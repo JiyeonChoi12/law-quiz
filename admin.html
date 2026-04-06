@@ -479,12 +479,21 @@ function renderManage(){
       </div>
       <div class="q-card-footer">
         <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;flex:1;">
-          <input type="text" placeholder="주제 태그" value="${q.topic||''}" style="width:120px;padding:5px 9px;font-size:12px;" id="topic-${uid}">
+          <select id="subj-${uid}" style="width:auto;padding:5px 9px;font-size:12px;">
+            <option value="헌법" ${subj==='헌법'?'selected':''}>헌법</option>
+            <option value="민법" ${subj==='민법'?'selected':''}>민법</option>
+            <option value="형법" ${subj==='형법'?'selected':''}>형법</option>
+            <option value="상법" ${subj==='상법'?'selected':''}>상법</option>
+            <option value="헌법논증이론" ${subj==='헌법논증이론'?'selected':''}>헌법논증이론</option>
+            <option value="글쓰기" ${subj==='글쓰기'?'selected':''}>글쓰기</option>
+          </select>
+          <input type="text" placeholder="주제 태그" value="${q.topic||''}" style="width:100px;padding:5px 9px;font-size:12px;" id="topic-${uid}">
           <select id="source-${uid}" style="width:auto;padding:5px 9px;font-size:12px;">
             <option value="" ${!q.source?'selected':''}>미지정</option>
             <option value="기출문제" ${q.source==='기출문제'?'selected':''}>기출문제</option>
             <option value="워크북" ${q.source==='워크북'?'selected':''}>워크북</option>
             <option value="형성평가" ${q.source==='형성평가'?'selected':''}>형성평가</option>
+            <option value="강의문제" ${q.source==='강의문제'?'selected':''}>강의문제</option>
           </select>
           <button class="btn btn-sm" onclick="saveTag('${subj}',${i},'${uid}')">저장</button>
         </div>
@@ -495,10 +504,15 @@ function renderManage(){
 }
 
 function saveTag(subj,idx,uid){
+  const newSubj=document.getElementById('subj-'+uid).value;
   const topic=document.getElementById('topic-'+uid).value.trim();
   const source=document.getElementById('source-'+uid).value;
-  db[subj][idx].topic=topic;
-  db[subj][idx].source=source;
+  const q=db[subj][idx];
+  q.topic=topic; q.source=source;
+  if(newSubj!==subj){
+    db[subj].splice(idx,1);
+    db[newSubj].push(q);
+  }
   save(); renderManage();
 }
 
