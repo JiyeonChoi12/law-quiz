@@ -195,6 +195,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .back-btn:hover{color:var(--text2);}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.unlock-modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:999;}
+.unlock-modal{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:2rem 1.5rem;width:300px;text-align:center;}
+.unlock-modal h3{font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px;}
+.unlock-modal p{font-size:12px;color:var(--text3);margin-bottom:16px;}
+.unlock-modal input{margin-bottom:10px;text-align:center;letter-spacing:0.1em;}
+.unlock-err{font-size:12px;color:var(--red);margin-bottom:8px;min-height:16px;}
 /* 통계 */
 .stats-section{margin-bottom:1.75rem;}
 .stats-section-title{font-size:11px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
@@ -386,6 +392,19 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   </div>
 </div>
 
+<div class="unlock-modal-bg" id="unlock-modal" style="display:none;">
+  <div class="unlock-modal">
+    <h3>접근 코드 입력</h3>
+    <p>강의문제를 열람하려면 코드가 필요해요</p>
+    <input type="password" id="unlock-input" placeholder="코드를 입력하세요" onkeydown="if(event.key==='Enter')tryUnlock()">
+    <div class="unlock-err" id="unlock-err"></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="tryUnlock()">확인</button>
+      <button class="btn" style="flex:1;justify-content:center;" onclick="closeUnlockModal()">취소</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const DATA_BASE='./data/';
 const SUBJECTS=[
@@ -474,6 +493,23 @@ async function selectSubject(idx){
 
     // 출처 칩 초기화
     document.querySelectorAll('.source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
+    // 강의문제 칩 (잠금해제된 경우만)
+    const existingLec=document.querySelector('#source-chips .chip[data-val="강의문제"]');
+    if(!existingLec && lectureUnlocked){
+      const btn=document.createElement('button');
+      btn.className='chip source-chip';
+      btn.dataset.val='강의문제';
+      btn.textContent='강의문제 🔓';
+      btn.onclick=function(){toggleSource(this);};
+      document.getElementById('source-chips').appendChild(btn);
+    } else if(!lectureUnlocked){
+      const lockBtn=document.createElement('button');
+      lockBtn.className='chip';
+      lockBtn.textContent='강의문제 🔒';
+      lockBtn.onclick=showUnlockModal;
+      lockBtn.style.borderStyle='dashed';
+      document.getElementById('source-chips').appendChild(lockBtn);
+    }
 
     updateFilterResult(d);
 
@@ -972,6 +1008,58 @@ function renderStats(){
   }
 
   el.innerHTML=html;
+}
+
+
+const manifest = ['setting', 'initialize', 'modify'];
+let lectureUnlocked = false;
+try{ lectureUnlocked = localStorage.getItem('_lu')==='1'; }catch(e){}
+
+function showUnlockModal(){
+  document.getElementById('unlock-input').value='';
+  document.getElementById('unlock-err').textContent='';
+  document.getElementById('unlock-modal').style.display='flex';
+  setTimeout(()=>document.getElementById('unlock-input').focus(),100);
+}
+function closeUnlockModal(){
+  document.getElementById('unlock-modal').style.display='none';
+}
+function tryUnlock(){
+  const val=document.getElementById('unlock-input').value.trim();
+  if(manifest.includes(val)){
+    lectureUnlocked=true;
+    try{localStorage.setItem('_lu','1');}catch(e){}
+    closeUnlockModal();
+    // 현재 열린 필터 칩 갱신
+    const topicChips=document.getElementById('source-chips');
+    if(topicChips) refreshSourceChips();
+    const wnChips=document.getElementById('wn-source-chips');
+    if(wnChips) refreshWNSourceChips();
+  } else {
+    document.getElementById('unlock-err').textContent='코드가 올바르지 않아요';
+  }
+}
+function refreshSourceChips(){
+  const existing=document.querySelector('#source-chips .chip[data-val="강의문제"]');
+  if(!existing && lectureUnlocked){
+    const btn=document.createElement('button');
+    btn.className='chip source-chip';
+    btn.dataset.val='강의문제';
+    btn.textContent='강의문제 🔓';
+    btn.onclick=function(){toggleSource(this);};
+    document.getElementById('source-chips').appendChild(btn);
+  }
+}
+function refreshWNSourceChips(){
+  const existing=document.querySelector('#wn-source-chips .chip[data-val="강의문제"]');
+  if(!existing && lectureUnlocked){
+    const btn=document.createElement('button');
+    btn.className='chip source-chip';
+    btn.dataset.val='강의문제';
+    btn.textContent='강의문제 🔓';
+    btn.onclick=function(){wnToggleSource(this);};
+    document.getElementById('wn-source-chips').appendChild(btn);
+  }
 }
 
 
