@@ -460,7 +460,7 @@ async function selectSubject(idx){
     currentSubject=subj;
     selectedTopics.clear(); selectedSource='all';
     document.getElementById('mode-subj-name').textContent=subj.key;
-    document.getElementById('time-select').style.display='none';
+    
 
     // 주제 칩 생성
     const topics=[...new Set(d.map(q=>q.topic).filter(Boolean))].sort();
@@ -530,7 +530,7 @@ function getQuizPool(){
   return getFilteredData(data);
 }
 
-function showTimeSelect(){document.getElementById('time-select').style.display='';}
+function showTimeSelect(){}
 
 function startNormalMode(){
   const pool=getQuizPool();
@@ -854,7 +854,7 @@ function clearWrongNote(){
 }
 
 function retryQuiz(){
-  if(currentMode==='exam'){showScreen('screen-mode');document.getElementById('time-select').style.display='';}
+  if(currentMode==='exam'){showScreen('screen-mode');}
   else if(currentMode==='wrongnote')startWrongNoteQuiz();
   else startNormalMode();
 }
