@@ -423,7 +423,7 @@ async function extractQuestions(b64,mediaType,subj){
 OX형: {"id":"${subj}_001","type":"ox","question":"문제","answer":"O","explanation":"","topic":"","source":""}
 단답형: {"id":"${subj}_001","type":"sa","question":"문제","answer":"키워드","explanation":"","topic":"","source":""}
 JSON 배열만:`;
-  const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,{
+  const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
