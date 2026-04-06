@@ -274,7 +274,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div class="m-name">일반 모드</div>
         <div class="m-desc">문제마다 즉시 정답·해설 확인</div>
       </div>
-      <div class="mode-card mode-exam" onclick="showTimeSelect()">
+      <div class="mode-card mode-exam" onclick="startExamMode(25)">
         <div class="m-icon">⏱️</div>
         <div class="m-name">실전 모드</div>
         <div class="m-desc">타이머 · 마지막에 채점</div>
@@ -285,13 +285,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div class="m-desc" id="mode-wn-desc"></div>
       </div>
     </div>
-    <div class="time-select" id="time-select" style="display:none;">
-      <h3>시험 시간을 선택하세요</h3>
-      <div class="time-btns">
-        <button class="time-btn" onclick="startExamMode(40)"><div class="t-min">40분</div></button>
-        <button class="time-btn" onclick="startExamMode(50)"><div class="t-min">50분</div></button>
-      </div>
-    </div>
+
   </div>
 
   <!-- 일반 모드 -->
