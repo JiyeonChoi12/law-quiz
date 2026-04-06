@@ -111,7 +111,7 @@ textarea{resize:none;}
       <button class="btn btn-accent" onclick="checkPw()">입력</button>
     </div>
     <p id="pw-err" style="font-size:12px;color:var(--red);margin-top:8px;"></p>
-    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">ADMIN_PW 변수에서 비밀번호 변경</p>
+    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">비밀번호는 관리자만 알 수 있습니다</p>
   </div>
 
   <!-- 관리자 메인 -->
@@ -125,10 +125,10 @@ textarea{resize:none;}
     <!-- 문제 추가 -->
     <div id="atab-upload">
       <div class="api-box">
-        <h3>Anthropic API 키 (이미지 자동 추출용)</h3>
-        <p><a href="https://console.anthropic.com/keys" target="_blank" style="color:var(--accent);text-decoration:none;">console.anthropic.com</a>에서 발급</p>
+        <h3>Google Gemini API 키 (이미지 자동 추출용)</h3>
+        <p><a href="https://aistudio.google.com/keys" target="_blank" style="color:var(--accent);text-decoration:none;">aistudio.google.com</a>에서 발급</p>
         <div class="api-row">
-          <input type="password" id="api-input" placeholder="sk-ant-...">
+          <input type="password" id="api-input" placeholder="AIza...">
           <button class="btn btn-accent" onclick="saveApiKey()">저장</button>
         </div>
         <div class="api-status" id="api-status"></div>
@@ -310,7 +310,7 @@ textarea{resize:none;}
 </div>
 
 <script>
-const ADMIN_PW = 'admin1234';
+const ADMIN_PW = 'wldusqjqgkr1043*!';
 const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
 const SUBJECT_FILES = {'헌법':'헌법.json','민법':'민법.json','형법':'형법.json','상법':'상법.json','헌법논증이론':'헌법논증이론.json','글쓰기':'글쓰기.json'};
 const NUMS = ['①','②','③','④'];
@@ -336,7 +336,7 @@ function logout(){ showScreen('login-screen'); document.getElementById('pw-input
 
 function saveApiKey(){
   const k=document.getElementById('api-input').value.trim();
-  if(!k.startsWith('sk-ant-')){ showApiStatus('올바른 키 형식이 아니에요',false); return; }
+  if(!k.startsWith('AIza')){ showApiStatus('올바른 키 형식이 아니에요 (AIza로 시작)',false); return; }
   API_KEY=k; try{localStorage.setItem('admin_api_key',k);}catch(e){} showApiStatus('✓ 저장됐어요',true);
 }
 function showApiStatus(msg,ok){ const el=document.getElementById('api-status'); el.textContent=msg; el.className='api-status '+(ok?'ok':'err'); }
@@ -418,24 +418,25 @@ async function handleFiles(files){
 function toB64(file){ return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);}); }
 
 async function extractQuestions(b64,mediaType,subj){
-  const resp=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify({
-      model:'claude-opus-4-5',max_tokens:4000,
-      messages:[{role:'user',content:[
-        {type:'image',source:{type:'base64',media_type:mediaType,data:b64}},
-        {type:'text',text:`이 이미지는 "${subj}" 과목 시험 문제입니다. 모든 문제를 추출해 JSON 배열로만 반환하세요 (마크다운 없이):
+  const prompt=`이 이미지는 "${subj}" 과목 시험 문제입니다. 모든 문제를 추출해 JSON 배열로만 반환하세요 (마크다운 없이):
 객관식: {"id":"${subj}_001","type":"mc","question":"문제","choices":["① 보기1","② 보기2","③ 보기3","④ 보기4"],"answer":0,"explanation":"","topic":"","source":""}
 OX형: {"id":"${subj}_001","type":"ox","question":"문제","answer":"O","explanation":"","topic":"","source":""}
 단답형: {"id":"${subj}_001","type":"sa","question":"문제","answer":"키워드","explanation":"","topic":"","source":""}
-JSON 배열만:`}
-      ]}]
+JSON 배열만:`;
+  const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[
+        {inline_data:{mime_type:mediaType,data:b64}},
+        {text:prompt}
+      ]}],
+      generationConfig:{temperature:0,maxOutputTokens:4000}
     })
   });
   if(!resp.ok){ const e=await resp.json(); throw new Error(e.error?.message||resp.status); }
   const data=await resp.json();
-  const text=data.content?.map(c=>c.text||'').join('')||'';
+  const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
   return JSON.parse(text.replace(/```json|```/g,'').trim());
 }
 
