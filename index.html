@@ -330,7 +330,7 @@ async function renderHome(){
     try{
       const d=await loadSubject(s); const cnt=d.length;
       const st=getStats(s.key);
-      document.getElementById('sc-cnt-'+i).textContent=cnt>0?`${cnt}문제${st.s!==null?' · 최근 '+st.s+'점':'`}`:'문제 없음';
+      document.getElementById('sc-cnt-'+i).textContent=cnt>0?`${cnt}문제${st.s!==null?' · 최근 '+st.s+'점':''}`:'문제 없음';
       if(cnt===0) document.getElementById('sc-'+i).classList.add('disabled');
       if(st.s!==null) document.getElementById('sc-bar-'+i).style.width=st.s+'%';
     }catch(e){ document.getElementById('sc-cnt-'+i).textContent='오류'; document.getElementById('sc-'+i).classList.add('disabled'); }
