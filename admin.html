@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 — 법과목 기출문제</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0e8; --surface: #fffdf8; --surface2: #f0ebe0;
+  --border: #ddd5c0; --border2: #c8bda8;
+  --text: #2c2416; --text2: #6b5c45; --text3: #a89278;
+  --accent: #7a5c2e; --accent2: #5a3f1a;
+  --green: #2d7a4a; --green-bg: #e8f5ee;
+  --red: #a63030; --red-bg: #faeaea;
+  --r: 8px; --rl: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; font-weight: 300; min-height: 100vh; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 1.5rem 1.25rem 5rem; }
+
+.app-header { text-align: center; padding: 1.75rem 0 1.5rem; border-bottom: 0.5px solid var(--border); margin-bottom: 2rem; }
+.app-header h1 { font-size: 18px; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
+.app-header p { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+/* LOGIN */
+#login-screen { max-width: 340px; margin: 4rem auto; text-align: center; }
+#login-screen h2 { font-size: 16px; font-weight: 500; color: var(--text2); margin-bottom: 1.5rem; }
+.pw-row { display: flex; gap: 8px; }
+
+/* SCREENS */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* TABS */
+.tab-bar { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 1.5rem; gap: 2px; }
+.tab { padding: 9px 18px; font-size: 13px; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: color 0.15s; }
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* INPUTS */
+input[type=text], input[type=password], textarea, select {
+  width: 100%; padding: 9px 11px; background: var(--surface2);
+  border: 0.5px solid var(--border2); border-radius: var(--r);
+  color: var(--text); font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300; outline: none;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--accent2); }
+textarea { resize: none; }
+.form-group { margin-bottom: 12px; }
+.form-label { font-size: 11px; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; display: block; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border: 0.5px solid var(--border2); border-radius: var(--r); background: transparent; color: var(--text); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: all 0.15s; }
+.btn:hover { background: var(--surface2); }
+.btn:active { transform: scale(0.98); }
+.btn-accent { background: var(--accent); color: #0f0f0f; border-color: var(--accent); font-weight: 500; }
+.btn-accent:hover { opacity: 0.88; background: var(--accent); }
+.btn-danger { border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: var(--red-bg); }
+.btn-green { border-color: var(--green); color: var(--green); }
+.btn-green:hover { background: var(--green-bg); }
+
+/* UPLOAD */
+.upload-zone { border: 1.5px dashed var(--border2); border-radius: var(--rl); padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 1rem; }
+.upload-zone:hover { border-color: var(--accent2); background: rgba(201,169,110,0.04); }
+.upload-zone input { display: none; }
+.upload-zone .uz-icon { font-size: 24px; margin-bottom: 8px; }
+.upload-zone .uz-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.upload-zone .uz-sub { font-size: 12px; color: var(--text3); }
+.processing { display: none; text-align: center; padding: 2rem; }
+.spinner { width: 28px; height: 28px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* API KEY */
+.api-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rl); padding: 1.25rem; margin-bottom: 1.5rem; }
+.api-box h3 { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 8px; }
+.api-box p { font-size: 12px; color: var(--text3); margin-bottom: 10px; line-height: 1.6; }
+.api-row { display: flex; gap: 8px; }
+.api-row input { flex: 1; font-family: monospace; }
+.api-status { font-size: 12px; margin-top: 6px; }
+.api-status.ok { color: var(--green); }
+.api-status.err { color: var(--red); }
+
+/* QUESTION LIST */
+.q-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.q-table th { text-align: left; padding: 8px 10px; font-size: 11px; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 0.5px solid var(--border); font-weight: 400; }
+.q-table td { padding: 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; color: var(--text2); }
+.q-table td:first-child { color: var(--text); }
+.q-table tr:last-child td { border-bottom: none; }
+.q-table tr:hover td { background: var(--surface2); }
+.badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 20px; }
+.badge-mc { background: #e8f0fa; color: #2d5a9e; border: 0.5px solid #6a90c8; }
+.badge-ox { background: var(--green-bg); color: var(--green); border: 0.5px solid var(--green); }
+.badge-sa { background: #fdf3e4; color: #8a5520; border: 0.5px solid #c47a30; }
+
+.stats-row { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.mini-stat { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 8px 14px; font-size: 13px; color: var(--text2); }
+.mini-stat strong { color: var(--text); font-weight: 500; }
+
+.toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.toolbar select { width: auto; }
+
+.empty { text-align: center; padding: 3rem; color: var(--text3); font-size: 14px; }
+
+/* JSON EXPORT */
+.json-box { background: var(--surface2); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1rem; font-family: monospace; font-size: 12px; color: var(--text2); max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; margin-top: 1rem; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header">
+    <h1>관리자 페이지</h1>
+    <p>문제 업로드 및 관리 · 사용자에게는 보이지 않습니다</p>
+  </div>
+
+  <!-- 로그인 -->
+  <div id="login-screen" class="screen active">
+    <h2>비밀번호를 입력하세요</h2>
+    <div class="pw-row">
+      <input type="password" id="pw-input" placeholder="비밀번호" onkeydown="if(event.key==='Enter')checkPw()">
+      <button class="btn btn-accent" onclick="checkPw()">입력</button>
+    </div>
+    <p id="pw-err" style="font-size:12px;color:var(--red);margin-top:8px;"></p>
+    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">기본 비밀번호: <code style="color:var(--text2);">admin1234</code><br>코드에서 변경하세요 (ADMIN_PW 변수)</p>
+  </div>
+
+  <!-- 관리자 메인 -->
+  <div id="admin-screen" class="screen">
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchAdminTab('upload')">문제 추가</div>
+      <div class="tab" onclick="switchAdminTab('manage')">문제 관리</div>
+      <div class="tab" onclick="switchAdminTab('export')">JSON 내보내기</div>
+    </div>
+
+    <!-- 탭: 문제 추가 -->
+    <div id="atab-upload">
+      <div class="api-box">
+        <h3>Anthropic API 키 (이미지 자동 추출용)</h3>
+        <p>이미지 업로드로 문제를 추출할 때 필요해요. <a href="https://console.anthropic.com/keys" target="_blank" style="color:var(--accent);text-decoration:none;">console.anthropic.com</a>에서 발급</p>
+        <div class="api-row">
+          <input type="password" id="api-input" placeholder="sk-ant-...">
+          <button class="btn btn-accent" onclick="saveApiKey()">저장</button>
+        </div>
+        <div class="api-status" id="api-status"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">추가할 과목 선택</label>
+        <select id="upload-subj">
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법 논증 이론</option>
+          <option value="글쓰기">글쓰기 (교양)</option>
+        </select>
+      </div>
+
+      <label class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept="image/*" multiple onchange="handleFiles(this.files)">
+        <div class="uz-icon">📷</div>
+        <div class="uz-title">기출문제 이미지 업로드</div>
+        <div class="uz-sub" style="margin-top:4px;">클릭 또는 드래그 앤 드롭 · 여러 장 동시 가능</div>
+        <div class="uz-sub" style="margin-top:3px;color:var(--text3);">객관식 / OX / 단답형 + 해설 자동 추출</div>
+      </label>
+      <div class="processing" id="processing">
+        <div class="spinner"></div>
+        <p id="proc-msg" style="font-size:13px;color:var(--text2);"></p>
+      </div>
+
+      <div style="border-top:0.5px solid var(--border);padding-top:1.25rem;margin-top:0.5rem;">
+        <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">또는 직접 입력</p>
+        <div class="form-group">
+          <label class="form-label">문제 유형</label>
+          <select id="m-type" onchange="updateForm()" style="width:auto;">
+            <option value="mc">객관식 (4지선다)</option>
+            <option value="ox">OX형</option>
+            <option value="sa">단답형</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">문제</label>
+          <textarea id="m-q" rows="3" placeholder="문제 내용을 입력하세요"></textarea>
+        </div>
+        <div id="f-mc">
+          <div class="form-group">
+            <label class="form-label">보기</label>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <input type="text" class="m-choice" placeholder="① 보기 1">
+              <input type="text" class="m-choice" placeholder="② 보기 2">
+              <input type="text" class="m-choice" placeholder="③ 보기 3">
+              <input type="text" class="m-choice" placeholder="④ 보기 4">
+            </div>
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px;">
+            <label class="form-label" style="margin:0;">정답</label>
+            <select id="m-mc-ans" style="width:auto;"><option value="0">①</option><option value="1">②</option><option value="2">③</option><option value="3">④</option></select>
+          </div>
+        </div>
+        <div id="f-ox" style="display:none;" class="form-group">
+          <label class="form-label">정답</label>
+          <select id="m-ox-ans" style="width:auto;"><option value="O">O (맞다)</option><option value="X">X (틀리다)</option></select>
+        </div>
+        <div id="f-sa" style="display:none;" class="form-group">
+          <label class="form-label">정답 키워드 (쉼표로 복수 키워드 가능)</label>
+          <input type="text" id="m-sa-ans" placeholder="예: 권리능력, 법인격">
+        </div>
+        <div class="form-group">
+          <label class="form-label">해설 (선택)</label>
+          <textarea id="m-exp" rows="2" placeholder="해설 내용 (없으면 비워두세요)"></textarea>
+        </div>
+        <button class="btn btn-accent" onclick="saveManual()">문제 저장</button>
+      </div>
+    </div>
+
+    <!-- 탭: 문제 관리 -->
+    <div id="atab-manage" style="display:none;">
+      <div class="toolbar">
+        <select id="filter-subj" onchange="renderManage()" style="width:auto;">
+          <option value="all">전체 과목</option>
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법 논증 이론</option>
+          <option value="글쓰기">글쓰기</option>
+        </select>
+        <button class="btn btn-danger" onclick="clearSubject()">선택 과목 초기화</button>
+      </div>
+      <div class="stats-row" id="manage-stats"></div>
+      <div id="manage-list"></div>
+    </div>
+
+    <!-- 탭: JSON 내보내기 -->
+    <div id="atab-export" style="display:none;">
+      <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.7;">
+        아래 JSON을 복사해서 GitHub 저장소의 <code style="color:var(--accent);">data/</code> 폴더에 각 파일로 저장하세요.<br>
+        저장 후 사용자 페이지에 즉시 반영됩니다.
+      </p>
+      <div class="form-group">
+        <label class="form-label">과목 선택</label>
+        <select id="export-subj" onchange="renderExport()" style="width:auto;">
+          <option value="헌법">헌법.json</option>
+          <option value="민법">민법.json</option>
+          <option value="형법">형법.json</option>
+          <option value="상법">상법.json</option>
+          <option value="헌법논증이론">헌법논증이론.json</option>
+          <option value="글쓰기">글쓰기.json</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:0.5rem;">
+        <button class="btn btn-accent" onclick="copyExport()">클립보드에 복사</button>
+        <button class="btn btn-green" onclick="downloadExport()">파일로 다운로드</button>
+      </div>
+      <div class="json-box" id="json-preview"></div>
+    </div>
+
+    <div style="margin-top:2rem;text-align:right;">
+      <button class="btn btn-danger" onclick="logout()">로그아웃</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ★ 비밀번호 변경하세요
+const ADMIN_PW = 'admin1234';
+
+const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
+const SUBJECT_FILES = { '헌법':'헌법.json','민법':'민법.json','형법':'형법.json','상법':'상법.json','헌법논증이론':'헌법논증이론.json','글쓰기':'글쓰기.json' };
+const NUMS = ['①','②','③','④'];
+
+let db = {}; // { 헌법: [...], 민법: [...], ... }
+let API_KEY = '';
+
+// 초기화
+SUBJECT_KEYS.forEach(k => db[k] = []);
+try {
+  const saved = localStorage.getItem('admin_db');
+  if(saved) db = JSON.parse(saved);
+  SUBJECT_KEYS.forEach(k => { if(!db[k]) db[k] = []; });
+} catch(e){}
+try { API_KEY = localStorage.getItem('admin_api_key')||''; } catch(e){}
+
+function save() {
+  try { localStorage.setItem('admin_db', JSON.stringify(db)); } catch(e){}
+}
+
+// LOGIN
+function checkPw() {
+  const v = document.getElementById('pw-input').value;
+  if(v === ADMIN_PW) {
+    showScreen('admin-screen');
+    if(API_KEY) {
+      document.getElementById('api-input').value = API_KEY;
+      document.getElementById('api-status').textContent = '✓ API 키 저장됨';
+      document.getElementById('api-status').className = 'api-status ok';
+    }
+    renderManage();
+    renderExport();
+  } else {
+    document.getElementById('pw-err').textContent = '비밀번호가 틀렸어요';
+    document.getElementById('pw-input').value = '';
+  }
+}
+function logout() {
+  showScreen('login-screen');
+  document.getElementById('pw-input').value = '';
+}
+
+// API KEY
+function saveApiKey() {
+  const k = document.getElementById('api-input').value.trim();
+  if(!k.startsWith('sk-ant-')) {
+    document.getElementById('api-status').textContent = '올바른 키 형식이 아니에요 (sk-ant-로 시작)';
+    document.getElementById('api-status').className = 'api-status err';
+    return;
+  }
+  API_KEY = k;
+  try { localStorage.setItem('admin_api_key', k); } catch(e){}
+  document.getElementById('api-status').textContent = '✓ 저장됐어요';
+  document.getElementById('api-status').className = 'api-status ok';
+}
+
+// ADMIN TABS
+function switchAdminTab(tab) {
+  ['upload','manage','export'].forEach((t,i) => {
+    document.getElementById('atab-'+t).style.display = t===tab?'':'none';
+    document.querySelectorAll('.tab')[i].classList.toggle('active', t===tab);
+  });
+  if(tab==='manage') renderManage();
+  if(tab==='export') renderExport();
+}
+
+// MANUAL FORM
+function updateForm() {
+  const t = document.getElementById('m-type').value;
+  document.getElementById('f-mc').style.display = t==='mc'?'':'none';
+  document.getElementById('f-ox').style.display = t==='ox'?'':'none';
+  document.getElementById('f-sa').style.display = t==='sa'?'':'none';
+}
+function saveManual() {
+  const subj = document.getElementById('upload-subj').value;
+  const type = document.getElementById('m-type').value;
+  const question = document.getElementById('m-q').value.trim();
+  const explanation = document.getElementById('m-exp').value.trim();
+  if(!question){ alert('문제를 입력해주세요'); return; }
+  const id = subj + '_' + Date.now();
+  let q = { id, type, question, explanation };
+  if(type==='mc'){
+    const choices = Array.from(document.querySelectorAll('.m-choice')).map(e=>e.value.trim());
+    if(choices.some(c=>!c)){ alert('모든 보기를 입력해주세요'); return; }
+    q.choices = choices;
+    q.answer = parseInt(document.getElementById('m-mc-ans').value);
+  } else if(type==='ox'){
+    q.answer = document.getElementById('m-ox-ans').value;
+  } else {
+    const ans = document.getElementById('m-sa-ans').value.trim();
+    if(!ans){ alert('정답을 입력해주세요'); return; }
+    q.answer = ans;
+  }
+  db[subj].push(q);
+  save();
+  // 입력 초기화
+  document.getElementById('m-q').value = '';
+  document.getElementById('m-exp').value = '';
+  document.querySelectorAll('.m-choice').forEach(e=>e.value='');
+  if(document.getElementById('m-sa-ans')) document.getElementById('m-sa-ans').value='';
+  alert(`[${subj}] 문제 추가됨! (현재 ${db[subj].length}개)`);
+}
+
+// FILE UPLOAD
+async function handleFiles(files) {
+  if(!files.length) return;
+  if(!API_KEY){ alert('API 키를 먼저 저장해주세요'); return; }
+  const subj = document.getElementById('upload-subj').value;
+  const zone = document.getElementById('upload-zone');
+  const proc = document.getElementById('processing');
+  zone.style.display = 'none'; proc.style.display = 'block';
+  let total = 0;
+  for(const file of files){
+    document.getElementById('proc-msg').textContent = `"${file.name}" 분석 중... (${subj})`;
+    try {
+      const b64 = await toB64(file);
+      const result = await extractQuestions(b64, file.type, subj);
+      if(result && result.length){ db[subj].push(...result); total += result.length; }
+    } catch(e){ alert('오류: '+e.message); }
+  }
+  save();
+  zone.style.display = ''; proc.style.display = 'none';
+  document.getElementById('file-input').value = '';
+  if(total) alert(`[${subj}] ${total}개 문제 추가됐어요! (총 ${db[subj].length}개)`);
+  else alert('문제를 인식하지 못했어요');
+}
+
+function toB64(file){
+  return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+}
+
+async function extractQuestions(b64, mediaType, subj) {
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': API_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-opus-4-5',
+      max_tokens: 4000,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: mediaType, data: b64 } },
+          { type: 'text', text: `이 이미지는 한국 법학 시험 "${subj}" 과목의 기출문제입니다.
+이미지에서 모든 시험 문제를 추출해 아래 JSON 형식으로만 반환하세요 (순수 JSON 배열, 마크다운 없이):
+
+객관식: {"id":"${subj}_001","type":"mc","question":"문제내용","choices":["① 보기1","② 보기2","③ 보기3","④ 보기4"],"answer":0,"explanation":"해설 (없으면 빈 문자열)"}
+OX형: {"id":"${subj}_001","type":"ox","question":"문제내용","answer":"O","explanation":"해설"}
+단답형: {"id":"${subj}_001","type":"sa","question":"문제내용","answer":"정답키워드","explanation":"해설"}
+
+answer: mc=0부터 시작 인덱스, ox="O"또는"X", sa=정답 키워드(쉼표로 복수가능)
+모르면 mc=0, ox="O", sa="", explanation=""
+JSON 배열만:` }
+        ]
+      }]
+    })
+  });
+  if(!resp.ok){ const e = await resp.json(); throw new Error(e.error?.message || resp.status); }
+  const data = await resp.json();
+  const text = data.content?.map(c=>c.text||'').join('')||'';
+  const clean = text.replace(/```json|```/g,'').trim();
+  return JSON.parse(clean);
+}
+
+// MANAGE TAB
+function renderManage() {
+  const filter = document.getElementById('filter-subj').value;
+  // stats
+  const statsEl = document.getElementById('manage-stats');
+  statsEl.innerHTML = SUBJECT_KEYS.map(k =>
+    `<div class="mini-stat"><strong>${db[k].length}</strong> ${k}</div>`
+  ).join('');
+  // list
+  const listEl = document.getElementById('manage-list');
+  const keys = filter==='all' ? SUBJECT_KEYS : [filter];
+  let rows = [];
+  keys.forEach(k => db[k].forEach((q,i) => rows.push({subj:k, q, i})));
+  if(!rows.length){ listEl.innerHTML = '<div class="empty">문제가 없어요</div>'; return; }
+  const badge = t => t==='mc'?'<span class="badge badge-mc">객관식</span>':t==='ox'?'<span class="badge badge-ox">OX</span>':'<span class="badge badge-sa">단답</span>';
+  listEl.innerHTML = `<table class="q-table">
+    <thead><tr><th>문제</th><th>유형</th><th>과목</th><th></th></tr></thead>
+    <tbody>${rows.map(({subj,q,i}) => `<tr>
+      <td style="max-width:380px;line-height:1.5;">${q.question.substring(0,80)}${q.question.length>80?'...':''}</td>
+      <td>${badge(q.type)}</td>
+      <td style="white-space:nowrap;font-size:12px;">${subj}</td>
+      <td><span style="font-size:12px;color:var(--red);cursor:pointer;padding:2px 8px;border:0.5px solid var(--red);border-radius:6px;" onclick="deleteQ('${subj}',${i})">삭제</span></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function deleteQ(subj, idx) {
+  if(!confirm('이 문제를 삭제할까요?')) return;
+  db[subj].splice(idx, 1);
+  save();
+  renderManage();
+}
+
+function clearSubject() {
+  const filter = document.getElementById('filter-subj').value;
+  if(filter==='all'){ alert('전체 초기화는 각 과목을 선택해서 해주세요'); return; }
+  if(!confirm(`[${filter}] 과목의 모든 문제(${db[filter]?.length}개)를 삭제할까요?`)) return;
+  db[filter] = [];
+  save();
+  renderManage();
+}
+
+// EXPORT TAB
+function renderExport() {
+  const subj = document.getElementById('export-subj').value;
+  const data = db[subj] || [];
+  document.getElementById('json-preview').textContent = JSON.stringify(data, null, 2);
+}
+
+function copyExport() {
+  const text = document.getElementById('json-preview').textContent;
+  navigator.clipboard.writeText(text).then(() => alert('클립보드에 복사됐어요!')).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    alert('복사됐어요!');
+  });
+}
+
+function downloadExport() {
+  const subj = document.getElementById('export-subj').value;
+  const filename = SUBJECT_FILES[subj];
+  const text = document.getElementById('json-preview').textContent;
+  const blob = new Blob([text], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Drag & drop
+const uz = document.getElementById('upload-zone');
+uz.addEventListener('dragover', e=>{e.preventDefault();uz.style.borderColor='var(--accent)';});
+uz.addEventListener('dragleave', ()=>{uz.style.borderColor='';});
+uz.addEventListener('drop', e=>{e.preventDefault();uz.style.borderColor='';handleFiles(e.dataTransfer.files);});
+</script>
+</body>
+</html>
