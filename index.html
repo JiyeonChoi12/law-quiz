@@ -24,6 +24,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .screen { display: none; }
 .screen.active { display: block; }
 
+/* 홈 탭 */
+.home-tabs { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 1.5rem; }
+.home-tab { padding: 9px 18px; font-size: 13px; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: color 0.15s; }
+.home-tab:hover { color: var(--text); }
+.home-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+
 /* 과목 */
 .subject-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .subject-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rl); padding: 1.25rem 1rem; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; overflow: hidden; }
@@ -35,6 +41,24 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .subject-card .s-count { font-size: 11px; color: var(--text3); }
 .subject-card .s-bar { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--accent); transition: width 0.4s; }
 .section-title { font-size: 11px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+
+/* 오답노트 */
+.wn-subj-list { display: flex; flex-direction: column; gap: 8px; }
+.wn-subj-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1rem 1.25rem; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: space-between; }
+.wn-subj-card:hover { border-color: var(--accent2); background: #f5eddd; }
+.wn-subj-left { display: flex; align-items: center; gap: 10px; }
+.wn-subj-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.wn-subj-cnt { font-size: 12px; color: var(--red); }
+.wn-arrow { font-size: 14px; color: var(--text3); }
+.wn-empty { text-align: center; padding: 3rem 1rem; color: var(--text3); font-size: 14px; line-height: 1.8; }
+.wn-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1rem 1.25rem; margin-bottom: 8px; }
+.wn-item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.wn-wrong-cnt { font-size: 11px; color: var(--red); background: var(--red-bg); border: 0.5px solid var(--red); border-radius: 20px; padding: 2px 8px; }
+.wn-q { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 8px; font-family: 'Noto Serif KR', serif; }
+.wn-ans { font-size: 12px; color: var(--green); margin-bottom: 4px; }
+.wn-exp { font-size: 12px; color: var(--text2); padding: 8px 10px; background: var(--surface2); border-radius: var(--r); line-height: 1.6; margin-top: 6px; }
+.wn-del { font-size: 11px; color: var(--text3); cursor: pointer; padding: 2px 8px; border: 0.5px solid var(--border2); border-radius: var(--r); }
+.wn-del:hover { color: var(--red); border-color: var(--red); background: var(--red-bg); }
 
 /* 모드 선택 */
 .mode-header { margin-bottom: 1.75rem; }
@@ -49,6 +73,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .mode-card .m-desc { font-size: 12px; color: var(--text3); line-height: 1.6; }
 .mode-card.mode-exam { border-color: var(--accent2); }
 .mode-card.mode-exam .m-name { color: var(--accent); }
+.mode-card.mode-wn { border-color: var(--red); }
+.mode-card.mode-wn .m-name { color: var(--red); }
 
 /* 시간 선택 */
 .time-select { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rl); padding: 1.25rem; margin-bottom: 1rem; }
@@ -57,7 +83,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .time-btn { flex: 1; padding: 14px; border: 0.5px solid var(--border2); border-radius: var(--r); background: transparent; cursor: pointer; text-align: center; transition: all 0.15s; font-family: 'Noto Sans KR', sans-serif; }
 .time-btn:hover { background: var(--surface2); border-color: var(--accent2); }
 .time-btn .t-min { font-size: 22px; font-weight: 500; color: var(--accent); }
-.time-btn .t-label { font-size: 11px; color: var(--text3); margin-top: 3px; }
 
 /* 타이머 */
 .timer-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding: 10px 16px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); }
@@ -98,7 +123,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .choice-btn.selected { border-color: var(--accent); background: #f5eddd; }
 .choice-btn.selected .choice-num { color: var(--accent); }
 .choice-btn.disabled { cursor: default; }
-
 .ox-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ox-btn { padding: 20px; border: 0.5px solid var(--border); border-radius: var(--rl); font-size: 28px; cursor: pointer; background: transparent; transition: all 0.15s; text-align: center; }
 .ox-btn:hover:not(.disabled) { background: var(--surface2); border-color: var(--border2); }
@@ -106,7 +130,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .ox-btn.wrong { border-color: var(--red); background: var(--red-bg); }
 .ox-btn.selected { border-color: var(--accent); background: #f5eddd; }
 .ox-btn.disabled { cursor: default; }
-
 .sa-row { display: flex; gap: 8px; }
 .sa-input { flex: 1; padding: 11px 13px; background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--r); color: var(--text); font-size: 14px; font-family: 'Noto Sans KR', sans-serif; outline: none; }
 .sa-input:focus { border-color: var(--accent2); }
@@ -124,7 +147,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .fb-exp { font-size: 13px; color: var(--text2); border-top: 0.5px solid var(--border); padding-top: 10px; margin-top: 10px; }
 .fb-exp-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
 
-/* 실전모드 문제 네비 */
+/* 실전모드 네비 */
 .q-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
 .q-dot { width: 30px; height: 30px; border-radius: 50%; font-size: 11px; font-weight: 500; border: 0.5px solid var(--border2); background: var(--surface); color: var(--text3); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s; }
 .q-dot:hover { border-color: var(--accent); color: var(--accent); }
@@ -174,10 +197,18 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <p>과목을 선택하고 학습하세요</p>
   </div>
 
-  <!-- 과목 선택 -->
+  <!-- 홈 -->
   <div id="screen-home" class="screen active">
-    <div class="section-title" style="margin-bottom:14px;">과목 선택</div>
-    <div class="subject-grid" id="subject-grid"></div>
+    <div class="home-tabs">
+      <div class="home-tab active" onclick="switchHomeTab('quiz')">과목 선택</div>
+      <div class="home-tab" onclick="switchHomeTab('wrongnote')">오답노트</div>
+    </div>
+    <div id="tab-quiz">
+      <div class="subject-grid" id="subject-grid"></div>
+    </div>
+    <div id="tab-wrongnote" style="display:none;">
+      <div class="wn-subj-list" id="wn-subj-list"></div>
+    </div>
   </div>
 
   <!-- 모드 선택 -->
@@ -187,7 +218,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
       <div class="subj-name" id="mode-subj-name"></div>
       <div class="subj-cnt" id="mode-subj-cnt"></div>
     </div>
-    <div class="mode-cards">
+    <div class="mode-cards" id="mode-cards">
       <div class="mode-card" onclick="startNormalMode()">
         <div class="m-icon">📖</div>
         <div class="m-name">일반 모드</div>
@@ -198,17 +229,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
         <div class="m-name">실전 모드</div>
         <div class="m-desc">타이머 · 답 미공개 · 마지막에 채점</div>
       </div>
+      <div class="mode-card mode-wn" id="mode-wn-card" onclick="startWrongNoteQuiz()" style="display:none;">
+        <div class="m-icon">📕</div>
+        <div class="m-name">오답 풀기</div>
+        <div class="m-desc" id="mode-wn-desc">틀린 문제만 다시 풀기</div>
+      </div>
     </div>
     <div class="time-select" id="time-select" style="display:none;">
       <h3>시험 시간을 선택하세요</h3>
       <div class="time-btns">
         <button class="time-btn" onclick="startExamMode(40)">
           <div class="t-min">40분</div>
-          <div class="t-label">시험 시간</div>
         </button>
         <button class="time-btn" onclick="startExamMode(50)">
           <div class="t-min">50분</div>
-          <div class="t-label">시험 시간</div>
         </button>
       </div>
     </div>
@@ -247,7 +281,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
       </div>
     </div>
     <div class="progress-wrap">
-      <div class="progress-meta"><span id="eq-meta-l"></span><span id="eq-meta-r"></span></div>
+      <div class="progress-meta"><span id="eq-meta-l"></span><span></span></div>
       <div class="progress-bar"><div class="progress-fill" id="eprog-fill"></div></div>
     </div>
     <div class="q-nav" id="q-nav"></div>
@@ -263,6 +297,19 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <div style="margin-top:8px;text-align:center;">
       <button class="btn btn-danger" style="font-size:12px;padding:6px 14px;" onclick="if(confirm('시험을 포기할까요?'))backToHome()">포기</button>
     </div>
+  </div>
+
+  <!-- 오답노트 상세 -->
+  <div id="screen-wrongnote" class="screen">
+    <div class="back-btn" onclick="showScreen('screen-home')">← 오답노트</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+      <div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:18px;font-weight:600;color:var(--accent);" id="wn-detail-title"></div>
+        <div style="font-size:12px;color:var(--text3);margin-top:3px;" id="wn-detail-cnt"></div>
+      </div>
+      <button class="btn btn-danger" style="font-size:12px;padding:6px 12px;" onclick="clearWrongNote()">초기화</button>
+    </div>
+    <div id="wn-detail-list"></div>
   </div>
 
   <!-- 결과 -->
@@ -307,6 +354,30 @@ const NUMS = ['①','②','③','④','⑤'];
 let quiz=[], cur=0, correct=0, answered=false, wrongList=[];
 let currentSubject=null, currentMode='normal', allData={};
 let examAnswers={}, examCur=0, timerSec=0, timerInterval=null;
+let wnCurrentSubj=null;
+
+// ── 오답노트 저장소 ──
+// 구조: { '헌법': { 'q.id 또는 q.question해시': { q, wrongCount, lastMyAns } } }
+function getWrongNote(subjKey) {
+  try { return JSON.parse(localStorage.getItem('lq_wn_'+subjKey)||'{}'); } catch(e){ return {}; }
+}
+function saveWrongNote(subjKey, data) {
+  try { localStorage.setItem('lq_wn_'+subjKey, JSON.stringify(data)); } catch(e){}
+}
+function addToWrongNote(subjKey, q, myAns) {
+  const wn = getWrongNote(subjKey);
+  const key = q.id || q.question.substring(0,30);
+  if(!wn[key]) wn[key] = { q, wrongCount:0, lastMyAns:'' };
+  wn[key].wrongCount++;
+  wn[key].lastMyAns = myAns;
+  wn[key].q = q;
+  saveWrongNote(subjKey, wn);
+}
+function removeFromWrongNote(subjKey, qKey) {
+  const wn = getWrongNote(subjKey);
+  delete wn[qKey];
+  saveWrongNote(subjKey, wn);
+}
 
 function getStats(k){ try{return JSON.parse(localStorage.getItem('lq_s_'+k)||'{"a":0,"s":null}');}catch(e){return{a:0,s:null};} }
 function saveStats(k,score){ const s=getStats(k);s.a++;s.s=score;try{localStorage.setItem('lq_s_'+k,JSON.stringify(s));}catch(e){} }
@@ -316,6 +387,14 @@ async function loadSubject(subj){
   const r=await fetch(DATA_BASE+subj.file+'?t='+Date.now());
   if(!r.ok) throw new Error('파일 없음');
   const d=await r.json(); allData[subj.key]=d; return d;
+}
+
+// ── 홈 탭 ──
+function switchHomeTab(tab) {
+  document.querySelectorAll('.home-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='quiz')||(i===1&&tab==='wrongnote')));
+  document.getElementById('tab-quiz').style.display = tab==='quiz'?'':'none';
+  document.getElementById('tab-wrongnote').style.display = tab==='wrongnote'?'':'none';
+  if(tab==='wrongnote') renderWrongNoteHome();
 }
 
 async function renderHome(){
@@ -337,6 +416,77 @@ async function renderHome(){
   });
 }
 
+function renderWrongNoteHome() {
+  const el = document.getElementById('wn-subj-list');
+  const rows = SUBJECTS.map(s => {
+    const wn = getWrongNote(s.key);
+    const cnt = Object.keys(wn).length;
+    return { s, cnt, wn };
+  }).filter(r => r.cnt > 0);
+
+  if(!rows.length) {
+    el.innerHTML = '<div class="wn-empty">아직 오답노트가 없어요<br>퀴즈를 풀면 틀린 문제가 자동으로 저장돼요</div>';
+    return;
+  }
+  el.innerHTML = rows.map(({s,cnt})=>`
+    <div class="wn-subj-card" onclick="showWrongNoteDetail('${s.key}')">
+      <div class="wn-subj-left">
+        <span style="font-size:18px;">${s.icon}</span>
+        <div>
+          <div class="wn-subj-name">${s.key}</div>
+          <div class="wn-subj-cnt">오답 ${cnt}문제</div>
+        </div>
+      </div>
+      <span class="wn-arrow">→</span>
+    </div>`).join('');
+}
+
+function showWrongNoteDetail(subjKey) {
+  wnCurrentSubj = subjKey;
+  const subj = SUBJECTS.find(s=>s.key===subjKey);
+  const wn = getWrongNote(subjKey);
+  const items = Object.entries(wn).sort((a,b)=>b[1].wrongCount-a[1].wrongCount);
+
+  document.getElementById('wn-detail-title').textContent = subjKey + ' 오답노트';
+  document.getElementById('wn-detail-cnt').textContent = `총 ${items.length}문제 · 틀린 횟수 순`;
+
+  if(!items.length) {
+    document.getElementById('wn-detail-list').innerHTML = '<div class="wn-empty">오답 문제가 없어요</div>';
+  } else {
+    document.getElementById('wn-detail-list').innerHTML = items.map(([key,{q,wrongCount,lastMyAns}])=>{
+      let ca = q.type==='mc'?`${NUMS[q.answer]} ${q.choices[q.answer]}`:q.answer;
+      const exp = q.explanation?`<div class="wn-exp">💡 ${q.explanation}</div>`:'';
+      return `<div class="wn-item">
+        <div class="wn-item-header">
+          <div style="display:flex;gap:6px;align-items:center;">
+            ${typeBadge(q.type)}
+            <span class="wn-wrong-cnt">✕ ${wrongCount}회</span>
+          </div>
+          <span class="wn-del" onclick="delWrongItem('${subjKey}','${key.replace(/'/g,"\\'")}')">삭제</span>
+        </div>
+        <div class="wn-q">${q.question}</div>
+        <div class="wn-ans">정답: ${ca}</div>
+        ${lastMyAns?`<div style="font-size:12px;color:var(--red);">마지막 내 답: ${lastMyAns}</div>`:''}
+        ${exp}
+      </div>`;
+    }).join('');
+  }
+  showScreen('screen-wrongnote');
+}
+
+function delWrongItem(subjKey, key) {
+  removeFromWrongNote(subjKey, key);
+  showWrongNoteDetail(subjKey);
+}
+
+function clearWrongNote() {
+  if(!confirm(`[${wnCurrentSubj}] 오답노트를 전부 지울까요?`)) return;
+  try { localStorage.removeItem('lq_wn_'+wnCurrentSubj); } catch(e){}
+  showScreen('screen-home');
+  switchHomeTab('wrongnote');
+}
+
+// ── 과목 선택 ──
 async function selectSubject(idx){
   if(document.getElementById('sc-'+idx).classList.contains('disabled')) return;
   const subj=SUBJECTS[idx];
@@ -347,13 +497,33 @@ async function selectSubject(idx){
     document.getElementById('mode-subj-name').textContent=subj.key;
     document.getElementById('mode-subj-cnt').textContent=`총 ${d.length}문제 · 랜덤 25문제 출제`;
     document.getElementById('time-select').style.display='none';
+    // 오답 문제 있으면 오답풀기 카드 표시
+    const wn = getWrongNote(subj.key);
+    const wnCnt = Object.keys(wn).length;
+    const wnCard = document.getElementById('mode-wn-card');
+    if(wnCnt > 0) {
+      wnCard.style.display='';
+      document.getElementById('mode-wn-desc').textContent=`${wnCnt}문제 틀린 것만 다시 풀기`;
+    } else {
+      wnCard.style.display='none';
+    }
     showScreen('screen-mode');
   }catch(e){alert('로드 실패: '+e.message);}
 }
 
 function showTimeSelect(){ document.getElementById('time-select').style.display=''; }
 
-/* ── 일반 모드 ── */
+// ── 오답 풀기 모드 ──
+function startWrongNoteQuiz() {
+  currentMode = 'wrongnote';
+  const wn = getWrongNote(currentSubject.key);
+  const items = Object.values(wn);
+  quiz = shuffle([...items.map(i=>i.q)]).slice(0, Math.min(25, items.length));
+  cur=0; correct=0; wrongList=[];
+  showScreen('screen-quiz'); renderQ();
+}
+
+// ── 일반 모드 ──
 function startNormalMode(){
   currentMode='normal';
   const d=allData[currentSubject.key]||[];
@@ -393,7 +563,8 @@ function showFeedback(ok,q){
 function normalSelectMC(idx){
   if(answered)return; answered=true;
   const q=quiz[cur]; const ok=idx===q.answer;
-  if(ok)correct++; else wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});
+  if(ok)correct++;
+  else { wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]}); addToWrongNote(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]); }
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled');
     if(i===q.answer)b.classList.add('correct');
@@ -405,7 +576,8 @@ function normalSelectMC(idx){
 function normalSelectOX(val){
   if(answered)return; answered=true;
   const q=quiz[cur]; const ok=val===q.answer;
-  if(ok)correct++; else wrongList.push({q,myAns:val});
+  if(ok)correct++;
+  else { wrongList.push({q,myAns:val}); addToWrongNote(currentSubject.key,q,val); }
   document.querySelectorAll('#answer-area .ox-btn').forEach(b=>{
     b.classList.add('disabled');
     if(b.dataset.val===q.answer)b.classList.add('correct');
@@ -423,13 +595,14 @@ function normalCheckSA(){
   const q=quiz[cur];
   const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);
   const ok=kws.length>0&&kws.some(k=>val.includes(k));
-  if(ok)correct++; else wrongList.push({q,myAns:val});
+  if(ok)correct++;
+  else { wrongList.push({q,myAns:val}); addToWrongNote(currentSubject.key,q,val); }
   inp.disabled=true; showFeedback(ok,q);
 }
 
 function nextQ(){ cur++; if(cur<quiz.length)renderQ(); else showResult('normal'); }
 
-/* ── 실전 모드 ── */
+// ── 실전 모드 ──
 function startExamMode(min){
   currentMode='exam';
   const d=allData[currentSubject.key]||[];
@@ -499,7 +672,7 @@ function submitExam(timeUp=false){
   showResult('exam');
 }
 
-/* ── 공통 답안 렌더 ── */
+// ── 공통 답안 렌더 ──
 function renderAnswerArea(areaId,q,mode,qIdx){
   const area=document.getElementById(areaId);
   const saved=mode==='exam'?examAnswers[qIdx]:undefined;
@@ -524,10 +697,10 @@ function renderAnswerArea(areaId,q,mode,qIdx){
   }
 }
 
-/* ── 결과 ── */
+// ── 결과 ──
 function showResult(mode){
   let correctCnt=0, wrongItems=[], skipCnt=0;
-  if(mode==='normal'){
+  if(mode==='normal'||mode==='wrongnote'){
     correctCnt=correct; wrongItems=wrongList; skipCnt=0;
   } else {
     quiz.forEach((q,i)=>{
@@ -537,7 +710,8 @@ function showResult(mode){
       if(q.type==='mc') ok=ans===q.answer;
       else if(q.type==='ox') ok=ans===q.answer;
       else { const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean); ok=kws.length>0&&kws.some(k=>ans.includes(k)); }
-      if(ok) correctCnt++; else wrongItems.push({q,myAns:q.type==='mc'?NUMS[ans]+' '+q.choices[ans]:ans});
+      if(ok) correctCnt++;
+      else { wrongItems.push({q,myAns:q.type==='mc'?NUMS[ans]+' '+q.choices[ans]:ans}); addToWrongNote(currentSubject.key,q,q.type==='mc'?NUMS[ans]+' '+q.choices[ans]:ans); }
     });
   }
   const score=Math.round((correctCnt/quiz.length)*100);
@@ -547,7 +721,7 @@ function showResult(mode){
   document.getElementById('res-c').textContent=correctCnt;
   document.getElementById('res-w').textContent=quiz.length-correctCnt-skipCnt;
   document.getElementById('res-s').textContent=skipCnt;
-  document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':'일반모드');
+  document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':mode==='wrongnote'?'오답풀기':'일반모드');
   document.getElementById('res-msg').textContent=score>=90?'완벽해요! 🎉':score>=70?'잘 하셨어요!':score>=50?'조금 더 노력해봐요':'다시 도전해봐요 💪';
   document.getElementById('review-title').textContent=mode==='exam'?'채점 결과 (오답·미답)':'틀린 문제 복습';
   const wr=document.getElementById('wrong-review');
@@ -568,6 +742,7 @@ function showResult(mode){
 
 function retryQuiz(){
   if(currentMode==='exam'){showScreen('screen-mode');document.getElementById('time-select').style.display='';}
+  else if(currentMode==='wrongnote') startWrongNoteQuiz();
   else startNormalMode();
 }
 
