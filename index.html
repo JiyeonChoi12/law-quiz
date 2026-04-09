@@ -628,7 +628,7 @@ function showFeedback(ok,q){
 function normalSelectMC(idx){
   if(answered)return; answered=true;
   const q=quiz[cur]; const ok=idx===q.answer;
-  if(ok)correct(); else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
+  if(ok)correct++; else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled');
     if(i===q.answer)b.classList.add('correct');
