@@ -99,6 +99,14 @@ textarea{resize:none;}
 <body>
 <div class="wrap">
   <div class="app-header">
+    <div style="position:relative;">
+      <a href="./index.html" target="_blank" title="사용자 페이지로 이동"
+        style="position:absolute;right:0;top:0;display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);text-decoration:none;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--r);transition:all 0.15s;"
+        onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent2)'"
+        onmouseout="this.style.color='var(--text3)';this.style.borderColor='var(--border2)'">
+        ↗ 사용자 페이지
+      </a>
+    </div>
     <h1>관리자 페이지</h1>
     <p>문제 업로드 및 관리 · 주제·출처 태그 설정</p>
   </div>
@@ -111,7 +119,7 @@ textarea{resize:none;}
       <button class="btn btn-accent" onclick="checkPw()">입력</button>
     </div>
     <p id="pw-err" style="font-size:12px;color:var(--red);margin-top:8px;"></p>
-    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">비밀번호는 관리자만 알 수 있습니다</p>
+    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">비밀번호는 관리자만 알 수 있습니다.</p>
   </div>
 
   <!-- 관리자 메인 -->
@@ -165,7 +173,7 @@ textarea{resize:none;}
         <input type="file" id="file-input" accept="image/*" multiple onchange="handleFiles(this.files)">
         <div style="font-size:24px;margin-bottom:8px;">📷</div>
         <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">기출문제 이미지 업로드</div>
-        <div style="font-size:12px;color:var(--text3);">클릭 또는 드래그 앤 드롭 · 위에서 주제·출처 먼저 선택</div>
+        <div style="font-size:12px;color:var(--text3);">클릭 · 드래그 앤 드롭 · <strong style="color:var(--accent);">Ctrl+V 붙여넣기</strong> 가능</div>
       </label>
       <div class="processing" id="processing">
         <div class="spinner"></div>
@@ -309,6 +317,62 @@ textarea{resize:none;}
   </div>
 </div>
 
+<!-- 문제 수정 모달 -->
+<div id="edit-modal-bg" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;overflow-y:auto;padding:2rem 1rem;">
+  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);max-width:600px;margin:0 auto;padding:1.5rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <h3 style="font-size:15px;font-weight:500;color:var(--text);">문제 수정</h3>
+      <button class="btn btn-sm" onclick="closeEditModal()">✕ 닫기</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">문제 유형</label>
+      <select id="edit-type" onchange="updateEditForm()" style="width:auto;">
+        <option value="mc">객관식</option>
+        <option value="ox">OX형</option>
+        <option value="sa">단답형</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">문제</label>
+      <textarea id="edit-q" rows="4"></textarea>
+    </div>
+    <div id="edit-mc-section">
+      <div class="form-group">
+        <label class="form-label">보기</label>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <input type="text" class="edit-choice" placeholder="① 보기 1">
+          <input type="text" class="edit-choice" placeholder="② 보기 2">
+          <input type="text" class="edit-choice" placeholder="③ 보기 3">
+          <input type="text" class="edit-choice" placeholder="④ 보기 4">
+        </div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:10px;">
+        <label class="form-label" style="margin:0;">정답</label>
+        <select id="edit-mc-ans" style="width:auto;">
+          <option value="0">①</option><option value="1">②</option>
+          <option value="2">③</option><option value="3">④</option>
+        </select>
+      </div>
+    </div>
+    <div id="edit-ox-section" style="display:none;" class="form-group">
+      <label class="form-label">정답</label>
+      <select id="edit-ox-ans" style="width:auto;"><option value="O">O</option><option value="X">X</option></select>
+    </div>
+    <div id="edit-sa-section" style="display:none;" class="form-group">
+      <label class="form-label">정답 키워드</label>
+      <input type="text" id="edit-sa-ans" placeholder="쉼표로 복수 가능">
+    </div>
+    <div class="form-group">
+      <label class="form-label">해설</label>
+      <textarea id="edit-exp" rows="2" placeholder="해설 (없으면 비워두세요)"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:1rem;">
+      <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="saveEdit()">저장</button>
+      <button class="btn" style="flex:1;justify-content:center;" onclick="closeEditModal()">취소</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const ADMIN_PW = 'wldusqjqgkr1043*!';
 const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
@@ -419,9 +483,10 @@ function toB64(file){ return new Promise((res,rej)=>{const r=new FileReader();r.
 
 async function extractQuestions(b64,mediaType,subj){
   const prompt=`이 이미지는 "${subj}" 과목 시험 문제입니다. 모든 문제를 추출해 JSON 배열로만 반환하세요 (마크다운 없이):
-객관식: {"id":"${subj}_001","type":"mc","question":"문제","choices":["① 보기1","② 보기2","③ 보기3","④ 보기4"],"answer":0,"explanation":"","topic":"","source":""}
+객관식: {"id":"${subj}_001","type":"mc","question":"문제 (번호기호 제외)","choices":["보기1 텍스트만","보기2 텍스트만","보기3 텍스트만","보기4 텍스트만"],"answer":0,"explanation":"","topic":"","source":""}
 OX형: {"id":"${subj}_001","type":"ox","question":"문제","answer":"O","explanation":"","topic":"","source":""}
 단답형: {"id":"${subj}_001","type":"sa","question":"문제","answer":"키워드","explanation":"","topic":"","source":""}
+중요: choices 배열에는 ①②③④ 같은 번호 기호를 포함하지 마세요. 텍스트만 넣으세요.
 JSON 배열만:`;
   const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
     method:'POST',
@@ -496,6 +561,7 @@ function renderManage(){
             <option value="강의문제" ${q.source==='강의문제'?'selected':''}>강의문제</option>
           </select>
           <button class="btn btn-sm" onclick="saveTag('${subj}',${i},'${uid}')">저장</button>
+          <button class="btn btn-sm" onclick="openEditModal('${subj}',${i})">수정</button>
         </div>
         <button class="btn btn-danger btn-sm" onclick="deleteQ('${subj}',${i})">삭제</button>
       </div>
