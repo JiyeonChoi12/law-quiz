@@ -651,6 +651,72 @@ const uz=document.getElementById('upload-zone');
 uz.addEventListener('dragover',e=>{e.preventDefault();uz.style.borderColor='var(--accent)';});
 uz.addEventListener('dragleave',()=>{uz.style.borderColor='';});
 uz.addEventListener('drop',e=>{e.preventDefault();uz.style.borderColor='';handleFiles(e.dataTransfer.files);});
+
+// 클립보드 붙여넣기
+document.addEventListener('paste',function(e){
+  if(!document.getElementById('admin-screen').classList.contains('active')) return;
+  const items=e.clipboardData?.items;
+  if(!items) return;
+  const files=[];
+  for(const item of items){ if(item.type.startsWith('image/')) files.push(item.getAsFile()); }
+  if(files.length) handleFiles(files);
+});
+
+// 문제 수정 모달
+let editSubj='', editIdx=-1;
+
+function openEditModal(subj,idx){
+  editSubj=subj; editIdx=idx;
+  const q=db[subj][idx];
+  document.getElementById('edit-type').value=q.type;
+  document.getElementById('edit-q').value=q.question;
+  document.getElementById('edit-exp').value=q.explanation||'';
+  updateEditForm();
+  if(q.type==='mc'){
+    document.querySelectorAll('.edit-choice').forEach((el,i)=>el.value=q.choices?.[i]||'');
+    document.getElementById('edit-mc-ans').value=q.answer;
+  } else if(q.type==='ox'){
+    document.getElementById('edit-ox-ans').value=q.answer;
+  } else {
+    document.getElementById('edit-sa-ans').value=q.answer||'';
+  }
+  document.getElementById('edit-modal-bg').style.display='block';
+}
+
+function closeEditModal(){
+  document.getElementById('edit-modal-bg').style.display='none';
+}
+
+function updateEditForm(){
+  const t=document.getElementById('edit-type').value;
+  document.getElementById('edit-mc-section').style.display=t==='mc'?'':'none';
+  document.getElementById('edit-ox-section').style.display=t==='ox'?'':'none';
+  document.getElementById('edit-sa-section').style.display=t==='sa'?'':'none';
+}
+
+function saveEdit(){
+  const type=document.getElementById('edit-type').value;
+  const question=document.getElementById('edit-q').value.trim();
+  const explanation=document.getElementById('edit-exp').value.trim();
+  if(!question){alert('문제를 입력해주세요');return;}
+  const q=db[editSubj][editIdx];
+  q.type=type; q.question=question; q.explanation=explanation;
+  if(type==='mc'){
+    const choices=Array.from(document.querySelectorAll('.edit-choice')).map(e=>e.value.trim());
+    if(choices.some(c=>!c)){alert('모든 보기를 입력해주세요');return;}
+    q.choices=choices;
+    q.answer=parseInt(document.getElementById('edit-mc-ans').value);
+  } else if(type==='ox'){
+    q.answer=document.getElementById('edit-ox-ans').value;
+    delete q.choices;
+  } else {
+    const ans=document.getElementById('edit-sa-ans').value.trim();
+    if(!ans){alert('정답을 입력해주세요');return;}
+    q.answer=ans; delete q.choices;
+  }
+  save(); closeEditModal(); renderManage();
+  alert('수정됐어요!');
+}
 </script>
 </body>
 </html>
