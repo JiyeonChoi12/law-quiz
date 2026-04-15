@@ -44,7 +44,7 @@ textarea{resize:none;}
 .btn-green{border-color:var(--green);color:var(--green);}
 .btn-green:hover{background:var(--green-bg);}
 .btn-sm{padding:5px 12px;font-size:12px;}
-.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--rl);padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:1rem;}
+.upload-zone{display:block;width:100%;border:1.5px dashed var(--border2);border-radius:var(--rl);padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:1rem;}
 .upload-zone:hover{border-color:var(--accent2);}
 .upload-zone input{display:none;}
 .processing{display:none;text-align:center;padding:2rem;}
@@ -142,7 +142,7 @@ textarea{resize:none;}
         <div class="api-status" id="api-status"></div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
         <div class="form-group" style="margin:0;">
           <label class="form-label">과목</label>
           <select id="upload-subj">
