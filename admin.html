@@ -107,7 +107,7 @@ textarea{resize:none;}
         ↗ 사용자 페이지
       </a>
     </div>
-    <h1>관리자 페이지</h1>
+    <h1 onclick="location.reload()" style="cursor:pointer;">관리자 페이지</h1>
     <p>문제 업로드 및 관리 · 주제·출처 태그 설정</p>
   </div>
 
@@ -142,7 +142,7 @@ textarea{resize:none;}
         <div class="api-status" id="api-status"></div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
         <div class="form-group" style="margin:0;">
           <label class="form-label">과목</label>
           <select id="upload-subj">
@@ -165,6 +165,8 @@ textarea{resize:none;}
             <option value="기출문제">기출문제</option>
             <option value="워크북">워크북</option>
             <option value="형성평가">형성평가</option>
+            <option value="강의문제">강의문제</option>
+            <option value="자격증시험">자격증 시험</option>
           </select>
         </div>
       </div>
@@ -258,6 +260,8 @@ textarea{resize:none;}
           <option value="기출문제">기출문제</option>
           <option value="워크북">워크북</option>
           <option value="형성평가">형성평가</option>
+          <option value="강의문제">강의문제</option>
+          <option value="자격증시험">자격증 시험</option>
         </select>
         <input type="text" id="filter-topic" placeholder="주제 검색" style="width:120px;padding:7px 10px;font-size:12px;" oninput="renderManage()">
         <button class="btn btn-danger btn-sm" onclick="clearSubject()">선택 과목 초기화</button>
@@ -599,6 +603,7 @@ function renderManage(){
             <option value="워크북" ${q.source==='워크북'?'selected':''}>워크북</option>
             <option value="형성평가" ${q.source==='형성평가'?'selected':''}>형성평가</option>
             <option value="강의문제" ${q.source==='강의문제'?'selected':''}>강의문제</option>
+            <option value="자격증시험" ${q.source==='자격증시험'?'selected':''}>자격증 시험</option>
           </select>
           <button class="btn btn-sm" onclick="saveTag('${subj}',${i},'${uid}')">저장</button>
           <button class="btn btn-sm" onclick="openEditModal('${subj}',${i})">수정</button>
