@@ -203,6 +203,8 @@ textarea{resize:none;}
               <option value="기출문제">기출문제</option>
               <option value="워크북">워크북</option>
               <option value="형성평가">형성평가</option>
+              <option value="강의문제">강의문제</option>
+              <option value="자격증시험">자격증 시험</option>
             </select>
           </div>
         </div>
@@ -218,11 +220,12 @@ textarea{resize:none;}
               <input type="text" class="m-choice" placeholder="② 보기 2">
               <input type="text" class="m-choice" placeholder="③ 보기 3">
               <input type="text" class="m-choice" placeholder="④ 보기 4">
+              <input type="text" class="m-choice" placeholder="⑤ 보기 5 (선택)">
             </div>
           </div>
           <div class="form-group" style="display:flex;align-items:center;gap:10px;">
             <label class="form-label" style="margin:0;">정답</label>
-            <select id="m-mc-ans" style="width:auto;"><option value="0">①</option><option value="1">②</option><option value="2">③</option><option value="3">④</option></select>
+            <select id="m-mc-ans" style="width:auto;"><option value="0">①</option><option value="1">②</option><option value="2">③</option><option value="3">④</option><option value="4">⑤</option></select>
           </div>
         </div>
         <div id="f-ox" style="display:none;" class="form-group">
@@ -406,7 +409,8 @@ async function checkPw(){
   if(document.getElementById('pw-input').value===ADMIN_PW){
     showScreen('admin-screen');
     if(API_KEY){ document.getElementById('api-input').value=API_KEY; showApiStatus('✓ API 키 저장됨',true); }
-    if(GH_TOKEN){ document.getElementById('gh-token').value=GH_TOKEN; document.getElementById('gh-status').textContent='✓ 토큰 저장됨'; document.getElementById('gh-status').className='api-status ok'; }
+    if(GH_TOKEN){ document.getElementById('gh-token').value=GH_TOKEN; document.getElementById('gh-status').textContent='✓ 저장됨'; document.getElementById('gh-status').className='api-status ok'; }
+    try{ const t=localStorage.getItem('admin_last_topic'); if(t) document.getElementById('m-topic').value=t; }catch(e){}
     await loadFromJson();
     renderManage(); renderExport();
   } else {
@@ -469,13 +473,15 @@ function saveManual(){
   const question=document.getElementById('m-q').value.trim();
   const explanation=document.getElementById('m-exp').value.trim();
   const topic=document.getElementById('m-topic').value.trim();
+  try{ if(topic) localStorage.setItem('admin_last_topic',topic); }catch(e){}
   const source=document.getElementById('m-source').value;
   if(!question){ alert('문제를 입력해주세요'); return; }
   const id=subj+'_'+Date.now();
   let q={id,type,question,explanation,topic,source};
   if(type==='mc'){
-    const choices=Array.from(document.querySelectorAll('.m-choice')).map(e=>e.value.trim());
-    if(choices.some(c=>!c)){ alert('모든 보기를 입력해주세요'); return; }
+    const allChoices=Array.from(document.querySelectorAll('.m-choice')).map(e=>e.value.trim());
+    const choices=allChoices[4]?allChoices:allChoices.slice(0,4);
+    if(choices.slice(0,4).some(c=>!c)){ alert('①~④ 보기를 모두 입력해주세요'); return; }
     q.choices=choices; q.answer=parseInt(document.getElementById('m-mc-ans').value);
   } else if(type==='ox'){
     q.answer=document.getElementById('m-ox-ans').value;
@@ -488,7 +494,7 @@ function saveManual(){
   db[uploadSubj].push(q); save();
   document.getElementById('m-q').value=''; document.getElementById('m-exp').value='';
   document.querySelectorAll('.m-choice').forEach(e=>e.value='');
-  document.getElementById('m-topic').value='';
+  // 주제 태그는 유지 (캐싱)
   if(document.getElementById('m-sa-ans')) document.getElementById('m-sa-ans').value='';
   alert(`[${uploadSubj}] 문제 추가됨! (${db[uploadSubj].length}개)`);
 }
