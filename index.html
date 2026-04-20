@@ -629,15 +629,62 @@ function showFeedback(ok,q){
   nb.textContent=cur+1<quiz.length?'다음 →':'결과 보기 →';
 }
 
+function checkMCAnswer(selected, answer){
+  if(Array.isArray(answer)){
+    return Array.isArray(selected)
+      ? answer.length===selected.length && answer.every(a=>selected.includes(a))
+      : answer.length===1 && answer[0]===selected;
+  }
+  return selected===answer;
+}
+function isCorrectChoice(i, answer){
+  return Array.isArray(answer)?answer.includes(i):i===answer;
+}
+
 function normalSelectMC(idx){
-  if(answered)return; answered=true;
-  const q=quiz[cur]; const ok=idx===q.answer;
+  if(answered)return;
+  const q=quiz[cur];
+  if(Array.isArray(q.answer)){
+    // 복수정답: 토글 방식으로 선택
+    const btn=document.querySelectorAll('#answer-area .choice-btn')[idx];
+    btn.classList.toggle('selected');
+    // 확인 버튼 표시
+    if(!document.getElementById('mc-confirm-btn')){
+      const nb=document.createElement('button');
+      nb.id='mc-confirm-btn'; nb.className='btn btn-accent';
+      nb.style.cssText='margin-top:12px;';
+      nb.textContent='선택 완료';
+      nb.onclick=confirmMultiMC;
+      document.getElementById('answer-area').appendChild(nb);
+    }
+    return;
+  }
+  // 단일정답
+  answered=true;
+  const ok=idx===q.answer;
   if(ok)correct++; else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled');
-    if(i===q.answer)b.classList.add('correct');
+    if(isCorrectChoice(i,q.answer))b.classList.add('correct');
     else if(i===idx&&!ok)b.classList.add('wrong');
   });
+  showFeedback(ok,q);
+}
+
+function confirmMultiMC(){
+  if(answered)return; answered=true;
+  const q=quiz[cur];
+  const selected=Array.from(document.querySelectorAll('#answer-area .choice-btn.selected')).map(b=>parseInt(b.dataset.idx));
+  const ok=checkMCAnswer(selected,q.answer);
+  const myAnsStr=selected.map(i=>NUMS[i]+' '+q.choices[i]).join(', ');
+  if(ok)correct++; else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
+  document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
+    b.classList.add('disabled'); b.classList.remove('selected');
+    if(isCorrectChoice(i,q.answer))b.classList.add('correct');
+    else if(selected.includes(i)&&!isCorrectChoice(i,q.answer))b.classList.add('wrong');
+  });
+  const cb=document.getElementById('mc-confirm-btn');
+  if(cb)cb.remove();
   showFeedback(ok,q);
 }
 
@@ -708,8 +755,20 @@ function examGo(idx){
 }
 
 function examSelectMC(qIdx,ci){
-  examAnswers[qIdx]=ci;
-  document.querySelectorAll('#eanswer-area .choice-btn').forEach((b,i)=>b.classList.toggle('selected',i===ci));
+  const q=quiz[qIdx];
+  if(Array.isArray(q.answer)){
+    // 복수정답: 토글
+    let cur=examAnswers[qIdx];
+    if(!Array.isArray(cur))cur=[];
+    const idx=cur.indexOf(ci);
+    if(idx>=0)cur.splice(idx,1); else cur.push(ci);
+    examAnswers[qIdx]=cur.length?cur:undefined;
+    if(!cur.length)delete examAnswers[qIdx];
+    document.querySelectorAll('#eanswer-area .choice-btn').forEach((b,i)=>b.classList.toggle('selected',cur.includes(i)));
+  } else {
+    examAnswers[qIdx]=ci;
+    document.querySelectorAll('#eanswer-area .choice-btn').forEach((b,i)=>b.classList.toggle('selected',i===ci));
+  }
   document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
   renderNav();
 }
@@ -735,8 +794,9 @@ function renderAnswerArea(areaId,q,mode,qIdx){
   const area=document.getElementById(areaId);
   const saved=mode==='exam'?examAnswers[qIdx]:undefined;
   if(q.type==='mc'){
+    const savedArr=mode==='exam'&&saved!==undefined?(Array.isArray(saved)?saved:[saved]):[];
     area.innerHTML='<div class="choices">'+q.choices.map((c,i)=>
-      `<button class="choice-btn${mode==='exam'&&saved===i?' selected':''}"
+      `<button class="choice-btn${savedArr.includes(i)?' selected':''}" data-idx="${i}"
         onclick="${mode==='exam'?`examSelectMC(${qIdx},${i})`:`normalSelectMC(${i})`}">
         <span class="choice-num">${NUMS[i]}</span><span class="choice-text">${c}</span>
       </button>`).join('')+'</div>';
@@ -765,7 +825,7 @@ function showResult(mode){
       const ans=examAnswers[i];
       if(ans===undefined){skipCnt++;wrongItems.push({q,myAns:'미답',skip:true});return;}
       let ok=false;
-      if(q.type==='mc')ok=ans===q.answer;
+      if(q.type==='mc')ok=checkMCAnswer(Array.isArray(ans)?ans:ans,q.answer);
       else if(q.type==='ox')ok=ans===q.answer;
       else{const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);ok=kws.length>0&&kws.some(k=>ans.includes(k));}
       if(ok)correctCnt++;
@@ -786,7 +846,7 @@ function showResult(mode){
   if(wrongItems.length){
     wr.style.display='';
     document.getElementById('review-list').innerHTML=wrongItems.map(({q,myAns})=>{
-      let ca=q.type==='mc'?`${NUMS[q.answer]} ${q.choices[q.answer]}`:q.answer;
+      let ca=q.type==='mc'?(Array.isArray(q.answer)?q.answer.map(a=>NUMS[a]+' '+q.choices[a]).join(', '):`${NUMS[q.answer]} ${q.choices[q.answer]}`):q.answer;
       const exp=q.explanation?`<div class="r-exp">💡 ${q.explanation}</div>`:'';
       return `<div class="review-item">
         <div class="r-q">${q.question.substring(0,130)}${q.question.length>130?'...':''}</div>
