@@ -278,13 +278,24 @@ textarea{resize:none;}
       <!-- 일괄 수정 바 -->
       <div class="bulk-bar" id="bulk-bar">
         <span id="bulk-cnt"></span>
+        <select id="bulk-subj" style="width:auto;font-size:12px;padding:5px 9px;">
+          <option value="">과목 선택</option>
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법논증이론</option>
+          <option value="글쓰기">글쓰기</option>
+        </select>
         <select id="bulk-source" style="width:auto;font-size:12px;padding:5px 9px;">
           <option value="">출처 선택</option>
           <option value="기출문제">기출문제</option>
           <option value="워크북">워크북</option>
           <option value="형성평가">형성평가</option>
+          <option value="강의문제">강의문제</option>
+          <option value="자격증시험">자격증 시험</option>
         </select>
-        <input type="text" id="bulk-topic" placeholder="주제 태그 입력" style="width:140px;padding:5px 9px;font-size:12px;">
+        <input type="text" id="bulk-topic" placeholder="주제 태그 입력" style="width:120px;padding:5px 9px;font-size:12px;">
         <button class="btn btn-accent btn-sm" onclick="applyBulk()">선택 항목에 적용</button>
         <button class="btn btn-sm" onclick="clearSelection()">선택 해제</button>
       </div>
@@ -674,16 +685,26 @@ function updateBulkBar(){
   else bar.classList.remove('active');
 }
 function applyBulk(){
+  const newSubj=document.getElementById('bulk-subj').value;
   const source=document.getElementById('bulk-source').value;
   const topic=document.getElementById('bulk-topic').value.trim();
-  if(!source&&!topic){ alert('출처 또는 주제를 입력해주세요'); return; }
+  if(!newSubj&&!source&&!topic){ alert('과목, 출처, 주제 중 하나 이상 선택해주세요'); return; }
+  const toMove=[];
   selectedIds.forEach(uid=>{
     const [subj,idxStr]=uid.split('__'); const idx=parseInt(idxStr);
     if(db[subj]&&db[subj][idx]){
       if(source) db[subj][idx].source=source;
       if(topic) db[subj][idx].topic=topic;
+      if(newSubj&&newSubj!==subj) toMove.push({subj,idx});
     }
   });
+  // 과목 이동 (뒤에서 앞으로 삭제해야 인덱스 안 꼬임)
+  if(newSubj){
+    toMove.sort((a,b)=>b.idx-a.idx).forEach(({subj,idx})=>{
+      const q=db[subj].splice(idx,1)[0];
+      db[newSubj].push(q);
+    });
+  }
   save(); selectedIds.clear(); renderManage();
   alert('적용됐어요!');
 }
