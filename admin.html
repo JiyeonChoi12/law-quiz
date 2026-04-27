@@ -120,6 +120,7 @@ textarea{resize:none;}
     </div>
     <p id="pw-err" style="font-size:12px;color:var(--red);margin-top:8px;"></p>
     <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">비밀번호는 관리자만 알 수 있습니다.</p>
+    <button class="btn btn-sm" style="margin-top:10px;font-size:11px;border-color:var(--red);color:var(--red);" onclick="reloadFromJson()">GitHub에서 문제 다시 불러오기</button>
   </div>
 
   <!-- 관리자 메인 -->
@@ -465,6 +466,14 @@ async function loadFromJson(){
   }
 }
 function logout(){ showScreen('login-screen'); document.getElementById('pw-input').value=''; }
+async function reloadFromJson(){
+  if(!confirm('로컬 데이터를 초기화하고 GitHub에서 문제를 다시 불러올까요?')) return;
+  try{ localStorage.removeItem('admin_db'); }catch(e){}
+  SUBJECT_KEYS.forEach(k=>db[k]=[]);
+  await loadFromJson();
+  renderManage(); renderExport();
+  alert('GitHub에서 문제를 다시 불러왔어요!');
+}
 
 function saveApiKey(){
   const k=document.getElementById('api-input').value.trim();
