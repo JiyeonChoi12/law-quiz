@@ -230,8 +230,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="app-header">
     <h1 onclick="location.reload()" style="cursor:pointer;">법학과 수강과목 기출문제</h1>
     <p>과목을 선택하고 학습하세요</p>
+    <a href="https://www.law.go.kr/LSW/main.html" target="_blank"
+      style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 16px;background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;border-radius:20px;text-decoration:none;font-family:inherit;border:0.5px solid var(--border2);transition:opacity 0.15s;"
+      onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+      ⚖️ 법령정보센터 바로가기
+    </a>
     <a href="https://open.kakao.com/o/sg1nQ5oi" target="_blank"
-      style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 16px;background:#FEE500;color:#3A1D1D;font-size:12px;font-weight:500;border-radius:20px;text-decoration:none;font-family:inherit;transition:opacity 0.15s;"
+      style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 16px;background:#FEE500;color:#3A1D1D;font-size:12px;font-weight:500;border-radius:20px;text-decoration:none;font-family:inherit;transition:opacity 0.15s;"
       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       💬 개발자에게 메시지 남기기
     </a>
@@ -584,7 +589,7 @@ function startNormalMode(){
   const pool=getQuizPool();
   if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
   currentMode='normal';
-  quiz=shuffle([...pool]).slice(0,Math.min(25,pool.length));
+  quiz=shuffle([...pool]);
   cur=0;correct=0;wrongList=[];
   showScreen('screen-quiz');renderQ();
 }
