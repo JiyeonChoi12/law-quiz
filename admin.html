@@ -297,6 +297,7 @@ textarea{resize:none;}
         </select>
         <input type="text" id="bulk-topic" placeholder="주제 태그 입력" style="width:120px;padding:5px 9px;font-size:12px;">
         <button class="btn btn-accent btn-sm" onclick="applyBulk()">선택 항목에 적용</button>
+        <button class="btn btn-danger btn-sm" onclick="bulkDelete()">선택 삭제</button>
         <button class="btn btn-sm" onclick="clearSelection()">선택 해제</button>
       </div>
 
@@ -710,6 +711,21 @@ function toggleSelectAll(){
   updateBulkBar();
 }
 function clearSelection(){ selectedIds.clear(); updateBulkBar(); renderManage(); }
+function bulkDelete(){
+  if(!confirm(`선택한 ${selectedIds.size}개 문제를 삭제할까요?`)) return;
+  // 과목별로 묶어서 인덱스 내림차순 삭제
+  const bySubj={};
+  selectedIds.forEach(uid=>{
+    const [subj,idxStr]=uid.split('__'); const idx=parseInt(idxStr);
+    if(!bySubj[subj]) bySubj[subj]=[];
+    bySubj[subj].push(idx);
+  });
+  Object.entries(bySubj).forEach(([subj,idxs])=>{
+    idxs.sort((a,b)=>b-a).forEach(idx=>db[subj].splice(idx,1));
+  });
+  save(); selectedIds.clear(); renderManage();
+  alert('삭제됐어요!');
+}
 function updateBulkBar(){
   const bar=document.getElementById('bulk-bar');
   if(selectedIds.size>0){ bar.classList.add('active'); document.getElementById('bulk-cnt').textContent=`${selectedIds.size}개 선택됨`; }
