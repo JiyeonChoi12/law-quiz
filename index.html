@@ -195,6 +195,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .back-btn:hover{color:var(--text2);}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.settings-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.settings-card-left{flex:1;}
+.settings-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;}
+.settings-desc{font-size:12px;color:var(--text3);}
 .unlock-modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:999;}
 .unlock-modal{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:2rem 1.5rem;width:300px;text-align:center;}
 .unlock-modal h3{font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px;}
@@ -240,10 +244,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="home-tab active" onclick="switchHomeTab('quiz')">과목 선택</div>
       <div class="home-tab" onclick="switchHomeTab('wrongnote')">오답노트</div>
       <div class="home-tab" onclick="switchHomeTab('stats')">취약점 분석</div>
+      <div class="home-tab" onclick="switchHomeTab('settings')">설정</div>
     </div>
     <div id="tab-quiz"><div class="subject-grid" id="subject-grid"></div></div>
     <div id="tab-wrongnote" style="display:none;"><div id="wn-subj-list"></div></div>
     <div id="tab-stats" style="display:none;"><div id="stats-content"></div></div>
+    <div id="tab-settings" style="display:none;"><div id="settings-content"></div></div>
   </div>
 
   <!-- 모드 선택 -->
@@ -447,12 +453,14 @@ async function loadSubject(subj){
 
 // ── 홈 ──
 function switchHomeTab(tab){
-  document.querySelectorAll('.home-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='quiz')||(i===1&&tab==='wrongnote')||(i===2&&tab==='stats')));
+  document.querySelectorAll('.home-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='quiz')||(i===1&&tab==='wrongnote')||(i===2&&tab==='stats')||(i===3&&tab==='settings')));
   document.getElementById('tab-quiz').style.display=tab==='quiz'?'':'none';
   document.getElementById('tab-wrongnote').style.display=tab==='wrongnote'?'':'none';
   document.getElementById('tab-stats').style.display=tab==='stats'?'':'none';
+  document.getElementById('tab-settings').style.display=tab==='settings'?'':'none';
   if(tab==='wrongnote')renderWNHome();
   if(tab==='stats')renderStats();
+  if(tab==='settings')renderSettings();
 }
 
 async function renderHome(){
@@ -967,6 +975,104 @@ function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.ra
 // correct 변수 충돌 방지
 // correct declared above
 
+
+// ── 설정 (캐시 초기화) ──
+function renderSettings(){
+  const el=document.getElementById('settings-content');
+  const SUBJ_KEYS=['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'];
+  const SUBJ_FILE_KEYS=['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
+
+  let html=`
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">전체 초기화</div>
+        <div class="settings-desc">오답노트, 풀이 이력, 잠금 해제 상태 모두 삭제</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearAll()">초기화</button>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">오답노트 전체 초기화</div>
+        <div class="settings-desc">모든 과목의 오답 기록 삭제</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearAllWN()">초기화</button>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">풀이 이력 전체 초기화</div>
+        <div class="settings-desc">모든 과목의 점수·응시 횟수 삭제</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearAllStats()">초기화</button>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">강의문제 잠금 초기화</div>
+        <div class="settings-desc">잠금 해제 상태 삭제 (다시 코드 입력 필요)</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearLecture()">초기화</button>
+    </div>
+    <div style="height:0.5px;background:var(--border);margin:6px 0;"></div>
+    <div style="font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">과목별 초기화</div>`;
+
+  SUBJ_KEYS.forEach((k,i)=>{
+    const fk=SUBJ_FILE_KEYS[i];
+    const wn=getWN(k); const wnCnt=Object.keys(wn).length;
+    const st=getStats(k);
+    html+=`<div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">${k}</div>
+        <div class="settings-desc">오답 ${wnCnt}개 · ${st.s!==null?'최근 '+st.s+'점':'응시 없음'}</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn btn-sm" style="font-size:11px;padding:4px 10px;border-color:var(--red);color:var(--red);" onclick="clearSubjWN('${k}')">오답</button>
+        <button class="btn btn-sm" style="font-size:11px;padding:4px 10px;border-color:var(--red);color:var(--red);" onclick="clearSubjStats('${k}')">이력</button>
+      </div>
+    </div>`;
+  });
+
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function clearAll(){
+  if(!confirm('정말 전체 초기화할까요? 오답노트, 풀이 이력, 잠금 해제 상태가 모두 삭제됩니다.')) return;
+  try{
+    ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{
+      localStorage.removeItem('lq_wn_'+k);
+      localStorage.removeItem('lq_s_'+k);
+    });
+    localStorage.removeItem('_lu');
+    lectureUnlocked=false;
+  }catch(e){}
+  alert('전체 초기화됐어요!');
+  renderSettings(); renderHome();
+}
+function clearAllWN(){
+  if(!confirm('모든 과목의 오답노트를 초기화할까요?')) return;
+  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
+  alert('오답노트 전체 초기화됐어요!'); renderSettings();
+}
+function clearAllStats(){
+  if(!confirm('모든 과목의 풀이 이력을 초기화할까요?')) return;
+  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_s_'+k);}catch(e){} });
+  alert('풀이 이력 전체 초기화됐어요!'); renderSettings(); renderHome();
+}
+function clearLecture(){
+  if(!confirm('강의문제 잠금 해제 상태를 초기화할까요?')) return;
+  try{localStorage.removeItem('_lu'); lectureUnlocked=false;}catch(e){}
+  alert('잠금 초기화됐어요!'); renderSettings();
+}
+function clearSubjWN(k){
+  if(!confirm(`[${k}] 오답노트를 초기화할까요?`)) return;
+  try{localStorage.removeItem('lq_wn_'+k);}catch(e){}
+  renderSettings();
+}
+function clearSubjStats(k){
+  if(!confirm(`[${k}] 풀이 이력을 초기화할까요?`)) return;
+  try{localStorage.removeItem('lq_s_'+k);}catch(e){}
+  renderSettings(); renderHome();
+}
 
 // ── 취약점 분석 ──
 function renderStats(){
