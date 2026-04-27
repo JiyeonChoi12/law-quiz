@@ -590,7 +590,8 @@ function getFilteredRows(){
 }
 
 function renderManage(){
-  selectedIds.clear(); updateBulkBar();
+  // selectedIds 유지 (전체선택 후 재렌더링해도 선택 유지)
+  updateBulkBar();
   document.getElementById('select-all').checked=false;
   const statsEl=document.getElementById('manage-stats');
   statsEl.innerHTML=SUBJECT_KEYS.map(k=>`<div class="mini-stat"><strong>${db[k].length}</strong> ${k}</div>`).join('');
@@ -675,8 +676,12 @@ function toggleSelectAll(){
   const checked=document.getElementById('select-all').checked;
   const rows=getFilteredRows();
   rows.forEach(({subj,i})=>{ const uid=subj+'__'+i; if(checked)selectedIds.add(uid); else selectedIds.delete(uid); });
-  updateBulkBar(); renderManage();
-  document.getElementById('select-all').checked=checked;
+  // 각 체크박스 직접 업데이트 (renderManage 호출 안 함)
+  document.querySelectorAll('.q-card input[type=checkbox]').forEach(cb=>{
+    const uid=cb.closest('.q-card')?.id?.replace('card-','');
+    if(uid) cb.checked=selectedIds.has(uid);
+  });
+  updateBulkBar();
 }
 function clearSelection(){ selectedIds.clear(); updateBulkBar(); renderManage(); }
 function updateBulkBar(){
