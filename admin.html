@@ -244,6 +244,10 @@ textarea{resize:none;}
           <input type="text" id="m-sa-ans" placeholder="쉼표로 복수 가능">
         </div>
         <div class="form-group">
+          <label class="form-label">이미지 URL <span style="font-size:11px;color:var(--text3);">(선택)</span></label>
+          <input type="text" id="m-image" placeholder="https://i.imgur.com/...">
+        </div>
+        <div class="form-group">
           <label class="form-label">해설 (선택)</label>
           <textarea id="m-exp" rows="2" placeholder="해설"></textarea>
         </div>
@@ -512,7 +516,9 @@ function saveManual(){
   const source=document.getElementById('m-source').value;
   if(!question){ alert('문제를 입력해주세요'); return; }
   const id=subj+'_'+Date.now();
+  const image=document.getElementById('m-image').value.trim();
   let q={id,type,question,explanation,topic,source};
+  if(image) q.image=image;
   if(type==='mc'){
     const allChoices=Array.from(document.querySelectorAll('.m-choice')).map(e=>e.value.trim());
     const choices=allChoices[4]?allChoices:allChoices.slice(0,4);
@@ -529,7 +535,7 @@ function saveManual(){
   }
   const uploadSubj=document.getElementById('upload-subj').value;
   db[uploadSubj].push(q); save();
-  document.getElementById('m-q').value=''; document.getElementById('m-exp').value='';
+  document.getElementById('m-q').value=''; document.getElementById('m-exp').value=''; document.getElementById('m-image').value='';
   document.querySelectorAll('.m-choice').forEach(e=>e.value='');
   document.querySelectorAll('.m-mc-ans-cb').forEach(e=>e.checked=false);
   // 주제 태그는 유지 (캐싱)
