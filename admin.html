@@ -504,7 +504,6 @@ function saveManual(){
   const question=document.getElementById('m-q').value.trim();
   const explanation=document.getElementById('m-exp').value.trim();
   const topic=document.getElementById('m-topic').value.trim();
-  const image=document.getElementById('m-image').value.trim();
   try{ if(topic) localStorage.setItem('admin_last_topic',topic); }catch(e){}
   const source=document.getElementById('m-source').value;
   if(!question){ alert('문제를 입력해주세요'); return; }
@@ -858,7 +857,8 @@ function openEditModal(subj,idx){
   document.getElementById('edit-type').value=q.type;
   document.getElementById('edit-q').value=q.question;
   document.getElementById('edit-exp').value=q.explanation||'';
-  document.getElementById('edit-image').value=q.image||'';
+  const editImgEl=document.getElementById('edit-image');
+  if(editImgEl) editImgEl.value=q.image||'';
   updateEditForm();
   if(q.type==='mc'){
     document.querySelectorAll('.edit-choice').forEach((el,i)=>el.value=q.choices?.[i]||'');
@@ -889,7 +889,8 @@ function saveEdit(){
   const type=document.getElementById('edit-type').value;
   const question=document.getElementById('edit-q').value.trim();
   const explanation=document.getElementById('edit-exp').value.trim();
-  const editImage=document.getElementById('edit-image').value.trim();
+  const editImgEl2=document.getElementById('edit-image');
+  const editImage=editImgEl2?editImgEl2.value.trim():'';
   if(!question){alert('문제를 입력해주세요');return;}
   const q=db[editSubj][editIdx];
   q.type=type; q.question=question; q.explanation=explanation;
