@@ -402,6 +402,10 @@ textarea{resize:none;}
       <input type="text" id="edit-sa-ans" placeholder="쉼표로 복수 가능">
     </div>
     <div class="form-group">
+      <label class="form-label">이미지 URL <span style="font-size:11px;color:var(--text3);">(선택)</span></label>
+      <input type="text" id="edit-image" placeholder="https://i.imgur.com/...">
+    </div>
+    <div class="form-group">
       <label class="form-label">해설</label>
       <textarea id="edit-exp" rows="2" placeholder="해설 (없으면 비워두세요)"></textarea>
     </div>
@@ -857,7 +861,6 @@ function openEditModal(subj,idx){
   document.getElementById('edit-type').value=q.type;
   document.getElementById('edit-q').value=q.question;
   document.getElementById('edit-exp').value=q.explanation||'';
-  document.getElementById('edit-image').value=q.image||'';
   updateEditForm();
   if(q.type==='mc'){
     document.querySelectorAll('.edit-choice').forEach((el,i)=>el.value=q.choices?.[i]||'');
@@ -888,15 +891,12 @@ function saveEdit(){
   const type=document.getElementById('edit-type').value;
   const question=document.getElementById('edit-q').value.trim();
   const explanation=document.getElementById('edit-exp').value.trim();
-  const editImage=document.getElementById('edit-image').value.trim();
   if(!question){alert('문제를 입력해주세요');return;}
   const q=db[editSubj][editIdx];
   q.type=type; q.question=question; q.explanation=explanation;
-  if(editImage) q.image=editImage; else delete q.image;
   if(type==='mc'){
-    const allEditChoices=Array.from(document.querySelectorAll('.edit-choice')).map(e=>e.value.trim());
-    const choices=allEditChoices[4]?allEditChoices:allEditChoices.slice(0,4);
-    if(choices.slice(0,4).some(c=>!c)){alert('①~④ 보기를 모두 입력해주세요');return;}
+    const choices=Array.from(document.querySelectorAll('.edit-choice')).map(e=>e.value.trim());
+    if(choices.some(c=>!c)){alert('모든 보기를 입력해주세요');return;}
     const checkedEditAns=Array.from(document.querySelectorAll('.edit-mc-ans-cb:checked')).map(e=>parseInt(e.value));
     if(!checkedEditAns.length){ alert('정답을 하나 이상 선택해주세요'); return; }
     q.choices=choices;
