@@ -104,7 +104,6 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 /* 문제 */
 .q-label{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
 .q-body{font-family:'Noto Serif KR',serif;font-size:16px;line-height:1.8;color:var(--text);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:0.5px solid var(--border);}
-.q-img{max-width:100%;border-radius:var(--r);margin-bottom:1rem;border:0.5px solid var(--border);display:block;}
 
 /* 보기 */
 .choices{display:flex;flex-direction:column;gap:8px;}
@@ -194,8 +193,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .divider{height:0.5px;background:var(--border);margin:1.5rem 0;}
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text3);cursor:pointer;margin-bottom:1.5rem;}
 .back-btn:hover{color:var(--text2);}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;} ::-webkit-scrollbar-track{background:var(--surface2);}
 .settings-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .settings-card-left{flex:1;}
 .settings-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;}
@@ -623,7 +622,7 @@ function renderQ(){
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
   document.getElementById('q-label').innerHTML=labelHtml;
-  document.getElementById('q-body').innerHTML=(q.image?`<img src="${q.image}" class="q-img" alt="문제 이미지">`:'')+'<span>'+q.question.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
+  document.getElementById('q-body').textContent=q.question;
   document.getElementById('feedback').style.display='none';
   document.getElementById('next-btn').style.display='none';
   document.getElementById('score-live').textContent='';
@@ -750,7 +749,7 @@ function renderExamQ(idx){
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
   document.getElementById('eq-label').innerHTML=labelHtml;
-  document.getElementById('eq-body').innerHTML=(q.image?`<img src="${q.image}" class="q-img" alt="문제 이미지">`:'')+'<span>'+q.question.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
+  document.getElementById('eq-body').textContent=q.question;
   document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
   renderNav(); renderAnswerArea('eanswer-area',q,'exam',idx);
 }
