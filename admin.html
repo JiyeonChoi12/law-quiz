@@ -2,9 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>법학과 수강과목 기출문제</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 — 법과목 기출문제</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#f5f0e8;--surface:#fffdf8;--surface2:#f0ebe0;
@@ -13,1233 +13,911 @@
   --accent:#7a5c2e;--accent2:#5a3f1a;
   --green:#2d7a4a;--green-bg:#e8f5ee;
   --red:#a63030;--red-bg:#faeaea;
-  --purple:#6b3fa0;--purple-bg:#f0eafa;
   --r:8px;--rl:12px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-weight:300;min-height:100vh;}
-.wrap{max-width:640px;margin:0 auto;padding:1.5rem 1.25rem 5rem;}
-.app-header{text-align:center;padding:2rem 0 1.75rem;border-bottom:0.5px solid var(--border);margin-bottom:2rem;}
-.app-header h1{font-family:'Noto Serif KR',serif;font-size:21px;font-weight:600;color:var(--accent);letter-spacing:0.06em;}
-.app-header p{font-size:13px;color:var(--text3);margin-top:5px;}
+.wrap{max-width:820px;margin:0 auto;padding:1.5rem 1.25rem 5rem;}
+.app-header{text-align:center;padding:1.75rem 0 1.5rem;border-bottom:0.5px solid var(--border);margin-bottom:2rem;}
+.app-header h1{font-size:18px;font-weight:500;color:var(--accent);}
+.app-header p{font-size:12px;color:var(--text3);margin-top:4px;}
 .screen{display:none;}.screen.active{display:block;}
-
-/* 홈 탭 */
-.home-tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:1.5rem;}
-.home-tab{padding:9px 18px;font-size:13px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:color 0.15s;}
-.home-tab:hover{color:var(--text);}
-.home-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500;}
-
-/* 과목 카드 */
-.subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.subject-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem 1rem;cursor:pointer;transition:all 0.2s;text-align:center;position:relative;overflow:hidden;}
-.subject-card:hover{border-color:var(--accent2);background:#f5eddd;}
-.subject-card:active{transform:scale(0.97);}
-.subject-card.disabled{opacity:0.4;cursor:not-allowed;}
-.subject-card .s-icon{font-size:22px;margin-bottom:8px;}
-.subject-card .s-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;}
-.subject-card .s-count{font-size:11px;color:var(--text3);}
-.subject-card .s-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);transition:width 0.4s;}
-
-/* 모드 선택 */
-.mode-header{margin-bottom:1.5rem;}
-.mode-header .subj-name{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:var(--accent);margin-bottom:4px;}
-.mode-header .subj-cnt{font-size:13px;color:var(--text3);}
-.mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;}
-.mode-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem 1rem;cursor:pointer;transition:all 0.2s;text-align:center;}
-.mode-card:hover{border-color:var(--accent2);background:#f5eddd;}
-.mode-card:active{transform:scale(0.97);}
-.mode-card .m-icon{font-size:22px;margin-bottom:8px;}
-.mode-card .m-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;}
-.mode-card .m-desc{font-size:11px;color:var(--text3);line-height:1.5;}
-.mode-card.mode-exam{border-color:var(--accent2);}
-.mode-card.mode-exam .m-name{color:var(--accent);}
-.mode-card.mode-wn{border-color:var(--red);}
-.mode-card.mode-wn .m-name{color:var(--red);}
-
-/* 필터 박스 */
-.filter-box{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.25rem;}
-.filter-box h3{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:12px;}
-.filter-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap;}
-.filter-label{font-size:11px;color:var(--text3);min-width:36px;}
-.filter-chips{display:flex;gap:6px;flex-wrap:wrap;}
-.chip{font-size:12px;padding:4px 12px;border:0.5px solid var(--border2);border-radius:20px;cursor:pointer;background:transparent;color:var(--text2);transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;}
-.chip:hover{border-color:var(--accent2);color:var(--accent);}
-.chip.active{background:var(--accent);color:#fffdf8;border-color:var(--accent);}
-.chip.source-chip.active{background:var(--purple);border-color:var(--purple);color:#fff;}
-.filter-result{font-size:12px;color:var(--text3);margin-top:8px;}
-
-/* 시간 선택 */
-.time-select{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1rem;}
-.time-select h3{font-size:14px;font-weight:500;color:var(--text);margin-bottom:12px;}
-.time-btns{display:flex;gap:10px;}
-.time-btn{flex:1;padding:14px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;cursor:pointer;text-align:center;transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;}
-.time-btn:hover{background:var(--surface2);border-color:var(--accent2);}
-.time-btn .t-min{font-size:22px;font-weight:500;color:var(--accent);}
-
-/* 타이머 */
-.timer-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding:10px 16px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);}
-.timer-display{font-size:20px;font-weight:500;color:var(--accent);font-family:monospace;letter-spacing:0.05em;}
-.timer-display.urgent{color:var(--red);animation:pulse 1s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-.timer-label{font-size:11px;color:var(--text3);margin-bottom:2px;}
-
-/* 진행바 */
-.progress-wrap{margin-bottom:1.25rem;}
-.progress-meta{display:flex;justify-content:space-between;margin-bottom:8px;}
-.progress-meta span{font-size:12px;color:var(--text3);}
-.progress-bar{height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
-.progress-fill{height:100%;background:var(--accent);transition:width 0.4s cubic-bezier(.4,0,.2,1);}
-
-/* 배지 */
-.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
-.badge-mc{background:#e8f0fa;color:#2d5a9e;border:0.5px solid #6a90c8;}
-.badge-ox{background:var(--green-bg);color:var(--green);border:0.5px solid var(--green);}
-.badge-sa{background:#fdf3e4;color:#8a5520;border:0.5px solid #c47a30;}
-.badge-subj{background:var(--surface2);color:var(--text2);border:0.5px solid var(--border2);}
-.badge-topic{background:var(--surface2);color:var(--text2);border:0.5px solid var(--border2);}
-.badge-source{background:var(--purple-bg);color:var(--purple);border:0.5px solid var(--purple);}
-.badge-exam{background:#fdf3e4;color:var(--accent);border:0.5px solid var(--accent2);}
-
-/* 문제 */
-.q-label{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.q-body{font-family:'Noto Serif KR',serif;font-size:16px;line-height:1.8;color:var(--text);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:0.5px solid var(--border);}
-
-/* 보기 */
-.choices{display:flex;flex-direction:column;gap:8px;}
-.choice-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:0.5px solid var(--border);border-radius:var(--r);background:transparent;cursor:pointer;text-align:left;width:100%;transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;}
-.choice-btn:hover:not(.disabled){border-color:var(--border2);background:var(--surface2);}
-.choice-num{font-size:12px;font-weight:500;color:var(--text3);min-width:18px;padding-top:1px;}
-.choice-text{font-size:14px;color:var(--text);line-height:1.55;font-weight:300;}
-.choice-btn.correct{border-color:var(--green);background:var(--green-bg);}
-.choice-btn.correct .choice-num,.choice-btn.correct .choice-text{color:var(--green);}
-.choice-btn.wrong{border-color:var(--red);background:var(--red-bg);}
-.choice-btn.wrong .choice-num,.choice-btn.wrong .choice-text{color:var(--red);}
-.choice-btn.selected{border-color:var(--accent);background:#f5eddd;}
-.choice-btn.selected .choice-num{color:var(--accent);}
-.choice-btn.disabled{cursor:default;}
-.ox-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.ox-btn{padding:20px;border:0.5px solid var(--border);border-radius:var(--rl);font-size:28px;cursor:pointer;background:transparent;transition:all 0.15s;text-align:center;}
-.ox-btn:hover:not(.disabled){background:var(--surface2);border-color:var(--border2);}
-.ox-btn.correct{border-color:var(--green);background:var(--green-bg);}
-.ox-btn.wrong{border-color:var(--red);background:var(--red-bg);}
-.ox-btn.selected{border-color:var(--accent);background:#f5eddd;}
-.ox-btn.disabled{cursor:default;}
-.sa-row{display:flex;gap:8px;}
-.sa-input{flex:1;padding:11px 13px;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;}
-.sa-input:focus{border-color:var(--accent2);}
-.sa-input:disabled{opacity:0.5;}
-
-/* 피드백 */
-.feedback-box{margin-top:14px;padding:14px 16px;border-radius:var(--r);font-size:13px;line-height:1.65;animation:fadeIn 0.2s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.feedback-box.correct{border:0.5px solid var(--green);background:var(--green-bg);}
-.feedback-box.wrong{border:0.5px solid var(--red);background:var(--red-bg);}
-.fb-title{font-weight:500;margin-bottom:5px;}
-.feedback-box.correct .fb-title{color:var(--green);}
-.feedback-box.wrong .fb-title{color:var(--red);}
-.fb-answer{font-size:13px;color:var(--text2);margin-bottom:5px;}
-.fb-exp{font-size:13px;color:var(--text2);border-top:0.5px solid var(--border);padding-top:10px;margin-top:10px;}
-.fb-exp-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;}
-
-/* 실전모드 네비 */
-.q-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
-.q-dot{width:30px;height:30px;border-radius:50%;font-size:11px;font-weight:500;border:0.5px solid var(--border2);background:var(--surface);color:var(--text3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;}
-.q-dot:hover{border-color:var(--accent);color:var(--accent);}
-.q-dot.answered{background:var(--accent);color:#fffdf8;border-color:var(--accent);}
-.q-dot.current{border:2px solid var(--accent2);color:var(--accent);}
-
-/* 버튼 */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text);font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.15s;font-weight:400;}
+#login-screen{max-width:340px;margin:4rem auto;text-align:center;}
+#login-screen h2{font-size:16px;font-weight:500;color:var(--text2);margin-bottom:1.5rem;}
+.pw-row{display:flex;gap:8px;}
+.tab-bar{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:1.5rem;}
+.tab{padding:9px 16px;font-size:13px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:color 0.15s;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+input[type=text],input[type=password],textarea,select{width:100%;padding:9px 11px;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:300;outline:none;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent2);}
+textarea{resize:none;}
+.form-group{margin-bottom:12px;}
+.form-label{font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;display:block;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text);font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.15s;}
 .btn:hover{background:var(--surface2);}
 .btn:active{transform:scale(0.98);}
 .btn-accent{background:var(--accent);color:#fffdf8;border-color:var(--accent);font-weight:500;}
 .btn-accent:hover{opacity:0.88;background:var(--accent);}
 .btn-danger{border-color:var(--red);color:var(--red);}
 .btn-danger:hover{background:var(--red-bg);}
-.btn-full{width:100%;justify-content:center;padding:12px;font-size:14px;}
+.btn-green{border-color:var(--green);color:var(--green);}
+.btn-green:hover{background:var(--green-bg);}
+.btn-sm{padding:5px 12px;font-size:12px;}
+.upload-zone{display:block;width:100%;border:1.5px dashed var(--border2);border-radius:var(--rl);padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:1rem;}
+.upload-zone:hover{border-color:var(--accent2);}
+.upload-zone input{display:none;}
+.processing{display:none;text-align:center;padding:2rem;}
+.spinner{width:28px;height:28px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 10px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.api-box{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.5rem;}
+.api-box h3{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:8px;}
+.api-box p{font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.6;}
+.api-row{display:flex;gap:8px;}
+.api-row input{flex:1;font-family:monospace;}
+.api-status{font-size:12px;margin-top:6px;}
+.api-status.ok{color:var(--green);}
+.api-status.err{color:var(--red);}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;}
+.badge-mc{background:#e8f0fa;color:#2d5a9e;border:0.5px solid #6a90c8;}
+.badge-ox{background:var(--green-bg);color:var(--green);border:0.5px solid var(--green);}
+.badge-sa{background:#fdf3e4;color:#8a5520;border:0.5px solid #c47a30;}
+.badge-topic{background:var(--surface2);color:var(--text2);border:0.5px solid var(--border2);}
+.badge-source{background:#f0eafa;color:#6b3fa0;border:0.5px solid #b08ad0;}
+.stats-row{display:flex;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.mini-stat{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:13px;color:var(--text2);}
+.mini-stat strong{color:var(--text);font-weight:500;}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
+.toolbar select{width:auto;}
+.empty{text-align:center;padding:3rem;color:var(--text3);font-size:14px;}
+.json-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem;font-family:monospace;font-size:12px;color:var(--text2);max-height:300px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;margin-top:1rem;}
 
-/* 결과 */
-.result-hero{text-align:center;padding:2rem 0 1.5rem;}
-.result-ring{width:110px;height:110px;border-radius:50%;border:2px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem;}
-.result-ring .big{font-size:28px;font-weight:500;color:var(--accent);}
-.result-ring .small{font-size:12px;color:var(--text3);}
-.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.25rem;}
-.stat-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem;}
-.stat-card .lbl{font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
-.stat-card .val{font-size:20px;font-weight:500;}
-.review-section{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1rem;}
-.review-section h3{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:1rem;}
-.review-item{padding:12px 0;border-bottom:0.5px solid var(--border);}
-.review-item:last-child{border-bottom:none;}
-.r-q{font-size:13px;color:var(--text);margin-bottom:6px;line-height:1.55;}
-.r-my{font-size:12px;color:var(--red);margin-bottom:2px;}
-.r-ans{font-size:12px;color:var(--green);}
-.r-exp{font-size:12px;color:var(--text2);margin-top:7px;padding:8px 10px;background:var(--surface2);border-radius:var(--r);line-height:1.6;}
+/* 문제 카드 (관리 탭) */
+.q-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:8px;}
+.q-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.q-card-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.q-card-text{font-size:13px;color:var(--text);line-height:1.55;margin-bottom:8px;}
+.q-card-footer{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.tag-input-row{display:flex;gap:6px;align-items:center;margin-top:6px;}
+.tag-input-row input{padding:5px 9px;font-size:12px;}
+.tag-input-row select{width:auto;padding:5px 9px;font-size:12px;}
 
-/* 오답노트 */
-.wn-subj-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.wn-subj-card:hover{border-color:var(--accent2);background:#f5eddd;}
-.wn-empty{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:14px;line-height:1.8;}
-.wn-item{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:8px;}
-.wn-wrong-cnt{font-size:11px;color:var(--red);background:var(--red-bg);border:0.5px solid var(--red);border-radius:20px;padding:2px 8px;}
-.wn-q{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:8px;font-family:'Noto Serif KR',serif;}
-.wn-ans{font-size:12px;color:var(--green);margin-bottom:4px;}
-.wn-exp{font-size:12px;color:var(--text2);padding:8px 10px;background:var(--surface2);border-radius:var(--r);line-height:1.6;margin-top:6px;}
-.wn-del{font-size:11px;color:var(--text3);cursor:pointer;padding:2px 8px;border:0.5px solid var(--border2);border-radius:var(--r);}
-.wn-del:hover{color:var(--red);border-color:var(--red);background:var(--red-bg);}
+/* 태그 */
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:20px;background:var(--surface2);border:0.5px solid var(--border2);color:var(--text2);}
+.tag-del{cursor:pointer;color:var(--text3);font-size:10px;line-height:1;}
+.tag-del:hover{color:var(--red);}
 
-.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;}
-.divider{height:0.5px;background:var(--border);margin:1.5rem 0;}
-.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text3);cursor:pointer;margin-bottom:1.5rem;}
-.back-btn:hover{color:var(--text2);}
+/* 일괄수정 */
+.bulk-bar{background:var(--surface);border:0.5px solid var(--accent2);border-radius:var(--r);padding:12px 16px;margin-bottom:1rem;display:none;}
+.bulk-bar.active{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.bulk-bar span{font-size:13px;color:var(--accent);font-weight:500;}
+
 ::-webkit-scrollbar{width:8px;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;} ::-webkit-scrollbar-track{background:var(--surface2);}
-.settings-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.settings-card-left{flex:1;}
-.settings-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.settings-desc{font-size:12px;color:var(--text3);}
-.unlock-modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:999;}
-.unlock-modal{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:2rem 1.5rem;width:300px;text-align:center;}
-.unlock-modal h3{font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px;}
-.unlock-modal p{font-size:12px;color:var(--text3);margin-bottom:16px;}
-.unlock-modal input{margin-bottom:10px;text-align:center;letter-spacing:0.1em;}
-.unlock-err{font-size:12px;color:var(--red);margin-bottom:8px;min-height:16px;}
-/* 통계 */
-.stats-section{margin-bottom:1.75rem;}
-.stats-section-title{font-size:11px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
-.stat-row{margin-bottom:10px;}
-.stat-row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.stat-row-label{font-size:13px;color:var(--text);}
-.stat-row-val{font-size:12px;color:var(--text2);}
-.stat-bar-wrap{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;}
-.stat-bar-fill{height:100%;border-radius:4px;transition:width 0.6s cubic-bezier(.4,0,.2,1);}
-.stat-bar-fill.good{background:var(--green);}
-.stat-bar-fill.mid{background:#c9a030;}
-.stat-bar-fill.bad{background:var(--red);}
-.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.75rem;}
-.ov-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;}
-.ov-card .ov-val{font-size:22px;font-weight:500;color:var(--accent);margin-bottom:4px;}
-.ov-card .ov-label{font-size:11px;color:var(--text3);}
-.stats-empty{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:14px;line-height:1.8;}
-
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="app-header">
-    <h1 onclick="location.reload()" style="cursor:pointer;">법학과 수강과목 기출문제</h1>
-    <p>과목을 선택하고 학습하세요</p>
-    <a href="https://www.law.go.kr/LSW/main.html" target="_blank"
-      style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 16px;background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;border-radius:20px;text-decoration:none;font-family:inherit;border:0.5px solid var(--border2);transition:opacity 0.15s;"
-      onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
-      ⚖️ 법령정보센터 바로가기
-    </a>
-    <a href="https://open.kakao.com/o/sg1nQ5oi" target="_blank"
-      style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 16px;background:#FEE500;color:#3A1D1D;font-size:12px;font-weight:500;border-radius:20px;text-decoration:none;font-family:inherit;transition:opacity 0.15s;"
-      onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-      💬 개발자에게 메시지 남기기
-    </a>
-    <p style="margin-top:10px;font-size:12px;color:var(--red);font-weight:500;">© 무단 배포 및 공유 금지</p>
+    <div style="position:relative;">
+      <a href="./index.html" target="_blank" title="사용자 페이지로 이동"
+        style="position:absolute;right:0;top:0;display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);text-decoration:none;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--r);transition:all 0.15s;"
+        onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent2)'"
+        onmouseout="this.style.color='var(--text3)';this.style.borderColor='var(--border2)'">
+        ↗ 사용자 페이지
+      </a>
+    </div>
+    <h1 onclick="location.reload()" style="cursor:pointer;">관리자 페이지</h1>
+    <p>문제 업로드 및 관리 · 주제·출처 태그 설정</p>
   </div>
 
-  <!-- 홈 -->
-  <div id="screen-home" class="screen active">
-    <div class="home-tabs">
-      <div class="home-tab active" onclick="switchHomeTab('quiz')">과목 선택</div>
-      <div class="home-tab" onclick="switchHomeTab('wrongnote')">오답노트</div>
-      <div class="home-tab" onclick="switchHomeTab('stats')">취약점 분석</div>
-      <div class="home-tab" onclick="switchHomeTab('settings')">설정</div>
+  <!-- 로그인 -->
+  <div id="login-screen" class="screen active">
+    <h2>비밀번호를 입력하세요</h2>
+    <div class="pw-row">
+      <input type="password" id="pw-input" placeholder="비밀번호" onkeydown="if(event.key==='Enter')checkPw()">
+      <button class="btn btn-accent" onclick="checkPw()">입력</button>
     </div>
-    <div id="tab-quiz"><div class="subject-grid" id="subject-grid"></div></div>
-    <div id="tab-wrongnote" style="display:none;"><div id="wn-subj-list"></div></div>
-    <div id="tab-stats" style="display:none;"><div id="stats-content"></div></div>
-    <div id="tab-settings" style="display:none;"><div id="settings-content"></div></div>
+    <p id="pw-err" style="font-size:12px;color:var(--red);margin-top:8px;"></p>
+    <p style="font-size:11px;color:var(--text3);margin-top:1.5rem;">비밀번호는 관리자만 알 수 있습니다.</p>
+    <button class="btn btn-sm" style="margin-top:10px;font-size:11px;border-color:var(--red);color:var(--red);" onclick="reloadFromJson()">GitHub에서 문제 다시 불러오기</button>
   </div>
 
-  <!-- 모드 선택 -->
-  <div id="screen-mode" class="screen">
-    <div class="back-btn" onclick="backToHome()">← 과목 선택</div>
-    <div class="mode-header">
-      <div class="subj-name" id="mode-subj-name"></div>
-      <div class="subj-cnt" id="mode-subj-cnt"></div>
+  <!-- 관리자 메인 -->
+  <div id="admin-screen" class="screen">
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchTab('upload')">문제 추가</div>
+      <div class="tab" onclick="switchTab('manage')">문제 관리</div>
+      <div class="tab" onclick="switchTab('export')">문제 내보내기</div>
     </div>
 
-    <!-- 필터 -->
-    <div class="filter-box">
-      <h3>범위 설정 <span style="font-size:11px;font-weight:300;color:var(--text3);">(선택 안 하면 전체)</span></h3>
-      <div class="filter-row">
-        <span class="filter-label">주제</span>
-        <div class="filter-chips" id="topic-chips"></div>
+    <!-- 문제 추가 -->
+    <div id="atab-upload">
+      <div class="api-box">
+        <h3>이미지 자동 추출을 위한 비밀번호</h3>
+        <div class="api-row">
+          <input type="password" id="api-input" placeholder="비밀번호를 입력하세요">
+          <button class="btn btn-accent" onclick="saveApiKey()">저장</button>
+        </div>
+        <div class="api-status" id="api-status"></div>
       </div>
-      <div class="filter-row">
-        <span class="filter-label">출처</span>
-        <div class="filter-chips" id="source-chips">
-          <button class="chip source-chip active" data-val="all" onclick="toggleSource(this)">전체</button>
-          <button class="chip source-chip" data-val="기출문제" onclick="toggleSource(this)">기출문제</button>
-          <button class="chip source-chip" data-val="워크북" onclick="toggleSource(this)">워크북</button>
-          <button class="chip source-chip" data-val="형성평가" onclick="toggleSource(this)">형성평가</button>
-          <button class="chip source-chip" data-val="강의문제" onclick="toggleSource(this)">강의문제</button>
-          <button class="chip source-chip" data-val="자격증시험" onclick="toggleSource(this)">자격증 시험</button>
-          <button class="chip source-chip" data-val="" onclick="toggleSource(this)">미지정</button>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">과목</label>
+          <select id="upload-subj">
+            <option value="헌법">헌법</option>
+            <option value="민법">민법</option>
+            <option value="형법">형법</option>
+            <option value="상법">상법</option>
+            <option value="헌법논증이론">헌법 논증 이론</option>
+            <option value="글쓰기">글쓰기</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">주제 태그</label>
+          <input type="text" id="upload-topic" placeholder="예: 기본권">
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">출처</label>
+          <select id="upload-source">
+            <option value="">미지정</option>
+            <option value="기출문제">기출문제</option>
+            <option value="워크북">워크북</option>
+            <option value="형성평가">형성평가</option>
+            <option value="강의문제">강의문제</option>
+            <option value="자격증시험">자격증 시험</option>
+          </select>
         </div>
       </div>
-      <div class="filter-result" id="filter-result"></div>
-    </div>
 
-    <div class="mode-cards" id="mode-cards">
-      <div class="mode-card" onclick="startNormalMode()">
-        <div class="m-icon">📖</div>
-        <div class="m-name">일반 모드</div>
-        <div class="m-desc">문제마다 즉시 정답·해설 확인</div>
+      <label class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept="image/*" multiple onchange="handleFiles(this.files)">
+        <div style="font-size:24px;margin-bottom:8px;">📷</div>
+        <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">기출문제 이미지 업로드</div>
+        <div style="font-size:12px;color:var(--text3);">클릭 · 드래그 앤 드롭 · <strong style="color:var(--accent);">Ctrl+V 붙여넣기</strong> 가능</div>
+      </label>
+      <div class="processing" id="processing">
+        <div class="spinner"></div>
+        <p id="proc-msg" style="font-size:13px;color:var(--text2);"></p>
       </div>
-      <div class="mode-card mode-exam" onclick="startExamMode(25)">
-        <div class="m-icon">⏱️</div>
-        <div class="m-name">실전 모드</div>
-        <div class="m-desc">타이머 · 마지막에 채점</div>
-      </div>
-      <div class="mode-card mode-wn" id="mode-wn-card" onclick="startWrongNoteQuiz()" style="display:none;">
-        <div class="m-icon">📕</div>
-        <div class="m-name">오답 풀기</div>
-        <div class="m-desc" id="mode-wn-desc"></div>
-      </div>
-    </div>
 
-  </div>
-
-  <!-- 일반 모드 -->
-  <div id="screen-quiz" class="screen">
-    <div class="back-btn" onclick="backToHome()">← 과목 선택</div>
-    <div class="progress-wrap">
-      <div class="progress-meta"><span id="q-meta-l"></span><span id="q-meta-r"></span></div>
-      <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
-    </div>
-    <div class="q-label" id="q-label"></div>
-    <div class="q-body" id="q-body"></div>
-    <div id="answer-area"></div>
-    <div class="feedback-box" id="feedback" style="display:none;"></div>
-    <div class="nav-row">
-      <span style="font-size:13px;color:var(--text3);" id="score-live"></span>
-      <button class="btn btn-accent" id="next-btn" onclick="nextQ()" style="display:none;">다음 →</button>
-    </div>
-    <div style="margin-top:1.5rem;text-align:right;">
-      <button class="btn btn-danger" onclick="if(confirm('종료할까요?'))backToHome()">종료</button>
-    </div>
-  </div>
-
-  <!-- 실전 모드 -->
-  <div id="screen-exam" class="screen">
-    <div class="timer-bar">
-      <div><div class="timer-label">남은 시간</div><div class="timer-display" id="timer-disp">50:00</div></div>
-      <div style="text-align:right;"><div class="timer-label">답안 작성</div><div style="font-size:15px;font-weight:500;color:var(--text);" id="ans-count">0 / 25</div></div>
-    </div>
-    <div class="progress-wrap">
-      <div class="progress-meta"><span id="eq-meta-l"></span><span></span></div>
-      <div class="progress-bar"><div class="progress-fill" id="eprog-fill"></div></div>
-    </div>
-    <div class="q-nav" id="q-nav"></div>
-    <div class="q-label" id="eq-label"></div>
-    <div class="q-body" id="eq-body"></div>
-    <div id="eanswer-area"></div>
-    <div class="nav-row" style="margin-top:1.25rem;">
-      <button class="btn" onclick="examGo(examCur-1)">← 이전</button>
-      <button class="btn" onclick="examGo(examCur+1)">다음 →</button>
-    </div>
-    <div class="divider"></div>
-    <button class="btn btn-accent btn-full" onclick="submitExam(false)">제출하고 채점하기</button>
-    <div style="margin-top:8px;text-align:center;">
-      <button class="btn btn-danger" style="font-size:12px;padding:6px 14px;" onclick="if(confirm('포기할까요?'))backToHome()">포기</button>
-    </div>
-  </div>
-
-  <!-- 오답노트 상세 -->
-  <div id="screen-wrongnote" class="screen">
-    <div class="back-btn" onclick="showScreen('screen-home')">← 오답노트</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-      <div>
-        <div style="font-family:'Noto Serif KR',serif;font-size:18px;font-weight:600;color:var(--accent);" id="wn-detail-title"></div>
-        <div style="font-size:12px;color:var(--text3);margin-top:3px;" id="wn-detail-cnt"></div>
-      </div>
-      <button class="btn btn-danger" style="font-size:12px;padding:6px 12px;" onclick="clearWrongNote()">초기화</button>
-    </div>
-    <div class="filter-box" style="margin-bottom:1rem;">
-      <div class="filter-row" id="wn-topic-row" style="display:none;">
-        <span class="filter-label">주제</span>
-        <div class="filter-chips" id="wn-topic-chips"></div>
-      </div>
-      <div class="filter-row">
-        <span class="filter-label">출처</span>
-        <div class="filter-chips" id="wn-source-chips">
-          <button class="chip source-chip active" data-val="all" onclick="wnToggleSource(this)">전체</button>
-          <button class="chip source-chip" data-val="기출문제" onclick="wnToggleSource(this)">기출문제</button>
-          <button class="chip source-chip" data-val="워크북" onclick="wnToggleSource(this)">워크북</button>
-          <button class="chip source-chip" data-val="형성평가" onclick="wnToggleSource(this)">형성평가</button>
-          <button class="chip source-chip" data-val="강의문제" onclick="wnToggleSource(this)">강의문제</button>
-          <button class="chip source-chip" data-val="자격증시험" onclick="wnToggleSource(this)">자격증 시험</button>
-          <button class="chip source-chip" data-val="" onclick="wnToggleSource(this)">미지정</button>
+      <div style="border-top:0.5px solid var(--border);padding-top:1.25rem;margin-top:0.5rem;">
+        <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">또는 직접 입력</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div class="form-group" style="margin:0;">
+            <label class="form-label">문제 유형</label>
+            <select id="m-type" onchange="updateForm()">
+              <option value="mc">객관식</option>
+              <option value="ox">OX형</option>
+              <option value="sa">단답형</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label">주제 태그</label>
+            <input type="text" id="m-topic" placeholder="예: 기본권">
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label">출처</label>
+            <select id="m-source">
+              <option value="">미지정</option>
+              <option value="기출문제">기출문제</option>
+              <option value="워크북">워크북</option>
+              <option value="형성평가">형성평가</option>
+              <option value="강의문제">강의문제</option>
+              <option value="자격증시험">자격증 시험</option>
+            </select>
+          </div>
         </div>
+        <div class="form-group">
+          <label class="form-label">문제</label>
+          <textarea id="m-q" rows="3" placeholder="문제 내용"></textarea>
+        </div>
+        <div id="f-mc">
+          <div class="form-group">
+            <label class="form-label">보기</label>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <input type="text" class="m-choice" placeholder="① 보기 1">
+              <input type="text" class="m-choice" placeholder="② 보기 2">
+              <input type="text" class="m-choice" placeholder="③ 보기 3">
+              <input type="text" class="m-choice" placeholder="④ 보기 4">
+              <input type="text" class="m-choice" placeholder="⑤ 보기 5 (선택)">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">정답 (복수 선택 가능)</label>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="m-mc-ans-cb" value="0"> ①</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="m-mc-ans-cb" value="1"> ②</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="m-mc-ans-cb" value="2"> ③</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="m-mc-ans-cb" value="3"> ④</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="m-mc-ans-cb" value="4"> ⑤</label>
+            </div>
+          </div>
+        </div>
+        <div id="f-ox" style="display:none;" class="form-group">
+          <label class="form-label">정답</label>
+          <select id="m-ox-ans" style="width:auto;"><option value="O">O</option><option value="X">X</option></select>
+        </div>
+        <div id="f-sa" style="display:none;" class="form-group">
+          <label class="form-label">정답 키워드</label>
+          <input type="text" id="m-sa-ans" placeholder="쉼표로 복수 가능">
+        </div>
+        <div class="form-group">
+          <label class="form-label">해설 (선택)</label>
+          <textarea id="m-exp" rows="2" placeholder="해설"></textarea>
+        </div>
+        <button class="btn btn-accent" onclick="saveManual()">저장</button>
       </div>
     </div>
-    <div id="wn-detail-list"></div>
-  </div>
 
-  <!-- 결과 -->
-  <div id="screen-result" class="screen">
-    <div class="back-btn" onclick="backToHome()">← 과목 선택</div>
-    <div class="result-hero">
-      <div class="result-ring"><div class="big" id="res-score"></div><div class="small" id="res-frac"></div></div>
-      <p style="font-size:14px;color:var(--text2);" id="res-msg"></p>
-      <p style="font-size:12px;color:var(--text3);margin-top:4px;" id="res-subj"></p>
+    <!-- 문제 관리 -->
+    <div id="atab-manage" style="display:none;">
+      <div class="toolbar">
+        <select id="filter-subj" onchange="renderManage()" style="width:auto;">
+          <option value="all">전체 과목</option>
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법논증이론</option>
+          <option value="글쓰기">글쓰기</option>
+        </select>
+        <select id="filter-source" onchange="renderManage()" style="width:auto;">
+          <option value="all">전체 출처</option>
+          <option value="">미지정</option>
+          <option value="기출문제">기출문제</option>
+          <option value="워크북">워크북</option>
+          <option value="형성평가">형성평가</option>
+          <option value="강의문제">강의문제</option>
+          <option value="자격증시험">자격증 시험</option>
+        </select>
+        <input type="text" id="filter-topic" placeholder="주제 검색" style="width:120px;padding:7px 10px;font-size:12px;" oninput="renderManage()">
+        <button class="btn btn-danger btn-sm" onclick="clearSubject()">선택 과목 초기화</button>
+      </div>
+
+      <!-- 일괄 수정 바 -->
+      <div class="bulk-bar" id="bulk-bar">
+        <span id="bulk-cnt"></span>
+        <select id="bulk-subj" style="width:auto;font-size:12px;padding:5px 9px;">
+          <option value="">과목 선택</option>
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법논증이론</option>
+          <option value="글쓰기">글쓰기</option>
+        </select>
+        <select id="bulk-source" style="width:auto;font-size:12px;padding:5px 9px;">
+          <option value="">출처 선택</option>
+          <option value="기출문제">기출문제</option>
+          <option value="워크북">워크북</option>
+          <option value="형성평가">형성평가</option>
+          <option value="강의문제">강의문제</option>
+          <option value="자격증시험">자격증 시험</option>
+        </select>
+        <input type="text" id="bulk-topic" placeholder="주제 태그 입력" style="width:120px;padding:5px 9px;font-size:12px;">
+        <button class="btn btn-accent btn-sm" onclick="applyBulk()">선택 항목에 적용</button>
+        <button class="btn btn-danger btn-sm" onclick="bulkDelete()">선택 삭제</button>
+        <button class="btn btn-sm" onclick="clearSelection()">선택 해제</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <label style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;cursor:pointer;">
+          <input type="checkbox" id="select-all" onchange="toggleSelectAll()"> 전체 선택
+        </label>
+        <span style="font-size:12px;color:var(--text3);" id="manage-total-cnt"></span>
+      </div>
+
+      <div class="stats-row" id="manage-stats"></div>
+      <div id="manage-list"></div>
     </div>
-    <div class="result-grid">
-      <div class="stat-card"><div class="lbl">정답</div><div class="val" id="res-c" style="color:var(--green);"></div></div>
-      <div class="stat-card"><div class="lbl">오답</div><div class="val" id="res-w" style="color:var(--red);"></div></div>
-      <div class="stat-card"><div class="lbl">미답</div><div class="val" id="res-s" style="color:var(--text3);"></div></div>
+
+    <!-- JSON 내보내기 -->
+    <div id="atab-export" style="display:none;">
+      <div class="api-box" style="margin-bottom:1.25rem;">
+        <h3>자동 업로드 설정</h3>
+        <p style="margin-bottom:8px;">비밀번호 한 번만 입력하면 저장소에 자동으로 반영돼요.
+        </p>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <input type="password" id="gh-token" placeholder="비밀번호를 입력하세요" style="flex:1;">
+          <button class="btn btn-accent" onclick="saveGhConfig()">저장</button>
+        </div>
+        <span class="api-status" id="gh-status"></span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">과목</label>
+        <select id="export-subj" onchange="renderExport()" style="width:auto;">
+          <option value="헌법">헌법</option>
+          <option value="민법">민법</option>
+          <option value="형법">형법</option>
+          <option value="상법">상법</option>
+          <option value="헌법논증이론">헌법 논증 이론</option>
+          <option value="글쓰기">글쓰기</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:0.5rem;flex-wrap:wrap;">
+        <button class="btn btn-accent" onclick="pushToGithub()" id="gh-push-btn">저장소에 올리기 ↑</button>
+        <button class="btn" onclick="copyExport()">클립보드 복사</button>
+        <button class="btn btn-green" onclick="downloadExport()">파일 다운로드</button>
+      </div>
+      <div id="gh-push-status" style="font-size:12px;margin-bottom:8px;"></div>
+      <div class="json-box" id="json-preview"></div>
     </div>
-    <div class="review-section" id="wrong-review" style="display:none;">
-      <h3 id="review-title">틀린 문제 복습</h3>
-      <div id="review-list"></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:1rem;">
-      <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="retryQuiz()">다시 풀기</button>
-      <button class="btn" style="flex:1;justify-content:center;" onclick="backToHome()">과목 선택</button>
+
+    <div style="margin-top:2rem;text-align:right;">
+      <button class="btn btn-danger" onclick="logout()">로그아웃</button>
     </div>
   </div>
 </div>
 
-<div class="unlock-modal-bg" id="unlock-modal" style="display:none;">
-  <div class="unlock-modal">
-    <h3>접근 코드 입력</h3>
-    <p>강의문제를 열람하려면 코드가 필요해요</p>
-    <input type="password" id="unlock-input" placeholder="코드를 입력하세요" onkeydown="if(event.key==='Enter')tryUnlock()">
-    <div class="unlock-err" id="unlock-err"></div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="tryUnlock()">확인</button>
-      <button class="btn" style="flex:1;justify-content:center;" onclick="closeUnlockModal()">취소</button>
+<!-- 문제 수정 모달 -->
+<div id="edit-modal-bg" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;overflow-y:auto;padding:2rem 1rem;">
+  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);max-width:600px;margin:0 auto;padding:1.5rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <h3 style="font-size:15px;font-weight:500;color:var(--text);">문제 수정</h3>
+      <button class="btn btn-sm" onclick="closeEditModal()">✕ 닫기</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">문제 유형</label>
+      <select id="edit-type" onchange="updateEditForm()" style="width:auto;">
+        <option value="mc">객관식</option>
+        <option value="ox">OX형</option>
+        <option value="sa">단답형</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">문제</label>
+      <textarea id="edit-q" rows="4"></textarea>
+    </div>
+    <div id="edit-mc-section">
+      <div class="form-group">
+        <label class="form-label">보기</label>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <input type="text" class="edit-choice" placeholder="① 보기 1">
+          <input type="text" class="edit-choice" placeholder="② 보기 2">
+          <input type="text" class="edit-choice" placeholder="③ 보기 3">
+          <input type="text" class="edit-choice" placeholder="④ 보기 4">
+          <input type="text" class="edit-choice" placeholder="⑤ 보기 5 (선택)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">정답 (복수 선택 가능)</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-mc-ans-cb" value="0"> ①</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-mc-ans-cb" value="1"> ②</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-mc-ans-cb" value="2"> ③</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-mc-ans-cb" value="3"> ④</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-mc-ans-cb" value="4"> ⑤</label>
+        </div>
+      </div>
+    </div>
+    <div id="edit-ox-section" style="display:none;" class="form-group">
+      <label class="form-label">정답</label>
+      <select id="edit-ox-ans" style="width:auto;"><option value="O">O</option><option value="X">X</option></select>
+    </div>
+    <div id="edit-sa-section" style="display:none;" class="form-group">
+      <label class="form-label">정답 키워드</label>
+      <input type="text" id="edit-sa-ans" placeholder="쉼표로 복수 가능">
+    </div>
+    <div class="form-group">
+      <label class="form-label">해설</label>
+      <textarea id="edit-exp" rows="2" placeholder="해설 (없으면 비워두세요)"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:1rem;">
+      <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="saveEdit()">저장</button>
+      <button class="btn" style="flex:1;justify-content:center;" onclick="closeEditModal()">취소</button>
     </div>
   </div>
 </div>
 
 <script>
-const DATA_BASE='./data/';
-const SUBJECTS=[
-  {key:'헌법',icon:'⚖️',file:'헌법.json'},
-  {key:'민법',icon:'📜',file:'민법.json'},
-  {key:'형법',icon:'🔍',file:'형법.json'},
-  {key:'상법',icon:'🏛️',file:'상법.json'},
-  {key:'헌법 논증 이론',icon:'📝',file:'헌법논증이론.json'},
-  {key:'글쓰기',icon:'✍️',file:'글쓰기.json'},
-];
-const NUMS=['①','②','③','④','⑤'];
-let quiz=[],cur=0,correct=0,answered=false,wrongList=[];
-let currentSubject=null,currentMode='normal',allData={};
-let examAnswers={},examCur=0,timerSec=0,timerInterval=null;
-let wnCurrentSubj=null;
-let selectedTopics=new Set(),selectedSource='all'; // 필터 상태
+const ADMIN_PW = 'admin1234';
+const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
+const SUBJECT_FILES = {'헌법':'헌법.json','민법':'민법.json','형법':'형법.json','상법':'상법.json','헌법논증이론':'헌법논증이론.json','글쓰기':'글쓰기.json'};
+const NUMS = ['①','②','③','④'];
+let db = {}, API_KEY = '', selectedIds = new Set();
+const GH_OWNER='JiyeonChoi12', GH_REPO='law-quiz';
+let GH_TOKEN='';
 
-// ── 오답노트 ──
-function getWN(k){try{return JSON.parse(localStorage.getItem('lq_wn_'+k)||'{}');}catch(e){return{};}}
-function saveWN(k,d){try{localStorage.setItem('lq_wn_'+k,JSON.stringify(d));}catch(e){}}
-function addWN(k,q,myAns){
-  const wn=getWN(k); const key=q.id||q.question.substring(0,30);
-  if(!wn[key])wn[key]={q,wrongCount:0,lastMyAns:''};
-  wn[key].wrongCount++; wn[key].lastMyAns=myAns; wn[key].q=q;
-  saveWN(k,wn);
-}
-function getStats(k){try{return JSON.parse(localStorage.getItem('lq_s_'+k)||'{"a":0,"s":null}');}catch(e){return{a:0,s:null};}}
-function saveStats(k,score){const s=getStats(k);s.a++;s.s=score;try{localStorage.setItem('lq_s_'+k,JSON.stringify(s));}catch(e){}}
+SUBJECT_KEYS.forEach(k=>db[k]=[]);
+try{ const s=localStorage.getItem('admin_db'); if(s) db=JSON.parse(s); SUBJECT_KEYS.forEach(k=>{if(!db[k])db[k]=[];}); }catch(e){}
+try{ API_KEY=localStorage.getItem('admin_api_key')||''; }catch(e){}
+try{ GH_TOKEN=localStorage.getItem('admin_gh_token')||''; }catch(e){}
 
-async function loadSubject(subj){
-  if(allData[subj.key])return allData[subj.key];
-  const r=await fetch(DATA_BASE+subj.file+'?t='+Date.now());
-  if(!r.ok)throw new Error('파일 없음');
-  const d=await r.json(); allData[subj.key]=d; return d;
+function save(){ try{localStorage.setItem('admin_db',JSON.stringify(db));}catch(e){} }
+
+async function checkPw(){
+  if(document.getElementById('pw-input').value===ADMIN_PW){
+    showScreen('admin-screen');
+    if(API_KEY){ document.getElementById('api-input').value=API_KEY; showApiStatus('✓ API 키 저장됨',true); }
+    if(GH_TOKEN){ document.getElementById('gh-token').value=GH_TOKEN; document.getElementById('gh-status').textContent='✓ 저장됨'; document.getElementById('gh-status').className='api-status ok'; }
+    try{ const t=localStorage.getItem('admin_last_topic'); if(t) document.getElementById('m-topic').value=t; }catch(e){}
+    await loadFromJson();
+    renderManage(); renderExport();
+  } else {
+    document.getElementById('pw-err').textContent='비밀번호가 틀렸어요';
+    document.getElementById('pw-input').value='';
+  }
 }
 
-// ── 홈 ──
-function switchHomeTab(tab){
-  document.querySelectorAll('.home-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='quiz')||(i===1&&tab==='wrongnote')||(i===2&&tab==='stats')||(i===3&&tab==='settings')));
-  document.getElementById('tab-quiz').style.display=tab==='quiz'?'':'none';
-  document.getElementById('tab-wrongnote').style.display=tab==='wrongnote'?'':'none';
-  document.getElementById('tab-stats').style.display=tab==='stats'?'':'none';
-  document.getElementById('tab-settings').style.display=tab==='settings'?'':'none';
-  if(tab==='wrongnote')renderWNHome();
-  if(tab==='stats')renderStats();
-  if(tab==='settings')renderSettings();
-}
-
-async function renderHome(){
-  const grid=document.getElementById('subject-grid');
-  grid.innerHTML=SUBJECTS.map((s,i)=>`<div class="subject-card" id="sc-${i}" onclick="selectSubject(${i})">
-    <div class="s-icon">${s.icon}</div><div class="s-name">${s.key}</div>
-    <div class="s-count" id="sc-cnt-${i}">로딩 중...</div>
-    <div class="s-bar" id="sc-bar-${i}" style="width:0%"></div>
-  </div>`).join('');
-  SUBJECTS.forEach(async(s,i)=>{
+async function loadFromJson(){
+  // localStorage가 비어있으면 JSON 파일에서 불러오기
+  const hasLocal = SUBJECT_KEYS.some(k=>db[k].length>0);
+  if(hasLocal) return; // 이미 로컬 데이터 있으면 스킵
+  let loaded = 0;
+  const btn = document.getElementById('pw-input');
+  for(const k of SUBJECT_KEYS){
     try{
-      const d=await loadSubject(s); const cnt=d.length;
-      const st=getStats(s.key);
-      document.getElementById('sc-cnt-'+i).textContent=cnt>0?`${cnt}문제${st.s!==null?' · 최근 '+st.s+'점':''}`:'문제 없음';
-      if(cnt===0)document.getElementById('sc-'+i).classList.add('disabled');
-      if(st.s!==null)document.getElementById('sc-bar-'+i).style.width=st.s+'%';
-    }catch(e){document.getElementById('sc-cnt-'+i).textContent='오류';document.getElementById('sc-'+i).classList.add('disabled');}
-  });
+      const r = await fetch('./data/'+SUBJECT_FILES[k]+'?t='+Date.now());
+      if(!r.ok) continue;
+      const data = await r.json();
+      if(data.length){ db[k]=data; loaded+=data.length; }
+    }catch(e){}
+  }
+  if(loaded>0){
+    save();
+    const msg = document.createElement('p');
+    msg.style.cssText='font-size:12px;color:var(--green);text-align:center;margin-top:8px;';
+    msg.textContent=`✓ JSON에서 ${loaded}개 문제를 불러왔어요`;
+    document.getElementById('login-screen').appendChild(msg);
+    setTimeout(()=>msg.remove(), 3000);
+  }
+}
+function logout(){ showScreen('login-screen'); document.getElementById('pw-input').value=''; }
+async function reloadFromJson(){
+  if(!confirm('로컬 데이터를 초기화하고 GitHub에서 문제를 다시 불러올까요?')) return;
+  try{ localStorage.removeItem('admin_db'); }catch(e){}
+  SUBJECT_KEYS.forEach(k=>db[k]=[]);
+  await loadFromJson();
+  renderManage(); renderExport();
+  alert('GitHub에서 문제를 다시 불러왔어요!');
 }
 
-// ── 과목 선택 & 필터 ──
-async function selectSubject(idx){
-  if(document.getElementById('sc-'+idx).classList.contains('disabled'))return;
-  const subj=SUBJECTS[idx];
+function saveApiKey(){
+  const k=document.getElementById('api-input').value.trim();
+  
+  API_KEY=k; try{localStorage.setItem('admin_api_key',k);}catch(e){} showApiStatus('✓ 저장됐어요',true);
+}
+function showApiStatus(msg,ok){ const el=document.getElementById('api-status'); el.textContent=msg; el.className='api-status '+(ok?'ok':'err'); }
+
+function switchTab(tab){
+  ['upload','manage','export'].forEach((t,i)=>{
+    document.getElementById('atab-'+t).style.display=t===tab?'':'none';
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===tab);
+  });
+  if(tab==='manage') renderManage();
+  if(tab==='export') renderExport();
+}
+
+function updateForm(){
+  const t=document.getElementById('m-type').value;
+  document.getElementById('f-mc').style.display=t==='mc'?'':'none';
+  document.getElementById('f-ox').style.display=t==='ox'?'':'none';
+  document.getElementById('f-sa').style.display=t==='sa'?'':'none';
+}
+
+function saveManual(){
+  const subj=document.getElementById('filter-subj').value==='all'?'헌법':document.getElementById('upload-subj').value;
+  const type=document.getElementById('m-type').value;
+  const question=document.getElementById('m-q').value.trim();
+  const explanation=document.getElementById('m-exp').value.trim();
+  const topic=document.getElementById('m-topic').value.trim();
+  try{ if(topic) localStorage.setItem('admin_last_topic',topic); }catch(e){}
+  const source=document.getElementById('m-source').value;
+  if(!question){ alert('문제를 입력해주세요'); return; }
+  const uploadSubj=document.getElementById('upload-subj').value;
+  // 기존 id에서 최대 번호 찾아서 순번 생성
+  const existingNums=db[uploadSubj].map(q=>{
+    const m=q.id&&q.id.match(/_(\d+)$/);
+    return m?parseInt(m[1]):0;
+  });
+  const nextNum=(existingNums.length?Math.max(...existingNums):0)+1;
+  const id=uploadSubj+'_'+String(nextNum).padStart(3,'0');
+  let q={id,type,question,explanation,topic,source};
+  if(type==='mc'){
+    const allChoices=Array.from(document.querySelectorAll('.m-choice')).map(e=>e.value.trim());
+    const choices=allChoices[4]?allChoices:allChoices.slice(0,4);
+    if(choices.slice(0,4).some(c=>!c)){ alert('①~④ 보기를 모두 입력해주세요'); return; }
+    const checkedAns=Array.from(document.querySelectorAll('.m-mc-ans-cb:checked')).map(e=>parseInt(e.value));
+    if(!checkedAns.length){ alert('정답을 하나 이상 선택해주세요'); return; }
+    q.choices=choices; q.answer=checkedAns.length===1?checkedAns[0]:checkedAns;
+  } else if(type==='ox'){
+    q.answer=document.getElementById('m-ox-ans').value;
+  } else {
+    const ans=document.getElementById('m-sa-ans').value.trim();
+    if(!ans){ alert('정답을 입력해주세요'); return; }
+    q.answer=ans;
+  }
+  db[uploadSubj].push(q); save();
+  document.getElementById('m-q').value=''; document.getElementById('m-exp').value='';
+  document.querySelectorAll('.m-choice').forEach(e=>e.value='');
+  document.querySelectorAll('.m-mc-ans-cb').forEach(e=>e.checked=false);
+  // 주제 태그는 유지 (캐싱)
+  if(document.getElementById('m-sa-ans')) document.getElementById('m-sa-ans').value='';
+  alert(`[${uploadSubj}] 문제 추가됨! (${db[uploadSubj].length}개)`);
+}
+
+// FILE UPLOAD
+async function handleFiles(files){
+  if(!files.length) return;
+  if(!API_KEY){ alert('API 키를 먼저 저장해주세요'); return; }
+  const subj=document.getElementById('upload-subj').value;
+  const topic=document.getElementById('upload-topic').value.trim();
+  const source=document.getElementById('upload-source').value;
+  const zone=document.getElementById('upload-zone');
+  const proc=document.getElementById('processing');
+  zone.style.display='none'; proc.style.display='block';
+  let total=0;
+  for(const file of files){
+    document.getElementById('proc-msg').textContent=`"${file.name}" 분석 중...`;
+    try{
+      const b64=await toB64(file);
+      const result=await extractQuestions(b64,file.type,subj);
+      if(result&&result.length){
+        result.forEach(q=>{ q.topic=topic; q.source=source; });
+        db[subj].push(...result); total+=result.length;
+      }
+    }catch(e){ alert('오류: '+e.message); }
+  }
+  save(); zone.style.display=''; proc.style.display='none';
+  document.getElementById('file-input').value='';
+  if(total) alert(`[${subj}] ${total}개 추가됐어요!`);
+  else alert('문제를 인식하지 못했어요');
+}
+
+function toB64(file){ return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);}); }
+
+async function extractQuestions(b64,mediaType,subj){
+  const prompt=`이 이미지는 "${subj}" 과목 시험 문제입니다. 모든 문제를 추출해 JSON 배열로만 반환하세요 (마크다운 없이):
+객관식: {"id":"${subj}_001","type":"mc","question":"문제 (번호기호 제외)","choices":["보기1 텍스트만","보기2 텍스트만","보기3 텍스트만","보기4 텍스트만"],"answer":0,"explanation":"","topic":"","source":""}
+OX형: {"id":"${subj}_001","type":"ox","question":"문제","answer":"O","explanation":"","topic":"","source":""}
+단답형: {"id":"${subj}_001","type":"sa","question":"문제","answer":"키워드","explanation":"","topic":"","source":""}
+중요: choices 배열에는 ①②③④ 같은 번호 기호를 포함하지 마세요. 텍스트만 넣으세요.
+문제 텍스트에 큰따옴표(")가 있으면 반드시 이스케이프(\")하세요.
+JSON 배열만:`;
+
+  const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[
+        {inline_data:{mime_type:mediaType,data:b64}},
+        {text:prompt}
+      ]}],
+      generationConfig:{temperature:0,maxOutputTokens:8192}
+    })
+  });
+  if(!resp.ok){ const e=await resp.json(); throw new Error(e.error?.message||resp.status); }
+  const data=await resp.json();
+  let text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+
+  // 마크다운 코드블록 제거
+  text=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+
+  // JSON 배열 부분만 추출
+  const startIdx=text.indexOf('[');
+  const endIdx=text.lastIndexOf(']');
+  if(startIdx!==-1&&endIdx!==-1) text=text.slice(startIdx,endIdx+1);
+
+  // 잘린 JSON 복구 시도
   try{
-    const d=await loadSubject(subj);
-    if(!d.length){alert('문제가 없어요');return;}
-    currentSubject=subj;
-    selectedTopics.clear(); selectedSource='all';
-    document.getElementById('mode-subj-name').textContent=subj.key;
-    
-
-    // 주제 칩 생성
-    const topics=[...new Set(d.map(q=>q.topic).filter(Boolean))].sort();
-    const topicEl=document.getElementById('topic-chips');
-    if(topics.length){
-      topicEl.innerHTML='<button class="chip active" data-val="all" onclick="toggleTopic(this)">전체</button>'
-        +topics.map(t=>`<button class="chip" data-val="${t}" onclick="toggleTopic(this)">${t}</button>`).join('');
-    } else {
-      topicEl.innerHTML='<span style="font-size:12px;color:var(--text3);">주제 태그 없음</span>';
+    return JSON.parse(text);
+  } catch(e){
+    // 마지막 완전한 객체까지만 파싱
+    const lastComma=text.lastIndexOf('},');
+    if(lastComma!==-1){
+      const fixed=text.slice(0,lastComma+1)+']';
+      try{
+        const partial=JSON.parse(fixed);
+        console.warn(`JSON 일부 손상 - ${partial.length}개만 추출됨`);
+        return partial;
+      } catch(e2){}
     }
-
-    // 출처 칩 초기화
-    document.querySelectorAll('.source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
-    // 강의문제 칩 (잠금해제된 경우만)
-    const existingLec=document.querySelector('#source-chips .chip[data-val="강의문제"]');
-    if(!existingLec && lectureUnlocked){
-      const btn=document.createElement('button');
-      btn.className='chip source-chip';
-      btn.dataset.val='강의문제';
-      btn.textContent='강의문제 🔓';
-      btn.onclick=function(){toggleSource(this);};
-      document.getElementById('source-chips').appendChild(btn);
-    } else if(!lectureUnlocked){
-      const lockBtn=document.createElement('button');
-      lockBtn.className='chip';
-      lockBtn.textContent='강의문제 🔒';
-      lockBtn.onclick=showUnlockModal;
-      lockBtn.style.borderStyle='dashed';
-      document.getElementById('source-chips').appendChild(lockBtn);
-    }
-
-    updateFilterResult(d);
-
-    // 오답풀기 카드
-    const wn=getWN(subj.key);
-    const wnCnt=Object.keys(wn).length;
-    const wnCard=document.getElementById('mode-wn-card');
-    if(wnCnt>0){wnCard.style.display='';document.getElementById('mode-wn-desc').textContent=`${wnCnt}문제 틀린 것만`;}
-    else wnCard.style.display='none';
-
-    showScreen('screen-mode');
-  }catch(e){alert('로드 실패: '+e.message);}
-}
-
-function toggleTopic(btn){
-  const val=btn.dataset.val;
-  if(val==='all'){
-    selectedTopics.clear();
-    document.querySelectorAll('#topic-chips .chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
-  } else {
-    document.querySelector('#topic-chips .chip[data-val="all"]').classList.remove('active');
-    btn.classList.toggle('active');
-    if(btn.classList.contains('active')) selectedTopics.add(val); else selectedTopics.delete(val);
-    if(selectedTopics.size===0) document.querySelector('#topic-chips .chip[data-val="all"]').classList.add('active');
-  }
-  updateFilterResult(allData[currentSubject.key]||[]);
-}
-
-function toggleSource(btn){
-  const val=btn.dataset.val;
-  selectedSource=val;
-  document.querySelectorAll('.source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val===val));
-  updateFilterResult(allData[currentSubject.key]||[]);
-}
-
-function getFilteredData(data){
-  return data.filter(q=>{
-    const topicOk=selectedTopics.size===0||selectedTopics.has(q.topic||'');
-    const sourceOk=selectedSource==='all'||(q.source||'')===selectedSource;
-    return topicOk&&sourceOk;
-  });
-}
-
-function updateFilterResult(data){
-  const filtered=getFilteredData(data);
-  const cnt=Math.min(25,filtered.length);
-  document.getElementById('mode-subj-cnt').textContent=`${filtered.length}문제 중 ${cnt}문제 출제`;
-  document.getElementById('filter-result').textContent=filtered.length===0?'해당 조건의 문제가 없어요':'';
-}
-
-// ── 모드 시작 ──
-function getQuizPool(){
-  const data=allData[currentSubject.key]||[];
-  return getFilteredData(data);
-}
-
-function showTimeSelect(){}
-
-function startNormalMode(){
-  const pool=getQuizPool();
-  if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
-  currentMode='normal';
-  quiz=shuffle([...pool]);
-  cur=0;correct=0;wrongList=[];
-  showScreen('screen-quiz');renderQ();
-}
-
-function startExamMode(min){
-  const pool=getQuizPool();
-  if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
-  currentMode='exam';
-  quiz=shuffle([...pool]).slice(0,Math.min(25,pool.length));
-  examAnswers={};examCur=0;timerSec=min*60;
-  showScreen('screen-exam');renderExamQ(0);startTimer();
-}
-
-function startWrongNoteQuiz(){
-  currentMode='wrongnote';
-  const wn=getWN(currentSubject.key);
-  quiz=shuffle(Object.values(wn).map(i=>i.q)).slice(0,Math.min(25,Object.values(wn).length));
-  cur=0;correct=0;wrongList=[];
-  showScreen('screen-quiz');renderQ();
-}
-
-// ── 일반 모드 ──
-function renderQ(){
-  answered=false;
-  const q=quiz[cur];
-  document.getElementById('prog-fill').style.width=Math.round((cur/quiz.length)*100)+'%';
-  document.getElementById('q-meta-l').textContent=`${cur+1} / ${quiz.length}`;
-  document.getElementById('q-meta-r').textContent=`정답 ${correct}개`;
-  let labelHtml=typeBadge(q.type)+` <span class="badge badge-subj">${currentSubject.key}</span>`;
-  if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
-  if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
-  document.getElementById('q-label').innerHTML=labelHtml;
-  document.getElementById('q-body').textContent=q.question;
-  document.getElementById('feedback').style.display='none';
-  document.getElementById('next-btn').style.display='none';
-  document.getElementById('score-live').textContent='';
-  renderAnswerArea('answer-area',q,'normal',cur);
-}
-
-function showFeedback(ok,q){
-  const fb=document.getElementById('feedback');
-  fb.className='feedback-box '+(ok?'correct':'wrong');
-  let ans='';
-  if(!ok){ans=q.type==='mc'?`정답: ${NUMS[q.answer]} ${q.choices[q.answer]}`:`정답: ${q.answer}`;}
-  const exp=q.explanation?`<div class="fb-exp"><div class="fb-exp-label">해설</div>${q.explanation}</div>`:'';
-  fb.innerHTML=`<div class="fb-title">${ok?'✓ 정답':'✗ 오답'}</div>`+(ans?`<div class="fb-answer">${ans}</div>`:'')+exp;
-  fb.style.display='block';
-  const nb=document.getElementById('next-btn');
-  nb.style.display='inline-flex';
-  nb.textContent=cur+1<quiz.length?'다음 →':'결과 보기 →';
-}
-
-function checkMCAnswer(selected, answer){
-  if(Array.isArray(answer)){
-    return Array.isArray(selected)
-      ? answer.length===selected.length && answer.every(a=>selected.includes(a))
-      : answer.length===1 && answer[0]===selected;
-  }
-  return selected===answer;
-}
-function isCorrectChoice(i, answer){
-  return Array.isArray(answer)?answer.includes(i):i===answer;
-}
-
-function normalSelectMC(idx){
-  if(answered)return;
-  const q=quiz[cur];
-  if(Array.isArray(q.answer)){
-    // 복수정답: 토글 방식으로 선택
-    const btn=document.querySelectorAll('#answer-area .choice-btn')[idx];
-    btn.classList.toggle('selected');
-    // 확인 버튼 표시
-    if(!document.getElementById('mc-confirm-btn')){
-      const nb=document.createElement('button');
-      nb.id='mc-confirm-btn'; nb.className='btn btn-accent';
-      nb.style.cssText='margin-top:12px;';
-      nb.textContent='선택 완료';
-      nb.onclick=confirmMultiMC;
-      document.getElementById('answer-area').appendChild(nb);
-    }
-    return;
-  }
-  // 단일정답
-  answered=true;
-  const ok=idx===q.answer;
-  if(ok)correct++; else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
-  document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
-    b.classList.add('disabled');
-    if(isCorrectChoice(i,q.answer))b.classList.add('correct');
-    else if(i===idx&&!ok)b.classList.add('wrong');
-  });
-  showFeedback(ok,q);
-}
-
-function confirmMultiMC(){
-  if(answered)return; answered=true;
-  const q=quiz[cur];
-  const selected=Array.from(document.querySelectorAll('#answer-area .choice-btn.selected')).map(b=>parseInt(b.dataset.idx));
-  const ok=checkMCAnswer(selected,q.answer);
-  const myAnsStr=selected.map(i=>NUMS[i]+' '+q.choices[i]).join(', ');
-  if(ok)correct++; else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
-  document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
-    b.classList.add('disabled'); b.classList.remove('selected');
-    if(isCorrectChoice(i,q.answer))b.classList.add('correct');
-    else if(selected.includes(i)&&!isCorrectChoice(i,q.answer))b.classList.add('wrong');
-  });
-  const cb=document.getElementById('mc-confirm-btn');
-  if(cb)cb.remove();
-  showFeedback(ok,q);
-}
-
-function normalSelectOX(val){
-  if(answered)return; answered=true;
-  const q=quiz[cur]; const ok=val===q.answer;
-  if(ok)correct++; else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
-  document.querySelectorAll('#answer-area .ox-btn').forEach(b=>{
-    b.classList.add('disabled');
-    if(b.dataset.val===q.answer)b.classList.add('correct');
-    else if(b.dataset.val===val&&!ok)b.classList.add('wrong');
-  });
-  showFeedback(ok,q);
-}
-
-function normalCheckSA(){
-  if(answered)return;
-  const inp=document.querySelector('#answer-area .sa-input');
-  const val=inp.value.trim();
-  if(!val){alert('정답을 입력해주세요');return;}
-  answered=true;
-  const q=quiz[cur];
-  const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);
-  const ok=kws.length>0&&kws.some(k=>val.includes(k));
-  if(ok)correct++; else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
-  inp.disabled=true; showFeedback(ok,q);
-}
-
-function nextQ(){cur++;if(cur<quiz.length)renderQ();else showResult('normal');}
-
-// ── 실전 모드 ──
-function startTimer(){
-  clearInterval(timerInterval);updateTimer();
-  timerInterval=setInterval(()=>{timerSec--;updateTimer();if(timerSec<=0){clearInterval(timerInterval);submitExam(true);}},1000);
-}
-function updateTimer(){
-  const m=Math.floor(timerSec/60),s=timerSec%60;
-  const el=document.getElementById('timer-disp');
-  el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  el.className='timer-display'+(timerSec<=60?' urgent':'');
-}
-
-function renderExamQ(idx){
-  examCur=idx;
-  const q=quiz[idx];
-  document.getElementById('eprog-fill').style.width=Math.round((idx/quiz.length)*100)+'%';
-  document.getElementById('eq-meta-l').textContent=`${idx+1} / ${quiz.length}`;
-  let labelHtml=typeBadge(q.type)+` <span class="badge badge-subj">${currentSubject.key}</span> <span class="badge badge-exam">실전</span>`;
-  if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
-  if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
-  document.getElementById('eq-label').innerHTML=labelHtml;
-  document.getElementById('eq-body').textContent=q.question;
-  document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
-  renderNav(); renderAnswerArea('eanswer-area',q,'exam',idx);
-}
-
-function renderNav(){
-  document.getElementById('q-nav').innerHTML=quiz.map((_,i)=>
-    `<div class="q-dot${examAnswers[i]!==undefined?' answered':''}${i===examCur?' current':''}" onclick="examGo(${i})">${i+1}</div>`
-  ).join('');
-}
-
-function examGo(idx){
-  if(idx<0||idx>=quiz.length)return;
-  const inp=document.querySelector('#eanswer-area .sa-input');
-  if(inp&&inp.value.trim())examAnswers[examCur]=inp.value.trim();
-  renderExamQ(idx);
-}
-
-function examSelectMC(qIdx,ci){
-  const q=quiz[qIdx];
-  if(Array.isArray(q.answer)){
-    // 복수정답: 토글
-    let cur=examAnswers[qIdx];
-    if(!Array.isArray(cur))cur=[];
-    const idx=cur.indexOf(ci);
-    if(idx>=0)cur.splice(idx,1); else cur.push(ci);
-    examAnswers[qIdx]=cur.length?cur:undefined;
-    if(!cur.length)delete examAnswers[qIdx];
-    document.querySelectorAll('#eanswer-area .choice-btn').forEach((b,i)=>b.classList.toggle('selected',cur.includes(i)));
-  } else {
-    examAnswers[qIdx]=ci;
-    document.querySelectorAll('#eanswer-area .choice-btn').forEach((b,i)=>b.classList.toggle('selected',i===ci));
-  }
-  document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
-  renderNav();
-}
-
-function examSelectOX(qIdx,val){
-  examAnswers[qIdx]=val;
-  document.querySelectorAll('#eanswer-area .ox-btn').forEach(b=>b.classList.toggle('selected',b.dataset.val===val));
-  document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
-  renderNav();
-}
-
-function submitExam(timeUp=false){
-  const inp=document.querySelector('#eanswer-area .sa-input');
-  if(inp&&inp.value.trim())examAnswers[examCur]=inp.value.trim();
-  if(!timeUp&&Object.keys(examAnswers).length<quiz.length){
-    if(!confirm(`미답 ${quiz.length-Object.keys(examAnswers).length}문제가 있어요. 제출할까요?`))return;
-  }
-  clearInterval(timerInterval); showResult('exam');
-}
-
-// ── 답안 렌더 ──
-function renderAnswerArea(areaId,q,mode,qIdx){
-  const area=document.getElementById(areaId);
-  const saved=mode==='exam'?examAnswers[qIdx]:undefined;
-  if(q.type==='mc'){
-    const savedArr=mode==='exam'&&saved!==undefined?(Array.isArray(saved)?saved:[saved]):[];
-    area.innerHTML='<div class="choices">'+q.choices.map((c,i)=>
-      `<button class="choice-btn${savedArr.includes(i)?' selected':''}" data-idx="${i}"
-        onclick="${mode==='exam'?`examSelectMC(${qIdx},${i})`:`normalSelectMC(${i})`}">
-        <span class="choice-num">${NUMS[i]}</span><span class="choice-text">${c}</span>
-      </button>`).join('')+'</div>';
-  }else if(q.type==='ox'){
-    area.innerHTML=`<div class="ox-row">
-      <button class="ox-btn${mode==='exam'&&saved==='O'?' selected':''}" data-val="O" onclick="${mode==='exam'?`examSelectOX(${qIdx},'O')`:`normalSelectOX('O')`}">○</button>
-      <button class="ox-btn${mode==='exam'&&saved==='X'?' selected':''}" data-val="X" onclick="${mode==='exam'?`examSelectOX(${qIdx},'X')`:`normalSelectOX('X')`}">✕</button>
-    </div>`;
-  }else{
-    area.innerHTML=`<div class="sa-row">
-      <input class="sa-input" type="text" placeholder="정답을 입력하세요" value="${mode==='exam'&&saved?saved:''}"
-        ${mode==='normal'?`onkeydown="if(event.key==='Enter')normalCheckSA()"`:''}>
-      ${mode==='normal'?'<button class="btn btn-accent" onclick="normalCheckSA()">확인</button>':''}
-    </div>`;
-    if(mode==='normal')setTimeout(()=>document.querySelector(`#${areaId} .sa-input`)?.focus(),100);
+    throw new Error('JSON 파싱 실패: '+e.message);
   }
 }
 
-// ── 결과 ──
-function showResult(mode){
-  let correctCnt=0,wrongItems=[],skipCnt=0;
-  if(mode==='normal'||mode==='wrongnote'){
-    correctCnt=correct; wrongItems=wrongList;
-  }else{
-    quiz.forEach((q,i)=>{
-      const ans=examAnswers[i];
-      if(ans===undefined){skipCnt++;wrongItems.push({q,myAns:'미답',skip:true});return;}
-      let ok=false;
-      if(q.type==='mc')ok=checkMCAnswer(Array.isArray(ans)?ans:ans,q.answer);
-      else if(q.type==='ox')ok=ans===q.answer;
-      else{const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);ok=kws.length>0&&kws.some(k=>ans.includes(k));}
-      if(ok)correctCnt++;
-      else{wrongItems.push({q,myAns:q.type==='mc'?NUMS[ans]+' '+q.choices[ans]:ans});addWN(currentSubject.key,q,q.type==='mc'?NUMS[ans]+' '+q.choices[ans]:ans);}
-    });
-  }
-  const score=Math.round((correctCnt/quiz.length)*100);
-  saveStats(currentSubject.key,score);
-  document.getElementById('res-score').textContent=score+'점';
-  document.getElementById('res-frac').textContent=`${correctCnt}/${quiz.length}`;
-  document.getElementById('res-c').textContent=correctCnt;
-  document.getElementById('res-w').textContent=quiz.length-correctCnt-skipCnt;
-  document.getElementById('res-s').textContent=skipCnt;
-  document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':mode==='wrongnote'?'오답풀기':'일반모드');
-  document.getElementById('res-msg').textContent=score>=90?'완벽해요! 🎉':score>=70?'잘 하셨어요!':score>=50?'조금 더 노력해봐요':'다시 도전해봐요 💪';
-  document.getElementById('review-title').textContent=mode==='exam'?'채점 결과':'틀린 문제 복습';
-  const wr=document.getElementById('wrong-review');
-  if(wrongItems.length){
-    wr.style.display='';
-    document.getElementById('review-list').innerHTML=wrongItems.map(({q,myAns})=>{
-      let ca=q.type==='mc'?(Array.isArray(q.answer)?q.answer.map(a=>NUMS[a]+' '+q.choices[a]).join(', '):`${NUMS[q.answer]} ${q.choices[q.answer]}`):q.answer;
-      const exp=q.explanation?`<div class="r-exp">💡 ${q.explanation}</div>`:'';
-      return `<div class="review-item">
-        <div class="r-q">${q.question.substring(0,130)}${q.question.length>130?'...':''}</div>
-        <div class="r-my">내 답: ${myAns}</div>
-        <div class="r-ans">정답: ${ca}</div>${exp}
-      </div>`;
-    }).join('');
-  }else wr.style.display='none';
-  showScreen('screen-result'); allData={};
+// MANAGE
+function getFilteredRows(){
+  const filterSubj=document.getElementById('filter-subj').value;
+  const filterSource=document.getElementById('filter-source').value;
+  const filterTopic=document.getElementById('filter-topic').value.trim().toLowerCase();
+  const keys=filterSubj==='all'?SUBJECT_KEYS:[filterSubj];
+  let rows=[];
+  keys.forEach(k=>db[k].forEach((q,i)=>rows.push({subj:k,q,i})));
+  if(filterSource!=='all') rows=rows.filter(r=>(r.q.source||'')===(filterSource));
+  if(filterTopic) rows=rows.filter(r=>(r.q.topic||'').toLowerCase().includes(filterTopic));
+  return rows;
 }
 
-// ── 오답노트 ──
-function renderWNHome(){
-  const el=document.getElementById('wn-subj-list');
-  const rows=SUBJECTS.map(s=>{const wn=getWN(s.key);return{s,cnt:Object.keys(wn).length};}).filter(r=>r.cnt>0);
-  if(!rows.length){el.innerHTML='<div class="wn-empty">아직 오답노트가 없어요<br>퀴즈를 풀면 틀린 문제가 자동으로 저장돼요</div>';return;}
-  el.innerHTML=rows.map(({s,cnt})=>`
-    <div class="wn-subj-card" onclick="showWNDetail('${s.key}')">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-size:18px;">${s.icon}</span>
-        <div><div style="font-size:14px;font-weight:500;">${s.key}</div><div style="font-size:12px;color:var(--red);">오답 ${cnt}문제</div></div>
+function renderManage(){
+  // selectedIds 유지 (전체선택 후 재렌더링해도 선택 유지)
+  updateBulkBar();
+  document.getElementById('select-all').checked=false;
+  const statsEl=document.getElementById('manage-stats');
+  statsEl.innerHTML=SUBJECT_KEYS.map(k=>`<div class="mini-stat"><strong>${db[k].length}</strong> ${k}</div>`).join('');
+  const rows=getFilteredRows();
+  document.getElementById('manage-total-cnt').textContent=`${rows.length}문제`;
+  const listEl=document.getElementById('manage-list');
+  if(!rows.length){ listEl.innerHTML='<div class="empty">문제가 없어요</div>'; return; }
+  const typeBadge=t=>t==='mc'?'<span class="badge badge-mc">객관식</span>':t==='ox'?'<span class="badge badge-ox">OX</span>':'<span class="badge badge-sa">단답</span>';
+  listEl.innerHTML=rows.map(({subj,q,i})=>{
+    const uid=subj+'__'+i;
+    const topicTag=q.topic?`<span class="badge badge-topic">${q.topic}</span>`:'';
+    const sourceTag=q.source?`<span class="badge badge-source">${q.source}</span>`:'';
+    return `<div class="q-card" id="card-${uid}">
+      <div class="q-card-header">
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;flex:1;">
+          <input type="checkbox" style="margin-top:3px;width:auto;" onchange="toggleSelect('${uid}',this.checked)" ${selectedIds.has(uid)?'checked':''}>
+          <div style="flex:1;">
+            <div class="q-card-meta">${typeBadge(q.type)} <span style="font-size:11px;color:var(--text3);">${subj}</span> ${topicTag} ${sourceTag}</div>
+            <div class="q-card-text" style="margin-top:6px;">${q.question.substring(0,100)}${q.question.length>100?'...':''}</div>
+          </div>
+        </label>
       </div>
-      <span style="color:var(--text3);">→</span>
-    </div>`).join('');
-}
-
-let wnFilterTopic=new Set(), wnFilterSource='all';
-
-function showWNDetail(subjKey){
-  wnCurrentSubj=subjKey;
-  wnFilterTopic.clear(); wnFilterSource='all';
-  const wn=getWN(subjKey);
-  const allItems=Object.entries(wn);
-  // 주제 칩
-  const topics=[...new Set(allItems.map(([,v])=>v.q.topic).filter(Boolean))].sort();
-  const topicRow=document.getElementById('wn-topic-row');
-  const topicEl=document.getElementById('wn-topic-chips');
-  if(topics.length){
-    topicRow.style.display='';
-    topicEl.innerHTML='<button class="chip active" data-val="all" onclick="wnToggleTopic(this)">전체</button>'
-      +topics.map(t=>`<button class="chip" data-val="${t}" onclick="wnToggleTopic(this)">${t}</button>`).join('');
-  } else topicRow.style.display='none';
-  // 출처 칩 초기화
-  document.querySelectorAll('#wn-source-chips .source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
-  document.getElementById('wn-detail-title').textContent=subjKey+' 오답노트';
-  renderWNList();
-  showScreen('screen-wrongnote');
-}
-
-function renderWNList(){
-  const wn=getWN(wnCurrentSubj);
-  let items=Object.entries(wn).sort((a,b)=>b[1].wrongCount-a[1].wrongCount);
-  if(wnFilterTopic.size>0) items=items.filter(([,v])=>wnFilterTopic.has(v.q.topic||''));
-  if(wnFilterSource!=='all') items=items.filter(([,v])=>(v.q.source||'')===wnFilterSource);
-  document.getElementById('wn-detail-cnt').textContent=`${items.length}문제 · 틀린 횟수 순`;
-  if(!items.length){document.getElementById('wn-detail-list').innerHTML='<div class="wn-empty">해당 조건의 오답이 없어요</div>';return;}
-  document.getElementById('wn-detail-list').innerHTML=items.map(([key,{q,wrongCount,lastMyAns}])=>{
-    let ca=q.type==='mc'?`${NUMS[q.answer]} ${q.choices[q.answer]}`:q.answer;
-    const exp=q.explanation?`<div class="wn-exp">💡 ${q.explanation}</div>`:'';
-    const topicBadge=q.topic?`<span class="badge badge-topic">${q.topic}</span>`:'';
-    const srcBadge=q.source?`<span class="badge badge-source">${q.source}</span>`:'';
-    const safeKey=encodeURIComponent(key);
-    return `<div class="wn-item">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${typeBadge(q.type)} ${topicBadge} ${srcBadge} <span class="wn-wrong-cnt">✕ ${wrongCount}회</span></div>
-        <span class="wn-del" onclick="delWN('${safeKey}')">삭제</span>
+      <div class="q-card-footer">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;flex:1;">
+          <select id="subj-${uid}" style="width:auto;padding:5px 9px;font-size:12px;">
+            <option value="헌법" ${subj==='헌법'?'selected':''}>헌법</option>
+            <option value="민법" ${subj==='민법'?'selected':''}>민법</option>
+            <option value="형법" ${subj==='형법'?'selected':''}>형법</option>
+            <option value="상법" ${subj==='상법'?'selected':''}>상법</option>
+            <option value="헌법논증이론" ${subj==='헌법논증이론'?'selected':''}>헌법논증이론</option>
+            <option value="글쓰기" ${subj==='글쓰기'?'selected':''}>글쓰기</option>
+          </select>
+          <input type="text" placeholder="주제 태그" value="${q.topic||''}" style="width:100px;padding:5px 9px;font-size:12px;" id="topic-${uid}">
+          <select id="source-${uid}" style="width:auto;padding:5px 9px;font-size:12px;">
+            <option value="" ${!q.source?'selected':''}>미지정</option>
+            <option value="기출문제" ${q.source==='기출문제'?'selected':''}>기출문제</option>
+            <option value="워크북" ${q.source==='워크북'?'selected':''}>워크북</option>
+            <option value="형성평가" ${q.source==='형성평가'?'selected':''}>형성평가</option>
+            <option value="강의문제" ${q.source==='강의문제'?'selected':''}>강의문제</option>
+            <option value="자격증시험" ${q.source==='자격증시험'?'selected':''}>자격증 시험</option>
+          </select>
+          <button class="btn btn-sm" onclick="saveTag('${subj}',${i},'${uid}')">저장</button>
+          <button class="btn btn-sm" onclick="openEditModal('${subj}',${i})">수정</button>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteQ('${subj}',${i})">삭제</button>
       </div>
-      <div class="wn-q">${q.question}</div>
-      <div class="wn-ans">정답: ${ca}</div>
-      ${lastMyAns?`<div style="font-size:12px;color:var(--red);">마지막 내 답: ${lastMyAns}</div>`:''}
-      ${exp}
     </div>`;
   }).join('');
 }
 
-function wnToggleTopic(btn){
-  const val=btn.dataset.val;
-  if(val==='all'){
-    wnFilterTopic.clear();
-    document.querySelectorAll('#wn-topic-chips .chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
-  } else {
-    document.querySelector('#wn-topic-chips .chip[data-val="all"]').classList.remove('active');
-    btn.classList.toggle('active');
-    if(btn.classList.contains('active'))wnFilterTopic.add(val); else wnFilterTopic.delete(val);
-    if(wnFilterTopic.size===0)document.querySelector('#wn-topic-chips .chip[data-val="all"]').classList.add('active');
+function saveTag(subj,idx,uid){
+  const newSubj=document.getElementById('subj-'+uid).value;
+  const topic=document.getElementById('topic-'+uid).value.trim();
+  const source=document.getElementById('source-'+uid).value;
+  const q=db[subj][idx];
+  q.topic=topic; q.source=source;
+  if(newSubj!==subj){
+    db[subj].splice(idx,1);
+    db[newSubj].push(q);
   }
-  renderWNList();
+  save(); renderManage();
 }
 
-function wnToggleSource(btn){
-  wnFilterSource=btn.dataset.val;
-  document.querySelectorAll('#wn-source-chips .source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val===btn.dataset.val));
-  renderWNList();
+function deleteQ(subj,idx){
+  if(!confirm('이 문제를 삭제할까요?')) return;
+  db[subj].splice(idx,1); save(); renderManage();
 }
 
-function delWN(safeKey){
-  const key=decodeURIComponent(safeKey);
-  removeFromWN(wnCurrentSubj,key); renderWNList();
-}
-function removeFromWN(k,key){const wn=getWN(k);delete wn[key];saveWN(k,wn);}
-function clearWrongNote(){
-  if(!confirm(`[${wnCurrentSubj}] 오답노트를 전부 지울까요?`))return;
-  try{localStorage.removeItem('lq_wn_'+wnCurrentSubj);}catch(e){}
-  showScreen('screen-home'); switchHomeTab('wrongnote');
+function clearSubject(){
+  const filter=document.getElementById('filter-subj').value;
+  if(filter==='all'){ alert('과목을 먼저 선택해주세요'); return; }
+  if(!confirm(`[${filter}] 과목 전체 문제(${db[filter]?.length}개)를 삭제할까요?`)) return;
+  db[filter]=[]; save(); renderManage();
 }
 
-function retryQuiz(){
-  if(currentMode==='exam'){showScreen('screen-mode');}
-  else if(currentMode==='wrongnote')startWrongNoteQuiz();
-  else startNormalMode();
+// 선택 / 일괄수정
+function toggleSelect(uid,checked){
+  if(checked) selectedIds.add(uid); else selectedIds.delete(uid);
+  updateBulkBar();
 }
-
-function typeBadge(t){return t==='mc'?'<span class="badge badge-mc">객관식</span>':t==='ox'?'<span class="badge badge-ox">OX형</span>':'<span class="badge badge-sa">단답형</span>';}
-function backToHome(){clearInterval(timerInterval);showScreen('screen-home');allData={};renderHome();}
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
-
-// correct 변수 충돌 방지
-// correct declared above
-
-
-// ── 설정 (캐시 초기화) ──
-function renderSettings(){
-  const el=document.getElementById('settings-content');
-  const SUBJ_KEYS=['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'];
-  const SUBJ_FILE_KEYS=['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
-
-  let html=`
-  <div style="display:flex;flex-direction:column;gap:10px;">
-    <div class="settings-card">
-      <div class="settings-card-left">
-        <div class="settings-title">전체 초기화</div>
-        <div class="settings-desc">오답노트, 풀이 이력, 잠금 해제 상태 모두 삭제</div>
-      </div>
-      <button class="btn btn-danger" onclick="clearAll()">초기화</button>
-    </div>
-    <div class="settings-card">
-      <div class="settings-card-left">
-        <div class="settings-title">오답노트 전체 초기화</div>
-        <div class="settings-desc">모든 과목의 오답 기록 삭제</div>
-      </div>
-      <button class="btn btn-danger" onclick="clearAllWN()">초기화</button>
-    </div>
-    <div class="settings-card">
-      <div class="settings-card-left">
-        <div class="settings-title">풀이 이력 전체 초기화</div>
-        <div class="settings-desc">모든 과목의 점수·응시 횟수 삭제</div>
-      </div>
-      <button class="btn btn-danger" onclick="clearAllStats()">초기화</button>
-    </div>
-    <div class="settings-card">
-      <div class="settings-card-left">
-        <div class="settings-title">강의문제 잠금 초기화</div>
-        <div class="settings-desc">잠금 해제 상태 삭제 (다시 코드 입력 필요)</div>
-      </div>
-      <button class="btn btn-danger" onclick="clearLecture()">초기화</button>
-    </div>
-    <div style="height:0.5px;background:var(--border);margin:6px 0;"></div>
-    <div style="font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">과목별 초기화</div>`;
-
-  SUBJ_KEYS.forEach((k,i)=>{
-    const fk=SUBJ_FILE_KEYS[i];
-    const wn=getWN(k); const wnCnt=Object.keys(wn).length;
-    const st=getStats(k);
-    html+=`<div class="settings-card">
-      <div class="settings-card-left">
-        <div class="settings-title">${k}</div>
-        <div class="settings-desc">오답 ${wnCnt}개 · ${st.s!==null?'최근 '+st.s+'점':'응시 없음'}</div>
-      </div>
-      <div style="display:flex;gap:6px;">
-        <button class="btn btn-sm" style="font-size:11px;padding:4px 10px;border-color:var(--red);color:var(--red);" onclick="clearSubjWN('${k}')">오답</button>
-        <button class="btn btn-sm" style="font-size:11px;padding:4px 10px;border-color:var(--red);color:var(--red);" onclick="clearSubjStats('${k}')">이력</button>
-      </div>
-    </div>`;
+function toggleSelectAll(){
+  const checked=document.getElementById('select-all').checked;
+  const rows=getFilteredRows();
+  rows.forEach(({subj,i})=>{ const uid=subj+'__'+i; if(checked)selectedIds.add(uid); else selectedIds.delete(uid); });
+  // 각 체크박스 직접 업데이트 (renderManage 호출 안 함)
+  document.querySelectorAll('.q-card input[type=checkbox]').forEach(cb=>{
+    const uid=cb.closest('.q-card')?.id?.replace('card-','');
+    if(uid) cb.checked=selectedIds.has(uid);
   });
-
-  html+='</div>';
-  el.innerHTML=html;
+  updateBulkBar();
+}
+function clearSelection(){ selectedIds.clear(); updateBulkBar(); renderManage(); }
+function bulkDelete(){
+  if(!confirm(`선택한 ${selectedIds.size}개 문제를 삭제할까요?`)) return;
+  // 과목별로 묶어서 인덱스 내림차순 삭제
+  const bySubj={};
+  selectedIds.forEach(uid=>{
+    const [subj,idxStr]=uid.split('__'); const idx=parseInt(idxStr);
+    if(!bySubj[subj]) bySubj[subj]=[];
+    bySubj[subj].push(idx);
+  });
+  Object.entries(bySubj).forEach(([subj,idxs])=>{
+    idxs.sort((a,b)=>b-a).forEach(idx=>db[subj].splice(idx,1));
+  });
+  save(); selectedIds.clear(); renderManage();
+  alert('삭제됐어요!');
+}
+function updateBulkBar(){
+  const bar=document.getElementById('bulk-bar');
+  if(selectedIds.size>0){ bar.classList.add('active'); document.getElementById('bulk-cnt').textContent=`${selectedIds.size}개 선택됨`; }
+  else bar.classList.remove('active');
+}
+function applyBulk(){
+  const newSubj=document.getElementById('bulk-subj').value;
+  const source=document.getElementById('bulk-source').value;
+  const topic=document.getElementById('bulk-topic').value.trim();
+  if(!newSubj&&!source&&!topic){ alert('과목, 출처, 주제 중 하나 이상 선택해주세요'); return; }
+  const toMove=[];
+  selectedIds.forEach(uid=>{
+    const [subj,idxStr]=uid.split('__'); const idx=parseInt(idxStr);
+    if(db[subj]&&db[subj][idx]){
+      if(source) db[subj][idx].source=source;
+      if(topic) db[subj][idx].topic=topic;
+      if(newSubj&&newSubj!==subj) toMove.push({subj,idx});
+    }
+  });
+  // 과목 이동 (뒤에서 앞으로 삭제해야 인덱스 안 꼬임)
+  if(newSubj){
+    toMove.sort((a,b)=>b.idx-a.idx).forEach(({subj,idx})=>{
+      const q=db[subj].splice(idx,1)[0];
+      db[newSubj].push(q);
+    });
+  }
+  save(); selectedIds.clear(); renderManage();
+  alert('적용됐어요!');
 }
 
-function clearAll(){
-  if(!confirm('정말 전체 초기화할까요? 오답노트, 풀이 이력, 잠금 해제 상태가 모두 삭제됩니다.')) return;
+// EXPORT
+function renderExport(){
+  const subj=document.getElementById('export-subj').value;
+  document.getElementById('json-preview').textContent=JSON.stringify(db[subj]||[],null,2);
+}
+function copyExport(){
+  const text=document.getElementById('json-preview').textContent;
+  navigator.clipboard.writeText(text).then(()=>alert('복사됐어요!')).catch(()=>{
+    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta); alert('복사됐어요!');
+  });
+}
+function downloadExport(){
+  const subj=document.getElementById('export-subj').value;
+  const blob=new Blob([document.getElementById('json-preview').textContent],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=SUBJECT_FILES[subj]; a.click();
+}
+
+function saveGhConfig(){
+  GH_TOKEN=document.getElementById('gh-token').value.trim();
+  if(!GH_TOKEN){ alert('토큰을 입력해주세요'); return; }
+  try{localStorage.setItem('admin_gh_token',GH_TOKEN);}catch(e){}
+  document.getElementById('gh-status').textContent='✓ 저장됐어요';
+  document.getElementById('gh-status').className='api-status ok';
+}
+
+async function pushToGithub(){
+  if(!GH_TOKEN||!GH_OWNER||!GH_REPO){ alert('GitHub 설정을 먼저 해주세요'); return; }
+  const subj=document.getElementById('export-subj').value;
+  const filename=SUBJECT_FILES[subj];
+  const content=JSON.stringify(db[subj]||[],null,2);
+  const statusEl=document.getElementById('gh-push-status');
+  const btn=document.getElementById('gh-push-btn');
+  btn.disabled=true; btn.textContent='업로드 중...';
+  statusEl.style.color='var(--text3)'; statusEl.textContent='GitHub에 업로드 중...';
   try{
-    ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{
-      localStorage.removeItem('lq_wn_'+k);
-      localStorage.removeItem('lq_s_'+k);
+    // 기존 파일 SHA 가져오기
+    const getResp=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/data/${filename}`,{
+      headers:{'Authorization':`token ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json'}
     });
-    localStorage.removeItem('_lu');
-    lectureUnlocked=false;
-  }catch(e){}
-  alert('전체 초기화됐어요!');
-  renderSettings(); renderHome();
-}
-function clearAllWN(){
-  if(!confirm('모든 과목의 오답노트를 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
-  alert('오답노트 전체 초기화됐어요!'); renderSettings();
-}
-function clearAllStats(){
-  if(!confirm('모든 과목의 풀이 이력을 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_s_'+k);}catch(e){} });
-  alert('풀이 이력 전체 초기화됐어요!'); renderSettings(); renderHome();
-}
-function clearLecture(){
-  if(!confirm('강의문제 잠금 해제 상태를 초기화할까요?')) return;
-  try{localStorage.removeItem('_lu'); lectureUnlocked=false;}catch(e){}
-  alert('잠금 초기화됐어요!'); renderSettings();
-}
-function clearSubjWN(k){
-  if(!confirm(`[${k}] 오답노트를 초기화할까요?`)) return;
-  try{localStorage.removeItem('lq_wn_'+k);}catch(e){}
-  renderSettings();
-}
-function clearSubjStats(k){
-  if(!confirm(`[${k}] 풀이 이력을 초기화할까요?`)) return;
-  try{localStorage.removeItem('lq_s_'+k);}catch(e){}
-  renderSettings(); renderHome();
-}
+    let sha='';
+    if(getResp.ok){ const d=await getResp.json(); sha=d.sha; }
 
-// ── 취약점 분석 ──
-function renderStats(){
-  const el=document.getElementById('stats-content');
-
-  // 전체 오답 수집
-  let totalAttempts=0, totalCorrect=0;
-  const topicMap={};   // {topic: {correct,total}}
-  const sourceMap={};  // {source: {correct,total}}
-  const subjMap={};    // {subj: {correct,total}}
-
-  SUBJECTS.forEach(s=>{
-    const wn=getWN(s.key);
-    const items=Object.values(wn);
-    if(!items.length) return;
-    if(!subjMap[s.key])subjMap[s.key]={correct:0,total:0,icon:s.icon};
-    items.forEach(({q,wrongCount})=>{
-      // 오답 횟수로 역산 (틀린 것만 기록되므로 total=wrongCount, correct=0으로 취급)
-      const total=wrongCount;
-      totalAttempts+=total; // 틀린 것만 있음
-      // 주제
-      const topic=q.topic||'(미분류)';
-      if(!topicMap[topic])topicMap[topic]={wrong:0,subj:s.key};
-      topicMap[topic].wrong+=wrongCount;
-      // 출처
-      const src=q.source||'미지정';
-      if(!sourceMap[src])sourceMap[src]={wrong:0};
-      sourceMap[src].wrong+=wrongCount;
-      // 과목
-      subjMap[s.key].total+=wrongCount;
+    // 파일 업로드
+    const putResp=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/data/${filename}`,{
+      method:'PUT',
+      headers:{'Authorization':`token ${GH_TOKEN}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:`Update ${filename}`,
+        content:btoa(unescape(encodeURIComponent(content))),
+        sha:sha||undefined
+      })
     });
-  });
-
-  // 퀴즈 통계로 정답률 계산
-  const subjStats={};
-  SUBJECTS.forEach(s=>{
-    const st=getStats(s.key);
-    if(st.s!==null)subjStats[s.key]={score:st.s,attempts:st.a,icon:s.icon};
-  });
-
-  const hasData=Object.keys(subjStats).length>0||Object.keys(topicMap).length>0;
-  if(!hasData){
-    el.innerHTML='<div class="stats-empty">아직 데이터가 없어요<br>퀴즈를 풀면 분석 결과가 나타납니다</div>';
-    return;
+    if(putResp.ok){
+      statusEl.style.color='var(--green)'; statusEl.textContent=`✓ ${filename} 업로드 완료! 1~2분 후 반영돼요.`;
+    } else {
+      const err=await putResp.json();
+      statusEl.style.color='var(--red)'; statusEl.textContent='오류: '+(err.message||putResp.status);
+    }
+  }catch(e){
+    statusEl.style.color='var(--red)'; statusEl.textContent='오류: '+e.message;
   }
-
-  let html='';
-
-  // 과목별 최근 점수
-  const subjEntries=Object.entries(subjStats).sort((a,b)=>a[1].score-b[1].score);
-  if(subjEntries.length){
-    html+=`<div class="stats-section">
-      <div class="stats-section-title">과목별 최근 점수</div>`;
-    subjEntries.forEach(([key,{score,attempts,icon}])=>{
-      const cls=score>=70?'good':score>=50?'mid':'bad';
-      html+=`<div class="stat-row">
-        <div class="stat-row-header">
-          <span class="stat-row-label">${icon} ${key}</span>
-          <span class="stat-row-val">${score}점 · ${attempts}회 응시</span>
-        </div>
-        <div class="stat-bar-wrap"><div class="stat-bar-fill ${cls}" style="width:${score}%"></div></div>
-      </div>`;
-    });
-    html+=`</div>`;
-  }
-
-  // 주제별 오답 횟수
-  const topicEntries=Object.entries(topicMap).sort((a,b)=>b[1].wrong-a[1].wrong);
-  if(topicEntries.length){
-    const maxWrong=topicEntries[0][1].wrong;
-    html+=`<div class="stats-section">
-      <div class="stats-section-title">주제별 오답 횟수 (많은 순)</div>`;
-    topicEntries.forEach(([topic,{wrong,subj}])=>{
-      const pct=Math.round((wrong/maxWrong)*100);
-      html+=`<div class="stat-row">
-        <div class="stat-row-header">
-          <span class="stat-row-label">${topic} <span style="font-size:11px;color:var(--text3);">${subj}</span></span>
-          <span class="stat-row-val">✕ ${wrong}회</span>
-        </div>
-        <div class="stat-bar-wrap"><div class="stat-bar-fill bad" style="width:${pct}%"></div></div>
-      </div>`;
-    });
-    html+=`</div>`;
-  }
-
-  // 출처별 오답 횟수
-  const srcEntries=Object.entries(sourceMap).sort((a,b)=>b[1].wrong-a[1].wrong);
-  if(srcEntries.length){
-    const maxW=srcEntries[0][1].wrong;
-    html+=`<div class="stats-section">
-      <div class="stats-section-title">출처별 오답 횟수</div>`;
-    srcEntries.forEach(([src,{wrong}])=>{
-      const pct=Math.round((wrong/maxW)*100);
-      html+=`<div class="stat-row">
-        <div class="stat-row-header">
-          <span class="stat-row-label">${src}</span>
-          <span class="stat-row-val">✕ ${wrong}회</span>
-        </div>
-        <div class="stat-bar-wrap"><div class="stat-bar-fill mid" style="width:${pct}%"></div></div>
-      </div>`;
-    });
-    html+=`</div>`;
-  }
-
-  el.innerHTML=html;
+  btn.disabled=false; btn.textContent='GitHub에 바로 올리기 ↑';
 }
 
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
-// ── 강의문제 잠금 ──
-const manifest = ['CODE001', 'CODE002', 'CODE003'];
-let lectureUnlocked = false;
-try{ lectureUnlocked = localStorage.getItem('_lu')==='1'; }catch(e){}
+const uz=document.getElementById('upload-zone');
+uz.addEventListener('dragover',e=>{e.preventDefault();uz.style.borderColor='var(--accent)';});
+uz.addEventListener('dragleave',()=>{uz.style.borderColor='';});
+uz.addEventListener('drop',e=>{e.preventDefault();uz.style.borderColor='';handleFiles(e.dataTransfer.files);});
 
-function showUnlockModal(){
-  document.getElementById('unlock-input').value='';
-  document.getElementById('unlock-err').textContent='';
-  document.getElementById('unlock-modal').style.display='flex';
-  setTimeout(()=>document.getElementById('unlock-input').focus(),100);
-}
-function closeUnlockModal(){
-  document.getElementById('unlock-modal').style.display='none';
-}
-function tryUnlock(){
-  const val=document.getElementById('unlock-input').value.trim();
-  if(manifest.includes(val)){
-    lectureUnlocked=true;
-    try{localStorage.setItem('_lu','1');}catch(e){}
-    closeUnlockModal();
-    // 현재 열린 필터 칩 갱신
-    const topicChips=document.getElementById('source-chips');
-    if(topicChips) refreshSourceChips();
-    const wnChips=document.getElementById('wn-source-chips');
-    if(wnChips) refreshWNSourceChips();
+// 클립보드 붙여넣기
+document.addEventListener('paste',function(e){
+  if(!document.getElementById('admin-screen').classList.contains('active')) return;
+  const items=e.clipboardData?.items;
+  if(!items) return;
+  const files=[];
+  for(const item of items){ if(item.type.startsWith('image/')) files.push(item.getAsFile()); }
+  if(files.length) handleFiles(files);
+});
+
+// 문제 수정 모달
+let editSubj='', editIdx=-1;
+
+function openEditModal(subj,idx){
+  editSubj=subj; editIdx=idx;
+  const q=db[subj][idx];
+  document.getElementById('edit-type').value=q.type;
+  document.getElementById('edit-q').value=q.question;
+  document.getElementById('edit-exp').value=q.explanation||'';
+  document.getElementById('edit-image').value=q.image||'';
+  updateEditForm();
+  if(q.type==='mc'){
+    document.querySelectorAll('.edit-choice').forEach((el,i)=>el.value=q.choices?.[i]||'');
+    document.querySelectorAll('.edit-mc-ans-cb').forEach(e=>e.checked=false);
+    const ans=q.answer;
+    const ansArr=Array.isArray(ans)?ans:[ans];
+    ansArr.forEach(a=>{ const cb=document.querySelector(`.edit-mc-ans-cb[value="${a}"]`); if(cb)cb.checked=true; });
+  } else if(q.type==='ox'){
+    document.getElementById('edit-ox-ans').value=q.answer;
   } else {
-    document.getElementById('unlock-err').textContent='코드가 올바르지 않아요';
+    document.getElementById('edit-sa-ans').value=q.answer||'';
   }
-}
-function refreshSourceChips(){
-  const existing=document.querySelector('#source-chips .chip[data-val="강의문제"]');
-  if(!existing && lectureUnlocked){
-    const btn=document.createElement('button');
-    btn.className='chip source-chip';
-    btn.dataset.val='강의문제';
-    btn.textContent='강의문제 🔓';
-    btn.onclick=function(){toggleSource(this);};
-    document.getElementById('source-chips').appendChild(btn);
-  }
-}
-function refreshWNSourceChips(){
-  const existing=document.querySelector('#wn-source-chips .chip[data-val="강의문제"]');
-  if(!existing && lectureUnlocked){
-    const btn=document.createElement('button');
-    btn.className='chip source-chip';
-    btn.dataset.val='강의문제';
-    btn.textContent='강의문제 🔓';
-    btn.onclick=function(){wnToggleSource(this);};
-    document.getElementById('wn-source-chips').appendChild(btn);
-  }
+  document.getElementById('edit-modal-bg').style.display='block';
 }
 
+function closeEditModal(){
+  document.getElementById('edit-modal-bg').style.display='none';
+}
 
-renderHome();
+function updateEditForm(){
+  const t=document.getElementById('edit-type').value;
+  document.getElementById('edit-mc-section').style.display=t==='mc'?'':'none';
+  document.getElementById('edit-ox-section').style.display=t==='ox'?'':'none';
+  document.getElementById('edit-sa-section').style.display=t==='sa'?'':'none';
+}
+
+function saveEdit(){
+  const type=document.getElementById('edit-type').value;
+  const question=document.getElementById('edit-q').value.trim();
+  const explanation=document.getElementById('edit-exp').value.trim();
+  const editImage=document.getElementById('edit-image').value.trim();
+  if(!question){alert('문제를 입력해주세요');return;}
+  const q=db[editSubj][editIdx];
+  q.type=type; q.question=question; q.explanation=explanation;
+  if(editImage) q.image=editImage; else delete q.image;
+  if(type==='mc'){
+    const allEditChoices=Array.from(document.querySelectorAll('.edit-choice')).map(e=>e.value.trim());
+    const choices=allEditChoices[4]?allEditChoices:allEditChoices.slice(0,4);
+    if(choices.slice(0,4).some(c=>!c)){alert('①~④ 보기를 모두 입력해주세요');return;}
+    const checkedEditAns=Array.from(document.querySelectorAll('.edit-mc-ans-cb:checked')).map(e=>parseInt(e.value));
+    if(!checkedEditAns.length){ alert('정답을 하나 이상 선택해주세요'); return; }
+    q.choices=choices;
+    q.answer=checkedEditAns.length===1?checkedEditAns[0]:checkedEditAns;
+  } else if(type==='ox'){
+    q.answer=document.getElementById('edit-ox-ans').value;
+    delete q.choices;
+  } else {
+    const ans=document.getElementById('edit-sa-ans').value.trim();
+    if(!ans){alert('정답을 입력해주세요');return;}
+    q.answer=ans; delete q.choices;
+  }
+  save(); closeEditModal(); renderManage();
+  alert('수정됐어요!');
+}
 </script>
 </body>
 </html>
