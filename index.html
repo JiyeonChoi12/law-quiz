@@ -606,7 +606,7 @@ function startExamMode(min){
 function startWrongNoteQuiz(){
   currentMode='wrongnote';
   const wn=getWN(currentSubject.key);
-  quiz=shuffle(Object.values(wn).map(i=>i.q)).slice(0,Math.min(25,Object.values(wn).length));
+  quiz=shuffle(Object.values(wn).map(i=>i.q));
   cur=0;correct=0;wrongList=[];
   showScreen('screen-quiz');renderQ();
 }
