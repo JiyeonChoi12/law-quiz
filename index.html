@@ -56,6 +56,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .mode-card.mode-exam .m-name{color:var(--accent);}
 .mode-card.mode-wn{border-color:var(--red);}
 .mode-card.mode-wn .m-name{color:var(--red);}
+.mode-card.mode-bm{border-color:#c79100;}
+.mode-card.mode-bm .m-name{color:#c79100;}
+.bm-star{cursor:pointer;font-size:18px;line-height:1;background:none;border:none;padding:2px 4px;transition:transform 0.1s;user-select:none;}
+.bm-star:active{transform:scale(1.3);}
 
 /* 필터 박스 */
 .filter-box{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.25rem;}
@@ -310,6 +314,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div class="m-name">오답 풀기</div>
         <div class="m-desc" id="mode-wn-desc"></div>
       </div>
+      <div class="mode-card mode-bm" id="mode-bm-card" onclick="startBookmarkQuiz()" style="display:none;">
+        <div class="m-icon">⭐</div>
+        <div class="m-name">북마크 풀기</div>
+        <div class="m-desc" id="mode-bm-desc"></div>
+      </div>
     </div>
 
   </div>
@@ -449,6 +458,18 @@ let examAnswers={},examCur=0,timerSec=0,timerInterval=null;
 let wnCurrentSubj=null;
 let selectedTopics=new Set(),selectedSource='all'; // 필터 상태
 
+// ── 북마크 ──
+function getBM(k){try{return JSON.parse(localStorage.getItem('lq_bm_'+k)||'{}');}catch(e){return{};}}
+function saveBM(k,d){try{localStorage.setItem('lq_bm_'+k,JSON.stringify(d));}catch(e){}}
+function bmKeyOf(q){return q.id||q.question.substring(0,30);}
+function isBookmarked(k,q){const bm=getBM(k);return !!bm[bmKeyOf(q)];}
+function toggleBookmark(k,q){
+  const bm=getBM(k); const key=bmKeyOf(q);
+  if(bm[key]){ delete bm[key]; } else { bm[key]={q}; }
+  saveBM(k,bm);
+  return !!bm[key];
+}
+
 // ── 오답노트 ──
 function getWN(k){try{return JSON.parse(localStorage.getItem('lq_wn_'+k)||'{}');}catch(e){return{};}}
 function saveWN(k,d){try{localStorage.setItem('lq_wn_'+k,JSON.stringify(d));}catch(e){}}
@@ -577,6 +598,13 @@ async function selectSubject(idx){
     if(wnCnt>0){wnCard.style.display='';document.getElementById('mode-wn-desc').textContent=`${wnCnt}문제 틀린 것만`;}
     else wnCard.style.display='none';
 
+    // 북마크 카드
+    const bm=getBM(subj.key);
+    const bmCnt=Object.keys(bm).length;
+    const bmCard=document.getElementById('mode-bm-card');
+    if(bmCnt>0){bmCard.style.display='';document.getElementById('mode-bm-desc').textContent=`${bmCnt}문제 북마크함`;}
+    else bmCard.style.display='none';
+
     showScreen('screen-mode');
   }catch(e){alert('로드 실패: '+e.message);}
 }
@@ -651,13 +679,29 @@ function startWrongNoteQuiz(){
   showScreen('screen-quiz');renderQ();
 }
 
+function startBookmarkQuiz(){
+  currentMode='bookmark';
+  const bm=getBM(currentSubject.key);
+  quiz=shuffle(Object.values(bm).map(i=>i.q));
+  if(!quiz.length){alert('북마크한 문제가 없어요');return;}
+  cur=0;correct=0;wrongList=[];correctList=[];
+  showScreen('screen-quiz');renderQ();
+}
+
 // ── 일반 모드 ──
+function onToggleBookmark(){
+  const q=quiz[cur];
+  const nowBm=toggleBookmark(currentSubject.key,q);
+  const star=document.getElementById('q-bm-star');
+  if(star)star.textContent=nowBm?'⭐':'☆';
+}
 function renderQ(){
   answered=false;
   const q=quiz[cur];
   document.getElementById('prog-fill').style.width=Math.round((cur/quiz.length)*100)+'%';
   document.getElementById('q-meta-l').textContent=`${cur+1} / ${quiz.length}`;
-  document.getElementById('q-meta-r').textContent=`정답 ${correct}개`;
+  const bmk=isBookmarked(currentSubject.key,q);
+  document.getElementById('q-meta-r').innerHTML=`<span style="margin-right:8px;">정답 ${correct}개</span><button class="bm-star" id="q-bm-star" title="북마크" onclick="onToggleBookmark()">${bmk?'⭐':'☆'}</button>`;
   let labelHtml=typeBadge(q.type)+` <span class="badge badge-subj">${currentSubject.key}</span>`;
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
@@ -779,7 +823,7 @@ function normalCheckSA(){
   inp.disabled=true; showFeedback(ok,q);
 }
 
-function nextQ(){cur++;if(cur<quiz.length)renderQ();else showResult('normal');}
+function nextQ(){cur++;if(cur<quiz.length)renderQ();else showResult(currentMode);}
 
 // ── 실전 모드 ──
 function startTimer(){
@@ -793,6 +837,12 @@ function updateTimer(){
   el.className='timer-display'+(timerSec<=60?' urgent':'');
 }
 
+function onToggleBookmarkExam(){
+  const q=quiz[examCur];
+  const nowBm=toggleBookmark(currentSubject.key,q);
+  const star=document.getElementById('eq-bm-star');
+  if(star)star.textContent=nowBm?'⭐':'☆';
+}
 function renderExamQ(idx){
   examCur=idx;
   const q=quiz[idx];
@@ -801,6 +851,8 @@ function renderExamQ(idx){
   let labelHtml=typeBadge(q.type)+` <span class="badge badge-subj">${currentSubject.key}</span> <span class="badge badge-exam">실전</span>`;
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
+  const ebmk=isBookmarked(currentSubject.key,q);
+  labelHtml+=` <button class="bm-star" id="eq-bm-star" title="북마크" onclick="onToggleBookmarkExam()" style="margin-left:auto;">${ebmk?'⭐':'☆'}</button>`;
   document.getElementById('eq-label').innerHTML=labelHtml;
   document.getElementById('eq-body').innerHTML=(q.image?`<img src="${q.image}" class="q-img" alt="문제 이미지">`:'')+'<span>'+q.question.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
   document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
@@ -884,7 +936,7 @@ function renderAnswerArea(areaId,q,mode,qIdx){
 // ── 결과 ──
 function showResult(mode){
   let correctCnt=0,wrongItems=[],skipCnt=0;
-  if(mode==='normal'||mode==='wrongnote'){
+  if(mode==='normal'||mode==='wrongnote'||mode==='bookmark'){
     correctCnt=correct; wrongItems=wrongList;
   }else{
     quiz.forEach((q,i)=>{
@@ -905,7 +957,7 @@ function showResult(mode){
   document.getElementById('res-c').textContent=correctCnt;
   document.getElementById('res-w').textContent=quiz.length-correctCnt-skipCnt;
   document.getElementById('res-s').textContent=skipCnt;
-  document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':mode==='wrongnote'?'오답풀기':'일반모드');
+  document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':mode==='wrongnote'?'오답풀기':mode==='bookmark'?'북마크풀기':'일반모드');
   document.getElementById('res-msg').textContent=score>=90?'완벽해요! 🎉':score>=70?'잘 하셨어요!':score>=50?'조금 더 노력해봐요':'다시 도전해봐요 💪';
   // 오답풀기 모드 + 자동제거 켜진 경우 안내
   const resExtra=document.getElementById('res-extra');
@@ -999,10 +1051,14 @@ function renderWNList(){
     const topicBadge=q.topic?`<span class="badge badge-topic">${q.topic}</span>`:'';
     const srcBadge=q.source?`<span class="badge badge-source">${q.source}</span>`:'';
     const safeKey=encodeURIComponent(key);
+    const wbm=isBookmarked(wnCurrentSubj,q);
     return `<div class="wn-item">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${typeBadge(q.type)} ${topicBadge} ${srcBadge} <span class="wn-wrong-cnt">✕ ${wrongCount}회</span></div>
-        <span class="wn-del" onclick="delWN('${safeKey}')">삭제</span>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="bm-star" title="북마크" onclick="wnToggleBM('${safeKey}',this)">${wbm?'⭐':'☆'}</button>
+          <span class="wn-del" onclick="delWN('${safeKey}')">삭제</span>
+        </div>
       </div>
       <div class="wn-q">${q.question}</div>
       <div class="wn-ans">정답: ${ca}</div>
@@ -1010,6 +1066,14 @@ function renderWNList(){
       ${exp}
     </div>`;
   }).join('');
+}
+
+function wnToggleBM(safeKey,btn){
+  const key=decodeURIComponent(safeKey);
+  const wn=getWN(wnCurrentSubj);
+  if(!wn[key])return;
+  const nowBm=toggleBookmark(wnCurrentSubj,wn[key].q);
+  btn.textContent=nowBm?'⭐':'☆';
 }
 
 function wnToggleTopic(btn){
@@ -1046,6 +1110,7 @@ function clearWrongNote(){
 function retryQuiz(){
   if(currentMode==='exam'){showScreen('screen-mode');}
   else if(currentMode==='wrongnote')startWrongNoteQuiz();
+  else if(currentMode==='bookmark')startBookmarkQuiz();
   else startNormalMode();
 }
 
@@ -1079,6 +1144,13 @@ function renderSettings(){
         <div class="settings-desc">모든 과목의 오답 기록 삭제</div>
       </div>
       <button class="btn btn-danger" onclick="clearAllWN()">초기화</button>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">북마크 전체 초기화</div>
+        <div class="settings-desc">모든 과목의 북마크 삭제</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearAllBM()">초기화</button>
     </div>
     <div class="settings-card">
       <div class="settings-card-left">
@@ -1130,11 +1202,12 @@ function renderSettings(){
 }
 
 function clearAll(){
-  if(!confirm('정말 전체 초기화할까요? 오답노트, 풀이 이력, 잠금 해제 상태가 모두 삭제됩니다.')) return;
+  if(!confirm('정말 전체 초기화할까요? 오답노트, 북마크, 풀이 이력, 잠금 해제 상태가 모두 삭제됩니다.')) return;
   try{
-    ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{
+    ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{
       localStorage.removeItem('lq_wn_'+k);
       localStorage.removeItem('lq_s_'+k);
+      localStorage.removeItem('lq_bm_'+k);
     });
     localStorage.removeItem('_lu');
     lectureUnlocked=false;
@@ -1144,8 +1217,13 @@ function clearAll(){
 }
 function clearAllWN(){
   if(!confirm('모든 과목의 오답노트를 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
+  ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
   alert('오답노트 전체 초기화됐어요!'); renderSettings();
+}
+function clearAllBM(){
+  if(!confirm('모든 과목의 북마크를 초기화할까요?')) return;
+  ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_bm_'+k);}catch(e){} });
+  alert('북마크 전체 초기화됐어요!'); renderSettings();
 }
 function clearAllStats(){
   if(!confirm('모든 과목의 풀이 이력을 초기화할까요?')) return;
