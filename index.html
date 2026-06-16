@@ -654,7 +654,8 @@ function getQuizPool(){
 
 function showTimeSelect(){}
 
-function startNormalMode(){
+async function startNormalMode(){
+  if(!allData[currentSubject.key]){ try{await loadSubject(currentSubject);}catch(e){} }
   const pool=getQuizPool();
   if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
   currentMode='normal';
@@ -663,7 +664,8 @@ function startNormalMode(){
   showScreen('screen-quiz');renderQ();
 }
 
-function startExamMode(min){
+async function startExamMode(min){
+  if(!allData[currentSubject.key]){ try{await loadSubject(currentSubject);}catch(e){} }
   const pool=getQuizPool();
   if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
   currentMode='exam';
