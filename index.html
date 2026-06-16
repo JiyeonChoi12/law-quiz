@@ -408,6 +408,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <h3 id="review-title">틀린 문제 복습</h3>
       <div id="review-list"></div>
     </div>
+    <div class="review-section" id="correct-review" style="display:none;margin-top:1rem;">
+      <h3>맞힌 문제 <span style="font-size:12px;font-weight:300;color:var(--text3);">— 오답노트에서 뺄 수 있어요</span></h3>
+      <div id="correct-list"></div>
+    </div>
     <div style="display:flex;gap:8px;margin-top:1rem;">
       <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="retryQuiz()">다시 풀기</button>
       <button class="btn" style="flex:1;justify-content:center;" onclick="backToHome()">과목 선택</button>
@@ -439,7 +443,7 @@ const SUBJECTS=[
   {key:'글쓰기',icon:'✍️',file:'글쓰기.json'},
 ];
 const NUMS=['①','②','③','④','⑤'];
-let quiz=[],cur=0,correct=0,answered=false,wrongList=[];
+let quiz=[],cur=0,correct=0,answered=false,wrongList=[],correctList=[];
 let currentSubject=null,currentMode='normal',allData={};
 let examAnswers={},examCur=0,timerSec=0,timerInterval=null;
 let wnCurrentSubj=null;
@@ -456,6 +460,25 @@ function handleWNCorrect(k,q){
   if(!getWNAutoRemove())return;
   const wn=getWN(k); const key=q.id||q.question.substring(0,30);
   if(wn[key]){ delete wn[key]; saveWN(k,wn); }
+}
+function wnKeyOf(q){return q.id||q.question.substring(0,30);}
+function isInWN(k,q){const wn=getWN(k);return !!wn[wnKeyOf(q)];}
+// 개별 토글: 버튼에서 호출 (오답노트에서 빼기 / 되돌리기)
+function toggleWNItem(btnId,k,qKey){
+  const wn=getWN(k);
+  const btn=document.getElementById(btnId);
+  if(wn[qKey]){
+    // 제거하되, 되돌릴 수 있게 데이터 백업
+    if(!window._wnBackup)window._wnBackup={};
+    window._wnBackup[k+'||'+qKey]=wn[qKey];
+    delete wn[qKey]; saveWN(k,wn);
+    if(btn){btn.textContent='↩ 되돌리기';btn.classList.remove('btn-danger');}
+  }else{
+    // 복원
+    const bk=window._wnBackup&&window._wnBackup[k+'||'+qKey];
+    if(bk){ wn[qKey]=bk; saveWN(k,wn); }
+    if(btn){btn.textContent='오답노트에서 빼기';btn.classList.add('btn-danger');}
+  }
 }
 function addWN(k,q,myAns){
   const wn=getWN(k); const key=q.id||q.question.substring(0,30);
@@ -607,7 +630,7 @@ function startNormalMode(){
   if(!pool.length){alert('선택한 조건의 문제가 없어요');return;}
   currentMode='normal';
   quiz=shuffle([...pool]);
-  cur=0;correct=0;wrongList=[];
+  cur=0;correct=0;wrongList=[];correctList=[];
   showScreen('screen-quiz');renderQ();
 }
 
@@ -624,7 +647,7 @@ function startWrongNoteQuiz(){
   currentMode='wrongnote';
   const wn=getWN(currentSubject.key);
   quiz=shuffle(Object.values(wn).map(i=>i.q));
-  cur=0;correct=0;wrongList=[];
+  cur=0;correct=0;wrongList=[];correctList=[];
   showScreen('screen-quiz');renderQ();
 }
 
@@ -658,6 +681,14 @@ function showFeedback(ok,q){
   if(!ok){ans=q.type==='mc'?`정답: ${NUMS[q.answer]} ${q.choices[q.answer]}`:`정답: ${q.answer}`;}
   const exp=q.explanation?`<div class="fb-exp"><div class="fb-exp-label">해설</div>${q.explanation}</div>`:'';
   fb.innerHTML=`<div class="fb-title">${ok?'✓ 정답':'✗ 오답'}</div>`+(ans?`<div class="fb-answer">${ans}</div>`:'')+exp;
+  // 오답풀기 모드에서 맞혔고, 자동제거가 꺼져 있으면 개별 제거 버튼 표시
+  if(ok&&currentMode==='wrongnote'&&!getWNAutoRemove()){
+    const qKey=wnKeyOf(q);
+    const stillIn=isInWN(currentSubject.key,q);
+    const btnId='fb-wn-btn';
+    const btnHtml=`<button id="${btnId}" class="btn btn-sm ${stillIn?'btn-danger':''}" style="margin-top:10px;font-size:12px;" onclick="toggleWNItem('${btnId}','${currentSubject.key}','${qKey.replace(/'/g,"\\'")}')">${stillIn?'오답노트에서 빼기':'↩ 되돌리기'}</button>`;
+    fb.innerHTML+=btnHtml;
+  }
   fb.style.display='block';
   const nb=document.getElementById('next-btn');
   nb.style.display='inline-flex';
@@ -697,7 +728,7 @@ function normalSelectMC(idx){
   // 단일정답
   answered=true;
   const ok=idx===q.answer;
-  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
+  if(ok){correct++;correctList.push(q);handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled');
     if(isCorrectChoice(i,q.answer))b.classList.add('correct');
@@ -712,7 +743,7 @@ function confirmMultiMC(){
   const selected=Array.from(document.querySelectorAll('#answer-area .choice-btn.selected')).map(b=>parseInt(b.dataset.idx));
   const ok=checkMCAnswer(selected,q.answer);
   const myAnsStr=selected.map(i=>NUMS[i]+' '+q.choices[i]).join(', ');
-  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
+  if(ok){correct++;correctList.push(q);handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled'); b.classList.remove('selected');
     if(isCorrectChoice(i,q.answer))b.classList.add('correct');
@@ -726,7 +757,7 @@ function confirmMultiMC(){
 function normalSelectOX(val){
   if(answered)return; answered=true;
   const q=quiz[cur]; const ok=val===q.answer;
-  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
+  if(ok){correct++;correctList.push(q);handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
   document.querySelectorAll('#answer-area .ox-btn').forEach(b=>{
     b.classList.add('disabled');
     if(b.dataset.val===q.answer)b.classList.add('correct');
@@ -744,7 +775,7 @@ function normalCheckSA(){
   const q=quiz[cur];
   const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);
   const ok=kws.length>0&&kws.some(k=>val.includes(k));
-  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
+  if(ok){correct++;correctList.push(q);handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
   inp.disabled=true; showFeedback(ok,q);
 }
 
@@ -900,6 +931,20 @@ function showResult(mode){
       </div>`;
     }).join('');
   }else wr.style.display='none';
+  // 오답풀기 모드: 맞힌 문제 목록 + 개별 제거 버튼 (자동제거 꺼진 경우만)
+  const cr=document.getElementById('correct-review');
+  if(mode==='wrongnote'&&!getWNAutoRemove()&&correctList.length){
+    cr.style.display='';
+    document.getElementById('correct-list').innerHTML=correctList.map((q,i)=>{
+      const qKey=wnKeyOf(q);
+      const stillIn=isInWN(currentSubject.key,q);
+      const btnId='res-wn-btn-'+i;
+      return `<div class="review-item" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div class="r-q" style="flex:1;">${q.question.substring(0,90)}${q.question.length>90?'...':''}</div>
+        <button id="${btnId}" class="btn btn-sm ${stillIn?'btn-danger':''}" style="font-size:11px;white-space:nowrap;flex-shrink:0;" onclick="toggleWNItem('${btnId}','${currentSubject.key}','${qKey.replace(/'/g,"\\'")}')">${stillIn?'오답노트에서 빼기':'↩ 되돌리기'}</button>
+      </div>`;
+    }).join('');
+  }else cr.style.display='none';
   showScreen('screen-result'); allData={};
 }
 
