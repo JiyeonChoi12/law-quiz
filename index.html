@@ -104,6 +104,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 /* 문제 */
 .q-label{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
 .q-body{font-family:'Noto Serif KR',serif;font-size:16px;line-height:1.8;color:var(--text);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:0.5px solid var(--border);}
+.q-img{max-width:100%;border-radius:var(--r);margin-bottom:1rem;border:0.5px solid var(--border);display:block;}
 
 /* 보기 */
 .choices{display:flex;flex-direction:column;gap:8px;}
@@ -196,6 +197,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 ::-webkit-scrollbar{width:8px;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;} ::-webkit-scrollbar-track{background:var(--surface2);}
 .settings-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.toggle-switch{position:relative;display:inline-block;width:42px;height:24px;flex-shrink:0;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--border2);border-radius:24px;transition:0.2s;}
+.toggle-slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.2s;}
+.toggle-switch input:checked+.toggle-slider{background:var(--accent);}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(18px);}
 .settings-card-left{flex:1;}
 .settings-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;}
 .settings-desc{font-size:12px;color:var(--text3);}
@@ -390,6 +397,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="result-ring"><div class="big" id="res-score"></div><div class="small" id="res-frac"></div></div>
       <p style="font-size:14px;color:var(--text2);" id="res-msg"></p>
       <p style="font-size:12px;color:var(--text3);margin-top:4px;" id="res-subj"></p>
+      <p style="font-size:12px;color:var(--green);margin-top:8px;display:none;" id="res-extra"></p>
     </div>
     <div class="result-grid">
       <div class="stat-card"><div class="lbl">정답</div><div class="val" id="res-c" style="color:var(--green);"></div></div>
@@ -440,6 +448,15 @@ let selectedTopics=new Set(),selectedSource='all'; // 필터 상태
 // ── 오답노트 ──
 function getWN(k){try{return JSON.parse(localStorage.getItem('lq_wn_'+k)||'{}');}catch(e){return{};}}
 function saveWN(k,d){try{localStorage.setItem('lq_wn_'+k,JSON.stringify(d));}catch(e){}}
+function getWNAutoRemove(){try{return localStorage.getItem('lq_wn_auto')==='1';}catch(e){return false;}}
+function setWNAutoRemove(v){try{localStorage.setItem('lq_wn_auto',v?'1':'0');}catch(e){}}
+// 오답 풀기 모드에서 맞힌 경우: 설정에 따라 오답노트에서 제거
+function handleWNCorrect(k,q){
+  if(currentMode!=='wrongnote')return;
+  if(!getWNAutoRemove())return;
+  const wn=getWN(k); const key=q.id||q.question.substring(0,30);
+  if(wn[key]){ delete wn[key]; saveWN(k,wn); }
+}
 function addWN(k,q,myAns){
   const wn=getWN(k); const key=q.id||q.question.substring(0,30);
   if(!wn[key])wn[key]={q,wrongCount:0,lastMyAns:''};
@@ -510,18 +527,18 @@ async function selectSubject(idx){
 
     // 출처 칩 초기화
     document.querySelectorAll('.source-chip').forEach(c=>c.classList.toggle('active',c.dataset.val==='all'));
-    // 강의문제 칩 (잠금해제된 경우만)
-    const existingLec=document.querySelector('#source-chips .chip[data-val="강의문제"]');
-    if(!existingLec && lectureUnlocked){
+    // 기존 강의문제 칩(잠금/해제 모두) 제거 후 다시 생성
+    document.querySelectorAll('#source-chips .lec-chip').forEach(c=>c.remove());
+    if(lectureUnlocked){
       const btn=document.createElement('button');
-      btn.className='chip source-chip';
+      btn.className='chip source-chip lec-chip';
       btn.dataset.val='강의문제';
       btn.textContent='강의문제 🔓';
       btn.onclick=function(){toggleSource(this);};
       document.getElementById('source-chips').appendChild(btn);
-    } else if(!lectureUnlocked){
+    } else {
       const lockBtn=document.createElement('button');
-      lockBtn.className='chip';
+      lockBtn.className='chip lec-chip';
       lockBtn.textContent='강의문제 🔒';
       lockBtn.onclick=showUnlockModal;
       lockBtn.style.borderStyle='dashed';
@@ -621,8 +638,13 @@ function renderQ(){
   let labelHtml=typeBadge(q.type)+` <span class="badge badge-subj">${currentSubject.key}</span>`;
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
+  if(currentMode==='wrongnote'){
+    const wn=getWN(currentSubject.key); const key=q.id||q.question.substring(0,30);
+    const wc=wn[key]?wn[key].wrongCount:0;
+    if(wc>0) labelHtml+=` <span class="wn-wrong-cnt">✕ ${wc}회 틀림</span>`;
+  }
   document.getElementById('q-label').innerHTML=labelHtml;
-  document.getElementById('q-body').textContent=q.question;
+  document.getElementById('q-body').innerHTML=(q.image?`<img src="${q.image}" class="q-img" alt="문제 이미지">`:'')+'<span>'+q.question.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
   document.getElementById('feedback').style.display='none';
   document.getElementById('next-btn').style.display='none';
   document.getElementById('score-live').textContent='';
@@ -675,7 +697,7 @@ function normalSelectMC(idx){
   // 단일정답
   answered=true;
   const ok=idx===q.answer;
-  if(ok)correct++; else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
+  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:NUMS[idx]+' '+q.choices[idx]});addWN(currentSubject.key,q,NUMS[idx]+' '+q.choices[idx]);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled');
     if(isCorrectChoice(i,q.answer))b.classList.add('correct');
@@ -690,7 +712,7 @@ function confirmMultiMC(){
   const selected=Array.from(document.querySelectorAll('#answer-area .choice-btn.selected')).map(b=>parseInt(b.dataset.idx));
   const ok=checkMCAnswer(selected,q.answer);
   const myAnsStr=selected.map(i=>NUMS[i]+' '+q.choices[i]).join(', ');
-  if(ok)correct++; else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
+  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:myAnsStr});addWN(currentSubject.key,q,myAnsStr);}
   document.querySelectorAll('#answer-area .choice-btn').forEach((b,i)=>{
     b.classList.add('disabled'); b.classList.remove('selected');
     if(isCorrectChoice(i,q.answer))b.classList.add('correct');
@@ -704,7 +726,7 @@ function confirmMultiMC(){
 function normalSelectOX(val){
   if(answered)return; answered=true;
   const q=quiz[cur]; const ok=val===q.answer;
-  if(ok)correct++; else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
+  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
   document.querySelectorAll('#answer-area .ox-btn').forEach(b=>{
     b.classList.add('disabled');
     if(b.dataset.val===q.answer)b.classList.add('correct');
@@ -722,7 +744,7 @@ function normalCheckSA(){
   const q=quiz[cur];
   const kws=(q.answer||'').split(',').map(k=>k.trim()).filter(Boolean);
   const ok=kws.length>0&&kws.some(k=>val.includes(k));
-  if(ok)correct++; else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
+  if(ok){correct++;handleWNCorrect(currentSubject.key,q);} else{wrongList.push({q,myAns:val});addWN(currentSubject.key,q,val);}
   inp.disabled=true; showFeedback(ok,q);
 }
 
@@ -749,7 +771,7 @@ function renderExamQ(idx){
   if(q.topic) labelHtml+=` <span class="badge badge-topic">${q.topic}</span>`;
   if(q.source) labelHtml+=` <span class="badge badge-source">${q.source}</span>`;
   document.getElementById('eq-label').innerHTML=labelHtml;
-  document.getElementById('eq-body').textContent=q.question;
+  document.getElementById('eq-body').innerHTML=(q.image?`<img src="${q.image}" class="q-img" alt="문제 이미지">`:'')+'<span>'+q.question.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
   document.getElementById('ans-count').textContent=`${Object.keys(examAnswers).length} / ${quiz.length}`;
   renderNav(); renderAnswerArea('eanswer-area',q,'exam',idx);
 }
@@ -854,6 +876,16 @@ function showResult(mode){
   document.getElementById('res-s').textContent=skipCnt;
   document.getElementById('res-subj').textContent=currentSubject.key+' · '+(mode==='exam'?'실전모드':mode==='wrongnote'?'오답풀기':'일반모드');
   document.getElementById('res-msg').textContent=score>=90?'완벽해요! 🎉':score>=70?'잘 하셨어요!':score>=50?'조금 더 노력해봐요':'다시 도전해봐요 💪';
+  // 오답풀기 모드 + 자동제거 켜진 경우 안내
+  const resExtra=document.getElementById('res-extra');
+  if(resExtra){
+    if(mode==='wrongnote'&&getWNAutoRemove()&&correctCnt>0){
+      resExtra.style.display='';
+      resExtra.textContent=`✓ 맞힌 ${correctCnt}문제를 오답노트에서 제거했어요`;
+    }else{
+      resExtra.style.display='none';
+    }
+  }
   document.getElementById('review-title').textContent=mode==='exam'?'채점 결과':'틀린 문제 복습';
   const wr=document.getElementById('wrong-review');
   if(wrongItems.length){
@@ -1016,6 +1048,18 @@ function renderSettings(){
         <div class="settings-desc">잠금 해제 상태 삭제 (다시 코드 입력 필요)</div>
       </div>
       <button class="btn btn-danger" onclick="clearLecture()">초기화</button>
+    </div>
+    <div style="height:0.5px;background:var(--border);margin:6px 0;"></div>
+    <div style="font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">오답 풀기 설정</div>
+    <div class="settings-card">
+      <div class="settings-card-left">
+        <div class="settings-title">맞히면 오답노트에서 제거</div>
+        <div class="settings-desc">오답 풀기 모드에서 정답을 맞힌 문제를 오답노트에서 자동으로 지워요</div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="wn-auto-remove" ${getWNAutoRemove()?'checked':''} onchange="setWNAutoRemove(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
     </div>
     <div style="height:0.5px;background:var(--border);margin:6px 0;"></div>
     <div style="font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">과목별 초기화</div>`;
