@@ -423,7 +423,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     </div>
     <div style="display:flex;gap:8px;margin-top:1rem;">
       <button class="btn btn-accent" style="flex:1;justify-content:center;" onclick="retryQuiz()">다시 풀기</button>
-      <button class="btn" style="flex:1;justify-content:center;" onclick="backToHome()">과목 선택</button>
+      <button class="btn" style="flex:1;justify-content:center;" onclick="backToMode()">모드 선택으로</button>
     </div>
   </div>
 </div>
@@ -1122,7 +1122,8 @@ function retryQuiz(){
 }
 
 function typeBadge(t){return t==='mc'?'<span class="badge badge-mc">객관식</span>':t==='ox'?'<span class="badge badge-ox">OX형</span>':'<span class="badge badge-sa">단답형</span>';}
-function backToHome(){clearInterval(timerInterval);showScreen('screen-home');allData={};renderHome();}
+function backToHome(){clearInterval(timerInterval);showScreen('screen-home');renderHome();}
+function backToMode(){clearInterval(timerInterval);if(currentSubject)selectSubject(SUBJECTS.indexOf(currentSubject));else backToHome();}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 
@@ -1390,10 +1391,10 @@ function tryUnlock(){
   }
 }
 function refreshSourceChips(){
-  const existing=document.querySelector('#source-chips .chip[data-val="강의문제"]');
-  if(!existing && lectureUnlocked){
+  document.querySelectorAll('#source-chips .lec-chip').forEach(c=>c.remove());
+  if(lectureUnlocked){
     const btn=document.createElement('button');
-    btn.className='chip source-chip';
+    btn.className='chip source-chip lec-chip';
     btn.dataset.val='강의문제';
     btn.textContent='강의문제 🔓';
     btn.onclick=function(){toggleSource(this);};
