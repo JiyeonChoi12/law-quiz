@@ -641,7 +641,12 @@ function getFilteredData(data){
 
 function updateFilterResult(data){
   const filtered=getFilteredData(data);
-  document.getElementById('mode-subj-cnt').textContent=`${filtered.length}문제`;
+  const total=data.length;
+  if(filtered.length===total){
+    document.getElementById('mode-subj-cnt').textContent=`총 ${total}문제`;
+  }else{
+    document.getElementById('mode-subj-cnt').textContent=`총 ${total}문제 중 ${filtered.length}문제`;
+  }
   document.getElementById('filter-result').textContent=filtered.length===0?'해당 조건의 문제가 없어요':'';
 }
 
