@@ -454,6 +454,7 @@ const SUBJECTS=[
 const NUMS=['①','②','③','④','⑤'];
 let quiz=[],cur=0,correct=0,answered=false,wrongList=[],correctList=[];
 let currentSubject=null,currentMode='normal',allData={};
+let lastResultMode='normal';
 let examAnswers={},examCur=0,timerSec=0,timerInterval=null;
 let wnCurrentSubj=null;
 let selectedTopics=new Set(),selectedSource='all'; // 필터 상태
@@ -672,18 +673,21 @@ function startExamMode(min){
 }
 
 function startWrongNoteQuiz(){
-  currentMode='wrongnote';
   const wn=getWN(currentSubject.key);
-  quiz=shuffle(Object.values(wn).map(i=>i.q));
+  const list=Object.values(wn).map(i=>i.q);
+  if(!list.length){alert('오답노트가 비어 있어요');selectSubject(SUBJECTS.indexOf(currentSubject));return;}
+  currentMode='wrongnote';
+  quiz=shuffle(list);
   cur=0;correct=0;wrongList=[];correctList=[];
   showScreen('screen-quiz');renderQ();
 }
 
 function startBookmarkQuiz(){
-  currentMode='bookmark';
   const bm=getBM(currentSubject.key);
-  quiz=shuffle(Object.values(bm).map(i=>i.q));
-  if(!quiz.length){alert('북마크한 문제가 없어요');return;}
+  const list=Object.values(bm).map(i=>i.q);
+  if(!list.length){alert('북마크한 문제가 없어요');selectSubject(SUBJECTS.indexOf(currentSubject));return;}
+  currentMode='bookmark';
+  quiz=shuffle(list);
   cur=0;correct=0;wrongList=[];correctList=[];
   showScreen('screen-quiz');renderQ();
 }
@@ -935,6 +939,7 @@ function renderAnswerArea(areaId,q,mode,qIdx){
 
 // ── 결과 ──
 function showResult(mode){
+  lastResultMode=mode;
   let correctCnt=0,wrongItems=[],skipCnt=0;
   if(mode==='normal'||mode==='wrongnote'||mode==='bookmark'){
     correctCnt=correct; wrongItems=wrongList;
@@ -1108,9 +1113,9 @@ function clearWrongNote(){
 }
 
 function retryQuiz(){
-  if(currentMode==='exam'){showScreen('screen-mode');}
-  else if(currentMode==='wrongnote')startWrongNoteQuiz();
-  else if(currentMode==='bookmark')startBookmarkQuiz();
+  if(lastResultMode==='exam'){showScreen('screen-mode');}
+  else if(lastResultMode==='wrongnote')startWrongNoteQuiz();
+  else if(lastResultMode==='bookmark')startBookmarkQuiz();
   else startNormalMode();
 }
 
