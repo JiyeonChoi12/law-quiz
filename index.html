@@ -641,8 +641,7 @@ function getFilteredData(data){
 
 function updateFilterResult(data){
   const filtered=getFilteredData(data);
-  const cnt=Math.min(25,filtered.length);
-  document.getElementById('mode-subj-cnt').textContent=`${filtered.length}문제 중 ${cnt}문제 출제`;
+  document.getElementById('mode-subj-cnt').textContent=`${filtered.length}문제`;
   document.getElementById('filter-result').textContent=filtered.length===0?'해당 조건의 문제가 없어요':'';
 }
 
