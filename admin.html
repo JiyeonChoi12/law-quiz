@@ -152,6 +152,12 @@ textarea{resize:none;}
             <option value="상법">상법</option>
             <option value="헌법논증이론">헌법 논증 이론</option>
             <option value="글쓰기">글쓰기</option>
+            <option value="통치의기본구조">통치의 기본구조</option>
+            <option value="물권법">물권법</option>
+            <option value="주식회사법">주식회사법</option>
+            <option value="채권각론">채권각론</option>
+            <option value="소비자법">소비자법</option>
+            <option value="세법">세법</option>
           </select>
         </div>
         <div class="form-group" style="margin:0;">
@@ -266,6 +272,12 @@ textarea{resize:none;}
           <option value="상법">상법</option>
           <option value="헌법논증이론">헌법논증이론</option>
           <option value="글쓰기">글쓰기</option>
+          <option value="통치의기본구조">통치의 기본구조</option>
+          <option value="물권법">물권법</option>
+          <option value="주식회사법">주식회사법</option>
+          <option value="채권각론">채권각론</option>
+          <option value="소비자법">소비자법</option>
+          <option value="세법">세법</option>
         </select>
         <select id="filter-source" onchange="renderManage()" style="width:auto;">
           <option value="all">전체 출처</option>
@@ -291,6 +303,12 @@ textarea{resize:none;}
           <option value="상법">상법</option>
           <option value="헌법논증이론">헌법논증이론</option>
           <option value="글쓰기">글쓰기</option>
+          <option value="통치의기본구조">통치의 기본구조</option>
+          <option value="물권법">물권법</option>
+          <option value="주식회사법">주식회사법</option>
+          <option value="채권각론">채권각론</option>
+          <option value="소비자법">소비자법</option>
+          <option value="세법">세법</option>
         </select>
         <select id="bulk-source" style="width:auto;font-size:12px;padding:5px 9px;">
           <option value="">출처 선택</option>
@@ -339,6 +357,12 @@ textarea{resize:none;}
           <option value="상법">상법</option>
           <option value="헌법논증이론">헌법 논증 이론</option>
           <option value="글쓰기">글쓰기</option>
+          <option value="통치의기본구조">통치의 기본구조</option>
+          <option value="물권법">물권법</option>
+          <option value="주식회사법">주식회사법</option>
+          <option value="채권각론">채권각론</option>
+          <option value="소비자법">소비자법</option>
+          <option value="세법">세법</option>
         </select>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:0.5rem;flex-wrap:wrap;">
@@ -422,8 +446,8 @@ textarea{resize:none;}
 
 <script>
 const ADMIN_PW = 'admin1234';
-const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
-const SUBJECT_FILES = {'헌법':'헌법.json','민법':'민법.json','형법':'형법.json','상법':'상법.json','헌법논증이론':'헌법논증이론.json','글쓰기':'글쓰기.json'};
+const SUBJECT_KEYS = ['헌법','민법','형법','상법','헌법논증이론','글쓰기','통치의기본구조','물권법','주식회사법','채권각론','소비자법','세법'];
+const SUBJECT_FILES = {'헌법':'헌법.json','민법':'민법.json','형법':'형법.json','상법':'상법.json','헌법논증이론':'헌법논증이론.json','글쓰기':'글쓰기.json','통치의기본구조':'통치의기본구조.json','물권법':'물권법.json','주식회사법':'주식회사법.json','채권각론':'채권각론.json','소비자법':'소비자법.json','세법':'세법.json'};
 const NUMS = ['①','②','③','④'];
 let db = {}, API_KEY = '', selectedIds = new Set();
 const GH_OWNER='JiyeonChoi12', GH_REPO='law-quiz';

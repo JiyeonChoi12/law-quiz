@@ -450,6 +450,12 @@ const SUBJECTS=[
   {key:'상법',icon:'🏛️',file:'상법.json'},
   {key:'헌법 논증 이론',icon:'📝',file:'헌법논증이론.json'},
   {key:'글쓰기',icon:'✍️',file:'글쓰기.json'},
+  {key:'통치의 기본구조',icon:'🏛️',file:'통치의기본구조.json'},
+  {key:'물권법',icon:'🏠',file:'물권법.json'},
+  {key:'주식회사법',icon:'📈',file:'주식회사법.json'},
+  {key:'채권각론',icon:'📑',file:'채권각론.json'},
+  {key:'소비자법',icon:'🛒',file:'소비자법.json'},
+  {key:'세법',icon:'💰',file:'세법.json'},
 ];
 const NUMS=['①','②','③','④','⑤'];
 let quiz=[],cur=0,correct=0,answered=false,wrongList=[],correctList=[];
@@ -1138,8 +1144,8 @@ function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.ra
 // ── 설정 (캐시 초기화) ──
 function renderSettings(){
   const el=document.getElementById('settings-content');
-  const SUBJ_KEYS=['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'];
-  const SUBJ_FILE_KEYS=['헌법','민법','형법','상법','헌법논증이론','글쓰기'];
+  const SUBJ_KEYS=['헌법','민법','형법','상법','헌법 논증 이론','글쓰기','통치의 기본구조','물권법','주식회사법','채권각론','소비자법','세법'];
+  const SUBJ_FILE_KEYS=['헌법','민법','형법','상법','헌법논증이론','글쓰기','통치의기본구조','물권법','주식회사법','채권각론','소비자법','세법'];
 
   let html=`
   <div style="display:flex;flex-direction:column;gap:10px;">
@@ -1216,7 +1222,7 @@ function renderSettings(){
 function clearAll(){
   if(!confirm('정말 전체 초기화할까요? 오답노트, 북마크, 풀이 이력, 잠금 해제 상태가 모두 삭제됩니다.')) return;
   try{
-    ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{
+    SUBJECTS.map(s=>s.key).forEach(k=>{
       localStorage.removeItem('lq_wn_'+k);
       localStorage.removeItem('lq_s_'+k);
       localStorage.removeItem('lq_bm_'+k);
@@ -1229,17 +1235,17 @@ function clearAll(){
 }
 function clearAllWN(){
   if(!confirm('모든 과목의 오답노트를 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
+  SUBJECTS.map(s=>s.key).forEach(k=>{ try{localStorage.removeItem('lq_wn_'+k);}catch(e){} });
   alert('오답노트 전체 초기화됐어요!'); renderSettings();
 }
 function clearAllBM(){
   if(!confirm('모든 과목의 북마크를 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법논증이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_bm_'+k);}catch(e){} });
+  SUBJECTS.map(s=>s.key).forEach(k=>{ try{localStorage.removeItem('lq_bm_'+k);}catch(e){} });
   alert('북마크 전체 초기화됐어요!'); renderSettings();
 }
 function clearAllStats(){
   if(!confirm('모든 과목의 풀이 이력을 초기화할까요?')) return;
-  ['헌법','민법','형법','상법','헌법 논증 이론','글쓰기'].forEach(k=>{ try{localStorage.removeItem('lq_s_'+k);}catch(e){} });
+  SUBJECTS.map(s=>s.key).forEach(k=>{ try{localStorage.removeItem('lq_s_'+k);}catch(e){} });
   alert('풀이 이력 전체 초기화됐어요!'); renderSettings(); renderHome();
 }
 function clearLecture(){
