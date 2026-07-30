@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>민법총칙 제1장 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  .course-tabs {
+    display: inline-flex;
+    gap: 4px;
+    margin: 0 0 30px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #eeede7;
+    font: 750 12px/1 "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+  }
+  .course-tabs a, .course-tabs span {
+    display: block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .course-tabs .active {
+    color: white;
+    background: var(--accent);
+  }
+  h1[id], h2[id] { scroll-margin-top: 76px; }
+  @media print { .course-tabs { display: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CIVIL LAW · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">민법총칙</span>
+    <span class="brand-sub">제1장 서론 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="민법 학습 메뉴"><span class="active" aria-current="page">개념</span><a href="../index.html?subject=민법">문제</a></nav><h1>민법총칙 제1장 서론</h1>
+<h2>정확하게 정리하고, 쉽게 이해하는 통합 과외본</h2>
+<p>대상 범위: 교재 제1장 「서론」 전체</p>
+<hr>
+<h2>이 장을 공부하기 전에</h2>
+<p>이 장은 단순히 “민법이 무엇인가”를 소개하는 장이 아니다. 민법 문제를 풀 때 반복해서 사용하는 기본 문법을 만든다.</p>
+<blockquote>
+<p><strong>사람이 한 약속이나 행동을 법이 언제 인정하고, 언제 처음부터 무시하며, 언제 당사자에게 되돌릴 기회를 줄 것인가?</strong></p>
+</blockquote>
+<p>이 질문을 풀기 위해 교재는 다음 순서로 움직인다.</p>
+<ol>
+<li>민법이 다루는 관계와 판단 근거를 정한다.</li>
+<li>민법을 움직이는 기본원리를 정한다.</li>
+<li>권리와 의무가 생기는 구조를 설명한다.</li>
+<li>사람이 의사로 법률효과를 만드는 ‘법률행위’를 설명한다.</li>
+<li>흠 있는 법률행위를 무효와 취소로 나누어 처리한다.</li>
+</ol>
+<h3>민법 전체에서의 위치</h3>
+<p>이 장은 민법총칙의 입구이자 뒤 단원의 공통 언어다. 다음 장의 권리능력·행위능력, 이후의 의사표시·대리·조건·기한에서도 계속 다음 질문을 반복한다.</p>
+<ul>
+<li>법률행위가 성립했는가?</li>
+<li>성립했다면 유효한가?</li>
+<li>처음부터 무효인가?</li>
+<li>취소권자가 취소할 수 있는가?</li>
+<li>나중에 추인하여 확정할 수 있는가?</li>
+</ul>
+<p>이 장을 이해하지 못하면 뒤 단원의 결론을 이유 없이 외우게 된다.</p>
+<hr>
+<h1>제1절 민법은 무엇인가</h1>
+<h2 id="civil-01-01" data-concept-id="civil-01-01">1. 민법의 대상과 성격 ★★★★☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>민법은 사인(私人) 상호 간의 생활관계를 규율하는 일반사법이다. 생활관계는 크게 재산관계와 가족관계로 나뉜다. 민법은 사법의 일반법이므로 특별한 규정이 있는 경우에는 특별법이 먼저 적용된다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>지우가 현수에게 돈을 빌려주었다. 현수는 약속한 날 돈을 갚지 않았다. 이때 국가는 현수를 감옥에 보내는 문제부터 따지는 것이 아니다. 먼저 “누가 돈을 돌려달라고 요구할 수 있고, 누가 갚아야 하는가”를 정한다. 이런 개인 사이의 권리와 의무를 정리하는 법이 민법이다.</p>
+<p>민법을 학교 규칙에 비유하면 ‘학교 전체 생활규정’과 비슷하다. 다만 과학실에서는 별도의 안전수칙이 먼저 적용된다. 이 안전수칙 같은 것이 특별법이다.</p>
+<h3>③ 용어를 한자로 이해하기</h3>
+<p><strong>사인(私人)</strong></p>
+<ul>
+<li>私(사사로울 사): 국가의 공적인 영역이 아닌 개인의 영역</li>
+<li>人(사람 인): 사람 또는 사적인 단체</li>
+<li>법률상 의미: 국가권력의 주체가 아닌 개인·법인 등</li>
+<li>기억법: ‘공적인 국가’의 반대편에 있는 ‘사적인 사람’</li>
+</ul>
+<p><strong>사법(私法)</strong></p>
+<ul>
+<li>私(사사로울 사) + 法(법 법)</li>
+<li>사인 사이의 관계를 규율하는 법</li>
+<li>공법은 국가권력이 중심이고, 사법은 원칙적으로 동등한 개인들이 중심이다.</li>
+</ul>
+<h3>④ 실제 사례</h3>
+<p>민지는 온라인 중고거래로 카메라를 샀다. 판매자는 돈을 받았지만 카메라를 보내지 않았다. 여기서 핵심은 판매자를 처벌하는 문제만이 아니다. 민지가 카메라 인도나 대금 반환을 요구할 수 있는지, 판매자가 어떤 책임을 지는지가 민법 문제다.</p>
+<h3>⑤ 시험에서는 이렇게 묻는다</h3>
+<ul>
+<li>민법이 공법인지 사법인지 묻는다.</li>
+<li>민법이 재산관계만 다룬다는 보기를 낸다. 가족관계도 다루므로 틀리다.</li>
+<li>특별법이 있는데도 언제나 민법이 먼저 적용된다고 유도한다. 특별법 우선 원칙에 반한다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>민법은 개인들의 재산·가족 생활을 정리하는 사법의 일반법이다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-02" data-concept-id="civil-01-02">2. 민법의 법원 - 민법 제1조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>민법 제1조는 민사에 관하여 법률에 규정이 없으면 관습법에 의하고, 관습법이 없으면 조리에 의한다고 규정한다. 적용 순서는 <strong>법률 → 관습법 → 조리</strong>다. 우리 민법상 판례는 법원이 아니다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>판사가 사건을 맡았는데 법전에 딱 맞는 답이 없다고 하자. 판사는 “답이 없으니 재판하지 않겠다”고 할 수 없다. 다음 순서대로 답을 찾아야 한다.</p>
+<ol>
+<li>글로 만들어진 법률을 찾는다.</li>
+<li>법률이 없으면 법으로 인정된 관습을 찾는다.</li>
+<li>그것도 없으면 상식·정의·사물의 이치에 맞는 답을 찾는다.</li>
+</ol>
+<p>이것은 판사에게 주는 길찾기 순서다.</p>
+<h3>③ 용어를 한자로 이해하기</h3>
+<p><strong>법원(法源)</strong></p>
+<ul>
+<li>法(법 법): 법</li>
+<li>源(근원 원): 물이 시작되는 근원</li>
+<li>합친 뜻: 법이 흘러나오는 근거</li>
+<li>주의: 재판기관인 법원(法院)과 발음은 같지만 한자가 다르다.</li>
+</ul>
+<p><strong>조리(條理)</strong></p>
+<ul>
+<li>條(가지 조): 사물의 갈래</li>
+<li>理(다스릴 리): 이치</li>
+<li>법률상 의미: 사물의 본질, 정의관념, 사회의 합리적인 이치에서 나오는 규범</li>
+</ul>
+<h3>④ 조문은 왜 만들었는가</h3>
+<p>사회생활은 법전보다 빠르게 변한다. 모든 분쟁을 법률이 미리 적어 둘 수 없다. 민법 제1조는 법률의 빈틈이 있어도 재판이 가능하도록 보충 순서를 정한다.</p>
+<h3>⑤ 시험 함정</h3>
+<table>
+<thead>
+<tr>
+<th>보기</th>
+<th>판단</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>판례는 민법 제1조의 법원이다</td>
+<td>틀림</td>
+<td>판례는 중요하지만 민법 제1조상 법원은 아니다</td>
+</tr>
+<tr>
+<td>민사 특별법도 법률에 포함된다</td>
+<td>맞음</td>
+<td>‘법률’은 민법전만을 뜻하지 않는다</td>
+</tr>
+<tr>
+<td>법률이 없으면 곧바로 조리를 적용한다</td>
+<td>틀림</td>
+<td>관습법을 먼저 확인한다</td>
+</tr>
+<tr>
+<td>법원은 법률이 없다는 이유로 재판을 거절할 수 있다</td>
+<td>틀림</td>
+<td>관습법과 조리로 보충한다</td>
+</tr>
+</tbody></table>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>민법의 답 찾기 순서는 법률, 관습법, 조리이며 판례는 민법 제1조의 법원이 아니다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-03" data-concept-id="civil-01-03">3. 관습법과 사실인 관습 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>관습법은 사회에서 반복된 관행이 수범자의 법적 확신을 얻어 법규범으로 승인된 것이다. 법원은 당사자의 주장·입증을 기다리지 않고 관습법의 존재를 직권으로 확정해야 한다. 사실인 관습은 법규범이 아니라 단순한 관행이며, 주로 법률행위 당사자의 의사를 보충한다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>학교에서 학생들이 비 오는 날 우산을 복도 한쪽에 놓는다고 하자. 오래 반복했다고 해서 곧바로 학교 규칙은 아니다. 학생들이 “그냥 편해서 그렇게 한다”고 생각한다면 관행일 뿐이다.</p>
+<p>반대로 모두가 “반드시 지켜야 하는 규칙이고, 어기면 안 된다”고 믿고 학교도 공식 규칙처럼 인정한다면 관습법과 비슷한 단계가 된다.</p>
+<h3>③ 이름 속에 답이 있다</h3>
+<p><strong>관습법(慣習法)</strong></p>
+<ul>
+<li>慣(익숙할 관): 오랫동안 익숙해진 것</li>
+<li>習(익힐 습): 반복하여 몸에 밴 것</li>
+<li>法(법 법): 법규범</li>
+<li>따라서 단순 반복만으로 부족하고, ‘법’으로 지켜야 한다는 믿음이 필요하다.</li>
+</ul>
+<h3>④ 판례를 드라마로 이해하기 - 대법원 1983. 6. 14. 80다3231</h3>
+<p><strong>등장인물</strong>: 오랫동안 일정한 거래방식을 사용해 온 당사자들, 그 관행의 법적 의미를 판단해야 하는 법원</p>
+<p><strong>사건 발생</strong>: 당사자 사이에 법률에 명확한 규정이 없는 문제가 생겼다. 한쪽은 오랜 관행을 근거로 자신의 주장이 맞다고 했다.</p>
+<p><strong>법원의 고민</strong>: 그 관행이 사회 구성원 모두를 구속하는 ‘관습법’인가, 아니면 계약 당사자의 뜻을 해석할 때 참고하는 ‘사실인 관습’인가?</p>
+<p><strong>결론</strong>: 관습법과 사실인 관습은 다르다. 관습법은 법규범이므로 법원이 직권으로 확정하고, 사실인 관습은 법률행위 당사자의 의사를 보충하는 데 그친다.</p>
+<p><strong>다른 결론이면 생기는 문제</strong>: 오래 반복된 행동을 전부 법으로 인정하면 생활습관 하나하나가 강제규범이 된다. 반대로 법적 확신을 얻은 관습까지 모두 단순한 습관으로 보면 법률의 빈틈을 메우지 못한다.</p>
+<h3>⑤ 시험 함정</h3>
+<ul>
+<li>“오래 반복되면 관습법이다” → 틀림. 법적 확신이 필요하다.</li>
+<li>“관습법은 당사자가 주장해야만 법원이 적용한다” → 틀림. 직권 확정 대상이다.</li>
+<li>“사실인 관습도 법령과 같은 효력이 있다” → 틀림.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>관습법은 반복된 행동에 법적 확신이 더해진 법규범이고, 사실인 관습은 계약 해석을 돕는 생활관행이다.</p>
+</blockquote>
+<hr>
+<h1>민법의 구성원리</h1>
+<h2 id="civil-01-04" data-concept-id="civil-01-04">4. 권리능력 평등의 원칙 ★★★☆☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>근대민법은 모든 자연인이 신분·성별·계급과 관계없이 평등하게 권리와 의무의 주체가 된다는 원칙에서 출발한다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>과거에는 태어난 신분에 따라 재산을 가질 수 있는 사람과 그렇지 못한 사람이 나뉘었다. 근대민법은 “사람이라면 누구나 법의 주인공이 될 수 있다”는 생각을 출발점으로 삼았다.</p>
+<h3>③ 용어</h3>
+<p>**권리능력(權利能力)**은 권리와 의무의 주체가 될 수 있는 자격이다. 실제로 혼자 계약을 잘할 수 있는 능력인 ‘행위능력’과 구별해야 한다.</p>
+<h3>④ 시험 함정</h3>
+<p>권리능력과 행위능력을 같은 뜻으로 내는 보기가 자주 나온다. 갓난아기도 권리능력은 있지만 혼자 유효한 계약을 자유롭게 할 행위능력은 없다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>사람은 누구나 권리의 주체가 되지만, 혼자 법률행위를 완성할 능력은 별개의 문제다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-05" data-concept-id="civil-01-05">5. 사적 자치와 계약자유 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>사적 자치의 원칙은 개인이 자신의 의사에 따라 법률관계를 형성할 수 있다는 원칙이다. 계약자유는 계약체결의 자유, 상대방 선택의 자유, 내용결정의 자유, 방식의 자유로 나타난다. 다만 강행규정, 사회질서, 신의칙, 약자보호 법리에 따라 제한된다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>법은 모든 사람에게 “누구와 무엇을 거래할지 국가가 대신 정해 주겠다”고 하지 않는다. 각자가 자기 삶과 재산을 가장 잘 안다고 보고 선택권을 준다.</p>
+<p>그러나 힘센 사람이 약한 사람에게 사실상 선택권이 없는 계약을 강요한다면 “서명했으니 자유로운 계약”이라고만 할 수 없다. 그래서 민법은 자유를 출발점으로 삼되, 강박·사기·불공정·강행규정으로 경계를 만든다.</p>
+<h3>③ 사례</h3>
+<p>회사 A가 신입사원 B에게 “퇴사하면 평생 어느 회사에도 취업할 수 없다”는 조항에 서명하게 했다. B가 서명했다는 사실만으로 언제나 유효한 것은 아니다. 직업의 자유, 조항의 범위, 기간, 대가, 강행규정과 사회질서를 함께 본다.</p>
+<h3>④ 시험 함정</h3>
+<ul>
+<li>계약자유가 절대적이라고 하면 틀리다.</li>
+<li>당사자가 합의했어도 강행규정에 반하면 무효가 될 수 있다.</li>
+<li>계약을 체결할 자유에는 원칙적으로 계약하지 않을 자유도 포함된다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>사적 자치는 스스로 법률관계를 만들 자유이지만, 타인의 자유와 사회질서를 해치는 순간 제한된다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-06" data-concept-id="civil-01-06">6. 소유권 존중과 사회적 제한 ★★★☆☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>소유권자는 법률의 범위 안에서 소유물을 사용·수익·처분할 수 있다. 근대민법은 소유권을 강하게 보호했으나, 현대민법에서는 공공복리·환경·이웃관계·권리남용금지에 따른 사회적 제한을 인정한다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>내 집이라고 해서 밤새 큰 소음을 내 이웃을 잠들지 못하게 할 자유까지 생기는 것은 아니다. “내 것”이라는 이유는 강하지만, 다른 사람의 권리를 지워 버리는 만능열쇠는 아니다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>소유권은 강하게 보호되지만 무제한 권력은 아니다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-07" data-concept-id="civil-01-07">7. 신의성실의 원칙 - 민법 제2조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>권리의 행사와 의무의 이행은 신의에 좇아 성실히 해야 한다. 권리는 남용하지 못한다. 신의칙은 법률관계 당사자의 신뢰와 형평을 보호하며, 금반언·실효의 원칙·사정변경 원칙 등의 기초가 된다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>상대방이 믿도록 행동해 놓고, 상대가 그 믿음 때문에 큰 결정을 한 뒤에 갑자기 정반대 말을 해 이익만 챙기면 안 된다는 뜻이다.</p>
+<h3>③ 한자 풀이</h3>
+<p><strong>신의성실(信義誠實)</strong></p>
+<ul>
+<li>信(믿을 신): 믿음</li>
+<li>義(옳을 의): 옳고 공평함</li>
+<li>誠(정성 성): 거짓 없이 정성을 다함</li>
+<li>實(참될 실): 내용이 실제와 맞음</li>
+</ul>
+<p>이름 자체가 “믿음을 저버리지 말고 실제로 성실하게 행동하라”는 뜻이다.</p>
+<h3>④ 드라마 사례</h3>
+<p>임대인 영수는 세입자 지혜에게 여러 차례 “계약은 계속 연장해 줄 테니 안심하고 가게를 고쳐도 된다”고 말했다. 지혜는 그 말을 믿고 5천만 원을 들여 인테리어를 했다. 공사가 끝나자 영수는 더 높은 임대료를 받을 수 있다는 이유로 즉시 나가라고 했다.</p>
+<p>법원은 단순히 “건물주는 영수”라는 사실만 보지 않는다. 영수가 어떤 신뢰를 만들었는지, 지혜가 그 신뢰 때문에 어떤 지출을 했는지, 영수의 주장이 앞선 행동과 모순되는지를 살핀다.</p>
+<h3>⑤ 시험 함정</h3>
+<p>신의칙은 모든 명문 규정을 마음대로 무시하는 마법 조항이 아니다. 특히 제한능력자 보호처럼 법이 명확히 마련한 제도를 신의칙만으로 쉽게 없애면 안 된다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>신의칙은 권리를 없애는 조항이 아니라, 권리를 믿음과 형평에 맞게 사용하도록 만드는 원칙이다.</p>
+</blockquote>
+<hr>
+<h1>제2절 법률관계의 형성과 변동</h1>
+<h2 id="civil-01-08" data-concept-id="civil-01-08">8. 법률관계의 3요소 ★★★★☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>법률관계는 권리·의무의 주체, 객체, 내용으로 구성된다.</p>
+<table>
+<thead>
+<tr>
+<th>요소</th>
+<th>법학적 의미</th>
+<th>집 매매 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주체</td>
+<td>권리·의무의 귀속자</td>
+<td>매도인 A, 매수인 B</td>
+</tr>
+<tr>
+<td>객체</td>
+<td>권리가 향하는 대상</td>
+<td>집, 소유권, 대금</td>
+</tr>
+<tr>
+<td>내용</td>
+<td>구체적인 권리와 의무</td>
+<td>이전청구권, 대금지급의무</td>
+</tr>
+</tbody></table>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>법률관계는 연극과 같다. 누가 등장하는지, 무엇을 두고 다투는지, 각자가 무엇을 해야 하는지가 정해져야 이야기가 완성된다.</p>
+<h3>③ 시험 함정</h3>
+<p>권리의 객체와 권리의 내용을 혼동한다. 집은 객체이고, 집을 넘겨달라고 요구할 수 있는 힘은 권리의 내용이다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>법률관계는 누가, 무엇을 두고, 어떤 권리와 의무로 연결되는지를 보여 주는 구조다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-09" data-concept-id="civil-01-09">9. 법률사실·법률요건·법률효과 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>법률사실은 법률효과의 발생에 영향을 주는 개별 사실이다. 법률요건은 일정한 법률효과를 발생시키는 데 필요한 법률사실의 총체다. 법률효과는 권리·의무의 발생·변경·소멸이다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>라면을 끓이려면 물, 면, 스프, 열이 필요하다. 재료와 불 하나하나는 ‘사실’이고, 필요한 것이 모두 갖춰진 상태가 ‘요건 충족’이다. 그 결과 라면이 완성되는 것이 ‘효과’다.</p>
+<p>법에서도 계약 당사자, 의사표시, 목적 등 필요한 사실이 모여 법률요건이 완성되면 권리와 의무라는 법률효과가 생긴다.</p>
+<h3>③ 사례</h3>
+<p>A와 B가 집과 대금을 정해 매매에 합의했다. 합의 등 개별 사실이 모여 매매계약이라는 법률요건을 이루고, A에게 소유권 이전의무, B에게 대금지급의무가 생긴다.</p>
+<h3>④ 시험 함정</h3>
+<p>법률요건과 법률효과의 방향을 뒤집은 보기가 나온다. 공식은 언제나 <strong>요건이 갖춰지면 효과가 발생한다</strong>다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>법률사실이 모여 법률요건을 이루고, 요건이 완성되면 법률효과가 생긴다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-10" data-concept-id="civil-01-10">10. 법률행위의 개념과 종류 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>법률행위는 의사표시를 불가결한 구성요소로 하며, 행위자가 의도한 법률효과를 발생시키는 법률요건이다. 의사표시의 수와 방향에 따라 단독행위·계약·합동행위로 나눈다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>법률행위는 “법이 알아들을 수 있는 방식으로 내 결정을 밖에 내놓는 행동”이다. 마음속으로 자전거를 팔겠다고 생각한 것만으로는 부족하다. 상대방에게 팔겠다는 뜻을 표시하고, 계약이라면 상대방의 사겠다는 뜻과 만나야 한다.</p>
+<h3>③ 비교표</h3>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th align="right">필요한 의사표시</th>
+<th>대표 사례</th>
+<th>기억법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>단독행위</td>
+<td align="right">한 방향</td>
+<td>유언, 해제, 상계</td>
+<td>한쪽 의사로 완성</td>
+</tr>
+<tr>
+<td>계약</td>
+<td align="right">대립하는 둘 이상의 의사 합치</td>
+<td>매매, 임대차</td>
+<td>주고받는 합의</td>
+</tr>
+<tr>
+<td>합동행위</td>
+<td align="right">같은 방향의 여러 의사 결합</td>
+<td>사단법인 설립행위</td>
+<td>같은 목표로 결합</td>
+</tr>
+</tbody></table>
+<h3>④ 시험 함정</h3>
+<ul>
+<li>대물변제는 통설상 계약이다.</li>
+<li>상대방 있는 단독행위에 조건을 붙이면 상대방 지위가 지나치게 불안정해질 수 있다.</li>
+<li>단독행위라고 해서 언제나 상대방이 없는 것은 아니다. 해제처럼 상대방 있는 단독행위도 있다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>법률행위는 의사표시를 중심으로 당사자가 원하는 법률효과를 만드는 제도다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-11" data-concept-id="civil-01-11">11. 채권행위와 처분행위 ★★★★☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>채권행위는 일정한 급부를 해야 할 의무를 발생시키는 의무부담행위다. 처분행위는 물권 또는 권리를 직접 발생·변경·소멸시키며 처분권한을 필요로 한다. 물권행위와 준물권행위가 처분행위에 포함된다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>“내일 자전거를 넘겨줄게”는 약속을 만드는 단계다. 아직 자전거의 권리 상태를 실제로 바꾸는 단계와는 다르다.</p>
+<ul>
+<li>채권행위: 해야 할 일을 만든다.</li>
+<li>처분행위: 권리 상태를 직접 바꾼다.</li>
+</ul>
+<h3>③ 사례</h3>
+<p>A가 B에게 집을 팔기로 계약했다. 매매계약은 A에게 집을 넘길 의무를 만들고 B에게 대금을 낼 의무를 만든다. 실제 소유권 변동에는 별도의 물권변동 요건이 필요하다.</p>
+<h3>④ 시험 함정</h3>
+<p>“매매계약만 체결하면 부동산 소유권이 즉시 이전된다”는 틀린 보기다. 우리 민법상 부동산 물권변동에는 등기가 필요하다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>채권행위는 약속을 만들고, 처분행위는 권리의 상태를 직접 바꾼다.</p>
+</blockquote>
+<hr>
+<h1>제3절 법률행위의 무효</h1>
+<h2 id="civil-01-12" data-concept-id="civil-01-12">12. 무효의 의미와 효과 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>무효인 법률행위는 성립하였더라도 처음부터 법률효과가 발생하지 않는다. 원칙적으로 누구나 무효를 주장할 수 있고 법원도 직권으로 판단할 수 있다. 이미 급부가 이루어졌다면 부당이득 반환이 문제된다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>무효는 서류가 아예 존재하지 않는다는 뜻이 아니다. 계약서에 서명하고 도장까지 찍었어도 법이 그 계약에 효과를 주지 않는다는 뜻이다.</p>
+<p>무효는 ‘처음부터 전원이 연결되지 않은 전등’과 같다. 스위치를 눌렀다는 행동은 있었지만 불은 처음부터 켜지지 않는다.</p>
+<h3>③ 한자 풀이</h3>
+<p><strong>무효(無效)</strong></p>
+<ul>
+<li>無(없을 무): 없음</li>
+<li>效(효과 효): 법률효과</li>
+<li>이름 그대로 법률효과가 없다는 뜻이다.</li>
+</ul>
+<h3>④ 시험 함정</h3>
+<ul>
+<li>무효와 불성립은 다르다. 무효는 외형상 법률행위가 성립했지만 효력이 없는 경우다.</li>
+<li>무효라고 해서 이미 건넨 물건을 그냥 가져도 되는 것은 아니다. 반환관계가 남는다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>무효는 법률행위의 모습은 있어도 법률효과가 처음부터 생기지 않는 상태다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-13" data-concept-id="civil-01-13">13. 불확정적 무효·유동적 무효·확정적 무효 ★★★★☆</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>확정적 무효는 효력이 발생할 가능성이 최종적으로 없는 상태다. 유동적 무효는 현재는 효력이 없지만 추인·허가 등 일정한 사정에 따라 유효로 확정될 가능성이 있는 상태다. 불확정적 유효는 현재 효력이 있으나 장래 일정 사정에 따라 무효로 확정될 수 있는 상태다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<ul>
+<li>확정적 무효: 경기 결과가 이미 0대 3으로 끝났다.</li>
+<li>유동적 무효: 지금은 경기 중단 상태지만 허가가 나오면 다시 진행될 수 있다.</li>
+<li>불확정적 유효: 일단 경기는 진행됐지만 나중에 심사 결과에 따라 취소될 수 있다.</li>
+</ul>
+<h3>③ 사례 - 토지거래허가구역</h3>
+<p>허가를 전제로 체결한 거래는 허가 전까지 효력이 완성되지 않은 유동적 무효 상태가 문제될 수 있다. 허가를 받으면 유효로 확정될 수 있지만, 허가가 최종적으로 불가능해지면 확정적 무효가 된다.</p>
+<h3>④ 시험 함정</h3>
+<p>유동적 무효를 “처음부터 영원히 되살릴 수 없는 무효”라고 설명하면 틀리다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>유동적 무효는 지금은 효력이 없지만 일정한 보충으로 유효해질 가능성이 남은 상태다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-14" data-concept-id="civil-01-14">14. 일부무효 - 민법 제137조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>법률행위의 일부분이 무효이면 원칙적으로 전부 무효다. 다만 그 무효 부분이 없더라도 법률행위를 하였을 것이라고 인정되는 경우에는 나머지 부분은 유효하다. 핵심은 법률행위의 일체성과 당사자의 가정적 의사다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>계약을 케이크라고 생각해 보자. 상한 딸기 하나를 빼도 같은 케이크를 사겠다고 했을 것이라면 딸기만 빼고 살릴 수 있다. 그러나 그 딸기가 케이크를 산 유일한 이유였다면 나머지를 억지로 남겨서는 안 된다.</p>
+<h3>③ 사례</h3>
+<p>임대차계약의 위약금 조항만 강행규정에 위반한다. 그 조항이 없어도 당사자들이 임대차계약을 체결했을 것이 분명하다면, 위약금 부분만 무효로 하고 임대차는 유지할 수 있다.</p>
+<h3>④ 시험 함정</h3>
+<p>“일부가 무효이면 언제나 나머지는 유효하다”도 틀리고, “일부가 무효이면 예외 없이 전부 무효다”도 틀리다. 원칙과 예외를 함께 외워야 한다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>일부무효는 나머지를 살릴 수 있는지 당사자의 가정적 의사를 묻는 제도다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-15" data-concept-id="civil-01-15">15. 무효행위의 전환 - 민법 제138조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>무효인 법률행위가 다른 법률행위의 요건을 갖추고, 당사자가 무효임을 알았더라면 그 다른 법률행위를 하였을 것으로 인정되는 경우 그 다른 법률행위로서 효력을 가진다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>전환은 고장 난 A기계를 수리해 A로 쓰는 것이 아니다. A로는 쓸 수 없지만 부품과 구조가 B기계의 조건을 갖췄고, 주인도 A가 안 된다면 B로 썼을 것이라고 보이면 B로 인정하는 것이다.</p>
+<h3>③ 시험 함정</h3>
+<ul>
+<li>전환은 원래 무효행위를 사후에 유효하게 고치는 제도가 아니다.</li>
+<li>다른 법률행위의 요건과 당사자의 가정적 의사가 필요하다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>전환은 무효인 행위를 살리는 것이 아니라 그 안에 들어 있는 다른 유효한 행위를 인정하는 것이다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-16" data-concept-id="civil-01-16">16. 무효행위의 추인 - 민법 제139조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>무효인 법률행위를 추인하더라도 원칙적으로 그 행위가 소급하여 유효해지지 않는다. 당사자가 무효임을 알고 추인한 때에는 새로운 법률행위를 한 것으로 본다. 추인 시점에 유효요건이 갖추어져야 한다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>처음 계약은 처음부터 작동하지 않았다. 나중에 “인정한다”고 하면 옛 계약에 생명을 불어넣는 것이 아니라, 그날 새 계약을 한 것으로 보는 것이다.</p>
+<h3>③ 비교 - 전환과 추인</h3>
+<table>
+<thead>
+<tr>
+<th>구별</th>
+<th>전환</th>
+<th>무효행위의 추인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 인정하나</td>
+<td>다른 종류의 법률행위</td>
+<td>같은 내용의 새로운 법률행위</td>
+</tr>
+<tr>
+<td>당사자 판단</td>
+<td>무효를 알았다면 다른 행위를 했을 것</td>
+<td>무효임을 알고 다시 인정</td>
+</tr>
+<tr>
+<td>원칙적 시점</td>
+<td>전환된 행위의 성립 구조에 따름</td>
+<td>추인 때부터 새 행위</td>
+</tr>
+</tbody></table>
+<h3>④ 시험 함정</h3>
+<p>“무효행위의 추인은 언제나 원래 행위 시점으로 소급한다”는 틀린 보기다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>무효의 추인은 옛 행위의 부활이 아니라 원칙적으로 새 법률행위다.</p>
+</blockquote>
+<hr>
+<h1>제4절 법률행위의 취소</h1>
+<h2 id="civil-01-17" data-concept-id="civil-01-17">17. 취소의 의미와 존재 이유 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>취소할 수 있는 법률행위는 취소되기 전까지 유효하다. 법이 정한 취소권자가 취소 의사표시를 하면 그 법률행위는 처음부터 무효인 것으로 본다. 제한능력, 착오, 사기·강박 등이 주요 취소원인이다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>취소는 ‘일단 켜진 전등’이다. 법은 보호가 필요한 사람에게 끌 수 있는 스위치를 준다. 그 사람이 끄지 않으면 전등은 계속 켜져 있고, 추인하면 더 이상 끌 수 없다.</p>
+<p>왜 처음부터 무효로 하지 않을까? 보호받는 사람이 거래를 유지하고 싶을 수도 있고, 상대방의 거래안정도 고려해야 하기 때문이다.</p>
+<h3>③ 한자 풀이</h3>
+<p><strong>취소(取消)</strong></p>
+<ul>
+<li>取(가질 취): 취하여 잡음</li>
+<li>消(사라질 소): 없앰</li>
+<li>이미 존재하는 법률효과를 취소권자의 선택으로 없애는 제도다.</li>
+</ul>
+<h3>④ 시험 함정</h3>
+<p>“취소할 수 있는 행위는 취소 전에도 무효다”는 가장 기본적인 오답이다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>취소할 수 있는 행위는 일단 유효하지만 취소권자가 취소하면 처음부터 무효로 돌아간다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-18" data-concept-id="civil-01-18">18. 취소권자와 취소 방법 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>취소권자는 제한능력자, 착오로 의사표시를 한 자, 사기·강박에 의한 의사표시를 한 자 및 법정대리인·승계인 등 법이 정한 자다. 취소는 상대방에 대한 의사표시로 하며 반드시 소송으로 해야 하는 것은 아니다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>계약에 문제가 있다고 아무나 취소 버튼을 누를 수는 없다. 법이 특별히 보호하려는 사람과 그 사람을 대신할 수 있는 사람에게만 버튼을 준다.</p>
+<p>취소는 “이 계약을 취소합니다”라는 뜻이 상대방에게 도달하면 된다. 먼저 법원에 가서 판결문을 받아야만 가능한 것은 아니다.</p>
+<h3>③ 시험 함정</h3>
+<ul>
+<li>취소권이 없는 제3자가 마음대로 취소할 수 없다.</li>
+<li>상대방 없는 혼잣말만으로 상대방 있는 법률행위를 취소했다고 할 수 없다.</li>
+</ul>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>취소는 법이 정한 취소권자가 상대방에게 하는 의사표시다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-19" data-concept-id="civil-01-19">19. 취소의 효과 - 민법 제141조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>취소된 법률행위는 처음부터 무효인 것으로 본다. 이미 이행된 급부는 부당이득으로 반환해야 한다. 제한능력자는 그 행위로 받은 이익이 현존하는 범위에서 상환할 책임이 있다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>취소 버튼을 누르면 계약이 그날부터만 사라지는 것이 아니다. 법은 처음부터 계약이 없었던 것처럼 되돌려 계산한다. 그래서 받은 돈과 물건을 돌려줘야 한다.</p>
+<p>다만 제한능력자는 보호 대상이다. 이미 생활비로 써서 남지 않은 이익까지 모두 갚게 하면 취소 제도의 보호 목적이 무너질 수 있다. 그래서 현재 남아 있는 이익 범위에서 반환하게 한다.</p>
+<h3>③ 시험 함정</h3>
+<p>취소의 소급효와 해제의 효과를 혼동하지 않는다. 또한 제한능력자의 반환범위는 ‘받은 전부’가 아니라 현존이익 범위라는 점이 중요하다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>취소하면 처음부터 무효가 되고, 반환관계에서는 제한능력자의 현존이익 책임을 확인한다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-20" data-concept-id="civil-01-20">20. 추인과 법정추인 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>취소할 수 있는 법률행위의 추인은 취소권을 포기하고 그 행위를 확정적으로 유효하게 하는 단독행위다. 원칙적으로 취소원인이 종료한 후에 해야 한다. 민법 제145조가 정한 행위가 있고 이의를 보류하지 않으면 법정추인이 성립할 수 있다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>취소할 수 있는 사람이 문제 상황에서 벗어난 뒤 “그래도 이 계약을 유지하겠다”고 결정하면 취소 버튼을 버린 셈이 된다.</p>
+<p>법정추인은 말로 “추인한다”고 하지 않아도, 계약을 인정한 사람처럼 행동하면 법이 추인한 것으로 보는 제도다. 다만 아직 협박이 계속되거나 제한능력 상태가 끝나지 않았다면 진짜 자유로운 선택이라고 보기 어렵다.</p>
+<h3>③ 시험 함정</h3>
+<blockquote>
+<p>법정추인은 <strong>취소원인이 종료한 후</strong>라는 시간 조건을 먼저 확인한다.</p>
+</blockquote>
+<p>취소원인이 남아 있는 동안의 행동을 함부로 법정추인으로 보면 보호받을 사람에게 불리하다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>취소 가능한 행위의 추인은 취소권 포기이며, 원칙적으로 취소원인이 끝난 뒤에 가능하다.</p>
+</blockquote>
+<hr>
+<h2 id="civil-01-21" data-concept-id="civil-01-21">21. 취소권의 단기제척기간 - 민법 제146조 ★★★★★</h2>
+<h3>① 법학적으로 정확한 정리</h3>
+<p>취소권은 추인할 수 있는 날부터 3년 내, 법률행위를 한 날부터 10년 내에 행사해야 한다. 이는 제척기간으로 이해한다.</p>
+<h3>② 중학생도 이해하는 번역</h3>
+<p>언제까지나 계약이 뒤집힐 수 있다면 상대방과 제3자는 안심하고 거래할 수 없다. 그래서 법은 보호받을 사람에게 충분한 고민 시간을 주되, 거래를 확정할 마지막 시한도 정한다.</p>
+<p>두 시계가 동시에 간다.</p>
+<ul>
+<li>취소원인에서 벗어나 추인할 수 있게 된 날부터 3년</li>
+<li>법률행위를 한 날부터 최대 10년</li>
+</ul>
+<p>둘 중 하나라도 먼저 끝나면 취소권을 더 이상 행사할 수 없다.</p>
+<h3>③ 시험 함정</h3>
+<p>제척기간을 소멸시효처럼 중단·정지할 수 있다고 단정하는 보기를 조심한다.</p>
+<h3>한 줄 결론</h3>
+<blockquote>
+<p>취소권은 3년과 10년의 이중 한계 안에서 행사해야 한다.</p>
+</blockquote>
+<hr>
+<h1>교재 사례·판례 완전 해설</h1>
+<p>교재의 사례는 본문을 장식하는 예가 아니다. 앞에서 배운 추상적인 법리를 실제 사실관계에 적용하는 ‘두 번째 본문’이다. 각 사례를 다음 순서로 읽는다.</p>
+<blockquote>
+<p><strong>사실관계 → 법적 질문 → 결론 → 법원이 그렇게 판단한 이유 → 시험 함정</strong></p>
+</blockquote>
+<h2>사례 1. 관습법은 위헌법률심판의 대상인가</h2>
+<p><strong>연결 개념</strong>: 민법의 법원, 관습법과 법률의 차이</p>
+<p><strong>사실관계</strong>: 재판에서 적용될 관습법이 헌법에 어긋난다는 의문이 생겼다. 당사자는 관습법도 헌법재판소의 위헌법률심판 대상이 될 수 있다고 주장했다.</p>
+<p><strong>법적 질문</strong>: 관습법을 국회가 만든 법률처럼 헌법재판소에 위헌법률심판 제청할 수 있는가?</p>
+<p><strong>결론</strong>: 없다. 위헌법률심판에서 말하는 ‘법률’은 국회의 의결을 거친 형식적 의미의 법률이다. 관습법은 여기에 해당하지 않는다(대결 2009. 5. 28. 2007카기134).</p>
+<p><strong>이유를 쉽게</strong>: 관습법은 국회가 문서로 만든 법이 아니라 사회의 관행과 법적 확신에서 생긴다. 관습법이 헌법이나 성문법에 어긋나면 일반 법원이 그 효력을 부인할 수 있다.</p>
+<p><strong>시험 함정</strong>: “관습법은 법원이므로 형식적 의미의 법률과 완전히 같은 방식으로 위헌심사를 받는다”는 틀리다.</p>
+<hr>
+<h2>사례 2. 제사주재자는 장남이 우선하는가</h2>
+<p><strong>연결 개념</strong>: 조리, 사회관념의 변화</p>
+<p><strong>등장인물</strong>: 사망한 사람의 여러 공동상속인</p>
+<p><strong>사건 발생</strong>: 가족들이 제사를 주재할 사람을 협의로 정하지 못했다. 과거 판례는 특별한 사정이 없으면 장남, 장남이 사망하면 장손자, 아들이 없으면 장녀를 우선했다.</p>
+<p><strong>법원의 고민</strong>: 과거의 장남 우선 기준이 오늘날에도 합리적인 조리라고 할 수 있는가?</p>
+<p><strong>최종 결론</strong>: 더 이상 장남 우선 법리를 유지하기 어렵다. 협의가 되지 않으면 남녀·적서를 묻지 않고 피상속인의 최근친 직계비속 중 연장자를 우선한다(대판[전원합의체] 2023. 5. 11. 2018다248626).</p>
+<p><strong>왜 그렇게 판단했나</strong>: 조리는 고정된 옛 풍습이 아니라 헌법상 평등과 현재 사회의 합리적 관념을 반영해야 한다.</p>
+<p><strong>시험 함정</strong>: “조리는 예전부터 내려온 방식을 그대로 유지하는 것”이 아니다.</p>
+<hr>
+<h2>사례 3. 계약상대방의 손실을 일반적으로 보호할 의무가 있는가</h2>
+<p><strong>연결 개념</strong>: 사적 자치, 자기책임, 신의칙</p>
+<p><strong>사실관계</strong>: 계약을 체결한 한쪽 당사자에게 예상하지 못한 손해가 생겼다. 그는 상대방이 자신의 손실을 막아 주거나 이익을 보호했어야 한다고 주장했다.</p>
+<p><strong>법적 질문</strong>: 계약을 맺었다는 이유만으로 상대방의 이익을 보호할 일반적 의무가 생기는가?</p>
+<p><strong>결론</strong>: 원칙적으로 아니다. 사람은 자신의 자유로운 선택과 결정에서 생긴 이익과 손실을 스스로 감수한다(대판[전원합의체] 2014. 8. 21. 2010다92438).</p>
+<p><strong>쉬운 설명</strong>: 내가 충분히 판단하여 주식을 샀는데 가격이 떨어졌다고 해서 거래 상대방이 내 손실을 대신 막아 줄 일반적 의무를 지는 것은 아니다. 다만 특별한 신뢰관계나 고지의무가 인정되는 사정은 별도로 검토한다.</p>
+<p><strong>시험 함정</strong>: 신의칙을 근거로 모든 계약당사자에게 상대방의 이익을 보호할 포괄적 의무가 생긴다고 하면 틀리다.</p>
+<hr>
+<h2>사례 4. 약정한 변호사 보수는 언제나 전액 청구할 수 있는가</h2>
+<p><strong>연결 개념</strong>: 계약자유와 신의칙의 충돌</p>
+<p><strong>사실관계</strong>: 변호사와 의뢰인이 보수액을 미리 약정했고 변호사가 사건을 처리했다. 그런데 사건의 난이도와 실제 노력에 비해 약정보수가 지나치게 컸다.</p>
+<p><strong>법적 질문</strong>: 계약자유를 이유로 약정액 전부를 언제나 청구할 수 있는가?</p>
+<p><strong>결론</strong>: 원칙적으로 약정액을 청구할 수 있다. 다만 평소 관계, 수임 경위, 난이도, 노력, 소송물 가액, 의뢰인이 얻은 이익 등을 종합했을 때 약정보수가 부당하게 과다하여 신의칙과 형평에 반하는 특별한 사정이 있으면 합리적 범위로 제한할 수 있다(대판[전원합의체] 2018. 5. 17. 2016다35833).</p>
+<p><strong>법원의 고민</strong>: 너무 쉽게 감액하면 계약자유가 무너지고, 어떤 경우에도 감액하지 않으면 현저히 불공평한 결과를 법이 도와주게 된다.</p>
+<p><strong>시험 함정</strong>: 감액은 원칙이 아니라 특별한 사정이 있는 예외다.</p>
+<hr>
+<h2>사례 5. 보증인의 책임을 신의칙으로 줄일 수 있는가</h2>
+<p><strong>연결 개념</strong>: 신의칙의 보충성, 법적 안정성</p>
+<p><strong>사실관계</strong>: 보증계약이 유효하게 성립한 뒤 채권자가 보증인에게 책임을 물었다. 보증인은 결과가 너무 가혹하므로 신의칙에 따라 책임을 제한해야 한다고 주장했다.</p>
+<p><strong>결론</strong>: 권리행사가 신의칙상 도저히 용납될 수 없는 특별한 경우에는 제한 가능성이 있지만 극히 예외적으로 인정해야 한다(대판 2004. 1. 27. 2003다45410).</p>
+<p><strong>이유를 쉽게</strong>: 유효한 계약을 결과가 불리하다는 이유만으로 자주 줄여 주면 누구도 계약을 믿을 수 없다.</p>
+<p><strong>시험 함정</strong>: “보증인의 책임은 불리하기만 하면 신의칙으로 감액된다”는 틀리다.</p>
+<hr>
+<h2>사례 6. 아파트 전 소유자의 공용부분 체납관리비</h2>
+<p><strong>연결 개념</strong>: 신의칙, 특별승계, 특별법</p>
+<p><strong>등장인물</strong>: 아파트를 판 전 소유자, 새로 산 특별승계인, 관리단</p>
+<p><strong>사건 발생</strong>: 전 소유자가 공용부분 관리비를 체납한 채 아파트를 팔았다. 관리단은 새 소유자에게 체납관리비를 청구했다.</p>
+<p><strong>결론</strong>: 집합건물의 공용부분은 전체 공유자의 이익을 위해 공동 관리되므로, 집합건물법 제18조에 따라 특별승계인은 전 소유자의 공용부분 체납관리비를 승계한다(대판 2021. 6. 10. 2021다207489·207496).</p>
+<p><strong>시험 함정</strong>: 전유부분과 공용부분의 관리비를 구별해야 한다.</p>
+<hr>
+<h2>사례 7. 근로자 동의 없는 취업규칙 불이익변경</h2>
+<p><strong>연결 개념</strong>: 신의칙, 집단적 동의권 남용</p>
+<p><strong>사실관계</strong>: 사용자가 취업규칙을 근로자에게 불리하게 변경했지만 집단적 동의를 받지 못했다.</p>
+<p><strong>법적 질문</strong>: 변경 내용에 사회통념상 합리성이 있으면 동의 없이도 유효한가?</p>
+<p><strong>결론</strong>: 근로자 측이 집단적 동의권을 남용했다고 볼 특별한 사정이 없다면 단지 사회통념상 합리적이라는 이유만으로 유효하게 볼 수 없다. 동의권 남용은 엄격히 판단한다(대판[전원합의체] 2023. 5. 11. 2017다35588·35595).</p>
+<p><strong>시험 함정</strong>: ‘합리성’만 있으면 언제나 유효하다는 과거식 문장을 조심한다.</p>
+<hr>
+<h2>사례 8. 환불을 기대하게 한 뒤 무효·취소를 주장한 조합원</h2>
+<p><strong>연결 개념</strong>: 모순행위금지, 금반언</p>
+<p><strong>사실관계</strong>: 조합원들이 환불보장약정의 조건이 성취되지 않을 것을 알면서도 상당한 분담금을 계속 납부하여 조합계약을 유지하려는 신뢰를 주었다. 뒤늦게 조합계약의 무효·취소를 주장하며 반환을 청구했다.</p>
+<p><strong>결론</strong>: 앞선 납부행위로 조합과 다른 조합원에게 계약을 유지하리라는 신뢰를 준 뒤 정반대 주장을 하여 상대방에게 손해를 떠넘기는 것은 신의칙상 허용되지 않을 수 있다(대판 2025. 5. 15. 2024다239692).</p>
+<p><strong>시험 함정</strong>: 단순히 입장이 바뀌었다고 모두 금반언은 아니다. 선행행위가 만든 정당한 신뢰와 상대방의 불이익이 필요하다.</p>
+<hr>
+<h2>사례 9. 매매와 교통사고로 배우는 법률요건</h2>
+<p><strong>연결 개념</strong>: 법률사실·법률요건·법률효과</p>
+<h3>사례 A - 토지 매매</h3>
+<p>갑이 자기 토지를 을에게 1억 원에 팔겠다고 하고 을이 사겠다고 했다. 두 의사표시라는 법률사실이 합치하여 매매계약이라는 법률요건을 완성한다. 그 결과 갑에게 소유권이전의무, 을에게 1억 원의 대금지급의무라는 법률효과가 발생한다.</p>
+<h3>사례 B - 교통사고</h3>
+<p>갑이 운전하다 과실로 을을 다치게 했다. 둘 사이에 손해배상계약을 체결하겠다는 의사표시는 없지만, 갑의 행위가 민법상 불법행위 요건을 충족하면 손해배상책임이라는 법률효과가 발생한다.</p>
+<p><strong>교재가 두 사례를 나란히 둔 이유</strong>: 법률효과는 당사자가 원한 법률행위에서만 생기는 것이 아니다. 법률의 규정도 법률요건이 된다.</p>
+<p><strong>시험 함정</strong>: 모든 법률요건에 의사표시가 필요하다고 하면 틀리다.</p>
+<hr>
+<h2>사례 10. 매매계약이 무효이면 이미 넘긴 소유권도 무효인가</h2>
+<p><strong>연결 개념</strong>: 채권행위·물권행위, 물권행위의 독자성·무인성</p>
+<p><strong>사실관계</strong>: 갑과 을이 X부동산을 1억 원에 매매했다. 갑은 소유권을 이전하고 을은 대금을 지급했다. 나중에 매매계약에 무효사유가 발견되었다.</p>
+<p><strong>법적 질문</strong>: 매매계약의 무효가 소유권이전행위에도 자동으로 영향을 미치는가?</p>
+<p><strong>검토 순서</strong></p>
+<ol>
+<li>소유권이전행위를 매매계약과 구별되는 물권행위로 볼 것인가.</li>
+<li>별개의 행위라면 매매계약의 흠이 소유권이전에도 영향을 미치는가.</li>
+<li>우리 판례가 원인행위의 흠과 물권변동을 어떻게 연결하는가.</li>
+</ol>
+<p><strong>결론의 방향</strong>: 판례는 물권행위의 독자성을 부정하고 유인론적 입장을 취하므로 원인인 매매계약이 무효이면 그에 따른 소유권이전도 영향을 받는다.</p>
+<p><strong>시험 함정</strong>: 물권행위의 ‘개념’, ‘독자성’, ‘무인성’을 하나의 질문으로 섞지 않는다.</p>
+<hr>
+<h2>사례 11. 토지거래허가구역 안의 매매</h2>
+<p><strong>연결 개념</strong>: 유동적 무효</p>
+<p><strong>등장인물</strong>: 매도인 갑, 매수인 을</p>
+<p><strong>사건 발생</strong>: 갑과 을이 허가구역 안의 X토지를 1억 원에 매매했지만 아직 관할관청의 허가를 받지 않았다.</p>
+<p><strong>질문 1</strong>: 갑은 대금을 청구하고 을은 소유권이전을 청구할 수 있는가?</p>
+<p><strong>결론</strong>: 허가 전에는 계약의 효력이 완성되지 않으므로 서로 대금이나 소유권이전을 청구할 수 없다. 채무불이행책임이나 계약해제도 원칙적으로 문제되지 않는다.</p>
+<p><strong>질문 2</strong>: 허가신청에 협력하라고 청구할 수 있는가?</p>
+<p><strong>결론</strong>: 가능하다. 당사자에게는 허가를 받을 수 있도록 협력할 의무가 있다. 다만 협력의무와 대금지급의무는 동시이행관계가 아니다.</p>
+<p><strong>최종 상태</strong>: 허가를 받으면 소급하여 유효, 불허가가 확정되면 확정적 무효가 된다(대판[전원합의체] 1991. 12. 24. 90다12243).</p>
+<p><strong>특별 함정</strong>: 처음부터 허가를 배제·잠탈하려 한 계약은 처음부터 확정적 무효다. 나중에 허가구역 지정이 해제되어도 저절로 유효가 되지 않는다(대판 2019. 1. 31. 2017다228618).</p>
+<hr>
+<h2>사례 12. 남의 부동산을 자기 것처럼 판 무권리자</h2>
+<p><strong>연결 개념</strong>: 처분권한, 무권리자의 처분행위, 부당이득</p>
+<p><strong>사실관계</strong>: 무권리자가 타인 소유 부동산에 자기 명의의 보존등기를 하고 제3자에게 매도해 이전등기까지 마쳤다.</p>
+<p><strong>결론</strong>: 등기가 실체관계에 부합하는 특별한 사정이 없다면 보존등기와 이전등기는 모두 무효다. 원소유자는 소유권을 잃지 않는다. 무권리자가 받은 매매대금도 원소유자에게서 직접 얻은 이익이 아니므로 곧바로 원소유자에 대한 부당이득은 아니다(대판 2022. 12. 29. 2019다272275).</p>
+<p><strong>예외 연결</strong>: 제3자가 선의취득 등으로 유효하게 권리를 취득하여 원권리자가 권리를 잃었다면, 무권리자가 받은 대가에 대해 침해부당이득 반환이 문제될 수 있다(대판 2011. 6. 10. 2010다40239).</p>
+<p><strong>시험 함정</strong>: 무권리자의 매매계약 자체와 그 계약이 원소유자에게 미치는 효과를 구별한다.</p>
+<hr>
+<h2>사례 13. 토지와 건물을 한꺼번에 판 계약의 일부무효</h2>
+<p><strong>연결 개념</strong>: 민법 제137조, 일체성·분할가능성·가정적 의사</p>
+<p><strong>사실관계</strong>: 갑과 을이 X토지와 Y건물을 한꺼번에 2억 원에 매매했다. X토지는 토지거래허가구역 안에 있지만 허가를 받지 않았다.</p>
+<p><strong>질문</strong>: X토지 부분이 유동적 무효라면 을은 Y건물만이라도 이전해 달라고 할 수 있는가?</p>
+<p><strong>판단 순서</strong></p>
+<ol>
+<li>토지와 건물의 매매가 경제적·사실적으로 하나의 거래인가.</li>
+<li>둘을 분리하여도 독립된 거래로 존속할 수 있는가.</li>
+<li>당사자들이 토지 부분의 무효를 알았어도 건물만 거래했을 것인가.</li>
+</ol>
+<p><strong>결론</strong>: 세 질문에 따라 나머지 건물 부분의 유효 여부가 달라진다. 법원이 당사자를 위해 새 계약을 만들어 주는 것이 아니다.</p>
+<p><strong>판례 연결</strong>: 중간생략등기 합의처럼 여러 당사자의 합의가 전체로서 일체성을 가지면, 일부 의사표시가 무효일 때 나머지를 유지할지는 당사자의 가정적 의사로 판단한다(대판 1996. 2. 27. 95다38875).</p>
+<p><strong>시험 함정</strong>: 일부무효는 단순히 물리적으로 잘라낼 수 있는지만 보는 제도가 아니다.</p>
+<hr>
+<h2>사례 14. 혼인외 출생자를 혼인중 출생자로 신고한 경우</h2>
+<p><strong>연결 개념</strong>: 무효행위의 전환, 신분행위</p>
+<p><strong>사실관계</strong>: 법률상 부부인 갑과 을 사이에, 갑과 병의 관계에서 태어난 아이 A가 있었다. 갑과 을은 A를 자신들 사이에서 태어난 아이인 것처럼 출생신고했다.</p>
+<p><strong>질문 1</strong>: 혼인중 출생자로 한 출생신고는 유효한가?</p>
+<p><strong>결론</strong>: 진실한 신분관계와 다르므로 그 신고 자체는 무효다.</p>
+<p><strong>질문 2</strong>: 갑에게는 어떤 의미가 있는가?</p>
+<p><strong>결론</strong>: 혼인외 출생자를 혼인중 출생자로 신고한 행위는 무효지만, 친아버지 갑의 인지신고로서 효력이 인정될 수 있다(대판 1971. 11. 15. 71다1983).</p>
+<p><strong>질문 3</strong>: 친어머니가 아닌 을에게는 어떤 의미가 있는가?</p>
+<p><strong>결론의 방향</strong>: 타인의 자를 자기 자로 출생신고한 경우 입양의 실질적 요건과 의사가 갖춰졌다면 입양의 효력이 인정될 수 있다(대판[전원합의체] 1977. 7. 26. 77다492).</p>
+<p><strong>시험 함정</strong>: 판례가 단독행위나 신분행위에서 전환을 전혀 인정하지 않는다는 보기는 틀리다.</p>
+<hr>
+<h2>사례 15. 불공정한 매매를 다른 가격의 매매로 전환할 수 있는가</h2>
+<p><strong>연결 개념</strong>: 민법 제104조와 제138조</p>
+<p><strong>사실관계</strong>: 매매대금이 지나치게 불공정하여 계약이 민법 제104조에 따라 무효가 되었다.</p>
+<p><strong>법적 질문</strong>: 법원이 적정하다고 생각하는 다른 가격의 매매로 바꾸어 유효하게 만들 수 있는가?</p>
+<p><strong>결론</strong>: 제138조의 전환 가능성은 있지만 매우 신중해야 한다. 당사자들이 무효임을 알았다면 실제로 다른 대금액으로 합의했을 것이라는 가정적 의사가 예외적으로 인정되어야 한다(대판 2010. 7. 15. 2009다50308).</p>
+<p><strong>시험 함정</strong>: 법원이 공정한 가격을 정해 계약을 강제로 만들어 주는 제도가 아니다.</p>
+<hr>
+<h2>사례 16. 말하지 않아도 무효행위를 추인한 것으로 볼 수 있는가</h2>
+<p><strong>연결 개념</strong>: 민법 제139조, 묵시적 추인</p>
+<p><strong>사실관계</strong>: 당사자가 과거의 무효인 법률행위를 전제로 후속 행동을 했다. 상대방은 그 행동만으로 추인이 성립했다고 주장했다.</p>
+<p><strong>결론</strong>: 묵시적 추인은 가능하다. 그러나 당사자가 종전 행위가 무효임을 알거나 의심하면서도 그 법적 지위를 충분히 이해하고, 진의로 결과를 자신에게 귀속시키려 했다는 사정이 인정되어야 한다. 신중하게 판단한다(대판 2014. 3. 27. 2012다106607).</p>
+<p><strong>시험 함정</strong>: 무효임을 모른 채 유효하다고 착각하고 한 후속 행동은 ‘무효임을 알고 한 추인’과 다르다.</p>
+<hr>
+<h2>사례 17. 미성년자의 부동산 매매와 취소</h2>
+<p><strong>연결 개념</strong>: 취소사유·취소권자·소급효·현존이익</p>
+<p><strong>등장인물</strong>: 만 18세 갑, 부모 A·B, 매수인 을</p>
+<p><strong>사건 발생</strong>: 갑은 부모 동의 없이 자기 부동산을 을에게 1억 원에 팔아 이전등기까지 해 주었다. 받은 1억 원은 유흥비로 모두 사용했다.</p>
+<p><strong>질문 1 - 계약은 유효한가?</strong></p>
+<p>취소되기 전까지는 유효하지만 제한능력자 법률행위이므로 취소할 수 있다.</p>
+<p><strong>질문 2 - 누가 취소하는가?</strong></p>
+<p>갑과 법정대리인 등이 취소권자가 된다. 취소는 상대방 을에게 해야 한다.</p>
+<p><strong>질문 3 - 부모가 대금을 받았다면 취소할 수 없는가?</strong></p>
+<p>대금 수령 사실만으로 곧바로 갑의 취소권이 사라지는 것은 아니다. 누가 어떤 자격으로 받았고 추인 요건이 갖춰졌는지 따져야 한다.</p>
+<p><strong>질문 4 - 취소하면 부동산은 어떻게 되는가?</strong></p>
+<p>계약은 처음부터 무효인 것으로 돌아가고 소유권 회복과 등기 말소 문제가 생긴다.</p>
+<p><strong>질문 5 - 갑은 탕진한 1억 원 전부를 반환하는가?</strong></p>
+<p>제한능력자는 현존이익 범위에서 반환책임을 진다. 돈이 실제로 남아 있지 않다면 반환범위가 제한될 수 있다.</p>
+<p><strong>시험 함정</strong>: 취소할 수 있는 계약을 처음부터 무효라고 표현하지 않는다.</p>
+<hr>
+<h2>사례 18. 취소한다고 말하지 않고 소송을 제기한 경우</h2>
+<p><strong>연결 개념</strong>: 추단적·포함적 취소 의사표시</p>
+<p><strong>사실관계</strong>: 강박으로 매매계약을 체결한 매도인이 별도로 “취소한다”고 통지하지 않고, 매수인을 상대로 소유권이전등기의 말소를 구하는 소송을 제기했다.</p>
+<p><strong>법적 질문</strong>: 취소라는 단어를 쓰지 않았으니 취소의 효력이 없는가?</p>
+<p><strong>결론</strong>: 취소 의사가 상대방에게 인식될 수 있으면 특별한 방식은 필요 없다. 취소를 당연한 전제로 한 이행청구·이행거절에는 취소 의사표시가 포함될 수 있다. 위 사례에서는 소장 송달로 취소한 것으로 볼 수 있다(대판 1957. 10. 7. 4293민상518; 대판 1993. 9. 14. 93다13162).</p>
+<p><strong>시험 함정</strong>: 취소는 반드시 내용증명이나 별도의 ‘취소한다’는 문장으로 해야 한다는 보기는 틀리다.</p>
+<hr>
+<h2>사례 19. 계약취소와 불법행위 손해배상은 함께 주장할 수 있는가</h2>
+<p><strong>연결 개념</strong>: 청구권 경합</p>
+<p><strong>사실관계</strong>: 상대방의 잘못 때문에 계약을 취소할 수 있는 동시에 그 행위가 불법행위에도 해당했다.</p>
+<p><strong>결론</strong>: 취소에 따른 부당이득반환청구권과 불법행위 손해배상청구권은 함께 존재할 수 있다. 다만 경제적으로 같은 손해를 메우는 것이므로 한 청구권이 만족을 얻어 소멸하면 그 범위에서 다른 청구권도 소멸한다(대판 2021. 6. 10. 2019다226005).</p>
+<p><strong>쉬운 설명</strong>: 피해자는 여러 법적 길을 선택할 수 있지만 같은 손해를 두 번 배상받을 수는 없다.</p>
+<p><strong>시험 함정</strong>: 청구권이 함께 존재할 수 있다는 말과 이중으로 만족받을 수 있다는 말을 구별한다.</p>
+<hr>
+<h2>사례 20. 매매취소 뒤 소유권을 돌려받는 두 가지 길</h2>
+<p><strong>연결 개념</strong>: 부당이득반환청구권과 물권적 청구권</p>
+<p><strong>사실관계</strong>: 갑이 을에게 X부동산을 1억 원에 팔아 소유권을 이전했고, 이후 매매계약이 취소되었다.</p>
+<p><strong>길 1 - 부당이득반환청구</strong>: 갑은 민법 제741조에 따라 원인 없이 을에게 넘어간 소유권을 반환하라고 청구할 수 있다. 이는 물권행위의 유인론·무인론과 무관하게 인정된다.</p>
+<p><strong>길 2 - 소유권에 기한 청구</strong>: 원인행위의 실효가 물권변동에도 영향을 준다는 유인론을 취하는 판례에 따르면, 갑은 소유권에 기한 반환·방해배제청구도 할 수 있다.</p>
+<p><strong>교재가 이 사례를 마지막에 둔 이유</strong>: 제1장에서 배운 취소의 소급효가 물권변동과 반환관계로 어떻게 이어지는지 보여 주기 위해서다.</p>
+<p><strong>시험 함정</strong>: 부당이득반환청구와 물권적 청구의 법적 근거를 섞지 않는다.</p>
+<hr>
+<h1>무효와 취소 최종 비교</h1>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>무효</th>
+<th>취소</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>처음 상태</td>
+<td>처음부터 효력 없음</td>
+<td>취소 전까지 유효</td>
+</tr>
+<tr>
+<td>주장·행사 주체</td>
+<td>원칙적으로 누구나 주장 가능</td>
+<td>법이 정한 취소권자</td>
+</tr>
+<tr>
+<td>법원의 태도</td>
+<td>직권 판단 가능</td>
+<td>취소 의사표시가 있어야 함</td>
+</tr>
+<tr>
+<td>추인의 의미</td>
+<td>원칙적으로 새 법률행위</td>
+<td>취소권 포기, 확정적 유효</td>
+</tr>
+<tr>
+<td>시간 효과</td>
+<td>처음부터 효과 없음</td>
+<td>취소하면 처음부터 무효로 봄</td>
+</tr>
+<tr>
+<td>반환</td>
+<td>부당이득 반환</td>
+<td>소급무효에 따른 반환, 제한능력자 현존이익</td>
+</tr>
+</tbody></table>
+<h3>10초 기억법</h3>
+<blockquote>
+<p>무효는 처음부터 꺼진 전등. 취소는 켜져 있지만 보호받는 사람이 끌 수 있는 전등.</p>
+</blockquote>
+<hr>
+<h1>기출 연결</h1>
+<p>제공된 기출 데이터에서 이 장과 직접 연결되는 중심 영역은 <code>민법의의의와구성원리</code> 22문항과 <code>유효, 무효, 취소</code> 35문항이다. 법률행위의 분류는 <code>법률행위 총론</code> 문제와도 연결된다.</p>
+<h2>가장 중요한 기출 TOP 5</h2>
+<h3>1. 민법_001 - 민법의 법원이 아닌 것</h3>
+<p><strong>정답 포인트</strong>: 판례는 민법 제1조상 법원이 아니다.</p>
+<p><strong>출제자의 함정</strong>: 대법원 판례가 실무에서 매우 중요하므로 ‘중요한 것 = 법원’이라고 착각하게 한다.</p>
+<h3>2. 민법_002 - 관습법</h3>
+<p><strong>정답 포인트</strong>: 관습법과 사실인 관습의 효력·적용 방식을 구별한다.</p>
+<p><strong>출제자의 함정</strong>: 오래 반복된 관행을 모두 관습법으로 표현한다.</p>
+<h3>3. 민법_004 - 신의칙</h3>
+<p><strong>정답 포인트</strong>: 신의칙으로 제한능력자 보호 규정을 함부로 무력화할 수 없다.</p>
+<p><strong>출제자의 함정</strong>: 신의칙을 모든 문제를 해결하는 만능 원칙처럼 제시한다.</p>
+<h3>4. 민법_008 - 무효행위의 전환</h3>
+<p><strong>정답 포인트</strong>: 다른 법률행위의 요건과 당사자의 가정적 의사가 필요하다.</p>
+<p><strong>출제자의 함정</strong>: 전환을 원래 무효행위의 사후 치유로 설명한다.</p>
+<h3>5. 민법_011 - 무효행위의 추인</h3>
+<p><strong>정답 포인트</strong>: 원칙적으로 새로운 법률행위이며 당연한 소급효가 없다.</p>
+<p><strong>출제자의 함정</strong>: 취소 가능한 행위의 추인과 효과를 섞는다.</p>
+<hr>
+<h1>새로운 응용문제 5개</h1>
+<h2>문제 1 - 관습법</h2>
+<p>한 시장에서 30년 동안 상인들이 공동 통로의 청소비를 점포 면적에 따라 부담해 왔다. 상인들은 이를 법적 의무가 아니라 좋은 이웃 사이의 관행이라고 생각했다. 이 관행을 관습법이라고 단정할 수 있는가?</p>
+<p><strong>정답</strong>: 없다. 반복된 관행 외에 법적 확신이 필요하다.</p>
+<p><strong>출제 의도</strong>: 반복성과 법적 확신을 분리할 수 있는지 확인한다.</p>
+<h2>문제 2 - 신의칙</h2>
+<p>건물주 A가 임차인 B에게 5년간 계약을 유지하겠다고 반복해 말했고 B는 이를 믿고 큰 비용을 지출했다. A가 공사 직후 아무 사정변경 없이 퇴거만 요구한다면 어떤 원칙을 우선 검토해야 하는가?</p>
+<p><strong>정답</strong>: 신의성실의 원칙과 금반언 법리를 검토한다.</p>
+<h2>문제 3 - 일부무효</h2>
+<p>계약의 위약금 조항만 강행규정에 반하지만, 그 조항이 없어도 양 당사자가 본계약을 체결했을 것이 분명하다. 계약 전체는 어떻게 되는가?</p>
+<p><strong>정답</strong>: 나머지 부분은 유효할 수 있다.</p>
+<h2>문제 4 - 무효의 추인</h2>
+<p>당사자들이 무효인 계약임을 안 뒤 유효요건을 모두 갖추어 같은 내용으로 다시 합의했다. 원래 계약 시점부터 당연히 유효해지는가?</p>
+<p><strong>정답</strong>: 아니다. 원칙적으로 다시 합의한 때 새로운 법률행위가 성립한다.</p>
+<h2>문제 5 - 법정추인</h2>
+<p>강박을 당한 사람이 강박 상태가 계속되는 동안 계약상 급부를 일부 이행했다. 그 사실만으로 법정추인이 성립하는가?</p>
+<p><strong>정답</strong>: 원칙적으로 아니다. 취소원인이 종료한 후인지 먼저 확인해야 한다.</p>
+<hr>
+<h1>시험 직전 A4 압축노트</h1>
+<h2>TOP 3</h2>
+<ol>
+<li><strong>법원</strong>: 법률 → 관습법 → 조리, 판례는 민법 제1조의 법원이 아님.</li>
+<li><strong>무효와 취소</strong>: 무효는 처음부터 효력 없음, 취소는 취소 전까지 유효.</li>
+<li><strong>전환과 추인</strong>: 전환은 다른 행위 인정, 무효의 추인은 새 행위, 취소의 추인은 취소권 포기.</li>
+</ol>
+<h2>반드시 외울 문장</h2>
+<ul>
+<li>관습법은 반복된 관행과 법적 확신을 필요로 한다.</li>
+<li>법률사실이 모여 법률요건을 이루고, 요건이 완성되면 법률효과가 생긴다.</li>
+<li>채권행위는 의무를 만들고 처분행위는 권리 상태를 직접 바꾼다.</li>
+<li>취소된 법률행위는 처음부터 무효인 것으로 본다.</li>
+<li>법정추인은 원칙적으로 취소원인이 종료한 후에 문제된다.</li>
+<li>취소권은 추인할 수 있는 날부터 3년, 법률행위를 한 날부터 10년 내에 행사한다.</li>
+</ul>
+<h2>마지막 비교</h2>
+<table>
+<thead>
+<tr>
+<th>헷갈리는 개념</th>
+<th>구별 신호</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>관습법 vs 사실인 관습</td>
+<td>법적 확신과 법규범성</td>
+</tr>
+<tr>
+<td>권리능력 vs 행위능력</td>
+<td>주체가 될 자격 vs 혼자 유효한 행위를 할 능력</td>
+</tr>
+<tr>
+<td>채권행위 vs 처분행위</td>
+<td>의무 발생 vs 권리 직접 변동</td>
+</tr>
+<tr>
+<td>무효 vs 취소</td>
+<td>처음부터 효력 없음 vs 취소 전 유효</td>
+</tr>
+<tr>
+<td>전환 vs 추인</td>
+<td>다른 행위 인정 vs 새 행위 또는 취소권 포기</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>학습 상태 진단</h1>
+<p>다음 세 질문에 이유까지 답할 수 있는지 확인한다.</p>
+<ol>
+<li>판례가 매우 중요한데도 왜 민법 제1조의 법원은 아닌가?</li>
+<li>취소할 수 있는 법률행위를 왜 처음부터 무효로 처리하지 않는가?</li>
+<li>무효행위의 추인과 취소할 수 있는 행위의 추인은 왜 효과가 다른가?</li>
+</ol>
+<ul>
+<li>🟢 이해 완료: 세 질문을 사례와 함께 설명할 수 있다.</li>
+<li>🟡 복습 필요: 결론은 알지만 이유를 말하지 못한다.</li>
+<li>🔴 이해 부족: 무효와 취소, 전환과 추인을 서로 바꾸어 설명한다.</li>
+</ul>
+<p>반드시 복습할 TOP 3은 <strong>관습법과 사실인 관습, 무효와 취소, 전환과 추인</strong>이다.</p>
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '민법총칙 · CHAPTER 01' : 'PART · CIVIL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(민법총칙 · CHAPTER 01|PART · CIVIL LAW)/, '')
+      .replace(/★+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>
+

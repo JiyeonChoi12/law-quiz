@@ -45,6 +45,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .mode-header{margin-bottom:1.5rem;}
 .mode-header .subj-name{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:var(--accent);margin-bottom:4px;}
 .mode-header .subj-cnt{font-size:13px;color:var(--text3);}
+.subject-view-tabs{display:none;grid-template-columns:1fr 1fr;gap:6px;margin:-0.25rem 0 1.25rem;padding:5px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);}
+.subject-view-tabs.active{display:grid;}
+.subject-view-tab{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border:0;border-radius:6px;background:transparent;color:var(--text2);font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;}
+.subject-view-tab:hover{color:var(--accent);background:var(--surface);}
+.subject-view-tab.active{color:#fffdf8;background:var(--accent);font-weight:500;}
 .mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;}
 .mode-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1.25rem 1rem;cursor:pointer;transition:all 0.2s;text-align:center;}
 .mode-card:hover{border-color:var(--accent2);background:#f5eddd;}
@@ -146,6 +151,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .fb-answer{font-size:13px;color:var(--text2);margin-bottom:5px;}
 .fb-exp{font-size:13px;color:var(--text2);border-top:0.5px solid var(--border);padding-top:10px;margin-top:10px;}
 .fb-exp-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;}
+.concept-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:11px;padding-top:10px;border-top:0.5px solid var(--border);}
+.concept-links-label{font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-right:2px;}
+.concept-link{display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border:0.5px solid var(--accent);border-radius:20px;color:var(--accent);background:var(--surface);font-size:11px;font-weight:500;text-decoration:none;transition:all 0.15s;}
+.concept-link:hover{background:var(--accent);color:#fffdf8;}
+.review-item .concept-links,.wn-item .concept-links{border-top:0;margin-top:7px;padding-top:0;}
 
 /* 실전모드 네비 */
 .q-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
@@ -274,6 +284,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     <div class="mode-header">
       <div class="subj-name" id="mode-subj-name"></div>
       <div class="subj-cnt" id="mode-subj-cnt"></div>
+    </div>
+
+    <div class="subject-view-tabs" id="subject-view-tabs" aria-label="과목 학습 메뉴">
+      <button class="subject-view-tab" type="button" onclick="openSubjectConcept()">📚 개념</button>
+      <button class="subject-view-tab active" type="button" aria-current="page">✏️ 문제</button>
     </div>
 
     <!-- 필터 -->
@@ -457,6 +472,32 @@ const SUBJECTS=[
   {key:'소비자법',icon:'🛒',file:'소비자법.json'},
   {key:'세법',icon:'💰',file:'세법.json'},
 ];
+const CONCEPT_PAGES={
+  '민법':'./concepts/민법총칙_제1장_통합과외본.html'
+};
+const CONCEPT_TITLES={
+  'civil-01-01':'민법의 대상과 성격',
+  'civil-01-02':'민법의 법원',
+  'civil-01-03':'관습법과 사실인 관습',
+  'civil-01-04':'권리능력 평등',
+  'civil-01-05':'사적 자치와 계약자유',
+  'civil-01-06':'소유권 존중과 사회적 제한',
+  'civil-01-07':'신의성실의 원칙',
+  'civil-01-08':'법률관계의 3요소',
+  'civil-01-09':'법률사실·법률요건·법률효과',
+  'civil-01-10':'법률행위의 개념과 종류',
+  'civil-01-11':'채권행위와 처분행위',
+  'civil-01-12':'무효의 의미와 효과',
+  'civil-01-13':'불확정적·유동적·확정적 무효',
+  'civil-01-14':'일부무효',
+  'civil-01-15':'무효행위의 전환',
+  'civil-01-16':'무효행위의 추인',
+  'civil-01-17':'취소의 의미',
+  'civil-01-18':'취소권자와 취소 방법',
+  'civil-01-19':'취소의 효과',
+  'civil-01-20':'추인과 법정추인',
+  'civil-01-21':'취소권의 단기제척기간'
+};
 const NUMS=['①','②','③','④','⑤'];
 let quiz=[],cur=0,correct=0,answered=false,wrongList=[],correctList=[];
 let currentSubject=null,currentMode='normal',allData={};
@@ -517,6 +558,26 @@ function addWN(k,q,myAns){
 function getStats(k){try{return JSON.parse(localStorage.getItem('lq_s_'+k)||'{"a":0,"s":null}');}catch(e){return{a:0,s:null};}}
 function saveStats(k,score){const s=getStats(k);s.a++;s.s=score;try{localStorage.setItem('lq_s_'+k,JSON.stringify(s));}catch(e){}}
 
+function openSubjectConcept(conceptId=''){
+  const subjectKey=currentSubject?.key||'민법';
+  const page=CONCEPT_PAGES[subjectKey];
+  if(!page)return;
+  location.href=page+(conceptId?'#'+encodeURIComponent(conceptId):'');
+}
+function getConceptIds(q){
+  if(!q)return[];
+  const fresh=(allData['민법']||[]).find(item=>item.id&&item.id===q.id);
+  if(fresh&&Array.isArray(fresh.conceptIds))return fresh.conceptIds;
+  if(Array.isArray(q.conceptIds))return q.conceptIds;
+  return q.conceptId?[q.conceptId]:[];
+}
+function conceptLinksHtml(q){
+  const page=CONCEPT_PAGES['민법'];
+  const ids=getConceptIds(q).filter(id=>CONCEPT_TITLES[id]);
+  if(!page||!ids.length)return'';
+  return `<div class="concept-links"><span class="concept-links-label">관련 개념</span>${ids.map(id=>`<a class="concept-link" href="${page}#${encodeURIComponent(id)}" target="_blank" rel="noopener">📖 ${CONCEPT_TITLES[id]}</a>`).join('')}</div>`;
+}
+
 async function loadSubject(subj){
   if(allData[subj.key])return allData[subj.key];
   const r=await fetch(DATA_BASE+subj.file+'?t='+Date.now());
@@ -564,6 +625,7 @@ async function selectSubject(idx){
     currentSubject=subj;
     selectedTopics.clear(); selectedSource='all';
     document.getElementById('mode-subj-name').textContent=subj.key;
+    document.getElementById('subject-view-tabs').classList.toggle('active',!!CONCEPT_PAGES[subj.key]);
     
 
     // 주제 칩 생성
@@ -740,7 +802,7 @@ function showFeedback(ok,q){
   let ans='';
   if(!ok){ans=q.type==='mc'?`정답: ${NUMS[q.answer]} ${q.choices[q.answer]}`:`정답: ${q.answer}`;}
   const exp=q.explanation?`<div class="fb-exp"><div class="fb-exp-label">해설</div>${q.explanation}</div>`:'';
-  fb.innerHTML=`<div class="fb-title">${ok?'✓ 정답':'✗ 오답'}</div>`+(ans?`<div class="fb-answer">${ans}</div>`:'')+exp;
+  fb.innerHTML=`<div class="fb-title">${ok?'✓ 정답':'✗ 오답'}</div>`+(ans?`<div class="fb-answer">${ans}</div>`:'')+exp+conceptLinksHtml(q);
   // 오답풀기 모드에서 맞혔고, 자동제거가 꺼져 있으면 개별 제거 버튼 표시
   if(ok&&currentMode==='wrongnote'&&!getWNAutoRemove()){
     const qKey=wnKeyOf(q);
@@ -996,7 +1058,7 @@ function showResult(mode){
       return `<div class="review-item">
         <div class="r-q">${q.question.substring(0,130)}${q.question.length>130?'...':''}</div>
         <div class="r-my">내 답: ${myAns}</div>
-        <div class="r-ans">정답: ${ca}</div>${exp}
+        <div class="r-ans">정답: ${ca}</div>${exp}${conceptLinksHtml(q)}
       </div>`;
     }).join('');
   }else wr.style.display='none';
@@ -1080,7 +1142,7 @@ function renderWNList(){
       <div class="wn-q">${q.question}</div>
       <div class="wn-ans">정답: ${ca}</div>
       ${lastMyAns?`<div style="font-size:12px;color:var(--red);">마지막 내 답: ${lastMyAns}</div>`:''}
-      ${exp}
+      ${exp}${conceptLinksHtml(q)}
     </div>`;
   }).join('');
 }
@@ -1423,8 +1485,16 @@ function refreshWNSourceChips(){
   }
 }
 
+async function openInitialSubjectFromQuery(){
+  const subject=new URLSearchParams(location.search).get('subject');
+  if(!subject)return;
+  const idx=SUBJECTS.findIndex(s=>s.key===subject);
+  if(idx<0)return;
+  await selectSubject(idx);
+}
 
 renderHome();
+openInitialSubjectFromQuery();
 </script>
 </body>
 </html>
