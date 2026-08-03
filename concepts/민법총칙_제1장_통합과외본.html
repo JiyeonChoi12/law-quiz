@@ -560,29 +560,31 @@
     a { color: inherit; text-decoration: none; }
   }
 
-  .course-tabs {
+  .course-tabs, .chapter-tabs {
     display: inline-flex;
+    flex-wrap: wrap;
     gap: 4px;
-    margin: 0 0 30px;
+    margin: 0 0 12px;
     padding: 4px;
     border: 1px solid var(--line);
     border-radius: 9px;
     background: #eeede7;
     font: 750 12px/1 "Noto Sans KR Local", "Noto Sans KR", sans-serif;
   }
-  .course-tabs a, .course-tabs span {
+  .chapter-tabs { display: flex; width: fit-content; margin-bottom: 30px; }
+  .course-tabs a, .course-tabs span, .chapter-tabs a, .chapter-tabs span {
     display: block;
     padding: 10px 18px;
     border-radius: 6px;
     color: var(--ink-soft);
     text-decoration: none;
   }
-  .course-tabs .active {
+  .course-tabs .active, .chapter-tabs .active {
     color: white;
     background: var(--accent);
   }
   h1[id], h2[id] { scroll-margin-top: 76px; }
-  @media print { .course-tabs { display: none !important; } }
+  @media print { .course-tabs, .chapter-tabs { display: none !important; } }
 
 </style>
 </head>
@@ -612,7 +614,7 @@
     <div class="legend-row"><span class="dot b"></span>연결·비교</div>
   </div>
 </aside>
-<main id="content"><nav class="course-tabs" aria-label="민법 학습 메뉴"><span class="active" aria-current="page">개념</span><a href="../index.html?subject=민법">문제</a></nav><h1>민법총칙 제1장 서론</h1>
+<main id="content"><nav class="course-tabs" aria-label="민법 학습 메뉴"><a class="active" aria-current="page" href="./민법_개념.html">개념</a><a href="../index.html?subject=민법">문제</a></nav><nav class="chapter-tabs" aria-label="민법 개념 장 선택"><span class="active" aria-current="page">제1장 서론</span><a href="./민법총칙_제2장_법률행위에서_당사자요건_통합과외본.html">제2장 당사자요건</a></nav><h1>민법총칙 제1장 서론</h1>
 <h2>정확하게 정리하고, 쉽게 이해하는 통합 과외본</h2>
 <p>대상 범위: 교재 제1장 「서론」 전체</p>
 <hr>
@@ -1568,4 +1570,3 @@
 </script>
 </body>
 </html>
-

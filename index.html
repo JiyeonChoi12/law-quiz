@@ -473,8 +473,12 @@ const SUBJECTS=[
   {key:'세법',icon:'💰',file:'세법.json'},
 ];
 const CONCEPT_PAGES={
-  '민법':'./concepts/민법총칙_제1장_통합과외본.html'
+  '민법':'./concepts/민법_개념.html'
 };
+const CONCEPT_ROUTES=[
+  {prefix:'civil-01-',page:'./concepts/민법총칙_제1장_통합과외본.html'},
+  {prefix:'civil-02-',page:'./concepts/민법총칙_제2장_법률행위에서_당사자요건_통합과외본.html'}
+];
 const CONCEPT_TITLES={
   'civil-01-01':'민법의 대상과 성격',
   'civil-01-02':'민법의 법원',
@@ -496,7 +500,44 @@ const CONCEPT_TITLES={
   'civil-01-18':'취소권자와 취소 방법',
   'civil-01-19':'취소의 효과',
   'civil-01-20':'추인과 법정추인',
-  'civil-01-21':'취소권의 단기제척기간'
+  'civil-01-21':'취소권의 단기제척기간',
+  'civil-02-00':'권리능력·의사능력·행위능력·책임능력',
+  'civil-02-01':'자연인의 권리능력',
+  'civil-02-02':'태아의 권리능력',
+  'civil-02-03':'사망과 동시사망의 추정',
+  'civil-02-04':'외국인의 권리능력',
+  'civil-02-05':'주소·거소·가주소',
+  'civil-02-06':'부재자와 재산관리',
+  'civil-02-07':'실종선고',
+  'civil-02-08':'실종선고 취소와 제3자 보호',
+  'civil-02-09':'법인의 권리주체성',
+  'civil-02-10':'법인의 종류',
+  'civil-02-11':'비영리법인의 허가와 등기',
+  'civil-02-12':'사단법인의 설립과 정관',
+  'civil-02-13':'재단법인의 설립과 출연재산',
+  'civil-02-14':'법인의 권리능력과 행위능력',
+  'civil-02-15':'법인의 불법행위책임',
+  'civil-02-16':'대표권 남용과 계약의 효력',
+  'civil-02-17':'법인의 기관',
+  'civil-02-18':'이사의 대표권 제한과 해임',
+  'civil-02-19':'사원권과 사원총회 결의',
+  'civil-02-20':'법인의 주소와 정관변경',
+  'civil-02-21':'해산과 청산',
+  'civil-02-22':'법인 아닌 사단과 총유',
+  'civil-02-23':'법인 아닌 재단',
+  'civil-02-24':'의사능력과 행위능력',
+  'civil-02-25':'미성년자의 행위능력 원칙',
+  'civil-02-26':'미성년자가 혼자 할 수 있는 행위',
+  'civil-02-27':'법정대리인의 권한과 제한',
+  'civil-02-28':'취소 후 현존이익 반환',
+  'civil-02-29':'제한능력자 상대방의 최고권',
+  'civil-02-30':'상대방의 철회권과 거절권',
+  'civil-02-31':'속임수와 취소권 배제',
+  'civil-02-32':'성년후견과 행위능력',
+  'civil-02-33':'한정후견과 행위능력',
+  'civil-02-34':'특정후견과 행위능력',
+  'civil-02-35':'성년·한정·특정후견 비교',
+  'civil-02-36':'후견의 선임·임무·감독'
 };
 const NUMS=['①','②','③','④','⑤'];
 let quiz=[],cur=0,correct=0,answered=false,wrongList=[],correctList=[];
@@ -558,9 +599,12 @@ function addWN(k,q,myAns){
 function getStats(k){try{return JSON.parse(localStorage.getItem('lq_s_'+k)||'{"a":0,"s":null}');}catch(e){return{a:0,s:null};}}
 function saveStats(k,score){const s=getStats(k);s.a++;s.s=score;try{localStorage.setItem('lq_s_'+k,JSON.stringify(s));}catch(e){}}
 
+function conceptPageFor(conceptId=''){
+  return CONCEPT_ROUTES.find(route=>conceptId.startsWith(route.prefix))?.page||null;
+}
 function openSubjectConcept(conceptId=''){
   const subjectKey=currentSubject?.key||'민법';
-  const page=CONCEPT_PAGES[subjectKey];
+  const page=conceptId?conceptPageFor(conceptId):CONCEPT_PAGES[subjectKey];
   if(!page)return;
   location.href=page+(conceptId?'#'+encodeURIComponent(conceptId):'');
 }
@@ -572,10 +616,13 @@ function getConceptIds(q){
   return q.conceptId?[q.conceptId]:[];
 }
 function conceptLinksHtml(q){
-  const page=CONCEPT_PAGES['민법'];
   const ids=getConceptIds(q).filter(id=>CONCEPT_TITLES[id]);
-  if(!page||!ids.length)return'';
-  return `<div class="concept-links"><span class="concept-links-label">관련 개념</span>${ids.map(id=>`<a class="concept-link" href="${page}#${encodeURIComponent(id)}" target="_blank" rel="noopener">📖 ${CONCEPT_TITLES[id]}</a>`).join('')}</div>`;
+  const links=ids.map(id=>{
+    const page=conceptPageFor(id);
+    return page?`<a class="concept-link" href="${page}#${encodeURIComponent(id)}" target="_blank" rel="noopener">📖 ${CONCEPT_TITLES[id]}</a>`:'';
+  }).join('');
+  if(!links)return'';
+  return `<div class="concept-links"><span class="concept-links-label">관련 개념</span>${links}</div>`;
 }
 
 async function loadSubject(subj){
