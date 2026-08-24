@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>민법총칙 제5장 법률행위의 대리 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  .course-tabs, .chapter-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 12px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #eeede7;
+    font: 750 12px/1 "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+  }
+  .chapter-tabs { display: flex; width: fit-content; margin-bottom: 30px; }
+  .course-tabs a, .course-tabs span, .chapter-tabs a, .chapter-tabs span {
+    display: block;
+    padding: 10px 13px;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .course-tabs .active, .chapter-tabs .active {
+    color: white;
+    background: var(--accent);
+  }
+  h1[id], h2[id] { scroll-margin-top: 76px; }
+  @media print { .course-tabs, .chapter-tabs { display: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CIVIL LAW · CHAPTER 05</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">민법총칙</span>
+    <span class="brand-sub">제5장 법률행위의 대리 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="민법 학습 메뉴"><a class="active" aria-current="page" href="./민법_개념.html">개념</a><a href="../index.html?subject=민법">문제</a></nav><nav class="chapter-tabs" aria-label="민법 개념 장 선택"><a href="./민법총칙_제1장_통합과외본.html">제1장 서론</a><a href="./민법총칙_제2장_법률행위에서_당사자요건_통합과외본.html">제2장 당사자요건</a><a href="./민법총칙_제3장_법률행위의_목적과_효력요건_통합과외본.html">제3장 목적·효력요건</a><a href="./민법총칙_제4장_법률행위에서_의사표시의_요건_통합과외본.html">제4장 의사표시</a><span class="active" aria-current="page">제5장 대리</span><a href="./민법총칙_제6장_조건부_기한부_법률행위와_소멸시효_통합과외본.html">제6장 조건·기한·시효</a></nav><h1>민법총칙 제5장 법률행위의 대리</h1>
+<h2>정확하게 정리하고, 쉽게 이해하는 통합 과외본</h2>
+<p>대상 범위: 교재 제5장 전체 · 스캔 70쪽(교재 221~290쪽)</p>
+<p>기출 연결: 「민법.json」 법률행위의 대리 78문제</p>
+<hr>
+<h2>이 장은 결국 무엇을 설명하는가</h2>
+<p>대리는 <strong>행동한 사람과 계약의 주인이 다른 제도</strong>다. 대리인이 본인의 이름으로 권한 안에서 계약하면 효과는 바로 본인에게 생긴다. 문제는 대리인이 권한을 넘거나, 자기 이익을 챙기거나, 이미 끝난 권한으로 행동했을 때다. 민법은 본인 보호만 하면 거래가 불안해지고, 상대방 보호만 하면 본인이 모르는 계약을 떠안게 되므로 <strong>권한의 외관을 누가 만들었는지와 상대방이 믿을 만했는지</strong>를 따져 위험을 나눈다.</p>
+<blockquote>
+<p><strong>이 장의 한 문장:</strong> 대리인의 행동을 본인의 법률효과로 바꾸는 조건과, 권한 없는 대리에서 본인·상대방·무권대리인 사이의 위험배분을 배우는 장이다.</p>
+</blockquote>
+<h3>왜 이런 제도가 생겼는가</h3>
+<p>사람은 모든 계약을 직접 할 수 없다. 해외에 있거나 전문지식이 부족할 수 있고, 미성년자는 법정대리인의 도움이 필요하다. 대리는 사적 자치를 <strong>확장</strong>하고 <strong>보충</strong>한다. 그러나 다른 사람의 이름을 내세우는 만큼 권한 남용과 위조 위험이 생긴다. 그래서 민법은 대리권·현명·권한 범위를 요구하고, 외관을 믿은 선의·무과실 상대방에게는 표현대리를 인정하며, 그렇지 않으면 본인의 추인과 상대방의 철회·최고, 무권대리인의 책임으로 해결한다.</p>
+<h3>앞뒤 단원 연결</h3>
+<table>
+<thead>
+<tr>
+<th>앞 장</th>
+<th>이 장</th>
+<th>다음 장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>의사표시의 하자를 누가 부담하는가</td>
+<td>타인이 한 의사표시를 누구에게 귀속하는가</td>
+<td>조건·기한으로 효력 시점을 조절하고 소멸시효로 권리의 시간 한계를 정함</td>
+</tr>
+</tbody></table>
+<p>제4장의 사기·강박·착오는 대리행위에서는 원칙적으로 대리인을 기준으로 판단한다. 제3장의 불공정행위는 경솔·무경험을 대리인 기준으로 본다. 뒤의 시효에서는 대리인을 통한 최고·승인과 표현대리 문제도 연결된다.</p>
+<h3>이 장을 모르면 생기는 문제</h3>
+<ul>
+<li>대리인과 사자, 직접대리와 간접대리를 구별하지 못한다.</li>
+<li>위임계약과 대리권 수여를 같은 것으로 본다.</li>
+<li>대리권 범위 안의 남용과 범위 밖의 무권대리를 섞는다.</li>
+<li>자기계약·쌍방대리를 무조건 확정무효라고 고른다.</li>
+<li>제125조·제126조·제129조의 요건을 뒤바꾼다.</li>
+<li>추인·최고·철회·제135조 책임의 주체와 순서를 틀린다.</li>
+</ul>
+<hr>
+<h1>단원 전체 지도</h1>
+<h2>시험 중요도</h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th align="right">중요도</th>
+<th>핵심 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대리의 구조와 현명</td>
+<td align="right">★★★★★</td>
+<td>누구 이름으로 행동했고 효과는 누구에게 생기는가?</td>
+</tr>
+<tr>
+<td>대리인과 사자</td>
+<td align="right">★★★★☆</td>
+<td>효과의사를 누가 결정하는가?</td>
+</tr>
+<tr>
+<td>수권행위와 원인관계</td>
+<td align="right">★★★★☆</td>
+<td>위임이 사라지면 대리권도 소급해 사라지는가?</td>
+</tr>
+<tr>
+<td>대리권 범위</td>
+<td align="right">★★★★★</td>
+<td>수권 내용과 제118조 보충권한은 어디까지인가?</td>
+</tr>
+<tr>
+<td>대리권남용</td>
+<td align="right">★★★★★</td>
+<td>범위 안이지만 배임이면 본인이 책임지는가?</td>
+</tr>
+<tr>
+<td>자기계약·쌍방대리</td>
+<td align="right">★★★★★</td>
+<td>제124조 위반 효과와 예외는?</td>
+</tr>
+<tr>
+<td>대리행위의 하자</td>
+<td align="right">★★★★★</td>
+<td>본인과 대리인 중 누구를 기준으로 보는가?</td>
+</tr>
+<tr>
+<td>복대리</td>
+<td align="right">★★★★☆</td>
+<td>복대리인은 누구의 대리인이고 누가 책임지는가?</td>
+</tr>
+<tr>
+<td>표현대리 3유형</td>
+<td align="right">★★★★★</td>
+<td>표시·권한초과·소멸 후를 구별하는가?</td>
+</tr>
+<tr>
+<td>협의의 무권대리</td>
+<td align="right">★★★★★</td>
+<td>추인·최고·철회·제135조 책임</td>
+</tr>
+</tbody></table>
+<h2 id="civil-05-00" data-concept-id="civil-05-00">대리 전체 판단 순서 ★★★★★</h2>
+<ol>
+<li>대리행위인가, 사자의 전달인가?</li>
+<li>본인을 위한 것임을 표시했는가(현명)?</li>
+<li>대리권이 실제로 존재하는가?</li>
+<li>존재한다면 그 범위 안인가?</li>
+<li>범위 안이어도 대리권남용·자기계약·쌍방대리인가?</li>
+<li>권한이 없다면 제125조·제126조·제129조 표현대리인가?</li>
+<li>표현대리도 아니면 본인의 추인과 상대방의 최고·철회가 있었는가?</li>
+<li>확정 무효이면 무권대리인의 제135조 책임이 성립하는가?</li>
+</ol>
+<hr>
+<h1>제1절 법률행위의 대리와 효력</h1>
+<h2 id="civil-05-01" data-concept-id="civil-05-01">1. 대리의 구조 ★★★★★</h2>
+<p><strong>대리(代理)</strong></p>
+<ul>
+<li>代(대신할 대): 다른 사람을 대신함</li>
+<li>理(다스릴 리): 일을 처리함</li>
+<li>법률상 의미: 대리인이 본인의 이름으로 의사표시를 하고 그 효과가 직접 본인에게 귀속하는 제도</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>관계</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>본인 ↔ 대리인</td>
+<td>수권행위와 위임·고용 등 내부관계</td>
+</tr>
+<tr>
+<td>대리인 ↔ 상대방</td>
+<td>실제 대리행위</td>
+</tr>
+<tr>
+<td>본인 ↔ 상대방</td>
+<td>계약의 권리·의무가 직접 발생</td>
+</tr>
+</tbody></table>
+<p>유권대리는 대리권이 있는 정상 대리, 무권대리는 정당한 대리권이 없는 대리다. 무권대리는 곧바로 확정무효가 아니라 본인의 추인 가능성이 남은 <strong>유동적 무효</strong>다.</p>
+<h2 id="civil-05-02" data-concept-id="civil-05-02">2. 대리와 비슷하지만 다른 제도</h2>
+<table>
+<thead>
+<tr>
+<th>제도</th>
+<th>누구 이름</th>
+<th>효과가 먼저 누구에게</th>
+<th>핵심 차이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>직접대리</td>
+<td>본인 이름</td>
+<td>본인</td>
+<td>민법의 대리</td>
+</tr>
+<tr>
+<td>간접대리</td>
+<td>행위자 자기 이름</td>
+<td>행위자</td>
+<td>나중에 내부관계로 본인에게 이전</td>
+</tr>
+<tr>
+<td>사자</td>
+<td>본인의 완성된 의사 전달</td>
+<td>본인</td>
+<td>의사결정권이 없음</td>
+</tr>
+<tr>
+<td>제3자를 위한 계약</td>
+<td>요약자·낙약자 이름</td>
+<td>계약당사자, 제3자는 수익</td>
+<td>제3자는 대리인이 아님</td>
+</tr>
+<tr>
+<td>법인 대표</td>
+<td>법인의 기관</td>
+<td>법인</td>
+<td>이론상 법인 자신의 행위</td>
+</tr>
+</tbody></table>
+<h3>판례 드라마: 변호사는 사자인가 대리인인가</h3>
+<p>계약 교섭에 변호사가 관여했다. 최종 결정권이 의뢰인에게 남았다는 사실만으로 사자라고 할 수는 없다. 법원은 상대방의 합리적 시각에서 행위자의 자격 표시, 실제 역할, 재량, 전문지식, 보수 규모 등을 종합해 대리인지 사자인지 판단한다(대판 2024. 1. 4. 2023다225580).</p>
+<blockquote>
+<p><strong>분홍 함정:</strong> “본인이 최종 승인했으므로 언제나 사자”는 틀리다. 외부에서 어느 정도 독자적 의사결정권을 가진 것으로 보였는지가 중요하다.</p>
+</blockquote>
+<hr>
+<h1>제2절 유권대리</h1>
+<h2 id="civil-05-03" data-concept-id="civil-05-03">1. 대리권의 발생과 수권행위 ★★★★★</h2>
+<p>법정대리권은 법률 규정·지정행위·법원 선임으로 생긴다. 임의대리권은 본인의 **수권행위(授權行爲)**로 생긴다. 授(줄 수)·權(권세 권)은 권한을 준다는 뜻이다.</p>
+<p>수권행위는 불요식이므로 구두·묵시적으로도 가능하고, 어떤 사람이 대리인 외양으로 행동하는 것을 본인이 알면서 방임한 사실상 용태에서도 추단될 수 있다(대판 2016. 5. 26. 2016다203315). 위임장은 대리권의 존재를 증명하는 서류이지 위임계약 자체와 같은 것은 아니다.</p>
+<h3>사례 1 — 수권행위의 독자성과 무인성</h3>
+<p>甲은 乙의 말에 속아 X 부동산 매도를 위임하고 대리권도 주었다. 乙은 丙에게 시가 2억 원 부동산을 1억 5천만 원에 팔았다. 甲은 사기를 이유로 乙과의 위임계약을 취소했다.</p>
+<p><strong>독자성.</strong> 위임계약은 ‘대리업무를 할 의무’에 관한 내부 채권관계이고, 수권행위는 ‘대외적으로 본인에게 효과를 귀속시킬 권한’을 주는 행위다. 둘은 별개다.</p>
+<p><strong>무인성 논쟁.</strong> 위임이 무효·취소되어도 수권행위가 자동 소급소멸하는지 견해가 갈린다. 거래안전을 중시하는 무인론은 대리권을 유지하고, 유인론은 원인관계와 함께 사라진다고 본다. 다만 유인론도 선의의 상대방 보호를 위해 소급효 제한이나 제129조 유추를 검토한다.</p>
+<p><strong>시험 결론.</strong> 위임 취소만 보고 丙의 소유권을 즉시 부정하지 말고, 수권행위가 별도 취소되었는지·소급효가 제한되는지·표현대리가 성립하는지까지 단계적으로 본다.</p>
+<h2 id="civil-05-04" data-concept-id="civil-05-04">2. 대리권의 범위 ★★★★★</h2>
+<p>수권 내용이 명확하면 해석에 따른다. 불명확한 때 제118조가 보충적으로 허용하는 것은 보존행위와, 물건의 성질을 바꾸지 않는 이용·개량행위다.</p>
+<ul>
+<li>토지매각 권한은 특별한 사정이 없으면 중도금·잔금 수령과 이전등기 권한을 포함한다.</li>
+<li>예금계약 체결 권한에 그 예금을 담보로 대출받거나 처분하는 권한까지 당연히 포함되지 않는다.</li>
+<li>계약 체결 권한이 그 계약의 해제 권한까지 당연히 포함하는 것은 아니다.</li>
+<li>인감증명·등기부등본을 융자 목적으로 주었다고 처분권까지 준 것은 아니다.</li>
+</ul>
+<h3>사례 2 — 대리권남용</h3>
+<p>甲은 乙에게 2억 원짜리 X 부동산 매도권을 주었다. 乙은 친구 丙에게 1억 9천만 원에 팔고 1천만 원 차액을 나누기로 했다.</p>
+<p>외형상 매도권 범위 안이므로 단순 권한초과가 아니다. 그러나 본인 이익이 아니라 자기·제3자 이익을 위한 배임적 행위다. 상대방 丙이 그 사정을 알았거나 알 수 있었다면 제107조 제1항 단서를 유추하여 효과가 본인에게 미치지 않는다(대판 1999. 3. 9. 97다7721 등). 그 외관을 기초로 새 이해관계를 맺은 선의의 제3자는 제107조 제2항 유추로 보호될 수 있다(대판 2018. 4. 26. 2016다3201).</p>
+<blockquote>
+<p><strong>노란 결론:</strong> 대리권남용은 ‘권한 밖’이 아니라 ‘권한 안에서 목적을 배반’한 경우다.</p>
+</blockquote>
+<h2 id="civil-05-05" data-concept-id="civil-05-05">3. 자기계약·쌍방대리 ★★★★★</h2>
+<p><strong>자기계약</strong>은 대리인이 한쪽에서는 본인을 대리하고 다른 쪽에서는 자기 자신으로 계약하는 것, <strong>쌍방대리</strong>는 한 사람이 양쪽 당사자를 모두 대리하는 것이다. 이해충돌 위험 때문에 제124조가 원칙적으로 금지한다.</p>
+<h3>사례 3 — 대리인이 스스로 산 부동산</h3>
+<p>甲의 매도대리인 乙이 매수인을 찾지 못하자 甲을 대리하는 동시에 자기 이름으로 1억 9천만 원에 매수했다. 매도행위라는 외형은 수권 범위 안이지만 제124조 위반이다. 효과는 확정무효가 아니라 <strong>무권대리</strong>이므로 甲이 추인할 수 있다.</p>
+<p>예외는 본인이 허락한 경우와 기존 채무의 단순 이행이다. 대물변제·경개는 새 이해관계를 만들므로 단순 채무이행 예외가 아니다.</p>
+<h2 id="civil-05-06" data-concept-id="civil-05-06">4. 공동대리와 대리권 소멸</h2>
+<p>대리인이 여러 명이면 원칙적으로 각자대리다. 법률·수권행위가 공동대리를 정하면 전원이 의사결정에 참여해야 하지만 실행행위를 모두 동시에 할 필요는 없다. 수동대리는 거래편의를 위해 각자가 수령할 수 있다고 본다.</p>
+<p>대리권은 본인·대리인의 사망, 대리인의 성년후견개시·파산 등 제127조 사유와 원인관계 종료·수권 철회로 소멸한다.</p>
+<h3>사례 4 — 위임계약이 끝난 뒤 매도</h3>
+<p>미국에 살던 甲은 乙에게 X 부동산 매도위임과 대리권을 주었다. 귀국한 甲이 직접 팔려고 위임계약을 해지했지만, 乙은 丙에게 싸게 팔고 등기를 넘겼다.</p>
+<p>원인관계 종료로 대리권도 소멸하므로 유권대리는 아니다. 다만 丙이 과거 대리권의 존재를 알고 있었고 소멸을 선의·무과실로 몰랐다면 제129조 표현대리를 검토한다.</p>
+<h2 id="civil-05-07" data-concept-id="civil-05-07">5. 현명주의 ★★★★★</h2>
+<p>**현명(顯名)**은 顯(나타날 현)·名(이름 명), 본인을 위한 행위임을 나타내는 것이다. 대리인은 반드시 자기 이름을 앞세울 필요는 없지만, 상대방이 누구에게 효과가 귀속하는지 알 수 있게 해야 한다.</p>
+<p>현명하지 않으면 원칙적으로 대리인 자신을 위한 행위로 본다(제115조 본문). 상대방이 대리행위임을 알았거나 알 수 있었으면 본인에게 효력이 생긴다(단서). 상행위는 상법 제48조가 현명주의를 완화한다.</p>
+<blockquote>
+<p><strong>분홍 함정:</strong> 본인 이름을 모용해 마치 본인 자신처럼 사기한 경우에는 특별한 사정 없이 제126조 표현대리가 성립하지 않는다.</p>
+</blockquote>
+<h2 id="civil-05-08" data-concept-id="civil-05-08">6. 대리행위의 하자 ★★★★★</h2>
+<h3>사례 5 — 협박당한 임대대리인</h3>
+<p>甲은 乙에게 X 부동산 임대권을 주었다. 丙이 乙을 협박해 시세보다 훨씬 싼 차임으로 계약하게 했다.</p>
+<p>하자는 대리인 乙을 기준으로 판단한다(제116조 제1항). 하지만 취소권과 계약상 법률효과는 본인 甲에게 귀속한다. 취소 뒤 부당이득반환의 당사자도 계약당사자인 甲과 丙이다. 대리인 乙이 받은 급부가 본인에게 실제 전달되지 않았더라도 원상회복의무는 특별한 사정 없이 본인이 부담한다(대판 2011. 8. 18. 2011다30871).</p>
+<p>본인이 지시한 행위에서는 본인이 알았거나 과실로 몰랐던 사정을 대리인의 선의·무과실로 덮을 수 없다(제116조 제2항).</p>
+<h2 id="civil-05-09" data-concept-id="civil-05-09">7. 대리인의 능력</h2>
+<p>임의대리인은 의사능력만 있으면 되고 행위능력자일 필요가 없다(제117조). 제한능력자를 대리인으로 선택한 위험은 본인이 부담한다. 본인의 권리능력은 필요하지만 대리행위 당시 본인의 의사능력·행위능력은 원칙적으로 필요하지 않는다.</p>
+<h2 id="civil-05-10" data-concept-id="civil-05-10">8. 복대리 ★★★★☆</h2>
+<h3>사례 6 — 부하직원 A가 매도한 경우</h3>
+<p>甲의 매도대리인 乙이 부하직원 A를 복대리인으로 선임했다. A는 X 부동산을 丙에게 정상가격으로 매도했다.</p>
+<ul>
+<li>A는 乙의 대리인이 아니라 <strong>甲의 복대리인</strong>이다.</li>
+<li>A의 권한 내 행위 효과는 甲에게 직접 귀속한다.</li>
+<li>임의대리인 乙은 본인의 승낙이나 부득이한 사유가 있어야 복임할 수 있고, 적법하게 복임했다면 선임·감독상 과실에 책임진다.</li>
+<li>법정대리인은 언제나 복임할 수 있지만 원칙적으로 복대리인의 행위 전부에 책임지고, 부득이한 사유가 있을 때만 선임·감독 과실 책임으로 줄어든다.</li>
+<li>복대리권은 원대리권 범위를 넘을 수 없고 원대리권이 소멸하면 함께 소멸한다.</li>
+</ul>
+<hr>
+<h1>제3절 무권대리와 표현대리</h1>
+<h2 id="civil-05-11" data-concept-id="civil-05-11">1. 표현대리의 공통 논리 ★★★★★</h2>
+<p>**표현대리(表見代理)**는 表(겉 표)·見(볼 견), 겉으로 대리권이 있어 보이는 경우다. 실제 권한은 없지만 본인이 만든 외관을 상대방이 정당하게 믿은 경우 거래안전을 위해 본인에게 효과를 귀속시킨다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>외관의 원인</th>
+<th>상대방 요건</th>
+<th>기억법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제125조</td>
+<td>본인이 대리권을 주었다고 표시</td>
+<td>선의·무과실</td>
+<td>“주었다고 보임”</td>
+</tr>
+<tr>
+<td>제126조</td>
+<td>실제 기본대리권은 있으나 범위를 초과</td>
+<td>초과권한을 믿을 정당한 이유</td>
+<td>“조금 있었는데 넘음”</td>
+</tr>
+<tr>
+<td>제129조</td>
+<td>과거 대리권이 소멸</td>
+<td>소멸을 선의·무과실로 모름</td>
+<td>“있었는데 끝남”</td>
+</tr>
+</tbody></table>
+<p>표현대리는 무권대리의 일종이므로 유권대리 주장만 했다고 표현대리 주장까지 자동 포함되는 것은 아니다. 상대방이 표현대리를 주장해야 한다.</p>
+<h2 id="civil-05-12" data-concept-id="civil-05-12">2. 제125조 — 대리권수여 표시에 의한 표현대리</h2>
+<h3>사례 7 — 사장 행세를 묵인한 직원</h3>
+<p>원단도매상 甲은 직원 乙에게 주문·판매를 전적으로 맡겼다. 乙이 사장 행세하며 거래하는 것을 알면서도 방치했다. 乙은 오랜 거래처 丙에게 甲 이름으로 1억 원 계약을 맺고 선금을 횡령했다.</p>
+<p>실제 대리권 유무와 별도로 甲이 직함·행동을 묵인하여 사회통념상 대리권을 추단할 외관을 만들었는지 본다. 표시된 범위 안의 거래이고 丙이 선의·무과실이면 제125조가 성립해 甲이 원단 제공 책임을 질 수 있다.</p>
+<p>호텔이 판매점·총대리점 명칭으로 회원모집을 허용·묵인한 경우도 대리권수여 표시가 될 수 있다(대판 1998. 6. 12. 97다53762). 반면 단순 중개인에게 회사 명의 영수증도 없이 대금을 지급하고 권한을 확인하지 않았다면 상대방 과실로 표현대리가 부정될 수 있다.</p>
+<h2 id="civil-05-13" data-concept-id="civil-05-13">3. 제126조 — 권한을 넘은 표현대리 ★★★★★</h2>
+<p>기본대리권, 그 범위를 넘은 대리행위, 상대방의 정당한 이유가 필요하다. 기본대리권은 사법행위뿐 아니라 등기신청 같은 공법상 행위도 될 수 있고, 법정대리권도 가능하다. 사실행위 권한만으로는 원칙적으로 기본대리권이 되지 않는다.</p>
+<p><strong>정당한 이유</strong>는 대리행위 당시 제반 사정을 객관적으로 보아 보통 사람이 권한이 있다고 믿을 만하고 상대방에게 과실이 없는 경우다. 인감도장 하나만 믿지 말고 거래규모·등기필증·본인 확인 가능성 등을 본다.</p>
+<h3>판례 대조</h3>
+<ul>
+<li>본인이 보증용 인감 등을 스스로 맡겼고 이전에도 직접 보증확인을 해 준 사정이 있다면 상대방 신뢰가 정당할 수 있다.</li>
+<li>거액의 근저당 설정에서 등기필증도 없고 본인 확인도 하지 않은 채 인감·주민등록증만 믿었다면 정당한 이유가 부정된다.</li>
+<li>일상가사대리권은 기본대리권이 될 수 있지만 배우자의 중요 부동산 처분·거액 보증은 이례적이므로 정당한 이유를 더 엄격히 본다.</li>
+</ul>
+<p>표현대리가 성립하면 본인은 전적인 계약책임을 지며 상대방 과실을 이유로 과실상계해 책임을 줄일 수 없다.</p>
+<h2 id="civil-05-14" data-concept-id="civil-05-14">4. 제129조 — 대리권 소멸 후 표현대리</h2>
+<h3>사례 8 — 퇴직한 자재과장</h3>
+<p>甲 회사의 자재과장 乙은 丙과 오래 거래하다 퇴직했다. 이를 모르는 丙은 乙의 새 주문을 정상 거래로 믿고 자재를 공급했다.</p>
+<p>과거에 실제 대리권이 있었고, 새 거래가 과거 권한 범위 안이며, 丙이 소멸을 선의·무과실로 몰랐다면 제129조가 성립한다. 과거 권한 범위까지 넘었다면 제126조와의 경합을 검토한다. 대리권 소멸 후 선임한 복대리인의 행위도 상대방이 선의·무과실이면 제129조가 성립할 수 있다(대판 1998. 5. 29. 97다55317).</p>
+<hr>
+<h1>협의의 무권대리</h1>
+<h2 id="civil-05-15" data-concept-id="civil-05-15">1. 사례 9 — 훔친 등기서류로 건물을 판 친구</h2>
+<p>乙은 친구 甲의 등기서류를 훔쳐 甲의 대리인인 것처럼 丙에게 건물을 팔았다. 甲은 나중에 매매대금 일부를 乙에게서 받았다가 “무권대리이니 무효”라고 했다.</p>
+<p><strong>첫 질문:</strong> 乙에게 권한은 없다. 표현대리도 본인이 외관을 만들지 않았다면 어렵다.</p>
+<p><strong>둘째 질문:</strong> 甲이 무권대리 사실을 알고 매매대금 일부를 받았다면 묵시적 추인으로 평가될 가능성이 크다. 추인이 인정되면 처음부터 유효했던 것처럼 소급한다. 단순히 알고도 오래 침묵했다는 사실만으로는 반드시 추인은 아니다.</p>
+<h2 id="civil-05-16" data-concept-id="civil-05-16">2. 본인과 상대방의 권리 ★★★★★</h2>
+<table>
+<thead>
+<tr>
+<th>주체</th>
+<th>권리</th>
+<th>요건·효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>본인</td>
+<td>추인</td>
+<td>상대방·무권대리인 또는 승계인에게 명시·묵시 가능, 원칙 소급효</td>
+</tr>
+<tr>
+<td>본인</td>
+<td>추인거절</td>
+<td>확정적 무효</td>
+</tr>
+<tr>
+<td>상대방</td>
+<td>최고</td>
+<td>선의·악의 불문, 상당기간 답이 없으면 추인거절 간주</td>
+</tr>
+<tr>
+<td>상대방</td>
+<td>철회</td>
+<td>계약 당시 선의인 상대방만, 본인 추인 전 가능</td>
+</tr>
+</tbody></table>
+<p>추인은 상대방뿐 아니라 무권대리인에게도 할 수 있다. 다만 무권대리인에게 한 추인은 상대방이 알기 전까지 상대방에게 대항하지 못한다. 일부추인·변경추인은 상대방 동의 없이는 무효다.</p>
+<h2 id="civil-05-17" data-concept-id="civil-05-17">3. 무권대리인의 제135조 책임 ★★★★★</h2>
+<p>본인의 추인을 얻지 못하고 대리권을 증명하지 못한 무권대리인은 상대방 선택에 따라 계약 이행 또는 손해배상 책임을 진다. 과실을 요구하지 않는 법정 무과실책임이다. 제3자의 기망·문서위조 때문에 무권대리가 생겼어도 원칙적으로 책임은 부정되지 않는다(대판 2014. 2. 27. 2013다213038).</p>
+<p>상대방이 계약의 이행을 선택하면 무권대리인은 본인이 부담했을 것과 같은 채무를 진다. 계약에 손해배상액 예정이 있으면 그 조항도 적용된다(대판 2018. 6. 28. 2018다210775).</p>
+<p><strong>책임 제외:</strong> 상대방이 대리권 없음을 알았거나 알 수 있었던 경우, 무권대리인이 제한능력자인 경우. 상대방이 먼저 계약을 철회해 확정무효로 만들면 제135조 책임도 물을 수 없다.</p>
+<h2 id="civil-05-18" data-concept-id="civil-05-18">4. 상속과 신의칙</h2>
+<p>무권대리인이 나중에 본인의 부동산을 상속해 이행할 수 있게 된 뒤 자기 무권대리행위를 이유로 전득자 등기를 말소하라고 하는 것은 금반언·신의칙에 반할 수 있다(대판 1994. 9. 27. 94다20617).</p>
+<h2 id="civil-05-19" data-concept-id="civil-05-19">5. 단독행위의 무권대리</h2>
+<p>상대방 있는 단독행위는 원칙 무효이고 제136조가 정한 동의·무다툼이 있을 때만 계약 무권대리 규정을 준용한다. 상대방 없는 단독행위의 무권대리는 언제나 무효이며 사후 추인으로 살릴 수 없다.</p>
+<hr>
+<h1>교재 문단별 독해 가이드</h1>
+<table>
+<thead>
+<tr>
+<th>범위</th>
+<th>교수의 의도</th>
+<th>시험 키워드</th>
+<th>한 줄 요약</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>222~229쪽</td>
+<td>대리 구조와 유사제도 구별</td>
+<td>직접·간접, 사자</td>
+<td>효과의사를 누가 정하는지 보라</td>
+</tr>
+<tr>
+<td>230~234쪽</td>
+<td>대리권 발생과 내부관계 분리</td>
+<td>수권, 독자성, 무인성</td>
+<td>위임과 대리권은 같은 것이 아님</td>
+</tr>
+<tr>
+<td>235~241쪽</td>
+<td>권한 범위와 이해충돌 통제</td>
+<td>남용, 자기계약, 쌍방대리</td>
+<td>범위 안 배임과 범위 밖을 구별</td>
+</tr>
+<tr>
+<td>242~249쪽</td>
+<td>소멸·현명</td>
+<td>제127·128·114·115조</td>
+<td>누구 이름으로 누구에게 효과가 생기는가</td>
+</tr>
+<tr>
+<td>250~256쪽</td>
+<td>하자·능력·복대리</td>
+<td>제116·117·120~123조</td>
+<td>하자는 대리인, 효과는 본인</td>
+</tr>
+<tr>
+<td>257~266쪽</td>
+<td>표현대리 일반과 제125조</td>
+<td>표시, 선의·무과실</td>
+<td>본인이 만든 외관의 책임</td>
+</tr>
+<tr>
+<td>267~275쪽</td>
+<td>제126조</td>
+<td>기본대리권, 정당한 이유</td>
+<td>조금 가진 권한을 넘은 경우</td>
+</tr>
+<tr>
+<td>276~278쪽</td>
+<td>제129조</td>
+<td>과거 권한, 소멸</td>
+<td>있었던 권한이 끝난 경우</td>
+</tr>
+<tr>
+<td>279~290쪽</td>
+<td>협의의 무권대리</td>
+<td>추인·최고·철회·제135조</td>
+<td>유동적 무효의 운명을 정함</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>기출 연결 — 가장 중요한 문제 TOP 5</h1>
+<h2>TOP 1 · 민법_238 자기계약·쌍방대리</h2>
+<p>자기계약, 쌍방대리, 위반 시 무권대리행위, 예외는 채무이행이므로 <strong>정답 ②</strong>. ‘무효’라고 바로 고르는 보기와 대물변제를 단순 이행으로 보는 보기가 함정이다.</p>
+<h2>TOP 2 · 민법_248 대리행위 하자</h2>
+<p>① 임대권 범위 안. ② 하자는 乙 기준. ③ 취소권은 본인 甲에게 생기므로 乙이 자기 권리로 취소할 수 없음. ④ <strong>틀림.</strong> 본인 甲만 협박당하고 실제 표시자는 乙이면 강박 의사표시가 성립하지 않는다. ⑤ 甲은 乙에 대한 강박을 이유로 취소 가능. <strong>정답 ④.</strong></p>
+<h2>TOP 3 · 민법_272 제126조</h2>
+<p>① 무권한 복대리인의 권한도 기본대리권이 될 수 있어 틀림. ② <strong>정답.</strong> 등기신청권 같은 공법상 권한도 기본대리권 가능. ③ 법정대리에도 적용 가능. ④ 정당한 이유는 대리행위 당시 판단. ⑤ 과실상계로 본인 책임 감경 불가. <strong>정답 ②.</strong></p>
+<h2>TOP 4 · 민법_282 추인·철회</h2>
+<p>① 상당기간 최고와 무응답=거절 간주. ② 악의 상대방은 철회 못함. ③ <strong>틀림.</strong> 丁 같은 법률관계 승계인에게도 추인 표시 가능. ④ 상대방이 추인을 안 뒤에는 철회 못함. ⑤ 상대방에게 과실이 있으면 제135조 책임 제한. <strong>정답 ③.</strong></p>
+<h2>TOP 5 · 민법_287 무권대리인 책임</h2>
+<p>ㄱ 제135조는 무과실책임이므로 ×. ㄴ 손해배상액 예정도 적용되므로 ×. ㄷ 추인은 명시·묵시, 당사자·승계인에게 가능하므로 ○. ㄹ 상대방의 악의를 본인이 증명하므로 ×. <strong>정답 ① ‘ㄷ’.</strong></p>
+<hr>
+<h1>새 사례형 응용문제 5개</h1>
+<h2>문제 1</h2>
+<p>甲은 乙에게 X 토지 매도권을 주었고 최저가격 5억 원은 내부에서만 지시했다. 乙은 그 지시를 어겨 선의의 丙에게 4억 8천만 원에 팔았다. 효과는?</p>
+<p><strong>정답:</strong> 최저가격 제한이 대외적 대리권 범위 제한인지 내부지시인지 해석한다. 단순 내부지시 위반이면 원칙적으로 본인에게 효과가 귀속하고 乙의 내부책임이 문제된다. <strong>의도:</strong> 대리권 범위와 내부의무 구별.</p>
+<h2>문제 2</h2>
+<p>대리인 乙이 본인 甲에게 갚아야 할 확정채무를 甲을 대리해 자기에게서 수령 처리했다. 제124조 위반인가?</p>
+<p><strong>정답:</strong> 기존 채무의 단순 이행이면 자기계약 금지의 예외가 될 수 있다. <strong>의도:</strong> 대물변제와 단순 이행 구별.</p>
+<h2>문제 3</h2>
+<p>甲이 乙에게 임대권만 주었는데 乙이 丙에게 건물을 매도했다. 丙은 위임장에 ‘임대관리’라고 명확히 적힌 것을 읽지 않았다. 제126조가 성립하는가?</p>
+<p><strong>정답:</strong> 기본대리권은 있으나 상대방에게 권한초과를 믿을 정당한 이유가 없으므로 부정될 가능성이 크다. <strong>의도:</strong> 기본대리권만으로 충분하지 않음.</p>
+<h2>문제 4</h2>
+<p>무권대리 계약 후 상대방 丙이 본인 甲에게 10일 안에 답하라고 최고했다. 甲이 침묵했고 그 뒤 추인하려 한다. 가능한가?</p>
+<p><strong>정답:</strong> 상당기간 내 확답이 없으면 추인을 거절한 것으로 보아 확정무효가 된다. <strong>의도:</strong> 최고와 추인 순서.</p>
+<h2>문제 5</h2>
+<p>제한능력자 乙이 성인이라고 속이고 甲의 무권대리인으로 계약했다. 상대방은 제135조 이행책임을 청구할 수 있는가?</p>
+<p><strong>정답:</strong> 제135조 제2항은 무권대리인이 제한능력자인 경우 책임을 배제한다. 제한능력자 보호규정의 별도 속임수 효과는 따로 검토한다. <strong>의도:</strong> 무과실책임의 예외.</p>
+<hr>
+<h1>시험 직전 A4 한 장 암기노트</h1>
+<ol>
+<li>대리=대리인이 본인 이름으로 행동, 효과는 본인에게 직접.</li>
+<li>사자=본인이 정한 의사를 전달, 대리인=효과의사를 스스로 결정.</li>
+<li>수권행위와 위임계약은 별개.</li>
+<li>대리권남용=범위 안 배임, 상대방 악의·과실이면 제107조 단서 유추.</li>
+<li>자기계약·쌍방대리 위반=무권대리, 예외=본인 허락·단순 채무이행.</li>
+<li>현명 없으면 대리인 자신의 행위, 상대방이 대리임을 알았거나 알 수 있으면 예외.</li>
+<li>대리행위 하자는 대리인 기준, 취소권·효과는 본인.</li>
+<li>복대리인은 본인의 대리인.</li>
+<li>125=표시, 126=권한초과+정당한 이유, 129=소멸 후+선의무과실.</li>
+<li>무권대리=유동적 무효. 본인 추인, 상대방 최고·철회, 대리인 제135조 책임.</li>
+</ol>
+<h2>반드시 외울 문장</h2>
+<blockquote>
+<p>권한 안에서 나쁜 마음은 대리권남용, 권한 밖에서 한 행위는 무권대리다.</p>
+</blockquote>
+<blockquote>
+<p>표현대리는 본인이 만든 권한 외관을 정당하게 믿은 상대방을 보호하는 제도다.</p>
+</blockquote>
+<blockquote>
+<p>최고는 악의도 가능, 철회는 선의만 가능, 제135조는 무과실책임이다.</p>
+</blockquote>
+<h2>TOP 3</h2>
+<ol>
+<li>대리권남용·자기계약·권한초과 구별</li>
+<li>제125조·제126조·제129조 비교</li>
+<li>추인·최고·철회·제135조의 시간순서</li>
+</ol>
+<hr>
+<h1>학습 상태 진단</h1>
+<ul>
+<li>🟢 <strong>이해 완료:</strong> 수권·남용·자기계약·현명·복대리·표현대리·무권대리 사례를 판단순서대로 풀 수 있다.</li>
+<li>🟡 <strong>복습 필요:</strong> 표현대리 결론은 알지만 세 조문의 외관 원인을 바꾼다.</li>
+<li>🔴 <strong>이해 부족:</strong> 무권대리를 즉시 무효라 하거나 자기계약을 추인 불가능한 확정무효라 한다.</li>
+</ul>
+<h2>반드시 복습할 TOP 3</h2>
+<ol>
+<li>수권행위와 원인관계</li>
+<li>표현대리 세 유형과 정당한 이유</li>
+<li>협의의 무권대리의 유동적 무효 구조</li>
+</ol>
+<blockquote>
+<p>이 장은 조문을 따로 외우면 뒤섞인다. “권한이 있었는가 → 외관을 누가 만들었는가 → 누가 먼저 추인·철회했는가”라는 한 줄 흐름으로 모든 사례를 풀어야 한다.</p>
+</blockquote>
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '민법총칙 · CHAPTER 05' : 'PART · CIVIL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(민법총칙 · CHAPTER 05|PART · CIVIL LAW)/, '')
+      .replace(/★+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>
