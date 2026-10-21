@@ -1,0 +1,108 @@
+{
+  "course": "소비자법",
+  "courseId": "KNOU2511001",
+  "checkedAt": "2026-10-22",
+  "sourceKind": "사용자가 지정한 로컬 ZIP만 사용",
+  "archiveName": "소비자법_기출문제_2012-2019_정답포함.zip",
+  "publishedFile": "data/소비자법.json",
+  "publishedQuestionCount": 175,
+  "preservedFormativeCount": 63,
+  "answerPolicy": "공식 정답표의 해당 연도 소비자법 행과 원문 번호 36~70을 순서대로 대조. 공식 해설은 미제공이므로 생성하지 않음.",
+  "imagePolicy": "2015/2017/2018/2019년은 OCR 오류를 정답 지문으로 게시하지 않고 문항별 원문 이미지로 제시. 2015년 57번의 다음 단 계속 부분, 2017년 49~52번의 공통지문을 포함.",
+  "topicPolicy": "기존 형성평가 강의 태그를 우선 사용. 현 강의 제목에 직접 대응하지 않는 표시·광고 및 협동조합은 구교재 범위로 구분.",
+  "attachments": [
+    {
+      "year": 2012,
+      "name": "소비자법_2012_2학기_기말시험.hwp",
+      "sha256": "77f0a227627fc1bbe90f6aaf9704a19036f2372588dfcd531d36abd04f51df5d",
+      "published": false,
+      "publishedQuestionCount": 0,
+      "status": "미반영",
+      "reason": "HWP 문제 원문 추출 미완료. 제공된 공식 정답표에 해당 연도가 없어 정답 확인도 필요."
+    },
+    {
+      "year": 2013,
+      "name": "소비자법_2013_2학기_기말시험.hwp",
+      "sha256": "3ceb9fbb038f4a4b201b413efaab097be6c7ddbf56d3a7efe3ea90924ec997f9",
+      "published": false,
+      "publishedQuestionCount": 0,
+      "status": "미반영",
+      "reason": "HWP 문제 원문 추출 미완료. 제공된 공식 정답표에 해당 연도가 없어 정답 확인도 필요."
+    },
+    {
+      "year": 2014,
+      "name": "소비자법_2014_2학기_기말시험.hwp",
+      "sha256": "8857df51f03e1dae8db59ae4cdb6812d6135b9d52d6e40afc38f8dc5b5d6d1eb",
+      "published": false,
+      "publishedQuestionCount": 0,
+      "status": "미반영",
+      "reason": "한글에서 정상 열람 성공. 인쇄 창 연결 오류(failed to activate captured window)가 재시도에도 발생해 PDF 저장 실패. 공식 정답표는 있으나 문제 원문 추출 미완료."
+    },
+    {
+      "year": 2015,
+      "name": "소비자법_2015_2학기_기말시험.pdf",
+      "sha256": "800c4c945c9ff094b41ff3a41edd6a988db138d54020c0907fa7a9187ab85124",
+      "published": true,
+      "questionCount": 35,
+      "publishedQuestionCount": 35,
+      "answerStatus": "공식 정답표 대조 완료",
+      "contentFormat": "original-question-image"
+    },
+    {
+      "year": 2016,
+      "name": "소비자법_2016_2학기_기말시험.pdf",
+      "sha256": "c1c55db2ce9c69636c3f0434253ea4c6879e5668be3e635ce2091a038f295296",
+      "published": true,
+      "questionCount": 35,
+      "publishedQuestionCount": 35,
+      "answerStatus": "공식 정답표 대조 완료",
+      "contentFormat": "text"
+    },
+    {
+      "year": 2017,
+      "name": "소비자법_2017_2학기_기말시험.pdf",
+      "sha256": "4eeab0d03a1f50656b14fd30e75e2df2bf37265d92c73728de63d5c1524b3d8a",
+      "published": true,
+      "questionCount": 35,
+      "publishedQuestionCount": 35,
+      "answerStatus": "공식 정답표 대조 완료",
+      "contentFormat": "original-question-image"
+    },
+    {
+      "year": 2018,
+      "name": "소비자법_2018_2학기_기말시험.pdf",
+      "sha256": "79e005670440a8611b12ddeb3de002a124e0426f0f661dc50f5c302163053e5e",
+      "published": true,
+      "questionCount": 35,
+      "publishedQuestionCount": 35,
+      "answerStatus": "공식 정답표 대조 완료",
+      "contentFormat": "original-question-image"
+    },
+    {
+      "year": 2019,
+      "name": "소비자법_2019_2학기_기말시험.pdf",
+      "sha256": "2d66c11858cabc899d347689e6a32c168380ddd0b0a2b3446d95c186a0400309",
+      "published": true,
+      "questionCount": 35,
+      "publishedQuestionCount": 35,
+      "answerStatus": "공식 정답표 대조 완료",
+      "contentFormat": "original-question-image"
+    }
+  ],
+  "answerKey": {
+    "name": "공식정답표_법학과_2014-2019.pdf",
+    "sha256": "57efeb20e541d05a537536a28985d83d93518373078a11d6a6c94fb4d14a8404",
+    "rows": {
+      "2014": "43311234121342134114433212322431431",
+      "2015": "44441231233411342332341124343213234",
+      "2016": "11432243214323142413132321423422341",
+      "2017": "11423134224223334221332243441342441",
+      "2018": "34231441121324143221144341332121414",
+      "2019": "43123144331212212423113311221314234"
+    },
+    "questionNumberRange": [
+      36,
+      70
+    ]
+  }
+}
