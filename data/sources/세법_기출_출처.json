@@ -1,0 +1,40 @@
+{
+  "course": "세법",
+  "courseId": "KNOU2301001",
+  "board": "U-KNOU 강의자료실",
+  "postId": 155723,
+  "postTitle": "[참고자료] 세법 기출문제",
+  "postedAt": "2024-10-29",
+  "checkedAt": "2026-10-21",
+  "notice": [
+    "지금 올려드리는 기출문제는 법령개정 등으로 인해 정오답이 다를 수 있습니다.",
+    "해당 기출문제는 출제경향으로만 참고하셔야 합니다. 기출문제와 같이 출제되지 않을 수 있음을 반드시 인지하시길 바랍니다.",
+    "학우님들께서는 반드시 세법 멀티미디어 강의와 강의교안을 중점으로 공부하시길 권고드립니다."
+  ],
+  "separateAnswerPost": "기출문제정답 분류 검색 결과 게시글 없음",
+  "attachments": [
+    {
+      "name": "2021기말고사(세법).hwp",
+      "savedFileId": "1730186668422.hwp",
+      "year": 2021,
+      "questionCount": 75,
+      "answerStatus": "원문 문항별 괄호에 표시된 정답을 그대로 사용",
+      "explanationStatus": "별도 해설 없음. 생성 해설을 추가하지 않음",
+      "publishedFile": "data/세법.json",
+      "localPdf": "세법 시험 자료 2.pdf",
+      "validation": "공식 HWP와 기존 PDF의 75문항 지문·보기·정답 전부 대조. 공백·줄바꿈·목록 기호를 제외한 내용 일치"
+    },
+    {
+      "name": "094-세법-4학년-2교시-(4p).hwp",
+      "savedFileId": "1730186782347.hwp",
+      "year": 2019,
+      "semester": 2,
+      "questionCount": 35,
+      "answerStatus": "공식 정답 미제공. 추정 정답을 넣지 않음",
+      "explanationStatus": "없음",
+      "pendingFile": "data/pending/세법_2019_정답미확인.json",
+      "localPdf": "세법 시험 자료 1.pdf",
+      "published": false
+    }
+  ]
+}
