@@ -30,11 +30,16 @@
       "year": 2019,
       "semester": 2,
       "questionCount": 35,
-      "answerStatus": "공식 정답 미제공. 추정 정답을 넣지 않음",
-      "explanationStatus": "없음",
+      "answerStatus": "사용자 요청으로 34문항 자체 풀이 정답 추가. 공식 정답 아님. 31번은 보기 해석 문제로 단일 정답 채점 보류",
+      "explanationStatus": "34문항 자체 해설·예외 및 개정 주의 작성. 공식 해설 아님",
       "pendingFile": "data/pending/세법_2019_정답미확인.json",
       "localPdf": "세법 시험 자료 1.pdf",
-      "published": false
+      "published": true,
+      "publishedFile": "data/세법.json",
+      "publishedQuestionCount": 34,
+      "pendingQuestionCount": 1,
+      "reviewedAt": "2026-10-21",
+      "reviewPolicy": "외부 문제집이나 추정 공식 정답을 사용하지 않음. 기존 공식 지문·보기 유지. 참고 법령·판례로 자체 풀이. 전 문항의 모든 역사적 특례를 전수 확정한 공식 해설이 아님"
     }
   ]
 }
