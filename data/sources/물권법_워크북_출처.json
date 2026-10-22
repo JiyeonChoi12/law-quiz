@@ -1,0 +1,2075 @@
+{
+  "subject": "물권법",
+  "category": "워크북",
+  "sourceType": "사용자가 제공한 촬영 영상",
+  "sourceFile": "녹음 2026-10-22 001228.mp4",
+  "sourceSha256": "24bd1aa7a0b6b942e2457c233e0e76fed7db0e0000396c238ea4144d41f9843a",
+  "sourceBytes": 757687314,
+  "processedDate": "2026-10-22",
+  "printedPageRange": [
+    5,
+    194
+  ],
+  "questionCount": 235,
+  "contentFormat": "text",
+  "answerKey": "1353223522253114452521424112431545124322454415555552335332225211452121434535433512414333113342514211135412452554124435224131133425325322315314442422125524214333453312233545552324142543433515211251435345445512443234231535443343552354212",
+  "answerVerification": "235개 인쇄 정답을 영상에서 확인. 별도 OCR로 판독된 정답값은 전부 일치 검사.",
+  "independentOcrAnswerCount": 188,
+  "transcriptionNotes": [
+    "본문·보기·정답·해설을 텍스트로 전사. 조합형 보기와 표를 읽기 순서에 맞게 선형화.",
+    "띄어쓰기와 판독 오자를 정리했으며 정답·법률 내용은 원문 기준. 최신 법령에 따른 자체 풀이로 대체하지 않음.",
+    "원문에 반복 수록된 문항도 페이지별로 보존.",
+    "기존 형성평가 123문항과 태그명을 변경하지 않음."
+  ],
+  "topicCounts": {
+    "물권관계총론": 20,
+    "물권변동의 기초이론": 25,
+    "등기의 특수문제와 비법률행위에 기한 물권변동": 12,
+    "동산물권등의 변동과 물권의 소멸": 14,
+    "점유권 1": 6,
+    "점유권 2": 4,
+    "소유권": 23,
+    "공동소유와 명의신탁": 15,
+    "지상권": 17,
+    "지역권과 전세권 1": 7,
+    "전세권 2": 9,
+    "유치권": 19,
+    "질권과 저당권 1": 22,
+    "저당권 2": 20,
+    "저당권 3과 비전형담보": 22
+  },
+  "questions": [
+    {
+      "id": "물권법_워크북_001",
+      "printedPages": [
+        5
+      ],
+      "startVideoSeconds": 488.5,
+      "answerPage": 5
+    },
+    {
+      "id": "물권법_워크북_002",
+      "printedPages": [
+        5,
+        6
+      ],
+      "startVideoSeconds": 488.5,
+      "answerPage": 6
+    },
+    {
+      "id": "물권법_워크북_003",
+      "printedPages": [
+        6
+      ],
+      "startVideoSeconds": 489.5,
+      "answerPage": 6
+    },
+    {
+      "id": "물권법_워크북_004",
+      "printedPages": [
+        7
+      ],
+      "startVideoSeconds": 490.5,
+      "answerPage": 7
+    },
+    {
+      "id": "물권법_워크북_005",
+      "printedPages": [
+        7,
+        8
+      ],
+      "startVideoSeconds": 490.5,
+      "answerPage": 7
+    },
+    {
+      "id": "물권법_워크북_006",
+      "printedPages": [
+        8
+      ],
+      "startVideoSeconds": 491.5,
+      "answerPage": 8
+    },
+    {
+      "id": "물권법_워크북_007",
+      "printedPages": [
+        9
+      ],
+      "startVideoSeconds": 492.5,
+      "answerPage": 9
+    },
+    {
+      "id": "물권법_워크북_008",
+      "printedPages": [
+        9,
+        10
+      ],
+      "startVideoSeconds": 492.5,
+      "answerPage": 9
+    },
+    {
+      "id": "물권법_워크북_009",
+      "printedPages": [
+        10,
+        11
+      ],
+      "startVideoSeconds": 493.5,
+      "answerPage": 11
+    },
+    {
+      "id": "물권법_워크북_010",
+      "printedPages": [
+        11,
+        12
+      ],
+      "startVideoSeconds": 494.5,
+      "answerPage": 12
+    },
+    {
+      "id": "물권법_워크북_011",
+      "printedPages": [
+        12
+      ],
+      "startVideoSeconds": 495.5,
+      "answerPage": 12
+    },
+    {
+      "id": "물권법_워크북_012",
+      "printedPages": [
+        12,
+        13
+      ],
+      "startVideoSeconds": 495.5,
+      "answerPage": 13
+    },
+    {
+      "id": "물권법_워크북_013",
+      "printedPages": [
+        13
+      ],
+      "startVideoSeconds": 496.5,
+      "answerPage": 13
+    },
+    {
+      "id": "물권법_워크북_014",
+      "printedPages": [
+        13,
+        14
+      ],
+      "startVideoSeconds": 496.5,
+      "answerPage": 14
+    },
+    {
+      "id": "물권법_워크북_015",
+      "printedPages": [
+        14
+      ],
+      "startVideoSeconds": 497.5,
+      "answerPage": 14
+    },
+    {
+      "id": "물권법_워크북_016",
+      "printedPages": [
+        15
+      ],
+      "startVideoSeconds": 498.5,
+      "answerPage": 15
+    },
+    {
+      "id": "물권법_워크북_017",
+      "printedPages": [
+        15,
+        16
+      ],
+      "startVideoSeconds": 498.5,
+      "answerPage": 15
+    },
+    {
+      "id": "물권법_워크북_018",
+      "printedPages": [
+        17,
+        18
+      ],
+      "startVideoSeconds": 500.5,
+      "answerPage": 17
+    },
+    {
+      "id": "물권법_워크북_019",
+      "printedPages": [
+        18,
+        19
+      ],
+      "startVideoSeconds": 501.5,
+      "answerPage": 18
+    },
+    {
+      "id": "물권법_워크북_020",
+      "printedPages": [
+        19,
+        20,
+        21
+      ],
+      "startVideoSeconds": 502.5,
+      "answerPage": 19
+    },
+    {
+      "id": "물권법_워크북_021",
+      "printedPages": [
+        21
+      ],
+      "startVideoSeconds": 504.5,
+      "answerPage": 21
+    },
+    {
+      "id": "물권법_워크북_022",
+      "printedPages": [
+        22
+      ],
+      "startVideoSeconds": 505.5,
+      "answerPage": 22
+    },
+    {
+      "id": "물권법_워크북_023",
+      "printedPages": [
+        22,
+        23
+      ],
+      "startVideoSeconds": 505.5,
+      "answerPage": 23
+    },
+    {
+      "id": "물권법_워크북_024",
+      "printedPages": [
+        23
+      ],
+      "startVideoSeconds": 506.5,
+      "answerPage": 23
+    },
+    {
+      "id": "물권법_워크북_025",
+      "printedPages": [
+        24
+      ],
+      "startVideoSeconds": 508.5,
+      "answerPage": 24
+    },
+    {
+      "id": "물권법_워크북_026",
+      "printedPages": [
+        24,
+        25
+      ],
+      "startVideoSeconds": 508.5,
+      "answerPage": 25
+    },
+    {
+      "id": "물권법_워크북_027",
+      "printedPages": [
+        25,
+        26
+      ],
+      "startVideoSeconds": 508.5,
+      "answerPage": 25
+    },
+    {
+      "id": "물권법_워크북_028",
+      "printedPages": [
+        26
+      ],
+      "startVideoSeconds": 509.5,
+      "answerPage": 26
+    },
+    {
+      "id": "물권법_워크북_029",
+      "printedPages": [
+        27
+      ],
+      "startVideoSeconds": 510.5,
+      "answerPage": 27
+    },
+    {
+      "id": "물권법_워크북_030",
+      "printedPages": [
+        27,
+        28
+      ],
+      "startVideoSeconds": 510.5,
+      "answerPage": 27
+    },
+    {
+      "id": "물권법_워크북_031",
+      "printedPages": [
+        28
+      ],
+      "startVideoSeconds": 511.5,
+      "answerPage": 28
+    },
+    {
+      "id": "물권법_워크북_032",
+      "printedPages": [
+        28,
+        29
+      ],
+      "startVideoSeconds": 511.5,
+      "answerPage": 29
+    },
+    {
+      "id": "물권법_워크북_033",
+      "printedPages": [
+        29,
+        30
+      ],
+      "startVideoSeconds": 512.5,
+      "answerPage": 30
+    },
+    {
+      "id": "물권법_워크북_034",
+      "printedPages": [
+        30
+      ],
+      "startVideoSeconds": 513.5,
+      "answerPage": 30
+    },
+    {
+      "id": "물권법_워크북_035",
+      "printedPages": [
+        31
+      ],
+      "startVideoSeconds": 514.5,
+      "answerPage": 31
+    },
+    {
+      "id": "물권법_워크북_036",
+      "printedPages": [
+        31,
+        32
+      ],
+      "startVideoSeconds": 514.5,
+      "answerPage": 32
+    },
+    {
+      "id": "물권법_워크북_037",
+      "printedPages": [
+        32,
+        33
+      ],
+      "startVideoSeconds": 515.5,
+      "answerPage": 33
+    },
+    {
+      "id": "물권법_워크북_038",
+      "printedPages": [
+        33
+      ],
+      "startVideoSeconds": 516.5,
+      "answerPage": 33
+    },
+    {
+      "id": "물권법_워크북_039",
+      "printedPages": [
+        33,
+        34
+      ],
+      "startVideoSeconds": 516.5,
+      "answerPage": 34
+    },
+    {
+      "id": "물권법_워크북_040",
+      "printedPages": [
+        34,
+        35
+      ],
+      "startVideoSeconds": 517.5,
+      "answerPage": 34
+    },
+    {
+      "id": "물권법_워크북_041",
+      "printedPages": [
+        35,
+        36
+      ],
+      "startVideoSeconds": 518.5,
+      "answerPage": 35
+    },
+    {
+      "id": "물권법_워크북_042",
+      "printedPages": [
+        36,
+        37
+      ],
+      "startVideoSeconds": 519.5,
+      "answerPage": 36
+    },
+    {
+      "id": "물권법_워크북_043",
+      "printedPages": [
+        37
+      ],
+      "startVideoSeconds": 520.5,
+      "answerPage": 37
+    },
+    {
+      "id": "물권법_워크북_044",
+      "printedPages": [
+        37,
+        38
+      ],
+      "startVideoSeconds": 520.5,
+      "answerPage": 38
+    },
+    {
+      "id": "물권법_워크북_045",
+      "printedPages": [
+        38,
+        39
+      ],
+      "startVideoSeconds": 521.5,
+      "answerPage": 39
+    },
+    {
+      "id": "물권법_워크북_046",
+      "printedPages": [
+        40
+      ],
+      "startVideoSeconds": 523.5,
+      "answerPage": 40
+    },
+    {
+      "id": "물권법_워크북_047",
+      "printedPages": [
+        40,
+        41
+      ],
+      "startVideoSeconds": 523.5,
+      "answerPage": 41
+    },
+    {
+      "id": "물권법_워크북_048",
+      "printedPages": [
+        41,
+        42
+      ],
+      "startVideoSeconds": 524.5,
+      "answerPage": 42
+    },
+    {
+      "id": "물권법_워크북_049",
+      "printedPages": [
+        42,
+        43
+      ],
+      "startVideoSeconds": 525.5,
+      "answerPage": 43
+    },
+    {
+      "id": "물권법_워크북_050",
+      "printedPages": [
+        44
+      ],
+      "startVideoSeconds": 527.5,
+      "answerPage": 44
+    },
+    {
+      "id": "물권법_워크북_051",
+      "printedPages": [
+        45,
+        46
+      ],
+      "startVideoSeconds": 528.5,
+      "answerPage": 45
+    },
+    {
+      "id": "물권법_워크북_052",
+      "printedPages": [
+        46
+      ],
+      "startVideoSeconds": 529.5,
+      "answerPage": 46
+    },
+    {
+      "id": "물권법_워크북_053",
+      "printedPages": [
+        46,
+        47
+      ],
+      "startVideoSeconds": 529.5,
+      "answerPage": 47
+    },
+    {
+      "id": "물권법_워크북_054",
+      "printedPages": [
+        47,
+        48
+      ],
+      "startVideoSeconds": 530.5,
+      "answerPage": 47
+    },
+    {
+      "id": "물권법_워크북_055",
+      "printedPages": [
+        48
+      ],
+      "startVideoSeconds": 531.5,
+      "answerPage": 48
+    },
+    {
+      "id": "물권법_워크북_056",
+      "printedPages": [
+        48,
+        49
+      ],
+      "startVideoSeconds": 531.5,
+      "answerPage": 49
+    },
+    {
+      "id": "물권법_워크북_057",
+      "printedPages": [
+        49,
+        50
+      ],
+      "startVideoSeconds": 532.5,
+      "answerPage": 50
+    },
+    {
+      "id": "물권법_워크북_058",
+      "printedPages": [
+        50
+      ],
+      "startVideoSeconds": 533.5,
+      "answerPage": 50
+    },
+    {
+      "id": "물권법_워크북_059",
+      "printedPages": [
+        50,
+        51
+      ],
+      "startVideoSeconds": 533.5,
+      "answerPage": 51
+    },
+    {
+      "id": "물권법_워크북_060",
+      "printedPages": [
+        51,
+        52
+      ],
+      "startVideoSeconds": 534.5,
+      "answerPage": 51
+    },
+    {
+      "id": "물권법_워크북_061",
+      "printedPages": [
+        52
+      ],
+      "startVideoSeconds": 535.5,
+      "answerPage": 52
+    },
+    {
+      "id": "물권법_워크북_062",
+      "printedPages": [
+        52,
+        53
+      ],
+      "startVideoSeconds": 535.5,
+      "answerPage": 53
+    },
+    {
+      "id": "물권법_워크북_063",
+      "printedPages": [
+        54
+      ],
+      "startVideoSeconds": 537.5,
+      "answerPage": 54
+    },
+    {
+      "id": "물권법_워크북_064",
+      "printedPages": [
+        55,
+        56
+      ],
+      "startVideoSeconds": 538.5,
+      "answerPage": 55
+    },
+    {
+      "id": "물권법_워크북_065",
+      "printedPages": [
+        56
+      ],
+      "startVideoSeconds": 539.5,
+      "answerPage": 56
+    },
+    {
+      "id": "물권법_워크북_066",
+      "printedPages": [
+        56,
+        57
+      ],
+      "startVideoSeconds": 539.5,
+      "answerPage": 56
+    },
+    {
+      "id": "물권법_워크북_067",
+      "printedPages": [
+        57
+      ],
+      "startVideoSeconds": 540.5,
+      "answerPage": 57
+    },
+    {
+      "id": "물권법_워크북_068",
+      "printedPages": [
+        57,
+        58
+      ],
+      "startVideoSeconds": 540.5,
+      "answerPage": 57
+    },
+    {
+      "id": "물권법_워크북_069",
+      "printedPages": [
+        58
+      ],
+      "startVideoSeconds": 541.5,
+      "answerPage": 58
+    },
+    {
+      "id": "물권법_워크북_070",
+      "printedPages": [
+        58,
+        59
+      ],
+      "startVideoSeconds": 541.5,
+      "answerPage": 59
+    },
+    {
+      "id": "물권법_워크북_071",
+      "printedPages": [
+        60,
+        61
+      ],
+      "startVideoSeconds": 543.5,
+      "answerPage": 60
+    },
+    {
+      "id": "물권법_워크북_072",
+      "printedPages": [
+        61,
+        62
+      ],
+      "startVideoSeconds": 544.5,
+      "answerPage": 61
+    },
+    {
+      "id": "물권법_워크북_073",
+      "printedPages": [
+        62,
+        63
+      ],
+      "startVideoSeconds": 545.5,
+      "answerPage": 63
+    },
+    {
+      "id": "물권법_워크북_074",
+      "printedPages": [
+        63
+      ],
+      "startVideoSeconds": 546.5,
+      "answerPage": 63
+    },
+    {
+      "id": "물권법_워크북_075",
+      "printedPages": [
+        63,
+        64
+      ],
+      "startVideoSeconds": 546.5,
+      "answerPage": 64
+    },
+    {
+      "id": "물권법_워크북_076",
+      "printedPages": [
+        64,
+        65,
+        66
+      ],
+      "startVideoSeconds": 547.5,
+      "answerPage": 65
+    },
+    {
+      "id": "물권법_워크북_077",
+      "printedPages": [
+        66
+      ],
+      "startVideoSeconds": 549.5,
+      "answerPage": 66
+    },
+    {
+      "id": "물권법_워크북_078",
+      "printedPages": [
+        66,
+        67
+      ],
+      "startVideoSeconds": 549.5,
+      "answerPage": 67
+    },
+    {
+      "id": "물권법_워크북_079",
+      "printedPages": [
+        68,
+        69
+      ],
+      "startVideoSeconds": 551.5,
+      "answerPage": 68
+    },
+    {
+      "id": "물권법_워크북_080",
+      "printedPages": [
+        69
+      ],
+      "startVideoSeconds": 552.5,
+      "answerPage": 69
+    },
+    {
+      "id": "물권법_워크북_081",
+      "printedPages": [
+        69,
+        70
+      ],
+      "startVideoSeconds": 552.5,
+      "answerPage": 70
+    },
+    {
+      "id": "물권법_워크북_082",
+      "printedPages": [
+        70,
+        71
+      ],
+      "startVideoSeconds": 553.5,
+      "answerPage": 71
+    },
+    {
+      "id": "물권법_워크북_083",
+      "printedPages": [
+        71,
+        72
+      ],
+      "startVideoSeconds": 554.5,
+      "answerPage": 72
+    },
+    {
+      "id": "물권법_워크북_084",
+      "printedPages": [
+        72,
+        73
+      ],
+      "startVideoSeconds": 555.5,
+      "answerPage": 72
+    },
+    {
+      "id": "물권법_워크북_085",
+      "printedPages": [
+        73
+      ],
+      "startVideoSeconds": 556.5,
+      "answerPage": 73
+    },
+    {
+      "id": "물권법_워크북_086",
+      "printedPages": [
+        74,
+        75
+      ],
+      "startVideoSeconds": 557.5,
+      "answerPage": 74
+    },
+    {
+      "id": "물권법_워크북_087",
+      "printedPages": [
+        75
+      ],
+      "startVideoSeconds": 558.5,
+      "answerPage": 75
+    },
+    {
+      "id": "물권법_워크북_088",
+      "printedPages": [
+        75,
+        76
+      ],
+      "startVideoSeconds": 558.5,
+      "answerPage": 76
+    },
+    {
+      "id": "물권법_워크북_089",
+      "printedPages": [
+        76,
+        77
+      ],
+      "startVideoSeconds": 559.5,
+      "answerPage": 77
+    },
+    {
+      "id": "물권법_워크북_090",
+      "printedPages": [
+        77,
+        78
+      ],
+      "startVideoSeconds": 560.5,
+      "answerPage": 78
+    },
+    {
+      "id": "물권법_워크북_091",
+      "printedPages": [
+        78,
+        79
+      ],
+      "startVideoSeconds": 561.5,
+      "answerPage": 79
+    },
+    {
+      "id": "물권법_워크북_092",
+      "printedPages": [
+        79,
+        80
+      ],
+      "startVideoSeconds": 562.5,
+      "answerPage": 80
+    },
+    {
+      "id": "물권법_워크북_093",
+      "printedPages": [
+        80
+      ],
+      "startVideoSeconds": 563.5,
+      "answerPage": 80
+    },
+    {
+      "id": "물권법_워크북_094",
+      "printedPages": [
+        81
+      ],
+      "startVideoSeconds": 564.5,
+      "answerPage": 81
+    },
+    {
+      "id": "물권법_워크북_095",
+      "printedPages": [
+        81,
+        82
+      ],
+      "startVideoSeconds": 564.5,
+      "answerPage": 82
+    },
+    {
+      "id": "물권법_워크북_096",
+      "printedPages": [
+        82,
+        83
+      ],
+      "startVideoSeconds": 565.5,
+      "answerPage": 83
+    },
+    {
+      "id": "물권법_워크북_097",
+      "printedPages": [
+        84,
+        85
+      ],
+      "startVideoSeconds": 567.5,
+      "answerPage": 84
+    },
+    {
+      "id": "물권법_워크북_098",
+      "printedPages": [
+        85,
+        86
+      ],
+      "startVideoSeconds": 568.5,
+      "answerPage": 86
+    },
+    {
+      "id": "물권법_워크북_099",
+      "printedPages": [
+        86,
+        87
+      ],
+      "startVideoSeconds": 569.5,
+      "answerPage": 86
+    },
+    {
+      "id": "물권법_워크북_100",
+      "printedPages": [
+        87
+      ],
+      "startVideoSeconds": 570.5,
+      "answerPage": 87
+    },
+    {
+      "id": "물권법_워크북_101",
+      "printedPages": [
+        87,
+        88
+      ],
+      "startVideoSeconds": 570.5,
+      "answerPage": 88
+    },
+    {
+      "id": "물권법_워크북_102",
+      "printedPages": [
+        88,
+        89
+      ],
+      "startVideoSeconds": 571.5,
+      "answerPage": 89
+    },
+    {
+      "id": "물권법_워크북_103",
+      "printedPages": [
+        89,
+        90
+      ],
+      "startVideoSeconds": 572.5,
+      "answerPage": 90
+    },
+    {
+      "id": "물권법_워크북_104",
+      "printedPages": [
+        90,
+        91
+      ],
+      "startVideoSeconds": 573.5,
+      "answerPage": 91
+    },
+    {
+      "id": "물권법_워크북_105",
+      "printedPages": [
+        91,
+        92
+      ],
+      "startVideoSeconds": 574.5,
+      "answerPage": 91
+    },
+    {
+      "id": "물권법_워크북_106",
+      "printedPages": [
+        92,
+        93
+      ],
+      "startVideoSeconds": 575.5,
+      "answerPage": 92
+    },
+    {
+      "id": "물권법_워크북_107",
+      "printedPages": [
+        93
+      ],
+      "startVideoSeconds": 576.5,
+      "answerPage": 93
+    },
+    {
+      "id": "물권법_워크북_108",
+      "printedPages": [
+        93,
+        94
+      ],
+      "startVideoSeconds": 576.5,
+      "answerPage": 94
+    },
+    {
+      "id": "물권법_워크북_109",
+      "printedPages": [
+        95,
+        96
+      ],
+      "startVideoSeconds": 578.5,
+      "answerPage": 95
+    },
+    {
+      "id": "물권법_워크북_110",
+      "printedPages": [
+        96,
+        97
+      ],
+      "startVideoSeconds": 579.5,
+      "answerPage": 96
+    },
+    {
+      "id": "물권법_워크북_111",
+      "printedPages": [
+        97,
+        98,
+        99
+      ],
+      "startVideoSeconds": 580.5,
+      "answerPage": 98
+    },
+    {
+      "id": "물권법_워크북_112",
+      "printedPages": [
+        99
+      ],
+      "startVideoSeconds": 582.5,
+      "answerPage": 99
+    },
+    {
+      "id": "물권법_워크북_113",
+      "printedPages": [
+        99,
+        100
+      ],
+      "startVideoSeconds": 582.5,
+      "answerPage": 100
+    },
+    {
+      "id": "물권법_워크북_114",
+      "printedPages": [
+        101,
+        102
+      ],
+      "startVideoSeconds": 584.5,
+      "answerPage": 101
+    },
+    {
+      "id": "물권법_워크북_115",
+      "printedPages": [
+        102,
+        103
+      ],
+      "startVideoSeconds": 585.5,
+      "answerPage": 102
+    },
+    {
+      "id": "물권법_워크북_116",
+      "printedPages": [
+        103,
+        104
+      ],
+      "startVideoSeconds": 586.5,
+      "answerPage": 103
+    },
+    {
+      "id": "물권법_워크북_117",
+      "printedPages": [
+        104,
+        105
+      ],
+      "startVideoSeconds": 587.5,
+      "answerPage": 105
+    },
+    {
+      "id": "물권법_워크북_118",
+      "printedPages": [
+        106
+      ],
+      "startVideoSeconds": 589.5,
+      "answerPage": 106
+    },
+    {
+      "id": "물권법_워크북_119",
+      "printedPages": [
+        106,
+        107,
+        108
+      ],
+      "startVideoSeconds": 589.5,
+      "answerPage": 107
+    },
+    {
+      "id": "물권법_워크북_120",
+      "printedPages": [
+        108
+      ],
+      "startVideoSeconds": 591.5,
+      "answerPage": 108
+    },
+    {
+      "id": "물권법_워크북_121",
+      "printedPages": [
+        108,
+        109
+      ],
+      "startVideoSeconds": 591.5,
+      "answerPage": 109
+    },
+    {
+      "id": "물권법_워크북_122",
+      "printedPages": [
+        109
+      ],
+      "startVideoSeconds": 592.5,
+      "answerPage": 109
+    },
+    {
+      "id": "물권법_워크북_123",
+      "printedPages": [
+        109
+      ],
+      "startVideoSeconds": 592.5,
+      "answerPage": 109
+    },
+    {
+      "id": "물권법_워크북_124",
+      "printedPages": [
+        110
+      ],
+      "startVideoSeconds": 593.5,
+      "answerPage": 110
+    },
+    {
+      "id": "물권법_워크북_125",
+      "printedPages": [
+        110,
+        111
+      ],
+      "startVideoSeconds": 593.5,
+      "answerPage": 111
+    },
+    {
+      "id": "물권법_워크북_126",
+      "printedPages": [
+        111
+      ],
+      "startVideoSeconds": 594.5,
+      "answerPage": 111
+    },
+    {
+      "id": "물권법_워크북_127",
+      "printedPages": [
+        111,
+        112
+      ],
+      "startVideoSeconds": 594.5,
+      "answerPage": 112
+    },
+    {
+      "id": "물권법_워크북_128",
+      "printedPages": [
+        112,
+        113
+      ],
+      "startVideoSeconds": 595.5,
+      "answerPage": 113
+    },
+    {
+      "id": "물권법_워크북_129",
+      "printedPages": [
+        113,
+        114,
+        115
+      ],
+      "startVideoSeconds": 596.5,
+      "answerPage": 114
+    },
+    {
+      "id": "물권법_워크북_130",
+      "printedPages": [
+        115
+      ],
+      "startVideoSeconds": 598.5,
+      "answerPage": 115
+    },
+    {
+      "id": "물권법_워크북_131",
+      "printedPages": [
+        115,
+        116
+      ],
+      "startVideoSeconds": 598.5,
+      "answerPage": 116
+    },
+    {
+      "id": "물권법_워크북_132",
+      "printedPages": [
+        116,
+        117
+      ],
+      "startVideoSeconds": 599.5,
+      "answerPage": 116
+    },
+    {
+      "id": "물권법_워크북_133",
+      "printedPages": [
+        117,
+        118
+      ],
+      "startVideoSeconds": 600.5,
+      "answerPage": 117
+    },
+    {
+      "id": "물권법_워크북_134",
+      "printedPages": [
+        118,
+        119
+      ],
+      "startVideoSeconds": 601.5,
+      "answerPage": 119
+    },
+    {
+      "id": "물권법_워크북_135",
+      "printedPages": [
+        120
+      ],
+      "startVideoSeconds": 603.5,
+      "answerPage": 120
+    },
+    {
+      "id": "물권법_워크북_136",
+      "printedPages": [
+        120,
+        121,
+        122
+      ],
+      "startVideoSeconds": 603.5,
+      "answerPage": 121
+    },
+    {
+      "id": "물권법_워크북_137",
+      "printedPages": [
+        122
+      ],
+      "startVideoSeconds": 605.5,
+      "answerPage": 122
+    },
+    {
+      "id": "물권법_워크북_138",
+      "printedPages": [
+        122,
+        123
+      ],
+      "startVideoSeconds": 605.5,
+      "answerPage": 123
+    },
+    {
+      "id": "물권법_워크북_139",
+      "printedPages": [
+        123,
+        124
+      ],
+      "startVideoSeconds": 606.5,
+      "answerPage": 123
+    },
+    {
+      "id": "물권법_워크북_140",
+      "printedPages": [
+        124,
+        125
+      ],
+      "startVideoSeconds": 607.5,
+      "answerPage": 124
+    },
+    {
+      "id": "물권법_워크북_141",
+      "printedPages": [
+        125,
+        126
+      ],
+      "startVideoSeconds": 608.5,
+      "answerPage": 125
+    },
+    {
+      "id": "물권법_워크북_142",
+      "printedPages": [
+        126,
+        127
+      ],
+      "startVideoSeconds": 609.5,
+      "answerPage": 126
+    },
+    {
+      "id": "물권법_워크북_143",
+      "printedPages": [
+        127
+      ],
+      "startVideoSeconds": 610.5,
+      "answerPage": 127
+    },
+    {
+      "id": "물권법_워크북_144",
+      "printedPages": [
+        127,
+        128
+      ],
+      "startVideoSeconds": 610.5,
+      "answerPage": 128
+    },
+    {
+      "id": "물권법_워크북_145",
+      "printedPages": [
+        128,
+        129
+      ],
+      "startVideoSeconds": 611.5,
+      "answerPage": 128
+    },
+    {
+      "id": "물권법_워크북_146",
+      "printedPages": [
+        129,
+        130
+      ],
+      "startVideoSeconds": 612.5,
+      "answerPage": 130
+    },
+    {
+      "id": "물권법_워크북_147",
+      "printedPages": [
+        130
+      ],
+      "startVideoSeconds": 613.5,
+      "answerPage": 130
+    },
+    {
+      "id": "물권법_워크북_148",
+      "printedPages": [
+        130,
+        131,
+        132
+      ],
+      "startVideoSeconds": 613.5,
+      "answerPage": 131
+    },
+    {
+      "id": "물권법_워크북_149",
+      "printedPages": [
+        132
+      ],
+      "startVideoSeconds": 615.5,
+      "answerPage": 132
+    },
+    {
+      "id": "물권법_워크북_150",
+      "printedPages": [
+        132,
+        133
+      ],
+      "startVideoSeconds": 615.5,
+      "answerPage": 133
+    },
+    {
+      "id": "물권법_워크북_151",
+      "printedPages": [
+        133,
+        134
+      ],
+      "startVideoSeconds": 616.5,
+      "answerPage": 133
+    },
+    {
+      "id": "물권법_워크북_152",
+      "printedPages": [
+        134,
+        135,
+        136
+      ],
+      "startVideoSeconds": 617.375,
+      "answerPage": 134
+    },
+    {
+      "id": "물권법_워크북_153",
+      "printedPages": [
+        136
+      ],
+      "startVideoSeconds": 618.5,
+      "answerPage": 136
+    },
+    {
+      "id": "물권법_워크북_154",
+      "printedPages": [
+        136,
+        137
+      ],
+      "startVideoSeconds": 618.5,
+      "answerPage": 137
+    },
+    {
+      "id": "물권법_워크북_155",
+      "printedPages": [
+        137
+      ],
+      "startVideoSeconds": 620.5,
+      "answerPage": 137
+    },
+    {
+      "id": "물권법_워크북_156",
+      "printedPages": [
+        138
+      ],
+      "startVideoSeconds": 621.5,
+      "answerPage": 138
+    },
+    {
+      "id": "물권법_워크북_157",
+      "printedPages": [
+        138
+      ],
+      "startVideoSeconds": 621.5,
+      "answerPage": 138
+    },
+    {
+      "id": "물권법_워크북_158",
+      "printedPages": [
+        139
+      ],
+      "startVideoSeconds": 622.5,
+      "answerPage": 139
+    },
+    {
+      "id": "물권법_워크북_159",
+      "printedPages": [
+        139,
+        140
+      ],
+      "startVideoSeconds": 622.5,
+      "answerPage": 139
+    },
+    {
+      "id": "물권법_워크북_160",
+      "printedPages": [
+        140
+      ],
+      "startVideoSeconds": 623.5,
+      "answerPage": 140
+    },
+    {
+      "id": "물권법_워크북_161",
+      "printedPages": [
+        140,
+        141
+      ],
+      "startVideoSeconds": 623.5,
+      "answerPage": 141
+    },
+    {
+      "id": "물권법_워크북_162",
+      "printedPages": [
+        141,
+        142
+      ],
+      "startVideoSeconds": 624.5,
+      "answerPage": 142
+    },
+    {
+      "id": "물권법_워크북_163",
+      "printedPages": [
+        142
+      ],
+      "startVideoSeconds": 625.5,
+      "answerPage": 142
+    },
+    {
+      "id": "물권법_워크북_164",
+      "printedPages": [
+        143
+      ],
+      "startVideoSeconds": 626.5,
+      "answerPage": 143
+    },
+    {
+      "id": "물권법_워크북_165",
+      "printedPages": [
+        144,
+        145
+      ],
+      "startVideoSeconds": 628.5,
+      "answerPage": 144
+    },
+    {
+      "id": "물권법_워크북_166",
+      "printedPages": [
+        145,
+        146
+      ],
+      "startVideoSeconds": 628.5,
+      "answerPage": 145
+    },
+    {
+      "id": "물권법_워크북_167",
+      "printedPages": [
+        146
+      ],
+      "startVideoSeconds": 629.5,
+      "answerPage": 146
+    },
+    {
+      "id": "물권법_워크북_168",
+      "printedPages": [
+        146,
+        147
+      ],
+      "startVideoSeconds": 629.5,
+      "answerPage": 147
+    },
+    {
+      "id": "물권법_워크북_169",
+      "printedPages": [
+        147,
+        148
+      ],
+      "startVideoSeconds": 630.5,
+      "answerPage": 148
+    },
+    {
+      "id": "물권법_워크북_170",
+      "printedPages": [
+        148,
+        149
+      ],
+      "startVideoSeconds": 631.5,
+      "answerPage": 149
+    },
+    {
+      "id": "물권법_워크북_171",
+      "printedPages": [
+        149,
+        150
+      ],
+      "startVideoSeconds": 633.5,
+      "answerPage": 150
+    },
+    {
+      "id": "물권법_워크북_172",
+      "printedPages": [
+        150,
+        151
+      ],
+      "startVideoSeconds": 634.5,
+      "answerPage": 150
+    },
+    {
+      "id": "물권법_워크북_173",
+      "printedPages": [
+        151
+      ],
+      "startVideoSeconds": 634.5,
+      "answerPage": 151
+    },
+    {
+      "id": "물권법_워크북_174",
+      "printedPages": [
+        151,
+        152
+      ],
+      "startVideoSeconds": 634.5,
+      "answerPage": 152
+    },
+    {
+      "id": "물권법_워크북_175",
+      "printedPages": [
+        152
+      ],
+      "startVideoSeconds": 635.5,
+      "answerPage": 152
+    },
+    {
+      "id": "물권법_워크북_176",
+      "printedPages": [
+        153
+      ],
+      "startVideoSeconds": 636.5,
+      "answerPage": 153
+    },
+    {
+      "id": "물권법_워크북_177",
+      "printedPages": [
+        153,
+        154
+      ],
+      "startVideoSeconds": 636.5,
+      "answerPage": 153
+    },
+    {
+      "id": "물권법_워크북_178",
+      "printedPages": [
+        154
+      ],
+      "startVideoSeconds": 637.5,
+      "answerPage": 154
+    },
+    {
+      "id": "물권법_워크북_179",
+      "printedPages": [
+        154,
+        155
+      ],
+      "startVideoSeconds": 637.5,
+      "answerPage": 155
+    },
+    {
+      "id": "물권법_워크북_180",
+      "printedPages": [
+        155
+      ],
+      "startVideoSeconds": 638.5,
+      "answerPage": 155
+    },
+    {
+      "id": "물권법_워크북_181",
+      "printedPages": [
+        155,
+        156
+      ],
+      "startVideoSeconds": 638.5,
+      "answerPage": 156
+    },
+    {
+      "id": "물권법_워크북_182",
+      "printedPages": [
+        156
+      ],
+      "startVideoSeconds": 639.5,
+      "answerPage": 156
+    },
+    {
+      "id": "물권법_워크북_183",
+      "printedPages": [
+        157
+      ],
+      "startVideoSeconds": 640.5,
+      "answerPage": 157
+    },
+    {
+      "id": "물권법_워크북_184",
+      "printedPages": [
+        157,
+        158
+      ],
+      "startVideoSeconds": 640.5,
+      "answerPage": 157
+    },
+    {
+      "id": "물권법_워크북_185",
+      "printedPages": [
+        158,
+        159
+      ],
+      "startVideoSeconds": 641.5,
+      "answerPage": 158
+    },
+    {
+      "id": "물권법_워크북_186",
+      "printedPages": [
+        159
+      ],
+      "startVideoSeconds": 642.5,
+      "answerPage": 159
+    },
+    {
+      "id": "물권법_워크북_187",
+      "printedPages": [
+        159,
+        160
+      ],
+      "startVideoSeconds": 642.5,
+      "answerPage": 159
+    },
+    {
+      "id": "물권법_워크북_188",
+      "printedPages": [
+        160
+      ],
+      "startVideoSeconds": 643.5,
+      "answerPage": 160
+    },
+    {
+      "id": "물권법_워크북_189",
+      "printedPages": [
+        160,
+        161
+      ],
+      "startVideoSeconds": 643.5,
+      "answerPage": 160
+    },
+    {
+      "id": "물권법_워크북_190",
+      "printedPages": [
+        161
+      ],
+      "startVideoSeconds": 644.5,
+      "answerPage": 161
+    },
+    {
+      "id": "물권법_워크북_191",
+      "printedPages": [
+        161,
+        162
+      ],
+      "startVideoSeconds": 644.5,
+      "answerPage": 161
+    },
+    {
+      "id": "물권법_워크북_192",
+      "printedPages": [
+        162,
+        163,
+        164
+      ],
+      "startVideoSeconds": 645.5,
+      "answerPage": 163
+    },
+    {
+      "id": "물권법_워크북_193",
+      "printedPages": [
+        164
+      ],
+      "startVideoSeconds": 647.5,
+      "answerPage": 164
+    },
+    {
+      "id": "물권법_워크북_194",
+      "printedPages": [
+        164,
+        165
+      ],
+      "startVideoSeconds": 647.5,
+      "answerPage": 164
+    },
+    {
+      "id": "물권법_워크북_195",
+      "printedPages": [
+        165
+      ],
+      "startVideoSeconds": 648.5,
+      "answerPage": 165
+    },
+    {
+      "id": "물권법_워크북_196",
+      "printedPages": [
+        165,
+        166
+      ],
+      "startVideoSeconds": 648.5,
+      "answerPage": 165
+    },
+    {
+      "id": "물권법_워크북_197",
+      "printedPages": [
+        166
+      ],
+      "startVideoSeconds": 649.5,
+      "answerPage": 166
+    },
+    {
+      "id": "물권법_워크북_198",
+      "printedPages": [
+        166
+      ],
+      "startVideoSeconds": 649.5,
+      "answerPage": 166
+    },
+    {
+      "id": "물권법_워크북_199",
+      "printedPages": [
+        166,
+        167
+      ],
+      "startVideoSeconds": 649.5,
+      "answerPage": 167
+    },
+    {
+      "id": "물권법_워크북_200",
+      "printedPages": [
+        167
+      ],
+      "startVideoSeconds": 650.5,
+      "answerPage": 167
+    },
+    {
+      "id": "물권법_워크북_201",
+      "printedPages": [
+        167,
+        168
+      ],
+      "startVideoSeconds": 650.5,
+      "answerPage": 168
+    },
+    {
+      "id": "물권법_워크북_202",
+      "printedPages": [
+        168,
+        169
+      ],
+      "startVideoSeconds": 651.5,
+      "answerPage": 168
+    },
+    {
+      "id": "물권법_워크북_203",
+      "printedPages": [
+        169
+      ],
+      "startVideoSeconds": 652.5,
+      "answerPage": 169
+    },
+    {
+      "id": "물권법_워크북_204",
+      "printedPages": [
+        169,
+        170
+      ],
+      "startVideoSeconds": 652.5,
+      "answerPage": 170
+    },
+    {
+      "id": "물권법_워크북_205",
+      "printedPages": [
+        170,
+        171
+      ],
+      "startVideoSeconds": 653.5,
+      "answerPage": 170
+    },
+    {
+      "id": "물권법_워크북_206",
+      "printedPages": [
+        171
+      ],
+      "startVideoSeconds": 654.5,
+      "answerPage": 171
+    },
+    {
+      "id": "물권법_워크북_207",
+      "printedPages": [
+        171,
+        172
+      ],
+      "startVideoSeconds": 654.5,
+      "answerPage": 172
+    },
+    {
+      "id": "물권법_워크북_208",
+      "printedPages": [
+        172
+      ],
+      "startVideoSeconds": 655.5,
+      "answerPage": 172
+    },
+    {
+      "id": "물권법_워크북_209",
+      "printedPages": [
+        172,
+        173
+      ],
+      "startVideoSeconds": 655.5,
+      "answerPage": 173
+    },
+    {
+      "id": "물권법_워크북_210",
+      "printedPages": [
+        173,
+        174
+      ],
+      "startVideoSeconds": 656.5,
+      "answerPage": 174
+    },
+    {
+      "id": "물권법_워크북_211",
+      "printedPages": [
+        174
+      ],
+      "startVideoSeconds": 657.5,
+      "answerPage": 174
+    },
+    {
+      "id": "물권법_워크북_212",
+      "printedPages": [
+        175
+      ],
+      "startVideoSeconds": 659.0,
+      "answerPage": 175
+    },
+    {
+      "id": "물권법_워크북_213",
+      "printedPages": [
+        175,
+        176
+      ],
+      "startVideoSeconds": 659.0,
+      "answerPage": 175
+    },
+    {
+      "id": "물권법_워크북_214",
+      "printedPages": [
+        176
+      ],
+      "startVideoSeconds": 659.5,
+      "answerPage": 176
+    },
+    {
+      "id": "물권법_워크북_215",
+      "printedPages": [
+        176,
+        177
+      ],
+      "startVideoSeconds": 659.5,
+      "answerPage": 177
+    },
+    {
+      "id": "물권법_워크북_216",
+      "printedPages": [
+        177,
+        178
+      ],
+      "startVideoSeconds": 660.5,
+      "answerPage": 177
+    },
+    {
+      "id": "물권법_워크북_217",
+      "printedPages": [
+        178
+      ],
+      "startVideoSeconds": 661.5,
+      "answerPage": 178
+    },
+    {
+      "id": "물권법_워크북_218",
+      "printedPages": [
+        179
+      ],
+      "startVideoSeconds": 662.5,
+      "answerPage": 179
+    },
+    {
+      "id": "물권법_워크북_219",
+      "printedPages": [
+        180
+      ],
+      "startVideoSeconds": 663.5,
+      "answerPage": 180
+    },
+    {
+      "id": "물권법_워크북_220",
+      "printedPages": [
+        181,
+        182
+      ],
+      "startVideoSeconds": 664.5,
+      "answerPage": 181
+    },
+    {
+      "id": "물권법_워크북_221",
+      "printedPages": [
+        182
+      ],
+      "startVideoSeconds": 665.5,
+      "answerPage": 182
+    },
+    {
+      "id": "물권법_워크북_222",
+      "printedPages": [
+        183
+      ],
+      "startVideoSeconds": 667.5,
+      "answerPage": 183
+    },
+    {
+      "id": "물권법_워크북_223",
+      "printedPages": [
+        183,
+        184,
+        185
+      ],
+      "startVideoSeconds": 667.5,
+      "answerPage": 184
+    },
+    {
+      "id": "물권법_워크북_224",
+      "printedPages": [
+        185,
+        186
+      ],
+      "startVideoSeconds": 669.5,
+      "answerPage": 185
+    },
+    {
+      "id": "물권법_워크북_225",
+      "printedPages": [
+        186
+      ],
+      "startVideoSeconds": 670.5,
+      "answerPage": 186
+    },
+    {
+      "id": "물권법_워크북_226",
+      "printedPages": [
+        187
+      ],
+      "startVideoSeconds": 671.5,
+      "answerPage": 187
+    },
+    {
+      "id": "물권법_워크북_227",
+      "printedPages": [
+        187,
+        188
+      ],
+      "startVideoSeconds": 671.5,
+      "answerPage": 187
+    },
+    {
+      "id": "물권법_워크북_228",
+      "printedPages": [
+        188
+      ],
+      "startVideoSeconds": 672.5,
+      "answerPage": 188
+    },
+    {
+      "id": "물권법_워크북_229",
+      "printedPages": [
+        189
+      ],
+      "startVideoSeconds": 673.5,
+      "answerPage": 189
+    },
+    {
+      "id": "물권법_워크북_230",
+      "printedPages": [
+        189,
+        190
+      ],
+      "startVideoSeconds": 673.5,
+      "answerPage": 190
+    },
+    {
+      "id": "물권법_워크북_231",
+      "printedPages": [
+        190
+      ],
+      "startVideoSeconds": 674.5,
+      "answerPage": 190
+    },
+    {
+      "id": "물권법_워크북_232",
+      "printedPages": [
+        191
+      ],
+      "startVideoSeconds": 675.5,
+      "answerPage": 191
+    },
+    {
+      "id": "물권법_워크북_233",
+      "printedPages": [
+        191,
+        192
+      ],
+      "startVideoSeconds": 675.5,
+      "answerPage": 192
+    },
+    {
+      "id": "물권법_워크북_234",
+      "printedPages": [
+        192,
+        193
+      ],
+      "startVideoSeconds": 676.5,
+      "answerPage": 193
+    },
+    {
+      "id": "물권법_워크북_235",
+      "printedPages": [
+        193,
+        194
+      ],
+      "startVideoSeconds": 677.5,
+      "answerPage": 193
+    }
+  ]
+}
