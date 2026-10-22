@@ -1,0 +1,5170 @@
+{
+  "subject": "통치의 기본구조",
+  "category": "워크북",
+  "sourceType": "사용자가 제공한 촬영 영상",
+  "sourceFile": "녹음 2026-10-22 145114.mp4",
+  "sourceSha256": "bf7c9978417f70a0d96dee36d892665252963ce9cfe2f4ad835efc4fa10748e7",
+  "sourceBytes": 688912833,
+  "processedDate": "2026-10-22",
+  "workbookStartVideoSeconds": 474,
+  "videoDurationSeconds": 620.6333333333333,
+  "capturedPrintedPageRange": [
+    3,
+    140
+  ],
+  "exercisePageRanges": [
+    [
+      5,
+      140
+    ]
+  ],
+  "questionCount": 346,
+  "choiceCount": 1384,
+  "printedExplanationCount": 251,
+  "noPrintedExplanationCount": 95,
+  "contentFormat": "text",
+  "answerKey": "4223332341331243121342123442333421441433324324444121323132343414142334433344121312341234214232331423234324234142441231242331433133433232333213233414412142343432232414413434431331331341122344332322314324313214312412343133131142142331342244122143341212212334122332144414233242124143232413412324134411221244134241331443414323231231341223424341323124",
+  "answerVerification": "인쇄 정답 346개를 화면 대조하고 별도 정답 기호 이미지 비교에서도 346개 모두 일치 확인. OCR이 누락한 298번 정답은 원문 ①을 직접 확인.",
+  "independentImageAnswerCount": 346,
+  "originalQuestionCount": 90,
+  "existingTopics": [
+    "통치구조의 조직원리",
+    "정부형태",
+    "통치작용",
+    "국회의 조직과 운영",
+    "국회의 입법과 재정에 관한 권한",
+    "국회의 국정통제권과 자율권",
+    "대통령의 지위와 신분",
+    "대통령의 권한",
+    "정부의 구성과 조직",
+    "감사원과 선거관리위원회"
+  ],
+  "addedTopics": [
+    "법원의 조직과 구성 및 사법권 독립",
+    "법원의 권한과 사법의 절차원리",
+    "헌법재판소의 지위와 조직",
+    "헌법재판소의 권한(1)",
+    "헌법재판소의 권한(2)"
+  ],
+  "topicApproval": "사용자: 없는 11~15강 태그만 추가",
+  "transcriptionNotes": [
+    "기존 형성평가 90문항과 기존 태그 10개를 변경하지 않고 워크북 346문항을 추가.",
+    "워크북 4장 국회의 입법권과 5장 국회의 재정에 관한 권한은 기존 태그 국회의 입법과 재정에 관한 권한에 통합 분류.",
+    "법원·헌법재판소에 해당하는 11~15장 태그 5개만 사용자 승인에 따라 추가.",
+    "문제와 보기, 인쇄 정답, 원문에 있는 해설 251개를 모두 텍스트로 전사. 원문 해설 없는 95문항은 해당 사실을 표시하며 해설을 생성하지 않음.",
+    "빈칸·괄호 생략부호·㉠~㉣ 보기와 한자 표기를 화면에서 확인하여 복원. 인식 오류 및 띄어쓰기만 정리하고 최신 법령이나 자체 풀이로 교체하지 않음.",
+    "원문 자체 표기(119번 계정, 208번 공정성의, 274번 질문의 성질장, 284번 보기의 반복 위헌제청, 302번 헌법재판소의, 324번 명시적으로 등)는 영상 대조 후 보존.",
+    "원본 영상과 임시 OCR 모델·프레임 이미지는 Git에 포함하지 않음."
+  ],
+  "topicCounts": {
+    "통치구조의 조직원리": 26,
+    "정부형태": 7,
+    "통치작용": 0,
+    "국회의 조직과 운영": 34,
+    "국회의 입법과 재정에 관한 권한": 57,
+    "국회의 국정통제권과 자율권": 34,
+    "대통령의 지위와 신분": 7,
+    "대통령의 권한": 32,
+    "정부의 구성과 조직": 8,
+    "감사원과 선거관리위원회": 13,
+    "법원의 조직과 구성 및 사법권 독립": 12,
+    "법원의 권한과 사법의 절차원리": 7,
+    "헌법재판소의 지위와 조직": 37,
+    "헌법재판소의 권한(1)": 27,
+    "헌법재판소의 권한(2)": 45
+  },
+  "sections": [
+    {
+      "section": 1,
+      "title": "통치구조의 조직원리",
+      "topic": "통치구조의 조직원리",
+      "count": 26
+    },
+    {
+      "section": 2,
+      "title": "정부형태",
+      "topic": "정부형태",
+      "count": 7
+    },
+    {
+      "section": 3,
+      "title": "국회의 조직과 운영",
+      "topic": "국회의 조직과 운영",
+      "count": 34
+    },
+    {
+      "section": 4,
+      "title": "국회의 입법권",
+      "topic": "국회의 입법과 재정에 관한 권한",
+      "count": 9
+    },
+    {
+      "section": 5,
+      "title": "국회의 재정에 관한 권한",
+      "topic": "국회의 입법과 재정에 관한 권한",
+      "count": 48
+    },
+    {
+      "section": 6,
+      "title": "국회의 국정통제권과 자율권",
+      "topic": "국회의 국정통제권과 자율권",
+      "count": 34
+    },
+    {
+      "section": 7,
+      "title": "대통령의 지위와 신분",
+      "topic": "대통령의 지위와 신분",
+      "count": 7
+    },
+    {
+      "section": 8,
+      "title": "대통령의 권한",
+      "topic": "대통령의 권한",
+      "count": 32
+    },
+    {
+      "section": 9,
+      "title": "정부의 구성과 조직",
+      "topic": "정부의 구성과 조직",
+      "count": 8
+    },
+    {
+      "section": 10,
+      "title": "감사원과 선거관리위원회",
+      "topic": "감사원과 선거관리위원회",
+      "count": 13
+    },
+    {
+      "section": 11,
+      "title": "법원의 조직과 구성 및 사법권 독립",
+      "topic": "법원의 조직과 구성 및 사법권 독립",
+      "count": 12
+    },
+    {
+      "section": 12,
+      "title": "법원의 권한과 사법의 절차원리",
+      "topic": "법원의 권한과 사법의 절차원리",
+      "count": 7
+    },
+    {
+      "section": 13,
+      "title": "헌법재판소의 지위와 조직",
+      "topic": "헌법재판소의 지위와 조직",
+      "count": 37
+    },
+    {
+      "section": 14,
+      "title": "헌법재판소의 권한(1)",
+      "topic": "헌법재판소의 권한(1)",
+      "count": 27
+    },
+    {
+      "section": 15,
+      "title": "헌법재판소의 권한(2)",
+      "topic": "헌법재판소의 권한(2)",
+      "count": 45
+    }
+  ],
+  "questions": [
+    {
+      "id": "통치의기본구조_워크북_001",
+      "section": 1,
+      "originalNumber": 1,
+      "printedPages": [
+        5
+      ],
+      "videoSeconds": [
+        479.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 1.0,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_002",
+      "section": 1,
+      "originalNumber": 2,
+      "printedPages": [
+        5,
+        6
+      ],
+      "videoSeconds": [
+        479.5,
+        480.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9999967813491821,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_003",
+      "section": 1,
+      "originalNumber": 3,
+      "printedPages": [
+        6
+      ],
+      "videoSeconds": [
+        480.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9993658661842346,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_004",
+      "section": 1,
+      "originalNumber": 4,
+      "printedPages": [
+        6,
+        7
+      ],
+      "videoSeconds": [
+        480.5,
+        481.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9999990463256836,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_005",
+      "section": 1,
+      "originalNumber": 5,
+      "printedPages": [
+        7
+      ],
+      "videoSeconds": [
+        481.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.973906934261322,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_006",
+      "section": 1,
+      "originalNumber": 6,
+      "printedPages": [
+        7
+      ],
+      "videoSeconds": [
+        481.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745728373527527,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_007",
+      "section": 1,
+      "originalNumber": 7,
+      "printedPages": [
+        8
+      ],
+      "videoSeconds": [
+        482.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987645745277405,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_008",
+      "section": 1,
+      "originalNumber": 8,
+      "printedPages": [
+        8
+      ],
+      "videoSeconds": [
+        482.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986532330513,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_009",
+      "section": 1,
+      "originalNumber": 9,
+      "printedPages": [
+        8,
+        9
+      ],
+      "videoSeconds": [
+        482.5,
+        483.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796804785728455,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_010",
+      "section": 1,
+      "originalNumber": 10,
+      "printedPages": [
+        9
+      ],
+      "videoSeconds": [
+        483.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9999954700469971,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_011",
+      "section": 1,
+      "originalNumber": 11,
+      "printedPages": [
+        9
+      ],
+      "videoSeconds": [
+        483.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9746484756469727,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_012",
+      "section": 1,
+      "originalNumber": 12,
+      "printedPages": [
+        9,
+        10
+      ],
+      "videoSeconds": [
+        483.0,
+        484.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.999141275882721,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_013",
+      "section": 1,
+      "originalNumber": 13,
+      "printedPages": [
+        10
+      ],
+      "videoSeconds": [
+        484.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9676873683929443,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_014",
+      "section": 1,
+      "originalNumber": 14,
+      "printedPages": [
+        10,
+        11
+      ],
+      "videoSeconds": [
+        484.5,
+        485.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987725615501404,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_015",
+      "section": 1,
+      "originalNumber": 15,
+      "printedPages": [
+        11
+      ],
+      "videoSeconds": [
+        485.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989045858383179,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_016",
+      "section": 1,
+      "originalNumber": 16,
+      "printedPages": [
+        11
+      ],
+      "videoSeconds": [
+        485.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9744446873664856,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_017",
+      "section": 1,
+      "originalNumber": 17,
+      "printedPages": [
+        11
+      ],
+      "videoSeconds": [
+        485.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988108277320862,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_018",
+      "section": 1,
+      "originalNumber": 18,
+      "printedPages": [
+        12
+      ],
+      "videoSeconds": [
+        486.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987452626228333,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_019",
+      "section": 1,
+      "originalNumber": 19,
+      "printedPages": [
+        12
+      ],
+      "videoSeconds": [
+        486.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669758677482605,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_020",
+      "section": 1,
+      "originalNumber": 20,
+      "printedPages": [
+        12,
+        13
+      ],
+      "videoSeconds": [
+        486.5,
+        487.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9750111699104309,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_021",
+      "section": 1,
+      "originalNumber": 21,
+      "printedPages": [
+        13
+      ],
+      "videoSeconds": [
+        487.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990265369415283,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_022",
+      "section": 1,
+      "originalNumber": 22,
+      "printedPages": [
+        13
+      ],
+      "videoSeconds": [
+        487.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.975396454334259,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_023",
+      "section": 1,
+      "originalNumber": 23,
+      "printedPages": [
+        13,
+        14
+      ],
+      "videoSeconds": [
+        487.5,
+        488.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9674834609031677,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_024",
+      "section": 1,
+      "originalNumber": 24,
+      "printedPages": [
+        14
+      ],
+      "videoSeconds": [
+        488.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988484978675842,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_025",
+      "section": 1,
+      "originalNumber": 25,
+      "printedPages": [
+        14,
+        15
+      ],
+      "videoSeconds": [
+        488.5,
+        489.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9743910431861877,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_026",
+      "section": 1,
+      "originalNumber": 26,
+      "printedPages": [
+        15
+      ],
+      "videoSeconds": [
+        489.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989503026008606,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_027",
+      "section": 2,
+      "originalNumber": 1,
+      "printedPages": [
+        16
+      ],
+      "videoSeconds": [
+        490.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.980046272277832,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_028",
+      "section": 2,
+      "originalNumber": 2,
+      "printedPages": [
+        16
+      ],
+      "videoSeconds": [
+        490.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988319277763367,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_029",
+      "section": 2,
+      "originalNumber": 3,
+      "printedPages": [
+        16,
+        17
+      ],
+      "videoSeconds": [
+        490.5,
+        491.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9739214181900024,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_030",
+      "section": 2,
+      "originalNumber": 4,
+      "printedPages": [
+        17
+      ],
+      "videoSeconds": [
+        491.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9749630689620972,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_031",
+      "section": 2,
+      "originalNumber": 5,
+      "printedPages": [
+        17
+      ],
+      "videoSeconds": [
+        491.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9751402139663696,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_032",
+      "section": 2,
+      "originalNumber": 6,
+      "printedPages": [
+        18
+      ],
+      "videoSeconds": [
+        492.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796496629714966,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_033",
+      "section": 2,
+      "originalNumber": 7,
+      "printedPages": [
+        18
+      ],
+      "videoSeconds": [
+        492.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989598393440247,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_034",
+      "section": 3,
+      "originalNumber": 1,
+      "printedPages": [
+        19
+      ],
+      "videoSeconds": [
+        493.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990170001983643,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_035",
+      "section": 3,
+      "originalNumber": 2,
+      "printedPages": [
+        19
+      ],
+      "videoSeconds": [
+        493.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.998904824256897,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_036",
+      "section": 3,
+      "originalNumber": 3,
+      "printedPages": [
+        19,
+        20
+      ],
+      "videoSeconds": [
+        493.0,
+        494.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793992042541504,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_037",
+      "section": 3,
+      "originalNumber": 4,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        494.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.966948390007019,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_038",
+      "section": 3,
+      "originalNumber": 5,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        494.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9797813892364502,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_039",
+      "section": 3,
+      "originalNumber": 6,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        494.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987517595291138,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_040",
+      "section": 3,
+      "originalNumber": 7,
+      "printedPages": [
+        20,
+        21
+      ],
+      "videoSeconds": [
+        494.0,
+        495.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986317157745361,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_041",
+      "section": 3,
+      "originalNumber": 8,
+      "printedPages": [
+        21
+      ],
+      "videoSeconds": [
+        495.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9751589894294739,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_042",
+      "section": 3,
+      "originalNumber": 9,
+      "printedPages": [
+        21
+      ],
+      "videoSeconds": [
+        495.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9756762981414795,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_043",
+      "section": 3,
+      "originalNumber": 10,
+      "printedPages": [
+        21,
+        22
+      ],
+      "videoSeconds": [
+        495.0,
+        496.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9795835018157959,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_044",
+      "section": 3,
+      "originalNumber": 11,
+      "printedPages": [
+        22
+      ],
+      "videoSeconds": [
+        496.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988476634025574,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_045",
+      "section": 3,
+      "originalNumber": 12,
+      "printedPages": [
+        22
+      ],
+      "videoSeconds": [
+        496.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987673759460449,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_046",
+      "section": 3,
+      "originalNumber": 13,
+      "printedPages": [
+        22,
+        23
+      ],
+      "videoSeconds": [
+        496.0,
+        497.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.998951256275177,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_047",
+      "section": 3,
+      "originalNumber": 14,
+      "printedPages": [
+        23
+      ],
+      "videoSeconds": [
+        497.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990821480751038,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_048",
+      "section": 3,
+      "originalNumber": 15,
+      "printedPages": [
+        23
+      ],
+      "videoSeconds": [
+        497.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990760684013367,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_049",
+      "section": 3,
+      "originalNumber": 16,
+      "printedPages": [
+        23
+      ],
+      "videoSeconds": [
+        497.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9992415308952332,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_050",
+      "section": 3,
+      "originalNumber": 17,
+      "printedPages": [
+        24
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9673891663551331,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_051",
+      "section": 3,
+      "originalNumber": 18,
+      "printedPages": [
+        24
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9993371367454529,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_052",
+      "section": 3,
+      "originalNumber": 19,
+      "printedPages": [
+        24
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669989943504333,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_053",
+      "section": 3,
+      "originalNumber": 20,
+      "printedPages": [
+        24
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987418055534363,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_054",
+      "section": 3,
+      "originalNumber": 21,
+      "printedPages": [
+        24,
+        25
+      ],
+      "videoSeconds": [
+        498.0,
+        499.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9762734174728394,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_055",
+      "section": 3,
+      "originalNumber": 22,
+      "printedPages": [
+        25
+      ],
+      "videoSeconds": [
+        499.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9746026396751404,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_056",
+      "section": 3,
+      "originalNumber": 23,
+      "printedPages": [
+        25
+      ],
+      "videoSeconds": [
+        499.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989649057388306,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_057",
+      "section": 3,
+      "originalNumber": 24,
+      "printedPages": [
+        26
+      ],
+      "videoSeconds": [
+        500.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988315105438232,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_058",
+      "section": 3,
+      "originalNumber": 25,
+      "printedPages": [
+        26
+      ],
+      "videoSeconds": [
+        500.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991800785064697,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_059",
+      "section": 3,
+      "originalNumber": 26,
+      "printedPages": [
+        26
+      ],
+      "videoSeconds": [
+        500.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989005923271179,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_060",
+      "section": 3,
+      "originalNumber": 27,
+      "printedPages": [
+        26
+      ],
+      "videoSeconds": [
+        500.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9799704551696777,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_061",
+      "section": 3,
+      "originalNumber": 28,
+      "printedPages": [
+        26,
+        27
+      ],
+      "videoSeconds": [
+        500.5,
+        501.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.974960446357727,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_062",
+      "section": 3,
+      "originalNumber": 29,
+      "printedPages": [
+        27
+      ],
+      "videoSeconds": [
+        501.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9992005228996277,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_063",
+      "section": 3,
+      "originalNumber": 30,
+      "printedPages": [
+        28
+      ],
+      "videoSeconds": [
+        502.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9661271572113037,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_064",
+      "section": 3,
+      "originalNumber": 31,
+      "printedPages": [
+        28
+      ],
+      "videoSeconds": [
+        502.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9798612594604492,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_065",
+      "section": 3,
+      "originalNumber": 32,
+      "printedPages": [
+        28
+      ],
+      "videoSeconds": [
+        502.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9660338163375854,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_066",
+      "section": 3,
+      "originalNumber": 33,
+      "printedPages": [
+        29
+      ],
+      "videoSeconds": [
+        503.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9997108578681946,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_067",
+      "section": 3,
+      "originalNumber": 34,
+      "printedPages": [
+        29
+      ],
+      "videoSeconds": [
+        503.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9756661057472229,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_068",
+      "section": 4,
+      "originalNumber": 1,
+      "printedPages": [
+        30
+      ],
+      "videoSeconds": [
+        505.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.99950110912323,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_069",
+      "section": 4,
+      "originalNumber": 2,
+      "printedPages": [
+        30,
+        31
+      ],
+      "videoSeconds": [
+        505.0,
+        505.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998632550239563,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_070",
+      "section": 4,
+      "originalNumber": 3,
+      "printedPages": [
+        31
+      ],
+      "videoSeconds": [
+        505.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990494847297668,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_071",
+      "section": 4,
+      "originalNumber": 4,
+      "printedPages": [
+        31
+      ],
+      "videoSeconds": [
+        505.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989179968833923,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_072",
+      "section": 4,
+      "originalNumber": 5,
+      "printedPages": [
+        31,
+        32
+      ],
+      "videoSeconds": [
+        505.5,
+        506.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9743703603744507,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_073",
+      "section": 4,
+      "originalNumber": 6,
+      "printedPages": [
+        32
+      ],
+      "videoSeconds": [
+        506.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987574219703674,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_074",
+      "section": 4,
+      "originalNumber": 7,
+      "printedPages": [
+        32
+      ],
+      "videoSeconds": [
+        506.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.999211847782135,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_075",
+      "section": 4,
+      "originalNumber": 8,
+      "printedPages": [
+        32,
+        33
+      ],
+      "videoSeconds": [
+        506.5,
+        508.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990503787994385,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_076",
+      "section": 4,
+      "originalNumber": 9,
+      "printedPages": [
+        33
+      ],
+      "videoSeconds": [
+        508.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990045428276062,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_077",
+      "section": 5,
+      "originalNumber": 1,
+      "printedPages": [
+        34
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669172763824463,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_078",
+      "section": 5,
+      "originalNumber": 2,
+      "printedPages": [
+        34
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9994112849235535,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_079",
+      "section": 5,
+      "originalNumber": 3,
+      "printedPages": [
+        34
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9676070213317871,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_080",
+      "section": 5,
+      "originalNumber": 4,
+      "printedPages": [
+        34,
+        35
+      ],
+      "videoSeconds": [
+        508.5,
+        509.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9737515449523926,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_081",
+      "section": 5,
+      "originalNumber": 5,
+      "printedPages": [
+        35
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9994176030158997,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_082",
+      "section": 5,
+      "originalNumber": 6,
+      "printedPages": [
+        35
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9761292934417725,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_083",
+      "section": 5,
+      "originalNumber": 7,
+      "printedPages": [
+        35
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9738494753837585,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_084",
+      "section": 5,
+      "originalNumber": 8,
+      "printedPages": [
+        36
+      ],
+      "videoSeconds": [
+        511.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9789602756500244,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_085",
+      "section": 5,
+      "originalNumber": 9,
+      "printedPages": [
+        36
+      ],
+      "videoSeconds": [
+        511.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9671868681907654,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_086",
+      "section": 5,
+      "originalNumber": 10,
+      "printedPages": [
+        36
+      ],
+      "videoSeconds": [
+        511.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991801381111145,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_087",
+      "section": 5,
+      "originalNumber": 11,
+      "printedPages": [
+        36
+      ],
+      "videoSeconds": [
+        511.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9991311430931091,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_088",
+      "section": 5,
+      "originalNumber": 12,
+      "printedPages": [
+        37
+      ],
+      "videoSeconds": [
+        511.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990350604057312,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_089",
+      "section": 5,
+      "originalNumber": 13,
+      "printedPages": [
+        37
+      ],
+      "videoSeconds": [
+        511.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.975501298904419,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_090",
+      "section": 5,
+      "originalNumber": 14,
+      "printedPages": [
+        37
+      ],
+      "videoSeconds": [
+        511.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989563226699829,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_091",
+      "section": 5,
+      "originalNumber": 15,
+      "printedPages": [
+        38
+      ],
+      "videoSeconds": [
+        513.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.979825496673584,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_092",
+      "section": 5,
+      "originalNumber": 16,
+      "printedPages": [
+        38,
+        39
+      ],
+      "videoSeconds": [
+        513.0,
+        514.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9762827754020691,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_093",
+      "section": 5,
+      "originalNumber": 17,
+      "printedPages": [
+        39
+      ],
+      "videoSeconds": [
+        514.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9744067192077637,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_094",
+      "section": 5,
+      "originalNumber": 18,
+      "printedPages": [
+        39
+      ],
+      "videoSeconds": [
+        514.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9754442572593689,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_095",
+      "section": 5,
+      "originalNumber": 19,
+      "printedPages": [
+        39,
+        40
+      ],
+      "videoSeconds": [
+        514.0,
+        515.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998784601688385,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_096",
+      "section": 5,
+      "originalNumber": 20,
+      "printedPages": [
+        40
+      ],
+      "videoSeconds": [
+        515.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986590147018433,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_097",
+      "section": 5,
+      "originalNumber": 21,
+      "printedPages": [
+        40
+      ],
+      "videoSeconds": [
+        515.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9673958420753479,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_098",
+      "section": 5,
+      "originalNumber": 22,
+      "printedPages": [
+        41
+      ],
+      "videoSeconds": [
+        516.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9992632269859314,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_099",
+      "section": 5,
+      "originalNumber": 23,
+      "printedPages": [
+        41
+      ],
+      "videoSeconds": [
+        516.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9752456545829773,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_100",
+      "section": 5,
+      "originalNumber": 24,
+      "printedPages": [
+        42
+      ],
+      "videoSeconds": [
+        517.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986404180526733,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_101",
+      "section": 5,
+      "originalNumber": 25,
+      "printedPages": [
+        42
+      ],
+      "videoSeconds": [
+        517.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.998927891254425,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_102",
+      "section": 5,
+      "originalNumber": 26,
+      "printedPages": [
+        42
+      ],
+      "videoSeconds": [
+        517.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986507892608643,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_103",
+      "section": 5,
+      "originalNumber": 27,
+      "printedPages": [
+        42,
+        43
+      ],
+      "videoSeconds": [
+        517.0,
+        518.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991264939308167,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_104",
+      "section": 5,
+      "originalNumber": 28,
+      "printedPages": [
+        43
+      ],
+      "videoSeconds": [
+        518.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9749900698661804,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_105",
+      "section": 5,
+      "originalNumber": 29,
+      "printedPages": [
+        43
+      ],
+      "videoSeconds": [
+        518.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9761513471603394,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_106",
+      "section": 5,
+      "originalNumber": 30,
+      "printedPages": [
+        43,
+        44
+      ],
+      "videoSeconds": [
+        518.0,
+        519.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9797199964523315,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_107",
+      "section": 5,
+      "originalNumber": 31,
+      "printedPages": [
+        44
+      ],
+      "videoSeconds": [
+        519.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991893172264099,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_108",
+      "section": 5,
+      "originalNumber": 32,
+      "printedPages": [
+        44
+      ],
+      "videoSeconds": [
+        519.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986812472343445,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_109",
+      "section": 5,
+      "originalNumber": 33,
+      "printedPages": [
+        45
+      ],
+      "videoSeconds": [
+        520.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.998872697353363,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_110",
+      "section": 5,
+      "originalNumber": 34,
+      "printedPages": [
+        45,
+        46
+      ],
+      "videoSeconds": [
+        520.0,
+        521.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9670192003250122,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_111",
+      "section": 5,
+      "originalNumber": 35,
+      "printedPages": [
+        46
+      ],
+      "videoSeconds": [
+        521.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9788386225700378,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_112",
+      "section": 5,
+      "originalNumber": 36,
+      "printedPages": [
+        46
+      ],
+      "videoSeconds": [
+        521.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987723231315613,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_113",
+      "section": 5,
+      "originalNumber": 37,
+      "printedPages": [
+        46,
+        47
+      ],
+      "videoSeconds": [
+        521.0,
+        521.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989487528800964,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_114",
+      "section": 5,
+      "originalNumber": 38,
+      "printedPages": [
+        47
+      ],
+      "videoSeconds": [
+        521.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989039897918701,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_115",
+      "section": 5,
+      "originalNumber": 39,
+      "printedPages": [
+        47
+      ],
+      "videoSeconds": [
+        521.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9987503886222839,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_116",
+      "section": 5,
+      "originalNumber": 40,
+      "printedPages": [
+        47
+      ],
+      "videoSeconds": [
+        521.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9752041697502136,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_117",
+      "section": 5,
+      "originalNumber": 41,
+      "printedPages": [
+        48
+      ],
+      "videoSeconds": [
+        522.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989516735076904,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_118",
+      "section": 5,
+      "originalNumber": 42,
+      "printedPages": [
+        48
+      ],
+      "videoSeconds": [
+        522.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9666721224784851,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_119",
+      "section": 5,
+      "originalNumber": 43,
+      "printedPages": [
+        48
+      ],
+      "videoSeconds": [
+        522.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999047577381134,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_120",
+      "section": 5,
+      "originalNumber": 44,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        523.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988757967948914,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_121",
+      "section": 5,
+      "originalNumber": 45,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        523.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9752904772758484,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_122",
+      "section": 5,
+      "originalNumber": 46,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        523.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745482802391052,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_123",
+      "section": 5,
+      "originalNumber": 47,
+      "printedPages": [
+        49,
+        50
+      ],
+      "videoSeconds": [
+        523.5,
+        525.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998691737651825,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_124",
+      "section": 5,
+      "originalNumber": 48,
+      "printedPages": [
+        50
+      ],
+      "videoSeconds": [
+        525.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9668357372283936,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_125",
+      "section": 6,
+      "originalNumber": 1,
+      "printedPages": [
+        51
+      ],
+      "videoSeconds": [
+        526.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989480972290039,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_126",
+      "section": 6,
+      "originalNumber": 2,
+      "printedPages": [
+        51
+      ],
+      "videoSeconds": [
+        526.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9747441411018372,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_127",
+      "section": 6,
+      "originalNumber": 3,
+      "printedPages": [
+        52
+      ],
+      "videoSeconds": [
+        527.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986303448677063,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_128",
+      "section": 6,
+      "originalNumber": 4,
+      "printedPages": [
+        52
+      ],
+      "videoSeconds": [
+        527.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9670814275741577,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_129",
+      "section": 6,
+      "originalNumber": 5,
+      "printedPages": [
+        52,
+        53
+      ],
+      "videoSeconds": [
+        527.0,
+        527.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988991022109985,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_130",
+      "section": 6,
+      "originalNumber": 6,
+      "printedPages": [
+        53
+      ],
+      "videoSeconds": [
+        527.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9742507934570312,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_131",
+      "section": 6,
+      "originalNumber": 7,
+      "printedPages": [
+        53
+      ],
+      "videoSeconds": [
+        527.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991827607154846,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_132",
+      "section": 6,
+      "originalNumber": 8,
+      "printedPages": [
+        53,
+        54
+      ],
+      "videoSeconds": [
+        527.5,
+        529.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998603880405426,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_133",
+      "section": 6,
+      "originalNumber": 9,
+      "printedPages": [
+        54
+      ],
+      "videoSeconds": [
+        529.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998809814453125,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_134",
+      "section": 6,
+      "originalNumber": 10,
+      "printedPages": [
+        54
+      ],
+      "videoSeconds": [
+        529.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987966418266296,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_135",
+      "section": 6,
+      "originalNumber": 11,
+      "printedPages": [
+        54,
+        55
+      ],
+      "videoSeconds": [
+        529.0,
+        530.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987245798110962,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_136",
+      "section": 6,
+      "originalNumber": 12,
+      "printedPages": [
+        55
+      ],
+      "videoSeconds": [
+        530.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9751818776130676,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_137",
+      "section": 6,
+      "originalNumber": 13,
+      "printedPages": [
+        55
+      ],
+      "videoSeconds": [
+        530.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9743649363517761,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_138",
+      "section": 6,
+      "originalNumber": 14,
+      "printedPages": [
+        55,
+        56
+      ],
+      "videoSeconds": [
+        530.0,
+        531.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986688494682312,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_139",
+      "section": 6,
+      "originalNumber": 15,
+      "printedPages": [
+        56
+      ],
+      "videoSeconds": [
+        531.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9991356134414673,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_140",
+      "section": 6,
+      "originalNumber": 16,
+      "printedPages": [
+        56
+      ],
+      "videoSeconds": [
+        531.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987260103225708,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_141",
+      "section": 6,
+      "originalNumber": 17,
+      "printedPages": [
+        57
+      ],
+      "videoSeconds": [
+        532.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988869428634644,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_142",
+      "section": 6,
+      "originalNumber": 18,
+      "printedPages": [
+        57
+      ],
+      "videoSeconds": [
+        532.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9741860032081604,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_143",
+      "section": 6,
+      "originalNumber": 19,
+      "printedPages": [
+        57,
+        58
+      ],
+      "videoSeconds": [
+        532.0,
+        533.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9755569696426392,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_144",
+      "section": 6,
+      "originalNumber": 20,
+      "printedPages": [
+        58
+      ],
+      "videoSeconds": [
+        533.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987342953681946,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_145",
+      "section": 6,
+      "originalNumber": 21,
+      "printedPages": [
+        58
+      ],
+      "videoSeconds": [
+        533.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986722469329834,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_146",
+      "section": 6,
+      "originalNumber": 22,
+      "printedPages": [
+        59
+      ],
+      "videoSeconds": [
+        533.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.999620258808136,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_147",
+      "section": 6,
+      "originalNumber": 23,
+      "printedPages": [
+        59
+      ],
+      "videoSeconds": [
+        533.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989160299301147,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_148",
+      "section": 6,
+      "originalNumber": 24,
+      "printedPages": [
+        59,
+        60
+      ],
+      "videoSeconds": [
+        533.5,
+        534.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.979149341583252,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_149",
+      "section": 6,
+      "originalNumber": 25,
+      "printedPages": [
+        60
+      ],
+      "videoSeconds": [
+        534.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9798040390014648,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_150",
+      "section": 6,
+      "originalNumber": 26,
+      "printedPages": [
+        60
+      ],
+      "videoSeconds": [
+        534.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9658676981925964,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_151",
+      "section": 6,
+      "originalNumber": 27,
+      "printedPages": [
+        60,
+        61
+      ],
+      "videoSeconds": [
+        534.5,
+        535.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9760416746139526,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_152",
+      "section": 6,
+      "originalNumber": 28,
+      "printedPages": [
+        61
+      ],
+      "videoSeconds": [
+        535.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9987154006958008,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_153",
+      "section": 6,
+      "originalNumber": 29,
+      "printedPages": [
+        61,
+        62
+      ],
+      "videoSeconds": [
+        535.5,
+        536.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988917112350464,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_154",
+      "section": 6,
+      "originalNumber": 30,
+      "printedPages": [
+        62
+      ],
+      "videoSeconds": [
+        536.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990134835243225,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_155",
+      "section": 6,
+      "originalNumber": 31,
+      "printedPages": [
+        62
+      ],
+      "videoSeconds": [
+        536.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989142417907715,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_156",
+      "section": 6,
+      "originalNumber": 32,
+      "printedPages": [
+        62,
+        63
+      ],
+      "videoSeconds": [
+        536.5,
+        538.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993537664413452,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_157",
+      "section": 6,
+      "originalNumber": 33,
+      "printedPages": [
+        63
+      ],
+      "videoSeconds": [
+        538.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9738457202911377,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_158",
+      "section": 6,
+      "originalNumber": 34,
+      "printedPages": [
+        63
+      ],
+      "videoSeconds": [
+        538.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989730715751648,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_159",
+      "section": 7,
+      "originalNumber": 1,
+      "printedPages": [
+        64
+      ],
+      "videoSeconds": [
+        538.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988940954208374,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_160",
+      "section": 7,
+      "originalNumber": 2,
+      "printedPages": [
+        64
+      ],
+      "videoSeconds": [
+        538.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989192485809326,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_161",
+      "section": 7,
+      "originalNumber": 3,
+      "printedPages": [
+        65
+      ],
+      "videoSeconds": [
+        539.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9757011532783508,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_162",
+      "section": 7,
+      "originalNumber": 4,
+      "printedPages": [
+        65
+      ],
+      "videoSeconds": [
+        539.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745413661003113,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_163",
+      "section": 7,
+      "originalNumber": 5,
+      "printedPages": [
+        65,
+        66
+      ],
+      "videoSeconds": [
+        539.5,
+        541.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9749862551689148,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_164",
+      "section": 7,
+      "originalNumber": 6,
+      "printedPages": [
+        66
+      ],
+      "videoSeconds": [
+        541.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9801965355873108,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_165",
+      "section": 7,
+      "originalNumber": 7,
+      "printedPages": [
+        66
+      ],
+      "videoSeconds": [
+        541.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669836759567261,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_166",
+      "section": 8,
+      "originalNumber": 1,
+      "printedPages": [
+        67
+      ],
+      "videoSeconds": [
+        542.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.999572217464447,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_167",
+      "section": 8,
+      "originalNumber": 2,
+      "printedPages": [
+        67,
+        68
+      ],
+      "videoSeconds": [
+        542.0,
+        543.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793936014175415,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_168",
+      "section": 8,
+      "originalNumber": 3,
+      "printedPages": [
+        68
+      ],
+      "videoSeconds": [
+        543.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9676328301429749,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_169",
+      "section": 8,
+      "originalNumber": 4,
+      "printedPages": [
+        68
+      ],
+      "videoSeconds": [
+        543.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988649487495422,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_170",
+      "section": 8,
+      "originalNumber": 5,
+      "printedPages": [
+        68,
+        69
+      ],
+      "videoSeconds": [
+        543.0,
+        544.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988802075386047,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_171",
+      "section": 8,
+      "originalNumber": 6,
+      "printedPages": [
+        69
+      ],
+      "videoSeconds": [
+        544.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9746742248535156,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_172",
+      "section": 8,
+      "originalNumber": 7,
+      "printedPages": [
+        69
+      ],
+      "videoSeconds": [
+        544.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989473223686218,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_173",
+      "section": 8,
+      "originalNumber": 8,
+      "printedPages": [
+        69,
+        70
+      ],
+      "videoSeconds": [
+        544.0,
+        545.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9795594215393066,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_174",
+      "section": 8,
+      "originalNumber": 9,
+      "printedPages": [
+        70
+      ],
+      "videoSeconds": [
+        545.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988623261451721,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_175",
+      "section": 8,
+      "originalNumber": 10,
+      "printedPages": [
+        70,
+        71
+      ],
+      "videoSeconds": [
+        545.0,
+        546.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9993011355400085,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_176",
+      "section": 8,
+      "originalNumber": 11,
+      "printedPages": [
+        71
+      ],
+      "videoSeconds": [
+        546.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745631814002991,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_177",
+      "section": 8,
+      "originalNumber": 12,
+      "printedPages": [
+        71,
+        72
+      ],
+      "videoSeconds": [
+        546.0,
+        547.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.974403977394104,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_178",
+      "section": 8,
+      "originalNumber": 13,
+      "printedPages": [
+        72
+      ],
+      "videoSeconds": [
+        547.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9671141505241394,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_179",
+      "section": 8,
+      "originalNumber": 14,
+      "printedPages": [
+        72
+      ],
+      "videoSeconds": [
+        547.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988828897476196,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_180",
+      "section": 8,
+      "originalNumber": 15,
+      "printedPages": [
+        72
+      ],
+      "videoSeconds": [
+        547.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987214803695679,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_181",
+      "section": 8,
+      "originalNumber": 16,
+      "printedPages": [
+        73
+      ],
+      "videoSeconds": [
+        547.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989716410636902,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_182",
+      "section": 8,
+      "originalNumber": 17,
+      "printedPages": [
+        73
+      ],
+      "videoSeconds": [
+        547.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9744357466697693,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_183",
+      "section": 8,
+      "originalNumber": 18,
+      "printedPages": [
+        73
+      ],
+      "videoSeconds": [
+        547.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988893270492554,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_184",
+      "section": 8,
+      "originalNumber": 19,
+      "printedPages": [
+        73,
+        74
+      ],
+      "videoSeconds": [
+        547.5,
+        549.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669687747955322,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_185",
+      "section": 8,
+      "originalNumber": 20,
+      "printedPages": [
+        74
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9676656723022461,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_186",
+      "section": 8,
+      "originalNumber": 21,
+      "printedPages": [
+        74
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989773035049438,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_187",
+      "section": 8,
+      "originalNumber": 22,
+      "printedPages": [
+        74
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.998779296875,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_188",
+      "section": 8,
+      "originalNumber": 23,
+      "printedPages": [
+        75
+      ],
+      "videoSeconds": [
+        549.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9747852683067322,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_189",
+      "section": 8,
+      "originalNumber": 24,
+      "printedPages": [
+        75
+      ],
+      "videoSeconds": [
+        549.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9995298981666565,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_190",
+      "section": 8,
+      "originalNumber": 25,
+      "printedPages": [
+        75,
+        76
+      ],
+      "videoSeconds": [
+        549.5,
+        550.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796179533004761,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_191",
+      "section": 8,
+      "originalNumber": 26,
+      "printedPages": [
+        76
+      ],
+      "videoSeconds": [
+        550.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989426136016846,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_192",
+      "section": 8,
+      "originalNumber": 27,
+      "printedPages": [
+        76,
+        77
+      ],
+      "videoSeconds": [
+        550.5,
+        552.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9991552233695984,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_193",
+      "section": 8,
+      "originalNumber": 28,
+      "printedPages": [
+        77
+      ],
+      "videoSeconds": [
+        552.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9757163524627686,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_194",
+      "section": 8,
+      "originalNumber": 29,
+      "printedPages": [
+        77
+      ],
+      "videoSeconds": [
+        552.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.974517822265625,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_195",
+      "section": 8,
+      "originalNumber": 30,
+      "printedPages": [
+        78
+      ],
+      "videoSeconds": [
+        553.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9986746907234192,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_196",
+      "section": 8,
+      "originalNumber": 31,
+      "printedPages": [
+        78
+      ],
+      "videoSeconds": [
+        553.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988307356834412,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_197",
+      "section": 8,
+      "originalNumber": 32,
+      "printedPages": [
+        79
+      ],
+      "videoSeconds": [
+        554.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9742218255996704,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_198",
+      "section": 9,
+      "originalNumber": 1,
+      "printedPages": [
+        80
+      ],
+      "videoSeconds": [
+        555.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9661361575126648,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_199",
+      "section": 9,
+      "originalNumber": 2,
+      "printedPages": [
+        80
+      ],
+      "videoSeconds": [
+        555.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793426990509033,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_200",
+      "section": 9,
+      "originalNumber": 3,
+      "printedPages": [
+        80,
+        81
+      ],
+      "videoSeconds": [
+        555.0,
+        556.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9738842844963074,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_201",
+      "section": 9,
+      "originalNumber": 4,
+      "printedPages": [
+        81
+      ],
+      "videoSeconds": [
+        556.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9753609895706177,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_202",
+      "section": 9,
+      "originalNumber": 5,
+      "printedPages": [
+        81
+      ],
+      "videoSeconds": [
+        556.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990678429603577,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_203",
+      "section": 9,
+      "originalNumber": 6,
+      "printedPages": [
+        81,
+        82
+      ],
+      "videoSeconds": [
+        556.0,
+        557.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9985562562942505,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_204",
+      "section": 9,
+      "originalNumber": 7,
+      "printedPages": [
+        82
+      ],
+      "videoSeconds": [
+        557.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9670779705047607,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_205",
+      "section": 9,
+      "originalNumber": 8,
+      "printedPages": [
+        82
+      ],
+      "videoSeconds": [
+        557.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986414909362793,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_206",
+      "section": 10,
+      "originalNumber": 1,
+      "printedPages": [
+        83
+      ],
+      "videoSeconds": [
+        558.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9760693907737732,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_207",
+      "section": 10,
+      "originalNumber": 2,
+      "printedPages": [
+        83
+      ],
+      "videoSeconds": [
+        558.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988517761230469,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_208",
+      "section": 10,
+      "originalNumber": 3,
+      "printedPages": [
+        83,
+        84
+      ],
+      "videoSeconds": [
+        558.0,
+        559.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793125987052917,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_209",
+      "section": 10,
+      "originalNumber": 4,
+      "printedPages": [
+        84
+      ],
+      "videoSeconds": [
+        559.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9992060661315918,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_210",
+      "section": 10,
+      "originalNumber": 5,
+      "printedPages": [
+        84
+      ],
+      "videoSeconds": [
+        559.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669532775878906,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_211",
+      "section": 10,
+      "originalNumber": 6,
+      "printedPages": [
+        84
+      ],
+      "videoSeconds": [
+        559.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990662336349487,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_212",
+      "section": 10,
+      "originalNumber": 7,
+      "printedPages": [
+        85
+      ],
+      "videoSeconds": [
+        560.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990442991256714,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_213",
+      "section": 10,
+      "originalNumber": 8,
+      "printedPages": [
+        85
+      ],
+      "videoSeconds": [
+        560.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988412857055664,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_214",
+      "section": 10,
+      "originalNumber": 9,
+      "printedPages": [
+        85
+      ],
+      "videoSeconds": [
+        560.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9757391810417175,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_215",
+      "section": 10,
+      "originalNumber": 10,
+      "printedPages": [
+        86
+      ],
+      "videoSeconds": [
+        561.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9992255568504333,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_216",
+      "section": 10,
+      "originalNumber": 11,
+      "printedPages": [
+        86
+      ],
+      "videoSeconds": [
+        561.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796518683433533,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_217",
+      "section": 10,
+      "originalNumber": 12,
+      "printedPages": [
+        86,
+        87
+      ],
+      "videoSeconds": [
+        561.0,
+        562.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9741990566253662,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_218",
+      "section": 10,
+      "originalNumber": 13,
+      "printedPages": [
+        87
+      ],
+      "videoSeconds": [
+        562.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988466501235962,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_219",
+      "section": 11,
+      "originalNumber": 1,
+      "printedPages": [
+        88
+      ],
+      "videoSeconds": [
+        563.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989073276519775,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_220",
+      "section": 11,
+      "originalNumber": 2,
+      "printedPages": [
+        88
+      ],
+      "videoSeconds": [
+        563.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9997169971466064,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_221",
+      "section": 11,
+      "originalNumber": 3,
+      "printedPages": [
+        88,
+        89
+      ],
+      "videoSeconds": [
+        563.5,
+        564.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989790320396423,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_222",
+      "section": 11,
+      "originalNumber": 4,
+      "printedPages": [
+        89
+      ],
+      "videoSeconds": [
+        564.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.974898099899292,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_223",
+      "section": 11,
+      "originalNumber": 5,
+      "printedPages": [
+        89,
+        90
+      ],
+      "videoSeconds": [
+        564.0,
+        565.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9671587944030762,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_224",
+      "section": 11,
+      "originalNumber": 6,
+      "printedPages": [
+        90
+      ],
+      "videoSeconds": [
+        565.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9670397043228149,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_225",
+      "section": 11,
+      "originalNumber": 7,
+      "printedPages": [
+        90
+      ],
+      "videoSeconds": [
+        565.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9794909358024597,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_226",
+      "section": 11,
+      "originalNumber": 8,
+      "printedPages": [
+        90,
+        91
+      ],
+      "videoSeconds": [
+        565.5,
+        566.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999387264251709,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_227",
+      "section": 11,
+      "originalNumber": 9,
+      "printedPages": [
+        91
+      ],
+      "videoSeconds": [
+        566.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9987372159957886,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_228",
+      "section": 11,
+      "originalNumber": 10,
+      "printedPages": [
+        92
+      ],
+      "videoSeconds": [
+        567.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796271920204163,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_229",
+      "section": 11,
+      "originalNumber": 11,
+      "printedPages": [
+        92
+      ],
+      "videoSeconds": [
+        567.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988006353378296,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_230",
+      "section": 11,
+      "originalNumber": 12,
+      "printedPages": [
+        93
+      ],
+      "videoSeconds": [
+        568.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9753983020782471,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_231",
+      "section": 12,
+      "originalNumber": 1,
+      "printedPages": [
+        94
+      ],
+      "videoSeconds": [
+        569.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9992044568061829,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_232",
+      "section": 12,
+      "originalNumber": 2,
+      "printedPages": [
+        94,
+        95
+      ],
+      "videoSeconds": [
+        569.5,
+        570.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.966980516910553,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_233",
+      "section": 12,
+      "originalNumber": 3,
+      "printedPages": [
+        95
+      ],
+      "videoSeconds": [
+        570.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745010137557983,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_234",
+      "section": 12,
+      "originalNumber": 4,
+      "printedPages": [
+        95
+      ],
+      "videoSeconds": [
+        570.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9995295405387878,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_235",
+      "section": 12,
+      "originalNumber": 5,
+      "printedPages": [
+        95
+      ],
+      "videoSeconds": [
+        570.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9751405715942383,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_236",
+      "section": 12,
+      "originalNumber": 6,
+      "printedPages": [
+        96
+      ],
+      "videoSeconds": [
+        571.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999041736125946,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_237",
+      "section": 12,
+      "originalNumber": 7,
+      "printedPages": [
+        96
+      ],
+      "videoSeconds": [
+        571.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793316721916199,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_238",
+      "section": 13,
+      "originalNumber": 1,
+      "printedPages": [
+        97
+      ],
+      "videoSeconds": [
+        572.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9996116161346436,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_239",
+      "section": 13,
+      "originalNumber": 2,
+      "printedPages": [
+        97
+      ],
+      "videoSeconds": [
+        572.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989630579948425,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_240",
+      "section": 13,
+      "originalNumber": 3,
+      "printedPages": [
+        97,
+        98
+      ],
+      "videoSeconds": [
+        572.5,
+        573.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989757537841797,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_241",
+      "section": 13,
+      "originalNumber": 4,
+      "printedPages": [
+        98
+      ],
+      "videoSeconds": [
+        573.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991785883903503,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_242",
+      "section": 13,
+      "originalNumber": 5,
+      "printedPages": [
+        99
+      ],
+      "videoSeconds": [
+        574.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990307092666626,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_243",
+      "section": 13,
+      "originalNumber": 6,
+      "printedPages": [
+        99
+      ],
+      "videoSeconds": [
+        574.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989050030708313,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_244",
+      "section": 13,
+      "originalNumber": 7,
+      "printedPages": [
+        99,
+        100
+      ],
+      "videoSeconds": [
+        574.5,
+        576.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986401200294495,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_245",
+      "section": 13,
+      "originalNumber": 8,
+      "printedPages": [
+        100
+      ],
+      "videoSeconds": [
+        576.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988745450973511,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_246",
+      "section": 13,
+      "originalNumber": 9,
+      "printedPages": [
+        100,
+        101
+      ],
+      "videoSeconds": [
+        576.5,
+        577.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990362524986267,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_247",
+      "section": 13,
+      "originalNumber": 10,
+      "printedPages": [
+        101
+      ],
+      "videoSeconds": [
+        577.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.999021053314209,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_248",
+      "section": 13,
+      "originalNumber": 11,
+      "printedPages": [
+        101,
+        102
+      ],
+      "videoSeconds": [
+        577.5,
+        578.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990328550338745,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_249",
+      "section": 13,
+      "originalNumber": 12,
+      "printedPages": [
+        102
+      ],
+      "videoSeconds": [
+        578.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9674702882766724,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_250",
+      "section": 13,
+      "originalNumber": 13,
+      "printedPages": [
+        102
+      ],
+      "videoSeconds": [
+        578.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990264177322388,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_251",
+      "section": 13,
+      "originalNumber": 14,
+      "printedPages": [
+        102
+      ],
+      "videoSeconds": [
+        578.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989252090454102,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_252",
+      "section": 13,
+      "originalNumber": 15,
+      "printedPages": [
+        103
+      ],
+      "videoSeconds": [
+        579.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989006519317627,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_253",
+      "section": 13,
+      "originalNumber": 16,
+      "printedPages": [
+        103
+      ],
+      "videoSeconds": [
+        579.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9761908650398254,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_254",
+      "section": 13,
+      "originalNumber": 17,
+      "printedPages": [
+        103
+      ],
+      "videoSeconds": [
+        579.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9748530983924866,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_255",
+      "section": 13,
+      "originalNumber": 18,
+      "printedPages": [
+        103,
+        104
+      ],
+      "videoSeconds": [
+        579.5,
+        580.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987162351608276,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_256",
+      "section": 13,
+      "originalNumber": 19,
+      "printedPages": [
+        104
+      ],
+      "videoSeconds": [
+        580.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9792182445526123,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_257",
+      "section": 13,
+      "originalNumber": 20,
+      "printedPages": [
+        104
+      ],
+      "videoSeconds": [
+        580.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669467806816101,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_258",
+      "section": 13,
+      "originalNumber": 21,
+      "printedPages": [
+        104
+      ],
+      "videoSeconds": [
+        580.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990741610527039,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_259",
+      "section": 13,
+      "originalNumber": 22,
+      "printedPages": [
+        105
+      ],
+      "videoSeconds": [
+        581.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9760522246360779,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_260",
+      "section": 13,
+      "originalNumber": 23,
+      "printedPages": [
+        105
+      ],
+      "videoSeconds": [
+        581.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9742504954338074,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_261",
+      "section": 13,
+      "originalNumber": 24,
+      "printedPages": [
+        105
+      ],
+      "videoSeconds": [
+        581.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9747888445854187,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_262",
+      "section": 13,
+      "originalNumber": 25,
+      "printedPages": [
+        106
+      ],
+      "videoSeconds": [
+        582.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987847805023193,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_263",
+      "section": 13,
+      "originalNumber": 26,
+      "printedPages": [
+        106
+      ],
+      "videoSeconds": [
+        582.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9669083952903748,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_264",
+      "section": 13,
+      "originalNumber": 27,
+      "printedPages": [
+        106
+      ],
+      "videoSeconds": [
+        582.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9798155426979065,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_265",
+      "section": 13,
+      "originalNumber": 28,
+      "printedPages": [
+        106,
+        107
+      ],
+      "videoSeconds": [
+        582.5,
+        583.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989111423492432,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_266",
+      "section": 13,
+      "originalNumber": 29,
+      "printedPages": [
+        107
+      ],
+      "videoSeconds": [
+        583.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990531802177429,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_267",
+      "section": 13,
+      "originalNumber": 30,
+      "printedPages": [
+        107
+      ],
+      "videoSeconds": [
+        583.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9987481832504272,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_268",
+      "section": 13,
+      "originalNumber": 31,
+      "printedPages": [
+        107,
+        108
+      ],
+      "videoSeconds": [
+        583.0,
+        584.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993789792060852,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_269",
+      "section": 13,
+      "originalNumber": 32,
+      "printedPages": [
+        108
+      ],
+      "videoSeconds": [
+        584.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.998781144618988,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_270",
+      "section": 13,
+      "originalNumber": 33,
+      "printedPages": [
+        108,
+        109
+      ],
+      "videoSeconds": [
+        584.0,
+        585.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9742359519004822,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_271",
+      "section": 13,
+      "originalNumber": 34,
+      "printedPages": [
+        109
+      ],
+      "videoSeconds": [
+        585.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745326042175293,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_272",
+      "section": 13,
+      "originalNumber": 35,
+      "printedPages": [
+        109
+      ],
+      "videoSeconds": [
+        585.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9754045009613037,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_273",
+      "section": 13,
+      "originalNumber": 36,
+      "printedPages": [
+        109
+      ],
+      "videoSeconds": [
+        585.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989157915115356,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_274",
+      "section": 13,
+      "originalNumber": 37,
+      "printedPages": [
+        110
+      ],
+      "videoSeconds": [
+        586.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991155862808228,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_275",
+      "section": 14,
+      "originalNumber": 1,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        587.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988356232643127,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_276",
+      "section": 14,
+      "originalNumber": 2,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        587.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9761154055595398,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_277",
+      "section": 14,
+      "originalNumber": 3,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        587.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988762140274048,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_278",
+      "section": 14,
+      "originalNumber": 4,
+      "printedPages": [
+        112
+      ],
+      "videoSeconds": [
+        588.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.965835452079773,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_279",
+      "section": 14,
+      "originalNumber": 5,
+      "printedPages": [
+        112
+      ],
+      "videoSeconds": [
+        588.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9798390865325928,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_280",
+      "section": 14,
+      "originalNumber": 6,
+      "printedPages": [
+        112,
+        113
+      ],
+      "videoSeconds": [
+        588.0,
+        589.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9748573303222656,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_281",
+      "section": 14,
+      "originalNumber": 7,
+      "printedPages": [
+        113
+      ],
+      "videoSeconds": [
+        589.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9754493832588196,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_282",
+      "section": 14,
+      "originalNumber": 8,
+      "printedPages": [
+        113
+      ],
+      "videoSeconds": [
+        589.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9745814800262451,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_283",
+      "section": 14,
+      "originalNumber": 9,
+      "printedPages": [
+        114
+      ],
+      "videoSeconds": [
+        590.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987313151359558,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_284",
+      "section": 14,
+      "originalNumber": 10,
+      "printedPages": [
+        114
+      ],
+      "videoSeconds": [
+        590.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9799088835716248,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_285",
+      "section": 14,
+      "originalNumber": 11,
+      "printedPages": [
+        115
+      ],
+      "videoSeconds": [
+        591.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988632798194885,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_286",
+      "section": 14,
+      "originalNumber": 12,
+      "printedPages": [
+        115
+      ],
+      "videoSeconds": [
+        591.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9742414951324463,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_287",
+      "section": 14,
+      "originalNumber": 13,
+      "printedPages": [
+        115
+      ],
+      "videoSeconds": [
+        591.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.999050498008728,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_288",
+      "section": 14,
+      "originalNumber": 14,
+      "printedPages": [
+        115
+      ],
+      "videoSeconds": [
+        591.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.998837947845459,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_289",
+      "section": 14,
+      "originalNumber": 15,
+      "printedPages": [
+        116
+      ],
+      "videoSeconds": [
+        592.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987276792526245,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_290",
+      "section": 14,
+      "originalNumber": 16,
+      "printedPages": [
+        116
+      ],
+      "videoSeconds": [
+        592.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986993670463562,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_291",
+      "section": 14,
+      "originalNumber": 17,
+      "printedPages": [
+        116,
+        117
+      ],
+      "videoSeconds": [
+        592.0,
+        593.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9762589335441589,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_292",
+      "section": 14,
+      "originalNumber": 18,
+      "printedPages": [
+        117
+      ],
+      "videoSeconds": [
+        593.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988712668418884,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_293",
+      "section": 14,
+      "originalNumber": 19,
+      "printedPages": [
+        117
+      ],
+      "videoSeconds": [
+        593.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.998962938785553,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_294",
+      "section": 14,
+      "originalNumber": 20,
+      "printedPages": [
+        117,
+        118
+      ],
+      "videoSeconds": [
+        593.5,
+        594.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9990900158882141,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_295",
+      "section": 14,
+      "originalNumber": 21,
+      "printedPages": [
+        118
+      ],
+      "videoSeconds": [
+        594.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9797725081443787,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_296",
+      "section": 14,
+      "originalNumber": 22,
+      "printedPages": [
+        118,
+        119
+      ],
+      "videoSeconds": [
+        594.5,
+        595.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989587664604187,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_297",
+      "section": 14,
+      "originalNumber": 23,
+      "printedPages": [
+        119
+      ],
+      "videoSeconds": [
+        595.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9993481040000916,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_298",
+      "section": 14,
+      "originalNumber": 24,
+      "printedPages": [
+        119
+      ],
+      "videoSeconds": [
+        595.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988393783569336,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_299",
+      "section": 14,
+      "originalNumber": 25,
+      "printedPages": [
+        119,
+        120
+      ],
+      "videoSeconds": [
+        595.0,
+        596.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9986834526062012,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_300",
+      "section": 14,
+      "originalNumber": 26,
+      "printedPages": [
+        120
+      ],
+      "videoSeconds": [
+        596.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.99913489818573,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_301",
+      "section": 14,
+      "originalNumber": 27,
+      "printedPages": [
+        120
+      ],
+      "videoSeconds": [
+        596.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9671953320503235,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_302",
+      "section": 15,
+      "originalNumber": 1,
+      "printedPages": [
+        121
+      ],
+      "videoSeconds": [
+        597.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9757484793663025,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_303",
+      "section": 15,
+      "originalNumber": 2,
+      "printedPages": [
+        121
+      ],
+      "videoSeconds": [
+        597.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993094205856323,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_304",
+      "section": 15,
+      "originalNumber": 3,
+      "printedPages": [
+        122
+      ],
+      "videoSeconds": [
+        598.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793168902397156,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_305",
+      "section": 15,
+      "originalNumber": 4,
+      "printedPages": [
+        122
+      ],
+      "videoSeconds": [
+        598.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9672000408172607,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_306",
+      "section": 15,
+      "originalNumber": 5,
+      "printedPages": [
+        122,
+        123
+      ],
+      "videoSeconds": [
+        598.0,
+        599.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9744008779525757,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_307",
+      "section": 15,
+      "originalNumber": 6,
+      "printedPages": [
+        123,
+        124
+      ],
+      "videoSeconds": [
+        599.0,
+        600.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989701509475708,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_308",
+      "section": 15,
+      "originalNumber": 7,
+      "printedPages": [
+        124
+      ],
+      "videoSeconds": [
+        600.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999037504196167,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_309",
+      "section": 15,
+      "originalNumber": 8,
+      "printedPages": [
+        124,
+        125
+      ],
+      "videoSeconds": [
+        600.0,
+        601.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.979728102684021,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_310",
+      "section": 15,
+      "originalNumber": 9,
+      "printedPages": [
+        125
+      ],
+      "videoSeconds": [
+        601.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988077878952026,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_311",
+      "section": 15,
+      "originalNumber": 10,
+      "printedPages": [
+        125,
+        126
+      ],
+      "videoSeconds": [
+        601.5,
+        602.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9985887408256531,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_312",
+      "section": 15,
+      "originalNumber": 11,
+      "printedPages": [
+        126
+      ],
+      "videoSeconds": [
+        602.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986479878425598,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_313",
+      "section": 15,
+      "originalNumber": 12,
+      "printedPages": [
+        126
+      ],
+      "videoSeconds": [
+        602.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9675707817077637,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_314",
+      "section": 15,
+      "originalNumber": 13,
+      "printedPages": [
+        127
+      ],
+      "videoSeconds": [
+        603.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9995884895324707,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_315",
+      "section": 15,
+      "originalNumber": 14,
+      "printedPages": [
+        127
+      ],
+      "videoSeconds": [
+        603.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989321231842041,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_316",
+      "section": 15,
+      "originalNumber": 15,
+      "printedPages": [
+        128
+      ],
+      "videoSeconds": [
+        604.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988718032836914,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_317",
+      "section": 15,
+      "originalNumber": 16,
+      "printedPages": [
+        128
+      ],
+      "videoSeconds": [
+        604.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9797669053077698,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_318",
+      "section": 15,
+      "originalNumber": 17,
+      "printedPages": [
+        128,
+        129
+      ],
+      "videoSeconds": [
+        604.5,
+        605.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9988003969192505,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_319",
+      "section": 15,
+      "originalNumber": 18,
+      "printedPages": [
+        129
+      ],
+      "videoSeconds": [
+        605.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990798234939575,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_320",
+      "section": 15,
+      "originalNumber": 19,
+      "printedPages": [
+        129,
+        130
+      ],
+      "videoSeconds": [
+        605.5,
+        606.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986931085586548,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_321",
+      "section": 15,
+      "originalNumber": 20,
+      "printedPages": [
+        130
+      ],
+      "videoSeconds": [
+        606.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988073110580444,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_322",
+      "section": 15,
+      "originalNumber": 21,
+      "printedPages": [
+        130,
+        131
+      ],
+      "videoSeconds": [
+        606.5,
+        607.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9986922144889832,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_323",
+      "section": 15,
+      "originalNumber": 22,
+      "printedPages": [
+        131
+      ],
+      "videoSeconds": [
+        607.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9760581254959106,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_324",
+      "section": 15,
+      "originalNumber": 23,
+      "printedPages": [
+        131,
+        132
+      ],
+      "videoSeconds": [
+        607.0,
+        608.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9746408462524414,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_325",
+      "section": 15,
+      "originalNumber": 24,
+      "printedPages": [
+        132
+      ],
+      "videoSeconds": [
+        608.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9674489498138428,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_326",
+      "section": 15,
+      "originalNumber": 25,
+      "printedPages": [
+        132
+      ],
+      "videoSeconds": [
+        608.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988013505935669,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_327",
+      "section": 15,
+      "originalNumber": 26,
+      "printedPages": [
+        132
+      ],
+      "videoSeconds": [
+        608.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9987249970436096,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_328",
+      "section": 15,
+      "originalNumber": 27,
+      "printedPages": [
+        133
+      ],
+      "videoSeconds": [
+        609.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989429712295532,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_329",
+      "section": 15,
+      "originalNumber": 28,
+      "printedPages": [
+        133,
+        134
+      ],
+      "videoSeconds": [
+        609.5,
+        610.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9737720489501953,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_330",
+      "section": 15,
+      "originalNumber": 29,
+      "printedPages": [
+        134
+      ],
+      "videoSeconds": [
+        610.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9793038964271545,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_331",
+      "section": 15,
+      "originalNumber": 30,
+      "printedPages": [
+        134
+      ],
+      "videoSeconds": [
+        610.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9663049578666687,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_332",
+      "section": 15,
+      "originalNumber": 31,
+      "printedPages": [
+        134
+      ],
+      "videoSeconds": [
+        610.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9987475872039795,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_333",
+      "section": 15,
+      "originalNumber": 32,
+      "printedPages": [
+        134,
+        135
+      ],
+      "videoSeconds": [
+        610.5,
+        611.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9753196835517883,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_334",
+      "section": 15,
+      "originalNumber": 33,
+      "printedPages": [
+        135
+      ],
+      "videoSeconds": [
+        611.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.974530041217804,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_335",
+      "section": 15,
+      "originalNumber": 34,
+      "printedPages": [
+        135,
+        136
+      ],
+      "videoSeconds": [
+        611.5,
+        612.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796893000602722,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_336",
+      "section": 15,
+      "originalNumber": 35,
+      "printedPages": [
+        136,
+        137
+      ],
+      "videoSeconds": [
+        612.5,
+        613.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990574717521667,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_337",
+      "section": 15,
+      "originalNumber": 36,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        613.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988925457000732,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_338",
+      "section": 15,
+      "originalNumber": 37,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        613.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9744173288345337,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_339",
+      "section": 15,
+      "originalNumber": 38,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        613.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990159869194031,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_340",
+      "section": 15,
+      "originalNumber": 39,
+      "printedPages": [
+        138
+      ],
+      "videoSeconds": [
+        614.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9674056172370911,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_341",
+      "section": 15,
+      "originalNumber": 40,
+      "printedPages": [
+        138,
+        139
+      ],
+      "videoSeconds": [
+        614.0,
+        615.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9992161989212036,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_342",
+      "section": 15,
+      "originalNumber": 41,
+      "printedPages": [
+        139
+      ],
+      "videoSeconds": [
+        615.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9755606651306152,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_343",
+      "section": 15,
+      "originalNumber": 42,
+      "printedPages": [
+        139
+      ],
+      "videoSeconds": [
+        615.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9746713042259216,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_344",
+      "section": 15,
+      "originalNumber": 43,
+      "printedPages": [
+        140
+      ],
+      "videoSeconds": [
+        616.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9660372734069824,
+      "hasPrintedExplanation": false
+    },
+    {
+      "id": "통치의기본구조_워크북_345",
+      "section": 15,
+      "originalNumber": 44,
+      "printedPages": [
+        140
+      ],
+      "videoSeconds": [
+        616.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989547729492188,
+      "hasPrintedExplanation": true
+    },
+    {
+      "id": "통치의기본구조_워크북_346",
+      "section": 15,
+      "originalNumber": 45,
+      "printedPages": [
+        140
+      ],
+      "videoSeconds": [
+        616.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9796830415725708,
+      "hasPrintedExplanation": false
+    }
+  ]
+}
