@@ -5,38 +5,41 @@
   "sourceKind": "사용자가 지정한 로컬 ZIP만 사용",
   "archiveName": "소비자법_기출문제_2012-2019_정답포함.zip",
   "publishedFile": "data/소비자법.json",
-  "publishedQuestionCount": 175,
+  "publishedQuestionCount": 280,
   "preservedFormativeCount": 63,
-  "answerPolicy": "공식 정답표의 해당 연도 소비자법 행과 원문 번호 36~70을 순서대로 대조. 공식 해설은 미제공이므로 생성하지 않음.",
-  "imagePolicy": "2015/2017/2018/2019년은 OCR 오류를 정답 지문으로 게시하지 않고 문항별 원문 이미지로 제시. 2015년 57번의 다음 단 계속 부분, 2017년 49~52번의 공통지문을 포함.",
+  "answerPolicy": "2014~2019년 210문항은 제공된 공식 정답표와 대조. 2012~2013년 70문항은 공식 정답 미제공으로 자체 풀이임을 문제·해설에 명시. 원문상 복수정답 가능 문항 2개는 임의 단일정답을 강제하지 않고 별도 표시.",
+  "imagePolicy": "이미지 문항 140개를 원문 대조 후 실제 문제·보기 텍스트로 교체. 문제 이미지 참조와 미사용 이미지 자산 제거.",
   "topicPolicy": "기존 형성평가 강의 태그를 우선 사용. 현 강의 제목에 직접 대응하지 않는 표시·광고 및 협동조합은 구교재 범위로 구분.",
   "attachments": [
     {
       "year": 2012,
       "name": "소비자법_2012_2학기_기말시험.hwp",
       "sha256": "77f0a227627fc1bbe90f6aaf9704a19036f2372588dfcd531d36abd04f51df5d",
-      "published": false,
-      "publishedQuestionCount": 0,
-      "status": "미반영",
-      "reason": "HWP 문제 원문 추출 미완료. 제공된 공식 정답표에 해당 연도가 없어 정답 확인도 필요."
+      "published": true,
+      "publishedQuestionCount": 35,
+      "questionCount": 35,
+      "contentFormat": "text",
+      "answerStatus": "자체 풀이 · 공식 정답 미제공"
     },
     {
       "year": 2013,
       "name": "소비자법_2013_2학기_기말시험.hwp",
       "sha256": "3ceb9fbb038f4a4b201b413efaab097be6c7ddbf56d3a7efe3ea90924ec997f9",
-      "published": false,
-      "publishedQuestionCount": 0,
-      "status": "미반영",
-      "reason": "HWP 문제 원문 추출 미완료. 제공된 공식 정답표에 해당 연도가 없어 정답 확인도 필요."
+      "published": true,
+      "publishedQuestionCount": 35,
+      "questionCount": 35,
+      "contentFormat": "text",
+      "answerStatus": "자체 풀이 · 공식 정답 미제공"
     },
     {
       "year": 2014,
       "name": "소비자법_2014_2학기_기말시험.hwp",
       "sha256": "8857df51f03e1dae8db59ae4cdb6812d6135b9d52d6e40afc38f8dc5b5d6d1eb",
-      "published": false,
-      "publishedQuestionCount": 0,
-      "status": "미반영",
-      "reason": "한글에서 정상 열람 성공. 인쇄 창 연결 오류(failed to activate captured window)가 재시도에도 발생해 PDF 저장 실패. 공식 정답표는 있으나 문제 원문 추출 미완료."
+      "published": true,
+      "publishedQuestionCount": 35,
+      "questionCount": 35,
+      "contentFormat": "text",
+      "answerStatus": "공식 정답표 대조 완료"
     },
     {
       "year": 2015,
@@ -46,7 +49,7 @@
       "questionCount": 35,
       "publishedQuestionCount": 35,
       "answerStatus": "공식 정답표 대조 완료",
-      "contentFormat": "original-question-image"
+      "contentFormat": "text"
     },
     {
       "year": 2016,
@@ -66,7 +69,7 @@
       "questionCount": 35,
       "publishedQuestionCount": 35,
       "answerStatus": "공식 정답표 대조 완료",
-      "contentFormat": "original-question-image"
+      "contentFormat": "text"
     },
     {
       "year": 2018,
@@ -76,7 +79,7 @@
       "questionCount": 35,
       "publishedQuestionCount": 35,
       "answerStatus": "공식 정답표 대조 완료",
-      "contentFormat": "original-question-image"
+      "contentFormat": "text"
     },
     {
       "year": 2019,
@@ -86,7 +89,7 @@
       "questionCount": 35,
       "publishedQuestionCount": 35,
       "answerStatus": "공식 정답표 대조 완료",
-      "contentFormat": "original-question-image"
+      "contentFormat": "text"
     }
   ],
   "answerKey": {
@@ -104,5 +107,65 @@
       36,
       70
     ]
-  }
+  },
+  "textQuestionCount": 280,
+  "imageQuestionCount": 0,
+  "officialAnswerQuestionCount": 210,
+  "selfSolvedQuestionCount": 70,
+  "reviewRequiredQuestionIds": [
+    "소비자법_기출2012_054",
+    "소비자법_기출2013_056"
+  ],
+  "extractionPolicy": "2015·2017·2018·2019년은 로컬 OCR 후 140개 원문 이미지 모두 대조. HWP는 pyhwp의 문서 XML에서 표 내부 문단까지 추출하고 문항 순서 복원. 2013년 58~59번, 2017년 49~52번 공통지문을 각 문항에 포함.",
+  "transcriptionNotes": [
+    {
+      "id": "소비자법_기출2018_056",
+      "note": "원문 보기 ②·④ 중복 보존. 공식 정답 ①."
+    },
+    {
+      "id": "소비자법_기출2012_054",
+      "note": "법정 기준은 ④이나 ③도 논리상 포함. 공식 키 없이 자체 복수정답 ③·④."
+    },
+    {
+      "id": "소비자법_기출2013_056",
+      "note": "원문 질문을 수정하지 않음. 옳은 보기는 자체 판단 ①·②·④."
+    }
+  ],
+  "selfSolutionReferences": [
+    {
+      "questionId": "소비자법_기출2012_054",
+      "title": "할부거래법 제13조 · 2010년 전부개정문",
+      "url": "https://www.law.go.kr/lsInfoP.do?lsiSeq=103425&viewCls=lsRvsDocInfoR"
+    },
+    {
+      "questionId": "소비자법_기출2013_036",
+      "title": "2013년 국회 본회의록 · 당시 39%·30% 이자율 논의",
+      "url": "https://archives.nanet.go.kr/upload/namo/files/000034/%EA%B5%AD%ED%9A%8C%ED%9A%8C%EC%9D%98%EB%A1%9D_19%EB%8C%80_321%ED%9A%8C_2%EC%B0%A8_%EA%B5%AD%ED%9A%8C%EB%B3%B8%ED%9A%8C%EC%9D%98.pdf"
+    },
+    {
+      "questionId": "소비자법_기출2013_039",
+      "title": "제조물책임법 제3조 · 제정·개정문",
+      "url": "https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=002039&lsRvsGubun=all"
+    },
+    {
+      "questionId": "소비자법_기출2013_042",
+      "title": "법제처 2011년 해석 · 소비자생활협동조합법 제22조",
+      "url": "https://moleg.kr/lawinfo/nwLwAnInfo.mo?cs_seq=42192&currentPage=173&keyField=&keyWord=&mid=a10106020000&pageCnt=40&sort=date"
+    },
+    {
+      "questionId": "소비자법_기출2013_044",
+      "title": "협동조합 기본법 제정이유 · 2012년",
+      "url": "https://www.law.go.kr/LSW/nwRvsLsInfoR.do?lsiSeq=122380"
+    },
+    {
+      "questionId": "소비자법_기출2013_056",
+      "title": "약관규제법 제16조 · 연혁법령",
+      "url": "https://www.law.go.kr/lsInfoP.do?lsiSeq=80022"
+    },
+    {
+      "questionId": "소비자법_기출2013_066",
+      "title": "개인정보 보호법 제47조 · 2011년 시행본",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20110930&lsiSeq=111327"
+    }
+  ]
 }
