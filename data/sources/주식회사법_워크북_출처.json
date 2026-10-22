@@ -1,0 +1,2268 @@
+{
+  "subject": "주식회사법",
+  "category": "워크북",
+  "sourceType": "사용자가 제공한 촬영 영상",
+  "sourceFile": "녹음 2026-10-22 143333.mp4",
+  "sourceSha256": "f124080ce566fe53061b0e4db225925772803607b4134acac30a6696e2971336",
+  "sourceBytes": 693286000,
+  "processedDate": "2026-10-22",
+  "workbookStartVideoSeconds": 456,
+  "videoDurationSeconds": 624.5666666666667,
+  "capturedPrintedPageRange": [
+    3,
+    160
+  ],
+  "exercisePageRanges": [
+    [
+      10,
+      14
+    ],
+    [
+      18,
+      21
+    ],
+    [
+      27,
+      30
+    ],
+    [
+      38,
+      41
+    ],
+    [
+      49,
+      53
+    ],
+    [
+      62,
+      64
+    ],
+    [
+      70,
+      74
+    ],
+    [
+      82,
+      85
+    ],
+    [
+      90,
+      93
+    ],
+    [
+      97,
+      101
+    ],
+    [
+      110,
+      113
+    ],
+    [
+      119,
+      122
+    ],
+    [
+      134,
+      137
+    ],
+    [
+      146,
+      149
+    ],
+    [
+      157,
+      160
+    ]
+  ],
+  "questionCount": 149,
+  "choiceCount": 596,
+  "contentFormat": "text",
+  "answerKey": "32232134431431331423234433443321344323314121431343134142433321333111433221332421234124443421123443441341134122234414112131432132323121324113124342113",
+  "answerVerification": "인쇄 정답 149개를 화면에서 대조하고, 별도 정답 기호 이미지 비교에서 149개 모두 일치 확인. 페이지 100의 OCR 누락 정답도 원문 ④ 확인.",
+  "independentImageAnswerCount": 149,
+  "transcriptionNotes": [
+    "기존 형성평가 60문항과 15개 태그를 변경하지 않고 워크북 149문항 추가.",
+    "문제·보기·인쇄 정답·인쇄 해설 모두 텍스트 전사. 2열 보기의 번호 순서를 복원.",
+    "원문 표 해설 2개(워크북 7번·119번)는 모든 항목을 항목별 텍스트로 변환.",
+    "공통 사례 지문은 관련 9개 문항에 각각 포함. 원문의 문제번호 참조도 유지.",
+    "인식 오류와 띄어쓰기를 정리했으며 원문의 법률 내용과 인쇄 정답을 현재 법령에 따른 자체 풀이로 대체하지 않음.",
+    "84번 보기의 동시통시수단, 60번 보기의 주식매수청권, 104번 해설의 손배배상, 93~95번 공통 지문의 채무자인, 144번 해설의 거치지 않아도 등 원문 자체의 표기도 영상과 대조 후 보존.",
+    "원본 영상과 OCR 모델·프레임 이미지는 Git에 포함하지 않음."
+  ],
+  "topicCounts": {
+    "회사법의 기초": 10,
+    "주식회사의 의의와 본질": 10,
+    "주식회사의 설립Ⅰ": 10,
+    "주식회사의 설립Ⅱ": 10,
+    "주식과 주주Ⅰ": 13,
+    "주식과 주주Ⅱ": 7,
+    "주주총회Ⅰ": 10,
+    "주주총회Ⅱ": 10,
+    "이사회와 이사Ⅰ": 10,
+    "이사회와 이사Ⅱ": 10,
+    "이사회와 이사Ⅲ": 10,
+    "감사제도": 9,
+    "신주발행": 10,
+    "정관변경, 자본금 감소, 회사의 회계": 10,
+    "주식회사의 합병": 10
+  },
+  "sections": [
+    {
+      "section": 1,
+      "topic": "회사법의 기초",
+      "exercisePages": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "count": 10
+    },
+    {
+      "section": 2,
+      "topic": "주식회사의 의의와 본질",
+      "exercisePages": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "count": 10
+    },
+    {
+      "section": 3,
+      "topic": "주식회사의 설립Ⅰ",
+      "exercisePages": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "count": 10
+    },
+    {
+      "section": 4,
+      "topic": "주식회사의 설립Ⅱ",
+      "exercisePages": [
+        38,
+        39,
+        40,
+        41
+      ],
+      "count": 10
+    },
+    {
+      "section": 5,
+      "topic": "주식과 주주Ⅰ",
+      "exercisePages": [
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "count": 13
+    },
+    {
+      "section": 6,
+      "topic": "주식과 주주Ⅱ",
+      "exercisePages": [
+        62,
+        63,
+        64
+      ],
+      "count": 7
+    },
+    {
+      "section": 7,
+      "topic": "주주총회Ⅰ",
+      "exercisePages": [
+        70,
+        71,
+        72,
+        73,
+        74
+      ],
+      "count": 10
+    },
+    {
+      "section": 8,
+      "topic": "주주총회Ⅱ",
+      "exercisePages": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "count": 10
+    },
+    {
+      "section": 9,
+      "topic": "이사회와 이사Ⅰ",
+      "exercisePages": [
+        90,
+        91,
+        92,
+        93
+      ],
+      "count": 10
+    },
+    {
+      "section": 10,
+      "topic": "이사회와 이사Ⅱ",
+      "exercisePages": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ],
+      "count": 10
+    },
+    {
+      "section": 11,
+      "topic": "이사회와 이사Ⅲ",
+      "exercisePages": [
+        110,
+        111,
+        112,
+        113
+      ],
+      "count": 10
+    },
+    {
+      "section": 12,
+      "topic": "감사제도",
+      "exercisePages": [
+        119,
+        120,
+        121,
+        122
+      ],
+      "count": 9
+    },
+    {
+      "section": 13,
+      "topic": "신주발행",
+      "exercisePages": [
+        134,
+        135,
+        136,
+        137
+      ],
+      "count": 10
+    },
+    {
+      "section": 14,
+      "topic": "정관변경, 자본금 감소, 회사의 회계",
+      "exercisePages": [
+        146,
+        147,
+        148,
+        149
+      ],
+      "count": 10
+    },
+    {
+      "section": 15,
+      "topic": "주식회사의 합병",
+      "exercisePages": [
+        157,
+        158,
+        159,
+        160
+      ],
+      "count": 10
+    }
+  ],
+  "questions": [
+    {
+      "id": "주식회사법_워크북_001",
+      "originalSection": 1,
+      "originalNumber": 1,
+      "printedPages": [
+        10
+      ],
+      "videoSeconds": [
+        467.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 1.0
+    },
+    {
+      "id": "주식회사법_워크북_002",
+      "originalSection": 1,
+      "originalNumber": 2,
+      "printedPages": [
+        10,
+        11
+      ],
+      "videoSeconds": [
+        467.5,
+        469.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9999971985816956
+    },
+    {
+      "id": "주식회사법_워크북_003",
+      "originalSection": 1,
+      "originalNumber": 3,
+      "printedPages": [
+        11
+      ],
+      "videoSeconds": [
+        469.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999106228351593
+    },
+    {
+      "id": "주식회사법_워크북_004",
+      "originalSection": 1,
+      "originalNumber": 4,
+      "printedPages": [
+        11
+      ],
+      "videoSeconds": [
+        469.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9489409923553467
+    },
+    {
+      "id": "주식회사법_워크북_005",
+      "originalSection": 1,
+      "originalNumber": 5,
+      "printedPages": [
+        12
+      ],
+      "videoSeconds": [
+        469.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9495081901550293
+    },
+    {
+      "id": "주식회사법_워크북_006",
+      "originalSection": 1,
+      "originalNumber": 6,
+      "printedPages": [
+        12
+      ],
+      "videoSeconds": [
+        469.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 1.0
+    },
+    {
+      "id": "주식회사법_워크북_007",
+      "originalSection": 1,
+      "originalNumber": 7,
+      "printedPages": [
+        12,
+        13
+      ],
+      "videoSeconds": [
+        469.5,
+        470.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9497554302215576
+    },
+    {
+      "id": "주식회사법_워크북_008",
+      "originalSection": 1,
+      "originalNumber": 8,
+      "printedPages": [
+        13
+      ],
+      "videoSeconds": [
+        470.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 1.0
+    },
+    {
+      "id": "주식회사법_워크북_009",
+      "originalSection": 1,
+      "originalNumber": 9,
+      "printedPages": [
+        14
+      ],
+      "videoSeconds": [
+        471.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9416801929473877
+    },
+    {
+      "id": "주식회사법_워크북_010",
+      "originalSection": 1,
+      "originalNumber": 10,
+      "printedPages": [
+        14
+      ],
+      "videoSeconds": [
+        471.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988968372344971
+    },
+    {
+      "id": "주식회사법_워크북_011",
+      "originalSection": 2,
+      "originalNumber": 1,
+      "printedPages": [
+        18
+      ],
+      "videoSeconds": [
+        475.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.99893718957901
+    },
+    {
+      "id": "주식회사법_워크북_012",
+      "originalSection": 2,
+      "originalNumber": 2,
+      "printedPages": [
+        18,
+        19
+      ],
+      "videoSeconds": [
+        475.5,
+        476.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989768862724304
+    },
+    {
+      "id": "주식회사법_워크북_013",
+      "originalSection": 2,
+      "originalNumber": 3,
+      "printedPages": [
+        19
+      ],
+      "videoSeconds": [
+        476.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9491448998451233
+    },
+    {
+      "id": "주식회사법_워크북_014",
+      "originalSection": 2,
+      "originalNumber": 4,
+      "printedPages": [
+        19,
+        20
+      ],
+      "videoSeconds": [
+        476.5,
+        478.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9354633688926697
+    },
+    {
+      "id": "주식회사법_워크북_015",
+      "originalSection": 2,
+      "originalNumber": 5,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        478.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9991934299468994
+    },
+    {
+      "id": "주식회사법_워크북_016",
+      "originalSection": 2,
+      "originalNumber": 6,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        478.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988590478897095
+    },
+    {
+      "id": "주식회사법_워크북_017",
+      "originalSection": 2,
+      "originalNumber": 7,
+      "printedPages": [
+        20
+      ],
+      "videoSeconds": [
+        478.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989230632781982
+    },
+    {
+      "id": "주식회사법_워크북_018",
+      "originalSection": 2,
+      "originalNumber": 8,
+      "printedPages": [
+        21
+      ],
+      "videoSeconds": [
+        478.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989140033721924
+    },
+    {
+      "id": "주식회사법_워크북_019",
+      "originalSection": 2,
+      "originalNumber": 9,
+      "printedPages": [
+        21
+      ],
+      "videoSeconds": [
+        478.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991137385368347
+    },
+    {
+      "id": "주식회사법_워크북_020",
+      "originalSection": 2,
+      "originalNumber": 10,
+      "printedPages": [
+        21
+      ],
+      "videoSeconds": [
+        478.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9492215514183044
+    },
+    {
+      "id": "주식회사법_워크북_021",
+      "originalSection": 3,
+      "originalNumber": 1,
+      "printedPages": [
+        27
+      ],
+      "videoSeconds": [
+        485.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991375803947449
+    },
+    {
+      "id": "주식회사법_워크북_022",
+      "originalSection": 3,
+      "originalNumber": 2,
+      "printedPages": [
+        27
+      ],
+      "videoSeconds": [
+        485.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9491977691650391
+    },
+    {
+      "id": "주식회사법_워크북_023",
+      "originalSection": 3,
+      "originalNumber": 3,
+      "printedPages": [
+        27,
+        28
+      ],
+      "videoSeconds": [
+        485.0,
+        486.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9418678879737854
+    },
+    {
+      "id": "주식회사법_워크북_024",
+      "originalSection": 3,
+      "originalNumber": 4,
+      "printedPages": [
+        27,
+        28
+      ],
+      "videoSeconds": [
+        485.0,
+        486.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9415401220321655
+    },
+    {
+      "id": "주식회사법_워크북_025",
+      "originalSection": 3,
+      "originalNumber": 5,
+      "printedPages": [
+        28
+      ],
+      "videoSeconds": [
+        486.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9990566968917847
+    },
+    {
+      "id": "주식회사법_워크북_026",
+      "originalSection": 3,
+      "originalNumber": 6,
+      "printedPages": [
+        29
+      ],
+      "videoSeconds": [
+        487.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9491853713989258
+    },
+    {
+      "id": "주식회사법_워크북_027",
+      "originalSection": 3,
+      "originalNumber": 7,
+      "printedPages": [
+        29
+      ],
+      "videoSeconds": [
+        487.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.999112069606781
+    },
+    {
+      "id": "주식회사법_워크북_028",
+      "originalSection": 3,
+      "originalNumber": 8,
+      "printedPages": [
+        29,
+        30
+      ],
+      "videoSeconds": [
+        487.0,
+        487.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991025924682617
+    },
+    {
+      "id": "주식회사법_워크북_029",
+      "originalSection": 3,
+      "originalNumber": 9,
+      "printedPages": [
+        30
+      ],
+      "videoSeconds": [
+        487.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9992291331291199
+    },
+    {
+      "id": "주식회사법_워크북_030",
+      "originalSection": 3,
+      "originalNumber": 10,
+      "printedPages": [
+        30
+      ],
+      "videoSeconds": [
+        487.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989829659461975
+    },
+    {
+      "id": "주식회사법_워크북_031",
+      "originalSection": 4,
+      "originalNumber": 1,
+      "printedPages": [
+        38
+      ],
+      "videoSeconds": [
+        496.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9498389959335327
+    },
+    {
+      "id": "주식회사법_워크북_032",
+      "originalSection": 4,
+      "originalNumber": 2,
+      "printedPages": [
+        38
+      ],
+      "videoSeconds": [
+        496.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989976286888123
+    },
+    {
+      "id": "주식회사법_워크북_033",
+      "originalSection": 4,
+      "originalNumber": 3,
+      "printedPages": [
+        38,
+        39
+      ],
+      "videoSeconds": [
+        496.0,
+        497.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988742470741272
+    },
+    {
+      "id": "주식회사법_워크북_034",
+      "originalSection": 4,
+      "originalNumber": 4,
+      "printedPages": [
+        39
+      ],
+      "videoSeconds": [
+        497.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993735551834106
+    },
+    {
+      "id": "주식회사법_워크북_035",
+      "originalSection": 4,
+      "originalNumber": 5,
+      "printedPages": [
+        39
+      ],
+      "videoSeconds": [
+        497.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.998946487903595
+    },
+    {
+      "id": "주식회사법_워크북_036",
+      "originalSection": 4,
+      "originalNumber": 6,
+      "printedPages": [
+        39,
+        40
+      ],
+      "videoSeconds": [
+        497.0,
+        498.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9494010210037231
+    },
+    {
+      "id": "주식회사법_워크북_037",
+      "originalSection": 4,
+      "originalNumber": 7,
+      "printedPages": [
+        40
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9494290947914124
+    },
+    {
+      "id": "주식회사법_워크북_038",
+      "originalSection": 4,
+      "originalNumber": 8,
+      "printedPages": [
+        40
+      ],
+      "videoSeconds": [
+        498.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989539384841919
+    },
+    {
+      "id": "주식회사법_워크북_039",
+      "originalSection": 4,
+      "originalNumber": 9,
+      "printedPages": [
+        41
+      ],
+      "videoSeconds": [
+        499.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9482096433639526
+    },
+    {
+      "id": "주식회사법_워크북_040",
+      "originalSection": 4,
+      "originalNumber": 10,
+      "printedPages": [
+        41
+      ],
+      "videoSeconds": [
+        499.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.934938371181488
+    },
+    {
+      "id": "주식회사법_워크북_041",
+      "originalSection": 5,
+      "originalNumber": 1,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        507.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9990507960319519
+    },
+    {
+      "id": "주식회사법_워크북_042",
+      "originalSection": 5,
+      "originalNumber": 2,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        507.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9354041218757629
+    },
+    {
+      "id": "주식회사법_워크북_043",
+      "originalSection": 5,
+      "originalNumber": 3,
+      "printedPages": [
+        49
+      ],
+      "videoSeconds": [
+        507.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990662932395935
+    },
+    {
+      "id": "주식회사법_워크북_044",
+      "originalSection": 5,
+      "originalNumber": 4,
+      "printedPages": [
+        50
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9992214441299438
+    },
+    {
+      "id": "주식회사법_워크북_045",
+      "originalSection": 5,
+      "originalNumber": 5,
+      "printedPages": [
+        50
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9418140053749084
+    },
+    {
+      "id": "주식회사법_워크북_046",
+      "originalSection": 5,
+      "originalNumber": 6,
+      "printedPages": [
+        50
+      ],
+      "videoSeconds": [
+        508.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998906672000885
+    },
+    {
+      "id": "주식회사법_워크북_047",
+      "originalSection": 5,
+      "originalNumber": 7,
+      "printedPages": [
+        51
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9362105131149292
+    },
+    {
+      "id": "주식회사법_워크북_048",
+      "originalSection": 5,
+      "originalNumber": 8,
+      "printedPages": [
+        51
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9487380981445312
+    },
+    {
+      "id": "주식회사법_워크북_049",
+      "originalSection": 5,
+      "originalNumber": 9,
+      "printedPages": [
+        51
+      ],
+      "videoSeconds": [
+        509.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988579154014587
+    },
+    {
+      "id": "주식회사법_워크북_050",
+      "originalSection": 5,
+      "originalNumber": 10,
+      "printedPages": [
+        52
+      ],
+      "videoSeconds": [
+        510.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989414215087891
+    },
+    {
+      "id": "주식회사법_워크북_051",
+      "originalSection": 5,
+      "originalNumber": 11,
+      "printedPages": [
+        52
+      ],
+      "videoSeconds": [
+        510.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990391731262207
+    },
+    {
+      "id": "주식회사법_워크북_052",
+      "originalSection": 5,
+      "originalNumber": 12,
+      "printedPages": [
+        53
+      ],
+      "videoSeconds": [
+        511.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.94881671667099
+    },
+    {
+      "id": "주식회사법_워크북_053",
+      "originalSection": 5,
+      "originalNumber": 13,
+      "printedPages": [
+        53
+      ],
+      "videoSeconds": [
+        511.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989820122718811
+    },
+    {
+      "id": "주식회사법_워크북_054",
+      "originalSection": 6,
+      "originalNumber": 1,
+      "printedPages": [
+        62
+      ],
+      "videoSeconds": [
+        520.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990234971046448
+    },
+    {
+      "id": "주식회사법_워크북_055",
+      "originalSection": 6,
+      "originalNumber": 2,
+      "printedPages": [
+        62
+      ],
+      "videoSeconds": [
+        520.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9420233964920044
+    },
+    {
+      "id": "주식회사법_워크북_056",
+      "originalSection": 6,
+      "originalNumber": 3,
+      "printedPages": [
+        62,
+        63
+      ],
+      "videoSeconds": [
+        520.5,
+        521.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9996118545532227
+    },
+    {
+      "id": "주식회사법_워크북_057",
+      "originalSection": 6,
+      "originalNumber": 4,
+      "printedPages": [
+        63
+      ],
+      "videoSeconds": [
+        521.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989597797393799
+    },
+    {
+      "id": "주식회사법_워크북_058",
+      "originalSection": 6,
+      "originalNumber": 5,
+      "printedPages": [
+        63,
+        64
+      ],
+      "videoSeconds": [
+        521.5,
+        522.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9488990902900696
+    },
+    {
+      "id": "주식회사법_워크북_059",
+      "originalSection": 6,
+      "originalNumber": 6,
+      "printedPages": [
+        64
+      ],
+      "videoSeconds": [
+        522.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988644123077393
+    },
+    {
+      "id": "주식회사법_워크북_060",
+      "originalSection": 6,
+      "originalNumber": 7,
+      "printedPages": [
+        64
+      ],
+      "videoSeconds": [
+        522.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9991958737373352
+    },
+    {
+      "id": "주식회사법_워크북_061",
+      "originalSection": 7,
+      "originalNumber": 1,
+      "printedPages": [
+        70
+      ],
+      "videoSeconds": [
+        528.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9493934512138367
+    },
+    {
+      "id": "주식회사법_워크북_062",
+      "originalSection": 7,
+      "originalNumber": 2,
+      "printedPages": [
+        71
+      ],
+      "videoSeconds": [
+        529.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9361249804496765
+    },
+    {
+      "id": "주식회사법_워크북_063",
+      "originalSection": 7,
+      "originalNumber": 3,
+      "printedPages": [
+        71
+      ],
+      "videoSeconds": [
+        529.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9490628838539124
+    },
+    {
+      "id": "주식회사법_워크북_064",
+      "originalSection": 7,
+      "originalNumber": 4,
+      "printedPages": [
+        71
+      ],
+      "videoSeconds": [
+        529.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9489923715591431
+    },
+    {
+      "id": "주식회사법_워크북_065",
+      "originalSection": 7,
+      "originalNumber": 5,
+      "printedPages": [
+        72
+      ],
+      "videoSeconds": [
+        530.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9990862011909485
+    },
+    {
+      "id": "주식회사법_워크북_066",
+      "originalSection": 7,
+      "originalNumber": 6,
+      "printedPages": [
+        72
+      ],
+      "videoSeconds": [
+        530.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989256858825684
+    },
+    {
+      "id": "주식회사법_워크북_067",
+      "originalSection": 7,
+      "originalNumber": 7,
+      "printedPages": [
+        73
+      ],
+      "videoSeconds": [
+        531.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9352395534515381
+    },
+    {
+      "id": "주식회사법_워크북_068",
+      "originalSection": 7,
+      "originalNumber": 8,
+      "printedPages": [
+        73
+      ],
+      "videoSeconds": [
+        531.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.935814380645752
+    },
+    {
+      "id": "주식회사법_워크북_069",
+      "originalSection": 7,
+      "originalNumber": 9,
+      "printedPages": [
+        73,
+        74
+      ],
+      "videoSeconds": [
+        531.5,
+        532.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9417011141777039
+    },
+    {
+      "id": "주식회사법_워크북_070",
+      "originalSection": 7,
+      "originalNumber": 10,
+      "printedPages": [
+        74
+      ],
+      "videoSeconds": [
+        532.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989114999771118
+    },
+    {
+      "id": "주식회사법_워크북_071",
+      "originalSection": 8,
+      "originalNumber": 1,
+      "printedPages": [
+        82
+      ],
+      "videoSeconds": [
+        540.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9989293217658997
+    },
+    {
+      "id": "주식회사법_워크북_072",
+      "originalSection": 8,
+      "originalNumber": 2,
+      "printedPages": [
+        82
+      ],
+      "videoSeconds": [
+        540.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.949946939945221
+    },
+    {
+      "id": "주식회사법_워크북_073",
+      "originalSection": 8,
+      "originalNumber": 3,
+      "printedPages": [
+        83
+      ],
+      "videoSeconds": [
+        541.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990898370742798
+    },
+    {
+      "id": "주식회사법_워크북_074",
+      "originalSection": 8,
+      "originalNumber": 4,
+      "printedPages": [
+        83
+      ],
+      "videoSeconds": [
+        541.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.934552788734436
+    },
+    {
+      "id": "주식회사법_워크북_075",
+      "originalSection": 8,
+      "originalNumber": 5,
+      "printedPages": [
+        83
+      ],
+      "videoSeconds": [
+        541.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9479538798332214
+    },
+    {
+      "id": "주식회사법_워크북_076",
+      "originalSection": 8,
+      "originalNumber": 6,
+      "printedPages": [
+        84
+      ],
+      "videoSeconds": [
+        542.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998889148235321
+    },
+    {
+      "id": "주식회사법_워크북_077",
+      "originalSection": 8,
+      "originalNumber": 7,
+      "printedPages": [
+        84
+      ],
+      "videoSeconds": [
+        542.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9494695663452148
+    },
+    {
+      "id": "주식회사법_워크북_078",
+      "originalSection": 8,
+      "originalNumber": 8,
+      "printedPages": [
+        84,
+        85
+      ],
+      "videoSeconds": [
+        542.5,
+        543.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991167187690735
+    },
+    {
+      "id": "주식회사법_워크북_079",
+      "originalSection": 8,
+      "originalNumber": 9,
+      "printedPages": [
+        85
+      ],
+      "videoSeconds": [
+        543.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9988768696784973
+    },
+    {
+      "id": "주식회사법_워크북_080",
+      "originalSection": 8,
+      "originalNumber": 10,
+      "printedPages": [
+        85
+      ],
+      "videoSeconds": [
+        543.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9345836639404297
+    },
+    {
+      "id": "주식회사법_워크북_081",
+      "originalSection": 9,
+      "originalNumber": 1,
+      "printedPages": [
+        90
+      ],
+      "videoSeconds": [
+        548.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9501321911811829
+    },
+    {
+      "id": "주식회사법_워크북_082",
+      "originalSection": 9,
+      "originalNumber": 2,
+      "printedPages": [
+        91
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9484667181968689
+    },
+    {
+      "id": "주식회사법_워크북_083",
+      "originalSection": 9,
+      "originalNumber": 3,
+      "printedPages": [
+        91
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993600845336914
+    },
+    {
+      "id": "주식회사법_워크북_084",
+      "originalSection": 9,
+      "originalNumber": 4,
+      "printedPages": [
+        91
+      ],
+      "videoSeconds": [
+        549.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.935661792755127
+    },
+    {
+      "id": "주식회사법_워크북_085",
+      "originalSection": 9,
+      "originalNumber": 5,
+      "printedPages": [
+        92
+      ],
+      "videoSeconds": [
+        550.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9498407244682312
+    },
+    {
+      "id": "주식회사법_워크북_086",
+      "originalSection": 9,
+      "originalNumber": 6,
+      "printedPages": [
+        92
+      ],
+      "videoSeconds": [
+        550.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9418178796768188
+    },
+    {
+      "id": "주식회사법_워크북_087",
+      "originalSection": 9,
+      "originalNumber": 7,
+      "printedPages": [
+        92
+      ],
+      "videoSeconds": [
+        550.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.942345380783081
+    },
+    {
+      "id": "주식회사법_워크북_088",
+      "originalSection": 9,
+      "originalNumber": 8,
+      "printedPages": [
+        93
+      ],
+      "videoSeconds": [
+        551.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991143941879272
+    },
+    {
+      "id": "주식회사법_워크북_089",
+      "originalSection": 9,
+      "originalNumber": 9,
+      "printedPages": [
+        93
+      ],
+      "videoSeconds": [
+        551.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9486246705055237
+    },
+    {
+      "id": "주식회사법_워크북_090",
+      "originalSection": 9,
+      "originalNumber": 10,
+      "printedPages": [
+        93
+      ],
+      "videoSeconds": [
+        551.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991189241409302
+    },
+    {
+      "id": "주식회사법_워크북_091",
+      "originalSection": 10,
+      "originalNumber": 1,
+      "printedPages": [
+        97
+      ],
+      "videoSeconds": [
+        555.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990648627281189
+    },
+    {
+      "id": "주식회사법_워크북_092",
+      "originalSection": 10,
+      "originalNumber": 2,
+      "printedPages": [
+        97,
+        98
+      ],
+      "videoSeconds": [
+        555.0,
+        556.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9999127984046936
+    },
+    {
+      "id": "주식회사법_워크북_093",
+      "originalSection": 10,
+      "originalNumber": 3,
+      "printedPages": [
+        98
+      ],
+      "videoSeconds": [
+        556.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990950226783752
+    },
+    {
+      "id": "주식회사법_워크북_094",
+      "originalSection": 10,
+      "originalNumber": 4,
+      "printedPages": [
+        98
+      ],
+      "videoSeconds": [
+        556.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9492854475975037
+    },
+    {
+      "id": "주식회사법_워크북_095",
+      "originalSection": 10,
+      "originalNumber": 5,
+      "printedPages": [
+        98,
+        99
+      ],
+      "videoSeconds": [
+        556.5,
+        557.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9487401247024536
+    },
+    {
+      "id": "주식회사법_워크북_096",
+      "originalSection": 10,
+      "originalNumber": 6,
+      "printedPages": [
+        99
+      ],
+      "videoSeconds": [
+        557.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.998981237411499
+    },
+    {
+      "id": "주식회사법_워크북_097",
+      "originalSection": 10,
+      "originalNumber": 7,
+      "printedPages": [
+        99,
+        100
+      ],
+      "videoSeconds": [
+        557.0,
+        558.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9419339299201965
+    },
+    {
+      "id": "주식회사법_워크북_098",
+      "originalSection": 10,
+      "originalNumber": 8,
+      "printedPages": [
+        100
+      ],
+      "videoSeconds": [
+        558.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9993463158607483
+    },
+    {
+      "id": "주식회사법_워크북_099",
+      "originalSection": 10,
+      "originalNumber": 9,
+      "printedPages": [
+        100,
+        101
+      ],
+      "videoSeconds": [
+        558.0,
+        559.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9416337609291077
+    },
+    {
+      "id": "주식회사법_워크북_100",
+      "originalSection": 10,
+      "originalNumber": 10,
+      "printedPages": [
+        101
+      ],
+      "videoSeconds": [
+        559.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9994525909423828
+    },
+    {
+      "id": "주식회사법_워크북_101",
+      "originalSection": 11,
+      "originalNumber": 1,
+      "printedPages": [
+        110
+      ],
+      "videoSeconds": [
+        568.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990315437316895
+    },
+    {
+      "id": "주식회사법_워크북_102",
+      "originalSection": 11,
+      "originalNumber": 2,
+      "printedPages": [
+        110
+      ],
+      "videoSeconds": [
+        568.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.99904865026474
+    },
+    {
+      "id": "주식회사법_워크북_103",
+      "originalSection": 11,
+      "originalNumber": 3,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        569.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991345405578613
+    },
+    {
+      "id": "주식회사법_워크북_104",
+      "originalSection": 11,
+      "originalNumber": 4,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        569.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9363621473312378
+    },
+    {
+      "id": "주식회사법_워크북_105",
+      "originalSection": 11,
+      "originalNumber": 5,
+      "printedPages": [
+        111
+      ],
+      "videoSeconds": [
+        569.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9342943429946899
+    },
+    {
+      "id": "주식회사법_워크북_106",
+      "originalSection": 11,
+      "originalNumber": 6,
+      "printedPages": [
+        112
+      ],
+      "videoSeconds": [
+        570.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9988294243812561
+    },
+    {
+      "id": "주식회사법_워크북_107",
+      "originalSection": 11,
+      "originalNumber": 7,
+      "printedPages": [
+        112
+      ],
+      "videoSeconds": [
+        570.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9417650103569031
+    },
+    {
+      "id": "주식회사법_워크북_108",
+      "originalSection": 11,
+      "originalNumber": 8,
+      "printedPages": [
+        112,
+        113
+      ],
+      "videoSeconds": [
+        570.5,
+        571.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9354618787765503
+    },
+    {
+      "id": "주식회사법_워크북_109",
+      "originalSection": 11,
+      "originalNumber": 9,
+      "printedPages": [
+        113
+      ],
+      "videoSeconds": [
+        571.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990291595458984
+    },
+    {
+      "id": "주식회사법_워크북_110",
+      "originalSection": 11,
+      "originalNumber": 10,
+      "printedPages": [
+        113
+      ],
+      "videoSeconds": [
+        571.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990413188934326
+    },
+    {
+      "id": "주식회사법_워크북_111",
+      "originalSection": 12,
+      "originalNumber": 1,
+      "printedPages": [
+        119
+      ],
+      "videoSeconds": [
+        577.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9990589022636414
+    },
+    {
+      "id": "주식회사법_워크북_112",
+      "originalSection": 12,
+      "originalNumber": 2,
+      "printedPages": [
+        119
+      ],
+      "videoSeconds": [
+        577.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.949128270149231
+    },
+    {
+      "id": "주식회사법_워크북_113",
+      "originalSection": 12,
+      "originalNumber": 3,
+      "printedPages": [
+        119,
+        120
+      ],
+      "videoSeconds": [
+        577.5,
+        578.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9993992447853088
+    },
+    {
+      "id": "주식회사법_워크북_114",
+      "originalSection": 12,
+      "originalNumber": 4,
+      "printedPages": [
+        120
+      ],
+      "videoSeconds": [
+        578.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9420856833457947
+    },
+    {
+      "id": "주식회사법_워크북_115",
+      "originalSection": 12,
+      "originalNumber": 5,
+      "printedPages": [
+        120
+      ],
+      "videoSeconds": [
+        578.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989272356033325
+    },
+    {
+      "id": "주식회사법_워크북_116",
+      "originalSection": 12,
+      "originalNumber": 6,
+      "printedPages": [
+        120,
+        121
+      ],
+      "videoSeconds": [
+        578.5,
+        579.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9415580630302429
+    },
+    {
+      "id": "주식회사법_워크북_117",
+      "originalSection": 12,
+      "originalNumber": 7,
+      "printedPages": [
+        121
+      ],
+      "videoSeconds": [
+        579.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9347352981567383
+    },
+    {
+      "id": "주식회사법_워크북_118",
+      "originalSection": 12,
+      "originalNumber": 8,
+      "printedPages": [
+        121
+      ],
+      "videoSeconds": [
+        579.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9351310133934021
+    },
+    {
+      "id": "주식회사법_워크북_119",
+      "originalSection": 12,
+      "originalNumber": 9,
+      "printedPages": [
+        122
+      ],
+      "videoSeconds": [
+        581.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9497144818305969
+    },
+    {
+      "id": "주식회사법_워크북_120",
+      "originalSection": 13,
+      "originalNumber": 1,
+      "printedPages": [
+        134
+      ],
+      "videoSeconds": [
+        592.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9989874362945557
+    },
+    {
+      "id": "주식회사법_워크북_121",
+      "originalSection": 13,
+      "originalNumber": 2,
+      "printedPages": [
+        134,
+        135
+      ],
+      "videoSeconds": [
+        592.5,
+        593.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9490603804588318
+    },
+    {
+      "id": "주식회사법_워크북_122",
+      "originalSection": 13,
+      "originalNumber": 3,
+      "printedPages": [
+        135
+      ],
+      "videoSeconds": [
+        593.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9347562789916992
+    },
+    {
+      "id": "주식회사법_워크북_123",
+      "originalSection": 13,
+      "originalNumber": 4,
+      "printedPages": [
+        135
+      ],
+      "videoSeconds": [
+        593.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9989301562309265
+    },
+    {
+      "id": "주식회사법_워크북_124",
+      "originalSection": 13,
+      "originalNumber": 5,
+      "printedPages": [
+        136
+      ],
+      "videoSeconds": [
+        594.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.998889148235321
+    },
+    {
+      "id": "주식회사법_워크북_125",
+      "originalSection": 13,
+      "originalNumber": 6,
+      "printedPages": [
+        136
+      ],
+      "videoSeconds": [
+        594.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.949050784111023
+    },
+    {
+      "id": "주식회사법_워크북_126",
+      "originalSection": 13,
+      "originalNumber": 7,
+      "printedPages": [
+        136
+      ],
+      "videoSeconds": [
+        594.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9992376565933228
+    },
+    {
+      "id": "주식회사법_워크북_127",
+      "originalSection": 13,
+      "originalNumber": 8,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        596.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9487452507019043
+    },
+    {
+      "id": "주식회사법_워크북_128",
+      "originalSection": 13,
+      "originalNumber": 9,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        596.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9989984631538391
+    },
+    {
+      "id": "주식회사법_워크북_129",
+      "originalSection": 13,
+      "originalNumber": 10,
+      "printedPages": [
+        137
+      ],
+      "videoSeconds": [
+        596.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9480620622634888
+    },
+    {
+      "id": "주식회사법_워크북_130",
+      "originalSection": 14,
+      "originalNumber": 1,
+      "printedPages": [
+        146
+      ],
+      "videoSeconds": [
+        605.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9492702484130859
+    },
+    {
+      "id": "주식회사법_워크북_131",
+      "originalSection": 14,
+      "originalNumber": 2,
+      "printedPages": [
+        146,
+        147
+      ],
+      "videoSeconds": [
+        605.0,
+        606.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9489884972572327
+    },
+    {
+      "id": "주식회사법_워크북_132",
+      "originalSection": 14,
+      "originalNumber": 3,
+      "printedPages": [
+        147
+      ],
+      "videoSeconds": [
+        606.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9345431327819824
+    },
+    {
+      "id": "주식회사법_워크북_133",
+      "originalSection": 14,
+      "originalNumber": 4,
+      "printedPages": [
+        147
+      ],
+      "videoSeconds": [
+        606.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.999553918838501
+    },
+    {
+      "id": "주식회사법_워크북_134",
+      "originalSection": 14,
+      "originalNumber": 5,
+      "printedPages": [
+        147,
+        148
+      ],
+      "videoSeconds": [
+        606.0,
+        606.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9350029826164246
+    },
+    {
+      "id": "주식회사법_워크북_135",
+      "originalSection": 14,
+      "originalNumber": 6,
+      "printedPages": [
+        148
+      ],
+      "videoSeconds": [
+        606.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9990836381912231
+    },
+    {
+      "id": "주식회사법_워크북_136",
+      "originalSection": 14,
+      "originalNumber": 7,
+      "printedPages": [
+        148
+      ],
+      "videoSeconds": [
+        606.5
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9492433071136475
+    },
+    {
+      "id": "주식회사법_워크북_137",
+      "originalSection": 14,
+      "originalNumber": 8,
+      "printedPages": [
+        148,
+        149
+      ],
+      "videoSeconds": [
+        606.5,
+        607.5
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9991022944450378
+    },
+    {
+      "id": "주식회사법_워크북_138",
+      "originalSection": 14,
+      "originalNumber": 9,
+      "printedPages": [
+        149
+      ],
+      "videoSeconds": [
+        607.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9348564147949219
+    },
+    {
+      "id": "주식회사법_워크북_139",
+      "originalSection": 14,
+      "originalNumber": 10,
+      "printedPages": [
+        149
+      ],
+      "videoSeconds": [
+        607.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9346781969070435
+    },
+    {
+      "id": "주식회사법_워크북_140",
+      "originalSection": 15,
+      "originalNumber": 1,
+      "printedPages": [
+        157
+      ],
+      "videoSeconds": [
+        615.5
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9487662315368652
+    },
+    {
+      "id": "주식회사법_워크북_141",
+      "originalSection": 15,
+      "originalNumber": 2,
+      "printedPages": [
+        157
+      ],
+      "videoSeconds": [
+        615.5
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9358123540878296
+    },
+    {
+      "id": "주식회사법_워크북_142",
+      "originalSection": 15,
+      "originalNumber": 3,
+      "printedPages": [
+        158
+      ],
+      "videoSeconds": [
+        617.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9494916796684265
+    },
+    {
+      "id": "주식회사법_워크북_143",
+      "originalSection": 15,
+      "originalNumber": 4,
+      "printedPages": [
+        158
+      ],
+      "videoSeconds": [
+        617.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9418749809265137
+    },
+    {
+      "id": "주식회사법_워크북_144",
+      "originalSection": 15,
+      "originalNumber": 5,
+      "printedPages": [
+        158,
+        159
+      ],
+      "videoSeconds": [
+        617.0,
+        618.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9493176937103271
+    },
+    {
+      "id": "주식회사법_워크북_145",
+      "originalSection": 15,
+      "originalNumber": 6,
+      "printedPages": [
+        159
+      ],
+      "videoSeconds": [
+        618.0
+      ],
+      "printedAnswer": "④",
+      "answerImageScore": 0.9988995790481567
+    },
+    {
+      "id": "주식회사법_워크북_146",
+      "originalSection": 15,
+      "originalNumber": 7,
+      "printedPages": [
+        159
+      ],
+      "videoSeconds": [
+        618.0
+      ],
+      "printedAnswer": "②",
+      "answerImageScore": 0.9991244077682495
+    },
+    {
+      "id": "주식회사법_워크북_147",
+      "originalSection": 15,
+      "originalNumber": 8,
+      "printedPages": [
+        160
+      ],
+      "videoSeconds": [
+        619.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9990102052688599
+    },
+    {
+      "id": "주식회사법_워크북_148",
+      "originalSection": 15,
+      "originalNumber": 9,
+      "printedPages": [
+        160
+      ],
+      "videoSeconds": [
+        619.0
+      ],
+      "printedAnswer": "①",
+      "answerImageScore": 0.9992439150810242
+    },
+    {
+      "id": "주식회사법_워크북_149",
+      "originalSection": 15,
+      "originalNumber": 10,
+      "printedPages": [
+        160
+      ],
+      "videoSeconds": [
+        619.0
+      ],
+      "printedAnswer": "③",
+      "answerImageScore": 0.9996183514595032
+    }
+  ]
+}
