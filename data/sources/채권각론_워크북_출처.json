@@ -1,0 +1,3294 @@
+{
+  "subject": "채권각론",
+  "category": "워크북",
+  "sourceType": "사용자가 제공한 촬영 영상",
+  "sourceFile": "녹음 2026-10-22 134250.mp4",
+  "sourceSha256": "5a8089ccc8853534dc622d77e971a905a73630eadb750d1b77fe837908f29d86",
+  "sourceBytes": 652705702,
+  "processedDate": "2026-10-22",
+  "workbookStartVideoSeconds": 402,
+  "printedPageRange": [
+    5,
+    170
+  ],
+  "questionCount": 300,
+  "contentFormat": "text",
+  "answerKey": "531445122323425131243421312542221515225515332314311514441251225342433533224131344322315232122152453445411511414251111425435152152451455521441352211252421221215533251422115444235425242311522535151544351245524344422535353551243322155432433324414523155344222245445151134225212532535321355511442224423343",
+  "multipleAnswers": {
+    "채권각론_워크북_050": {
+      "printed": "①/②",
+      "zeroBasedAnswers": [
+        0,
+        1
+      ]
+    }
+  },
+  "answerVerification": "인쇄 정답 300개를 영상에서 확인하고, 별도 정답 기호 이미지 대조로 300개 모두 일치 검사. 50번의 원문 복수정답 ①/②를 함께 보존.",
+  "independentImageAnswerCount": 300,
+  "transcriptionNotes": [
+    "본문·보기·인쇄 정답·인쇄 해설을 텍스트로 전사. 조합형 보기 및 여러 열의 보기 순서를 정리.",
+    "띄어쓰기와 판독 오자를 정리했으며 법률 내용·정답·인쇄 당시 조문은 원문 기준. 최신 법령에 따른 자체 풀이로 대체하지 않음.",
+    "원문에 반복 수록된 문항과 중복 보기도 보존.",
+    "기존 형성평가 167문항과 15개 태그를 변경하지 않음.",
+    "원본 영상 및 임시 프레임 이미지는 Git에 포함하지 않음."
+  ],
+  "topicCounts": {
+    "총론": 12,
+    "계약의 성립": 13,
+    "계약의 효력": 14,
+    "계약의 해제와 해지": 14,
+    "증여와 매매1": 24,
+    "매매2": 5,
+    "매매3": 11,
+    "교환,소비대차,사용대차 계약": 15,
+    "임대차 1": 14,
+    "임대차 2": 17,
+    "도급 등": 35,
+    "현상광고 등": 54,
+    "부당이득1": 11,
+    "부당이득2와 불법행위": 21,
+    "불법행위2": 40
+  },
+  "sections": [
+    {
+      "section": 1,
+      "startQuestion": 1,
+      "startPage": 5,
+      "count": 3
+    },
+    {
+      "section": 2,
+      "startQuestion": 4,
+      "startPage": 7,
+      "count": 6
+    },
+    {
+      "section": 3,
+      "startQuestion": 10,
+      "startPage": 10,
+      "count": 3
+    },
+    {
+      "section": 4,
+      "startQuestion": 13,
+      "startPage": 11,
+      "count": 13
+    },
+    {
+      "section": 5,
+      "startQuestion": 26,
+      "startPage": 18,
+      "count": 14
+    },
+    {
+      "section": 6,
+      "startQuestion": 40,
+      "startPage": 26,
+      "count": 14
+    },
+    {
+      "section": 7,
+      "startQuestion": 54,
+      "startPage": 35,
+      "count": 2
+    },
+    {
+      "section": 8,
+      "startQuestion": 56,
+      "startPage": 36,
+      "count": 8
+    },
+    {
+      "section": 9,
+      "startQuestion": 64,
+      "startPage": 40,
+      "count": 30
+    },
+    {
+      "section": 10,
+      "startQuestion": 94,
+      "startPage": 55,
+      "count": 3
+    },
+    {
+      "section": 11,
+      "startQuestion": 97,
+      "startPage": 57,
+      "count": 6
+    },
+    {
+      "section": 12,
+      "startQuestion": 103,
+      "startPage": 60,
+      "count": 6
+    },
+    {
+      "section": 13,
+      "startQuestion": 109,
+      "startPage": 63,
+      "count": 31
+    },
+    {
+      "section": 14,
+      "startQuestion": 140,
+      "startPage": 80,
+      "count": 5
+    },
+    {
+      "section": 15,
+      "startQuestion": 145,
+      "startPage": 82,
+      "count": 12
+    },
+    {
+      "section": 16,
+      "startQuestion": 157,
+      "startPage": 90,
+      "count": 7
+    },
+    {
+      "section": 17,
+      "startQuestion": 164,
+      "startPage": 93,
+      "count": 11
+    },
+    {
+      "section": 18,
+      "startQuestion": 175,
+      "startPage": 100,
+      "count": 40
+    },
+    {
+      "section": 19,
+      "startQuestion": 215,
+      "startPage": 121,
+      "count": 4
+    },
+    {
+      "section": 20,
+      "startQuestion": 219,
+      "startPage": 124,
+      "count": 10
+    },
+    {
+      "section": 21,
+      "startQuestion": 229,
+      "startPage": 130,
+      "count": 18
+    },
+    {
+      "section": 22,
+      "startQuestion": 247,
+      "startPage": 140,
+      "count": 54
+    }
+  ],
+  "questions": [
+    {
+      "id": "채권각론_워크북_001",
+      "printedPages": [
+        5
+      ],
+      "startVideoSeconds": 406.25,
+      "answerPage": 5,
+      "originalSection": 1,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_002",
+      "printedPages": [
+        5
+      ],
+      "startVideoSeconds": 406.25,
+      "answerPage": 5,
+      "originalSection": 1,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_003",
+      "printedPages": [
+        6
+      ],
+      "startVideoSeconds": 407.25,
+      "answerPage": 6,
+      "originalSection": 1,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_004",
+      "printedPages": [
+        7
+      ],
+      "startVideoSeconds": 408.25,
+      "answerPage": 7,
+      "originalSection": 2,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_005",
+      "printedPages": [
+        7,
+        8
+      ],
+      "startVideoSeconds": 408.25,
+      "answerPage": 7,
+      "originalSection": 2,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_006",
+      "printedPages": [
+        8
+      ],
+      "startVideoSeconds": 409.25,
+      "answerPage": 8,
+      "originalSection": 2,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_007",
+      "printedPages": [
+        8
+      ],
+      "startVideoSeconds": 409.25,
+      "answerPage": 8,
+      "originalSection": 2,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_008",
+      "printedPages": [
+        8,
+        9
+      ],
+      "startVideoSeconds": 409.25,
+      "answerPage": 9,
+      "originalSection": 2,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_009",
+      "printedPages": [
+        9
+      ],
+      "startVideoSeconds": 410.25,
+      "answerPage": 9,
+      "originalSection": 2,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_010",
+      "printedPages": [
+        10
+      ],
+      "startVideoSeconds": 411.75,
+      "answerPage": 10,
+      "originalSection": 3,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_011",
+      "printedPages": [
+        10
+      ],
+      "startVideoSeconds": 411.75,
+      "answerPage": 10,
+      "originalSection": 3,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_012",
+      "printedPages": [
+        11
+      ],
+      "startVideoSeconds": 412.25,
+      "answerPage": 11,
+      "originalSection": 3,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_013",
+      "printedPages": [
+        11
+      ],
+      "startVideoSeconds": 412.25,
+      "answerPage": 11,
+      "originalSection": 4,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_014",
+      "printedPages": [
+        12
+      ],
+      "startVideoSeconds": 413.25,
+      "answerPage": 12,
+      "originalSection": 4,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_015",
+      "printedPages": [
+        12
+      ],
+      "startVideoSeconds": 413.25,
+      "answerPage": 12,
+      "originalSection": 4,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_016",
+      "printedPages": [
+        13
+      ],
+      "startVideoSeconds": 414.25,
+      "answerPage": 13,
+      "originalSection": 4,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_017",
+      "printedPages": [
+        13
+      ],
+      "startVideoSeconds": 414.25,
+      "answerPage": 13,
+      "originalSection": 4,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_018",
+      "printedPages": [
+        14
+      ],
+      "startVideoSeconds": 415.25,
+      "answerPage": 14,
+      "originalSection": 4,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_019",
+      "printedPages": [
+        14
+      ],
+      "startVideoSeconds": 415.25,
+      "answerPage": 14,
+      "originalSection": 4,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_020",
+      "printedPages": [
+        15
+      ],
+      "startVideoSeconds": 417.25,
+      "answerPage": 15,
+      "originalSection": 4,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_021",
+      "printedPages": [
+        15,
+        16
+      ],
+      "startVideoSeconds": 417.25,
+      "answerPage": 16,
+      "originalSection": 4,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_022",
+      "printedPages": [
+        16
+      ],
+      "startVideoSeconds": 418.25,
+      "answerPage": 16,
+      "originalSection": 4,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_023",
+      "printedPages": [
+        17
+      ],
+      "startVideoSeconds": 418.75,
+      "answerPage": 17,
+      "originalSection": 4,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_024",
+      "printedPages": [
+        17
+      ],
+      "startVideoSeconds": 418.75,
+      "answerPage": 17,
+      "originalSection": 4,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_025",
+      "printedPages": [
+        18
+      ],
+      "startVideoSeconds": 419.75,
+      "answerPage": 18,
+      "originalSection": 4,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_026",
+      "printedPages": [
+        18,
+        19
+      ],
+      "startVideoSeconds": 419.75,
+      "answerPage": 19,
+      "originalSection": 5,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_027",
+      "printedPages": [
+        19
+      ],
+      "startVideoSeconds": 421.25,
+      "answerPage": 19,
+      "originalSection": 5,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_028",
+      "printedPages": [
+        19,
+        20
+      ],
+      "startVideoSeconds": 421.25,
+      "answerPage": 20,
+      "originalSection": 5,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_029",
+      "printedPages": [
+        20
+      ],
+      "startVideoSeconds": 422.25,
+      "answerPage": 20,
+      "originalSection": 5,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_030",
+      "printedPages": [
+        20,
+        21
+      ],
+      "startVideoSeconds": 422.25,
+      "answerPage": 21,
+      "originalSection": 5,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_031",
+      "printedPages": [
+        21
+      ],
+      "startVideoSeconds": 422.75,
+      "answerPage": 21,
+      "originalSection": 5,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_032",
+      "printedPages": [
+        21,
+        22
+      ],
+      "startVideoSeconds": 422.75,
+      "answerPage": 22,
+      "originalSection": 5,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_033",
+      "printedPages": [
+        22,
+        23
+      ],
+      "startVideoSeconds": 423.75,
+      "answerPage": 22,
+      "originalSection": 5,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_034",
+      "printedPages": [
+        23
+      ],
+      "startVideoSeconds": 425.25,
+      "answerPage": 23,
+      "originalSection": 5,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_035",
+      "printedPages": [
+        23,
+        24
+      ],
+      "startVideoSeconds": 425.25,
+      "answerPage": 24,
+      "originalSection": 5,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_036",
+      "printedPages": [
+        24
+      ],
+      "startVideoSeconds": 426.25,
+      "answerPage": 24,
+      "originalSection": 5,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_037",
+      "printedPages": [
+        24,
+        25
+      ],
+      "startVideoSeconds": 426.25,
+      "answerPage": 25,
+      "originalSection": 5,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_038",
+      "printedPages": [
+        25
+      ],
+      "startVideoSeconds": 426.75,
+      "answerPage": 25,
+      "originalSection": 5,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_039",
+      "printedPages": [
+        25,
+        26
+      ],
+      "startVideoSeconds": 426.75,
+      "answerPage": 26,
+      "originalSection": 5,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_040",
+      "printedPages": [
+        26
+      ],
+      "startVideoSeconds": 428.25,
+      "answerPage": 26,
+      "originalSection": 6,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_041",
+      "printedPages": [
+        27
+      ],
+      "startVideoSeconds": 429.25,
+      "answerPage": 27,
+      "originalSection": 6,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_042",
+      "printedPages": [
+        27
+      ],
+      "startVideoSeconds": 429.25,
+      "answerPage": 27,
+      "originalSection": 6,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_043",
+      "printedPages": [
+        28
+      ],
+      "startVideoSeconds": 429.75,
+      "answerPage": 28,
+      "originalSection": 6,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_044",
+      "printedPages": [
+        28
+      ],
+      "startVideoSeconds": 429.75,
+      "answerPage": 28,
+      "originalSection": 6,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_045",
+      "printedPages": [
+        28,
+        29
+      ],
+      "startVideoSeconds": 429.75,
+      "answerPage": 29,
+      "originalSection": 6,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_046",
+      "printedPages": [
+        29
+      ],
+      "startVideoSeconds": 430.75,
+      "answerPage": 29,
+      "originalSection": 6,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_047",
+      "printedPages": [
+        29,
+        30
+      ],
+      "startVideoSeconds": 430.75,
+      "answerPage": 30,
+      "originalSection": 6,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_048",
+      "printedPages": [
+        30
+      ],
+      "startVideoSeconds": 431.75,
+      "answerPage": 30,
+      "originalSection": 6,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_049",
+      "printedPages": [
+        30,
+        31
+      ],
+      "startVideoSeconds": 431.75,
+      "answerPage": 31,
+      "originalSection": 6,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_050",
+      "printedPages": [
+        31,
+        32
+      ],
+      "startVideoSeconds": 432.75,
+      "answerPage": 31,
+      "originalSection": 6,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_051",
+      "printedPages": [
+        32
+      ],
+      "startVideoSeconds": 433.75,
+      "answerPage": 32,
+      "originalSection": 6,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_052",
+      "printedPages": [
+        33
+      ],
+      "startVideoSeconds": 435.25,
+      "answerPage": 33,
+      "originalSection": 6,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_053",
+      "printedPages": [
+        33,
+        34
+      ],
+      "startVideoSeconds": 435.25,
+      "answerPage": 34,
+      "originalSection": 6,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_054",
+      "printedPages": [
+        35
+      ],
+      "startVideoSeconds": 437.25,
+      "answerPage": 35,
+      "originalSection": 7,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_055",
+      "printedPages": [
+        35
+      ],
+      "startVideoSeconds": 437.25,
+      "answerPage": 35,
+      "originalSection": 7,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_056",
+      "printedPages": [
+        36
+      ],
+      "startVideoSeconds": 437.75,
+      "answerPage": 36,
+      "originalSection": 8,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_057",
+      "printedPages": [
+        36
+      ],
+      "startVideoSeconds": 437.75,
+      "answerPage": 36,
+      "originalSection": 8,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_058",
+      "printedPages": [
+        36,
+        37
+      ],
+      "startVideoSeconds": 437.75,
+      "answerPage": 37,
+      "originalSection": 8,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_059",
+      "printedPages": [
+        37
+      ],
+      "startVideoSeconds": 439.25,
+      "answerPage": 37,
+      "originalSection": 8,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_060",
+      "printedPages": [
+        37,
+        38
+      ],
+      "startVideoSeconds": 439.25,
+      "answerPage": 38,
+      "originalSection": 8,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_061",
+      "printedPages": [
+        38
+      ],
+      "startVideoSeconds": 440.25,
+      "answerPage": 38,
+      "originalSection": 8,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_062",
+      "printedPages": [
+        38,
+        39
+      ],
+      "startVideoSeconds": 440.25,
+      "answerPage": 39,
+      "originalSection": 8,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_063",
+      "printedPages": [
+        39,
+        40
+      ],
+      "startVideoSeconds": 440.75,
+      "answerPage": 40,
+      "originalSection": 8,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_064",
+      "printedPages": [
+        40
+      ],
+      "startVideoSeconds": 442.25,
+      "answerPage": 40,
+      "originalSection": 9,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_065",
+      "printedPages": [
+        40
+      ],
+      "startVideoSeconds": 442.25,
+      "answerPage": 40,
+      "originalSection": 9,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_066",
+      "printedPages": [
+        41
+      ],
+      "startVideoSeconds": 442.75,
+      "answerPage": 41,
+      "originalSection": 9,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_067",
+      "printedPages": [
+        41
+      ],
+      "startVideoSeconds": 442.75,
+      "answerPage": 41,
+      "originalSection": 9,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_068",
+      "printedPages": [
+        41,
+        42
+      ],
+      "startVideoSeconds": 442.75,
+      "answerPage": 42,
+      "originalSection": 9,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_069",
+      "printedPages": [
+        42
+      ],
+      "startVideoSeconds": 444.25,
+      "answerPage": 42,
+      "originalSection": 9,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_070",
+      "printedPages": [
+        42,
+        43
+      ],
+      "startVideoSeconds": 444.25,
+      "answerPage": 43,
+      "originalSection": 9,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_071",
+      "printedPages": [
+        43
+      ],
+      "startVideoSeconds": 444.75,
+      "answerPage": 43,
+      "originalSection": 9,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_072",
+      "printedPages": [
+        43,
+        44
+      ],
+      "startVideoSeconds": 444.75,
+      "answerPage": 44,
+      "originalSection": 9,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_073",
+      "printedPages": [
+        44,
+        45
+      ],
+      "startVideoSeconds": 445.75,
+      "answerPage": 45,
+      "originalSection": 9,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_074",
+      "printedPages": [
+        45
+      ],
+      "startVideoSeconds": 446.75,
+      "answerPage": 45,
+      "originalSection": 9,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_075",
+      "printedPages": [
+        45,
+        46
+      ],
+      "startVideoSeconds": 446.75,
+      "answerPage": 46,
+      "originalSection": 9,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_076",
+      "printedPages": [
+        46
+      ],
+      "startVideoSeconds": 447.75,
+      "answerPage": 46,
+      "originalSection": 9,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_077",
+      "printedPages": [
+        46,
+        47
+      ],
+      "startVideoSeconds": 447.75,
+      "answerPage": 47,
+      "originalSection": 9,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_078",
+      "printedPages": [
+        47,
+        48
+      ],
+      "startVideoSeconds": 448.75,
+      "answerPage": 47,
+      "originalSection": 9,
+      "originalNumber": 15
+    },
+    {
+      "id": "채권각론_워크북_079",
+      "printedPages": [
+        48
+      ],
+      "startVideoSeconds": 450.25,
+      "answerPage": 48,
+      "originalSection": 9,
+      "originalNumber": 16
+    },
+    {
+      "id": "채권각론_워크북_080",
+      "printedPages": [
+        48,
+        49
+      ],
+      "startVideoSeconds": 450.25,
+      "answerPage": 49,
+      "originalSection": 9,
+      "originalNumber": 17
+    },
+    {
+      "id": "채권각론_워크북_081",
+      "printedPages": [
+        49
+      ],
+      "startVideoSeconds": 451.25,
+      "answerPage": 49,
+      "originalSection": 9,
+      "originalNumber": 18
+    },
+    {
+      "id": "채권각론_워크북_082",
+      "printedPages": [
+        49,
+        50
+      ],
+      "startVideoSeconds": 451.25,
+      "answerPage": 50,
+      "originalSection": 9,
+      "originalNumber": 19
+    },
+    {
+      "id": "채권각론_워크북_083",
+      "printedPages": [
+        50
+      ],
+      "startVideoSeconds": 452.25,
+      "answerPage": 50,
+      "originalSection": 9,
+      "originalNumber": 20
+    },
+    {
+      "id": "채권각론_워크북_084",
+      "printedPages": [
+        50
+      ],
+      "startVideoSeconds": 452.25,
+      "answerPage": 50,
+      "originalSection": 9,
+      "originalNumber": 21
+    },
+    {
+      "id": "채권각론_워크북_085",
+      "printedPages": [
+        50,
+        51
+      ],
+      "startVideoSeconds": 452.25,
+      "answerPage": 51,
+      "originalSection": 9,
+      "originalNumber": 22
+    },
+    {
+      "id": "채권각론_워크북_086",
+      "printedPages": [
+        51
+      ],
+      "startVideoSeconds": 453.25,
+      "answerPage": 51,
+      "originalSection": 9,
+      "originalNumber": 23
+    },
+    {
+      "id": "채권각론_워크북_087",
+      "printedPages": [
+        51,
+        52
+      ],
+      "startVideoSeconds": 453.25,
+      "answerPage": 51,
+      "originalSection": 9,
+      "originalNumber": 24
+    },
+    {
+      "id": "채권각론_워크북_088",
+      "printedPages": [
+        52
+      ],
+      "startVideoSeconds": 454.25,
+      "answerPage": 52,
+      "originalSection": 9,
+      "originalNumber": 25
+    },
+    {
+      "id": "채권각론_워크북_089",
+      "printedPages": [
+        52
+      ],
+      "startVideoSeconds": 454.25,
+      "answerPage": 52,
+      "originalSection": 9,
+      "originalNumber": 26
+    },
+    {
+      "id": "채권각론_워크북_090",
+      "printedPages": [
+        52,
+        53
+      ],
+      "startVideoSeconds": 454.25,
+      "answerPage": 53,
+      "originalSection": 9,
+      "originalNumber": 27
+    },
+    {
+      "id": "채권각론_워크북_091",
+      "printedPages": [
+        53
+      ],
+      "startVideoSeconds": 455.25,
+      "answerPage": 53,
+      "originalSection": 9,
+      "originalNumber": 28
+    },
+    {
+      "id": "채권각론_워크북_092",
+      "printedPages": [
+        54
+      ],
+      "startVideoSeconds": 456.25,
+      "answerPage": 54,
+      "originalSection": 9,
+      "originalNumber": 29
+    },
+    {
+      "id": "채권각론_워크북_093",
+      "printedPages": [
+        54,
+        55
+      ],
+      "startVideoSeconds": 456.25,
+      "answerPage": 55,
+      "originalSection": 9,
+      "originalNumber": 30
+    },
+    {
+      "id": "채권각론_워크북_094",
+      "printedPages": [
+        55
+      ],
+      "startVideoSeconds": 457.25,
+      "answerPage": 55,
+      "originalSection": 10,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_095",
+      "printedPages": [
+        55,
+        56
+      ],
+      "startVideoSeconds": 457.25,
+      "answerPage": 55,
+      "originalSection": 10,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_096",
+      "printedPages": [
+        56
+      ],
+      "startVideoSeconds": 457.75,
+      "answerPage": 56,
+      "originalSection": 10,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_097",
+      "printedPages": [
+        57
+      ],
+      "startVideoSeconds": 458.75,
+      "answerPage": 57,
+      "originalSection": 11,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_098",
+      "printedPages": [
+        57
+      ],
+      "startVideoSeconds": 458.75,
+      "answerPage": 57,
+      "originalSection": 11,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_099",
+      "printedPages": [
+        58
+      ],
+      "startVideoSeconds": 459.75,
+      "answerPage": 58,
+      "originalSection": 11,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_100",
+      "printedPages": [
+        58
+      ],
+      "startVideoSeconds": 459.75,
+      "answerPage": 58,
+      "originalSection": 11,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_101",
+      "printedPages": [
+        59
+      ],
+      "startVideoSeconds": 461.25,
+      "answerPage": 59,
+      "originalSection": 11,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_102",
+      "printedPages": [
+        59,
+        60
+      ],
+      "startVideoSeconds": 461.25,
+      "answerPage": 60,
+      "originalSection": 11,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_103",
+      "printedPages": [
+        60
+      ],
+      "startVideoSeconds": 462.25,
+      "answerPage": 60,
+      "originalSection": 12,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_104",
+      "printedPages": [
+        60,
+        61
+      ],
+      "startVideoSeconds": 462.25,
+      "answerPage": 61,
+      "originalSection": 12,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_105",
+      "printedPages": [
+        61
+      ],
+      "startVideoSeconds": 463.25,
+      "answerPage": 61,
+      "originalSection": 12,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_106",
+      "printedPages": [
+        61
+      ],
+      "startVideoSeconds": 463.25,
+      "answerPage": 61,
+      "originalSection": 12,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_107",
+      "printedPages": [
+        62
+      ],
+      "startVideoSeconds": 464.25,
+      "answerPage": 62,
+      "originalSection": 12,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_108",
+      "printedPages": [
+        62,
+        63
+      ],
+      "startVideoSeconds": 464.25,
+      "answerPage": 62,
+      "originalSection": 12,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_109",
+      "printedPages": [
+        63
+      ],
+      "startVideoSeconds": 465.25,
+      "answerPage": 63,
+      "originalSection": 13,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_110",
+      "printedPages": [
+        63
+      ],
+      "startVideoSeconds": 465.25,
+      "answerPage": 63,
+      "originalSection": 13,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_111",
+      "printedPages": [
+        64
+      ],
+      "startVideoSeconds": 465.75,
+      "answerPage": 64,
+      "originalSection": 13,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_112",
+      "printedPages": [
+        64
+      ],
+      "startVideoSeconds": 465.75,
+      "answerPage": 64,
+      "originalSection": 13,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_113",
+      "printedPages": [
+        64,
+        65
+      ],
+      "startVideoSeconds": 465.75,
+      "answerPage": 65,
+      "originalSection": 13,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_114",
+      "printedPages": [
+        65
+      ],
+      "startVideoSeconds": 466.75,
+      "answerPage": 65,
+      "originalSection": 13,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_115",
+      "printedPages": [
+        65,
+        66
+      ],
+      "startVideoSeconds": 466.75,
+      "answerPage": 66,
+      "originalSection": 13,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_116",
+      "printedPages": [
+        66,
+        67
+      ],
+      "startVideoSeconds": 468.25,
+      "answerPage": 67,
+      "originalSection": 13,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_117",
+      "printedPages": [
+        67
+      ],
+      "startVideoSeconds": 469.25,
+      "answerPage": 67,
+      "originalSection": 13,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_118",
+      "printedPages": [
+        67,
+        68
+      ],
+      "startVideoSeconds": 469.25,
+      "answerPage": 68,
+      "originalSection": 13,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_119",
+      "printedPages": [
+        68
+      ],
+      "startVideoSeconds": 470.25,
+      "answerPage": 68,
+      "originalSection": 13,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_120",
+      "printedPages": [
+        68
+      ],
+      "startVideoSeconds": 470.25,
+      "answerPage": 68,
+      "originalSection": 13,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_121",
+      "printedPages": [
+        69
+      ],
+      "startVideoSeconds": 471.25,
+      "answerPage": 69,
+      "originalSection": 13,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_122",
+      "printedPages": [
+        69
+      ],
+      "startVideoSeconds": 471.25,
+      "answerPage": 69,
+      "originalSection": 13,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_123",
+      "printedPages": [
+        70
+      ],
+      "startVideoSeconds": 472.25,
+      "answerPage": 70,
+      "originalSection": 13,
+      "originalNumber": 15
+    },
+    {
+      "id": "채권각론_워크북_124",
+      "printedPages": [
+        70
+      ],
+      "startVideoSeconds": 472.25,
+      "answerPage": 70,
+      "originalSection": 13,
+      "originalNumber": 16
+    },
+    {
+      "id": "채권각론_워크북_125",
+      "printedPages": [
+        71
+      ],
+      "startVideoSeconds": 472.75,
+      "answerPage": 71,
+      "originalSection": 13,
+      "originalNumber": 17
+    },
+    {
+      "id": "채권각론_워크북_126",
+      "printedPages": [
+        71,
+        72
+      ],
+      "startVideoSeconds": 472.75,
+      "answerPage": 71,
+      "originalSection": 13,
+      "originalNumber": 18
+    },
+    {
+      "id": "채권각론_워크북_127",
+      "printedPages": [
+        72
+      ],
+      "startVideoSeconds": 474.25,
+      "answerPage": 72,
+      "originalSection": 13,
+      "originalNumber": 19
+    },
+    {
+      "id": "채권각론_워크북_128",
+      "printedPages": [
+        72
+      ],
+      "startVideoSeconds": 474.25,
+      "answerPage": 72,
+      "originalSection": 13,
+      "originalNumber": 20
+    },
+    {
+      "id": "채권각론_워크북_129",
+      "printedPages": [
+        73
+      ],
+      "startVideoSeconds": 475.25,
+      "answerPage": 73,
+      "originalSection": 13,
+      "originalNumber": 21
+    },
+    {
+      "id": "채권각론_워크북_130",
+      "printedPages": [
+        73,
+        74
+      ],
+      "startVideoSeconds": 475.25,
+      "answerPage": 74,
+      "originalSection": 13,
+      "originalNumber": 22
+    },
+    {
+      "id": "채권각론_워크북_131",
+      "printedPages": [
+        74
+      ],
+      "startVideoSeconds": 476.25,
+      "answerPage": 74,
+      "originalSection": 13,
+      "originalNumber": 23
+    },
+    {
+      "id": "채권각론_워크북_132",
+      "printedPages": [
+        75
+      ],
+      "startVideoSeconds": 477.75,
+      "answerPage": 75,
+      "originalSection": 13,
+      "originalNumber": 24
+    },
+    {
+      "id": "채권각론_워크북_133",
+      "printedPages": [
+        75,
+        76
+      ],
+      "startVideoSeconds": 477.75,
+      "answerPage": 76,
+      "originalSection": 13,
+      "originalNumber": 25
+    },
+    {
+      "id": "채권각론_워크북_134",
+      "printedPages": [
+        76,
+        77
+      ],
+      "startVideoSeconds": 478.75,
+      "answerPage": 77,
+      "originalSection": 13,
+      "originalNumber": 26
+    },
+    {
+      "id": "채권각론_워크북_135",
+      "printedPages": [
+        77
+      ],
+      "startVideoSeconds": 479.25,
+      "answerPage": 77,
+      "originalSection": 13,
+      "originalNumber": 27
+    },
+    {
+      "id": "채권각론_워크북_136",
+      "printedPages": [
+        77,
+        78
+      ],
+      "startVideoSeconds": 479.25,
+      "answerPage": 78,
+      "originalSection": 13,
+      "originalNumber": 28
+    },
+    {
+      "id": "채권각론_워크북_137",
+      "printedPages": [
+        78
+      ],
+      "startVideoSeconds": 480.75,
+      "answerPage": 78,
+      "originalSection": 13,
+      "originalNumber": 29
+    },
+    {
+      "id": "채권각론_워크북_138",
+      "printedPages": [
+        78,
+        79
+      ],
+      "startVideoSeconds": 480.75,
+      "answerPage": 79,
+      "originalSection": 13,
+      "originalNumber": 30
+    },
+    {
+      "id": "채권각론_워크북_139",
+      "printedPages": [
+        79
+      ],
+      "startVideoSeconds": 481.75,
+      "answerPage": 79,
+      "originalSection": 13,
+      "originalNumber": 31
+    },
+    {
+      "id": "채권각론_워크북_140",
+      "printedPages": [
+        80
+      ],
+      "startVideoSeconds": 482.75,
+      "answerPage": 80,
+      "originalSection": 14,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_141",
+      "printedPages": [
+        80
+      ],
+      "startVideoSeconds": 482.75,
+      "answerPage": 80,
+      "originalSection": 14,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_142",
+      "printedPages": [
+        80,
+        81
+      ],
+      "startVideoSeconds": 482.75,
+      "answerPage": 81,
+      "originalSection": 14,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_143",
+      "printedPages": [
+        81
+      ],
+      "startVideoSeconds": 483.75,
+      "answerPage": 81,
+      "originalSection": 14,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_144",
+      "printedPages": [
+        81,
+        82
+      ],
+      "startVideoSeconds": 483.75,
+      "answerPage": 82,
+      "originalSection": 14,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_145",
+      "printedPages": [
+        82,
+        83
+      ],
+      "startVideoSeconds": 484.25,
+      "answerPage": 83,
+      "originalSection": 15,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_146",
+      "printedPages": [
+        83
+      ],
+      "startVideoSeconds": 485.75,
+      "answerPage": 83,
+      "originalSection": 15,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_147",
+      "printedPages": [
+        83,
+        84
+      ],
+      "startVideoSeconds": 485.75,
+      "answerPage": 84,
+      "originalSection": 15,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_148",
+      "printedPages": [
+        84
+      ],
+      "startVideoSeconds": 486.25,
+      "answerPage": 84,
+      "originalSection": 15,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_149",
+      "printedPages": [
+        84,
+        85
+      ],
+      "startVideoSeconds": 486.25,
+      "answerPage": 85,
+      "originalSection": 15,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_150",
+      "printedPages": [
+        85
+      ],
+      "startVideoSeconds": 487.25,
+      "answerPage": 85,
+      "originalSection": 15,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_151",
+      "printedPages": [
+        85,
+        86
+      ],
+      "startVideoSeconds": 487.25,
+      "answerPage": 86,
+      "originalSection": 15,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_152",
+      "printedPages": [
+        86
+      ],
+      "startVideoSeconds": 488.25,
+      "answerPage": 86,
+      "originalSection": 15,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_153",
+      "printedPages": [
+        87
+      ],
+      "startVideoSeconds": 489.25,
+      "answerPage": 87,
+      "originalSection": 15,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_154",
+      "printedPages": [
+        87,
+        88
+      ],
+      "startVideoSeconds": 489.25,
+      "answerPage": 88,
+      "originalSection": 15,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_155",
+      "printedPages": [
+        88,
+        89
+      ],
+      "startVideoSeconds": 490.75,
+      "answerPage": 88,
+      "originalSection": 15,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_156",
+      "printedPages": [
+        89
+      ],
+      "startVideoSeconds": 491.25,
+      "answerPage": 89,
+      "originalSection": 15,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_157",
+      "printedPages": [
+        90
+      ],
+      "startVideoSeconds": 492.25,
+      "answerPage": 90,
+      "originalSection": 16,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_158",
+      "printedPages": [
+        90
+      ],
+      "startVideoSeconds": 492.25,
+      "answerPage": 90,
+      "originalSection": 16,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_159",
+      "printedPages": [
+        90,
+        91
+      ],
+      "startVideoSeconds": 492.25,
+      "answerPage": 91,
+      "originalSection": 16,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_160",
+      "printedPages": [
+        91
+      ],
+      "startVideoSeconds": 493.25,
+      "answerPage": 91,
+      "originalSection": 16,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_161",
+      "printedPages": [
+        91,
+        92
+      ],
+      "startVideoSeconds": 493.25,
+      "answerPage": 92,
+      "originalSection": 16,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_162",
+      "printedPages": [
+        92
+      ],
+      "startVideoSeconds": 494.75,
+      "answerPage": 92,
+      "originalSection": 16,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_163",
+      "printedPages": [
+        92,
+        93
+      ],
+      "startVideoSeconds": 494.75,
+      "answerPage": 93,
+      "originalSection": 16,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_164",
+      "printedPages": [
+        93,
+        94
+      ],
+      "startVideoSeconds": 495.25,
+      "answerPage": 94,
+      "originalSection": 17,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_165",
+      "printedPages": [
+        94
+      ],
+      "startVideoSeconds": 496.75,
+      "answerPage": 94,
+      "originalSection": 17,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_166",
+      "printedPages": [
+        94
+      ],
+      "startVideoSeconds": 496.75,
+      "answerPage": 94,
+      "originalSection": 17,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_167",
+      "printedPages": [
+        95
+      ],
+      "startVideoSeconds": 497.75,
+      "answerPage": 95,
+      "originalSection": 17,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_168",
+      "printedPages": [
+        95,
+        96
+      ],
+      "startVideoSeconds": 497.75,
+      "answerPage": 96,
+      "originalSection": 17,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_169",
+      "printedPages": [
+        96
+      ],
+      "startVideoSeconds": 498.75,
+      "answerPage": 96,
+      "originalSection": 17,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_170",
+      "printedPages": [
+        96,
+        97
+      ],
+      "startVideoSeconds": 498.75,
+      "answerPage": 97,
+      "originalSection": 17,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_171",
+      "printedPages": [
+        97
+      ],
+      "startVideoSeconds": 499.25,
+      "answerPage": 97,
+      "originalSection": 17,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_172",
+      "printedPages": [
+        98
+      ],
+      "startVideoSeconds": 500.25,
+      "answerPage": 98,
+      "originalSection": 17,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_173",
+      "printedPages": [
+        98,
+        99
+      ],
+      "startVideoSeconds": 500.25,
+      "answerPage": 99,
+      "originalSection": 17,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_174",
+      "printedPages": [
+        99
+      ],
+      "startVideoSeconds": 501.25,
+      "answerPage": 99,
+      "originalSection": 17,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_175",
+      "printedPages": [
+        100
+      ],
+      "startVideoSeconds": 502.25,
+      "answerPage": 100,
+      "originalSection": 18,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_176",
+      "printedPages": [
+        100
+      ],
+      "startVideoSeconds": 502.25,
+      "answerPage": 100,
+      "originalSection": 18,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_177",
+      "printedPages": [
+        100,
+        101
+      ],
+      "startVideoSeconds": 502.25,
+      "answerPage": 101,
+      "originalSection": 18,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_178",
+      "printedPages": [
+        101
+      ],
+      "startVideoSeconds": 504.25,
+      "answerPage": 101,
+      "originalSection": 18,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_179",
+      "printedPages": [
+        101,
+        102
+      ],
+      "startVideoSeconds": 504.25,
+      "answerPage": 102,
+      "originalSection": 18,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_180",
+      "printedPages": [
+        102
+      ],
+      "startVideoSeconds": 505.25,
+      "answerPage": 102,
+      "originalSection": 18,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_181",
+      "printedPages": [
+        103
+      ],
+      "startVideoSeconds": 506.25,
+      "answerPage": 103,
+      "originalSection": 18,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_182",
+      "printedPages": [
+        103
+      ],
+      "startVideoSeconds": 506.25,
+      "answerPage": 103,
+      "originalSection": 18,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_183",
+      "printedPages": [
+        104
+      ],
+      "startVideoSeconds": 507.25,
+      "answerPage": 104,
+      "originalSection": 18,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_184",
+      "printedPages": [
+        104
+      ],
+      "startVideoSeconds": 507.25,
+      "answerPage": 104,
+      "originalSection": 18,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_185",
+      "printedPages": [
+        105
+      ],
+      "startVideoSeconds": 508.25,
+      "answerPage": 105,
+      "originalSection": 18,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_186",
+      "printedPages": [
+        105
+      ],
+      "startVideoSeconds": 508.25,
+      "answerPage": 105,
+      "originalSection": 18,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_187",
+      "printedPages": [
+        106
+      ],
+      "startVideoSeconds": 509.25,
+      "answerPage": 106,
+      "originalSection": 18,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_188",
+      "printedPages": [
+        106,
+        107
+      ],
+      "startVideoSeconds": 509.25,
+      "answerPage": 107,
+      "originalSection": 18,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_189",
+      "printedPages": [
+        107
+      ],
+      "startVideoSeconds": 510.75,
+      "answerPage": 107,
+      "originalSection": 18,
+      "originalNumber": 15
+    },
+    {
+      "id": "채권각론_워크북_190",
+      "printedPages": [
+        108
+      ],
+      "startVideoSeconds": 511.75,
+      "answerPage": 108,
+      "originalSection": 18,
+      "originalNumber": 16
+    },
+    {
+      "id": "채권각론_워크북_191",
+      "printedPages": [
+        108,
+        109
+      ],
+      "startVideoSeconds": 511.75,
+      "answerPage": 108,
+      "originalSection": 18,
+      "originalNumber": 17
+    },
+    {
+      "id": "채권각론_워크북_192",
+      "printedPages": [
+        109
+      ],
+      "startVideoSeconds": 512.75,
+      "answerPage": 109,
+      "originalSection": 18,
+      "originalNumber": 18
+    },
+    {
+      "id": "채권각론_워크북_193",
+      "printedPages": [
+        109,
+        110
+      ],
+      "startVideoSeconds": 512.75,
+      "answerPage": 109,
+      "originalSection": 18,
+      "originalNumber": 19
+    },
+    {
+      "id": "채권각론_워크북_194",
+      "printedPages": [
+        110
+      ],
+      "startVideoSeconds": 513.75,
+      "answerPage": 110,
+      "originalSection": 18,
+      "originalNumber": 20
+    },
+    {
+      "id": "채권각론_워크북_195",
+      "printedPages": [
+        110,
+        111
+      ],
+      "startVideoSeconds": 513.75,
+      "answerPage": 110,
+      "originalSection": 18,
+      "originalNumber": 21
+    },
+    {
+      "id": "채권각론_워크북_196",
+      "printedPages": [
+        111
+      ],
+      "startVideoSeconds": 514.75,
+      "answerPage": 111,
+      "originalSection": 18,
+      "originalNumber": 22
+    },
+    {
+      "id": "채권각론_워크북_197",
+      "printedPages": [
+        111
+      ],
+      "startVideoSeconds": 514.75,
+      "answerPage": 111,
+      "originalSection": 18,
+      "originalNumber": 23
+    },
+    {
+      "id": "채권각론_워크북_198",
+      "printedPages": [
+        112
+      ],
+      "startVideoSeconds": 515.75,
+      "answerPage": 112,
+      "originalSection": 18,
+      "originalNumber": 24
+    },
+    {
+      "id": "채권각론_워크북_199",
+      "printedPages": [
+        112
+      ],
+      "startVideoSeconds": 515.75,
+      "answerPage": 112,
+      "originalSection": 18,
+      "originalNumber": 25
+    },
+    {
+      "id": "채권각론_워크북_200",
+      "printedPages": [
+        112,
+        113
+      ],
+      "startVideoSeconds": 515.75,
+      "answerPage": 113,
+      "originalSection": 18,
+      "originalNumber": 26
+    },
+    {
+      "id": "채권각론_워크북_201",
+      "printedPages": [
+        113
+      ],
+      "startVideoSeconds": 516.75,
+      "answerPage": 113,
+      "originalSection": 18,
+      "originalNumber": 27
+    },
+    {
+      "id": "채권각론_워크북_202",
+      "printedPages": [
+        113,
+        114
+      ],
+      "startVideoSeconds": 516.75,
+      "answerPage": 114,
+      "originalSection": 18,
+      "originalNumber": 28
+    },
+    {
+      "id": "채권각론_워크북_203",
+      "printedPages": [
+        114,
+        115
+      ],
+      "startVideoSeconds": 517.25,
+      "answerPage": 115,
+      "originalSection": 18,
+      "originalNumber": 29
+    },
+    {
+      "id": "채권각론_워크북_204",
+      "printedPages": [
+        115
+      ],
+      "startVideoSeconds": 518.25,
+      "answerPage": 115,
+      "originalSection": 18,
+      "originalNumber": 30
+    },
+    {
+      "id": "채권각론_워크북_205",
+      "printedPages": [
+        116
+      ],
+      "startVideoSeconds": 519.25,
+      "answerPage": 116,
+      "originalSection": 18,
+      "originalNumber": 31
+    },
+    {
+      "id": "채권각론_워크북_206",
+      "printedPages": [
+        116
+      ],
+      "startVideoSeconds": 519.25,
+      "answerPage": 116,
+      "originalSection": 18,
+      "originalNumber": 32
+    },
+    {
+      "id": "채권각론_워크북_207",
+      "printedPages": [
+        116,
+        117
+      ],
+      "startVideoSeconds": 519.25,
+      "answerPage": 117,
+      "originalSection": 18,
+      "originalNumber": 33
+    },
+    {
+      "id": "채권각론_워크북_208",
+      "printedPages": [
+        117
+      ],
+      "startVideoSeconds": 520.75,
+      "answerPage": 117,
+      "originalSection": 18,
+      "originalNumber": 34
+    },
+    {
+      "id": "채권각론_워크북_209",
+      "printedPages": [
+        117,
+        118
+      ],
+      "startVideoSeconds": 520.75,
+      "answerPage": 117,
+      "originalSection": 18,
+      "originalNumber": 35
+    },
+    {
+      "id": "채권각론_워크북_210",
+      "printedPages": [
+        118
+      ],
+      "startVideoSeconds": 521.75,
+      "answerPage": 118,
+      "originalSection": 18,
+      "originalNumber": 36
+    },
+    {
+      "id": "채권각론_워크북_211",
+      "printedPages": [
+        118
+      ],
+      "startVideoSeconds": 521.75,
+      "answerPage": 118,
+      "originalSection": 18,
+      "originalNumber": 37
+    },
+    {
+      "id": "채권각론_워크북_212",
+      "printedPages": [
+        119
+      ],
+      "startVideoSeconds": 522.25,
+      "answerPage": 119,
+      "originalSection": 18,
+      "originalNumber": 38
+    },
+    {
+      "id": "채권각론_워크북_213",
+      "printedPages": [
+        119,
+        120
+      ],
+      "startVideoSeconds": 522.25,
+      "answerPage": 120,
+      "originalSection": 18,
+      "originalNumber": 39
+    },
+    {
+      "id": "채권각론_워크북_214",
+      "printedPages": [
+        120,
+        121
+      ],
+      "startVideoSeconds": 523.25,
+      "answerPage": 121,
+      "originalSection": 18,
+      "originalNumber": 40
+    },
+    {
+      "id": "채권각론_워크북_215",
+      "printedPages": [
+        121
+      ],
+      "startVideoSeconds": 524.25,
+      "answerPage": 121,
+      "originalSection": 19,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_216",
+      "printedPages": [
+        121,
+        122
+      ],
+      "startVideoSeconds": 524.25,
+      "answerPage": 122,
+      "originalSection": 19,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_217",
+      "printedPages": [
+        122
+      ],
+      "startVideoSeconds": 525.25,
+      "answerPage": 122,
+      "originalSection": 19,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_218",
+      "printedPages": [
+        122,
+        123
+      ],
+      "startVideoSeconds": 525.25,
+      "answerPage": 123,
+      "originalSection": 19,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_219",
+      "printedPages": [
+        124
+      ],
+      "startVideoSeconds": 527.25,
+      "answerPage": 124,
+      "originalSection": 20,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_220",
+      "printedPages": [
+        124
+      ],
+      "startVideoSeconds": 527.25,
+      "answerPage": 124,
+      "originalSection": 20,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_221",
+      "printedPages": [
+        125
+      ],
+      "startVideoSeconds": 528.75,
+      "answerPage": 125,
+      "originalSection": 20,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_222",
+      "printedPages": [
+        125
+      ],
+      "startVideoSeconds": 528.75,
+      "answerPage": 125,
+      "originalSection": 20,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_223",
+      "printedPages": [
+        125,
+        126
+      ],
+      "startVideoSeconds": 528.75,
+      "answerPage": 126,
+      "originalSection": 20,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_224",
+      "printedPages": [
+        126
+      ],
+      "startVideoSeconds": 529.75,
+      "answerPage": 126,
+      "originalSection": 20,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_225",
+      "printedPages": [
+        126,
+        127
+      ],
+      "startVideoSeconds": 529.75,
+      "answerPage": 127,
+      "originalSection": 20,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_226",
+      "printedPages": [
+        127
+      ],
+      "startVideoSeconds": 530.75,
+      "answerPage": 127,
+      "originalSection": 20,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_227",
+      "printedPages": [
+        128
+      ],
+      "startVideoSeconds": 531.75,
+      "answerPage": 128,
+      "originalSection": 20,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_228",
+      "printedPages": [
+        128,
+        129
+      ],
+      "startVideoSeconds": 531.75,
+      "answerPage": 129,
+      "originalSection": 20,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_229",
+      "printedPages": [
+        130
+      ],
+      "startVideoSeconds": 533.75,
+      "answerPage": 130,
+      "originalSection": 21,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_230",
+      "printedPages": [
+        130,
+        131
+      ],
+      "startVideoSeconds": 533.75,
+      "answerPage": 131,
+      "originalSection": 21,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_231",
+      "printedPages": [
+        131
+      ],
+      "startVideoSeconds": 535.25,
+      "answerPage": 131,
+      "originalSection": 21,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_232",
+      "printedPages": [
+        131,
+        132
+      ],
+      "startVideoSeconds": 535.25,
+      "answerPage": 132,
+      "originalSection": 21,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_233",
+      "printedPages": [
+        132
+      ],
+      "startVideoSeconds": 536.25,
+      "answerPage": 132,
+      "originalSection": 21,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_234",
+      "printedPages": [
+        133
+      ],
+      "startVideoSeconds": 537.25,
+      "answerPage": 133,
+      "originalSection": 21,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_235",
+      "printedPages": [
+        133,
+        134
+      ],
+      "startVideoSeconds": 537.25,
+      "answerPage": 133,
+      "originalSection": 21,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_236",
+      "printedPages": [
+        134
+      ],
+      "startVideoSeconds": 538.25,
+      "answerPage": 134,
+      "originalSection": 21,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_237",
+      "printedPages": [
+        134,
+        135
+      ],
+      "startVideoSeconds": 538.25,
+      "answerPage": 135,
+      "originalSection": 21,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_238",
+      "printedPages": [
+        135
+      ],
+      "startVideoSeconds": 539.25,
+      "answerPage": 135,
+      "originalSection": 21,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_239",
+      "printedPages": [
+        135,
+        136
+      ],
+      "startVideoSeconds": 539.25,
+      "answerPage": 136,
+      "originalSection": 21,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_240",
+      "printedPages": [
+        136
+      ],
+      "startVideoSeconds": 540.25,
+      "answerPage": 136,
+      "originalSection": 21,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_241",
+      "printedPages": [
+        136
+      ],
+      "startVideoSeconds": 540.25,
+      "answerPage": 136,
+      "originalSection": 21,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_242",
+      "printedPages": [
+        136,
+        137
+      ],
+      "startVideoSeconds": 540.25,
+      "answerPage": 137,
+      "originalSection": 21,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_243",
+      "printedPages": [
+        137
+      ],
+      "startVideoSeconds": 541.25,
+      "answerPage": 137,
+      "originalSection": 21,
+      "originalNumber": 15
+    },
+    {
+      "id": "채권각론_워크북_244",
+      "printedPages": [
+        138
+      ],
+      "startVideoSeconds": 541.75,
+      "answerPage": 138,
+      "originalSection": 21,
+      "originalNumber": 16
+    },
+    {
+      "id": "채권각론_워크북_245",
+      "printedPages": [
+        138,
+        139
+      ],
+      "startVideoSeconds": 541.75,
+      "answerPage": 139,
+      "originalSection": 21,
+      "originalNumber": 17
+    },
+    {
+      "id": "채권각론_워크북_246",
+      "printedPages": [
+        139,
+        140
+      ],
+      "startVideoSeconds": 543.25,
+      "answerPage": 140,
+      "originalSection": 21,
+      "originalNumber": 18
+    },
+    {
+      "id": "채권각론_워크북_247",
+      "printedPages": [
+        140
+      ],
+      "startVideoSeconds": 544.25,
+      "answerPage": 140,
+      "originalSection": 22,
+      "originalNumber": 1
+    },
+    {
+      "id": "채권각론_워크북_248",
+      "printedPages": [
+        140,
+        141
+      ],
+      "startVideoSeconds": 544.25,
+      "answerPage": 141,
+      "originalSection": 22,
+      "originalNumber": 2
+    },
+    {
+      "id": "채권각론_워크북_249",
+      "printedPages": [
+        141
+      ],
+      "startVideoSeconds": 545.25,
+      "answerPage": 141,
+      "originalSection": 22,
+      "originalNumber": 3
+    },
+    {
+      "id": "채권각론_워크북_250",
+      "printedPages": [
+        141
+      ],
+      "startVideoSeconds": 545.25,
+      "answerPage": 141,
+      "originalSection": 22,
+      "originalNumber": 4
+    },
+    {
+      "id": "채권각론_워크북_251",
+      "printedPages": [
+        142
+      ],
+      "startVideoSeconds": 545.75,
+      "answerPage": 142,
+      "originalSection": 22,
+      "originalNumber": 5
+    },
+    {
+      "id": "채권각론_워크북_252",
+      "printedPages": [
+        142
+      ],
+      "startVideoSeconds": 545.75,
+      "answerPage": 142,
+      "originalSection": 22,
+      "originalNumber": 6
+    },
+    {
+      "id": "채권각론_워크북_253",
+      "printedPages": [
+        143
+      ],
+      "startVideoSeconds": 546.75,
+      "answerPage": 143,
+      "originalSection": 22,
+      "originalNumber": 7
+    },
+    {
+      "id": "채권각론_워크북_254",
+      "printedPages": [
+        144
+      ],
+      "startVideoSeconds": 548.25,
+      "answerPage": 144,
+      "originalSection": 22,
+      "originalNumber": 8
+    },
+    {
+      "id": "채권각론_워크북_255",
+      "printedPages": [
+        144,
+        145
+      ],
+      "startVideoSeconds": 548.25,
+      "answerPage": 145,
+      "originalSection": 22,
+      "originalNumber": 9
+    },
+    {
+      "id": "채권각론_워크북_256",
+      "printedPages": [
+        145
+      ],
+      "startVideoSeconds": 548.75,
+      "answerPage": 145,
+      "originalSection": 22,
+      "originalNumber": 10
+    },
+    {
+      "id": "채권각론_워크북_257",
+      "printedPages": [
+        146
+      ],
+      "startVideoSeconds": 549.75,
+      "answerPage": 146,
+      "originalSection": 22,
+      "originalNumber": 11
+    },
+    {
+      "id": "채권각론_워크북_258",
+      "printedPages": [
+        146
+      ],
+      "startVideoSeconds": 549.75,
+      "answerPage": 146,
+      "originalSection": 22,
+      "originalNumber": 12
+    },
+    {
+      "id": "채권각론_워크북_259",
+      "printedPages": [
+        147
+      ],
+      "startVideoSeconds": 550.75,
+      "answerPage": 147,
+      "originalSection": 22,
+      "originalNumber": 13
+    },
+    {
+      "id": "채권각론_워크북_260",
+      "printedPages": [
+        147,
+        148
+      ],
+      "startVideoSeconds": 550.75,
+      "answerPage": 148,
+      "originalSection": 22,
+      "originalNumber": 14
+    },
+    {
+      "id": "채권각론_워크북_261",
+      "printedPages": [
+        148
+      ],
+      "startVideoSeconds": 551.75,
+      "answerPage": 148,
+      "originalSection": 22,
+      "originalNumber": 15
+    },
+    {
+      "id": "채권각론_워크북_262",
+      "printedPages": [
+        148,
+        149
+      ],
+      "startVideoSeconds": 551.75,
+      "answerPage": 149,
+      "originalSection": 22,
+      "originalNumber": 16
+    },
+    {
+      "id": "채권각론_워크북_263",
+      "printedPages": [
+        149
+      ],
+      "startVideoSeconds": 552.75,
+      "answerPage": 149,
+      "originalSection": 22,
+      "originalNumber": 17
+    },
+    {
+      "id": "채권각론_워크북_264",
+      "printedPages": [
+        149,
+        150
+      ],
+      "startVideoSeconds": 552.75,
+      "answerPage": 150,
+      "originalSection": 22,
+      "originalNumber": 18
+    },
+    {
+      "id": "채권각론_워크북_265",
+      "printedPages": [
+        150
+      ],
+      "startVideoSeconds": 554.25,
+      "answerPage": 150,
+      "originalSection": 22,
+      "originalNumber": 19
+    },
+    {
+      "id": "채권각론_워크북_266",
+      "printedPages": [
+        150,
+        151
+      ],
+      "startVideoSeconds": 554.25,
+      "answerPage": 151,
+      "originalSection": 22,
+      "originalNumber": 20
+    },
+    {
+      "id": "채권각론_워크북_267",
+      "printedPages": [
+        151
+      ],
+      "startVideoSeconds": 554.75,
+      "answerPage": 151,
+      "originalSection": 22,
+      "originalNumber": 21
+    },
+    {
+      "id": "채권각론_워크북_268",
+      "printedPages": [
+        151,
+        152
+      ],
+      "startVideoSeconds": 554.75,
+      "answerPage": 152,
+      "originalSection": 22,
+      "originalNumber": 22
+    },
+    {
+      "id": "채권각론_워크북_269",
+      "printedPages": [
+        152
+      ],
+      "startVideoSeconds": 556.25,
+      "answerPage": 152,
+      "originalSection": 22,
+      "originalNumber": 23
+    },
+    {
+      "id": "채권각론_워크북_270",
+      "printedPages": [
+        153
+      ],
+      "startVideoSeconds": 557.25,
+      "answerPage": 153,
+      "originalSection": 22,
+      "originalNumber": 24
+    },
+    {
+      "id": "채권각론_워크북_271",
+      "printedPages": [
+        153,
+        154
+      ],
+      "startVideoSeconds": 557.25,
+      "answerPage": 154,
+      "originalSection": 22,
+      "originalNumber": 25
+    },
+    {
+      "id": "채권각론_워크북_272",
+      "printedPages": [
+        154
+      ],
+      "startVideoSeconds": 558.25,
+      "answerPage": 154,
+      "originalSection": 22,
+      "originalNumber": 26
+    },
+    {
+      "id": "채권각론_워크북_273",
+      "printedPages": [
+        155
+      ],
+      "startVideoSeconds": 558.75,
+      "answerPage": 155,
+      "originalSection": 22,
+      "originalNumber": 27
+    },
+    {
+      "id": "채권각론_워크북_274",
+      "printedPages": [
+        155
+      ],
+      "startVideoSeconds": 558.75,
+      "answerPage": 155,
+      "originalSection": 22,
+      "originalNumber": 28
+    },
+    {
+      "id": "채권각론_워크북_275",
+      "printedPages": [
+        155,
+        156
+      ],
+      "startVideoSeconds": 558.75,
+      "answerPage": 156,
+      "originalSection": 22,
+      "originalNumber": 29
+    },
+    {
+      "id": "채권각론_워크북_276",
+      "printedPages": [
+        156
+      ],
+      "startVideoSeconds": 559.75,
+      "answerPage": 156,
+      "originalSection": 22,
+      "originalNumber": 30
+    },
+    {
+      "id": "채권각론_워크북_277",
+      "printedPages": [
+        157
+      ],
+      "startVideoSeconds": 561.25,
+      "answerPage": 157,
+      "originalSection": 22,
+      "originalNumber": 31
+    },
+    {
+      "id": "채권각론_워크북_278",
+      "printedPages": [
+        157,
+        158
+      ],
+      "startVideoSeconds": 561.25,
+      "answerPage": 158,
+      "originalSection": 22,
+      "originalNumber": 32
+    },
+    {
+      "id": "채권각론_워크북_279",
+      "printedPages": [
+        158
+      ],
+      "startVideoSeconds": 562.25,
+      "answerPage": 158,
+      "originalSection": 22,
+      "originalNumber": 33
+    },
+    {
+      "id": "채권각론_워크북_280",
+      "printedPages": [
+        158,
+        159
+      ],
+      "startVideoSeconds": 562.25,
+      "answerPage": 159,
+      "originalSection": 22,
+      "originalNumber": 34
+    },
+    {
+      "id": "채권각론_워크북_281",
+      "printedPages": [
+        159
+      ],
+      "startVideoSeconds": 563.25,
+      "answerPage": 159,
+      "originalSection": 22,
+      "originalNumber": 35
+    },
+    {
+      "id": "채권각론_워크북_282",
+      "printedPages": [
+        159,
+        160
+      ],
+      "startVideoSeconds": 563.25,
+      "answerPage": 160,
+      "originalSection": 22,
+      "originalNumber": 36
+    },
+    {
+      "id": "채권각론_워크북_283",
+      "printedPages": [
+        160,
+        161
+      ],
+      "startVideoSeconds": 563.75,
+      "answerPage": 160,
+      "originalSection": 22,
+      "originalNumber": 37
+    },
+    {
+      "id": "채권각론_워크북_284",
+      "printedPages": [
+        161
+      ],
+      "startVideoSeconds": 565.25,
+      "answerPage": 161,
+      "originalSection": 22,
+      "originalNumber": 38
+    },
+    {
+      "id": "채권각론_워크북_285",
+      "printedPages": [
+        162
+      ],
+      "startVideoSeconds": 565.75,
+      "answerPage": 162,
+      "originalSection": 22,
+      "originalNumber": 39
+    },
+    {
+      "id": "채권각론_워크북_286",
+      "printedPages": [
+        162
+      ],
+      "startVideoSeconds": 565.75,
+      "answerPage": 162,
+      "originalSection": 22,
+      "originalNumber": 40
+    },
+    {
+      "id": "채권각론_워크북_287",
+      "printedPages": [
+        163
+      ],
+      "startVideoSeconds": 567.25,
+      "answerPage": 163,
+      "originalSection": 22,
+      "originalNumber": 41
+    },
+    {
+      "id": "채권각론_워크북_288",
+      "printedPages": [
+        163,
+        164
+      ],
+      "startVideoSeconds": 567.25,
+      "answerPage": 163,
+      "originalSection": 22,
+      "originalNumber": 42
+    },
+    {
+      "id": "채권각론_워크북_289",
+      "printedPages": [
+        164
+      ],
+      "startVideoSeconds": 567.75,
+      "answerPage": 164,
+      "originalSection": 22,
+      "originalNumber": 43
+    },
+    {
+      "id": "채권각론_워크북_290",
+      "printedPages": [
+        164,
+        165
+      ],
+      "startVideoSeconds": 567.75,
+      "answerPage": 165,
+      "originalSection": 22,
+      "originalNumber": 44
+    },
+    {
+      "id": "채권각론_워크북_291",
+      "printedPages": [
+        165
+      ],
+      "startVideoSeconds": 568.75,
+      "answerPage": 165,
+      "originalSection": 22,
+      "originalNumber": 45
+    },
+    {
+      "id": "채권각론_워크북_292",
+      "printedPages": [
+        165,
+        166
+      ],
+      "startVideoSeconds": 568.75,
+      "answerPage": 166,
+      "originalSection": 22,
+      "originalNumber": 46
+    },
+    {
+      "id": "채권각론_워크북_293",
+      "printedPages": [
+        166
+      ],
+      "startVideoSeconds": 569.75,
+      "answerPage": 166,
+      "originalSection": 22,
+      "originalNumber": 47
+    },
+    {
+      "id": "채권각론_워크북_294",
+      "printedPages": [
+        166,
+        167
+      ],
+      "startVideoSeconds": 569.75,
+      "answerPage": 167,
+      "originalSection": 22,
+      "originalNumber": 48
+    },
+    {
+      "id": "채권각론_워크북_295",
+      "printedPages": [
+        167
+      ],
+      "startVideoSeconds": 571.25,
+      "answerPage": 167,
+      "originalSection": 22,
+      "originalNumber": 49
+    },
+    {
+      "id": "채권각론_워크북_296",
+      "printedPages": [
+        167,
+        168
+      ],
+      "startVideoSeconds": 571.25,
+      "answerPage": 168,
+      "originalSection": 22,
+      "originalNumber": 50
+    },
+    {
+      "id": "채권각론_워크북_297",
+      "printedPages": [
+        168
+      ],
+      "startVideoSeconds": 572.25,
+      "answerPage": 168,
+      "originalSection": 22,
+      "originalNumber": 51
+    },
+    {
+      "id": "채권각론_워크북_298",
+      "printedPages": [
+        169
+      ],
+      "startVideoSeconds": 573.25,
+      "answerPage": 169,
+      "originalSection": 22,
+      "originalNumber": 52
+    },
+    {
+      "id": "채권각론_워크북_299",
+      "printedPages": [
+        169
+      ],
+      "startVideoSeconds": 573.25,
+      "answerPage": 169,
+      "originalSection": 22,
+      "originalNumber": 53
+    },
+    {
+      "id": "채권각론_워크북_300",
+      "printedPages": [
+        170
+      ],
+      "startVideoSeconds": 574.25,
+      "answerPage": 170,
+      "originalSection": 22,
+      "originalNumber": 54
+    }
+  ]
+}
