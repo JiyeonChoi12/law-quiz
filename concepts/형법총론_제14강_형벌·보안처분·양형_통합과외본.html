@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>형법총론 제14강 형벌·보안처분·양형 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CRIMINAL LAW · CHAPTER 14</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">형법총론</span>
+    <span class="brand-sub">제14강 형벌·보안처분·양형 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./형법총론_개념.html">형법총론 개념 목록</a><a href="../index.html?subject=형법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>유죄라고 결론 났다고 재판이 끝나는 것은 아니다. <strong>어떤 벌을, 얼마만큼, 어떤 이유로 내릴지</strong> 남는다. 또 치료가 필요한 사람에게 형벌만 늘리는 것이 답인지도 생각해야 한다. 이 강은 형벌의 종류, 보안처분, 구체적인 형량 결정의 순서로 이어진다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하는가?</td>
+<td>9종 형벌, 치료·보호를 위한 보안처분, 법정형에서 선고형까지의 계산이다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>죄가 같아도 책임과 사정이 다르고, 처벌과 재범 방지는 같은 수단만으로 해결되지 않기 때문이다.</td>
+</tr>
+<tr>
+<td>전체에서 어디인가?</td>
+<td>범죄론을 마친 뒤 그 법률효과를 다루는 형벌론 첫 부분이다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>제13강의 죄수·경합 가중을 실제 양형에 반영한다. 제15강은 누범·유예·가석방·형의 소멸로 이어진다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>벌금과 과료, 형벌과 보안처분, 감경된 범위와 실제 선고형을 혼동한다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 본교재 273-284쪽 중 누범 앞까지(PDF 287-298쪽 해당 부분), 워크북 제14강 108-116쪽(PDF 432-440쪽). JSON 형벌론 13문항 중 이 강은 6문항·24개 보기, 나머지 7문항은 제15강에 배치한다. 별점은 학습 우선순위다. 실제 기출빈도·오답률 자료는 없다.</p>
+<p><strong>색상:</strong> <mark class="yellow">정의·암기</mark> / <mark class="green">제도의 이유</mark> / <mark class="pink">함정·구법 보완</mark> / <mark class="blue">앞뒤 연결</mark>.</p>
+<h1>1. 국가가 빼앗는 것은 무엇인가</h1>
+<h2 id="criminal-14-01" data-concept-id="criminal-14-01">1-1. 제41조의 9종 형벌과 법익별 분류 ★★★★★</h2>
+<p><strong>교재 274-275쪽·워크북 108쪽 / 문단의 역할:</strong> 형벌의 개념과 종류를 확정한다.</p>
+<p>형벌은 범죄에 대한 법률효과로 국가가 범죄자의 일정한 법익을 박탈하는 제재다. 국가가 정한 형사처벌이지 피해자에게 지급하는 민사 손해배상과 같지 않다. 법에 정해 놓지 않은 새 형벌을 판사가 만들어서는 안 된다.</p>
+<p><mark class="yellow">제41조의 순서: 사형 → 징역 → 금고 → 자격상실 → 자격정지 → 벌금 → 구류 → 과료 → 몰수.</mark> 이 순서는 형의 경중을 판단하는 제50조의 출발점이기도 하다. 자유형끼리 묶는 분류와 조문 순서는 다르므로 섞지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>박탈하는 법익</th>
+<th>해당 형벌</th>
+<th>쉬운 뜻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>생명</td>
+<td>사형</td>
+<td>생명을 박탈</td>
+</tr>
+<tr>
+<td>신체적 자유</td>
+<td>징역·금고·구류</td>
+<td>교정시설에 수용</td>
+</tr>
+<tr>
+<td>일정한 자격</td>
+<td>자격상실·자격정지</td>
+<td>법률상 자격을 잃거나 멈춤</td>
+</tr>
+<tr>
+<td>재산</td>
+<td>벌금·과료·몰수</td>
+<td>금전을 내거나 특정 재산을 잃음</td>
+</tr>
+</tbody></table>
+<p><strong>시험:</strong> 형법_094·095. 구류는 금액이 작은 재산형이 아니라 자유형이다. 자격상실은 보호·치료 처분이 아니라 형벌이다. <strong>키워드:</strong> 9종·박탈 법익·명예형=자격형. <strong>한 줄:</strong> 이름을 외우기 전에 무엇을 빼앗는 형인지 묶어 본다.</p>
+<h2 id="criminal-14-02" data-concept-id="criminal-14-02">1-2. 사형의 의미와 교재의 헌법재판 ★★★☆☆</h2>
+<p><strong>교재 275쪽·워크북 108쪽 / 문단의 역할:</strong> 생명형의 특수성과 존폐 논쟁을 소개한다.</p>
+<p>사형은 생명을 박탈하는 형벌이다. 형법 제66조는 집행 방법을 교수로 정하고, 군형법 제3조는 다른 집행 방법을 정한다. 학습에 필요한 법적 구별만 다루며 실제 집행 방법을 상세하게 묘사하지 않는다. 교재는 여적죄 제93조를 형법 각칙의 법정형으로 사형만 둔 예로 소개한다. <strong>절대적 사형 규정</strong>이라는 말은 법정형 선택지에 관한 것으로, 법률상 감경 가능성까지 모두 없다는 뜻은 아니다.</p>
+<p><strong>95헌바1·2008헌가23의 쟁점 이야기:</strong> 사형이 예정된 사건에서 ‘국가가 사람의 생명을 빼앗는 형벌을 둘 수 있는가’가 헌법재판의 질문이 되었다. 법원의 고민은 생명권·인간의 존엄, 국가의 형벌권과 사회 보호, 되돌릴 수 없는 오판 가능성 사이에 있었다. 교재는 두 결정의 사형제 합헌 결론을 소개한다. 합헌 논거는 극히 중대한 범죄에 대한 책임과 법질서 보호를 중시하고, 반대 논거는 생명의 불가역적 박탈·오판·범죄 억제 효과의 불확실성을 중시한다. <a href="https://www.law.go.kr/DRF/lawService.do?ID=12983&OC=unicpla&mobileYn=Y&target=detc&type=HTML">2008헌가23 결정 자료</a></p>
+<p><strong>문장 번역:</strong> ‘제도 자체의 합헌’ → 사형이라는 종류를 법에 둘 수 있다는 판단 / ‘개별 형벌조항의 심사’ → 어떤 범죄에 사형을 허용할지는 따로 따져야 함 / ‘최후의 수단’ → 모든 범죄에 넓게 쓰는 일반 처벌이 아님. 합헌이라는 역사적 결론을 도덕적으로 논쟁이 끝났다는 말로 바꾸지 않는다. 반대 결론이라면 형법 체계에서 사형을 대신할 제재 설계가 필요해진다.</p>
+<p>워크북의 ‘사형 규정 약 160개·절대적 사형 15개’는 작성 당시 설명이다. 현재 전체 법률을 새로 집계한 수치가 아니므로 <strong>현행 숫자 암기 대상으로 삼지 않는다</strong>. 이 과외본은 교재에 실린 두 결정을 설명하며, 확인하지 않은 최신 헌법재판의 결론을 덧붙이지 않는다.</p>
+<p><strong>시험:</strong> 생명형 분류와 절대적·선택적 법정형 구별이 우선이다. 존폐 논쟁은 심화다. <strong>키워드:</strong> 생명권·책임·오판·비례. <strong>한 줄:</strong> 제도 허용 여부와 구체적 사형 선고의 정당성은 별개다.</p>
+<h2 id="criminal-14-03" data-concept-id="criminal-14-03">1-3. 징역·금고·구류의 기간과 작업 ★★★★★</h2>
+<p><strong>교재 275쪽·워크북 108-109쪽 / 문단의 역할:</strong> 같은 수용형에서도 기간과 정역의 차이를 설명한다.</p>
+<p>징역과 금고는 모두 신체적 자유를 제한하지만 <strong>정해진 노역을 의무로 부과하는지</strong>가 다르다. 징역은 정역에 복무하고, 금고는 정역을 의무로 하지 않는다. 금고를 ‘돈을 넣는 금고’로 이해하지 않는다. 禁錮는 자유를 가두어 둔다는 뜻이다.</p>
+<p>두 형 모두 무기와 유기가 있다. 무기는 기간을 미리 정하지 않는 형이다. 유기는 원칙적으로 <strong>1개월 이상 30년 이하</strong>, 가중할 때 <strong>50년까지</strong>다. 제15강의 가석방을 보면 무기라고 해서 모든 경우 평생 교정시설 밖으로 나갈 수 없다는 뜻은 아님을 알 수 있다.</p>
+<p>구류는 <strong>1일 이상 30일 미만</strong>의 단기 자유형이다. ‘30일 이하’가 아니다. 금고·구류는 작업을 의무로 하지 않지만 신청에 따른 작업은 가능하다. 교재의 구 「행형법」 제38조 대신 현행 「형의 집행 및 수용자의 처우에 관한 법률」 제67조로 연결한다. <a href="https://www.law.go.kr/lsSc.do?query=%ED%98%95%EC%9D%98+%EC%A7%91%ED%96%89+%EB%B0%8F+%EC%88%98%EC%9A%A9%EC%9E%90%EC%9D%98+%EC%B2%98%EC%9A%B0%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0">현행 수용자 처우법의 신청에 따른 작업</a></p>
+<p>워크북의 금고를 정치범·양심범 등과 연결한 설명은 역사적 취지다. 현재 모든 금고형 범죄를 그 범주로 단정하지 않는다. 또 <strong>구류는 형벌, 구속·미결구금은 재판을 위한 신병 확보</strong>이므로 목적과 단계가 다르다.</p>
+<p><strong>사례:</strong> 갑에게 구류 20일, 을에게 벌금 20만 원이 선고되었다. 둘 다 가벼워 보인다고 같은 재산형이 아니다. 갑은 자유, 을은 재산을 제한받는다. <strong>시험:</strong> 형법_094②. <strong>키워드:</strong> 정역·30일 미만·30년/50년. <strong>한 줄:</strong> 자유형끼리는 정역과 기간을 나눈다.</p>
+<h2 id="criminal-14-04" data-concept-id="criminal-14-04">1-4. 벌금·과료·노역장 유치 ★★★★☆</h2>
+<p><strong>교재 276쪽·워크북 109쪽 / 문단의 역할:</strong> 금전형과 미납 때의 처리를 설명한다.</p>
+<p>벌금은 <strong>5만 원 이상</strong>이며 감경하면 5만 원 미만도 가능하다. 과료는 <strong>2천 원 이상 5만 원 미만</strong>이다. 두 형 모두 형벌이다. 행정질서벌인 <strong>과태료</strong>와 과료를 구별한다. 돈을 낸다는 외형만 같고 형사제재 여부가 다르다.</p>
+<p>벌금·과료는 원칙적으로 판결 확정일부터 30일 안에 납부한다. 법령과 집행 기준에 따른 분할납부·납부연기, 벌금형 집행유예 등은 별도 요건을 본다. ‘돈이 없으면 언제나 자유롭게 분할납부할 수 있다’는 뜻은 아니다. 벌금 500만 원 이하의 집행유예는 다음 강에서 배운다.</p>
+<p>미납하면 벌금은 <strong>1일 이상 3년 이하</strong>, 과료는 <strong>1일 이상 30일 미만</strong>의 노역장 유치가 문제 된다. 법원이 형을 선고할 때 유치기간도 정한다. 제70조의 고액 벌금은 1억 이상 5억 미만이면 300일 이상, 5억 이상 50억 미만이면 500일 이상, 50억 이상이면 1천 일 이상이라는 최소 유치기간이 있다. 각 상한과 함께 읽는다. 단순히 미납액이 얼마든 하루만 일하면 된다는 방식의 불균형을 막으려는 장치다.</p>
+<p><mark class="green">같은 액수의 벌금도 생활 형편에 따라 부담이 다르다.</mark> 워크북은 범행의 무게에 따른 일수와 경제력에 따른 하루 금액을 결합하는 <strong>일수벌금제 도입론</strong>을 소개한다. 이를 대한민국 형법의 모든 벌금이 이미 그 방식이라는 설명으로 바꾸지 않는다. 노역장 유치 환산과 일수벌금제도 다른 개념이다.</p>
+<p><strong>시험:</strong> 금액 경계·기간 경계·과태료를 바꾸는 보기. <strong>키워드:</strong> 벌금 5만 이상 / 과료 2천-5만 미만 / 미납 유치. <strong>한 줄:</strong> 돈으로 부과하는 형벌과 돈을 못 냈을 때의 조치는 나누어 본다.</p>
+<h2 id="criminal-14-05" data-concept-id="criminal-14-05">1-5. 몰수와 추징·부가형 ★★★★☆</h2>
+<p><strong>교재 276쪽·워크북 109쪽 / 문단의 역할:</strong> 범죄 도구·이익을 남겨 두지 않는 재산형을 설명한다.</p>
+<p>몰수는 범죄와 관련된 특정 재산을 박탈한다. 제48조는 범행에 제공했거나 제공하려 한 물건, 범행으로 생기거나 취득한 물건, 그 대가로 취득한 물건 등을 정한다. <strong>범인 외 사람의 소유인지, 범죄 후 사정을 알고 취득했는지</strong>와 같은 소유관계 요건도 본다. 범죄 현장에 있던 물건이라고 무관한 선의의 제3자 재산까지 모두 빼앗는 것은 아니다.</p>
+<p>일반 몰수는 임의적이다. 요건에 해당하면 몰수할 수 있으며 비례성 등도 판단한다. 특별 규정이 필요적 몰수를 정하면 반드시 몰수하는 구조가 된다. 특정 물건을 몰수할 수 없으면 그 가액을 추징한다. <mark class="yellow">몰수는 물건, 추징은 그에 갈음하는 가액</mark>이라는 구별이 먼저다. 특별법상 범죄수익 환수는 해당 법의 별도 요건을 확인한다.</p>
+<p>몰수는 원칙적으로 다른 형에 덧붙이는 <strong>부가형</strong>이다. 그러나 제49조 단서는 행위자에게 유죄 재판을 하지 않는 경우에도 몰수 요건이 있으면 몰수만 선고할 수 있도록 한다. <strong>항상 다른 형이 있어야만 가능하다</strong>는 절대적 표현은 틀리다. 유죄 재판이 없다는 이유만으로 몰수요건까지 없어지는 것은 아니다.</p>
+<p><strong>학습용 사례:</strong> 범행으로 취득한 물건을 보유하고 있으면 그 물건의 몰수를 검토한다. 이미 처분해 몰수할 수 없으면 가액 추징을 검토한다. 피해자에게 반환할 재산인지 등 다른 법률상 관계도 함께 살펴야 한다. <strong>시험:</strong> 형법_094①. <strong>키워드:</strong> 관련 물건·소유관계·임의 원칙·부가형·추징. <strong>한 줄:</strong> 몰수와 추징은 범죄 이익을 남기지 않기 위한 서로 연결된 수단이다.</p>
+<h2 id="criminal-14-06" data-concept-id="criminal-14-06">1-6. 자격상실·자격정지와 특별법 예외 ★★★★☆</h2>
+<p><strong>교재 276-277쪽·워크북 109-110쪽 / 문단의 역할:</strong> 모든 자유를 빼앗는 대신 특정 법률상 지위를 제한하는 형을 설명한다.</p>
+<p>사형·무기징역·무기금고 판결을 받은 사람은 제43조 제1항의 자격을 상실한다. ① 공무원이 되는 자격 ② 공법상 선거권·피선거권 ③ 법률로 요건을 정한 공법상 업무 자격 ④ 법인 이사·감사·지배인 등 일정한 자격이다. 도덕적 평판이 낮아진다는 추상적인 뜻이 아니다.</p>
+<p>유기징역·유기금고 판결을 받은 사람에게는 원칙적으로 집행 종료·면제 때까지 앞의 ①-③ 자격이 정지된다. <strong>제43조 제2항 단서의 다른 법률에 특별 규정이 있으면 그 법률을 따른다는 조건을 빠뜨리면 안 된다.</strong> <a href="https://www.law.go.kr/LSW//lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0043&lsiSeq=290185&urlMode=lsScJoRltInfoR">현행 제43조</a></p>
+<p><mark class="pink">교재만 보고 모든 유기 자유형·집행유예자의 선거권이 일률적으로 정지된다고 외우지 않는다.</mark> 공직선거법 제18조는 일반적으로 1년 이상 징역·금고의 집행이 끝나지 않은 사람 등을 규정하면서 집행유예 기간 중인 사람을 제외한다. 선거범 등에는 별도의 제한이 있으므로 ‘집행유예면 선거권은 언제나 있다’도 틀리다. <a href="https://www.law.go.kr/LSW//lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0018&lsiSeq=285629&urlMode=lsScJoRltInfoR">공직선거법 제18조</a></p>
+<p>선고에 따른 자격정지는 전부 또는 일부 자격을 <strong>1년 이상 15년 이하</strong>로 정지하는 형이다. 독립 선택형이면 원칙적으로 판결 확정일부터 계산한다. 유기징역·금고에 병과했으면 제44조 제2항에 따라 그 자유형의 집행 종료·면제일부터 정지기간을 계산한다. 복역 중 이미 다 지나갔다고 처리하면 추가 자격제한의 취지가 사라지기 때문이다.</p>
+<p><strong>시험:</strong> 형법_095④. 당연 상실·당연 정지·선고 정지의 조건과 범위를 나눈다. <strong>키워드:</strong> 4범주/3범주·1-15년·기산점·특별법. <strong>한 줄:</strong> 자격의 종류, 제한의 근거, 시작일을 각각 확인한다.</p>
+<h1>2. 처벌만으로 해결되지 않는 문제</h1>
+<h2 id="criminal-14-07" data-concept-id="criminal-14-07">2-1. 보안처분의 근거와 한계 ★★★★★</h2>
+<p><strong>교재 274·277쪽·워크북 110쪽 / 문단의 역할:</strong> 책임형벌의 한계를 메우되 이름만 바꾼 무제한 처벌을 경계한다.</p>
+<p>형벌은 과거 범죄에 대한 책임을 전제로 그 한도 안에서 부과한다. 책임능력이 없거나 책임을 넘는 위험성이 남아 있다는 이유로 형벌을 무한히 늘릴 수 없다. 보안처분은 법정 요건 아래 <strong>장래의 재범 위험과 사회 복귀 필요</strong>에 대응하는 제재다. 치료·교육·지도·감독으로 형벌을 보충하거나 대체한다.</p>
+<p><mark class="green">치료가 필요한 사람에게 책임을 넘는 징역을 더하는 대신, 법이 정한 치료·보호 수단으로 위험을 줄이려는 것이다.</mark> 형벌과 보안처분은 목적이 겹치는 면도 있지만 중심 근거가 책임과 위험성으로 다르다. 보안처분에는 필요성과 비례성, 적법절차와 법적 근거가 요구된다.</p>
+<p>형법의 보호관찰·사회봉사·수강명령뿐 아니라 소년법의 보호처분, 치료감호법의 치료감호, 보안관찰법의 보안관찰, 전자장치 관련 특별법상 제도 등이 있다. 형법 제41조의 아홉 종류 목록에 모두 들어 있지 않다. <strong>새 보안처분을 법률로 만들 수 있다는 말이지 판사가 법률 없이 마음대로 발명할 수 있다는 뜻은 아니다.</strong> JSON 형법_095 원본 해설의 ‘종류가 제한되지 않는다’를 이 의미로 읽는다.</p>
+<p>교재는 보안처분이 ‘이름표만 바꾼 형벌’이 될 위험을 지적한다. 실제로 자유를 크게 제한하면서 위험성만 넓게 추정하면 책임원칙을 우회할 수 있기 때문이다. 정신질환 진단 자체를 재범 위험과 동일시해서도 안 된다. <strong>법정 범죄·치료 필요·개별 위험성</strong>을 증거로 판단한다.</p>
+<p><strong>시험:</strong> 형법_026·095. <strong>키워드:</strong> 책임/위험성·과거/장래·비례·법률근거. <strong>한 줄:</strong> 형벌이 아니라고 인권 제한의 한계가 없어지는 것은 아니다.</p>
+<h2 id="criminal-14-08" data-concept-id="criminal-14-08">2-2. 치료감호의 대상·기간·집행 순서 ★★★★☆</h2>
+<p><strong>교재 278쪽·워크북 110-111쪽 / 문단의 역할:</strong> 시설 치료를 통해 재범 방지와 사회 복귀를 도모하는 요건을 설명한다.</p>
+<p>현행 법 이름은 「치료감호 등에 관한 법률」이다. 공통으로 시설 치료의 필요와 재범 위험이 있어야 한다. 법이 정한 대상은 ① 심신장애로 형법 제10조 제1항의 불처벌 또는 제2항의 감경 가능 대상이며 금고 이상에 해당하는 죄를 범한 사람 ② 법정 약물·알코올 등의 습벽·중독과 해당 범죄 요건을 충족한 사람 ③ 법정 정신성적 장애와 금고 이상 성폭력범죄 요건을 충족한 사람이다. <strong>본교재의 첫 유형을 심신상실만으로 좁혀 읽지 않는다. 심신미약도 포함한다.</strong> <a href="https://www.law.go.kr/LSW//lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0002&lsiSeq=290727&urlMode=lsScJoRltInfoR">현행 제2조</a></p>
+<p>검사의 청구로 법원이 선고한다. 치료감호시설에서 의학적 치료와 지도·감독을 받는다. 치료 경과에 따라 종료·가종료 등을 심사하는 구조이지, 낙인만 찍고 계속 가두는 제도가 아니다. 일반 수용한도는 첫째·셋째 유형 <strong>15년</strong>, 둘째 유형 <strong>2년</strong>이다.</p>
+<p><mark class="pink">워크북의 상한만 외우면 연장 특칙을 놓친다.</mark> 법정 살인범죄를 범해 치료감호를 받은 사람에게 같은 범죄 재범 위험과 계속 치료 필요가 인정되면, 시설장 신청에 따른 검사 청구로 법원이 <strong>최대 3회, 매회 2년 범위</strong>에서 연장할 수 있다. 모든 치료감호에 자동 적용되는 연장이 아니다. <a href="https://www.law.go.kr/LSW//lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0016&lsiSeq=290727&urlMode=lsScJoRltInfoR">현행 제16조</a></p>
+<p>치료감호와 형벌이 병과되면 치료감호를 먼저 집행하고 그 기간을 형기에 산입하는 것이 기본 구조다. 치료 필요를 먼저 다루면서 같은 자유 제한 기간을 이중으로 집행하지 않으려는 취지다.</p>
+<p><strong>학습용 사례:</strong> 갑에게 정신질환 진단이 있지만 법정 범죄 요건·치료 필요·재범 위험이 확인되지 않았다. 진단명 하나로 감호를 선고할 수 없다. 반대로 책임이 조각된 경우에도 치료감호의 별도 요건이 충족되면 ‘형벌 불처벌=모든 법적 조치 불가’라고 할 수 없다. <strong>시험:</strong> 형법_095②. <strong>키워드:</strong> 세 유형·공통 요건·15/2·제한적 연장. <strong>한 줄:</strong> 사람의 진단명이 아니라 법정 요건과 구체적 필요를 본다.</p>
+<h2 id="criminal-14-09" data-concept-id="criminal-14-09">2-3. 보호관찰과 사회 안에서의 복귀 ★★★★☆</h2>
+<p><strong>교재 279쪽·워크북 111쪽 / 문단의 역할:</strong> 시설 밖에서도 지도·감독을 통한 재범 방지가 가능함을 설명한다.</p>
+<p>보호관찰은 사람을 교정시설에 수용하지 않고 사회 안에서 지도·감독하는 제도다. 생활을 유지하면서 준수사항을 지키고 보호관찰관의 지도를 받는다. 아무 조건 없이 풀어 주는 것도, 교도소 안에서 관찰하는 것도 아니다.</p>
+<p>주거지에서 생활하고 생업에 종사하며, 범죄로 이어질 우려가 있는 관계를 피하고, 보호관찰관의 지도·감독·방문에 응하는 등의 일반 준수사항이 있다. 법원이나 보호관찰심사위원회는 법정 범위 안에서 특별 준수사항도 부과할 수 있다. 획일적으로 모든 사람에게 같은 제한을 붙이는 것이 목적은 아니다.</p>
+<p>선고유예 때 부과된 보호관찰은 <strong>1년</strong>, 집행유예 때는 원칙적으로 유예기간이되 법원이 그 안에서 정한 기간이 될 수 있다. 가석방은 원칙적으로 가석방기간의 보호관찰을 받지만 <strong>가석방을 허가한 행정관청이 필요 없다고 인정하는 예외</strong>가 있다. 본교재 개관의 ‘반드시’를 이 예외 없이 외우지 않는다. 가석방기간은 무기형 10년, 유기형 잔여형기이나 10년을 넘지 못한다. 제15강에서 제73조의2와 함께 다시 확인한다.</p>
+<p><strong>학습용 사례:</strong> 을은 집행유예와 보호관찰을 선고받아 일을 하며 정기 지도를 받는다. 자유롭게 일상생활을 한다고 제재가 전혀 없는 것은 아니다. 반대로 보호관찰을 받는다는 말만으로 실제 수감 중이라고 할 수도 없다.</p>
+<p><strong>시험:</strong> 형법_026③·095①. <strong>키워드:</strong> 사회 내·준수사항·기간·법정 예외. <strong>한 줄:</strong> 사회 복귀를 돕는 지도와 재범 방지 감독을 함께 한다.</p>
+<h1>3. 형을 실제로 정하는 순서</h1>
+<h2 id="criminal-14-10" data-concept-id="criminal-14-10">3-1. 법정형 → 처단형 → 선고형 ★★★★★</h2>
+<p><strong>교재 281-282쪽·워크북 111-112쪽 / 문단의 역할:</strong> 법률의 추상적인 범위에서 한 사람의 구체적인 형량으로 내려오는 과정을 보여 준다.</p>
+<p><strong>법정형</strong>은 범죄에 대해 법률이 정한 형벌 종류와 범위다. 살인죄 제250조 제1항은 사형·무기 또는 5년 이상의 징역을 정한다. <strong>처단형</strong>은 그중 형의 종류를 선택하고 법률상 가중·감경 등을 적용해 정해진 범위다. <strong>선고형</strong>은 그 범위 안에서 법원이 실제 선고하는 형이다.</p>
+<p><strong>교재 살인 사례를 시간 순서로:</strong> A의 살인죄가 인정되었다 → 법원이 유기징역을 선택했다 → 특별한 가중이 없다면 5년 이상 30년 이하가 출발 범위다 → 이 사건에 적용할 법률상 감경을 한 번 하면 장기·단기를 모두 절반으로 하여 <strong>2년 6개월 이상 15년 이하</strong>가 된다 → 그 안에서 징역 3년을 선고하면 3년이 선고형이다. ‘살인죄는 언제나 3년’이라는 말이 아니라 감경을 전제한 계산 예다.</p>
+<p>워크북은 절도죄의 징역·벌금 선택형 중 징역을 골라 감경한 뒤 징역 1년 6개월을 선고하는 예도 든다. 다만 감경 후 최저기간을 괄호로 1개월이라고 그대로 적은 부분은 <strong>유기형 장기와 단기를 모두 감경한다는 원칙과 맞춰 보완</strong>해야 한다. 감경 전 1개월-6년이면 한 번 감경 후 15일-3년을 출발 범위로 본다. 낮은 선고형이 적정한지는 별도의 양형 판단이다.</p>
+<p><mark class="blue">제13강의 경합범 가중은 이 처단형을 만드는 단계에 들어간다. 제15강의 집행유예는 그렇게 정한 형을 실제로 집행할지의 문제다.</mark> 양형기준의 권고범위와 법률상 처단형도 같은 것이 아니다.</p>
+<p><strong>시험:</strong> 형법_096. <strong>키워드:</strong> 법률 범위·선택과 가감·실제 선고. <strong>한 줄:</strong> 법정형은 출발 범위, 처단형은 조정된 범위, 선고형은 실제 결론이다.</p>
+<h2 id="criminal-14-11" data-concept-id="criminal-14-11">3-2. 가중은 법률로, 감경은 근거와 의무를 나누어 ★★★★★</h2>
+<p><strong>교재 282-283쪽·워크북 112쪽 / 문단의 역할:</strong> 형을 무겁게 하거나 가볍게 하는 권한의 근거를 구별한다.</p>
+<p>법률상 범위를 넓히는 가중은 법률에 근거해야 한다. 판사가 ‘마음에 들지 않는다’며 새 가중사유를 만들 수 없다. 경합범·누범·제34조 제2항 특수 교사·방조 등이 일반적 가중의 예이고, 각칙의 상습·특수 범죄 규정 등은 특별한 범죄의 가중 구조다. 다만 제34조 제2항도 교사와 방조의 효과가 같지 않으므로 제12강처럼 구체 조문을 확인한다.</p>
+<p><strong>법률상 가중과 범위 안의 무거운 양형은 다르다.</strong> 재판부는 제51조의 사정을 고려하여 허용된 범위 안에서 무거운 형을 선택할 수 있다. ‘재량 가중 없음’을 ‘판사는 사정을 보고 무거운 형을 선고할 수 없음’으로 해석하지 않는다.</p>
+<p>감경은 두 축으로 나눈다. <strong>근거</strong>가 법률의 개별 감경 규정인지 제53조의 정상참작감경인지, <strong>의무</strong>가 반드시 감경해야 하는지 선택 가능한지다. 법률상 감경이라고 전부 필요적이지 않고, 재량이 있다고 전부 제53조인 것도 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>현행 기준</th>
+<th>대표 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>필요적 감경</td>
+<td>제11조 청각과 언어장애가 함께 있는 사람, 제32조 일반 종범</td>
+</tr>
+<tr>
+<td>필요적 감경 또는 면제</td>
+<td>제26조 중지미수</td>
+</tr>
+<tr>
+<td>임의적 감경</td>
+<td>제10조 제2항 심신미약, 제25조 제2항 일반 미수</td>
+</tr>
+<tr>
+<td>임의적 감경 또는 면제</td>
+<td>제21조 제2항 과잉방위, 제52조 자수·자복 등</td>
+</tr>
+</tbody></table>
+<p><mark class="pink">본교재 283쪽·워크북 112쪽의 심신미약 ‘필요적 감경’은 현행법과 다르다. 2018년 개정 후 제10조 제2항은 임의적 감경이다.</mark> 제11조 역시 청각장애나 언어장애 중 하나만으로 적용하는 규정이 아니며 특별법상 배제 규정이 있을 수 있다. 제8강에서 배운 책임능력·원인에 있어서 자유로운 행위와 연결한다.</p>
+<p><strong>시험:</strong> 형법_027①·③. <strong>키워드:</strong> 근거/의무 두 축·법정 범위/범위 내 양형. <strong>한 줄:</strong> ‘왜 줄이는가’와 ‘반드시 줄이는가’는 다른 질문이다.</p>
+<h2 id="criminal-14-12" data-concept-id="criminal-14-12">3-3. 자수·자복과 정상참작감경 ★★★★★</h2>
+<p><strong>교재 279-280·283-284쪽·워크북 112쪽 / 문단의 역할:</strong> 스스로 밝힌 범행과 구체적 사정을 감경에 어떻게 반영하는지 설명한다.</p>
+<p>제52조 제1항의 자수는 죄를 지은 사람이 수사기관에 스스로 범행을 신고하고 그 처분을 구하는 것이다. 조사 중 단순히 사실을 인정한 모든 자백과 같지 않다. 요건을 갖추면 감경 또는 면제가 가능하다. 자동 면제나 반드시 감경은 아니다.</p>
+<p>제52조 제2항의 자복은 <strong>피해자의 의사에 반하여 처벌할 수 없는 범죄</strong>에서 피해자에게 자기 죄를 고백한 때의 규정이다. 모든 범죄에서 피해자에게 사과하면 같은 효과가 생기는 것은 아니다. 자수·자복의 법률상 효과와 반성·피해회복을 제51조 양형 사정으로 고려하는 것은 구별한다.</p>
+<p>제53조의 <strong>정상참작감경</strong>은 범죄의 정상에 참작할 사유가 있으면 재판부가 형을 감경할 수 있는 제도다. 교재의 ‘작량감경’은 같은 제도의 종전 명칭이다. 현행 조문 제목은 정상참작감경이다. 법률상 감경을 한 뒤에도 추가로 할 수 있지만 정상참작감경 자체는 한 번이다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1029634123">현행 제53조</a></p>
+<p><strong>64도454, 감경도 경계가 있는가:</strong> 특수절도 사건의 피고인이 재판 결과를 다투었다. 문제 중 하나는 법원의 재량에 의한 감경이라면 방법도 마음대로 정할 수 있는가였다. 대법원은 제53조가 허용하는 감경에도 일정한 범위가 필요하고, 제55조의 방법을 따라야 한다고 보았다. <a href="https://law.go.kr/LSW/precInfoP.do?precSeq=152540">대법원 64도454</a></p>
+<p><strong>판례 문장 번역:</strong> ‘일정한 범위를 정하여’ → 법관이 임의의 새 범위를 만들지 않음 / ‘각 범죄사정에 적합한 양형’ → 그 범위 안에서 사건의 사정을 반영 / ‘제55조 소정 방법’ → 형 종류마다 법이 정한 감경 방식을 따름. 반대로 무제한 재량을 인정하면 같은 사건이라도 판사마다 법정 하한을 제멋대로 없앨 위험이 생긴다. 판결에 드러나지 않은 피고인의 개인 사정은 지어내지 않는다.</p>
+<p><strong>시험:</strong> 형법_097·027②. <strong>키워드:</strong> 자수/자백/자복·임의적·정상참작 1회. <strong>한 줄:</strong> 선처할 이유가 있어도 법이 허용한 방식으로 줄여야 한다.</p>
+<h2 id="criminal-14-13" data-concept-id="criminal-14-13">3-4. 제55·56조의 방법과 순서 ★★★★★</h2>
+<p><strong>교재 280·283-284쪽·워크북 112-113쪽 / 문단의 역할:</strong> 같은 사유라도 처리 순서를 바꾸어 결과를 왜곡하지 않게 한다.</p>
+<p>제54조에 따라 선택형이면 적용할 종류부터 고른다. 제56조 순서는 <strong>각칙 본조 가중 → 제34조 제2항 가중 → 누범 가중 → 법률상 감경 → 경합범 가중 → 정상참작감경</strong>이다. 기억할 줄기는 ‘각·특·누·법·경·정’이다. 각 단계를 해석 없이 기계적으로 중복 적용하지 말고 해당 구성요건에 이미 반영된 가중인지도 살핀다.</p>
+<table>
+<thead>
+<tr>
+<th>감경할 형</th>
+<th>제55조의 방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사형</td>
+<td>무기 또는 20년 이상 50년 이하의 징역·금고</td>
+</tr>
+<tr>
+<td>무기징역·무기금고</td>
+<td>10년 이상 50년 이하의 징역·금고</td>
+</tr>
+<tr>
+<td>유기징역·유기금고</td>
+<td>형기 1/2: 장기와 단기 모두</td>
+</tr>
+<tr>
+<td>자격상실</td>
+<td>7년 이상의 자격정지</td>
+</tr>
+<tr>
+<td>자격정지</td>
+<td>형기 1/2</td>
+</tr>
+<tr>
+<td>벌금</td>
+<td>다액 1/2</td>
+</tr>
+<tr>
+<td>구류</td>
+<td>장기 1/2</td>
+</tr>
+<tr>
+<td>과료</td>
+<td>다액 1/2</td>
+</tr>
+</tbody></table>
+<p>법률상 감경사유가 여러 개이면 거듭 감경할 수 있다. 그러나 같은 사정 이름을 두 번 붙여 마음대로 중복 감경하는 것은 아니다. 정상참작감경은 한 번이며 법률상 감경이 여러 개인 경우와 다르다. 유기형 가중의 일반 한도는 50년이라는 제42조도 함께 본다.</p>
+<p><strong>감경을 하기로 한 뒤의 방법:</strong> 임의적 감경은 ‘감경할지’를 선택할 수 있다는 뜻이다. 감경한다고 정하고도 장기만 줄이거나 1/3로 줄이는 새 방식을 만들 수 있다는 뜻은 아니다. 유기형은 장기·단기를 모두 절반으로 한다. <a href="https://law.go.kr/LSW/precInfoP.do?precSeq=214247">대법원의 유기형 감경 방법 설명</a></p>
+<p><strong>학습용 계산:</strong> 2년 이상 10년 이하를 한 번 법률상 감경하면 1년 이상 5년 이하다. ‘최대만 5년으로 줄이고 최소는 2년’ 또는 ‘임의적이니 8개월로 정하겠다’는 계산은 다르다. 이후 선고형을 그 범위 안에서 정하는 단계와 구별한다.</p>
+<p><strong>시험:</strong> 형법_027④의 1/3은 틀리고 1/2이다. <strong>키워드:</strong> 종류 먼저·각특누법경정·장단기 절반. <strong>한 줄:</strong> 줄일지의 재량과 줄이는 법정 방법은 구별한다.</p>
+<h2 id="criminal-14-14" data-concept-id="criminal-14-14">3-5. 양형 조건·미결구금·판결 공시 ★★★★☆</h2>
+<p><strong>교재 279·281·284쪽·워크북 113-114쪽 / 문단의 역할:</strong> 허용 범위 안에서 개인 사정을 살피고 이미 받은 자유 제한과 명예 회복을 처리한다.</p>
+<p>제51조는 ① 범인의 연령·성행·지능·환경 ② 피해자와의 관계 ③ 범행의 동기·수단·결과 ④ 범행 후 정황을 참작하도록 한다. 동일한 죄명만으로 모든 사람에게 같은 기간을 선고하지 않는 이유다. 피해회복·반성 등의 사정은 실제 자료로 평가하며, 말을 잘했다는 것만으로 책임이 없어지지 않는다.</p>
+<p><strong>미결구금:</strong> 유죄 확정 전 범죄 혐의에 따라 구금되어 있던 기간이다. 아직 형 집행 자체는 아니지만 이미 자유를 제한받았다. 제57조는 판결 선고 전 구금일수 <strong>전부</strong>를 유기징역·유기금고, 벌금·과료에 관한 유치 또는 구류에 산입하고 하루를 하루로 계산하도록 한다. 이 조문이 ‘판사가 원하면 일부만’이라고 되어 있다는 설명은 틀리다. 외국 구금의 공제 문제는 제2강의 별도 조문·판례와 구별한다.</p>
+<p><strong>교재의 판결 공시 조문:</strong> 피해자의 이익을 위해 필요하면 피해자의 청구가 있을 때 피고인 부담으로 판결 공시 취지를 선고할 수 있다. 무죄 판결 때는 원칙적으로 공시 취지를 선고해야 하지만 피고인이 동의하지 않거나 동의를 받을 수 없으면 예외다. 면소 판결은 공시 취지를 선고할 수 있다. <strong>무죄와 면소의 공시를 모두 단순한 재량이라고 요약한 워크북 문장보다 본교재에 실린 제58조의 조건을 정확히 읽는다.</strong></p>
+<p><strong>쉬운 사례:</strong> 갑이 오래 구금된 뒤 징역형을 선고받으면 이미 구금된 기간을 빼놓고 똑같은 기간을 처음부터 다시 세지 않는다. 을이 무죄를 받았다면 사회에 알려진 혐의를 바로잡을 필요가 있지만, 을 본인이 공시를 원하지 않는 경우도 존중한다. 국가의 제재를 계산하는 일과 판결로 훼손된 명예를 회복하는 일까지 이 장이 이어지는 이유다.</p>
+<p><strong>시험:</strong> 전부/일부, 청구 필요/불필요, 해야 함/할 수 있음의 차이. <strong>키워드:</strong> 개별화·구금 전부 산입·공시 동의. <strong>한 줄:</strong> 형량 계산 뒤에도 이미 겪은 구금과 판결을 알릴 조건을 확인한다.</p>
+<h1>4. 시험으로 연결하기</h1>
+<h2>먼저 풀 TOP5</h2>
+<ol>
+<li><strong>형법_094:</strong> 재산형에 구류를 끼워 넣는 함정.</li>
+<li><strong>형법_026:</strong> 보안처분의 근거와 특별법.</li>
+<li><strong>형법_096:</strong> 법정형·처단형·선고형 순서.</li>
+<li><strong>형법_027:</strong> 가중의 법률 근거와 감경 방법.</li>
+<li><strong>형법_097:</strong> 정상참작감경과 임의적 법률상 감경 구별.</li>
+</ol>
+<p>형법_095도 풀어 자격상실이 형벌임을 확인한다. 6문항은 형벌 분류 1개, 보안처분 2개, 양형·감경 3개다. 실제 오답 통계는 없으며, <strong>‘보안처분은 법률 없이 가능’·‘감경하면 1/3’·‘재량이 있으면 모두 작량감경’</strong>이 이해를 확인할 핵심 함정이다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>문제 1.</strong> 갑에게 구류 15일을 선고했다. 법원이 벌금 대신 재산형의 다른 종류를 선택한 것인가?</p>
+<p><strong>답·의도:</strong> 아니다. 구류는 자유형이다. 금액·기간의 크기보다 박탈 법익으로 분류한다.</p>
+<p><strong>문제 2.</strong> 심신미약이 인정되면 2026년 현행 형법상 언제나 반드시 형을 감경해야 하는가?</p>
+<p><strong>답·의도:</strong> 아니다. 제10조 제2항은 감경할 수 있는 임의적 규정이다. 교재의 오래된 필요적 감경 표를 그대로 외우지 않는지 확인한다.</p>
+<p><strong>문제 3.</strong> 재판부가 유기징역의 범위 4-12년을 임의적 감경사유에 따라 감경하기로 했다. 상한만 6년으로 낮추고 하한은 4년으로 남길 수 있는가?</p>
+<p><strong>답·의도:</strong> 제55조 방식에 따른 감경이면 장기와 단기를 함께 절반으로 하여 2-6년이다. 감경 여부 재량과 방법을 구별한다.</p>
+<p><strong>문제 4.</strong> 치료감호 요건을 검토하며 정신질환 진단서 한 장만으로 재범 위험과 시설 치료 필요를 당연히 인정했다. 적절한가?</p>
+<p><strong>답·의도:</strong> 아니다. 법정 대상 범죄 등 요건, 치료 필요, 재범 위험을 각각 구체적으로 판단해야 한다. 진단과 위험성을 동일시하지 않는다.</p>
+<p><strong>문제 5.</strong> A죄의 법정형에서 종류 선택과 법률상 가감 후 1-5년 범위가 나왔고, 법원이 징역 2년을 선고했다. 1-5년과 2년을 각각 무엇이라 하는가?</p>
+<p><strong>답·의도:</strong> 처단형과 선고형이다. 이후 집행유예 여부는 형을 실제로 집행할지의 별도 판단이다.</p>
+<h1>용어 사전</h1>
+<h3>형벌 刑罰·양형 量刑</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 刑(형벌 형), 罰(벌할 벌), 量(헤아릴 량). <strong>③ 합친 뜻:</strong> 벌·형을 헤아림. <strong>④ 이름의 이유:</strong> 법정 제재의 종류와 양을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형벌은 범죄의 법률효과인 법익 박탈, 양형은 구체적인 형의 결정. <strong>⑥ 쉬운 말:</strong> 무슨 벌을 얼마나 내릴지 나누어 생각해. <strong>⑦ 사례:</strong> 절도에 징역 또는 벌금 중 선택.</p>
+<p><strong>⑧ 시험:</strong> 9종 형벌과 양형 단계. <strong>⑨ 비교·기억법:</strong> 민사 손해배상과 국가 형벌은 다르다.</p>
+<h3>사형 死刑</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 死(죽을 사): 생명 종료, 刑(형벌 형). <strong>③ 합친 뜻:</strong> 생명을 박탈하는 형. <strong>④ 이름의 이유:</strong> 형벌이 생명 자체에 미치기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제41조 제1호의 생명형. <strong>⑥ 쉬운 말:</strong> 되돌릴 수 없는 벌이라 특별히 엄격하게 생각해야 해. <strong>⑦ 사례:</strong> 교재의 사형제 헌법재판.</p>
+<p><strong>⑧ 시험:</strong> 생명형과 자유형 구별. <strong>⑨ 비교·기억법:</strong> 절대적 사형 법정형과 감경 불가능은 다르다.</p>
+<h3>징역 懲役·정역 定役</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 懲(징계할 징), 役(부릴 역): 노역, 定(정할 정). <strong>③ 합친 뜻:</strong> 징계 노역·정해진 노역. <strong>④ 이름의 이유:</strong> 수용에 노역 의무가 결합하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교정시설 수용과 정역 복무를 내용으로 하는 자유형. <strong>⑥ 쉬운 말:</strong> 자유 제한과 정해진 작업 의무가 함께 있어. <strong>⑦ 사례:</strong> 유기징역 2년.</p>
+<p><strong>⑧ 시험:</strong> 금고와 정역 차이. <strong>⑨ 비교·기억법:</strong> 유기형 30년 원칙·가중50년.</p>
+<h3>금고 禁錮</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 禁(금할 금): 제한, 錮(막을 고): 가둠. <strong>③ 합친 뜻:</strong> 자유를 막고 가둠. <strong>④ 이름의 이유:</strong> 가두는 처벌이라는 점을 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정역을 의무로 부과하지 않는 자유형. <strong>⑥ 쉬운 말:</strong> 징역처럼 수용되지만 정해진 작업 의무가 달라. <strong>⑦ 사례:</strong> 본인이 신청한 작업 가능.</p>
+<p><strong>⑧ 시험:</strong> 징역과 기간은 같고 정역은 다름. <strong>⑨ 비교·기억법:</strong> 金庫 돈 보관함과 한자가 다르다.</p>
+<h3>구류 拘留·구금 拘禁</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 拘(잡을 구), 留(머무를 류), 禁(금할 금). <strong>③ 합친 뜻:</strong> 잡아 머물게 함·자유를 묶음. <strong>④ 이름의 이유:</strong> 형벌인지 재판 중 조치인지 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구류는 단기 자유형, 미결구금은 확정 전 신병 제한. <strong>⑥ 쉬운 말:</strong> 수감되어 보여도 법적 이유가 달라. <strong>⑦ 사례:</strong> 구류20일과 재판 전 구속.</p>
+<p><strong>⑧ 시험:</strong> 구류1일 이상30일 미만. <strong>⑨ 비교·기억법:</strong> 구류는 재산형이 아니고 구속과도 다르다.</p>
+<h3>벌금 罰金·과료 科料·과태료 過怠料</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 罰(벌할 벌), 金(쇠 금): 돈, 科(과정 과): 부과, 料(헤아릴 료): 금액, 過(지날 과): 잘못, 怠(게으를 태). <strong>③ 합친 뜻:</strong> 벌로 내는 돈·부과 금액·질서 위반 금액. <strong>④ 이름의 이유:</strong> 같은 돈 납부라도 법적 성질이 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 벌금·과료는 형벌, 과태료는 행정질서벌. <strong>⑥ 쉬운 말:</strong> 돈을 낸다고 모두 형사처벌은 아니야. <strong>⑦ 사례:</strong> 벌금5만 이상·과료2천 이상5만 미만.</p>
+<p><strong>⑧ 시험:</strong> 금액 경계와 과태료 구별. <strong>⑨ 비교·기억법:</strong> 벌금은 감경하면5만 미만 가능.</p>
+<h3>노역장 유치 勞役場留置</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 勞(일할 로), 役(부릴 역), 場(마당 장), 留(머무를 류), 置(둘 치). <strong>③ 합친 뜻:</strong> 작업 장소에 머물게 함. <strong>④ 이름의 이유:</strong> 금전형을 집행하기 위한 대체적 자유 제한이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 벌금·과료 미납에 따른 법정 환형처분. <strong>⑥ 쉬운 말:</strong> 정해진 돈을 내지 않았을 때 법정 절차로 작업을 하게 해. <strong>⑦ 사례:</strong> 벌금 미납 유치기간 판결.</p>
+<p><strong>⑧ 시험:</strong> 벌금1일-3년·과료1일-30일 미만. <strong>⑨ 비교·기억법:</strong> 일수벌금제 도입론과 같은 제도가 아니다.</p>
+<h3>몰수 沒收·추징 追徵</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 沒(잠길 몰): 없앰, 收(거둘 수), 追(쫓을 추), 徵(거둘 징). <strong>③ 합친 뜻:</strong> 재산을 거둠·뒤따라 가액을 거둠. <strong>④ 이름의 이유:</strong> 물건을 없앴다고 이익을 보유하게 하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 관련 물건의 박탈과 몰수 불가능 때 가액 징수. <strong>⑥ 쉬운 말:</strong> 물건이 있으면 그 물건, 없으면 그 값이 문제 돼. <strong>⑦ 사례:</strong> 범죄로 얻은 물건을 처분함.</p>
+<p><strong>⑧ 시험:</strong> 임의 몰수 원칙과 필요적 특칙. <strong>⑨ 비교·기억법:</strong> 범죄 관련성·소유관계 요건을 먼저 본다.</p>
+<h3>부가형 附加刑·병과형 倂科刑</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 附(붙을 부), 加(더할 가), 刑(형벌 형), 倂(아우를 병), 科(과정 과): 부과. <strong>③ 합친 뜻:</strong> 붙여 더하는 형·함께 부과하는 형. <strong>④ 이름의 이유:</strong> 주된 형과 함께 붙는 관계를 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 몰수는 원칙적 부가형이며 법정 예외로 단독 선고 가능. <strong>⑥ 쉬운 말:</strong> 다른 벌 옆에 붙는 것이 원칙이지만 예외도 있어. <strong>⑦ 사례:</strong> 제49조 단서의 몰수만 선고.</p>
+<p><strong>⑧ 시험:</strong> 항상 다른 형 필요라는 함정. <strong>⑨ 비교·기억법:</strong> 병과는 함께 부과, 부가는 종속적 관계에 초점.</p>
+<h3>자격상실 資格喪失·자격정지 資格停止</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자): 자격 바탕, 格(격식 격), 喪(잃을 상), 失(잃을 실), 停(머무를 정), 止(그칠 지). <strong>③ 합친 뜻:</strong> 법적 지위를 잃음·멈춤. <strong>④ 이름의 이유:</strong> 모든 자유가 아니라 일정한 역할을 제한하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 법정 자격의 박탈 또는 일정기간 제한. <strong>⑥ 쉬운 말:</strong> 감옥에 가는 것과 별도로 특정 일을 못 할 수 있어. <strong>⑦ 사례:</strong> 법정 공무원 자격 등 제한.</p>
+<p><strong>⑧ 시험:</strong> 형벌이지 보안처분 아님. <strong>⑨ 비교·기억법:</strong> 선거권 등 특별법 조건을 함께 확인.</p>
+<h3>보안처분 保安處分</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 保(지킬 보), 安(편안할 안), 處(곳 처): 처리, 分(나눌 분): 처분. <strong>③ 합친 뜻:</strong> 안전을 지키는 처분. <strong>④ 이름의 이유:</strong> 장래 위험 예방·개선을 목표로 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재범 위험과 사회 복귀에 대응하는 법정 형사제재. <strong>⑥ 쉬운 말:</strong> 처벌만 늘리지 않고 치료와 지도로 재범을 막으려 해. <strong>⑦ 사례:</strong> 치료감호·보호관찰.</p>
+<p><strong>⑧ 시험:</strong> 형벌의 책임과 보안처분의 위험성 비교. <strong>⑨ 비교·기억법:</strong> 법적 근거·비례·절차가 필요하다.</p>
+<h3>치료감호 治療監護</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 治(다스릴 치), 療(병 고칠 료), 監(볼 감): 감독, 護(도울 호): 보호. <strong>③ 합친 뜻:</strong> 치료하며 감독·보호함. <strong>④ 이름의 이유:</strong> 치료와 재범 방지가 결합하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 대상과 치료 필요·재범 위험을 갖춘 사람에 대한 시설 치료 제도. <strong>⑥ 쉬운 말:</strong> 진단명만 보고 가두는 것이 아니라 법정 요건을 따져. <strong>⑦ 사례:</strong> 심신장애 범죄자의 별도 감호 심사.</p>
+<p><strong>⑧ 시험:</strong> 세 유형·15/2년·연장 특칙. <strong>⑨ 비교·기억법:</strong> 형벌의 무기한 연장을 대신하는 이름표가 아니다.</p>
+<h3>보호관찰 保護觀察</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 保(지킬 보), 護(도울 호), 觀(볼 관), 察(살필 찰). <strong>③ 합친 뜻:</strong> 보호하며 살핌. <strong>④ 이름의 이유:</strong> 생활을 유지하며 재범을 방지하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사회 안에서 준수사항과 지도·감독으로 복귀를 돕는 제도. <strong>⑥ 쉬운 말:</strong> 일상을 살면서 정해진 약속과 감독을 받아. <strong>⑦ 사례:</strong> 집행유예와 보호관찰 병과.</p>
+<p><strong>⑧ 시험:</strong> 시설 외 보안처분·기간. <strong>⑨ 비교·기억법:</strong> 아무 조건 없는 석방과 다르다.</p>
+<h3>법정형 法定刑·처단형 處斷刑·선고형 宣告刑</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 定(정할 정), 刑(형벌 형), 處(곳 처): 처리, 斷(끊을 단): 판단, 宣(베풀 선): 밝힘, 告(알릴 고). <strong>③ 합친 뜻:</strong> 법정 범위·처리할 범위·선언한 형. <strong>④ 이름의 이유:</strong> 출발점과 조정 범위와 최종 결론을 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률상 형에서 종류 선택·가감을 거쳐 구체 선고에 이르는 세 단계. <strong>⑥ 쉬운 말:</strong> 정해진 범위에서 사정에 맞게 조정하고 실제 벌을 골라. <strong>⑦ 사례:</strong> 5-30년→2년6개월-15년→3년.</p>
+<p><strong>⑧ 시험:</strong> 순서와 수치 구별. <strong>⑨ 비교·기억법:</strong> 처단형은 하나의 실제 선고기간이 아니라 범위.</p>
+<h3>가중 加重·감경 減輕</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 加(더할 가), 重(무거울 중), 減(덜 감), 輕(가벼울 경). <strong>③ 합친 뜻:</strong> 무겁게 더함·가볍게 줄임. <strong>④ 이름의 이유:</strong> 형벌 범위가 무거워지거나 가벼워지기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법적 근거에 따라 처단 범위를 변경하는 작용. <strong>⑥ 쉬운 말:</strong> 범위 자체를 바꾸는 것과 그 안에서 고르는 것은 달라. <strong>⑦ 사례:</strong> 유기형 장단기 절반 감경.</p>
+<p><strong>⑧ 시험:</strong> 근거·의무·방법 구별. <strong>⑨ 비교·기억법:</strong> 임의적 감경도 한다면 법정 방법을 따른다.</p>
+<h3>필요적 必要的·임의적 任意的</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 必(반드시 필), 要(요긴할 요), 的(과녁 적): 성질, 任(맡길 임), 意(뜻 의). <strong>③ 합친 뜻:</strong> 반드시 해야 함·선택에 맡김. <strong>④ 이름의 이유:</strong> 법률 문장의 하여야 한다와 할 수 있다 차이.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 요건 충족 때 감경 의무인지 재량인지의 구분. <strong>⑥ 쉬운 말:</strong> 조건이 맞으면 꼭 줄이는지, 줄일 수 있는지 봐. <strong>⑦ 사례:</strong> 종범 필요적·심신미약 임의적.</p>
+<p><strong>⑧ 시험:</strong> 2018년 이후심신미약 개정. <strong>⑨ 비교·기억법:</strong> 법률상/재판상은 근거 축, 필요/임의는 의무 축.</p>
+<h3>자수 自首·자복 自服·자백 自白</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 首(머리 수): 앞서 밝힘, 服(옷 복): 여기서는 인정, 白(흰 백): 밝힘. <strong>③ 합친 뜻:</strong> 스스로 신고·인정·사실을 밝힘. <strong>④ 이름의 이유:</strong> 누구에게 어떤 방식으로 밝히는지 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자수는 수사기관 신고와 처분 구함, 자복은 제52조2항 조건 아래 피해자에게 인정. <strong>⑥ 쉬운 말:</strong> 조사 때 인정한 모든 말이 자수는 아니야. <strong>⑦ 사례:</strong> 범행 후 수사기관에 스스로 신고.</p>
+<p><strong>⑧ 시험:</strong> 감경·면제 가능이지 자동 아님. <strong>⑨ 비교·기억법:</strong> 自手범의 수는 손 수이고 자수 신고와 다르다.</p>
+<h3>정상참작 情狀參酌·작량 酌量</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 情(뜻 정): 사정, 狀(형상 상), 參(참여할 참): 참고, 酌(따를 작): 헤아림, 量(헤아릴 량). <strong>③ 합친 뜻:</strong> 사정을 참고해 헤아림. <strong>④ 이름의 이유:</strong> 개별 범죄 사정을 반영하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제53조의 재판상 감경, 종전 명칭 작량감경. <strong>⑥ 쉬운 말:</strong> 법이 허용한 방식으로 구체 사정을 살펴 줄여. <strong>⑦ 사례:</strong> 법률상 감경 후 정상참작감경.</p>
+<p><strong>⑧ 시험:</strong> 한 번만, 방법은 제55조. <strong>⑨ 비교·기억법:</strong> 재량이 있는 모든 감경을 제53조라 부르지 않는다.</p>
+<h3>산입 算入·공시 公示</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 算(셀 산), 入(들 입), 公(공평할 공): 공적, 示(보일 시). <strong>③ 합친 뜻:</strong> 계산에 넣음·공적으로 알림. <strong>④ 이름의 이유:</strong> 이미 받은 제한과 판결에 따른 명예 회복을 처리하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구금 기간을 형기에 반영함과 판결 내용을 알리는 제도. <strong>⑥ 쉬운 말:</strong> 먼저 갇혀 있던 날을 빼먹지 않고 판결을 알릴 조건도 살펴. <strong>⑦ 사례:</strong> 미결구금 전부 산입·무죄 공시 동의.</p>
+<p><strong>⑧ 시험:</strong> 전부/일부, 해야 함/할 수 있음. <strong>⑨ 비교·기억법:</strong> 무죄 공시와 면소 공시의 규정은 같지 않다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 형벌과 양형</h2>
+<p><b>TOP3:</b> ① 형벌/보안처분 ② 법정형→처단형→선고형 ③ 감경 근거·의무·방법.</p>
+<table><tr><th>쟁점</th><th>기준</th></tr>
+<tr><td>형벌 9종</td><td>사형·징역·금고·자격상실·자격정지·벌금·구류·과료·몰수</td></tr>
+<tr><td>자유형</td><td>징역 정역 / 금고 정역 의무 없음 / 구류 1일-30일 미만</td></tr>
+<tr><td>유기형·자격정지</td><td>유기 1개월-30년, 가중 50년 / 자격정지 1-15년</td></tr>
+<tr><td>벌금·과료</td><td>벌금 5만 이상(감경 예외) / 과료 2천-5만 미만. 과태료 별개</td></tr>
+<tr><td>몰수·추징</td><td>물건 / 가액. 임의 몰수 원칙, 부가형 원칙과 단독 선고 예외</td></tr>
+<tr><td>보안처분</td><td>재범 위험·사회 복귀. 법적 근거·비례 필요. 자격상실은 형벌</td></tr>
+<tr><td>치료감호</td><td>심신장애·중독·정신성적 장애. 일반 15/2년, 제한적 연장 특칙</td></tr>
+<tr><td>양형 3단계</td><td>법정 종류·범위 → 선택·가감 범위 → 구체 선고</td></tr>
+<tr><td>현행 감경</td><td>심신미약 임의 / 일반 종범·제11조 필요 / 중지 감경 또는 면제</td></tr>
+<tr><td>정상참작</td><td>구 작량감경. 1회. 법률상 감경 후 가능, 방법은55조</td></tr>
+<tr><td>가감 순서</td><td>각칙·특수교사방조·누범·법률감경·경합·정상참작</td></tr>
+<tr><td>유기형 감경·구금</td><td>장기·단기 모두1/2 / 선고 전 구금일수 전부 산입</td></tr></table>
+<p><b>반드시 외울 문장:</b> 감경할지의 재량이 있다고 감경 방법까지 마음대로 정할 수 있는 것은 아니다.</p>
+<p><b>함정:</b> 구류=재산형 × / 모든 보안처분이 형법41조에 있음 × / 심신미약 필요적 감경 × / 모든 유기형 선거권 일률 정지 ×.</p>
+<p><b>사례를 풀 순서:</b> 형벌·보안처분 구별 → 형 종류 선택 → 법정 가감 근거·순서 → 처단 범위 → 개별 양형 → 구금·공시·특칙.</p>
+</section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p><strong>복습 TOP3:</strong> ① 9종 형벌과 보안처분 ② 양형 세 단계 ③ 감경의 필요·임의와 방법. 🟢 사례와 숫자까지 설명하면 이해 완료 / 🟡 이름은 알지만 계산·법 개정이 흔들리면 복습 필요 / 🔴 보안처분도 판사가 자유롭게 만든 벌이라고 생각하면 이해 부족. 실제 답안 전이므로 자기진단 기준이다.</p>
+<p>출처: 제공 본교재 273-284쪽 해당 부분, 워크북 제14강, 형법 JSON, 본문 연결 공식 법령·판례. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%98%95%EB%B2%95">현행 형법 제41-58조</a>. 심신미약·정상참작 명칭·자격제한 특별법·치료감호 대상과 연장·유기형 감경 하한·가석방 보호관찰 예외를 구분하여 보완했다.</p>
+<h1>문제 부록 · 6문항·24개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-형법_026"><h4>형성평가 · 형법_026</h4><p class="question-stem">보안처분에 대한 다음 설명 중 올바르지 않은 것은?</p><ol class="choices"><li>형사제재의 한 종류이다</li><li>범죄에 대한 책임이 아니라 재범의 위험성을 근거로 부과된다</li><li>보호관찰, 전자감시 등이 대표적인 보안처분이다</li><li>형법에 그 종류와 내용이 규정되어 있다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보안처분은 형벌과 구별되는 형사제재다. 형벌이 아니라고 법적 제재가 아닌 것은 아니다.</li><li><strong>비선택</strong> · 중심 근거는 과거 범행의 책임이 아니라 장래 재범 위험이다. 실제 적용에는 법정 요건과 비례·필요성도 요구된다.</li><li><strong>비선택</strong> · 보호관찰·전자감시는 대표적 예다. 각 법률의 적용 대상과 절차가 있으며 모든 범죄자에게 자동 부과되지 않는다.</li><li><strong>선택</strong> · 모든 종류·내용이 형법에 규정되었다는 설명이 틀렸다. 치료감호·소년 보호처분·전자장치 등은 특별법에도 규정된다. 형법에 보호관찰 등 규정이 전혀 없다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_027"><h4>형성평가 · 형법_027</h4><p class="question-stem">형의 가중·감경에 대한 다음 설명 중 올바르지 않은 것은?</p><ol class="choices"><li>형의 가중 사유는 모두 법률에 정해져 있으며 재판에서 법관의 재량으로 인정되는 가중사유는 없다</li><li>정상참작감경은 한 번만 할 수 있다</li><li>감경사유가 여러 가지가 있을 때에는 거듭해서 감경할 수 있다</li><li>유기징역이나 유기금고의 형을 감경할 때에는 형기의 1/3로 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 범위를 넓히는 가중에는 법률 근거가 필요하다. 다만 범위 안에서 사정을 보고 무거운 선고형을 고르는 재량까지 부정하는 문장은 아니다.</li><li><strong>비선택</strong> · 제53조 정상참작감경은 한 번만 한다. 종전 명칭 작량감경과 같은 제도다.</li><li><strong>비선택</strong> · 여러 법률상 감경사유가 있으면 거듭 감경할 수 있다는 의미에서 맞다. 정상참작 사정을 여러 개 찾아 같은 제53조를 반복 적용한다는 뜻은 아니다.</li><li><strong>선택</strong> · 유기형은 1/3이 아니라 형기의 1/2로 한다. 장기·단기를 모두 감경하며 실제 선고형을 무조건 절반으로 다시 계산하는 것이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_094"><h4>워크북 · 형법_094</h4><p class="question-stem">다음 중 재산형이 아닌 것은?</p><ol class="choices"><li>몰수</li><li>구류</li><li>과료</li><li>벌금</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 몰수는 특정 재산을 박탈하는 재산형이다. 원칙적 부가형이라는 성질과 재산형 분류는 함께 성립한다.</li><li><strong>선택</strong> · 구류는 1일 이상30일 미만 자유형이다. 돈을 부과하는 재산형이 아니므로 질문의 정답이다.</li><li><strong>비선택</strong> · 과료는 2천 원 이상5만 원 미만의 재산형이다. 과태료와 구별한다.</li><li><strong>비선택</strong> · 벌금은 금전 지급을 부담시키는 재산형이다. 원칙5만 원 이상이며 감경 예외가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 252면. 재산형에는 벌금과 과료, 몰수가 있다. 구류는 자유형이다. 벌금과 과료가 어떻게 구분되는지 교재를 통해 확인해 보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_095"><h4>워크북 · 형법_095</h4><p class="question-stem">다음 중 보안처분이 아닌 것은?</p><ol class="choices"><li>보호관찰</li><li>치료감호</li><li>보호처분</li><li>자격상실</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보호관찰은 사회 내 지도·감독의 보안처분이다. 시설 수용이 없다고 제재가 아닌 것은 아니다.</li><li><strong>비선택</strong> · 치료감호는 법정 요건 아래 시설 치료를 하는 보안처분이다. 진단명만으로 자동 부과하지 않는다.</li><li><strong>비선택</strong> · 이 문맥의 보호처분은 소년법상 보호처분 등을 가리키며 보안처분의 예다. 모든 명칭의 보호 조치를 같은 것으로 일반화하지 않는다.</li><li><strong>선택</strong> · 자격상실은 형법 제41조의 형벌, 그중 명예형·자격형이다. 원자료의 새로운 보안처분 가능성은 법률에 의한 신설 가능성이지 법률 없는 창설을 뜻하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 253~255면. 형벌이 형법에 정해진 9가지로 제한되는 반면에 보안처분은 재범의 위험성을 예방하기 위하여 그 범죄에 적합한 처분을 부과하는 것이므로 그 종류가 제한되지 않는다. 법률에 규정된 보안처분뿐만 아니라 새로운 보안처분이 앞으로 계속해서 나올 수 있는 것이다. 현재 시행되고 있는 보안처분의 대표적인 예로는 보호관찰, 치료감호, (소년법의) 보호처분, 전자발찌, 사회봉사명령, 수강명령 등이 있다. 자격상실은 명예형으로서 형벌의 한 종류이다.</p></details></section>
+
+<section class="question-card" id="question-형법_096"><h4>워크북 · 형법_096</h4><p class="question-stem">다음은 형의 양정의 단계를 순서대로 나타낸 것이다. ( ) 안에 들어갈 말을 순서에 맞게 연결한 것은?<br><br>( ) → 처단형 → ( )</p><ol class="choices"><li>가중형 - 선고형</li><li>법정형 - 선고형</li><li>선고형 - 감경형</li><li>가중형 - 감경형</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법률이 정한 최초 범위는 가중형이 아니라 법정형이다. 뒤의 선고형은 맞아도 앞이 틀렸다.</li><li><strong>선택</strong> · 법정형에서 종류 선택과 가감으로 처단형을 만들고, 그 안에서 선고형을 정한다.</li><li><strong>비선택</strong> · 선고형은 마지막의 구체적 결론이지 처단형보다 앞 단계가 아니다. 감경형이라는 일반적 최종 단계도 쓰지 않는다.</li><li><strong>비선택</strong> · 가중·감경은 범위를 조정하는 작용이다. 첫 단계와 마지막 단계의 이름이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 257~258면. 법률에 정해진 형벌의 종류와 범위 내에서 구체적인 사건에 적용할 형을 정하는 과정을 '형의 양정'이라고 한다. 형의 양정은 법정형 → 처단형 → 선고형의 순서로 이루어진다. 각각의 의미와 내용을 교재를 통해 확인해 보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_097"><h4>워크북 · 형법_097</h4><p class="question-stem">법원은 범죄의 정상에 참작할 만한 사유가 있는 때에는 재량에 의해 그 형을 감경할 수 있다. 이를 무엇이라고 하는가?</p><ol class="choices"><li>법률상 감경</li><li>필요적 감경</li><li>임의적 감경</li><li>작량감경</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특정 법률상 감경사유에 따른 감경과 달리, 질문은 정상참작에 따른 제53조 재판상 감경을 묻는다.</li><li><strong>비선택</strong> · 필요적 감경은 요건을 갖추면 반드시 하는 감경이다. 질문은 재량에 의한 정상참작이다.</li><li><strong>비선택</strong> · 정상참작감경도 임의적 성격이 있지만 임의적 감경은 더 넓은 분류다. 질문이 특정한 제도 이름의 정답은④다.</li><li><strong>선택</strong> · 종전 명칭 작량감경, 현행 제목 정상참작감경이다. 한 번만 할 수 있고 법률상 감경 뒤에도 가능하며 방법은 제55조를 따른다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 259면. 형법 제53조는 '작량감경'을 규정한다. 법원의 재량에 의한 재판상 감경으로, 법률상 감경을 한 이후에도 작량감경을 할 수 있다. 단, 작량감경은 한 번만 할 수 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '형법총론 · CHAPTER 14' : 'PART · CRIMINAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(형법총론 · CHAPTER 14|PART · CRIMINAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('criminal-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

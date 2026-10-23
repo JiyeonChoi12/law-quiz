@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>형법총론 제11강 공동정범과 교사범 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CRIMINAL LAW · CHAPTER 11</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">형법총론</span>
+    <span class="brand-sub">제11강 공동정범과 교사범 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./형법총론_개념.html">형법총론 개념 목록</a><a href="../index.html?subject=형법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>갑은 위협하고 을은 물건을 가져갔다. 갑은 손대지 않았으니 협박만, 을은 위협하지 않았으니 절도만 책임질까? 그렇게 나누면 둘이 함께 실행한 강도를 놓친다. 반대로 한 사람이 뜻밖에 저지른 모든 행동을 나머지 사람에게 떠넘기면 개인책임 원칙이 무너진다. 이 강은 <strong>함께 한 범행의 전체 책임과 각자의 책임 한계</strong>를 동시에 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하는가?</td>
+<td>공동정범의 의사·역할·책임 범위, 합동범, 교사범의 고의·실행·착오다.</td>
+</tr>
+<tr>
+<td>왜 생겼는가?</td>
+<td>범행을 나누어 했다는 이유로 책임을 피하지 못하게 하되 단순한 동석·관계만으로 처벌하지 않기 위해서다.</td>
+</tr>
+<tr>
+<td>전체의 위치는?</td>
+<td>제30조 공동정범과 제31조 교사범을 중심으로 공범론을 구체화한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>제10강의 행위지배·종속성을 사례에 적용하고, 제12강에서 방조·간접정범·신분을 완성한다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>가담 전 범행·동료의 돌발 행동·시킨 것과 다른 실행의 책임을 구별할 수 없다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 본교재 216쪽 공동정범부터 236쪽 교사범 끝까지(PDF 230-250쪽 해당 부분), 워크북 제11강 84-91쪽(PDF 408-415쪽), JSON 7문항·28개 보기. 본교재의 종범 시작 부분은 제12강에서 설명한다. 별점은 학습 우선순위이지 실제 기출빈도·오답률이 아니다. 교재의 학설상 평가와 판례의 판단을 구분하고 후속 판례는 따로 표시한다.</p>
+<p><strong>색상:</strong> <mark class="yellow">정의·필수 암기</mark> / <mark class="green">판단 이유</mark> / <mark class="pink">함정·자료 보완</mark> / <mark class="blue">개념 연결</mark>.</p>
+<h1>1. 같이 실행한 범죄 · 공동정범</h1>
+<h2 id="criminal-11-01" data-concept-id="criminal-11-01">1-1. 제30조와 일부 실행·전체 책임 ★★★★★</h2>
+<p><strong>교재 216-217쪽 / 문단의 역할:</strong> 공동정범을 별도로 규정하는 이유를 보여 준다.</p>
+<p><mark class="yellow">둘 이상이 공동하여 죄를 범하면 각자를 그 죄의 정범으로 처벌한다. 공동가공의 의사와 공동 실행이 필요하다.</mark> 혼자서도 구성요건 전체를 실현한 두 사람이 우연히 같이 있었다는 뜻이 아니다. 각자 일부 역할만 하더라도 서로의 실행을 합하여 하나의 범죄를 지배한 경우가 핵심이다.</p>
+<p><strong>교재의 골목 강도 이야기:</strong> 갑·을은 돈을 마련하려 강도하기로 함께 정했다. 갑이 행인을 위협하는 동안 을은 그 행인의 가방에서 지갑을 가져갔다. 따로 떼면 갑의 위협과 을의 취거만 보인다. 그러나 공동계획 속에서 둘은 상대 역할을 이용하여 재물 강취를 완성했다. 따라서 갑은 협박만, 을은 절도만이 아니라 강도 공동정범이다. 법원의 질문은 “누가 마지막에 지갑을 손에 쥐었나”가 아니라 “누가 함께 전체를 실행했나”다.</p>
+<p>교재의 두 사람이 함께 피해자를 공격한 사례에서도, 공동의 살인 의사와 실행이 있으면 누가 직접 치명적 결과를 일으켰는지만으로 다른 사람을 무조건 미수로 낮추지 않는다. 반대로 공동 의사가 없으면 뒤에서 볼 동시범의 문제다. <strong>일부 실행으로 전체 책임을 지는 이유는 상호 이용·보충의 공동 실행</strong>이지 단순히 둘이 나쁜 사람이기 때문이 아니다.</p>
+<p>기능적 행위지배설은 전체 계획에 필요한 역할을 나누어 범행을 함께 장악했다는 점을 강조한다. 교재가 판례의 행위공동설도 소개하는 것은 특히 과실 공동정범의 설명과 이어진다. 학설의 이름보다 의사·행위·범위라는 기본 요소를 먼저 잡는다.</p>
+<p><strong>시험:</strong> 제30조의 ‘공동하여’를 의사와 실행으로 나누기. <strong>키워드:</strong> 일부 실행·전체 책임·상호 이용. <strong>한 줄:</strong> 손을 나누어 움직였어도 범죄를 함께 자기 일로 실행했다면 전체의 정범이다.</p>
+<h2 id="criminal-11-02" data-concept-id="criminal-11-02">1-2. 공동의 의사와 오토바이 처분 약속 사례 ★★★★★</h2>
+<p><strong>교재 217-218·220쪽 / 문단의 역할:</strong> 범죄를 안다는 것과 함께 실행한다는 것을 구별한다.</p>
+<p>공동의 의사는 특정한 범행을 함께 실행하면서 서로 다른 사람의 행동을 이용하여 자기 범행을 실현하려는 뜻이다. 남이 범행하는 것을 알거나 찬성했다는 사실만으로 바로 성립하지 않는다. 어떤 범행에 어떤 역할로 가담하기로 했는지를 확인한다.</p>
+<p><strong>97도1940의 이야기:</strong> A1은 A2가 훔쳐 온 오토바이를 처분해 주기로 이야기했다. A2는 A3와 실제 절취를 했다. 그러나 A2는 A1이 돈을 주지 않으면 다른 사람에게 팔았고 더 비싸게 사는 사람에게 넘기기도 했다. 법원은 이 사안의 약속을 A1이 절도 실행자들과 일체가 되어 자신의 절취 의사를 실현한 관계로 보지 않아 절도 공동가공의 의사를 부정했다. <strong>훔친 물건을 산다는 관계 → 절도의 공동 실행과 자동 동일하지 않음</strong>이다. 장물죄나 교사·방조 가능성은 각각의 요건에 따라 별도다.</p>
+<p>반대로 공동 의사를 주고받는 방식에 정해진 의식은 없다. 계약서를 쓰거나 전원이 같은 방에서 모의할 필요도 없다. 순차적·묵시적 의사 연락도 가능하며, 범행 과정에서 뜻이 합쳐질 수도 있다. 교재의 98도2654·92도2628은 이 점을 뒷받침한다. 서로 얼굴을 모르는 사람들도 중간 연결을 통해 공동계획을 공유할 수 있지만, <strong>서로 얼굴을 모른다는 사실만으로 공동계획이 자동 생기는 것은 아니다.</strong></p>
+<p><strong>시험:</strong> 형법_020①. <strong>키워드:</strong> 공동가공·순차·묵시·사전 공모 불필수. <strong>한 줄:</strong> 형식적 회의가 필요한 것은 아니지만 범행을 함께 한다는 실질은 필요하다.</p>
+<h2 id="criminal-11-03" data-concept-id="criminal-11-03">1-3. 동시범·편면적 관여·제263조의 한계 ★★★★★</h2>
+<p><strong>교재 218-219쪽 / 문단의 역할:</strong> 의사 연락이 없는 여러 사람의 행동을 별도로 평가한다.</p>
+<p><strong>교재의 우연한 동시 공격:</strong> 서로 모르는 갑·을이 우연히 같은 피해자를 살해하려 공격했다. 둘은 계획을 공유하지 않았다. 따라서 공동정범이 아니라 각자의 단독정범이 경합한 동시범이다. 누구의 행위로 사망했는지 알면 그 사람의 기수와 다른 사람의 미수를 각각 따진다. 원인 행위가 밝혀지지 않으면 제19조에 따라 각 행위를 미수로 다룬다. 해당 미수 처벌 규정도 필요하다. 제19조는 동시뿐 아니라 서로 다른 시점의 독립 행위 경합도 포함한다.</p>
+<p>상해에는 제263조의 특별 규정이 있다. 독립된 가해행위들이 경합하여 상해 결과가 생겼고 원인 행위를 가릴 수 없을 때 공동정범의 예에 의한다. 공동의 의사가 실제로 생겼다고 의제하는 설명이 아니라, 일정한 요건 아래 처벌을 특별히 정한 것이다. 아무 집단 사건에나 입증 부담을 없애는 조문이 아니다.</p>
+<p><strong>84도488의 이야기:</strong> 피해자는 여러 사람이 자신을 공격했고 누군가 병으로 코를 때렸다고 주장했다. 그러나 문제 된 공격을 피고인들 중 누가 했는지뿐 아니라 그 가해행위가 그들 가운데 한 사람의 행동인지도 명확하지 않았다. 법원은 가해행위를 한 것 자체가 분명하지 않은 사람을 제263조로 처벌할 수 없다고 했다. <strong>가해행위 참여는 입증 / 그중 결과 원인만 불명 → 특별 규정 검토</strong>다. 반대로 보면 현장에 있었다는 이유만으로 범행을 떠넘기는 문제가 생긴다.</p>
+<p>편면적 공동정범은 한 사람만 상대와 함께 한다고 생각하고 상대는 모르는 경우다. 을이 갑의 범행 계획을 알고 몰래 피해자를 유인하거나, 갑을 돕겠다고 독자적으로 공격한 교재 사례가 이에 해당한다. 상호 의사 연락이 없어 공동정범은 부정한다. 을이 자신의 실행을 지배했다면 단독정범·동시범, 남의 실행을 도왔다면 방조가 문제될 수 있다. <strong>공동정범 부정=아무 책임 없음</strong>은 아니다.</p>
+<p><strong>시험:</strong> 형법_079·020②. <strong>키워드:</strong> 독립 행위·원인 불명·상해 특례·편면. <strong>한 줄:</strong> 함께 일어난 행동과 함께 하기로 한 행동은 다르다.</p>
+<h2 id="criminal-11-04" data-concept-id="criminal-11-04">1-4. 중간에 들어온 사람과 공모에서 빠진 사람 ★★★★★</h2>
+<p><strong>교재 219-221·223쪽 / 문단의 역할:</strong> 책임이 시작되고 끝나는 시점을 제한한다.</p>
+<p>승계적 공동정범은 범행이 이미 진행된 뒤 공동 의사를 갖고 가담하는 경우다. 원칙적으로 가담 이후 함께 실행한 범위의 책임을 진다. 이미 끝난 과거 행위를 나중에 알았다는 것만으로 그 행위를 지배했다고 볼 수 없다. 교재는 개인책임 원리와 97도163의 포괄일죄 사례를 들어 설명한다. 계속 중인 범행·결합된 범죄에서 남아 있는 실행과 선행 상태를 이용하는 문제는 구체적으로 나누어야 한다.</p>
+<p><strong>2019도8357, 중도 가담한 배임:</strong> 여러 사람이 반복하여 회사에 손해를 입혔다. A1은 전체 기간의 처음부터가 아니라 뒤늦게 가담했는데 앞선 행위까지 합산되었다. 법원은 실제 가담한 이후의 범행만 공동정범 책임 범위로 보았다. <strong>과거 일을 알고 가입 → 과거의 모든 배임까지 소급 책임 아님</strong>이다. 먼저부터 가담한 사람과 시작 시점이 다르다는 것이지 이후 행위의 책임이 가벼워진다는 뜻은 아니다.</p>
+<p>공모 이탈도 마음속으로 ‘나는 빠졌다’라고 생각하는 것으로 충분하지 않다. 자신의 관여가 실행에 미친 영향을 제거했는지, 다른 사람에게 이탈 뜻을 알렸는지, 실행 착수 전후인지, 범행을 주도했는지 등을 검토한다. 실행 후에는 단순한 이탈 선언만으로 이미 생긴 공동책임을 없앨 수 없고 제10강의 중지미수에는 결과 방지까지 필요하다.</p>
+<p><strong>85도2371·85감도347:</strong> 살해 모의에는 가담했지만 다른 공모자들이 살인 실행에 착수하기 전에 실제로 공모관계에서 이탈했다고 인정된 사안이다. 판례는 이탈 뒤 다른 사람의 실행에 대한 공동정범 책임을 부정했다. 이 결론은 ‘말만 하면 언제든 빠짐’이 아니라 <strong>실제 이탈이 인정되었다는 전제</strong>가 붙는다.</p>
+<p><strong>2008도1274:</strong> 강도 모의를 주도한 사람이 다른 공모자들이 목표를 뒤쫓을 때 따라가지 않고 떨어져 앉아 있었다. 법원은 범행을 만류하는 등 이탈을 하지 않았고 공동 의사와 기능적 행위지배가 남아 있다고 보았다. <strong>현장과의 거리 → 이탈의 자동 증거 아님 / 앞선 주도와 영향의 지속 → 공동책임</strong>이다. 물리적으로 멀어지는 것과 범행 관계를 끊는 것을 구별한다.</p>
+<p><mark class="pink">형법_020③의 ‘모든 행위에 책임’은 지나친 일반화다. 다만 그 반대로 ‘범행 도중 나가면 이후 책임은 언제나 없다’고 외워서도 안 된다.</mark> 진정한 이탈인지와 착수 시점, 남은 영향력을 먼저 판단한다.</p>
+<p><strong>시험:</strong> 형법_020③④. <strong>키워드:</strong> 가담 이후·실제 이탈·영향력 제거·착수 전후. <strong>한 줄:</strong> 과거 책임을 소급해서 떠넘기지도, 이미 기여한 책임을 말 한마디로 지우지도 않는다.</p>
+<h2 id="criminal-11-05" data-concept-id="criminal-11-05">1-5. 과실범의 공동정범과 가습기살균제 판례 비교 ★★★★☆</h2>
+<p><strong>교재 221-222쪽·워크북 85쪽 / 문단의 역할:</strong> 범죄 결과를 원하지 않은 사람들도 공동정범이 될 수 있는지 묻는다.</p>
+<p>교재가 소개하는 부정설은 공동정범의 기능적 행위지배가 고의를 전제한다고 본다. 과실은 각자의 주의의무 위반과 인과관계로 책임져야 하고, 과실의 동시범으로 해결해야 한다는 입장이다. 원인 행위를 가릴 수 없어 제19조의 미수 문제로 넘어가면 과실범의 미수 처벌 규정이 없다는 난점도 있다. 이러한 처벌 공백을 메우고 싶은 마음만으로 공동정범을 인정할 수는 없다는 비판이다.</p>
+<p>반면 판례는 과실범의 공동정범을 인정한다. 94도660은 의사 연락 아래 과실행위를 함께 하여 범죄 결과를 낸 경우를 설명한다. 여기서 <strong>사람을 다치게 하려는 고의를 공유했다</strong>는 뜻이 아니라, 공동의 주의의무·그 위반에 대한 공동의 인식이 문제다. 단지 같은 직장 사람이거나 모두 부주의했다는 것만으로 충분하지 않다.</p>
+<p><strong>2017도12537, 교재의 PHMG 등 가습기살균제 사건:</strong> 개발·제조·판매에 관여한 사람들이 안전 확인에 관한 주의의무를 다하지 않았고, 여러 제품을 사용한 피해자들에게 사망·상해가 발생했다. 법원은 해당 제품과 관계자들 사이의 공동의 주의의무와 인식을 인정하여 과실 공동정범을 인정한 판단을 유지했다. <strong>각자의 과실＋공동의 인식＋해당 피해 결과와의 연결</strong>이 중요하다. 모든 판매업체를 자동으로 같은 공동정범으로 묶은 것이 아니다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=205774">대법원 2017도12537</a></p>
+<p><strong>후속 판례 보완 · 2024도1856:</strong> 다른 주원료인 CMIT/MIT 제품 관계자와 PHMG 등 제품 관계자 사이의 공동정범이 문제되었다. 대법원은 서로 협력·의견교환 없이 주요 요소가 다른 제품을 독자 개발한 사정 등을 들어 공동의 인식을 인정하기 어렵다고 보아 원심을 파기환송했다. 과실 공동정범 자체를 폐기한 것이 아니라 <strong>공동 인식 없이 책임을 무한정 넓힐 수 없다는 한계</strong>를 확인한 것이다. 교재의 2018년 사건과 제품·관계자·사실관계를 구별한다. <a href="https://scourt.go.kr/portal/news/NewsViewAction.work?gubun=4&searchOption=&searchWord=&seqnum=10248">대법원 2024도1856 판례속보</a></p>
+<p>판례 문장을 쉬운 순서로 바꾸면 <strong>과실범도 공동정범 가능 / 하지만 의사 연락 또는 주의의무 위반의 공동 인식 필요 / 정책상 필요만으로 이를 대신할 수 없음</strong>이다. 피해가 크다는 사실만으로 형사책임 요건을 생략하면 개인책임 원칙을 해친다.</p>
+<p><strong>시험:</strong> 과실 공동정범의 학설·판례 구별. <strong>키워드:</strong> 공동 주의의무·공동 인식·개별 인과관계. <strong>한 줄:</strong> 함께 부주의했다는 책임도 ‘함께’라는 연결을 증명해야 한다.</p>
+<h2 id="criminal-11-06" data-concept-id="criminal-11-06">1-6. 실행 분담·공모공동정범과 기능적 기여 ★★★★★</h2>
+<p><strong>교재 222-224쪽 / 문단의 역할:</strong> 손으로 구성요건을 직접 실행하지 않은 사람의 정범성을 판단한다.</p>
+<p>분담한 역할은 전체 범행 실현에 본질적인 기능이어야 한다. 교재의 61도374는 한 사람은 절취하고 다른 사람은 운반하는 공동 실행을 설명한다. 준비 단계에만 머문 행동과 달리, 준비 때의 기여라도 실행 단계까지 범행을 지배하는 영향이 이어지면 평가가 달라진다. 현장 출석 여부만으로 결정하지 않는다.</p>
+<p><strong>85도2411, 다른 방에서 감시한 사람:</strong> 공동 강도 뒤 공범들이 성폭력을 실행하는 동안 다른 가담자가 피해자의 자녀들을 감시했다. 법원은 그 감시가 공동 범행을 가능하게 하는 역할이고 공동가공의 의사가 있다고 보아 공동책임을 인정했다. 직접 성적 행위를 하지 않았다는 사정만으로 빠지지 않는다. 다만 모든 주변인이 같은 고의를 가졌다고 추정하는 뜻은 아니다.</p>
+<p><strong>2009도10139, 가짜 임대인 전화:</strong> A2는 위조한 임대차계약서를 담보처럼 내밀어 돈을 빌리려 했다. A1은 계획을 알면서 확인 전화가 오면 임대인인 척하기로 했고 실제 전화에 거짓 확인을 했다. 법원은 위조사문서 행사의 인식과 역할 분담, 기능적 행위지배를 인정했다. <strong>서류를 직접 건넨 사람만 실행자 아님 / 서류의 신뢰를 꾸미는 핵심 역할도 공동 실행</strong>이라는 뜻이다.</p>
+<p>공모공동정범 이론은 일부만 직접 실행한 경우 실행하지 않은 공모자에게도 정범 책임을 인정하는 논의다. 교재는 단순한 공모만으로 처벌을 넓히는 위험과 역사적 활용에 비판적이다. 이 비판과 오늘날 판례의 실제 요건은 구별해야 한다. <strong>2007도235는 지위·역할·범죄 경과의 장악을 종합해 본질적 기여와 기능적 행위지배가 있어야 한다고 밝힌다.</strong> 모의 자리에 앉아 있었다는 이유만으로 충분하지 않다. <a href="https://law.go.kr/LSW/precInfoP.do?precSeq=68454">대법원 2007도235</a></p>
+<p><strong>2017도14322, 국가정보원 사이버 활동 사건:</strong> 기관장의 지시와 직원들의 순차적 실행이 문제되었다. 교재는 지시 내용·조직 내 역할·실행과의 연결을 통해 기능적 행위지배와 공동정범이 인정된 사례로 제시한다. 기관장이라는 직함만으로 결과를 떠안긴다는 뜻이 아니다. 누가 어떤 방식으로 공동 실행을 지배했는지가 입증되어야 한다.</p>
+<p><mark class="pink">형법_021②와 형법_080의 ‘공동실행 없음’은 직접 구성요건 행위를 손수 분담하지 않았다는 맥락으로 읽는다. 기능적 기여조차 없어도 공동정범이라는 뜻은 아니다.</mark> ‘직접 실행을 안 함’과 ‘범행에 대한 본질적 기여가 없음’을 같은 말로 만들면 문제끼리 모순처럼 보인다.</p>
+<p><strong>시험:</strong> 형법_021①②·080. <strong>키워드:</strong> 직접 실행 불필수·본질적 기여 필수·단순 공모 부족. <strong>한 줄:</strong> 현장에 없었다고 끝도 아니고, 모의에 있었다고 끝도 아니다.</p>
+<h2 id="criminal-11-07" data-concept-id="criminal-11-07">1-7. 공동 의사의 초과와 결과적가중범 ★★★★★</h2>
+<p><strong>교재 224-226쪽 / 문단의 역할:</strong> 공동책임의 범위를 무제한으로 확대하지 않는다.</p>
+<p>공동정범은 각자를 그 죄의 정범으로 처벌하지만 구체적인 형까지 똑같을 필요는 없다. 가중·감경·양형 사정은 각자에게 적용한다. 또한 공동 의사의 범위를 벗어난 다른 가담자의 행동은 자동으로 나머지 사람에게 귀속되지 않는다.</p>
+<p>교재의 강도 공동계획 중 한 사람이 상해를 가한 예에서는, 다른 사람에게 상해의 고의까지 있었는지와 예견 가능한 중한 결과에 대한 결과적가중범 책임을 구분한다. 고의의 공동이 있으면 그 고의범의 공동정범을 검토하고, 고의는 없지만 중한 결과에 대한 예견가능성 등이 있으면 결과적가중범을 검토한다. 그냥 “비슷한 범행이니 다 공동정범”이라고 할 수 없다.</p>
+<p><strong>83도3162와 91도2156을 함께 읽기:</strong> 교재는 전자의 예견가능성 표현을 비판한 뒤 후자의 구분을 제시한다. 91도2156에서 함께 강도한 사람 중 한 사람이 피해자를 살해했다. 대법원은 강도살인의 공동정범에는 살인의 고의도 공동되어야 한다고 강조했다. 살인의 공동 고의가 없는 다른 사람은 사망 결과를 예견할 수 있었는지 등에 따라 강도치사 책임이 문제된다. 고의와 예견가능성을 구별하지 않은 원심은 파기환송되었다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=601683">대법원 91도2156</a></p>
+<p>문장을 풀면 <strong>살인을 함께 의도·용인 → 강도살인 공동정범 검토 / 살인 고의 없음＋예견 가능한 사망 → 강도치사 검토 / 사망 없이 상해만 → 상해·치상 관련 요건 / 상해도 없음 → 강도 등 실제 실현 범위</strong>다. 각 단계마다 해당 고의·귀속 요건이 필요하다. ‘사망 가능성을 생각할 수 있었음’과 ‘사망을 용인함’은 제4·5강에서 구별했다.</p>
+<p><strong>2000도745, 공동 상해 뒤 사망:</strong> 함께 신체 침해를 하던 중 한 사람이 중한 공격을 가해 피해자가 사망했다. 판례는 기본 상해 행위의 공동 의사와 사망 결과의 예견가능성을 기준으로 상해치사 공동정범을 설명한다. 죽이려는 공동 의사는 필요하지 않지만 사망을 전혀 예견할 수 없었던 사람에게까지 무조건 책임지우지 않는다. 교재 저자는 중한 결과에 대한 각자의 인과관계·과실을 강조하는 별도 설명을 제시한다.</p>
+<p><mark class="pink">형법_021③은 양적 초과에 관한 교재의 압축 표현이다. 예견가능성만으로 고의범인 살인까지 모두 공동정범이 된다는 일반 법칙으로 읽으면 틀린다.</mark> 원본 정답 ②는 유지하고 ③의 조건을 해설에 보완했다.</p>
+<p><strong>시험:</strong> 형법_021③④. <strong>키워드:</strong> 공동 고의·초과·예견가능성·결과적가중범. <strong>한 줄:</strong> 함께 시작한 죄와 동료가 넘어서 버린 결과를 고의·과실별로 다시 나눈다.</p>
+<h2 id="criminal-11-08" data-concept-id="criminal-11-08">1-8. 합동범과 현장 밖 공동정범 ★★★★★</h2>
+<p><strong>교재 226-228쪽·워크북 86쪽 / 문단의 역할:</strong> ‘공동’보다 좁은 ‘합동’의 뜻과 외부 가담자를 설명한다.</p>
+<p>합동범은 둘 이상이 합동한다는 특별한 구성요건이 붙은 범죄다. 제331조 제2항의 합동절도가 대표적이다. 교재의 다수설·판례인 현장설은 합동에 시간적·장소적 협동을 요구한다. 반드시 같은 물건에 동시에 손을 대야 한다는 뜻은 아니고 서로 가까운 곳에서 역할을 협력할 수 있다.</p>
+<p><strong>96도313, 동생 집의 수표:</strong> 두 사람이 수표를 훔치기로 모의하고 함께 집에 갔다. 한 사람은 다른 방에 대기하고 다른 사람이 수표를 가져왔으며 함께 나와 나눴다. 법원은 집 안 가까운 곳에서의 대기와 공동 실행을 시간적·장소적 협동으로 보았다. <strong>방이 다름 → 자동 비합동 아님</strong>이다. 대기가 실제 범행 역할이었는지를 확인해야 한다.</p>
+<p>옛 입장은 현장 밖 사람에게 합동범의 공동정범을 인정하지 않고 단순 절도의 공동정범 등으로 보았다. 그러나 현장에 둘 이상이 합동 실행하고, 밖의 사람이 그 전체를 기능적으로 지배한 경우까지 더 가벼운 죄로만 취급하는 것은 부당하다는 비판이 있었다. 98도321 전원합의체는 합동범에 대한 공동정범을 인정하는 방향으로 판례를 바꾸었다.</p>
+<p><strong>98도321, 주점 지배인과 종업원:</strong> 지배인이 손님의 신용카드를 강취해 종업원들과 돈을 나누기로 했다. 지배인은 주점에서 손님을 감시하고 종업원 둘은 현금을 인출했다. 법원은 현장에 둘 이상이 시간적·장소적으로 협동하여 실행하고 지배인이 그 합동절도를 자기 의사의 수단으로 기능적으로 지배한 경우 공동정범이 가능하다고 보았다. <strong>세 사람 이상 공모＋현장 둘 이상 합동＋밖의 사람 정범성</strong>을 나눠 기억한다. 현장 인원 요건을 공모자 전체 숫자로 대체할 수 없다.</p>
+<p>합동범의 교사·방조도 가능하다. 교재의 장물 매수자가 절도범들에게 기존 거래 관계 속에서 계속 절도하도록 격려한 91도542는 교사 부분에서 다시 본다. 현장에 있다고 모두 정범이 되는 것도 아니고, 밖에 있다고 모두 방조가 되는 것도 아니다.</p>
+<p><strong>시험:</strong> 형법_081. <strong>키워드:</strong> 시간·장소 협동·현장 둘·외부 기능적 지배. <strong>한 줄:</strong> 합동 실행은 현장에서 성립하지만 그 합동 범행을 지배한 외부인도 공동정범이 될 수 있다.</p>
+<h1>2. 범행할 결심을 만들어 낸 사람 · 교사범</h1>
+<h2 id="criminal-11-09" data-concept-id="criminal-11-09">2-1. 제31조와 교사행위·이중의 고의 ★★★★★</h2>
+<p><strong>교재 228-230쪽·워크북 86쪽 / 문단의 역할:</strong> 직접 실행 대신 타인의 범죄 결의를 일으킨 책임을 설명한다.</p>
+<p>교사범은 범죄 결의가 없던 사람에게 일정한 범행을 결심하게 하여 실행하게 한 좁은 공범이다. 직접 실행을 분담하는 공동정범, 이미 결의한 사람을 돕는 종범, 의사지배로 타인을 이용하는 간접정범과 구별한다. 교사행위와 상대방의 결의 사이의 인과관계가 있어야 한다.</p>
+<p>말·돈·설득 등 수단에 정해진 형식은 없지만 막연히 나쁜 일을 하라고 하는 정도로는 부족하다. 특정한 범죄를 실행할 결의를 일으킬 만큼 내용이 정해져야 한다. 일시·장소·방법의 모든 세부를 정할 필요는 없다. 부작위나 과실에 의한 교사는 인정하지 않는다는 것이 교재의 설명이다. 강요·기망이 상대의 의사를 지배하는 정도라면 간접정범이 문제될 수 있다.</p>
+<p><strong>91도542, 장물 매수자의 격려:</strong> 평소 절도범들의 장물을 사 주던 사람이 그중 한 명이 구속되자 나머지에게 돈이 필요할 테니 계속 일하라는 취지로 말하고 범행에 쓰일 물건도 제공했다. 법원은 거래 관계와 발언의 맥락에서 종전 범위의 절도를 계속하면 물건을 사 주겠다는 뜻으로 보아 교사를 인정했다. <strong>겉말만 읽으면 막연한 격려 / 실제 관계 속 의미는 일정한 절도 결의 유발</strong>이다. 판례는 모든 생활상 격려를 범죄로 보는 것이 아니다.</p>
+<p>절도를 결심한 사람에게 방화를 결심하게 한 교재 예에서는 질적으로 다른 방화 고의를 새로 유발하므로 그 방화에 대한 교사가 가능하다. 여러 사람이 함께 결의를 유발하는 공동 교사도 가능하다. 반대로 이미 동일한 범행을 확정적으로 결심한 사람에게 같은 말을 되풀이하면 새 결의를 낳은 교사가 아니라 정신적 방조 등이 문제된다.</p>
+<p><mark class="yellow">교사의 고의는 두 겹이다. 타인에게 일정한 범죄 결의를 생기게 한다는 인식과 그 범죄를 완성하게 한다는 고의가 필요하다.</mark> 특정 상대방·범행에 대한 인식이 필요하되 세부 결과를 모두 정확히 예견해야 한다는 뜻은 아니다. 미필적 고의의 가능성도 제4강과 연결한다.</p>
+<p><strong>시험:</strong> 교사와 방조·간접정범 구별. <strong>키워드:</strong> 결의 유발·인과관계·특정 범죄·이중 고의. <strong>한 줄:</strong> 시킨 말이 있었다는 것보다 그 말로 어떤 범행 결심이 새로 생겼는지를 본다.</p>
+<h2 id="criminal-11-10" data-concept-id="criminal-11-10">2-2. 미수에 그치게 할 의사와 함정수사 ★★★★☆</h2>
+<p><strong>교재 230-231쪽·워크북 86·90쪽 / 문단의 역할:</strong> 교사자의 완성 고의와 실행자의 실제 실패를 구별한다.</p>
+<p>처음부터 범죄 완성은 막고 상대가 미수에 그치게 할 의사만 있었다면 그 범죄의 기수 고의가 없어 교사범 성립이 부정된다는 것이 교재와 형법_082의 설명이다. 이는 <strong>완성을 의도했지만 실행자가 실패한 경우</strong>와 다르다. 후자는 해당 미수 처벌 규정이 있으면 미수범에 대한 교사로 처벌될 수 있다. 둘 다 말로는 ‘미수의 교사’라고 줄일 수 있어 실제 고의를 풀어 읽어야 한다.</p>
+<p>교재는 함정수사를 관련 문제로 소개한다. 이미 범행 의사가 있는 사람에게 수사상 기회를 제공한 경우와, 원래 의사가 없는 사람에게 수사기관이 범의를 유발한 경우를 구분한다. 판례는 전자를 수사의 상당성 범위에서 허용하고 후자를 위법한 수사로 본다. 그런데 <strong>교사자의 고의가 있는지</strong>, <strong>수사 방법이 적법한지</strong>, <strong>피고인에 대한 소추의 효력이 어떠한지</strong>는 서로 다른 질문이다.</p>
+<p><mark class="pink">형법_082③의 ‘처벌되지 않는다’는 질문이 전제한 완성 고의 없는 교사의 형법상 결론으로 제한해 읽는다. 모든 함정수사가 적법하거나 수사기관이 어떤 위법행위를 해도 책임 없다는 선언이 아니다.</mark> 실제로 완성 가능성을 용인했는지, 이미 다른 범죄가 성립했는지도 별도다.</p>
+<p><strong>시험:</strong> 형법_082. <strong>키워드:</strong> 처음부터 미수만 의도 / 기수 의도 후 실패 / 수사 적법성 별개. <strong>한 줄:</strong> 실패하길 바라며 유인한 것과 성공시키려다 실패한 것은 고의부터 다르다.</p>
+<h2 id="criminal-11-11" data-concept-id="criminal-11-11">2-3. 피교사자의 실행과 실패한·효과 없는 교사 ★★★★★</h2>
+<p><strong>교재 231-232·236쪽·워크북 87-88쪽 / 문단의 역할:</strong> 실행이 없을 때의 예외 처벌 구조를 정한다.</p>
+<p>정상적인 교사범 성립에는 교사로 인한 결의와 적어도 실행의 착수가 필요하다. 피교사자가 기수이면 그 기수의 교사, 미수이면 처벌 가능한 그 미수의 교사가 문제된다. 제한적 종속형식에 따라 피교사자의 행위는 구성요건에 해당하고 위법해야 하지만 반드시 그 사람에게 책임이 있어야 하는 것은 아니다.</p>
+<p><strong>실패한 교사:</strong> 상대가 범죄 실행을 승낙하지 않았다. 제31조 제3항에 따라 교사자만 예비·음모에 준하여 처벌한다. 거절한 피교사자는 그 거절만으로 처벌할 수 없다. <strong>효과 없는 교사:</strong> 상대가 승낙했지만 실행에는 착수하지 않았다. 제31조 제2항에 따라 교사자·피교사자 모두 예비·음모에 준하여 처벌한다. 두 유형을 기도된 교사라고 묶어 부른다.</p>
+<p>중요한 전제는 <strong>해당 범죄의 예비·음모를 처벌하는 규정</strong>이다. 이 규정 없이 모든 범죄 교사의 실패를 똑같이 처벌한다고 읽지 않는다. 교재가 상해의 예비·음모는 처벌 규정이 없고 강도는 있다고 비교하는 이유도 여기에 있다. 제31조 제2·3항은 실행 없는 경우를 본범의 미수나 정범으로 바꾸는 조문이 아니라 예비·음모에 준하는 특칙이다.</p>
+<p>이미 결의한 사람에게 다시 권유한 경우도 교사 인과관계가 없다는 의미에서 실패라고 설명될 수 있지만, 상대가 거절한 경우와 사실관계는 다르다. 기존 결의를 강화한 정신적 방조와 실제 실행의 연결을 별도로 검토한다. 이름이 비슷하다고 처벌 구조를 한꺼번에 묶지 않는다.</p>
+<p><strong>시험:</strong> 형법_083. <strong>키워드:</strong> 거절=교사자 / 승낙 후 미착수=양쪽 / 예비·음모 규정. <strong>한 줄:</strong> 결의와 실행을 한 칸씩 확인하면 누구를 어떤 단계로 처벌할지 보인다.</p>
+<h2 id="criminal-11-12" data-concept-id="criminal-11-12">2-4. 시킨 것보다 적게·많이·다르게 실행한 경우 ★★★★★</h2>
+<p><strong>교재 232-234쪽·워크북 87쪽 / 문단의 역할:</strong> 교사의 인식과 실제 실행이 어긋났을 때 책임을 나눈다.</p>
+<p>적게 실행한 경우에는 양쪽이 겹치는 실제 실행 범위에서 교사 책임을 진다. 상해를 시켰지만 폭행만 했다면 폭행 교사가 기본이다. 공범은 정범의 실행에 종속하기 때문이다. 강도를 시켰지만 절도만 했다면 절도 교사와 별도로 강도 예비·음모의 요건이 남을 수 있다. 교재는 이 경우 실행된 죄와 예비·음모의 상상적 경합을 설명한다. 처음부터 강도를 승낙하지 않은 경우와 승낙 후 실행하지 않은 경우도 제31조 제2·3항에 따라 나눈다.</p>
+<p>양적으로 초과한 경우도 교사자의 고의 범위를 넘는 부분은 자동 귀속되지 않는다. 절도를 시켰는데 상대가 강도를 했다면 교사자에게 강도의 고의가 없는 한 절도 교사의 범위를 기본으로 본다. 그러나 더 무거운 결과에 대한 과실·예견가능성이 있으면 결과적가중범의 교사가 문제될 수 있다. ‘지시보다 심했다’는 이유로 모든 중한 결과 책임을 면하는 것은 아니다.</p>
+<p><strong>2002도4089, 중상해를 시킨 뒤 사망:</strong> 교사자는 피해자에게 심각한 상해를 입히라는 취지로 지시하고 비용을 제공했다. 실행자들의 공격으로 피해자가 사망했다. 법원은 교사자에게 사망 결과의 예견가능성이 있다고 보아 상해치사 교사를 인정했다. <strong>살인을 직접 시켰는가만 묻지 않음 / 심각한 상해를 시킨 사람이 사망을 예견할 수 있었는지도 판단</strong>한다. 실제 공격 방법을 재현할 필요 없이 고의와 중한 결과의 관계를 공부하면 된다.</p>
+<p>질적으로 전혀 다른 범죄이면 그 실행의 교사 책임은 없다. 상해를 시켰는데 상대가 별개의 절도를 했다면 그 절도를 시킨 인과관계·고의가 없기 때문이다. 다만 교사한 원래 범죄가 예비·음모 처벌 대상이면 그 규정을 따로 살핀다. 교재의 강도를 시켰는데 성폭력을 실행한 예에서도, 지시한 강도에 관한 승낙·준비 여부에 따라 예비·음모 책임을 검토하되 다른 실행을 자동으로 교사했다고 보지 않는다.</p>
+<p>피교사자를 책임능력자로 알았는데 실제로는 책임무능력자였거나 반대인 경우, 제한적 종속형식은 책임능력을 교사의 고의에 필수인 요소로 보지 않는다. 그러므로 이 착오만으로 교사가 자동 부정되지 않는다. 다만 실제 의사지배로 이용했는지 등은 간접정범 논점으로 따로 확인한다.</p>
+<p><strong>시험:</strong> 실제 실행 범위＋교사 고의＋중한 결과 예견가능성. <strong>키워드:</strong> 적게·초과·질적 변경·능력 착오. <strong>한 줄:</strong> 시킨 범위와 실제 실행의 겹치는 부분부터 찾고 더 무거운 결과는 따로 심사한다.</p>
+<h2 id="criminal-11-13" data-concept-id="criminal-11-13">2-5. 교사범의 형·신분·연쇄 교사 ★★★★☆</h2>
+<p><strong>교재 234-236쪽·워크북 88쪽 / 문단의 역할:</strong> 처벌의 기준과 사람을 거친 교사를 마무리한다.</p>
+<p>제31조 제1항의 정범과 동일한 형은 같은 법정형을 기준으로 한다는 의미다. 실제 선고형이 반드시 같아야 한다는 뜻은 아니다. 각자의 동기·역할·책임 등 양형 사정이 달라질 수 있고, 정범 개인에게 책임·소추 조건의 문제가 있어 실제 처벌되지 않는 경우도 있다.</p>
+<p>자기의 지휘·감독을 받는 사람을 교사하면 제34조 제2항의 특칙이 문제된다. 정범에 정한 형의 장기 또는 다액의 2분의 1까지 가중하는 구조다. 직장에서 직급이 높다는 사실만으로 모든 행동에 이 규정을 적용하는 것이 아니라 그 지휘·감독 관계와 교사 요건이 필요하다.</p>
+<p>신분이 없어도 신분범의 교사범이 될 수 있다. 교재는 공무원의 배우자가 공무원에게 뇌물 수수를 교사한 예를 든다. 부진정신분범에서는 가중되는 신분을 개인별로 본다. 을에게 을의 아버지를 살해하도록 시킨 갑은 일반 살인 교사, 실행자 을은 존속살해가 문제된다. 반대로 갑이 을에게 갑의 아버지를 살해하게 했다면 갑의 존속관계에 따른 가중과 을의 일반 살인 책임을 구별한다. 제33조의 자세한 쟁점은 제12강에서 설명한다.</p>
+<p>교사의 교사도 가능하다. A1이 A2에게 범행을 시켰는데 A2가 다시 A3를 시켜 실행하게 한 연쇄 구조, 또는 처음부터 A2를 통해 A3에게 시키도록 한 구조가 간접교사다. 이것은 의사지배에 의한 간접정범과 다른 말이다. 각 연결의 고의·결의 유발·인과관계를 살핀다.</p>
+<p><strong>66도1586, 허위 진단서의 연쇄 교사:</strong> A1은 의사에게 반감을 가져 A2에게 허위 진단서를 작성하게 만들도록 시켰다. A2가 의사에게 허위 작성의 결의를 일으켜 실제 작성되었다. A1은 자신이 의사도 아니고 의사를 직접 만나지도 않았다고 다퉜다. 법원은 신분 없는 사람도 제33조에 따라 교사할 수 있고, 타인을 거친 교사도 가능하다고 보았다. <strong>직접 만남 불필수 / 신분 없음만으로 면책 불가 / 교사 연결의 성립 필요</strong>다. 중간 사람을 끼웠다는 이유로 책임을 없애면 교사 규정의 취지가 무너진다.</p>
+<p><strong>시험:</strong> 법정형과 선고형, 간접교사와 간접정범. <strong>키워드:</strong> 동일 법정형·감독관계·신분 개별·연쇄. <strong>한 줄:</strong> 직접 만나거나 같은 신분일 필요는 없지만 범행을 일으킨 연결은 입증되어야 한다.</p>
+<h1>3. 시험으로 연결하기</h1>
+<h2>먼저 풀 TOP5</h2>
+<ol>
+<li><strong>형법_079:</strong> 공동 의사 없는 독립 행위와 동시범.</li>
+<li><strong>형법_020:</strong> 가담·이탈의 시점과 책임의 범위.</li>
+<li><strong>형법_021:</strong> 본질적 기여와 고의·결과적가중범의 구분.</li>
+<li><strong>형법_081:</strong> 합동 실행과 현장 밖 기능적 지배.</li>
+<li><strong>형법_083:</strong> 실패한 교사의 예비·음모 특칙.</li>
+</ol>
+<p>7문항 중 공동정범 5개, 교사범 2개다. 빈출은 제공 문제 안의 반복 주제라는 의미이며 실제 연도별 빈도나 오답률 자료는 없다. 특히 형법_021의 압축된 표현은 원본 정답과 현대 판례의 정확한 요건을 나누어 설명했다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>문제 1.</strong> 갑은 전시물을 훔치고 을은 공동계획에 따라 보안 담당자의 주의를 돌리는 핵심 역할을 했다. 을이 전시물에 손을 대지 않았으므로 언제나 종범인가?</p>
+<p><strong>답·의도:</strong> 아니다. 공동 의사와 본질적 역할, 기능적 행위지배가 있으면 공동정범이 가능하다. 직접 취거 여부만으로 분류하지 않는다.</p>
+<p><strong>문제 2.</strong> 회사 돈을 반복적으로 빼돌리는 범행에 9월부터 가담한 직원이 7월의 행위도 알고 있었다. 알고 합류했으므로 7월 행위까지 모두 공동정범인가?</p>
+<p><strong>답·의도:</strong> 과거 사실을 알았다는 사정만으로는 아니다. 원칙적으로 가담 이후 범행이 책임 범위다. 과거 행위에 실제로 어떤 관여가 있었는지와 가담 시점을 확인한다.</p>
+<p><strong>문제 3.</strong> 공동 절도를 계획한 갑이 현장으로 가다가 마음이 바뀌어 혼자 돌아갔다. 앞서 제공한 핵심 지원은 그대로 쓰였고 동료에게 중단도 알리지 않았다. 돌아간 사실만으로 책임을 벗어나는가?</p>
+<p><strong>답·의도:</strong> 아니다. 실제 공모관계 이탈, 실행 착수 시점과 남아 있는 영향력을 심사한다. 물리적 부재와 법적 이탈을 구별한다.</p>
+<p><strong>문제 4.</strong> 상대방이 범행을 이미 확정적으로 결심한 뒤 갑이 같은 범행을 다시 권해 마음을 더 굳게 했다. 그 말 때문에 새 범죄 결의가 생긴 교사범인가?</p>
+<p><strong>답·의도:</strong> 기존 결의를 새로 유발한 것은 아니므로 그 이유만으로 교사범이 되지 않는다. 실행을 촉진한 정신적 방조와 그 고의·인과관계는 별도로 검토한다.</p>
+<p><strong>문제 5.</strong> 갑이 예비·음모 처벌 규정이 없는 범죄를 을에게 시켰지만 을이 거절했다. 제31조 제3항만으로 해당 본범의 미수와 똑같이 처벌할 수 있는가?</p>
+<p><strong>답·의도:</strong> 없다. 조문은 예비·음모에 준하는 특칙이고 해당 예비·음모 처벌 규정이 전제된다. 실행이 없는데 본범의 미수나 정범으로 곧바로 바꾸어 처벌하지 않는다.</p>
+<h1>용어 사전</h1>
+<h3>공동정범 共同正犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 同(한가지 동), 正(바를 정), 犯(범할 범). <strong>③ 합친 뜻:</strong> 범행을 함께 실현하는 중심 행위자. <strong>④ 이름의 이유:</strong> 각자의 행동이 합쳐져 전체 범죄를 이루기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동가공의 의사와 공동 실행으로 구성요건을 함께 실현하는 참여자. <strong>⑥ 쉬운 말:</strong> 일을 나누어 했어도 함께 자기 범죄를 한 사람들. <strong>⑦ 사례:</strong> 한 명이 위협하고 다른 한 명이 재물을 가져간 공동 강도.</p>
+<p><strong>⑧ 시험:</strong> 제30조, 일부 실행·전체 책임. <strong>⑨ 비교·기억법:</strong> 같은 현장에 있었거나 아는 사이인 것만으로 성립하지 않음.</p>
+<h3>공동가공 共同加功</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 同(한가지 동), 加(더할 가), 功(공 공): 힘을 보탬. <strong>③ 합친 뜻:</strong> 함께 힘을 더해 관여함. <strong>④ 이름의 이유:</strong> 범죄를 남의 일이 아니라 함께 실현할 일로 받아들이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 서로의 행동을 이용해 특정 범행을 공동으로 실행하려는 관여. <strong>⑥ 쉬운 말:</strong> 서로 맡은 일을 합쳐 범행하자는 것. <strong>⑦ 사례:</strong> 공동계획 아래 역할을 분담.</p>
+<p><strong>⑧ 시험:</strong> 의사와 실행을 모두 확인. <strong>⑨ 비교·기억법:</strong> 범행을 아는 것·묵인하는 것과 자동으로 같지 않음.</p>
+<h3>동시범 同時犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 同(같을 동), 時(때 시), 犯(범할 범). <strong>③ 합친 뜻:</strong> 독립한 범행들이 경합한 유형. <strong>④ 이름의 이유:</strong> 겉으로 함께 일어나도 공동 실행 관계가 아니기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동 의사 없이 둘 이상의 독립 행위가 경합하는 경우. <strong>⑥ 쉬운 말:</strong> 서로 모르게 각자 같은 피해자에게 범행했다. <strong>⑦ 사례:</strong> 독립적인 공격 중 어느 것이 사망 원인인지 문제.</p>
+<p><strong>⑧ 시험:</strong> 제19조 원인 불명 미수, 제263조 상해 특례. <strong>⑨ 비교·기억법:</strong> 제19조는 같은 때뿐 아니라 다른 때의 경합도 포함.</p>
+<h3>편면적 片面的</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 片(조각 편), 面(낯 면), 的(과녁 적). <strong>③ 합친 뜻:</strong> 한쪽 면에만 있는 성질. <strong>④ 이름의 이유:</strong> 의사가 쌍방으로 연결되지 않았기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 한 사람만 상대와 함께한다는 뜻을 갖고 상대방은 이를 모르는 관여. <strong>⑥ 쉬운 말:</strong> 나는 몰래 돕지만 상대는 내가 돕는 줄 모른다. <strong>⑦ 사례:</strong> 상대의 범행을 알고 몰래 피해자를 유인.</p>
+<p><strong>⑧ 시험:</strong> 편면적 공동정범은 부정, 방조 등 별도. <strong>⑨ 비교·기억법:</strong> 묵시적이더라도 상호 의사 연락이 있는 경우와 다름.</p>
+<h3>승계적 공동정범 承繼的共同正犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 承(이을 승), 繼(이을 계), 的(과녁 적), 共(함께 공), 同(한가지 동), 正(바를 정), 犯(범할 범). <strong>③ 합친 뜻:</strong> 진행 중 범행에 뒤이어 가담한 정범. <strong>④ 이름의 이유:</strong> 앞서 시작된 실행에 중간부터 이어 붙기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 범행 도중 공동 의사를 갖고 남은 실행을 함께하는 경우. <strong>⑥ 쉬운 말:</strong> 이미 진행하던 범행에 뒤늦게 합류했다. <strong>⑦ 사례:</strong> 반복 배임에 특정 시점부터 관여.</p>
+<p><strong>⑧ 시험:</strong> 원칙적으로 가담 이후 책임. <strong>⑨ 비교·기억법:</strong> 과거 일을 알았다는 사후 인식만으로 과거 행위를 지배하지 않음.</p>
+<h3>공모관계 이탈 共謀關係離脫</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 謀(꾀할 모), 關(관계할 관), 係(맬 계), 離(떠날 리), 脫(벗을 탈). <strong>③ 합친 뜻:</strong> 함께 범행하려던 관계에서 벗어남. <strong>④ 이름의 이유:</strong> 장소를 떠나는 것보다 범행에 대한 기여를 없애는 것이 중요하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공모에 의한 실행의 연결과 자신의 영향력을 실제로 끊는 문제. <strong>⑥ 쉬운 말:</strong> 나는 빠진다고 생각한 것 이상으로 범행과의 연결을 끊는다. <strong>⑦ 사례:</strong> 모의를 주도한 사람이 만류 없이 떨어져 대기하면 이탈 단정 불가.</p>
+<p><strong>⑧ 시험:</strong> 착수 전후·잔존 영향·적극적 방지. <strong>⑨ 비교·기억법:</strong> 중지미수는 자의와 결과 방지 등 별도 요건.</p>
+<h3>기능적 행위지배 機能的行爲支配</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 機(틀 기), 能(능할 능), 的(과녁 적), 行(다닐 행), 爲(할 위), 支(지탱할 지), 配(나눌 배). <strong>③ 합친 뜻:</strong> 중요한 역할을 통해 실행을 장악함. <strong>④ 이름의 이유:</strong> 손수 전체 실행을 하지 않아도 핵심 역할로 전체를 움직일 수 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동계획의 본질적 기능을 분담하여 범행을 함께 지배하는 것. <strong>⑥ 쉬운 말:</strong> 각자 중요한 몫을 맡아 범죄 진행을 함께 좌우한다. <strong>⑦ 사례:</strong> 가짜 임대인으로 확인 전화를 받아 위조서류 행사에 핵심 기여.</p>
+<p><strong>⑧ 시험:</strong> 공동정범의 객관적 판단. <strong>⑨ 비교·기억법:</strong> 작은 도움을 준 모든 사람이 공동정범은 아님.</p>
+<h3>공모공동정범 共謀共同正犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 謀(꾀할 모), 共(함께 공), 同(한가지 동), 正(바를 정), 犯(범할 범). <strong>③ 합친 뜻:</strong> 공모를 바탕으로 인정하는 공동정범. <strong>④ 이름의 이유:</strong> 배후의 핵심 관여자를 직접 손대지 않았다는 이유만으로 제외하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 직접 구성요건 행위를 분담하지 않아도 본질적 기여와 기능적 지배가 인정되는 공동정범. <strong>⑥ 쉬운 말:</strong> 직접 실행하지 않아도 범행의 중심 역할을 했다. <strong>⑦ 사례:</strong> 계획을 수립하고 실행을 실질적으로 지휘.</p>
+<p><strong>⑧ 시험:</strong> 단순 공모만으로는 부족. <strong>⑨ 비교·기억법:</strong> 과거 이론에 대한 비판과 현재 판례의 기능적 지배 요건을 구별.</p>
+<h3>초과행위 超過行爲</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 超(뛰어넘을 초), 過(지날 과), 行(다닐 행), 爲(할 위). <strong>③ 합친 뜻:</strong> 정해진 범위를 넘어선 행동. <strong>④ 이름의 이유:</strong> 다른 참여자가 의도한 범위보다 더 나아갔기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동 또는 교사의 고의 범위를 넘어 실행자가 한 행동. <strong>⑥ 쉬운 말:</strong> 같이 정한 것보다 동료가 심하거나 다른 일을 했다. <strong>⑦ 사례:</strong> 상해를 시켰는데 실행자가 살인.</p>
+<p><strong>⑧ 시험:</strong> 공동 고의와 결과적가중범의 예견가능성 분리. <strong>⑨ 비교·기억법:</strong> 예견할 수 있었다는 말만으로 살인 고의가 생기지 않음.</p>
+<h3>합동범 合同犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 合(합할 합), 同(같을 동), 犯(범할 범). <strong>③ 합친 뜻:</strong> 현장에서 협동하여 범하는 유형. <strong>④ 이름의 이유:</strong> 밀접한 협력이 갖는 위험 때문에 특별히 구성하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 시간적·장소적 협동을 특별 요건으로 하는 범죄. <strong>⑥ 쉬운 말:</strong> 가까운 때와 장소에서 역할을 맞춰 범행한다. <strong>⑦ 사례:</strong> 한 집에서 다른 방에 대기하며 함께 절취.</p>
+<p><strong>⑧ 시험:</strong> 현장 둘 이상, 외부의 공동정범은 기능적 지배 확인. <strong>⑨ 비교·기억법:</strong> 공동정범은 항상 같은 현장에 있을 필요가 없음.</p>
+<h3>교사범 敎唆犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 敎(가르칠 교), 唆(부추길 사), 犯(범할 범). <strong>③ 합친 뜻:</strong> 범행하도록 부추긴 참여자. <strong>④ 이름의 이유:</strong> 실행은 남이 하지만 그 결심을 일으켰기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인에게 특정 범죄의 결의를 일으켜 실행하게 한 좁은 공범. <strong>⑥ 쉬운 말:</strong> 그 범행을 하기로 결심하게 만든 사람. <strong>⑦ 사례:</strong> 거래 관계 속에서 일정한 절도를 계속하도록 결의 유발.</p>
+<p><strong>⑧ 시험:</strong> 교사와 결의의 인과관계, 실행 착수. <strong>⑨ 비교·기억법:</strong> 이미 결심한 사람을 도우면 방조가 문제.</p>
+<h3>이중의 고의 二重故意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 二(두 이), 重(겹칠 중), 故(까닭 고), 意(뜻 의). <strong>③ 합친 뜻:</strong> 두 대상에 대한 고의. <strong>④ 이름의 이유:</strong> 자신의 관여와 타인의 범죄를 모두 인식해야 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교사로 결의를 유발한다는 고의와 정범의 범죄 완성에 대한 고의. <strong>⑥ 쉬운 말:</strong> 시키는 줄도 알고 어떤 범죄를 완성하게 할지도 안다. <strong>⑦ 사례:</strong> 특정 타인에게 범행 결의를 일으켜 기수에 이르게 함.</p>
+<p><strong>⑧ 시험:</strong> 처음부터 미수만 의도한 경우와 실제 실패 구별. <strong>⑨ 비교·기억법:</strong> 동일한 세부 사실을 모두 예견해야 한다는 뜻은 아님.</p>
+<h3>실패한 교사 失敗敎唆</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 失(잃을 실), 敗(패할 패), 敎(가르칠 교), 唆(부추길 사). <strong>③ 합친 뜻:</strong> 결의 유발에 실패한 교사. <strong>④ 이름의 이유:</strong> 상대가 하겠다는 결의에 이르지 않았기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 피교사자가 범죄 실행을 승낙하지 않은 제31조 제3항의 유형. <strong>⑥ 쉬운 말:</strong> 시켰지만 상대가 거절했다. <strong>⑦ 사례:</strong> 범행 제안을 받고 거절.</p>
+<p><strong>⑧ 시험:</strong> 교사자만 예비·음모 준용, 해당 처벌 규정 필요. <strong>⑨ 비교·기억법:</strong> 승낙했으나 실행 안 한 효과 없는 교사와 다름.</p>
+<h3>효과 없는 교사 效果敎唆</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 效(본받을 효): 효력, 果(열매 과): 결과, 敎(가르칠 교), 唆(부추길 사). <strong>③ 합친 뜻:</strong> 결의가 실행 효과로 이어지지 않은 교사. <strong>④ 이름의 이유:</strong> 결심은 생겼지만 본범 실행은 시작되지 않았기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 피교사자가 승낙했으나 실행에 착수하지 않은 제31조 제2항의 유형. <strong>⑥ 쉬운 말:</strong> 하겠다고 했지만 실제 시작하지 않았다. <strong>⑦ 사례:</strong> 계획을 받아들인 뒤 실행 전 중단.</p>
+<p><strong>⑧ 시험:</strong> 양쪽 예비·음모 준용, 해당 처벌 규정 필요. <strong>⑨ 비교·기억법:</strong> 처벌 가능한 미수에까지 나아갔다면 미수의 교사 문제.</p>
+<h3>기도된 교사 企圖敎唆</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 企(꾀할 기), 圖(그림 도): 꾀하다, 敎(가르칠 교), 唆(부추길 사). <strong>③ 합친 뜻:</strong> 범행을 시키려 시도했으나 실행으로 이어지지 않음. <strong>④ 이름의 이유:</strong> 정범의 실행 없이 교사 시도 단계에 머물기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실패한 교사와 효과 없는 교사를 묶어 부르는 말. <strong>⑥ 쉬운 말:</strong> 시켜 봤지만 본범 실행까지는 못 갔다. <strong>⑦ 사례:</strong> 거절 또는 승낙 후 미착수.</p>
+<p><strong>⑧ 시험:</strong> 제31조 제2·3항. <strong>⑨ 비교·기억법:</strong> 상대가 실행했다가 실패한 미수범의 교사와 다름.</p>
+<h3>간접교사 間接敎唆</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 間(사이 간), 接(이을 접), 敎(가르칠 교), 唆(부추길 사). <strong>③ 합친 뜻:</strong> 사람을 거쳐 하는 교사. <strong>④ 이름의 이유:</strong> 직접 만나지 않아도 교사의 연결로 범행을 발생시키기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중간 사람의 교사를 통해 최종 실행자의 범행을 일으키는 연쇄 교사. <strong>⑥ 쉬운 말:</strong> 다른 사람에게 다시 시키게 하여 실행을 이끌었다. <strong>⑦ 사례:</strong> 중간 사람을 통해 의사에게 허위 진단서 작성을 교사.</p>
+<p><strong>⑧ 시험:</strong> 각 연결의 고의·인과관계. <strong>⑨ 비교·기억법:</strong> 의사지배로 사람을 이용하는 간접정범과 용어 구별.</p>
+<h3>법정형·선고형 法定刑·宣告刑</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 定(정할 정), 刑(형벌 형), 宣(베풀 선): 널리 알리다, 告(알릴 고). <strong>③ 합친 뜻:</strong> 법이 정한 형과 법원이 선고한 형. <strong>④ 이름의 이유:</strong> 법의 기준과 개별 재판의 결론을 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구성요건별 법률상 형의 범위와 개별 사건에서 선고하는 구체적 형. <strong>⑥ 쉬운 말:</strong> 법의 처벌 범위와 실제 받은 처벌은 다르다. <strong>⑦ 사례:</strong> 교사와 정범은 동일 법정형이지만 개별 양형은 다를 수 있음.</p>
+<p><strong>⑧ 시험:</strong> 동일한 형이라는 조문 문구 해석. <strong>⑨ 비교·기억법:</strong> 같은 죄라고 실제 형량까지 항상 같지 않음.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 공동정범과 교사범</h2>
+<p><b>TOP3:</b> ① 공동 의사＋기능적 실행 ② 책임 범위는 가담·고의·예견별 ③ 교사는 결의 유발＋이중 고의＋실행.</p>
+<table><tr><th>쟁점</th><th>기준</th></tr>
+<tr><td>공동정범</td><td>공동가공 의사＋공동 실행. 일부 분담으로 전체 책임</td></tr>
+<tr><td>동시범 / 편면</td><td>독립 행위 경합 / 한쪽만 공동 의사. 공동정범 부정</td></tr>
+<tr><td>제19조 / 제263조</td><td>원인 불명 미수 / 상해 특례. 가해행위 자체는 입증 필요</td></tr>
+<tr><td>승계·이탈</td><td>원칙적 가담 이후 책임 / 실제 이탈·잔존 영향·착수 시점</td></tr>
+<tr><td>과실 공동정범</td><td>판례 긍정. 공동 주의의무와 위반의 공동 인식 필요</td></tr>
+<tr><td>공모공동정범</td><td>직접 실행 불필수. 단순 공모 부족, 본질적 기여 필요</td></tr>
+<tr><td>초과 실행</td><td>고의범은 공동 고의 / 결과적가중범은 중한 결과 예견 등</td></tr>
+<tr><td>합동범</td><td>시간·장소 협동. 현장 둘 이상＋외부 기능적 지배 검토</td></tr>
+<tr><td>교사 요건</td><td>결의 유발＋인과관계＋교사·기수의 고의＋적어도 착수</td></tr>
+<tr><td>실패 / 효과 없음</td><td>거절=교사자 / 승낙 후 미착수=양쪽. 예비·음모 규정 필요</td></tr>
+<tr><td>교사의 착오</td><td>실행과 고의가 겹친 범위. 초과 중한 결과는 과실 별도</td></tr>
+<tr><td>교사의 형·신분</td><td>동일 법정형≠동일 선고형. 비신분자·연쇄 교사 가능</td></tr></table>
+<p><b>반드시 외울 문장:</b> 예견가능성만으로 살인의 공동 고의를 대신할 수 없다. 현장에 없었다고 공동정범이 항상 부정되는 것도 아니다.</p>
+<p><b>함정:</b> 동석=공모 × / 돌아감=이탈 × / 가담 전 전부 소급 × / 시키다 실패하면 모두 본범 미수 ×.</p>
+<p><b>사례를 풀 순서:</b> 사람별 의사·역할 → 가담·이탈 시점 → 실제 실행 → 고의 범위·중한 결과 예견 → 공범 유형 → 개별 형·신분.</p>
+</section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p><strong>복습 TOP3:</strong> ① 공동정범·동시범·방조의 경계 ② 가담 전후와 공동 고의의 범위 ③ 교사의 실패 유형과 예비·음모. 🟢 인물별로 다른 죄책을 이유와 함께 설명하면 이해 완료 / 🟡 용어는 알지만 시점·고의가 섞이면 복습 필요 / 🔴 함께 있으면 전부 같은 죄라고 생각하면 이해 부족. 실제 응답 전이므로 자기진단 기준이다.</p>
+<p>출처: 제공 본교재·워크북 제11강, 형법 JSON, 본문에 연결한 대법원 판례. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%98%95%EB%B2%95">형법 제19·30·31·33·34·263·331·343조</a>. 가습기살균제 후속 판례와 원자료의 공동실행·초과행위 관련 표현을 보완했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-형법_020"><h4>형성평가 · 형법_020</h4><p class="question-stem">공동정범의 성립 요건 가운데 ‘공동의 의사’에 관하여 판례가 취하는 태도가 아닌 것은?</p><ol class="choices"><li>공동의 의사는 반드시 사전 공모일 필요는 없고 범죄행위시에 존재하면 된다</li><li>범행의사의 공유 없이 한 사람만 공동의사를 가진 경우에는 공동의 의사가 없는 것으로 본다</li><li>범행 도중 공모관계에서 이탈한 때에도 다른 공모자의 모든 행위에 대해 공동정범의 책임을 진다</li><li>실행행위의 일부 종료 후, 기수 이전에 범행에 가담한 경우에는 그 이후 행위에 대해서만 공동정범이 성립한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 판례 설명에 맞는다. 반드시 사전 모의가 필요한 것은 아니고 실행 과정에서 공동 의사가 형성될 수도 있다. 그 시점과 책임 범위는 별도로 본다.</li><li><strong>비선택</strong> · 판례 설명에 맞는다. 한 사람만 상대와 함께 한다고 생각하는 편면적 관여는 상호 공동 의사가 없어 공동정범이 부정된다. 방조 등은 별도다.</li><li><strong>선택</strong> · 원본 정답이다. 진정한 공모관계 이탈 여부와 시점·잔존 영향에 관계없이 모든 행동에 책임진다는 서술은 지나치다. 다만 범행 도중 단순히 현장을 떠나면 언제나 면책된다는 반대 명제도 틀리다.</li><li><strong>비선택</strong> · 교재가 제시한 기본 원칙에 맞는다. 뒤늦은 인식만으로 이미 끝난 선행 범행을 소급 지배한 것은 아니며, 가담 이후 공동 실행한 범위를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_021"><h4>형성평가 · 형법_021</h4><p class="question-stem">우리 판례가 공동정범에 대해 취하는 입장이 아닌 것은?</p><ol class="choices"><li>단순한 공모자가 아니라 범죄에 대한 본질적 기여를 통한 기능적 행위지배가 존재하는 것으로 인정되는 경우에만 공동정범이 성립한다</li><li>공동실행의 사실이 없는 이상 공동정범의 인정은 불가능하다</li><li>공동정범 중 어느 한 사람이 공동의사의 범위를 초과해서 실행한 경우, 초과된 부분이 모의된 행위와 비슷한 구성요건이고 이를 예견할 수 있었을 때에는, 초과 부분을 실행하지 않은 사람도 전체 행위에 대해 공동정범의 책임을 진다</li><li>결과적 가중범에 대해서도 공동정범이 성립한다. 단 각자가 중한 결과를 예견 가능했어야 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 판례의 기준이다. 단순 공모나 지위만으로 충분하지 않고 범행에 대한 본질적 기여와 기능적 행위지배가 필요하다.</li><li><strong>선택</strong> · 원본 정답이다. 직접 구성요건 행위를 분담하지 않았다는 이유만으로 공동정범을 일률적으로 부정하는 것은 판례와 다르다. 다만 기능적 기여조차 없어도 정범이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 원자료가 양적 초과에 관하여 압축한 보기다. 이를 예견가능성만 있으면 모든 고의범까지 공동정범이 된다는 뜻으로 읽으면 부정확하다. 강도살인에는 살인의 공동 고의가 필요하고, 고의 없는 중한 결과는 결과적가중범 요건을 별도로 심사한다.</li><li><strong>비선택</strong> · 판례는 결과적가중범 공동정범을 인정한다. 기본행위의 공동과 중한 결과에 대한 각자의 예견가능성 등 요건이 필요하고 단순한 가담 사실만으로 자동 책임을 지우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_079"><h4>워크북 · 형법_079</h4><p class="question-stem">갑과 을은 서로 모르는 사이이다. 그런데 각자가 자신의 원수 병을 죽이겠다며 우연히 동시에 총을 쏴서 그 결과 병이 사망한 경우, 갑과 을의 관계를 나타내는 말은?</p><ol class="choices"><li>동시범</li><li>공동정범</li><li>공모공동정범</li><li>편면적 공동정범</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 공동 의사 없는 독립 행동이 경합한 동시범이다. 사망의 원인 행위가 밝혀지는지에 따라 각자의 기수·미수를 판단한다.</li><li><strong>비선택</strong> · 공동가공의 의사가 없어 공동정범으로 묶을 수 없다. 우연한 동시 행동만으로 의사 연락을 추정하지 않는다.</li><li><strong>비선택</strong> · 공모 자체가 없다. 공모공동정범의 본질적 기여 여부를 논하기 전 단계다.</li><li><strong>비선택</strong> · 한쪽이 상대방의 범행을 알고 함께하려 했다는 사정도 없다. 서로 모르는 독립 행위이므로 동시범이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 202면. 공동정범이 성립하기 위해서는 주관적으로 범죄인 서로 간에 '공동의 의사'가 있어야 하고 객관적으로 '실행행위의 분담'이 있어야 한다. 이와는 달리 공동의 의사가 없는 단독행위가 우연히 경합하여 결과를 발생시킨 경우에는 공동정범이 성립하지 않으며, 이를 공동정범과 구별하여 '동시범'이라 한다. 동시범은 원칙적으로 각자의 행위에 대해서만 책임을 지는 것이며, 다만 결과의 원인행위가 밝혀지지 않은 때에는 각 행위를 미수범으로 처벌한다(제19조).</p></details></section>
+
+<section class="question-card" id="question-형법_080"><h4>워크북 · 형법_080</h4><p class="question-stem">우리 법원은 공모자 가운데 일부만 범죄를 실행하고 일부는 실행행위를 담당하지 않은 경우, 실행행위를 담당하지 않은 사람들도 공동정범으로 처벌하기 위해 이 이론을 활용하여 왔다. 즉, 이 이론은 공동실행이 없는 단순공모자를 처벌하기 위한 것으로서, 주로 공안사건에 관한 조직의 집행부를 처벌하는 데 이용되어 왔다고 할 수 있는데, 이 이론은 무엇인가?</p><ol class="choices"><li>간접정범이론</li><li>공모공동정범이론</li><li>공범의 종속성이론</li><li>공범의 독립성이론</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 간접정범은 다른 사람의 착오·강요 등을 이용한 의사지배 유형이다. 질문의 단순 공모자 처벌 논의와 다르다.</li><li><strong>선택</strong> · 정답이다. 공모공동정범 이론의 역사적 설명이다. 현재 판례는 단순한 공모가 아니라 본질적 기여와 기능적 행위지배를 요구한다는 보완을 함께 읽는다.</li><li><strong>비선택</strong> · 공범종속성은 좁은 공범의 성립이 정범 실행과 어느 요건까지 연결되는지의 문제다.</li><li><strong>비선택</strong> · 공범독립성은 교사·방조를 정범과 독립적으로 볼지의 문제이며 질문의 공동정범 이론 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 205~206면. 공동정범의 요건은 '공동의 의사'와 '실행행위의 분담'이다. 두 가지 모두 갖추어야 공동정범이 성립하며, 이 중 어느 한 가지라도 충족되지 않는다면 공동정범은 성립하지 않는다. 그런데 판례는 이 가운데 '실행행위의 분담'이 없는 사람에게도 공동정범의 성립을 인정하는 경우가 있다. 이를 '공모공동정범'이라고 하는데, 주로 조직범죄에서 범죄의 실행에 가담하지 않은 조직의 수뇌부를 처벌하기 위한 목적으로 이용되어 왔다. 하지만 이것은 공동정범의 요건을 지나치게 완화한 것이라는 비판이 계속되어 왔고, 그 결과 판례는 공모공동정범의 내용을 다소 변경하였다. 그 내용은 교재에서 확인해 보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_081"><h4>워크북 · 형법_081</h4><p class="question-stem">합동범의 공동정범에 대한 판례의 입장을 올바르게 설명한 것은?</p><ol class="choices"><li>현장의 범죄행위에 참여하지 않았더라도 배후에서 범행을 조종하는 등 전체 범죄에 기여도가 높아 기능적으로 행위지배를 하였다고 볼 수 있다면 합동범의 공동정범을 인정할 수 있다.</li><li>시간적·장소적으로 현장의 범죄행위에 참여한 자에 대해서만 합동범의 공동정범이 성립한다.</li><li>현장의 범죄행위에 참여하였다면 일반적으로는 방조행위로 볼 수 있는 기능적 행위지배가 없는 자에 대해서도 합동범의 공동정범이 성립한다.</li><li>공동의 모의에만 참여하였으면 합동범의 공동정범이 성립한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 현장에서 둘 이상이 합동 실행하고, 밖의 가담자에게도 공동 의사와 기능적 행위지배가 인정되어야 한다. 현장 인원과 외부인의 정범성을 각각 확인한다.</li><li><strong>비선택</strong> · 현장에 있는 사람만 가능하다는 제한은 변경된 판례와 다르다. 외부의 기능적 지배자도 공동정범이 될 수 있다.</li><li><strong>비선택</strong> · 현장에 있다는 이유만으로 기능적 행위지배 없는 도움을 정범으로 바꾸지 않는다. 방조에 그칠 수 있다.</li><li><strong>비선택</strong> · 단순 모의만으로는 부족하다. 범행에 대한 본질적 기여·기능적 행위지배가 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 208~209면. 합동범은 필요적 공범으로서 원칙적으로 형법총론의 공동정범규정이 적용되지 않는다. 즉, '합동'의 의미에 대한 다수설과 판례인 현장설에 의하면 합동이란 시간적·장소적 협동을 의미하므로 이러한 관계에 있지 않은 사람에 대해서는 그가 아무리 전체 범죄에서 중요한 역할을 했다 할지라도 합동범의 공동정범은 될 수가 없는 것이다. 그러나 판례는 이러한 원칙을 변경하여 합동범에 대해서도 외부의 공동정범이 성립할 수 있다고 본다. &quot;배후에서 합동범의 범행을 조종하는 수괴는 그 행위의 기여도가 강력함에도 불구하고 공동정범으로 처벌받지 않는 불합리한 현상이 나타날 수 있&quot;기 때문이라고 한다. 따라서 다른 일반 범죄와 마찬가지로 합동범에 대해서도 &quot;범행현장에 존재하지 아니한 범인도 공동정범이 될 수 있으며, 반대로 상황에 따라서는 장소적으로 협동한 범인도 방조만 한 경우에는 종범으로 처벌될 수도 있다&quot;고 한다.</p></details></section>
+
+<section class="question-card" id="question-형법_082"><h4>워크북 · 형법_082</h4><p class="question-stem">수사기관의 함정수사와 같이 피교사자의 행위가 미수에 그치게 할 의사를 갖고서 교사한 경우 교사자는 어떻게 처벌되는가?</p><ol class="choices"><li>미수의 교사로 처벌된다.</li><li>기수의 교사와 똑같이 처벌된다.</li><li>처벌되지 않는다.</li><li>교사한 범죄의 예비·음모에 준하여 처벌된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 완성을 의도했는데 실행자가 실패한 미수범의 교사와 다르다. 문제는 처음부터 완성 고의가 없다는 전제를 둔다.</li><li><strong>비선택</strong> · 기수 고의가 없는 사안을 기수의 교사와 동일하게 처벌한다는 결론은 맞지 않는다.</li><li><strong>선택</strong> · 원본 정답이다. 질문의 전제에서는 기수 고의가 없어 해당 교사범이 성립하지 않는다는 의미다. 모든 함정수사가 적법하거나 수사자의 다른 위법행위까지 면책된다는 뜻은 아니다.</li><li><strong>비선택</strong> · 제31조 제2·3항의 기도된 교사와 다른 문제다. 그 조항도 범죄를 완성시키려는 교사의 고의와 해당 예비·음모 처벌 규정 등이 전제된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 211면. 교사자의 고의는 이중의 것이다. 우선 자신의 교사행위에 대한 고의가 있어야 하고 다음으로 피교사자의 범죄행위에 대한 고의가 있어야 한다. 이때 피교사자의 범죄행위에 대한 고의는 통상의 경우와 마찬가지로 '기수의 고의'여야 한다. 미수의 고의를 가진 교사는 고의가 없는 교사인 것이다. '미수의 고의'는 고의가 아니다. 따라서 이런 경우에는 교사범이 성립하지 않는다.</p></details></section>
+
+<section class="question-card" id="question-형법_083"><h4>워크북 · 형법_083</h4><p class="question-stem">범죄를 교사하였지만 피교사자가 범죄의 실행을 승낙하지 않은 경우 교사자는 어떻게 처벌되는가?</p><ol class="choices"><li>본범의 미수범으로 처벌한다.</li><li>본범의 예비·음모에 준하여 처벌한다.</li><li>본범의 교사범으로 처벌한다.</li><li>본범의 정범으로 처벌한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정범이 실행에 착수하지 않았다. 실행 없는 교사 시도를 본범의 미수로 바로 바꾸지 않는다.</li><li><strong>선택</strong> · 정답이다. 제31조 제3항에 따라 교사자만 예비·음모에 준하여 처벌한다. 해당 범죄에 예비·음모 처벌 규정이 있어야 하며 거절한 상대는 그 거절로 처벌되지 않는다.</li><li><strong>비선택</strong> · 제31조 제1항의 통상 교사범은 정범의 실행을 전제로 한다. 여기서는 그 실행이 없다.</li><li><strong>비선택</strong> · 실패한 교사자를 본범의 정범으로 바꾸어 처벌하는 규정이 아니다. 예비·음모 준용의 특칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 212면. 범죄행위를 교사하였지만 피교사자가 범죄 실행을 승낙하고 실행의 착수에 이르지 않은 경우와 피교사자가 아예 범죄의 실행을 승낙하지 않은 때에는 교사자는 그 범죄의 예비 또는 음모에 준하여 처벌한다(제31조 제2항, 제3항). 전자를 '효과 없는 교사', 후자를 '실패한 교사'라고 한다. 이러한 때에는 피교사자, 즉 정범의 실행행위가 없으므로 공범인 교사범도 성립하지 않지만(공범의 종속성), 범죄의 예비·음모에는 해당한다고 볼 수 있으므로 이에 준하여 처벌하는 것이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '형법총론 · CHAPTER 11' : 'PART · CRIMINAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(형법총론 · CHAPTER 11|PART · CRIMINAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('criminal-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

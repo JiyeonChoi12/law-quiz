@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>형법총론 제5강 과실과 결과적가중범 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CRIMINAL LAW · CHAPTER 05</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">형법총론</span>
+    <span class="brand-sub">제5강 과실과 결과적가중범 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./형법총론_개념.html">형법총론 개념 목록</a><a href="../index.html?subject=형법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>“죽일 생각은 없었어요.” 이 말은 살인의 고의를 다툴 수는 있어도 모든 책임을 지워 주지는 않는다. <strong>부주의로 생긴 사고인지</strong>, 아니면 <strong>일부러 시작한 범죄가 더 무거운 결과로 번졌는지</strong>를 구별해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하는가?</td>
+<td>과실의 주의의무와 신뢰의 원칙, 고의의 기본 범죄와 중한 결과가 결합하는 결과적 가중범이다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>모든 사고를 범죄로 만들지 않으면서, 예견 가능한 위험을 방치하거나 일부러 만든 사람의 책임을 묻기 위해서다.</td>
+</tr>
+<tr>
+<td>전체에서 어디인가?</td>
+<td>구성요건론의 마지막 부분이다. 고의·과실과 객관적 결과를 연결한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>제4강의 고의·착오에서 넘어와 과실을 본다. 제6강에서는 구성요건에 맞더라도 정당화되는 행동을 다룬다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>사고 결과만 보고 처벌하거나, 죽일 뜻이 없으면 치사책임도 없다고 잘못 생각한다.</td>
+</tr>
+</tbody></table>
+<p><strong>읽은 범위:</strong> 본교재 90-103쪽(PDF 104-117쪽, 다음 104쪽은 구분용 공백), 워크북 제5강 36-42쪽(PDF 360-366쪽), JSON 6문항·24개 보기. 별점은 학습 우선순위다. 짧은 교통 사례는 구체적 예견·회피 가능성이라는 전제를 덧붙였다.</p>
+<p><strong>색:</strong> <mark class="yellow">정의·결론</mark> / <mark class="green">이유</mark> / <mark class="pink">함정</mark> / <mark class="blue">단원 연결</mark>.</p>
+<h1>1. 과실은 결과가 나빴다는 뜻이 아니다</h1>
+<h2 id="criminal-05-01" data-concept-id="criminal-05-01">1-1. 과실의 의미와 예외적 처벌 ★★★★★</h2>
+<p><strong>교재 90-91쪽 / 문단의 역할:</strong> 의도하지 않은 결과를 언제 처벌하는지 출발선을 정한다.</p>
+<p><mark class="yellow">과실은 요구되는 주의의무를 위반하여 구성요건을 실현하는 것이다.</mark> 형법 제14조는 주의를 게을리하여 범죄사실을 인식하지 못한 경우를 규정하면서, 특별한 처벌 규정이 있을 때만 벌하게 한다. 따라서 과실은 고의가 조금 약해진 정도가 아니라 별도로 판단하는 요소다. 사고가 크다는 이유만으로 처벌 규정을 새로 만들 수 없다.</p>
+<p>교재는 실화, 과실 폭발성 물건 파열 등, 과실 일수, 과실 교통방해, 과실치사상, 업무상 과실·중과실 장물 관련 범죄를 예로 든다. 특별법에도 과실 처벌 규정이 있다. 다만 제364조는 <strong>단순한 모든 과실 장물 취득</strong>이 아니라 업무상 과실 또는 중대한 과실이라는 요건을 둔다. 목록 이름만 보고 보통 과실까지 무조건 처벌한다고 외우지 않는다.</p>
+<p>인식 있는 과실은 결과 가능성은 알았으나 발생하지 않을 것으로 신뢰한 경우다. 인식 없는 과실은 주의의무를 위반하여 가능성 자체를 알지 못한 경우다. 둘 다 과실의 형태다. 법이 인식 여부만으로 별개의 범죄·법정형을 두는 것은 아니지만, 구체적 비난 정도와 양형까지 언제나 같다는 뜻은 아니다. 단순히 결과가 안 나기를 ‘희망했다’는 말만으로 미필적 고의가 배제되는 것도 아니다.</p>
+<p>업무상 과실은 일정한 업무 수행에 필요한 주의를 어긴 경우다. 업무는 반복·계속할 의사로 하는 사회생활상의 사무라는 관점에서 보며, 직장인인가 또는 월급을 받는가만으로 정하지 않는다. 중과실은 조금만 주의해도 위험을 알 수 있었는데 현저하게 게을리한 경우다. <strong>중과실=결과가 매우 큼</strong>은 아니다. 업무상 과실·중과실의 가중도 해당 처벌 규정에 근거해야 한다.</p>
+<p><strong>심화·체계:</strong> 과실을 책임 요소로만 보던 설명에서 구성요건 요소로 보는 설명으로 발전했고, 교재는 이중적 지위를 소개한다. 구성요건에서는 객관적으로 요구되는 주의를 어겼는지, 책임에서는 이 행위자가 그것을 지킬 개인적 능력이 있었는지를 나눈다.</p>
+<p><strong>시험:</strong> 형법_050. <strong>키워드:</strong> 특별규정·인식 유무·업무·현저한 태만. <strong>한 줄:</strong> 실수라는 말 하나가 아니라 처벌 규정과 구체적 주의의무 위반을 찾아야 한다.</p>
+<h2 id="criminal-05-02" data-concept-id="criminal-05-02">1-2. 예견의무와 결과회피의무 ★★★★★</h2>
+<p><strong>교재 92-93쪽 / 문단의 역할:</strong> ‘조심했어야지’를 판단 가능한 두 질문으로 바꾼다.</p>
+<p>주의의무는 <strong>위험을 알아차릴 의무인 예견의무</strong>와 <strong>그 결과를 막을 조치를 할 의무인 결과회피의무</strong>로 나뉜다. 위험을 예견할 수도 없었거나, 요구되는 조치를 해도 피할 수 없었다면 단순히 사고가 났다는 이유로 결과범의 책임을 지울 수 없다. <mark class="blue">제3강의 적법한 대체행위는 바로 이 ‘의무를 지켰으면 결과를 막을 수 있었는가’와 이어진다.</mark></p>
+<p>누구의 능력을 기준으로 할까? 교재의 통설인 객관설은 <strong>그 업무·거래 분야의 신중하고 사려 깊은 사람</strong>을 기준으로 한다. 의사에게 운전자의 기준을 적용하거나 모든 사람을 특별한 전문가와 비교하지 않는다. 행위자가 위험한 교차로임을 미리 알고 있었다는 등의 특별한 지식·경험은 고려한다. 객관설이라고 실제로 알고 있던 위험을 없는 것으로 취급하지는 않는다.</p>
+<p>주관설은 행위자의 구체적 능력을 기준으로 삼고 평균 이상 능력자에게 가능한 조치를 요구한다. 객관설 쪽에서는 개인 능력은 책임 단계에서 검토하고, 기술·과학의 규칙과 경험칙으로 객관적 주의를 정할 수 있다고 반박한다. 시험에서는 일반 평균인이 아니라 <strong>해당 분야의 신중한 사람</strong>이라는 표현이 중요하다.</p>
+<p>주의의무의 근거는 도로교통법·식품위생법·건축법 등 법령뿐 아니라 조리와 경험칙에서도 나온다. 법이 모든 현장 상황을 숫자로 적을 수 없기 때문이다. 다만 <strong>주의의무의 근거</strong>를 보완하는 것과 <strong>과실범의 처벌 규정 없이 죄를 만드는 것</strong>은 다르다. 후자는 허용되지 않는다.</p>
+<p><strong>시험:</strong> 형법_051. <strong>키워드:</strong> 예견＋회피·분야별 평균인·특별한 지식. <strong>한 줄:</strong> 위험을 알아차릴 수 있었고, 요구되는 조치를 하면 막을 수 있었는지 묻는다.</p>
+<h2 id="criminal-05-03" data-concept-id="criminal-05-03">1-3. 제한속도를 지켰는데도 과실이 되는 이유 ★★★★☆</h2>
+<p><strong>교재 93쪽 판례 74도231 / 문단의 역할:</strong> 법규의 숫자를 지키는 것과 구체적 안전조치를 다하는 것이 같지 않음을 보여 준다.</p>
+<p><strong>등장인물→사건:</strong> 운전자는 제한속도 100km/h인 고속도로를 밤에 달렸다. 교재에 인용된 상황에서는 전조등으로 확인할 수 있는 거리가 약 60m였다. <strong>갈등:</strong> 속도 제한 이내인데 과실이 있는가? <strong>법원의 고민:</strong> 보이는 거리에서 장애물을 발견해 멈출 수 있는 속도인가? <strong>결론:</strong> 그 상황에서 제한속도를 다 내어 운행하면 장애물을 보고도 충돌을 피할 수 없어 사고방지의무 위반이 될 수 있다고 보았다.</p>
+<p>판례의 논리를 풀면 ① 도로의 일반적 상한 속도와 ② 그날의 시야·정지 가능 거리를 구별하고 ③ 구체적 위험에 맞게 감속해야 한다는 뜻이다. 반대라면 시야가 나빠도 표지판 숫자만 지키면 책임을 피하게 된다. 물론 사고 결과와 그 주의의무 위반의 연결까지 따져야 하며, 밤 운전이면 언제나 과실이라는 뜻은 아니다.</p>
+<p><mark class="green">안전규정은 상황별 주의의무를 판단하는 중요한 출발점이지, 모든 상황의 면책증서가 아니다.</mark> <strong>시험:</strong> 법령 준수만으로 과실 없음이라고 단정하는 보기. <strong>키워드:</strong> 구체적 상황·가시거리·정지 가능성. <strong>한 줄:</strong> 허용된 최고속도와 지금 안전하게 달릴 속도는 다를 수 있다.</p>
+<h2 id="criminal-05-04" data-concept-id="criminal-05-04">1-4. 허용된 위험과 신뢰의 원칙 ★★★★★</h2>
+<p><strong>교재 94-96쪽 / 문단의 역할:</strong> 모든 위험을 없애라는 불가능한 요구로 과실책임을 넓히지 않는다.</p>
+<p>교통·공장·건축·에너지 시설은 적절한 조치를 해도 위험을 완전히 없앨 수 없다. 사회적으로 필요한 활동에서 요구되는 안전조치를 충분히 한 뒤 남는 위험까지 모두 형사책임으로 돌리지 않는 것이 허용된 위험이다. <strong>필요한 조치를 하지 않은 위험</strong>까지 ‘현대사회는 위험하니까’라며 허용하는 것은 아니다.</p>
+<p>신뢰의 원칙은 자신이 적절히 행동하는 상황에서 다른 참여자도 규칙에 맞게 행동하리라고 신뢰할 수 있다는 원칙이다. 모든 상대의 비정상적 행동을 끝없이 대비할 의무를 제한한다. 처음에는 교통에서 발전했지만 지금은 분업적 공동작업에서도 문제된다.</p>
+<table>
+<thead>
+<tr>
+<th>교재의 사례 묶음</th>
+<th>소개된 판단 방향</th>
+<th>반드시 함께 볼 조건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상대 차의 차선 침범·좌측 운행</td>
+<td>특별한 사정 없으면 모든 위반까지 대비할 의무 없음</td>
+<td>위반을 이미 보았거나 예상할 구체적 징후가 있는가</td>
+</tr>
+<tr>
+<td>적법한 신호 진행 중 다른 차의 신호 위반</td>
+<td>신뢰의 원칙 검토</td>
+<td>실제 사고 회피 가능성과 자기 위반의 관련성</td>
+</tr>
+<tr>
+<td>뒤차의 무모한 추월</td>
+<td>무모한 추월을 위해 항상 서행할 의무는 없음</td>
+<td>발견 후 취할 수 있는 안전조치는 별도</td>
+</tr>
+<tr>
+<td>자동차 전용도로의 자전거·자전거의 돌발 전도</td>
+<td>교재 판례는 예견의무를 제한</td>
+<td>실제로 인식한 위험을 무시할 권리는 아님</td>
+</tr>
+<tr>
+<td>일반 도로의 무단횡단 보행자</td>
+<td>신뢰 원칙의 적용을 제한</td>
+<td>무단횡단이라는 이유만으로 운전자 면책 아님</td>
+</tr>
+<tr>
+<td>고속도로·전용도로·육교 아래·보행 신호 위반</td>
+<td>교재는 적용을 인정한 판례를 제시</td>
+<td>장소 이름만으로 자동 무과실 결론 금지</td>
+</tr>
+</tbody></table>
+<p>교재는 83도3086·95도382(차선), 82도3071·92도2579(신호), 84도483(추월), 80도1446·82도2617(자전거), 80도842·95도715(일반 보행자), 77도403·85도833·89도1395·84도1572·87도1332(특수 도로·신호 상황)를 위 대비에 사용한다. 이 표는 판결의 쟁점과 결론을 교재가 제공한 범위에서 옮긴 것이며, 제시되지 않은 사고 속도·거리·시야를 만들어 넣지 않았다.</p>
+<p><strong>판례를 읽는 공통 순서:</strong> 정상적인 흐름을 따른 운전자에게 돌발 행동을 한 상대가 나타난다 → 운전자가 어느 순간 그 위험을 알 수 있었는지 다툰다 → 법원은 일상적으로 신뢰할 수 있는 교통 상황인지 검토한다 → 구체적 예견·회피 의무를 정한다. 신뢰를 전혀 인정하지 않으면 교통이 사실상 불가능해지고, 무조건 인정하면 이미 보이는 위험도 방치하게 된다.</p>
+<p><strong>시험:</strong> 형법_008의 짧은 보기는 이 교재의 전제를 따른다. <strong>키워드:</strong> 정상적 신뢰·구체적 위험·보행자 제한. <strong>한 줄:</strong> 상대도 규칙을 지킬 것이라 믿을 수 있지만, 보이는 위험을 못 본 척할 수는 없다.</p>
+<h2 id="criminal-05-05" data-concept-id="criminal-05-05">1-5. 신뢰가 깨지는 경우와 의료 분업 ★★★★★</h2>
+<p><strong>교재 96-97쪽 / 문단의 역할:</strong> 신뢰의 원칙을 무제한 면책으로 오해하지 않게 한다.</p>
+<p>상대의 규칙 위반을 이미 인식한 경우, 어린이·노약자·만취자 등 구체적으로 규칙 준수를 기대하기 어려운 경우에는 신뢰가 제한된다. 사람의 나이만으로 언제나 예측 불가능하다고 낙인찍는 것이 아니라 현장의 행동·상황을 본다. 자신이 먼저 규칙을 위반한 경우에도 원칙적으로 주장하기 어렵지만, <strong>자기 위반이 해당 사고와 관련 없는 경우</strong>까지 무조건 배제하는 것은 아니다.</p>
+<p><strong>92도2579의 이야기:</strong> 녹색 신호로 직진하던 운전자와 신호를 어기고 좌회전한 상대 차량이 충돌했다. 직진차의 과속도 있었다. 쟁점은 과속 사실 하나로 상대의 신호 위반까지 예상할 의무를 지울지였다. 법원은 그 과속과 사고 사이의 상당인과관계가 없다는 사정에서 신뢰의 원칙을 인정했다. ① 과속이라는 위반 ② 충돌의 원인 ③ 상대의 위반을 예상할 특별한 사정을 따로 보라는 뜻이다. 과속 자체가 언제나 괜찮다는 판결은 아니다.</p>
+<p>의료 분업에서는 신뢰할 수 있는 역할 분담이 전제다. 동료 의사의 담당 영역을 매 순간 전부 재검사하는 의무가 있는 것은 아니지만, 실제로 지휘·감독해야 하는 관계에서는 범위가 제한된다.</p>
+<p><strong>97도2812의 이야기:</strong> 위험 있는 의료행위를 간호사에게 맡긴 의사의 지도·감독이 문제됐다. 법원은 필요한 감독을 소홀히 하면서 단순히 간호사를 믿었다는 말로 과실책임을 피할 수 없다고 보았다. 문장 순서는 ① 의료상 위험 ② 의사에게 필요한 지도·감독 ③ 그 의무를 어긴 결과의 연결이다. 반대라면 감독해야 하는 사람이 맡겼다는 이유로 의무를 없앨 수 있다.</p>
+<p><strong>2005도9229의 이야기:</strong> 의사끼리 업무를 나눴어도 주된 담당의사 또는 사실상 지휘·감독자라면 다른 의사의 행위 내용을 확인·감독할 의무가 문제된다. 전적으로 다른 전문 영역에 속하거나 완전히 위임된 경우 등 구체적 분담을 함께 보아야 한다. ‘같은 의사면 전부 신뢰 가능’, ‘상하관계면 어떤 경우에도 신뢰 불가’라는 두 극단을 피한다.</p>
+<p><strong>시험:</strong> 상대 위반 인식·특별한 상황·자기 위반과 사고 관련성·감독의무. <strong>키워드:</strong> 분업과 감독의 경계. <strong>한 줄:</strong> 맡겨도 되는 일을 믿는 것과 내가 감독해야 할 일을 버리는 것은 다르다.</p>
+<h2 id="criminal-05-06" data-concept-id="criminal-05-06">1-6. 과실범의 미수와 공동정범 ★★★★☆</h2>
+<p><strong>교재 97-98쪽 / 문단의 역할:</strong> 고의범의 미수·공범 개념을 그대로 옮길 수 있는지 묻는다.</p>
+<p>과실범의 미수는 인정되지 않고, 이를 처벌하는 일반 규정도 없다. 부주의했지만 결과가 생기지 않은 경우를 과실치사미수라고 하지 않는다. 다만 위험행위 자체를 별도로 금지하는 법규가 있으면 그 위반죄는 다른 문제다.</p>
+<p>공동정범은 둘 이상이 공동으로 실행하는 경우다. 교재가 다수설로 소개하는 범죄공동설은 공동의 범죄실행 의사가 필요한데 과실에는 그런 의사가 없으므로 과실범의 공동정범을 부정한다. 행위공동설은 공동으로 행위를 하며 주의의무를 위반한 경우를 인정할 수 있다고 본다. 판례는 후자 방향이다. 단순히 같은 현장에 있었다는 이유만으로 공동정범이 되는 것은 아니다.</p>
+<p><strong>82도781의 이야기:</strong> 정기관사와 부기관사가 열차의 뒤로 이동하는 운행을 상의·동의했다. 사고 뒤 부기관사는 지휘·감독 아래였다는 점을 내세웠다. 법원은 공동으로 정한 운행에 과실이 있다면 하급자라는 이유만으로 책임을 벗어나지 않는다고 보았다. ① 함께 결정한 행위 ② 각자의 주의의무 ③ 공동의 위반을 확인하라는 뜻이다. 다만 모든 하급자가 상급자의 사고 결과를 무조건 책임지는 것은 아니다.</p>
+<p><strong>시험:</strong> 교재의 다수설과 판례가 다르다는 점. <strong>키워드:</strong> 과실미수 부정·공동 행위·공동 주의의무. <strong>한 줄:</strong> 함께 실수한 경우에도 공동으로 무엇을 결정하고 무엇을 어겼는지 확인한다.</p>
+<h1>2. 일부러 시작한 범죄가 더 큰 결과로 번지면</h1>
+<h2 id="criminal-05-07" data-concept-id="criminal-05-07">2-1. 결과적 가중범과 제15조 제2항 ★★★★★</h2>
+<p><strong>교재 98-99쪽 / 문단의 역할:</strong> 중한 결과만으로 책임을 지우지 않으면서 가중하는 이유를 설명한다.</p>
+<p>폭행을 일부러 했는데 피해자가 사망한 경우를 생각하자. 살인 고의가 없다면 살인죄와 구별하지만, 폭행이 가진 사망 위험을 예견할 수 있었고 그 위험이 실현되었다면 폭행치사가 문제된다. <mark class="yellow">진정 결과적 가중범의 구조는 기본 범죄의 고의＋중한 결과의 과실이다.</mark></p>
+<p>단순 과실치사보다 가중하는 불법의 이유는 <strong>고의로 시작한 기본 범죄의 전형적 위험이 더 무거운 결과로 이어졌기 때문</strong>이다. 그러나 가중책임을 정당화하려면 중한 결과에도 비난 가능성이 있어야 한다. 제15조 제2항은 그 결과를 예견할 수 없었다면 중한 죄로 벌하지 못하게 한다. <mark class="green">이 과실 요건이 결과적 가중범을 책임주의와 연결한다.</mark> 인과관계만 있으면 무조건 가중하던 과거의 결과책임 관념과 다르다.</p>
+<p><strong>중요한 보기 보완:</strong> 형법_009의 원본 정답은 중한 결과에 대한 과실이다. 이는 ‘책임주의에 맞는가’라는 질문에 대한 답이다. ‘단순 과실범보다 왜 더 무거운가’까지 완전히 설명하려면 고의의 기본 범죄가 가진 전형적 위험의 실현을 함께 말해야 한다. 중한 결과에 과실이 있다는 점만으로는 단순 과실범과 차이가 전부 설명되지 않는다.</p>
+<p>대표적으로 상해치사·폭행치사·유기치사상·체포감금치사상·강간등치사상·강도치사상·교통방해치사상이 소개된다. 교재의 낙태치사상 목록은 해당 기본범죄의 효력까지 확인해야 한다. 자기낙태와 의사낙태 일부에 관한 헌법불합치 결정이 있으므로 옛 목록을 모두 그대로 유효한 처벌 예로 외우지 않는다. <strong>모든 낙태 관련 조문이 통째로 같은 효력을 가진다는 뜻도 아니다.</strong> <a href="https://www.law.go.kr/lsLinkProc.do?efYd=20190411&joNo=027000000&lsClsCd=L&lsId=detc20190411&lsNm=%ED%98%95%EB%B2%95&mode=11">헌법불합치 결정 주석이 있는 조문</a></p>
+<p><strong>심화·입법론:</strong> 과실을 중과실 등으로 제한하자거나 직접성을 엄격히 해석하자거나 형량을 낮추자는 의견은 책임과 형벌의 비례를 강화하려는 제안이다. 현행 모든 결과적 가중범이 중과실을 요구한다는 말은 아니다.</p>
+<p><strong>시험:</strong> 형법_009·052·053. <strong>키워드:</strong> 고의＋과실·전형적 위험·예견 가능성. <strong>한 줄:</strong> 처음의 고의범과 나중의 결과에 대한 과실을 각각 확인한다.</p>
+<h2 id="criminal-05-08" data-concept-id="criminal-05-08">2-2. 진정·부진정 결과적 가중범 ★★★★☆</h2>
+<p><strong>교재 99-100쪽 / 문단의 역할:</strong> 중한 결과를 일부러 낸 경우도 같은 조문에 들어갈 수 있는지 묻는다.</p>
+<p>진정 결과적 가중범은 고의의 기본 범죄에 과실의 중한 결과가 붙는다. 상해치사가 대표다. 살인 고의가 있으면 단순히 상해치사라는 이름으로 그 고의를 지우지 않는다. 부진정 결과적 가중범은 중한 결과를 과실뿐 아니라 고의로 발생시킨 경우까지 포괄하는 유형이다. 교재는 현주건조물방화치사상·특수공무집행방해치사상·교통방해치사상·중상해 등을 예로 든다.</p>
+<p>부정설은 중한 결과에 고의가 있으면 그 고의범으로 처리하면 된다고 본다. 긍정설은 별도 고의범의 형이 더 가벼워지는 경우 등 형벌의 불균형을 지적한다. 통설·판례는 부진정 유형을 인정한다. 다만 구체적으로 어떤 조문이 고의 결과까지 포함하는지는 그 구성요건을 확인해야 한다.</p>
+<p><strong>94도2842의 판례 논리:</strong> 기본 범죄를 통해 고의로 중한 결과를 낸 사안에서, 그 결과가 별도의 고의범에도 해당하면 결과적 가중범과 그 고의범의 상상적 경합으로 처리할 수 있다고 설명했다. 교재가 전한 쟁점은 처벌 구조이므로 여기에 구체적 가해 수단·피해자 대화를 꾸며 넣지 않는다. 순서대로 풀면 ① 기본 범죄에 중한 결과가 붙고 ② 그 결과를 일부러 발생시켰으며 ③ 별도 고의 구성요건도 충족하면 ④ 두 법적 평가의 관계를 정해 적절한 형을 적용한다는 뜻이다. 반대로 고의가 있었다는 이유만으로 오히려 가벼워지는 모순을 막는다.</p>
+<p><strong>시험:</strong> 형법_052는 ‘진정’을 묻는다. 기본 고의＋중한 결과 고의를 답으로 고르면 범위를 바꾼 것이다. <strong>키워드:</strong> 과실만 / 고의도 포함·상상적 경합. <strong>한 줄:</strong> 진정·부진정은 범죄의 진짜·가짜가 아니라 중한 결과의 주관적 범위를 나눈다.</p>
+<h2 id="criminal-05-09" data-concept-id="criminal-05-09">2-3. 기본 범죄의 위험이 직접 실현되었는가 ★★★★★</h2>
+<p><strong>교재 100-101쪽 / 문단의 역할:</strong> 시간상 뒤에 생긴 모든 피해를 기본 범죄에 붙이지 않는다.</p>
+<p>기본 범죄는 고의범이어야 하고 <strong>기수뿐 아니라 미수도 포함될 수 있다.</strong> 중한 결과는 대체로 사망·상해이며, 중상해에서는 생명 위험도 문제된다. 기본 범죄와 결과 사이에 인과관계가 필요하고, 직접성의 원칙은 기본 범죄에 내포된 전형적 위험이 그 결과로 실현되었는지를 묻는다. ‘직접’은 손으로 직접 접촉했다는 뜻이 아니다.</p>
+<p>교재는 제3자·피해자의 독립 행위가 결과를 만든 경우를 제한의 예로 든다. 그러나 <mark class="pink">피해자가 스스로 도망갔다는 이유만으로 귀속이 끊기지는 않는다.</mark> 바로 그 범죄가 도피 위험을 만들었는지 보아야 한다. 제3자의 개입도 독립된 새 위험인지 원래 위험의 실현인지 구별한다.</p>
+<p><strong>95도425의 이야기:</strong> 성폭력의 폭행·협박을 피하려 탈출하던 피해자가 추락하여 사망했다. 쟁점은 가해자가 직접 밀지 않았다는 점이었다. 법원은 범죄 때문에 탈출한 위험과 사망의 연결을 인정했다. ① 기본 범죄가 도망의 원인이 되고 ② 그 도망 과정의 위험이 사망으로 이어졌다는 뜻이다. 반대라면 피해자가 피해를 피하려 했다는 이유로 가해자가 이익을 얻게 된다.</p>
+<p><strong>99도5286의 이야기:</strong> 승용차에 갇힌 피해자가 달리는 차에서 빠져나오려다 떨어져 사망했다. 법원은 감금으로 생긴 탈출 위험을 고려해 감금치사책임을 인정했다. ‘스스로 내렸다’는 표면보다 자유를 박탈당한 상황과 탈출의 연결이 핵심이다. 워크북의 폭행을 피하려 창문 밖으로 숨다가 실족한 사례도 같은 질문으로 읽는다. 모든 탈출 결과를 자동으로 귀속한다는 뜻은 아니며 구체적 예견 가능성까지 살핀다.</p>
+<p><strong>88도1628의 이야기:</strong> 기본 강간이 완성되지 않았지만 그 수단인 폭행으로 피해자가 다쳤다. 법원은 기본 범죄가 미수라는 이유만으로 강간치상의 성립을 부정하지 않았다. 자의로 중단했는지 여부도 이미 생긴 상해를 없애지 않는다. 문장의 뜻은 ① 기본죄의 완성과 ② 가중 결과의 발생은 별도이므로 ③ 기본죄 미수라도 가중 결과가 실제 생겼으면 해당 가중죄를 검토한다는 것이다.</p>
+<p><strong>시험:</strong> 기본죄 미수≠결과적 가중범도 항상 미수. <strong>키워드:</strong> 전형적 위험·도피·기본죄 미수 가능. <strong>한 줄:</strong> 결과가 바로 그 범죄의 위험에서 나왔는지 확인한다.</p>
+<h2 id="criminal-05-10" data-concept-id="criminal-05-10">2-4. 중한 결과를 예견할 수 있었는가 ★★★★★</h2>
+<p><strong>교재 101-102쪽 / 문단의 역할:</strong> 인과관계만으로 중한 결과책임을 인정하지 않는다.</p>
+<p>중한 결과에 대한 예견 가능성은 <strong>기본 범죄의 행위 당시</strong>를 기준으로 한다. 나중에 모든 결과를 알고 돌아보면 위험이 명백해 보일 수 있지만, 당시의 구체적 상황에서 그 결과를 예견할 수 있었는지 따져야 한다. 교재는 기본 범죄 자체를 하지 않아야 했다는 점을 전제로 회피의무보다 예견 가능성을 강조한다. ‘이미 결과가 생겼으니 일반 과실범에서도 회피 가능성은 필요 없다’는 뜻으로 넓히지 않는다.</p>
+<p><strong>90도1596의 이야기:</strong> 공장에서 말다툼 중 삿대질을 피하려 뒤로 물러난 피해자가 장애물에 걸려 넘어졌고 머리를 다쳐 사망했다. 쟁점은 넘어질 수 있다는 예상과 사망까지의 예상이 같은가였다. 법원은 제시된 경위에서 그 정도의 넘어짐으로 사망할 결과를 일반인이 예견하기 어렵다고 보았다. ① 장애물에 걸릴 가능성 ② 넘어짐의 정도 ③ 치명적 결과를 나누어 보라는 뜻이다. 그렇지 않으면 어떤 사소한 접촉 뒤의 이례적 사망도 자동 치사책임이 된다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=107346">대법원 판결</a></p>
+<p>특이 체질·희귀 조건도 이름만으로 예견 가능성을 항상 부정하지 않는다. 이미 알았던 질환과 공격 정도 등 실제 사실이 중요하다. 제3강의 인과관계 인정 여부와 이번 강의 예견 가능성도 서로 다른 질문이다.</p>
+<p><strong>교재 표현 보완:</strong> 기본 범죄가 끝난 뒤 완전히 별개의 새 행위로 결과를 낸 경우를 처음 범죄의 결과적 가중범으로 자동 연결할 수는 없다. 다만 교재의 ‘강간 뒤 살인 고의가 생기면 언제나 강간죄와 살인죄가 따로 성립한다’는 식의 설명은 그대로 일반화할 수 없다. 현행 제301조의2에는 <strong>강간등살인</strong>이라는 결합범 규정이 있으므로 범행 사이의 연결과 그 요건을 함께 검토한다. 강간등치사라는 과실 결과 유형과 고의의 살인 결합 유형을 나누어야 한다. <a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?ancYnChk=&chrClsCd=010202&lsJoLnkSeq=1013892281">현행 제301조의2</a></p>
+<p><strong>시험:</strong> 행위 당시 예견 가능성·독립된 새 행위·결합범과 구별. <strong>키워드:</strong> 사후 결과로 역산 금지. <strong>한 줄:</strong> 인과관계가 있어도 당시 예견할 수 없는 중한 결과까지 자동 책임지지는 않는다.</p>
+<h2 id="criminal-05-11" data-concept-id="criminal-05-11">2-5. 결과적 가중범의 미수와 공범 ★★★★☆</h2>
+<p><strong>교재 102-103쪽 / 문단의 역할:</strong> 기본죄와 중한 결과의 단계·공범 범위를 분리한다.</p>
+<p>진정 결과적 가중범의 중한 결과는 과실이므로 그 결과를 향한 미수를 생각하기 어렵다는 것이 교재의 다수설·판례 설명이다. 하지만 형법에는 인질치사상·강도치사상·해상강도치사상·현주건조물일수치사상 등을 포함하는 조문에 미수 처벌 규정이 연결되어 있다. 따라서 조문이 있다는 사실과 어떤 유형에 적용되는지의 해석을 나눈다.</p>
+<p>교재가 소개하는 소수설은 기본죄가 미수이고 중한 결과가 생긴 경우, 또는 고의로 중한 결과를 노린 부진정 유형이 실패한 경우에 미수를 인정한다. 다수설은 해당 규정이 인질살해·상해, 강도살인·상해 같은 <strong>고의 결합범</strong>에 적용된다고 설명한다. 여기서도 기본죄 미수와 결과적 가중범 전체의 미수를 같은 말로 쓰면 안 된다.</p>
+<p>공동정범에 대해서는 과실범 공동정범 논의와 연결된다. 교재의 부정설은 기본죄의 공동정범과 각자의 과실범을 나누고, 각자 인과관계·과실이 있을 때 책임을 묻는다. 행위공동설과 판례는 기본 범죄의 공동행위와 중한 결과의 예견 가능성을 토대로 공동정범을 인정한다.</p>
+<p><strong>93도1674의 이야기:</strong> 여러 사람이 함께 폭행·상해를 하던 중 한 사람이 피해자를 살해했다. 다른 가담자는 살인을 함께 계획하지 않았다고 주장했다. 법원은 기본 폭행·상해를 공동으로 하고 치사 결과를 예견할 수 있었다면 상해치사의 공동정범 책임을 물을 수 있다고 보았다. ① 기본행위의 공동 의사 ② 중한 결과에 대한 예견 가능성 ③ 각자의 책임을 구분한다는 뜻이다. 모두에게 살인죄를 자동 인정하는 것도, 살인 공모가 없으니 모두 면책하는 것도 아니다.</p>
+<p>교사·방조의 경우에도 기본범죄에 대한 교사·방조만 확인하고 끝내지 않는다. 그 사람에게 중한 결과의 예견 가능성이 있어야 결과적 가중범에 대한 책임을 검토할 수 있다. <mark class="blue">제11·12강에서 공동정범·교사범·종범을 배울 때 이 ‘중한 결과는 각자 확인’ 원칙을 다시 붙인다.</mark></p>
+<p><strong>시험:</strong> 공동행위 의사와 중한 결과의 공동 고의를 구별한다. <strong>키워드:</strong> 기본죄 공모·각자 예견·고의 결합범. <strong>한 줄:</strong> 함께한 기본 범죄의 범위와 각자가 예견할 수 있던 결과를 나누어 본다.</p>
+<h1>3. 문제로 확인하기</h1>
+<h2>먼저 풀 TOP5</h2>
+<ol>
+<li><strong>형법_050:</strong> 과실의 예외적 처벌과 이중적 지위.</li>
+<li><strong>형법_051:</strong> 예견의무＋결과회피의무.</li>
+<li><strong>형법_008:</strong> 신뢰의 원칙과 보행자 사고의 구체적 조건.</li>
+<li><strong>형법_009:</strong> 책임주의를 충족하는 과실과 가중불법의 근거를 구별.</li>
+<li><strong>형법_052:</strong> 진정 결과적 가중범의 고의＋과실 구조.</li>
+</ol>
+<p>6문항 중 과실 일반 1개, 주의의무 1개, 신뢰 원칙 1개, 결과적 가중범 3개다. 실제 오답률은 제공되지 않았다. 가장 조심할 표현은 ‘언제나 면책’, ‘결과만 생기면 가중’, ‘과실이면 별도 규정 없이 처벌’이다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>문제 1.</strong> 식품 제조 담당자가 위생 매뉴얼의 숫자 기준은 지켰지만, 당일 특정 원료가 오염됐다는 검사 결과를 직접 받았다. 숫자 기준 준수만으로 주의의무를 다했다고 할 수 있는가?</p>
+<p><strong>답·의도:</strong> 없다. 실제로 알고 있는 특수한 위험에 맞는 조치가 필요한지 보아야 한다. 처벌 규정·인과관계 등은 따로 확인한다. 일반 규칙과 특별한 지식의 관계를 묻는다.</p>
+<p><strong>문제 2.</strong> 무대 설치팀의 두 기술자가 담당 영역을 분명히 나눴다. 그런데 한 기술자가 다른 영역의 지지대가 무너지는 것을 이미 보았다. “분업이므로 믿으면 된다”는 말로 아무 조치도 하지 않아도 되는가?</p>
+<p><strong>답·의도:</strong> 아니다. 신뢰의 전제가 깨졌는지, 자신의 지위에서 가능한 조치와 의무가 무엇인지 확인해야 한다. 분업 신뢰와 이미 인식한 위험을 구별한다.</p>
+<p><strong>문제 3.</strong> 운전자가 안전의무를 위반했으나 아무 사고도 나지 않았다. 이를 과실치사미수로 처벌할 수 있는가?</p>
+<p><strong>답·의도:</strong> 없다. 과실치사미수라는 처벌 구조가 아니다. 별도의 교통법규 위반죄가 있다면 그 요건으로 판단한다. 결과범의 미수와 위험행위 자체의 금지를 분리한다.</p>
+<p><strong>문제 4.</strong> 갑이 을을 창고에 감금했고 을이 감금에서 벗어나려다 다쳤다. 갑은 “을이 스스로 움직였으니 내 책임이 아니다”라고 한다. 무엇을 더 물어야 하는가?</p>
+<p><strong>답·의도:</strong> 감금의 전형적 위험이 탈출 중 상해로 실현됐는지, 인과관계와 예견 가능성이 있는지 살핀다. 피해자의 행동이 개입했다는 말만으로 직접성을 부정하지 않게 한다.</p>
+<p><strong>문제 5.</strong> 갑과 을이 공동으로 폭행했으나 갑만 피해자의 위험한 건강상태를 알고 있었다. 사망 결과에 대한 책임도 두 사람에게 자동으로 같아지는가?</p>
+<p><strong>답·의도:</strong> 아니다. 각자의 지식·행위·결과 예견 가능성을 확인한다. 공동 기본범죄의 책임과 중한 결과의 주관적 책임을 분리한다. 실제 결론은 공격 정도 등 나머지 사실을 함께 보아야 한다.</p>
+<h1>용어 사전</h1>
+<h3>과실 過失</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과): 지나침·잘못, 失(잃을 실): 실수. <strong>③ 합친 뜻:</strong> 주의를 놓쳐 생긴 잘못. <strong>④ 이름의 이유:</strong> 의도된 침해가 아니라 주의의 결여를 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 요구되는 주의의무를 위반하여 구성요건을 실현하는 것. <strong>⑥ 쉬운 말:</strong> 알아차리고 막아야 할 위험을 부주의하게 놓친 것. <strong>⑦ 사례:</strong> 현장 위험을 확인하지 않아 발생한 사고.</p>
+<p><strong>⑧ 시험:</strong> 제14조, 특별 처벌 규정 필요. <strong>⑨ 비교·기억법:</strong> 고의가 약한 형태가 아니며 고의 부정만으로 자동 인정되지 않음.</p>
+<h3>업무상 과실 業務上過失</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 業(업 업): 일, 務(힘쓸 무): 맡은 일, 上(위 상), 過(지날 과), 失(잃을 실). <strong>③ 합친 뜻:</strong> 업무 수행 중의 주의 위반. <strong>④ 이름의 이유:</strong> 업무의 특성상 더 주의할 지위에 주목하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 업무에 요구되는 주의를 게을리하여 결과를 발생시킨 과실. <strong>⑥ 쉬운 말:</strong> 그 일을 계속 맡는 사람으로서 지켜야 할 주의를 어김. <strong>⑦ 사례:</strong> 의료행위나 운전 업무의 주의의무 위반.</p>
+<p><strong>⑧ 시험:</strong> 급여·직장 유무만으로 업무를 정하지 않는다. <strong>⑨ 비교·기억법:</strong> 보통 과실과 중과실은 각각 다른 분류 기준.</p>
+<h3>중과실 重過失</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 重(무거울 중), 過(지날 과), 失(잃을 실). <strong>③ 합친 뜻:</strong> 무거운 주의 태만. <strong>④ 이름의 이유:</strong> 결과 크기가 아니라 의무 위반 정도가 중하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 조금만 주의했어도 위험을 알 수 있는데 현저하게 게을리한 과실. <strong>⑥ 쉬운 말:</strong> 쉽게 확인할 위험도 거의 신경 쓰지 않았다. <strong>⑦ 사례:</strong> 명백한 위험 표지를 보고도 필요한 확인을 현저히 태만.</p>
+<p><strong>⑧ 시험:</strong> 큰 사고면 무조건 중과실이라는 함정. <strong>⑨ 비교·기억법:</strong> 인식 있는 과실과 항상 일치하지 않는다.</p>
+<h3>주의의무 注意義務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 注(물 댈 주): 마음을 쏟다, 意(뜻 의), 義(옳을 의), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 마음을 기울여 지켜야 할 의무. <strong>④ 이름의 이유:</strong> 위험에 주의를 기울이고 조치해야 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결과를 예견하고 회피하기 위해 요구되는 행위 기준. <strong>⑥ 쉬운 말:</strong> 위험을 알아보고 막을 준비를 해야 한다. <strong>⑦ 사례:</strong> 시야가 짧으면 도로 상한속도보다 감속할 의무.</p>
+<p><strong>⑧ 시험:</strong> 형법_051, 예견의무와 결과회피의무. <strong>⑨ 비교·기억법:</strong> 조리상 주의 근거와 형벌법규의 존재는 별개.</p>
+<h3>예견·회피 豫見·回避</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 豫(미리 예), 見(볼 견), 回(돌 회), 避(피할 피). <strong>③ 합친 뜻:</strong> 미리 봄 / 돌아서 피함. <strong>④ 이름의 이유:</strong> 미리 아는 단계와 막는 단계를 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결과 위험을 예상하고 발생을 막는 것. <strong>⑥ 쉬운 말:</strong> 무슨 일이 생길지 알아차리고 실제로 막기. <strong>⑦ 사례:</strong> 장애물을 발견할 수 있었는지와 멈출 수 있었는지.</p>
+<p><strong>⑧ 시험:</strong> 알 수 있었음과 막을 수 있었음을 각각 확인. <strong>⑨ 비교·기억법:</strong> 결과가 생긴 뒤 알고 보는 사후판단과 다름.</p>
+<h3>허용된 위험 許容危險</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 許(허락할 허), 容(얼굴 용): 받아들임, 危(위태할 위), 險(험할 험). <strong>③ 합친 뜻:</strong> 법이 받아들이는 남은 위험. <strong>④ 이름의 이유:</strong> 위험을 완전히 없애야만 활동할 수 있다고 요구하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 필요한 안전조치를 하였어도 사회적으로 수용되는 위험. <strong>⑥ 쉬운 말:</strong> 할 수 있는 필요한 안전조치를 해도 남는 위험. <strong>⑦ 사례:</strong> 규칙을 준수한 교통이나 적절히 관리된 시설.</p>
+<p><strong>⑧ 시험:</strong> 객관적 주의의무 범위를 제한하는 기능. <strong>⑨ 비교·기억법:</strong> 조치를 생략해 만든 금지된 위험과 구별.</p>
+<h3>신뢰의 원칙 信賴原則</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신), 賴(힘입을 뢰), 原(근원 원), 則(법칙 칙). <strong>③ 합친 뜻:</strong> 상대의 적절한 행동을 믿을 수 있다는 기준. <strong>④ 이름의 이유:</strong> 모든 타인의 비정상 행동을 무한히 대비할 수 없기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적법하게 행동한 사람이 다른 참여자의 적절한 행동을 신뢰할 수 있다는 원칙. <strong>⑥ 쉬운 말:</strong> 규칙을 지키는 상황에서는 상대도 지킬 것이라 믿을 수 있다. <strong>⑦ 사례:</strong> 신호 준수 운전자와 분업적 공동작업.</p>
+<p><strong>⑧ 시험:</strong> 형법_008, 이미 인식한 위험·감독의무에서는 제한. <strong>⑨ 비교·기억법:</strong> 민법의 신의성실 원칙과 동일한 제도가 아니다.</p>
+<h3>결과적 가중범 結果的加重犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 結(맺을 결), 果(열매 과), 的(과녁 적), 加(더할 가), 重(무거울 중), 犯(범할 범). <strong>③ 합친 뜻:</strong> 결과로 더 무겁게 평가하는 범죄. <strong>④ 이름의 이유:</strong> 기본 범죄에 내포된 위험이 더 중한 결과로 실현되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 고의의 기본 범죄가 중한 결과로 이어져 가중하는 범죄유형. <strong>⑥ 쉬운 말:</strong> 일부러 시작한 범죄가 예견 가능한 큰 피해로 번졌다. <strong>⑦ 사례:</strong> 폭행과 예견 가능한 사망으로 인한 폭행치사.</p>
+<p><strong>⑧ 시험:</strong> 제15조 제2항, 중한 결과의 예견 가능성 필요. <strong>⑨ 비교·기억법:</strong> 단순 과실치사는 고의의 기본 범죄가 없어 이 유형과 다름.</p>
+<h3>진정·부진정 결과적 가중범 眞正·不眞正結果的加重犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 眞(참 진), 正(바를 정), 不(아닐 불), 結(맺을 결), 果(열매 과), 加(더할 가), 重(무거울 중), 犯(범할 범). <strong>③ 합친 뜻:</strong> 본래 형태 / 그보다 넓은 형태. <strong>④ 이름의 이유:</strong> 본래 고의·과실 결합형에서 포괄 범위를 넓혔기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중한 결과의 과실만 결합하는 유형과 고의 발생까지 포괄하는 유형. <strong>⑥ 쉬운 말:</strong> 뒤의 큰 피해를 일부러 냈을 때도 해당 조문에 넣는가. <strong>⑦ 사례:</strong> 상해치사 / 교재의 현주건조물방화치사상.</p>
+<p><strong>⑧ 시험:</strong> 형법_052는 진정의 고의＋과실을 묻는다. <strong>⑨ 비교·기억법:</strong> 고의 결합범과의 조문 구조·죄수 관계도 별도 확인.</p>
+<h3>직접성 直接性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 直(곧을 직), 接(이을 접), 性(성품 성). <strong>③ 합친 뜻:</strong> 기본 위험과 결과가 바로 이어지는 성질. <strong>④ 이름의 이유:</strong> 시간상 이어진 모든 결과를 붙이지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본 범죄의 전형적 위험이 중한 결과로 실현되어야 한다는 제한. <strong>⑥ 쉬운 말:</strong> 바로 그 범죄가 만든 위험이 터진 것인가. <strong>⑦ 사례:</strong> 감금으로 탈출하게 되어 발생한 상해.</p>
+<p><strong>⑧ 시험:</strong> 피해자 도피가 개입했다는 이유만으로 자동 부정하지 않음. <strong>⑨ 비교·기억법:</strong> 물리적으로 직접 만졌는지의 문제가 아니다.</p>
+<h3>예견 가능성 豫見可能性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 豫(미리 예), 見(볼 견), 可(옳을 가): 가능, 能(능할 능), 性(성품 성). <strong>③ 합친 뜻:</strong> 미리 내다볼 수 있는 성질. <strong>④ 이름의 이유:</strong> 나중 결과만으로 책임을 역산하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행위 당시 구체적 상황에서 중한 결과를 예상할 수 있었음. <strong>⑥ 쉬운 말:</strong> 그때 이 일이 생길 수 있다는 것을 알 수 있었나. <strong>⑦ 사례:</strong> 단순 넘어짐에서 이례적 사망까지 예상 가능한지.</p>
+<p><strong>⑧ 시험:</strong> 형법_009, 인과관계와 별도의 책임 요건. <strong>⑨ 비교·기억법:</strong> 실제로 예상한 인식과 예상할 수 있었던 가능성을 구별.</p>
+<h3>공동정범 共同正犯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 同(같을 동), 正(바를 정): 주된, 犯(범할 범). <strong>③ 합친 뜻:</strong> 함께 실행한 주된 범행자. <strong>④ 이름의 이유:</strong> 도와준 사람을 넘어서 공동으로 실행하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동의 범행 실행 관계에서 정범으로 책임지는 사람들. <strong>⑥ 쉬운 말:</strong> 함께 결정하고 실행을 나누어 한 사람들. <strong>⑦ 사례:</strong> 두 기관사의 공동 운행 결정과 공동 주의의무 위반.</p>
+<p><strong>⑧ 시험:</strong> 과실 공동정범의 학설 대립과 판례 입장. <strong>⑨ 비교·기억법:</strong> 현장에 함께 있었다는 사실이나 단순 방조와 다름.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 과실과 결과적 가중범</h2>
+<p><b>TOP3:</b> ① 과실 특별규정 ② 예견·회피＋신뢰의 한계 ③ 기본 고의＋중한 결과 과실.</p>
+<table><tr><th>개념</th><th>기준</th></tr>
+<tr><td>제14조</td><td>과실은 특별한 처벌 규정이 있을 때만 처벌</td></tr>
+<tr><td>인식 있는 과실</td><td>가능성 인식＋불발생 신뢰. 단순 희망만으로 고의 배제 불가</td></tr>
+<tr><td>업무상 / 중과실</td><td>업무상 요구된 주의 위반 / 현저한 주의 태만</td></tr>
+<tr><td>주의의무</td><td>결과 예견＋회피. 위반과 실제 결과 연결도 필요</td></tr>
+<tr><td>객관설 기준</td><td>해당 분야의 신중한 사람. 특별한 지식·경험 고려</td></tr>
+<tr><td>법규 준수</td><td>구체적 상황의 추가 주의의무가 있을 수 있음</td></tr>
+<tr><td>허용된 위험</td><td>필요한 안전조치 후 남는 사회적 위험. 모든 위험 허용 아님</td></tr>
+<tr><td>신뢰 제한</td><td>상대 위반 인식·신뢰 불가능 사정·사고 관련 자기 위반·감독의무</td></tr>
+<tr><td>과실 미수 / 공동정범</td><td>미수 부정 / 공동 행위와 주의의무 위반을 판례는 인정 가능</td></tr>
+<tr><td>진정 결과적 가중범</td><td>기본 고의＋중한 결과 과실. 제15조 제2항 예견 가능성</td></tr>
+<tr><td>부진정 유형</td><td>중한 결과의 고의도 포괄. 개별 조문 확인</td></tr>
+<tr><td>직접성</td><td>기본 범죄의 전형적 위험 실현. 피해자 도피가 자동 단절 아님</td></tr>
+<tr><td>공범</td><td>기본 범죄 공동 의사와 각자의 중한 결과 예견 가능성 구별</td></tr></table>
+<p><b>반드시 외울 문장:</b> 주의의무 위반과 결과의 연결은 별개로 증명한다. 결과적 가중범은 중한 결과만으로 책임을 지우는 제도가 아니다.</p>
+<p><b>함정:</b> 제한속도 준수면 무조건 면책 × / 무단횡단이면 언제나 무과실 × / 중과실은 큰 결과 × / 기본죄 미수면 가중죄도 항상 미수 ×.</p>
+<p><b>사례를 풀 순서:</b> 처벌 규정 → 고의/과실 → 구체적 주의의무 → 결과 연결 → 신뢰의 한계 → 기본죄 위험의 실현 → 중한 결과 예견 가능성.</p>
+</section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p><strong>복습 TOP3:</strong> ① 예견과 회피를 각각 질문하기 ② 신뢰할 수 없는 징후 찾기 ③ 결과적 가중범에서 고의와 과실의 대상을 나누기. 🟢 새로운 사고에서 조건·이유를 설명하면 이해 완료 / 🟡 이름과 결론만 기억하면 복습 필요 / 🔴 결과가 크면 모두 가중한다고 생각하면 이해 부족. 실제 답안을 받지 않았으므로 자기점검 기준을 제공한다.</p>
+<p>출처: 제공 본교재·워크북 제5강 및 형법 JSON. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%98%95%EB%B2%95">형법 제14·15·268·364조 등</a>. 판례 이야기는 교재·공식 판결에 제시된 사실 범위만 사용했다. 현행법과 차이가 있거나 조건을 생략한 교재 표현은 별도로 보완했다.</p>
+<h1>문제 부록 · 6문항·24개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-형법_008"><h4>형성평가 · 형법_008</h4><p class="question-stem">판례에 따를 때, 다음 중 피고인이 ‘신뢰의 원칙’을 주장할 수 없는 경우는?</p><ol class="choices"><li>상대방이 차선을 먼저 침범하였다</li><li>뒤에서 오던 차가 무모하게 앞지르려고 하였다</li><li>고속도로에서 보행자를 충격하였다</li><li>횡단보도가 아닌 곳에서 길을 건너는 보행자를 충격하였다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재는 정상적인 상황에서 상대 차의 차선 침범까지 모두 예상할 의무는 없다는 판례를 제시한다. 다만 이미 침범을 보았고 피할 수 있는 상황인지 등 특별한 사정은 별도다.</li><li><strong>비선택</strong> · 교재는 다른 차의 무모한 추월을 위해 항상 서행할 의무는 없다고 설명한다. 위험을 이미 인식한 뒤 가능한 조치까지 면제하는 것은 아니다.</li><li><strong>비선택</strong> · 교재는 고속도로의 통상 예상하기 어려운 보행자 사고에서 신뢰의 원칙을 인정한 사례를 제시한다. 장소만으로 자동 면책되지 않고 시야·발견 시점·회피 가능성을 본다.</li><li><strong>선택</strong> · 원자료 정답. 일반 도로 보행자에 대한 주의의무는 상대의 무단횡단만으로 사라지지 않는다는 교재의 전제다. 다만 실제 모든 무단횡단 사고에서 운전자 과실이 자동 인정된다는 뜻도 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_009"><h4>형성평가 · 형법_009</h4><p class="question-stem">책임주의의 입장에서 결과적 가중범을 단순한 과실범보다 더 무겁게 벌하는 법적 근거는 어떻게 설명될 수 있는가?</p><ol class="choices"><li>행위자가 의도하지 않은 무거운 결과가 발생했기 때문이다</li><li>행위자의 행위와 무거운 결과 사이에 인과관계가 인정되기 때문이다.</li><li>무거운 결과에 대해서 행위자의 과실이 인정되기 때문이다.</li><li>행위자의 기본범죄행위에 무거운 고의가 포함되어 있기 때문이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 중한 결과가 발생했다는 객관적 사실만으로는 책임주의를 충족하지 못한다. 결과만으로 가중하면 결과책임이 된다.</li><li><strong>비선택</strong> · 인과관계는 필요하지만 그것만으로는 중한 결과에 대한 주관적 비난 가능성이 설명되지 않는다.</li><li><strong>선택</strong> · 원자료 정답. 중한 결과에 대한 과실·예견 가능성이 책임주의에 맞게 가중책임을 제한한다. 다만 단순 과실범보다 무거운 이유까지 설명하려면 고의의 기본 범죄에 내포된 전형적 위험의 실현을 함께 말해야 한다.</li><li><strong>비선택</strong> · 진정 결과적 가중범에서 중한 결과의 고의까지 요구하는 것은 아니다. 기본 범죄에는 고의가 필요하지만 무거운 고의라는 불명확한 표현이 중한 결과의 과실을 대신하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_050"><h4>워크북 · 형법_050</h4><p class="question-stem">과실에 대한 설명으로 올바르지 않은 것은?</p><ol class="choices"><li>과실은 주관적 구성요건요소이다.</li><li>통설은 고의와 마찬가지로 구성요건요소이자 책임요소인 이중의 지위를 갖는다고 본다.</li><li>과실범은 법률에 특별한 규정이 없더라도 원칙적으로 처벌된다.</li><li>인식없는 과실뿐만 아니라 인식있는 과실도 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 분류로 맞다. 고의와 구별되는 과실을 설명한다. 다만 객관적 주의의무 위반도 구성요건에서 검토하므로 과실을 마음속 상태만으로 좁히지 않는다.</li><li><strong>비선택</strong> · 교재의 통설 설명으로 맞다. 객관적 주의의무 위반과 개인의 주의능력을 구성요건·책임 단계에서 구별한다.</li><li><strong>선택</strong> · 정답인 틀린 보기. 과실범은 특별한 처벌 규정이 있을 때만 처벌한다. 결과가 크다는 이유로 없는 규정을 만들 수 없다.</li><li><strong>비선택</strong> · 맞음. 가능성을 실제 인식했는지로 두 유형을 나눈다. 인식 있는 과실은 결과를 용인한 미필적 고의와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 81~82면. 과실은 고의와 함께 주관적 구성요건요소이다. 범죄의 성립을 위해서는 객관적 구성요건요소, 즉 범죄의 주체, 객체, 행위, 결과, 인과관계가 모두 존재해야 하는 것과는 달리, 주관적 구성요건요소는 고의와 과실 중 한 가지가 존재하면 된다. 중요한 것은 원칙적으로 주관적 구성요건은 고의를 의미한다는 점이다. 이를 '고의범 처벌의 원칙'이라고 한다. 달리 말하면 과실범은 원칙적으로 형법이 처벌하지 않는 것이다. 형법은 범죄인의 의사를 핵심적인 처벌의 대상으로 하기 때문이다. 과실범은 법률에 처벌규정이 있는 경우에만 예외적으로 처벌된다.</p></details></section>
+
+<section class="question-card" id="question-형법_051"><h4>워크북 · 형법_051</h4><p class="question-stem">과실범의 주의의무를 정확하게 나타낸 것은?</p><ol class="choices"><li>예견의무와 보호의무</li><li>예견의무와 안전의무</li><li>예견의무와 결과회피의무</li><li>예견의무와 결과실현의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보호의무는 다른 맥락에서 중요하지만 과실범 주의의무의 두 내용을 정확히 짝지은 답은 아니다.</li><li><strong>비선택</strong> · 안전의무 역시 관련 표현이나 여기서 요구하는 정식 구분은 예견과 결과회피다.</li><li><strong>선택</strong> · 정답. 결과 위험을 예견할 의무와 결과 발생을 막을 의무다. 의무를 지켰어도 결과가 불가피했는지는 별도 검토한다.</li><li><strong>비선택</strong> · 결과를 실현할 의무가 아니라 결과를 회피할 의무다. 방향을 정반대로 바꾼 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 83면. 과실의 내용은 주의의무 위반이라고 할 수 있고, 주의의무는 다시 결과발생에 대한 예견의무와 결과발생을 방지하기 위한 회피의무로 이루어져 있다고 할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-형법_052"><h4>워크북 · 형법_052</h4><p class="question-stem">진정결과적 가중범에 필요한 주관적 구성요건은 다음 중 무엇인가?</p><ol class="choices"><li>기본범죄에 대한 고의와 중한 결과에 대한 과실</li><li>기본범죄에 대한 과실과 중한 결과에 대한 고의</li><li>기본범죄에 대한 과실과 중한 결과에 대한 과실</li><li>기본범죄에 대한 고의와 중한 결과에 대한 고의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 진정 결과적 가중범은 기본 범죄의 고의와 중한 결과의 과실을 결합한다. 기본 위험의 실현·인과관계 등 객관적 요건도 필요하다.</li><li><strong>비선택</strong> · 기본 범죄와 중한 결과의 주관적 요건을 뒤바꾸었다. 기본 범죄는 고의에 의한 것이어야 한다.</li><li><strong>비선택</strong> · 기본 범죄의 고의가 빠져 있다. 전체가 과실이라면 일반 과실범의 문제와 구별해야 한다.</li><li><strong>비선택</strong> · 진정 결과적 가중범을 묻는 질문에 맞지 않는다. 중한 결과의 고의가 있는 경우 부진정 유형 또는 고의 결합범·별도 고의범의 구조를 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 89~90면. 결과적 가중범이란 기본범죄로 인하여 통상의 결과를 넘어서는 중한 결과가 발생한 경우 이를 그 (기본)범죄보다 가중하여 처벌하는 범죄를 말한다. 이때 기본범죄가 고의에 의한 것이어야 함은 문제가 없다(과실에 의해 중한 결과가 발생한 경우에는 통상의 과실범으로 처벌하면 되기 때문이다). 문제는 중한 결과인데, 이에 대해서 아무런 주관적 요건을 요구하지 않는다면 책임주의의 예외가 되어 버린다(책임주의는 범죄결과에 대한 책임을 요구하고, 책임의 핵심요소는 고의나 과실과 같은 주관적 요소이기 때문이다). 그러므로 형법 제15조 제2항은 중한 결과에 대해 '예견가능성', 즉 과실을 요구한다. 이에 따라 결과적 가중범은 기본범죄에 대한 고의와 중한 결과에 대한 과실을 필요로 하는 범죄로 정리할 수 있다. 이를 '진정결과적 가중범'이라 한다. 부진정결과적 가중범에 대해서는 교재를 통해 그 요건을 찾아보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_053"><h4>워크북 · 형법_053</h4><p class="question-stem">다음 중 결과적 가중범에 해당하지 않는 것은?</p><ol class="choices"><li>과실치사죄</li><li>폭행치사죄</li><li>상해치사죄</li><li>유기치사죄</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 과실치사는 단순 과실범으로, 고의의 기본 범죄에 중한 결과가 붙는 구조가 아니다. 사망이라는 큰 결과만으로 결과적 가중범이 되는 것은 아니다.</li><li><strong>비선택</strong> · 폭행의 고의와 사망 결과의 과실이 결합하는 대표적 결과적 가중범이다.</li><li><strong>비선택</strong> · 상해의 고의와 사망 결과의 과실이 결합하는 대표적 결과적 가중범이다.</li><li><strong>비선택</strong> · 고의의 유기 범죄가 예견 가능한 사망으로 이어지는 결과적 가중범이다. 유기의 주체·의무 등 기본죄 요건도 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 89면. 결과적 가중범의 예로는 보기 ②~④ 외에 체포·감금 치사상죄, 강간치사상죄, 강도치사상죄, 교통방해치사상죄 등을 들 수 있다. 과실치사죄는 결과적 가중범이 아니라 단순 과실범이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '형법총론 · CHAPTER 05' : 'PART · CRIMINAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(형법총론 · CHAPTER 05|PART · CRIMINAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('criminal-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

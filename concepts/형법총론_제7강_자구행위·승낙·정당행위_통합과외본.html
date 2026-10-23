@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>형법총론 제7강 자구행위·승낙·정당행위 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CRIMINAL LAW · CHAPTER 07</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">형법총론</span>
+    <span class="brand-sub">제7강 자구행위·승낙·정당행위 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./형법총론_개념.html">형법총론 개념 목록</a><a href="../index.html?subject=형법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>빌려 준 돈을 받지 못했다고 채무자의 물건을 마음대로 가져가도 될까? 상대가 동의하면 어떤 상처든 입혀도 될까? 직업상 하는 일이라면 남의 권리를 침해해도 될까? 이번 강은 세 질문에 <strong>“그럴 만한 이유”와 “법이 허용하는 요건”은 다르다</strong>고 답한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하는가?</td>
+<td>자구행위, 피해자의 승낙·양해·추정적 승낙, 정당행위다.</td>
+</tr>
+<tr>
+<td>왜 생겼는가?</td>
+<td>국가의 보호가 제때 오지 못하는 순간, 개인의 자기결정, 사회생활에 필요한 정당한 활동을 반영하기 위해서다.</td>
+</tr>
+<tr>
+<td>전체에서 어디인가?</td>
+<td>범죄체계의 위법성 단계다. 다만 양해는 더 앞선 구성요건 단계에서 작동한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>제6강의 방위·피난과 비교한다. 제8강에서는 허용되지 않는 행위를 한 사람에게 책임까지 물을 수 있는지 본다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>내 권리가 있다는 이유로 보복을 허용하거나, 동의·직업·명령만 있으면 범죄가 아니라고 오해한다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 본교재 136-157쪽(PDF 150-171쪽), 워크북 제7강 52-59쪽(PDF 376-383쪽), JSON 7문항·28개 보기. 별점은 학습 우선순위이며 실제 출제빈도·오답률 통계가 아니다. 현재 법령 보완 기준일은 2026년 10월 24일이다.</p>
+<p><strong>주석 색:</strong> <mark class="yellow">정의·암기 결론</mark> / <mark class="green">왜 허용하거나 제한하는가</mark> / <mark class="pink">조건·함정</mark> / <mark class="blue">다른 제도와 연결</mark>.</p>
+<h1>1. 자구행위: 직접 받아 내는 것이 아니라 보전하는 것</h1>
+<h2 id="criminal-07-01" data-concept-id="criminal-07-01">1-1. 제23조가 허용하는 좁은 예외 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 사적인 강제력 사용을 원칙적으로 막으면서 국가의 보호가 늦는 예외를 설명한다.</p>
+<p>국가는 소송·가압류·강제집행 같은 절차로 권리를 보호한다. 돈 받을 권리가 있다는 이유만으로 내가 상대를 붙잡거나 물건을 팔아 갚게 하면, 권리의 존재와 범위를 누구도 제대로 심사하지 못한다. 힘센 사람이 스스로 판사와 집행관이 되는 문제가 생긴다.</p>
+<p>그렇지만 채무자가 곧 외국으로 도주하려는 등 법정 절차를 기다렸다가는 청구권을 실현할 방법이 사라지는 순간도 있다. <mark class="yellow">자구행위는 법정 절차로 청구권을 보전할 수 없는 긴급한 상황에서 그 실행의 불능·현저한 곤란을 막기 위해 하는 상당한 행위다.</mark> 공항 사례에서도 “돈을 안 갚았으므로 붙잡아도 된다”가 아니라 실제 도주 위험, 법적 보호의 불가능, 일시적 보전의 필요와 정도를 모두 본다.</p>
+<p>보전은 나중에 적법하게 권리를 실현할 수 있도록 상태를 지키는 것이다. 만족은 실제로 돈을 받아 내거나 재산을 처분하여 권리를 실현하는 것이다. <strong>제23조는 원칙적으로 보전의 예외이지 사적 강제집행의 허가가 아니다.</strong> 보전 후에는 가능한 법적 절차로 이어져야 한다.</p>
+<p>정당방위는 현재의 침해를 막지만 자구행위는 이미 발생한 권리침해의 회복 가능성을 긴급히 보전한다. 둘 다 부정 대 정의 관계를 기본으로 한다. 긴급피난과 함께 긴급행위이고, 자구의사 등 주관적 정당화 요소와 상당한 이유도 필요하다. 다만 같은 ‘상당성’이라도 요건의 강도는 다르다.</p>
+<p><strong>시험:</strong> 형법_059. <strong>키워드:</strong> 청구권·보전·사후 긴급구제. <strong>한 줄:</strong> 직접 갚게 만드는 권리가 아니라 적법하게 갚게 할 기회가 사라지지 않도록 지키는 예외다.</p>
+<h2 id="criminal-07-02" data-concept-id="criminal-07-02">1-2. 어떤 권리를 누구를 위해 지킬 수 있는가 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 보전할 수 있는 권리와 단순 보복을 구분한다.</p>
+<p>대상은 사법상의 청구권이다. 재산에 관한 채권·물권적 청구권뿐 아니라 가족·상속 관계에서도 성질상 보전할 수 있는 청구권이 문제될 수 있다. 생명·신체·자유·명예를 이미 침해당했다는 이유로 상대에게 같은 해를 가하는 것은 그 권리의 보전이 아니다. 손해배상청구권이 생겼더라도 따로 그 청구권의 긴급한 보전 요건을 충족해야 한다.</p>
+<p>기본적으로 자기 청구권을 위한 행위다. 제6강의 타인을 위한 정당방위처럼 누구나 일반적으로 남의 권리를 대신 강제 보전할 수 있는 것은 아니다. 다만 권리자로부터 적법하게 권한을 받은 사람의 행위는 가능성을 검토한다. 교재의 호텔 주인이 종업원에게 요금을 내지 않고 도주하는 손님을 제지하도록 부탁한 예도 <strong>위임과 긴급성·최소한의 제지</strong>가 모두 전제다.</p>
+<p>교재의 도난품 회수 사례를 시간 순으로 보자. 훔쳐 가는 현장에서 곧바로 추격해 회수하려는 때에는 침해의 현재성이 남아 정당방위가 문제될 수 있다. 나중에 우연히 발견한 물건을 회수하는 때에는 동일한 현재성을 당연히 인정할 수 없고 자구행위 요건 등을 별도로 본다. 자기 물건이라는 사실만으로 모든 방법이 정당해지지는 않는다.</p>
+<p>토지·건물은 보통 채무자와 함께 도주하지 않는다. 그래서 법적 절차로 인도를 받을 수 있는데 강제로 몰아내는 일을 긴급한 자구행위라고 보기 어렵다. 담보가 충분해 나중의 집행 가능성이 보전되어 있는 경우에도 당장 사적 강제력을 써야 한다는 주장은 약해진다. 각각 실제 보전 위험을 따지는 것이지 부동산이라는 단어 하나로 모든 사안을 기계적으로 결정하는 것은 아니다.</p>
+<p><strong>시험:</strong> 권리가 있음과 즉시 보전 필요는 별도. <strong>키워드:</strong> 자기 청구권·위임·회복 가능성. <strong>한 줄:</strong> 누구의 어떤 권리를, 지금 지키지 않으면 무엇이 불가능해지는지 말할 수 있어야 한다.</p>
+<h2 id="criminal-07-03" data-concept-id="criminal-07-03">1-3. 보충성·상당성·과잉자구행위 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 긴급한 권리보전이 사적 폭력으로 변하지 않도록 한계를 정한다.</p>
+<p>법정 절차는 본안소송만 뜻하지 않는다. 가압류·가처분·수사기관의 보호 등 그 상황에서 이용할 수 있는 적법한 수단을 함께 본다. 절차가 번거롭다는 정도는 부족하다. 지체하면 청구권 실행이 불가능하거나 현저히 어려워지고 법적 보호를 제때 받을 수 없어야 한다. 이 점에서 자구행위의 <strong>보충성</strong>은 엄격하다.</p>
+<p>상당성은 필요한 범위의 보전 방법을 요구한다. 긴급피난과 똑같은 본질적 우월성만 요구하는 것은 아니지만, 재산 보전을 위해 생명을 해치는 등 현저한 불균형은 허용되지 않는다. 교재의 ‘채무자가 탄 비행기를 멈추려고 허위 폭발물 신고를 한다’는 예는 다른 사람들의 안전과 공적 업무를 크게 침해하므로 정당화될 수 없는 수단을 보여 준다. 채무자의 물건을 임의로 팔아 변제에 충당하는 것도 보전과 만족을 혼동한 것이다.</p>
+<p><strong>2005도8081의 핵심 장면:</strong> 채권을 가진 쪽이 권리를 실현한다며 상대에게 불법한 압박을 가했다. 재판에서 중요한 것은 채권의 존재만이 아니라 그 실현 방법이었다. 교재가 소개하는 판례 법리는 권리실행이라도 협박·폭행 등 수단이 허용 범위를 넘으면 범죄가 될 수 있다는 것이다. <strong>“권리자다” → 목적의 사정일 뿐 / “방법이 정당하다” → 따로 심사할 문제</strong>로 읽는다. 반대 결론이면 채권자가 사적 제재를 마음대로 할 수 있게 된다.</p>
+<p>과잉자구행위는 자구상황과 자구의사는 있으나 상당한 정도를 넘은 행위다. 제23조 제2항은 정황에 따라 형을 줄이거나 면제할 수 있도록 한다. <mark class="pink">제21조 제3항의 야간·공포 등 특별한 불안 상태에 관한 불처벌 규정은 자구행위에 준용되지 않는다.</mark> 오상자구행위는 실제 보전 상황이 없는데 있다고 잘못 믿은 경우로, 제8강의 정당화 전제사실 착오와 이어진다.</p>
+<p><strong>시험:</strong> 과잉의 임의 감면과 위법성 조각을 구분. <strong>키워드:</strong> 법적 보호 불가능·최소한·제23조 제2항. <strong>한 줄:</strong> 받을 권리가 있어도 폭력으로 받을 권리까지 생기지는 않는다.</p>
+<h1>2. 피해자의 승낙: ‘좋다’는 말의 법적 한계</h1>
+<h2 id="criminal-07-04" data-concept-id="criminal-07-04">2-1. 제24조의 승낙과 구성요건상 양해 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 동의 때문에 범죄의 어느 단계가 충족되지 않는지 구별한다.</p>
+<p>사람은 자기 재산·생활에 관해 결정할 수 있다. 법은 보호받는 사람이 적법하게 처분할 수 있는 이익에 대해 자유롭게 허락한 행위라면 일정 범위에서 그 결정을 존중한다. 제24조는 그런 승낙에 따른 침해를 원칙적으로 정당화하되 법률의 특별 규정이 있으면 그 규정을 따르도록 한다.</p>
+<p><mark class="yellow">양해는 구성요건 해당성을 배제하고, 피해자의 승낙은 구성요건에 해당하는 행위의 위법성을 조각한다.</mark> 교재의 대표 사례는 물건 소유자이자 점유자가 “가져가도 된다”고 허락한 경우다. 권리자의 의사에 반하여 점유를 빼앗은 것이 아니므로 절취 자체가 없다. 절도죄가 일단 성립할 모습인데 위법성만 없어진다고 쓰면 단계가 틀린다.</p>
+<p>강간·강제추행·감금·주거침입 등 의사에 반한 침해가 중요한 범죄에서도 동의가 구성요건 판단에 영향을 줄 수 있다. 그러나 교재의 죄명 목록을 <strong>‘허락 한마디면 언제나 구성요건 없음’</strong>으로 외우지 않는다. 동의할 권한, 실제 보호법익, 동의의 자유와 범위, 연령 등에 관한 별도 규정이 있다. 미성년자 대상 성범죄의 특별 규정, 주거의 사실상 평온 등은 각론에서 따로 확인한다. 문서·비밀 관련 범죄 역시 명의자나 특정 개인의 허락만으로 공공의 신용까지 처분할 수 있는 것은 아니다.</p>
+<p><strong>시험:</strong> 형법_060. <strong>키워드:</strong> 양해=구성요건 / 승낙=위법성. <strong>한 줄:</strong> 무죄라는 결과가 같아도 어느 관문에서 멈추는지가 다르다.</p>
+<h2 id="criminal-07-05" data-concept-id="criminal-07-05">2-2. 처분할 수 있는 법익과 승낙능력 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 누가 무엇을 허락할 수 있는지 정한다.</p>
+<p>승낙은 원칙적으로 <strong>개인에게 처분권이 있는 개인적 법익</strong>을 대상으로 한다. 국가의 재판 기능이나 공공의 안전은 개인 혼자 허락해 없앨 수 없다. 2005도2712의 무고죄 관련 설명은 고소당할 사람이 동의했다고 국가의 형사사법 기능을 해치는 허위 신고까지 정당화되지 않는다는 뜻이다. 자기 소유 건물을 태우는 경우에도 소유권 동의와 공공 위험에 대한 처벌은 별도다.</p>
+<p>생명은 일반적인 승낙으로 살해를 정당화할 수 있는 법익이 아니다. 형법 제252조가 촉탁·승낙에 의한 살인을 따로 처벌한다. 따라서 형법_061의 ‘승낙이 전혀 인정되지 않는다’는 표현은 <strong>제24조에 의한 정당화가 되지 않는다</strong>는 취지로 읽는다. 동의가 죄명·형벌 판단에서 법적으로 아무 의미도 없다는 뜻은 아니다.</p>
+<p>상해는 모든 동의가 무효인 것도, 모든 동의가 유효한 것도 아니다. 특별한 금지 규정과 사회상규상 허용 여부를 확인한다. 의료행위처럼 신체에 침습이 있어도 정당한 목적·방법·동의가 있는 경우와 보험사기를 위한 상해는 다르다.</p>
+<p>승낙자는 법익의 주체 또는 적법한 범위에서 대리할 수 있는 사람이어야 한다. 부모·배우자라는 관계만으로 모든 신체·사생활에 대한 처분권을 얻지는 않는다. <strong>승낙능력</strong>은 그 침해의 의미와 결과를 이해하고 판단할 능력이다. 민법상 성년·미성년이나 법률행위 능력과 정확히 겹치지 않는다. 미성년자라도 사안에 따라 판단능력이 있을 수 있고 성년이라도 의식·판단 상태에 따라 없을 수 있다. 필요한 특별 규정은 별도다.</p>
+<p><strong>시험:</strong> 형법_012·061. <strong>키워드:</strong> 처분권·개인적 법익·실질적 판단능력. <strong>한 줄:</strong> 허락한 사람이 그 이익을 결정할 권한과 판단능력을 가졌는지 먼저 묻는다.</p>
+<h2 id="criminal-07-06" data-concept-id="criminal-07-06">2-3. 자유로운 의사·시점·표시·철회 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 겉으로 한 “네”와 실제 유효한 동의를 구별한다.</p>
+<p>승낙은 자유롭고 진지해야 한다. 협박에 눌려 말했거나, 침해의 본질에 관한 중요한 사실을 속아서 말했다면 유효성이 문제된다. 모든 사소한 동기의 착오를 똑같이 무효로 보는 것은 아니지만, 어떤 행위인지 모르는 허락을 곧바로 자기결정으로 보기는 어렵다.</p>
+<p>의료행위에서 설명은 환자의 결정을 가능하게 한다. 교재는 설명이 오히려 환자에게 중대한 위험을 줄 수 있는 특수 상황 등을 논하지만, 이를 ‘불안해할 것 같으니 설명하지 않아도 됨’으로 넓히면 안 된다. 현행 의료법 제24조의2는 일정한 수술·수혈·전신마취에서 설명·서면동의를 규정하고, 지체하면 생명 위험이나 중대한 장애를 초래할 경우의 예외를 둔다. 설명을 기다릴 수 없는 응급상황과 단순한 편의는 다르다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032850229">의료법 제24조의2</a></p>
+<p>승낙은 행위 전 또는 적어도 행위 당시 존재해야 한다. 일이 끝난 뒤 “용서한다”는 말은 이미 성립한 범죄의 위법성을 소급해서 없애지 않는다. 다만 고소·처벌불원·양형에 미치는 영향은 해당 범죄의 다른 규정으로 본다. 승낙은 철회할 수 있고 특별한 형식을 반드시 요구하는 것은 아니다. 2010도9962 관련 교재의 포인트도 계속되는 행위에서 철회와 범위를 확인하라는 것이다.</p>
+<p>마음속 승낙만으로 충분한지, 외부 표시가 필요한지는 의사방향설·표시설·절충설이 대립한다. 시험에서는 학설의 기준을 나누고, 판례·실무적으로는 실제 의사와 그 표현·인식 근거를 확인한다. 명시적 말뿐 아니라 사정상 명백한 묵시적 허락이 문제될 수 있지만 <strong>침묵은 언제나 동의가 아니다.</strong> 행위자도 승낙을 알고 그 승낙에 따라 행동해야 한다는 주관적 요소를 함께 본다.</p>
+<p><strong>시험:</strong> 사후 추인과 사전·동시 승낙, 민법상 행위능력과 승낙능력. <strong>키워드:</strong> 자유·진지·행위 당시·철회. <strong>한 줄:</strong> 무엇을 얼마나 허락했는지, 그 허락이 그때도 살아 있었는지를 확인한다.</p>
+<h2 id="criminal-07-07" data-concept-id="criminal-07-07">2-4. 사회상규에 반하는 동의는 만능 면책이 아니다 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 개인의 선택을 존중하되 위법한 침해를 무제한 허용하지 않는다.</p>
+<p>승낙의 사회적 허용 여부를 평가할 때는 단순히 동기가 마음에 드는지만 보지 않고 침해 행위의 성질과 정도, 목적, 관련 법질서를 함께 본다. 동의한 상해의 한계가 대표적이다. 85도1892의 종교적 의식 과정에서 발생한 치명적 신체침해 사례는 종교적 동의가 생명·신체 침해를 모두 정당화하지 않는다는 교재의 예다. 의식의 이름이 아니라 실제 행위와 결과를 본다.</p>
+<p><strong>2008도9606의 이야기:</strong> 보험금을 부정하게 받으려는 계획에 신체침해를 받을 사람이 동의했다. 갈등은 “내 몸인데 내가 허락하면 되는가”였다. 교재가 소개하는 판례는 사회상규에 어긋나는 상해행위의 승낙을 정당화 근거로 삼을 수 없다고 본다. <strong>당사자의 동의 → 존재할 수 있음 / 법이 허용하는 동의 → 별도 심사</strong>다. 반대 결론이면 범죄 목적의 신체침해를 합의만으로 정당화하게 된다.</p>
+<p>이에 비해 소유자가 자기 자동차를 손괴하도록 허락한 사례에서는 재산 처분의 자유에 따라 재물손괴의 판단이 달라질 수 있다. 그렇다고 보험사기나 다른 범죄까지 사라지는 것은 아니다. <strong>같은 계획 속 여러 행위도 각 죄의 보호법익과 요건별로 판단한다.</strong> 재산의 처분 가능성과 신체침해의 사회적 한계를 혼동하지 않는다.</p>
+<p><strong>시험:</strong> 형법_012의 ④가 함정. <strong>키워드:</strong> 동의 존재와 정당화 효력·법익별 판단. <strong>한 줄:</strong> 서로 합의했는가와 그 합의를 법이 정당화 근거로 인정하는가는 다른 질문이다.</p>
+<h2 id="criminal-07-08" data-concept-id="criminal-07-08">2-5. 추정적 승낙: 실제로 물을 수 없을 때 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 실제 동의를 받을 수 없는 상황에서 권리자의 의사를 존중할 방법을 설명한다.</p>
+<p><mark class="yellow">추정적 승낙은 현실의 승낙을 얻을 수 없지만 당시 사정을 보아 권리자가 알았다면 승낙했을 것이라고 인정되는 경우다.</mark> 행위 전의 객관적 사정과 그 사람의 실제 가치관·의사를 기준으로 한다. 나중에 화내지 않을 것 같다는 예상이나 내 생각에 이익이라는 판단만으로 대신하지 않는다.</p>
+<p>교재는 권리자를 위한 유형으로 의식을 잃은 환자의 긴급 치료, 부재 중인 배우자에게 온 편지를 특별한 사정에서 열어 보는 경우를 든다. 후자는 혼인관계면 비밀을 마음대로 열어도 된다는 뜻이 아니다. 실제 물을 수 없는지, 꼭 필요한지, 그 사람이라면 허락했을 구체적 근거가 있는지를 확인한다.</p>
+<p>행위자·제3자를 위한 유형으로 집안일을 돕는 사람이 버릴 물건이라고 믿은 물건을 어려운 사람에게 주는 예, 평소 서로 빌려 쓰던 친구의 오토바이를 쓰는 예가 나온다. 우호관계나 좋은 목적만으로 정당화하지 않는다. 대상 물건, 기존 허락의 범위, 이용 목적과 위험 등 구체적 사실이 중요하다.</p>
+<p>보충성이 있으므로 연락하여 실제 승낙을 받을 수 있는데도 생략해서는 안 된다. 처분 가능한 법익·승낙능력·사회적 허용 범위도 그대로 필요하다. 명확하게 거부한 사실을 알면서 “합리적인 사람이라면 동의했을 것”이라고 의사를 덮어쓸 수 없다. 다른 긴급피난·특별법상 근거가 있는지는 별도 문제다.</p>
+<p><mark class="blue">추정적 승낙은 그 사람의 가정적 의사, 긴급피난은 법익 충돌과 이익교량이 중심이다.</mark> 결과적으로 도움이 되었다는 사후 사정만으로 당시의 근거 부족을 메우지 않는다.</p>
+<p><strong>시험:</strong> 실제 승낙을 얻을 수 없는 사정과 의사 추정의 근거. <strong>키워드:</strong> 사전 판단·본인의 의사·보충성. <strong>한 줄:</strong> “내가 보기엔 좋다”가 아니라 “그 사람이라면 허락했을 근거가 있다”여야 한다.</p>
+<h1>3. 정당행위: 법질서 전체에서 허용되는 행동</h1>
+<h2 id="criminal-07-09" data-concept-id="criminal-07-09">3-1. 제20조의 세 유형과 적법한 공무 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 법령·업무·사회상규가 구성요건에 해당하는 행위를 정당화하는 이유를 설명한다.</p>
+<p>형법 제20조는 <strong>법령에 따른 행위, 업무로 인한 행위, 그 밖에 사회상규에 어긋나지 않는 행위</strong>를 규정한다. 모두 법질서 전체에서 허용할 수 있는 행동이라는 공통점이 있다. 사회상규는 내용을 구체화하는 판단 기준이지 개인이 법률을 마음대로 무시할 수 있는 허가증이 아니다. 방위·피난 등 더 구체적인 규정이 맞는지 먼저 확인한다.</p>
+<p>적법한 공무집행에는 추상적 직무 권한, 그 사건에서의 구체적 권한, 필요한 절차가 있어야 한다. 법이 정한 절차의 강제집행·체포 등은 겉으로 자유·재산을 제한하지만 법질서가 허용한 활동이다. 교재의 형벌 집행 사례는 이러한 법적 구조를 설명하는 것이며 실제 집행 현황까지 주장하는 것은 아니다. 직책이나 공무원 신분만으로 모든 행위가 적법해지지는 않는다.</p>
+<p>현행범 체포는 법정 요건 아래 일반인도 할 수 있다. 체포에 필요한 최소한의 유형력과 체포 뒤 보복은 다르다. 학교의 징계·정당한 노동쟁의·법정 요건에 따른 의료결정도 각각 관련 법률의 범위와 절차를 지킨 경우에 검토한다. <strong>법령에 근거가 있음 → 행위의 범위·방법까지 적법함</strong>으로 곧장 건너뛰지 않는다.</p>
+<p><strong>시험:</strong> 형법_062의 분류. <strong>키워드:</strong> 법령·업무·사회상규·권한과 절차. <strong>한 줄:</strong> 법이 맡긴 일을 법이 정한 범위와 방식으로 했는지가 중요하다.</p>
+<h2 id="criminal-07-10" data-concept-id="criminal-07-10">3-2. 상관 명령·학교 징계·노동쟁의의 한계 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 권위와 조직의 관행이 불법을 적법하게 바꿀 수 없음을 보여 준다.</p>
+<p><strong>87도2358의 이야기:</strong> 수사기관 구성원들이 상관의 지시 등에 따라 수사대상자를 고문하여 사망에 이르게 한 사건이다. 법원이 마주한 주장은 명령과 조직의 관행 때문에 어쩔 수 없었다는 것이었다. 교재의 판례 결론은 명백히 위법한 고문 명령에 복종할 의무가 없고, 그 관행이 정당화나 적법행위의 기대불가능을 만들어 주지 않는다는 것이다. <strong>복종의무 → 적법한 명령의 범위 / 관행 → 위법성을 없애는 법이 아님</strong>으로 읽는다. 반대 결론이면 조직의 지시만으로 기본권 침해를 정당화하게 된다.</p>
+<p>99도636의 선거 관련 허위 유인물 등 정치 관여 지시 사례도 직무상 명령이면 무엇이든 적법하다는 주장을 배척하는 맥락이다. 다만 명령이 적법하다고 오인한 경우는 무엇을 잘못 알았는지를 나눈다. 사실관계를 잘못 알았다면 정당화 전제사실 착오, 사실을 알면서 법적으로 허용된다고 생각했다면 위법성 착오가 문제될 수 있다. 모든 경우를 같은 착오로 처리하지 않는다.</p>
+<p><strong>학교 징계 보완:</strong> 교재와 형법_062의 학교장 징계 예는 적법한 징계만 뜻한다. 교육 목적이 있다는 이유로 체벌이 허용되지 않는다. 현행 초·중등교육법 시행령 제40조의3은 학생생활지도와 방어·보호를 위한 제지에서도 신체에 고통을 가하는 방법을 금지한다. 2022도1718도 금지된 체벌은 훈육 목적만으로 정당화되지 않는다고 보았다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lspttninfSeq=198833">현행 학생생활지도 규정</a> · <a href="https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=4&seqnum=8873">대법원 2022도1718</a></p>
+<p>워크북의 부모 징계 관련 표현도 주의한다. <strong>민법 제915조의 친권자 징계권 규정은 2021년에 삭제되었다.</strong> 보호·교육 의무와 아동에 대한 폭력 허용은 다른 문제다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0915&lsiSeq=284415&urlMode=lsScJoRltInfoR">민법 제915조</a></p>
+<p>노동쟁의도 정당한 주체·목적·절차·수단을 확인한다. 교재의 2007도482 전원합의체는 모든 파업이 당연히 업무방해죄의 위력이 되는 것은 아니며, 예측하기 어려운 시기에 전격적으로 이루어져 사업 운영에 심대한 혼란·막대한 손해를 주는 등 사정을 살펴야 한다는 구조다. 90도2852의 형량 등에 항의한 쟁의 사례와 저자의 비판은 구별한다. 정치적 쟁점과 근로조건의 관련성을 구체적으로 보아야 하며 옛 사례의 명칭만으로 현재의 모든 쟁의를 결론 내리지 않는다.</p>
+<p><strong>2026년 보완:</strong> 3월 10일 시행된 개정 노동조합법은 사용자·노동쟁의 범위 등을 바꾸었다. 실질적·구체적으로 근로조건을 지배·결정하는 지위, 근로조건에 영향을 미치는 사업경영상 결정 등 개정 요건을 확인한다. 이는 모든 파업·손해행위를 자동 적법하게 만든다는 뜻은 아니다. <a href="https://moel.go.kr/news/enews/report/enewsView.do?news_seq=19047">고용노동부 개정법 설명</a></p>
+<p><strong>시험:</strong> 명백히 불법인 명령과 적법한 직무, 징계와 체벌. <strong>키워드:</strong> 적법한 명령·개별 법률의 한계. <strong>한 줄:</strong> 상관·부모·학교·노동조합이라는 이름보다 실제 행위의 요건이 먼저다.</p>
+<h2 id="criminal-07-11" data-concept-id="criminal-07-11">3-3. 의료·변론·종교·보도의 업무행위 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 사회적으로 필요한 업무도 수단과 범위의 심사를 받는다는 것을 설명한다.</p>
+<p>업무는 사회생활상 계속·반복하여 하는 사무다. 반드시 돈을 받는 직업만 뜻하지 않는다. 형식적 계약의 흠이 있다는 이유만으로 언제나 사회적 보호가 사라지는 것도 아니다. 반대로 업무라는 이름만 붙인 불법 활동이 정당화되는 것도 아니다.</p>
+<p>의사의 치료는 신체에 침습을 가할 수 있지만 의학적으로 적절한 목적·방법, 환자의 유효한 동의 등을 갖추었는지 본다. 학설은 구성요건 해당성 자체를 부정하거나 승낙·업무행위에 따른 위법성 조각으로 설명하는 등 차이가 있다. 치료 결과가 나쁘다는 사실만으로 곧바로 과실이 생기는 것은 아니며 진료상 주의의무 위반과 인과관계를 따로 심사한다.</p>
+<p>연명의료 중단은 단순히 가족이 원하거나 환자가 말기 상태라는 이유만으로 가능한 것이 아니다. <strong>임종과정에 있다는 의학적 판단, 환자의 의사 확인 등 법정 절차</strong>가 필요하다. 합법적 연명의료 중단과 적극적으로 생명을 끊는 행위는 구별한다. 교재의 관련 법률 설명은 제도적 절차를 지킨 행위가 왜 정당화되는지를 보여 준다. <a href="https://www.lst.go.kr/userinfo/medicalperson/suspensionPendingGuide.do">국립연명의료관리기관 절차 안내</a></p>
+<p>변호사의 변론에서는 사건을 밝히는 데 필요한 사실을 적절한 범위에서 말하는 행위가 정당화될 수 있다. 그러나 불필요하게 타인의 비밀을 퍼뜨리거나 허위 증거를 만들고 위증을 시키는 행동까지 업무행위가 되는 것은 아니다. 형법_062의 비밀 누설 보기는 이 적정한 변론 범위가 전제된 축약 표현이다.</p>
+<p>종교활동에서도 고민을 듣거나 통상적인 도움을 제공하는 것과 범인을 적극 숨겨 도피시키는 것은 다르다. 교재의 82도3248 관련 사례는 종교적 동기만으로 적극적 범인도피를 정당화할 수 없다는 경계를 보여 준다. 일반인에게 포괄적 범죄 신고의무가 있는 것은 아니므로, 단순히 신고하지 않은 행위는 먼저 구성요건·특별한 의무 여부부터 확인한다.</p>
+<p>언론의 정당한 취재·보도 역시 공익적 기능이 있지만 불법한 방법까지 무제한 허용하지 않는다. 교재의 2011도639 관련 설명은 취재 목적, 요청·행동의 방식과 범위를 보라는 뜻이다. <strong>직업은 출발점이지 결과를 미리 정하는 면허가 아니다.</strong></p>
+<p><strong>시험:</strong> 형법_062의 ④는 모든 비밀 누설 허용이 아님. <strong>키워드:</strong> 업무의 사회적 상당성·필요한 범위. <strong>한 줄:</strong> 일을 잘하려는 목적과 그 일을 위해 쓴 방법을 각각 살핀다.</p>
+<h2 id="criminal-07-12" data-concept-id="criminal-07-12">3-4. 사회상규의 다섯 판단 요소와 판례 읽기 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 법률의 개별 예외로 다 적을 수 없는 행위를 전체 법질서에 맞게 평가한다.</p>
+<p>사회상규는 법질서 전체의 정신과 그 바탕의 사회윤리·통념에 비추어 허용할 수 있는 기준이다. 단순히 다수가 좋아한다는 뜻이나 판사 개인의 취향이 아니다. 전통적인 판단 요소는 <strong>동기·목적의 정당성, 수단·방법의 상당성, 보호·침해 법익의 균형성, 긴급성, 보충성</strong>이다.</p>
+<p><mark class="green">목적만 좋으면 수단이 나빠도 된다는 판단과, 수단 하나만 떼어 전체 사정을 지워 버리는 판단을 함께 피하려고 여러 요소를 본다.</mark> 2017도2760(2023년 5월 18일)은 이 요소들이 불가분적으로 연결되어 종합 평가되어야 하고, 긴급성·보충성이 모든 적법한 수단의 존재 가능성을 완전히 없애야 한다는 뜻은 아니라고 설명했다. 그렇다고 필요한 대안 검토를 전부 생략하라는 의미는 아니다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=234935">대법원 판결</a></p>
+<p><strong>소극적 방어 사례들:</strong> 81도2958은 강제로 끌고 가려는 상황의 저항, 84도1440·92도37 등은 위법한 공격에서 벗어나려는 대응, 89도1426은 운전자를 붙잡는 행동에서 벗어나려 한 대응이라는 교재의 맥락이다. 갈등은 유형력이 있었다는 이유만으로 모두 폭행 책임을 물을지다. 판례는 구체적 경위와 방어적·소극적 성격을 보아 사회상규상 정당행위를 인정할 수 있다고 설명한다. 2008도2695도 개별 사정을 종합하는 논의와 이어진다.</p>
+<p>법원의 표현을 풀면 <strong>“소극적 저항” → 공격하려는 것이 아니라 부당한 상태에서 벗어나려는 행동 / “사회통념상 허용” → 경위와 정도를 함께 볼 때 형법상 금지할 수준을 넘지 않음 / “위법성 조각” → 범죄의 겉모습이 있어도 행위가 법적으로 허용됨</strong>이다. 상처가 가볍다는 이유만으로 모든 폭행이 허용되지는 않는다. 저자는 이러한 방어행위를 제21조로 더 충실하게 심사할 필요도 논한다. 판례의 적용 조항과 저자의 평가를 섞지 않는다.</p>
+<p>음란 표현과 예술·학술·교육의 결합에 관한 2012도13352도 작품이라는 이름만으로 면책하는 것이 아니다. 먼저 구성요건 해당성, 내용 전체의 성격을 보고, 사회적 해악이 해소되는 구체적 맥락에서 정당행위 가능성을 검토한다. 예술이라는 표지와 실제 표현의 법적 평가는 다르다.</p>
+<p>2015도6008의 선거 관련 금품 제공 사례는 법정 기부행위 예외와 사회상규의 관계를 보여 준다. 법률상 열거된 예외 외에는 언제나 제20조가 불가능하다고 단정하지 않지만, 통상적 의례의 범위인지 등 사정을 엄격히 본다. 적은 금액이거나 친분이 있다는 사실만으로 항상 허용되는 것은 아니다.</p>
+<p>워크북의 수지침·징계 권한 없는 사람의 행동·권리실현 사례도 같은 방법으로 읽는다. 무면허 의료나 사적 징계를 일반적으로 허용하는 예가 아니라 특정 사안의 위험·경위·정도 등을 평가하는 논의다. <strong>권리실행의 필요성은 그 자체로 사회상규 판단을 대체하는 독립 면허가 아니다.</strong></p>
+<p><strong>시험:</strong> 형법_013·063. <strong>키워드:</strong> 목적·수단·균형·긴급·보충의 종합. <strong>한 줄:</strong> 다섯 단어를 외운 뒤 구체적 사건에서 서로 어떻게 작동하는지 설명한다.</p>
+<h1>4. 문제로 연결하기</h1>
+<h2>먼저 풀 TOP5</h2>
+<ol>
+<li><strong>형법_059:</strong> 세 긴급행위의 공통점과 부정 대 정 / 정 대 정의 차이.</li>
+<li><strong>형법_060:</strong> 양해와 승낙이 작동하는 단계.</li>
+<li><strong>형법_012:</strong> 승낙의 능력·자유·법익·사회상규 요건.</li>
+<li><strong>형법_062:</strong> 위법한 명령과 적법한 징계·업무의 한계.</li>
+<li><strong>형법_063:</strong> 사회상규의 다섯 요소와 권리실행 필요의 구별.</li>
+</ol>
+<p>7문항은 긴급행위 비교 1개, 동의 관련 3개, 정당행위 관련 3개다. 실제 오답률은 없다. 헷갈리기 쉬운 보기는 ‘소유자니까 강제로 회수’, ‘동의하면 살인도 정당화’, ‘학교장이라 체벌 가능’, ‘비밀 누설도 변호사라면 모두 허용’이다. 원본 문제는 보존하고 조건을 보기별 해설에 보완했다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>문제 1.</strong> 가구 제작비를 받지 못한 업체가 채무자의 창고를 강제로 열어 물품을 가져가 팔았다. 채무자에게는 충분한 담보가 있었고 가압류도 가능한 상태였다. 자구행위인가?</p>
+<p><strong>답·의도:</strong> 청구권의 존재만으로 부족하다. 법적 보전이 가능한지, 집행이 불가능·현저히 곤란해지는지, 행위가 보전인지 사적 만족인지 본다. 담보와 절차가 있고 임의 처분까지 했다면 제23조의 요건을 인정하기 어렵다.</p>
+<p><strong>문제 2.</strong> 물건 소유자이자 점유자가 전시용 의자를 친구에게 주겠다고 허락했다. 친구가 이를 가져간 것은 절도죄가 성립할 모습이지만 승낙으로 위법성만 없어진 것인가?</p>
+<p><strong>답·의도:</strong> 아니다. 유효한 허락의 범위라면 의사에 반한 절취가 없어 구성요건 단계의 양해다. 똑같이 처벌하지 않더라도 법적 이유를 정확히 구분한다.</p>
+<p><strong>문제 3.</strong> 의식이 없는 환자의 긴급한 처치를 검토하던 의료진이 환자가 해당 처치를 명확히 거부한 유효한 의사표시를 발견했다. “누구나 건강해지기를 원한다”는 말만으로 추정적 승낙이 되는가?</p>
+<p><strong>답·의도:</strong> 아니다. 추정적 승낙은 실제 본인의 의사를 존중하는 제도다. 알고 있는 명확한 거부를 일반적 추측으로 덮을 수 없다. 의사표시의 범위·효력과 별도 법적 근거를 검토해야 한다.</p>
+<p><strong>문제 4.</strong> 학교가 교육 목적을 내세워 학생에게 신체적 고통을 주는 체벌을 했다. 학칙에 적혀 있다는 이유만으로 법령에 따른 정당행위가 되는가?</p>
+<p><strong>답·의도:</strong> 아니다. 학칙과 징계도 상위 법령의 한계를 지켜야 한다. 교육 목적과 수단의 적법성은 별도이고, 현행 학생생활지도 규정의 체벌 금지를 확인한다.</p>
+<p><strong>문제 5.</strong> 상점 주인이 자신을 붙잡아 끌고 가는 사람에게서 벗어나려 최소한으로 저항했다. 검사는 다른 법적 대응 수단이 이론적으로 하나라도 존재하므로 사회상규상 정당행위가 절대 불가능하다고 주장한다. 타당한가?</p>
+<p><strong>답·의도:</strong> 기계적으로 단정할 수 없다. 먼저 정당방위 등 구체적 규정을 검토하고, 제20조에서는 실제 상황의 목적·수단·균형·긴급·보충을 종합한다. 현실적으로 유효한 대안인지와 사건의 전체 맥락이 중요하다.</p>
+<h1>용어 사전</h1>
+<h3>자구행위 自救行爲</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 救(구원할 구), 行(다닐 행): 행하다, 爲(할 위). <strong>③ 합친 뜻:</strong> 스스로 권리를 구하는 행동. <strong>④ 이름의 이유:</strong> 국가의 보호가 제때 오지 못할 때 스스로 보전하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 절차로 보전할 수 없는 긴급한 상황에서 청구권 실행의 불능·현저한 곤란을 막는 상당한 행위. <strong>⑥ 쉬운 말:</strong> 나중에 적법하게 받을 기회가 사라지지 않도록 잠시 지킨다. <strong>⑦ 사례:</strong> 해외로 도주하려는 채무자를 필요한 범위에서 일시 제지하는 사안.</p>
+<p><strong>⑧ 시험:</strong> 청구권 존재뿐 아니라 보전 긴급성·상당성 필요. <strong>⑨ 비교·기억법:</strong> 정당방위는 현재 침해를 막음, 자구는 사후 권리보전.</p>
+<h3>청구권 請求權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청), 求(구할 구), 權(권세 권): 권리. <strong>③ 합친 뜻:</strong> 다른 사람에게 요구할 권리. <strong>④ 이름의 이유:</strong> 상대에게 무엇을 하거나 하지 말라고 청구하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정인에게 일정한 작위·부작위를 요구하는 권리. <strong>⑥ 쉬운 말:</strong> 약속한 돈을 갚으라고 요구할 수 있다. <strong>⑦ 사례:</strong> 대여금 반환청구권.</p>
+<p><strong>⑧ 시험:</strong> 청구권이 있어도 사적 폭력이 허용되지 않음. <strong>⑨ 비교·기억법:</strong> 공적인 처벌권과 다르다.</p>
+<h3>보전 保全</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 保(지킬 보), 全(온전할 전). <strong>③ 합친 뜻:</strong> 온전히 지켜 둠. <strong>④ 이름의 이유:</strong> 권리실현의 가능성을 지켜 두기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 장래 권리실현이 불가능하거나 곤란해지지 않도록 상태를 유지하는 것. <strong>⑥ 쉬운 말:</strong> 나중에 받을 수 있게 해 둔다. <strong>⑦ 사례:</strong> 재산에 가압류를 하여 집행 가능성 확보.</p>
+<p><strong>⑧ 시험:</strong> 자구행위의 보전과 직접 변제받는 만족 구별. <strong>⑨ 비교·기억법:</strong> 보전은 준비·유지, 만족은 실제 실현.</p>
+<h3>보충성 補充性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보): 부족한 것을 메우다, 充(채울 충), 性(성품 성). <strong>③ 합친 뜻:</strong> 다른 수단의 부족을 보충하는 성질. <strong>④ 이름의 이유:</strong> 통상적 보호수단이 작동하지 못하는 틈을 메우기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현실적으로 이용할 적절한 다른 수단이 없을 때 예외 수단을 사용하는 요건. <strong>⑥ 쉬운 말:</strong> 다른 제대로 된 길이 없었는가. <strong>⑦ 사례:</strong> 법적 절차로 제때 보호받을 수 없는 상황.</p>
+<p><strong>⑧ 시험:</strong> 자구·피난의 요건과 제20조의 종합 판단 구별. <strong>⑨ 비교·기억법:</strong> 단순히 편리한 수단을 선택한다는 뜻이 아님.</p>
+<h3>피해자의 승낙 被害者承諾</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 被(입을 피), 害(해칠 해), 者(사람 자), 承(이을 승): 받아들이다, 諾(허락할 낙). <strong>③ 합친 뜻:</strong> 침해받는 사람이 받아들여 허락함. <strong>④ 이름의 이유:</strong> 자기 이익에 관한 결정을 존중하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 처분할 수 있는 법익의 주체가 유효하게 허락한 침해행위의 정당화사유. <strong>⑥ 쉬운 말:</strong> 내가 결정할 수 있는 범위에서 그 일을 허락한다. <strong>⑦ 사례:</strong> 적법한 범위의 신체 침습에 대한 유효한 동의.</p>
+<p><strong>⑧ 시험:</strong> 능력·자유·시점·사회적 한계. <strong>⑨ 비교·기억법:</strong> 양해는 구성요건 배제, 승낙은 위법성 조각.</p>
+<h3>양해 諒解</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 諒(살펴 알 량), 解(풀 해). <strong>③ 합친 뜻:</strong> 사정을 알아 받아들임. <strong>④ 이름의 이유:</strong> 의사에 반한 침해라는 범죄의 요소가 없기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리자의 동의로 구성요건 자체가 충족되지 않게 되는 경우. <strong>⑥ 쉬운 말:</strong> 처음부터 그 범죄의 모양이 아니다. <strong>⑦ 사례:</strong> 소유자이자 점유자가 허락한 물건을 가져감.</p>
+<p><strong>⑧ 시험:</strong> 형법_060 절도 구성요건 해당성 부정. <strong>⑨ 비교·기억법:</strong> 일상적 양해 부탁과 형법상 효과를 구별.</p>
+<h3>처분권 處分權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 處(곳 처): 처리하다, 分(나눌 분), 權(권세 권). <strong>③ 합친 뜻:</strong> 어떻게 처리할지 결정할 권리. <strong>④ 이름의 이유:</strong> 그 이익의 운명을 결정할 수 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해당 법익을 법적으로 유효하게 처분할 수 있는 권한. <strong>⑥ 쉬운 말:</strong> 내가 허락해도 되는 대상인가. <strong>⑦ 사례:</strong> 재산 처분과 공공 안전 침해를 구별.</p>
+<p><strong>⑧ 시험:</strong> 생명·국가·사회 법익의 한계. <strong>⑨ 비교·기억법:</strong> 법익을 누리는 사람이라고 모든 처분이 허용되지는 않음.</p>
+<h3>승낙능력 承諾能力</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 承(이을 승), 諾(허락할 낙), 能(능할 능), 力(힘 력). <strong>③ 합친 뜻:</strong> 허락의 의미를 판단할 능력. <strong>④ 이름의 이유:</strong> 형식적 나이보다 실제 자기결정 가능성이 중요하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 침해의 의미·결과를 이해하고 결정할 실질적 능력. <strong>⑥ 쉬운 말:</strong> 무슨 일을 허락하는지 알고 결정할 수 있는가. <strong>⑦ 사례:</strong> 성인이라도 의식이 없으면 당장 동의할 수 없음.</p>
+<p><strong>⑧ 시험:</strong> 민법상 행위능력과 일치하지 않음. <strong>⑨ 비교·기억법:</strong> 모든 미성년자의 동의가 무효라는 뜻이 아니다.</p>
+<h3>철회 撤回</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 撤(거둘 철), 回(돌아올 회). <strong>③ 합친 뜻:</strong> 거두어 되돌림. <strong>④ 이름의 이유:</strong> 내놓았던 허락을 거두기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 앞서 한 의사표시의 효력을 장래에 유지하지 않겠다는 의사표시. <strong>⑥ 쉬운 말:</strong> 이제는 그만하라고 허락을 거둔다. <strong>⑦ 사례:</strong> 계속되는 침해에 대한 동의 철회.</p>
+<p><strong>⑧ 시험:</strong> 행위 당시 유효한 동의가 남아 있는지. <strong>⑨ 비교·기억법:</strong> 사후 용서는 이미 한 행위의 정당화를 소급하지 않음.</p>
+<h3>추정적 승낙 推定的承諾</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 推(밀 추): 미루어 생각하다, 定(정할 정), 的(과녁 적), 承(이을 승), 諾(허락할 낙). <strong>③ 합친 뜻:</strong> 미루어 판단한 허락. <strong>④ 이름의 이유:</strong> 실제 질문이 불가능할 때 본인의 의사를 추론하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현실의 승낙을 받을 수 없지만 본인이라면 허락했을 것으로 인정되는 경우. <strong>⑥ 쉬운 말:</strong> 물어볼 수 없지만 이 사람의 생각에 비추어 허락했을 근거가 있다. <strong>⑦ 사례:</strong> 의식을 잃은 환자에게 필요한 긴급 처치.</p>
+<p><strong>⑧ 시험:</strong> 명확한 거부를 일반적 이익 판단으로 덮지 않음. <strong>⑨ 비교·기억법:</strong> 긴급피난은 이익교량, 추정적 승낙은 본인의 가정적 의사.</p>
+<h3>정당행위 正當行爲</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 正(바를 정), 當(마땅할 당), 行(다닐 행): 행하다, 爲(할 위). <strong>③ 합친 뜻:</strong> 법에 맞고 마땅한 행동. <strong>④ 이름의 이유:</strong> 전체 법질서가 허용할 만한 행동이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령·업무 또는 사회상규에 따라 위법성이 조각되는 행위. <strong>⑥ 쉬운 말:</strong> 겉으로 남의 권리를 제한해도 법이 허용한 일이다. <strong>⑦ 사례:</strong> 법정 권한과 절차를 지킨 체포.</p>
+<p><strong>⑧ 시험:</strong> 제20조의 세 유형과 구체 규정 우선. <strong>⑨ 비교·기억법:</strong> 좋은 의도만 있으면 무엇이든 된다는 뜻이 아님.</p>
+<h3>사회상규 社會常規</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 社(모일 사), 會(모일 회), 常(항상 상), 規(법 규). <strong>③ 합친 뜻:</strong> 사회생활에서 통상적으로 지킬 규범. <strong>④ 이름의 이유:</strong> 생활의 모든 허용 사례를 개별 법률에 열거할 수 없기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법질서 전체의 정신과 사회윤리·통념에 비추어 허용할 수 있는 기준. <strong>⑥ 쉬운 말:</strong> 이 상황과 방법을 법질서 전체에서 받아들일 수 있는가. <strong>⑦ 사례:</strong> 부당하게 붙잡힌 데서 벗어나려 한 소극적 저항.</p>
+<p><strong>⑧ 시험:</strong> 목적·수단·균형·긴급·보충을 종합. <strong>⑨ 비교·기억법:</strong> 여론이나 다수의 취향만으로 결정하지 않음.</p>
+<h3>쟁의행위 爭議行爲</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 爭(다툴 쟁), 議(의논할 의), 行(다닐 행), 爲(할 위). <strong>③ 합친 뜻:</strong> 노동관계의 다툼에서 하는 행동. <strong>④ 이름의 이유:</strong> 집단적 노동관계의 분쟁을 행동으로 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 노동관계 당사자가 주장을 관철하려 업무의 정상적 운영을 저해하는 행위 등 법정 개념. <strong>⑥ 쉬운 말:</strong> 노동조건 등을 두고 파업 등으로 요구를 나타낸다. <strong>⑦ 사례:</strong> 적법한 요건을 갖춘 파업.</p>
+<p><strong>⑧ 시험:</strong> 주체·목적·절차·수단 및 2026 개정법 범위 확인. <strong>⑨ 비교·기억법:</strong> 모든 파업이 자동 위력 업무방해인 것도 자동 적법인 것도 아님.</p>
+<h3>위법한 명령 違法命令</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어길 위), 法(법 법), 命(목숨 명): 명하다, 令(하여금 령): 명령. <strong>③ 합친 뜻:</strong> 법을 어기는 지시. <strong>④ 이름의 이유:</strong> 조직 내부의 지시도 법질서의 한계를 받기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령과 권한의 범위를 벗어난 상관 등의 지시. <strong>⑥ 쉬운 말:</strong> 윗사람이 시켜도 법을 어긴 일이다. <strong>⑦ 사례:</strong> 고문하라는 명령.</p>
+<p><strong>⑧ 시험:</strong> 명백히 위법한 지시에 복종의무 없음. <strong>⑨ 비교·기억법:</strong> 사실 착오와 법적 허용 여부의 착오를 구분.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 자구·승낙·정당행위</h2>
+<p><b>TOP3:</b> ① 자구=긴급한 보전 ② 양해=구성요건 / 승낙=위법성 ③ 정당행위=권한·목적뿐 아니라 방법도 심사.</p>
+<table><tr><th>쟁점</th><th>기준</th></tr>
+<tr><td>자구 제23조</td><td>법정 절차로 보전 불가＋실행 불능·현저한 곤란 위험＋상당성</td></tr>
+<tr><td>자구 대상</td><td>원칙적으로 자기 사법상 청구권. 위임은 범위 내 검토</td></tr>
+<tr><td>자구 한계</td><td>보전≠사적 강제집행. 권리 있음≠폭행·협박 허용</td></tr>
+<tr><td>과잉자구</td><td>정황에 따른 임의 감면. 제21조 제3항 불처벌 준용 없음</td></tr>
+<tr><td>양해 / 승낙</td><td>구성요건 배제 / 구성요건 해당 행위의 위법성 조각</td></tr>
+<tr><td>처분 가능 법익</td><td>개인적 법익 중심. 국가·사회 법익 불가, 살해는 승낙으로 정당화 불가</td></tr>
+<tr><td>승낙 요건</td><td>권한·능력·자유·진지성·행위 당시 존재·허용 범위·행위자의 인식</td></tr>
+<tr><td>철회 / 사후 허락</td><td>철회 가능. 사후 허락은 위법성을 소급 제거하지 않음</td></tr>
+<tr><td>추정적 승낙</td><td>실제 동의 불가＋본인이라면 동의할 근거. 명확한 거부를 덮지 않음</td></tr>
+<tr><td>정당행위 제20조</td><td>법령·업무·기타 사회상규. 지위·명령만으로 적법하지 않음</td></tr>
+<tr><td>사회상규</td><td>목적·수단·균형·긴급·보충을 종합 판단</td></tr>
+<tr><td>현행법 주의</td><td>부모 징계권 규정 삭제, 체벌 금지, 노동쟁의 관련 2026 개정 구별</td></tr></table>
+<p><b>반드시 외울 문장:</b> 권리가 있어도 모든 실현 방법이 허용되지는 않는다. 동의가 있어도 모든 법익을 처분할 수는 없다.</p>
+<p><b>함정:</b> 자구=돈 직접 받아 내기 × / 승낙능력=민법상 성년 × / 직업상 행동=자동 정당화 × / 가벼운 폭행=항상 허용 ×.</p>
+<p><b>사례를 풀 순서:</b> 구성요건과 양해 → 실제 권리·동의·권한 → 필요한 범위와 수단 → 구체적 정당화사유 → 과잉·착오 → 책임.</p>
+</section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p><strong>복습 TOP3:</strong> ① 보전과 만족 ② 양해·승낙·추정적 승낙 ③ 정당한 목적과 적법한 수단. 🟢 새로운 사건에서 단계와 한계를 설명하면 이해 완료 / 🟡 결론은 알지만 조건을 빠뜨리면 복습 필요 / 🔴 동의·권리·명령만 있으면 허용된다고 생각하면 이해 부족. 실제 답안을 받기 전이므로 자기진단 기준이다.</p>
+<p>출처: 제공 본교재·워크북 제7강과 형법 JSON, 본문에 연결한 현행 법령·대법원·공식 기관 자료. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%98%95%EB%B2%95">형법 제20·23·24·252조</a>. 사건의 교재 설명과 최신 보완을 구별했고, 원문 문제의 옛 쪽수는 그대로 보존했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-형법_012"><h4>형성평가 · 형법_012</h4><p class="question-stem">다음 중 피해자의 승낙이 성립하기 위한 요건으로 올바르지 않은 설명은?</p><ol class="choices"><li>승낙자에게는 승낙능력이 있어야 한다</li><li>승낙은 자유롭고 진지한 의사에 의한 것이어야 한다</li><li>사회적·국가적 법익에 관한 범죄에 대해서는 승낙할 수 없다</li><li>승낙은 사회윤리나 도덕과는 상관없이 할 수 있다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 승낙의 의미와 결과를 판단할 실질적 능력이 필요하다. 민법상 성년·행위능력과 반드시 일치하지 않는다.</li><li><strong>비선택</strong> · 강요되거나 중요한 침해 사실을 속아서 한 말은 유효성이 문제된다. 자유롭고 진지한 자기결정이 핵심이다.</li><li><strong>비선택</strong> · 개인이 처분할 수 없는 국가·사회 법익은 그 개인의 동의로 정당화할 수 없다. 무고나 공공 위험의 예를 떠올린다.</li><li><strong>선택</strong> · 틀린 설명이다. 승낙이 있어도 특별 규정과 사회상규상 한계를 지켜야 한다. 특히 사회상규에 반하는 상해는 합의만으로 정당화되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_013"><h4>형성평가 · 형법_013</h4><p class="question-stem">우리 판례가 소극적 방어행위로서의 폭행이나 가벼운 상해에 대해 지나친 처벌을 피하기 위해 사용하는 법적 근거는?</p><ol class="choices"><li>이러한 행위들은 구성요건에도 해당하지 않는다</li><li>사회상규에 따라 허용되는 범위 내에서 이 행위들은 위법성이 조각될 수 있다</li><li>이러한 행위들로 인한 피해는 너무 가벼워 형사책임을 묻기에 적당하지 않다</li><li>이 행위들도 범죄임에는 분명하지만 처벌할 필요까지는 없다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 소극적 저항도 폭행 등의 구성요건에는 해당할 수 있다. 이 문제는 사회상규에 의한 위법성 조각의 근거를 묻는다.</li><li><strong>선택</strong> · 맞다. 구체적 경위·목적·정도 등을 종합하여 제20조의 정당행위로 위법성이 조각될 수 있다. 정당방위 요건 검토와도 구별한다.</li><li><strong>비선택</strong> · 피해가 가볍다는 사정만으로 일반적인 범죄 성립을 배제하지 않는다. 경미함만으로 모든 폭행을 허용하는 규정은 아니다.</li><li><strong>비선택</strong> · 단순히 범죄는 성립하지만 처벌하지 않는다는 설명이 아니다. 정당행위가 성립하면 위법성이 없어 범죄가 성립하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-형법_059"><h4>워크북 · 형법_059</h4><p class="question-stem">정당방위, 긴급피난, 자구행위에 공통적인 사항이 아닌 것은?</p><ol class="choices"><li>긴급상태에서 행해지는 긴급행위의 일종이다.</li><li>주관적 정당화 요소가 필요하다.</li><li>상당한 이유가 있어야 한다.</li><li>부정(不正) 대 정(正)의 관계이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 셋 모두 통상의 보호를 기다리기 어려운 상황에 대한 긴급행위다. 다만 현재 침해·위난·청구권 보전이라는 상황은 다르다.</li><li><strong>비선택</strong> · 방위의사·피난의사·자구의사 등 주관적 정당화 요소가 필요하다는 교재의 입장이다.</li><li><strong>비선택</strong> · 세 규정 모두 상당한 이유를 요구한다. 단어가 같아도 보충성·균형성 등 구체적 내용이 모두 같은 것은 아니다.</li><li><strong>선택</strong> · 공통점이 아니다. 방위·자구는 부정 대 정이 기본이고 피난은 무관한 제3자 법익을 희생하는 정 대 정이 대표다. 피난의 위험 원인이 반드시 적법해야 한다는 뜻으로 확대하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 126면. 보기 ①~③은 3가지 위법성 조각사유의 공통점이다. 정당방위와 자구행위는 부정 대 정의 관계이지만, 긴급피난은 정 대 정의 관계이다. 그 밖의 자구행위의 요건은 교재를 통해 확인해 보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_060"><h4>워크북 · 형법_060</h4><p class="question-stem">어떤 물건의 소유자(동시에 점유자)의 허락을 받고 그 물건을 가져갔다면 형법적으로 어떻게 평가되는가?</p><ol class="choices"><li>절도죄의 구성요건에 해당하지 않으므로 무죄</li><li>절도죄의 구성요건에는 해당하나 피해자의 승낙으로 인해 위법성이 조각되므로 무죄</li><li>구성요건해당성, 위법성은 갖추었으나 행위자를 비난할 요소가 없으므로 책임이 조각되어 무죄</li><li>구성요건해당성, 위법성, 책임은 갖추었으나 처벌할 만한 요소가 없으므로 범죄는 성립하되 처벌은 유예</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞다. 소유자이자 점유자의 유효한 허락 범위에서 가져갔으므로 의사에 반한 절취가 없다. 양해에 의한 구성요건 해당성 배제다.</li><li><strong>비선택</strong> · 결론만 무죄로 같아도 단계가 틀린다. 이 사안은 절취라는 구성요건이 없으며 제24조의 승낙으로 위법성만 제거하는 구조가 아니다.</li><li><strong>비선택</strong> · 책임은 위법한 행위에 대해 개인을 비난할 수 있는지다. 이 사안은 그보다 앞선 구성요건 단계에서 멈춘다.</li><li><strong>비선택</strong> · 범죄 성립 후 처벌만 유예하는 사안이 아니다. 허락된 취득이므로 절도죄 자체가 성립하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 132면. 나중에 형법각론에서 공부하게 되지만, 절도죄는 그 구성요건으로 다른 사람의 재물을 '그의 의사에 반해서' 가져갈 것을 요구한다. 따라서 권리자의 허락을 받고 물건을 가져간 경우에는 절도죄의 구성요건을 충족시켰다고 볼 수 없게 된다. 이와 같이 구성요건해당성을 조각하게 하는 사유를 '양해'라고 하며, 이것은 위법성 조각사유인 '피해자의 승낙'과는 다른 것이다.</p></details></section>
+
+<section class="question-card" id="question-형법_061"><h4>워크북 · 형법_061</h4><p class="question-stem">다음 중 피해자의 승낙이 전혀 인정되지 않는 범죄는?</p><ol class="choices"><li>상해죄(단, 병역의무 등과 관련한 예외가 있다)</li><li>감금죄</li><li>명예훼손죄</li><li>살인죄</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상해의 승낙은 특별 규정과 사회상규의 한계 안에서 검토된다. 모든 상해 동의가 무효인 것은 아니지만 범죄 목적의 상해 등은 정당화되지 않을 수 있다.</li><li><strong>비선택</strong> · 자유로운 동의에 따른 체류는 감금 구성요건 자체를 배제하는 양해가 문제될 수 있다. 문제는 동의가 전혀 효력이 없는 범죄를 고르라는 취지다.</li><li><strong>비선택</strong> · 개인적 명예에 대한 유효한 동의는 해당 요건과 범위 안에서 검토한다. 모든 제3자나 공적 법익까지 함께 처분하는 것은 아니다.</li><li><strong>선택</strong> · 정답이다. 다만 “전혀 인정”은 제24조에 의한 살해 정당화가 안 된다는 뜻이다. 제252조가 촉탁·승낙에 의한 살인을 별도로 처벌하므로 동의가 법적으로 아무 의미도 없다는 표현은 부정확하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 134면. 피해자의 승낙은 개인에게 처분이 가능한 법익에 한정된다. 따라서 국가적, 사회적 법익은 승낙대상이 아니며, 개인적 법익 가운데에서도 생명은 처분가능한 법익으로 인정되지 않는다. 우리 형법은 제252조에서 '승낙에 의한 살인죄'를 규정하고 있다. 상해죄에 대해서는 피해자의 승낙을 제한하는 특별법의 규정이 있으며, 이런 규정이 없다 하더라도 '사회상규에 반하는 (상해)행위'는 승낙에 의해서도 할 수 없다고 보는 것이 일반적인 입장이다.</p></details></section>
+
+<section class="question-card" id="question-형법_062"><h4>워크북 · 형법_062</h4><p class="question-stem">다음 중 위법성이 조각되지 않는 행위는?</p><ol class="choices"><li>수사대상자를 고문하라는 상관의 명령에 따른 경찰의 고문행위</li><li>교육법상 징계권이 있는 학교장의 학생에 대한 징계행위</li><li>목적과 절차, 수단과 방법 등에서 법령을 지킨 노동자의 쟁의행위</li><li>법정에서 타인의 비밀을 누설한 변호사의 변론행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 고문은 명백히 위법한 지시이므로 복종의무가 없고 제20조로 정당화되지 않는다. 조직 관행도 면책 근거가 되지 않는다. 원본 해설의 “법령에 따른 행위”라는 표현은 적법한 법령행위와 구별해야 한다.</li><li><strong>비선택</strong> · 적법한 법령·학칙의 범위와 절차를 지킨 징계가 전제다. 학교장이라는 이유로 체벌까지 허용되는 것은 아니며 현행법의 체벌 금지를 확인한다.</li><li><strong>비선택</strong> · 주체를 포함한 정당성 요건과 관련 법령을 지킨 쟁의라는 전제다. 단순히 파업이라는 이름만으로 모든 행동이 적법해지는 것은 아니다. 2026 개정법 범위도 별도 확인한다.</li><li><strong>비선택</strong> · 정당한 변론에 필요하고 적절한 범위의 진술이 전제된 축약 보기다. 변호사의 모든 비밀 누설, 허위 증거나 위증 조장이 정당화된다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 141~147면. 형법 제20조가 규정하는 정당행위에는 법령에 의한 행위, 업무로 인한 행위, 사회상규에 위배되지 않는 행위가 포함된다. 보기 ②와 ③은 법령에 의한 행위, ④는 업무로 인한 행위에 해당한다. ①은 상관의 명령, 즉 법령에 따른 행위이기는 하지만 '위법한 명령'에 따른 행위에 대해서는 위법성이 조각되지 않는다는 것이 우리 판례의 태도이다. 교재를 통해 판례를 확인해 보기 바란다.</p></details></section>
+
+<section class="question-card" id="question-형법_063"><h4>워크북 · 형법_063</h4><p class="question-stem">'사회상규에 위배되지 않는 행위'를 판단하기 위한 구체적 기준으로 타당하지 않는 것은?</p><ol class="choices"><li>법익의 균형성</li><li>목적의 정당성</li><li>행위의 긴급성</li><li>권리실행의 필요성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보호이익과 침해이익의 관계를 평가하는 법익 균형성은 제시되는 판단 요소다. 단순한 금액만 비교하지 않는다.</li><li><strong>비선택</strong> · 동기·목적이 정당한지 본다. 다만 목적이 좋다는 사실만으로 수단도 정당해지는 것은 아니다.</li><li><strong>비선택</strong> · 긴급성도 판단 요소다. 최근 판례는 다른 요소와 종합하여 평가하며 모든 법적 수단이 이론적으로 전혀 없어야 한다고 기계적으로 요구하지 않는다.</li><li><strong>선택</strong> · 정답이다. 전통적 다섯 요소는 목적·수단·균형·긴급·보충이다. 권리실행의 필요가 사안에서 아무 의미도 없다는 뜻이 아니라 그것만으로 폭행·협박을 정당화할 수 없다는 취지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교재 147~150면. 사회상규에 반하지 않는 행위가 구체적으로 무엇인지를 판단하기는 쉽지 않다. 사례에 따라 모든 사정을 종합하여 구체적 판단이 이루어져야 하겠지만, 이에 대한 몇 가지 원칙적인 기준을 생각해 볼 수 있는데 목적의 정당성, 행위수단의 상당성, 행위의 긴급성, 보충성, 법익의 균형성 등이 제시될 수 있다. 자신의 권리를 실현할 필요가 있다 하더라도 긴급하지 않은 상황에서 상당하지 않은 수단으로 어떤 행위(예컨대 폭행이나 협박)를 하였다면, 이것은 사회상규에 반하지 않는 행위로 인정되지 않는다. 사회상규에 반하지 않는 행위로 인정된 사례들과 그렇지 않은 사례들을 교재를 통해 확인해 보기 바란다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '형법총론 · CHAPTER 07' : 'PART · CRIMINAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(형법총론 · CHAPTER 07|PART · CRIMINAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('criminal-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
