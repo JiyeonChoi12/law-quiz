@@ -1,0 +1,1607 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>채권각론 제2장 계약총론 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">OBLIGATIONS · CHAPTER 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">채권각론</span>
+    <span class="brand-sub">제2장 계약총론 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./채권각론_개념.html">채권각론 개념 목록</a><a href="../index.html?subject=채권각론">문제 풀기</a></nav><h1>채권각론 제2장 · 계약총론</h1>
+<blockquote>
+<p>“약속은 언제 계약이 되고, 상대방이 약속을 지키지 않으면 나는 무엇을 할 수 있을까?” 계약이 태어나고, 서로 맞물려 움직이고, 끝나는 순서로 읽는 장이다.</p>
+</blockquote>
+<p>교재 인쇄 6~96쪽. 교재의 다섯 절 순서를 유지한 해설이다. 법률용어는 정확히 쓰되 바로 옆에서 쉬운 말로 풀었다. 사건의 인물은 스캔에서 한자가 흐려지는 문제를 피하려고 ‘매도인·매수인’처럼 역할로 표시했다. 교재 사례와 설명용 창작 사례는 구별한다.</p>
+<div class="legend-note"><span class="key-yellow">노랑 · 정의와 결론</span>　<span class="key-green">초록 · 이유</span>　<span class="key-pink">분홍 · 함정</span>　<span class="key-blue">파랑 · 연결</span><p>형광펜은 핵심 문장에만 사용한다. 검정 메모는 쉬운 풀이, 빨간 메모는 출제 포인트다.</p></div>
+
+<h1>1. 전체 지도와 중요도</h1>
+<h2 id="obligations-02-01" data-concept-id="obligations-02-01">1-1. 이 장의 다섯 질문 ★★★★★</h2>
+<p><strong>무엇을 설명하나?</strong> 매매·임대차·도급 등 여러 계약에 공통으로 쓰는 규칙이다. <strong>왜 생겼나?</strong> “계약했으니 무조건 해!”로는 합의가 없었던 경우, 맞교환이 막힌 경우, 집이 불타 버린 경우를 공평하게 해결할 수 없기 때문이다. <strong>민법에서 어디인가?</strong> 총칙의 의사표시·무효·취소를 구체적인 거래에 적용하는 다리다. <strong>앞뒤 연결은?</strong> 1장의 ‘계약은 채권의 발생 원인’에서 출발해 3장의 개별 계약으로 간다. <strong>모르면?</strong> 매매 해제와 임대차 해지를 혼동하고, 돈을 안 줘도 되는 경우와 이미 받은 돈을 돌려줘야 하는 경우를 구별하지 못한다.</p>
+<p class="key-blue">합의 확인 → 유효성 확인 → 누가 무엇을 먼저 해야 하는지 → 이행 장애의 원인 → 유지·배상·해소 중 구제수단 선택.</p>
+
+<table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>주제</th>
+<th>공부할 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>★★★★★</td>
+<td>청약·승낙, 동시이행, 위험부담, 해제의 요건·효과</td>
+<td>사례에서 순서를 바꾸면 답이 바뀐다</td>
+</tr>
+<tr>
+<td>★★★★★</td>
+<td>제3자를 위한 계약, 해제와 제3자</td>
+<td>세 사람 이상의 관계를 정확히 나누는 문제</td>
+</tr>
+<tr>
+<td>★★★★☆</td>
+<td>약관, 계약 종류, 해지, 계약교섭 책임</td>
+<td>객관식의 단정적 표현을 잡는 영역</td>
+</tr>
+<tr>
+<td>★★★☆☆</td>
+<td>신의칙·공정성의 구체적 작용</td>
+<td>원칙과 예외가 왜 필요한지 이해</td>
+</tr>
+<tr>
+<td>★★☆☆☆ 심화</td>
+<td>해제의 법적 구성, 체약상 과실의 법적 성질</td>
+<td>학설을 판례처럼 외우지 않기</td>
+</tr>
+<tr>
+<td>★☆☆☆☆ 심화</td>
+<td>계약의 철학적 기초·외국법의 역사</td>
+<td>국내 조문 문제와 분리하여 읽기</td>
+</tr>
+</tbody></table>
+<p>별점은 제공 자료를 바탕으로 한 학습 우선순위다. 실제 변리사시험 출제 통계나 사용자의 오답률을 뜻하지 않는다.</p>
+<h1>2. 제1절 · 계약의 기초이론 [6~16쪽]</h1>
+<h2 id="obligations-02-02" data-concept-id="obligations-02-02">2-1. 합의와 법적 구속력은 다른 질문이다 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 교재는 먼저 ‘계약의 뜻’과 ‘왜 법이 약속을 지키게 하는가’를 분리한다. 계약은 서로 대립하는 의사표시가 내용상 맞아 생기는 법률행위다. “팔겠다”와 “사겠다”는 말은 방향이 반대지만 같은 물건·같은 가격을 가리키면 맞아떨어진다. 모두가 같은 방향의 의사를 모으는 합동행위와 구별한다.</p>
+<p>넓은 계약에는 물권계약·준물권계약·가족법상의 계약도 들어간다. 이 장의 중심은 <strong>채권을 발생시키는 좁은 뜻의 계약</strong>이다. 다른 분야에는 성질이 맞는 범위에서 계약 규칙을 적용한다. 혼인에 매매의 해제 규정을 그대로 끼워 넣어서는 안 된다.</p>
+<p>교재의 철학적 문단은 “둘이 합의했으니 노예계약도 강제로 실현해 줄까?”라는 질문이다. 자율적인 결정, 도덕적 한계, 법질서의 승인이 있어야 약속의 강제에 정당성이 생긴다는 취지다. 합의라는 <strong>성립 문제</strong>와 강행규정·공서양속 등에 비추어 <strong>유효한가</strong>라는 문제를 나누자. 철학적 논의를 매 사건마다 독립된 증명요건처럼 쓰지는 않는다.</p>
+<p><strong>시험·키워드:</strong> 성립/효력, 넓은 계약/채권계약. <strong>한 줄:</strong> <span class="key-yellow">말이 맞았는지를 먼저, 그 말을 법이 보호하는지를 다음에 묻는다.</span></p>
+<h2 id="obligations-02-03" data-concept-id="obligations-02-03">2-2. 계약 자유의 네 칸과 네 울타리 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 자유를 하나의 구호가 아니라 네 가지 결정으로 나눈다. ① 계약할지 ② 누구와 할지 ③ 무슨 내용으로 할지 ④ 어떤 형식으로 할지를 당사자가 정하는 것이 원칙이다. 임의규정은 당사자의 다른 합의를 허용하지만, 강행규정은 합의로 밀어낼 수 없다. 조문이 어느 쪽인지는 문언·목적 등을 해석해야 한다.</p>
+<p><strong>왜 제한하나?</strong> 거대 사업자가 작성한 조건을 생활에 필요한 서비스를 쓰려는 사람이 그대로 받아들여야 한다면, ‘동의 버튼을 눌렀다’는 외형만으로 대등한 자유가 있었다고 보기 어렵다. 이것이 계약 자유의 형해화다. 계약 자체를 없애자는 말이 아니라 실제 선택과 공정성을 회복하자는 말이다.</p>
+<table>
+<thead>
+<tr>
+<th>자유</th>
+<th>제한의 방향</th>
+<th>오해하면 안 되는 점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>체결</td>
+<td>공공서비스 공급·의료 등 특별법의 정당한 이유 없는 거절 제한</td>
+<td>거절했다고 모든 경우에 사법상 계약이 자동 성립하는 것은 아니다</td>
+</tr>
+<tr>
+<td>상대방 선택</td>
+<td>노동조합 가입 등을 이유로 한 차별적 고용 거절 제한</td>
+<td>사회적 비난과 특정 법률상 금지는 구분한다</td>
+</tr>
+<tr>
+<td>내용</td>
+<td>강행규정, 민법 제103·104조, 불공정 약관 통제</td>
+<td>임의규정과 다르다는 이유만으로 모두 무효는 아니다</td>
+</tr>
+<tr>
+<td>방식</td>
+<td>보증의 서면 등 법정 방식</td>
+<td>유언은 단독행위다. 유언 방식은 계약 방식의 직접 예가 아니다</td>
+</tr>
+</tbody></table>
+<p>사적 자치와 계약 자유를 교재가 서로 다른 층위에서 설명하는 것은 개념 정리다. 시험에서는 구체적 제한과 효과가 더 중요하다. “계약을 파기할 자유”라는 표현도 <strong>이미 생긴 의무를 책임 없이 없앨 권리</strong>로 읽으면 틀린다.</p>
+<p><strong>키워드·한 줄:</strong> 체결/상대/내용/방식. <span class="key-green">스스로 정할 자유를 보장하되, 강자가 그 자유를 독점하지 못하게 한다.</span></p>
+<h2 id="obligations-02-04" data-concept-id="obligations-02-04">2-3. 신의성실·공정성: 자기 말을 믿게 하고 뒤집지 말자 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 계약서에 써 있지 않은 부분까지 아무렇게나 행동해도 되는지를 설명한다. 신의칙은 상대방의 정당한 신뢰를 고려하여 권리 행사와 의무 이행을 구체화하는 기준이다. 법관이 마음대로 계약을 고치는 권한도, ‘나는 착한 사람’이라는 주관적 감정도 아니다. 공정거래의 원칙은 시장에서 지배력 남용이나 부당한 거래를 통제하는 문제와 연결된다. 교재가 두 원칙을 ‘주관/객관’으로 대비하더라도 <strong>민법 제2조가 객관적 행동규범이라는 점</strong>을 놓치지 말자.</p>
+<h3>교재 사례 · 51년 거래한 자동차 판매점 [13쪽]</h3>
+<p>등장인물은 자동차 제조사와 오랜 독점 판매점이다. 1946년 시작된 거래가 매년 갱신되었다. 제조사는 1998년 11월 30일에 다음 해 계약을 갱신하지 않겠다고 통지했다. 판매점은 “한 달 전에 말하면 끝이라는 문구만 보고 수십 년의 신뢰를 무시할 수 있느냐”고 다툰다. 교재가 제시하는 판단의 고민은 <strong>계약 문구와 장기 거래가 만들어 낸 신뢰의 조정</strong>이다. 교재는 이 사정에서 통지가 충분하지 않아 손해배상이 문제된다고 설명한다. 반대로 문구만으로 항상 충분하다고 하면 장기 거래를 믿고 투자한 상대방의 신뢰가 보호되지 않는다. <strong>국내 특정 대법원 판결로 제시된 사례가 아니므로, ‘51년이면 무조건 배상’이라는 판례 공식으로 암기하지 않는다.</strong></p>
+<h3>교재 사례 · 은행의 확인을 믿고 지급한 돈 [14쪽]</h3>
+<p>은행이 입금을 확인해 주자 거래자는 그 말을 믿고 해외 상대방에게 되돌리기 어려운 지급을 했다. 은행은 나중에 착오였다며 돈을 돌려 달라고 한다. 쟁점은 실수 자체보다 <strong>은행의 선행행위가 정당한 신뢰와 후속 행동을 만들었는가</strong>다. 교재는 그 사정에서 모순된 반환 요구를 제한한다. 다른 결론이면 정보를 가진 은행의 확인을 믿은 사람이 위험을 전부 떠안는다. 다만 모든 착오송금의 반환을 금지하는 결론은 아니다.</p>
+<p>공정성 문단의 선택 가능성·대등한 지위·공서양속은 계약 통제의 배경이다. 공정거래기관의 역할에 대한 교재 저자의 평가와 외국 제도의 역사 설명은 <strong>심화·저자 견해</strong>로 읽는다. 국내 개별 사건의 결론은 적용 조문과 판례로 내려야 한다.</p>
+<p><strong>시험·한 줄:</strong> <span class="key-pink">신의칙은 상대방 보호라는 이름으로 모든 계약상 권리를 없애는 만능 규정이 아니다.</span></p>
+<h1>3. 제2절 · 계약의 종류 [17~21쪽]</h1>
+<h2 id="obligations-02-05" data-concept-id="obligations-02-05">3-1. 서로 다른 분류 기준을 섞지 말자 ★★★★☆</h2>
+<p><strong>왜 이 문단인가?</strong> 같은 계약도 여러 기준으로 분류된다. 기준을 섞으면 ‘유상=쌍무’ 같은 함정에 빠진다.</p>
+<table>
+<thead>
+<tr>
+<th>분류</th>
+<th>쉬운 질문</th>
+<th>예와 시험 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>전형/비전형</td>
+<td>민법이 이름과 기본 틀을 정했나?</td>
+<td>비전형도 유효할 수 있다. 법전에 없다는 이유로 무효가 아니다</td>
+</tr>
+<tr>
+<td>낙성/요물</td>
+<td>합의만 필요한가, 인도·지정행위 등도 필요한가?</td>
+<td>매매·사용대차는 낙성. 교재는 현상광고를 계약설에 따라 요물로 설명한다</td>
+</tr>
+<tr>
+<td>쌍무/편무</td>
+<td>의무가 서로 대가로 맞물리는가?</td>
+<td>무상 사용대차의 반환의무만 보고 쌍무라고 하지 않는다</td>
+</tr>
+<tr>
+<td>유상/무상</td>
+<td>대가를 주고받는가?</td>
+<td>현상광고는 유상이지만 편무라는 분류가 가능하다</td>
+</tr>
+<tr>
+<td>일시/계속</td>
+<td>급부 전체가 확정된 한 번의 거래인가, 시간에 걸쳐 지속되는가?</td>
+<td>정해진 총량의 분할 인도와 신문 정기구독을 구분한다</td>
+</tr>
+<tr>
+<td>본계약/예약</td>
+<td>바로 본거래를 하나, 나중 본거래를 위한 약속인가?</td>
+<td>예약완결권의 행사로 본계약이 성립하는 유형과 단순 체결의무 약속을 구별한다</td>
+</tr>
+</tbody></table>
+<p>식당 거래는 음식·좌석 이용·서비스가 결합되고, 주문 제작 공급은 매매와 도급 성질이 섞인다. 계약 이름에 억지로 끼우지 말고 <strong>합의한 실제 내용과 각 급부의 성질</strong>에 맞춰 규정을 적용한다. 비전형계약도 해석 가능한 약정 내용이 있으면 유효할 수 있다는 것이 교재 인용 2009다67313의 요지다. 금융리스도 임대차와 똑같다고 단정하지 않는다(84다카503·504, 97다27107).</p>
+<p>대물변제는 “다른 것으로 대신 갚자”라는 약속만으로 원래 빚이 사라지는 것이 아니라 실제 대체 급부가 필요하다. 부동산이면 등기 문제까지 봐야 한다(90누5801). 대물변제의 예약과 완료된 대물변제를 구별한다.</p>
+<p><strong>주의의무 함정:</strong> 무상이라 언제나 자기 재산 정도의 주의만 하면 되는 것은 아니다. 무상 위임도 선관주의가 원칙이고, 무상 임치에는 별도 규정이 있다. 무상계약 일반론을 개별 조문보다 앞세우지 말자.</p>
+<h2 id="obligations-02-06" data-concept-id="obligations-02-06">3-2. 계속적 계약과 예약완결권 ★★★★☆</h2>
+<p>계속적 계약은 거래가 길게 이어져 신뢰와 사정변경이 특히 중요하다. 하지만 <strong>기간이 정해진 계약까지 언제나 마음대로 해지할 수 있다는 뜻은 아니다.</strong> 기간 없는 임대차·고용 등도 통고 후 효력 발생 시점과 특별법을 확인한다.</p>
+<p>예약완결권은 “이제 본계약으로 만들겠습니다”라는 일방적 의사표시로 본계약을 성립시키는 <strong>형성권</strong>이다. 매매예약에서 행사기간을 정했다면 그 기간, 없으면 원칙적으로 예약 성립부터 10년의 제척기간을 본다. 소멸시효와 혼동하지 않는다. 기간 안에 권리행사가 상대방에게 도달해야 하는 문제도 확인한다. 상대방의 새 승낙을 받아야만 본계약이 생긴다고 쓰면 완결권의 특징을 놓친다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=225417">판례 확인: 2019다227817</a>.</p>
+<p><strong>문단 한 줄:</strong> <span class="key-yellow">계속적 계약은 시간, 예약완결권은 한 번의 의사표시에 주목한다.</span></p>
+<h1>4. 제3절 · 계약의 성립 [22~43쪽]</h1>
+<h2 id="obligations-02-07" data-concept-id="obligations-02-07">4-1. 합의가 없나, 합의는 있지만 착오인가 ★★★★★</h2>
+<p><strong>왜 이 문단인가?</strong> 불성립과 취소는 출발점부터 다르다. 핵심 내용이 일치하지 않으면 계약이 성립하지 않는다. 객관적으로 내용은 일치하지만 한 사람이 그 의미·전제에 중요한 착오를 했다면 계약 성립 후 제109조의 취소 문제다. 세부사항을 모두 숫자로 정하지 않아도 장래 확정할 객관적 기준이 있으면 성립할 수 있다(2017다242867).</p>
+<p>의식적 불합의는 서로 아직 안 맞는다는 사실을 아는 경우, 무의식적 불합의는 맞았다고 생각하지만 실제 내용이 안 맞는 경우다. 일부 불합의는 중요성과 나머지만으로 계약하려는 의사를 따져야 한다. 교재의 ‘100달러’ 예에서 한쪽은 미국 달러, 다른 쪽은 호주 달러를 뜻하고 객관적 해석으로도 공통 의미를 정할 수 없다면 불합의다. <strong>일단 계약해석을 하지 않고 마음속 생각이 달랐다는 이유만으로 불성립이라고 하지 않는다.</strong> 교재의 당시 환율은 현재 환율로 외우지 않는다.</p>
+<h3>교재 중심 사례 · 모닝·아반떼·쏘나타 [22·42~43쪽]</h3>
+<p>매도인은 모닝 1,000cc·500만 원, 아반떼 1,600cc·1,000만 원, 쏘나타 2,000cc·1,500만 원을 제시하고 5일 안에 답해 달라고 했다.</p>
+<p><strong>첫 갈래:</strong> 매수인이 “쏘나타를 1,200만 원에 사겠다”고 답했다. 가격을 바꿨으므로 원청약의 승낙이 아니라 <strong>거절과 새 청약</strong>이다(제534조). 매도인이 이 새 조건을 받아들이면 그때 새 계약 성립을 검토한다.</p>
+<p><strong>둘째 갈래:</strong> 매수인이 차종별 배기량을 잘못 기억한 채 “배기량이 가장 큰 차를 사겠다”고 답했다. 객관적으로 ‘가장 큰 차’는 쏘나타이므로 그 내용의 합의가 인정된다는 것이 교재의 풀이다. 마음속으로 모닝을 생각했다면 중요한 내용의 착오와 중과실 등 제109조 요건을 검토한다. <strong>당연 무효도, 무조건 취소도 아니다.</strong> 판결이 주어진 실제 재판 사건이 아니라 교재의 가상 사례다.</p>
+<p><strong>결론의 이유:</strong> 객관적으로 맞은 말을 뒤의 내심과 구별해야 거래의 신뢰와 착오자의 보호를 함께 설명할 수 있다. <strong>키워드:</strong> 표시의 해석 → 합의 → 착오.</p>
+<p>비교법 문단의 영미법상 약인과 프랑스법상 원인은 국내 계약의 독립 성립요건으로 끌어오지 않는다. 특히 외국법의 역사적 설명을 현행 외국법 전체라고 단정하지 않는다. 국내 증여는 대가가 없다는 이유만으로 당연 무효가 되지 않는다.</p>
+<h2 id="obligations-02-08" data-concept-id="obligations-02-08">4-2. 청약·유인·승낙: 누가 마지막 ‘예’를 하면 끝나는가 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 청약은 상대방이 그대로 “예”라고 하면 계약이 생길 정도로 구체적이고 확정적인 제안이다. 청약의 유인은 상대방에게 먼저 제안해 보라고 끌어오는 단계다. 불특정 다수를 향한 청약도 가능하다. 광고는 보통 유인이지만 <strong>광고는 언제나 유인이라는 공식은 틀린다.</strong> 확정적 구속의사와 뒤의 합의 내용을 해석한다.</p>
+<p>상가 수익보장 광고 사건에서 법원은 특별한 사정 없이 광고·설명만으로 계약 내용이 되었다고 보지 않았다(99다55601·55618). 판례의 문장을 풀면 “광고를 봤다”와 “그 내용을 계약으로 약속했다”는 다르다는 뜻이다. 반대로 구체적 광고 내용과 당사자 의사에 따라 계약 내용이 인정될 수 있다는 판례(2017다275447)도 함께 읽는다. 안 그러면 계약서 밖의 모든 약속을 지워 버리게 된다.</p>
+<p>청약은 도달하면 효력이 생기는 것이 원칙이고, 그 뒤에는 원칙적으로 임의 철회할 수 없다(제111·527조). 철회 유보와 소비자보호 특별법의 예외를 확인한다. 근로자의 사직서는 <strong>일방적 종료 통고인지 합의해지의 청약인지</strong>에 따라 철회 문제가 달라지므로 일반 청약 규칙만으로 답하지 않는다(99두8657, 91다43138, 2002다11458).</p>
+<p>승낙은 청약의 조건을 그대로 받아들이는 말이다. 특별한 사정 없는 침묵은 승낙이 아니다. 승낙할 의무도 원칙적으로 없다. 청약의 구속력은 청약자가 함부로 철회할 수 없다는 문제이고, 승낙적격은 그 청약에 승낙하여 계약을 만들 수 있는 기간의 문제다.</p>
+<h2 id="obligations-02-09" data-concept-id="obligations-02-09">4-3. 승낙의 시간표: 발송과 도달을 함께 보자 ★★★★★</h2>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>법적 처리</th>
+<th>쉽게 기억하기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>승낙기간 지정</td>
+<td>원칙적으로 기간 안에 승낙 통지가 도달해야 함</td>
+<td>답장 기한 확인</td>
+</tr>
+<tr>
+<td>기간 미지정</td>
+<td>상당한 기간 내 도달 여부</td>
+<td>영원히 열어 둔 제안이 아님</td>
+</tr>
+<tr>
+<td>정상적으로는 제때 올 발송인데 연착</td>
+<td>청약자는 지체 없이 연착 통지. 통지를 게을리하면 연착 아닌 것으로 봄</td>
+<td>우편 지연과 방치의 책임을 구분</td>
+</tr>
+<tr>
+<td>늦은 승낙</td>
+<td>청약자가 새 청약으로 볼 수 있음</td>
+<td>옛 계약이 자동 성립한 것은 아님</td>
+</tr>
+<tr>
+<td>조건을 바꾼 승낙</td>
+<td>원청약 거절 + 새 청약</td>
+<td>‘그 대신’이 나오면 제534조</td>
+</tr>
+<tr>
+<td>격지자 계약</td>
+<td>승낙 통지 발송 시 성립, 승낙기간 규율과 함께 판단</td>
+<td>발신주의만 외우고 도달기한을 지우지 않기</td>
+</tr>
+<tr>
+<td>승낙 통지 불요</td>
+<td>승낙으로 인정되는 사실이 있는 때</td>
+<td>청약자가 그 사실을 알게 된 때가 아님</td>
+</tr>
+<tr>
+<td>교차청약</td>
+<td>같은 내용의 두 청약이 서로 도달한 때</td>
+<td>두 통 모두 도착해야 함</td>
+</tr>
+</tbody></table>
+<p>제528~534조는 <strong>언제부터 거래를 확정적으로 믿어도 되는가</strong>를 조정한다. 호텔에서 관습상 인정되는 서비스 착수 등은 제532조의 사실에 의한 성립을 검토한다. 은행이 현금을 확인·수령하여 예금이 성립한 뒤 직원이 돈을 빼돌린 사건에서는, 내부 사고가 이미 성립한 예금계약을 없애지 않는다(95다26919).</p>
+<p class="red-note">확인 기준: 민법 제531조의 격지자 발신주의는 현행 조문에 남아 있다. 교재의 개정 제안과 현행법을 구별한다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0531&lsiSeq=284415&urlMode=lsScJoRltInfoR">국가법령정보센터 제531조</a>.</p>
+
+<h2 id="obligations-02-10" data-concept-id="obligations-02-10">4-4. 약관은 회사가 만든 법이 아니다 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 대량 거래에서는 매번 흥정하기 어려워 사업자가 미리 내용을 만든다. 편리하고 거래비용을 줄이지만, 고객의 내용 결정권이 약해진다. 그래서 계약에 편입되었는지와 내용이 공정한지를 따로 통제한다.</p>
+<p>① 여러 상대방과 반복 사용할 목적으로 미리 만든 내용인지 확인한다. 이름이 ‘동의서’여도 약관일 수 있다. ② 개별적으로 실질 협상한 합의가 있으면 약관보다 우선한다. 읽고 서명했다는 것만으로 개별 협상이 되는 것은 아니다. 실제 영향력을 행사할 기회가 있었는지 보고 그 사정은 사업자가 증명한다는 판례를 기억한다(2013다214864). ③ 명시·중요 내용 설명 의무를 확인한다. 위반하면 해당 약관 내용을 계약 내용으로 주장하지 못하는 문제다. 설명 예외는 법령상 당연한 내용, 이미 아는 내용 등 구체적 근거를 보며 ‘상인끼리면 전부 면제’라고 하지 않는다.</p>
+<p>약관의 구속력은 명시·묵시적 <strong>편입 합의</strong>에서 나온다(계약설). 해석은 평균적 고객을 기준으로 객관적·통일적으로 한다. 그 방법을 거친 뒤에도 불명확하면 고객에게 유리하게 해석한다. 고객마다 제멋대로 뜻을 달리하는 방식이 아니다.</p>
+<p>불공정성 통제에는 일반조항과 함께 면책, 과중한 배상, 해제·해지, 일방적 급부 변경, 고객 권리 제한, 의사표시 간주, 대리인의 책임 가중, 소송상 불이익 등이 포함된다. 예컨대 귀책 없는 급부불능의 위험을 정당한 이유 없이 고객에게 떠넘기는 약관은 제537조가 임의규정이라는 말만으로 정당화되지 않는다(2003두3734).</p>
+<p>일부 약관이 무효라도 <strong>나머지 계약은 유효한 것이 원칙</strong>이다(약관규제법 제16조). 나머지만으로 목적을 달성할 수 없거나 일방에게 부당하게 불리한 경우 등 예외를 본다. 민법 제137조의 일반 구조를 그대로 답으로 쓰지 말자. 불공정 문구를 법원이 언제나 적당히 고쳐 유효화해 준다고도 생각하지 않는다.</p>
+<p class="key-pink">교재 37쪽의 비영리사업 제외는 범위를 좁혀 읽어야 한다. 모든 비영리 계약이 제외되는 것이 아니다. 약관규제법 제30조가 정한 상법 제3편·근로기준법 및 대통령령이 정하는 분야 등의 적용 제외다. <a href="https://www.law.go.kr/LSW/lsLinkProc.do?joNo=003000&lnkJoNo=undefined&lsClsCd=L&lsId=000667&lsNm=약관의규제에관한법률&mode=4">제30조 확인</a>.</p>
+
+<p><strong>한 줄:</strong> <span class="key-yellow">약관은 편입 → 해석 → 불공정성 → 일부 무효의 순서로 푼다.</span></p>
+<h2 id="obligations-02-11" data-concept-id="obligations-02-11">4-5. 계약 전에도 남을 함부로 다치게 하거나 믿게 해서는 안 된다 ★★★★☆</h2>
+<p>교재가 카펫을 고르다가 다친 손님, 채소 껍질에 미끄러진 아이, 시승 중 차를 망가뜨린 손님을 넣은 이유는 <strong>계약 성립 전에도 보호해야 할 생명·신체·재산이 있다</strong>는 점을 보여 주기 위해서다. 각 사안의 안전관리 의무·과실·인과관계에 따라 불법행위 등을 검토한다. 계약이 성립하지 않았으니 언제나 아무 책임도 없다는 결론은 안 된다.</p>
+<p>민법 제535조는 그 넓은 문제 중 <strong>목적의 원시적 불능</strong>을 규정한다. 불능을 알았거나 알 수 있었던 사람이, 불능을 몰랐고 몰랐던 데 과실도 없는 상대방에게 신뢰손해를 배상한다. 배상액은 계약이 유효했다면 얻을 이익을 넘지 못한다. 이미 불탄 물건을 온전한 것처럼 계약한 경우, 쓸데없이 지출한 준비비용을 떠올리자. 실제로 나중에 불탔다면 후발적 불능으로 갈라진다.</p>
+<p>교섭 파기는 원칙적으로 계약 자유의 영역이지만, 상대방에게 <strong>확고하고 정당한 체결 신뢰를 주고 그 신뢰에 따라 행동하게 한 뒤 상당한 이유 없이 중단</strong>했다면 불법행위가 될 수 있다. 그 신뢰 이전의 일반 입찰 준비비까지 모두 물어주는 것은 아니다. 반대로 상대방의 적극적 요구로 미리 이행에 착수한 비용이나 인격적 침해에 따른 정신적 손해는 요건에 따라 따로 검토한다.</p>
+<p>계약이 의사 불합치로 성립하지 않았다는 이유만으로 제535조를 유추 적용할 수 없다는 판례(2015다10929)를 기억하자. 법적 성질을 계약책임·불법행위·독자책임 중 무엇으로 볼지, 입증책임·시효·이행보조자 규정을 어떻게 연결할지는 <strong>학설 심화</strong>다. 교재 저자의 독자책임설을 전부 판례의 결론인 것처럼 쓰지 않는다.</p>
+<p><strong>키워드·한 줄:</strong> 원시불능/신뢰이익/이행이익 한도/상대방 선의무과실. <span class="key-green">계약을 못 맺었다는 이유와 남에게 손해를 주어도 된다는 말은 다르다.</span></p>
+<h1>5. 제4절 · 계약의 효력 [43~73쪽]</h1>
+<h2 id="obligations-02-12" data-concept-id="obligations-02-12">5-1. 동시이행: “당신도 준비하면 나도 줄게” ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 쌍무계약의 두 채무는 우연히 나란히 있는 것이 아니라 서로 대가로 맞물린다. 이를 견련성이라 한다. 동시이행항변권은 상대방이 이행 또는 이행제공을 할 때까지 자기 이행을 미룰 수 있는 권리다(제536조). 채무가 사라지는 권리가 아니다.</p>
+<p>기본 요건은 ① 동일한 쌍무계약에서 생긴 대가적 채무 ② 상대방 채무의 변제기 도래 ③ 상대방의 완전한 이행·제공이 없음이다. 동일한 법률요건에서 생긴 반환채무 등 공평상 함께 이행해야 할 때에도 확장될 수 있다(2017다291593). 한쪽이 먼저 이행하기로 했으면 원칙적으로 항변할 수 없지만, 지체 중 상대방 이행기도 도래하면 그때부터 동시이행이 되는 경우가 있다. <strong>이미 발생한 지연손해금이 없어지는 것은 아니다.</strong></p>
+<p>불안의 항변권은 선이행자가 상대방의 이행을 현저히 기대하기 어려워진 경우 자신만 먼저 이행하도록 강요하지 않기 위한 제도다(제536조 제2항). 상대방의 파산만 해당하는 것은 아니다. 기성금을 정당한 이유 없이 안 줘 앞으로 공사대금도 합리적으로 기대하기 어려운 경우를 포함할 수 있다(2011다93025).</p>
+<p>일부만 제공했다면 원칙적으로 미제공 부분에 비례해 거절한다. 가벼운 흠을 핑계로 큰 금액 전부를 막으면 신의칙 문제가 생긴다. 반대로 결함 때문에 계약 목적 전체를 달성할 수 없다면 전부 거절이 가능할 수 있다. 채무 내용의 가분성과 흠의 중요성을 읽자.</p>
+<h3>교재 사례 · 기계 10대와 약속어음 [44~45·54~55쪽]</h3>
+<p>대당 500만 원인 기계 10대, 합계 5,000만 원 거래다. 매도인은 10일 인도, 매수인은 20일 현금 지급하기로 했다. 매도인이 늦어 20일에야 준비하자 매수인은 현금 3,000만 원과 두 달 뒤 만기 어음 2,000만 원을 내며 10대 전부를 요구했다.</p>
+<p><strong>갈등:</strong> 먼저 늦은 매도인이 이제 돈을 핑계로 거절할 수 있는가? <strong>판단 순서:</strong> 20일이 되어 대금도 변제기에 도달했으므로 동시이행을 검토한다. 어음을 받았다고 곧바로 약정한 현금 전액을 변제한 것은 아니다. 각 기계가 독립적으로 500만 원의 가치인 가분급부이므로, 교재는 <strong>현금에 대응하는 6대는 인도하고 미지급 2,000만 원에 대응하는 4대는 거절</strong>할 수 있다고 푼다. 10대가 하나의 불가분 설비인 다른 사실관계라면 그대로 6/4로 나누지 않는다.</p>
+<p><strong>왜?</strong> 선이행 지체를 이유로 영원히 항변을 박탈하지 않되, 일부 미지급을 핑계로 받은 대가에 해당하는 인도까지 막지 않는 것이다.</p>
+<h2 id="obligations-02-13" data-concept-id="obligations-02-13">5-2. 시계 수리: 동시이행과 유치권을 구별하자 ★★★★★</h2>
+<h3>교재 사례 · 수리비를 안 준 시계 [45·55쪽]</h3>
+<p>수리와 대금 지급을 모두 5월 21일로 약정했다. (1) 의뢰인이 20일 출국한다며 시계는 먼저 달라 하고 대금은 21일 주겠다고 한다. (2) 21일 수리비를 가져오자 수리업자는 별개의 밀린 빚까지 갚으라고 한다. (3) 계약자가 아닌 실제 시계 소유자가 반환을 요구한다.</p>
+<p><strong>첫 갈래의 날짜 주의:</strong> 교재 해설은 동시이행·유치권에 의한 거절을 설명하지만, 문제 문언 그대로 20일이면 양 채무의 약정 이행기 전이다. 우선 <strong>수리·반환의 이행기가 아직 오지 않았다는 점</strong>으로 판단한다. 수리비 변제기 전인데 유치권이 이미 성립했다고 외우면 제320조 요건과 충돌한다. 21일에 반환을 요구하는 상황이라면 수리비 제공 전 동시이행항변권 및 유치권을 검토할 수 있다.</p>
+<p><strong>둘째 갈래:</strong> 별개의 빚은 이 수리계약의 대가도 시계에 관하여 생긴 채권도 아니라면 두 제도의 근거가 되지 않는다. 그 빚 자체가 실제로 시계와 관련된 채권인지 사실을 확인해야 한다. <strong>셋째 갈래:</strong> 동시이행항변권은 수리계약 당사자가 아닌 소유자에게 그 계약만으로 주장하지 못한다. 유치권은 요건을 갖추면 제3자에게도 주장할 수 있는 물권이다. 적법한 점유·채권 변제기 등 유치권 요건까지 확인한다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>동시이행항변권</th>
+<th>유치권</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>누구에게</td>
+<td>해당 채권관계의 상대방</td>
+<td>물권으로서 제3자에게도</td>
+</tr>
+<tr>
+<td>연결</td>
+<td>서로 대가적·공평상 함께 이행할 채무</td>
+<td>그 물건에 관해 생긴 채권</td>
+</tr>
+<tr>
+<td>대상</td>
+<td>인도뿐 아니라 금전·등기 등</td>
+<td>점유한 물건 등의 반환 거절</td>
+</tr>
+<tr>
+<td>일부 이행</td>
+<td>원칙적으로 미제공 부분에 대응</td>
+<td>불가분성으로 전부 유치 가능</td>
+</tr>
+<tr>
+<td>끝나는 계기</td>
+<td>상대방의 적절한 이행제공으로 항변 저지</td>
+<td>현실 변제 등. 상당한 담보 제공에 의한 소멸청구 제도도 있음</td>
+</tr>
+</tbody></table>
+<p><strong>한 줄:</strong> <span class="key-pink">인도 거절은 동시이행에서도 가능하다. 다만 동시이행은 인도 거절에만 한정되지 않는다.</span></p>
+<h2 id="obligations-02-14" data-concept-id="obligations-02-14">5-3. 판례의 동시이행 지도와 소송 효과 ★★★★★</h2>
+<p>판례는 아래 각 사건에서 “두 채무를 떨어뜨리면 누구에게 불공평한가”를 묻는다. 등장인물·분쟁과 결론을 함께 읽어야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 판례·등장인물과 갈등</th>
+<th>법원의 판단을 쉬운 말로</th>
+<th>반대로 보면 생기는 문제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2000다43819 · 매수인이 가압류 경매를 막으려고 채무를 대신 갚음</td>
+<td>구상금은 가압류 말소의무가 바뀐 모습. 잔대금과 동시이행</td>
+<td>매수인이 이중으로 자금을 먼저 부담</td>
+</tr>
+<tr>
+<td>90다카24939 · 소유권 없는 매수인에게 빌린 임차인이 원소유자에게 보증금을 요구</td>
+<td>별도 임대차 보증금 반환을 원소유자의 명도청구에 당연히 맞세우지 못함</td>
+<td>계약하지 않은 원소유자에게 남의 보증금 책임 전가</td>
+</tr>
+<tr>
+<td>2006다24049 · 무효 경매의 낙찰자와 배당받은 채권자</td>
+<td>등기말소 의무는 채무자에게, 배당금 반환채권은 채권자에게. 상대가 달라 동시이행 아님</td>
+<td>세 사람의 채무를 하나처럼 섞음</td>
+</tr>
+<tr>
+<td>2009다18526 · 전매수인이 낸 가처분과 원매매 해제</td>
+<td>중간 매수인에게 말소할 법적 지위·원상회복 의무가 없다면 대금 반환과 묶지 못함</td>
+<td>할 수 없는 일을 조건으로 반환을 막음</td>
+</tr>
+<tr>
+<td>90다19930 · 중도금 미지급 후 잔금일 도래</td>
+<td>중도금·그때까지 지연손해금·잔금과 등기를 동시이행으로 봄</td>
+<td>선이행 지체를 영구적 항변권 박탈로 취급</td>
+</tr>
+<tr>
+<td>2011다93025 · 기성금을 안 받는 공사업자</td>
+<td>앞으로 대금 지급을 합리적으로 기대하기 어렵다면 불안의 항변 검토</td>
+<td>무조건 공사를 계속하여 손실 확대</td>
+</tr>
+<tr>
+<td>99다34697 · 원상회복비 326,000원과 보증금 125,226,670원</td>
+<td>경미한 미회복을 이유로 보증금 전액 반환 거절 불가</td>
+<td>작은 흠으로 거액을 붙잡음</td>
+</tr>
+<tr>
+<td>88다카13332 · 임대인이 수선을 안 해 일부 사용 불가</td>
+<td>사용 지장 범위에 대응하여 차임 거절. 전혀 못 쓰면 전부 검토</td>
+<td>일부 지장만 있는데 차임 전액 면제</td>
+</tr>
+<tr>
+<td>92다56490·98다13754 등 · 한 번 제공 후 중단</td>
+<td>한 번 제공했다고 상대방 항변이 영구 소멸하지 않음</td>
+<td>과거 제공만으로 현재의 무제공을 정당화</td>
+</tr>
+<tr>
+<td>2004다24106 등 · 분양회사의 현저한 이행 불안</td>
+<td>수분양자의 정당한 중도금 지급 거절은 지체책임을 발생시키지 않음</td>
+<td>집을 못 받을 뚜렷한 위험에도 선지급 강요</td>
+</tr>
+</tbody></table>
+<p>채권 양도·채무 인수·상속으로 당사자가 바뀌어도 채권관계의 동일성이 유지되면 항변은 남을 수 있다. 반면 경개처럼 동일성이 사라지는 경우는 다르다.</p>
+<p><strong>소송 문단의 뜻:</strong> 상대방이 소송을 걸었다면 항변을 주장해야 법원이 상환이행판결, 즉 “상대방에게 받을 것을 받으면서 이행하라”는 판결을 내린다. 청구 전부 기각과 다르다. 하지만 <strong>이행지체책임이 생기지 않는 효과는 항변권 존재 자체에서 나오므로 반드시 항변했다는 말이 필요한 것은 아니다</strong>(2001다3764). 항변권 붙은 채권을 자동채권으로 상계하면 상대의 교환 보장을 빼앗으므로 원칙적으로 허용되지 않는다. 실체권설 등 학설의 설명 방식과 이 실무 결론을 분리한다.</p>
+<h2 id="obligations-02-15" data-concept-id="obligations-02-15">5-4. 위험부담: 잘못 없이 못 주게 된 물건의 돈은? ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 이행을 미룰 수 있는 문제가 아니라 급부가 아예 불가능해진 경우다. 제537조의 기본 상황은 유효한 쌍무계약 뒤 당사자 쌍방의 책임 없이 급부가 불능이 된 경우다. 물건을 줘야 하는 채무자는 인도의무를 면하지만 대금도 청구하지 못한다. 이것이 <strong>채무자위험부담주의</strong>다. ‘채무자’는 이 문맥에서 불능이 된 급부의 채무자를 가리킨다.</p>
+<p>급부위험은 물건을 못 받는 위험, 반대급부위험은 물건을 못 주어 돈도 못 받는 위험이다. 이미 대금이 오갔다면 법률상 원인이 사라진 급부의 반환을 검토한다. 계약 성립 때부터 불능이었던 경우와 구별하고, 종류채무는 특정 전 원칙적으로 같은 종류의 다른 물건을 구해 이행해야 한다. 채무자가 이행지체 중이면 제392조에 따라 무과실 불능에도 책임질 수 있어 제537조만으로 결론 내리지 않는다.</p>
+<p>교재가 위험의 이전과 종료를 구별하는 이유는 이행을 마친 뒤의 멸실을 아직 남은 채무의 위험부담 문제와 섞지 않기 위해서다. 채권자 수령지체 중 불능은 제538조로 이어진다. 일부 불능이면 원칙적으로 그 비율만큼 반대급부도 줄어든다. 제537조는 임의규정이지만 약관으로 정당한 이유 없이 위험을 떠넘기는 경우는 별도 통제한다.</p>
+<h3>교재 사례 · 1억 원을 먼저 냈는데 집이 불탔다 [56·60쪽]</h3>
+<p>매수인이 대금을 전부 냈고 인도 전 제3자의 방화로 집이 소실되었다. 매도인에게도 책임이 없다. 매수인은 “집도 못 받고 돈도 잃나?”라고 묻는다. <strong>기본 결론은 매도인이 1억 원을 부당이득으로 반환</strong>해야 한다는 것이다. 매도인에게 잘못이 없다면 계약 위반 손해배상을 바로 청구하는 것과는 다르다.</p>
+<p>다른 길은 <strong>대상청구권</strong>이다. 불능을 만든 같은 원인으로 매도인이 방화자에 대한 배상채권을 얻었다면, 그 대신 얻은 이익을 이전하라고 청구하는 방법을 검토한다. 이 길을 택하면 매수인의 대금의무도 함께 고려해야 한다. <strong>대금 전액도 돌려받고 같은 손실의 대체 이익도 전부 가져가는 이중 회수는 아니다.</strong></p>
+<p>판례 문장을 풀면 다음과 같다. 2017다254228의 “상대방의 이행도 청구하지 못한다”는 물건을 못 주면서 돈만 달라고 하지 못한다는 뜻이다. 92다4581·4598의 토지수용 보상금 사건은 “토지 대신 받은 보상금”을 따라가는 것이다. 대상은 채권자에게 저절로 귀속되지 않는다. 아직 못 받은 채권이면 <strong>양도</strong>, 이미 받았으면 <strong>인도</strong>를 청구한다. 모든 재매각 대금에 무조건 대상청구권이 생긴다는 뜻도 아니다.</p>
+<h2 id="obligations-02-16" data-concept-id="obligations-02-16">5-5. 채권자 때문에 못 준 경우: 제538조 ★★★★★</h2>
+<p>제538조는 ① 채권자의 책임 있는 사유로 불능이 되었거나 ② 채권자의 수령지체 중 쌍방 책임 없는 사유로 불능이 된 경우를 다룬다. 채무자는 반대급부를 청구할 수 있지만 <strong>자기 의무를 면해서 얻은 이익은 돌려줘야 한다</strong>. 실제로 번 수익뿐 아니라 아낀 비용도 포함한다. 단순히 채권자의 생활영역에서 일이 생겼다는 이유만으로 민법상 귀책사유라고 단정하지 않는다.</p>
+<h3>교재 사례 · 안 받겠다는 중고 자전거, 뒤의 화재 [61·64~65쪽]</h3>
+<p>5만 원에 자전거를 팔기로 했다. 매도인이 인도 준비를 하고 연락했지만 매수인은 정당한 이유 없이 일방적으로 거래를 깨겠다고 했다. 창고에 보관 중 원인 불명의 불로 자전거가 탔다. <strong>먼저</strong> 적절한 이행제공과 수령지체가 있었는지, 화재에 매도인의 고의·중과실 등 책임이 없는지 확인한다. 요건을 충족하면 제538조 제1항 후단에 따라 대금의무가 남는다.</p>
+<p>그렇지만 배송을 하지 않아 아낀 비용이 있다면 제2항에 따라 상환한다. 예컨대 설명용으로 절약한 운송비가 3천 원이라면 실질 정산은 4만 7천 원이 된다. 3천 원은 교재에 없는 가정이다. <strong>교재 결론은 5만 원을 아무 공제 없이 전부 달라고 할 수 없다는 것</strong>이다. 수령거절을 곧바로 적법한 해제라고 보지 않는 것이 첫 함정이다.</p>
+<p><strong>고용 연결:</strong> 부당해고가 무효이면 고용관계는 살아 있고, 사용자 때문에 일을 못 한 근로자의 임금청구가 문제된다(2000다18127). 해고 뒤의 단체협약상 임금 인상도 반영될 수 있다(93다21736). 다른 직장에서 번 중간수입 공제에는 휴업수당 보호와 연결된 한계가 있다(93다37915). 민법 제538조의 임금 전액과 근로기준법상 휴업수당을 같은 요건으로 취급하지 않는다. 교재 62쪽의 휴업수당 ‘제45조’ 표기는 현행 <strong>근로기준법 제46조</strong>와 대조한다. <a href="https://law.go.kr/lsInfoP.do?lsId=001872&urlMode=lsInfoP">현행 근로기준법</a>.</p>
+<h2 id="obligations-02-17" data-concept-id="obligations-02-17">5-6. 제3자를 위한 계약: 약속한 두 사람과 받을 한 사람 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 계약의 당사자와 급부를 받을 사람을 나누는 제도다. 노트북을 파는 민지는 구매자 수호에게 “대금은 내가 돈을 빌린 지우에게 직접 줘”라고 약정한다. 지우에게 수호에게 직접 청구할 권리까지 주는 경우가 제3자를 위한 계약이다. 단순히 송금 계좌만 타인 명의로 지정한 경우와 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>관계</th>
+<th>역할과 내용</th>
+<th>잘못된 연결</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>민지(요약자) ↔ 수호(낙약자)</td>
+<td>기본·보상관계: 노트북 매매와 제3자 수익약정</td>
+<td>‘대가관계’라고 바꿔 부르지 않기</td>
+</tr>
+<tr>
+<td>민지 ↔ 지우(수익자)</td>
+<td>원인·대가·출연관계: 빌린 돈을 갚으려는 이유</td>
+<td>그 관계의 하자가 매매를 자동 무효로 만들지 않음</td>
+</tr>
+<tr>
+<td>수호 → 지우</td>
+<td>급부실현관계: 대금 지급</td>
+<td>지우가 곧바로 매매 당사자가 되는 것은 아님</td>
+</tr>
+</tbody></table>
+<p>대리는 본인이 계약 당사자가 되는 구조이고, 여기서는 요약자가 당사자로 남는다. 부진정 제3자 계약은 제3자에게 직접 청구권이 없다는 차이다. 제3자에게 일정 부담 아래 권리를 주는 약정 가능성과, 동의 없이 남에게 독립 채무를 강제하는 문제도 구별한다. 제3자 보호효 있는 계약은 생활공동체 구성원에게 보호의무를 확장할지의 별도 학설이다. 교재의 계단에서 다친 임차인의 자녀 사례는 <strong>직접 이행청구권을 주는 본 제도와 같지 않으며</strong>, 국내 판례가 일반적으로 당연 채택한 이론처럼 쓰지 않는다.</p>
+<p>기본계약은 유효해야 한다. 제3자에게 직접 권리를 주려는 약정은 계약해석으로 확인한다. 토지거래허가 등 기본계약 자체의 문제도 피할 수 없다. 제3자는 계약 당시 반드시 현존할 필요는 없지만 권리를 받을 때의 특정·현존 문제가 있다. 병존적 채무인수 등과 달리 이행인수·면책적 채무인수 등을 전부 이 구조로 분류하지 않는다.</p>
+<h2 id="obligations-02-18" data-concept-id="obligations-02-18">5-7. 수익자의 권리, 합의해제와 법정해제의 차이 ★★★★★</h2>
+<p>수익자는 원칙적으로 <strong>낙약자에게 수익 의사를 표시</strong>할 때 권리를 취득한다(제539조). 요약자에게만 말하는 것으로 바꾸지 않는다. 낙약자가 상당한 기간을 정해 확답을 최고했는데 대답이 없으면 수익 거절로 본다(제540조). 이행청구 자체가 묵시적인 수익 의사표시가 될 수 있다. 수익 의사표시권의 형성권성·기간과 재산적 권리의 이전·대위 가능성에 관한 학설도 구분해 읽는다.</p>
+<p>권리가 확정되면 당사자끼리 마음대로 지우거나 바꿀 수 없다(제541조). 미리 변경권을 유보했거나 수익자가 동의한 경우는 별개다. <strong>합의해제</strong>로 수익자의 확정 권리를 없애는 것과, 낙약자의 채무불이행을 이유로 요약자가 <strong>법정해제</strong>하는 것은 다르다. 후자는 제3자의 동의 없이 가능한 것이 판례다(69다1410·1411). 수익자는 손해배상을 청구할 수 있지만 기본계약 당사자의 취소권·해제권을 자신의 권리처럼 행사하지 못한다.</p>
+<p>낙약자는 기본계약에 기한 무효·취소·동시이행 등의 항변을 수익자에게 주장할 수 있다(제542조). 그러나 요약자와 수익자 사이의 원인관계에 기한 항변을 끌어오지는 못한다(2003다49771). 원인관계가 사라졌다면 그 관계의 당사자 사이에서 부당이득을 정산하는 것이 원칙이다. 기본관계가 무효·취소되었다고 이미 지급한 낙약자가 언제나 수익자를 바로 상대로 반환청구하는 것도 아니다(제공 문제의 2010다31860·31877).</p>
+<p>요약자는 제3자에게 이행하라고 청구할 권리를 가지며, 자기 손해가 생기면 배상 문제도 검토한다. 제3자 수익 거절 때문에 계약 목적 자체를 달성할 수 없어진 경우 위험부담과 연결된다. 물권 취득은 계약에서 정한 청구권 외에 등기·인도 등 별도 요건이 필요한지 확인한다. 교재의 무인론 설명은 학설의 구성이지, 한국의 물권변동이 언제나 무인이라는 선언이 아니다.</p>
+<p><strong>암기:</strong> <span class="key-yellow">수익 의사는 낙약자에게. 기본관계 항변은 가능. 원인관계 항변은 별개. 수익자는 원칙적으로 계약 당사자가 아니다.</span></p>
+<h1>6. 제5절 · 계약의 해제와 해지 [73~96쪽]</h1>
+<h2 id="obligations-02-19" data-concept-id="obligations-02-19">6-1. 다섯 가지 ‘끝내기’를 먼저 나누자 ★★★★★</h2>
+<table>
+<thead>
+<tr>
+<th>제도</th>
+<th>작동 원인</th>
+<th>핵심 효과·함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>해제</td>
+<td>해제권자의 의사표시</td>
+<td>원칙적으로 소급적 해소·원상회복</td>
+</tr>
+<tr>
+<td>해지</td>
+<td>계속적 관계의 해지권·권한 행사</td>
+<td>장래 소멸. 과거의 정상 급부까지 전부 반환하지 않음</td>
+</tr>
+<tr>
+<td>합의해제·합의해지</td>
+<td>당사자들의 새로운 합의</td>
+<td>합의 내용이 기준. 해제 규정 전부를 자동 적용하지 않음</td>
+</tr>
+<tr>
+<td>해제조건</td>
+<td>조건의 성취</td>
+<td>별도 해제 의사표시 불요. 원칙적으로 조건 성취 때부터 효력 상실</td>
+</tr>
+<tr>
+<td>취소</td>
+<td>제한능력·착오·사기 등 법정 사유와 취소</td>
+<td>모든 법률행위에서 검토. 반환범위는 해제와 다를 수 있음</td>
+</tr>
+</tbody></table>
+<p><strong>문단의 역할:</strong> 이름이 비슷하다고 요건까지 같다고 생각하지 않게 하는 부분이다. 철회는 효력발생을 막는 문제와 연결되고, 소비자 특별법상 청약철회에는 별도의 법정 효과가 있으므로 용어만으로 전부 같은 처리하지 않는다.</p>
+<p class="key-pink">중요 보완: 제공 형성평가 035 해설은 해제조건 성취를 소급효라고 서술하지만, 민법 제147조 제2항은 조건 성취 때부터 효력을 잃는 것이 원칙이다. 소급효 특약은 제3항에서 별도로 다룬다. 원본 정답은 보존하고 문제 해설에 이 충돌을 표시했다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0147&lsiSeq=284415&urlMode=lsScJoRltInfoR">제147조 확인</a>.</p>
+
+<p>합의해제에는 특별한 사정·약정 없이 받은 날부터의 이자나 채무불이행 손해배상이 자동으로 붙지 않는다. 다만 거래 안전을 위한 제3자 보호는 적용된다(95다16011, 86다카1147, 2005다6341). 이미 이행한 부분이 있고 반환 정산이 중요한 관심사라면 그 조건까지 합의했는지 봐야 한다. “끝내자는 말은 둘 다 했으니 반환액을 다퉈도 이미 합의해제”라고 단정하면 안 된다(2016다274270·274287).</p>
+<p>실권조항은 일정한 채무불이행이 생기면 별도 표시 없이 실효되도록 정한 약정이다. 하지만 상대방이 동시이행항변권으로 정당하게 지급을 거절하는데 단지 날짜가 지났다고 자동해제시킬 수는 없다(2011다110128). <strong>선이행 중도금의 자동해제와 동시이행 잔금의 자동해제를 구별</strong>한다.</p>
+<h2 id="obligations-02-20" data-concept-id="obligations-02-20">6-2. 해제권의 발생: 늦음·불능·불완전이행 ★★★★★</h2>
+<p><strong>문단의 역할:</strong> 상대방이 밉다는 이유만으로 계약을 없애지 못하므로 해제권의 근거를 찾는다. 약정해제권은 계약이 정한 원인·효과, 법정해제권은 법률이 정한 요건을 본다. 법정해제는 채무불이행 외에 증여·매매 담보책임·도급의 특칙 등에서도 생긴다.</p>
+<p><strong>이행지체의 기본 길:</strong> 이행 가능한 주요 채무의 기일이 지남 → 상대방에게 적절히 이행을 요구하고 상당한 기회를 줌 → 그 기간에도 이행하지 않음 → 해제 의사표시. 서로 동시이행이면 자기 이행제공으로 상대방의 정당한 항변을 제거했는지도 확인한다. 제공의 정도는 사안에 따라 신의칙으로 판단한다. 부수적 의무의 경미한 위반만으로 계약 전체를 없애는 것이 원칙은 아니다.</p>
+<p>정기행위는 결혼식 당일의 촬영처럼 그 시기를 지나면 목적을 이룰 수 없는 경우다. 명백한 이행거절도 쓸모없는 최고를 되풀이할 필요가 없다. 다만 거절이 철회되었다면 다시 최고가 필요한 경우가 있다(2000다40995). 지나치게 과다한 금액만 받겠다고 요구한 부적법한 최고도 피해야 한다.</p>
+<p><strong>기한 없는 채무 주의:</strong> 이행청구로 지체가 시작되는 문제와, 해제를 위해 상당한 이행기회를 부여하는 문제를 구별한다. 처음 청구가 이미 상당한 기간의 최고 기능을 했다면 같은 요구를 다시 반복할 필요가 없다는 뜻이지, 기한 없으면 언제나 즉시 해제할 수 있다는 뜻은 아니다. 교재·제공 문제의 ‘별도 최고 불필요’를 이 한계와 함께 읽자.</p>
+<p><strong>이행불능:</strong> 물리적 절대불능뿐 아니라 거래상 이행을 기대할 수 없는 경우도 포함한다. 채무자에게 책임 있는 불능이면 제546조에 따라 최고 없이 해제할 수 있다. 쌍방 책임 없는 후발불능은 제537조와 구별한다. 일부 불능은 나머지로 목적을 달성할 수 있는지에 따라 일부 또는 전부 해제를 판단한다. 불완전이행은 보완 가능성과 목적 달성 여부에 따라 지체·불능 규율을 연결한다.</p>
+<p><strong>귀책사유의 학설 주의:</strong> 제546조는 명시적으로 채무자의 책임을 요구한다. 제544조의 문언과 귀책사유 필요성에 관한 통설·유력설 설명은 분리한다. 제공 워크북 048의 ②와 교재 앞부분이 충돌하므로 이를 현행 판례의 확정된 ‘귀책사유 불필요’ 공식으로 외우지 않는다.</p>
+<h2 id="obligations-02-21" data-concept-id="obligations-02-21">6-3. 사정변경과 해제권 행사 ★★★★☆</h2>
+<p>계약 뒤 일이 나빠졌다고 모두 해제할 수 있으면 약속의 의미가 사라진다. 사정변경은 계약 기초인 <strong>객관적 사정의 현저한 변화</strong>, 예견 불가능, 해제를 원하는 당사자에게 책임 없음, 계약을 그대로 강제하면 신의칙에 현저히 반하는 결과라는 엄격한 요건을 본다. 개인적으로 돈이 궁해졌다는 사정만으로 충분하지 않다.</p>
+<p>교재 80쪽 본문의 ‘판례는 부정’이라는 일반화와 바로 아래 2012다13637 판례 박스는 맞지 않는다. <strong>판례도 엄격한 예외로 인정한다</strong>는 결론으로 정리한다. <a href="https://law.go.kr/LSW/precInfoP.do?mode=0&precSeq=218835">국가법령정보센터의 관련 판례</a>. 객관적 계약 기초와 자신의 투자 기대를 구별하는 것이 출제 포인트다.</p>
+<p>해제권은 발생만으로 계약이 없어지지 않는다. 상대방에게 행사해야 한다. 한쪽 또는 양쪽 당사자가 여럿이면 원칙적으로 <strong>전원으로부터 전원에게</strong> 행사한다(제547조). 동시에 한 장의 문서로 해야 한다는 뜻은 아니다. 법·약정상 기간을 먼저 보고, 정함 없는 형성권의 제척기간도 확인한다. 행사 전에 적법한 완전 이행 등으로 해제권이 소멸하는지, 포기·실효·최고에 의한 소멸·제553조의 훼손 등 사유도 순서대로 검토한다.</p>
+<h2 id="obligations-02-22" data-concept-id="obligations-02-22">6-4. 해제의 효과: 돌려줄 것과 배상할 것을 분리하자 ★★★★★</h2>
+<p>해제하면 원칙적으로 각자 받은 급부를 원상회복한다(제548조). 물건은 원물, 금전은 받은 날부터의 이자를 더하여 반환한다. 목적물을 사용했다면 사용이익도 문제된다(2020다290804). 원물을 처분해 돌려줄 수 없으면 특별한 사정 없는 한 처분 당시 대가 또는 시가 상당액과 그 이득에 대한 이자를 검토한다(2013다14675). 선의라 현재 남은 것만 반환한다는 일반 부당이득 규칙으로 줄이지 않는다.</p>
+<p>이자는 원상회복의 일부이고, 반환의무의 <strong>이행지체로 생기는 지연손해금과 원인이 다르다</strong>. 원상회복에 과실상계를 그대로 적용해서도 안 된다. 손해배상에서는 상대방의 귀책사유와 손해·인과관계 등을 검토한다. 해제와 손해배상은 양립한다(제551조). 이행이익 배상이 원칙이지만 신뢰이익을 선택적으로 청구할 수 있는 경우도 있다. 통상 지출비용과 특별사정 비용을 나누어 제393조로 판단한다(2002다2539).</p>
+<p><strong>판례 이야기 · 분양을 믿고 산 채권:</strong> 아파트 계약자가 입찰을 위해 채권을 액면가로 사서 더 싼 시장가격으로 팔았다. 분양자의 채무불이행으로 계약이 해제되자 그 차액을 청구했다. 법원은 이행을 믿고 지출한 손해라는 관점에서 신뢰이익 배상을 검토했다. “계약을 지켰다면 얻을 이익만 가능하고 준비비용은 절대 불가”라면 정당한 신뢰 지출이 누락된다. 다만 모든 지출을 무제한 보상하는 판결은 아니다.</p>
+<p>원상회복 의무끼리는 동시이행이다(제549조). 해제에 따른 손해배상 의무도 관련 원상회복 의무와 동시이행으로 묶이는 경우가 있다. <strong>돌려주는 계산</strong>과 <strong>추가 손해를 메우는 계산</strong>을 별도로 적고 관계를 연결한다.</p>
+<p><strong>심화·학설:</strong> 직접효과설은 계약이 소급 소멸한다고, 청산관계설은 계약관계가 반환 정산 관계로 바뀐다고 설명한다. 직접효과설 내부의 물권적·채권적 효과설은 소유권이 당연히 돌아오는지도 달리 본다. 교재 저자는 청산관계설의 설명력을 강조하지만, 판례의 일반적 이해는 직접효과설·물권적 효과설로 정리한다. 학설 선택과 실제 제3자 보호 요건은 별도로 답한다.</p>
+<h2 id="obligations-02-23" data-concept-id="obligations-02-23">6-5. 해제와 제3자: 거래의 시간을 그리자 ★★★★★</h2>
+<p>원래 매매가 해제되어도 그것을 믿고 새 권리를 취득한 사람을 모두 쫓아내면 거래가 불안해진다. 제548조 제1항 단서는 그 보호를 위한 규정이다. 원계약의 효과를 기초로 <strong>새로운 이해관계와 등기·인도 등 권리취득 요건</strong>을 갖췄는지 본다.</p>
+<table>
+<thead>
+<tr>
+<th>권리취득 시점·지위</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>해제 전, 새 이해관계와 완전한 권리 취득</td>
+<td>해제될 가능성을 알았다는 이유만으로 곧바로 배제되지 않음</td>
+</tr>
+<tr>
+<td>해제 후, 원상회복 등기 전</td>
+<td>해제 사실을 모르는 선의 등 추가 요건 확인</td>
+</tr>
+<tr>
+<td>매매 목적 부동산의 가압류채권자</td>
+<td>보호되는 제3자에 포함될 수 있음</td>
+</tr>
+<tr>
+<td>소멸할 계약상 채권의 양수인·그 채권의 가압류권자</td>
+<td>목적물의 독립 권리취득과 달라 원칙적으로 제외</td>
+</tr>
+<tr>
+<td>대항요건 갖춘 주택임차인</td>
+<td>기초 권원과 취득 시점 등을 확인하여 보호</td>
+</tr>
+<tr>
+<td>제3자 계약의 수익자</td>
+<td>수익자라는 이름만으로 자동 보호 아님. 새 이해관계와 등기·인도 등의 요건 확인</td>
+</tr>
+</tbody></table>
+<h3>교재 중심 사례 · 분양계약이 해제된 집의 세입자 [73·91쪽]</h3>
+<p>분양회사는 매수인에게 등기를 넘겼다. 매수인은 집을 임대했고 임차인은 인도와 주민등록 등 대항요건을 갖추었다. 뒤에 분양대금 어음이 부도나 원매매가 해제되고 등기가 말소되었다. 회사가 다시 다른 사람에게 팔자 새 소유자가 세입자에게 나가라고 한다.</p>
+<p><strong>법원의 고민:</strong> 원매매를 되돌리는 이익과 적법한 임대권원을 믿고 대항요건을 갖춘 세입자 보호 중 무엇을 조정할까? 교재 사례는 해제 전에 적법한 권원을 바탕으로 대항요건을 갖춘 임차인으로서 제548조의 제3자 보호를 받아 새 소유자에게 임차권을 주장할 수 있다고 푼다(96다17653의 법리). <strong>계약이 해제됐으니 모든 세입자가 무조건 나간다는 결론은 틀린다.</strong></p>
+<p>그러나 처음부터 권원이 없거나, 매매 해제를 조건으로 한 제한적 임대권한이 문제된 95다32037 같은 사건을 동일하게 처리해서는 안 된다. 주민등록 하나만으로 없는 권원을 새로 만드는 것은 아니다. 사례의 시간표와 권원 내용을 먼저 확인한다.</p>
+<h3>교재 심화 사례 · 부동산을 다시 판 뒤 원매매 해제 [88~90쪽]</h3>
+<p>원매도인 → 중간 매수인 → 등기까지 마친 전매수인의 순서다. 중간 매수인이 잔금을 안 줘 원매매를 해제했다. 학설의 설명은 다르지만, <strong>해제 전 이미 새 권리를 취득한 제3자 보호</strong>를 먼저 놓치지 말자. 교재의 마지막 비교 문구를 보고 해제 전과 해제 후의 선의 요건을 섞지 않는다. 해제 후 원상회복 등기 전 취득자는 해제 사실을 몰랐는지가 중요하고, 해제 전 취득자에게 같은 선의 요건을 일반적으로 요구하는 것은 아니다(2008다57746).</p>
+<p>제3자 계약의 수익자도 원인관계를 맺고 해제 전에 새 이해관계를 가지며 등기·인도 등을 마쳤다면 보호될 수 있다(2018다244976). 이 판례를 “모든 수익자는 당연 보호”로 줄이면 정작 판결의 요건이 사라진다.</p>
+<h2 id="obligations-02-24" data-concept-id="obligations-02-24">6-6. 해지: 어제의 이용은 두고 내일부터 끝낸다 ★★★★☆</h2>
+<p><strong>문단의 역할:</strong> 계속적 계약은 오랫동안 쌓인 급부를 처음부터 없던 일로 만들기 어려워 장래 종료가 중심이 된다. 기간 없는 계약에서는 종류별 통고 규정에 따라 종료할 수 있지만, 통고 즉시 끝나는지 일정 기간이 필요한지는 개별 조문을 본다. 기간 있는 계약은 기간 만료가 원칙이고 약정된 해지권·법정 사유·부득이한 사유 등이 별도로 필요하다.</p>
+<p>신뢰관계가 깨져 더 이상 지속을 기대하기 어려운 경우, 특별 규정의 사유, 중대한 불이행 등을 검토한다. 해제의 일반 규정을 계속적 관계에 적용할 때도 그 성질에 맞게 조정한다. 해지 의사표시는 명시적 말뿐 아니라 객관적으로 종료 의사가 드러나 상대방도 알 수 있는 행위로 가능하다(2006다62492·62508). 그러나 단순한 내심만으로 끝나지는 않는다. 도달한 해지표시는 원칙적으로 철회하지 못하고, 다수 당사자는 전원 문제가 있다.</p>
+<p>해지되면 이미 정상 제공된 급부는 원칙적으로 그대로 유효하다. 임대한 집을 돌려주는 것은 과거 차임·사용을 모두 원상회복하는 해제 효과가 아니라, <strong>사용권이 끝나 발생하는 계약상 반환의무</strong>다. 손해배상 청구는 별도로 남을 수 있다. 상대방에게 특별히 불리한 시기에 해지한 책임도 요건에 따라 검토한다. 합의해지는 새로운 계약이므로 그 합의의 내용이 우선한다.</p>
+<p><strong>한 줄:</strong> <span class="key-yellow">해제는 되돌림, 해지는 앞으로 멈춤. 하지만 종료 후 물건 반환과 손해배상은 따로 남는다.</span></p>
+<h1>7. 시험 연결과 새로운 적용</h1>
+<h2>7-1. 먼저 풀 문제 TOP5와 주의할 원자료 표현</h2>
+<table>
+<thead>
+<tr>
+<th>우선</th>
+<th>제공 문제</th>
+<th>출제 의도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>워크북 020</td>
+<td>발송일·도달일·연착 통지를 시간순으로 구별</td>
+</tr>
+<tr>
+<td>2</td>
+<td>워크북 028</td>
+<td>선이행·이행제공 중단·항변권 존재 효과 비교</td>
+</tr>
+<tr>
+<td>3</td>
+<td>워크북 035</td>
+<td>위험부담·대상청구권·제3자 불법행위 구별</td>
+</tr>
+<tr>
+<td>4</td>
+<td>워크북 039</td>
+<td>기본관계·원인관계·합의해제/법정해제 구별</td>
+</tr>
+<tr>
+<td>5</td>
+<td>워크북 050</td>
+<td>복수정답과 제3자 보호의 구체적 요건</td>
+</tr>
+</tbody></table>
+<p>실제 오답률 자료는 없다. ‘많이 틀리는 보기’ 대신 <strong>틀리기 쉬운 표현</strong>을 표시한다. ‘항상·전부·행사해야만·도달한 때·수익자면 누구나’가 특히 위험하다. 원자료의 답을 바꾸어 저장하지 않고, 표현상 충돌은 해설에서 알린다. 워크북 009의 유언/계약 혼용, 012의 완결권 효과, 018의 고지의무 문구 누락 가능성, 048의 귀책사유 학설, 형성평가 035의 해제조건 소급효는 별도 주의 대상이다.</p>
+<h2>7-2. 출제위원의 새 사례 5개</h2>
+<p>아래는 설명용 창작 문제다. 기존 문제의 인물·가격만 바꾼 것이 아니라 서로 다른 논점을 함께 판단하도록 구성했다.</p>
+<p><strong>문제 1.</strong> 지역극장은 단체 관람 제안에 “공연 날짜를 토요일로 바꾸면 전 좌석을 사겠다”고 답했다. 극장은 곧바로 다른 단체의 신청을 거절했다. 조건을 바꾼 답장만으로 첫 단체와 계약이 성립하는가?</p>
+<p><strong>해설:</strong> 원제안의 승낙이 아니라 새 청약이다. 극장의 행위가 그 새 청약을 승낙한 의사표시나 제532조의 사실로 인정되는지는 통지 불요의 사정·관습과 객관적 표시를 더 봐야 한다. 마음속 수락과 타인 신청 거절만으로 항상 계약 성립은 아니다. <strong>의도:</strong> 변경승낙과 의사실현을 연달아 적용하기.</p>
+<p><strong>문제 2.</strong> 공연장 수리업자가 계약대로 공사를 했지만 중요하지 않은 명찰 하나를 잘못 달았다. 운영자는 그 교체비 2만 원을 이유로 공사대금 2천만 원 전부를 안 주겠다고 한다. 가능한가?</p>
+<p><strong>해설:</strong> 흠의 중요성·보수비·사용 가능성을 보아야 하고, 주어진 경미한 사정만으로 대금 전액 거절은 정당화되기 어렵다. 하자보수와 손해배상의 별도 요건도 검토한다. <strong>의도:</strong> 동시이행은 ‘흠 하나면 전부 거절’ 제도가 아님을 확인.</p>
+<p><strong>문제 3.</strong> 전시작품 매매 후 인도 전에 예측 불가능한 사고로 작품이 멸실되었다. 판매자가 대체 보상금을 받았다. 구매자는 대금 반환과 보상금 전액 이전을 함께 요구한다.</p>
+<p><strong>해설:</strong> 쌍방 무책임·후발불능이면 제537조의 반환 문제, 불능과 인과적 연결이 있는 대체 이익이면 대상청구권을 검토한다. 그러나 같은 손실에 대금도 전액 돌려받고 대체 이익도 전액 보유하는 결론으로 겹치지 않게 대가관계를 정산한다. <strong>의도:</strong> 구제수단의 선택과 이중 회수 방지.</p>
+<p><strong>문제 4.</strong> 공연기획자가 후원자에게 “공연료를 배우에게 직접 지급하라”고 약정했고 배우가 수익 의사를 밝혔다. 기획자와 배우의 별도 정산 약정이 취소되자 후원자는 공연료를 주지 않겠다고 한다.</p>
+<p><strong>해설:</strong> 별도 정산 약정은 원인관계이고, 후원자의 의무가 생긴 기본관계와 다르다. 기본관계에 별도 영향이 없는 한 그 원인관계 취소만으로 지급을 거절하지 못한다. 이미 받은 돈의 반환은 원인관계 당사자 사이의 부당이득을 검토한다. <strong>의도:</strong> 세 관계를 분리하기.</p>
+<p><strong>문제 5.</strong> 기간 없는 장비 임대차를 적법한 통고로 종료했다. 임차인은 “해지되었으니 지난 석 달 임대료도 돌려 달라”고 한다. 동시에 장비는 아직 반환하지 않았다.</p>
+<p><strong>해설:</strong> 해지는 장래효이므로 과거 정상 이용의 대가는 원칙적으로 남는다. 장비는 사용권 종료에 따라 반환해야 하며, 늦은 반환으로 인한 손해는 별도 검토한다. <strong>의도:</strong> 해지의 장래효와 반환의무가 모순되지 않음을 설명하기.</p>
+<h1>용어 사전 · 한자에서 사례와 시험까지</h1>
+<p>한자의 훈은 글자 본래의 대표 뜻이고, 법률상 뜻은 아래에서 별도로 연결한다. 한자 풀이만으로 조문 요건을 대체하지 않는다.</p>
+<h3>계약</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 契(맺을 계) 約(맺을 약). <strong>③ 합친 뜻:</strong> 서로 약속을 맺음. <strong>④ 이름의 이유:</strong> 팔 사람의 말과 살 사람의 말이 만나기 때문에.</p>
+<p><strong>⑤ 법률상 의미:</strong> 양쪽의 표시가 내용상 맞아 법적 효과를 만드는 법률행위. <strong>⑥ 쉬운 말:</strong> “팔게”와 “살게”가 같은 조건으로 만난다. <strong>⑦ 사례:</strong> 민지의 10만 원 판매 제안에 수호가 그대로 수락.</p>
+<p><strong>⑧ 시험:</strong> 성립과 유효성을 구별. <strong>⑨ 비교·기억법:</strong> 합동행위는 같은 방향, 단독행위는 한쪽 표시.</p>
+<h3>사적 자치</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 私(사사로울 사) 的(과녁 적) 自(스스로 자) 治(다스릴 치). <strong>③ 합친 뜻:</strong> 개인의 일을 스스로 정함. <strong>④ 이름의 이유:</strong> 남이 정해 주는 것보다 당사자의 결정을 존중하기 때문에.</p>
+<p><strong>⑤ 법률상 의미:</strong> 개인의 법률관계를 자기 의사로 형성하는 원칙. <strong>⑥ 쉬운 말:</strong> 내 거래의 조건은 내가 정하는 것이 출발점. <strong>⑦ 사례:</strong> 빌려줄지·얼마를 받을지 정한다.</p>
+<p><strong>⑧ 시험:</strong> 강행규정·사회질서의 한계. <strong>⑨ 비교·기억법:</strong> 계약 자유는 사적 자치의 중요한 표현.</p>
+<h3>신의성실</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 信(믿을 신) 義(옳을 의) 誠(정성 성) 實(열매 실). <strong>③ 합친 뜻:</strong> 믿음에 맞게 진실하고 성실하게 행동함. <strong>④ 이름의 이유:</strong> 내 말을 믿고 행동한 상대를 함부로 배신하지 않게 하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 권리 행사·의무 이행의 객관적 행동기준. <strong>⑥ 쉬운 말:</strong> 말을 믿게 해 놓고 자기 편할 때만 뒤집지 말자. <strong>⑦ 사례:</strong> 입금 확인을 믿고 되돌릴 수 없는 지급을 한 거래자.</p>
+<p><strong>⑧ 시험:</strong> 권리남용·모순행위·계약 구체화. <strong>⑨ 비교·기억법:</strong> 선의는 사정을 모름, 신의칙은 행동기준.</p>
+<h3>강행규정</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 强(강할 강) 行(갈 행) 規(법 규) 定(정할 정). <strong>③ 합친 뜻:</strong> 강제로 적용하도록 정한 규칙. <strong>④ 이름의 이유:</strong> 공익이나 보호할 이익을 합의보다 앞세우므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 당사자의 다른 의사로 배제할 수 없는 법 규정. <strong>⑥ 쉬운 말:</strong> 둘이 좋다고 해도 넘을 수 없는 울타리. <strong>⑦ 사례:</strong> 보호 규정에 반하는 약정의 효력을 검토.</p>
+<p><strong>⑧ 시험:</strong> 위반 효과와 입법목적. <strong>⑨ 비교·기억법:</strong> 임의규정은 다른 합의 가능.</p>
+<h3>낙성계약</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 諾(허락할 낙) 成(이룰 성) 契約(계약). <strong>③ 합친 뜻:</strong> 서로 허락하여 이루어지는 계약. <strong>④ 이름의 이유:</strong> 물건 전달을 성립요건으로 추가하지 않으므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 합의만으로 성립하는 계약. <strong>⑥ 쉬운 말:</strong> 받기 전에 이미 약속이 성립할 수 있다. <strong>⑦ 사례:</strong> 내일 인도할 자전거를 오늘 매매.</p>
+<p><strong>⑧ 시험:</strong> 인도·등기와 계약 성립 분리. <strong>⑨ 비교·기억법:</strong> 요물계약은 인도 등 추가 요건.</p>
+<h3>요물계약</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 要(요긴할 요) 物(만물 물) 契約(계약). <strong>③ 합친 뜻:</strong> 물건 등 추가 급부를 필요로 함. <strong>④ 이름의 이유:</strong> 약속만으로 끝나지 않아 붙은 이름.</p>
+<p><strong>⑤ 법률상 의미:</strong> 합의 외에 인도 또는 일정 급부 등의 요건을 요구하는 계약 분류. <strong>⑥ 쉬운 말:</strong> 말만이 아니라 실제 행위까지 필요한 종류. <strong>⑦ 사례:</strong> 대물변제의 실제 대체 급부.</p>
+<p><strong>⑧ 시험:</strong> 현상광고 계약설·대물변제와 예약. <strong>⑨ 비교·기억법:</strong> 요식은 형식의 문제, 요물은 추가 급부의 문제.</p>
+<h3>쌍무계약</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 雙(쌍 쌍) 務(힘쓸 무) 契約(계약). <strong>③ 합친 뜻:</strong> 양쪽 의무가 있는 계약. <strong>④ 이름의 이유:</strong> 한 의무가 다른 의무를 받기 위한 대가이므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 서로 대가적 의미로 연결된 채무를 부담하는 계약. <strong>⑥ 쉬운 말:</strong> 물건과 돈을 서로 주고받는 약속. <strong>⑦ 사례:</strong> 매도인의 인도와 매수인의 대금.</p>
+<p><strong>⑧ 시험:</strong> 단순 양쪽 의무 존재만으로 부족. <strong>⑨ 비교·기억법:</strong> 유상은 대가 유무, 쌍무는 대가적 채무의 연결.</p>
+<h3>견련성</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 牽(끌 견) 連(이을 련) 性(성품 성). <strong>③ 합친 뜻:</strong> 끌어 이어진 성질. <strong>④ 이름의 이유:</strong> 한쪽을 떼면 교환의 균형이 깨지므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 급부들이 대가·공평상 서로 연결되는 관계. <strong>⑥ 쉬운 말:</strong> 돈을 주는 이유가 그 물건을 받기 위해서다. <strong>⑦ 사례:</strong> 잔금과 소유권이전등기.</p>
+<p><strong>⑧ 시험:</strong> 성립·이행·존속·청산상의 연결. <strong>⑨ 비교·기억법:</strong> 단순히 같은 사람 사이의 두 빚과 다름.</p>
+<h3>예약완결권</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 豫(미리 예) 約(맺을 약) 完(완전할 완) 結(맺을 결) 權(권세 권). <strong>③ 합친 뜻:</strong> 미리 한 약속을 완성시키는 권리. <strong>④ 이름의 이유:</strong> 새 승낙 없이 본거래를 완성하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 일방 표시로 예약의 본계약을 성립시키는 형성권. <strong>⑥ 쉬운 말:</strong> “약속한 매매를 이제 하겠습니다”로 완성. <strong>⑦ 사례:</strong> 매매예약 완결 표시를 상대방에게 전달.</p>
+<p><strong>⑧ 시험:</strong> 약정기간·없으면 원칙 10년 제척기간. <strong>⑨ 비교·기억법:</strong> 단순 본계약 체결청구권과 구별.</p>
+<h3>청약</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 請(청할 청) 約(맺을 약). <strong>③ 합친 뜻:</strong> 계약을 청함. <strong>④ 이름의 이유:</strong> 상대에게 계약을 맺자고 청하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 승낙과 결합하면 계약이 성립할 구체적·확정적 제안. <strong>⑥ 쉬운 말:</strong> 그대로 “예”라고 하면 끝날 제안. <strong>⑦ 사례:</strong> 특정 시계를 20만 원에 팔겠다는 확정 제안.</p>
+<p><strong>⑧ 시험:</strong> 도달·구속력·승낙적격. <strong>⑨ 비교·기억법:</strong> 유인은 상대에게 청약해 보라고 유도.</p>
+<h3>승낙</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 承(이을 승) 諾(허락할 낙). <strong>③ 합친 뜻:</strong> 받아 이어 허락함. <strong>④ 이름의 이유:</strong> 상대가 제안한 조건을 이어받으므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 청약을 그대로 받아 계약을 성립시키려는 표시. <strong>⑥ 쉬운 말:</strong> “그 조건 그대로 할게”. <strong>⑦ 사례:</strong> 가격 변경 없이 수락 편지를 보냄.</p>
+<p><strong>⑧ 시험:</strong> 발송·도달기한·연착. <strong>⑨ 비교·기억법:</strong> 변경승낙은 거절+새 청약.</p>
+<h3>불합의</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 不(아닐 불) 合(합할 합) 意(뜻 의). <strong>③ 합친 뜻:</strong> 뜻이 맞지 않음. <strong>④ 이름의 이유:</strong> 서로 다른 약속을 생각하며 말하기 때문에.</p>
+<p><strong>⑤ 법률상 의미:</strong> 계약의 중요한 내용에 객관적 합치가 없음. <strong>⑥ 쉬운 말:</strong> 둘이 같은 거래를 한 게 아니었다. <strong>⑦ 사례:</strong> 객관적 해석으로도 미국·호주 달러를 정할 수 없는 경우.</p>
+<p><strong>⑧ 시험:</strong> 불성립과 취소 구별. <strong>⑨ 비교·기억법:</strong> 착오는 합의는 있지만 인식에 잘못.</p>
+<h3>약관</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 約(맺을 약) 款(조목 관). <strong>③ 합친 뜻:</strong> 약속의 조항들. <strong>④ 이름의 이유:</strong> 거래 조건을 조목조목 준비하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 다수 상대와 계약하기 위해 미리 마련한 계약 내용. <strong>⑥ 쉬운 말:</strong> 회사에서 미리 인쇄해 둔 조건. <strong>⑦ 사례:</strong> 보험·통신 서비스의 표준 조건.</p>
+<p><strong>⑧ 시험:</strong> 편입·설명·해석·공정성. <strong>⑨ 비교·기억법:</strong> 실질 협상한 개별 약정 우선.</p>
+<h3>체약상 과실</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 締(맺을 체) 約(맺을 약) 上(위 상) 過(허물 과) 失(잃을 실). <strong>③ 합친 뜻:</strong> 계약을 맺는 과정의 잘못. <strong>④ 이름의 이유:</strong> 약속 전후의 부주의로 신뢰손해가 생기므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 넓게는 계약교섭 책임, 제535조는 원시불능 계약의 책임. <strong>⑥ 쉬운 말:</strong> 아직 계약을 제대로 못 맺었어도 남을 함부로 손해 보게 하면 안 된다. <strong>⑦ 사례:</strong> 이미 멸실한 물건의 판매계약.</p>
+<p><strong>⑧ 시험:</strong> 제535조의 좁은 요건을 확인. <strong>⑨ 비교·기억법:</strong> 후발불능·계약교섭 부당파기는 각각 별도 검토.</p>
+<h3>항변권</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 抗(막을 항) 辯(말씀 변) 權(권세 권). <strong>③ 합친 뜻:</strong> 상대 요구를 막아 맞설 권리. <strong>④ 이름의 이유:</strong> 권리 자체를 없애지 않고 요구에 맞서므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 청구권의 실현을 거절하는 권리. <strong>⑥ 쉬운 말:</strong> “빚 없는 게 아니라 지금은 못 해줘”. <strong>⑦ 사례:</strong> 상대가 잔금을 제공할 때까지 등기 거절.</p>
+<p><strong>⑧ 시험:</strong> 상환이행판결·원용과 존재 효과. <strong>⑨ 비교·기억법:</strong> 채무 소멸과 다름.</p>
+<h3>동시이행</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 同(같을 동) 時(때 시) 履(밟을 이) 行(갈 행). <strong>③ 합친 뜻:</strong> 같은 때 약속을 실행함. <strong>④ 이름의 이유:</strong> 한쪽만 먼저 손해 보지 않게 하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 대가적으로 연결된 급부를 상환적으로 이행. <strong>⑥ 쉬운 말:</strong> 돈과 물건을 맞바꾸자. <strong>⑦ 사례:</strong> 기계 6대의 돈만 제공하면 가분성 아래 대응 범위 판단.</p>
+<p><strong>⑧ 시험:</strong> 변제기·제공·부분 거절. <strong>⑨ 비교·기억법:</strong> 유치권은 물건 관련 채권을 담보하는 물권.</p>
+<h3>위험부담</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 危(위태할 위) 險(험할 험) 負(질 부) 擔(멜 담). <strong>③ 합친 뜻:</strong> 우연한 불이익을 누가 짊어지는가. <strong>④ 이름의 이유:</strong> 누구 잘못이 없어도 손실은 생기기 때문에.</p>
+<p><strong>⑤ 법률상 의미:</strong> 귀책 없는 급부불능 등에서 대가 위험을 배분하는 문제. <strong>⑥ 쉬운 말:</strong> 물건이 사라지면 돈은 누가 잃을까. <strong>⑦ 사례:</strong> 제3자 방화로 집이 멸실.</p>
+<p><strong>⑧ 시험:</strong> 제537조와 제538조 갈림. <strong>⑨ 비교·기억법:</strong> 잘못에 대한 손해배상과 구별.</p>
+<h3>대상청구권</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 代(대신할 대) 償(갚을 상) 請(청할 청) 求(구할 구) 權(권세 권). <strong>③ 합친 뜻:</strong> 대신 생긴 이익을 달라는 권리. <strong>④ 이름의 이유:</strong> 원래 물건 자리에 다른 이익이 들어왔으므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 불능의 같은 원인으로 얻은 대체 이익의 이전을 청구하는 권리. <strong>⑥ 쉬운 말:</strong> 토지 대신 받은 보상금을 달라. <strong>⑦ 사례:</strong> 수용 보상금·불능 원인과 연결된 배상채권.</p>
+<p><strong>⑧ 시험:</strong> 양도청구/인도청구·대가 존속. <strong>⑨ 비교·기억법:</strong> 소유권처럼 대상이 저절로 귀속하는 것은 아님.</p>
+<h3>요약자·낙약자·수익자</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 要(구할 요) 約(맺을 약) / 諾(허락할 낙) 約(맺을 약) / 受(받을 수) 益(더할 익) 者(사람 자). <strong>③ 합친 뜻:</strong> 약속을 구한 사람·허락한 사람·이익 받는 사람. <strong>④ 이름의 이유:</strong> 누가 계약하고 누가 받는지 나누기 위해.</p>
+<p><strong>⑤ 법률상 의미:</strong> 제3자 계약의 세 역할. <strong>⑥ 쉬운 말:</strong> 부탁한 사람·해 주겠다는 사람·직접 받는 사람. <strong>⑦ 사례:</strong> 판매자가 구매자에게 제3자에게 대금 지급을 약정.</p>
+<p><strong>⑧ 시험:</strong> 기본/원인/급부관계와 의사표시 상대. <strong>⑨ 비교·기억법:</strong> 대리인은 계약 효과 귀속 구조가 다름.</p>
+<h3>해제</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 解(풀 해) 除(덜 제). <strong>③ 합친 뜻:</strong> 묶인 관계를 풀어 없앰. <strong>④ 이름의 이유:</strong> 원래 약속에서 벗어나 급부를 되돌리므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 해제권 행사로 계약을 소급적으로 해소하는 제도. <strong>⑥ 쉬운 말:</strong> 약속을 되돌려 주고받은 것도 정산하자. <strong>⑦ 사례:</strong> 책임 있는 인도불능으로 매매 해제.</p>
+<p><strong>⑧ 시험:</strong> 원상회복·제3자·손해배상. <strong>⑨ 비교·기억법:</strong> 해지는 장래 종료, 합의해제는 새 계약.</p>
+<h3>해지</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 解(풀 해) 止(그칠 지). <strong>③ 합친 뜻:</strong> 관계를 풀어 그치게 함. <strong>④ 이름의 이유:</strong> 이미 지나간 거래는 두고 앞으로 멈추므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 계속적 계약을 장래에 대하여 종료. <strong>⑥ 쉬운 말:</strong> 어제 빌린 값은 내고 내일부터 종료. <strong>⑦ 사례:</strong> 기간 없는 임대차의 적법한 해지 통고.</p>
+<p><strong>⑧ 시험:</strong> 통고기간·기간 약정·종료 후 반환. <strong>⑨ 비교·기억법:</strong> 해제처럼 과거 급부 전부를 되돌리지 않음.</p>
+<h3>원상회복</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 原(근원 원) 狀(형상 상) 回(돌 회) 復(돌아올 복). <strong>③ 합친 뜻:</strong> 원래 상태로 돌아감. <strong>④ 이름의 이유:</strong> 계약이 없었던 상태로 돌리려 하므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 해제로 받은 급부와 관련 이익을 정산하는 의무. <strong>⑥ 쉬운 말:</strong> 돈·물건과 그 사용이익을 돌려주자. <strong>⑦ 사례:</strong> 매매대금에 받은 날부터 이자를 가산.</p>
+<p><strong>⑧ 시험:</strong> 일반 부당이득보다 넓은 특별 규율. <strong>⑨ 비교·기억법:</strong> 손해배상·지연손해금과 구별.</p>
+<h3>제척기간</h3>
+<p><strong>① 음훈·② 글자 본래 뜻:</strong> 除(덜 제) 斥(물리칠 척) 期(기약할 기) 間(사이 간). <strong>③ 합친 뜻:</strong> 기간이 지나면 권리를 배제함. <strong>④ 이름의 이유:</strong> 법률관계를 장기간 불확실하게 두지 않으므로.</p>
+<p><strong>⑤ 법률상 의미:</strong> 권리 존속·행사에 관한 법정 또는 약정 기간 문제. <strong>⑥ 쉬운 말:</strong> 정해진 시간 안에 권리를 행사해야 한다. <strong>⑦ 사례:</strong> 예약완결권의 기간 내 행사.</p>
+<p><strong>⑧ 시험:</strong> 소멸시효로 쓰지 말 것. <strong>⑨ 비교·기억법:</strong> 발생 근거와 기간 기산점은 권리별 확인.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>계약총론 · 한 장으로 마지막 확인</h2>
+<p><strong>TOP3</strong> ① 성립과 유효성 ② 동시이행·위험부담 ③ 해제·해지와 제3자</p>
+<table><thead><tr><th>질문</th><th>기억할 문장</th></tr></thead><tbody>
+<tr><td>계약 자유</td><td>체결·상대방·내용·방식. 합의≠언제나 유효.</td></tr>
+<tr><td>성립</td><td>청약 도달. 격지자 승낙 발송 + 기간 내 도달 규율. 변경승낙=거절+새 청약.</td></tr>
+<tr><td>특수 성립</td><td>의사실현=사실 발생 때. 교차청약=두 청약 모두 도달.</td></tr>
+<tr><td>약관</td><td>편입 → 객관적 해석 → 불명확하면 고객 유리 → 불공정 통제. 일부 무효여도 나머지 유효 원칙.</td></tr>
+<tr><td>제535조</td><td>원시불능 + 상대방 선의무과실. 신뢰이익, 이행이익 한도.</td></tr>
+<tr><td>동시이행</td><td>견련성·변제기·상대방 제공 없음. 소송의 상환이행은 원용, 지체면책은 존재 효과.</td></tr>
+<tr><td>불안 항변</td><td>선이행이어도 상대방 이행의 현저한 불안이 있으면 검토.</td></tr>
+<tr><td>제537/538조</td><td>쌍방 무책임=대금도 못 받음. 채권자 책임·수령지체=대금 존속, 면한 이익 상환.</td></tr>
+<tr><td>제3자 계약</td><td>요약↔낙약=기본. 요약↔수익=원인. 수익 의사는 낙약자에게.</td></tr>
+<tr><td>권리 확정</td><td>임의 합의로 소멸 금지≠채무불이행 법정해제 금지.</td></tr>
+<tr><td>해제</td><td>지체는 최고 원칙. 불능·명백한 거절·정기행위는 예외 검토. 행사 필요.</td></tr>
+<tr><td>원상회복</td><td>받은 급부 + 사용이익·금전이자. 지연손해금과 구별. 손해배상 양립.</td></tr>
+<tr><td>제3자</td><td>해제 전 새 이해관계+권리 취득. 해제 후 원상회복 등기 전은 선의 등 확인.</td></tr>
+<tr><td>해지/조건</td><td>해지=장래 종료. 해제조건도 성취 때 효력 상실이 원칙. 해제와 혼동 금지.</td></tr>
+</tbody></table>
+<p><strong>꼭 외울 구별</strong> 계약당사자≠수익자 · 채무 소멸≠이행 거절 · 부당이득 일반≠해제 원상회복 · 원본 정답≠보완 없는 절대적 법명제.</p>
+<p><strong>사례를 풀 순서</strong> 인물과 채무 → 날짜 → 유효성 → 누가 무엇을 안 했나 → 항변 → 해소 → 반환·배상 → 제3자.</p>
+</section>
+
+<h1>학습 상태 진단</h1>
+<p>아직 답안을 받지 않았으므로 이해 완료라고 대신 판정하지 않는다. <strong>🟢</strong> 기계·자전거·세입자 사례를 조문과 함께 혼자 설명하면 이해 완료. <strong>🟡</strong> 결론은 맞지만 제536·537·538조가 헷갈리면 복습 필요. <strong>🔴</strong> 합의가 없는데 취소부터 하거나, 모든 멸실을 손해배상이라고 하면 기초 연결부터 다시 보자.</p>
+<p>반드시 복습할 TOP3는 <strong>① 승낙의 발송·도달·연착 시간표 ② 동시이행과 두 위험부담 조문 ③ 해제 전후 제3자 보호와 세 관계</strong>다. 다음 3장에서는 이 공통 규칙에 매매·임대차·도급 등의 특칙을 얹는다.</p>
+<h1>문제 부록 · 85문항과 390개 보기</h1>
+<p>제공 JSON의 문제·선택지·정답을 보존했다. 각 보기 아래의 과외 해설은 별도로 작성했다. 원자료 문구가 부정확하거나 조건이 생략된 경우 정답을 몰래 바꾸지 않고 보완 사항을 명시한다. ‘선택’은 질문에 맞춰 고르는 번호라는 뜻이며, 틀린 것을 고르는 문제에서 그 문장이 옳다는 뜻은 아니다. 실제 응시자의 오답률은 제공되지 않았다.</p>
+<section class="question-card" id="question-f3"><h4>형성평가 003 <small>채권각론_003</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 중 계약의 자유 원칙에 포함되는 내용이 아닌 것은?</p><ol class="choices"><li>계약체결의 자유</li><li>상대방 선택의 자유</li><li>내용결정의 자유</li><li>사회적 약자 보호의 필요성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약할지 말지의 결정이다. 체결 자유에 해당한다.</li><li><strong>비선택</strong> · 거래할 사람을 고르는 자유다. 특별법상 제한은 별도다.</li><li><strong>비선택</strong> · 가격·급부 등 내용을 정하는 자유다. 강행규정이 울타리다.</li><li><strong>선택</strong> · 약자 보호는 자유의 구성 항목이 아니라 자유를 제한·보완하는 이유다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약체결의 자유, 상대방 선택의 자유, 내용결정의 자유, 방식의 자유는 계약의 자유 원칙을 구성하는 세부 내용이고, 사회적 약자 보호의 필요성은 계약 자유를 제한하는 필요성에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-f4"><h4>형성평가 004 <small>채권각론_004</small></h4><p class="question-stem">다음 중 '대가적 급부'와 '견련관계'를 특징으로 하는 계약은?</p><ol class="choices"><li>낙성계약</li><li>요물계약</li><li>쌍무계약</li><li>편무계약</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합의만으로 성립하는지의 기준이다. 서로 대가를 부담하는지는 별개다.</li><li><strong>비선택</strong> · 인도 등 추가 성립요건에 관한 분류다. 대가적 견련성의 이름이 아니다.</li><li><strong>선택</strong> · 내 의무가 상대 의무의 대가로 맞물린다. 돈과 물건의 교환을 떠올리자.</li><li><strong>비선택</strong> · 대가적으로 맞물리는 양 채무가 없는 쪽이다. 반환의무가 있다는 이유만으로 쌍무가 되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 쌍무계약은 당사자 쌍방이 서로 대가적 의미를 가지는 채무를 부담하는 계약으로, 대가적 급부와 견련관계를 특징으로 합니다.</p></details></section>
+
+<section class="question-card" id="question-f6"><h4>형성평가 006 <small>채권각론_006</small></h4><p class="question-stem">계약 자유의 제한이 필요한 주요 원인 중, '계약 자유의 형해화'가 의미하는 바는?</p><ol class="choices"><li>계약의 종류가 너무 다양해진다.</li><li>계약의 내용이 형식적으로만 자유롭게 보인다.</li><li>계약이 너무 쉽게 체결되어 법적 안정성이 저해된다.</li><li>계약 당사자 간의 불균형으로 인해 자유로운 의사결정이 불가능해진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 종류의 증가가 아니라 실제 선택권의 약화다.</li><li><strong>비선택</strong> · 형식뿐인 자유라는 취지로 이해될 여지가 있다. 다만 ④가 당사자의 불균형이라는 원인까지 구체적으로 설명하는 최선답이다.</li><li><strong>비선택</strong> · 쉽게 성립해서가 아니라 약자가 조건을 바꿀 수 없어서 문제다.</li><li><strong>선택</strong> · 겉으로 동의했지만 거래력 차이 때문에 실제로 선택하기 어렵다는 뜻이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 자유의 형해화는 형식적으로는 계약 자유가 보장되지만, 실질적으로는 사회적 약자 등이 불리한 계약을 강요받아 자유로운 의사결정이 어렵게 되는 현상을 의미하며, 이로 인해 사회적 약자 보호의 필요성이 대두된다.</p></details></section>
+
+<section class="question-card" id="question-f7"><h4>형성평가 007 <small>채권각론_007</small></h4><p class="question-stem">공정거래의 원칙이 계약상 행위의 지침으로서 갖는 특징으로 가장 적절한 것은?</p><ol class="choices"><li>주관적 개념으로 법관의 계약 통제규범이다.</li><li>객관적 기준으로 시장지배적 지위의 남용을 금지한다.</li><li>권리의 행사와 의무의 발생을 주로 다룬다.</li><li>모순거동의 금지를 주요 내용으로 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재는 신의칙과 대비한다. 그러나 신의칙 자체도 객관적 행동규범이므로 주관적 선의와 동일시하지 않는다.</li><li><strong>선택</strong> · 시장지배력 남용 등 거래구조를 통제한다는 설명이다.</li><li><strong>비선택</strong> · 신의칙은 권리 행사·의무 이행의 기준이다. 의무의 발생이라고 바꾼 표현에도 주의한다.</li><li><strong>비선택</strong> · 모순행위 금지는 정당한 신뢰를 보호하는 신의칙의 구체화다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공정거래의 원칙은 계약상 행위의 지침으로서 '객관적 기준'이며, 시장지배적 지위의 남용이나 독점 등을 금지하는 내용을 가집니다.</p></details></section>
+
+<section class="question-card" id="question-f10"><h4>형성평가 010 <small>채권각론_010</small></h4><p class="question-stem">신의성실의 원칙이 '법관의 계약통제규범'으로서 기능한다는 설명이 의미하는 바는?</p><ol class="choices"><li>법관이 계약의 성립 여부를 임의로 판단할 수 있다는 의미이다.</li><li>계약의 불요식성을 인정하여 법관이 개입할 여지를 넓힌다는 의미이다.</li><li>법관이 신의칙에 따라 계약 내용을 구체화하고 합리화하여 규제할 수 있다는 의미이다.</li><li>계약 당사자가 모순되는 행동을 할 경우에만 법관이 개입할 수 있다는 의미이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 임의 판단이 아니라 법적 기준에 따른 해석·통제다.</li><li><strong>비선택</strong> · 불요식성은 방식 자유의 문제다.</li><li><strong>선택</strong> · 미정 부분을 구체화하고 신뢰·공정의 관점에서 권리 행사를 통제한다.</li><li><strong>비선택</strong> · 모순행위 금지는 한 예일 뿐이다. 계약 내용의 구체화 등도 포함한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 신의성실의 원칙은 계약 내용의 구체화 및 합리화를 통해 법관이 계약을 통제하는 규범으로 작용하며, 이는 법관이 신의칙에 따라 계약의 공정성을 확보하고 분쟁을 해결하는 역할을 한다는 의미이다.</p></details></section>
+
+<section class="question-card" id="question-f11"><h4>형성평가 011 <small>채권각론_011</small></h4><p class="question-stem">계약이 성립하기 위한 기본 요건 중, 청약과 함께 필요한 것은 무엇인가?</p><ol class="choices"><li>철회</li><li>합의</li><li>유인</li><li>불합의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 철회는 성립을 위한 짝이 아니다.</li><li><strong>선택</strong> · 선택지 중에서는 합의다. 정확한 짝은 청약에 대한 승낙이며 두 표시가 합치해야 한다.</li><li><strong>비선택</strong> · 청약의 유인은 청약을 하도록 유도하는 전 단계다.</li><li><strong>비선택</strong> · 불합의는 핵심 내용이 맞지 않는 상태다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약은 청약에 대한 승낙, 즉 합의를 통해 성립한다.</p></details></section>
+
+<section class="question-card" id="question-f12"><h4>형성평가 012 <small>채권각론_012</small></h4><p class="question-stem">다음 중 '청약의 유인'에 해당하는 경우는?</p><ol class="choices"><li>특정 상품 구매를 제안하는 확정적 의사표시</li><li>상가를 분양하며 일정한 수익을 보장한다는 광고</li><li>특정 서비스 이용에 대한 구체적인 조건을 제시하는 행위</li><li>경매에서 물건에 대한 최종 입찰</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 승낙만으로 계약을 만들 확정적 제안이면 청약이다.</li><li><strong>선택</strong> · 교재의 해당 수익보장 광고 판례에서는 특별한 사정 없는 한 유인이다. 모든 광고가 언제나 유인이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 조건을 제시한 정도만으로 언제나 유인이라고 단정하지 못한다. 구속의사와 확정성을 본다.</li><li><strong>비선택</strong> · 통상 입찰은 청약이고 낙찰 등이 승낙 기능을 한다. 경매 유형별 규율도 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상가를 분양하며 일정한 수익을 보장한다는 광고는 확정적 구속의사가 없어 청약을 촉구하는 행위인 청약의 유인에 불과하다.  구인광고나 카탈로그 등도 청약의 유인에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-f13"><h4>형성평가 013 <small>채권각론_013</small></h4><p class="question-stem">청약의 효력발생시기에 대한 민법의 원칙은?</p><ol class="choices"><li>발신주의</li><li>도달주의</li><li>요지주의</li><li>표백주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 격지자 승낙 통지의 성립시기와 혼동한 것이다.</li><li><strong>선택</strong> · 청약은 상대방에게 도달하면 효력이 생기는 것이 원칙이다.</li><li><strong>비선택</strong> · 실제로 읽고 이해해야만 효력이 생기는 요지주의가 아니다.</li><li><strong>비선택</strong> · 법정 원칙의 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 청약의 효력발생 시기는 도달주의(민법 제111조)가 원칙이다.</p></details></section>
+
+<section class="question-card" id="question-f14"><h4>형성평가 014 <small>채권각론_014</small></h4><p class="question-stem">승낙의 의사표시가 필요 없는 경우 중, 두 개의 청약이 서로에게 도달한 때 계약이 성립하는 것은?</p><ol class="choices"><li>의사실현에 의한 계약 성립</li><li>교차청약에 의한 계약 성립</li><li>체약 강제</li><li>호의관계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 승낙으로 인정되는 사실이 있을 때 성립하는 제532조다.</li><li><strong>선택</strong> · 서로 모른 채 같은 내용의 청약을 보내고 둘 다 도달하면 된다.</li><li><strong>비선택</strong> · 계약 체결의 자유를 제한하는 문제다.</li><li><strong>비선택</strong> · 법적 구속의사 없는 친절과 계약을 구별하는 개념이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교차청약에 의한 계약 성립은 두 청약이 서로에게 도달한 때 계약이 성립하는 경우를 말한다.</p></details></section>
+
+<section class="question-card" id="question-f15"><h4>형성평가 015 <small>채권각론_015</small></h4><p class="question-stem">약관에 의한 계약의 특징 중, 상대방이 계약 내용을 미리 정해진 대로 받아들여야 하는 계약을 이르는 용어는?</p><ol class="choices"><li>전형계약</li><li>비전형계약</li><li>부합계약</li><li>쌍무계약</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 민법에 정형화된 유형인지의 기준이다.</li><li><strong>비선택</strong> · 정형화되지 않았는지의 기준으로 약관 여부와 다르다.</li><li><strong>선택</strong> · 미리 만든 조건에 상대방이 들어가는 거래 형태다. 그래도 약관의 공정성 심사는 가능하다.</li><li><strong>비선택</strong> · 서로 대가적 채무를 부담하는지의 기준이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관은 불특정 다수와 반복적으로 특정 계약을 체결하기 위해 미리 정해둔 계약 내용이며, 상대방은 이를 부합계약의 형태로 받아들인다.</p></details></section>
+
+<section class="question-card" id="question-f16"><h4>형성평가 016 <small>채권각론_016</small></h4><p class="question-stem">계약불성립의 경우 중, 당사자들이 합의에 이르지 못했음을 의식하지 못하고 있는 상태를 무엇이라고 하는가?</p><ol class="choices"><li>의식적 불합의</li><li>무의식적 불합의</li><li>착오</li><li>호의관계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 안 맞는다는 사실을 당사자들도 아는 경우다.</li><li><strong>선택</strong> · 일치했다고 생각하지만 객관적으로 중요한 내용이 안 맞는 경우다.</li><li><strong>비선택</strong> · 객관적 합의는 있으나 내심·인식에 잘못이 있는 경우와 구별한다.</li><li><strong>비선택</strong> · 법적 구속의사가 없는 생활상 호의의 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 불합의는 의식적 불합의와 무의식적 불합의로 나뉘며, 무의식적 불합의는 당사자들이 합의에 이르지 못했음을 의식하지 못하는 경우를 말한다.</p></details></section>
+
+<section class="question-card" id="question-f17"><h4>형성평가 017 <small>채권각론_017</small></h4><p class="question-stem">청약의 구속력에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>청약은 상대방에게 도달하기 전에도 철회할 수 없다.</li><li>청약자는 상대방에게 도달 후에는 원칙적으로 철회할 수 없다.</li><li>청약자는 언제든지 자유롭게 철회할 수 있다.</li><li>소비자 보호를 이유로도 청약은 철회할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 도달 전에 철회가 먼저 또는 함께 도달하는 경우 등을 구별한다.</li><li><strong>선택</strong> · 도달 후 임의 철회 금지가 원칙이다. 철회 유보·특별법 예외는 별도다.</li><li><strong>비선택</strong> · 상대방이 믿고 승낙을 준비할 수 있어 무제한 철회는 안 된다.</li><li><strong>비선택</strong> · 소비자보호 특별법은 일정한 청약철회를 허용할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 청약은 원칙적으로 상대방에게 도달 후에는 청약자가 철회할 수 없다. 다만 도달 전, 철회권 유보, 소비자 보호 등의 예외가 있다.</p></details></section>
+
+<section class="question-card" id="question-f18"><h4>형성평가 018 <small>채권각론_018</small></h4><p class="question-stem">승낙기간을 정한 계약에서 승낙기간이 도과했을 경우, 계약의 성립에 대한 다음 설명 중 옳은 것은?</p><ol class="choices"><li>계약이 성립한다.</li><li>청약자의 연착통지 여부와 관계없이 계약이 성립한다.</li><li>계약이 불성립한다.</li><li>변경된 승낙으로 간주되어 새로운 청약으로 본다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기간만 지났다는 이유로 당연 성립하지 않는다.</li><li><strong>비선택</strong> · 통상 제때 올 발송이었다면 연착 통지 여부가 결론에 영향을 준다.</li><li><strong>선택</strong> · 원칙적 처리다. 제528조 제2·3항의 연착 예외까지 함께 기억한다.</li><li><strong>비선택</strong> · 늦은 승낙과 내용을 변경한 승낙은 다르다. 제530조는 늦은 승낙을 새 청약으로 볼 가능성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 승낙기간을 정한 경우, 원칙적으로 기간이 도과하면 계약은 불성립한다. 다만 통상적으로 기간 내 도달 가능한 경우 청약자의 연착통지 여부에 따라 달라질 수 있다.</p></details></section>
+
+<section class="question-card" id="question-f19"><h4>형성평가 019 <small>채권각론_019</small></h4><p class="question-stem">약관규제법의 입법 취지로 가장 적절한 것은?</p><ol class="choices"><li>대량 거래의 신속성 확보</li><li>사업자의 이익 극대화</li><li>불공정 거래의 예방 및 규제를 통한 소비자 보호</li><li>약관의 동일성 유지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대량거래의 장점이지 불공정 약관 규제의 중심 목적은 아니다.</li><li><strong>비선택</strong> · 고객에게 불공정한 조건을 통제하려는 법이다.</li><li><strong>선택</strong> · 공정한 거래질서를 통해 고객을 보호하는 취지다. 고객을 소비자로만 지나치게 좁히지는 않는다.</li><li><strong>비선택</strong> · 통일적 해석은 수단 중 하나다. 입법 목적 전체를 대신하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관규제법은 불공정 거래의 예방 및 규제를 통해 소비자를 보호하는 것을 입법 취지로 한다</p></details></section>
+
+<section class="question-card" id="question-f20"><h4>형성평가 020 <small>채권각론_020</small></h4><p class="question-stem">민법 제535조에 따른 계약체결상 과실책임의 요건이 아닌 것은?</p><ol class="choices"><li>계약체결을 위한 교섭행위</li><li>계약 내용의 후발적 불능</li><li>가해자의 고의 내지 과실</li><li>상대방의 선의·무과실</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제535조는 목적 불능의 계약을 체결한 상황을 전제로 한다. 일반 교섭사고 전체를 포괄하는 만능 조항은 아니다.</li><li><strong>선택</strong> · 후발불능이 아니라 원시불능을 규정한다. 나중 불탔으면 다른 규율이다.</li><li><strong>비선택</strong> · 책임질 사람은 불능을 알았거나 알 수 있었어야 한다.</li><li><strong>비선택</strong> · 피해 상대방도 불능을 알았거나 알 수 있었다면 제535조 책임은 배제된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 민법 제535조는 원시적 불능을 전제로 규정된 조항이다.  따라서 계약 내용이 '원시적 불능'일 것이 요건이다.</p></details></section>
+
+<section class="question-card" id="question-f21"><h4>형성평가 021 <small>채권각론_021</small></h4><p class="question-stem">쌍무계약에서 채무이행의 거절을 인정하는 동시이행의 항변권의 인정 근거로 옳은 것은?</p><ol class="choices"><li>계약체결상의 과실에 기반한다.</li><li>계약의 유효한 성립 여부와 관계없이 인정된다.</li><li>쌍무계약의 견련관계에 기초한다</li><li>채무자의 귀책사유로 인한 불이익을 보상하기 위함이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제535조와 제536조를 바꾼 것이다.</li><li><strong>비선택</strong> · 쌍무계약의 대가관계에서 출발한다. 무효·취소의 반환채무에 확장되는 것과 구별한다.</li><li><strong>선택</strong> · 서로 대가로 연결된 의무를 한쪽만 먼저 강제하지 않기 위해서다.</li><li><strong>비선택</strong> · 손해를 메우는 제도가 아니라 이행을 잠시 거절하는 제도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 동시이행의 항변권은 쌍무계약의 견련관계에 기초한 채무이행의 거절을 그 인정 근거로 한다.</p></details></section>
+
+<section class="question-card" id="question-f22"><h4>형성평가 022 <small>채권각론_022</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 중 유치권과 동시이행의 항변권의 공통점에 해당하지 않는 것은?</p><ol class="choices"><li>공평의 원칙에 기반한다.</li><li>변제 촉구의 기능을 한다</li><li>상환이행 판결을 가능하게 한다.</li><li>목적물의 인도 거절을 특징으로 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한쪽만 급부하고 못 받는 불공평을 막는다.</li><li><strong>비선택</strong> · 상대방이 갚거나 제공하도록 유도한다.</li><li><strong>비선택</strong> · 받을 것을 받으면서 돌려주라는 판결이 가능하다.</li><li><strong>선택</strong> · 원본의 선택답이다. 정확히는 동시이행은 목적물 인도 거절에 한정되지 않는다. 동시이행에서도 인도를 거절할 수 있으므로 문구를 절대명제로 외우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 목적물의 인도 거절은 유치권의 특징이며, 동시이행의 항변권과 유치권의 공통점은 아니다. 공통점으로는 공평의 원칙, 변제 촉구, 상환이행 판결이 있다.</p></details></section>
+
+<section class="question-card" id="question-f23"><h4>형성평가 023 <small>채권각론_023</small></h4><p class="question-stem">위험부담에 관한 민법 제537조가 적용되는 원칙으로 옳은 것은?</p><ol class="choices"><li>채권자위험부담주의</li><li>채무자위험부담주의</li><li>이행지체 중 불능</li><li>계약의 존속</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제537조의 원칙과 반대다. 제538조 예외를 구별한다.</li><li><strong>선택</strong> · 불능 급부의 채무자가 대가도 못 받는 위험을 진다.</li><li><strong>비선택</strong> · 채무자 지체 중 불능은 제392조 등 책임 문제를 먼저 본다.</li><li><strong>비선택</strong> · 급부를 못 주면서 반대급부를 그대로 청구한다는 구조가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 당사자 쌍방의 귀책사유 없이 채무를 이행할 수 없게 된 경우 채무자는 민법 제537조에 따라 자신의 채무를 이행할 의무를 면함과 더불어 상대방의 이행도 청구하지 못한다.  이를 채무자 위험부담주의라고 한다.</p></details></section>
+
+<section class="question-card" id="question-f24"><h4>형성평가 024 <small>채권각론_024</small></h4><p class="question-stem">제3자를 위한 계약에서 계약상 권리를 직접 취득하는 제3자를 지칭하는 용어로 옳은 것은?</p><ol class="choices"><li>요약자</li><li>낙약자</li><li>수익자</li><li>대리인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제3자에게 이행하도록 약속받은 계약 당사자다.</li><li><strong>비선택</strong> · 제3자에게 이행할 계약 당사자다.</li><li><strong>선택</strong> · 계약 당사자 밖에서 직접 이익과 청구권을 얻는 사람이다.</li><li><strong>비선택</strong> · 대리에서 계약 효과가 귀속되는 본인과 이 수익자의 지위를 섞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제3자를 위한 계약에서 계약상 권리를 직접 취득하는 제3자를 '수익자'라고 부른다.  요약자는 계약 당사자인 채권자, 낙약자는 계약 당사자인 채무자를 의미한다.</p></details></section>
+
+<section class="question-card" id="question-f25"><h4>형성평가 025 <small>채권각론_025</small></h4><p class="question-stem">제3자를 위한 계약에서 요약자와 낙약자 사이의 계약을 지칭하는 용어로 옳은 것은?</p><ol class="choices"><li>원인관계</li><li>대가관계</li><li>급부실현관계</li><li>보상관계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 요약자와 수익자 사이의 이유다.</li><li><strong>비선택</strong> · 같은 원인관계의 다른 명칭이다.</li><li><strong>비선택</strong> · 낙약자가 수익자에게 실제로 이행하는 관계다.</li><li><strong>선택</strong> · 요약자와 낙약자 사이의 기본 계약 관계다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제3자를 위한 계약에서 요약자와 낙약자 사이의 계약을 '보상관계' 또는 '기본관계'라고 지칭한다.</p></details></section>
+
+<section class="question-card" id="question-f26"><h4>형성평가 026 <small>채권각론_026</small></h4><p class="question-stem">다음 중 매도인과 매수인 사이의 채무가 동시이행 관계에 있지 않다고 판단한 판례의 입장으로 옳은 것은?</p><ol class="choices"><li>매수인이 선이행해야 할 중도금을 지급하지 아니한 채 잔대금 지급일을 경과한 경우, 중도금 및 지연손해금과 매도인의 소유권이전등기 의무</li><li>근저당권실행 경매가 무효로 되어 근저당권자의 배당금 반환채무와 낙찰자의 소유권이전등기말소의무</li><li>임차인의 차임 지급 의무와 임대인의 목적물 사용·수익케 할 의</li><li>토지수용으로 인한 매매목적물 인도 불능 시 매도인의 보상금 지급 의무와 매수인의 잔금 지급 의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상대방의 이행기도 도래하면 종전 중도금과 지연손해금·잔금이 등기와 맞물린다.</li><li><strong>선택</strong> · 배당금은 배당 채권자에게, 말소는 채무자에게 부담한다. 상대가 다르다.</li><li><strong>비선택</strong> · 사용·수익과 차임이 대가다. 지장 정도에 대응해 거절한다.</li><li><strong>비선택</strong> · 대상청구권을 행사하는 경우 반대급부도 함께 고려한다. 보상금만 받고 잔금은 안 준다는 구조가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 근저당권실행을 위한 경매가 무효로 되어 채권자(=근저당권자)의 배당금 반환채무와 낙찰자가 채무자에 대하여 부담하는 소유권이전등기 말소의무는 서로 이행의 상대방을 달리하는 것으로 동시이행 관계에 있지 않다.</p></details></section>
+
+<section class="question-card" id="question-f27"><h4>형성평가 027 <small>채권각론_027</small></h4><p class="question-stem">선이행의무자가 이행지체에 빠진 상태에서 상대방 채무의 변제기가 도래한 경우, 선이행의무자의 이행지체 책임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>상대방 채무의 변제기 도래와 상관없이 이행지체 책임을 계속 부담한다.</li><li>선이행 의무의 이행지체는 면제되지 않고, 여전히 책임을 진다.</li><li>상대방 채무의 변제기 도래 이후부터는 동시이행의 항변권이 인정되어 이행지체 책임을 면하게 된다.</li><li>불안의 항변권이 발생하여 이행지체 책임이 면제된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 변제기 도래로 동시이행 관계가 생길 수 있다. 종전 지체와 이후를 나눈다.</li><li><strong>비선택</strong> · 과거 지체책임은 남지만 이후까지 무조건 계속되는 것은 아니다.</li><li><strong>선택</strong> · 상대방 제공도 없는 등의 요건 아래 그 이후의 지체책임은 생기지 않는다. 이미 발생한 지연손해금은 남는다.</li><li><strong>비선택</strong> · 상대방 이행기의 도래만으로 해결되는 사안이다. 현저한 이행 불안이라는 별도 사정을 요구하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 매수인이 선이행해야 할 중도금을 지급하지 아니한 채 잔대금 지급일을 경과한 경우에는 매수인의 중도금 및 지연손해금과 잔대금의 지급채무는 매도인의 소유권이전등기 의무와 특별한 사정이 없는 한 동시이행관계에 있다. 따라서 상대방 채무의 변제기 도래 이후부터는 동시이행의 항변권이 인정되어 이행지체 책임이 면제된다.</p></details></section>
+
+<section class="question-card" id="question-f28"><h4>형성평가 028 <small>채권각론_028</small></h4><p class="question-stem">쌍무계약에서 채무자에게 귀책사유가 없고 채권자에게도 귀책사유가 없는 후발적 급부불능의 경우, 원칙적인 효과로 옳은 것은?</p><ol class="choices"><li>계약은 존속하며, 채무자는 반대급부를 청구할 수 있다.</li><li>계약은 소멸하며, 채무자의 반대급부청구권도 소멸한다.</li><li>채무자는 이익상환의 의무를 진다.</li><li>채권자는 대상청구권을 행사할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제537조 원칙은 반대급부 청구권도 잃는 것이다.</li><li><strong>선택</strong> · 불능 급부와 대가의 연결을 끊고 이미 받은 급부를 정산한다.</li><li><strong>비선택</strong> · 제538조 제2항의 이익 상환과 혼동했다.</li><li><strong>비선택</strong> · 대체 이익이 생겼는지 등의 요건이 추가로 필요하다. 모든 불능에 자동 인정되는 원칙적 효과가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 당사자 쌍방의 귀책사유 없이 채무를 이행할 수 없게 된 경우(민법 제537조 적용), 채무자는 자신의 채무를 이행할 의무를 면함과 더불어 상대방의 이행도 청구하지 못한다. 이는 계약이 소멸하고 채무자의 반대급부청구권이 소멸함을 의미한다.</p></details></section>
+
+<section class="question-card" id="question-f29"><h4>형성평가 029 <small>채권각론_029</small></h4><p class="question-stem">제3자를 위한 계약에서 수익의 의사표시를 한 수익자에게 인정되는 법적 지위로 옳지 않은 것은?</p><ol class="choices"><li>권리가 확정되어 계약 당사자가 임의로 변경하거나 소멸시킬 수 없다.</li><li>원칙적으로 채권이 그 내용이나, 물권이나 채무면제도 가능하다.</li><li>낙약자의 채무불이행 시 손해배상청구권을 행사할 수 있다.</li><li>기본관계의 하자를 이유로 계약의 취소권, 해제권 등을 행사할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제541조. 사전 유보·제3자 동의 등 예외는 별도다.</li><li><strong>비선택</strong> · 단순 채권을 중심으로 설명하지만 권리 면제 등 다양한 급부도 가능하다. 물권은 등기·인도 등의 요건을 추가 확인한다.</li><li><strong>비선택</strong> · 자신의 권리 불이행에 관한 손해배상을 청구할 수 있다.</li><li><strong>선택</strong> · 수익자는 기본계약 당사자가 아니므로 그 취소·해제권을 당연 행사하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 수익자는 수익의 의사표시 후 권리가 확정되지만 , 기본관계의 하자를 이유로 계약의 취소권, 해제권 등을 갖지 못한다.</p></details></section>
+
+<section class="question-card" id="question-f30"><h4>형성평가 030 <small>채권각론_030</small></h4><p class="question-stem">계약이 해제되었을 때, 민법 제548조 제1항 단서에 의해 보호받는 제3자에 대한 설명으로 가장 옳은 것은?</p><ol class="choices"><li>계약 당사자가 자기들 명의로 체결한 계약에 의해 직접 권리를 취득한 자이다.</li><li>해제 전에 새로운 이해관계를 가졌으나 등기나 인도를 마치지 못한 자이다</li><li>해제 전에 새로운 이해관계를 가졌을 뿐만 아니라 등기, 인도 등으로 권리를 취득한 자이다.</li><li>해제된 계약의 효력이 확장되어 보호를 받을 뿐, 직접 권리를 가지지는 않는 자이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약 당사자와 보호되는 제3자를 섞었다.</li><li><strong>비선택</strong> · 단순한 이해관계만으로 부족하고 해당 권리취득 요건이 중요하다.</li><li><strong>선택</strong> · 새로운 독립 이해관계와 등기·인도 등의 권리 취득이 핵심이다.</li><li><strong>비선택</strong> · 독립된 권리 보호 문제다. 막연한 계약효과 확장으로 설명하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 해제의 소급효가 제한되는 제3자는 일반적으로 해제된 계약으로부터 생긴 법률효과를 기초로 해제 전에 새로운 이해관계를 가졌을 뿐만 아니라 등기, 인도 등으로 권리를 취득한 사람을 말한다.  제3자를 위한 계약에서도 수익자가 이러한 요건을 충족하면 보호받는 제3자에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-f31"><h4>형성평가 031 <small>채권각론_031</small></h4><p class="question-stem">해제권에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>해제권은 법정해제권과 약정해제권으로 구분된다.</li><li>약정해제권은 당사자가 계약으로 해제권의 발생원인과 그 효과를 미리 유보한 것이다.</li><li>약정해제권의 행사 및 효과는 법정해제권의 경우와 다를 바 없으나 특약이 있는 경우 특약이 우선한다</li><li>법정해제권은 모든 계약에서 채무불이행이 있는 경우에만 발생한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법과 약정이라는 발생 근거를 구별한다.</li><li><strong>비선택</strong> · 원인·효과를 미리 정해 놓는 약정이다.</li><li><strong>비선택</strong> · 약정 내용이 우선하는 범위를 확인한다.</li><li><strong>선택</strong> · 증여 특칙·담보책임 등 채무불이행 외 법정 사유도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법정해제권은 모든 계약에 있어서 일반적으로는 채무불이행을 원인으로 발생하지만(제544조 내지 제546조) 각종 계약에서의 특수한 원인으로 발생하기도 한다. 예컨대 증여에서 법정해제사유(제556조 내지 제557조), 매매에서 매도인의 담보책임(제570조 내지 제578조), 도급에서 도급인의 해제권(제668조 내지 제670조)을 규정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-f32"><h4>형성평가 032 <small>채권각론_032</small></h4><p class="question-stem">계약의 해제와 해지에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>계약 해제는 계속적 채권 관계에서 장래를 향해 계약을 소멸시키는 것이다.</li><li>계약 해지는 계약 관계로부터의 해방을 의미하며, 주로 일시적 계약에 적용된다.</li><li>계약 해제는 일방적 의사표시에 의해 계약 관계를 해소시키는 형성권의 행사이며, 소급효를 가진다.</li><li>계약 해지와 해제는 모두 법률의 규정에 의해서만 발생하며, 당사자의 약정으로는 발생할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계속적 관계의 장래 종료는 해지 설명이다.</li><li><strong>비선택</strong> · 일시적 관계의 소급적 해소라는 해제 특징과 섞었다.</li><li><strong>선택</strong> · 판례의 기본 구조를 묻는다. 제3자 보호 등 소급효 제한은 별도다.</li><li><strong>비선택</strong> · 당사자 약정으로 해제·해지권을 둘 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 해제는 계약 관계 전체를 소급하여 소멸시키고, 해지는 계속적 채권 관계를 장래에 향해 소멸시키는 것이다. 계약 해제는 일방적 의사표시에 의한 형성권 행사이다.</p></details></section>
+
+<section class="question-card" id="question-f33"><h4>형성평가 033 <small>채권각론_033</small></h4><p class="question-stem">합의해제에 대한 다음 설명 중 옳은 것은?</p><ol class="choices"><li>합의해제로 인하여 반환할 금전에 그 받은 날로부터의 이자를 가하여야 할 의무가 있다.</li><li>채무불이행으로 인한 손해배상을 청구할 수 있다</li><li>계약해제로 인한 원상회복등기 등이 이루어지기 이전에 해약 당사자와 양립되지 아니하는 법률관계를 가지게 되었고 계약해제사실을 몰랐던 제3자에 대하여는 계약해제를 주장할 수 없다.</li><li>채무불이행이 있는 경우에만 합의해제가 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합의 내용이 기준이므로 특별약정 없이 제548조 제2항 이자가 자동 발생하지 않는다.</li><li><strong>비선택</strong> · 특약·유보 등 특별한 사정 없이 기존 불이행 손해배상을 당연 청구하지 않는다.</li><li><strong>선택</strong> · 해제 후 원상회복 등기 전 선의의 새 권리취득자 보호다.</li><li><strong>비선택</strong> · 합의에 의한 새로운 계약이므로 채무불이행이 필수 요건은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법정해제에 관한 민법의 규정은 원칙적으로 적용되지 않으므로, 특별한 약정이 없는 이상 이자가산의무나 손해배상청구권은 문제되지 않는다. 또한, 합의해제는 법정해제와 달리 채무불이행과 같은 일정한 사유를 요건으로 하지 않는다. 다만, 제3자 보호규정은 적용되므로, ③은 옳다.</p></details></section>
+
+<section class="question-card" id="question-f34"><h4>형성평가 034 <small>채권각론_034</small></h4><p class="question-stem">계약의 합의해제 내지 합의해지에 관한 설명 중 옳지 않은 것은? (다툼이 있으면 판례에 의함)</p><ol class="choices"><li>특별한 사정이 없는 한 채무불이행으로 인한 손해배상청구는 할 수 없다.</li><li>매도인이 매수인에게 매매계약의 합의해제를 청약하였더라도 매수인이 그 청약에 대하여 조건을 붙여 승낙한 경우, 매도인의 청약은 실효된다.</li><li>계약이 일부이행된 경우, 그 원상회복에 관하여 의사가 일치되지 않아도 계약의 묵시적 합의해제가 인정될 수 있다.</li><li>매매계약을 합의해제한 후 그 합의해제를 무효화시키고, 해제된 매매계약을 부활시키는 약정은 적어도 당사자 사이에서는 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특약·유보 등이 없는 기본 결론이다.</li><li><strong>비선택</strong> · 조건을 바꾼 승낙은 거절과 새 청약이다. 합의해제도 계약이므로 같다.</li><li><strong>선택</strong> · 이행 부분의 반환 정산이 중요한 사안에서는 그 내용도 합의해야 한다.</li><li><strong>비선택</strong> · 서로 새 합의를 할 수 있다. 제3자의 이미 취득한 권리를 침해하는 문제는 별개다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약이 일부 이행된 경우 그 원상회복에 관하여도 의사가 일치되어야 한다(대판 2011.4.28, 2010다98412·98429).</p></details></section>
+
+<section class="question-card" id="question-f35"><h4>형성평가 035 <small>채권각론_035</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">합의해제, 해제조건, 실권조항, 법정해제에 관한 설명으로 가장 옳은 것은? (다툼이 있으면 판례에 의함)</p><ol class="choices"><li>합의해제는 일방 당사자의 채무불이행이 있는 경우에만 할 수 있다.</li><li>법정해제는 일방 당사자의 채무불이행이 있는 경우에만 할 수 있다.</li><li>해제조건이 성취되면 계약은 장래를 향하여 소멸한다.</li><li>실권조항에 규정된 채무불이행 사유가 발생하더라도 양 채무 간에 동시이행관계가 성립하면 계약은 효력을 상실하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 당사자 합의로 해소할 수 있으므로 사유를 채무불이행으로 한정하지 않는다.</li><li><strong>비선택</strong> · 특별한 계약의 법정해제 사유까지 모두 불이행으로 한정할 수 없다.</li><li><strong>비선택</strong> · 현행 제147조 제2항상 원칙적으로 맞는 설명이다. 원본 해설이 소급효라고 처리한 부분은 충돌한다. 이 문제는 ④ 단독정답으로 외우지 말고 원자료 주의로 분류한다.</li><li><strong>선택</strong> · 동시이행 항변으로 지급 거절이 정당하면 단순 미지급으로 실권을 인정하지 않는다. 다만 동시이행 관계라는 말만으로 끝내지 말고 상대방 이행제공 여부도 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 사유를 불문한다. ② 일반적으로 채무불이행을 요건으로 하지만, 증여계약에서와 같이 그 외의 사유에 의한 법정해제도 가능하다. ③ 해제조건의 성취는 소급하여 계약의 소멸을 가져온다.</p></details></section>
+
+<section class="question-card" id="question-f36"><h4>형성평가 036 <small>채권각론_036</small></h4><p class="question-stem">이행지체에 기한 법정해제권의 발생에 대한 설명으로 옳지 않은 것은? (다툼이 있으면 통설과 판례에 의함)</p><ol class="choices"><li>채무자의 귀책사유에 기한 이행지체인 경우에 한한다.</li><li>모든 이행지체에 있어서 상당기간을 정한 최고가 있어야 한다.</li><li>이행기를 정하지 않은 채무를 이행지체한 경우에도 별도의 최고가 필요하지 않다.</li><li>명백한 이행거절의 경우에는 최고가 필요하지 않다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통설·판례를 전제로 한 지체 해제 설명이다. 제544조 문언에 명시되어 있는지와 구별한다.</li><li><strong>선택</strong> · 정기행위·명백한 거절 등 최고 예외가 있어 모든 경우라는 말이 틀린다.</li><li><strong>비선택</strong> · 최초 청구가 이미 상당한 기간의 최고 기능을 한 경우 재차 최고가 필요 없다는 한계에서 읽는다. 기한 없음=무조건 즉시 해제가 아니다.</li><li><strong>비선택</strong> · 불필요한 형식 반복을 요구하지 않는다. 거절 철회 등 사정 변경은 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정기행위의 경우에는 최고가 불필요하다.</p></details></section>
+
+<section class="question-card" id="question-f37"><h4>형성평가 037 <small>채권각론_037</small></h4><p class="question-stem">사정변경에 기한 해제권의 발생요건이 아닌 것은?</p><ol class="choices"><li>계약성립 당시 당사자가 예견할 수 없었던 현저한 사정의 변경이 발생하였어야 한다.</li><li>여기에서 말하는 사정이란 일방당사자의 주관적 또는 개인적인 사정을 의미한다.</li><li>사정의 변경이 해제권을 취득하는 당사자에게 책임 없는 사유로 생긴 것이어야 한다.</li><li>계약내용대로의 구속력을 인정한다면 신의칙에 현저히 반하는 결과가 생기는 경우여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 당초 예견 불가능한 현저한 변화가 필요하다.</li><li><strong>선택</strong> · 계약 기초의 객관적 사정이다. 단순 개인 사정이 아니다.</li><li><strong>비선택</strong> · 스스로 초래한 사정으로 계약에서 벗어나려는 것이어서는 안 된다.</li><li><strong>비선택</strong> · 계약 준수 원칙의 예외이므로 현저한 신의칙 위반이 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약의 기초가 되었던 객관적 사정을 말한다.</p></details></section>
+
+<section class="question-card" id="question-f38"><h4>형성평가 038 <small>채권각론_038</small></h4><p class="question-stem">계약 해제 시 원상회복의무에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>원물반환이 원칙이다.</li><li>금전을 반환할 경우 이자를 가산해야 한다.</li><li>매수인이 목적물을 인도받아 사용했다면 원상회복으로 그 목적물 외에 사용이익을 반환할 의무를 부담한다.</li><li>가액반환 시 반환할 금액은 이익의 현존 여부나 선의, 악의에 따라 달라진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 받은 물건을 그대로 돌려주는 것이 출발점이다.</li><li><strong>비선택</strong> · 받은 날부터의 이자를 더한다. 반환지체가 시작한 날과 혼동하지 않는다.</li><li><strong>비선택</strong> · 물건만 돌려주고 그동안의 사용가치를 모두 보유하는 것은 원상회복과 맞지 않는다.</li><li><strong>선택</strong> · 일반 선의 수익자의 현존이익 한도와 다르다. 해제 원상회복은 특별규정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 해제로 인한 원상회복의무는 부당이득에 관한 특별규정의 성격을 가지며, 그 반환 범위는 이익의 현존 여부나 선의, 악의에 불문하고 특단의 사유가 없는 한 받은 이익의 전부이다.</p></details></section>
+
+<section class="question-card" id="question-f39"><h4>형성평가 039 <small>채권각론_039</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">계약 해제 시 제3자 보호에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>해제된 계약으로부터 새로운 이해관계를 가졌고 등기나 인도를 받은 제3자는 보호된다.</li><li>계약 해제 후 말소등기 이전에 이해관계를 가졌어도 제3자는 보호되지 않는다.</li><li>목적물을 가압류한 채권자나 대항력을 갖춘 주택임차인은 제3자 보호 대상에 해당할 수 있다.</li><li>채권양수인이나 채권의 가압류채권자는 제3자 보호 대상에 해당하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해제 전의 새 권리취득을 말한다.</li><li><strong>선택</strong> · 해제 후라도 원상회복 등기 전 선의 등 요건을 갖추면 보호될 수 있다. 원본 해설에 생략된 선의 요건을 붙여 읽는다.</li><li><strong>비선택</strong> · 물건의 가압류와 적법한 권원·대항요건 있는 임차인 등이다.</li><li><strong>비선택</strong> · 소멸할 채권 자체를 이어받은 경우와 물건에 새 권리를 얻은 경우는 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 해제 후 말소등기 이전에 새로운 이해관계를 가졌고 등기나 인도를 받은 제3자는 보호된다.</p></details></section>
+
+<section class="question-card" id="question-f40"><h4>형성평가 040 <small>채권각론_040</small></h4><p class="question-stem">다음 중 민법 제548조 제1항 단서의 계약해제의 소급효로 대항할 수 없는 제3자에 해당하는 경우는? (다툼이 있으면 판례에 의함)</p><ol class="choices"><li>제3자를 위한 계약의 수익자</li><li>계약해제로 인하여 소멸되는 채권의 양수인</li><li>미등기 무허가건물에 관한 매매계약이 해제되기 전 매수인으로부터 무허가건물을 다시 매수하고 무허가건물관리대장에 소유자로 등재된 자</li><li>토지 매도인이 매매계약을 해제한 경우 그 토지 위에 신축된 건물의 매수인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 조건부로 맞다. 2018다244976은 해제 전 새로운 이해관계와 등기·인도 등 권리취득을 갖춘 수익자를 보호한다. 모든 수익자 자동 보호가 아니다.</li><li><strong>비선택</strong> · 계약의 소멸할 채권 자체를 양수했을 뿐이다.</li><li><strong>비선택</strong> · 관리대장 기재는 소유권이전등기를 대신하지 않는다.</li><li><strong>비선택</strong> · 토지와 그 위 신축 건물은 별개다. 건물 매수라는 사실만으로 토지 매매 해제의 제3자가 되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제3자를 위한 계약의 수익자는 보상관계의 급부청구권을 가진 자이므로 별개의 새로운 권리를 취득한 자라 할 수 없다고 봄이 종래의 통설이지만, 판례는 “수익자는 민법 제548조 제1항 단서에서 말하는 계약해제의 소급효가 제한되는 제3자에 해당한다.”고 본다(대판 2021. 8. 19. 2018다244976).</p></details></section>
+
+<section class="question-card" id="question-w4"><h4>워크북 004 <small>채권각론_워크북_004</small></h4><p class="question-stem">다음은 무엇에 관한 설명인가?<br>당사자 간 서로 대립하는 의사표시가 내용상 합치함으로써 이루어지는 법률행위로서 당사자 쌍방의 권리와 의무에 변동을 일으키는 법률 요건이다.</p><ol class="choices"><li>채권</li><li>합동행위</li><li>단독행위</li><li>계약</li><li>채무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 채권은 특정 행위를 청구할 권리로 법률행위 자체와 다르다.</li><li><strong>비선택</strong> · 동일 방향의 의사를 모으는 행위와 대립하는 의사의 합치를 구별한다.</li><li><strong>비선택</strong> · 한쪽 의사표시로 법률효과를 만드는 행위다.</li><li><strong>선택</strong> · 서로 다른 방향의 의사가 같은 거래 내용으로 일치하는 계약이다.</li><li><strong>비선택</strong> · 채무는 이행해야 할 의무로 계약 자체가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약의 의의에 관한 설명이다.</p></details></section>
+
+<section class="question-card" id="question-w5"><h4>워크북 005 <small>채권각론_워크북_005</small></h4><p class="question-stem">다음 설명 중 가장 옳지 않은 것은?</p><ol class="choices"><li>계약은 당사자 사이의 서로 대립하는 의사표시가 내용상 합치함으로써 이루어진다.</li><li>채권계약, 물권계약, 준물권계약 및 가족법상의 계약도 넓은 의미의 계약에 해당한다.</li><li>협의의 계약은 채권관계 내지 채권의 발생을 목적으로 하는 합의인 채권계약만을 의미한다.</li><li>계약에서 의사표시의 합치는 권리·의무가 발생하기 위한 조건이자 그 효력의 근거가 된다.</li><li>의사표시에 의한 법률행위의 내용이 공서양속에 반하는 반도덕적인 것이어서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 말의 방향은 반대지만 내용은 맞아야 한다.</li><li><strong>비선택</strong> · 계약이라는 법률행위는 채권계약에만 존재하지 않는다.</li><li><strong>비선택</strong> · 채권각론에서 주로 다루는 좁은 뜻이다.</li><li><strong>선택</strong> · 합의와 효력의 정당화·유효요건을 구분하는 교재 관점이다. 반사회적 내용은 합의해도 보호되지 않는다.</li><li><strong>비선택</strong> · 제103조 등 계약 자유의 한계다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약에서 두 개의 의사표시가 합치되어야 한다는 것은 계약 성립의 근거일 뿐, 그 효력의 근거가 되지는 않는다. 즉, 계약의 목적이 확정성(목적의 내용이 결정될 것), 가능성(목적의 실현이 가능할 것), 적법성(강행 법규에 반하지 않을 것), 타당성(공서양속에 반하지 않는 윤리적·도덕적 한계 내에서 자유로운 의사에 의해 이루어질 것) 등의 요건을 갖추어야, 효력이 발생한다.</p></details></section>
+
+<section class="question-card" id="question-w6"><h4>워크북 006 <small>채권각론_워크북_006</small></h4><p class="question-stem">다음 설명 중 계약의 공정성 확보와 가장 거리가 먼 것은?</p><ol class="choices"><li>민법 제2조 신의성실에 관한 규정</li><li>민법 제103조 반사회적 법률행위에 관한 규정</li><li>민법 제104조 불공정 법률행위에 관한 규정</li><li>민법 제570조 이하 담보책임에 관한 규정</li><li>민법 제162조 채권의 소멸시효에 관한 규정</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정당한 신뢰를 고려하는 행동 기준이다.</li><li><strong>비선택</strong> · 사회질서에 반하는 내용을 배제한다.</li><li><strong>비선택</strong> · 궁박·경솔·무경험과 현저한 불균형 등의 요건으로 통제한다.</li><li><strong>비선택</strong> · 임의규정도 균형 있는 위험배분의 기준이 될 수 있다.</li><li><strong>선택</strong> · 장기 권리 불행사를 정리하여 법적 안정성을 확보하는 목적과 더 직접 연결된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약의 공정성 확보를 위해 선택의 가능성, 당사자 간 지위의 대등성, 공서양속 등을 보장해야하며, ① 내지 ③ 은 이러한 내용을 담고 있다. ④ 와 같은 임의 규정 역시 공정성을 판단하는 기준으로서 역할을 하는 것으로 해석된다. ⑤ 는 법률관계의 확정을 위한 정책적 필요에 따른 규정으로서 공정성 확보와는 거리가 멀다.</p></details></section>
+
+<section class="question-card" id="question-w7"><h4>워크북 007 <small>채권각론_워크북_007</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 계약자유 원칙의 내용이 아닌 것은?</p><ol class="choices"><li>유언의 자유</li><li>상대방 선택의 자유</li><li>내용 결정의 자유</li><li>계약 파기의 자유</li><li>계약방식의 자유</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 유언은 단독행위이므로 계약 자유 항목이 아니다.</li><li><strong>비선택</strong> · 거래 상대를 고르는 자유다.</li><li><strong>비선택</strong> · 계약 내용을 정하는 자유다.</li><li><strong>비선택</strong> · 원본은 넓은 의미의 체결 자유로 다룬다. 다만 이미 생긴 채무를 책임 없이 일방 소멸시킬 법적 권리가 있다는 뜻은 아니다.</li><li><strong>비선택</strong> · 원칙적으로 특정 형식을 강요하지 않는다는 뜻이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 유언의 자유는 법률행위의 자유에 속하지만, 유언이 단독행위라는 점에서 계약의 자유에는 포함되지 않는다. 한편, 계약 파기의 자유도 계약체결의 자유의 한 갈래로 인정된다. 다만, 일단 성립된 계약 관계를 해소하는 과정에 당사자 간 합의나 법률규정에 근거하지 않았다면, 계약을 파기한 사람이 이에 대한 손해배상책임을 부담할 수 있는데, 이는 계약의 자유와는 별개이다.</p></details></section>
+
+<section class="question-card" id="question-w8"><h4>워크북 008 <small>채권각론_워크북_008</small></h4><p class="question-stem">다음 설명 중 옳지 않은 것은?</p><ol class="choices"><li>계약자유의 원칙, 소유권 절대의 원칙, 과실 책임의 원칙은 근대 민법의 3 대 원칙이다.</li><li>계약을 체결할 것인지 말 것인지를 결정할 계약체결의 자유는 절대적으로 보장되어야 한다.</li><li>특정한 상대방과의 계약에서는 상대방 선택의 자유가 제한될 수 있다.</li><li>기업의 독점화와 약관의 보편화로 인하여 계약의 상대방인 소비자가 계약 내용을 결정할 수 있는 가능성은 점차 사라지고 있다.</li><li>계약방식의 자유가 보장됨에 따라 낙성계약·불요식계약이 원칙이지만 예외적으로 특정한 방식을 요구할 수도 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 근대 사법의 기본 원칙들이다. 현대적 제한과 함께 본다.</li><li><strong>선택</strong> · 절대적으로라는 단정이 틀린다. 공익·약자 보호 등의 제한이 있다.</li><li><strong>비선택</strong> · 차별 금지 등 법정 제한이 있다.</li><li><strong>비선택</strong> · 약관과 거래력 격차가 자유의 형해화 문제를 만든다는 설명이다.</li><li><strong>비선택</strong> · 원칙과 보증 서면 등 예외를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당한 이유 없이 공공 업무의 수행을 거절할 수 없는 경우(전기 사업 법 제14조, 수도 법 제39조 1항, 철도 사업 법 제20조 2항, 전기 통신 사업 법 제3조 1항, 여객 자동차 운수 사업 법 제26조 1항 1호 등), 공익적 직무의 수행을 거절할 수 없는 경우(의료 법 제15조 1항, 약사법 제24조 1항 등), 국민 생활에 필수적인 물자의 수급 조절 또는 적정한 가격 유지를 위해 계약체결을 거절할 수 없는 경우(양곡 관리법 제16조 등)가 있다.</p></details></section>
+
+<section class="question-card" id="question-w9"><h4>워크북 009 <small>채권각론_워크북_009</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 계약의 자유를 제한하는 경우에 대한 설명으로 가장 옳지 않은 것은?</p><ol class="choices"><li>공기업이 국민 생활에 중요한 재화의 공급을 거절할 수 없도록 하는 경우</li><li>카페 주인이 어린이 동반 고객의 출입을 금지하는 경우</li><li>공정거래법을 통해 독점을 금지하는 경우</li><li>민법 규정으로 유언의 방식에 엄격한 요식성을 부여하는 경우</li><li>노동조합법상 노동조합의 조합원임을 이유로 고용을 거부하지 못하도록 하는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공급 의무는 체결 거절의 자유 제한이다.</li><li><strong>선택</strong> · 출제 의도는 카페의 선택 자유 행사와 법률에 의한 자유 제한을 구별하는 것이다. 구체적인 차별 규제·정당성은 별도다.</li><li><strong>비선택</strong> · 경제력 남용 등에 대한 법정 통제로 출제되었다.</li><li><strong>비선택</strong> · 문구 보완 필요. 유언은 계약이 아닌 단독행위다. 넓은 법률행위 방식의 제한으로는 설명되지만 계약 자유의 직접 예로는 부정확하다.</li><li><strong>비선택</strong> · 노동조합원이라는 이유의 고용 차별 금지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 공기업에 계약체결 의무를 부여한다. ② 차별에 해당할 수 있지만 여전히 상대방 선택의 자유를 제한하고 있지는 않다. ③ 소비자를 보호하기 위해 내용 결정의 자유를 제한한 경우이다. ④ 법률관계를 명확히 하기 위해 계약방식의 자유를 제한한 경우이다. ⑤ 차별에 해당하기에 상대방 선택의 자유를 제한한 경우이다.</p></details></section>
+
+<section class="question-card" id="question-w10"><h4>워크북 010 <small>채권각론_워크북_010</small></h4><p class="question-stem">다음 설명 중 옳지 않은 것은?</p><ol class="choices"><li>민법전에 규정되어 있는 계약을 전형계약 혹은 유명계약이라 한다.</li><li>전형계약과 그 명칭 및 내용을 달리하는 비전형계약은 계약으로서 유효하다.</li><li>전형계약은 모두 당사자의 합의만으로 성립하는 낙성계약이다.</li><li>매매 및 교환은 그 성질상 쌍무계약이다.</li><li>증여 및 사용대차는 무상계약이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 민법에 유형이 정해진 계약이다.</li><li><strong>비선택</strong> · 계약 이름이 법전에 없다고 무효가 되지 않는다.</li><li><strong>선택</strong> · 교재 계약설에서 현상광고는 지정행위 완료가 필요하므로 모두 낙성이라는 단정은 틀린다.</li><li><strong>비선택</strong> · 재산권과 돈 또는 서로의 재산권이 대가로 연결된다.</li><li><strong>비선택</strong> · 대가 없는 이전·사용이라는 유형의 기본 성질이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 비전형계약도 계약으로서 유효하다(대판 2010.10.14,2009다67313). ③ 민법의 전형 계약 중 하나인 현상광고는 이에 응하는 자(=응모자)가 광고에 정한 행위(=지정 행위)를 완료해야 효력이 생기는 요물계약이다. 당사자의 합의 외에 물건의 인도 또는 기타의 급부를 성립 요건으로 하는 계약(요물계약)에는 대물변제, 전세금 계약, 보증금 계약, 계약금계약 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-w11"><h4>워크북 011 <small>채권각론_워크북_011</small></h4><p class="question-stem">다음 계속적 계약에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>임대차와 같이 일정 기간에 걸쳐 급부를 실현해야 할 의무가 채권관계의 내용을 이루는 계약이다.</li><li>계약 당사자 간 강한 인적 신뢰 관계가 존재하기 때문에 사정 변경의 원칙은 고려될 수 없다.</li><li>계속적 채권관계에서는 일정한 해지 통고 기간을 준수하면 당사자는 언제든지 해지할 수 있는 계약 해지의 자유가 있다.</li><li>분할 공급 계약은 계속적 계약의 일종으로서 분할된 급 부 및 계약 전체에 대해 매매계약에 관한 규정이 적용된다.</li><li>일정 기간 신문을 공급하는 계약은 회귀적 급부 계약으로서 계속적 계약의 일종이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 시간에 걸친 지속적 급부가 특징이다.</li><li><strong>선택</strong> · 장기 관계에서 오히려 사정변경과 신뢰 파괴를 고려할 여지가 있다.</li><li><strong>비선택</strong> · 기간 없는 계약 등 해당 해지권한과 통고 규정이 있는 경우로 한정한다. 정기 계약까지 언제든 해지하는 것은 아니다.</li><li><strong>비선택</strong> · 총량이 정해진 분할 공급과 기간에 따른 회귀적 공급을 구별하면서 매매 규정을 연결한다.</li><li><strong>비선택</strong> · 기간 중 반복 공급이 중심이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약 당사자 간 강한 인적 신뢰 관계가 존재하고, 채권관계의 시간적 계속성이 중요한 계속적 계약의 경우 사정 변경의 원칙이 고려될 여지가 크다. 반면, 일시적 계약에서는 사정 변경의 원칙이 극히 예외적으로 인정된다.</p></details></section>
+
+<section class="question-card" id="question-w12"><h4>워크북 012 <small>채권각론_워크북_012</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 중 예약에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>예약이란 장래 일정한 내용을 가지는 본계약이 체결될 것을 미리 약정하는 채권계약이다.</li><li>장차 성립할 본계약의 내용을 확정하거나 확정할 수 있는 의사표시와 함께 예약완결권을 주는 의사표시로 성립한다.</li><li>예약완결권은 형성권으로서 10년의 소멸시효가 적용된다.</li><li>예약완결권자가 예약완결권을 행사하면 그 상대방은 본계약을 체결할 의무를 부담한다.</li><li>본계약의 목적이 불능·불법으로 무효인 경우 예약도 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 나중 본계약을 예정하는 약속이다.</li><li><strong>비선택</strong> · 완결권을 부여하는 유형의 예약 설명이다.</li><li><strong>선택</strong> · 소멸시효가 아니라 제척기간이다. 약정기간이 있으면 우선 확인한다.</li><li><strong>비선택</strong> · 완결권형 예약은 행사로 본계약이 성립한다. 단순히 새 본계약을 맺을 의무만 발생한다는 문구는 다른 예약 유형과 혼동하므로 보완이 필요하다.</li><li><strong>비선택</strong> · 본계약의 목적을 유효하게 실현할 수 있는지도 보아야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 매매예약에서 예약자의 상대방이 매매예약 완결의 의사표시를 하여 매매의 효력을 생기게하는 권리, 즉 매매예약의 완결권은 일종의 형성권으로서 당사자 사이에 행사 기간을 약정한 때에는 그 기간 내에, 약정이 없는 때에는 예약이 성립한 때부터 10년 내에 이를 행사하여야 하고, 그 기간이 지난 때에는 예약완결권은 제척기간의 경과로 소멸한다(대판 2018.11.29,2017다247190).</p></details></section>
+
+<section class="question-card" id="question-w13"><h4>워크북 013 <small>채권각론_워크북_013</small></h4><p class="question-stem">청약에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>청약은 상대방의 승낙과 결합하여 일정한 내용의 계약을 성립시킬 것을 목적으로 하는 의사표시이다.</li><li>청약은 특정인에게 그 의사표시가 도달한 때 효력이 발생한다.</li><li>청약의 의사표시가 상대방에게 도달하면 청약자는 임의로 철회할 수 없다.</li><li>청약은 상대방 있는 의사표시로서 청약 당시 반드시 상대방이 특정되어야 한다.</li><li>소비자 보호를 위해 특별법으로 청약 철회 유보 기간(cooling-off period)제도를 보장한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 그대로 받아들이면 계약이 생길 정도로 확정적이어야 한다.</li><li><strong>비선택</strong> · 도달주의 설명이다. 특정 수령인에게 보낸 경우를 말하며 청약 당시 불특정 다수 가능성을 부정하는 것은 아니다.</li><li><strong>비선택</strong> · 제527조의 원칙이다.</li><li><strong>선택</strong> · 불특정 다수를 향한 확정적 청약도 가능하다.</li><li><strong>비선택</strong> · 특별법의 요건·기간·제외사유를 따로 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 청약의 의사표시는 상대방 있는 의사표시이나, 상대방은 반드시 청약 당시에 특정되어 있을 필요는 없다. 따라서 불특정 다수인에 대한 청약도 유효하다. 한편 소비자 보호를 위해 할부거래법 제8조, 방문판매법 제8조, 전자상거래법 제17조 등은 일정 기간 내 청약 철회를 허용하는 규정을 두고 있다.</p></details></section>
+
+<section class="question-card" id="question-w14"><h4>워크북 014 <small>채권각론_워크북_014</small></h4><p class="question-stem">승낙에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>승낙은 청약에 대응하여 계약을 성립시킬 목적으로 청약자에게 하는 수령자의 의사표시이다</li><li>청약수령자는 원칙적으로 승낙이나 거절의 의사 표시를 해야 할 의무를 부담한다.</li><li>승낙 기간이 정해지지 않은 경우 승낙의 통지가 상당한 기간 내에 청약자에게 도달하지 않으면 계약은 성립하지 않는다.</li><li>연착된 승낙의 경우 새로운 청약으로서의 효력을 가질 수 있다.</li><li>변경된 승낙의 경우 승낙자가 새롭게 청약한 것으로 본다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 청약 내용의 수락이다.</li><li><strong>선택</strong> · 일반적으로 응답할 의무가 없고 침묵도 승낙이 아니다.</li><li><strong>비선택</strong> · 제529조의 상당기간 규율이다.</li><li><strong>비선택</strong> · 제530조에 따라 청약자가 새 청약으로 볼 수 있다.</li><li><strong>비선택</strong> · 제534조상 거절과 새 청약이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 청약수령자는 승낙이나 거절의 의사 표시를 해야 할 의무가 없고, 일반적으로 침묵은 특별한 사정이 없는 한 승낙하지 않은 것으로 해석된다.</p></details></section>
+
+<section class="question-card" id="question-w15"><h4>워크북 015 <small>채권각론_워크북_015</small></h4><p class="question-stem">청약과 승낙에 관한 설명 중 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>청약은 그에 응하는 승낙이 있으면 곧 계약이 성립하는 구체적·확정적 의사표시여야 한다.</li><li>승낙의 기간을 정하지 않은 청약은 청약자가 상당 기간 내에 승낙의 통지를 받지 못하면 그 효력을 잃는다.</li><li>일정한 사실 행위도 승낙의 의사표시로 인정되어 계약을 성립시킬 수 있다.</li><li>매도인의 청약에 대하여 매수인이 조건을 붙여 승낙했다면 매도인의 청약은 실효된다.</li><li>아파트 분양을 위해 일정액 이상의 수익이 보장될 수 있다는 취지의 광고를 하고 분양 계약 체결 당시 그에 대해 설명했다면 비록 분양 계약서에는 기재하지 않았더라도 이는 청약에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 구체성·확정성·구속의사를 확인한다.</li><li><strong>비선택</strong> · 언제까지나 상대방 승낙에 묶이지 않는다.</li><li><strong>비선택</strong> · 제532조의 사실에 의한 계약 성립 등을 떠올린다.</li><li><strong>비선택</strong> · 조건부 승낙은 원청약의 거절과 새 청약이다.</li><li><strong>선택</strong> · 해당 광고 판례는 특별한 사정 없는 한 유인으로 보았다. 계약서 미기재 하나만으로 모든 광고 약속을 배제하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 판례는 상가를 분양하면서 일정액 이상의 수익이 보장될 수 있다는 취지의 광고를 하고, 분양 계약 체결 시 이러한 내용을 설명하였더라도 분양 계약서에 기재되지 않았다면, 특별한 사정이 없는 한 이는 청약의 유인에 불과하다고 한다(대판 2001.5.29,99다55601).</p></details></section>
+
+<section class="question-card" id="question-w16"><h4>워크북 016 <small>채권각론_워크북_016</small></h4><p class="question-stem">약관에 의한 계약에 대한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>약관은 그 자체로서 법규범적 성질을 가지고 있다는 것이 판례의 입장이다.</li><li>약관은 평균적 고객의 이해 가능성을 기준으로 객관적·획일적으로 해석되어야 한다.</li><li>약관의 내용이 불명확할 경우 그로 인한 불이익은 원칙적으로 작성자가 부담한다.</li><li>개별 약정 우선의 원칙에 따라 당사자 간의 개별적 합의가 유효한 경우 이에 반하는 약관의 규정은 적용되지 않는다.</li><li>불공정 약관 조항으로서 무효인 조항을 포함하고 있더라도 약관은 원칙적으로 나머지 부분만으로 유효하게 존속한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 회사 스스로 만든 법이어서가 아니라 편입 합의 때문에 구속한다.</li><li><strong>비선택</strong> · 고객마다 자의적으로 해석하지 않는다.</li><li><strong>비선택</strong> · 객관적 해석 후에도 불명확한 경우의 작성자 불이익이다.</li><li><strong>비선택</strong> · 실질적인 개별 약정이 약관보다 우선한다.</li><li><strong>비선택</strong> · 약관규제법 제16조의 나머지 유효 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관 구속력의 근거에 대한 논의는, 약관을 기업이 자주적으로 제정하는 법규로 보는 자치 법 설과 관습에 의한 것이라는상 관습 설, 계약 당사자 간의 합의를 근거로 삼는 계약 설로 나뉘며, 판례는 약관이 계약 당사자에 대하여 구속력을 갖는 것은 그 자체가 법규범 또는 법규범적 성질을 가져서가 아니라 계약 당사자 사이에서 계약 내용에 포함시키기로 명시적·묵시적으로 합의하였기 때문이라는 계약 설의 입장을 취하고 있다(대판 2004.11.11,2003다30807).</p></details></section>
+
+<section class="question-card" id="question-w17"><h4>워크북 017 <small>채권각론_워크북_017</small></h4><p class="question-stem">다음은 약관의 규제에 관한 법률이 정하고 있는 바와 다른 것은?</p><ol class="choices"><li>약관에 정한 사항에 관하여 사업자와 고객이 약관의 내용과 다르게 합의한 사항은 약관보다 우선한다</li><li>약관의 내용 중 고객에게 부당하게 불리한 조항은 공정성을 잃은 것으로 추정된다.</li><li>약관은 신의성실의 원칙에 따라 공정하게 해석되어야 하고 고객에 따라 구체적·개별적으로 해석되어야 한다.</li><li>계약의 성질상 설명하는 것이 현저하게 곤란한 경우 중요한 내용이라도 설명 의무를 지지 않는다.</li><li>고객에게 부당하게 과중한 손해배상 의무를 부담시키는 약관 조항은 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 개별 합의가 우선한다.</li><li><strong>비선택</strong> · 부당한 고객 불이익은 불공정성 판단의 중심이다.</li><li><strong>선택</strong> · 구체적·개별적으로 다르게가 아니라 객관적·통일적 해석이다.</li><li><strong>비선택</strong> · 설명의무의 법정 예외를 묻는다. 예외를 모든 번거로운 경우로 넓히지 않는다.</li><li><strong>비선택</strong> · 과중한 손해배상 예정 등을 통제한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관은 고객에 따라 다르게 해석되어서는 안 된다(약관 규제 법 제5조 1항).</p></details></section>
+
+<section class="question-card" id="question-w18"><h4>워크북 018 <small>채권각론_워크북_018</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">약관에 관한 다음 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>약관의 일부가 무효인 경우 그 전부를 무효로 함이 원칙이나, 그 무효 부분이 없더라도 계약을 했을 것으로 인정될 때에는 나머지 부분은 무효가 되지 않는다.</li><li>사업자가 약관의 명시·설명 의무를 위반하여 계약을 체결한 경우 해당 약관을 계약의 내용으로 주장할 수 없다.</li><li>당해 거래 계약에 당연히 적용되는 법령이 있다면 그것이 약관의 중요한 내용에 해당하더라도 특별한 사정이 없는 한 사업자가 그 내용을 따로 명시·설명하지 않아도 된다.</li><li>보험 계약자나 그 대리인이 약관에 규정된 고지 의무를 위반했다는 이유로 보험 계약을 해지할 수는 없다</li><li>약관상 매매계약 해제 시 사업자인 매도인을 위한 손해배상액의 예정 조항은 있으나 고객인 매수인을 위한 손해배상액의 예정 조항이 없더라도 해당 조항이 무효가 되는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 민법 제137조의 일반 틀을 약관에 그대로 가져왔다. 약관법은 나머지 유효가 원칙이다.</li><li><strong>비선택</strong> · 위반한 약관을 편입된 내용이라고 주장하지 못하는 효과다.</li><li><strong>비선택</strong> · 당연 적용되는 법령의 반복 등은 설명의무 예외가 문제된다.</li><li><strong>비선택</strong> · 설명의무 위반 등의 전제가 빠져 보이는 문장이다. 보험 고지의무 위반이면 언제나 해지 불가라는 일반명제는 틀리므로 원본 표현 주의로 분류한다.</li><li><strong>비선택</strong> · 양쪽에 같은 예정조항이 없다는 이유만으로 당연 무효는 아니다. 내용의 부당성을 따져야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관의 일부 조항이 무효인 경우 계약은 나머지 부분만으로 유효하게 존속한다(약관 규제 법 제16조).</p></details></section>
+
+<section class="question-card" id="question-w19"><h4>워크북 019 <small>채권각론_워크북_019</small></h4><p class="question-stem">계약의 성립에 관한 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>계약의 청약은 이를 철회하지 못한다.</li><li>격지자 간의 계약은 승낙의 통지가 도달한 때에 성립한다</li><li>청약자의 의사표시나 관습에 의하여 승낙의 통지가 필요하지 아니한 경우에 계약은 승낙의 의사표시로 인정되는 사실이 있는 때에 성립한다.</li><li>당사자 간 동일한 내용의 청약이 상호 교차된 경우 양 청약이 상대방에게 도달한 때에 계약이 성립한다</li><li>승낙자가 청약에 대해 변경을 가하여 승낙한 때에는 그 청약의 거절과 동시에 새로 청약한 것으로 본다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 도달 후 임의 철회 금지가 원칙이며 예외는 별도다.</li><li><strong>선택</strong> · 제531조는 발송 시 성립이다. 기간 내 도달 규율도 함께 적용한다.</li><li><strong>비선택</strong> · 청약자가 그 사실을 안 때로 바꾸지 않는다.</li><li><strong>비선택</strong> · 두 청약이 모두 도달해야 한다.</li><li><strong>비선택</strong> · 조건 변경을 수락이라고만 부르면 안 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 격지자 간의 계약은 승낙의 통지를 발송한 때에 성립한다(제531조).</p></details></section>
+
+<section class="question-card" id="question-w20"><h4>워크북 020 <small>채권각론_워크북_020</small></h4><p class="question-stem">다음 사례에 관한 설명으로 옳은 것은?<br>(다툼이 있으면 다수설과 판례에 의함) 甲은 2018년 9월 10일 乙에게 자신이 사용하던 X 컴퓨터를 50 만 원에 매각하겠다는 의사표시와 2018년 9월 25일까지 구매 여부를 알려 달라는 내용의 편지를 발송하였고, 그 편지는 2018년 9월 13일 乙에게 도달하였다. 이에 乙이 2018년 9월 17일 X 컴퓨터를 50 만 원에 매수하겠다는 승낙의 편지를 甲에게 발송하였다.</p><ol class="choices"><li>甲이 乙이 발송한 편지를 2018년 9월 19일 받았는데,2018년 9월 24일 개봉하여 읽었다면 매매계약은 2018년 9월 24일에 성립한다.</li><li>乙이 승낙의 의사표시를 하였으므로, 乙이 발송한 편지를 甲이 2018년 9월 25일까지 받지 못 하였더라도 매매계약은 성립한다.</li><li>甲이 乙이 발송한 편지를 2018년 9월 20일 받았다면, 매매계약은 그때부터 성립하고 효력이 발생한다.</li><li>乙이 발송한 편지가 2018년 9월 26일 甲에게 도달하였고 甲이 2018년 9월 27일 연착의 통지를 한 경우 매매계약은 성립하지 않는다</li><li>乙이 2018년 9월 17일 매수하겠다는 편지를 발송하기 전까지 특별한 사정이 없는 한 甲은 乙에 대하여 매각의 의사표시를 철회할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실제로 읽은 24일이 아니라 승낙 발송 17일을 기준으로 본다.</li><li><strong>비선택</strong> · 기간 내 도달 요건과 연착 특칙을 생략했다.</li><li><strong>비선택</strong> · 20일 도달이 기간 내 도달 문제를 해결하지만 성립시기는 발송일이다.</li><li><strong>선택</strong> · 제때 올 발송이 연착했고 지체 없이 연착 통지를 했다는 문제 전제에서는 원청약에 따른 계약 성립이 부정된다.</li><li><strong>비선택</strong> · 청약은 13일에 도달하여 원칙적으로 임의 철회가 안 된다. 승낙 발송 때까지 자유로운 것이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 및 ③ 의 경우, 격지자 간의 계약은 발신주의를 취하기 때문에(제531조)乙이 승낙의 의사표시를 발송한 2018년 9월 17일 계약이 성립한다. ② 의 경우, 승낙 기간 내에 승낙의 통지를 받지 못 했기 때문에 계약은 성립하지 않는다(제528조 1항). 제528조 1항과 제531조의 모순 관계에 대하여 다수설은 일단 발송으로 계약의 효력이 발생하나 이는 기간 내 승낙이 도달하지 않는 것을 해제 조건으로 하는 해제조건설의 입장을 취한다. ④ 제528조 2항 및 3항. ⑤ 청약이 상대방에게 도달하여 그 효력이 발생하면 청약자는 철회할 수 없다(제527조).</p></details></section>
+
+<section class="question-card" id="question-w21"><h4>워크북 021 <small>채권각론_워크북_021</small></h4><p class="question-stem">계약의 성립에 관한 설명으로 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>당사자들의 의사가 일치하는 경우 그 의사에 따라 계약 당사자를 확정해야 한다.</li><li>임대차계약에서 보증금의 지급 약정이 있는 경우, 보증금의 수수는 임대차계약의 성립 요건이 아니다.</li><li>계약이 의사의 불합치로 성립하지 아니한 경우, 그로 인하여 손해를 입은 당사자는 상대방에 대하여 민법 제535조를 유추 적용하여 손해배상을 청구할 수 있다.</li><li>매매계약 체결 당시 목적물과 대금이 구체적으로 확정되지 않았더라도, 이행기 전까지 구체적으로 확정될 수 있는 방법과 기준이 정해져 있다면 계약의 성립을 인정할 수 있다.</li><li>청약자의 의사표시나 관습에 의해 승낙의 통지가 필요하지 않은 경우, 계약은 승낙의 의사표시로 인정되는 사실이 있는 때에 성립한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실제 일치한 의사가 확인되면 그에 따른다.</li><li><strong>비선택</strong> · 임대차는 낙성계약이다. 보증금 계약의 성질과 임대차 자체 성립을 나눈다.</li><li><strong>선택</strong> · 2015다10929는 의사 불합치에 제535조를 그렇게 확장하지 않는다.</li><li><strong>비선택</strong> · 확정할 수 있는 방법·기준이 있으면 가능하다.</li><li><strong>비선택</strong> · 제532조의 사실 발생 시점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약이 의사의 불합치로 성립하지 않은 경우 그로 인하여 손해를 입은 당사자는 상대방이 계약이 성립되지 않을 수 있다는 것을 알았거나 알 수 있었다는 이유로 제535조(계약체결상의 과실)를 유추 적용하여 손해배상을 청구할 수는 없다(대판 2017.11.14,2015다10929).</p></details></section>
+
+<section class="question-card" id="question-w22"><h4>워크북 022 <small>채권각론_워크북_022</small></h4><p class="question-stem">다음 보기 중 甲과 乙 사이에 계약이 성립한 경우를 모두 고른 것은? (다툼이 있으면 판례에 의함)<br>ㄱ. 甲이 청약일로부터 15일간의 승낙기간을 정하여 乙에게 청약을 하였고, 乙이 승낙기간을 지나 승낙통지를 발송하여 甲에게 도착하였는데, 甲이 乙의 승낙에 대하여 조건을 붙여 승낙의 의사표시를 하여 그 의사표시가 乙에게 도달된 경우<br>ㄴ. 甲이 2013. 1. 10. 乙에게 A를 100만 원에 팔겠다는 청약을 하였으나, 乙이 그와 같은 甲의 청약사실을 알지 못한 채 같은 달 12일 甲에게 A를 100만 원에 사겠다는 청약을 하였는데, 甲과 乙의 청약이 모두 상대방에게 도달한 경우<br>ㄷ. 甲의 청약에 대하여 乙이 조건을 붙여서 승낙을 하였는데, 甲이 乙의 조건부 승낙에 대하여 승낙의 의사표시를 하여 그 의사표시가 乙에게 도달된 경우</p><ol class="choices"><li>ㄱ</li><li>ㄱ, ㄴ</li><li>ㄱ, ㄷ</li><li>ㄴ, ㄷ</li><li>ㄱ, ㄴ, ㄷ</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · ㄱ은 다시 조건을 붙여 새 청약이 되었을 뿐이므로 성립하지 않았다.</li><li><strong>비선택</strong> · ㄱ이 포함돼 틀린 조합이다. ㄴ은 동일 내용의 교차청약으로 성립한다.</li><li><strong>비선택</strong> · ㄱ을 넣고 ㄴ을 빼서 틀렸다.</li><li><strong>선택</strong> · ㄴ은 교차청약, ㄷ은 변경된 새 청약에 다시 승낙했으므로 성립한다.</li><li><strong>비선택</strong> · ㄱ까지 포함하면 안 된다. 늦은 답장에 다시 조건이 붙은 순서를 끝까지 보자.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ㄱ의 경우, 乙의 승낙은 연착된 승낙으로서 연착의 통지가 없었으므로 최초의 甲의 청약은 효력을 잃고(제528조) 乙의 연착된 승낙이 새 청약이 되나(제530조), 여기에 甲이 다시 조건을 붙여 승낙했기 때문에 다시 이는 乙에 대한 새로운 청약이 된다(제534조). 따라서 조건을 붙인 甲의 승낙(새로운 청약)에 대해 乙의 승낙이 있어야 계약이 성립한다.</p></details></section>
+
+<section class="question-card" id="question-w23"><h4>워크북 023 <small>채권각론_워크북_023</small></h4><p class="question-stem">계약에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 의함)<br>ㄱ. 승낙기간을 정하지 아니한 계약의 청약을 한 자가 상당한 기간 내에 승낙의 통지를 받은 때에는 계약이 성립한다.<br>ㄴ. 관습에 의하여 승낙의 의사표시가 필요하지 않은 경우 계약의 성립시기는 청약자가 승낙의 의사표시로 인정되는 사실을 알게 된 때이다.<br>ㄷ. 어느 일방이 교섭단계에서 계약이 확실히 체결되리라는 정당한 기대 내지 신뢰를 부여하여 상대방이 그 신뢰에 따라 행동하였음에도 상당한 이유 없이 계약의 체결을 거부하여 손해를 입혔다면 불법행위를 구성할 수 있다.<br>ㄹ. 목적이 불능인 계약을 체결할 때에 그 불능을 알 수 있었을 자는 상대방이 그 불능을 알 수 있었더라도 이행이익을 넘지 않은 한도에서 상대방에게 신뢰이익을 배상하여야 한다.</p><ol class="choices"><li>ㄱ, ㄴ</li><li>ㄱ, ㄷ</li><li>ㄴ, ㄹ</li><li>ㄱ, ㄷ, ㄹ</li><li>ㄴ, ㄷ, ㄹ</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · ㄴ은 사실이 있는 때와 청약자가 안 때를 바꾸어 틀렸다.</li><li><strong>선택</strong> · ㄱ은 상당기간 내 승낙, ㄷ은 확고한 신뢰를 부당하게 깨뜨린 불법행위로 옳다.</li><li><strong>비선택</strong> · ㄴ도 틀리고 ㄹ도 상대방 무과실 요건을 놓쳤다.</li><li><strong>비선택</strong> · ㄹ은 상대방도 불능을 알 수 있었다면 제535조 책임이 배제되므로 틀리다.</li><li><strong>비선택</strong> · ㄱ을 빼고 틀린 ㄴ·ㄹ을 넣은 조합이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ㄴ의 경우, 승낙의 의사표시로 인정되는 사실이 있는 때에 성립한다(제532조). ㄹ의 경우, 상대방이 불능을 알았거나 알 수 있었을 경우에는 계약체결상의 과실책임을 물을 수 없다(제535조).</p></details></section>
+
+<section class="question-card" id="question-w24"><h4>워크북 024 <small>채권각론_워크북_024</small></h4><p class="question-stem">계약체결상의 과실 책임에 대한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>민법에 계약체결상의 과실 책임에 대한 명문 규정은 없으나 판례는 이를 인정하고 있다.</li><li>원시적 불능의 경우, 그 불능을 알았거나 알 수 있었을 자는 상대방이 그 계약의 유효를 신뢰하여 지출한 손해에 대해 배상하여야 한다.</li><li>계약체결상의 과실을 이유로 한 신뢰이익의 손해배상액은 계약이 유효함으로 인해 생길 이익 액을 넘지 못한다.</li><li>상대방이 그 불능을 알았거나 알 수 있었다면 손해배상책임을 지지 않는다</li><li>계약체결상의 과실 책임은 그 불능을 알지 못한 데 대한 상대방의 무과실을 요한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제535조라는 명문 규정이 있다.</li><li><strong>비선택</strong> · 원시불능을 알고도 또는 과실로 모르고 체결한 책임을 묻는다. 상대방 선의무과실도 필요하다.</li><li><strong>비선택</strong> · 신뢰이익을 주되 유효계약의 이익보다 더 유리하게 만들지는 않는다.</li><li><strong>비선택</strong> · 상대방이 알았거나 알 수 있었으면 제535조 제2항이 배제한다.</li><li><strong>비선택</strong> · 단순 선의만이 아니라 무과실도 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 우리 민법은 제535조에서 계약체결상의 과실 책임을 명문으로 규정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-w25"><h4>워크북 025 <small>채권각론_워크북_025</small></h4><p class="question-stem">계약 교섭의 부당한 중도 파기가 위법한 것으로 인정되는 경우에 대한 설명 중 가장 옳지 않은 것은?</p><ol class="choices"><li>일방이 계약이 확실히 체결되리라는 정당한 기대 내지 신뢰를 부여하여 상대방이 그 신뢰에 따라 행동하였음에도 상당한 이유 없이 계약의 체결을 거부하여 손해를 입힌 경우이는 불법행위를 구성한다.</li><li>계약 교섭의 파기로 인한 불법행위가 인격적 법익을 침해함으로써 상대방에게 정신적 고통을 초래하였다고 인정되는 경우 그러한 정신적 고통에 대한 손해 배상 청구도 가능하다</li><li>계약체결에 관한 확고한 신뢰가 부여되기 전 경쟁 입찰에 참가하기 위해 지출한 제안서, 견적서 작성 비용 등도 손해배상의 범위에 포함된다.</li><li>계약 교섭 단계에서 이행의 착수가 상대방의 적극적인 요구에 따른 것이고 그 이행에 들어간 비용의 지급에 대하여 이미 계약 교섭이 진행되고 있었다면 이 행을 위하여 지출한 비용도 상당 인과관계 있는 손해에 해당한다.</li><li>계약 교섭의 부당한 중도 파기로 인한 손해는 신뢰 손해에 한정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약 자유의 한계를 넘는 부당한 신뢰 침해다.</li><li><strong>비선택</strong> · 인격적 법익 침해와 정신적 손해의 요건을 별도로 충족하면 검토할 수 있다.</li><li><strong>선택</strong> · 확고한 신뢰 이전 통상 입찰 준비비까지 전부 배상하는 것은 아니다.</li><li><strong>비선택</strong> · 상대방의 적극적 요구로 선지출한 비용은 신뢰 침해와 인과관계가 있을 수 있다.</li><li><strong>비선택</strong> · 교섭 파기의 신뢰손해와 계약 이행으로 얻을 이익을 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약의 성립을 기대하고 지출한 계약 준비 비용 이외에 계약체결을 위하여 불가피하게 소요되는 비용(경쟁 입찰에 참가하기 위하여 지출한 제안서, 견적서 작성 비용 등)은 손해배상의 범위에 포함되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-w26"><h4>워크북 026 <small>채권각론_워크북_026</small></h4><p class="question-stem">다음 중 쌍무계약의 일반적 효력에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>쌍무계약의 일반적 효력은 계약의 일반적 효력과 동일하다.</li><li>쌍무계약의 경우 양 당사자의 채무는 원칙적으로 법적 견련관계에 놓인다.</li><li>쌍무계약에서는 상대방이 이행할 때까지 자기의 채무 이행을 거절할 수 있다</li><li>쌍무계약에서 일방의 채무가 불능하여 성립하지 않을 경우 그 대가인 상대방의 채무도 성립하지 않는다.</li><li>쌍무계약에서 일방 당사자의 급부가 더 이상 존속하지 않으면 상대방에 대해서도 그 급부를 청구할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 모든 계약이 쌍무계약은 아니다. 특별한 대가적 견련성을 구별해야 한다.</li><li><strong>비선택</strong> · 서로 대가가 되는 채무의 연결을 말한다.</li><li><strong>비선택</strong> · 요건을 갖추면 제536조로 이행을 미룬다.</li><li><strong>비선택</strong> · 원시불능과 성립상 견련성의 설명이다. 타인권리 매매 등 특칙은 별도다.</li><li><strong>비선택</strong> · 존속상 견련성의 원칙 설명이다. 제538조 등 예외를 함께 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 모든 계약이 쌍무계약은 아니다. 계약의 성질과 내용에 따라 권리·의무를 발생시키는 계약의 일반적 효력과 성립, 이행 및 존속, 청산의 모든 과정에서 견련관계를 전제로 하는 쌍무계약의 일반적 효력은 구별하여 이해해야 한다.</p></details></section>
+
+<section class="question-card" id="question-w27"><h4>워크북 027 <small>채권각론_워크북_027</small></h4><p class="question-stem">동시이행 항변권에 관한 설명으로 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>쌍방의 채무가 동일한 쌍무계약으로부터 발생해야 한다.</li><li>쌍방의 채무 중 적어도 어느 하나는 변제기에 있어야 한다.</li><li>상대방이 채무의 이행 또는 이행의 제공을 하지 않아야 한다.</li><li>동시이행 항변권을 행사하여 상대방의 청구를 일시적으로 저지시킬 수 있다.</li><li>동시이행 항변권을 행사하지 않더라도 상대방 채무의 이행제공이 있을 때까지 이행지체 책임을 부담하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기본형이다. 공평상 인정되는 확장 사례도 있다.</li><li><strong>선택</strong> · 상대방 채무가 변제기에 있어야 한다. 어느 하나만으로 충분하지 않다.</li><li><strong>비선택</strong> · 적절한 제공이 있으면 이를 핑계로 자기 이행을 계속 거절하지 못한다.</li><li><strong>비선택</strong> · 채무가 소멸하는 것이 아니라 잠시 이행을 거절한다.</li><li><strong>비선택</strong> · 지체면책은 항변권 존재의 효과다. 소송상 상환이행 주장은 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 쌍무계약의 당사자 일방은 상대방이 그 채무 이행을 제공할 때까지 자기의 채무 이행을 거절할 수 있으나 상대방의 채무가 변제기에 있지 않으면 동시이행 항변권은 인정되지 않기 때문에(제536조 1항 단서)결국 쌍방의 채무가 모두 변제기에 있을 것을 요한다.</p></details></section>
+
+<section class="question-card" id="question-w28"><h4>워크북 028 <small>채권각론_워크북_028</small></h4><p class="question-stem">다음 중 쌍무계약에 관한 설명으로 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>쌍무계약의 일방이 계약상 선이행의무를 질 때, 그와 대가 관계에 있는 상대방의 채무가 이행기에 이르지 않았더라도 이행기의 이행이 현저히 불투명한 경우에는 반대급부의 이행이 확실해질 때까지 선이행의무의 이행을 거절할 수 있다.</li><li>쌍무계약의 당사자 일방이 먼저 한 번 현실의 제공을 하고 상대방을 수령 지체에 빠지게했더라도, 그 이행의 제공이 계속되지 않는 경우는 과거 이행의 제공이 있었다는 사실만으로 상대방이 가지는 동시이행의 항변권이 소멸하는 것은 아니다.</li><li>쌍무계약에서 일시적으로 당사자 일방의 이행제공이 있었으나 곧 그 이행제공이 중지되고 더 이상 그 제공이 계속되지 않는다면, 상대방의 채무는 이행지체의 상태가 아니다</li><li>쌍무계약인 매매계약에서 매수인이 선이행의무인 잔금 지급 의무를 이행하지 않던 중 매도인도 소유권이전등기의무의 이행을 제공하지 않은 채 소유권이전등기의무의 이행기를 도과한 경우, 특별한 사정이 없는 한 매도인과 매수인 쌍방의 의무는 동시이행의 관계에 있다.</li><li>대가적 채무 간에 이행 거절의 권능을 가지는 경우에는 이행 거절의 의사를 구체적으로 밝혀야만 이행지체 책임을 면할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 불안의 항변권이다. 현저한 이행 불안의 근거를 확인한다.</li><li><strong>비선택</strong> · 과거 한 번의 제공이 항변권을 영구 소멸시키지 않는다.</li><li><strong>비선택</strong> · 제공 중단 뒤의 기간을 구분해 지체를 판단한다.</li><li><strong>비선택</strong> · 선이행 지체 중 상대방 기일도 와서 동시이행으로 전환될 수 있다.</li><li><strong>선택</strong> · 존재만으로 지체책임이 생기지 않는 효과가 있다. 구체적 원용이 필수는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이행지체의 책임이 없다고 주장하는 자가 반드시 동시이행의 항변권을 행사해야만 이행지체 책임을 면하는 것은 아니다(대판 2001.7.10,2001다3764).</p></details></section>
+
+<section class="question-card" id="question-w29"><h4>워크북 029 <small>채권각론_워크북_029</small></h4><p class="question-stem">다음 중 동시이행의 관계에 있다고 볼 수 없는 것은?</p><ol class="choices"><li>매매계약이 취소된 경우 당사자 쌍방의 부당이득반환 의무</li><li>수급인의 의무불이행으로 도급인에게 하자 확대 손해가 발생한 경우 수급인의 손해배상 채무와 도급인의 보수 지급 채무</li><li>근저당권설정등기 있는 부동산의 매매에 있어서 매수인의 대금지급의무와 매도인의 소유권이전등기의무 및 근저당권설정등기 말소 의무</li><li>임대인의 임대차 보증금 반환 의무와 임차인의 주택 임대차 보호법에 의한 임차권 등기 말소 의무</li><li>미등기 건물의 매매에 있어서 매수인의 잔대금지급의무와 매도인의 소유권이전등기의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약을 취소하고 서로 받은 것을 돌려주는 공평상 연결이다.</li><li><strong>비선택</strong> · 하자 확대손해 배상과 보수 사이의 동시이행을 인정하는 판례다.</li><li><strong>비선택</strong> · 온전한 권리 이전과 그 대금은 서로 맞물린다.</li><li><strong>선택</strong> · 보증금 반환이 임차권등기 말소보다 먼저다. 안전장치를 먼저 없애게 해서는 안 된다.</li><li><strong>비선택</strong> · 미등기라는 이유로 등기의무와 잔금의 연결이 없어지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판 2010.10.14, 2010다47438. ② 대판 2007.8.23,2007다26455. ③ 대판 1996.5.10,96다6554. ④ 임대인이 임대차 보증금의 반환 의무가 임차인의 임차권 등기 말소 의무보다 선 이행되어야 한다(대판 2005.6.9,2005다4529). ⑤ 대판 1979.2.27,78다2327.</p></details></section>
+
+<section class="question-card" id="question-w30"><h4>워크북 030 <small>채권각론_워크북_030</small></h4><p class="question-stem">동시이행 항변권에 관한 설명으로 가장 옳지 않은 것은?</p><ol class="choices"><li>쌍무계약의 당사자 일방은 상대방이 그 채무 이행을 제공할 때까지 자기의 채무 이행을 거절할 수 있다.</li><li>당사자 일방이 선이행의무를 불이행하는 중에는 상대방에게 반대급부의 이행기가 도래하더라도 동시이행 항변권은 발생하지 않는다.</li><li>선이행의무 자의 상대방에게 이행이 곤란할 현저한 사유가 있는 때에는 선이행의무자에게도 동시이행 항변권이 인정된다.</li><li>쌍무계약에서 쌍방의 채무가 동시이행 관계에 있는 경우, 특별한 사정이 없는 한 동시이행 항변권을 행사·원용하지 않아도 이행지체 책임을 부담하지 않는다.</li><li>비쌍무계약이라고 하더라도 양 채무가 동일한 법률 요건으로부터 생겨서 공평의 관점에서 보아 견 련적으로 이행시킴이 마땅한 경우에는 동시이행 항변권이 인정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 적절한 제공 전까지 거절하는 제도다.</li><li><strong>선택</strong> · 후에 상대방 이행기가 도래하면 항변을 인정할 수 있다.</li><li><strong>비선택</strong> · 선이행자를 보호하는 제536조 제2항이다.</li><li><strong>비선택</strong> · 지체면책은 존재 효과다.</li><li><strong>비선택</strong> · 형식적 쌍무계약이 아니어도 동일 요건·공평상 견련성을 인정하는 경우가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① ② 선이행의무 자가 이행하지 않는 동안 상대방에게 반대급부의 이행기가 도래한 경우에는 선이행의무자에게도 동시이행 항변권이 인정된다(대판 1991.3.27,90다19930). ③ 이를 불안의 항변권이라 한다(제536조 2항). ④ 대판 2010.10.14,2010다47438. ⑤ 대판 2000.10.27,2000다36118.</p></details></section>
+
+<section class="question-card" id="question-w31"><h4>워크북 031 <small>채권각론_워크북_031</small></h4><p class="question-stem">동시이행의 항변권에 관한 다음 설명 중 가장 옳지 않은 것은?</p><ol class="choices"><li>쌍무계약의 무효로 각 당사자가 서로 취득한 것을 반환해야 할 경우 각 당사자의 반환 의무는 동시이행 관계에 있다.</li><li>금전 채권에 대한 압류 및 추심 명령이 있는 경우 추심 채무자는 제3 채무자에 대하여 피압류 채권에 기한 동시이행 항변권을 상실한다.</li><li>선이행의무 자가 이행을 지체하는 동안 상대방의 채무가 이행기에 달하면 선이행의무를 부담하는 채무자도 동시이행 항변권을 행사할 수 있다.</li><li>동시이행 항변권이 붙은 채권을 자동 채권으로 하는 상계는 원칙적으로 금지된다.</li><li>공사 도급계약상 도급인의 지체상금 채권과 수급인의 공사 대금 채권은 특별한 사정이 없는 한 동시이행의 관계에 있다고 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 서로 받은 급부의 반환을 함께 하도록 한다.</li><li><strong>선택</strong> · 압류·추심명령이 있더라도 해당 항변권이 당연 소멸하는 것은 아니다.</li><li><strong>비선택</strong> · 선이행 시점과 현재의 변제기를 나눈다.</li><li><strong>비선택</strong> · 상계로 상대의 교환적 보호를 빼앗을 수 없어 원칙 금지다.</li><li><strong>비선택</strong> · 지체상금은 하자보수 갈음 손해배상 등과 구별한다. 모든 공사 관련 채무를 동시이행으로 묶지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판 2007.12.28,2005다38843. ② 임대차보증금 반환 채권에 대한 압류 및 추심 명령이 있는 경우, 임차인은 임대인에 대하여 임차 보증금 반환 채권에 기한 건물 명도 의무와의 동시이행 항변권을 상실하지 않는다(대판 2001.3.9,2000다73490). ③ 대판 1991.3.27,90다19930. ④ 대판 2014.4.30,2010다11323. ⑤ 대판 2015.8.27,2013다81224.</p></details></section>
+
+<section class="question-card" id="question-w32"><h4>워크북 032 <small>채권각론_워크북_032</small></h4><p class="question-stem">동시이행의 항변권에 관한 다음 설명 중 가장 옳지 않은 것은?</p><ol class="choices"><li>부동산 매매계약에서 매수인이 부가 가치세를 부담하기로 약정한 경우, 특별한 사정이 없는 한 부가 가치세를 포함한 매매 대금 전부와 부동산의 소유권이전등기의무는 동시이행 관계에 있다.</li><li>원인 채무의 지급을 담보하기 위하여 어음이 교부된 경우, 채무자는 어음 반환과 동시이행을 주장하여 원인 채무의 지급을 거절할 수는 없다.</li><li>계약이 해제된 경우 계약 당사자가 부담하는 원상회복 의무뿐 아니라 손해배상 의무도 함께 동시이행 관계에 있다.</li><li>구분 소유적 공유 관계가 전부 해소된 경우, 공유 지분권자 상호 간의 지분 이전 등기 의무는 동시이행의 관계에 있다.</li><li>동시이행의 관계에 있는 쌍방의 채무 중 어느 한 채무가 이행불능이 됨으로 인하여 발생한 손해 배상 채무도 여전히 다른 채무와 동시이행의 관계에 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 약정상 부가가치세를 포함한 대금 전체와 온전한 이전을 맞교환한다.</li><li><strong>선택</strong> · 원인채무를 갚고도 어음이 남아 이중 지급 위험이 생기므로 어음 반환과 동시이행이다.</li><li><strong>비선택</strong> · 원상회복과 관련 손해배상도 함께 정산한다.</li><li><strong>비선택</strong> · 구분소유적 공유를 해소하며 서로 지분을 이전하는 관계다.</li><li><strong>비선택</strong> · 원래 급부가 배상채무로 바뀌어도 대가적 연결이 남는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판2006.2.24,2005다58656. ② 채무 이행의 확보를 위한 어음을 발행한 경우, 그 채무의 이행과 어음의 반환은 동시이행의 관계에 있다(대판 1992.12.22,92다8712). ③ 대판 1996.7.26, 95다25138·25145. ④ 대판 2008.6.26,2004다32992. ⑤ 대판 2000.2.25,97다30066.</p></details></section>
+
+<section class="question-card" id="question-w33"><h4>워크북 033 <small>채권각론_워크북_033</small></h4><p class="question-stem">다음은 민법 제537조와 관련된 내용이다. 괄호 안에 들어갈 알맞은 단어를 고르시오. 유효하게 성립한 채권관계에서 채무자의 귀책사유 없이 급부 장애가 발생한 경우에 이에 따른 불이익을 누가 부담할 것인지를 정하는 것이(㉠)의 문제이다. 편무계약에서는 채무자의 귀책사유 없이 급부가 불가능하게 된 경우 채무자는 급부 의무를 면하고 급부 불능에 따른 급부 위험은 채권자가 부담하지만, 쌍무계약에서는 급부 위험뿐만 아니라 반대급부 위혐의 문제가 함께 발생한다. 당사자의 특약이 없는 한 민법 제537조는 쌍무계약의 존속상의 견련관계를 고려하여 반대급부의 위험을(㉡)에게 부담시키고 있으며, 이를(㉢)라 한다.</p><ol class="choices"><li>㉠ 위험부담 / ㉡ 채무자 / ㉢ 채무자위험부담주의</li><li>㉠ 위험부담 / ㉡ 채권자 / ㉢ 채권자위험부담주의</li><li>㉠ 원시적 불능 / ㉡ 채무자 / ㉢ 채무자위험부담주의</li><li>㉠ 원시적 불능 / ㉡ 채권자 / ㉢ 채권자위험부담주의</li><li>㉠ 후발적 불능 / ㉡ 채무자 / ㉢ 채무자위험부담주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 위험부담·채무자·채무자위험부담주의의 정확한 조합이다.</li><li><strong>비선택</strong> · 반대급부 위험을 채권자에게 두는 것으로 원칙을 뒤집었다.</li><li><strong>비선택</strong> · 제537조는 유효 성립 뒤의 후발불능이다.</li><li><strong>비선택</strong> · 원시불능도 틀리고 부담 주체도 뒤집었다.</li><li><strong>비선택</strong> · 후발불능은 요건이고 이 불이익 배분 문제의 이름은 위험부담이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 위험부담에 관한 설명이다. 위험부담에서 문제되는 급부의 불능은 후발적 불능에 한정되며, 원시적 불능에 대해서는 계약의 무효, 계약체결상의 과실 책임 혹은 담보책임이 문제된다. 위험부담의 문제는 법 정책적 개념으로서 우리 민법 제537조는 채무자부담주의를 취하고 있다.</p></details></section>
+
+<section class="question-card" id="question-w34"><h4>워크북 034 <small>채권각론_워크북_034</small></h4><p class="question-stem">다음 사례에 대한 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함) 甲은 자기 소유의 주택에 대하여 乙과 매매계약을 체결하고 계약금과 중도금만 받은 상태인데 제3자 丙의 방화로 甲과 乙의 과실 없이 그 주택이 소실되었다.</p><ol class="choices"><li>甲과 乙 상호 간에는 채무불이행에 의한 손해배상청구권이 발생하지 않는다.</li><li>甲은 이미 지급 받은 계약금과 중도금을 乙에게 반환하여야 한다.</li><li>甲이 대가위험을 부담하게 되므로 甲은 乙에게 잔금의 지급을 청구할 수 없다</li><li>甲에게 잔금 지급 청구권을 인정하기로 하는 특약은 유효하다.</li><li>만약 乙이 주택을 인도받아 사용하고 있더라도 임료 상당의 부당이득반환 문제는 발생하지 않는다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 쌍방에게 귀책사유가 없다는 전제다. 제3자의 불법행위 책임은 별개다.</li><li><strong>비선택</strong> · 이미 받은 대가가 법률상 원인 없는 급부가 된다.</li><li><strong>비선택</strong> · 불능 급부의 채무자가 대금도 못 받는 위험을 진다.</li><li><strong>비선택</strong> · 임의규정이므로 개별 특약 가능하다. 불공정 약관 통제는 별도다.</li><li><strong>선택</strong> · 이미 사용한 이익은 별도 반환 문제가 생길 수 있다. 물건을 못 주게 된 것과 과거 이용을 나눈다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 민법 제537조는 채무자위험부담주의를 취하고 있어 쌍무계약에서 귀책사유 없이 채무가 이행불능된 경우 채무자는 급부 의무를 면함과 더불어 반대급부도 청구하지 못한다. 이는 임의 규정으로서 당사자 간 특약이 있다면 특약이 우선한다. 위험부담의 법리에 따라 매도인은 이미 지급 받은 계약금을 반환하여야 하고 매수인은 목적물을 점유·사용함으로써 취득한 임료 상당의 부당이득을 반환할 의무가 있다(대판 2009.5.28, 2008다98655·98662).</p></details></section>
+
+<section class="question-card" id="question-w35"><h4>워크북 035 <small>채권각론_워크북_035</small></h4><p class="question-stem">다음 사례에 대한 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함) 甲은 자신의 X 건물을 乙에게 매도하는 계약을 체결하고, 乙로부터 계약금을 수령하였다. 甲이 乙에게 X 건물의 인도 및 소유권이전등기를 마쳐 주기 전에 제3자 丙의 과실로 X 건물이 전부 멸실되었다.</p><ol class="choices"><li>乙은 丙에게 불법행위로 인한 손해 배상을 청구할 수 있다</li><li>乙은 甲에게 X 건물에 관한 소유권이전등기를 청구할 수 없다.</li><li>乙은 甲에게 채무불이행으로 인한 손해 배상을 청구할 수 없다</li><li>乙은 甲에게 지급한 계약금에 대해 부당이득반환을 청구할 수 있다.</li><li>乙은 甲에게 대상청구권의 행사로써 丙에 대한 손해배상 채권의 양도를 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 매수인이 아직 소유자가 아니므로 소유권 침해 배상을 바로 청구하지 못한다. 제3자의 채권침해에는 추가 요건이 있어 단순 과실만으로 당연 성립하지 않는다.</li><li><strong>비선택</strong> · 전부 멸실하여 원래 등기의무는 이행할 수 없다.</li><li><strong>비선택</strong> · 매도인에게도 책임 없다는 전제다.</li><li><strong>비선택</strong> · 대금 일부를 이미 받았으므로 원인 없는 급부의 반환을 청구한다.</li><li><strong>비선택</strong> · 불능과 연결된 대체 배상채권을 양도하라고 청구하는 경로다. 대금 반환과 중복 회수하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 후발적 불능에 대하여 甲과 乙 모두 귀책사유가 없으므로 위험부담의 문제이다. 후발적 불능의 경우 대상청구권을 행사할 수 있다. 한편, 丙의 과실로 인해 목적물인 건물이 멸실되고, 이는 결과적으로 매수인 乙의 소유권이전 청구권의 실현이 불가능해진 경우에 해당되어, 丙의 행위는 제3자의 채권 침해에 해당된다. 그러나 제3자의 채권 침해로 불법행위가 성립되기 위해서는 그 제3자가 침해되는 채권의 존재를 알았어야하므로, 과실이 있었을 뿐인 이 사안에서 乙이 직접 丙에게 불법행위 책임을 물을 수는 없다.</p></details></section>
+
+<section class="question-card" id="question-w36"><h4>워크북 036 <small>채권각론_워크북_036</small></h4><p class="question-stem">제3자를 위한 계약에서의 3 면 관계에 관한 설명이다. 괄호 안에 들어갈 알맞은 단어를 고르시오. 계약 당사자 중에서 제3자에게 급부를 행할 의무를 부담하는 자를(㉠), 제3자에 대한 이행의 약속을 요구한 자를(㉡), 직접 급부를 받는 자를(㉢)라 한다. 기본적 채권관계의 당사자는(㉠)와(㉡)이며,(㉢)는 그 채권관계에서 발생된 특정 급부에 대해서(㉠)에게 이행청구권을 가진다.</p><ol class="choices"><li>㉠ 낙약자 / ㉡ 수익자 / ㉢ 요약자</li><li>㉠ 수익자 / ㉡ 요약자 / ㉢ 낙약자</li><li>㉠ 요약자 / ㉡ 낙약자 / ㉢ 수익자</li><li>㉠ 수익자 / ㉡ 낙약자 / ㉢ 요약자</li><li>㉠ 낙약자 / ㉡ 요약자 / ㉢ 수익자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · ②·③의 역할을 바꾸었다.</li><li><strong>비선택</strong> · 이행하는 사람은 낙약자다.</li><li><strong>비선택</strong> · 요구한 사람과 약속한 사람이 뒤바뀌었다.</li><li><strong>비선택</strong> · 세 역할의 순서가 맞지 않는다.</li><li><strong>선택</strong> · 이행자 낙약자 → 약속받은 요약자 → 직접 받는 수익자의 순서다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제3자를 위한 계약은 계약 당사자 이외의 제3자에게 직접 권리를 취득시키는 계약으로 당사자들은 3 면 관계에 놓여 있다. 요약자(채권자)와 낙약자(채무자)의 관계를 보상 관계, 낙약자(채무자)와 제3자(수익자)의 관계를 급부 실현 관계, 요약자(채권자)와 제3자(수익자)의 관계를 대가 관계라 한다.</p></details></section>
+
+<section class="question-card" id="question-w37"><h4>워크북 037 <small>채권각론_워크북_037</small></h4><p class="question-stem">제3자를 위한 계약에 관한 설명으로 가장 옳지 않은 것은?</p><ol class="choices"><li>제3자는 채무자에게 직접 그 이행을 청구할 수 있다.</li><li>제3자의 권리는 채권자가 채무자에 대하여 계약의 이익을 제3자에게 주기로 하는 의사를 표시한 때에 생긴다</li><li>채무자는 상당한 기간을 정하여 계약의 이익을 받을 것인지 여부에 대한 확답을 제3자에게 최고할 수 있다.</li><li>제3자의 권리가 확정된 후 당사자는 이를 변경 또는 소멸시키지 못한다.</li><li>채무자는 채권자와의 기본 계약에 기한 항변으로 그 계약의 이익을 받을 제3자에게 대항할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 직접 청구권을 주는 것이 진정 제3자 계약의 특징이다.</li><li><strong>선택</strong> · 제3자가 낙약자에게 수익 의사를 표시할 때 생기는 것이 원칙이다.</li><li><strong>비선택</strong> · 답을 재촉하여 불확실한 상태를 정리할 수 있다.</li><li><strong>비선택</strong> · 사전 유보·동의 등 예외가 없는 원칙이다.</li><li><strong>비선택</strong> · 기본관계에서 나온 방어수단을 수익자에게도 주장한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 제539조 1항. ② 제3자의 권리는 그 제3자가 채무자에 대하여 계약의 이익을 받을 의사를 표시한 때에 생긴다(제539조 2항). ③ 제540조. ④ 제541조. ⑤ 제542조.</p></details></section>
+
+<section class="question-card" id="question-w38"><h4>워크북 038 <small>채권각론_워크북_038</small></h4><p class="question-stem">제3자를 위한 계약에 관한 설명으로 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>낙약자는 요약자와 수익자 사이의 법률관계에 의한 항변으로 수익자에게 대항하지 못한다.</li><li>요약자는 대가 관계의 부존재나 효력의 상실을 이유로 기본 관계에 기하여 낙약자에게 부담하는 자신의 채무 이행을 거절할 수 있다.</li><li>제3자를 위한 유상·쌍무계약의 경우 요약자는 낙약자의 채무불이행을 이유로 수익자의 동의 없이 계약을 해제할 수 있다.</li><li>수익의 의사표시를 한 제3자는 낙약자의 채무불이행을 이유로 요약자가 계약을 해제한 경우, 낙약자에게 자신의 손해에 대한 배상을 청구할 수 있다.</li><li>제3자가 수익의 의사표시를 한 후에 요약자와 낙약자가 제3자의 권리를 임의로 변경·소멸시키는 행위를 하더라도 제3자에게는 그 효력이 발생하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원인관계 항변은 낙약자의 기본계약 항변과 다르다.</li><li><strong>선택</strong> · 기본계약이 유효한 이상 원인관계 사정만으로 자기 급부를 거절하지 못한다.</li><li><strong>비선택</strong> · 법정해제는 임의 합의로 수익권을 지우는 경우와 다르다.</li><li><strong>비선택</strong> · 자신이 입은 불이행 손해의 배상을 청구할 수 있다.</li><li><strong>비선택</strong> · 확정 권리의 임의 변경·소멸 금지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 및 ② 의 경우, 판례는 요약자는 대가 관계의 부존재나 효력의 상실을 이유로 자신이 기본 관계에 기하여 낙약자에게 부담하는 채무의 이행을 거부할 수 없다고 한다(대판 2003.12.11,2003다49771). ③ 대판 1970.2.24,69다1410·1411. ④ 대판1994.8.12,92다41559. ⑤ 민법 제541조.</p></details></section>
+
+<section class="question-card" id="question-w39"><h4>워크북 039 <small>채권각론_워크북_039</small></h4><p class="question-stem">다음 지문에 대한 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함) 甲은 자신 소유의 X 노트북을 乙에게 매도하면서 그 대금은 乙이 甲의 채권자 丙에게 직접 지급하기로 하는 제3자를 위한 계약을 체결하였고, 丙은 乙에게 수익의 의사를 표시하였다.</p><ol class="choices"><li>甲과 乙이 미리 매매계약에서 丙의 권리를 변경·소멸할 수 있음을 유보한 경우, 이러한 약정은 丙에 대해서도 효력이 있다.</li><li>甲과 乙의 매매계약이 취소된 경우, 乙이 丙에게 이미 매매 대금을 지급하였다고 하더라도 특별한 사정이 없는 한 乙은 丙을 상대로 부당이득반환 청구를 할 수 없다.</li><li>제3자를 위한 계약의 체결 원인이 된 甲과 丙 사이의 법률관계가 취소된 경우 특별한 사정이 없는 한 乙은 丙에게 대금 지급을 거절할 수 없다</li><li>乙의 채무불이행을 이유로 甲이 계약을 해제한 경우, 丙은 乙에게 자기가 입은 손해에 대한 배상을 청구할 수 있다</li><li>甲은 丙의 동의가 없는 한 乙의 채무불이행을 이유로 계약을 해제할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 권리 발생 전 유보된 내용은 수익자가 취득할 권리 내용에 영향을 준다.</li><li><strong>비선택</strong> · 낙약자와 요약자 사이 정산이 원칙인 경우다. 직접 반환청구를 무조건 인정하지 않는다.</li><li><strong>비선택</strong> · 원인관계 하자가 기본관계의 의무를 당연 없애지 않는다.</li><li><strong>비선택</strong> · 기본계약 해제와 수익자의 손해배상을 구분한다.</li><li><strong>선택</strong> · 낙약자의 불이행에 기한 법정해제에는 원칙적으로 수익자 동의가 필요하지 않다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판 2002.1.25, 2001다30285. ② 대판 2010.8.19, 2010다31860·31877. ③ 대판 2003.12.11,2003다49771. ④ 대판 1994.8.12,92다41559. ⑤ 제3자를 위한 유상·쌍무계약의 경우 요약자는 낙약자의 채무불이행을 이유로 제3자의 동의 없이 계약을 해제할 수 있다(대판 1970.2.24, 69다1410·1411).</p></details></section>
+
+<section class="question-card" id="question-w40"><h4>워크북 040 <small>채권각론_워크북_040</small></h4><p class="question-stem">취소와 해제의 구별에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>취소와 해제의 소급효는 제한을 받는다.</li><li>취소권은 법률의 규정에 의하여 발생하나 해제권은 계약에 의해서도 발생한다.</li><li>취소와 해제의 의사표시는 단독행위이다.</li><li>취소의 발생원인은 법률행위 성립 당시, 해제의 발생원인은 법률행위 성립 이후의 사유에 의한다.</li><li>해제 또는 취소의 효과로 인정되는 부당이득에 대한 반환 의무의 범위는 같다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 취소의 제3자 보호 규정과 해제의 제548조 단서 등이 있다.</li><li><strong>비선택</strong> · 약정해제권과 법정취소권의 근거 차이다.</li><li><strong>비선택</strong> · 상대방 있는 단독행위다. 합의해제와 다르다.</li><li><strong>비선택</strong> · 일반적인 구별이다. 증여·담보책임 등 특수 해제 사유까지 단순한 시간 공식으로 해결하지 않는다.</li><li><strong>선택</strong> · 취소의 일반 부당이득과 해제의 특별 원상회복은 범위가 다를 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 해제의 효과로서 원상회복 의무의 경우, 반환할 금전에는 그 받은 날로부터 선의 혹은 악의를 묻지 않고 이자를 가산토록하고(제548조 2항), 무효나 취소의 효과로서 부당이득반환의 경우, 선의의 수익자는 현존이익을, 악의의 수익자는 그 받은 이익에 이자를 붙여 반환하고 손해가 있으면 이를 배상한다(제748조).</p></details></section>
+
+<section class="question-card" id="question-w41"><h4>워크북 041 <small>채권각론_워크북_041</small></h4><p class="question-stem">계약의 해제와 해지에 관한 설명이다. 괄호 안에 들어갈 옳은 단어로 짝 지어진 것은?<br>해제와 해지는 해제권자 및 해지권자의 일방적 의사표시에 의하여 계약 관계를 해소하는 제도이다.(㉠)가 이미 발생된 계약 관계로부터의 해방 또는 이미 이행된 급부를 반환케하는 제도라고 한다면,(㉡)는 계속적 채권관계에 있어서 장래를 향해서만 그 효력이 발생하는 제도이다. 한편 형성권의 일종인 해제권 혹은 해지권의 유무와 관계없이 유효하게 성립한 계약 관계를 해소하겠다는 내용을 가진'새로운 계약'에 의하여 기존의 계약 관계가 청산되는 것은(㉢)라고 한다.</p><ol class="choices"><li>㉠ 해제 ㉡ 해지 / ㉢ 합의해제 혹은 합의해지</li><li>㉠ 해제 ㉡ 합의해제 혹은 합의해지 ㉢ 해지</li><li>㉠ 합의해제 혹은 합의해지 / ㉡ 해제 ㉢ 해지</li><li>㉠ 합의해제 혹은 합의해지 / ㉡ 해지 ㉢ 해제</li><li>㉠ 해지 ㉡ 해제 / ㉢ 합의해제 혹은 합의해지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 되돌림 해제, 앞으로 종료 해지, 새 합의로 종료 합의해제·해지다.</li><li><strong>비선택</strong> · 장래 종료를 합의해제로 한 칸에 고정할 수 없다.</li><li><strong>비선택</strong> · 일방 권리행사와 새로운 합의를 섞었다.</li><li><strong>비선택</strong> · 앞칸은 해제다. 마지막 새 계약은 합의해제·해지다.</li><li><strong>비선택</strong> · 해제와 해지의 시간 방향이 바뀌었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기존의 계약 당사자들이 계약 해소에 관하여 합의한 것은 합의해제 또는 해제 계약으로서 형성권의 일종인 해제권의 유무와는 관계가 없다. 따라서 합의해제는 해제와는 성격이 다르며 원칙적으로 법정 해제에 관한 규정(제543조 이하)이 적용되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-w42"><h4>워크북 042 <small>채권각론_워크북_042</small></h4><p class="question-stem">해제권에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>해제권은 법정 해제권과 약정 해제권으로 구분된다.</li><li>약정 해제권은 당사자가 계약으로 해제권의 발생원인과 그 효과를 미리 유보한 것이다.</li><li>법정해제권은 법률의 규정에 의해 발생한다.</li><li>약정 해제권의 행사 및 효과는 법정 해제권의 경우와 다를 바 없으나 특약이 있는 경우 특약이 우선한다.</li><li>법정해제권은 모든 계약에서 채무불이행이 있는 경우에만 발생한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 발생 근거가 법인지 약정인지의 구별이다.</li><li><strong>비선택</strong> · 당사자가 원인과 효과를 정할 수 있다.</li><li><strong>비선택</strong> · 법정이라는 이름대로 법률에 근거한다.</li><li><strong>비선택</strong> · 특약의 내용과 범위를 우선 해석한다.</li><li><strong>선택</strong> · 개별 계약의 특별 법정 사유가 있으므로 오직 불이행뿐은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법정해제권은 모든 계약에 있어서 일반적으로는 채무불이행을 원인으로 발생하지만(제544조 내지 제546조) 각종 계약에서의 특수한 원인으로 발생하기도한다. 예컨대 증여에서 법정 해제 사유(제556조 내지 제557조), 매매에서 매도인의 담보책임(제570조 내지 제578조), 도급에서 도급인의 해제권 (제668조 내지 제670조)을 규정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-w43"><h4>워크북 043 <small>채권각론_워크북_043</small></h4><p class="question-stem">해지권에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>해지권의 행사는 상대방에 대한 일방적 의사표시에 의한다.</li><li>해지의 의사표시가 상대방에게 도달하면 철회할 수 없다</li><li>해지권 행사의 상대방이 수인인 경우 그중 1 인에 대하여 행사하는 것으로 족하다.</li><li>계약 해지의 의사표시는 묵시적으로도 가능하다.</li><li>해지권을 행사하면 이미 이행된 급부는 유효하고 장래에 대해서만 효과가 발생한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합의해지가 아니라 해지권 행사다.</li><li><strong>비선택</strong> · 제543조 제2항의 원칙이다.</li><li><strong>선택</strong> · 전원으로부터 전원에게 행사하는 불가분성 원칙을 위반했다.</li><li><strong>비선택</strong> · 객관적 종료 표시와 상대방 도달이 확인되면 묵시적 행사도 가능하다.</li><li><strong>비선택</strong> · 과거 급부의 유효성과 장래 종료를 나눈다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 당사자의 일방 또는 쌍방이 수인인 경우 해지권의 행사는 전원으로부터 전원에게 해야 한다(제547조 1항).</p></details></section>
+
+<section class="question-card" id="question-w44"><h4>워크북 044 <small>채권각론_워크북_044</small></h4><p class="question-stem">계약의 합의해제 내지 합의해지에 관한 설명 중 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>특별한 사정이 없는 한 채무불이행으로 인한 손해 배상 청구는 할 수 없다.</li><li>매도인이 매수인에게 매매계약의 합의해제를 청약하였더라도 매수인이 그 청약에 대하여 조건을 붙여 승낙한 경우 매도인의 청약은 실효된다.</li><li>계약이 일부 이행된 경우, 그 원상회복에 관하여 의사가 일치되지 않아도 계약의 묵시적 합의해제가 인정될 수 있다.</li><li>매매계약을 합의해제한 후 그 합의해제를 무효화시키고, 해제된 매매계약을 부활시키는 약정은 적어도 당사자 사이에서는 가능하다.</li><li>당사자 사이에 약정이 없는 이상 합의해지로 인하여 반환할 금전에 그 받은 날로부터 이자를 붙여서 반환할 의무는 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특약·유보 등 특별사정 없다는 한계가 중요하다.</li><li><strong>비선택</strong> · 조건부 수락은 원청약 거절과 새 청약이다.</li><li><strong>선택</strong> · 원상회복이 중요한 조건인 경우 그 합의까지 필요하다.</li><li><strong>비선택</strong> · 당사자 간 새 합의로 부활 약정이 가능하다. 제3자 권리 침해는 별도다.</li><li><strong>비선택</strong> · 제548조 제2항의 법정해제 이자를 당연 적용하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판2021.5.7,2017다220416. ② 대판2009.2.12,2008다71926. ③ 계약이 일부 이행된 경우 그 원상회복에 관하여도 의사가 일치되어야 한다(대판 2011.4.28,2010다98412·98429). ④ 대판2006.4.13,2003다45700. ⑤ 대판 2003.1.24,2000다5336·5343.</p></details></section>
+
+<section class="question-card" id="question-w45"><h4>워크북 045 <small>채권각론_워크북_045</small></h4><p class="question-stem">법정해제권에 관한 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>매도인이 미리 계약을 이행하지 아니할 의사를 명백히 표시한 경우, 매수인은 자기 채무의 이행제공 없이 계약을 해제할 수 있다.</li><li>채무 이행의 최고액이 본래 이행할 채무 액보다 현저히 과다하고, 채권자가 최고한 금액을 제공하지 않으면 수령을 거절할 것이 명백한 경우, 그 최고는 해제권 행사의 요건인 최고로서의 효력이 있다.</li><li>일방 당사자의 계약 위반을 이유로 상대방이 계약을 해제하였다면, 특별한 사정이 없는 한 계약 위반의 당사자도 계약 해제의 효과를 주장할 수 있다.</li><li>목적물이 타인에게 양도되어 전세권 설정 등기의 이행이 불능이 된 경우, 전세 계약을 해제하기 위해서는 전세금의 이행제공을 요하지 않는다.</li><li>계약의 목적 달성과 관련이 없는 부수적 채무의 위반만을 이유로 한 해제권의 행사는 허용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 명백하고 확정적인 이행거절이면 무의미한 제공·최고를 요구하지 않는다.</li><li><strong>선택</strong> · 현저한 과다 요구만 받고 적정 이행은 거절한다면 유효한 최고가 아니다.</li><li><strong>비선택</strong> · 위반자도 이미 적법하게 발생한 해제 효과 자체를 주장할 수 있다.</li><li><strong>비선택</strong> · 이미 불능이라 잔여 대금의 제공을 요구할 실익이 없다.</li><li><strong>비선택</strong> · 계약 목적과 관계없는 경미한 부수의무 위반은 원칙적으로 부족하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 신의성실의 원칙상 이행기 전이라도 자신의 채무의 이행제공이나 최고 없이도 계약을 해제할 수 있다(대판 2020.10.15, 2018다235576·235583). ② 이러한 부적법한 최고에 터 잡은 계약의 해제는 효력이 없다(대판 2004.7.9, 2004다13083). ③ 대판 2008.10.23, 2007다54979. ④ 대판 1997.9.13,77다918. ⑤ 대판 2005.11.25,2005다53705·53712.</p></details></section>
+
+<section class="question-card" id="question-w46"><h4>워크북 046 <small>채권각론_워크북_046</small></h4><p class="question-stem">해제와 해지의 효과에 관한 설명 중 옳지 않은 것은?</p><ol class="choices"><li>채무자의 책임 있는 사유로 이행이 불능하게 된 때에는 채권자는 계약을 해제할 수 있다.</li><li>당사자 일방이 계약을 해제한 때에는 각 당사자는 원상회복의 의무를 진다</li><li>당사자 일방이 계약을 해지한 때에는 계약은 소급하여 그 효력을 잃는다.</li><li>해제로 인하여 각 당사자가 부담하는 원상회복 의무는 동시이행 관계에 있다.</li><li>계약의 해제 또는 해지는 손해배상의 청구에 영향을 미치지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제546조의 책임 있는 불능이다.</li><li><strong>비선택</strong> · 제548조상 서로 받은 것을 정산한다.</li><li><strong>선택</strong> · 해지는 장래에 대하여 효력을 잃는다.</li><li><strong>비선택</strong> · 제549조가 동시이행을 연결한다.</li><li><strong>비선택</strong> · 제551조. 다만 배상 요건은 별도로 갖춰야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약을 해지한 때 계약은 장래에 대하여 그 효력을 잃는다(제550조).</p></details></section>
+
+<section class="question-card" id="question-w47"><h4>워크북 047 <small>채권각론_워크북_047</small></h4><p class="question-stem">다음 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>계약의 해제와 해제 조건의 성취는 서로 법적 성격이 같다.</li><li>계약의 합의해제에는 원칙적으로 해제에 관한 민법 제543조 이하의 규정이 적용되지 않는다</li><li>계약의 합의해제의 경우 제3자 보호에 관한 민법 제548조 1항 단서의 규정이 적용된다.</li><li>채무불이행을 이유로 계약을 해제하려면 채무불이행은 주된 채무에 관한 것이어야 한다.</li><li>부수적 채무의 불이행은 원칙적으로 해제권을 발생시키지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 조건 성취의 자동 효과와 해제권자의 의사표시는 성격이 다르다.</li><li><strong>비선택</strong> · 새 합의의 내용이 기준이다.</li><li><strong>비선택</strong> · 제3자 보호는 합의해제에도 인정된다.</li><li><strong>비선택</strong> · 계약 목적 달성에 필요한 주요 채무인지 본다.</li><li><strong>비선택</strong> · 원칙적으로라는 한계가 중요하다. 명칭보다 실제 목적 관련성을 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 해제 조건은 조건의 성취라는 객관적 사실에 의하여 법률행위의 효력이 자동적으로 소멸하도록 약정하는 경우로서, 당사자의 의사표시에 의해 계약이 소멸되는 해제·해지와 구별된다. 합의해제의 기본적 효력은 합의의 내용에 의하고(대판 1979.10.3,79다1455), 계약의 해제는 제3자의 권리를 해할 수 없다는 민법 제548조 1항 단서의 규정은 합의해제의 경우에도 적용된다(대판 2005.6.9,2005다6341).</p></details></section>
+
+<section class="question-card" id="question-w48"><h4>워크북 048 <small>채권각론_워크북_048</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">다음 설명 중 가장 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>계약이 합의에 의하여 해제 또는 해지된 경우에는 채무불이행으로 인한 손해 배상을 청구할 수 없다.</li><li>민법은 이행지체로 인한 해제에 있어서 채무자의 유책사유에 의할 것을 요하지 않는다.</li><li>민법 제546조는 이행불능에 의한 해제에 있어서 채무자의 유책사유를 요건으로 하고 있다.</li><li>매매목적물이 가압류되었다면 매도인의 계약 위반을 이유로 매매계약을 해제할 수 있다.</li><li>하나의 계약에 당사자 일방이 수인인 경우 계약의 해제는 전원으로부터 또는 전원에 대하여 하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특약·유보 등 예외가 생략된 일반 원칙 설명으로 읽는다.</li><li><strong>비선택</strong> · 제544조의 문언과 해석상 귀책사유 요구를 혼동할 위험이 있다. 교재 통설·판례 전제와 충돌하므로 별도 보완이 필요한 보기다.</li><li><strong>비선택</strong> · 제546조에는 채무자의 책임 있는 사유가 명시되어 있다.</li><li><strong>선택</strong> · 가압류가 있다고 곧바로 등기 이행이 불가능하거나 계약 위반으로 확정되는 것은 아니다.</li><li><strong>비선택</strong> · 제547조의 전원 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 매매목적물에 대하여 가압류 집행이 되었더라도 소유권이전등기가 불가능한 것은 아니기 때문에 매매목적물이 가압류되었다는 사유만으로는 매도인의 계약 위반을 이유로 매매계약을 해제할 수는 없다는 것이 판례의 입장이다(대판 1999.6.11,99다11045).</p></details></section>
+
+<section class="question-card" id="question-w49"><h4>워크북 049 <small>채권각론_워크북_049</small></h4><p class="question-stem">계약의 해제 및 해지에 관한 설명 중 옳지 않은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>계약을 합의해지한 경우에 별도의 약정이 없는 한 합의해지로 인하여 반환해야 할 금전에 법정 이자를 가산해야 하는 것은 아니다.</li><li>계약을 합의해제한 경우에도 민법상 해제의 효과에 따른 제3자 보호 규정이 적용된다.</li><li>부동산 매매계약에서 매수인이 잔금 지급 기일까지 잔금을 지급하지 못하면 계약이 자동적으로 해제된다는 약정을 한 경우 잔금 지급 기일이 도과하였는데 매수인이 잔금을 지급하지 않았다면 계약은 자동적으로 해제된다.</li><li>경제 상황 등의 변동으로 당사자에게 손해가 생기더라도 사정 변경에 대한 예견 가능성이 있었다면 사정 변경을 이유로 계약을 해제할 수 없다.</li><li>계약 해제의 효과로서 원상회복 의무를 규정한 민법 제548조 1항의 본문은 부당이득반환에 관한 특별 규정의 성격을 가지는 것으로, 그 반환의 범위는 이익의 현존 여부나 선의, 악의에 불문하고 특단의 사유가 없는 한 받은 이익의 전부이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합의 내용이 기준이다.</li><li><strong>비선택</strong> · 거래 안전을 위한 제3자 보호는 적용한다.</li><li><strong>선택</strong> · 동시이행 잔금이라면 매도인의 적절한 제공 등으로 지체에 빠졌는지도 확인해야 한다.</li><li><strong>비선택</strong> · 예견할 수 있는 경제변동이면 사정변경 예외로 쉽게 벗어나지 못한다.</li><li><strong>비선택</strong> · 현존이익·선악의에 따라 일반 부당이득처럼 줄이지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 합의해지의 경우도 합의해제와 같이 민법 제548조 2항의 규정은 적용되지 않는다. ② 대판 2005.6.9,2005다6341. ③ 이 경우 매수인의 잔금 지급 의무와 매도인의 소유권이전등기의무는 동시이행 관계에 있으므로 매도인이 이행의 제공을하여 매수인을 이행지체에 빠지게하였을 때 비로소 자동적으로 매매계약이 해제된다고 보아야 한다(대판 1998.6.12,98다505). ④ 경제 상황 등의 변동으로 당사자에게 손해가 생기더라도 합리적인 사람의 입장에서 사정 변경을 예견할 수 있었다면 사정 변경을 이유로 계약을 해제하거나 해지할 수 없다(대판 2021.6.30,2019다276338). ⑤ 대판 2014.3.13,2013다34143.</p></details></section>
+
+<section class="question-card" id="question-w50"><h4>워크북 050 <small>채권각론_워크북_050</small> <span class="review-tag">표현·조건 확인</span></h4><p class="question-stem">민법 제548조 1항 단서의 계약 해제의 소급효로 대항할 수 없는 제3자에 해당하는 경우를 고르시오.(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>해제된 매매계약에 의하여 채무자의 책임 재산이 된 부동산을 가압류 집행한 가압류 채권자</li><li>제3자를 위한 계약의 수익자</li><li>계약 해제로 인하여 소멸되는 채권의 양수인</li><li>미등기 무허가 건물에 관한 매매계약이 해제되기 전 매수인으로부터 무허가 건물을 다시 매수하고 무허가 건물 관리 대장에 소유자로 등재된 자</li><li>토지 매도인이 매매계약을 해제한 경우 그 토지 위에 신축된 건물의 매수인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번 · 2번 (복수정답)</p><ol class="choice-notes"><li><strong>선택</strong> · 목적 부동산에 별개의 집행상 이해관계를 취득한 가압류권자는 보호 대상이 될 수 있다.</li><li><strong>선택</strong> · 원본은 복수정답 중 하나다. 해제 전 새 이해관계와 등기·인도 등 요건을 갖춘 수익자라는 한계를 반드시 붙인다.</li><li><strong>비선택</strong> · 소멸할 계약채권 자체를 넘겨받은 것이라 원칙적으로 보호 제3자가 아니다.</li><li><strong>비선택</strong> · 관리대장 기재로 건물 소유권을 완전히 취득한 것이 아니다.</li><li><strong>비선택</strong> · 별개 신축 건물의 매수인이라는 사실만으로 원토지 계약 해제의 보호 대상이 되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 민법 제548조 1항 단서에서 말하는 제3자란 일반적으로 해제된 계약으로부터 생긴 법률효과를 기초로 하여 별개의 새로운 권리를 취득했을 뿐 아니라 등기·인도 등으로 완전한 권리를 취득한 자를 말한다. ① 대판 2005.1.14,2003다33004. ② 제3자를 위한 계약의 수익자는 보상 관계의 급부 청구권을 가진 자이므로 별개의 새로운 권리를 취득한 자라 할 수 없다고 봄이 종래의 통설이지만, 판례는 제3자에 해당한다고 본다(대판 2021.8.19,2018다244976 참고). ③ 계약상의 채권을 양수한 자는 '제3 자'에 해당하지 않는다(대판 2003.1.24,2000다22850). ④ 미등기 건물의 매수인은 무허가 건물 관리 대장에 소유자로 등재되었다고 해도 건물에 관하여 완전한 권리를 취득한 자가 아니므로 이에 해당하지 않는다(대판 2014.2.13,2011다64782). ⑤ 대판 1991.5.28,90 다 카 16761.</p></details></section>
+
+<section class="question-card" id="question-w51"><h4>워크북 051 <small>채권각론_워크북_051</small></h4><p class="question-stem">甲과 乙은 甲 소유의 X 토지에 대하여 매매계약을 체결하였다. 이에 관한 설명으로 옳지 않은 것은?<br>(다툼이 있으면 판례에 따름)</p><ol class="choices"><li>甲과 乙이 계약 해제로 인한 원상회복 의무로 반환할 매매 대금에 가산할 이자를 연 4%로 약정한 경우, 동 약정 이율은 매매 대금 반환 의무의 이행지체로 인한 지연손해금률에도 적용된다.</li><li>甲이 乙의 채무불이행을 이유로 매매계약을 해제한 후에도 乙은 착오를 이유로 매매계약을 취소할 수 있다.</li><li>乙 명의로 소유권 이전 등기가 경료된 X 토지에 대하여 乙의 채권자 丙이 가압류 집행을 마쳐 둔 경우, 甲은 丙에 대하여 乙의 채무불이행을 이유로 한 해제의 소급효를 주장할 수 없다.</li><li>甲이 乙의 채무불이행에 관하여 원인의 일부를 제공하였다고 하더라도 乙이 이를 이유로 甲의 계약 해제에 따른 원상회복 청구에 대하여 과실상계하는 것은 인정되지 않는다.</li><li>乙이 중도금을 약정된 기일에 지급하지 않으면 최고 없이 계약은 자동적으로 해제되는 것으로 약정한 경우, 특별한 사정이 없는 한 그 불이행이 있으면 계약은 자동적으로 해제된다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원상회복 이자 약정이 법정 이율보다 낮으면 지체배상에는 법정 이율이 적용되는 문제다. 원상회복 이자와 지연손해금을 구별한다.</li><li><strong>비선택</strong> · 해제 이후에도 취소 요건을 갖추면 그 불이익을 벗어나기 위해 취소할 수 있다.</li><li><strong>비선택</strong> · 해제 전 목적 부동산의 가압류로 새 이해관계가 생겼다.</li><li><strong>비선택</strong> · 원상회복은 손해배상이 아니므로 과실상계를 그대로 적용하지 않는다.</li><li><strong>비선택</strong> · 선이행 중도금의 특별약정 사례다. 동시이행 잔금에 대한 자동해제와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 계약 해제 시 반환할 금전에 가산할 이자는 당사자 사이에 약정이 있는 경우 특별한 사정이 없는 한 이행지체로 인한 지연손해금도 그 약정 이율에 의하기로 하였다고 보는 것이 당사자의 의사에 부합한다. 다만 그 약정 이율이 법정 이율보다 낮은 경우에 지연손해금은 법정 이율에 의한다(대판 2013.4.26,2011다50509). ② 대판 1996.12.6,95다24982·24999. ③ 해제된 매매계약에 의하여 채무자의 책임 재산이 된 부동산을 가압류 집행한 가압류 채권자도 원칙상 민법 제548조 1항 단서에서 말하는 제3자에 해당한다(대판 2005.1.14,2003다33004). ④ 과실상계는 본래 채무불이행 또는 불법행위로 인한 손해배상책임에 대하여 인정되는 것이고, 매매계약이 해제로 인한 원상회복 의무의 이행으로서 이미 지급한 매매 대금 기타 급부의 반환을 구하는 경우에는 적용되지 않는다(대판 2014.3.13, 2013다34143). ⑤ 대판 1992.8.18, 92다5928.</p></details></section>
+
+<section class="question-card" id="question-w52"><h4>워크북 052 <small>채권각론_워크북_052</small></h4><p class="question-stem">다음 사례에 대한 설명 중 옳은 것은?<br>(다툼이 있으면 판례에 의함) 甲은 자신이 소유한 토지를 乙에게 매도하고 중도금까지 받았다. 그런데 甲은 丙에게 다시 그 토지를 매도한 후, 丙 명의로 소유권이전등기까지 경료해 주었다. 결국 乙은 매매계약의 목적을 달성할 수 없게 되었다.</p><ol class="choices"><li>乙이 甲과의 계약을 해제하기 위해서는 상당한 기간을 정해 이행을 최고하여야 한다</li><li>乙이 甲과의 계약을 해제하면 乙은 甲에 대해 원상회복 청구권을 갖는데, 그 권리의 소멸시효는 해제권이 발생한 때로부터 진행한다.</li><li>乙이 甲과의 계약을 해제하기 위해서는 甲의 소유권이전등기의무와 동시이행 관계에 있는 잔대금지급의무의 이행제공을 하여야 한다.</li><li>만약 丙이 아직 甲에게 매매 대금을 지급하지 않았다면, 乙은 甲과의 계약을 해제하지 않고 丙을 상대로 甲에게 지급할 매매 대금[이른바, 대상(代償)]을 자신에게 지급하라고 청구할 수 있다.</li><li>만약 丁이 甲의 乙에 대한 채무의 이행을 보증하였고 乙이 甲의 채무불이행을 이유로 계약을 해제하였다면, 丁은 특별한 사정이 없는 한 甲의 乙에 대한 원상회복 의무에 대해서도 책임을 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 5번</p><ol class="choice-notes"><li><strong>비선택</strong> · 책임 있는 불능이면 불필요한 최고가 필요 없다.</li><li><strong>비선택</strong> · 해제권 발생이 아니라 실제 해제로 반환청구권이 생긴 시점부터 본다.</li><li><strong>비선택</strong> · 불능이라 잔금 제공을 요구하지 않는다.</li><li><strong>비선택</strong> · 이 재매각 대금을 곧바로 대상이라고 하여 제3자에게 직접 청구할 수 없다. 대상청구권도 직접 귀속권이 아니다.</li><li><strong>선택</strong> · 특별사정 없는 이행보증은 해제에 따른 원상회복 책임도 포함할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 및 ③ 채무자의 책임 있는 사유로 이행이 불능하게 된 때에는 채권자는 최고 없이 계약을 해제할 수 있다(제546조). ② 계약의 해제로 인한 원상회복 청구권의 소멸시효는 해제시, 즉 원상회복 청구권이 발생한 때부터 진행한다(대판 2009.12.24,2009다63267). ④ 이 경우 대상청구권을 인정하지 않는다. ⑤ 대판 1972.5.9,71다1474.</p></details></section>
+
+<section class="question-card" id="question-w53"><h4>워크북 053 <small>채권각론_워크북_053</small></h4><p class="question-stem">계약의 해제에 관한 설명 중 옳은 것은?<br>(다툼이 있으면 판례에 의함)</p><ol class="choices"><li>매도인으로부터 매매목적물의 소유권을 이전 받은 매수인이 매도인의 계약 해제 이전에 제3자에게 목적물을 처분하여 계약 해제에 따른 원물반환이 불가능하게 된 경우, 매수인이 원상회복 의무로서 반환하여야 하는 목적물의 가액은 특별한 사정이 없는 한 그 처분 당시의 대가 또는 그 시가 상당액이다.</li><li>당사자가 기존 계약의 효력을 소멸시키고 서로에게 급부한 것을 원상회복하기로 합의한 경우, 특별한 약정이 없는 한 위 합의해제로 인하여 반환할 금전에는 그 받은 날로부터 이자를 가하여야 한다.</li><li>부동산 매매 계약이 해제되기 전에 매수인과 매매예약을 체결하고 그에 기한 소유권 이전 청구권 보전을 위한 가등기를 마친 사람은 민법 제548조 1항 단서에서 말하는 계약 해제로 보호 받는'제3 자'에 포함되지 않는다.</li><li>해제자가 계약 해제의 원인이 된 채무불이행에 관하여 그 원인의 일부를 제공하였다면, 신의칙 또는 공평의 원칙에 기하여 일반적으로 손해배상에 있어서의 과실상계에 준하여 계약의 해제로 인한 원상회복 청구권의 내용이 제한될 수 있다.</li><li>계약 해제로 인하여 당사자 일방이 수령한 금전을 반환함에 있어 그 받은 날로부터 가산하여 지급하여야 할 민법 제548조 2항의 소정의 이자는 반환 의무의 이행지체로 인한 지연손해금이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 처분으로 원물 반환이 불가능하면 처분 당시의 대가·시가를 기준으로 가액 반환을 검토한다.</li><li><strong>비선택</strong> · 합의해제는 제548조 제2항 이자가 자동 발생하는 법정해제와 다르다.</li><li><strong>비선택</strong> · 해제 전 매매예약과 가등기를 갖춘 사람도 보호될 수 있다는 판례와 반대다.</li><li><strong>비선택</strong> · 원상회복에 과실상계나 그에 준하는 신의칙 감액을 일반 적용하지 않는다.</li><li><strong>비선택</strong> · 받은 날부터의 이자는 원상회복의 범위이고 반환 지체의 손해배상이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대판2013.12.12, 2012다58029. ② 합의해제의 효력은 당사자의 합의 내용에 의해 결정되고 해제에 관한 민법 제548조 2항의 규정은 적용되지 않으므로, 당사자 사이에 약정이 없는 이상 합의해제로 인하여 반환할 금전에 그 받은 날로부터의 이자를 가하여야 할 의무는 없다(대판 2003.1.24,2000다5336·5343). ③ 대판 2014.12.11,2013다14569. ④ 해제로 인한 원상회복 의무에는 과실상계의 법리나 과실상계에 준하는 신의칙의 법리가 적용될 수 없다(대판 2014.3.13,2013다34143). ⑤ 이는 원상회복의 범위에 속하는 것이며 일종의 부당이득반환의 성질을 가지는 것이지 반환 의무의 이행지체로 인한 손해배상은 아니다(대판 2003.7.22,2001다76298).</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '채권각론 · CHAPTER 02' : 'PART · OBLIGATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(채권각론 · CHAPTER 02|PART · OBLIGATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('obligations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

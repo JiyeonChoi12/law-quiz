@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>채권각론 제1장 총론 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+.course-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:30px;font-size:12px;font-weight:700}.course-tabs a{padding:9px 15px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}.course-tabs .active{background:#3f6258;color:#fff}h2[id]{scroll-margin-top:90px}@media print{.course-tabs{display:none!important}.source-footnote{font-size:8pt}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">OBLIGATIONS · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">채권각론</span>
+    <span class="brand-sub">제1장 총론 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="채권각론 학습 메뉴"><a class="active" href="./채권각론_개념.html">개념 목록</a><a href="../index.html?subject=채권각론">문제 풀기</a></nav><h1>채권각론 제1장 · 총론</h1>
+<blockquote>
+<p><strong>“왜 내가 저 사람에게 무언가를 해 줘야 하지?”</strong> 이 질문에 답하는 것이 채권각론이다. 약속했기 때문인지, 남을 도왔기 때문인지, 잘못 받은 이익이 있기 때문인지, 남에게 손해를 주었기 때문인지부터 구별하자.</p>
+</blockquote>
+<p>교재 범위: 인쇄 2~4쪽, PDF 13~15쪽. 장 표지는 PDF 12쪽이다. 교재의 제1절·제2절 순서와 모든 본문 문단을 따라 설명했다. 원문을 그대로 옮긴 책이 아니라 <strong>교재를 다시 읽기 위한 해설·색상 주석본</strong>이다.</p>
+<div class="legend-note"><span class="key-yellow">노랑: 정의·암기</span>　<span class="key-green">초록: 이유·취지</span>　<span class="key-pink">분홍: 함정·구별</span>　<span class="key-blue">파랑: 앞뒤 연결</span><p>검정 메모는 쉬운 말, 빨간 메모는 문제 연결과 주의사항이다. 배경은 밝게 두고 중요한 구절만 색칠했다.</p></div>
+
+<p><strong>사례·판례 확인:</strong> 이 장에는 별도 번호를 붙인 교재 사례와 판례가 없다. 아래 사건 이야기는 모두 ‘설명용 창작 사례’로 구분한다. 실제 판결인 것처럼 법원·사건번호를 만들어 붙이지 않았다.</p>
+<h1>1. 이 장이 필요한 이유</h1>
+<h2 id="obligations-01-01" data-concept-id="obligations-01-01">1-1. 물권법 다음에 왜 ‘사람 사이의 약속’을 배우나 ★★★★★</h2>
+<p>물권법에서는 “이 자전거가 누구 것이고 누가 지배하는가?”를 물었다. 채권법에서는 “누가 누구에게 자전거를 넘겨 달라고 요구할 수 있는가?”를 묻는다. <strong>채권은 돈만 받을 권리가 아니다.</strong> 물건을 인도하거나, 집을 고치거나, 일정한 행동을 하지 말라고 요구하는 권리도 포함한다.</p>
+<p>예를 들어 민지가 수호의 자전거를 10만 원에 사기로 했다. 민지는 자전거를 달라고 요구하는 채권자이면서, 10만 원을 지급해야 하는 채무자다. 수호는 그 반대다. ‘채권자=부자’, ‘채무자=나쁜 사람’이라는 그림은 버리자. <strong>하나의 계약에서 같은 사람이 채권자와 채무자가 될 수 있다.</strong></p>
+<p class="key-blue">민법총칙: 의사표시와 법률행위의 기본 문법 → 물권법: 물건을 지배하는 권리 → 채권각론: 사람 사이의 의무가 생기는 구체적인 원인.</p>
+
+<p><strong>이 단원의 다섯 질문.</strong> 무엇을 설명하나? 채권이 생기는 대표적인 네 원인이다. 왜 필요한가? 돈을 달라는 말이 같아도 근거와 요건이 다르기 때문이다. 어디에 위치하나? 채권각론 전체의 입구다. 다음은 무엇인가? 제2장 계약총론에서 계약의 성립·효력·해제 등을, 제3장 계약각론에서 개별 계약을, 제4장에서 법정채권관계를 배운다. 이 장을 모르면? 모든 돈 문제를 ‘계약 위반’ 또는 ‘손해배상’이라고 잘못 분류하게 된다.</p>
+<h2 id="obligations-01-02" data-concept-id="obligations-01-02">1-2. 교재 첫 문단 · 채권총론과 채권각론을 구별하자 [2쪽] ★★★★☆</h2>
+<p><strong>교수가 넣은 이유:</strong> 법전의 배열과 과목의 이름을 혼동하지 않도록 지도를 보여 주는 문단이다.</p>
+<p><strong>결국 무슨 말인가:</strong> 채권총론은 이미 생긴 채권에 공통으로 적용되는 규칙을 배운다. 채권각론은 채권이 생기는 대표 원인들을 배운다. ‘총론’이라는 단어가 같아도 <strong>이 교재 제1장 총론은 채권각론의 도입부</strong>이지, 별도 과목 채권총론 전체가 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>법전의 채권편</th>
+<th>공부할 내용</th>
+<th>이 교재와의 관계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제1장 총칙</td>
+<td>채권의 목적·효력·이전·소멸 등 공통 규칙</td>
+<td>채권총론 과목</td>
+</tr>
+<tr>
+<td>제2장 계약</td>
+<td>계약의 공통 규칙과 개별 계약</td>
+<td>교재 제2·3장</td>
+</tr>
+<tr>
+<td>제3장 사무관리</td>
+<td>부탁받지 않았는데 남의 일을 처리한 경우</td>
+<td>교재 제4장 제1절</td>
+</tr>
+<tr>
+<td>제4장 부당이득</td>
+<td>근거 없이 얻은 이익의 반환</td>
+<td>교재 제4장 제2절</td>
+</tr>
+<tr>
+<td>제5장 불법행위</td>
+<td>위법하게 끼친 손해의 배상</td>
+<td>교재 제4장 제3절</td>
+</tr>
+</tbody></table>
+<p><strong>시험 질문:</strong> “채권각론은 채권의 소멸에 공통되는 규칙만을 다룬다”는 틀린 설명이다. <strong>키워드:</strong> 발생 원인 / 공통 규칙 / 법전과 교재의 장 번호. <strong>한 줄:</strong> <span class="key-yellow">각론은 ‘어디서 생겼나’, 총론은 ‘생긴 채권을 어떻게 다루나’.</span></p>
+<h2>1-3. 중요도와 이번 문제 범위</h2>
+<table>
+<thead>
+<tr>
+<th>중요도</th>
+<th>먼저 잡을 내용</th>
+<th>판단 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>★★★★★ 시험 필수</td>
+<td>약정/법정 구별, 계약/사무관리/부당이득/불법행위</td>
+<td>이 장의 중심이고 제공 문제에 반복 등장</td>
+</tr>
+<tr>
+<td>★★★★★ 시험 필수</td>
+<td>의사표시 해석 / 법률 해석과 포섭</td>
+<td>워크북 002·003과 형성평가 002·005·008 연결</td>
+</tr>
+<tr>
+<td>★★★★☆ 자주 확인</td>
+<td>계약 자유의 한계, 전형·비전형계약</td>
+<td>2쪽 본문 및 제2장 연결</td>
+</tr>
+<tr>
+<td>★★★☆☆ 이해 보강</td>
+<td>사무관리의 비용·손해, 반환과 배상의 차이</td>
+<td>단어를 외우기 전에 제도의 목적 이해</td>
+</tr>
+<tr>
+<td>★★☆☆☆ 심화</td>
+<td>임의규정의 강행화·반강행화 논의</td>
+<td>교재 2쪽 괄호 설명, 제2장·약관 논의로 확장</td>
+</tr>
+</tbody></table>
+<p>별점은 <strong>이 단원의 구조와 제공 문제에 근거한 학습 우선순위</strong>다. 변리사 시험 전체의 출제 빈도 통계나 실제 오답률을 뜻하지 않는다.</p>
+<p>JSON의 ‘총론’ 22문항을 검토했다. 이 과외본에서는 <strong>1장 직접 연결 8문항, 35개 보기</strong>를 모두 해설한다. 나머지 14문항은 계약 종류·신의칙·계약 자유의 상세 논의 등 제2장 중심 문제로 따로 목록화했다. 주제 태그만 보고 교재 범위를 섞지 않았다.</p>
+<h1>2. 제1절 · 약정채권관계: 계약 [2쪽]</h1>
+<h2 id="obligations-01-03" data-concept-id="obligations-01-03">2-1. 계약 · 약속이 서로 맞으면 의무가 생긴다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 수많은 채권의 출발점이 당사자의 합의라는 점을 먼저 알려 준다. <strong>결국 무슨 말인가:</strong> 수호가 “자전거를 10만 원에 팔게”, 민지가 “그 조건으로 살게”라고 합의하면 계약상 권리와 의무가 생긴다. 한 사람이 혼자 마음먹은 것으로는 부족하다.</p>
+<p><span class="key-yellow">계약은 당사자의 의사표시가 내용상 합치하여 성립하는 법률행위다.</span> 여기서 ‘법률행위’란 변호사나 법원이 하는 일이 아니라, <strong>원하는 법적 효과를 의사표시를 통해 생기게 하는 행위</strong>라는 뜻이다. 물건을 팔겠다는 말과 사겠다는 말은 방향은 반대지만 거래 내용이 맞는다.</p>
+<p><strong>왜 소유권과 나란히 중요한가:</strong> 소유권이 “이 물건은 내 것”이라는 자리를 정한다면, 계약은 그 물건을 팔거나 빌려 주거나 수리하도록 하는 통로다. 이것이 교재의 ‘재화의 이전과 활용’이다. 다만 매매계약 성립과 소유권 이전의 요건은 구별한다. 계약만 이야기하고 등기·인도 문제까지 자동 해결됐다고 생각하지 말자.</p>
+<p><strong>시험 질문:</strong> ‘계약=약정채권관계’, ‘계약의 성립·내용 확인=의사표시 해석’의 짝을 바꿔 출제한다. <strong>키워드:</strong> 합치 / 법률행위 / 재화의 이전·활용. <strong>한 줄:</strong> <span class="key-green">남이 정해 준 빚이 아니라, 서로 약속해서 부담하는 의무다.</span></p>
+<p class="red-note">문제 연결: 형성평가 001·002, 워크북 001·003. ‘합의했다’와 ‘언제나 유효하다’는 다른 말이다.</p>
+
+<h2 id="obligations-01-04" data-concept-id="obligations-01-04">2-2. 계약 자유 · 약속할 자유에도 울타리가 있다 ★★★★☆</h2>
+<p><strong>교수가 넣은 이유:</strong> 의사가 일치했다는 이유만으로 모든 계약이 보호되는 것은 아니라는 점을 바로 옆에 붙여 둔 것이다. <strong>결국 무슨 말인가:</strong> 계약을 맺을지와 어떤 내용으로 맺을지는 원칙적으로 당사자가 정하지만, 사회가 받아들일 수 없는 내용까지 법이 강제로 실현해 주지는 않는다.</p>
+<p><span class="key-yellow">계약 자유는 무제한의 자유가 아니다.</span> 제103조는 선량한 풍속 기타 사회질서에 반하는 법률행위의 효력을 부인한다. 제104조는 궁박·경솔·무경험으로 인하여 현저하게 공정을 잃은 법률행위를 무효로 한다. 조문이 해결하려는 문제는 각각 ‘사회질서의 한계’와 ‘심하게 불공정한 거래’다.</p>
+<p><strong>설명용 창작 장면:</strong> “돈을 줄 테니 이웃 가게의 유리창을 일부러 깨 줘.” 두 사람이 분명히 합의했더라도 이 약속을 법이 이행하라고 명령할 수는 없다. 반대로 물건값이 마음에 들지 않는다는 사정만으로 모든 매매가 제104조에 의해 무효가 되는 것도 아니다. 조문이 정한 요건을 확인해야 한다.</p>
+<p><strong>시험 질문:</strong> 제103조는 계약방식을 자유롭게 만드는 규정인가? 아니다. <strong>키워드:</strong> 성립과 효력 구별 / 제103·104조 / 무효. <strong>한 줄:</strong> <span class="key-pink">“합의했으니 무조건 유효”라는 말에 걸려들지 말자.</span></p>
+<p>근거: <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0103&lsiSeq=284415&urlMode=lsScJoRltInfoR">민법 제103조</a>, <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0104&lsiSeq=284415&urlMode=lsScJoRltInfoR">제104조</a>. 형성평가 009와 연결된다.</p>
+<h2 id="obligations-01-05" data-concept-id="obligations-01-05">2-3. 전형계약과 비전형계약 · 법전의 목록 밖에도 계약은 있다 ★★★★☆</h2>
+<p><strong>교수가 넣은 이유:</strong> 민법이 자주 쓰는 계약을 정리해 놓은 것과 계약의 종류를 제한하는 것은 다르기 때문이다. <strong>결국 무슨 말인가:</strong> 전형계약은 법전에 기본 유형이 마련된 계약이다. 비전형계약도 계약 자유의 범위 안에서 성립할 수 있다. 교재는 리스와 프랜차이즈를 예로 든다.</p>
+<p>교재가 제시하는 민법상 전형계약 15가지는 <strong>증여·매매·교환·소비대차·사용대차·임대차·고용·도급·여행·현상광고·위임·임치·조합·종신정기금·화해</strong>다. 지금은 각 요건을 외우는 단계가 아니다. 이름이 법전에 있는 유형인지, 당사자가 새로 짠 거래인지 구분하면 된다. 상세 내용은 제3장에서 배운다.</p>
+<p><span class="key-blue">물권법정주의와 대비: 물권의 종류·내용을 당사자가 마음대로 만들 수 없다는 것과, 비전형계약을 체결할 수 있다는 것은 모순이 아니다.</span> 채권과 물권은 작동 방식이 다르기 때문이다.</p>
+<p><strong>시험 질문:</strong> “비전형계약은 법전에 이름이 없으므로 법정채권관계다”는 틀리다. 오히려 내용결정의 자유로 설명하는 <strong>약정채권관계</strong>다. <strong>키워드:</strong> 전형 / 비전형 / 내용결정 / 약정. <strong>한 줄:</strong> 목록 밖 계약도 계약이며, 그 약속을 먼저 읽는다.</p>
+<p class="red-note">형성평가 008. 교재 2쪽의 ‘리스·프랜차이즈’ 예시는 그대로 살렸다. 명칭만으로 모든 세부 법적 성질이 같아지는 것은 아니다.</p>
+
+<h2 id="obligations-01-06" data-concept-id="obligations-01-06">2-4. 임의규정과 강행화 논의 · 계약서 빈칸을 채우는 규칙 [심화] ★★☆☆☆</h2>
+<p><strong>교수가 넣은 이유:</strong> “당사자가 정한다”는 말과 “법에 계약 규정이 있다”는 말의 관계를 설명하고, 소비자 거래에서의 긴장을 소개한다. <strong>결국 무슨 말인가:</strong> 계약에 관한 민법 규정은 원칙적으로 임의규정이다. 사회질서에 관계없는 임의규정과 다르게 합의했다면 그 합의에 따를 수 있다. 당사자의 약정이 없거나 불명확한 부분에서는 법의 규칙이 중요한 역할을 한다.</p>
+<p>그런데 큰 사업자가 미리 만든 약관에 소비자가 사실상 서명만 한다면, 글자상 ‘동의’와 실질적인 선택 가능성이 다를 수 있다. <span class="key-green">그래서 법이 제시한 합리적 기준을 함부로 낮추지 못하게 하자는 논의가 나온다.</span> 교재의 강행화·반강행화는 이 문제의식이다. 반강행화는 특히 보호받는 쪽에 불리하게 바꾸는 것을 제한하는 방향으로 이해하면 쉽다.</p>
+<p><strong>시험 함정:</strong> <span class="key-pink">“강행화가 주장된다”를 “모든 임의규정이 이미 강행규정으로 바뀌었다”로 바꾸면 안 된다.</span> 구체적인 조문과 약관 통제 규정을 따로 확인해야 한다. <strong>키워드:</strong> 원칙적으로 임의규정 / 약관 / 합리적 기준 / 반강행. <strong>한 줄:</strong> 자유로운 약속을 존중하되, 자유가 실제로 있었는지도 묻는다.</p>
+<p>근거: <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0105&lsiSeq=284415&urlMode=lsScJoRltInfoR">민법 제105조</a>. 이 절의 소비자 보호 논의는 교재 2쪽 괄호 설명을 풀어 쓴 것이며, 모든 계약에 대한 일괄적인 무효 판단이 아니다.</p>
+<h1>3. 제1절 · 법정채권관계 [3쪽]</h1>
+<h2 id="obligations-01-07" data-concept-id="obligations-01-07">3-1. 사무관리 · 부탁받지 않았어도 남을 도운 비용은 문제 된다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 합의가 없어도 법이 권리·의무를 정하는 첫 번째 장면을 보여 준다. <strong>결국 무슨 말인가:</strong> 법률상 의무 없이 남을 위해 그 사람의 일을 처리하는 것이 사무관리다. 여기서 ‘사무’는 사무실 업무만이 아니라 생활상의 일도 포함한다.</p>
+<p><strong>설명용 창작 사례 A.</strong> 폭우가 내리는데 여행 중인 이웃 은서의 창문이 깨졌다. 법률상 관리 의무가 없는 도윤이 은서의 집을 보호하려고, 은서가 알았다면 원했을 적절한 응급조치를 하고 필요한 비용 8만 원을 냈다. 은서와 수리 계약을 맺은 것은 아니다. 그래도 요건을 갖추면 사무관리 규정에 따른 비용상환을 검토한다.</p>
+<p><span class="key-yellow">의무 없음 + 타인의 사무 + 타인을 위한다는 의사.</span> 선의로 도왔다는 말만으로 모든 비용이 당연히 전액 인정되는 것은 아니다. 일의 성질, 본인의 이익과 의사, 비용의 성질 등을 함께 보아야 한다. 이미 계약상 관리 의무가 있는 사람이 그 의무를 이행하는 장면과 구별하자.</p>
+<p><strong>조문의 설계:</strong> 제734조는 본인에게 이익이 되는 적절한 관리와 본인의 의사를 존중하게 한다. 제739조는 필요비·유익비 상환을, 제740조는 관리자가 과실 없이 입은 손해의 보상을 규정한다. 이는 <span class="key-green">남을 돕는 행동을 보호하면서, 원하지 않는 간섭을 무제한 허용하지 않기 위한 균형</span>이다. 관리계속의무도 원칙과 예외를 갖고 있다.</p>
+<p>교재가 이를 ‘적법행위(준법률행위)’라고 설명하는 것은, 법질서가 일정한 도움을 인정하되 합의가 아니라 법률규정으로 효과를 연결한다는 뜻이다. 제737조상 관리는 원칙적으로 본인·상속인·법정대리인이 관리할 때까지 계속하지만, 계속하는 것이 본인의 의사에 반하거나 본인에게 불리함이 명백하면 예외가 된다. 마음대로 일을 벌여 놓고 언제든 손을 떼도 된다는 뜻이 아니다.</p>
+<p class="red-note">교재 표현 보완: 3쪽의 ‘손해의 배상’은 제740조를 정확히 읽으면 ‘무과실손해의 보상’이다. 관리자가 과실 없이 손해를 입어야 하고, 본인의 현존이익 한도가 있다. 도와주다 다친 손해를 언제나 전액 배상받는다는 뜻이 아니다.</p>
+
+<p><strong>시험 질문:</strong> 사무관리는 선한 행동이므로 계약인가? 아니다. 법률효과를 발생시키는 합의를 필수로 하지 않는다. 법정채권관계라고 해서 타인을 위한다는 의사까지 불필요하다는 것도 아니다. <strong>키워드:</strong> 의무 없이 / 타인을 위하여 / 법정 / 비용상환. <strong>한 줄:</strong> <span class="key-pink">도우려는 마음은 필요할 수 있지만, 비용상환 의무는 합의가 아니라 법이 정한다.</span></p>
+<p>근거: <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=251069">민법 사무관리 규정 제734~740조</a>, <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0739&lsiSeq=284415&urlMode=lsScJoRltInfoR">제739조</a>, <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0740&lsiSeq=284415&urlMode=lsScJoRltInfoR">제740조</a>. 첫 링크는 해당 규정 확인용 연혁본이며, 비용·보상은 2026.3.17 시행 조문과 대조했다.</p>
+<h2 id="obligations-01-08" data-concept-id="obligations-01-08">3-2. 부당이득 · 받을 이유 없는 이익은 돌려놓는다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 나쁜 행동을 벌하는 것과, 근거 없는 이익을 되돌리는 것은 다르다는 점을 알려 준다. <strong>결국 무슨 말인가:</strong> 법률상 원인 없이 타인의 재산이나 노무로 이익을 얻고 그 때문에 상대방에게 손실이 생겼다면 반환 문제가 생긴다.</p>
+<p><strong>설명용 창작 사례 B.</strong> 민지는 은서에게 보낼 20만 원을 모르는 사람 지후에게 잘못 보냈다. 지후가 아무것도 속이지 않았더라도, 돈을 받을 계약 등 정당한 근거가 없다면 반환을 검토한다. “나는 나쁜 일을 안 했어”는 “그러므로 돈을 가져도 돼”와 같지 않다.</p>
+<p><span class="key-yellow">제741조: 이익 + 상대방의 손실 + 둘 사이의 관련성 + 법률상 원인 없음.</span> ‘부당’은 단순히 기분 나쁘거나 불공평해 보인다는 뜻이 아니다. 그 이익을 보유할 법률상 근거가 없는지를 묻는다. 유효한 매매계약에 따라 대금을 받은 것과 착오송금을 받은 것을 구별하자.</p>
+<p>그 근거는 계약에만 한정되지 않는다. 불법행위에 따른 손해배상금을 받을 권리나 사무관리에 따른 비용상환청구권이 있어서 돈을 받았다면, 그 지급을 정당화하는 법률상 원인을 함께 보아야 한다. 교재가 계약·불법행위·사무관리를 예로 나열한 이유다.</p>
+<p><strong>왜 만든 조문인가:</strong> 근거 없는 재산 이동을 그대로 두면 재산질서가 어긋난다. 이 제도는 이익을 되돌리는 데 초점이 있다. <strong>시험 질문:</strong> 수익자의 고의·과실이 언제나 있어야 반환하는가? 아니다. 다만 선의·악의 등은 반환 범위 문제와 연결될 수 있으며 상세 내용은 제4장에서 배운다. <strong>키워드:</strong> 법률상 원인 없음 / 이익 반환 / 손해배상과 구별. <strong>한 줄:</strong> <span class="key-green">잘못했는지를 따지기 전에, 가져도 되는 돈인지를 본다.</span></p>
+<p>근거: <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0741&lsiSeq=284415&urlMode=lsScJoRltInfoR">민법 제741조</a>. 예시는 발생원인 구별용이며 실제 반환 범위·절차까지 모두 결론 낸 사례가 아니다.</p>
+<h2 id="obligations-01-09" data-concept-id="obligations-01-09">3-3. 불법행위 · 약속이 없어도 남에게 끼친 손해를 책임진다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 계약 없이도 손해배상 의무가 생기는 원인을 보여 주고, 앞의 두 법정채권관계와 구별한다. <strong>결국 무슨 말인가:</strong> 고의 또는 과실에 의한 위법행위로 남에게 손해를 주면 제750조에 따른 배상 문제가 생긴다.</p>
+<p><strong>설명용 창작 사례 C.</strong> 성인인 수호가 자전거를 타며 휴대전화를 보다가 주차된 은서의 차를 긁었다. 수호와 은서 사이에 “차를 긁으면 배상한다”는 계약은 없었다. 그래도 주의의무 위반, 위법성, 손해와 인과관계 등 요건이 인정되면 법이 배상의무를 정한다. 이 예시는 책임능력에 문제가 없음을 전제로 한다.</p>
+<p><span class="key-yellow">계약법은 합의한 급부의 실현, 불법행위법은 위법한 가해로 생긴 손해의 배상을 중심으로 한다.</span> 돈을 받는 모습만 보고 두 제도를 같은 것으로 보지 말자. 손해를 주려던 의도가 없더라도 과실이 있으면 문제가 될 수 있다.</p>
+<p><strong>앞의 두 제도와 같고 다른 점:</strong> 셋 모두 합의한 법률효과를 실현하는 계약과 다르다. 그중 불법행위는 남의 법익을 침해한 위법행위라는 점이 두드러진다. 그렇다고 “부당이득이 생긴 사건에는 불법행위가 절대 함께 성립할 수 없다”고 확대해서는 안 된다. 같은 사실관계에 여러 청구 근거가 문제 될 수 있다.</p>
+<p><strong>시험 질문:</strong> ‘계약 없음→배상 없음’, ‘고의 없음→항상 배상 없음’은 모두 함정이다. <strong>키워드:</strong> 고의·과실 / 위법 / 손해 / 인과관계. <strong>한 줄:</strong> <span class="key-pink">약속하지 않았다는 말로 가해 책임이 사라지지는 않는다.</span></p>
+<p>근거: <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0750&lsiSeq=284415&urlMode=lsScJoRltInfoR">민법 제750조</a>. 일반 불법행위의 입구를 설명한 것이며, 특수책임의 모든 예외를 이 한 줄로 대신하지 않는다.</p>
+<h1>4. 제2절 · 발생 원인의 비교 [4쪽]</h1>
+<h2 id="obligations-01-10" data-concept-id="obligations-01-10">4-1. 같은 ‘돈 주세요’라도 이유가 네 가지다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 따로 읽은 네 제도를 한 번에 비교하여 사건의 출발점을 찾게 한다. <strong>결국 무슨 말인가:</strong> 계약은 법률행위에 따른 약정채권관계, 나머지 세 가지는 법률규정에 따른 법정채권관계다.</p>
+<table>
+<thead>
+<tr>
+<th>원인</th>
+<th>장면</th>
+<th>법이 먼저 묻는 질문</th>
+<th>대표적인 요구</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>계약</td>
+<td>“10만 원에 팔기로 했잖아”</td>
+<td>어떤 내용으로 합의했나?</td>
+<td>약속한 물건·대금·서비스의 이행</td>
+</tr>
+<tr>
+<td>사무관리</td>
+<td>“부탁받지 않았지만 필요한 응급조치를 했어”</td>
+<td>의무 없이 남을 위해 적절히 관리했나?</td>
+<td>요건을 갖춘 비용의 상환 등</td>
+</tr>
+<tr>
+<td>부당이득</td>
+<td>“네가 받을 이유 없는 돈이 갔어”</td>
+<td>이익을 보유할 법률상 원인이 있나?</td>
+<td>근거 없는 이익의 반환</td>
+</tr>
+<tr>
+<td>불법행위</td>
+<td>“네가 부주의해서 내 물건을 망가뜨렸어”</td>
+<td>고의·과실 있는 위법행위로 손해를 주었나?</td>
+<td>손해배상</td>
+</tr>
+</tbody></table>
+<p><strong>시험 질문:</strong> 사무관리를 계약 쪽으로 옮겨 놓거나, 부당이득을 가해 책임으로만 설명한다. <strong>키워드:</strong> 약정 1 / 법정 3. <strong>한 줄:</strong> <span class="key-yellow">계약은 약속, 사무관리는 도움, 부당이득은 반환, 불법행위는 배상.</span> 이것은 기억용 표지다. 실제 답안에서는 각 요건까지 적어야 한다.</p>
+<h2 id="obligations-01-11" data-concept-id="obligations-01-11">4-2. 계약은 약속을 읽고, 법정채권은 조문에 사실을 대입한다 ★★★★★</h2>
+<p><strong>교수가 넣은 이유:</strong> 분류표를 외우는 데서 끝내지 말고, 실제로 권리·의무를 확정하는 방법을 가르친다. <strong>결국 무슨 말인가:</strong> 계약에서는 의사표시의 내용을 확인·해석한다. 법정채권에서는 적용할 법률을 찾고, 조문의 요건에 해당하는 사실이 있는지 검토한다.</p>
+<p><strong>설명용 창작 사례 D.</strong> 민지가 지후에게 “이 돈은 자전거 수리비야”라며 5만 원을 보냈다. 둘이 수리를 약속했고 그 약정대로 보낸 것이라면 먼저 약속의 내용을 읽는다. 그런데 수리 약속은 없고 계좌번호를 잘못 눌렀다면, 같은 5만 원이어도 부당이득 규정의 요건을 확인한다. ‘돈을 보냈다’는 결과만 보고 계약이라고 결정하면 안 된다.</p>
+<div class="decision-flow"><strong>사건 풀이 순서</strong><br>① 누가 누구에게 무엇을 요구하는가?<br>② 그 요구의 원인은 약속인가, 법이 정한 다른 사실인가?<br>③ 계약이면 합의 내용을 해석한다. 법정채권이면 조문과 요건을 찾는다.<br>④ 사실을 요건 하나씩에 대입하고, 권리의 발생·내용·범위를 결론 낸다.</div>
+
+<p>‘포섭’은 큰 그물에 억지로 끼워 넣는 것이 아니라 <strong>법의 조건에 실제 사건이 들어맞는지 하나씩 대조하는 것</strong>이다. 착오송금이면 제741조를 적고, 이익·손실·관련성·법률상 원인 부재를 확인한다. 법률을 ‘적시’한다는 것은 이렇게 근거가 되는 규정을 구체적으로 밝혀 쓰는 것이다.</p>
+<p><span class="key-pink">교재의 ‘당사자의 의사와 관계없이’는 ‘법률효과를 발생시키려는 합의가 없어도’라는 뜻으로 읽자.</span> 사무관리의 타인을 위하는 의사, 불법행위의 고의·과실처럼 심리 상태가 요건이 되는 경우까지 없다는 뜻이 아니다. 또 계약에도 법의 해석이 필요하다. 교재는 두 영역의 <strong>출발점과 주된 확인 대상</strong>을 대비한 것이지 서로 완전히 차단한 것이 아니다.</p>
+<p><strong>시험 질문:</strong> ‘사무관리는 의사표시 해석으로 성립·내용을 확정한다’는 보기의 분류 오류를 찾는다. <strong>키워드:</strong> 의사표시 해석 / 법률 해석·포섭 / 구성요건사실 / 조문 적시. <strong>한 줄:</strong> <span class="key-yellow">약정은 약속의 내용, 법정은 조문의 조건에서 출발한다.</span></p>
+<p class="red-note">문제 연결: 형성평가 002·005·008, 워크북 002·003. ‘모든 의사가 무관하다’와 ‘계약에는 법률이 필요 없다’는 과장에 주의한다.</p>
+
+<h1>5. 어려운 말을 뜻으로 연결하기</h1>
+<p>아래 용어는 <strong>① 음훈 → ② 글자의 뜻 → ③ 합친 뜻 → ④ 이름의 이유 → ⑤ 법률 뜻 → ⑥ 쉬운 말 → ⑦ 사례 → ⑧ 출제 → ⑨ 비교</strong> 순서로 읽는다. 한자의 뜻은 기억을 돕는 장치이고, 실제 법률상 요건은 본문과 조문으로 확인한다.</p>
+<h2>5-1. 권리·약속·법의 조건</h2>
+<h3>채권·채무 · 債權 / 債務</h3>
+<p>① 債(빚 채)·權(권세 권)·務(힘쓸 무). ② 빚·권한·해야 할 일. ③ 빚과 관련하여 요구하는 권리 / 이행해야 할 의무. ④ 하나의 관계를 요구하는 쪽과 이행하는 쪽에서 부르는 이름이다. ⑤ 특정인에게 일정한 급부를 요구할 권리와 그에 대응하는 의무. ⑥ “해 달라고 말할 자격 / 해 줘야 할 책임.” ⑦ 매수인의 자전거 인도청구와 대금지급 의무. ⑧ 돈 문제에만 한정하거나 채권자·채무자를 고정 신분으로 보는 함정. ⑨ 물권은 물건을 직접 지배하는 권리, 채권은 특정인에게 급부를 요구하는 권리다.</p>
+<h3>급부 · 給付</h3>
+<p>① 給(줄 급)·付(줄 부). ② 주다·내어 주다. ③ 상대방에게 제공할 것. ④ 채무자가 해야 할 내용을 가리킨다. ⑤ 채권의 목적이 되는 작위·부작위 등 일정한 행위. ⑥ “상대에게 해 줘야 하는 일.” ⑦ 돈 지급·수리·약속한 범위에서 경쟁하지 않기. ⑧ 급부를 금전 지급으로만 좁히는 보기. ⑨ 급부는 이행할 내용이고, 채권은 그 이행을 요구하는 권리다.</p>
+<h3>계약·약정 · 契約 / 約定</h3>
+<p>① 契(맺을 계)·約(맺을 약)·定(정할 정). ② 맺다·묶다·정하다. ③ 서로 내용을 정해 맺은 약속. ④ 당사자가 스스로 법적 관계를 형성하는 점을 이름에 담았다. ⑤ 계약은 의사표시가 내용상 합치하는 법률행위, 약정은 당사자가 합의하여 정한 사항을 가리킨다. ⑥ “둘이 정한 약속.” ⑦ 자전거의 가격과 인도일 합의. ⑧ 약정채권의 대표 발생원인=계약. ⑨ 법정채권은 효과를 발생시키려는 합의 대신 법률의 요건에서 출발한다.</p>
+<h3>법정·법률행위 · 法定 / 法律行爲</h3>
+<p>① 法(법 법)·定(정할 정), 律(법칙 률)·行(다닐 행)·爲(할 위). ② 법·정함 / 법칙·행동·함. ③ 법이 정함 / 의사표시로 법적 효과를 생기게 하는 행위. ④ ‘법정’은 효과의 근거가 법에 있음을, ‘법률행위’는 의사표시를 통한 효과 형성을 나타낸다. ⑤ 법정채권은 법률규정의 요건 충족으로 발생하고, 계약은 법률행위에 속한다. ⑥ “법이 정한 책임 / 법적 효과를 겨냥한 의사표시.” ⑦ 사고의 배상책임 / 매매 합의. ⑧ ‘불법행위도 법률행위다’는 함정. ⑨ 法定은 법이 정했다는 뜻이지, 法庭(庭: 뜰 정, 재판하는 곳)이 아니다.</p>
+<h3>의사표시·합치 · 意思表示 / 合致</h3>
+<p>① 意(뜻 의)·思(생각 사)·表(겉 표)·示(보일 시), 合(합할 합)·致(이를 치). ② 생각·겉으로 보임 / 합하여 같음에 이름. ③ 법적 효과를 원하는 뜻을 밖으로 나타냄 / 내용이 맞음. ④ 마음속 생각과 상대가 확인할 표현을 구별하려는 말이다. ⑤ 법률행위의 요소가 되는 의사표시, 계약에서는 서로 대립하는 표시의 내용상 일치. ⑥ “내 생각을 거래의 말로 꺼내고 서로 맞추기.” ⑦ “팔게”와 “살게”가 가격·물건에 관해 맞는다. ⑧ 혼자 마음먹으면 계약이 된다는 함정. ⑨ 합치는 성립 문제이지 모든 효력요건 충족의 보증서가 아니다.</p>
+<h3>구성요건·포섭·적시 · 構成要件 / 包攝 / 摘示</h3>
+<p>① 構(얽을 구)·成(이룰 성)·要(요긴할 요)·件(물건 건), 包(쌀 포)·攝(거둘 섭), 摘(딸 적)·示(보일 시). ② 짜서 이룬 핵심 조건 / 감싸서 거둠 / 골라 보임. ③ 법적 효과에 필요한 조건 / 사실을 조건 아래 대입 / 근거를 골라 명시. ④ 법을 사건에 적용하는 세 작업을 이름 붙인 것이다. ⑤ 요건사실의 존재를 확인하고 법규범에 해당하는지 판단하며 근거 조문을 밝힌다. ⑥ “조건표를 찾아 사건과 맞춰 보고 조문 번호를 쓰기.” ⑦ 착오송금을 제741조에 대입. ⑧ 법정채권인데 약속의 해석만 하는 오류. ⑨ 법률 해석은 조건의 뜻을 정하는 일, 포섭은 실제 사실이 그 조건에 맞는지 판단하는 일이다.</p>
+<h2>5-2. 세 가지 법정채권과 계약의 경계</h2>
+<h3>사무관리·상호부조 · 事務管理 / 相互扶助</h3>
+<p>① 事(일 사)·務(힘쓸 무)·管(대롱 관)·理(다스릴 리), 相(서로 상)·互(서로 호)·扶(도울 부)·助(도울 조). ② 일·처리 / 서로·돕기. ③ 남의 일을 관리함 / 서로 돕는 것. ④ 법률상 의무 없는 도움도 일정하게 보호하려는 제도다. ⑤ 의무 없이 타인을 위하여 그 사무를 관리한다. ⑥ “부탁받지 않았지만 남의 일을 필요한 만큼 돌봄.” ⑦ 여행 중 이웃집 창문 응급조치. ⑧ 사무실 업무만 뜻한다거나 항상 계약이라는 보기. ⑨ 위임계약상 의무 이행과 구별한다. 돕는 마음이 있어도 법적 분류가 곧 계약은 아니다.</p>
+<h3>준법률행위 · 準法律行爲</h3>
+<p>① 準(준할 준)·法(법 법)·律(법칙 률)·行(다닐 행)·爲(할 위). ② 어떤 것에 견줌·법·행동. ③ 법률행위와 구별되지만 법이 효과를 연결하는 행위. ④ 원하는 법적 효과를 합의하는 계약과, 법이 일정한 행위에 효과를 정하는 장면을 구별하기 위한 이름이다. ⑤ 이 교재는 사무관리를 적법행위인 준법률행위로 설명한다. ⑥ “계약으로 효과를 약속하지 않아도 법이 의미를 붙여 주는 행동.” ⑦ 의무 없이 이웃을 위한 필요한 관리. ⑧ ‘준’자를 보고 사무관리를 계약의 한 종류로 분류하는 함정. ⑨ 계약의 의사표시와 사무관리에서 요구되는 관리 의사를 구별한다. 상세한 학설 분류보다 이 차이가 이 장의 핵심이다.</p>
+<h3>부당이득 · 不當利得</h3>
+<p>① 不(아닐 부)·當(마땅할 당)·利(이로울 이)·得(얻을 득). ② 마땅하지 않음·이익을 얻음. ③ 보유할 법률상 근거 없는 이익. ④ 이익을 누가 보유해야 하는지 바로잡는 이름이다. ⑤ 제741조의 요건을 갖춘 이익은 반환 대상이 된다. ⑥ “받을 이유 없이 내게 온 이익 돌려주기.” ⑦ 잘못 들어온 송금액. ⑧ ‘고의가 없으니 반환도 없다’는 함정. ⑨ 불법행위의 배상과 달리 이익의 반환에 초점이 있다.</p>
+<h3>불법행위·법익 · 不法行爲 / 法益</h3>
+<p>① 不(아닐 불)·法(법 법)·行(다닐 행)·爲(할 위), 益(더할 익). ② 법에 어긋난 행동 / 법이 보호하는 이익. ③ 위법한 가해 / 보호받는 이익. ④ 침해된 이익과 가해 책임을 나타낸다. ⑤ 일반 불법행위는 제750조의 고의·과실, 위법행위, 손해 및 인과관계 등을 검토한다. ⑥ “남이 보호받아야 할 것을 잘못 침해한 책임.” ⑦ 부주의한 운전으로 타인 차를 파손. ⑧ 계약이 있어야만 배상한다는 보기. ⑨ 민사상 불법행위가 문제 된다고 언제나 같은 내용의 범죄가 성립하는 것은 아니다.</p>
+<h3>고의·과실 · 故意 / 過失</h3>
+<p>① 故(까닭 고)·意(뜻 의), 過(지날 과)·失(잃을 실). ② 의도함 / 잘못·실수. ③ 알고 의도함 / 요구되는 주의를 다하지 못함. ④ 일부러 한 경우와 부주의한 경우를 구별한다. ⑤ 구체적인 책임요건 판단에서 인식·의사 또는 주의의무 위반을 따진다. ⑥ “일부러 / 조심했어야 하는데 못 함.” ⑦ 고의로 창문을 깸 / 휴대전화를 보며 운전하다 파손. ⑧ 제750조를 고의만의 책임으로 바꾸는 함정. ⑨ 부당이득은 이익 보유의 근거를 먼저 보므로 고의·과실을 그 일반 성립요건처럼 요구하지 않는다.</p>
+<h3>상환·반환·배상·보상 · 償還 / 返還 / 賠償 / 補償</h3>
+<p>① 償(갚을 상)·還(돌아올 환), 返(돌이킬 반), 賠(물어줄 배), 補(기울 보). ② 갚아 돌림 / 되돌림 / 손해를 갚음 / 부족한 것을 메움. ③ 지출의 상환·이익의 반환·손해의 배상·손실의 보상. ④ 돈을 주는 이유가 다르므로 동사를 달리한다. ⑤ 사무관리의 비용상환, 부당이득반환, 불법행위 손해배상, 제740조 무과실손해보상은 각각 요건이 다르다. ⑥ “쓴 돈 갚기 / 잘못 온 이익 돌리기 / 끼친 손해 갚기 / 법이 정한 손실 메우기.” ⑦ 본문의 A·B·C 사건. ⑧ 모두 손해배상이라고 묶는 함정. ⑨ 명칭만이 아니라 발생원인과 범위를 대조한다.</p>
+<h3>필요비·유익비·현존이익 · 必要費 / 有益費 / 現存利益</h3>
+<p>① 必(반드시 필)·要(요긴할 요)·費(쓸 비), 有(있을 유)·益(더할 익), 現(나타날 현)·存(있을 존)·利(이로울 이). ② 필요한 지출 / 이롭게 하는 지출 / 지금 남은 이익. ③ 관리에 필요한 비용, 유익한 비용, 현재 보유하는 이익. ④ 지출액과 인정 범위를 구별하는 말이다. ⑤ 제739·740조의 비용·보상 범위 판단에 쓰인다. ⑥ “필요해서 쓴 돈 / 도움이 되게 쓴 돈 / 실제 남아 있는 도움.” ⑦ 깨진 창을 긴급하게 막는 비용과 그 관리로 남은 이익. ⑧ 비용을 쓰기만 하면 모두 전액 받는다는 함정. ⑨ 사무관리자의 지출과 본인의 현존이익은 항상 같은 액수가 아니다.</p>
+<h3>임의규정·강행규정·반강행 · 任意規定 / 強行規定 / 半強行</h3>
+<p>① 任(맡길 임)·意(뜻 의)·規(법 규)·定(정할 정), 強(강할 강)·行(행할 행), 半(반 반). ② 뜻에 맡긴 규칙 / 반드시 따를 규칙 / 한 방향의 강제. ③ 다른 약정을 허용하는 규정 / 다른 약정으로 배제할 수 없는 규정 / 보호받는 쪽에 불리한 변경 등을 막는 규율. ④ 계약의 자유가 미치는 범위를 구분한다. ⑤ 제105조와 구체적인 강행·보호 규정을 구별해 적용한다. ⑥ “바꿔 약속할 수 있음 / 마음대로 못 바꿈 / 불리하게는 못 바꿈.” ⑦ 지급 방법의 약정과 사회질서 위반 계약의 구별. ⑧ 민법의 계약 규정은 전부 강행규정이라는 함정. ⑨ 강행화 ‘논의’와 현행법상 실제 강행성 판단은 다르다.</p>
+<h3>전형·비전형·약관 · 典型 / 非典型 / 約款</h3>
+<p>① 典(법 전)·型(거푸집 형), 非(아닐 비), 約(맺을 약)·款(조목 관). ② 기준이 되는 틀 / 그 틀 바깥 / 약속의 조항. ③ 법전의 유형 / 그 유형에 그대로 들어맞지 않는 계약 / 미리 정한 거래 조항. ④ 유형과 계약 내용을 만드는 방식을 각각 가리킨다. ⑤ 전형·비전형은 계약의 유형 분류이고, 약관은 다수 거래를 위해 한쪽이 미리 마련한 내용이다. ⑥ “정해 둔 기본형 / 새로 짠 거래 / 미리 인쇄된 조건.” ⑦ 매매 / 교재의 리스·프랜차이즈 / 가입 조건. ⑧ 비전형=무효, 약관=법률이라는 함정. ⑨ 전형계약도 약관을 사용할 수 있다. 서로 배타적인 세 칸이 아니다.</p>
+<h3>무효·궁박·경솔·무경험 · 無效 / 窮迫 / 輕率 / 無經驗</h3>
+<p>① 無(없을 무)·效(본받을 효), 窮(다할 궁)·迫(닥칠 박), 輕(가벼울 경)·率(거느릴 솔), 經(지날 경)·驗(시험할 험). ② 효력 없음 / 곤궁하고 급박함 / 가볍고 성급함 / 경험 없음. ③ 법적 효력의 부인과, 불공정 거래를 판단할 때 보는 사정들. ④ 합의가 있어도 법이 효력을 인정하지 않을 수 있기 때문이다. ⑤ 제103·104조의 요건에 따른 무효 여부를 검토한다. ⑥ “약속했다고 법이 모두 지켜 주지는 않아.” ⑦ 사회질서에 반하는 가해 청부 약속. ⑧ 비싸다는 사정만으로 무조건 제104조 무효라고 단정하는 오류. ⑨ 무효는 단순히 마음이 바뀌어 약속을 취소하고 싶다는 감정과 다르다.</p>
+<h1>6. 사례를 한 번에 연결하기 · 모두 설명용 창작</h1>
+<h2>6-1. 비 오는 토요일의 네 사건</h2>
+<p><strong>등장인물:</strong> 자전거를 파는 수호, 사는 민지, 여행 중인 은서, 이웃 도윤, 착오송금을 받은 지후.</p>
+<p><strong>오전 9시:</strong> 수호와 민지는 자전거를 10만 원에 거래하기로 합의한다. 민지는 “언제 넘겨주기로 했지?”라며 약속을 확인한다. 여기서는 <strong>계약</strong>이 출발점이다.</p>
+<p><strong>오전 11시:</strong> 폭우로 은서의 창문이 깨진다. 도윤은 관리 의무나 부탁이 없지만 은서를 위해 적절한 응급조치를 한다. 은서가 “부탁한 적 없는데?”라고 묻더라도 검토가 끝나지 않는다. <strong>사무관리</strong>의 요건과 비용상환 범위를 확인한다.</p>
+<p><strong>오후 1시:</strong> 민지가 계좌를 잘못 눌러 지후에게 돈을 보낸다. 지후가 “내가 속인 건 아니야”라고 말한다. 그래도 보유할 근거가 없다면 <strong>부당이득</strong>의 반환을 검토한다.</p>
+<p><strong>오후 3시:</strong> 수호가 부주의하게 자전거를 몰다 은서의 차를 긁는다. “계약서에 배상 조항이 없잖아”라는 항변은 출발점을 잘못 잡았다. <strong>불법행위</strong>의 요건을 확인한다.</p>
+<p><strong>사건의 갈등:</strong> 모두 돈이나 물건을 요구하지만 이유가 다르다. <strong>판단자가 고민할 점:</strong> 합의한 의무의 이행인지, 사무관리 비용인지, 근거 없는 이익인지, 가해 손해인지 각각 나누어야 한다. <strong>검토 결론:</strong> 각 원인의 요건이 충족되면 그에 맞는 권리·의무가 생긴다. <strong>다르게 판단하면 생기는 문제:</strong> 모든 사건에 계약서를 요구하면 착오송금 반환과 가해 책임을 설명하지 못한다. 반대로 모든 도움을 계약으로 보면 상대방이 하지 않은 약속까지 만들어 내게 된다.</p>
+<p><strong>실제 판례 아님:</strong> 법원의 판결·사건번호·판결문은 없다. 위 문단은 법원이 실제 판단했다고 주장하는 재판 재현이 아니라, 교재의 분류를 연습하기 위한 이야기다.</p>
+<h1>7. 기출을 보는 눈</h1>
+<h2>7-1. 가장 먼저 풀 TOP5</h2>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>문제</th>
+<th>출제 의도</th>
+<th>풀고 나서 말할 한 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>워크북 001</td>
+<td>네 발생원인의 기본 분류</td>
+<td>계약만 약정, 나머지 셋은 법정</td>
+</tr>
+<tr>
+<td>2</td>
+<td>워크북 002</td>
+<td>분류를 풀이 방법에 연결</td>
+<td>사무관리를 의사표시 해석만으로 확정하지 않는다</td>
+</tr>
+<tr>
+<td>3</td>
+<td>형성평가 002</td>
+<td>약정채권의 내용 확인 방법</td>
+<td>원인은 계약이고, 내용은 의사표시를 해석하여 확인</td>
+</tr>
+<tr>
+<td>4</td>
+<td>형성평가 008</td>
+<td>비전형계약을 법정으로 착각하는지</td>
+<td>비전형도 계약이므로 약정채권관계</td>
+</tr>
+<tr>
+<td>5</td>
+<td>형성평가 009</td>
+<td>성립과 유효를 혼동하는지</td>
+<td>제103조는 사회질서에 반하는 법률행위를 무효로 한다</td>
+</tr>
+</tbody></table>
+<p>같은 개념을 반복한 제공 문제의 목록이다. TOP5는 실제 오답률 순위가 아니라 <strong>이 장의 사고방식을 익히는 순서</strong>다.</p>
+<h2>7-2. 함정 문장을 바꿔 말하기</h2>
+<table>
+<thead>
+<tr>
+<th>위험한 문장</th>
+<th>정확하게 고치기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“사무관리는 도와주기로 한 계약이다.”</td>
+<td>의무 없이 타인을 위한 사무를 처리하는 법정채권관계다.</td>
+</tr>
+<tr>
+<td>“법정이면 마음이나 의사는 전혀 보지 않는다.”</td>
+<td>법률효과를 발생시키려는 합의가 필수는 아니지만, 개별 요건에 의사·고의·과실이 들어갈 수 있다.</td>
+</tr>
+<tr>
+<td>“의사표시 해석이 채권의 발생원인이다.”</td>
+<td>대표 발생원인은 계약이고, 계약 내용을 확인하는 방법이 의사표시 해석이다.</td>
+</tr>
+<tr>
+<td>“부당이득은 나쁜 마음으로 돈을 얻은 것이다.”</td>
+<td>핵심은 법률상 원인 없이 이익을 얻었다는 점이다.</td>
+</tr>
+<tr>
+<td>“법률을 적시해야 비로소 권리가 발생한다.”</td>
+<td>요건 충족으로 권리가 발생하고, 답안에서는 그 근거 법률을 구체적으로 밝혀 설명한다.</td>
+</tr>
+</tbody></table>
+<h2>7-3. JSON의 ‘총론’ 가운데 제2장으로 이어질 문제</h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>번호</th>
+<th>제2장 중심 쟁점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성평가</td>
+<td>003·006</td>
+<td>계약 자유의 세부 내용·형해화</td>
+</tr>
+<tr>
+<td>형성평가</td>
+<td>004</td>
+<td>쌍무·편무, 대가성과 견련관계</td>
+</tr>
+<tr>
+<td>형성평가</td>
+<td>007·010</td>
+<td>공정거래·신의성실과 계약 통제</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>004·005·006</td>
+<td>계약의 의의·효력의 근거·공정성</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>007·008·009</td>
+<td>계약 자유의 내용·제한</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>010·011·012</td>
+<td>계약 종류·계속적 계약·예약</td>
+</tr>
+</tbody></table>
+<p>이 14문항은 빠뜨린 것이 아니라 <strong>제2장 해설 대상으로 분리한 것</strong>이다. 특히 워크북 009·011·012처럼 문장 조건이나 개념 구별을 검토해야 하는 보기는 다음 장에서 조문·교재와 함께 분석한다. 아직 정답의 정확성을 확정한 것으로 읽지 말자.</p>
+<h1>8. 새 사례로 확인하는 응용 문제 5개</h1>
+<p>아래 문제는 교재·JSON 원문 문제가 아닌 새로 만든 학습 문제다. 답보다 <strong>발생원인 → 확인할 사항 → 결론</strong>의 순서로 말하는 연습이 목적이다.</p>
+<h2>8-1. 장면은 비슷해도 근거는 다르다</h2>
+<p>수진은 하린의 화분에 물을 주고 1만 원을 썼다. A에서는 둘이 보수를 주기로 관리 계약을 맺었다. B에서는 계약도 관리 의무도 없고, 여행 중인 하린을 위해 하린의 의사·이익에 맞게 필요한 관리를 했다. A와 B에서 비용 문제를 같은 근거로 처리할 수 있는가?</p>
+<p><strong>해설:</strong> A는 먼저 계약 내용을 해석한다. B는 사무관리 요건과 비용상환 범위를 본다. 물을 주었다는 외형은 같아도 약정상 의무의 유무가 다르다. <strong>출제 의도:</strong> 착한 행동인지가 아니라 의무의 근거로 분류하는지 확인. <strong>함정:</strong> B에 합의가 없다는 이유만으로 모든 비용 문제를 지워 버리기.</p>
+<h2>8-2. 상대가 착해도 반환할 수 있다</h2>
+<p>도현이 채무도 없는 서연에게 30만 원을 실수로 보냈다. 서연은 돈이 왜 들어왔는지 모르며 이를 그대로 보관 중이다. 다른 반환 제한 사유는 없다. 서연의 고의가 없다는 이유만으로 반환 문제가 사라지는가?</p>
+<p><strong>해설:</strong> 아니다. 법률상 원인 없는 이익·손실 등 제741조 요건을 검토한다. 상대가 일부러 돈을 빼앗았는지와 받을 근거가 있는지는 별개다. <strong>출제 의도:</strong> 부당이득을 불법행위의 고의·과실 요건으로 재단하지 않는지 확인. <strong>함정:</strong> ‘부당’을 반드시 악의적인 행동이라고 해석하기.</p>
+<h2>8-3. 손해배상 약속을 한 적이 없다</h2>
+<p>성인인 준우가 통로를 보지 않고 손수레를 밀어 유나의 정상 주차 차량을 파손했다. 주의의무 위반과 위법성, 그로 인한 손해가 인정되고 책임능력 문제는 없다. 둘 사이에 계약이 없으니 배상의무도 없다는 주장은 옳은가?</p>
+<p><strong>해설:</strong> 옳지 않다. 제750조에 따른 불법행위 책임은 배상에 합의해서 생기는 채무가 아니다. <strong>출제 의도:</strong> 계약 없이 발생하는 의무의 구조 확인. <strong>함정:</strong> 법정채권에도 계약서를 필수 증거처럼 요구하기.</p>
+<h2>8-4. 민법에 이름이 없다는 이유</h2>
+<p>도서 대여와 책 정리 서비스를 함께 제공하는 새로운 거래를 두 사람이 합의했다. 거래가 사회질서나 적용되는 강행규정에 반한다는 사정은 없다. “민법에 같은 이름의 전형계약이 없으므로 효력이 없고, 있다면 법정채권이다”라는 주장을 평가하라.</p>
+<p><strong>해설:</strong> 두 부분 모두 틀리다. 비전형계약도 계약 자유의 범위에서 유효할 수 있고, 합의에 따른 약정채권관계에 속한다. 구체적인 권리·의무는 약정 내용과 적용 법규를 검토한다. <strong>출제 의도:</strong> 물권법정주의를 계약에 그대로 적용하는 오류 방지. <strong>함정:</strong> ‘법전에 정한 유형이 아님’을 ‘법정채권’이라는 말과 연결하기.</p>
+<h2>8-5. ‘의사와 관계없다’는 문장의 진짜 뜻</h2>
+<p>학생 갑은 “법정채권은 당사자의 의사와 관계없이 생기므로, 남을 위한다는 의사가 없어도 언제나 사무관리가 되고 고의·과실도 불법행위에서 볼 필요가 없다”고 썼다. 한 문장으로 고치고 이유를 설명하라.</p>
+<p><strong>해설:</strong> “법정채권은 법률효과를 발생시키려는 당사자의 합의 없이도 법률상 요건을 충족하면 생기지만, 그 요건에 포함된 의사·고의·과실은 확인해야 한다.” 교재는 효과의 근거를 비교했지 모든 심리적 요건을 없앤 것이 아니다. <strong>출제 의도:</strong> 암기한 문장을 과장하지 않고 적용하는지 확인. <strong>함정:</strong> ‘합의 불필요’를 ‘의사 전부 불필요’로 확대하기.</p>
+<h1>9. 시험 직전 A4 한 장</h1>
+<section class="memory-sheet">
+<div class="memory-kicker">ONE-PAGE RECALL · OBLIGATIONS / CHAPTER 01</div>
+<h2>왜 해 줘야 하는가?</h2>
+<p><strong>한 장 요약:</strong> 채권각론은 채권의 대표 발생원인을 배운다. 약정채권관계의 대표는 계약, 법정채권관계의 대표는 사무관리·부당이득·불법행위다. 같은 돈 청구라도 먼저 원인을 구별해야 한다.</p>
+<table><thead><tr><th>원인</th><th>출발점</th><th>핵심·효과</th></tr></thead><tbody><tr><td>계약</td><td>무엇을 약속했나</td><td>합의·의사표시 해석 → 약정한 급부</td></tr><tr><td>사무관리</td><td>의무 없이 남을 위해 관리했나</td><td>제734조 이하 → 비용상환 등</td></tr><tr><td>부당이득</td><td>받을 법률상 이유가 있나</td><td>제741조 → 이익 반환</td></tr><tr><td>불법행위</td><td>위법하게 손해를 끼쳤나</td><td>제750조 → 손해배상</td></tr></tbody></table>
+<p><strong>TOP3:</strong> ① 약정 1 / 법정 3. ② 계약은 의사표시 해석, 법정채권은 법률 해석·포섭. ③ 도움의 비용·이익의 반환·가해의 배상은 다르다.</p>
+<p><strong>키워드:</strong> 합치 · 임의규정 · 전형/비전형 · 법률상 원인 없음 · 고의/과실 · 구성요건사실 · 조문 적시.</p>
+<p><strong>반드시 외울 문장:</strong><br>계약은 약정채권관계, 사무관리·부당이득·불법행위는 법정채권관계다.<br>비전형계약도 계약이다. 계약 자유는 무제한이 아니다.<br>법정채권은 효과를 발생시키려는 합의를 필수로 하지 않는다.</p>
+<p><strong>함정 방지:</strong> 채권≠돈만 받을 권리. 계약 성립≠항상 유효. 법정≠모든 의사 불필요. 부당이득≠반드시 나쁜 마음. 사무관리≠언제나 지출 전액 상환.</p>
+<p><strong>조문 연결:</strong> 103·104: 자유의 한계 / 105: 임의규정 / 734: 관리 기준 / 739: 비용상환 / 740: 무과실손해보상, 현존이익 한도 / 741: 이익 반환 / 750: 가해 손해배상.</p>
+<p><strong>풀이 순서:</strong> 누가 누구에게 무엇을 요구? → 원인 분류 → 약정 내용 또는 조문 요건 → 사실 대입 → 발생·내용·범위 결론.</p>
+<p class="memory-last"><strong>마지막 문장:</strong> 약정은 약속의 내용, 법정은 조문의 조건에서 출발한다.</p>
+</section>
+
+<h1>10. 학습 상태 진단</h1>
+<p>아직 답변을 받지 않았으므로 이해 완료라고 단정하지 않는다. <strong>현재는 미진단, 우선 표시 🟡 복습 필요</strong>다. 아래 다섯 항목을 책을 덮고 설명해 보고 상태를 바꾸자.</p>
+<ol>
+<li>네 가지 발생원인을 약정과 법정으로 나누어 말할 수 있다.</li>
+<li>의사표시 해석과 법률 해석·포섭이 무엇이 다른지 사례로 설명한다.</li>
+<li>사무관리에서 타인을 위하는 의사와 비용상환 합의의 필요성을 구별한다.</li>
+<li>착오송금 반환과 자동차 파손 배상의 목적이 다름을 설명한다.</li>
+<li>비전형계약도 계약이고, 합의해도 무효가 될 수 있음을 말한다.</li>
+</ol>
+<p><strong>🟢 이해 완료:</strong> 다섯 항목을 모두 자기 말로 설명하고 응용 문제의 이유도 말한다. <strong>🟡 복습 필요:</strong> 3~4개는 설명하지만 두 개념을 가끔 섞는다. <strong>🔴 이해 부족:</strong> 0~2개만 설명하거나 법정채권도 계약이 있어야 한다고 생각한다. 이는 학습용 자기점검 기준이지 시험 합격 예측이 아니다.</p>
+<p><strong>반드시 복습할 TOP3:</strong> 약정/법정 분류 → 의사표시 해석/포섭 → 상환·반환·배상의 구별.</p>
+<h1>11. 원문 범위와 검토 메모</h1>
+<p>교재의 2쪽 도입 문단은 1-2절, 2쪽 계약 문단은 2-1~2-4절, 3쪽 세 문단은 3-1~3-3절, 4쪽 비교 문단은 4-1~4-2절에 대응한다. 제1장 본문 문단을 빠짐없이 설명했고, 2쪽의 리스·프랜차이즈 예시와 임의규정의 반강행화 논의도 포함했다. 전자 추출에서 누락된 ‘半’은 원본 페이지 이미지로 확인했다.</p>
+<p>법령 링크는 설명 옆에 두었다. 제103·104·105·739·740·741·750조는 국가법령정보센터의 2026.3.17 시행본 표시를 확인했다. 교재의 개념 설명을 돕는 학습자료이며, 개별 분쟁의 결론을 대신하는 법률의견서는 아니다.</p>
+<h1>부록. 제1장 직접 연결 8문항 · 35개 보기 해설</h1>
+<p>원본 문제·선택지·정답 번호를 보존했다. 형성평가 002의 표현상 주의 등은 별도 보완으로 구분한다. HTML에서는 해설을 접어 풀 수 있고, PDF에는 모든 해설이 펼쳐진다. 문제 JSON 자체는 변경하지 않았다.</p>
+<section class="question-card" id="question-f1"><h4>형성평가 001 <small>채권각론_001</small></h4><p class="question-stem">채권의 발생원인 중 '법정채권관계'에 해당하지 않는 것은?</p><ol class="choices"><li>사무관리</li><li>부당이득</li><li>불법행위</li><li>계약</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 4번</p><ol class="choice-notes"><li>정답 아님. 사무관리는 의무 없이 남의 일을 처리한 경우 법이 권리·의무를 정한다. 법정채권관계다. 함정은 ‘남을 도와준다’는 말을 합의로 바꾸는 것. 키워드: 의무 없이, 타인을 위하여.</li><li>정답 아님. 법률상 원인 없이 얻은 이익을 반환하는 관계는 법정채권관계다. 함정은 상대가 반환에 동의해야만 의무가 생긴다고 보는 것. 키워드: 법률상 원인 없음.</li><li>정답 아님. 고의·과실 있는 위법행위로 손해를 준 경우의 배상은 법정채권관계다. 함정은 계약서에 배상 조항이 없으면 책임도 없다는 생각. 키워드: 위법한 가해.</li><li>정답 ④. 계약은 당사자의 합의에 따른 약정채권관계의 대표 발생원인이다. 문제는 법정에 ‘해당하지 않는’ 것을 묻는다. 키워드: 합의, 약정.</li></ol></details></section>
+
+<section class="question-card" id="question-f2"><h4>형성평가 002 <small>채권각론_002</small> <span class="review-tag">표현 보완</span></h4><p class="question-stem">다음 중 약정채권관계의 발생원인으로 가장 적절한 것은?</p><ol class="choices"><li>법률규정의 해석</li><li>의사표시의 해석</li><li>법률규정의 적시</li><li>법관의 계약통제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 2번</p><p class="parts-note">문제의 ‘발생원인’ 표현은 엄밀하지 않다. 발생원인은 계약이라는 법률행위이고, ② 의사표시의 해석은 그 성립·내용을 확인하는 방법이다. JSON 정답은 ②로 유지하되, ‘해석 자체가 채권을 만들어 낸다’고 외우지 않는다.</p><ol class="choice-notes"><li>정답 아님. 교재의 대비에서는 법정채권관계에 관한 법률 해석·포섭 쪽이다. 다만 계약에도 법률 해석이 필요하므로 계약과 전혀 무관하다는 뜻은 아니다. 함정: 주된 확인 대상을 뒤바꾸기. 키워드: 법정 요건.</li><li>출제 취지상 정답 ②. 당사자가 어떤 내용으로 의사표시를 했는지 해석하여 약정상 권리·의무를 확인한다. 함정: 파악 방법과 발생원인 혼동. 키워드: 계약의 내용 확인.</li><li>정답 아님. 법률규정을 구체적으로 밝혀 쓰는 것은 법정채권의 근거 설명에서 강조된다. 법률을 인용하는 행위 자체가 발생원인은 아니다. 키워드: 근거 조문.</li><li>정답 아님. 법관의 계약통제는 성립한 계약의 효력·내용을 규율하는 문제이지 약정채권의 대표 발생원인이 아니다. 함정: 법관이 당사자 대신 계약을 만든다고 생각하기. 키워드: 통제와 발생 구별.</li></ol></details></section>
+
+<section class="question-card" id="question-f5"><h4>형성평가 005 <small>채권각론_005</small> <span class="review-tag">표현 보완</span></h4><p class="question-stem">다음 중 '법정채권관계'의 발생원인에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주로 의사표시의 해석을 통해 발생한다.</li><li>재화의 이전과 활용을 실현하는 법적 수단이다.</li><li>법률규정의 적시가 필요하다.</li><li>전형계약과 비전형계약으로 나눌 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 3번</p><p class="parts-note">③의 ‘법률규정 적시’는 법정채권을 분석하고 설명할 때 근거 규정을 밝히라는 뜻이다. 당사자가 조문 번호를 말해야 비로소 권리가 발생한다는 뜻은 아니다.</p><ol class="choice-notes"><li>틀린 설명. 법정채권관계에서는 주로 법률의 요건에 해당하는 사실을 확인한다. 계약의 내용을 확인하는 방법을 가져온 보기다. 함정: 의사표시 해석/법률 해석 바꾸기.</li><li>정답 아님. 교재는 이 표현을 계약의 기능으로 설명한다. 법정채권관계 일반의 발생 방식에 대한 설명으로 고를 수 없다. 키워드: 재화의 이전·활용 → 계약.</li><li>정답 ③. 법률규정에 따른 관계이므로 구체적인 근거 조문을 밝히고 요건에 사실을 대입한다. 함정: 적시와 권리 발생 시점을 혼동하지 말 것. 키워드: 조문·요건·포섭.</li><li>정답 아님. 전형/비전형은 계약의 분류다. 비전형도 약정채권관계 쪽이라는 점이 핵심이다. 함정: 비전형이라는 이유로 법정에 넣기.</li></ol></details></section>
+
+<section class="question-card" id="question-f8"><h4>형성평가 008 <small>채권각론_008</small></h4><p class="question-stem">약정채권관계와 법정채권관계를 비교할 때, '비전형계약'은 다음 중 어디에 더 밀접하게 관련되는가?</p><ol class="choices"><li>법률규정의 적시</li><li>법률규정의 해석과 포섭</li><li>의사표시의 해석</li><li>상호부조의 윤리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 3번</p><ol class="choice-notes"><li>정답 아님. 교재의 구별에서는 법정채권의 근거 제시에 해당한다. 비전형계약의 성립·내용 확인에서 가장 밀접한 것은 당사자의 약정 해석이다. 키워드: 이름 없는 계약도 계약.</li><li>정답 아님. 법률의 해석·포섭은 법정채권을 분석할 때 강조되는 방법이다. 비전형계약에 법이 적용되지 않는다는 뜻은 아니지만 이 문항의 대비에서는 ③이 맞는다. 함정: ‘비전형’과 ‘법정’ 연결.</li><li>정답 ③. 새 유형의 계약도 당사자의 합의에 기초한다. 무엇을 제공하고 어떤 대가를 주기로 했는지 의사표시를 해석한다. 키워드: 계약 자유·내용결정.</li><li>정답 아님. 상호부조의 윤리는 교재가 사무관리의 기초로 설명하는 내용이다. 함정: 법정채권의 배경을 계약 유형에 붙이는 것. 키워드: 상호부조 → 사무관리.</li></ol></details></section>
+
+<section class="question-card" id="question-f9"><h4>형성평가 009 <small>채권각론_009</small></h4><p class="question-stem">민법 제103조가 계약의 자유를 제한하는 법질서 승인의 예시로 제시된 이유는?</p><ol class="choices"><li>계약의 방식을 자유롭게 결정할 수 있도록 하기 위해서이다.</li><li>사회적 약자를 보호하기 위한 강행규정의 대표적인 예시이기 때문이다.</li><li>계약 당사자의 자유로운 의사결정의 타당성을 확보하기 위해서이다.</li><li>계약이 선량한 풍속 기타 사회질서에 반하는 경우 법적 효력을 부인하기 위해서이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 4번</p><ol class="choice-notes"><li>정답 아님. 제103조는 방식 선택의 자유를 부여하는 규정이 아니라 반사회질서 법률행위를 무효로 하는 규정이다. 함정: 자유의 근거와 한계 뒤바꾸기. 키워드: 무효.</li><li>이 질문의 직접적인 설명으로는 ④가 더 정확하다. 제103조가 약자 보호에 기여할 수 없다는 뜻은 아니지만, 일반적인 취지는 선량한 풍속·사회질서에 반하는 법률행위의 효력 부인이다. ‘약자 보호’만으로 규정 전체를 좁혀 외우지 않는다.</li><li>정답 아님. 자유로운 의사결정의 타당성 확보라는 추상적 표현만으로 제103조가 정한 구체적인 제한 내용이 드러나지 않는다. 함정: 그럴듯한 가치 설명으로 조문의 요건·효과를 대체하기.</li><li>정답 ④. 사회질서에 반하는 사항을 내용으로 하면 합의가 있어도 효력을 인정하지 않는다는 뜻이다. 키워드: 반사회질서 → 무효. ‘당사자가 합의했으니 반드시 유효’라는 문장을 반박한다.</li></ol></details></section>
+
+<section class="question-card" id="question-w1"><h4>워크북 001 <small>채권각론_워크북_001</small></h4><p class="question-stem">채권관계의 발생원인에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>채권관계는 계약, 사무관리, 부당이득, 불법행위에 의해 발생한다.</li><li>계약은 약정채권관계의 발생원인이다.</li><li>불법행위는 법정채권관계의 발생원인이다.</li><li>부당이득은 법률규정에 의해 채권관계를 발생시킨다.</li><li>사무관리는 법률행위에 의해 채권관계를 발생시킨다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 5번</p><ol class="choice-notes"><li>옳은 설명. 교재가 다루는 대표 발생원인 네 가지다. 이것을 이 장의 기본 분류로 기억한다. 함정: 뒤의 셋까지 계약으로 묶지 말 것. 키워드: 계약·사무관리·부당이득·불법행위.</li><li>옳은 설명. 계약은 합의에 기초하는 약정채권관계의 대표다. 키워드: 당사자의 의사표시 합치. 함정: 법의 보호를 받는다는 이유로 법정채권으로 분류하기.</li><li>옳은 설명. 배상에 관한 별도 합의가 없어도 법률요건을 충족하면 불법행위 책임이 문제 된다. 키워드: 제750조. 함정: 계약 부재를 책임 부재로 바꾸기.</li><li>옳은 설명. 부당이득반환의무는 법률상 요건을 갖추면 발생한다. 키워드: 제741조·원인 없는 이익. 함정: 상대의 반환 동의가 필수라고 생각하기.</li><li>틀린 설명이므로 정답 ⑤. 사무관리의 권리·의무는 계약이라는 법률행위가 아니라 법률규정에 따른다. 남을 위하는 의사와 권리·의무를 합의하여 만드는 의사표시는 구별한다. 키워드: 의무 없이 → 법정.</li></ol></details></section>
+
+<section class="question-card" id="question-w2"><h4>워크북 002 <small>채권각론_워크북_002</small></h4><p class="question-stem">다음 설명 중 가장 옳지 않은 것은?</p><ol class="choices"><li>계약에서의 채권·채무는 법률행위에 의하여 발생한다.</li><li>부당이득에서의 채권·채무는 당사자의 의사와는 관계없이 발생한다.</li><li>사무관리의 경우 의사표시의 해석에 의해 채권·채무의 성립과 내용이 확정된다.</li><li>불법행위의 경우 법률의 해석과 포섭에 의해 일정한 법률효과가 발생한다.</li><li>법률규정에 의한 채권·채무의 발생을 확정하기 위해서는 법률에 규정된 구성요건사실의 존부를 검토해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 3번</p><ol class="choice-notes"><li>옳은 설명. 계약은 의사표시의 합치로 성립하는 법률행위다. 키워드: 약정채권. 함정: 법률행위를 법원에서 하는 행위로 오해하기.</li><li>교재의 분류상 옳은 설명. 부당이득반환 효과를 발생시키려는 합의가 없어도 법률의 요건으로 의무가 생긴다는 뜻이다. 당사자의 인식 등이 반환 범위에 전혀 영향을 미치지 않는다는 뜻은 아니다. 키워드: 합의 불필요.</li><li>틀린 설명이므로 정답 ③. 사무관리의 성립·내용은 관련 법률을 해석하고 요건사실을 대입하여 확정한다. 남을 위하는 의사가 요건에 들어가더라도 그 관계가 계약이 되는 것은 아니다. 함정: 의사/의사표시 해석 혼동.</li><li>옳은 설명. 제750조 등 적용 규정의 요건에 사실을 대입하여 효과를 판단한다. 키워드: 법률의 해석과 포섭. 함정: 가해자가 배상에 동의해야 한다고 보기.</li><li>옳은 설명. 법정채권의 핵심은 요건사실이 존재하는지 확인하는 것이다. 법률 이름만 쓰고 요건 검토를 생략하면 부족하다. 키워드: 구성요건사실의 존부.</li></ol></details></section>
+
+<section class="question-card" id="question-w3"><h4>워크북 003 <small>채권각론_워크북_003</small></h4><p class="question-stem">다음 빈칸 ㉠ 에 들어갈 알맞은 단어는 무엇인지 고르시오. 일반적으로 계약, 사무관리, 부당이득 및 불법행위를 채권의 발생원인이라 한다.(㉠) 을(를) 법률행위에 의한 채권 발생원인이라 하고, 나머지는 법률의 규정에 의한 채권 발생원인이라고 한다. 따라서(㉠)에 의한 채권·채무를 확정하려면 계약 당사자의 의사표시 내용을 정확하게 확인 또는 해석하여야 한다.</p><ol class="choices"><li>계약</li><li>사무관리</li><li>부당이득</li><li>불법행위</li><li>계약과 사무관리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">JSON 정답: 1번</p><ol class="choice-notes"><li>정답 ①. 법률행위에 의한 대표 발생원인이며, 당사자의 의사표시를 해석한다는 문장과 맞는다. 함정: 뒤의 다른 원인까지 한꺼번에 넣지 말 것. 키워드: 약정·합의.</li><li>정답 아님. 사무관리는 법률규정에 따른 법정채권관계다. 타인을 위하는 의사가 있다는 이유로 계약의 합의와 같다고 보면 안 된다. 키워드: 의무 없는 타인 사무.</li><li>정답 아님. 부당이득은 이익 보유의 법률상 근거가 없는 경우 반환을 정하는 법정채권관계다. 키워드: 법률상 원인 없음.</li><li>정답 아님. 불법행위는 요건을 갖춘 가해 사실에 법이 배상 효과를 부여한다. ‘행위’라는 단어가 있다고 곧 법률행위인 것은 아니다. 키워드: 위법한 가해.</li><li>정답 아님. 계약은 맞지만 사무관리를 함께 넣은 부분이 틀리다. 함정: 일부 맞는 말을 섞은 묶음 보기. 키워드: ‘계약과 사무관리’ 중 뒤 항목을 분리하여 판단.</li></ol></details></section>
+
+<h2>정답 빠르게 대조</h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>번호: 정답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성평가</td>
+<td>001: ④ · 002: ②(표현 보완) · 005: ③ · 008: ③ · 009: ④</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>001: ⑤ · 002: ③ · 003: ①</td>
+</tr>
+</tbody></table>
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '채권각론 · CHAPTER 01' : 'PART · OBLIGATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(채권각론 · CHAPTER 01|PART · OBLIGATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>
+document.querySelectorAll('#content > h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title');});
+window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true;}));
+window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>{d.open=d.dataset.wasOpen==='1';}));
+function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}if(!id.startsWith('obligations-'))return;const target=document.getElementById(id);if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));}
+window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);
+</script></body>
+</html>

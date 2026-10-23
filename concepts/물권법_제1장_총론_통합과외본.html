@@ -1,0 +1,1861 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>물권법 제1장 총론 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+.course-tabs,.chapter-tabs{display:flex;flex-wrap:wrap;gap:4px;width:fit-content;margin:0 0 12px;padding:4px;border:1px solid #d9d9d1;border-radius:9px;background:#eeede7;font:750 12px/1.5 "Malgun Gothic",sans-serif}
+.chapter-tabs{margin-bottom:30px}.course-tabs a,.chapter-tabs a,.chapter-tabs span{display:block;padding:9px 12px;border-radius:6px;color:#46564e;text-decoration:none}.course-tabs .active,.chapter-tabs .active{color:white;background:#3f6258}.course-tabs a:focus-visible,.chapter-tabs a:focus-visible{outline:2px solid #3f6258;outline-offset:2px}h1[id],h2[id]{scroll-margin-top:90px}
+.table-scroll{max-width:100%;overflow-x:auto}.table-scroll:focus-visible{outline:2px solid #3f6258;outline-offset:2px}
+@media screen and (max-width:900px){.table-scroll.wide-table table{min-width:600px}.table-scroll{scrollbar-width:thin}}
+@media print{.course-tabs,.chapter-tabs{display:none!important}.table-scroll{display:contents}}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">PROPERTY LAW · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">물권법</span>
+    <span class="brand-sub">제1장 총론 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="물권법 학습 메뉴"><a class="active" aria-current="page" href="./물권법_개념.html">개념 목록</a><a href="../index.html?subject=물권법">문제 풀기</a></nav><nav class="chapter-tabs" aria-label="물권법 개념 장 선택"><span class="active" aria-current="page">제1장 총론</span><a href="./물권법_제2장_물권변동_통합과외본.html">제2장 물권변동</a><a href="./물권법_제3장_기본물권_통합과외본.html">제3장 기본물권</a><a href="./물권법_제4장_용익물권_통합과외본.html">제4장 용익물권</a><a href="./물권법_제5장_담보물권_통합과외본.html">제5장 담보물권</a></nav><h1>물권법 제1장 총론</h1>
+<h2>정확하게 정리하고, 쉽게 이해하는 통합 과외본</h2>
+<p>대상 범위: 교재 제1장 전체 · 본문 2<del>36쪽(PDF 13</del>47쪽)</p>
+<p>기출 연결: 「물권법.json」 중 <code>물권관계총론</code> 24문제</p>
+<p>현행법 확인 기준: 2026년 10월 22일 · 민법 제98조~제102조, 제185조, 제213조, 제214조</p>
+<hr>
+<h2>이 장은 결국 무엇을 설명하는가</h2>
+<p>물권법의 첫 장은 “내 물건이니 내 마음대로 한다”는 일상적인 말을 법률의 언어로 바꾸는 장이다. 물건을 직접 지배하는 권리인 <strong>물권이 무엇인지</strong>, 사람들이 마음대로 새로운 물권을 만들 수 없는 <strong>물권법정주의</strong>, 무엇이 물권의 대상이 되는지 정하는 <strong>물권의 객체</strong>, 여러 권리가 부딪칠 때 누가 먼저인지 정하는 <strong>우선적 효력</strong>, 물권이 침해되었을 때 되찾고 막아내는 <strong>물권적 청구권</strong>을 하나의 체계로 묶는다.</p>
+<blockquote>
+<p><strong>이 장의 한 문장:</strong> 물권의 종류·대상·힘·구제수단을 정하여 “누가 어떤 물건을 누구에게까지 주장할 수 있는가”를 설명하는 장이다.</p>
+</blockquote>
+<h3>왜 이런 개념이 생겼는가</h3>
+<p>채권은 약속한 두 사람 사이의 관계이므로 제3자는 계약서를 보지 못해도 보통 손해를 입지 않는다. 그러나 물권은 세상 모든 사람에게 주장할 수 있다. 처음 보는 사람이 “이 토지에는 내가 만든 특별한 사용권이 있다”고 주장할 수 있다면 누구도 안심하고 토지를 사거나 담보로 잡지 못한다. 그래서 법은 물권의 종류와 내용을 정형화하고, 등기나 점유처럼 밖에서 알아볼 수 있는 표시를 요구한다.</p>
+<p>동시에 물권은 이름만 거창해서는 소용없다. 남이 내 땅을 차지하거나 무효인 등기를 해 두었을 때, 단순히 “내가 주인이다”라고 선언하는 것만으로는 지배를 회복할 수 없다. 반환·방해제거·방해예방을 요구하는 물권적 청구권이 필요한 이유다.</p>
+<h3>물권법 전체에서의 위치와 연결</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>앞에서 배운 민법총칙</th>
+<th>제1장 총론</th>
+<th>다음 장부터</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>권리주체, 법률행위, 의사표시, 무효·취소</td>
+<td>물권의 기본 언어와 공통효력</td>
+<td>제2장 물권변동, 제3장 소유권·점유권, 제4장 용익물권, 제5장 담보물권</td>
+</tr>
+</tbody></table></div>
+<p>민법총칙이 “누가 어떤 의사로 법률행위를 했는가”를 다뤘다면, 물권법은 그 법률행위로 생긴 권리를 외부의 제3자에게 어떻게 보이고 주장할 것인지 다룬다. 제1장의 물권법정주의는 제2장의 공시제도와 연결되고, 물권의 객체는 제3장의 소유권과 제5장의 담보권 범위를 정한다. 물권적 청구권은 이후 모든 물권에서 반복되는 공통 도구다.</p>
+<h3>이 장을 모르면 생기는 문제</h3>
+<ul>
+<li>물권과 채권의 차이를 “강한 권리와 약한 권리” 정도로만 외우게 된다.</li>
+<li>관습법상 물권과 사실상 이익을 구별하지 못한다.</li>
+<li>1필 토지의 일부, 건물 일부, 나무·농작물·종물의 소유관계를 틀린다.</li>
+<li>먼저 생긴 물권이 언제나 우선한다고 오해한다.</li>
+<li>반환청구·방해제거·방해예방청구를 구별하지 못한다.</li>
+<li>물권적 청구권에 손해배상·부당이득의 요건을 잘못 섞는다.</li>
+<li>현재의 방해와 과거에 끝난 손해를 구별하지 못한다.</li>
+</ul>
+<hr>
+<h1>단원 전체 지도</h1>
+<h2>시험 중요도와 공부 순서</h2>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>주제</th>
+<th align="right">중요도</th>
+<th>시험의 핵심 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물권과 채권의 차이</td>
+<td align="right">★★★★★</td>
+<td>직접성·배타성·절대성을 설명할 수 있는가?</td>
+</tr>
+<tr>
+<td>물권법정주의</td>
+<td align="right">★★★★★</td>
+<td>종류강제와 내용강제, 법률과 관습법의 범위를 아는가?</td>
+</tr>
+<tr>
+<td>물권의 종류</td>
+<td align="right">★★★★☆</td>
+<td>본권·점유권, 소유권·제한물권, 용익·담보물권을 분류하는가?</td>
+</tr>
+<tr>
+<td>특정성과 독립성</td>
+<td align="right">★★★★★</td>
+<td>물건 일부·집합물이 언제 예외적으로 객체가 되는가?</td>
+</tr>
+<tr>
+<td>동산과 부동산</td>
+<td align="right">★★★★★</td>
+<td>공시·공신력·취득시효·물권 종류의 차이를 아는가?</td>
+</tr>
+<tr>
+<td>주물과 종물</td>
+<td align="right">★★★★★</td>
+<td>종물 요건과 제100조 제2항의 임의규정성을 아는가?</td>
+</tr>
+<tr>
+<td>원물과 과실</td>
+<td align="right">★★★★☆</td>
+<td>천연과실·법정과실의 귀속시점을 구별하는가?</td>
+</tr>
+<tr>
+<td>일물일권주의와 예외</td>
+<td align="right">★★★★★</td>
+<td>토지·건물 일부, 수목·농작물의 독립성을 판단하는가?</td>
+</tr>
+<tr>
+<td>물권 상호 간 우선효</td>
+<td align="right">★★★★★</td>
+<td>제한물권의 설정순위와 경매효과를 판단하는가?</td>
+</tr>
+<tr>
+<td>물권과 채권의 우열</td>
+<td align="right">★★★★★</td>
+<td>대항력·확정일자·최우선변제의 예외를 구별하는가?</td>
+</tr>
+<tr>
+<td>물권적 청구권 3종</td>
+<td align="right">★★★★★</td>
+<td>반환·방해제거·방해예방의 요건과 상대방을 찾는가?</td>
+</tr>
+<tr>
+<td>방해와 손해의 구별</td>
+<td align="right">★★★★★</td>
+<td>현재 방해인지 과거 침해의 결과인지 구별하는가?</td>
+</tr>
+<tr>
+<td>비용·소멸시효·다른 청구권</td>
+<td align="right">★★★★☆</td>
+<td>제214조의 범위와 청구권 경합을 구별하는가?</td>
+</tr>
+<tr>
+<td>로마법·게르만법 요소</td>
+<td align="right">★★☆☆☆ 심화</td>
+<td>점유·등기제도의 역사적 배경을 묻는가?</td>
+</tr>
+</tbody></table></div>
+<h2>1장을 푸는 다섯 질문</h2>
+<ol>
+<li><strong>무슨 권리인가?</strong> 물권인가 채권인가, 소유권인가 제한물권인가.</li>
+<li><strong>무엇을 대상으로 하는가?</strong> 특정되고 독립된 물건인가.</li>
+<li><strong>어떻게 밖에 드러나는가?</strong> 부동산은 등기, 동산은 점유가 기본이다.</li>
+<li><strong>다른 권리와 충돌하면 누가 우선하는가?</strong> 권리의 성질과 성립순위를 본다.</li>
+<li><strong>침해되면 무엇을 요구하는가?</strong> 돌려달라, 치워달라, 미리 막아달라 중 하나다.</li>
+</ol>
+<blockquote>
+<p><strong>파란 연결:</strong> 물권법정주의는 “권리의 메뉴”, 객체론은 “권리가 붙는 대상”, 우선적 효력은 “권리끼리의 순서”, 물권적 청구권은 “침해 때의 행동”을 정한다.</p>
+</blockquote>
+<hr>
+<h1>제1절 물권의 의의와 물권법정주의</h1>
+<h2 id="property-01-01" data-concept-id="property-01-01">1. 물권과 물권법 ★★★★★</h2>
+<p>물권은 물권자가 특정한 물건을 <strong>직접 지배</strong>하여 사용·수익·처분할 수 있는 재산권이다. 소유권자는 원칙적으로 물건의 사용가치와 교환가치를 모두 지배하고, 지상권자나 전세권자는 사용가치 일부를, 저당권자는 교환가치를 지배한다.</p>
+<h3>용어를 한자로 이해하기</h3>
+<p><strong>물권(物權)</strong></p>
+<ul>
+<li>物(만물 물): 사람이 지배하는 물건</li>
+<li>權(권세 권): 법이 보장하는 힘</li>
+<li>합친 뜻: 물건을 직접 지배하는 법적 힘</li>
+<li>이름이 붙은 이유: 상대방의 행동을 요구하는 채권과 달리, 권리의 중심이 물건에 있기 때문이다.</li>
+<li>중학생 설명: “사람에게 약속을 지키라고 요구하는 표”가 채권이라면, “이 물건은 내 지배 아래 있다”는 표가 물권이다.</li>
+<li>실제 사례: 집주인의 소유권, 남의 땅에 건물을 소유하기 위한 지상권, 돈을 못 받으면 집값에서 먼저 변제받는 저당권.</li>
+<li>시험 출제: 물권=절대권·지배권·배타권, 채권=상대권·청구권이라는 대비로 나온다.</li>
+</ul>
+<p><strong>채권(債權)</strong></p>
+<ul>
+<li>債(빚 채): 갚거나 이행해야 할 의무</li>
+<li>權(권세 권): 법이 보장하는 힘</li>
+<li>법률상 뜻: 특정 채무자에게 일정한 급부를 요구하는 권리</li>
+<li>기억법: 물권의 화살표는 <strong>권리자 → 물건</strong>, 채권의 화살표는 <strong>채권자 → 채무자 → 급부</strong>다.</li>
+</ul>
+<h3>형식적 의미와 실질적 의미</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>의미</th>
+<th>범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형식적 의미의 물권법</td>
+<td>민법전 제2편 물권</td>
+<td>민법 제185조~제372조</td>
+</tr>
+<tr>
+<td>실질적 의미의 물권법</td>
+<td>사람과 물건의 지배관계를 규율하는 모든 법</td>
+<td>민법, 특별법, 관습법 등</td>
+</tr>
+</tbody></table></div>
+<p>교재가 특별법을 길게 열거한 이유는 시험에서 “물권법은 민법 물권편에만 있다”는 보기를 틀리게 만들기 위해서다. 부동산등기법, 집합건물법, 부동산실명법, 가등기담보법, 동산·채권담보법 등도 실질적 물권법에 포함된다.</p>
+<h3>쉬운 사례: 집을 샀는데 아직 등기를 하지 않았다</h3>
+<p>甲이 乙에게 집을 팔고 대금까지 받았지만 등기를 넘기지 않았다. 乙은 매매계약에 따른 소유권이전등기청구권이라는 <strong>채권</strong>을 갖는다. 아직 소유권이라는 <strong>물권</strong>은 甲에게 있다. 乙이 집을 인도받아 사용할 권리가 있을 수는 있지만, “매수했으니 이미 소유자”라고 말하면 틀린다.</p>
+<blockquote>
+<p><strong>한 줄 결론:</strong> 매매계약은 소유권을 넘길 의무를 만들고, 부동산 소유권은 원칙적으로 등기를 해야 이전된다.</p>
+</blockquote>
+<h2 id="property-01-02" data-concept-id="property-01-02">2. 물권법의 특성 ★★★☆☆</h2>
+<h3>강행규정성</h3>
+<p>물권은 제3자 모두에게 영향을 미치므로 당사자끼리 합의하여 효력을 마음대로 바꾸기 어렵다. 그래서 물권법은 대체로 강행규정이다. 다만 모든 규정이 강행규정은 아니다. 종물이 주물의 처분에 따른다는 제100조 제2항, 유치권 배제특약 등에는 당사자의 다른 합의가 허용된다.</p>
+<h3>고유법성</h3>
+<p>토지·건물·등기·점유제도는 각 사회의 역사와 생활관습에 깊이 연결된다. 우리 민법은 독일법의 영향을 많이 받았지만 전세권과 같은 고유한 제도도 갖는다.</p>
+<h3>로마법 요소와 게르만법 요소</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>로마법적 요소</th>
+<th>게르만법적 요소</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>소유와 점유의 구별</td>
+<td>동산과 부동산의 구별</td>
+</tr>
+<tr>
+<td>개인주의적·포괄적 소유권</td>
+<td>부동산 등기제도</td>
+</tr>
+<tr>
+<td>소유권과 제한물권의 엄격한 구별</td>
+<td>선의의 제3자 보호, 점유의 적법 추정</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>분홍 함정:</strong> <code>점유의 적법 추정</code>은 게르만법적 요소다. 기출 <code>물권법_워크북_002</code>의 정답 신호다.</p>
+</blockquote>
+<h2 id="property-01-03" data-concept-id="property-01-03">3. 물권법정주의 ★★★★★</h2>
+<p>민법 제185조는 법률 또는 관습법이 인정하지 않는 물권을 임의로 만들지 못하게 한다. 목적은 권리관계를 정형화하고 공시를 가능하게 하여 제3자의 예상하지 못한 손해를 막는 것이다.</p>
+<h3>용어를 한자로 이해하기</h3>
+<p><strong>물권법정주의(物權法定主義)</strong></p>
+<ul>
+<li>物權: 물건을 직접 지배하는 권리</li>
+<li>法(법 법)·定(정할 정): 법이 정함</li>
+<li>主義(주장할 주·옳을 의): 제도의 기본원칙</li>
+<li>합친 뜻: 물권의 종류와 내용은 당사자가 아니라 법질서가 정한다는 원칙</li>
+<li>기억법: “물권 메뉴판은 법이 만든다.” 메뉴에 없는 물권을 주문할 수 없고, 메뉴의 재료도 마음대로 바꿀 수 없다.</li>
+</ul>
+<h3>종류강제와 내용강제</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>질문</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>종류강제</td>
+<td>법에 없는 새로운 물권을 만들 수 있는가?</td>
+<td>“영원히 모든 소유자에게 주장하는 카페이용권”을 새 물권으로 창설할 수 없음</td>
+</tr>
+<tr>
+<td>내용강제</td>
+<td>법이 정한 물권의 내용을 마음대로 바꿀 수 있는가?</td>
+<td>저당권에 법이 인정하지 않는 전면적 사용권을 붙일 수 없음</td>
+</tr>
+</tbody></table></div>
+<h3>제185조의 ‘법률’과 ‘관습법’</h3>
+<ul>
+<li><strong>법률:</strong> 국회가 제정한 형식적 의미의 법률을 뜻한다. 행정명령·규칙·조례만으로 새 물권을 창설할 수 없다.</li>
+<li><strong>관습법:</strong> 민법 제1조의 보충적 효력만 갖는지, 제185조에서는 성문법과 대등한 효력을 갖는지 학설이 대립한다.</li>
+<li><strong>시험 안전선:</strong> 법률과 관습법 모두 물권의 근거가 될 수 있다는 결론부터 잡고, 양자의 관계에는 견해대립이 있다고 답한다.</li>
+</ul>
+<h3>위반 효과</h3>
+<p>제185조는 강행규정이므로 위반한 물권행위는 무효다. 다만 물권적 효력을 만들지 못한다고 해서 당사자 사이의 채권적 약속까지 언제나 전부 무효라고 단정하면 안 된다. 약정의 목적과 당사자 의사에 따라 채권적 효력, 일부무효, 무효행위 전환을 따로 검토한다.</p>
+<h3>물권법정주의가 너무 딱딱해지는 문제</h3>
+<p>새로운 경제생활은 법전이 예상하지 못한 담보수요를 만든다. 이를 보완하는 두 통로가 있다.</p>
+<ol>
+<li><strong>특별법:</strong> 가등기담보권, 양도담보권, 동산담보권 등</li>
+<li><strong>관습법:</strong> 관습법상 법정지상권, 분묘기지권 등</li>
+</ol>
+<p>그렇다고 사회에서 반복된다고 모두 관습법상 물권이 되는 것은 아니다. 판례는 온천권, 근린공원이용권, 사도통행권, 미등기 무허가건물 양수인의 이른바 관습상 소유권을 관습법상 물권으로 인정하지 않았다.</p>
+<h3>판례 드라마: 온천을 발견한 사람의 ‘온천권’</h3>
+<p><strong>등장인물.</strong> 온천공을 굴착한 사람과 토지소유자. <strong>사건.</strong> 굴착자는 자신이 온천을 발견하고 시설을 갖추었으므로 토지소유자에게도 주장할 수 있는 독립한 온천권이 있다고 주장했다. <strong>갈등.</strong> 경제적 가치와 지역관행만으로 새로운 배타적 물권을 인정할 수 있는가. <strong>법원의 고민.</strong> 인정하면 거래 당사자는 등기부에도 없는 권리를 예측하기 어렵다. <strong>결론.</strong> 판례는 온천권을 관습법상 물권이나 준물권으로 인정하지 않았다(대법원 1970. 5. 26. 69다1239).</p>
+<blockquote>
+<p><strong>노란 결론:</strong> 반복되는 이용관행이나 경제적 이익이 있다고 해서 자동으로 관습법상 물권이 되지 않는다.</p>
+</blockquote>
+<h2 id="property-01-04" data-concept-id="property-01-04">4. 물권의 종류 ★★★★☆</h2>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>기준</th>
+<th>구분</th>
+<th>핵심 의미</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사실상 지배와의 관계</td>
+<td>본권 / 점유권</td>
+<td>지배할 법적 권리 / 현재 사실상 지배의 보호</td>
+</tr>
+<tr>
+<td>지배 범위</td>
+<td>소유권 / 제한물권</td>
+<td>사용·수익·처분 전부 / 일부 권능만 지배</td>
+</tr>
+<tr>
+<td>제한물권의 목적</td>
+<td>용익물권 / 담보물권</td>
+<td>사용가치 / 교환가치</td>
+</tr>
+<tr>
+<td>객체</td>
+<td>부동산물권 / 동산물권</td>
+<td>토지·건물 / 그 밖의 물건</td>
+</tr>
+</tbody></table></div>
+<h3>본권과 점유권</h3>
+<p>본권(本權)은 “내가 이 물건을 지배할 법적 근거가 있다”는 권리다. 점유권(占有權)은 그 근거가 있는지를 당장 묻지 않고 현실의 지배상태 자체를 우선 보호한다. 도둑도 물건을 사실상 지배하면 점유자가 될 수 있지만, 소유권까지 얻는 것은 아니다.</p>
+<h3>소유권과 제한물권</h3>
+<p>소유권은 물건의 사용가치와 교환가치를 전면적으로 지배한다. 제한물권은 그중 일부만 떼어 지배한다. 지상권·지역권·전세권은 주로 사용가치를, 유치권·질권·저당권은 채권회수를 위해 교환가치를 지배한다.</p>
+<h3>민법 밖의 물권</h3>
+<p>공장저당권, 자동차저당권, 선박저당권, 광업권, 어업권, 가등기담보권 등은 특별법이 인정하는 물권이다. 따라서 “동산에는 저당권이 성립할 여지가 전혀 없다”는 보기는 틀리다. 원칙은 부동산 저당이지만 특별법상 자동차·선박·항공기 등에도 저당권이 설정된다.</p>
+<hr>
+<h1>제2절 물권의 특성과 객체</h1>
+<h2 id="property-01-05" data-concept-id="property-01-05">1. 물권의 세 가지 핵심 특성 ★★★★★</h2>
+<h3>재산권성과 특정성</h3>
+<p>물권은 원칙적으로 특정되고 독립된 물건을 대상으로 한다. “창고 안의 물건 아무거나”처럼 대상이 정해지지 않으면 모든 사람에게 배타적으로 주장할 범위를 알 수 없다.</p>
+<h3>절대성</h3>
+<p>물권자는 특정 채무자뿐 아니라 모든 사람에게 자신의 권리를 주장할 수 있다. 그러나 가처분등기, 가등기, 신탁적 소유권 이전처럼 특정 관계에서 물권 주장이 제한되는 예외도 있다. 절대성은 “어떤 상황에서도 무조건 이긴다”는 뜻이 아니다.</p>
+<h3>직접지배성과 배타성</h3>
+<p>물권자는 채무자의 이행을 거치지 않고 물건을 직접 지배한다. 그래서 서로 양립할 수 없는 동일한 내용의 물권은 하나의 물건에 동시에 성립할 수 없다. 반면 같은 집을 두 사람에게 이중매매하면 두 매수인의 소유권이전등기청구권이라는 채권은 병존할 수 있다. 실제 소유권은 먼저 유효한 등기를 갖춘 쪽이 취득한다.</p>
+<blockquote>
+<p><strong>한 줄 결론:</strong> 물권은 특정 물건을 직접·배타적으로 지배하고 모든 사람에게 주장하는 권리다.</p>
+</blockquote>
+<h2 id="property-01-06" data-concept-id="property-01-06">2. 물권의 객체: 특정한 독립물 ★★★★★</h2>
+<p>원칙적으로 물권의 객체는 현존하고 특정된 하나의 독립한 물건이어야 한다. 이를 뒷받침하는 원칙이 일물일권주의다.</p>
+<h3>특정(特定)과 독립(獨立)</h3>
+<ul>
+<li>特(특별할 특)·定(정할 정): 다른 것과 구별되도록 정해짐</li>
+<li>獨(홀로 독)·立(설 립): 다른 부분과 구별되는 하나의 물건으로 섬</li>
+<li>기억법: “어느 물건인지 알아야 하고, 혼자 거래될 수 있어야 한다.”</li>
+</ul>
+<p>물건 일부나 구성부분은 원칙적으로 독립한 물권의 대상이 되지 않는다. 하지만 사회적 필요가 있고 범위를 공시할 수 있으면 예외가 인정된다. 토지 일부의 지상권·지역권·전세권, 구분건물, 명인방법을 갖춘 수목 등이 대표적이다.</p>
+<h3>예외적으로 권리가 객체가 되는 경우</h3>
+<p>물건이 아닌 재산권도 법률이 특별히 인정하면 물권의 객체가 된다.</p>
+<ul>
+<li>채권·주식 등 재산권을 목적으로 하는 권리질권</li>
+<li>재산권의 준점유</li>
+<li>지상권·전세권을 목적으로 하는 저당권</li>
+</ul>
+<blockquote>
+<p><strong>분홍 함정:</strong> “물권의 객체는 물건에만 한한다”는 단정은 틀리다.</p>
+</blockquote>
+<h2 id="property-01-07" data-concept-id="property-01-07">3. 단일물·합성물·집합물 ★★★★☆</h2>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>뜻</th>
+<th>예시</th>
+<th>법률관계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>단일물</td>
+<td>구성부분이 개성을 잃고 하나의 형체를 이룸</td>
+<td>1필 토지, 석불</td>
+<td>하나의 물건</td>
+</tr>
+<tr>
+<td>합성물</td>
+<td>여러 물건이 개성을 어느 정도 유지하며 결합</td>
+<td>자동차, 보석반지, 건물</td>
+<td>법률상 하나의 물건, 부합·혼화·가공 문제</td>
+</tr>
+<tr>
+<td>집합물</td>
+<td>여러 독립물이 경제적으로 하나의 가치를 가짐</td>
+<td>공장 재고, 도서관 장서</td>
+<td>원칙상 각각이 객체, 특정·공시되면 예외 가능</td>
+</tr>
+</tbody></table></div>
+<h3>판례 드라마: 창고 안에서 계속 바뀌는 재고</h3>
+<p><strong>등장인물.</strong> 자금이 필요한 공장주와 금융회사. <strong>사건.</strong> 공장주는 창고 속 원재료 전부를 담보로 제공했지만 원재료는 매일 들어오고 제품으로 나갔다. <strong>갈등.</strong> 내용물이 계속 바뀌는데 “특정한 물건”이라고 할 수 있는가. <strong>법원의 고민.</strong> 모두 개별 표시하게 하면 기업담보가 사실상 불가능하지만, 범위를 모호하게 두면 제3자가 피해를 본다. <strong>결론.</strong> 종류·보관장소·수량 등으로 범위가 특정되고 점유개정이라는 공시방법을 갖추면 유동집합물에 하나의 양도담보권을 인정할 수 있다. 새로 반입된 물건이나 생산물까지 미치는지는 계약의 해석에 따라 판단한다(대법원 2004. 11. 12. 2004다22858 등).</p>
+<blockquote>
+<p><strong>초록 이유:</strong> 일물일권주의는 거래안전을 위한 원칙이므로, 거래안전을 해치지 않는 특정·공시가 가능하면 경제적 필요에 맞춰 예외를 인정한다.</p>
+</blockquote>
+<h2 id="property-01-08" data-concept-id="property-01-08">4. 동산과 부동산 ★★★★★</h2>
+<p>민법 제99조에 따라 토지와 그 정착물은 부동산이고, 그 밖의 물건은 동산이다. 선박·자동차·항공기·일부 건설기계는 본래 동산이지만 등록으로 권리관계를 공시한다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>부동산</th>
+<th>동산</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기본 공시방법</td>
+<td>등기</td>
+<td>점유</td>
+</tr>
+<tr>
+<td>공신력</td>
+<td>등기에 원칙적으로 없음</td>
+<td>선의취득을 통해 제한적으로 인정</td>
+</tr>
+<tr>
+<td>대표 물권</td>
+<td>소유권·점유권·지상권·지역권·전세권·유치권·저당권</td>
+<td>소유권·점유권·유치권·질권</td>
+</tr>
+<tr>
+<td>취득시효</td>
+<td>점유 + 등기 필요</td>
+<td>점유 중심</td>
+</tr>
+<tr>
+<td>무주물</td>
+<td>국유 귀속</td>
+<td>소유의 의사로 점유한 사람이 취득 가능</td>
+</tr>
+<tr>
+<td>부합</td>
+<td>토지소유자 귀속이 원칙</td>
+<td>주된 동산소유자 귀속, 주종 불명확하면 가액비율 공유</td>
+</tr>
+</tbody></table></div>
+<p>금전은 동산이지만 개성이 없고 가치 자체로 유통되므로 물권적 청구권이나 선의취득 규정이 그대로 적용되지 않는 경우가 있다.</p>
+<blockquote>
+<p><strong>분홍 함정:</strong> 부동산 취득시효는 점유기간만 채웠다고 완성되는 것이 아니라 소유권이전등기를 해야 소유권을 취득한다.</p>
+</blockquote>
+<h2 id="property-01-09" data-concept-id="property-01-09">5. 주물과 종물 ★★★★★</h2>
+<h3>용어와 요건</h3>
+<p><strong>주물(主物)</strong>은 경제적 중심이 되는 물건, <strong>종물(從物)</strong>은 주물의 경제적 효용을 계속 높이기 위해 부속된 독립한 물건이다.</p>
+<p>종물이 되려면 다음을 확인한다.</p>
+<ol>
+<li>주물의 상용, 즉 주물 자체의 경제적 효용에 이바지할 것</li>
+<li>주물과 장소적으로 밀접하게 결합할 것</li>
+<li>주물의 구성부분이 아니라 독립한 물건일 것</li>
+<li>원칙적으로 주물과 동일한 소유자에게 속할 것</li>
+</ol>
+<h3>사례로 구별하기</h3>
+<ul>
+<li>주유소 건물과 주유기: 주유소의 경제적 기능을 직접 높이므로 종물.</li>
+<li>백화점 건물과 전화교환설비: 백화점 운영기능에 계속 이바지하므로 종물.</li>
+<li>호텔 객실의 TV·냉장고: 투숙객의 이용편의를 위한 것이지 호텔 건물 자체의 효용에 직접 이바지하는 것은 아니므로 판례상 종물이 아니다.</li>
+<li>토지 지하의 유류저장탱크: 독립성을 잃고 토지에 결합하면 종물이 아니라 부합물이다.</li>
+</ul>
+<h3>종물의 효과</h3>
+<p>민법 제100조 제2항에 따라 종물은 원칙적으로 주물의 처분에 따른다. 그러나 이 규정은 <strong>임의규정</strong>이므로 특약으로 종물을 제외하거나 종물만 따로 처분할 수 있다. 다만 등기나 점유 등 별도의 공시요건이 필요한 권리취득은 그 요건도 갖춰야 한다.</p>
+<p>저당권의 효력은 설정 당시의 종물뿐 아니라 설정 뒤에 부속된 종물에도 미칠 수 있다. 주된 권리와 종된 권리의 관계에도 제100조 제2항의 취지가 유추된다.</p>
+<blockquote>
+<p><strong>노란 결론:</strong> “같이 사용한다”만으로는 부족하고, 종물이 <strong>주물 자체의 경제적 효용</strong>을 계속 높여야 한다.</p>
+</blockquote>
+<h2 id="property-01-10" data-concept-id="property-01-10">6. 원물과 과실 ★★★★☆</h2>
+<p><strong>원물(元物)</strong>은 수익을 낳는 원래 물건이고, <strong>과실(果實)</strong>은 그 물건에서 생기는 경제적 수익이다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>뜻</th>
+<th>예시</th>
+<th>귀속 시점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>천연과실</td>
+<td>물건의 용법에 따라 얻는 산출물</td>
+<td>과일, 우유, 새끼, 석재</td>
+<td>원물에서 분리될 때 수취권자에게 귀속</td>
+</tr>
+<tr>
+<td>법정과실</td>
+<td>물건 사용의 대가로 받는 금전·물건</td>
+<td>임대료</td>
+<td>수취권 존속기간의 일수 비율로 귀속</td>
+</tr>
+</tbody></table></div>
+<p>주식배당금·특허사용료는 권리 사용의 대가이고, 임금은 노동의 대가이므로 민법상 법정과실이 아니다. 권원 없이 사용하여 얻은 사용이익도 엄밀한 법정과실은 아니지만 관련 규정이 유추될 수 있다.</p>
+<h3>쉬운 사례: 임대한 집을 중간에 팔았다</h3>
+<p>甲이 세입자에게 빌려 준 집을 15일에 乙에게 팔고 등기까지 넘겼다. 한 달 임대료는 원칙적으로 소유권이전등기 전후의 일수 비율에 따라 甲과 乙이 나누어 취득한다. 제102조 제2항은 임의규정이므로 매매계약에서 달리 정할 수 있다.</p>
+<h2 id="property-01-11" data-concept-id="property-01-11">7. 일물일권주의와 예외 ★★★★★</h2>
+<h3>원칙</h3>
+<p>하나의 물권은 하나의 독립된 물건을 대상으로 한다. 물건 일부에 독립한 소유권을 무제한 인정하면 공시가 곤란하고, 여러 물건 전체에 하나의 권리를 인정하면 그 범위를 제3자가 알기 어렵기 때문이다.</p>
+<h3>토지 일부</h3>
+<ul>
+<li>1필 토지의 일부는 분필·등기 전에는 독립한 소유권의 객체가 되기 어렵다.</li>
+<li>토지 일부를 시효취득할 수는 있지만 최종 소유권 취득에는 분필과 등기가 필요하다.</li>
+<li>지상권·지역권·전세권 같은 용익물권은 범위를 등기로 공시할 수 있으면 분필 없이 토지 일부에도 설정할 수 있다.</li>
+<li>지상·지하의 일정 공간에는 구분지상권을 설정할 수 있다.</li>
+</ul>
+<h3>건물 일부</h3>
+<p>구조상·이용상 독립성과 구분행위가 있고 공시가 갖춰지면 건물 일부는 구분소유권의 객체가 된다. 독립된 이용가치가 있는 건물 일부에는 구분등기 전이라도 범위를 특정해 전세권을 설정할 수 있는 경우가 있다.</p>
+<h3>수목·미분리과실·농작물</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>대상</th>
+<th>원칙</th>
+<th>독립성이 인정되는 경우</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>수목</td>
+<td>토지의 구성부분</td>
+<td>입목등기 또는 명인방법</td>
+</tr>
+<tr>
+<td>미분리 천연과실</td>
+<td>수목·원물의 일부</td>
+<td>명인방법을 갖춘 경우</td>
+</tr>
+<tr>
+<td>농작물</td>
+<td>토지에 부합</td>
+<td>권원 있는 경작자의 농작물, 판례상 무권원 경작자의 농작물도 별개 물건</td>
+</tr>
+</tbody></table></div>
+<p>판례는 타인의 토지에 권한 없이 심은 농작물도 경작자의 소유로 본다. 다만 수확 전 농작물을 매매하여 소유권을 넘기려면 명인방법이 필요하다. “농작물은 언제나 토지소유자 것”이라는 단정은 틀리다.</p>
+<hr>
+<h1>제3절 물권의 효력</h1>
+<h2 id="property-01-12" data-concept-id="property-01-12">1. 물권 상호 간의 우선적 효력 ★★★★★</h2>
+<p>“먼저 생긴 물권이 우선한다”는 말은 출발점일 뿐 모든 경우의 답은 아니다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>충돌관계</th>
+<th>판단법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>양립할 수 없는 소유권끼리</td>
+<td>먼저 유효하게 성립한 소유권만 존재</td>
+</tr>
+<tr>
+<td>소유권과 제한물권</td>
+<td>제한물권은 설정범위에서 소유권을 제한하므로 성립순위와 무관하게 그 내용이 우선</td>
+</tr>
+<tr>
+<td>양립 가능한 제한물권끼리</td>
+<td>원칙적으로 먼저 성립한 물권이 우선</td>
+</tr>
+<tr>
+<td>저당권끼리</td>
+<td>순위에 따라 우선변제, 경매로 모두 소멸하는 것이 원칙</td>
+</tr>
+<tr>
+<td>점유권과 본권</td>
+<td>점유권에는 일반적인 우선적 효력이 없음</td>
+</tr>
+</tbody></table></div>
+<h3>사례 1: 전세권·저당권·새 소유자</h3>
+<p>甲 소유 주택에 A의 저당권이 먼저 등기되었다. 그 뒤 乙의 전세권이 등기되고, 마지막으로 丙이 소유권을 취득했다.</p>
+<ul>
+<li>乙은 새 소유자 丙에게 전세권을 주장할 수 있다. 소유권이 바뀌어도 등기된 제한물권은 그대로 붙어 간다.</li>
+<li>그러나 A의 저당권이 乙의 전세권보다 먼저였다면 A의 저당권 실행으로 후순위 전세권은 소멸한다.</li>
+<li>전세권이 저당권보다 먼저였다면 경매 뒤에도 원칙적으로 전세권이 존속한다.</li>
+</ul>
+<blockquote>
+<p><strong>분홍 함정:</strong> “제한물권은 소유권보다 먼저 생겨야만 소유자에게 주장할 수 있다”는 문장은 틀리다. 제한물권은 그 성질상 소유권을 제한한다.</p>
+</blockquote>
+<h2 id="property-01-13" data-concept-id="property-01-13">2. 채권에 우선하는 효력과 예외 ★★★★★</h2>
+<h3>원칙</h3>
+<p>같은 물건에 물권과 채권이 병존하면 성립시기와 관계없이 물권이 우선한다. 임차인의 단순 임대차채권보다 새 소유자의 소유권이 원칙적으로 우선하는 이유다. 이 원칙은 경매의 우선배당, 파산절차의 환취권·별제권, 강제집행에 대한 제3자이의의 소로 구체화된다.</p>
+<h3>예외를 세 묶음으로 외우기</h3>
+<ol>
+<li><strong>채권이 공시를 갖추어 물권과 대등하게 경쟁:</strong> 등기된 임차권, 주택·상가임대차의 대항력, 가등기로 순위 보전된 청구권.</li>
+<li><strong>배당에서 우선권을 획득:</strong> 대항요건과 확정일자를 갖춘 보증금반환채권.</li>
+<li><strong>법이 최우선 지위를 특별히 부여:</strong> 일정 임금채권, 소액임차보증금 등.</li>
+</ol>
+<h3>사례 2: 임차인과 저당권자</h3>
+<p>甲이 乙에게 집을 빌려 준 뒤 丙에게 소유권을 넘기고, A의 저당권도 설정했다.</p>
+<ul>
+<li>乙이 단순히 계약서만 갖고 있다면 새 소유자 丙에게 원칙적으로 대항하지 못한다.</li>
+<li>乙이 주택을 인도받고 전입신고를 하여 대항력을 갖추었다면 그보다 뒤의 소유자에게 임차권을 주장할 수 있다.</li>
+<li>대항요건과 확정일자를 갖추면 경매대금에서 순위에 따른 우선변제를 받을 수 있다.</li>
+<li>소액보증금의 최우선변제는 대항요건이 핵심이며 확정일자가 필수는 아니다.</li>
+</ul>
+<blockquote>
+<p><strong>한 줄 결론:</strong> 임차권 문제는 <code>대항력</code>, <code>확정일자 우선변제</code>, <code>소액보증금 최우선변제</code>를 서로 다른 제도로 나누어야 한다.</p>
+</blockquote>
+<h2 id="property-01-14" data-concept-id="property-01-14">3. 물권적 청구권 ★★★★★</h2>
+<p>물권적 청구권은 물권의 완전한 지배가 방해받거나 방해받을 염려가 있을 때 반환·제거·예방을 요구하는 권리다. 물권은 침해자 모두에게 주장할 수 있지만, 청구권은 구체적인 현재 방해자에게 행사하므로 “물권적”이면서 “청구권”이다.</p>
+<h3>용어를 한자로 이해하기</h3>
+<p><strong>물권적 청구권(物權的請求權)</strong></p>
+<ul>
+<li>請(청할 청): 상대방에게 요구함</li>
+<li>求(구할 구): 필요한 행위를 구함</li>
+<li>뜻: 물권의 지배상태를 현실에서 회복·보전하기 위해 특정인에게 행동을 요구하는 권리</li>
+<li>기억법: <code>빼앗겼다 → 반환</code>, <code>막혀 있다 → 제거</code>, <code>곧 막힐 것 같다 → 예방</code>.</li>
+</ul>
+<h3>세 종류</h3>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>종류</th>
+<th>침해 모습</th>
+<th>요구 내용</th>
+<th>대표 조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>반환청구권</td>
+<td>목적물의 점유를 빼앗기거나 반환을 거부</td>
+<td>물건을 돌려달라</td>
+<td>제204조, 제213조</td>
+</tr>
+<tr>
+<td>방해제거청구권</td>
+<td>점유침탈 이외의 현재 방해</td>
+<td>방해원인을 치워달라</td>
+<td>제205조, 제214조</td>
+</tr>
+<tr>
+<td>방해예방청구권</td>
+<td>장래 침해의 구체적 염려</td>
+<td>침해를 막거나 손해배상 담보를 제공하라</td>
+<td>제206조, 제214조</td>
+</tr>
+</tbody></table></div>
+<h3>어떤 물권에 어떤 청구권이 붙는가</h3>
+<ul>
+<li>소유권·지상권·전세권: 반환·방해제거·방해예방이 문제될 수 있다.</li>
+<li>지역권·저당권: 목적물을 점유할 권리가 없으므로 반환청구권은 인정되지 않고 방해제거·예방이 중심이다.</li>
+<li>점유권: 점유보호청구권의 별도 규정이 적용된다.</li>
+<li>간접점유자도 점유보호청구권을 행사할 수 있지만 점유보조자는 점유자가 아니므로 행사할 수 없다.</li>
+</ul>
+<h2 id="property-01-15" data-concept-id="property-01-15">4. 물권적 청구권의 요건 ★★★★★</h2>
+<h3>청구권자</h3>
+<p>대외적으로 물권을 행사할 수 있는 법률상 물권자여야 한다. 부동산을 샀지만 아직 등기하지 않은 매수인이나 대외적 소유권이 없는 명의신탁자는 자기 소유권에 기한 청구권을 직접 행사할 수 없다. 다만 매도인·명의수탁자의 권리를 채권자대위로 행사할 여지는 있다.</p>
+<h3>방해 또는 방해의 염려</h3>
+<p>방해는 지금도 계속되는 침해상태다. 과거 위법행위가 끝났고 손해만 남았다면 방해제거가 아니라 손해배상의 문제다. 방해제거청구권은 <strong>방해원인</strong>을 제거하는 권리이지, 이미 끝난 행위의 모든 결과를 원상회복시키는 만능청구권이 아니다.</p>
+<h3>상대방</h3>
+<p>사실심 변론종결 당시 방해상태를 지배하는 현재의 방해자다. 직접점유자와 간접점유자는 상대방이 될 수 있으나, 독립한 점유가 없는 점유보조자는 반환청구의 상대방이 아니다. 과거에 방해행위를 했더라도 현재 방해상태를 지배하지 않으면 원칙적으로 물권적 청구권의 상대방이 아니다.</p>
+<blockquote>
+<p><strong>노란 결론:</strong> <code>법률상 물권자 + 현재의 방해 + 현재 방해상태를 지배하는 자</code>가 기본 구조다. 고의·과실과 현실적 손해는 물권적 청구권의 요건이 아니다.</p>
+</blockquote>
+<h2 id="property-01-16" data-concept-id="property-01-16">5. 사례 3: 무단점유 토지가 다시 팔리거나 임대된 경우</h2>
+<p>甲 소유 X토지를 乙이 무단점유하다가 丙에게 팔아 점유를 넘겼다. 별개의 경우로 乙이 丁에게 임대하여 丁이 점유한다고 하자.</p>
+<ul>
+<li><strong>현재 점유가 丙이라면:</strong> 甲은 현재 점유자 丙에게 반환을 청구한다. 이미 점유를 잃은 乙에게 반환을 요구할 수는 없다.</li>
+<li><strong>현재 점유가 丁이라면:</strong> 반환의 직접 상대방은 丁이다. 임대인 乙이 간접점유자로서 반환지배력을 갖는지에 따라 함께 상대방이 될 수 있다.</li>
+<li><strong>과거 사용이익:</strong> 반환청구와 별개로 乙·丙·丁의 점유권원, 선의·악의, 얻은 이익, 고의·과실을 따져 부당이득·불법행위책임을 각각 판단한다.</li>
+</ul>
+<blockquote>
+<p><strong>분홍 함정:</strong> 반환청구가 인정되면 사용이익과 손해배상도 자동으로 인정되는 것이 아니다. 세 청구권은 요건이 다르다.</p>
+</blockquote>
+<h2 id="property-01-17" data-concept-id="property-01-17">6. 판례 드라마: 남의 땅 위 무단건물과 퇴거청구 ★★★★★</h2>
+<p><strong>등장인물.</strong> 토지소유자 甲, 무단건물 소유자 乙, 그 건물을 임차해 사는 丁. <strong>사건.</strong> 乙은 甲의 토지에 권원 없이 건물을 지었다. <strong>갈등.</strong> 甲은 누구에게 철거·인도·퇴거를 요구해야 하는가.</p>
+<p><strong>법원의 구별.</strong> 건물소유자 乙은 건물을 소유함으로써 토지를 간접적으로 점유한다. 따라서 甲은 乙에게 건물철거와 토지인도를 청구한다. 하지만 乙이 자기 건물에 직접 거주하는 경우, 甲이 乙에게 별도로 “건물에서 퇴거하라”고 청구할 필요는 없다. 철거·인도로 토지침해를 제거할 수 있기 때문이다.</p>
+<p>반면 건물의 실제 점유자가 임차인 丁이면, 丁의 점유를 제거하지 않고서는 철거를 실행할 수 없다. 이때 甲은 丁에게 건물에서 퇴거하라고 청구할 수 있다. 丁의 주택임차권에 대항력이 있어도 그 대항력은 <strong>건물</strong>에 관한 것이지 甲의 <strong>토지사용권</strong>을 제한하는 것은 아니므로 결론이 달라지지 않는다(대법원 2010. 8. 19. 2010다43801).</p>
+<h3>판례 문장 쉬운 번역</h3>
+<ul>
+<li>“건물소유자가 토지를 점유한다” → 건물을 유지하는 동안 그 아래 땅을 계속 사용하고 있다는 뜻이다.</li>
+<li>“건물소유자에게 퇴거청구는 불가” → 그가 건물 주인이라면 철거와 토지인도청구로 충분하다.</li>
+<li>“건물점유자에게 퇴거청구 가능” → 세입자가 버티면 철거할 수 없으므로 세입자의 점유부터 풀 수 있다.</li>
+<li>“임차권 대항력으로 토지소유자에게 대항 불가” → 집을 계속 빌릴 권리와 남의 땅을 계속 사용할 권리는 같은 것이 아니다.</li>
+</ul>
+<h2 id="property-01-18" data-concept-id="property-01-18">7. 판례 드라마: 30년 전 매립된 생활쓰레기 ★★★★★</h2>
+<p><strong>등장인물.</strong> 과거 쓰레기를 매립한 지방자치단체와 훗날 인접토지를 취득한 소유자. <strong>사건.</strong> 새 소유자가 땅을 파 보니 지하 1.5~4m에 생활쓰레기와 오니·건축폐기물이 토양과 뒤섞여 있었다. <strong>갈등.</strong> 쓰레기가 아직 땅속에 있으니 현재의 방해인가, 아니면 과거 행위로 생긴 손해인가.</p>
+<p><strong>법원의 고민.</strong> 단순히 폐기물이 놓여 있는 상태라면 현재 방해원인이 될 수 있다. 그러나 30년 이상 지나 토양과 사실상 분리하기 어려울 만큼 혼재되었다면 과거 매립행위가 만든 토양오염이라는 손해로 볼 여지가 크다.</p>
+<p><strong>최종 판결.</strong> 이 사건에서는 현재 독립한 침해물의 방해가 계속된다고 볼 수 없으므로 소유권에 기한 방해배제청구는 인정되지 않았다(대법원 2019. 7. 10. 2016다205540). 손해배상 등 다른 청구의 가능성은 별개다.</p>
+<blockquote>
+<p><strong>분홍 함정:</strong> 땅속에 물질이 남아 있다는 사실만으로 언제나 현재 방해가 되는 것은 아니다. 독립한 방해원인이 계속되는지, 토양과 일체가 된 과거 손해인지 구별한다.</p>
+</blockquote>
+<h2 id="property-01-19" data-concept-id="property-01-19">8. 판례 드라마: 소유권을 잃은 뒤 등기말소를 못 하게 된 경우 ★★★★☆</h2>
+<p>소유자는 원인 없이 남의 명의로 된 등기를 말소하라고 청구했다. 그런데 소송 중 소유권을 잃었다. 당사자는 “등기말소의무가 이행불능이 되었으니 민법 제390조의 전보배상을 달라”고 주장했다.</p>
+<p>대법원 전원합의체는 소유권에 기한 방해배제청구권은 기초인 소유권과 운명을 같이하므로 소유권을 잃으면 청구권 자체의 발생기반이 사라진다고 보았다. 기존 채권이 동일성을 유지한 채 손해배상채권으로 바뀌는 채무불이행 구조와 다르므로 제390조 전보배상청구권은 인정되지 않는다(대법원 전원합의체 2012. 5. 17. 2010다28604).</p>
+<blockquote>
+<p><strong>초록 이유:</strong> 물권적 청구권은 물권에서 떨어져 독립적으로 살아남는 채권이 아니다.</p>
+</blockquote>
+<h2 id="property-01-20" data-concept-id="property-01-20">9. 비용부담과 소멸시효 ★★★★☆</h2>
+<h3>비용부담</h3>
+<p>민법 제214조는 방해제거·예방이라는 <strong>행위</strong>를 요구할 권리를 정한다. 소유자가 먼저 방해를 치운 뒤 그 비용을 제214조 자체에 근거하여 청구할 수 있는 것은 아니다(대법원 2014. 11. 27. 2014다52612). 비용을 돈으로 돌려받으려면 불법행위·부당이득 등 별도 근거를 검토해야 한다.</p>
+<p>학설상으로는 방해자에게 귀책사유가 있으면 방해자가, 귀책사유가 없으면 소유자가 비용을 부담하는 접근이 제시된다. 시험에서는 “제214조에 비용청구권까지 포함된다”는 보기를 먼저 제거한다.</p>
+<h3>소멸시효</h3>
+<p>학설은 소멸시효 부정설, 20년 적용설, 소유권과 제한물권을 나누는 제한적 긍정설로 나뉜다. 판례는 적어도 <strong>소유권에 기한 물권적 청구권</strong>은 소멸시효에 걸리지 않는다는 태도다. 침해가 계속되는 동안 소유권으로부터 청구권이 계속 발생하고, 소유권 자체가 소멸시효로 사라지지 않기 때문이다.</p>
+<blockquote>
+<p><strong>분홍 함정:</strong> “물권적 청구권은 소멸시효에 걸리지 않는다는 데 학설상 이견이 없다”는 문장은 틀리다.</p>
+</blockquote>
+<h2 id="property-01-21" data-concept-id="property-01-21">10. 물권적 청구권과 다른 청구권의 관계 ★★★★★</h2>
+<p>같은 사실에서 여러 청구권이 나란히 생길 수 있다. 자동으로 묶지 말고 요건을 따로 확인한다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>청구권</th>
+<th>핵심 요건</th>
+<th>목적</th>
+<th>고의·과실 필요</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물권적 청구권</td>
+<td>법률상 물권 + 현재 방해·염려 + 현재 방해자</td>
+<td>지배상태의 회복·보전</td>
+<td>불필요</td>
+</tr>
+<tr>
+<td>부당이득반환</td>
+<td>법률상 원인 없음 + 상대방 이익 + 내 손해 + 인과관계</td>
+<td>일탈된 재산가치 회복</td>
+<td>불필요</td>
+</tr>
+<tr>
+<td>불법행위 손해배상</td>
+<td>위법행위 + 고의·과실 + 손해 + 인과관계</td>
+<td>손해 전보</td>
+<td>필요</td>
+</tr>
+</tbody></table></div>
+<h3>사례 4: 무단점유자의 사용이익</h3>
+<p>乙이 甲의 토지를 무단으로 사용한다면 甲은 현재 점유자인 乙에게 반환을 청구할 수 있다. 乙이 법률상 원인 없이 사용이익을 얻었다면 부당이득반환도 문제되고, 고의·과실의 위법행위로 甲에게 손해를 입혔다면 불법행위책임도 문제된다. 하지만 선의점유자의 과실취득, 점유자·회복자 관계의 특칙 등으로 반환범위가 달라질 수 있다.</p>
+<h3>불법원인급여와 물권적 반환청구</h3>
+<p>불법원인으로 재산을 급여한 자는 부당이득반환뿐 아니라 소유권에 기한 반환청구로 우회하여 되찾을 수도 없다. 판례는 사회적으로 타당하지 않은 급여를 한 사람이 청구형식만 바꾸어 원상회복을 요구하는 것을 막고, 급여물의 소유권이 반사적으로 수익자에게 귀속한다고 본다(대법원 전원합의체 1979. 11. 13. 79다483).</p>
+<blockquote>
+<p><strong>한 줄 결론:</strong> 물권적 청구권은 물건을 되찾는 도구이고, 사용이익과 손해를 돈으로 정산하는 일은 부당이득·불법행위가 맡는다.</p>
+</blockquote>
+<hr>
+<h1>핵심 조문 해설</h1>
+<h2>민법 제98조·제99조: 물건과 동산·부동산 ★★★★☆</h2>
+<ul>
+<li><strong>입법 취지:</strong> 물권이 붙을 대상을 정하고 공시방법을 나누기 위한 출발점이다.</li>
+<li><strong>해결하려는 문제:</strong> 전기나 자연력, 토지의 정착물처럼 경계가 모호한 대상을 법률상 물건으로 다룰 것인지 결정한다.</li>
+<li><strong>실제 적용:</strong> 토지와 건물은 부동산, 일반 물건은 동산이라는 구별이 등기·점유, 저당권·질권, 취득시효의 차이를 만든다.</li>
+<li><strong>시험 질문:</strong> “동산과 부동산은 시효취득이 모두 점유만으로 완성된다”는 보기가 대표 오답이다.</li>
+</ul>
+<h2>민법 제100조: 주물과 종물 ★★★★★</h2>
+<ul>
+<li><strong>입법 취지:</strong> 경제적으로 함께 기능하는 물건을 거래할 때 당사자가 매번 부속물 전부를 열거하지 않아도 되게 한다.</li>
+<li><strong>핵심:</strong> 종물은 독립한 물건이어야 하고 주물 자체의 상용에 이바지해야 한다.</li>
+<li><strong>효과:</strong> 종물은 주물 처분에 따르지만 제2항은 임의규정이다.</li>
+<li><strong>시험 질문:</strong> 호텔 객실 TV, 주유기, 지하탱크를 종물·독립물·부합물로 분류한다.</li>
+</ul>
+<h2>민법 제101조·제102조: 과실 ★★★★☆</h2>
+<ul>
+<li><strong>입법 취지:</strong> 원물에서 생기는 수익이 누구에게 언제 귀속되는지 정한다.</li>
+<li><strong>핵심:</strong> 천연과실은 분리 시, 법정과실은 권리존속기간의 일수비율로 귀속한다.</li>
+<li><strong>시험 질문:</strong> 임대료와 주식배당금, 과일과 미분리과실을 구별한다.</li>
+</ul>
+<h2>민법 제185조: 물권법정주의 ★★★★★</h2>
+<ul>
+<li><strong>입법 취지:</strong> 제3자에게 주장되는 권리의 종류와 내용을 예측 가능하게 하고 공시질서를 유지한다.</li>
+<li><strong>왜 만들었는가:</strong> 당사자마다 제각각인 비밀 물권을 만들면 거래안전이 무너지기 때문이다.</li>
+<li><strong>적용:</strong> 종류강제와 내용강제, 법률과 관습법, 위반행위의 무효가 핵심이다.</li>
+<li><strong>시험 질문:</strong> 제185조의 법률에 명령·규칙이 포함되는지, 관습법과 성문법의 관계에 학설대립이 있는지 묻는다.</li>
+</ul>
+<h2>민법 제213조: 소유물반환청구권 ★★★★★</h2>
+<ul>
+<li><strong>입법 취지:</strong> 소유권자가 점유를 잃었을 때 현실의 지배를 회복하게 한다.</li>
+<li><strong>요건:</strong> 원고의 소유권, 피고의 현재 점유. 피고는 점유할 정당한 권리가 있으면 반환을 거부할 수 있다.</li>
+<li><strong>실제 적용:</strong> 무단점유자, 미등기 무단건물의 사실상 처분권자, 점유를 승계한 사람을 상대로 한다.</li>
+<li><strong>시험 질문:</strong> 과거 점유자·점유보조자·저당권자에게 반환청구가 가능한지 묻는다.</li>
+</ul>
+<h2>민법 제214조: 방해제거·방해예방청구권 ★★★★★</h2>
+<ul>
+<li><strong>입법 취지:</strong> 점유침탈 이외의 방해를 제거하고 장래의 구체적인 침해위험을 막는다.</li>
+<li><strong>핵심 구별:</strong> 현재 방해는 제거, 장래 염려는 예방 또는 손해배상 담보, 과거에 끝난 손해는 원칙적으로 손해배상 영역이다.</li>
+<li><strong>실제 적용:</strong> 원인무효등기 말소, 무단건물 철거, 저당목적물 가치침해 방지.</li>
+<li><strong>시험 질문:</strong> 제214조에 방해제거비용 청구까지 포함되는지 묻는다. 정답은 부정이다.</li>
+</ul>
+<hr>
+<h1>교재 문단별 독해 가이드</h1>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>교재 범위</th>
+<th>교수가 넣은 이유</th>
+<th>결국 무슨 말인가</th>
+<th>시험 키워드</th>
+<th>한 줄 요약</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2~3쪽</td>
+<td>물권법의 범위와 법원을 제시</td>
+<td>물권법은 민법 물권편만이 아니라 특별법·관습법까지 포함</td>
+<td>형식적·실질적 물권법</td>
+<td>사람과 물건의 지배관계를 다루는 모든 규범</td>
+</tr>
+<tr>
+<td>3~4쪽</td>
+<td>물권법의 성격을 채권법과 비교</td>
+<td>제3자에게 미치므로 강행성이 강하고 역사·관습의 영향이 큼</td>
+<td>강행규정, 고유법성</td>
+<td>물권은 사회 전체의 거래질서를 요구</td>
+</tr>
+<tr>
+<td>4~5쪽</td>
+<td>제185조의 필요성과 한계를 설명</td>
+<td>정형화로 거래안전을 확보하되 특별법·관습법으로 경직성을 보완</td>
+<td>종류강제, 내용강제</td>
+<td>법이 만든 메뉴 밖의 물권은 없음</td>
+</tr>
+<tr>
+<td>6~8쪽</td>
+<td>물권의 전체 분류를 한눈에 제시</td>
+<td>본권·점유권, 소유권·제한물권, 용익·담보물권을 계층적으로 분류</td>
+<td>물권 체계도</td>
+<td>사용가치와 교환가치를 나눠 보라</td>
+</tr>
+<tr>
+<td>8쪽</td>
+<td>인정·불인정 관습법상 물권을 대비</td>
+<td>관행이나 이익만으로 새로운 물권이 되지 않음</td>
+<td>분묘기지권, 온천권</td>
+<td>관습법상 물권 인정은 엄격</td>
+</tr>
+<tr>
+<td>9~11쪽</td>
+<td>물권과 채권의 본질 차이를 설명</td>
+<td>특정물 직접지배·절대성·배타성이 공통 특징</td>
+<td>절대권, 지배권</td>
+<td>물권은 물건에 직접 닿는다</td>
+</tr>
+<tr>
+<td>11~14쪽</td>
+<td>특정·독립성과 물건 분류를 설명</td>
+<td>객체가 분명해야 배타적 권리를 공시할 수 있음</td>
+<td>단일·합성·집합물</td>
+<td>특정과 공시가 예외의 열쇠</td>
+</tr>
+<tr>
+<td>14~15쪽</td>
+<td>동산·부동산의 효과 차이를 정리</td>
+<td>공시·공신력·취득시효·물권종류가 달라짐</td>
+<td>등기, 점유, 선의취득</td>
+<td>부동산 등기에는 공신력이 없음</td>
+</tr>
+<tr>
+<td>15~18쪽</td>
+<td>주종관계와 과실귀속을 설명</td>
+<td>경제적 결합과 수익의 귀속을 기본값으로 정함</td>
+<td>종물, 천연·법정과실</td>
+<td>종물 규정은 임의규정</td>
+</tr>
+<tr>
+<td>18~21쪽</td>
+<td>일물일권주의와 현실적 예외를 설명</td>
+<td>공시가 가능하고 필요성이 있으면 일부·집합물에도 예외 인정</td>
+<td>분필, 구분소유, 명인방법</td>
+<td>원칙보다 예외의 요건이 시험 포인트</td>
+</tr>
+<tr>
+<td>22~25쪽</td>
+<td>권리충돌의 순서를 설명</td>
+<td>물권끼리는 성질·순위, 물권과 채권은 원칙·특별법 예외로 해결</td>
+<td>우선효, 대항력</td>
+<td>먼저라는 말만으로 풀지 말 것</td>
+</tr>
+<tr>
+<td>25~29쪽</td>
+<td>물권적 청구권의 체계와 요건을 제시</td>
+<td>현재 지배상태 회복을 위한 반환·제거·예방청구</td>
+<td>제213조, 제214조</td>
+<td>현재의 방해자를 찾는다</td>
+</tr>
+<tr>
+<td>30~32쪽</td>
+<td>방해와 손해, 퇴거·철거를 판례로 구별</td>
+<td>현재 방해원인과 과거 침해결과는 다름</td>
+<td>현재 방해, 토지·건물</td>
+<td>철거 상대와 퇴거 상대가 다를 수 있음</td>
+</tr>
+<tr>
+<td>33~34쪽</td>
+<td>청구권 성질·비용·시효를 설명</td>
+<td>특수한 독립청구권이며 비용청구는 별도 근거 필요</td>
+<td>비용, 소멸시효</td>
+<td>제214조는 비용상환조문이 아님</td>
+</tr>
+<tr>
+<td>35~36쪽</td>
+<td>부당이득·불법행위와 경합을 정리</td>
+<td>같은 사실이라도 목적과 요건이 다른 청구권을 각각 심사</td>
+<td>청구권 경합</td>
+<td>반환·이익·손해를 나누어 보라</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>기출 연결</h1>
+<h2>출제 분포와 가장 많이 틀리는 함정</h2>
+<p><code>물권관계총론</code> 24문제는 형성평가 4문제와 워크북 20문제로 구성된다. 출제는 네 묶음에 집중된다.</p>
+<ol>
+<li>물권법정주의: 법률의 의미, 관습법, 종류·내용강제</li>
+<li>객체론: 특정·독립물, 동산·부동산, 종물, 일물일권주의</li>
+<li>우선효: 제한물권 순위, 임차권 대항력·우선변제</li>
+<li>물권적 청구권: 현재 방해자, 퇴거·철거, 방해와 손해, 시효·비용</li>
+</ol>
+<p>가장 위험한 보기 표현은 <strong>“언제나”, “모두”, “이견이 없다”, “물건에만”, “점유만으로”</strong>다. 물권법 총론은 원칙 뒤에 예외가 많은 단원이므로 강한 단정이 함정이 된다.</p>
+<h2>가장 중요한 문제 TOP 5</h2>
+<h3>TOP 1 · 물권법_워크북_003 — 제185조 해석 ★★★★★</h3>
+<p><strong>정답: ⑤</strong></p>
+<ol>
+<li>형식적 의미의 법률을 뜻하고 명령·규칙은 제외: 맞다.</li>
+<li>보충적 효력설은 성문법에 빈틈이 있을 때만 관습법상 물권을 인정: 맞다.</li>
+<li>대등적 효력설은 성문법 물권과 다른 관습법상 내용을 병존시킬 수 있다고 봄: 맞다.</li>
+<li>변경적 효력설은 실제 적용에서 관습법이 성문법 내용을 바꿀 수 있다고 봄: 학설 설명으로 맞다.</li>
+<li>종류만 새로 만들 수 없고 내용변경은 자유라는 설명: <strong>틀리다. 종류강제와 내용강제를 모두 포함한다.</strong></li>
+</ol>
+<p><strong>출제자의 함정:</strong> ‘창설’이라는 단어를 “새 이름 만들기”로만 좁혀 읽게 한다. <strong>정답 신호:</strong> 제185조를 보면 <code>종류 + 내용</code>을 한 세트로 떠올린다.</p>
+<h3>TOP 2 · 물권법_워크북_006 — 특정한 독립물 ★★★★★</h3>
+<p><strong>정답: ② 기존 건물 일부의 증·개축 부분</strong></p>
+<ol>
+<li>임야의 자연석을 조각한 석불: 임야에서 독립한 물건이 될 수 있다.</li>
+<li>기존 건물의 단순 증·개축 부분: 건물의 구성부분이면 별개의 물건이 아니다.</li>
+<li>매립 폐기물: 토양과 분리된 독립물인지, 부합하여 토지 일부가 되었는지 구체적으로 판단한다. 문제는 판례의 특수맥락을 묻는다.</li>
+<li>타인 토지에서 수확기에 이른 벼: 판례상 경작자 소유의 독립물로 취급될 수 있다.</li>
+<li>명인방법을 갖춘 미분리과실·수목집단: 독립한 거래객체가 될 수 있다.</li>
+</ol>
+<p><strong>출제자의 함정:</strong> 눈으로 구별되는 부분과 법률상 독립물을 같다고 착각하게 한다. <strong>정답 신호:</strong> 분리하면 본체의 효용이 훼손되는 구성부분인지 확인한다.</p>
+<h3>TOP 3 · 물권법_워크북_009 — 부합물과 종물 ★★★★★</h3>
+<p><strong>정답: ②, 옳은 것은 2개</strong></p>
+<ul>
+<li>㉠ 사실상 분리복구가 불가능해 독립성을 완전히 잃었다면 권원부속의 예외보다 부합이 우선할 수 있어 옳다.</li>
+<li>㉡ 경매평가 누락이나 배당 누락만으로 대지권 취득·저당권 소멸 결론이 달라진다고 한 부분이 틀리다.</li>
+<li>㉢ 분리처분을 허용한 특별한 규약이 있다면 전유부분 가압류가 대지권에 당연히 미친다고 할 수 없어 틀리다.</li>
+<li>㉣ 증축부분이 기존 건물에 부합했다면 기존 근저당권 효력이 미치고 경락인이 취득하므로 옳다.</li>
+<li>㉤ 제100조 제2항은 강행규정이라는 부분이 틀리다. 임의규정이다.</li>
+<li>㉥ 사람의 편의를 위한 물건도 모두 종물이라는 부분이 틀리다. 주물 자체의 경제적 효용에 이바지해야 한다.</li>
+</ul>
+<p><strong>출제자의 함정:</strong> 종물과 부합물을 섞고, 임의규정을 강행규정으로 바꾼다. <strong>정답 신호:</strong> <code>독립성 상실=부합</code>, <code>독립성 유지+주물효용=종물</code>.</p>
+<h3>TOP 4 · 물권법_워크북_017 — 방해와 손해 ★★★★★</h3>
+<p><strong>정답: ④</strong></p>
+<ol>
+<li>건물소유자에게 별도 퇴거청구는 할 수 없다는 설명: 맞다.</li>
+<li>건물점유자에게 퇴거청구 가능: 맞다.</li>
+<li>건물임차권에 대항력이 있어도 토지소유자에게 토지사용권으로 대항하지 못함: 맞다.</li>
+<li>30년 지나 토양과 분리하기 어려운 쓰레기를 현재 방해로 보아 제거청구를 인용한다는 설명: <strong>틀리다. 판례는 과거 침해로 인한 손해로 보았다.</strong></li>
+<li>제214조 자체로 방해배제비용을 청구할 수 없다는 설명: 맞다.</li>
+</ol>
+<p><strong>출제자의 함정:</strong> “쓰레기가 지금도 존재한다”와 “독립한 방해원인이 현재 계속된다”를 같게 만든다. <strong>정답 신호:</strong> 현재 방해인지 과거 손해인지 먼저 묻는다.</p>
+<h3>TOP 5 · 물권법_워크북_018 — 물권적 청구권 판례 종합 ★★★★★</h3>
+<p><strong>정답: ⑤, 제시된 다섯 설명 모두 현재 판례와 다르다.</strong></p>
+<ul>
+<li>㉠ 등기 전 매수인에게서 다시 산 사람이 매매계약상 점유권원을 승계한 경우, 원매도인이 무조건 물권적 청구권을 행사할 수 있는 것은 아니다.</li>
+<li>㉡ 소송 중 소유권을 넘겨 소유권을 상실한 전 소유자는 자기 물권적 청구권을 계속 유지하지 못한다.</li>
+<li>㉢ 불법원인급여자는 청구형식을 소유권 반환으로 바꾸어도 되찾을 수 없다.</li>
+<li>㉣ 피담보채무 소멸 후 양도담보 설정자의 등기청구는 실질적 소유권에 기한 물권적 청구로 보아 소멸시효에 걸리지 않는다.</li>
+<li>㉤ 합의해제로 소유권이 당연 복귀하는 경우 원상회복등기청구도 소유권에 기한 청구로서 소멸시효 대상이 아니다.</li>
+</ul>
+<p><strong>출제자의 함정:</strong> 계약상 점유권원, 소유권 상실, 불법원인급여, 소멸시효를 한 문제에 겹쳐 판단순서를 무너뜨린다. <strong>정답 신호:</strong> 각 문장마다 먼저 “현재 소유권자가 누구인가”를 적는다.</p>
+<h2>24문제 전수 체크표</h2>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>문제</th>
+<th align="right">정답</th>
+<th>핵심 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물권법_001</td>
+<td align="right">①</td>
+<td>물권법정주의는 계약자유의 파생이 아니라 제한</td>
+</tr>
+<tr>
+<td>물권법_002</td>
+<td align="right">④</td>
+<td>부동산 취득시효는 점유만으로 소유권 취득 아님</td>
+</tr>
+<tr>
+<td>물권법_003</td>
+<td align="right">①</td>
+<td>입목등기 수목집단은 독립 부동산</td>
+</tr>
+<tr>
+<td>물권법_004</td>
+<td align="right">①</td>
+<td>대항력 있는 임차권에도 물권적 청구권 법리가 연결될 수 있음</td>
+</tr>
+<tr>
+<td>물권법_워크북_001</td>
+<td align="right">①</td>
+<td>무효인 물권효과와 채권적 효력을 구별</td>
+</tr>
+<tr>
+<td>물권법_워크북_002</td>
+<td align="right">③</td>
+<td>점유의 적법 추정은 게르만법적 요소</td>
+</tr>
+<tr>
+<td>물권법_워크북_003</td>
+<td align="right">⑤</td>
+<td>종류강제와 내용강제 모두 포함</td>
+</tr>
+<tr>
+<td>물권법_워크북_004</td>
+<td align="right">③</td>
+<td>제185조의 법률은 형식적 법률</td>
+</tr>
+<tr>
+<td>물권법_워크북_005</td>
+<td align="right">②</td>
+<td>제3자의 채권침해도 일정 요건에서 불법행위 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_006</td>
+<td align="right">②</td>
+<td>증·개축부분이 구성부분이면 독립물 아님</td>
+</tr>
+<tr>
+<td>물권법_워크북_007</td>
+<td align="right">③</td>
+<td>건물 일부도 구분소유 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_008</td>
+<td align="right">⑤</td>
+<td>부동산 취득시효에 등기 필요</td>
+</tr>
+<tr>
+<td>물권법_워크북_009</td>
+<td align="right">②</td>
+<td>부합·종물, 임의규정 구별</td>
+</tr>
+<tr>
+<td>물권법_워크북_010</td>
+<td align="right">②</td>
+<td>토지 일부에 분필 없이 용익물권 설정 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_011</td>
+<td align="right">②</td>
+<td>저당권에는 반환청구권 없음</td>
+</tr>
+<tr>
+<td>물권법_워크북_012</td>
+<td align="right">⑤</td>
+<td>특별법상 동산저당 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_013</td>
+<td align="right">③</td>
+<td>선순위 지상권은 저당권 실행으로 언제나 소멸하지 않음</td>
+</tr>
+<tr>
+<td>물권법_워크북_014</td>
+<td align="right">①</td>
+<td>주택임차인의 대항에는 대항요건과 순위관계 확인</td>
+</tr>
+<tr>
+<td>물권법_워크북_015</td>
+<td align="right">①</td>
+<td>간접점유자도 점유보호청구 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_016</td>
+<td align="right">④</td>
+<td>물권적 청구권 시효에 학설대립 존재</td>
+</tr>
+<tr>
+<td>물권법_워크북_017</td>
+<td align="right">④</td>
+<td>오래된 혼재 쓰레기는 현재 방해가 아닌 과거 손해로 판단</td>
+</tr>
+<tr>
+<td>물권법_워크북_018</td>
+<td align="right">⑤</td>
+<td>다섯 판례의 현재 법리를 각각 대조</td>
+</tr>
+<tr>
+<td>물권법_워크북_019</td>
+<td align="right">②</td>
+<td>미등기건물 사실상 처분권자도 철거청구 상대 가능</td>
+</tr>
+<tr>
+<td>물권법_워크북_020</td>
+<td align="right">⑤</td>
+<td>불법원인급여자는 소유권 반환청구로도 우회 불가</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h1>새 사례형 응용문제 5개</h1>
+<h2>문제 1</h2>
+<p>甲과 乙은 “乙이 개발한 특별한 주차이용권은 앞으로 건물소유자가 누구로 바뀌더라도 영구히 행사할 수 있다”고 합의하고 등기 없이 계약서만 작성했다. 이 권리를 새 소유자에게 물권으로 주장할 수 있는가?</p>
+<p><strong>정답:</strong> 원칙적으로 없다. 법률 또는 관습법이 인정하지 않는 새로운 종류·내용의 물권을 당사자 합의만으로 창설할 수 없다. 당사자 사이의 채권적 약정효력은 별도로 검토한다. <strong>출제 의도:</strong> 물권적 효력 무효와 채권적 효력을 분리하는지 확인.</p>
+<h2>문제 2</h2>
+<p>공장주 甲은 “A창고 안에 현재 및 장래 보관되는 원재료 전부”를 금융회사 乙에게 양도담보로 제공했다. 원재료는 매일 교체되지만 종류·장소·관리표가 명확하다. 특정성이 없으므로 담보는 언제나 무효인가?</p>
+<p><strong>정답:</strong> 아니다. 종류·소재장소·수량 등으로 범위를 특정하고 적절한 공시를 갖추면 유동집합물 양도담보가 인정될 수 있다. <strong>출제 의도:</strong> 일물일권주의의 경제적 예외를 이해하는지 확인.</p>
+<h2>문제 3</h2>
+<p>甲의 주유소 건물이 경매되었다. 주유기는 건물과 분리할 수 있고 별도 목록에 기재되지 않았다. 특별한 약정은 없다. 경락인이 주유기까지 취득하는가?</p>
+<p><strong>정답:</strong> 주유기가 주유소 건물의 상용에 계속 이바지하고 주물과 밀접하게 부속된 동일소유자의 독립물이라면 종물이다. 종물은 원칙적으로 주물 처분에 따르므로 경매효과가 미칠 수 있다. <strong>출제 의도:</strong> 부합물이 아니라 종물인 이유와 제100조 제2항을 적용하는지 확인.</p>
+<h2>문제 4</h2>
+<p>甲 소유 토지에 乙이 권원 없이 광고탑을 설치했다가 丙에게 양도했고, 사실심 변론종결 당시 丙이 광고탑을 관리한다. 甲은 乙에게 광고탑 제거를 청구할 수 있는가?</p>
+<p><strong>정답:</strong> 원칙적으로 현재 방해상태를 지배하는 丙이 방해제거청구의 상대방이다. 과거 설치자인 乙이 현재 방해상태를 지배하지 않는다면 乙은 물권적 청구권의 상대방이 아니다. 乙의 손해배상책임은 별개다. <strong>출제 의도:</strong> 과거 행위자와 현재 방해자를 구별.</p>
+<h2>문제 5</h2>
+<p>甲 소유 토지를 선의·무과실로 자기 땅이라고 믿은 乙이 1년 동안 사용했다. 甲이 소유권을 증명하여 반환을 청구한다. 반환이 인정되면 1년 사용이익과 손해배상도 당연히 전액 인정되는가?</p>
+<p><strong>정답:</strong> 아니다. 반환청구는 소유권과 현재 점유를 중심으로 판단하지만, 사용이익은 부당이득 및 점유자·회복자 특칙을, 손해배상은 乙의 고의·과실과 위법성·손해를 별도로 검토한다. <strong>출제 의도:</strong> 청구권 경합을 자동 연결하지 않는지 확인.</p>
+<hr>
+<h1>시험 직전 A4 한 장 암기노트</h1>
+<h2>한 장 요약</h2>
+<ol>
+<li>물권 = 특정 물건의 직접·배타적 지배권, 모든 사람에게 주장 가능.</li>
+<li>물권법정주의 = 법률·관습법만 물권을 인정, 종류강제 + 내용강제.</li>
+<li>제185조의 법률 = 형식적 의미의 법률. 명령·규칙·조례 제외.</li>
+<li>본권은 법적 지배권, 점유권은 사실상 지배상태 보호.</li>
+<li>소유권은 사용·수익·처분 전부, 제한물권은 사용가치 또는 교환가치 일부.</li>
+<li>객체 원칙 = 현존하는 특정한 독립물. 권리도 법이 특별히 정하면 객체 가능.</li>
+<li>부동산 공시=등기, 동산 공시=점유. 부동산 등기에는 원칙적으로 공신력 없음.</li>
+<li>종물 = 독립물 + 주물 상용 + 장소적 밀접성 + 원칙적 동일소유. 제100조 제2항은 임의규정.</li>
+<li>천연과실은 분리 시, 법정과실은 권리존속 일수비율로 귀속.</li>
+<li>일물일권주의 예외 = 집합물 특정·공시, 토지 일부 용익물권, 구분소유, 입목·명인방법.</li>
+<li>물권 상호 간은 성질과 순위, 물권과 채권은 물권 우선이 원칙이나 특별법상 예외.</li>
+<li>물권적 청구권 = 반환·방해제거·방해예방. 고의·과실·손해 불필요.</li>
+<li>상대방 = 사실심 변론종결 당시 현재 방해상태를 지배하는 자.</li>
+<li>현재 방해와 과거 손해를 구별. 제214조 자체에는 비용청구권이 없음.</li>
+<li>소유권에 기한 물권적 청구권은 판례상 소멸시효에 걸리지 않음.</li>
+<li>반환·부당이득·불법행위는 요건과 목적을 각각 따로 판단.</li>
+</ol>
+<h2>비교표</h2>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>물권적 청구권</th>
+<th>부당이득반환</th>
+<th>불법행위 손해배상</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지키는 것</td>
+<td>현재 물권지배</td>
+<td>부당하게 빠져나간 가치</td>
+<td>발생한 손해</td>
+</tr>
+<tr>
+<td>상대방 귀책</td>
+<td>불필요</td>
+<td>불필요</td>
+<td>고의·과실 필요</td>
+</tr>
+<tr>
+<td>손해 발생</td>
+<td>불필요</td>
+<td>손해·이익 대응 필요</td>
+<td>필요</td>
+</tr>
+<tr>
+<td>대표 결과</td>
+<td>반환·제거·예방</td>
+<td>이익 반환</td>
+<td>금전배상·원상회복</td>
+</tr>
+</tbody></table></div>
+<h2>반드시 외울 문장</h2>
+<blockquote>
+<p>물권법정주의는 종류강제와 내용강제를 모두 포함하며, 제185조의 법률은 형식적 의미의 법률이다.</p>
+</blockquote>
+<blockquote>
+<p>종물은 독립한 물건이어야 하고 주물 자체의 경제적 효용에 이바지해야 하며, 주물의 처분에 따른다는 규정은 임의규정이다.</p>
+</blockquote>
+<blockquote>
+<p>물권적 청구권은 현재의 방해상태를 회복하는 권리이므로 고의·과실과 손해를 요구하지 않지만, 과거에 끝난 손해까지 제거하는 권리는 아니다.</p>
+</blockquote>
+<h2>TOP 3 개념</h2>
+<ol>
+<li>물권법정주의의 종류강제·내용강제</li>
+<li>특정·독립물과 일물일권주의의 예외</li>
+<li>물권적 청구권의 세 종류와 현재 방해자</li>
+</ol>
+<hr>
+<h1>학습 상태 진단</h1>
+<ul>
+<li>🟢 <strong>이해 완료:</strong> 새로운 이용권, 유동집합물, 주유기, 무단건물, 매립쓰레기 사례를 각각 물권법정주의·객체·종물·청구권으로 설명할 수 있다.</li>
+<li>🟡 <strong>복습 필요:</strong> 결론은 알지만 종류강제·내용강제, 부합·종물, 방해·손해를 말로 구별하지 못한다.</li>
+<li>🔴 <strong>이해 부족:</strong> “먼저 생긴 권리는 언제나 우선”, “물권의 객체는 물건뿐”, “남아 있으면 언제나 현재 방해”라고 판단한다.</li>
+</ul>
+<h2>반드시 복습할 TOP 3</h2>
+<ol>
+<li>제185조의 법률·관습법과 종류강제·내용강제</li>
+<li>종물·부합물·구성부분 및 일물일권주의 예외</li>
+<li>반환·방해제거·방해예방과 부당이득·불법행위의 구별</li>
+</ol>
+<hr>
+<h1>현행법·판례 확인 자료</h1>
+<ul>
+<li><a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=60398">국가법령정보센터 민법 본문</a></li>
+<li><a href="https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=6728">대법원 2019. 7. 10. 선고 2016다205540 주요판결</a></li>
+</ul>
+<blockquote>
+<p>이 원고는 교재의 문장을 복제한 축약본이 아니라, 교재를 다시 펼쳤을 때 각 문장의 이유·사례·시험 함정이 보이도록 재구성한 학습용 통합 주석본이다.</p>
+</blockquote>
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '물권법 · CHAPTER 01' : 'PART · PROPERTY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(물권법 · CHAPTER 01|PART · PROPERTY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>
+function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}if(!id.startsWith('property-'))return;const target=document.getElementById(id);if(!target)return;for(let p=target.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));}
+window.addEventListener('hashchange',showConceptAnchor);window.addEventListener('load',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);
+</script></body>
+</html>

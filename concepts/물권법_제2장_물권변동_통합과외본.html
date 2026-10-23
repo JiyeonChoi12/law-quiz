@@ -1,0 +1,3623 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>물권법 제2장 물권변동 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 2: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+}
+
+
+.course-tabs,.chapter-tabs{display:flex;flex-wrap:wrap;gap:4px;width:fit-content;margin:0 0 12px;padding:4px;border:1px solid #d9d9d1;border-radius:9px;background:#eeede7;font:750 12px/1.5 "Malgun Gothic",sans-serif}
+.chapter-tabs{margin-bottom:30px}.course-tabs a,.chapter-tabs a,.chapter-tabs span{display:block;padding:9px 12px;border-radius:6px;color:#46564e;text-decoration:none}.course-tabs .active,.chapter-tabs .active{color:white;background:#3f6258}.course-tabs a:focus-visible,.chapter-tabs a:focus-visible{outline:2px solid #3f6258;outline-offset:2px}h1[id],h2[id]{scroll-margin-top:90px}
+.table-scroll{max-width:100%;overflow-x:auto}.table-scroll:focus-visible{outline:2px solid #3f6258;outline-offset:2px}
+@media screen and (max-width:900px){.table-scroll.wide-table table{min-width:600px}.table-scroll{scrollbar-width:thin}}
+@media print{.course-tabs,.chapter-tabs{display:none!important}.table-scroll{display:contents}}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">PROPERTY LAW · CHAPTER 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">물권법</span>
+    <span class="brand-sub">제2장 물권변동 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="물권법 학습 메뉴"><a class="active" aria-current="page" href="./물권법_개념.html">개념 목록</a><a href="../index.html?subject=물권법">문제 풀기</a></nav><nav class="chapter-tabs" aria-label="물권법 개념 장 선택"><a href="./물권법_제1장_총론_통합과외본.html">제1장 총론</a><span class="active" aria-current="page">제2장 물권변동</span><a href="./물권법_제3장_기본물권_통합과외본.html">제3장 기본물권</a><a href="./물권법_제4장_용익물권_통합과외본.html">제4장 용익물권</a><a href="./물권법_제5장_담보물권_통합과외본.html">제5장 담보물권</a></nav><h1>물권법 제2장 물권변동</h1>
+<h2>약속이 권리가 되는 순간을 이해하는 통합 과외본</h2>
+<p>교재 범위: 본문 38~102쪽 · PDF 49~113쪽. 제2장 표지와 다음 장의 경계도 함께 확인했다.</p>
+<p>문제 범위: 제공된 「물권법.json」의 관련 66문항 · 형성평가 15문항 + 워크북 51문항.</p>
+<p>이 책의 읽는 순서: <strong>이야기로 이해 → 법률용어로 정리 → 사례로 확인 → 기출 보기로 점검.</strong></p>
+<div class="legend-note"><span class="key-yellow">노랑 · 결론과 암기</span> <span class="key-green">초록 · 이유와 논리</span> <span class="key-pink">분홍 · 함정과 예외</span> <span class="key-blue">파랑 · 앞뒤 개념 연결</span><p>본문은 검정색 설명, 빨간 여백 메모는 중요도·문제 번호·주의사항이다. 색에만 의존하지 않고 ‘결론·이유·함정·연결’이라는 말도 함께 붙였다.</p></div>
+
+<p>이 자료는 스캔 위에 글씨를 겹친 파일이 아니다. 교재의 순서와 사례를 따라 새로 조판한 학습용 해설·색상 주석본이다. 교재 원문을 그대로 옮기지 않고 뜻을 풀었다. 교재의 학설, 판례의 결론, 현행법 보완을 구별하며, 사례의 인물 이름은 이해하기 쉽게 바꿔 부르기도 한다. 법령·핵심 판례 확인 기준일은 2026년 10월 22일이다.</p>
+<hr>
+<h1>00. 먼저, 이 장의 큰 그림</h1>
+<h2>이 장이 해결하는 단 하나의 질문</h2>
+<p>지민이가 아파트를 사고 대금까지 모두 냈다. 열쇠도 받았다. 그런데 아직 등기를 하지 않았다. 지민이는 집주인일까? 친구의 카메라를 빌려 쓰다가 돈을 주고 사기로 했다면, 카메라를 돌려줬다가 다시 받아야 할까? 도둑에게 산 자전거도 내 것이 될 수 있을까?</p>
+<p>이 장은 이런 질문에 답한다. <span class="key-yellow">“물권이 누구에게, 어떤 조건을 갖춘 순간에, 생기고·옮겨가고·사라지는가?”</span> 계약서, 대금, 실제 점유, 등기는 서로 다른 역할을 한다. 어느 하나만 보고 주인을 결정하면 틀린다.</p>
+<h3>왜 이런 규칙이 필요한가</h3>
+<p>집 안에서 두 사람만 “오늘부터 네 집이야”라고 약속했다면, 다른 사람은 주인이 바뀌었는지 모른다. 그런데 소유권은 계약에 참여하지 않은 사람에게도 주장하는 권리다. <span class="key-green">모두에게 영향을 주는 권리이므로, 밖에서 알아볼 수 있는 표시와 권리변동의 기준 시점이 필요하다.</span> 다만 상속처럼 사람이 죽는 순간 생기는 변화까지 등기할 때까지 멈춰 둘 수는 없다. 그래서 원칙과 예외가 나뉜다.</p>
+<h3>민법 전체에서 어디에 놓이는가</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>앞에서 배운 것</th>
+<th>지금 연결할 것</th>
+<th>다음에 써먹을 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>민법총칙: 계약, 무효·취소, 대리</td>
+<td>계약이 유효한가? 처분할 권한이 있는가?</td>
+<td>사기매매, 무권대리, 명의신탁</td>
+</tr>
+<tr>
+<td>제1장: 물권의 종류·효력·객체</td>
+<td>그 물권이 실제로 발생했는가?</td>
+<td>소유물반환·등기말소청구</td>
+</tr>
+<tr>
+<td>제2장: 등기·인도·선의취득·혼동</td>
+<td>언제 누구의 권리가 되는가?</td>
+<td>제3장 기본물권, 이후 용익물권·담보물권</td>
+</tr>
+</tbody></table></div>
+<p>이 장을 모르면 “계약했으니 주인”, “등기에 이름이 있으니 진짜 주인”, “착하게 샀으니 보호”, “내 물건이니 내 담보권은 무조건 없어짐”이라는 네 가지 오해가 남는다. 뒤의 소유권·취득시효·전세권·저당권 문제는 이 오해를 이용해 출제된다.</p>
+<h2>중요도와 학습 순서</h2>
+<p>아래 별점은 제공된 문제의 반복성과 기본 법리를 함께 고려한 학습 우선순위다. 전국 시험의 출제율이나 실제 오답률을 집계한 수치는 아니다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>순서·교재 범위</th>
+<th>주제</th>
+<th>중요도</th>
+<th>반드시 답할 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 · 38~51쪽</td>
+<td>변동의 종류·공시와 공신·물권행위</td>
+<td>★★★★★</td>
+<td>표시가 있다는 것과 진실이라고 믿어도 된다는 것은 같은가?</td>
+</tr>
+<tr>
+<td>2 · 52~60쪽</td>
+<td>등기의 종류·절차·효력</td>
+<td>★★★★★</td>
+<td>가등기로 주인이 되는가? 추정력과 공신력은 같은가?</td>
+</tr>
+<tr>
+<td>3 · 60~76쪽</td>
+<td>등기청구권·중복등기·중간생략·명의회복</td>
+<td>★★★★★</td>
+<td>누구에게 어떤 등기를 청구하며, 시효는 어떻게 되는가?</td>
+</tr>
+<tr>
+<td>4 · 76~80쪽</td>
+<td>등기 없는 취득·제187조</td>
+<td>★★★★★</td>
+<td>판결이면 전부 등기가 필요 없는가?</td>
+</tr>
+<tr>
+<td>5 · 80~93쪽</td>
+<td>인도 4종·선의취득·도품</td>
+<td>★★★★★</td>
+<td>인도 방식과 무과실, 도난 여부가 결론을 어떻게 바꾸는가?</td>
+</tr>
+<tr>
+<td>6 · 94~98쪽</td>
+<td>입목등기·명인방법</td>
+<td>★★★★☆</td>
+<td>나무는 언제 토지와 따로 거래할 수 있는가?</td>
+</tr>
+<tr>
+<td>7 · 98~102쪽</td>
+<td>멸실·포기·혼동</td>
+<td>★★★★★</td>
+<td>권리를 없애면 오히려 손해 보는 사람이 있는가?</td>
+</tr>
+<tr>
+<td>심화</td>
+<td>독자성·무인성 논쟁, 해제의 청산관계설</td>
+<td>★★☆☆☆</td>
+<td>저자의 견해를 판례의 결론과 구별하는가?</td>
+</tr>
+<tr>
+<td>심화</td>
+<td>옛 멸실회복등기·폐지된 예고등기</td>
+<td>★★☆☆☆</td>
+<td>현재 제도와 과거 판례의 전제를 구별하는가?</td>
+</tr>
+</tbody></table></div>
+<h2>문제를 풀 때의 판단 순서</h2>
+<div class="decision-flow"><b>① 물건</b> 부동산인가, 동산인가? → <b>② 원인</b> 계약인가, 법률규정인가? → <b>③ 권한</b> 처분자가 진짜 권리자인가? → <b>④ 표시</b> 등기·인도·명인방법을 갖췄는가? → <b>⑤ 예외</b> 선의취득·제3자 보호·혼동 예외가 있는가?</div>
+
+<p>이 순서대로 묻는 습관이 중요하다. “선의인가?”부터 보면, 부동산 등기의 공신력을 잘못 인정하거나 무효인 계약까지 살려 주는 실수를 한다.</p>
+<h1>01. 총설 · 물권은 어떻게 움직이는가</h1>
+<h2 id="property-02-01" data-concept-id="property-02-01">1. 발생·변경·소멸의 지도 · 교재 38~40쪽</h2>
+<h3>쉬운 이야기</h3>
+<p>아무것도 없던 땅에 집을 완성하면 새로운 집의 소유권이 생긴다. 그 집을 팔면 기존 소유권이 다른 사람에게 옮겨간다. 은행에 저당권을 설정하면 집의 소유권은 그대로인데 그 위에 은행의 담보권이 새로 생긴다. 집이 완전히 무너지면 그 집의 소유권은 없어진다.</p>
+<h3>정확한 정리</h3>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>분류</th>
+<th>뜻</th>
+<th>사례</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>원시취득</td>
+<td>앞사람의 권리를 이어받지 않고 새 권리를 취득</td>
+<td>건물 신축, 수용, 선의취득, 취득시효</td>
+<td>‘전 주인이 있었다’고 무조건 승계취득은 아님</td>
+</tr>
+<tr>
+<td>이전적 승계취득</td>
+<td>기존 권리 자체가 새 주체에게 이전</td>
+<td>매매·증여에 따른 소유권 이전, 상속</td>
+<td>매매는 계약만으로 부동산 소유권 이전 아님</td>
+</tr>
+<tr>
+<td>설정적 승계취득</td>
+<td>기존 권리 위에 제한물권 설정</td>
+<td>토지에 지상권·저당권 설정</td>
+<td>소유자가 바뀌는 것은 아님</td>
+</tr>
+<tr>
+<td>물권의 변경</td>
+<td>주체 외의 내용·범위·순위 등이 변화</td>
+<td>지상권 존속기간 변경, 저당권 순위 변경</td>
+<td>변경에도 필요한 공시를 검토</td>
+</tr>
+<tr>
+<td>절대적 소멸</td>
+<td>권리 자체가 사라짐</td>
+<td>건물의 완전한 멸실</td>
+<td>담보권의 가치적 대체물 문제는 별도</td>
+</tr>
+<tr>
+<td>상대적 소멸</td>
+<td>권리가 이전되어 종전 주체가 잃음</td>
+<td>A의 집이 B에게 이전</td>
+<td>B에게 권리는 남아 있음</td>
+</tr>
+</tbody></table></div>
+<p>원시취득에서는 종전 권리의 제한을 그대로 이어받는지, 법률이 무엇을 소멸시키는지 별도로 살핀다. “원시취득이면 어떤 부담도 절대 남지 않는다”는 표현은 피한다. 각 제도의 조문이 기준이다.</p>
+<h3>교재 문단의 의도와 한 줄 요약</h3>
+<p>교수는 뒤에서 서로 다른 취득 원인이 뒤섞이지 않도록 분류표부터 만든다. 핵심 키워드는 <strong>새로 생김 / 그대로 이전 / 일부 권능 설정</strong>이다. 시험은 선의취득·수용을 승계취득이라고 바꾸어 묻는다. <span class="key-yellow">한 줄: 권리가 생겼다는 결과가 같아도, 생긴 경로에 따라 요건과 부담의 승계가 달라진다.</span></p>
+<h2 id="property-02-02" data-concept-id="property-02-02">2. 계약, 물권적 합의, 공시를 분리해서 보기 · 40~47쪽</h2>
+<p>지민과 수아가 “이 토지를 1억 원에 팔게”라고 계약했다. 이때 지민에게는 대금을 달라는 권리, 수아에게는 소유권을 넘겨 달라는 권리가 생긴다. 그러나 수아가 모든 사람에게 “내 땅이다”라고 할 수 있는 것은 아직 아니다. 부동산은 유효한 권리이전 원인과 등기를 함께 갖춰야 한다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>층위</th>
+<th>쉬운 말</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>채권행위</td>
+<td>앞으로 넘겨주겠다는 약속</td>
+<td>이행을 요구할 채권·채무 발생</td>
+</tr>
+<tr>
+<td>물권행위·물권적 합의</td>
+<td>해당 물권을 이전·설정·소멸시키려는 의사</td>
+<td>공시 등 요건과 결합하여 물권변동</td>
+</tr>
+<tr>
+<td>공시</td>
+<td>밖에 보이는 표시</td>
+<td>부동산은 등기, 동산은 인도·점유</td>
+</tr>
+</tbody></table></div>
+<p>‘계약금 지급’, ‘잔금 지급’, ‘열쇠 인도’는 중요한 사실이지만, 부동산 소유권이전등기를 대신하지 않는다. 반대로 채무불이행이 있었다고 언제나 이미 이루어진 물권변동이 자동으로 없던 일이 되는 것도 아니다. 해제·취소 등 별도 원인과 제3자 보호를 확인해야 한다.</p>
+<h3>심화 · 독자성과 무인성은 다른 질문이다</h3>
+<p><strong>독자성</strong>은 “매매라는 채권행위와 따로 구별되는 물권행위가 있는가?”라는 질문이다. <strong>유인성·무인성</strong>은 “매매가 무효이면 그에 따른 물권변동도 영향을 받는가?”라는 질문이다. 별도로 구별되는 행위라고 보면서도 원인행위의 무효에 영향을 받는다고 설명할 수 있다. 따라서 <span class="key-pink">독자성 긍정 = 무인성 긍정이 아니다.</span></p>
+<p>교재는 물권행위를 별도의 독립행위로 구성하는 이론을 비판적으로 검토한다. 학설 중에는 독자성을 긍정하면서 유인성을 인정하는 입장이 있다. 판례는 원인행위와 물권변동을 분리하여 원인 무효에도 소유권이 그대로 이전된다고 일반화하지 않는다. 문제에 “판례에 의하면”이라고 있으면 교재 저자의 독자적인 설명과 섞지 말아야 한다.</p>
+<h3>문단 해설 · 왜 독일 이론까지 나오는가</h3>
+<p>이 논쟁은 “계약이 깨진 뒤 소유권은 누구에게 남는가?”를 설명하는 도구다. 학설 이름 자체를 늘어놓는 것이 목적이 아니다. 시험 키워드는 <strong>독자성은 행위의 구별, 무인성은 원인 무효의 영향 차단</strong>이다. 한 줄: 두 개의 질문을 한 개로 외우지 말자.</p>
+<h2 id="property-02-03" data-concept-id="property-02-03">3. 공시의 원칙과 공신의 원칙 · 43~49쪽</h2>
+<h3>중학생 설명</h3>
+<p>동네 게시판에 “이 집 주인은 수아”라는 이름표가 붙어 있다. <strong>공시</strong>는 “누가 주인인지 밖에 표시하자”라는 규칙이다. <strong>공신</strong>은 “그 표시가 사실과 달라도 일정한 요건 아래 믿은 사람을 보호하자”라는 규칙이다. 이름표를 붙이라는 말과 이름표를 국가가 모두 보증한다는 말은 전혀 다르다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>공시의 원칙</th>
+<th>공신의 원칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>출발 질문</td>
+<td>권리변동을 어떻게 밖에 나타낼까?</td>
+<td>표시가 거짓일 때 누구를 보호할까?</td>
+</tr>
+<tr>
+<td>보호하려는 이익</td>
+<td>권리관계의 명확성</td>
+<td>표시를 믿고 한 거래의 안전</td>
+</tr>
+<tr>
+<td>우리 부동산</td>
+<td>등기를 공시방법으로 사용</td>
+<td>등기에 일반적 공신력 없음</td>
+</tr>
+<tr>
+<td>우리 동산</td>
+<td>인도에 따른 점유가 공시</td>
+<td>제249조의 선의취득 요건 아래 보호</td>
+</tr>
+<tr>
+<td>착각 금지</td>
+<td>등기를 했으니 진짜 권리라는 보장 아님</td>
+<td>선의 하나만으로 보호되는 것 아님</td>
+</tr>
+</tbody></table></div>
+<p>공신력을 넓게 인정하면 새로 사는 사람의 거래는 편해지지만 진짜 주인이 권리를 잃을 수 있다. 이것이 <strong>동적 안전과 정적 안전의 충돌</strong>이다. 정적 안전은 이미 가진 권리를 지키는 것, 동적 안전은 새로운 거래를 믿고 할 수 있게 하는 것이다.</p>
+<p><span class="key-yellow">우리 민법은 법률행위에 의한 부동산물권변동에 성립요건주의를 채택한다.</span> 등기가 없으면 당사자 사이에서도 소유권은 이전되지 않는다. 이것을 형식주의라고 한다. 의사표시만으로 권리가 옮겨가고 공시는 제3자에게 주장하는 요건으로 쓰는 체계는 의사주의·대항요건주의다. ‘형식주의’를 ‘계약 내용은 전혀 중요하지 않다’는 뜻으로 해석하면 안 된다.</p>
+<h3>연결 · 제3자 보호 조문은 공신력과 다르다</h3>
+<p>통정허위표시의 제108조 제2항, 사기·강박 취소의 제110조 제3항 등은 그 조문이 정한 사람을 특별히 보호한다. 등기만 믿으면 전부 보호하는 제도가 아니다. 제107조~제110조, 해제의 제548조 제1항 단서, 부동산실명법·가등기담보법상의 제3자 보호는 각각 요건을 확인한다. 표현대리나 채권의 준점유자에 대한 변제도 외관 신뢰 보호라는 연결점은 있으나, 전부 동산 선의취득과 같은 제도는 아니다.</p>
+<h3>시험 여백 메모</h3>
+<p class="red-note">★★★★★ · 형성 005 / 워크북 021\~027. “등기의 추정력”을 “등기의 공신력”으로, “법률행위에 의한 변동”을 “모든 변동”으로 바꾸는 함정에 주의.</p>
+
+<h2>사례 1. A → B → C, 처음 계약이 깨지면? · 50~51쪽</h2>
+<h3>사건과 갈등</h3>
+<p>A의 땅을 B가 취득하고 등기했다. B는 다시 C에게 팔아 C 명의로 등기를 마쳤다. 뒤늦게 A와 B 사이 계약의 문제가 드러났다. A는 “처음부터 잘못됐으니 내 땅을 돌려줘”라고 한다. C는 “나는 등기까지 보고 샀는데?”라고 맞선다.</p>
+<h3>법원의 고민과 결론</h3>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>처음 거래의 문제</th>
+<th>C에 대한 판단의 출발점</th>
+<th>쉬운 해설</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A가 사기·강박으로 계약하여 취소</td>
+<td>제110조 제3항의 선의의 제3자 보호</td>
+<td>C의 선의와 제3자 해당 여부를 확인</td>
+</tr>
+<tr>
+<td>A·B가 짜고 허위매매</td>
+<td>제108조 제2항의 선의의 제3자 보호</td>
+<td>외관을 스스로 만든 A의 책임도 고려</td>
+</tr>
+<tr>
+<td>제한능력자의 계약 취소</td>
+<td>위 조문과 같은 일반적 선의 제3자 보호 없음</td>
+<td>C가 몰랐다는 사실만으로 A에게 대항 못 함</td>
+</tr>
+<tr>
+<td>등기서류를 위조한 무권리자 B</td>
+<td>부동산 등기에 공신력 없음</td>
+<td>C가 선의·무과실이어도 등기만으로 보호 안 됨</td>
+</tr>
+<tr>
+<td>불법원인급여</td>
+<td>제746조의 반환 제한 등 별도 검토</td>
+<td>A가 스스로 불법급여하고 소유권 주장으로 우회할 수 있는지 문제</td>
+</tr>
+</tbody></table></div>
+<p>법원은 단지 “C가 불쌍한가?”가 아니라 <strong>어느 보호 조문이 적용되는가</strong>를 본다. 부동산도 무조건 선의취득이 된다면, 등기를 위조당한 주인은 등기만 믿은 전득자에게 언제든 땅을 잃게 된다.</p>
+<h3>판례 문장 풀기</h3>
+<p>“취소로 소유권이 복귀한다” → 원인행위를 취소하면 그에 따른 소유권 이전의 효력도 영향을 받는다는 뜻이다. “선의의 제3자에게 대항하지 못한다” → 취소를 이유로 법이 보호하는 C의 권리를 빼앗을 수 없다는 뜻이다. “불법원인급여자는 소유권에 기한 반환도 청구할 수 없다” → 금지된 급여를 해 놓고 청구 이름만 바꾸어 회수할 수는 없다는 취지다.</p>
+<h3>교재의 학설과 판례를 분리하기</h3>
+<p>교재는 해제 이후를 당사자 사이의 청산관계로 설명하며 재이전을 위한 등기를 중시하는 견해를 소개한다. 그러나 시험에서 판례를 묻는 경우에는 해제의 물권적 효과와 제548조의 제3자 보호를 기준으로 판단한다. <span class="key-pink">저자의 청산관계설을 ‘판례도 반드시 재등기해야 소유권 복귀’로 옮겨 외우면 안 된다.</span></p>
+<p>추가로 C의 등기부취득시효를 검토할 수 있다. 다만 <strong>등기 후 10년</strong>만으로 끝나지 않는다. 제245조 제2항의 소유의 의사, 평온·공연한 점유, 선의·무과실 등 요건이 필요하며 중복등기의 특수 문제도 있다.</p>
+<p><span class="key-yellow">사례 한 줄: 처음 계약의 하자가 같지 않으므로, C를 보호하는 근거도 같지 않다.</span></p>
+<h1>02. 부동산 · 등기의 문을 통과해야 하는 경우</h1>
+<h2 id="property-02-04" data-concept-id="property-02-04">4. 제186조, 왜 돈만 내서는 주인이 아닌가 · 52~54쪽</h2>
+<p>민법 제186조의 역할은 법률행위에 의한 부동산물권변동의 기준 시점을 정하는 것이다. 유효한 매매계약을 했어도 등기를 마치기 전 매수인은 원칙적으로 소유자가 아니라 <strong>소유권을 이전받을 채권자</strong>다. 대금을 완납하고 토지를 인도받아 계속 이용하는 경우도 출발점은 같다.</p>
+<h3>조문을 다섯 단계로 풀기</h3>
+<p>입법 취지는 모두에게 영향을 미치는 권리변동을 분명하게 드러내는 것이다. 해결할 문제는 계약서만 든 여러 사람이 서로 주인이라고 주장하는 상황이다. 사건에 적용할 때에는 매매·증여·저당권설정처럼 법률행위에 의한 변동인지, 유효한 원인이 있는지, 필요한 등기를 했는지를 확인한다. 시험은 잔금·인도를 등기와 바꾸거나, 등기만 있으면 원인무효도 고쳐진다고 묻는다.</p>
+<p><span class="key-yellow">결론: 법률행위에 의한 부동산물권변동 = 유효한 원인 + 등기.</span> 점유권·유치권은 등기 대상 물권이 아니므로 똑같이 대입하지 않는다.</p>
+<h2 id="property-02-05" data-concept-id="property-02-05">5. 등기부 읽기와 등기의 종류 · 53~58쪽</h2>
+<h3>등기부의 세 칸</h3>
+<p><strong>표제부</strong>는 물건의 신분증이다. 소재지·지번·건물 구조 등 무엇에 관한 기록인지 나타낸다. <strong>갑구</strong>는 소유권에 관한 사항이다. <strong>을구</strong>는 저당권·전세권 같은 소유권 이외의 권리다. “갑구가 있으니 갑이 주인”이라는 뜻이 아니라 기록 칸의 이름이다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>등기</th>
+<th>쉬운 뜻·등장 이유</th>
+<th>시험에서 바꾸는 말</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>보존등기</td>
+<td>미등기 부동산의 소유권을 처음 기록</td>
+<td>이전등기와 혼동</td>
+</tr>
+<tr>
+<td>이전등기</td>
+<td>기존 소유권 등이 다른 사람에게 넘어감</td>
+<td>매수인이 새 등기부를 만들어도 된다는 착각</td>
+</tr>
+<tr>
+<td>변경등기</td>
+<td>처음에는 맞았는데 뒤에 사정이 바뀜</td>
+<td>처음부터 틀린 경정과 혼동</td>
+</tr>
+<tr>
+<td>경정등기</td>
+<td>처음 기록할 때부터 있던 잘못을 고침</td>
+<td>이후 변화인 변경과 혼동</td>
+</tr>
+<tr>
+<td>말소등기</td>
+<td>무효·소멸 등으로 기존 기록을 지움</td>
+<td>기록 삭제가 언제나 권리소멸 원인이라는 착각</td>
+</tr>
+<tr>
+<td>말소회복등기</td>
+<td>부당하게 지워진 등기를 되살림</td>
+<td>기록 자체가 사라진 멸실회복과 구별</td>
+</tr>
+<tr>
+<td>주등기·부기등기</td>
+<td>독립 순위번호 기록 / 기존 등기에 붙여 기록</td>
+<td>부기등기에도 원래 등기와의 순위관계가 있음</td>
+</tr>
+<tr>
+<td>본등기·가등기</td>
+<td>완성된 등기 / 장래 본등기의 순위 확보</td>
+<td>가등기를 소유권이전 자체로 오해</td>
+</tr>
+</tbody></table></div>
+<p>등기기록 멸실의 회복은 옛 등기부가 재난 등으로 사라진 사건에서 문제된다. 현재 전산 등기에서도 그 역사적 판례의 논리를 배울 수 있지만, 가등기·말소회복과 섞지 않는다. <strong>예고등기는 2011년 폐지된 제도</strong>이므로 현재 이용 가능한 등기처럼 외우지 않는다.</p>
+<p>교수는 등기가 한 종류가 아니라는 점을 보여 주려고 이 문단을 넣었다. 시험 키워드는 <strong>처음 / 나중 / 잘못 삭제 / 순위 확보</strong>다. 한 줄: 같은 “등기”라도 목적과 효과가 다르다.</p>
+<h2>사례 2. 9월 가등기, 11월 본등기 · 55~57쪽</h2>
+<h3>등장인물과 시간 순서</h3>
+<p>A가 2021년 9월 1일 B에게 토지를 팔았다. B는 9월 10일 소유권이전청구권 보전 가등기를 했다. A는 다시 C에게 팔아 10월 1일 C 명의 이전등기를 했다. B가 11월 1일 가등기에 기한 본등기를 마쳤다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>일어난 일</th>
+<th>소유권 판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>9월 1일</td>
+<td>A·B 매매</td>
+<td>B는 등기청구권 취득</td>
+</tr>
+<tr>
+<td>9월 10일</td>
+<td>B 가등기</td>
+<td>가등기만으로 B가 소유자 되는 것은 아님</td>
+</tr>
+<tr>
+<td>10월 1일</td>
+<td>C 이전등기</td>
+<td>원칙적으로 C가 소유권 취득, B의 가등기 순위에 제약</td>
+</tr>
+<tr>
+<td>11월 1일</td>
+<td>B 본등기</td>
+<td>본등기로 B가 소유권 취득, 순위는 가등기 순위 보전</td>
+</tr>
+</tbody></table></div>
+<h3>재판에서 묻는 두 가지</h3>
+<p>B는 C가 현재 등기명의자라는 이유만으로 C에게 매매에 따른 본등기를 청구하는 것이 아니다. 본등기 의무자는 가등기의무자인 A다. 가등기에 기한 본등기가 이루어지면 가등기 이후의 양립할 수 없는 중간등기는 법이 정한 절차에 따라 정리된다.</p>
+<p><span class="key-yellow">가등기의 소급효는 ‘순위’에 관한 것이고, 소유권 취득 자체가 가등기일로 소급하는 것은 아니다.</span> 그동안 누가 주인이었는지, 누가 사용이익을 얻었는지는 이 구별에 달려 있다. 가등기에 권리변동 자체의 추정력이 일반적으로 생기는 것도 아니다.</p>
+<p>부동산등기법 제6조의 ‘등기 완료 후 접수 시점의 효력’과도 구별한다. <strong>접수→완료</strong>의 시점 문제와 <strong>가등기→본등기</strong>의 순위 문제는 별개다. 가등기에 의한 청구권의 양도는 부기등기로 공시할 수 있다. 순위보전 가등기와 채권담보를 위한 담보가등기도 목적부터 구별한다.</p>
+<p class="red-note">★★★★★ · TOP5 워크북 030. 기억 문장: “주인은 본등기로, 순위는 가등기로.”</p>
+
+<h2 id="property-02-06" data-concept-id="property-02-06">6. 등기절차와 네 가지 효력 · 57~60쪽</h2>
+<h3>절차가 필요한 이유</h3>
+<p>등기관은 제출된 신청정보·첨부정보 등으로 법정 요건을 심사한다. 현장에 가서 실제 주인을 끝까지 조사하여 보증하는 기관이 아니다. 그래서 신청서가 접수되고 등기가 되었다는 사실만으로 원인행위의 무효가 사라지지 않는다. 등기절차의 적법성과 실체적 권리관계의 유효성은 연결되지만 같은 질문은 아니다.</p>
+<p>원칙적으로 등기권리자와 등기의무자가 공동으로 신청한다. 등기를 얻는 사람이 혼자 “내 것”이라고 올리는 일을 막기 위해서다. 상속·법인 합병, 판결에 의한 신청 등은 단독신청이 허용되는 유형이 있다. 가등기도 상대방의 승낙 등이 있는 경우 단독으로 신청할 수 있다. 신청 각하 사유는 부동산등기법 제29조 등 현행 절차 규정에 따른다. 교재의 오래된 조문 번호·기관 명칭을 현행 그대로라고 암기하지 않는다.</p>
+<p><strong>등기필정보</strong>는 완료된 등기와 신청인 확인에 관한 정보이지, 종이 하나를 가진 사람이 진짜 소유자라는 보증서가 아니다. 물리적 현황의 확인에는 토지·건축물대장, 권리관계의 확인에는 등기기록이라는 기능 구별도 필요하다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>효력</th>
+<th>뜻</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>권리변동의 효력</td>
+<td>제186조의 성립요건을 충족</td>
+<td>원인무효까지 유효화하는 것은 아님</td>
+</tr>
+<tr>
+<td>순위확정의 효력</td>
+<td>양립하는 권리 사이 선후 결정</td>
+<td>가등기·부기등기 등 별도 규칙 확인</td>
+</tr>
+<tr>
+<td>대항력</td>
+<td>법률이 정한 사항을 제3자에게 주장</td>
+<td>모든 물권변동이 대항요건주의라는 뜻 아님</td>
+</tr>
+<tr>
+<td>추정력</td>
+<td>일단 등기에 맞는 권리가 있다고 취급</td>
+<td>반증 가능, 공신력과 다름</td>
+</tr>
+</tbody></table></div>
+<h3>추정력의 부담을 이야기로 보기</h3>
+<p>등기에 수아가 소유자로 올라 있다. 민지는 “수아는 주인이 아니야”라고 주장한다. 등기의 추정력이 작용하면 민지가 무효 사유를 입증해야 한다. 수아가 등기만 내면 영원히 이기는 것이 아니라 <strong>누가 먼저 어떤 사실을 증명할 것인가</strong>가 정해지는 것이다.</p>
+<p>보존등기 명의자가 다른 사람에게서 취득했다고 스스로 주장하여 최초 소유관계와 어긋남이 드러나는 등, 추정이 깨지는 유형을 구별한다. 가등기에는 본등기와 같은 권리변동의 추정력을 그대로 인정하지 않는다. 등기절차가 적법하게 이루어졌다는 추정과 실체적 권리 추정의 구체적 범위도 문제된다.</p>
+<p><span class="key-pink">“등기를 믿은 선의자이므로 진정한 소유자에게 이긴다”는 공신력 논리다. 추정력으로는 그 결론을 낼 수 없다.</span></p>
+<h2 id="property-02-07" data-concept-id="property-02-07">7. 등기청구권과 시효 · 60~67쪽</h2>
+<p>등기소에 신청하는 권한이 <strong>등기신청권</strong>이라면, 상대방에게 “등기에 협력해 줘”라고 요구하는 실체법상 권리가 <strong>등기청구권</strong>이다. 매도인이 소유권이전등기를 가져가 달라고 매수인에게 요구하는 <strong>등기인수청구권</strong>도 생각할 수 있다. 신청의 상대는 등기관, 청구의 상대는 협력할 의무가 있는 사람이다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>생긴 원인</th>
+<th>법적 성질</th>
+<th>시효·핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>매매·증여 등에 따른 이전등기청구</td>
+<td>채권적 청구권</td>
+<td>원칙적으로 10년, 인도받아 점유·사용하는 매수인에 대한 판례 예외</td>
+</tr>
+<tr>
+<td>무효등기 말소·진정명의회복</td>
+<td>소유권에 기한 물권적 청구권</td>
+<td>소유권 존속을 전제로 독립 소멸시효에 걸리지 않음</td>
+</tr>
+<tr>
+<td>부동산 점유취득시효 완성에 따른 이전등기청구</td>
+<td>판례상 채권적 청구권</td>
+<td>계속 점유와 점유상실에 따른 시효 문제 구별</td>
+</tr>
+<tr>
+<td>임대차등기 협력청구</td>
+<td>채권적 청구권</td>
+<td>제621조, 반대약정 여부 확인</td>
+</tr>
+<tr>
+<td>법정지상권 등에 기초한 등기청구</td>
+<td>이미 성립한 물권에 기초</td>
+<td>법률이 인정한 권리의 공시를 요구</td>
+</tr>
+<tr>
+<td>제649조 법정저당권의 등기청구</td>
+<td>교재·문제 분류상 물권적</td>
+<td>토지임대인의 건물 압류 등 특별 요건 필요</td>
+</tr>
+</tbody></table></div>
+<p><span class="key-green">시효는 권리를 행사하지 않고 방치하는 상태를 문제 삼는다.</span> 그래서 인도받은 부동산을 계속 지배하는 매수인을 단순히 계약서만 보관한 사람과 똑같이 취급하지 않는 것이다. 다만 채권적 청구권이라는 성질 자체가 소유권으로 바뀌는 것은 아니다.</p>
+<h2>사례 3. 2000년에 사고 2021년까지 등기를 안 했다 · 62쪽</h2>
+<h3>사건의 출발</h3>
+<p>A는 2000년 9월 1일 토지를 B에게 팔았다. B는 대금을 지급하고 토지를 인도받아 사용했다. 2021년 9월 1일까지 이전등기는 하지 않았다. A는 “벌써 21년인데 등기해 달라는 권리는 시효로 없어졌어”라고 주장한다.</p>
+<h3>판결의 고민과 이유</h3>
+<p>법원은 B가 실제로 토지를 인도받아 계속 사용·수익했다는 점을 본다. 이런 매수인은 권리를 방치했다고 보기 어렵다. 따라서 그 매매에 따른 이전등기청구권은 그 점유·사용 상태에서 소멸시효가 진행하지 않는다는 판례가 적용된다. <strong>B가 이미 소유자라서가 아니라, 매매에 따른 등기청구권을 보호하는 것</strong>이다.</p>
+<p>시간을 바꿔 보자. B가 2010년 9월 15일 C에게 다시 팔아 인도했다면? 매수인의 전매·인도는 권리를 적극적으로 행사한 것이므로 B의 매매에 따른 등기청구권이 곧바로 방치된 권리로 바뀌지 않는다. C는 필요한 요건 아래 B를 대위하여 A에게 <strong>A→B</strong> 이전등기를 청구하고, 이어 B에게 <strong>B→C</strong> 이전을 요구할 수 있다. 세 사람의 중간생략 합의 없이 A에게 곧바로 C 명의 등기를 요구하는 것은 별개의 문제다.</p>
+<h3>비슷하지만 다른 경우 · 취득시효 완성자</h3>
+<p>B의 권리가 ‘매매’가 아니라 ‘점유취득시효 완성’으로 생긴 등기청구권이라면 판례 법리가 그대로 같지 않다. 계속 점유하는 동안과 점유를 잃은 뒤를 나누어야 한다. 2010년에 점유를 상실하고 2021년까지 아무런 시효 중단 등 사유가 없다면 10년 소멸시효 문제가 생긴다. 매매의 전매 사례를 취득시효 사례에 무조건 붙이면 틀린다.</p>
+<p class="red-note">★★★★★ · TOP5 워크북 049. “등기청구권”이라는 이름보다 ‘매매인가, 취득시효인가, 소유권에 기한 말소인가’를 먼저 표시.</p>
+
+<h2>사례 4. 위조등기 뒤에 다시 매매가 된 경우 · 62~63쪽</h2>
+<p>A의 토지에 B가 2000년 9월 1일 위조서류로 자기 명의 등기를 했다. B는 2010년 9월 15일 C에게 팔아 이전등기했다. 2021년 A가 발견했다.</p>
+<p>A의 소유권은 B의 위조등기만으로 사라지지 않는다. 따라서 A는 무효인 등기의 말소를 해당 명의자에게 청구할 수 있고, 요건에 따라 현재 명의자 C에게 진정명의회복을 위한 이전등기를 청구할 수도 있다. 이 청구는 소유권의 방해를 제거하는 청구다. “처음 위조된 지 20년이 넘었다”만으로 없어지지 않는다.</p>
+<p>다만 C가 등기부취득시효를 주장한다면 제245조 제2항의 모든 요건을 따로 검토한다. 11년이라는 숫자만으로 C가 이기는 것이 아니다. <span class="key-pink">A의 말소청구권에 소멸시효가 없다는 말과, C가 별도 취득시효로 소유권을 얻을 수 없다는 말은 다르다.</span></p>
+<h3>등기청구권을 양도하면 어떻게 될까</h3>
+<p>매매에 따른 이전등기청구권은 통상의 금전채권과 완전히 같은 방식으로 양도·대항할 수 있는 것이 아니다. 판례는 매도인의 동의·승낙을 요구한다. B가 C에게 “내 등기청구권을 줄게” 하고 A에게 통지만 했다는 이유만으로 C가 A에게 직접 청구할 수 있다고 결론 내리지 않는다. 계약 상대방 변경과 관련된 매도인의 이해를 보호하려는 것이다.</p>
+<h2 id="property-02-08" data-concept-id="property-02-08">8. 등기가 맞아야 할 네 가지 · 67~71쪽</h2>
+<p>교재는 등기의 유효성을 <strong>물건의 동일성, 권리의 일치, 절차의 문제, 현재 실체관계와의 부합</strong>으로 나누어 살핀다. 절차에 흠이 있다는 이유만으로 항상 무효도 아니고, 실체가 맞는다는 말만으로 모든 절차 위반을 치유하는 것도 아니다. 중복등기는 특히 별도 원칙을 갖는다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>판단과 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>증여했지만 등기원인을 매매로 적음</td>
+<td>실제 소유권 이전 의사가 유효하고 현재 관계가 맞으면 등기 효력 인정 가능. 조세상 책임은 별도</td>
+</tr>
+<tr>
+<td>권리이전 합의는 유효한데 신청서류가 위조됨</td>
+<td>실체관계 부합 여부를 확인. 위조라는 사정만으로 항상 무효라고 못 함</td>
+</tr>
+<tr>
+<td>아무런 이전 합의도 없이 서류만 위조</td>
+<td>실체관계가 없으므로 원인무효. 위 행과 다름</td>
+</tr>
+<tr>
+<td>실제 대상과 다른 토지·동일성 없는 건물의 등기</td>
+<td>다른 물건의 등기로 권리를 공시할 수 없음</td>
+</tr>
+<tr>
+<td>기존 건물의 증축·개축으로 동일성이 유지됨</td>
+<td>기존 기록으로 판단. 별도 보존등기는 중복 문제</td>
+</tr>
+<tr>
+<td>건물이 멸실되고 전혀 새로운 건물 신축</td>
+<td>옛 건물의 등기를 새 건물에 그대로 유용할 수 없음</td>
+</tr>
+<tr>
+<td>원래 무효인 등기를 새 합의에 이용</td>
+<td>새 합의 전 이해관계 있는 제3자를 해치지 않는 등 요건 필요</td>
+</tr>
+<tr>
+<td>적법한 신청 뒤 완료 전에 신청인 사망</td>
+<td>사망했다는 사실만으로 적법하게 신청된 등기가 무효가 되지 않음</td>
+</tr>
+<tr>
+<td>공동상속인 한 명이 전체를 자기 명의로 등기</td>
+<td>적어도 자신의 상속지분과 다른 상속인 지분을 구별, 전부 무효 단정 금지</td>
+</tr>
+</tbody></table></div>
+<h2>사례 5. 한 건물에 등기부가 두 개라면 · 68~69쪽</h2>
+<p>A가 건물을 지어 먼저 보존등기했다. A에게서 산 B는 A 등기부에서 이전등기를 받지 않고 자기 이름의 새 보존등기를 만들었다. A의 첫 등기부에서는 C에게, B의 두 번째 등기부에서는 D에게 이전등기가 되었다.</p>
+<h3>법원의 고민</h3>
+<p>법은 한 부동산에 하나의 등기기록을 두어 권리의 흐름을 이어 가려 한다. 두 개를 모두 인정하면 각 등기부를 본 C와 D가 서로 주인이라고 싸우고 담보순위도 정할 수 없다.</p>
+<h3>결론과 조건</h3>
+<p><span class="key-yellow">같은 부동산의 첫 보존등기가 원인무효가 아니라면 뒤의 중복 보존등기는 원칙적으로 무효다.</span> B가 실제로 매수했다는 사실만으로 두 번째 보존등기가 유효해지지 않는다. 뒤의 등기에 기초한 D의 등기도 문제된다. C의 취득은 유효한 이전 원인 등 별도 요건을 전제로 판단한다. 이중매매 적극가담 등 특별 사정이 있으면 추가 검토가 필요하다.</p>
+<p>같은 사람 명의의 중복등기도 뒤 등기가 원칙적으로 무효다. 다른 사람 명의라면 앞 등기의 원인무효 여부가 중요하다. 단, 애초에 첫 등기 표시가 실제 건물과 동일성이 없어 그 건물의 등기로 볼 수 없다면 ‘같은 부동산의 유효한 선등기’라는 전제가 달라진다.</p>
+<p>뒤의 중복 보존등기를 해 놓고 오래 점유했다고 그 등기가 자동으로 유효해지는 것도 아니다. 제245조 제2항의 등기부취득시효에서 요구하는 등기는 1부동산 1등기기록 원칙에 반하는 후등기까지 모두 포함하는 것이 아니다. 워크북 070은 바로 이 함정이다.</p>
+<h3>심화 · 멸실회복등기</h3>
+<p>원래 보존등기의 선후를 알 수 있으면 그것을 기준으로 판단한다. 그러나 원래 등기들이 동일한 것이었는지 중복이었는지, 언제 이루어졌는지조차 밝혀지지 않는 유형에서는 회복등기의 선후를 기준으로 우열을 가리는 판례가 있다. <strong>99다66915는 이 문제의 판례</strong>다. 아래의 진정명의회복·기판력 판례 번호와 혼동하지 않는다.</p>
+<h2 id="property-02-09" data-concept-id="property-02-09">9. 미등기 매수인의 지위와 중간생략등기 · 71~73쪽</h2>
+<h3>미등기 매수인은 아무 권리도 없을까</h3>
+<p>소유자는 아니지만 계약상 권리와 점유에 따른 보호가 있다. 매도인에 대해서는 적법하게 인도받은 계약관계를 근거로 점유를 정당화할 수 있다. 그 지위를 전매한 경우의 점유관계도 따져야 한다. 점유침탈을 당하면 점유권에 기한 보호도 검토한다. 그러나 소유자만 행사할 수 있는 물권적 청구를 곧바로 자신의 소유권에 기초하여 행사하거나, 매도인의 모든 채권자에 대해 소유자처럼 집행을 배제할 수 있다고 일반화하면 안 된다.</p>
+<h2>사례 6. A → B → C인데 등기는 A → C로 · 72쪽</h2>
+<p>A가 B에게, B가 C에게 순서대로 토지를 팔았다. C는 “등기비용도 드니 A가 바로 내 이름으로 해 줘요”라고 한다.</p>
+<p><strong>아직 등기 전</strong>이라면 C가 A에게 직접 이전등기를 요구할 근거가 필요하다. 판례는 원칙적으로 A·B·C 모두의 중간생략 합의를 요구한다. 합의가 없으면 B를 대위하는 방법 등 정상적인 권리 흐름을 따져야 한다.</p>
+<p><strong>이미 A→C 등기가 끝난 뒤</strong>라면 이야기가 달라진다. 유효한 원인관계에 부합하는 등기는 단지 중간생략 합의가 없었다는 이유만으로 당연히 무효가 되는 것이 아니다. 부동산등기특별조치법상의 규제·제재와 사법상 효력을 구별한다.</p>
+<p>중간생략 합의를 했다고 B의 A에 대한 원래 청구권이나 A의 대금채권이 언제나 소멸하는 것도 아니다. A·B 계약의 해제나 동시이행항변 등 원래 관계가 영향을 줄 수 있다. 토지거래허가를 피하려고 실제 A→B→C 거래를 숨기고 가짜 A→C 계약에 대해 허가받는 문제도 단순한 중간생략 유효론으로 해결하지 않는다.</p>
+<p><span class="key-pink">함정: ‘직접 청구할 수 있는가’와 ‘이미 마친 등기가 유효한가’는 다른 질문이다.</span></p>
+<p class="red-note">★★★★★ · TOP5 워크북 048 / 형성 012. “아직”인지 “이미”인지에 동그라미.</p>
+
+<h2>사례 7. 강박으로 준 땅, 선의의 은행 저당권 · 73~74쪽</h2>
+<p>A가 B의 강박 때문에 땅을 증여하고 이전등기했다. B는 그 땅에 C의 저당권을 설정했다. C는 강박 사정을 모르는 제110조 제3항의 보호받는 제3자다. A가 증여를 취소했다.</p>
+<p>A는 B에게서 자기 명의를 되찾고 싶다. 하지만 C의 보호받는 저당권까지 한꺼번에 없앨 수 없다. B 명의 이전등기를 말소하는 방식에서는 등기상 이해관계인 C의 승낙 문제가 생긴다. 이때 <strong>현재 명의자 B로부터 A에게 진정명의회복을 원인으로 이전등기</strong>하는 방법을 생각할 수 있다. C의 저당권은 남겨 두고 소유명의만 바로잡는 것이다.</p>
+<p>법원의 고민은 진짜 소유자의 권리회복과 제3자의 법정 보호를 함께 지키는 것이다. “원상회복이니 중간에 생긴 권리는 다 지운다”면 C를 보호하라는 조문이 무의미해진다.</p>
+<h3>판례 문장 한 줄씩 풀기</h3>
+<p>“진정명의회복을 원인으로 이전등기를 청구할 수 있다” → 잘못된 등기를 전부 뒤로 지우는 방법만 있는 것은 아니다. “소유권에 기한 방해배제청구권이다” → 매매계약이 있어서 넘겨 달라는 것이 아니라, 이미 가진 진짜 소유권을 등기상 회복해 달라는 것이다. “기판력이 미친다” → 같은 소유권 회복 문제로 확정적으로 졌다면 청구 이름만 바꾸어 다시 다툴 수 없다는 뜻이다.</p>
+<p>예전에 자기 명의로 소유권을 공시한 적이 있거나 법률에 의해 소유권을 취득한 진정한 소유자 등의 요건, 현재 등기명의자를 상대로 한다는 점을 확인한다. 말소청구 패소확정 뒤 같은 근거로 진정명의회복을 구하는 것을 제한하는 판례는 <strong>대법원 2001. 9. 20. 99다37894</strong>다. 제공 JSON 형성 010의 판례 번호는 이 점에서 보완이 필요하다.</p>
+<h2 id="property-02-10" data-concept-id="property-02-10">10. 재단법인의 출연과 소멸시효 · 74~76쪽</h2>
+<p>A가 장학재단을 세우면서 건물을 내놓았다. “재단이 성립했으니 등기 없이도 제3자에게 내 건물이라고 할 수 있나?”가 쟁점이다. 민법 제48조는 생전처분에 의한 출연재산이 법인 성립 때 법인 재산이 되는 관계와 유언 출연의 효력 발생을 정한다.</p>
+<p>판례는 <strong>출연자와 법인 사이의 귀속</strong>과 <strong>제3자에 대한 관계</strong>를 나눈다. 내부적으로 법인 성립에 따라 귀속되더라도, 부동산 취득을 제3자에게 주장하려면 등기가 필요하다. “항상 등기 불필요”도, “출연자와 법인 사이에서도 항상 등기 전에는 아무 귀속이 없다”도 정확하지 않다.</p>
+<p>제162조 제2항은 소유권 이외 재산권의 20년 소멸시효를 규정한다. 그러나 점유권·유치권은 그 성질에 따른 별도 검토가 필요하고, 소유권에는 소멸시효가 없다. 등기청구권의 채권적·물권적 성질과도 구별한다. 재판에서 소멸시효 완성을 권리자가 주장하는 문제도 있으므로 판사가 언제나 알아서 적용한다고 외우지 않는다.</p>
+<h1>03. 부동산 · 등기 없이 먼저 생기는 권리</h1>
+<h2 id="property-02-11" data-concept-id="property-02-11">11. 제187조를 읽는 정확한 방법 · 76~80쪽</h2>
+<p>아버지가 돌아가신 순간 상속인이 집을 상속한다. 상속등기를 아직 못 했다고 그 집이 주인 없는 집이 될 수는 없다. 법이 일정한 사건에 권리취득 효과를 붙인 경우에는 등기 없이도 취득을 인정한다. 다만 다시 처분하여 권리를 옮기려면 자신의 등기를 먼저 갖추게 한다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>원인</th>
+<th>언제·어떻게 취득하는가</th>
+<th>반드시 구별할 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상속</td>
+<td>사망에 따른 상속 개시</td>
+<td>상속등기는 취득 원인이 아니라 공시. 포괄유증·합병과 특정유증 구별</td>
+</tr>
+<tr>
+<td>공용징수·수용</td>
+<td>법률이 정한 수용 효력 발생 시점</td>
+<td>일반적인 협의매수는 사법상 계약이므로 원칙적으로 이전등기 필요</td>
+</tr>
+<tr>
+<td>판결</td>
+<td>그 자체로 물권변동을 일으키는 형성판결</td>
+<td>이행판결·확인판결은 그 자체로 소유권 이전시키지 않음</td>
+</tr>
+<tr>
+<td>경매</td>
+<td>법정 경매에서 매수대금 완납</td>
+<td>최고가 입찰, 매각허가만으로는 부족. 사적인 경매 형식 거래와 구별</td>
+</tr>
+<tr>
+<td>기타 법률규정</td>
+<td>각 법률이 정한 시점</td>
+<td>건물 신축, 첨부, 법정지상권, 혼동 등 개별 요건</td>
+</tr>
+</tbody></table></div>
+<p><strong>채권·채무가 법률에 의해 생겼다는 것</strong>과 <strong>물권변동 자체가 법률규정에 의해 일어난다는 것</strong>도 다르다. 불법행위로 생긴 배상채무를 토지로 대신 갚는 대물변제는 부동산을 넘기는 법률행위이므로 등기가 필요하다.</p>
+<p>특정유증에 따른 부동산 이전도 상속이라는 말로 한꺼번에 처리하지 않는다. 포괄유증과 특정유증은 구별해야 한다. 토지수용의 재결과 법정 협의성립확인 등 특수 절차를 일반 협의매수와 혼동하지 않는 것도 중요하다.</p>
+<h3>제187조 단서 · 처분하지 못한다는 뜻</h3>
+<p>상속인은 등기 없이도 소유권을 취득한다. 그 상태에서 타인에게 매매계약을 하는 것 자체가 전부 무효라는 뜻은 아니다. 다만 이전등기 등 처분에 필요한 등기 절차를 생략한 채 상대방에게 소유권을 넘길 수는 없다. 여기서 처분은 물권을 이전·설정하는 법률상 처분 문제이며, 집을 수리하는 사실행위까지 금지한다는 뜻이 아니다.</p>
+<h3>반드시 따로 외울 예외</h3>
+<p><span class="key-pink">부동산 점유취득시효는 법률에 근거하지만, 제245조 제1항이 등기를 요구한다.</span> 20년 점유만으로 곧바로 소유권을 얻는다고 일반화하지 않는다. 소유권이전등기청구권의 발생과 소유권 취득은 구별된다.</p>
+<h2>사례 8. 공유물분할 ‘판결’과 ‘조정’ · 78~79쪽</h2>
+<p>A와 B가 토지를 절반씩 공유했다. 다투다가 법원에서 “동쪽은 A, 서쪽은 B가 단독으로 갖자”는 내용이 만들어졌다. 법원에서 나온 종이이므로 모두 제187조의 판결일까?</p>
+<p><strong>공유물분할의 형성판결</strong>이면 확정에 의해 법률이 정한 물권변동이 생긴다. 하지만 당사자가 합의하여 성립한 <strong>조정</strong>이라면, 그 합의에 따른 권리변동에는 원칙적으로 등기가 필요하다. 재판상 화해도 확정판결과 같은 효력이 있다는 이유만으로 모든 합의 내용이 즉시 형성적 물권변동이 되는 것은 아니다.</p>
+<p>법원은 문서의 이름만이 아니라 <strong>권리변동을 직접 일으키는 재판인가, 이전해 주기로 한 합의인가</strong>를 본다. 대법원 2013. 11. 21. 2011두1917의 핵심도 이 구별이다. 반대로 본다면 당사자가 법정에서 약속했다는 이유만으로 제186조의 등기 원칙을 쉽게 우회하게 된다.</p>
+<p>한 줄 번역: “형성판결만 해당한다” → 판결문이 등기를 하라고 시키는 것인지, 판결 자체가 권리관계를 바꾸는 것인지 가려라.</p>
+<h1>04. 동산 · 손에 들고 있다는 표시의 힘</h1>
+<h2 id="property-02-12" data-concept-id="property-02-12">12. 인도 네 가지를 장면으로 기억하기 · 80~84쪽</h2>
+<p>민법 제188조~제190조는 동산 소유권 양도의 공시를 다룬다. 물건을 진짜로 들어서 건네는 방식만 인정하면 창고에 있는 큰 기계, 이미 빌려 준 물건을 거래할 때마다 불필요하게 옮겨야 한다. 그래서 합의와 점유관계 변경으로 인도를 대신하는 방법들이 있다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>방법·조문</th>
+<th>이전 모습</th>
+<th>쉬운 장면</th>
+<th>선의취득</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>현실의 인도 · 188①</td>
+<td>A의 지배 → B의 지배</td>
+<td>자전거를 건네받음, 실제 지배를 넘기는 열쇠 전달 등</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>간이인도 · 188②</td>
+<td>B가 이미 점유</td>
+<td>빌린 카메라를 B가 사기로 합의</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>점유개정 · 189</td>
+<td>A가 계속 직접점유하되 B를 위해 점유</td>
+<td>팔고도 A가 다시 빌려 씀</td>
+<td>이것만으로 선의취득 불가</td>
+</tr>
+<tr>
+<td>목적물반환청구권 양도 · 190</td>
+<td>제3자 C가 직접점유</td>
+<td>창고업자 C에게 맡긴 물건을 B에게 팔며 반환채권 양도</td>
+<td>대항요건 등 필요 요건을 갖추면 가능</td>
+</tr>
+</tbody></table></div>
+<p>간이인도는 <strong>받을 사람이 이미 가지고 있음</strong>, 점유개정은 <strong>줄 사람이 계속 가지고 있음</strong>이다. 실제 물건이 움직이지 않는다는 점만 보고 같다고 하면 안 된다.</p>
+<p>제190조의 반환청구권은 임대차·임치 등 관계에서 생기는 채권적 반환청구권을 말한다. 누구에게나 행사하는 소유물반환청구권을 아무렇게나 양도한다는 뜻이 아니다. 채권양도의 유효성과 제3자·채무자에게 대항하는 요건을 나눈다. 선의취득에서는 반환청구권 양도의 대항요건을 갖추었는지가 중요하다.</p>
+<h3>인도 네 가지를 모든 권리에 복사하면 안 되는 이유</h3>
+<p>질권은 담보물을 채권자 쪽에 맡겨 두는 성격 때문에 제332조가 설정자의 대리점유를 금지한다. 따라서 점유개정으로 질권을 설정할 수 없다. 점유권·유치권도 각 권리의 점유 요건을 따로 살핀다. 상속·첨부 등 법률규정에 의한 취득은 각 조문의 요건으로 정하며, 양도계약을 전제로 한 인도 규정을 무조건 요구하지 않는다.</p>
+<h2>사례 9. 기계를 두 사람에게 팔고 계속 쓰는 A · 83쪽</h2>
+<p>A가 기계를 B에게 팔고, “내가 다시 빌려 계속 쓸게”라고 합의했다. 이어 A는 C에게도 같은 기계를 넘긴다고 하며 계속 사용했다. 이것이 이중 점유개정의 문제다.</p>
+<p>먼저 구별해야 한다. <strong>정당한 소유자가 첫 번째 점유개정으로 소유권을 이전하는 것</strong>은 가능하다. 반면 <strong>이미 무권리자가 된 사람이 두 번째 양수인에게 점유개정만 해 주어 선의취득시키는 것</strong>은 불가능하다. 그 뒤 현실 인도와 선의·무과실을 갖춘 새 취득이 가능한지는 추가 사실을 확인한다.</p>
+<p>교재의 74다1564 판례는 이중양도와 현실 인도에 관한 구체적 사실관계에서 읽어야 한다. 그 문장을 떼어 “모든 동산매매에서 점유개정은 효력이 없고 현실 인도를 먼저 받은 사람이 언제나 주인”이라고 외우면 제189조와 충돌한다.</p>
+<p><strong>이중 양도담보</strong>에서도 첫 담보권자의 점유개정에 따른 권리 취득과, 나중 담보권자의 선의취득은 다르다. 뒤의 양도담보권자가 점유개정만으로 선의취득할 수는 없으며, 실제 처분으로 먼저 권리 얻은 사람에게 손해를 입히면 불법행위 등 책임도 문제된다. 매매·양도담보, 정당한 권리승계·무권리자로부터의 취득을 따로 적자.</p>
+<h3>특수 동산의 공시 · 교재 84~85쪽</h3>
+<p>선박은 등기의 대항요건 규율을, 자동차·항공기 등은 등록에 의한 물권변동 규율을 확인한다. 겉모양이 움직이는 물건이라고 항상 민법 제188조만 적용되는 것은 아니다. 부동산에 붙어 그 구성부분·종물로 함께 이전되는 것, 창고증권·화물상환증 등 증권의 교부가 물건의 인도와 연결되는 경우도 별도 규율이 있다.</p>
+<h2 id="property-02-13" data-concept-id="property-02-13">13. 제249조 선의취득 · 85~91쪽</h2>
+<h3>왜 남의 물건을 산 사람을 보호할까</h3>
+<p>중고시장에 나온 카메라를 살 때 모든 과거 주인을 찾아갈 수는 없다. 물건을 가지고 있는 사람은 주인처럼 보인다. 이 외관을 믿은 거래를 일정하게 보호하되, 진짜 주인을 지나치게 희생시키지 않도록 엄격한 요건을 둔다.</p>
+<p><span class="key-yellow">선의취득은 ‘양도인이 권리자가 아니었다’는 흠을 일정 요건 아래 보완한다.</span> 계약 자체의 무효, 대리권 흠결, 취소 등의 모든 문제를 한꺼번에 없애는 만능 규칙이 아니다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>요건</th>
+<th>실제로 확인할 것</th>
+<th>시험 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대상</td>
+<td>선의취득이 허용되는 동산 소유권·질권</td>
+<td>부동산·등기된 입목 등에 확대</td>
+</tr>
+<tr>
+<td>양도인</td>
+<td>물건을 점유하나 처분할 권리가 없음</td>
+<td>진정한 소유자에게서 산 거래와 구별</td>
+</tr>
+<tr>
+<td>거래행위</td>
+<td>소유권 흠결 외에는 유효한 거래</td>
+<td>상속만으로 선의취득, 무효 계약도 치유된다고 함</td>
+</tr>
+<tr>
+<td>점유 취득</td>
+<td>인정되는 인도 방법으로 취득</td>
+<td>점유개정만으로도 된다고 함</td>
+</tr>
+<tr>
+<td>평온·공연</td>
+<td>폭력·은밀한 점유가 아님</td>
+<td>성립 뒤의 사정을 취득 당시와 혼동</td>
+</tr>
+<tr>
+<td>선의·무과실</td>
+<td>권리 없음을 모르고, 몰랐던 데 부주의도 없음</td>
+<td>선의면 무과실도 자동 추정된다고 함</td>
+</tr>
+</tbody></table></div>
+<h3>대상에서 걸러 내는 것들</h3>
+<p>등록된 자동차·항공기 등은 특별한 공시체계 때문에 보통의 동산 선의취득과 다르게 처리한다. 미등록 자동차 등은 등록 상태와 특별법 적용을 정확히 확인한다. 토지의 일부인 수목·미분리 과실은 공시방법을 갖춘 독립 거래와 분리된 동산 여부를 나눈다. 보통의 화폐는 금전의 가치와 점유에 관한 특수성이 있고, 수집용 특정 화폐·봉금 등은 별도로 본다. 도품·유실물 특칙도 금전에는 적용되지 않는다. 유가증권은 증권 자체와 그 안의 권리에 관한 특별법상 선의취득도 구별한다.</p>
+<p>공장에서 분리되어 독립 동산이 된 설비라면 이전의 저당권 부착 문제와 선의취득을 검토할 수 있다. 거래가 법으로 금지된 물건이라면 유효한 거래행위라는 요건부터 살핀다. 모든 물건을 단순히 “손에 들 수 있으니 선의취득”이라고 처리하지 않는다.</p>
+<h3>선의와 무과실, 시점과 증명</h3>
+<p>선의는 착한 마음이 아니라 <strong>양도인에게 권리가 없다는 사실을 모름</strong>이다. 무과실은 <strong>필요한 주의를 기울였는데도 몰랐음</strong>이다. 시가는 200만 원인데 정체불명의 판매자가 50만 원에 급히 파는 등 의심할 사정이 있다면 확인 여부가 중요하다.</p>
+<p>기준 시점은 물권행위가 완성되어 점유를 취득하는 때다. 합의 때만 몰랐어도 물건을 받을 때 이미 알고 있었다면 문제가 된다. 반대로 선의취득이 완성된 뒤 나중에 진실을 알았다는 이유만으로 이미 취득한 권리가 당연히 사라지는 것은 아니다.</p>
+<p>제197조에 따른 선의·평온·공연의 추정과 <strong>무과실의 입증</strong>을 구별한다. 판례는 무과실을 선의취득 주장자가 증명하도록 한다. 특히 질권 선의취득에 관한 80다2910 판결은 선의와 무과실의 입증책임을 취득 주장자에게 둔다. ‘선의는 모든 권리 유형에서 예외 없이 추정’이라고 넓혀 쓰지 않는다.</p>
+<h3>효과</h3>
+<p>요건을 갖추면 원시취득이다. 단지 반환을 잠깐 거절할 수 있는 지위가 아니라 권리 자체를 취득한다. 진정한 소유자는 무권리자인 처분자에게 손해배상·부당이득 등 다른 구제를 검토해야 한다. 선의취득자가 임의로 “취득 안 한 것으로 할 테니 원래 주인에게 청구하라”고 법적 효과를 부정할 수 없다는 판례도 이 확정적 취득을 전제로 한다. 다만 도품·유실물에는 아래 특칙이 있다.</p>
+<h2>사례 10. 200만 원 노트북을 50만 원에 샀다 · 86쪽</h2>
+<p>A가 도둑맞은 노트북을 B가 가지고 있었다. C는 중고 시가보다 훨씬 싼 가격에 사면서도 판매 경위와 권한을 제대로 확인하지 않았다. A가 돌려 달라고 한다.</p>
+<p><strong>첫 질문은 ‘도난 후 2년이 지났나’가 아니다.</strong> C에게 제249조의 선의·무과실이 있는지를 먼저 본다. 실제로 장물임을 알았다면 악의, 몰랐더라도 거래 사정을 확인하지 않은 과실이 인정되면 선의취득은 성립하지 않는다. 싸게 샀다는 이유 하나만으로 모든 경우에 악의라고 단정하는 것도 정확하지 않다.</p>
+<p>C가 선의취득 요건을 갖추지 못했다면 A는 소유권에 기한 반환을 구할 수 있다. 이때 제250조의 2년 제한이나 제251조의 대가변상 조건을 가져와 A의 소유권을 막을 수 없다. 반대로 C가 요건을 모두 갖췄다면 그때 비로소 도품 특칙을 검토한다.</p>
+<p><span class="key-yellow">사례 한 줄: 제249조 통과 여부를 먼저 보고, 통과한 사람에게만 제250·251조의 특칙을 적용한다.</span></p>
+<h2 id="property-02-14" data-concept-id="property-02-14">14. 도품·유실물과 대가변상 · 91~93쪽</h2>
+<h3>제250조는 왜 필요한가</h3>
+<p>주인이 스스로 물건을 맡겼다가 수탁자가 횡령한 경우와, 주인이 도둑맞거나 잃어버린 경우는 다르다. 후자에서는 피해자의 선택 없이 점유를 잃었으므로 피해자에게 되찾을 기회를 더 준다. 이것이 선의취득 일반원칙에 대한 도품·유실물 특칙이다.</p>
+<p><span class="key-yellow">피해자 또는 유실자는 도난·유실한 날부터 2년 내에 반환을 청구할 수 있다.</span> 도둑이나 현재 소지자를 발견한 날부터가 아니다. 현재 점유자를 상대로 하며, 피해자가 반드시 소유자여야 하는 것은 아니다. 정당하게 점유하던 임차인·수치인 등도 해당 여부를 검토한다.</p>
+<p>사기·강박에 의해 자발적으로 넘긴 물건이나 위탁물 횡령은 이 특칙의 도품·유실물로 곧바로 분류하지 않는다. 종업원 등 점유보조자의 부정 처분도 판례상 민법 제250조의 도품에 포함되지 않는 유형이 있다. 형법상 절도죄라는 이름과 민법상 도품을 동일시하지 않는다.</p>
+<h3>제251조 · 언제 돈을 돌려주고 되찾아야 하나</h3>
+<p>선의·무과실로 취득한 사람이 <strong>경매, 공개시장, 같은 종류 물건을 판매하는 상인</strong>에게서 매수한 경우에는 그가 지급한 대가를 변상하고 반환받는 특칙이 있다. 시가가 아니라 지급한 대가다. 단순히 인터넷으로 만난 개인에게 샀다는 이유만으로 이 조문상 공개시장 매수라고 단정하지 않는다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>취득자의 상태·경로</th>
+<th>원래 피해자의 판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>악의 또는 과실, 선의취득 실패</td>
+<td>소유권에 기한 반환 검토. 250조 2년·251조 대가변상으로 제한하지 않음</td>
+</tr>
+<tr>
+<td>선의취득 요건 충족 + 도품·유실물</td>
+<td>도난·유실일부터 2년 내 특칙상 반환 가능</td>
+</tr>
+<tr>
+<td>위 요건 + 251조의 매수 경로</td>
+<td>지급대가를 변상하고 반환받음</td>
+</tr>
+<tr>
+<td>위탁물 횡령 등 도품 특칙 대상 아님</td>
+<td>일반 선의취득 요건 충족 여부로 판단</td>
+</tr>
+</tbody></table></div>
+<p>교재는 2년 동안의 소유권 귀속을 둘러싼 견해를 소개한다. 즉시 취득하되 특별한 반환청구로 조정한다는 설명과, 취득을 유예한다는 설명을 구별하되, 객관식 기본에서는 <strong>반환기간·반환대상·대가변상 요건</strong>을 먼저 고정한다. 학설 설명을 모든 사건에 관한 단일한 판례 선언처럼 바꾸지 않는다.</p>
+<h2>사례 11. 금은방 직원이 맡긴 시계를 팔았다 · 기출 확장</h2>
+<p>A는 친구 B의 금은방에 자기 시계를 보관시켰다. B는 직원 C에게 팔지 말라고 했지만, C가 D에게 팔아 건넸다. A가 되찾으려 한다.</p>
+<p>B는 임치관계의 직접점유자, C는 통상 B의 지시에 따라 물건을 다루는 점유보조자다. A는 임치관계를 통하여 간접점유한다. 판례는 이런 점유보조자의 부정 처분을 민법상 도품 특칙에 기계적으로 넣지 않는다. D의 선의취득 요건을 검토해야 한다.</p>
+<p>다만 C가 자기 이름으로 거래했는지 B의 대리인으로 행위했는지, 대리권 또는 표현대리 요건이 있는지는 별도 문제다. <span class="key-pink">“대리권이 없어도 선의취득이니까 모든 흠이 해결된다”는 설명은 잘못이다.</span> 선의취득이 보완하는 것은 처분권 흠결이고, 거래 자체의 유효성은 따로 필요하다. 워크북 063의 의도는 도품·점유보조자의 구별이지만 해설의 대리 관련 표현은 이 한계를 붙여 읽는다.</p>
+<h1>05. 나무와 과실 · 토지와 따로 팔려면</h1>
+<h2 id="property-02-15" data-concept-id="property-02-15">15. 입목등기와 명인방법 · 94~98쪽</h2>
+<p>산을 팔았는데 그 안의 나무는 다른 사람 것일 수 있을까? 원칙적으로 땅에 붙은 나무는 토지와 결합한다. 그러나 일정한 공시를 갖춘 수목은 독립하여 거래될 수 있다. 큰 산림을 담보로 돈을 빌리거나, 과수원 열매만 미리 파는 현실을 반영한다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>입목에 관한 법률의 입목</th>
+<th>관습법상 명인방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대상</td>
+<td>법정 요건을 갖추어 소유권보존등기를 받은 수목 집단</td>
+<td>등기되지 않은 수목 집단, 미분리 과실 등 허용되는 지상물</td>
+</tr>
+<tr>
+<td>공시</td>
+<td>입목등기</td>
+<td>누구 소유인지 밖에서 알아볼 표시</td>
+</tr>
+<tr>
+<td>법적 취급</td>
+<td>독립한 부동산으로 취급</td>
+<td>허용된 대상·범위에서 토지와 독립 거래</td>
+</tr>
+<tr>
+<td>가능한 권리</td>
+<td>소유권·저당권 등 법정 규율</td>
+<td>소유권 이전·양도담보, 저당권 설정은 불가</td>
+</tr>
+<tr>
+<td>토지 처분과 관계</td>
+<td>토지·지상권 처분이 입목에 미치지 않음</td>
+<td>명인방법과 토지등기의 선후 등 확인</td>
+</tr>
+<tr>
+<td>공신력</td>
+<td>부동산 등기 공신력 원칙과 연결</td>
+<td>공신력 없음</td>
+</tr>
+</tbody></table></div>
+<h3>입목등기의 흐름</h3>
+<p>입목등록원부의 등록 등 법정 절차를 거쳐 소유권보존등기를 한다. 단순히 나무가 여러 그루 있다고 모두 입목법상 입목은 아니다. 토지와 입목의 소유자가 나뉘면 입목의 존립을 위한 법정지상권 문제도 생긴다. 이후 물권변동에는 부동산물권변동 규율을 연결한다.</p>
+<h3>명인방법은 어떤 표시인가</h3>
+<p>수목에 표지를 붙이고 소유자가 누구인지 특정할 수 있게 하는 등 관습상 인정되는 공시다. 핵심은 <strong>객관적으로 식별할 수 있는 소유자 표시와 그 공시의 계속</strong>이다. 모든 과거 소유자와 거래원인을 길게 써야 한다는 뜻은 아니다. 표시가 없어지고 그 상태가 계속되는 경우의 효력을 가볍게 보면 안 된다.</p>
+<p>이미 법정 등기제도가 적용되는 토지·건물이나 입목등기를 한 수목의 등기를, 임의의 이름표로 대신할 수 없다. 또한 이름표를 믿었다는 이유로 무권리자에게서 공신력에 의한 취득을 할 수 없다.</p>
+<h2>사례 12. 산은 C에게, 나무는 B에게</h2>
+<p>A가 산의 나무를 B에게 팔고, B가 먼저 적법한 명인방법을 갖췄다. 그 뒤 A가 산을 C에게 팔아 토지등기를 넘겼다. B의 공시가 갖추어져 계속되는 등 요건을 전제로 나무는 토지와 따로 귀속될 수 있다. 반대로 토지이전등기가 먼저 이루어졌는데 A가 나중에 B에게 나무를 팔았다는 이유만으로 B가 이미 권리를 얻은 C에게 이길 수는 없다.</p>
+<p>과수원에서 아직 따지 않은 사과를 따로 파는 경우도 같은 공시 문제를 떠올릴 수 있다. 열매를 딴 뒤에는 독립 동산의 인도 문제로 넘어간다. <span class="key-blue">연결: 땅에 붙어 있는가 → 독립 거래의 공시를 갖췄는가 → 분리되어 동산이 되었는가.</span></p>
+<p>교재에 나오는 명인방법과 해제·취소 후 소유권 복귀 관련 옛 판례는 그 공시가 계속되는 상황과 권리관계에 관한 논의를 전제로 한다. 일반 부동산의 계약 해제 법리를 그대로 복사하거나, 반대로 모든 해제에 재공시가 필요하다고 일반화하지 않는다.</p>
+<h1>06. 물권의 소멸 · 없어졌다고 끝이 아닌 이유</h1>
+<h2 id="property-02-16" data-concept-id="property-02-16">16. 멸실·소멸시효·포기 · 98~100쪽</h2>
+<h3>목적물이 없어지는 경우</h3>
+<p>집이 완전히 없어져 동일성을 잃으면 그 집의 소유권도 소멸한다. 조금 수리하면 되는 훼손인지, 독립 물건으로서 없어졌는지 구별한다. 집이 부서진 뒤 남은 자재나 보험금은 집 자체와 다른 대상이다.</p>
+<p>담보물권은 물건의 사용이 아니라 교환가치를 붙잡는 권리다. 그래서 보험금·손해배상금 등 가치적 대체물에 <strong>물상대위</strong>가 문제된다. 제342조와 이를 준용하는 제370조에 따라 지급·인도 전 압류 등 요건을 확인해야 한다. “보험금이 생기면 아무 절차 없이 담보권자가 바로 가진다”는 뜻은 아니다.</p>
+<p><span class="key-green">물건 자체는 사라져도 그 가치가 돈으로 바뀌어 남는 경우가 있기 때문에 담보권을 별도로 설명한다.</span> 워크북 068의 ‘절대적으로 소멸’은 이 단서 없이 모든 물권의 효력이 끝난다는 식으로 읽는 것이 함정이다.</p>
+<h3>포기하는 경우</h3>
+<p>권리자가 스스로 권리를 놓는 행위다. 부동산물권의 포기는 법률행위에 의한 변동이므로 필요한 등기를 갖춰야 한다. “포기한다고 말했으니 즉시 등기상 권리도 소멸”은 아니다.</p>
+<p>자기 권리라고 마음대로 버려 다른 사람을 해칠 수는 없다. 지상권·전세권이 저당권의 목적이라면 제371조 제2항에 따라 저당권자 동의 없이 포기할 수 없다. 담보를 제공해 놓고 담보물을 없애 버리는 결과를 막으려는 것이다.</p>
+<p>공유지분 포기도 상대방 있는 단독행위이지만, 부동산 지분 포기의 의사표시 도달만으로 곧바로 물권변동이 완성되는 것은 아니다. 다른 공유자에게 귀속될 지분에 관하여 이전등기청구권이 생기고 등기를 통해 변동한다는 판례를 기억한다.</p>
+<h2 id="property-02-17" data-concept-id="property-02-17">17. 혼동의 원칙과 예외 · 100~102쪽</h2>
+<h3>쉬운 이야기</h3>
+<p>남의 땅을 쓸 수 있는 지상권을 가진 수아가 그 땅 자체를 샀다. 이제 자기 땅을 쓰기 위해 ‘남의 땅을 쓰는 별도 권리’를 남겨 둘 필요가 보통 없다. 서로 대립하던 지위가 한 사람에게 모이는 것이 혼동이다. 머리가 헷갈린다는 뜻이 아니라 <strong>권리와 지위가 합쳐진다</strong>는 법률용어다.</p>
+<p>민법 제191조는 같은 물건의 소유권과 제한물권이 같은 사람에게 귀속하면 제한물권이 소멸하는 것을 원칙으로 한다. 제한물권과 그것을 목적으로 하는 다른 권리가 같은 사람에게 모이는 경우도 규율한다. 그러나 제3자의 권리 목적이거나 본인·제3자의 이익을 위해 남길 필요가 있는 경우에는 예외다. 점유권에는 이 혼동 소멸 규정을 적용하지 않는다.</p>
+<h3>시험에서 쓰는 질문</h3>
+<p><span class="key-yellow">“이 권리를 지우면 누가 부당하게 이익을 얻고, 누가 손해를 보는가?”</span> 이 질문을 해 보면 예외를 외우기 쉬워진다.</p>
+<h2>사례 13. 2월 임차권, 3월 저당권, 4월 매수 · 100쪽</h2>
+<p>2021년 2월 1일 B가 A의 건물에 대항력과 우선변제권을 갖춘 임차권을 취득했다. 3월 1일 C가 저당권을 취득했다. 4월 1일 B가 건물을 사서 소유권을 취득했다.</p>
+<p>C는 “B는 이제 집주인이니 임차권은 없어졌죠? 그러면 내가 먼저 돈을 받겠네요”라고 한다. 여기서 임차권을 기계적으로 없애면 B가 원래 가지고 있던 선순위 보호를 잃고 후순위 C가 뜻밖의 이익을 얻는다. 판례는 이런 보호 필요를 고려하여 혼동 소멸의 예외를 인정한다.</p>
+<p>법원의 판단을 쉬운 말로 옮기면 “두 지위가 같은 사람에게 모였다는 이유로, 먼저 확보한 보호까지 빼앗지는 말자”이다. 임차권은 채권이므로 채권의 혼동 규율과 그 취지도 함께 연결한다. 물권 혼동의 제191조만 기계적으로 적고 끝내지 않는다.</p>
+<h2>사례 14. 1순위 은행이 땅을 샀을 때</h2>
+<p>A의 토지에 B의 1순위 저당권, C의 2순위 저당권이 있다. B가 토지를 사서 소유권을 얻었다. B의 저당권을 없애 버리면 C가 1순위로 올라가 B가 손해를 볼 수 있다. 그래서 B의 선순위 저당권은 보호 필요가 있는 한 남는다.</p>
+<p>반대로 C가 토지를 샀다면, 후순위인 자기 저당권을 그대로 남겨야 할 사정이 없는 보통의 경우 그 2순위 저당권은 혼동으로 소멸한다. B의 1순위 저당권은 그대로다. 상속으로 채권·채무·소유권이 같은 사람에게 모이는 경우에도 선순위 권리 보존 필요가 있는지 살핀다.</p>
+<p>채무자가 피담보채무를 실제 변제한 경우는 혼동과 다른 경로다. 피담보채권이 소멸하면 부종성에 따라 저당권도 소멸하며, 이 소멸에 말소등기가 성립요건인 것은 아니다. 말소는 남은 기록을 정리하는 것이다.</p>
+<p class="red-note">★★★★★ · TOP5 워크북 069 / 워크북 071. “먼저 있던 권리를 없애서 후순위자에게 보너스를 주지 않는다.”</p>
+
+<h2>사례 15. 가등기권자가 다른 경로로 소유권을 얻었다 · 100~101쪽</h2>
+<p>B가 A에 대해 특정 토지의 이전등기청구권을 가지고 가등기도 해 두었다. 나중에 B가 다른 경로로 그 토지 소유권을 취득했다. 이제 B가 토지 주인이니 A에 대한 채권도 언제나 혼동으로 없어질까?</p>
+<p>채권의 혼동은 원칙적으로 <strong>채권자와 채무자가 같은 사람</strong>이 되어야 한다. 채권자가 목적물의 소유자가 되었다는 사실만으로 채무자 A까지 B가 된 것은 아니다. 95다29888 판례는 이 구별을 보여 준다. 다른 소멸 사유가 있는지는 별도지만, ‘목적물 소유권 취득 = 채권·채무 혼동’은 아니다.</p>
+<h3>마지막 예외들</h3>
+<p>점유권은 소유권과 같은 사람에게 있어도 없어지지 않는다. 광업권과 토지소유권은 객체·내용이 다르므로 같은 물건 위의 소유권과 제한물권처럼 단순 처리하지 않는다. 혼동을 일으킨 원인행위가 무효·취소 등으로 효력을 잃으면 소멸했던 권리의 회복 문제도 생긴다. 소멸을 말할 때에는 <strong>어떤 원인으로, 어떤 범위에서, 누구의 이익을 남겨야 하는지</strong>까지 확인한다.</p>
+<h1>07. 한자로 기억하는 용어 사전</h1>
+<h2>한자의 뜻 → 이름의 이유 → 사건 → 시험으로 연결하기</h2>
+<p>아래는 이 장의 새 핵심용어 사전이다. ‘소유권·점유권·제한물권’ 같은 제1장 기본어도 다시 붙였다. 한자의 원뜻은 법률상 정의 그 자체가 아니라 기억의 출발점이다. 이미 풀어 쓴 낱말이 다시 나올 때마다 아홉 단계를 반복하지 않고 이 사전과 해당 사례를 연결한다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>용어·한자 음훈과 원뜻</th>
+<th>이름의 이유·법적 의미·쉬운 말</th>
+<th>사례·시험·비교 기억법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물권변동 物(만물 물) 權(권세 권) 變(변할 변) 動(움직일 동)</td>
+<td>물건에 대한 권리가 움직임. 발생·변경·소멸을 합친 이름</td>
+<td>집 신축·매매·멸실. 시험: 주인 변경만 뜻한다는 보기 X</td>
+</tr>
+<tr>
+<td>원시취득 原(근원 원) 始(처음 시) 取(취할 취) 得(얻을 득)</td>
+<td>앞 권리를 이어받지 않고 새 출발로 얻음</td>
+<td>선의취득·수용. ‘최초 인간이 갖는 것’으로만 한정 X</td>
+</tr>
+<tr>
+<td>승계취득 承(이을 승) 繼(이을 계)</td>
+<td>앞사람 권리를 이어 얻음</td>
+<td>매매·상속. 이전적은 통째 이전, 설정적은 제한권리 설정</td>
+</tr>
+<tr>
+<td>채권행위 債(빚 채) 權(권세 권) 行(다닐 행) 爲(할 위)</td>
+<td>이행할 빚과 청구권을 만드는 행위</td>
+<td>집 매매계약. 물권변동 완성과 구별</td>
+</tr>
+<tr>
+<td>물권행위 物權行爲</td>
+<td>물권을 직접 바꾸려는 행위</td>
+<td>저당권설정 합의. 독자성·무인성은 별개 질문</td>
+</tr>
+<tr>
+<td>독자성 獨(홀로 독) 自(스스로 자) 性(성품 성)</td>
+<td>채권행위와 구별되는 독립 행위인지의 성질</td>
+<td>‘행위가 따로 있나’. 무인성은 ‘원인 무효 영향 없나’</td>
+</tr>
+<tr>
+<td>유인성·무인성 有(있을 유) 無(없을 무) 因(인할 인) 性</td>
+<td>원인행위 효력에 영향받음 / 영향이 차단됨</td>
+<td>매매 취소 후 소유권. 因은 여기서 원인이지 사람 人 아님</td>
+</tr>
+<tr>
+<td>공시 公(공평할 공) 示(보일 시)</td>
+<td>여러 사람에게 권리관계를 보임</td>
+<td>등기·점유. ‘보일 시’를 보고 표시 떠올리기</td>
+</tr>
+<tr>
+<td>공신 公(공평할 공) 信(믿을 신)</td>
+<td>공시를 믿은 거래를 보호</td>
+<td>동산 선의취득. 부동산 등기에는 일반 공신력 없음</td>
+</tr>
+<tr>
+<td>대항 對(대할 대) 抗(막을 항)</td>
+<td>상대방에게 법적 효과를 주장하며 맞섬</td>
+<td>제3자에게 임차권 주장. 성립요건과 대항요건 구별</td>
+</tr>
+<tr>
+<td>등기 登(오를 등) 記(기록할 기)</td>
+<td>권리관계를 공적 기록에 올림</td>
+<td>갑구 소유권·을구 저당권. 장부가 진실 보증은 아님</td>
+</tr>
+<tr>
+<td>보존 保存: 保(지킬 보) 存(있을 존)</td>
+<td>처음 소유권 기록을 보전</td>
+<td>신축 후 최초 소유권등기. 매수 후에는 보통 이전등기</td>
+</tr>
+<tr>
+<td>경정 更(고칠 경) 正(바를 정) / 변경 變更</td>
+<td>잘못된 처음 기록을 바로잡음 / 나중 변화 반영</td>
+<td>처음부터 틀림은 경정, 후에 바뀜은 변경</td>
+</tr>
+<tr>
+<td>말소 抹(지울 말) 消(사라질 소)</td>
+<td>등기기록을 지움</td>
+<td>무효등기 삭제. 말소회복은 잘못 지운 것을 복구</td>
+</tr>
+<tr>
+<td>가등기 假(임시 가) 登記 / 본등기 本(근본 본) 登記</td>
+<td>임시로 순위를 잡음 / 본래 등기를 완성</td>
+<td>사례 2. 가등기일로 소유권 취득 소급 X</td>
+</tr>
+<tr>
+<td>추정 推(밀 추) 定(정할 정)</td>
+<td>반증 전까지 일정 사실을 인정</td>
+<td>등기명의자의 권리 추정. 반증 불가한 간주·공신력과 다름</td>
+</tr>
+<tr>
+<td>청구 請(청할 청) 求(구할 구)</td>
+<td>상대에게 일정 행위를 요구</td>
+<td>등기에 협력하라. 등기관에 하는 신청과 구별</td>
+</tr>
+<tr>
+<td>소멸시효 消(사라질 소) 滅(멸할 멸) 時(때 시) 效(본받을 효)</td>
+<td>일정 기간 권리 불행사에 법이 소멸 효과 부여</td>
+<td>일반 채권 10년. 소유권 자체에는 적용 X</td>
+</tr>
+<tr>
+<td>취득시효 取得時效</td>
+<td>일정 기간의 점유 등 요건에 취득 효과 부여</td>
+<td>부동산 점유취득시효는 등기 필요. 소멸시효와 방향 반대</td>
+</tr>
+<tr>
+<td>중간생략 中(가운데 중) 間(사이 간) 省(덜 생) 略(줄일 략)</td>
+<td>가운데 사람의 등기를 건너뜀</td>
+<td>A→B→C를 A→C. 직접 청구와 완료 후 효력 구별</td>
+</tr>
+<tr>
+<td>진정명의회복 眞(참 진) 正(바를 정) 名(이름 명) 義(옳을 의) 回(돌 회) 復(회복할 복)</td>
+<td>진짜 권리자의 명의를 되찾음</td>
+<td>현재 명의자에게 이전 청구. 새 매매계약이 필요한 청구 아님</td>
+</tr>
+<tr>
+<td>기판력 旣(이미 기) 判(판단할 판) 力(힘 력)</td>
+<td>확정된 재판 판단을 다시 모순되게 다투지 못하게 하는 힘</td>
+<td>같은 회복청구를 이름 바꿔 재소 X. 등기 추정력과 다름</td>
+</tr>
+<tr>
+<td>출연 出(날 출) 捐(버릴 연)</td>
+<td>재산을 내놓아 기여함</td>
+<td>장학재단에 건물 제공. 방송에 나오는 出演과 다름</td>
+</tr>
+<tr>
+<td>공용징수 公(공평할 공) 用(쓸 용) 徵(거둘 징) 收(거둘 수)</td>
+<td>공익 목적의 법정 강제 취득</td>
+<td>토지수용. 자발적 협의매수와 등기 필요성 구별</td>
+</tr>
+<tr>
+<td>형성판결 形(모양 형) 成(이룰 성) 判決</td>
+<td>판결 자체가 법률관계의 새 모습을 만듦</td>
+<td>공유물분할 판결. 이행하라고 명하는 판결과 다름</td>
+</tr>
+<tr>
+<td>인도 引(끌 인) 渡(건널 도)</td>
+<td>물건의 지배를 건너가게 함</td>
+<td>자전거 건넴. 주소지로 배송해야만 한다는 뜻 아님</td>
+</tr>
+<tr>
+<td>간이인도 簡(간략할 간) 易(쉬울 이) 引渡</td>
+<td>이미 가진 사람에게 간단한 합의로 인도</td>
+<td>빌린 카메라 매수. 받을 사람이 이미 들고 있음</td>
+</tr>
+<tr>
+<td>점유개정 占(차지할 점) 有(있을 유) 改(고칠 개) 定(정할 정)</td>
+<td>직접점유는 두고 누구를 위해 점유하는지 고침</td>
+<td>팔고 다시 빌려 씀. 줄 사람이 계속 들고 있음</td>
+</tr>
+<tr>
+<td>선의·악의 善(착할 선) 惡(악할 악) 意(뜻 의)</td>
+<td>법률에서는 특정 사실을 모름 / 앎</td>
+<td>장물인 줄 몰랐음. 성격이 착한가와 무관</td>
+</tr>
+<tr>
+<td>무과실 無(없을 무) 過(허물 과) 失(잃을 실)</td>
+<td>주의해야 할 일을 빠뜨린 허물이 없음</td>
+<td>이상한 가격·경위를 확인했는지. 선의와 별도</td>
+</tr>
+<tr>
+<td>도품 盜(도둑 도) 品(물건 품) / 유실물 遺(남길 유) 失(잃을 실) 物</td>
+<td>도난 물건 / 의사에 기하지 않고 점유를 떠난 분실물</td>
+<td>도난·유실일부터 2년. 횡령물과 구별</td>
+</tr>
+<tr>
+<td>횡령 橫(가로 횡) 領(거느릴 령)</td>
+<td>맡아 지배하던 남의 물건을 부당하게 자기처럼 처분</td>
+<td>맡긴 시계를 팔기. 민법 도품 여부 별도</td>
+</tr>
+<tr>
+<td>점유보조 占有補(도울 보) 助(도울 조)</td>
+<td>남의 지시에 따라 사실상 물건을 다룸</td>
+<td>가게 직원. 독립 직접점유자·간접점유자와 구별</td>
+</tr>
+<tr>
+<td>대가변상 代(대신할 대) 價(값 가) 辨(분별할 변) 償(갚을 상)</td>
+<td>지급한 값을 갚아 줌</td>
+<td>251조 매수인의 실제 지급액. 시가와 구별</td>
+</tr>
+<tr>
+<td>입목 立(설 립) 木(나무 목)</td>
+<td>서 있는 나무 집단 중 법정 등기 갖춘 것</td>
+<td>입목등기로 독립 부동산. 단순 나무 무리 전부 아님</td>
+</tr>
+<tr>
+<td>명인방법 明(밝을 명) 認(알 인) 方(모 방) 法(법 법)</td>
+<td>누구 것인지 밝게 알아볼 수 있는 표시 방식</td>
+<td>나무 소유 표시. 유명한 사람 名人의 방법 아님</td>
+</tr>
+<tr>
+<td>물상대위 物(물건 물) 上(윗 상) 代(대신할 대) 位(자리 위)</td>
+<td>물건의 가치가 대신 자리 잡은 대상에 권리 효력 미침</td>
+<td>집 보험금과 저당권. 필요한 압류 등 요건 확인</td>
+</tr>
+<tr>
+<td>혼동 混(섞일 혼) 同(같을 동)</td>
+<td>대립 지위가 섞여 한 사람에게 같아짐</td>
+<td>소유자와 지상권자 일치. 권리 보존 필요 예외</td>
+</tr>
+<tr>
+<td>부종성 附(붙을 부) 從(좇을 종) 性</td>
+<td>주된 권리에 붙어서 따름</td>
+<td>채권 소멸에 담보권 소멸. 혼동과 소멸 원인 다름</td>
+</tr>
+<tr>
+<td>소유권 所(바 소) 有(있을 유) 權 / 점유권 占有權</td>
+<td>물건을 전면 지배할 권리 / 사실 지배를 보호하는 권리</td>
+<td>도둑도 점유 사실은 가짐. 점유 있다고 소유자 아님</td>
+</tr>
+<tr>
+<td>제한물권 制(억제할 제) 限(한할 한) 物權</td>
+<td>특정 권능만 가진 물권</td>
+<td>지상권·저당권. 소유권 전체와 구별</td>
+</tr>
+</tbody></table></div>
+<h1>08. 교재 문단을 다시 읽는 체크 지도</h1>
+<h2>빠진 논점 없이 교재로 돌아가기</h2>
+<p>교재 문장을 그대로 반복하는 대신, 관련 문단 묶음의 역할을 아래에 대응시켰다. 페이지는 교재 본문 쪽수다. 세부 설명과 사례는 앞의 같은 제목에서 읽는다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>교재</th>
+<th>교수는 왜 넣었나?</th>
+<th>결국 무슨 말인가?</th>
+<th>시험 질문·키워드</th>
+<th>한 줄 요약</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>38~40</td>
+<td>변동을 분류하려고</td>
+<td>취득 경로가 다르면 법리가 다름</td>
+<td>원시·이전·설정</td>
+<td>새로 얻는 것과 이어 얻는 것 구별</td>
+</tr>
+<tr>
+<td>40~43</td>
+<td>계약과 권리를 분리하려고</td>
+<td>이행 약속과 물권변동은 다름</td>
+<td>채권행위·물권행위</td>
+<td>계약만 보고 소유자 판단 금지</td>
+</tr>
+<tr>
+<td>43~47</td>
+<td>이론의 선택이 결과에 미침을 보여 주려고</td>
+<td>독자성과 무인성은 별개</td>
+<td>원인 무효의 영향</td>
+<td>학설 질문 두 개를 분리</td>
+</tr>
+<tr>
+<td>43~49</td>
+<td>제3자에게 보이는 기준을 세우려고</td>
+<td>표시 필요와 표시 신뢰 보호는 다름</td>
+<td>공시·공신·형식주의</td>
+<td>부동산 공시 O, 일반 공신 X</td>
+</tr>
+<tr>
+<td>49~51</td>
+<td>취소·해제와 전득자 충돌 해결</td>
+<td>하자 유형마다 보호 조문 다름</td>
+<td>108·110·548·746</td>
+<td>C가 선의라는 말만으로 끝내지 말기</td>
+</tr>
+<tr>
+<td>52~54</td>
+<td>부동산 변동의 출발 규칙</td>
+<td>법률행위에는 등기</td>
+<td>186</td>
+<td>유효한 원인과 공시 모두 필요</td>
+</tr>
+<tr>
+<td>53~58</td>
+<td>여러 등기의 용도를 구별</td>
+<td>기록마다 목적·효력 다름</td>
+<td>보존·경정·가등기</td>
+<td>가등기는 순위만 예약</td>
+</tr>
+<tr>
+<td>57~60</td>
+<td>절차와 실체·증명을 분리</td>
+<td>등기관은 진실 보증자가 아님</td>
+<td>공동신청·추정력</td>
+<td>등기가 있어도 무효 반증 가능</td>
+</tr>
+<tr>
+<td>60~63</td>
+<td>청구의 상대·원인을 찾게 함</td>
+<td>계약청구와 소유권회복청구 다름</td>
+<td>신청권·청구권</td>
+<td>원인을 보고 성질 결정</td>
+</tr>
+<tr>
+<td>63~67</td>
+<td>등기청구권 시효·양도를 정리</td>
+<td>점유 계속과 권리행사의 의미 중요</td>
+<td>매매·시효취득·동의</td>
+<td>등기청구권이면 전부 같은 시효 X</td>
+</tr>
+<tr>
+<td>67~71</td>
+<td>실체에 맞는 등기와 중복 문제 해결</td>
+<td>절차 흠과 무권리·중복을 구별</td>
+<td>동일성·유용·선보존</td>
+<td>후중복등기를 실체 부합만으로 살리지 않음</td>
+</tr>
+<tr>
+<td>71~73</td>
+<td>현실 전매의 등기 경로 설명</td>
+<td>직접 청구와 이미 완료된 효력 다름</td>
+<td>미등기매수·중간생략</td>
+<td>아직인지 이미인지 먼저 보기</td>
+</tr>
+<tr>
+<td>73~74</td>
+<td>진짜 권리자의 회복 방식 제시</td>
+<td>이전등기로도 명의 회복 가능</td>
+<td>현재 명의자·기판력</td>
+<td>청구 이름 바꾸어 확정판결 우회 X</td>
+</tr>
+<tr>
+<td>74~76</td>
+<td>일반 규칙의 특수 응용</td>
+<td>재단 귀속과 제3자 관계 구별</td>
+<td>출연·48·시효</td>
+<td>내부 귀속과 외부 공시 분리</td>
+</tr>
+<tr>
+<td>76~80</td>
+<td>등기 원칙의 예외 경계 설정</td>
+<td>법률이 먼저 권리를 주는 경우 존재</td>
+<td>187·형성판결·완납</td>
+<td>모든 판결·모든 법률원인이 예외는 아님</td>
+</tr>
+<tr>
+<td>80~85</td>
+<td>이동 가능한 물건의 공시 설명</td>
+<td>지배를 넘기는 네 방식·특별법</td>
+<td>188~190·질권</td>
+<td>실제 이동 없어도 인도 가능</td>
+</tr>
+<tr>
+<td>85~91</td>
+<td>무권리자 거래와 거래안전 조정</td>
+<td>엄격한 요건 아래 원시취득</td>
+<td>249·무과실·인도</td>
+<td>점유개정만으로 선의취득 X</td>
+</tr>
+<tr>
+<td>91~93</td>
+<td>비자발적 점유상실자 보호</td>
+<td>도품·유실물 반환 특칙</td>
+<td>250·251·2년</td>
+<td>249부터 확인한 뒤 특칙</td>
+</tr>
+<tr>
+<td>94~98</td>
+<td>토지에 붙은 지상물의 독립 거래</td>
+<td>입목등기와 명인방법은 별개</td>
+<td>소유권·저당권·계속</td>
+<td>이름표로 저당권 설정 X</td>
+</tr>
+<tr>
+<td>98~100</td>
+<td>물건·가치·권리 소멸을 분리</td>
+<td>멸실·포기에도 단서 존재</td>
+<td>물상대위·371</td>
+<td>타인 담보를 마음대로 없애지 말기</td>
+</tr>
+<tr>
+<td>100~102</td>
+<td>불필요한 권리 정리와 순위 보호</td>
+<td>혼동 원칙과 보존 필요 예외</td>
+<td>191·507·후순위</td>
+<td>없애서 손해 보면 남길 이유 확인</td>
+</tr>
+</tbody></table></div>
+<h1>09. 시험으로 연결하기</h1>
+<h2>제공된 66문항의 분포와 TOP5</h2>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>JSON 주제</th>
+<th align="right">형성평가</th>
+<th align="right">워크북</th>
+<th align="right">합계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물권변동의 기초이론</td>
+<td align="right">7</td>
+<td align="right">25</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td>등기의 특수문제와 비법률행위에 기한 물권변동</td>
+<td align="right">4</td>
+<td align="right">12</td>
+<td align="right">16</td>
+</tr>
+<tr>
+<td>동산물권등의 변동과 물권의 소멸</td>
+<td align="right">4</td>
+<td align="right">14</td>
+<td align="right">18</td>
+</tr>
+<tr>
+<td>전체</td>
+<td align="right">15</td>
+<td align="right">51</td>
+<td align="right">66</td>
+</tr>
+</tbody></table></div>
+<p>실제 학생들의 정답률 자료는 없다. 따라서 아래 함정은 ‘가장 많이 틀렸다는 통계’가 아니라, 제공된 보기에서 반복되는 오해를 골랐다. 문제 ID는 부록에서 검색할 수 있다. 원본 JSON은 수정하지 않았다.</p>
+<div class="table-scroll wide-table" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>TOP5</th>
+<th>선택 이유·출제 의도</th>
+<th>틀리기 쉬운 지점</th>
+<th>풀기 전 키워드</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>워크북 030</td>
+<td>가등기 효과를 종합 확인</td>
+<td>본등기의 소유권 취득까지 소급</td>
+<td>순위만 소급</td>
+</tr>
+<tr>
+<td>워크북 049</td>
+<td>청구권 성질과 시효를 연결</td>
+<td>미등기 매수인을 이미 소유자로 취급</td>
+<td>매매·점유 계속·전매</td>
+</tr>
+<tr>
+<td>워크북 048</td>
+<td>중간생략의 두 질문 구별</td>
+<td>합의 없는 완료등기는 언제나 무효</td>
+<td>직접 청구 / 이미 완료</td>
+</tr>
+<tr>
+<td>워크북 062</td>
+<td>선의취득 요건을 한 번에 점검</td>
+<td>점유개정·무과실·다른 하자 혼동</td>
+<td>249, 권리 흠결만 보완</td>
+</tr>
+<tr>
+<td>워크북 069</td>
+<td>혼동 예외를 순위로 이해</td>
+<td>선순위자가 소유권 취득하면 무조건 소멸</td>
+<td>권리 없애면 누가 이익?</td>
+</tr>
+</tbody></table></div>
+<p>반복 출제되는 개념은 <strong>공시와 공신, 가등기, 등기의 실체 부합과 중복, 등기청구권의 성질·시효, 제187조의 범위, 인도와 선의취득, 혼동</strong>이다. 부록은 단순 정답표가 아니라 모든 선택지를 검토한다. 조합형은 먼저 ㄱ·ㄴ 등 개별 명제를 판정하고, 각 숫자 선택지가 그 판정과 맞는지 설명한다.</p>
+<h2>문제 원문을 읽을 때 붙여야 할 정정·주의</h2>
+<ol>
+<li><strong>형성 009</strong>: 데이터의 질문에는 ‘옳지 않은 것’을 고르라는 지시가 빠져 있다. 선택지·해설·정답에 따라 그 취지로 읽되, 누락 사실을 표시한다.</li>
+<li><strong>형성 010</strong>: 진정명의회복과 말소청구의 기판력 판례는 99다37894다. 해설의 99다66915는 멸실회복등기 관련 판례다. 임대차등기 협력청구도 ‘임대인이 그냥 거부하면 언제나 불가능’으로 외우지 않는다.</li>
+<li><strong>워크북 023</strong>: ‘등기한 지 10년’ 외에 제245조 제2항의 점유·선의·무과실 등 요건을 보충한다.</li>
+<li><strong>워크북 041</strong>: 등기사항을 알 수 있다는 논의를 모든 사건에서 실제 악의가 법정 추정된다는 말로 확대하지 않는다.</li>
+<li><strong>워크북 061</strong>: 보기와 해설 사이에 결론 충돌이 있다. JSON의 정답 ⑤는 보존하되, 이 문항은 확정적 단일정답 암기를 보류한다. 소유권이 없다는 이유만으로 간접점유가 없다고 할 수도 없다.</li>
+<li><strong>워크북 063</strong>: 점유보조자 처분과 도품 구별은 배우되, 대리권 흠결까지 선의취득으로 모두 치유된다는 설명은 배제한다.</li>
+<li><strong>워크북 064</strong>: 과실 때문에 선의취득이 안 된다고 타인 물건 매매계약까지 당연무효가 되는 것은 아니다. 소유권 취득 실패와 계약 유효성을 구별한다.</li>
+<li><strong>워크북 068·071</strong>: 멸실의 ‘절대적 소멸’, 다른 사람의 취득시효에 따른 종전 소유권 상실의 ‘상대적 소멸’이라는 용어는 문맥상 주의가 필요하다. 물상대위, 원시취득이라는 정확한 개념을 함께 기억한다.</li>
+</ol>
+<p>아래 응용문제·암기노트 뒤에 관련 66문항의 원문과 보기별 해설이 이어진다.</p>
+<h1>10. 새 사례로 푸는 응용문제 5개</h1>
+<h2>응용 1. 상속한 창고, 세입자의 짐, 미등기 매매</h2>
+<p>다은은 아버지가 사망하여 창고를 상속했다. 상속등기 전 민호에게 창고를 팔고 대금을 모두 받았다. 창고 안에는 세입자의 물건이 있다. 민호는 “다은도 등기 없이 취득했으니 나도 대금만 내면 소유자”라고 한다. 맞는가? 다은은 매매계약 자체도 할 수 없는가?</p>
+<details class="answer-box"><summary>정답·해설 펼치기</summary><p>민호의 말은 틀리다. 다은의 취득 원인은 상속으로 제187조에 따라 등기 없이 취득한다. 민호의 취득 원인은 매매이므로 제186조가 적용되어 이전등기가 필요하다. 제187조 단서는 필요한 등기 없이 물권적 처분을 완성할 수 없다는 것이지, 매매계약 자체가 모두 무효라는 뜻이 아니다. 창고 안의 세입자 물건은 창고 소유권 취득만으로 민호의 물건이 되지 않는다.</p><p><b>출제 의도:</b> 한 물건이 연속 거래되어도 사람마다 취득 원인이 달라진다는 점, 부동산과 타인 소유 동산을 분리하는지를 확인한다.</p></details>
+
+<h2>응용 2. 촬영 장비를 팔고도 촬영을 계속했다</h2>
+<p>스튜디오 운영자 A는 자기 카메라를 B에게 팔고 2주간 빌려 쓰기로 했다. 이틀 뒤 A는 C에게도 팔면서 “촬영이 끝나면 줄게. 그때까지 네 것을 빌려 쓰는 것으로 하자”고 했다. C는 A가 아직 소유자라고 믿었고 과실도 없다. 현재 카메라는 계속 A가 쓰고 있다. C는 선의취득했는가? B의 취득도 무효인가?</p>
+<details class="answer-box"><summary>정답·해설 펼치기</summary><p>B는 정당한 소유자 A로부터 유효한 합의와 점유개정으로 소유권을 취득할 수 있다. C는 이미 권리를 잃은 A에게서 취득하려는 사람이므로 선의취득을 검토하지만, 점유개정만으로는 선의취득할 수 없다. 따라서 ‘점유개정의 일반적 효력’과 ‘점유개정에 의한 선의취득의 불허’를 구별해야 한다.</p><p><b>출제 의도:</b> 인도 방식이 같아도 양도인의 권리 유무에 따라 결과가 달라짐을 확인한다. C가 선의·무과실이라는 사실을 미끼로 삼았다.</p></details>
+
+<h2>응용 3. 훔친 악기와 전문 판매점</h2>
+<p>A가 도난당한 바이올린을 D가 중고 악기 전문점에서 80만 원에 샀다. 정상적인 거래로 선의·무과실 요건을 충족했고 실제 인도도 받았다. 도난 1년 뒤 A가 발견했다. 현재 시가는 120만 원이다. A는 공짜로 반환받을 수 있는가? 만약 D가 도난 사실을 알고 샀다면?</p>
+<details class="answer-box"><summary>정답·해설 펼치기</summary><p>첫 경우는 제249조 요건을 충족했지만 도품이므로 도난일부터 2년 내 제250조 반환을 청구할 수 있다. 동종 물건을 파는 상인에게 매수한 제251조의 경우이므로 실제 지급한 80만 원을 변상해야 한다. 시가 120만 원이 기준이 아니다. D가 악의였다면 선의취득이 성립하지 않으므로 A는 소유권에 기한 반환을 검토하고, D는 제251조를 근거로 대가변상을 요구할 수 없다.</p><p><b>출제 의도:</b> ‘2년→가격’부터 외우지 않고 249→250→251의 순서로 적용하는지를 확인한다.</p></details>
+
+<h2>응용 4. 공유분할 조정과 후발 저당권</h2>
+<p>A와 B는 공유 토지를 나누기로 법원에서 조정했다. 동쪽은 A 단독, 서쪽은 B 단독으로 하기로 했지만 아직 분할에 따른 등기를 하지 않았다. A는 “조정은 확정판결과 같으니 동쪽은 벌써 내 단독소유”라고 한다. 이때 확인해야 할 핵심은 무엇인가?</p>
+<details class="answer-box"><summary>정답·해설 펼치기</summary><p>조정의 효력과 제187조가 말하는 형성판결의 물권변동 효과를 구별해야 한다. 합의에 따른 조정이라면 등기를 해야 분할에 따른 물권변동이 이루어진다. 이후 담보권이 설정된 상황에서는 당시 공유지분과 등기·담보권 설정의 범위를 구체적으로 확인해야 한다. 단순히 ‘법원 문서가 먼저’라는 이유만으로 제3자의 담보권을 배제할 수 없다.</p><p><b>출제 의도:</b> 재판 문서의 이름보다 권리변동의 법적 원인을 확인하는지를 본다. 후발 권리의 결론은 설정 범위 등 사실관계 없이 단정하지 않는 것도 답안의 일부다.</p></details>
+
+<h2>응용 5. 선순위 저당권자가 증여받은 건물의 화재</h2>
+<p>A의 건물에는 B의 1순위 저당권과 C의 2순위 저당권이 있다. B가 건물을 증여받아 이전등기한 뒤 화재로 건물이 완전히 멸실했고 보험금청구권이 생겼다. C는 “B가 소유자가 된 순간 1순위가 없어졌으니 내가 먼저이고, 건물이 없어졌으니 담보권은 전부 끝”이라고 한다. 두 주장을 평가하라.</p>
+<details class="answer-box"><summary>정답·해설 펼치기</summary><p>첫 주장은 틀리다. B의 선순위 저당권을 지워 C에게 이익을 줄 필요가 없으므로 혼동 소멸의 예외를 검토한다. 매매가 아니라 증여라는 이유만으로 예외가 사라지지 않는다. 두 번째 주장도 가치적 대체물에 대한 물상대위를 빼먹었다. 건물 자체의 멸실과 보험금청구권에 미치는 담보권 효력을 구별하고, 지급 전 압류 등 물상대위 요건을 갖추었는지 살핀다.</p><p><b>출제 의도:</b> 혼동·순위·멸실·물상대위를 한 사건의 시간 순서로 연결한다. 서로 다른 소멸 원인을 한꺼번에 처리하지 않는 연습이다.</p></details>
+
+<h1>11. 시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<div class="memory-kicker">PROPERTY LAW · CHAPTER 02 · ONE-PAGE RECALL</div>
+<h2>물권변동, 이 한 장으로 복원하기</h2>
+<p><b>TOP3</b> ① 186·187의 경계 ② 249→250→251의 순서 ③ 등기청구권·가등기·혼동의 예외.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table><thead><tr><th>갈림길</th><th>반드시 외울 문장</th></tr></thead><tbody>
+<tr><td>부동산 · 계약</td><td><b>유효한 원인 + 등기.</b> 잔금·인도만으로 소유권 X. 등기 공신력 X.</td></tr>
+<tr><td>부동산 · 법률</td><td>187: 상속·수용·형성판결·경매 완납 등은 등기 없이 취득. 처분에는 등기. 점유취득시효는 245①에 따라 등기 필요.</td></tr>
+<tr><td>공시 / 공신 / 추정</td><td>밖에 보임 / 거짓 외관 신뢰 보호 / 반증 전까지 권리 인정. 세 개를 분리.</td></tr>
+<tr><td>가등기 / 본등기</td><td>순위는 가등기, 물권취득은 본등기. 소유권 취득 자체 소급 X.</td></tr>
+<tr><td>채권적 등기청구</td><td>매매·임대차·점유취득시효. 매수인 인도·사용 계속의 시효 예외. 매매 전매와 시효취득 점유상실을 구별.</td></tr>
+<tr><td>물권적 등기청구</td><td>소유권에 기한 무효등기 말소·진정명의회복. 소유권 존속 전제 독립 소멸시효 X.</td></tr>
+<tr><td>중복 / 중간생략</td><td>유효한 첫 보존등기 있으면 후중복 원칙 무효. A→C 직접청구는 합의 필요; 이미 완료된 등기의 실체 부합은 별도.</td></tr>
+<tr><td>인도 4종</td><td>현실 / 간이(받는 사람이 이미 점유) / 점유개정(주는 사람이 계속 점유) / 반환채권 양도(제3자 점유).</td></tr>
+<tr><td>선의취득 249</td><td>허용 동산 + 무권리자 점유 + 유효 거래 + 점유취득 + 평온·공연·선의·무과실. <b>점유개정만으로 X.</b></td></tr>
+<tr><td>도품 250·251</td><td>249 통과 후 검토. 도난·유실일부터 2년. 경매·공개시장·동종상인 매수는 지급대가 변상. 악의·과실이면 이 특칙으로 원소유자 제한 X.</td></tr>
+<tr><td>입목 / 명인</td><td>입목은 법정 등기·저당권 가능. 명인은 계속되는 소유 표시·소유권 및 양도담보, 저당권 X·공신력 X.</td></tr>
+<tr><td>멸실 / 포기 / 혼동</td><td>담보권은 물상대위 확인. 담보된 지상권·전세권 포기에는 저당권자 동의. 혼동은 원칙 소멸, 보존 이익 있으면 예외.</td></tr>
+</tbody></table></div>
+<p><b>10초 비교</b> 판결이면 전부 187? <b>아니다, 형성판결.</b> 선의면 모두 보호? <b>아니다, 무과실 등 필요.</b> 소유권 얻으면 내 선순위 저당권 소멸? <b>후순위가 있으면 보존 필요.</b></p>
+<p><b>사례 복원</b> 가등기 9월→본등기 11월 / 매매 후 21년 계속 점유 / 도난 악기 전문점 80만 원 / 1순위 담보권자가 소유권 취득. 네 장면의 결론을 말하면 이 장의 중심이 복원된다.</p>
+<p class="memory-last"><b>마지막 문장:</b> “누가 진짜 권리자인가 → 무엇으로 공시했는가 → 어떤 예외가 있는가.”</p>
+</section>
+
+<h1>12. 학습 상태 진단과 복습 TOP3</h1>
+<h2>읽었다는 느낌 대신 설명할 수 있는지 확인하기</h2>
+<p>아직 실제 답변을 받지 않았으므로 이해도를 단정하지 않는다. 아래 6개에 교재를 보지 않고 답해 보고 스스로 표시하자.</p>
+<ol>
+<li>공시와 공신의 차이를 부동산·동산으로 설명할 수 있는가?</li>
+<li>가등기 후 제3자 등기, 그 뒤 본등기의 시점을 정확히 구별하는가?</li>
+<li>매매에 따른 등기청구권과 소유권에 기한 말소청구권의 시효를 구별하는가?</li>
+<li>제187조의 판결에 이행판결과 조정이 자동으로 포함되지 않는 이유를 설명하는가?</li>
+<li>선의취득의 네 인도 방식 중 점유개정이 왜 걸러지는지, 도품 특칙의 적용 순서를 말하는가?</li>
+<li>1순위 저당권자가 소유권을 취득해도 저당권을 남겨야 할 경우를 설명하는가?</li>
+</ol>
+<p><strong>🟢 이해 완료</strong>: 6개 모두 자기 사례로 설명하고 반대 사례까지 구별. <strong>🟡 복습 필요</strong>: 3~5개는 설명하지만 예외나 시점을 혼동. <strong>🔴 이해 부족</strong>: 0~2개만 설명하거나 ‘계약했으니 주인’, ‘선의면 보호’로 답함. 이는 이 자료용 자가점검 기준이며 실제 성적 예측이 아니다.</p>
+<p>복습 TOP3는 <strong>① 186·187과 가등기의 시간축 ② 등기청구권의 원인·성질·시효 ③ 선의취득과 도품 특칙의 적용 순서</strong>다. 혼동 문제를 틀렸다면 사례 13~15를 네 번째 복습 대상으로 추가한다.</p>
+<h1>13. 확인 자료와 읽기 원칙</h1>
+<h2>교재·문제·현행법을 섞지 않기</h2>
+<p>기본 범위는 제공된 물권법 교재 제2장과 물권법 문제 JSON이다. 본문은 교재 학습을 위한 해설이며 구체적 실제 분쟁에 대한 법률 자문이 아니다. 교재에 쓰인 옛 법률명·폐지 제도는 역사적 설명으로 표시했다. 전체 판례를 최신성까지 전수 조사했다는 의미는 아니며, 혼동되기 쉬운 핵심 조문과 아래 판례를 공식 자료로 대조했다.</p>
+<ul>
+<li><a href="https://www.law.go.kr/lsInfoP.do?ancYnChk=0&lsId=001706">민법 현행 본문 · 국가법령정보센터</a>: 제48조, 제162조, 제186~191조, 제245조, 제249~251조, 제342조, 제370~371조 등 연결 조문.</li>
+<li><a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032404455">민법 제249~251조 · 국가법령정보센터</a>: 선의취득과 도품·유실물 특칙.</li>
+<li><a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026155553">부동산등기법 제6조 · 국가법령정보센터</a>: 등기 접수·완료와 효력 발생 시점.</li>
+<li><a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=99%EB%8B%A437894">대법원 99다37894 · 국가법령정보센터</a>: 진정명의회복과 말소청구의 기판력.</li>
+<li><a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=96229">대법원 80다2910 · 국가법령정보센터</a>: 질권 선의취득의 증명책임.</li>
+<li><a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=74%EB%8B%A41564">대법원 74다1564 · 국가법령정보센터</a>: 이중 점유개정과 현실 인도에 관한 구체적 판례.</li>
+<li><a href="https://www.law.go.kr/LSW/precStmdInfoP.do?precSeq=166937">대법원 91다70 · 국가법령정보센터</a>: 선의·무과실의 기준 시점, 점유보조자의 부정 처분, 도품 특칙.</li>
+<li><a href="https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=903">대법원 2011두1917 선고 안내 · 대법원</a>: 공유물분할 조정과 물권변동.</li>
+</ul>
+<p>본문의 사건 설명은 이해를 위해 인물의 대사·판단 순서를 재구성한 것이다. 대사는 실제 법정 녹취가 아니며, ‘판례 문장 풀기’는 취지의 쉬운 번역이지 판결문 직접 인용이 아니다. 아래 부록은 제공 문제의 표현을 보존하면서 해설을 새로 붙였다.</p>
+<h1>부록. 관련 기출 66문항 · 모든 보기 해설</h1>
+<p>문제와 선택지는 제공 JSON 원문을 유지했다. 띄어쓰기·OCR 오탈자도 원문에 남아 있을 수 있으며, 뜻에 영향을 주는 부분은 해설에서 지적한다. 정답은 JSON의 인쇄 정답을 표시하되 보완·보류 문항은 이를 구별한다. 답을 먼저 보지 않으려면 HTML에서 해설을 접어 두면 된다. PDF에는 해설이 모두 펼쳐져 있다.</p>
+<h2>물권변동의 기초이론</h2>
+<section class="question-card" id="question-f5">
+<h4>형성평가 005 <small>물권법_005</small></h4>
+<p class="question-stem">공시의 원칙과 공신의 원칙에 관한 다음의 기술 중 옳지 않은 것은?</p>
+<ol class="choices">
+<li>우리 민법은 이 두 원칙을 동산․부동산을 구별하지 않고 인정한다.</li>
+<li>민법상 공시방법을 갖추지 않으면 당사자는 물론 모든 사람에 대한 관계에 있어 물권변동의 효력이 생기지 않는다.</li>
+<li>물권변동의 공시방법은 인도에 한하지 않는다.</li>
+<li>물권변동에 있어 공신력을 인정하는 경우, 진정한 권리자에게 불법행위로 인한 손해배상청구권이 인정될 수 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 부동산 등기에는 일반적 공신력이 없다. 동산은 제249조 요건 아래 인정된다. 키워드: 동산·부동산 구별.</li>
+<li>O(범위 주의) · 법률행위에 의한 변동의 성립요건주의를 뜻한다. 제187조 등 법률규정에 의한 취득까지 전부 부정하는 문장으로 읽으면 안 된다.</li>
+<li>O · 부동산 등기, 동산의 다양한 인도·특별법상 등록도 있다. 인도만이 공시는 아니다.</li>
+<li>O · 공신력으로 권리를 잃은 진정 권리자는 무권리자인 처분자에게 불법행위 요건 등을 갖추어 배상을 구할 수 있다. 취득자에게 자동 배상책임이 생긴다는 뜻은 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f6">
+<h4>형성평가 006 <small>물권법_006</small></h4>
+<p class="question-stem">다음 중 법률행위에 의한 물권변동은?</p>
+<ol class="choices">
+<li>소멸통고로 인한 전세권의 소멸</li>
+<li>매장물의 발견</li>
+<li>저당권의 설정</li>
+<li>경매로 인한 소유권이전</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>O(비법률행위 분류) · 출제 의도는 소멸통고와 법정 기간 경과에 따른 전세권 소멸을 법률효과로 구별하는 것이다. 설정계약과 다르다.</li>
+<li>O(비법률행위 분류) · 발견 사실과 법정 요건에 따른 취득 문제다. 발견 즉시 항상 소유권을 얻는다는 뜻은 아니다.</li>
+<li>정답 · 저당권설정은 당사자의 설정 합의라는 법률행위와 등기로 이루어진다.</li>
+<li>O(비법률행위 분류) · 법정 경매의 대금 완납에 따른 취득이다. 사적인 매매 방식의 경매와 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f7">
+<h4>형성평가 007 <small>물권법_007</small></h4>
+<p class="question-stem">다음 중 등기를 하지 않고서도 부동산물권이 취득되는 경우가 아닌 것은?</p>
+<ol class="choices">
+<li>취득시효</li>
+<li>판결</li>
+<li>경매</li>
+<li>공용징수</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>정답 · 부동산 점유취득시효는 제245조 제1항이 등기를 요구한다.</li>
+<li>오답 · 제187조의 형성판결을 전제로 등기 없이 취득한다. 모든 판결이라는 뜻은 아니다.</li>
+<li>오답 · 법정 경매는 대금 완납 시 취득한다. 매각허가만으로는 부족하다.</li>
+<li>오답 · 수용은 법정 효력 발생 시점에 취득한다. 일반 협의매수와 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f8">
+<h4>형성평가 008 <small>물권법_008</small></h4>
+<p class="question-stem">아직 등기가 안된 부동산에 관하여 처음으로 행해지는 소유권의 등기를 무엇이라고 하는가?</p>
+<ol class="choices">
+<li>보존등기</li>
+<li>이전등기</li>
+<li>말소등기</li>
+<li>변경등기</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>정답 · 최초의 소유권 기록은 보존등기다. 기억: 처음 보존, 다음 이전.</li>
+<li>오답 · 이미 공시된 소유권을 다른 사람에게 옮기는 등기다.</li>
+<li>오답 · 기존 등기를 지우는 등기다.</li>
+<li>오답 · 처음에는 맞던 등기가 나중 변화와 어긋나 이를 고친다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f9">
+<h4>형성평가 009 <small>물권법_009</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">㉠ 동일 부동산에 관하여 등기명의인을 달리하여 멸실회복된 각 소유권이전등기가 있고,  그 바탕이 된 각 소유권보존등기가 동일등기인지 중복등기인지, 중복등기라면 각 소유권보존등기가 언제 이루어졌는지가 밝혀지지 아니한 경우에는 멸실후 회복된 소유권이전등기의 각 회복등기일자의 선후로는 회복등기의 우열을 가릴 수 없다.㉡ 동일부동산에 대하여 등기명의인을 달리하는 이중의 소유권보존등기가 존재하는 경우에, 먼저 이루어진 소유권보존등기가 원인무효로 되지 않는 한 뒤에 이루어진 소유권보존등기는 그 부동산의 매수인에 의하여 이루어진 경우라도 무효로 본다.㉢ 증여자 甲이 수증자 乙에게 부동산을 증여하면서 증여세 등을 면하기 위하여 등기원인을 매매로 기재하게 하여 소유권이전등기를 한 경우  乙의 그 등기는 유효하다.㉣ 등기신청이 적법하다 하더라도 등기명의인의 사망 후에 경료된 등기는 무효이다.㉤ 부동산의 공동상속인 중의 1인이 불법으로 단독명의로 소유권이전등기를 경료한 경우 그 등기는 그의 상속분에 관하여도 효력이 없다.㉥ 유효하게 등기된 건물이 증․개축된 경우 당초 건물과의 동일성이 인정된다면 증․개축된 현재의 건물에 대하여 다시 경료된 보존등기는 무효이다.</p>
+<ol class="choices">
+<li>㉠, ㉤, ㉥</li>
+<li>㉡, ㉢, ㉣</li>
+<li>㉠, ㉣, ㉤</li>
+<li>㉢, ㉣, ㉤</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<p class="parts-note">개별 명제: ㉠ X(원등기의 동일성·선후를 알 수 없는 유형은 회복일 선후로 판단) / ㉡ O(유효한 선보존등기 우선) / ㉢ O(실체관계에 부합) / ㉣ X(적법 신청 후 사망만으로 무효 아님) / ㉤ X(본인 상속지분은 구별) / ㉥ O(건물 동일성 유지 시 후보존 중복). 원문에는 선택 지시가 누락되어 있다. 해설·정답에 따라 ‘틀린 명제’를 찾는 문제로 읽는다.</p>
+<ol class="choice-notes">
+<li>X · ㉥은 옳고, 틀린 ㉣을 빠뜨렸다.</li>
+<li>X · 옳은 ㉡·㉢을 포함하고 틀린 ㉠·㉤을 놓쳤다.</li>
+<li>정답 · 틀린 ㉠·㉣·㉤만 모았다.</li>
+<li>X · 옳은 ㉢을 포함하고 틀린 ㉠을 빠뜨렸다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f10">
+<h4>형성평가 010 <small>물권법_010</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">등기청구권에 관한 다음 설명 중 옳지 않은 것은? (다툼이 있으면 다수설과 판례에 의함)</p>
+<ol class="choices">
+<li>甲 소유의 토지를 임차한 乙은 반대약정이 없으면 임대차등기절차에 협력할 것을 청구할 수 있다.</li>
+<li>증여가 원인무효임을 주장하면서 소유권이전등기말소청구를 제기하였으나 패소한 경우, 소송물을 달리하여 다시 진정명의회복을 원인으로 한 소유권이전등기를 구하는 것은 허용되지 않는다.</li>
+<li>소유권이전등기청구권을 매수인으로부터 양도받은 양수인이 이를 가지고 매도인(채무자)에게 대항하기 위해서는 반드시 채무자의 동의나 승낙을 받아야 한다.</li>
+<li>판례에 의하면 부동산점유취득시효에 의해 갖는 등기청구권의 성질은 원칙적으로 물권적 청구권이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 제621조의 반대약정이 없으면 등기절차 협력을 청구할 수 있다. 협력의무가 있는데 임대인이 단순 거부하면 청구 자체가 없어진다는 설명은 부정확하다.</li>
+<li>O · 같은 소유권 회복을 위한 청구의 형식만 바꿔 확정판결을 우회할 수 없다. 정확한 판례는 99다37894다.</li>
+<li>O · 매매에 따른 이전등기청구권의 양도는 매도인의 동의·승낙을 요구하는 판례 법리를 확인한다. 단순 통지와 구별.</li>
+<li>X · 점유취득시효 완성에 따른 이전등기청구권은 판례상 채권적 청구권이다. 이미 소유자가 되어 말소를 구하는 경우와 다르다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f11">
+<h4>형성평가 011 <small>물권법_011</small></h4>
+<p class="question-stem">다음 등기청구권의 발생원인과 그 법적 성질에 관한 연결 중 부당한 것은? (다수설․판례에 의한다)</p>
+<ol class="choices">
+<li>A 소유의 부동산을 B 에게 매도한 경우 B 가 가지는 소유권이전등기청구권 - 채권적 청구권</li>
+<li>A 소유의 부동산에 관하여 무권리자 B 가 위조문서를 작성하여 B 명의로 소유권이전등기를 한 경우 A 가 가지는 말소등기청구권 - 물권적 청구권</li>
+<li>토지임대인 A 가 변제기를 경과한 후 최후 2 년의 차임채권에 의하여 그 지상에 있는 임차인 B 소유의 건물을 압류한 경우 성립하는 법정저당권설정의 등기청구권 - 물권적 청구권</li>
+<li>부동산임차인 A 가 임대인 B 에 대하여 그 임대차등기절차에 협력할 것을 청구하는 등기청구권 - 물권적 청구권</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 매매계약에서 생기는 이행청구이므로 채권적이다.</li>
+<li>O · 진정 소유자의 등기 방해 제거이므로 물권적이다.</li>
+<li>O · 제649조 법정저당권의 특별 요건에 기초한 등기청구라는 교재·판례 분류다.</li>
+<li>X · 임대차계약과 제621조에 기초한 협력청구는 채권적이다. 등기라는 이름만으로 물권적이 되지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w21">
+<h4>워크북 021 <small>물권법_워크북_021</small></h4>
+<p class="question-stem">물권행위에 관한 다음 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>물권행위란 직접 물권의 변동을 일으키는 법률행위이다.</li>
+<li>물권행위에는 채무자에 의한 ‘이행 '이라는 문제가 발생한다.</li>
+<li>물권행위를 물권적 의사 표시와 이에 기한 등기 · 인도 모두를 구성 요소로 하는 법률행위로 파악하는 견해도 있다.</li>
+<li>물권행위는 언제나 채권행위를 원인행위로 하여서 행하여지는 것은 아니다.</li>
+<li>원인행위인 채권행위의 유효를 조건으로 하여 물권행위를 하는 것도 가능하다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 물권을 직접 이전·설정·소멸시키려는 법률행위라는 정의다.</li>
+<li>X · 채무의 이행을 남겨 두는 채권행위의 성격과 혼동했다. 물권행위는 직접 물권변동을 목적으로 한다.</li>
+<li>O · 공시까지 물권행위의 구성요소로 파악하는 학설이 있다. 유일한 정의라고 한 것은 아니다.</li>
+<li>O · 물권 포기 등 반드시 선행 채권계약을 요구하지 않는 경우도 있다.</li>
+<li>O · 원인행위의 유효와 연결하는 조건 설정을 생각할 수 있다. 독자성만으로 무인성 필수라는 결론은 안 된다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w22">
+<h4>워크북 022 <small>물권법_워크북_022</small></h4>
+<p class="question-stem">물권행위의 무인성에 관한 다음 기술 중 틀린 것은?</p>
+<ol class="choices">
+<li>물권행위의 독자성을 인정하면 반드시 물권행위의 무인성을 인정하여야 한다.</li>
+<li>물권행위의 효력은 그 원인인 채권행위의 부존재 · 무효 · 취소 · 해제 등으로 당연히 영향을 받는다고 하는 것이 물권행위의 유인성론이다.</li>
+<li>물권행위의 독자성을 인정한다고 해서 채권행위와 물권행위가 합체되어서 행하여질 수 없다고 하는 것도 아니다</li>
+<li>우리 대법원 판례는 물권행위의 유인설에 입각하고 있다.</li>
+<li>물권행위의 무인 설에 의하면 악의의 제3자까지 보호하는 결과가 된다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 독립 행위를 인정하면서도 원인행위의 효력에 영향받는다고 볼 수 있다.</li>
+<li>O · 원인행위와 물권행위 효력의 연결이 유인성의 뜻이다. 제3자 보호 등은 별도.</li>
+<li>O · 관념상 구별과 시간상 반드시 따로 행위해야 한다는 말은 다르다.</li>
+<li>O · 판례의 원인행위와 물권변동 연결을 묻는다. 저자의 독자적 학설과 구별.</li>
+<li>O(추상적 이론 비교) · 유효한 물권행위가 남으면 후속 취득자의 악의만으로 소유권 취득이 막히지 않을 수 있다. 별도의 무효 사유까지 면책한다는 뜻은 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w23">
+<h4>워크북 023 <small>물권법_워크북_023</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">A는 자기의 부동산을 B에게 매도하고 이를 다시 C에게 매도하였다(등기는 A → B → C로 순차적으로 행하여졌다). 그런데 A · B 사이의 매매계약은 처음부터 확정적으로 무효였다. 다음 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>물권행위의 무인성을 긍정하는 경우에는 A · B 사이의 물권행위 자체에 별도의 무효 사유가 존재하지 않는 한, B는 목적 부동산의 소유권을 취득한 것으로 본다.</li>
+<li>물권행위의 무인성을 부정하게 되면 A ·B 사이의 매매계약이 무효가 됨으로 인하여 A ·B 사이의 물권행위도 무효가 되며, 이를 믿고 거래한 C도 목적 부동산의 소유권을 취득할 수 없다.</li>
+<li>물권행위의 무인성을 부정하더라도 A ·B 사이의 매매계약이 상대방이 알았거나 알 수 있었던 통정 허위 표시 등에 의한 것으로 무효가 되는 경우에 C가 선의 이면 A와 B는 C에게 매매계약이 무효임을 주장하지 못한다.</li>
+<li>물권행위의 무인성을 부정하는 경우에 A가 B에게 이행한 급여가 불법 원인에 의하였다 할지라도 A가 소유권에 기한 반환 청구권을 행사할 수 있다고 하여 C도 그 부동산 소유권을 취득할 수 없다고 보는 것이 판례의 견해이다.</li>
+<li>부동산의 소유권이 C 명의로 등기되어 있고 C 가등기 시로부터 10년 동안 계속하여 그 부동산을 점유하면 소유권을 취득한다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 무인설을 가정하면 원인 매매 무효와 물권행위 자체의 무효를 분리한다.</li>
+<li>O(별도 보호조문 없다는 전제) · 유인성을 취하면 원인무효가 물권변동에 영향을 준다.</li>
+<li>O(표현 주의) · 통정허위표시라면 제108조 제2항의 선의 제3자 보호를 검토한다. ‘상대방이 알았거나 알 수 있었던’ 표현은 비진의표시 요건과 섞여 있어 구별해야 한다.</li>
+<li>X · 불법원인급여는 소유권에 기한 반환청구로도 우회할 수 없다는 판례 문제다.</li>
+<li>조건 누락 · 등기부취득시효는 10년만으로 부족하다. 소유의 의사·평온·공연한 점유와 선의·무과실 등이 필요하다. 원문 ‘C 가등기 시’는 문맥상 C의 등기 시점으로 읽으며, 가등기를 뜻한다면 더욱 성립하지 않는다. JSON 정답 ④는 보존하지만 이 보기를 그대로 외우지 말 것.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w24">
+<h4>워크북 024 <small>물권법_워크북_024</small></h4>
+<p class="question-stem">물권변동에 관한 다음 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>공시의 원칙은 물권이 배타성을 갖고 있으므로 제3자에게 미치는 영향이 크고 권리 관계를 복잡하게하기 때문에 이를 방지하기 위한 것이다</li>
+<li>공시의 원칙은 물권에 한정된 현상이다.</li>
+<li>공시의 원칙이 확실히 행하여지지 않으면 공신의 원칙에 의하여 정적 안전이 위협당한다.</li>
+<li>동산물권에 있어서의 공시방법은 점유이지만, 점유는 동산물권의 표상으로는 불완전하다</li>
+<li>부동산물권에 있어서의 공시의 원칙은 넓게 부동산물권에 관한 거래 관계의 보호를 목적으로 한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 배타적 권리의 대외적 영향을 명확하게 하려는 취지다.</li>
+<li>X · 채권양도 통지 등 물권 이외의 권리관계에서도 공시와 대항요건의 역할이 있다.</li>
+<li>O · 부정확한 외관을 쉽게 믿도록 하면 진정 권리자의 기존 권리인 정적 안전이 손상된다.</li>
+<li>O · 점유자는 소유자뿐 아니라 임차인·수치인일 수 있어 완전한 표상이 아니다.</li>
+<li>O · 부동산 거래자가 권리관계를 알 수 있게 하는 목적을 가진다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w25">
+<h4>워크북 025 <small>물권법_워크북_025</small></h4>
+<p class="question-stem">다음과 같은 과정을 거쳐 부동산의 거래가 이루어질 경우 물권변동은 언제 일어나는가? · 9월 15일: 甲과 乙 사이에 乙 소유의 부동산에 관한 매매계약 체결(매매가는 2억 원). 甲은 계약금으로 2천만 원 지급 · 9월 25일: 甲은 중도금으로 8천만 원을 乙에게 지급 · 10월 10일: 乙은 소유권이전등기에 필요한 서류를 법무사에게 위탁하였고, 甲은 등기 서류가 넘어온 것을 확인한 후 乙에게 9천만 원을 지급하였으며, 법무사는 등기 서류를 갖추어 등기소에 소유권이전등기 신청을 하였다. · 10월 11일: 전일 접수된 등기 신청 정보가 전산 정보 처리 조직에 저장되었다. · 10월 13일: 乙은 甲에게 부동산을 인도하고 甲은 乙에게 잔 대금 1천만 원을 지급 완료하였다.</p>
+<ol class="choices">
+<li>9월 15일</li>
+<li>9월 25일</li>
+<li>10월 10일</li>
+<li>10월 11일</li>
+<li>10월 13일</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>X · 매매계약만으로는 부동산 소유권이 옮겨가지 않는다.</li>
+<li>X · 중도금 지급은 등기를 대신하지 않는다.</li>
+<li>X · 서류 제출일과 법정 접수 시점을 구별한다. 문제는 신청정보 저장일을 따로 제시했다.</li>
+<li>정답 · 부동산등기법 제6조상 신청정보가 전산정보처리조직에 저장된 때 접수된 것으로 본다. 등기가 완료되면 접수 시 효력이 발생한다는 전제에서 10월 11일이다.</li>
+<li>X · 인도·잔금 지급이 부동산 소유권변동의 필수 시점을 정하지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w26">
+<h4>워크북 026 <small>물권법_워크북_026</small></h4>
+<p class="question-stem">물권변동에 관한 설명으로 타당하지 않은 것은? (단, 판례 · 통설에 의한다)</p>
+<ol class="choices">
+<li>부동산등기특별조치법의 시행으로 이른바 중간생략등기의 효력은 인정될 수 없게 되었다.</li>
+<li>미등기 부동산의 양수인이 그 명의로 한 소유권보존등기는 실체관계에 부합하면 유효하다.</li>
+<li>법률행위에 의한 물권변동의 경우 물권적 합의 없이 공시방법이 갖추어지더라도 물권은 변동되지 않는다</li>
+<li>동산의 경우 현실적 점유 이전 없이도 물권이 변동되는 경우가 있다.</li>
+<li>부동산의 경우 점유 이전은 물권변동의 요건이 아니다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 규제·처벌과 이미 완료된 등기의 사법상 효력은 별도다.</li>
+<li>O · 미등기 부동산에서 현재 실체에 부합하는 경우를 말한다. 중복등기 원칙까지 배제하지 않는다.</li>
+<li>O · 공시만 있고 유효한 권리변동 원인이 없으면 부족하다.</li>
+<li>O · 간이인도·점유개정·반환채권 양도가 있다.</li>
+<li>O · 부동산 소유권변동의 공시는 등기이며 점유 이전은 별개다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w27">
+<h4>워크북 027 <small>물권법_워크북_027</small></h4>
+<p class="question-stem">물권변동에 관한 다음 설명 중 가장 옳지 않은 것은?</p>
+<ol class="choices">
+<li>공유물 분할의 소송 절차 또는 조정 절차에서 공유자 사이에 공유 토지에 관한 현물 분할의 협의가 성립하여 그 합의 사항을 조서에 기재함으로써 조정이 성립하였다면, 재판에 의한 공유물 분할의 경우와 마찬가지로 그 즉시 공유 관계가 소멸하고 각 공유자에게 그 협의에 따른 새로운 법률관계가 창설된다.</li>
+<li>건물 신축 도급 계약에 있어서는 수급인이 자기의 노력과 재료를 들여 건물을 완성하더라도 도급인과 수급인 사이에 도급인 명의로 건축 허가를 받아 소유권보존등기를 하기로 하는 등 완성된 건물의 소유권을 도급인에게 귀속시키기로 합의한 경우에는 그 건물의 소유권은 도급인에게 원시적으로 귀속된다.</li>
+<li>유언으로 재단법인을 설립하는 경우 재단법인이 출연재산인 부동산에 관하여 소유권이전등기를 마치지 아니 하였다면 유언자의 상속인의 한 사람으로부터 부동산의 지분을 취득하여 이전등기를 마친 선의의 제3자에 대하여 대항할 수 없다.</li>
+<li>신축 건물의 보존 등기를 건물 완성 전에 하였더라도 그 후 건물이 완성되었다면 그 등기는 유효하다.</li>
+<li>채무자 이외의 자의 소유에 속하는 동산을 경매한 경우에도 경매절차에서 그 동산을 경락 받아 경락대금을 납부하고 이를 인도받은 경락인은 특별한 사정이 없는 한 소유권을 선의취득한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 합의에 따른 조정은 형성판결과 다르다. 등기를 통해 분할의 물권변동을 완성한다.</li>
+<li>O · 완성 건물의 원시귀속에 관한 당사자 합의를 고려한다. 건축허가 명의만으로 항상 소유자가 된다는 뜻은 아니다.</li>
+<li>O · 재단과 출연자의 내부 귀속과 제3자에 대한 등기 필요성을 분리한다.</li>
+<li>O(전제 주의) · 이후 건물이 완성되어 등기가 실체관계에 부합하는 경우다. 완성 전 아직 건물 아닌 물건에 대한 등기로 곧바로 소유권을 얻는다는 뜻은 아니다.</li>
+<li>O · 동산 경매도 거래행위에 해당하며 선의취득 요건을 충족할 수 있다. 경매면 무조건 선의·무과실은 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w28">
+<h4>워크북 028 <small>물권법_워크북_028</small></h4>
+<p class="question-stem">등기에 관한 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>가등기의 가등기를 긍정하는 것이 판례의 입장이다.</li>
+<li>경정등기라 함은 등기와 실체관계의 후발적 불일치를 시정하기 위하여 행하여지는 등기이다.</li>
+<li>물권변동의 효력을 발생케하는 등기를 본등기라고 한다.</li>
+<li>가등기는 본등기의 순위를 보전하는 효력이 있다.</li>
+<li>판결에 의하여 취득한 소유권의 양도는 등기를 요한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 가등기된 청구권을 둘러싼 추가 가등기를 허용하는 판례를 묻는다.</li>
+<li>X · 후발적 불일치는 변경등기, 처음부터의 착오·누락은 경정등기다.</li>
+<li>O · 가등기에 대응하는 본등기의 의미다.</li>
+<li>O · 가등기의 핵심은 장래 본등기의 순위보전이다.</li>
+<li>O · 제187조로 취득했어도 이후 법률상 처분에는 등기가 필요하다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w29">
+<h4>워크북 029 <small>물권법_워크북_029</small></h4>
+<p class="question-stem">다음 괄호에 들어가는 것이 잘 짝 지어진 것은? 물권변동의 효력을 발생케하는 등 기를 ( ㉠ )라고 하는데, 소유권이전등기가 이에 속한다. 그러나 ( ㉡ )는 이와 같이 직접적으로 물권변동의 효력을 발생시키는 등기가 아니므로, 이를 ( ㉠ )에 대응하여 ( ㉢ )라고 부른다. 이 중 ( ㉡ )는 부동산물권 및 이에 준할 권리의 설정 · 이전 · 변경 또는 소멸의 청구권을 보전하는 등기이다.</p>
+<ol class="choices">
+<li>㉠ 주등기 / ㉡ 가등기 / ㉢ 예비등기</li>
+<li>㉠ 종국등기 / ㉡ 예고등기 / ㉢ 가등기</li>
+<li>㉠ 본등기 / ㉡ 예고등기 / ㉢ 예비등기</li>
+<li>㉠ 종국등기 / ㉡ 가등기 / ㉢ 예비등기</li>
+<li>㉠ 주등기 / ㉡ 가등기 / ㉢ 예고등기</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>X · 주등기는 부기등기와 대비하는 분류다. ㉠은 종국등기다.</li>
+<li>X · 청구권 순위를 보전하는 것은 가등기다. 예고등기는 현재 폐지 제도다.</li>
+<li>X · ㉡을 예고등기라고 한 것이 틀렸다.</li>
+<li>정답 · 종국등기 / 가등기 / 예비등기의 대응이다. 예비등기는 이론상 분류명으로 이해한다.</li>
+<li>X · 주등기·예고등기의 분류 축을 섞었다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w30">
+<h4>워크북 030 <small>물권법_워크북_030</small></h4>
+<p class="question-stem">가등기에 관한 설명으로 맞는 것은?</p>
+<ol class="choices">
+<li>가등기의 내용은 장차 행하여질 본등기의 내용과 일치하지 않아도 상관없다.</li>
+<li>판례는 가등기의 가등기를 인정하지 않는다</li>
+<li>가등기는 본등기의 순위를 보전하는 효력이 있다.</li>
+<li>가등기에 기하여 본등기가 행하여지면 물권변동의 효력은 가등기로 소급한다.</li>
+<li>본등기 전에도 가등기에 어떤 실체 법상 효력을 인정하는 것이 판례이다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>X · 보전할 청구권과 장차 본등기 내용의 대응이 필요하다. 아무 내용으로 순위를 가져갈 수 없다.</li>
+<li>X · 판례는 허용하는 유형을 인정한다.</li>
+<li>정답 · 가등기의 본질은 순위보전이다.</li>
+<li>X · 순위는 보전되지만 소유권 취득 자체가 가등기일로 소급하지 않는다.</li>
+<li>X(일반 순위보전 가등기 문맥) · 본등기 전 가등기만으로 물권취득의 실체적 효력이 생기지 않는다. 담보가등기의 특별법상 효과와 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w31">
+<h4>워크북 031 <small>물권법_워크북_031</small></h4>
+<p class="question-stem">가등기와 관련된 설명으로 잘못된 것은?</p>
+<ol class="choices">
+<li>가등기에 기하여 본등기를 청구하려면 권리자는 현재의 등기명의인을 상대로 해야 한다</li>
+<li>가등기에 기해 본등기를 행한 경우 물권변동은 본등기를 한 때에 일어난다.</li>
+<li>보전할 청구권이 있더라도 본등기를 할 수 없는 경우이면 가등기도 할 수 없다.</li>
+<li>등기의 효력으로 인정되는 추정력을 가등기에는 인정하지 않는 것이 판례의 태도이다.</li>
+<li>가등기에 의하여 순위 보전되는 등기청구권을 양도하면서 가등기의 가등기를 할 수 있다는 것이 판례의 태도이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 본등기의무자는 원칙적으로 가등기의무자다. 현재 소유명의자가 무조건 상대방은 아니다.</li>
+<li>O · 본등기로 변동이 발생한다. 순위 소급과 구별.</li>
+<li>O · 본등기로 실현할 수 있는 청구를 보전하는 제도다. 등기할 수 없는 권리를 가등기로 만들지 못한다.</li>
+<li>O · 가등기로 원인관계·권리변동이 당연히 추정되는 것은 아니다.</li>
+<li>O · 청구권의 양도와 관련된 가등기를 인정하는 판례다. 양도 공시의 부기등기와 함께 정리한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w32">
+<h4>워크북 032 <small>물권법_워크북_032</small></h4>
+<p class="question-stem">甲 소유의 X 토지에 乙 명의로 소유권이전청구권 보전을 위한 가등기가 설정되어 있다. 다음 설명 중 옳은 것은?</p>
+<ol class="choices">
+<li>乙은 가등기된 소유권이전청구권을 가등기에 대한 부기등기의 방법으로 타인에게 양도할 수 없다.</li>
+<li>乙이 가등기에 기한 본등기를 하면 乙은 가등기를 경료한 때부터 X 토지에 대한 소유권을 취득한다.</li>
+<li>가등기가 있으면 乙이 甲에 대한 소유권이전등기를 청구할 법률관계가 있는 것으로 추정된다.</li>
+<li>乙의 가등기보다 선순위의 담보권이나 가압류 등이 없는 경우에도 X 토지가 경매절차에서 제3자에게 매각되면 가등기는 소멸한다</li>
+<li>丙이 X 토지의 소유권을 양도 받은 후 乙 명의의 가등기가 불법으로 말소된 경우, 乙은 丙을 상대로 가등기의 회복등기 청구를 하여야 한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>X · 가등기된 청구권 양도를 부기등기로 공시할 수 있다.</li>
+<li>X · 소유권 취득은 본등기 때이고 가등기일로 소급하지 않는다.</li>
+<li>X · 가등기만으로 실체관계가 추정되지 않는다.</li>
+<li>X · 선순위 권리와 경매의 말소기준·인수 여부를 살펴야 한다. 선순위 순위보전 가등기가 경매로 언제나 소멸하지는 않는다.</li>
+<li>정답 · 불법 말소 당시 소유명의자인 丙이 회복등기의무자다. 본등기 청구의 상대방 문제와 다른 상황이다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w33">
+<h4>워크북 033 <small>물권법_워크북_033</small></h4>
+<p class="question-stem">등기에 관한 다음 설명 중 옳은 것은?</p>
+<ol class="choices">
+<li>타인의 가옥 중 방 하나에 대해서만 전세권을 취득한 자는 등기를 청구할 수 없다.</li>
+<li>건물을 신축한 경우에도 등기를 하여야만 소유권을 취득한다.</li>
+<li>등기에는 공신력이 없기 때문에 실질적 권리가 없는 자의 등기에는 아무런 효력도 인정되지 않는다.</li>
+<li>예비등기는 본래의 효력인 물권의 효력에는 직접적인 관계가 없는 것으로 가등기가 여기에 속한다</li>
+<li>부동산물권의 포기는 사실상의 포기가 있으면 되고, 등기가 필요하지 않다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>X · 건물 일부도 범위가 특정되면 전세권 등기가 가능하다. 소유권의 구분등기 요건과 다르다.</li>
+<li>X · 신축에 의한 원시취득은 보존등기 없이 가능하다.</li>
+<li>X · 공신력이 없어도 추정력 등 제도적 효력이 문제될 수 있다. 무효등기가 소유권을 준다는 뜻은 아니다.</li>
+<li>정답 · 가등기는 직접 물권변동을 완성하지 않고 순위를 보전한다.</li>
+<li>X · 부동산물권 포기는 법률행위이므로 필요한 등기를 해야 한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w34">
+<h4>워크북 034 <small>물권법_워크북_034</small></h4>
+<p class="question-stem">다음 중 부동산 등기에 관한 설명으로 옳지 않은 것은?</p>
+<ol class="choices">
+<li>권리 능력 없는 사단의 명의로 경료된 소유권이전등기도 유효하다.</li>
+<li>부동산의 표시 변경등기는 소유 명의자가 단독으로 신청할 수 있다.</li>
+<li>법정지상권은 이를 양도하는 경우, 등기하지 아니하면 양도의 효력이 없다</li>
+<li>동일 부동산에 관하여 동일인 명의로 이중의 소유권보존등기가 된 경우 뒤에 경료된 보존 등기는 무효이다.</li>
+<li>미등기 부동산을 매수하여 소유권보존등기를 경료한 경우, 매도인이 매매를 부인하여도 위 보존 등기는 권리 추정의 효력이 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 비법인사단도 법정 요건 아래 단체 명의 등기가 가능하다. 대표자 개인 소유라는 뜻은 아니다.</li>
+<li>O · 부동산 표시 변경은 소유명의자의 단독신청 유형이다.</li>
+<li>O · 법정지상권의 최초 취득과 이후 양도를 구별한다. 양도는 등기 필요.</li>
+<li>O · 동일인 명의 후보존등기는 중복으로 무효다.</li>
+<li>X · 보존등기 명의자가 타인으로부터 매수했다고 하는데 그 전주인이 매매를 부인하는 유형에서는 추정이 깨져 취득을 증명해야 한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w35">
+<h4>워크북 035 <small>물권법_워크북_035</small></h4>
+<p class="question-stem">각종 등기에 관한 기술 중 타당하지 않은 것은?</p>
+<ol class="choices">
+<li>가등기 권리자는 가등기만으로써 가등기 후의 본등기 취득자에게 가등기에 의하여 보전된 물권을 주장하여 제3자의 본등기의 말소를 청구할 수 있다</li>
+<li>동일성이 없어서 경정등기가 허용될 수 없는 경우에는 비록 경정등기가 경료되었다 하더라도 그 효력이 생길 수 없다.</li>
+<li>토지가 멸실된 경우에는 그 토지 소유권의 등기명의인은 그 사실이 있는 때부터 1개월 이내에 그 등기를 신청하여야 한다</li>
+<li>불법하게 말소된 것을 이유로 한 근저당권설정등기의 회복등기 청구는 그 등기 말소 당시의 소유자를 상대로 하여야 한다</li>
+<li>동일한 부동산에 대하여 같은 소유자 명의로 이중으로 소유권보존등기가 된 경우에는 후에된 보존 등기는 무효이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 가등기만으로 아직 취득하지 않은 물권을 내세워 후본등기 말소를 청구할 수는 없다.</li>
+<li>O · 동일성을 벗어나는 내용은 경정으로 고칠 수 없다. 다른 물건의 등기를 고쳐 쓰는 것과 구별.</li>
+<li>O · 토지 멸실에 대한 등기신청 의무·기간을 묻는다. 권리 소멸 시점과 신청 의무는 다르다.</li>
+<li>O · 말소 당시 소유자가 회복등기의무자라는 법리를 묻는다. 이후 이해관계인의 승낙 등 절차는 별도.</li>
+<li>O · 같은 소유자 명의 중복 보존은 후등기 무효가 원칙이다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w36">
+<h4>워크북 036 <small>물권법_워크북_036</small></h4>
+<p class="question-stem">다음 중 판례의 태도와 다른 것은?</p>
+<ol class="choices">
+<li>불법 말소된 말소등기는 실체관계에 부합하지 않는 것이어서 무효이므로 말소된 물권은 소멸치 않고 말소된 등기의 회복등기가 행하여지면 그 회복등기는 말소된 종전의 등기와 동일한 순위의 효력을 가진다고 한다.</li>
+<li>하나의 부동산에 2개의 등기부가 편제된 경우, 등기의 선후만을 따져서 어느 등기가 유효한지를 결정할 것이 아니라 실체관계를 살펴서 진정한 소유권에 바탕을 둔 보존 등기만이 유효하다.</li>
+<li>위조 문서에 의한 등기의 경우 실체관계에 부합하거나 그 등기에 부합하는 물권행위가 있는 한 그러한 등기도 유효하다.</li>
+<li>등기의무자인 사자명의의 신청으로 행하여진 등기가 사자의 공동상속인들의 의사에 좇아 이루어진 것이고 또한 현재의 실체적 권리관계에 합치한다면 그러한 등기도 유효하다.</li>
+<li>등기 신청을 한 대리인이 대리권을 가지고 있지 않는 그 신청이 본인의 의사에 부합하거나 또는 표현 대리가 인정되거나 실체관계가 본인의 의사에 의해서 유효하게 성립하고 등기가 이에 부합하는 때에는 그 등기는 유효하다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 불법 말소는 실체권리를 당연히 소멸시키지 않는다. 회복하면 원래 순위를 회복한다.</li>
+<li>X · 유효한 선보존등기가 있으면 후중복등기는 실제 매수인 것이라도 무효가 원칙이다. 실체관계만 보면 안 된다.</li>
+<li>O · 실체관계가 맞는 경우의 절차 흠과, 무권리자가 마음대로 만든 등기를 구별한다.</li>
+<li>O · 상속인들의 의사와 현재 실체관계에 부합하는 특수 사실관계다. 모든 사망자 명의 신청이 허용된다는 뜻은 아니다.</li>
+<li>O · 본인의 유효한 의사·표현대리 등 별도 유효 근거가 있는 경우다. 무권대리면 언제나 유효가 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w37">
+<h4>워크북 037 <small>물권법_워크북_037</small></h4>
+<p class="question-stem">등기 사무와 절차에 관한 다음 기술 중 타당하지 않은 것은?</p>
+<ol class="choices">
+<li>등기관은 등기 신청이 있는 경우 부동산 등기 법에 정해진 내용과 절차에 따라 신청 정보와 첨부 정보 그리고 등기 기록에 기초하여 등기 신청이 적법한지 여부를 심사할 권한이 있다</li>
+<li>등기부를 편성할 때에는 1필의 토지 또는 1동의 건물에 대하여 1개의 등기 기록을 둔다.</li>
+<li>소유권보존등기가 이루어진 후 등기부와 대장이 불일치하는 경우, 권리관계의 변동에 관하여는 대장이 등기부의 기재(즉, 갑구·을구의 기재)를 따른다.</li>
+<li>실체 법상 등기 사항이란 당사자가 등기를 신청할 수 있고 또한 등기관이 등기할 직책과 권한을 갖는 사항을 말한다</li>
+<li>상속 · 합병에 의한 등기, 판결에 의한 등기 등은 공동 신청의 예외이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 제출 정보와 등기기록 등에 기초하는 형식적 심사권을 설명한다.</li>
+<li>O(원칙) · 1부동산 1등기기록 원칙이다. 구분건물 등의 기록 편성 특칙은 별도.</li>
+<li>O · 권리관계는 등기부, 물리적 현황은 대장이라는 기능 구별이다.</li>
+<li>X · 이 설명은 절차법상 등기사항의 개념이다. 실체법상 등기 필요사항과 명칭을 바꿨다.</li>
+<li>O · 법률이 정한 단독신청 등 공동신청 예외다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w38">
+<h4>워크북 038 <small>물권법_워크북_038</small></h4>
+<p class="question-stem">등기의 유효성에 관한 서술 중 타당하지 않은 것은?</p>
+<ol class="choices">
+<li>미등기부동산이 전전매매이전된 경우 최후의 매수인이 소유권이전등기를 하지 않고 소유권보존등기를 하여도 그 소유권보존등기는 유효하다.</li>
+<li>구거(溝渠: 도랑)를 농지로서 일반 농지 소유권이전등기에 관한 특별조치법에 의하여 등기한 경우에도 그 등기가 실체 법상의 권리 관계에 부합하면 유효하다.</li>
+<li>위조된 등기 신청 서류에 의하여 경료된 소유권이전등기는 그 등기가 실체적 권리 관계에 부합하더라도 유효한 등기라 할 수 없다.</li>
+<li>중간 생략의 합의 없이 경료된 등기라도 매매가 적법하게 성립되어 이행된 경우에는 그 등기의 말소를 청구할 수 없다.</li>
+<li>근저당권설정등기 유용의 합의 이전에 가등기권자가 있는 경우에는 그 유용의 합의는 가등기권자에 대한 관계에 있어서 효력이 없으므로 그 범위 안에서 근저당권설정등기는 무효의 등기이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>O · 선등기가 없는 미등기 부동산이라는 전제에서 실체관계에 부합한다.</li>
+<li>O · 옛 특별법에 따른 절차 문제와 현재 실체 부합을 나누는 판례다.</li>
+<li>X · 실체관계가 일치하면 위조서류라는 사정만으로 항상 무효는 아니다.</li>
+<li>O · 이미 완료된 등기의 실체 부합 여부를 판단한다. 직접 청구의 합의 요건과 구별.</li>
+<li>O · 무효등기 유용 합의 전에 생긴 제3자의 권리를 해칠 수 없다. 키워드: 유용 전 이해관계인.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w39">
+<h4>워크북 039 <small>물권법_워크북_039</small></h4>
+<p class="question-stem">다음 중 무효인 등기는?</p>
+<ol class="choices">
+<li>증여 받은 부동산을 매매를 원인으로 소유권이전등기를 하는 경우</li>
+<li>등기되어 있는 건물이 멸실되어 새로이 신축한 건물의 등기로 구등기를 유용한 경우</li>
+<li>A에서 B로, B에서 C로 부동산이 매도되고 등기는 A에서 C로 직접 이전된 경우</li>
+<li>A · B 간의 가장 매매를 원인으로 소유권이전등기를 한 후, 다시 A ·B 간에 적법한 매매가 있은 때</li>
+<li>등기명의인이 동일하게 이중으로 소유권보존등기가 된 경우에 먼저 행하여진 등기</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X(유효 가능) · 실제 증여에 따른 소유권 이전과 부합하면 원인 명칭 차이만으로 무효는 아니다.</li>
+<li>정답 · 멸실한 건물과 신축 건물은 동일한 물건이 아니므로 옛 등기를 유용하지 못한다.</li>
+<li>X(유효 가능) · 유효한 원인에 부합하는 완료된 중간생략등기는 인정될 수 있다.</li>
+<li>X(유효 가능) · 새 유효 합의에 의한 유용이 문제된다. 앞서 권리 얻은 제3자가 없는 등 요건을 확인한다.</li>
+<li>X · 동일인 중복등기에서는 먼저 한 유효한 보존등기를 남기고 뒤 것을 무효로 한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w40">
+<h4>워크북 040 <small>물권법_워크북_040</small></h4>
+<p class="question-stem">등기의 효력에 대한 다음 기술 중 옳지 않은 것은?</p>
+<ol class="choices">
+<li>동일 부동산에 설정된 수 개의 권리의 순위 관계는 법률에 다른 규정이 없으면 등기의 선후에 의한다</li>
+<li>이미 등기된 부동산에 관하여도 점유의 추정력이 인정된다고 보는 것이 통설이다.</li>
+<li>타인 소유의 부동산에 관하여 서류를 위조하여 자기 명의로 보존 등기를 하였더라도 무효이다.</li>
+<li>증여로 인한 소유권 이전을 매매를 원인으로 하였다고 이전등기하는 것은 유효하다고 보는 것이 통설이다</li>
+<li>표현 상속인이 한 상속 등기를 믿고 그로부터 부동산 소유권을 양수한 자는 유효하게 소유권을 취득할 수 없다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 특별규정이 없는 한 등기 선후가 권리순위의 기준이다.</li>
+<li>X · 등기된 부동산의 권리관계에서는 등기의 추정력을 중심으로 판단한다. 점유만으로 등기와 반대 권리를 추정하지 않는다.</li>
+<li>O · 타인 소유를 권한 없이 자기 것으로 등기했으므로 실체관계에 부합하지 않는다.</li>
+<li>O · 실제 이전 원인과 소유관계가 유효하면 원인 명칭 차이만으로 무효는 아니다.</li>
+<li>O(별도 보호 근거 없는 전제) · 등기의 공신력이 없으므로 가짜 상속인의 등기를 믿은 것만으로는 소유권을 못 얻는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w41">
+<h4>워크북 041 <small>물권법_워크북_041</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">등기의 추정력에 관한 설명 중 옳지 않은 것은?</p>
+<ol class="choices">
+<li>판례는 등기가 있으면 등기 원인이 진정하고 등기 절차가 적법하게 행하여졌다는 점이 추정된다고 한다.</li>
+<li>판례는 전 등기의 접수 연월일, 접수 번호 및 원인일 자가 불명으로 기재된 멸실 회복등기도 적법하게 처리된 것으로 추정된다고 한다.</li>
+<li>판례는 소유권이전등기의 추정력이 권리 변동의 당사자에게도 미친다고 한다.</li>
+<li>판례는 소유권이전등기청구권을 보전하기 위한 가등기가 있으면 소유권이전등기를 청구할 어떤 법률관계가 있다고 추정된다고 한다.</li>
+<li>등기의 추정력에 의하여 등기 내용에 대한 악의가 추정된다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 등기의 원인·절차가 적법하다는 추정은 반증으로 깨질 수 있다.</li>
+<li>O · 해당 멸실회복등기의 적법 추정에 관한 판례다. 선후를 판단하는 문제와 분리한다.</li>
+<li>O · 추정력이 제3자에게만 작용하는 것은 아니다.</li>
+<li>X · 가등기에는 본등기와 같은 원인관계 추정력을 인정하지 않는다.</li>
+<li>주의 · JSON은 옳은 보기로 처리하지만, 등기사항을 확인할 수 있다는 논의를 실제 악의의 일반적 법정 추정으로 외우면 부정확하다. 선의·무과실·공신력과 반드시 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w42">
+<h4>워크북 042 <small>물권법_워크북_042</small></h4>
+<p class="question-stem">등기의 추정력에 관한 다음 설명 중 가장 옳지 않은 것은?</p>
+<ol class="choices">
+<li>구임야 소유권이전등기에 관한 특별조치법에 따라 경료된 소유권보존등기는 그 등기 명의자가 임야 대장의 명의 변경을 함에 있어 첨부한 원인 증서인 위 특별조치법 소정의 보증서와 확인서가 허위임이 입증되었다면 그 추정력은 깨어진다.</li>
+<li>소유권이전등기의 원인으로 주장된 계약서가 진정하지 않은 것으로 증명되었다면 그 소유권이전등기의 적법 추정은 깨어진다</li>
+<li>신축된 건물의 소유권은 이를 건축한 사람이 원시 취득하는 것이므로, 건물 소유권보존등기의 명의자가 이를 신축한 것이 아니라면 그 등기의 권리 추정력은 깨어지고, 등기 명의자가 스스로 적법하게 그 소유권을 취득한 사실을 입증하여야 한다</li>
+<li>등기 공무원이 관할 지방 법원의 명령에 의하여 소유권이전등기를 직권으로 말소하였으나 그 후 위 명령이 취소 확정된 경우에는 위 말소등기는 결국 원인 없이 경료된 등기와 같이되어 말소된 소유권이전등기는 회복되어야하고, 회복등기를 마치기 전이라도 등기명의인으로서의 권리를 그대로 보유하고 있다고 할 것이므로 그는 말소된 소유권이전등기의 최종 명의인으로서 적법한 권리자로 추정된다</li>
+<li>전 등기명의인이 미성년자이고 당해 부동산을 친권자에게 증여하는 행위가 이해 상반 행위라면 친권자에게 마쳐진 소유권이전등기에 관하여 필요한 절차를 적법하게 거친 것으로 추정되지 않는다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 특별조치법상 보증서·확인서의 허위 입증으로 추정이 깨진다.</li>
+<li>O · 원인 계약서의 진정성이 부정되면 적법 추정이 깨지는 경우다.</li>
+<li>O · 신축자의 원시취득과 보존등기 명의자의 취득 경위를 따져야 한다.</li>
+<li>O · 직권말소 근거가 취소되어 실체상 권리가 남는 유형이다. 기록이 지워졌다는 사실만 보지 않는다.</li>
+<li>X · 등기가 있으면 필요한 절차가 적법하게 이루어졌다고 추정될 수 있다. 이해상반행위라는 사정만으로 그 추정을 전부 부인하지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w43">
+<h4>워크북 043 <small>물권법_워크북_043</small></h4>
+<p class="question-stem">등기청구권에 관한 다음 기술 중 옳은 것은? (이견이 있는 경우 판례에 따른다)</p>
+<ol class="choices">
+<li>등기청구권이 채권적인 청구권이라는 데 이견이 없다.</li>
+<li>실체관계와 등기가 일치하지 않은 경우의 등기청구권은 일종의 채권적청구권이다.</li>
+<li>법률행위에 의한 물권변동의 경우에 발생하는 등기청구권은 채권적청구권이라는 데 이견이 없다.</li>
+<li>부동산의 매수인이 매도인으로부터 등기를 이전 받지 않은 채 목적물을 점유하는 경우, 등기청구권은 소멸시효에 걸리지 않는다.</li>
+<li>부동산 환매권에 기한 등기청구권은 그 성격이 물권적청구권이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>X · 발생 원인에 따라 채권적·물권적으로 나뉘므로 일괄 분류 불가.</li>
+<li>X · 소유권에 기한 무효등기 말소 등은 물권적 청구다.</li>
+<li>X · 판례·다수설의 채권적 설명과 학설에 이견이 전혀 없다는 말은 다르다.</li>
+<li>정답 · 인도받아 계속 점유하는 매수인의 등기청구권에는 판례상 시효 예외가 있다.</li>
+<li>X · 환매에 따른 재이전등기청구는 계약관계에서 나오는 채권적 청구로 본다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w44">
+<h4>워크북 044 <small>물권법_워크북_044</small></h4>
+<p class="question-stem">다음 등기청구권의 발생 원인과 그 법적 성질에 관한 연결 중 부당한 것은? (다수설 · 판례에 의한다)</p>
+<ol class="choices">
+<li>A 소유의 부동산을 B에게 매도한 경우 B가 가지는 소유권이전등기청구권-채권적청구권</li>
+<li>A 소유의 부동산에 관하여 무권리자 B가 위조 문서를 작성하여 B 명의로 소유권이전등기를 한 경우 A가 가지는 말소등기청구권 - 물권적청구권</li>
+<li>토지 임대인 A가 변제기를 경과한 후 최후 2년의 차임 채권에 의하여 그 지상에 있는 임차인 B 소유의 건물을 압류한 경우 성립하는 법정 저당권 설정의 등기청구권-물권적청구권</li>
+<li>부동산 임차인 A가 임대인 B에 대하여 그 임대차 등기 절차에 협력할 것을 청구하는 등기청구권 - 물권적청구권</li>
+<li>B가 취득시효의 완성으로 A의 부동산을 시효취득하는 경우 B가 가지는 소유권이전등기청구권 - 채권적청구권</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 매매의 이행을 구하는 채권적 청구다.</li>
+<li>O · 진정 소유권의 방해 제거를 요구하는 물권적 청구다.</li>
+<li>O · 제649조의 법정저당권에 기초한 특별한 등기청구의 분류다.</li>
+<li>X · 임대차등기 협력청구는 채권적이다.</li>
+<li>O · 점유취득시효 완성의 등기청구권은 판례상 채권적이다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w45">
+<h4>워크북 045 <small>물권법_워크북_045</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">다음은 등기에 관한 판례들이다. 판례의 태도가 아닌 것은 몇 개인가? (판례의 태도가 나뉘면 다수 의견과 최근의 판례에 따름)<br>㉠ 동일 부동산에 관하여 이중으로 보존 등기가 경료된 경우, 등기의 선후에 관계없이 부동산의 실제 상황과 일치하는 보존 등기만이 효력을 가진다.<br>㉡ 동일 부동산에 관하여 이중으로 보존 등기가 경료되고 등기명의인이 동일한 경우, 먼저 한 등기가 유효하고 뒤에 한 등기는 효력이 없다.<br>㉢ 동일 부동산에 등기명의인을 달리하여 중복된 소유권보존등기가 경료된 경우에는 먼저 이루어진 소유권보존등기가 원인 무효가 되지 않는 한, 뒤에 된 소유권보존등기는 비록 그 부동산의 매수인에 의하여 이루어진 경우라 하더라도 무효이다.<br>㉣ 동일 부동산에 관하여 중복된 소유권보존등기에 터 잡아 등기명의인을 달리하는 각 소유권이전등기가 경료된 경우에 등기의 효력은 소유권이전등기의 선후에 의하여 판단할 것이 아니고 각 소유권이전등기의 바탕이 된 소유권보존등기의 선후를 기준으로 판단하여야 하며, 그 이전등기가 멸실 회복으로 인한 이전등기라 하여 달리 볼 것은 아니다.<br>㉤ 동일 부동산에 관하여 하나의 소유권보존등기가 경료된 후 이를 바탕으로 순차로 소유권이전등기가 경료되었다가 그 등기부가 멸실된 후 등기명의인을 달리하는 소유권이전등기의 각 회복등기가 중복하여 이루어진 경우에는 중복등기의 문제로서 멸실 전 먼저 된 소유권이전등기가 잘못 회복 등재된 것이라 하더라도 그 회복등기 때문에 나중된 소유권이전등기의 회복등기는 무효이다.<br>㉥ 동일 부동산에 관하여 등기명의인을 달리하여 멸실 회복에 의한 각 소유권이전등기가 중복 등재되고 각 그 바탕이 된 소유권보존등기가 동일 등기인지 중복등기인지, 중복등기라면 각 소유권보존등기가 언제 이루어졌는지가 불명인 경우에는 위 법리로는 중복등기의 해소가 불가능하므로 이러한 경우에는 적법하게 경료된 것으로 추정되는 각 회복등기 상호 간에는 각 회복등기 일자의 선후를 기준으로 우열을 가려야한다.</p>
+<ol class="choices">
+<li>1개</li>
+<li>2개</li>
+<li>3개</li>
+<li>4개</li>
+<li>5개</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<p class="parts-note">개별 명제: ㉠ 조건부 O(실제 부동산과 동일성 없는 등기와의 비교라는 원판례 전제가 필요. 일반 중복등기 법리로는 부정확) / ㉡ O / ㉢ O / ㉣ O(원보존등기 선후 확인 가능 전제) / ㉤ X(같은 원등기에서 이어진 이전등기의 회복 문제를 후보존 무효 법리와 혼동) / ㉥ O(원등기 관계가 불명한 유형). JSON은 ㉤ 하나만 틀린 것으로 정답 ①을 제시한다. ㉠을 문구 그대로 일반화하면 다른 문제의 중복등기 법리와 충돌하므로 전제 보완이 필요하다.</p>
+<ol class="choice-notes">
+<li>자료 정답 · 위 판례 전제를 보완하여 ㉤ 1개로 계산한 답이다. ㉠의 문구만 무조건 암기하지 않는다.</li>
+<li>자료상 오답 · ㉠을 일반 중복등기로 읽으면 2개라고 판단할 여지가 있어 문제의 전제 불충분을 함께 기록한다.</li>
+<li>X · 별도 세 명제를 틀렸다고 할 근거가 없다.</li>
+<li>X · ㉡·㉢·㉣·㉥의 판례 유형을 일괄 부정하면 안 된다.</li>
+<li>X · 원보존등기와 회복등기의 판단 기준을 나누면 다섯 개가 틀린 것이 아니다.</li>
+</ol>
+</details>
+</section>
+
+<h2>등기의 특수문제와 비법률행위에 기한 물권변동</h2>
+<section class="question-card" id="question-f12">
+<h4>형성평가 012 <small>물권법_012</small></h4>
+<p class="question-stem">중간생략등기에 관한 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>부동산등기특별조치법은  중간생략등기를 금지하고 있다.</li>
+<li>중간생략등기는 매도인과 매수인 및 전득자의 합의가 있더라도 원칙적으로 사법상 무효라고 보는 것이 판례의 일관된 태도이다.</li>
+<li>판례는 최초양도인, 중간자, 최종양수인의 합의가 없으면 최종양수인은 최초양도인으로부터 직접 소유권이전등기를 청구할 수 없다고 한다.</li>
+<li>중간생략등기란 물권변동의 실체적 과정과 등기가 불일치한 경우에 속한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 중간생략을 규제하지만 규제 위반과 사법상 당연무효는 다르다.</li>
+<li>X · 합의가 있어도 언제나 사법상 무효라는 판례 태도가 아니다.</li>
+<li>O · 직접 청구에는 원칙적으로 전원 합의가 필요하다. 대위하여 중간자 앞으로 청구하는 것과 구별.</li>
+<li>O · 실제로는 두 번 거래됐는데 등기는 한 번 건너뛰므로 과정이 일치하지 않는다. 현재 실체와 맞는지는 별도다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f13">
+<h4>형성평가 013 <small>물권법_013</small></h4>
+<p class="question-stem">재단법인의 설립에 있어서 출연재산인 부동산의 귀속시기에 관하여 타당한 설명은(판례에 따름)?</p>
+<ol class="choices">
+<li>어떠한 경우에도 민법 제186조의 규정에 의한 부동산등기를 완료한 때이다.</li>
+<li>출연자와 법인간에는 등기 없이도 출연부동산이 법인설립과 동시에 법인에게 귀속되나, 법인이 취득한 부동산을 가지고 제3자에게 대항하려면 제186조에 따라 등기하여야 한다.</li>
+<li>어떠한 경우에도 법인이 설립한 때에 출연재산이 재단에 귀속된다.</li>
+<li>어떠한 경우에도 등기를 필요로 하지 않고 민법 제48조의 규정에 의한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X · 출연자와 법인 사이의 내부 귀속까지 언제나 등기가 필요하다고 한정할 수 없다.</li>
+<li>정답 · 내부 귀속과 제3자에 대한 공시를 나누는 판례다.</li>
+<li>X · 법인 성립만으로 제3자에게도 항상 대항하는 것은 아니다. 유언 출연의 시점도 구별한다.</li>
+<li>X · 제48조가 부동산의 제3자 관계에서 등기를 모두 없애는 것은 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f14">
+<h4>형성평가 014 <small>물권법_014</small></h4>
+<p class="question-stem">다음은 민법 제187조의 법률규정에 의한 부동산물권변동과 관련된 기술이다. 타당한 것은?</p>
+<ol class="choices">
+<li>부동산물권취득의 원인이 되는 채권채무가 법률의 규정에 의하여 발생하는 모든 경우에도 등기를 요하지 아니한다.</li>
+<li>법원의 경락허가결정을 원인으로 한 소유권이전등기가 중복등기로서 무효라 하더라도, 경락인은 대금지급기일에 대금을 완납하면, 확정적으로 경락부동산에 대한 소유권을 취득한다.</li>
+<li>토지수용을 한 기업자는 종전 물권자의 권리를 등기 없이도 승계취득한다.</li>
+<li>법률의 규정에 의하여 등기 없이 취득한 물권은 등기하지 않으면 법률상 처분은 물론이고 사실상 처분도 하지 못한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X · 법정 배상채무를 토지로 대물변제하더라도 물권변동 원인은 별도 법률행위이므로 등기가 필요하다.</li>
+<li>정답 · 유효한 법정 경매를 전제로 대금 완납이 취득 시점이다. 촉탁등기의 흠과 취득 원인을 구별.</li>
+<li>X · 수용은 원시취득이다. 승계라는 단어가 함정이다.</li>
+<li>X · 제187조 단서는 법률상 처분에 관한 제한이다. 수선 같은 사실상 처분까지 전면 금지하지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f15">
+<h4>형성평가 015 <small>물권법_015</small></h4>
+<p class="question-stem">등기의 유효성에 관한 설명 중 타당하지 않은 것은?</p>
+<ol class="choices">
+<li>미등기부동산이 전전매매이전된 경우 최후의 매수인이 소유권이전등기를 하지 않고 소유권보존등기를 하여도 그 소유권보존등기는 유효하다.</li>
+<li>구거(溝渠)를 농지로서 일반농지소유권이전등기에관한특별조치법에 의하여 등기한 경우에도 그 등기가 실체법상의 권리관계에 부합하면 유효하다.</li>
+<li>위조된 등기신청서류에 의하여 경료된 소유권이전등기는 그 등기가 실체적 권리관계에 부합하더라도 유효한 등기라 할 수 없다.</li>
+<li>중간생략의 합의 없이 경료된 등기라도 매매가 적법하게 성립되어 이행된 경우에는 그 등기의 말소를 청구할 수 없다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>O · 앞선 등기가 없는 미등기 부동산에서 실체관계에 부합하는 보존등기라는 전제다. 유효한 선등기가 있는 중복등기와 다르다.</li>
+<li>O · 적용 절차의 흠과 현재 소유관계 부합을 구별하는 옛 판례다. 해당 특별법이 지금 모든 거래에 적용된다는 뜻은 아니다.</li>
+<li>X · 실체관계에 부합한다면 신청서류의 위조만으로 언제나 무효라고 할 수 없다. 실제 이전 합의도 없는 위조등기와 구별.</li>
+<li>O · 이미 완료된 등기의 실체 부합을 본다. 아직 직접 청구할 때 필요한 합의와 다른 질문이다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w46">
+<h4>워크북 046 <small>물권법_워크북_046</small></h4>
+<p class="question-stem">중간생략등기에 관한 설명 중 판례의 태도와 다른 것은?</p>
+<ol class="choices">
+<li>중간생략등기를 금지하는 부동산등기특별조치법 제2조는 그 것을 위반하는 행위에 대한 처벌 규정에도 불구하고, 순차 매매한 당사자 사이의 중간생략등기 합의에 관한 사법상 효력까지 무효로 하는 것은 아니다.</li>
+<li>최초 양도인과 중간자의 동의가 있는 외에 최초 양도인과 최종 양수인 사이에도 중간생략등기의 합의가 있으면 최종 양수인은 최초 양도인에 대하여 직접 그 소유권이전등기청구권을 행사할 수 있다</li>
+<li>중간생략등기의 합의가 없는 경우 부동산의 최종 매수인은 중간자를 대위하여도 최초 양도인에 대하여 직접 자기 앞으로의 소유권이전등기를 구할 수 없다.</li>
+<li>당사자 사이에 적법한 등기 원인이 성립되어 중간생략등기가 이루어진 경우에는 그 중간생략등기에 관한 합의가 없었음을 이유로 그 등기의 말소 청구를 할 수 없다.</li>
+<li>국토 이용 관리법상 허가 구역 내에 있는 토지에 관한 매매계약에 있어서 최종 매수인이 최초 매도인을 매매 당사자로 하는 토지 거래 허가를 받아 최종 매수인 앞으로 소유권이전등기를 경료한 경우에 중간생략등기의 합의가 있었다면 이 등기는 유효하다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 형사·행정 규제와 사법상 효력은 별개다.</li>
+<li>O · 당사자 전원 합의가 있으면 직접청구 근거가 된다.</li>
+<li>O · 대위청구는 중간자 명의로의 이행을 구하는 것이며 자동으로 자기 명의 직접이전이 되지 않는다.</li>
+<li>O · 완료된 등기의 실체 부합을 본다.</li>
+<li>X · 실제 거래를 숨긴 허가 우회를 중간생략 합의만으로 유효하게 만들 수 없다. 원문의 국토이용관리법은 옛 법률명이며 현행 토지거래허가 체계와 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w47">
+<h4>워크북 047 <small>물권법_워크북_047</small></h4>
+<p class="question-stem">X 토지는 甲 - 乙 - 丙으로 순차 매도되고, 제3자 간에 중간생략등기의 합의를 하였다. 이에 대한 설명으로 틀린 것은? (다툼이 있으면 판례에 의함)</p>
+<ol class="choices">
+<li>丙은 甲에게 직접 소유권이전등기를 청구할 수 있다.</li>
+<li>乙의 甲에 대한 소유권이전등기청구권은 소멸하지 않는다</li>
+<li>甲의 乙에 대한 매매 대금 채권의 행사는 제한 받지 않는다</li>
+<li>만약 X 토지가 토지 거래 허가 구역에 소재한다면, 丙은 직접 甲에게 허가 신청 절차의 협력을 구할 수 없다</li>
+<li>만약 중간생략등기의 합의가 없다면, 丙은 甲의 동의나 승낙 없이 乙의 소유권이전등기청구권을 양도 받아 甲에게 소유권이전등기를 청구할 수 있다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 전원 합의라는 사실이 직접청구의 근거다.</li>
+<li>O · 중간생략 합의만으로 乙의 원래 청구권이 당연히 소멸하지 않는다.</li>
+<li>O · 매도인의 원래 대금채권이 자동 소멸·제한되는 합의는 아니다.</li>
+<li>O · 실제 각 매매의 토지거래허가 문제를 중간생략 합의로 우회하지 못한다.</li>
+<li>X · 매매에 따른 이전등기청구권 양도에는 매도인의 동의·승낙을 요구하는 판례를 적용한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w48">
+<h4>워크북 048 <small>물권법_워크북_048</small></h4>
+<p class="question-stem">甲은 자신이 소유하는 건물을 乙에게 매도한 뒤 인도하였고, 乙은 이를 다시 丙에게 매도한 뒤 인도하였다. 이에 관한 설명으로 옳은 것은?</p>
+<ol class="choices">
+<li>乙이 무자력이 아닌 경우 丙은 乙의 甲에 대한 이전등기청구권을 대위 행사할 수 없다.</li>
+<li>甲, 乙, 丙 전원의 합의가 없더라도, 丙은 甲에게 직접 이전등기를 청구할 수 있다.</li>
+<li>甲에서 직접 丙에게 이전등기하는 것에 관해 甲, 乙, 丙 전원의 합의가 있었으나, 甲과 乙 사이의 매매가 적법하게 합의 해제된 경우, 甲은 丙의 이전등기청구를 거절할 수 없다</li>
+<li>甲에서 丙으로 직접 이전등기가 된 경우, 乙과 丙이 대금을 완제했더라도 甲은 중간생략등기의 합의가 없다는 이유로 丙 명의의 등기의 말소를 청구할 수 있다.</li>
+<li>만약 乙이 甲으로부터 丙으로 이전등기하는 것에 동의했더라도, 乙은 甲에 대한 이전 등기청구권을 잃지 않는다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>X · 특정채권 보전을 위한 등기청구 대위에서는 무자력을 반드시 요구하는 일반 금전채권 대위와 다르다.</li>
+<li>X · 합의 등 직접청구 근거가 필요하다.</li>
+<li>X · 원래 매매의 적법한 합의해제 등 항변을 배제하는 것은 아니다. 丙의 보호받을 별도 지위도 따져야 한다.</li>
+<li>X · 적법한 거래·실체관계에 부합하여 이미 완료된 등기는 합의가 없었다는 이유만으로 말소하지 못한다.</li>
+<li>정답 · 생략에 동의했어도 乙의 원래 이전등기청구권은 당연히 소멸하지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w49">
+<h4>워크북 049 <small>물권법_워크북_049</small></h4>
+<p class="question-stem">甲은 乙로부터 부동산을 매수하여 소유권이전등기에 필요한 모든 서류를 넘겨받았으나, 아직 이전등기를 하지 않고 있다. 이에 관한 설명으로 옳지 않은 것은? (다수설· 판례에 의함)</p>
+<ol class="choices">
+<li>목적 부동산의 매매계약을 체결할 당시에, 乙은 甲에게 목적 부동산의 소유권이전등기에 필요한 서류 일체를 넘겨주었다 하더라도 乙은 매도인으로서 등기 이전에 협력할 의무를 진다.</li>
+<li>甲이 乙에 대하여 행사하는 목적 부동산에 대한 등기청구권은 채권적청구권으로서 원칙적으로 10년의 소멸시효에 걸린다.</li>
+<li>판례는 甲이 목적 부동산을 인도받아 점유하고 있는 경우에는 등기청구권의 소멸시효가 진행되지 않는다고 본다.</li>
+<li>甲의 등기청구권의 소멸시효가 완성된 경우, 乙이 재판 절차에서 그 주장을 하지 않으면, 법원은 등기청구권의 소멸시효완성을 직권으로 탐지하지 않는다.</li>
+<li>판례에 의하면, 목적 부동산을 점유하고 있던 甲이 다른 사람에게 그 부동산을 처분하고 그 점유를 승계하여 준 경우 점유의 상실로 인하여 그 시점으로부터 등기청구권의 소멸시효는 진행된다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 서류 교부만으로 등기협력의무가 항상 완전히 끝나는 것은 아니다.</li>
+<li>O · 계약에 기초한 채권적 청구로 원칙 10년이다.</li>
+<li>O · 인도받아 계속 점유·사용하는 매수인에 대한 시효 예외다.</li>
+<li>O · 소멸시효의 이익을 받을 당사자의 주장을 필요로 하는 문제다.</li>
+<li>X · 매수인의 전매·점유 승계는 적극적인 권리행사이므로 단순 점유상실과 같이 시효가 진행한다고 할 수 없다. 취득시효 완성자의 경우와 구별.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w50">
+<h4>워크북 050 <small>물권법_워크북_050</small></h4>
+<p class="question-stem">미등기 건물에 관한 설명 중 옳은 것을 모두 고른 것은? (다툼이 있는 경우 판례에 의함)<br>㉠ 타인의 토지 위에 있는 미등기 건물을 법률상, 사실상 처분할 수 있는 지위에 있는 사람은 그 대지에 대한 적법한 점유권원이 없다면 대지 소유자에 대하여 그 미등기 건물을 철거할 의무가 있다.<br>㉡ 미등기 무허가 건물을 매수하였으나 아직 인도받지 않고, 소유권이전등기를 마치지 않은 매수인은 그 건물의 불법 점유자에 대하여 직접 자신의 소유권에 기한 건물 반환을 청구할 수 있다.<br>㉢ 주택으로 사용되는 건물에 관하여 소유권보존등기가 이루어지지 않은 경우에도, 특별한 사정이 없는 한 주택 임대차 보호법이 적용된다.<br>㉣ 건물 소유를 목적으로 하는 토지 임대차에서 종전 임차인으로부터 미등기 무허가 건물을 매수하여 점유하고 있는 토지 임차인은, 특별한 사정이 없는 한 비록 소유자로서의 등기 명의가 없어 건물 소유권을 취득하지 못하였다 하더라도 임대인에 대하여 지상물매수청구권을 행사할 수 있는 지위에 있다.</p>
+<ol class="choices">
+<li>㉠</li>
+<li>㉡, ㉢</li>
+<li>㉡, ㉣</li>
+<li>㉢, ㉣</li>
+<li>㉠, ㉢, ㉣</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<p class="parts-note">개별 명제: ㉠ O(법률상·사실상 처분 가능자의 철거의무) / ㉡ X(미등기 매수인은 아직 소유자 아님) / ㉢ O(주거용 건물의 실질) / ㉣ O(요건 아래 지상물매수청구권 인정).</p>
+<ol class="choice-notes">
+<li>X · 옳은 ㉢·㉣이 빠졌다.</li>
+<li>X · 틀린 ㉡을 포함하고 ㉠·㉣을 빠뜨렸다.</li>
+<li>X · 틀린 ㉡을 포함하고 ㉠·㉢을 빠뜨렸다.</li>
+<li>X · 옳은 ㉠을 빠뜨렸다.</li>
+<li>정답 · ㉠·㉢·㉣이다. 소유권 미취득과 법이 인정하는 다른 지위를 구별.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w51">
+<h4>워크북 051 <small>물권법_워크북_051</small></h4>
+<p class="question-stem">乙은 2005.1.10. 甲 소유의 X 토지를 매수하고 대금을 지급한 후 X 토지를 인도받았으나 소유권이전등기는 마치지 않았다. 乙은 2015.12.31. X 토지를 다시 丙에게 매도하였고, 2019.2.16. 현재까지 丙 역시 미등기 상태로 X 토지를 점유하고 있다. 이에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 의함)</p>
+<ol class="choices">
+<li>甲은 丙에게 소유권에 기하여 X 토지의 반환을 청구할 수 없다</li>
+<li>乙의 甲에 대한 소유권이전등기청구권의 소멸시효는 진행되지 않는다</li>
+<li>丙은 乙의 甲에 대한 소유권이전등기청구권을 대위하여 행사할 수 있다</li>
+<li>甲은 丙에 대해 불법 점유를 이유로 임료 상당의 부당이득 반환을 청구할 수 없다.</li>
+<li>X 토지를 제3자가 불법 점유하고 있다면, 丙은 제3자에 대하여 소유권에 기한 물권적청구권을 행사할 수 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 적법한 전매·인도 경위로 점유하는 丙에게 매도인 甲이 단순 소유권만으로 반환을 요구할 수 없는 관계다.</li>
+<li>O · 인도받은 매수인의 전매는 적극적 권리행사다.</li>
+<li>O · 필요한 요건 아래 乙의 청구권을 대위할 수 있다. 甲→乙 청구와 직접 甲→丙 청구를 구별.</li>
+<li>O · 계약·전매에 따라 정당화되는 점유를 불법점유라고 하여 임료 부당이득을 구할 수 없다.</li>
+<li>X · 丙은 아직 소유자가 아니므로 자기 소유권에 기한 청구는 못 한다. 점유보호·대위 등 다른 근거는 별도.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w52">
+<h4>워크북 052 <small>물권법_워크북_052</small></h4>
+<p class="question-stem">법률행위에 의하지 않은 부동산물권의 변동에 관한 설명으로 틀린 것은? (다툼이 있으면 판례에 의함)</p>
+<ol class="choices">
+<li>관습법상 법정지상권은 설정 등기 없이 취득한다.</li>
+<li>이행 판결에 기한 부동산물권의 변동 시기는 확정 판결 시이다.</li>
+<li>상속인은 등기 없이 상속 받은 부동산의 소유권을 취득한다.</li>
+<li>경매로 인한 부동산 소유권의 취득 시기는 매각 대금을 완납한 때이다</li>
+<li>건물의 신축에 의한 소유권 취득은 소유권보존등기를 필요로 하지 않는다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 관습법상 요건에 따라 성립하며 최초 취득에 설정등기가 필요하지 않다.</li>
+<li>X · 이행판결은 등기하라는 명령이다. 소유권은 실제 등기로 변동한다.</li>
+<li>O · 상속개시로 취득한다.</li>
+<li>O · 법정 경매의 매각대금 완납이 기준이다.</li>
+<li>O · 건물 신축은 원시취득이다. 이후 처분을 위한 등기는 별도.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w53">
+<h4>워크북 053 <small>물권법_워크북_053</small></h4>
+<p class="question-stem">등기하여야 물권변동의 효력이 발생하는 것은?</p>
+<ol class="choices">
+<li>신축 건물의 소유권 취득</li>
+<li>관습법상 법정지상권의 취득</li>
+<li>증여에 의한 소유권의 취득</li>
+<li>분배 농지의 상환 완료에 의한 소유권 취득</li>
+<li>법률행위의 취소에 의한 물권의 복귀</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>X · 신축의 원시취득에는 등기가 성립요건이 아니다.</li>
+<li>X · 요건 충족에 따른 관습법상 취득이다.</li>
+<li>정답 · 증여는 법률행위이므로 제186조의 등기가 필요하다.</li>
+<li>X · 농지개혁 관련 옛 특별법의 법정 취득 유형이다. 현재 모든 농지 매매에 적용하지 않는다.</li>
+<li>X · 판례의 취소에 따른 물권 복귀를 묻는다. 별도 제3자 보호는 확인한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w54">
+<h4>워크북 054 <small>물권법_워크북_054</small></h4>
+<p class="question-stem">다음 중 판례에 의할 때 등기를 요하는 것은?</p>
+<ol class="choices">
+<li>출연자와 재단법인 간의 관계에 있어서 출연 부동산 소유권의 재단법인에의 귀속</li>
+<li>해제 조건의 성취에 따른 부동산 소유권의 복귀</li>
+<li>국유 임야의 불하에 의한 소유권 취득</li>
+<li>매매계약의 합의 해제에 따른 부동산 소유권의 복귀</li>
+<li>법정지상권이 있는 건물이 경매된 경우, 경락 매수인의 법정지상권 취득</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>X · 출연자·법인 내부 귀속은 제48조를 적용한다. 제3자에게 주장할 때 등기가 필요하다.</li>
+<li>X · 해제조건 성취로 권리가 복귀하는 법률효과를 묻는다. 제3자 보호 등은 별도.</li>
+<li>정답 · 국유 임야 불하는 계약에 따른 취득으로 원칙적으로 등기가 필요하다. 국가가 관여하면 모두 수용이 되는 것은 아니다.</li>
+<li>X · 합의해제에 따른 복귀의 판례 법리를 묻는다. 제3자 관계는 별도 검토.</li>
+<li>X · 건물 경매와 법정지상권의 수반취득에 관한 판례 유형이다. 법정지상권의 일반적인 임의양도와 구별.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w55">
+<h4>워크북 055 <small>물권법_워크북_055</small></h4>
+<p class="question-stem">A로부터 신축 중인 건물을 겨우 기초 공사만 한 상태에서 매수한 B는 건물을 완성하였는데, 미등기인 동안에 A가 자기 명의로 보존 등기를 한 후, 다시 C에게 매도하여 C에게 이전등기를 완료하여 주었다. 이 경우 A, B, C의 주장 중 타당한 것은?</p>
+<ol class="choices">
+<li>A는 보존 등기를 B보다 먼저 마쳤으므로 소유권을 주장할 수 있다.</li>
+<li>A는 물권변동의 형식주의에 입각하여 등기함으로써 소유권을 취득한다.</li>
+<li>C는 선의로 A로부터 양도 받아 이전등기를 마친 것이므로 선의의 제3자로서 B에게 대항할 수 있다</li>
+<li>C는 선 · 악의에 관계없이 물권변동의 요건을 갖춘 것이므로 소유권을 취득한다.</li>
+<li>B는 A ·C의 등기, 선 · 악의 등에 관계없이 건물의 소유권을 취득한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>X · 원시취득자는 B이므로 A의 보존등기가 먼저라는 이유만으로 A 소유가 되지 않는다.</li>
+<li>X · 형식주의는 실체 없는 등기까지 유효하게 만드는 원칙이 아니다.</li>
+<li>X · 부동산 등기의 공신력은 없다. C의 선의만으로 B에게 이길 수 없다.</li>
+<li>X · 등기만 있고 유효한 처분권이 없는 문제가 남는다.</li>
+<li>정답 · 아직 독립 건물 아닌 기초공사 단계에서 사서 완성한 B가 원시취득하는 사실관계다. 완성 당시 합의 등 다른 귀속 사정이 없는 전제.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w56">
+<h4>워크북 056 <small>물권법_워크북_056</small></h4>
+<p class="question-stem">다음 중 C가 토지 소유권을 아직 취득하지 못한다고 보아야 할 경우는?</p>
+<ol class="choices">
+<li>A 소유 부동산에 관하여 저당권자 B가 임의경매를 실행한 경우 경락대금은 완납하였으나 소유권이전등기를 경료 받지 아니한 경락 매수인 C</li>
+<li>A가 B에 대한 채무의 담보로 자기 소유 부동산에 관하여 양도담보로 소유권이전등기를 해 준 경우 위 채무의 변제기 이전에 담보 부동산을 B로부터 매수하여 이전등기를 받은 C</li>
+<li>A가 피상속인 B로부터 상속한 부동산에 관하여 상속 등기를 하지 않고 매도한 경우, 위 부동산을 매수하여 소유의 의사로 20년 간 평온 · 공연하게 점유한 매수인 C</li>
+<li>A가 그 소유의 부동산을 B에게 매도하여 이전등기 서류 일체를 교부한 경우 위 부동산을 A로부터 이중으로 매수하여 소유권이전등기를 받은 매수인 C</li>
+<li>A가 그 소유 부동산을 B에게 명의신탁하여 매매 형식의 이전등기를 하였는데 B가 위 수탁 재산을 임의 처분하지 않겠다는 A와의 약속을 위반하여 매도한 경우, 이를 매수하여 이전등기를 받은 C</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>X(이미 취득) · 법정 경매 대금 완납으로 취득한다.</li>
+<li>X(자료 전제상 취득) · 양도담보권자의 제3자 처분 문제다. 가등기담보법 적용 여부, 제3자의 보호 요건을 추가 확인해야 한다. 변제기 전이라는 사정만으로 C의 취득을 일괄 부정하지 않는다.</li>
+<li>정답 · 매매에 따른 이전등기나 점유취득시효의 등기를 하지 않았다. 20년 점유만으로 소유권을 취득하지 못한다.</li>
+<li>X(이미 취득 가능) · B가 서류만 받고 미등기인 사이 C가 유효한 매매와 등기를 마쳤다. 배임행위 적극가담 같은 특별한 무효 사유는 별도.</li>
+<li>X(이미 취득 가능) · 명의신탁 무효와 제3자 보호 규율을 확인한다. 단순히 내부 처분금지 약속 위반이라는 이유만으로 C의 취득이 부정되는 것은 아니다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w70">
+<h4>워크북 070 <small>물권법_워크북_070</small></h4>
+<p class="question-stem">X 토지에 관하여 甲 명의의 1996.5.1. 자 소유권보존등기와 乙 명의의 1999.5.1. 자 소유권보존등기가 각각 마쳐져 있다. 단, 甲 명의 소유권보존등기의 원인 무효 사유는 없다. 이에 관한 설명 중 옳은 것(O)과 옳지 않은 것(X)을 올바르게 조합한 것은? (다툼이 있는 경우 판례에 의함)<br>㉠ 乙이 甲으로부터 X 토지를 매수하고 위 소유권보존등기를 마친 것이라면 乙 명의의 위 등기가 유효하므로 乙은 甲 명의 등기의 말소를 청구할 수 있다.<br>㉡ X 토지에 관하여 乙의 점유취득시효가 완성된 경우에는 乙 명의의 위 소유권보존등기가 실체관계에 부합하게 되므로 乙은 甲 명의 등기의 말소를 청구할 수 있다.<br>㉢ 乙이 丙에게 위 X 토지를 매도하고 소유권이전등기를 마쳐 준 후 丙의 등기부취득시효가 완성되었더라도 甲은 丙 명의 등기의 말소를 청구할 수 있다.</p>
+<ol class="choices">
+<li>㉠ X / ㉡ X / ㉢ O</li>
+<li>㉠ X / ㉡ O / ㉢ X</li>
+<li>㉠ X / ㉡ O / ㉢ O</li>
+<li>㉠ O / ㉡ X / ㉢ X</li>
+<li>㉠ O / ㉡ O / ㉢ X</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<p class="parts-note">개별 명제: ㉠ X(유효한 선보존등기가 있는 한 후중복 무효) / ㉡ X(점유취득시효 완성만으로 후등기를 살리지 못함) / ㉢ O(후중복등기 계열로 등기부취득시효를 주장할 수 없음). ㉢의 ‘완성되었더라도’는 실제 법적 완성을 인정하는 것이 아니라 기간 등을 충족했다는 가정을 배척하는 취지다.</p>
+<ol class="choice-notes">
+<li>정답 · X / X / O. 오래 지났다는 사실만으로 중복등기 문제를 해결하지 못한다.</li>
+<li>X · ㉡과 ㉢의 판정을 뒤집었다.</li>
+<li>X · ㉡을 잘못 O로 판정했다.</li>
+<li>X · ㉠과 ㉢의 판정을 잘못했다.</li>
+<li>X · ㉠·㉡·㉢ 모두 판정이 다르다.</li>
+</ol>
+</details>
+</section>
+
+<h2>동산물권등의 변동과 물권의 소멸</h2>
+<section class="question-card" id="question-f16">
+<h4>형성평가 016 <small>물권법_016</small></h4>
+<p class="question-stem">동산물권변동에 관한 다음 설명 중 잘못된 것은?</p>
+<ol class="choices">
+<li>법률행위에 의한 동산의 물권변동을 위해서는 물권행위와 공시방법으로서의 인도를 갖추어야 하며, 이때 동산의 물권변동이라 함은 동산의 소유권변동만을 의미한다.</li>
+<li>공시방법으로서의 인도에는 현실의 인도 외에 간이인도,점유개정,목적물반환청구권의 양도에 의한 방법이 있다.</li>
+<li>동산물권의 공시방법인 점유에는 공신력이 인정된다.</li>
+<li>법률의 규정에 의한 동산의 물권변동은 물권행위와 공시방법으로서의 인도를 갖추어야 한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O(문맥 한정) · 제188\~190조의 소유권 양도 규율을 말한다. 점유권·유치권·질권이 동산물권이 아니라는 뜻은 아니고 각각 특별 규율을 따른다.</li>
+<li>O · 현실·간이·점유개정·반환청구권 양도의 네 가지다.</li>
+<li>O(조건부) · 제249조 요건에 따른 공신력이다. 점유만 있으면 무조건 권리 취득은 아니다.</li>
+<li>X · 법률규정에 의한 취득은 개별 조문 요건에 따른다. 상속 등에 다시 양도행위와 인도를 요구하지 않는다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f17">
+<h4>형성평가 017 <small>물권법_017</small></h4>
+<p class="question-stem">선의취득에 관한 내용 중 판례의 태도와 다른 것은?</p>
+<ol class="choices">
+<li>선의취득은 점유인도를 물권변동의 요건으로 하는 동산의 소유권취득에 관한 규정으로서 저당권의 취득에는 적용될 수 없다.</li>
+<li>동산의 선의취득은 양도인이 무권리자라고 하는 점을 제외하고는 아무런 흠이 없는 거래행위이어야 성립한다.</li>
+<li>동산질권을 선위취득하기 위하여는 질권자가 평온, 공연하게 선의이며 과실없이 질권의 목적동산을 취득하여야 하고, 그 취득자의 선의, 무과실은 동산질권자가 입증하여야 한다.</li>
+<li>무허가 건물을 자진 철거하는 시민들을 위하여 건립하는 연립주택의 입주권이라고 하더라도  선의취득의 대상이 될 수 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 저당권은 민법 제249조·제343조의 동산 소유권·질권 선의취득과 다르다.</li>
+<li>O · 소유권·처분권 흠결 외에는 유효한 거래여야 한다. 무권대리 자체를 치유하는 제도가 아니다.</li>
+<li>O · 질권에 관한 80다2910 판결의 증명책임이다. 선의 추정 일반론을 무조건 붙이지 않는다.</li>
+<li>X · 입주권은 여기서 말하는 동산 소유권·질권의 객체가 아니다. 물건과 채권적 지위를 구별.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f18">
+<h4>형성평가 018 <small>물권법_018</small></h4>
+<p class="question-stem">민법 제250조 도품,유실물에 관한 선의취득에 관하여 틀린 것은?</p>
+<ol class="choices">
+<li>질권자는 도난 당한 질물의 반환청구를 할 수 없다.</li>
+<li>임차인도 도난 당한 질물의 반환청구를 할 수 있다.</li>
+<li>다수설은 도품이 유통된 경우 현재 점유하고 있는 자가 반환의무자라고 한다.</li>
+<li>피해자나 유실자가 반환을 청구할 수 있는 2년 동안의 도품․유실물에 대한 소유권은 선의취득자에게 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>X · 질권자도 정당하게 점유하던 질물을 도난당한 피해자로서 반환청구를 할 수 있다.</li>
+<li>O · 임차인처럼 정당한 점유자도 피해자가 될 수 있다. 원문의 ‘질물’ 표현은 임차물 등으로 문맥을 보완한다.</li>
+<li>O · 현재 물건을 점유한 사람을 상대로 반환을 요구한다. 최초 도둑에게만 청구하는 것이 아니다.</li>
+<li>O(문제의 다수설 전제) · 즉시 취득 후 특별한 반환청구로 조정하는 설명이다. 다른 학설과 구별하고 2년간 반환 가능이라는 실무적 결론을 우선 기억한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-f19">
+<h4>형성평가 019 <small>물권법_019</small></h4>
+<p class="question-stem">물권에 공통된 소멸원인이 아닌 것은?</p>
+<ol class="choices">
+<li>혼동</li>
+<li>선점</li>
+<li>소멸시효</li>
+<li>포기</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>오답 · 혼동은 공통 소멸 원인 중 하나다. 다만 점유권 등 예외가 있다.</li>
+<li>정답 · 선점은 무주 동산의 취득 원인이지 소멸 원인이 아니다.</li>
+<li>오답 · 일부 재산권의 소멸 원인이다. 소유권·점유권·유치권까지 전부 시효소멸한다는 뜻은 아니다.</li>
+<li>오답 · 권리 포기는 소멸 원인이다. 필요한 등기와 제3자 동의 등 제한을 확인한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w57">
+<h4>워크북 057 <small>물권법_워크북_057</small></h4>
+<p class="question-stem">민법 제249조에 의한 선의취득에 관한 다음 설명 중 틀린 것은?</p>
+<ol class="choices">
+<li>남에게서 빌려 온 책을 매도인 본인의 것인 줄 알고 매수하면 선의취득이 성립된다.</li>
+<li>타인의 산림을 자기의 것으로 오신하고 벌채하여 입목을 취득하는 경우에는 선의취득의 적용을 받지 아니한다.</li>
+<li>무기명채권도 선의취득을 할 수 있다</li>
+<li>선의취득은 특정 승계 취득의 경우에만 인정된다.</li>
+<li>선의취득은 그 성질상 부동산에 관하여 인정되지 아니한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 3번</p>
+<ol class="choice-notes">
+<li>O(요건 보완) · 빌린 물건도 무권리자 점유의 대상이 된다. 다만 선의뿐 아니라 무과실·인도 등 모든 요건이 필요하다.</li>
+<li>O · 스스로 남의 나무를 베는 것은 양도인과의 유효한 거래에 의한 취득이 아니다.</li>
+<li>X(제249조 문맥) · 무기명채권은 제514조·제524조 등 별도 증권 규율 문제다. 모든 선의취득 제도 자체가 없다는 말로 외우면 안 된다.</li>
+<li>O(표현 주의) · 상속 같은 포괄승계가 아니라 개별 거래에 의한 취득을 말한다. 선의취득의 법적 성질은 원시취득이다.</li>
+<li>O · 제249조는 동산 규정이다. 부동산 제3자 보호 조문과 구별한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w58">
+<h4>워크북 058 <small>물권법_워크북_058</small></h4>
+<p class="question-stem">선의취득에 관한 다음 기술 중 옳지 않은 것은? (다툼이 있으면 다수설에 의함)</p>
+<ol class="choices">
+<li>선의취득은 특정 승계 취득의 경우에만 인정된다.</li>
+<li>선의취득에 필요한 점유는 현실의 인도뿐만 아니라 점유개정에 의한 점유 취득으로도 족하다</li>
+<li>양도인이 점유자이어야 하는데, 이 경우의 점유는 직접점유이든 간접점유이든 이를 묻지 않는다.</li>
+<li>취득자는 진실한 원 권리자에 대하여 부당이득 반환의 의무를 부담하지 않는다.</li>
+<li>도품 · 유실물에 관한 특례의 적용을 받는 것은 동산에 한한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O(표현 보완) · 개별 거래에 의한 취득이라는 뜻이며, 효과의 법적 성질은 원시취득이다.</li>
+<li>X · 점유개정만으로는 선의취득하지 못한다. 일반 소유권 이전의 효력과 구별.</li>
+<li>O · 반환청구권 양도 유형처럼 간접점유도 출발점이 될 수 있다.</li>
+<li>O(통상 거래 전제) · 적법한 선의취득을 부당이득으로 되돌리면 거래안전 보호가 무의미해진다. 무상취득의 학설상 논의는 별도.</li>
+<li>O · 제250·251조는 동산의 도품·유실물 특칙이다. 금전 제외도 확인.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w59">
+<h4>워크북 059 <small>물권법_워크북_059</small></h4>
+<p class="question-stem">동산의 선의취득에 관한 다음의 설명 중 옳은 것은?</p>
+<ol class="choices">
+<li>선의취득은 점유의 취득이 평온 · 공연하고 선의 · 무과실일 것을 요한다. 이것은 점유의 개시 시 뿐만 아니라 그 이후에도 구비하고 있지 않으면 안 된다. 따라서 그 이후에 악의로 된 경우는 선의취득이 인정되지 않는다</li>
+<li>무권대리인이 처분한 경우는 처분 권한이 없는 자가 한 것이지만, 이 경우 선의취득을 인정하면 무권대리 제도가 무의미해질 것이므로 이 경우에는 선의취득은 적용되지 않는다고 하는 것이 통설이다.</li>
+<li>선의취득은 거래에 의한 동산 취득의 경우에 한해 인정되고, 경매에 의한 경우도 적용이 있는가에 대한 다툼이 있지만 판례는 경매의 경우에는 적용이 없는 것으로 하고 있다.</li>
+<li>선의취득은 동산에 대해 인정, 선박은 등기가 대항요건으로 되어 있지만, 선박도 동산이므로 역시 선의취득의 목적으로 한다</li>
+<li>점유개정에 의한 선의취득이 가능하다는 것이 통설 · 판례이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X · 취득 완성 때의 요건을 본다. 사후에 알게 되었다고 취득이 자동 소멸하지 않는다.</li>
+<li>정답 · 선의취득은 처분권 흠결을 보완할 뿐, 대리권 없는 거래의 유효성까지 보완하지 않는다.</li>
+<li>X · 동산 경매에서도 요건 아래 선의취득을 인정한다.</li>
+<li>X · 등기되는 선박은 일반 동산 선의취득과 다르게 취급된다. 특별 공시제도를 확인한다.</li>
+<li>X · 통설·판례는 점유개정만에 의한 선의취득을 부정한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w60">
+<h4>워크북 060 <small>물권법_워크북_060</small></h4>
+<p class="question-stem">다음 중 선의취득의 객체가 될 수 없는 것은?</p>
+<ol class="choices">
+<li>공장 저당권의 효력이 미치는 설비 동산으로서 제3 취득자에게 인도된 경우</li>
+<li>가치의 표상으로서 5만 원 권 1 장</li>
+<li>타인의 질권의 목적인 일반 동산</li>
+<li>입목에 관한 법률에 의하여 등기된 입목이 토지로부터 분리된 경우</li>
+<li>미등록의 자동차</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X(객체 가능) · 설비가 독립 동산으로 인도된 상태에서 특별법과 선의취득 요건을 따진다.</li>
+<li>정답 · 보통의 금전은 가치의 표상으로서 점유와 소유를 연결하는 특수 취급이다. 수집용 특정 화폐와 구별.</li>
+<li>X(객체 가능) · 타인의 질권 부담이 있는 동산도 권리관계와 선의취득을 검토할 수 있다.</li>
+<li>X(객체 가능) · 토지에서 분리되면 독립 동산이다. 서 있는 등기 입목과 다르다.</li>
+<li>X(객체 가능) · 미등록 자동차는 등록된 자동차와 구별하여 선의취득 가능성을 검토한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w61">
+<h4>워크북 061 <small>물권법_워크북_061</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">A가 자기 소유의 TV를 B에게 임대하고 있던 중 B는 사정을 모르는 C에게 매각하고 그 후에도 C로부터 계속 임차하였다. 돈이 아쉬운 B는 위 TV를 사정을 모르는 D에게 다시 매각하여 D의 승낙을 얻고 여전히 사용했다. 이 경우 법률관계로서 틀린 것은?</p>
+<ol class="choices">
+<li>선의취득의 요건으로서 점유취득은 점유개정으로 충분하다는 견해에 의하면 C는 D에 대하여 TV의 소유권을 주장할 수 있다.</li>
+<li>선의취득의 성립요건으로서 점유취득은 점유개정으로는 충분치 못하다는 견해에 의하면 C·D는 서로 간에 TV의 소유권을 주장할 수 없다.</li>
+<li>①의 견해에 의하면 B·D 간의 임대차가 종료한 경우, D의 TV 인도청구에 대하여 B는 이를 거절할 수 없다.</li>
+<li>②의 견해에 의하면 B·C 간의 임대차가 종료한 경우, C의 TV 인도청구에 대하여 B는 이를 거절할 수 없다.</li>
+<li>②의 견해에 의하면 B가 TV를 도난당한 경우에는 C·D 모두 점유회복의 소를 제기할 수 있다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 · 학습 보류</summary>
+<p class="answer-label">JSON 정답: 5번 · 단일정답 학습 및 채점 보류</p>
+<p class="parts-note">검토 보류 문항. JSON 정답은 ⑤이나, ①과 해설 사이에도 충돌이 있다. 점유개정 선의취득 긍정설을 가정하면 C가 먼저 취득하더라도 D의 후속 선의취득 가능성을 따져야 한다. 또한 소유권이 없다고 간접점유까지 부정할 수 없다. 이 문항은 점수 계산에서 제외하고 아래 쟁점을 읽자.</p>
+<ol class="choice-notes">
+<li>충돌 주의 · 긍정설에서도 D가 후속 선의취득 요건을 갖추는지 보아야 하므로 C가 항상 소유권을 주장한다는 결론은 단정하기 어렵다.</li>
+<li>원칙 설명 가능 · 판례처럼 점유개정 선의취득을 부정하면 C·D는 이 거래만으로 소유권을 얻지 않는다.</li>
+<li>전제 확인 · 가정한 긍정설과 임대차 종료에 따른 계약상 반환의무를 연결한다. 소유권과 반환채권을 분리할 것.</li>
+<li>전제 확인 · C가 소유자가 아니어도 유효한 임대차에 따른 반환채권은 있을 수 있다.</li>
+<li>자료 정답이지만 해설 보완 필요 · C·D 모두의 간접점유가 성립·존속하는지 점유매개관계를 따져야 한다. 소유권이 없다는 이유 하나로 점유회복청구를 부정하는 해설은 부정확하다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w62">
+<h4>워크북 062 <small>물권법_워크북_062</small></h4>
+<p class="question-stem">다음은 선의취득에 관한 내용이다. 옳은 것을 모두 고른 것은?<br>㉠ 자동차는 선의취득되지 않는 동산이다.<br>㉡ 물권 취득의 거래 행위가 무효 · 취소되는 경우에는 취득하지 못한다.<br>㉢ 소유권 취득에 국한하지 않고 질권도 선의취득의 대상이 되며 모두 원시 취득이다.<br>㉣ 미 분리 과실에 관하여는 선의취득이 적용될 여지가 있다.<br>㉤ 선의취득 자는 선의 · 무과실로 평온 · 공연히 점유를 취득하여야 하고, 현실인도뿐만 아니라 점유개정도 포함한다.</p>
+<ol class="choices">
+<li>㉣, ㉤</li>
+<li>㉠, ㉡, ㉢</li>
+<li>㉡, ㉤</li>
+<li>㉢, ㉣, ㉤</li>
+<li>㉠, ㉡, ㉢, ㉣</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<p class="parts-note">개별 명제: ㉠ O(등록 자동차라는 시험 전제; 미등록 자동차는 별도) / ㉡ O(거래 자체의 하자는 치유 안 됨) / ㉢ O(소유권·질권, 원시취득) / ㉣ X(미분리 상태의 부동산적 공시 문제) / ㉤ X(점유개정 제외).</p>
+<ol class="choice-notes">
+<li>X · ㉣·㉤ 모두 틀린 명제다.</li>
+<li>정답 · ㉠·㉡·㉢이다. ㉠의 등록 여부 전제를 붙여 암기.</li>
+<li>X · 틀린 ㉤을 포함하고 옳은 ㉠·㉢을 빠뜨렸다.</li>
+<li>X · ㉣·㉤의 함정에 걸린 조합이다.</li>
+<li>X · 옳은 세 명제에 틀린 ㉣을 더했다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w63">
+<h4>워크북 063 <small>물권법_워크북_063</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">해외 장기 출장으로 인해 A는 금은방을 하는 친구 B에게 자신이 소유한 고가의 시계를 보관해 달라고 부탁하였고, B는 종업원 C에게 그 시계를 타인에게 매각하는 일이 발생하지 않도록 지시하였으나, C는 B가 잠시 가게를 비운 사이에 D에게 팔아 버렸다. 다음은 이 경우의 법률관계에 대한 설명이다. 적절하지 않은 것을 모두 고르면?<br>㉠ B의 의사에 반하여 점유를 떠난 것이므로 민법 제250조의 도품에 해당한다고 보는 것이 판례의 태도이다.<br>㉡ B의 의사에 기하지 않고 점유를 떠난 물건은 유실물에 해당한다.<br>㉢ B는 점유 주로서 간접점유자이고 C는 직접점유자이다.<br>㉣ B의 매각 금지가 있었으므로 C의 행위는 대리권도 없고 표현 대리도 문제되지 않는다.<br>㉤ C의 대리권 유무와 관계없이 B에게 처분권이 없으면 D의 선의취득이 문제된다.<br>㉥ 점유 이탈 의사의 유무는 B에 관하여 결정한다.</p>
+<ol class="choices">
+<li>㉠, ㉡, ㉢</li>
+<li>㉡, ㉢, ㉣</li>
+<li>㉢, ㉣, ㉤</li>
+<li>㉣, ㉤, ㉥</li>
+<li>㉠, ㉤, ㉥</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<p class="parts-note">개별 명제: ㉠ X(점유보조자 처분을 민법 도품으로 단정 못 함) / ㉡ X(해당 사실을 유실물로 분류하지 않음) / ㉢ X(B 직접점유, C 점유보조) / ㉣·㉤은 거래의 명의·대리권 사실이 부족하여 일반화 주의 / ㉥ O(B가 점유자). JSON은 ㉣·㉤을 옳게 처리하여 ①을 정답으로 제시한다. 실제 법리에서는 무권대리 하자까지 선의취득이 치유하지 않는다는 제한이 필요하다.</p>
+<ol class="choice-notes">
+<li>자료 정답 · 분명한 오류 ㉠·㉡·㉢을 모은 출제 의도다. 대리 관련 명제의 무조건적 암기는 금지.</li>
+<li>자료상 X · 틀린 ㉠을 누락했다. ㉣은 대리 사실에 따른 보완 검토 대상이다.</li>
+<li>자료상 X · 틀린 ㉠·㉡을 누락했다. ㉣·㉤은 제한적으로 읽는다.</li>
+<li>자료상 X · 옳은 ㉥을 포함하고 핵심 오류 ㉠·㉡·㉢을 누락했다.</li>
+<li>자료상 X · 틀린 ㉡·㉢을 놓치고 옳은 ㉥을 포함했다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w64">
+<h4>워크북 064 <small>물권법_워크북_064</small></h4>
+<p class="question-stem">甲 소유의 산악자전거를 乙이 훔쳐 보관하던 중, 선의이지만 과실이 있는 丙에게 팔고 인도하였다. 며칠 후 甲은 丙이 자신의 자전거를 가지고 있는 것을 발견하여 이를 자력으로써 탈환하였다. 이에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 의함)<br>㉠ 丙은 甲에 대해 자전거의 반환을 청구할 수 있다.<br>㉡ 丙은 자전거에 대한 선의취득을 근거로 소유권을 주장할 수 있다.<br>㉢ 丙의 甲에 대한 점유의 소에서 甲은 자전거에 대한 소유권을 근거로 항변할 수 있다.<br>㉣ 甲은 탈환 행위 전에 丙에 대해 점유물반환청구권을 행사할 수 있다.</p>
+<ol class="choices">
+<li>㉠</li>
+<li>㉠, ㉡</li>
+<li>㉡, ㉢</li>
+<li>㉠, ㉡, ㉣</li>
+<li>㉡, ㉢, ㉣</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<p class="parts-note">개별 명제: ㉠ O(적법한 즉시 자력구제가 아닌 침탈이라면 점유회복청구) / ㉡ X(과실 때문에 선의취득 실패) / ㉢ X(제208조 제2항, 점유의 소를 본권 이유로 재판하지 않음) / ㉣ X(선의의 특별승계인 丙에게는 제204조 제2항의 제한; 소유권에 기한 반환은 별도). 원문 해설 중 ‘선의취득 실패로 매매계약 무효’는 수정한다. 타인 물건 매매는 계약 자체가 당연무효가 아니다.</p>
+<ol class="choice-notes">
+<li>정답 · ㉠만 옳다. 소유권자도 며칠 뒤 임의로 빼앗아 오면 점유 침탈자가 될 수 있다.</li>
+<li>X · 과실 있는 丙은 선의취득하지 못하므로 ㉡이 틀렸다.</li>
+<li>X · ㉡·㉢ 모두 틀렸다.</li>
+<li>X · ㉡과 ㉣을 잘못 포함했다.</li>
+<li>X · 세 명제 모두 틀렸다. 소유권의 소와 점유의 소를 나눠야 한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w65">
+<h4>워크북 065 <small>물권법_워크북_065</small></h4>
+<p class="question-stem">명인방법에 의한 물권변동에 관한 다음 기술 중 옳지 않은 것은?</p>
+<ol class="choices">
+<li>명인방법은 지상물에 관한 물권변동의 성립 요건이다.</li>
+<li>명인방법에 의하여 거래되는 물건은 대체로 수목의 집단 · 미분리의 과실 등이다.</li>
+<li>명인방법에 의한 공시는 그 공시방법이 계속되어야만 효력이 있다.</li>
+<li>명인방법에 의하여 물권변동이 일어나는 권리는 소유권의 양도· 저당권의 설정 등이다.</li>
+<li>명인방법에는 공신력이 인정되지 않는다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 허용된 지상물 거래에서 명인방법은 변동의 성립요건이다.</li>
+<li>O · 토지에 붙어 있으나 독립 거래가 인정되는 대상들이다.</li>
+<li>O · 소유자를 알 수 있는 공시가 계속되어야 한다.</li>
+<li>X · 소유권 양도·양도담보 등과 저당권 설정을 구별한다. 명인방법으로 저당권을 설정하지 못한다.</li>
+<li>O · 불완전한 관습상 공시를 믿었다고 무권리자에게서 취득하는 일반 공신력은 없다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w66">
+<h4>워크북 066 <small>물권법_워크북_066</small></h4>
+<p class="question-stem">입목에 관한 법률에 관한 기술 중 틀린 것은?</p>
+<ol class="choices">
+<li>이 법은 입목에 관한 등기 및 저당권 설정 등에 관한 사항을 규정한다.</li>
+<li>동법의 입목이란 토지에 부착된 수목의 집단으로서 소유권보존등기를 받은 것이다.</li>
+<li>동법의 입목은 부동산으로 본다.</li>
+<li>토지 소유권 또는 지상권의 처분은 입목에 미치지 아니한다.</li>
+<li>동 법의 제정으로 인하여 관습법상 명인방법에 의한 물권변동은 배제된다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 5번</p>
+<ol class="choice-notes">
+<li>O · 법정 입목의 독립 거래와 담보 공시를 위한 법률이다.</li>
+<li>O · 단순 나무 집단이 아니라 법정 보존등기를 갖춘 입목이다.</li>
+<li>O · 토지와 별개의 부동산으로 취급한다.</li>
+<li>O · 입목을 독립시켰기 때문에 토지·지상권 처분이 당연히 입목까지 포함하지 않는다.</li>
+<li>X · 입목법이 있어도 적용 대상 밖 지상물의 명인방법은 별도로 존속한다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w67">
+<h4>워크북 067 <small>물권법_워크북_067</small></h4>
+<p class="question-stem">법률상 공시방법이 확립되어 있지 않은 것은?</p>
+<ol class="choices">
+<li>수목의 집단에 대한 저당권</li>
+<li>분묘에 대한 지상권</li>
+<li>건물의 일부에 대한 소유권</li>
+<li>토지상의 공간에 대한 지상권</li>
+<li>건물의 일부에 대한 전세권</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>X · 법정 입목의 저당권에는 등기제도가 있다.</li>
+<li>정답 · 관습법상 분묘기지권에 관한 표현이다. 분묘가 보이는 외관과 법정 등기방법의 존재를 구별한다.</li>
+<li>X · 구분소유 요건을 갖춘 건물 일부는 등기된다.</li>
+<li>X · 구분지상권은 법정 등기가 있다.</li>
+<li>X · 특정된 건물 일부의 전세권도 등기가 가능하다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w68">
+<h4>워크북 068 <small>물권법_워크북_068</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">물권의 소멸에 관한 기술 중 틀린 것은?</p>
+<ol class="choices">
+<li>목적물이 멸실하면 물권은 절대적으로 소멸한다.</li>
+<li>소유권은 소멸시효에 의하여 소멸하지 않는다.</li>
+<li>지역권자가 승역지의 소유권을 취득한 경우 지역권은 소멸한다</li>
+<li>지상권이 저당권의 목적인 때에는 그 지상권의 포기는 저당권자의 동의를 얻어야 한다.</li>
+<li>점유권과 유치권은 성질상 소멸시효로 인하여 소멸하지 않는다</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 1번</p>
+<ol class="choice-notes">
+<li>자료상 X · 물건 자체의 멸실은 권리 소멸 원인이지만, 담보권의 물상대위에 의한 가치적 대체물 효력까지 모두 끝난다고 읽으면 틀리다. ‘절대적 소멸’의 분류어와 담보 효력 잔존 문제를 구별.</li>
+<li>O · 소유권 자체는 소멸시효 대상이 아니다.</li>
+<li>O(예외 없는 전제) · 소유권과 지역권이 같은 사람에게 귀속하면 혼동 소멸이 원칙이다. 권리 보존 필요는 별도.</li>
+<li>O · 제371조 제2항은 저당권자의 담보를 함부로 없애지 못하게 한다.</li>
+<li>O · 점유권·유치권은 점유 등 권리 성질에 따른 존속 문제로서 보통의 소멸시효와 다르다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w69">
+<h4>워크북 069 <small>물권법_워크북_069</small></h4>
+<p class="question-stem">A(채무자) 소유의 토지 위에 B ·C가 각각 제1 순위의 저당권, 제2 순위의 저당권을 가지고 있다. 틀린 것은?</p>
+<ol class="choices">
+<li>C가 그 토지를 A로부터 양수하면 C의 제2 순위 저당권은 소멸한다.</li>
+<li>B가 그 토지를 A로부터 양수하면 B의 제1 순위 저당권은 소멸한다.</li>
+<li>A가 B를 상속하면 B의 제1 순위 저당권은 소멸하지 않는다.</li>
+<li>B가 A를 상속하면 B의 제1 순위 저당권은 소멸하지 않는다.</li>
+<li>A가 C에게 변제하면 저당권의 말소를 등기하지 않아도 C의 제2 순위 저당권은 소멸한다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 2번</p>
+<ol class="choice-notes">
+<li>O · 후순위 C가 소유권을 취득하면 자기 후순위 저당권을 남길 특별 이익이 없는 보통 경우 혼동 소멸한다.</li>
+<li>X · B의 선순위를 없애면 C에게 부당한 이익이 생기므로 B의 저당권을 보존한다.</li>
+<li>O · A가 B를 상속해도 C 때문에 선순위 담보와 채권 보존 필요가 있다.</li>
+<li>O · B가 A를 상속해도 후순위 권리와의 관계 때문에 같은 예외를 검토한다.</li>
+<li>O · 피담보채권 변제로 저당권은 부종성에 따라 소멸한다. 말소등기는 남은 기록 정리다.</li>
+</ol>
+</details>
+</section>
+
+<section class="question-card" id="question-w71">
+<h4>워크북 071 <small>물권법_워크북_071</small> <span class="review-tag">보완 확인</span></h4>
+<p class="question-stem">물권의 소멸에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 의함)</p>
+<ol class="choices">
+<li>점유권은 혼동이나 소멸시효에 의해 소멸하지 않는다.</li>
+<li>소유권은 소멸시효에 의해 소멸하지 않지만, 타인이 시효취득하면 상대적으로 소멸할 수 있다.</li>
+<li>전세권에 저당권이 설정된 경우, 전세 목적물에 대한 소유권과 전세권이 동일인에게 귀속되더라도 전세권은 혼동에 의해 소멸하지 않는다.</li>
+<li>후순위 저당권이 있는 부동산의 소유권을 선순위저당권자가 아무런 조건 없이 증여받아 취득한 경우, 혼동에 의해 저당권은 소멸한다.</li>
+<li>부동산 공유자의 공유 지분 포기의 의사 표시가 다른 공유자에게 도달하더라도 그 공유 지분이 바로 소멸하는 것은 아니고 다른 공유자는 자신에게 귀속될 공유 지분에 관하여 소유권이전등기를 청구할 수 있을 뿐이다.</li>
+</ol>
+<details class="answer-box"><summary>정답·보기별 해설 </summary>
+<p class="answer-label">JSON 정답: 4번</p>
+<ol class="choice-notes">
+<li>O · 점유권은 제191조의 혼동 규율에서 제외되며 점유 상실 등으로 소멸한다.</li>
+<li>O(표현 보완) · 소유권 자체는 시효소멸하지 않지만 타인의 취득시효 완성으로 잃을 수 있다. 이를 ‘상대적 소멸’이라고만 외우면 취득시효의 원시취득 성질과 혼동하므로 용어 주의.</li>
+<li>O · 전세권을 목적으로 한 저당권자의 이익을 지키기 위해 전세권을 남긴다.</li>
+<li>X · 무상 증여라도 후순위 저당권자에게 순위상 이익을 줄 이유가 없다. 선순위 권리 보존 필요가 남는다.</li>
+<li>O · 포기 의사표시 도달과 부동산물권변동 완성은 다르다. 필요한 이전등기가 있어야 한다.</li>
+</ol>
+</details>
+</section>
+
+<h2>전체 정답 빠르게 대조하기</h2>
+<p>정답표는 원본 JSON 기준이다. 별표(*) 문항은 본문의 정정·주의와 부록의 조건을 함께 읽는다. 061은 채점 보류다.</p>
+<div class="table-scroll" role="region" aria-label="비교표 · 화면이 좁으면 좌우로 이동" tabindex="0"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>번호: 정답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성평가</td>
+<td>005: 1 · 006: 3 · 007: 1 · 008: 1 · 009: 3* · 010: 4* · 011: 4 · 012: 2 · 013: 2 · 014: 2 · 015: 3 · 016: 4</td>
+</tr>
+<tr>
+<td>형성평가</td>
+<td>017: 4 · 018: 1 · 019: 2</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>021: 2 · 022: 1 · 023: 4* · 024: 2 · 025: 4 · 026: 1 · 027: 1 · 028: 2 · 029: 4 · 030: 3 · 031: 1 · 032: 5</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>033: 4 · 034: 5 · 035: 1 · 036: 2 · 037: 4 · 038: 3 · 039: 2 · 040: 2 · 041: 4* · 042: 5 · 043: 4 · 044: 4</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>045: 1* · 046: 5 · 047: 5 · 048: 5 · 049: 5 · 050: 5 · 051: 5 · 052: 2 · 053: 3 · 054: 3 · 055: 5 · 056: 3</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>057: 3 · 058: 2 · 059: 2 · 060: 2 · 061: 5* · 062: 2 · 063: 1* · 064: 1 · 065: 4 · 066: 5 · 067: 2 · 068: 1*</td>
+</tr>
+<tr>
+<td>워크북</td>
+<td>069: 2 · 070: 1 · 071: 4*</td>
+</tr>
+</tbody></table></div>
+<p>마지막 확인: 정답 숫자를 맞혔더라도 각 보기에서 틀린 단어를 바꿔 말할 수 있어야 이해한 것이다. 특히 “항상·모든·반드시·즉시”를 지우거나 조건을 붙여 정확한 문장으로 고치는 연습을 하자.</p>
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '물권법 · CHAPTER 02' : 'PART · PROPERTY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(물권법 · CHAPTER 02|PART · PROPERTY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>
+document.querySelectorAll('#content > h1').forEach(h=>{if(h.textContent.includes('11. 시험 직전'))h.classList.add('memory-section-title');});
+window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true;}));
+window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>{d.open=d.dataset.wasOpen==='1';}));
+</script><script>
+function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}if(!id.startsWith('property-'))return;const target=document.getElementById(id);if(!target)return;for(let p=target.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));}
+window.addEventListener('hashchange',showConceptAnchor);window.addEventListener('load',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);
+</script></body>
+</html>
