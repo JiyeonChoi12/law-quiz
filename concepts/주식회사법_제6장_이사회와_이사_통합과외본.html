@@ -1,0 +1,1598 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주식회사법 제6장 이사회와 이사 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMPANY LAW · CHAPTER 06</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">주식회사법</span>
+    <span class="brand-sub">제6장 이사회와 이사 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./주식회사법_개념.html">주식회사법 개념 목록</a><a href="../index.html?subject=주식회사법">문제 풀기</a></nav><h1>이 장의 큰 그림</h1>
+<p>주주들이 사장을 뽑았다. 그런데 사장이 회사 돈으로 자기 빚을 갚고, 동료 이사들은 “나는 회의에 이름만 올렸는데?”라고 한다. 누가 거래를 결정하고, 누가 회사를 대표하며, 누가 잘못을 막고 책임져야 할까? <strong>이 장은 회사의 운전대와 브레이크를 누구에게 맡기는지를 설명한다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>첫 질문</th>
+<th>쉬운 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나?</td>
+<td>이사회 결정→이사 선임→대표이사 집행→의무·책임→주주의 감독</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>투자한 사람과 실제 돈을 사용하는 사람이 다르기 때문에 권한 남용을 막아야 한다.</td>
+</tr>
+<tr>
+<td>전체에서 위치?</td>
+<td>5장 총회가 뽑은 경영진의 일과 책임을 정하는 중심 단원</td>
+</tr>
+<tr>
+<td>앞뒤 연결?</td>
+<td>4장 주주권·5장 선임결의→6장 경영→7장 감사→8장 자금 조달</td>
+</tr>
+<tr>
+<td>모르면 막히는 것?</td>
+<td>회사 계약의 효력, 자기거래, 손해배상, 대표소송, 신주발행 결정</td>
+</tr>
+</tbody></table>
+<p>교재195–277쪽의 본문·판례·생각해 보기15개와 <strong>보충강의 두 편 전체</strong>를 다룬다. 제공 JSON의 이사회와 이사Ⅰ·Ⅱ·Ⅲ <strong>42문항168개 보기</strong>는 뒤에 보존하고 별도 해설을 붙였다. 별은 실제 출제 통계가 아닌 학습 우선순위다. 설명용 이름·대화는 이해를 위한 재구성이며 판결에 없는 사실을 판례 사실로 보태지 않는다. 현행법 점검 기준은2026.10.23이다.</p>
+<h1>1. 이사회는 결정과 감독을 함께 맡는다</h1>
+<h2 id="company-06-01" data-concept-id="company-06-01">1-1. 이사회·이사·대표이사는 같은 말이 아니다 ★★★★★</h2>
+<p><strong>교재195–197쪽 · 문단의 이유:</strong> 회사의 의사결정과 실행을 구분해야 누구의 권한·책임인지 찾을 수 있다.</p>
+<p><strong>이사</strong>는 주주총회가 뽑은 경영 담당자다. <strong>이사회</strong>는 이사들이 모여 중요 업무를 결정하고 다른 이사의 일을 감독하는 회의체다. <strong>대표이사</strong>는 그 결정을 집행하고 외부와 계약할 때 회사를 대표한다. 이사들이 회의에서 “공장을 사자”고 결정하는 것과 대표이사가 매매계약서에 회사 이름으로 서명하는 것은 별개의 단계다.</p>
+<p><mark class="green">주주가 수천 명이면 매일 직접 경영하기 어렵다. 경영은 전문가에게 맡기되, 그 전문가가 회사 돈을 자기 돈처럼 쓰지 못하게 서로 감시하게 만든 것이다.</mark> 그러나 지배주주가 이사회를 장악하거나 독립적인 이사가 필요한 정보를 받지 못하면 감시가 형식화된다. 그래서 정보 요구권·충실의무·책임 규정까지 함께 필요하다.</p>
+<p>이사회는 원칙적으로 필요적 상설기관이다. 다만 <strong>자본금10억원 미만이고 실제 이사가1명 또는2명인 회사</strong>는 이사회가 없다. 자본금이 작아도3명 이상 이사를 두고 이사회를 운영할 수 있다. 교재의 과거5억원 기준은 연혁이다.</p>
+<p>383조4항의 경업·자기거래 승인, 신주발행 등 열거된 이사회 권한은 소규모 특례에서 총회가 맡는다. 반면383조6항에 따라 총회 소집·주주제안 처리·전자투표·업무집행 등은 각 이사 또는 정관에 따른 대표이사가 담당하는 사항도 있다. <strong>이사회가 없으면 모든 권한이 총회로 간다는 뜻은 아니다.</strong></p>
+<p><strong>시험:</strong> 기관·소규모 예외. <strong>키워드:</strong> 결정/집행/감독. <strong>한 줄:</strong> 이사회는 회의체, 대표이사는 실행·대표 기관이다.</p>
+<h2 id="company-06-02" data-concept-id="company-06-02">1-2. 중요한 재산과 큰 빚은 대표이사 혼자 정하지 않는다 ★★★★★</h2>
+<p><strong>교재197–198쪽 · 문단의 이유:</strong> 이사회가 책임지려면 중요한 의사결정권이 실제로 남아 있어야 한다.</p>
+<p>393조는 중요한 자산의 처분·양도, 대규모 재산 차입, 지배인 선임·해임, 지점 설치·이전·폐지 등 중요 업무집행을 이사회가 결정하게 한다. 대표이사 선임, 총회 소집 결정, 경업·자기거래 승인, 신주·사채 발행 사항 등도 관련 조문에 따른다. 일상적 집행은 위임할 수 있어도 중요한 결정을 통째로 사장에게 넘겨 이사회를 빈 껍데기로 만들 수 없다.</p>
+<h3>교재 판례 · 회사에서 ‘중요한 재산’은 얼마부터일까?</h3>
+<p><strong>2009다47791,2011.4.28.</strong> 자산 처분에 이사회 결의가 필요한지가 다투어졌다. 법원은 가격 하나가 아니라 총자산에서의 비중, 회사 규모·경영상태, 보유 목적, 평소 업무인지, 종전 처리 관행 등을 종합했다. <strong>번역:</strong>① 같은1억원도 작은 회사와 큰 회사에서 무게가 다르다.② 내부 규정에 항목이 없더라도 중요한 처분이면 결의가 필요하다.③ 사장 재량인지 회사 전체의 중대 선택인지 묻는다. 고정 금액만 기준으로 삼으면 사실상 핵심 재산을 빠져나가게 할 수 있다.</p>
+<p><strong>2007다23807,2008.5.15.</strong> 대규모 차입인지도 빚의 절대액만으로 정하지 않았다. 회사 규모·자산·영업상태·차입 목적 등으로 판단한다. <strong>번역:</strong> 빚이 회사에 얼마나 큰 부담인지 함께 본다. “몇억원 이상이면 무조건”이라는 보기는 위험하다.</p>
+<p><strong>시험:</strong> 종합 판단·포괄 위임 제한. <strong>키워드:</strong> 중요성. <strong>한 줄:</strong> 중요한 결정은 제목이 아니라 회사에 미치는 실제 영향으로 가린다.</p>
+<h2 id="company-06-03" data-concept-id="company-06-03">1-3. 감시하려면 보고를 받고 회의를 열 수 있어야 한다 ★★★★☆</h2>
+<p><strong>교재198–199쪽 · 문단의 이유:</strong> 정보도 회의도 없는 감독권은 쓸모가 없다.</p>
+<p>이사회는 이사의 직무집행을 감독한다. 각 이사는 대표이사에게 다른 이사·직원의 업무를 이사회에 보고하도록 요구할 수 있고, 이사는 <strong>3개월에1회 이상</strong> 업무집행 상황을 이사회에 보고한다. 감사는 이사회의 구성원이 아니지만 출석·의견진술을 할 수 있고, 위법 우려가 있는 이사의 행위를 보고해야 한다.</p>
+<p>390조의 원칙은 <strong>각 이사가 소집</strong>하는 것이다. 소집 담당 이사를 정했다면 다른 이사는 회의 목적을 밝혀 소집을 요구하고, 담당자가 정당한 이유 없이 거절하면 요구한 이사가 소집할 수 있다. 대표이사만 회의를 열 수 있다는 말은 틀리다. 감사의 소집청구·불응 시 직접 소집은7장에서 추가한다.</p>
+<p>원칙적으로 이사와 감사에게 <strong>1주 전</strong> 소집통지를 발송한다. 정관으로 그 기간을 줄일 수 있고 이사·감사 전원의 동의가 있으면 소집절차를 생략할 수 있다. 전원이 모였어도 개최에 반대한다면 무조건 동의로 볼 수 없다. 정기회의 날짜를 미리 정해 절차를 생략하는 경우도 전원 동의의 전제가 중요하다. 연기·속행은372조 준용에 따른다.</p>
+<p><strong>시험:</strong> 각 이사/1주/감사 포함. <strong>키워드:</strong> 정보 접근·소집. <strong>한 줄:</strong> 감시권은 자료 요구와 회의 참여 기회로 작동한다.</p>
+<h2 id="company-06-04" data-concept-id="company-06-04">1-4. 이사회는 ‘사람 수’로 두 문턱을 넘는다 ★★★★★</h2>
+<p><strong>교재199–201쪽 · 문단의 이유:</strong> 총회와 이사회의 표 계산을 섞지 않게 한다.</p>
+<p><mark class="yellow">이사회 일반결의는 이사 과반수 출석과 출석 이사 과반수 찬성이다. 정관으로 높일 수 있지만 낮출 수는 없다.</mark> 총회에서는 주식의 의결권을 세지만 이사회에서는 이사 수를 센다. 자기거래·회사기회 이용 승인 등은 별도의 <strong>이사3분의2 이상</strong> 요건이 있다. 감사위원 해임도 일반규정과 상장회사 특례를 구분한다.</p>
+<p><strong>교재94다33903,1995.4.11.</strong> 이사6명 중3명만 모여 보증에 만장일치로 찬성했다. 법원은 과반수 출석이 아니므로 유효한 결의로 인정하지 않았다. <strong>번역:</strong>①6명의 과반수는4명이다.②3명이 모두 찬성해도 회의 성립 문턱부터 못 넘는다.③ 출석 부족을 만장일치로 메울 수 없다.</p>
+<p>특별한 이해관계가 있는 이사는 해당 안건에 투표하지 못한다. 일반결의에서는 그 이사를 <strong>의사정족수를 계산하는 전체·출석 이사 수에는 포함하되, 찬성을 계산할 출석 이사와 찬성 수에서는 제외</strong>한다. 예컨대 이사5명 중 특별이해관계인1명을 포함하여3명이 출석했다면 출석 문턱은 넘지만, 의결권 있는 출석2명 중2명이 찬성해야 과반수가 된다. 이는 일반결의 예시이며398조의 가중 승인 수를 이 예시만으로 낮추면 안 된다. <a href="https://law.go.kr/LSW/precInfoP.do?evtNo=2008%EB%8B%A41521">대법원2008다1521</a></p>
+<p><strong>80다2441,1982.7.13.</strong> 회의 없이 서면에 서명만 모으거나 대리인에게 표를 맡기는 방식은 허용되지 않는다는 취지다. 이사는 토론하고 책임지는 사람으로 선임되었기 때문이다. 다만 정관에 반대 규정이 없으면 모든 이사가 <strong>음성을 동시에 송수신하는 통신수단</strong>으로 참가할 수 있다. 영상이 반드시 있어야 하는 것은 아니다. 나중에 따로 보내는 문자 찬성은 동시 음성회의와 다르다.</p>
+<p>가부동수이면 과반수 찬성이 아니다. 의장에게 결정표를 주는 학설 논의는 심화이며 상법이 당연히 두 표를 준다고 외우지 않는다. 책임 확인이 필요한 만큼 누가 찬성했는지도 남겨야 한다.</p>
+<p><strong>시험:</strong> 과반수·서면 불가·대리 불가·동시 음성. <strong>키워드:</strong> 출석 문턱/찬성 문턱. <strong>한 줄:</strong> 회의가 성립하는 수와 결의가 통과하는 수는 따로 계산한다.</p>
+<h2 id="company-06-05" data-concept-id="company-06-05">1-5. 결의 하자와 외부 거래의 효력은 나누어 판단한다 ★★★★★</h2>
+<p><strong>교재201–202쪽 · 문단의 이유:</strong> 회사 내부 회의가 잘못되었다고 거래 상대방이 항상 손해를 떠안는 것은 아니다.</p>
+<p>이사회 결의 하자에는 총회처럼 별도의 취소소송·2개월 제한 체계가 없다. 일반 민사원칙에 따라 무효를 주장하고, 확인의 이익이 있으면 무효확인을 구한다. <strong>99다30039,2000.2.11</strong>은 이런 구별을 보여 준다. <strong>80다2425,1982.9.14</strong>은 특별한 사정 없이 개별 이사를 상대로 결의무효 확인을 구하지 않고 회사를 상대해야 함을, <strong>98다26187,2000.1.28</strong>은 일반 민사판결의 효력이 원칙적으로 당사자 사이에 미침을 보여 준다. <strong>번역:</strong> 총회 취소소송의 피고·기간·대세효를 그대로 복사하지 않는다.</p>
+<p>이사회 결의가 없거나 무효이면 대표이사 선임 같은 내부 행위 자체가 무효가 될 수 있다. 하지만 그 뒤 외부와 맺은 거래는 제3자 보호 규정을 따로 검토한다.</p>
+<p><mark class="pink">교재의 ‘상대방이 알았거나 알 수 있었으면 무효’라는 일반적 이사회 결의 누락 설명은 현재 기준으로 보완해야 한다.2021년 전원합의체는 상대방의 악의 또는 중대한 과실을 기준으로 삼았다.</mark> 단순히 회사 회의록을 확인하지 않았다는 이유만으로 당연히 중과실이 되는 것도 아니다. 회사가 상대방의 악의·중과실을 주장·증명해야 한다. 이 기준은 내부적 제한뿐 아니라393조1항의 중요자산 처분·대규모 차입에도 적용된다. <a href="https://www.scourt.go.kr/sjudge/1613634580986_164940.pdf">2015다45451 전원합의체</a></p>
+<h3>교재 판례 · 통지가 빠졌는지를 누가 증명할까?</h3>
+<p><strong>62다685,1963.6.20.</strong> 이사3명 중2명이 참석한 회의에서, 특별한 사정이 없으면 나머지 이사에게도 통지가 이루어진 것으로 보아 통지 누락을 다투는 쪽의 입증을 요구했다. <strong>번역:</strong> 불참했다는 사실만으로 통지를 안 했다고 단정하지 않는다.</p>
+<p><strong>90다카22698,1992.4.14.</strong> 평소 경영을 전적으로 다른 이사에게 맡기고 형식적으로 관여하던 이사에게 통지하지 않은 사안에서, 통지했더라도 결론에 영향이 없을 특별한 사정을 인정했다. <strong>번역:</strong>① 일반 원칙은 모든 이사에게 참여 기회를 주는 것이다.② 판결은 구체적 사정을 본 예외다.③ ‘이름만 빌린 이사에게는 통지가 필요 없다’거나 ‘감시의무가 없다’는 규칙으로 확대하면 안 된다.</p>
+<p><strong>시험:</strong> 내부 무효/외부 보호·구판례 주의. <strong>키워드:</strong> 하자와 거래 분리. <strong>한 줄:</strong> 결의가 잘못됐는지와 상대방에게 거래효력을 부인할 수 있는지는 별개다.</p>
+<h2 id="company-06-06" data-concept-id="company-06-06">1-6. 의사록과 위원회는 책임의 흔적을 남긴다 ★★★★☆</h2>
+<p><strong>교재202–204쪽 · 문단의 이유:</strong> 결정의 내용과 담당자를 기록하고 전문적으로 나누어 처리한다.</p>
+<p>391조의3 의사록에는 안건, 경과의 요령, 결과, 반대한 사람과 반대 이유를 적고 출석 이사·감사가 서명 또는 기명날인한다. 의사록이 없다는 이유만으로 실제 결의가 언제나 없었던 것은 아니지만 입증과 책임 문제가 생긴다. 참가 이사가 반대했다는 흔적이 없으면399조상 찬성한 것으로 추정될 수 있다. <strong>추정은 반증 가능하며, 기록 누락만으로 손해·인과관계까지 자동 인정되는 것은 아니다.</strong> 주주는 영업시간에 열람·등사를 청구할 수 있고 회사가 이유를 붙여 거절하면 법원 허가 절차가 있다. 채권자의 일반 서류열람권과 똑같다고 하지 않는다.</p>
+<p>393조의2에 따라 정관으로 이사회 안에 <strong>2명 이상 이사로 구성되는 위원회</strong>를 둘 수 있다. 전문적인 검토가 목적이다. 그러나 총회 승인이 필요한 사항의 제안, 대표이사 선임·해임, 위원회 설치와 위원 선임·해임, 정관이 유보한 사항은 맡길 수 없다. 집행임원 설치회사의 특별한 권한 배분은 보충강의에서 따로 본다.</p>
+<p>위원회는 결의한 사항을 모든 이사에게 통지한다. 각 이사는 이사회 소집을 요구할 수 있고 이사회가 다시 결의할 수 있다. <strong>감사위원회 결의에 대한 재결의 금지 등 특별규정은 별도</strong>다. 소규모라도 실제 이사회가 있는 회사까지 위원회 설치가 무조건 불가능한 것은 아니다.</p>
+<p><strong>시험:</strong>2명·위임 금지4묶음·감사위원회 예외. <strong>키워드:</strong> 기록·전문분담. <strong>한 줄:</strong> 나누어 맡겨도 핵심 권한과 감독 책임은 사라지지 않는다.</p>
+<h1>2. 이사는 어떻게 들어오고 나가는가</h1>
+<h2 id="company-06-07" data-concept-id="company-06-07">2-1. 이사 자격과 독립성은 구분한다 ★★★★☆</h2>
+<p><strong>교재204–206쪽 · 문단의 이유:</strong> 회사가 사람을 선택할 자유와 감시자의 독립성 확보를 함께 설명한다.</p>
+<p>이사와 회사에는 위임 규정이 적용된다. 일반 이사에게 주주여야 한다는 일률적 요건은 없지만 정관으로 자격을 정하는 경우가 있고, 법정 겸직금지·결격사유도 있으므로 ‘아무 제한도 없다’는 표현은 과장이다. 법인이 이사가 될 수 있는지의 학설 논쟁은 심화이며, 자연인 이사를 전제로 하는 현행 체계·등기 실무와 유한책임회사의 법인 업무집행자를 섞지 않는다. 감사는 회사와 자회사의 이사 등을 겸하지 못한다. 정관이 주식 보유를 자격으로 요구하는 경우387조의 주식 공탁 문제도 연결된다.</p>
+<p>교재의 사외이사 결격사유는 ‘회사와 너무 가깝지 않은가’로 묶으면 이해하기 쉽다.</p>
+<table>
+<thead>
+<tr>
+<th>관계</th>
+<th>교재382조3항의 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자기 경력</td>
+<td>회사의 상무에 종사하는 이사·감사·집행임원·직원 또는 최근2년 내 해당자</td>
+</tr>
+<tr>
+<td>최대주주가 개인</td>
+<td>그 본인·배우자·직계존비속</td>
+</tr>
+<tr>
+<td>최대주주가 법인</td>
+<td>그 법인의 이사·감사·집행임원·직원</td>
+</tr>
+<tr>
+<td>회사 경영진 가족</td>
+<td>회사 이사·감사·집행임원의 배우자·직계존비속</td>
+</tr>
+<tr>
+<td>모·자회사</td>
+<td>그 이사·감사·집행임원·직원</td>
+</tr>
+<tr>
+<td>중요 거래관계 법인</td>
+<td>그 이사·감사·집행임원·직원</td>
+</tr>
+<tr>
+<td>상호 파견 관계</td>
+<td>회사 경영진·직원이 이사·집행임원으로 있는 다른 회사의 경영진·직원</td>
+</tr>
+</tbody></table>
+<p>상장회사는542조의8의 추가 결격사유도 본다. <strong>2026.7.23부터 법정 명칭은 독립이사이고 원칙적 비율은 이사총수의1/3 이상</strong>이다. 일정 대규모 상장회사는3명 이상이면서 과반수여야 한다. 해당 개정의 부칙상1년 정비기간도 함께 보아야 하며, 교재·문제의 ‘사외이사1/4’를 현행법 숫자로 외우지 않는다. 명칭 변화가 감시 기능을 면제하는 것은 아니다.</p>
+<p><strong>시험:</strong> 일반 자격과 독립성 제한·회사 규모. <strong>키워드:</strong> 독립적 감독. <strong>한 줄:</strong> 회사 밖 사람이라는 이름보다 경영진과의 실제 관계가 중요하다.</p>
+<h2 id="company-06-08" data-concept-id="company-06-08">2-2. 선임결의와 취임승낙이 있어야 이사가 된다 ★★★★★</h2>
+<p><strong>교재206–207쪽 · 문단의 이유:</strong> 선임, 계약, 등기의 효력을 나눈다.</p>
+<p>이사는 원칙적으로3명 이상이고 자본금10억원 미만은1명 또는2명이 가능하다. 임기는3년을 넘지 못하나 정관에 따라 임기 중 최종 결산기에 관한 정기총회 종결까지 연장할 수 있다. 재선은 가능하다. 임기 기산점은 실제 취임 효력과 결의·정관 내용을 함께 확인한다.</p>
+<p>설립 시에는 발기인 또는 창립총회가, 성립 후에는 주주총회가 원칙적으로 보통결의로 선임한다. 상장회사는 미리 통지·공고한 후보자 중 선임하는 등 절차를 지킨다. 이름·주민등록번호 등 변경등기는2주 내에 하지만 <strong>등기가 이사 지위의 발생요건은 아니다.</strong></p>
+<p><strong>2016다251215 전원합의체,2017.3.23.</strong> 총회가 이사를 뽑고 당사자가 승낙했는데 대표이사와 별도의 임용계약이 없다는 이유로 지위를 부정할 수 있는지가 문제되었다. 법원은 별도 대표이사의 계약 체결이 필수는 아니라고 보았다. <strong>번역:</strong>① 주주총회의 선임권을 먼저 존중한다.② 당사자의 취임승낙은 필요하다.③ 대표이사가 계약을 안 해준다는 이유로 총회의 선택을 막을 수 없다.</p>
+<p><strong>91다4409,1991.12.27.</strong> 이사로 등기되면 적법한 선임을 거친 것으로 추정한다. 그러나 반증이 가능하다. <strong>번역:</strong> 등기는 유력한 자료이지만 없던 결의를 창조하거나 모든 하자를 치료하지 않는다.</p>
+<p><strong>시험:</strong> 총회+승낙·등기 대항요건. <strong>키워드:</strong> 선임 효력. <strong>한 줄:</strong> 이사는 등기 때문에 되는 것이 아니라 적법한 선임과 승낙으로 된다.</p>
+<h2 id="company-06-09" data-concept-id="company-06-09">2-3. 집중투표는 소수주주의 표를 한 후보에게 모은다 ★★★★★</h2>
+<p><strong>교재207–209쪽 · 문단의 이유:</strong> 다수주주가 모든 자리를 차지하는 것을 완화한다.</p>
+<p>3명을 뽑는데 주주 민서가10주를 갖고 있다면 집중투표에서는30표를 한 후보에게 몰아주거나 여러 후보에게 나눌 수 있다. 많은 표를 얻은 후보부터 정해진 수만큼 당선된다. <strong>한 명 선임에는 적용되지 않는다.</strong></p>
+<p>일반회사는 무의결권주식을 뺀 발행주식총수3% 이상 주주가 총회7일 전까지 <strong>서면 또는 전자문서</strong>로 청구한다. 정관 배제가 허용되는 것이 일반규정이다. 청구가 있으면 의장이 알리고 관련 서면을 총회 종료까지 본점에서 열람하게 한다. 상장회사의 청구는6주 전까지이고 정기총회는 법이 정한 전년도 총회일 대응 기준을 쓴다. 최근 사업연도 말 자산2조원 이상 상장회사는1% 청구 특례가 있다.</p>
+<p><mark class="pink">2026.9.10 시행 개정으로 위 대규모 상장회사는 정관으로 집중투표를 배제할 수 없다. 시행 후 최초 이사 선임을 위한 총회 소집부터 적용한다. 다만 적법한 소수주주 청구 없이 언제나 자동 실시한다는 뜻은 아니다.</mark> 교재의 ‘배제 정관 변경 시3% 초과 표 제한·별도 의안’ 설명은 해당 구규정의 연혁으로 읽는다. <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026995417">현행542조의7</a>, <a href="https://www.moj.go.kr/bbs/moj/166/487198/download.do">법무부 연구자료</a></p>
+<p><strong>2016다217741,2017.1.12.</strong> 집중투표 방식이라고 정관이 요구하는 총회 출석 요건까지 없어지는 것은 아니라고 보았다. <strong>번역:</strong> ‘표를 어떻게 배분하고 당선시키나’와 ‘회의에 얼마나 출석해야 하나’는 다른 질문이다.</p>
+<p><strong>시험:</strong>2명 이상·3%/1%·7일/6주·개정 적용. <strong>키워드:</strong> 표 집중. <strong>한 줄:</strong> 표의 총량을 후보별로 집중해 소수주주의 이사 진출 가능성을 높인다.</p>
+<h2 id="company-06-10" data-concept-id="company-06-10">2-4. 사임과 해임은 출발점이 다르다 ★★★★★</h2>
+<p><strong>교재209–212쪽 · 문단의 이유:</strong> 그만두는 자유, 주주의 경영진 교체권, 임기 보장을 조정한다.</p>
+<p>임기만료·사망·사임·해임 등이 종임 사유다. 사임은 원칙적으로 회사에 도달하면 효력이 생기는 단독 의사표시다. <strong>서울고법79나2290,1980.5.23</strong>은 이 원칙을 보여 준다. <strong>98다8615,1998.4.28</strong>은 사임 처리를 대표이사에게 맡기는 등 구체적 의사표시 내용에 따라 승낙을 기다리는 경우를 구분했다. <strong>번역:</strong> 사임서를 냈다는 이름만 보지 말고 언제 그만두겠다는 뜻인지 읽는다.</p>
+<p>총회는 <strong>언제든지 특별결의로 이사를 해임</strong>할 수 있다. 다만 임기가 정해진 이사를 정당한 이유 없이 중도 해임하면 회사가 손해를 배상한다. <strong>2004다25123,2004.12.10</strong>은 경영진 교체의 자유와 이사의 임기 이익을 함께 보호한다. 해임이 무효가 되어 계속 일하는 것과 금전 배상은 다르다.</p>
+<p><strong>2004다25611,2004.10.15.</strong> 단순 불화·불신만이 아니라 위법행위, 객관적 경영능력 상실, 중대한 경영 실패, 장기간 업무수행 곤란 등 직무 계속을 막는 객관적 사정을 본다. <strong>번역:</strong> “마음에 안 든다”만으로 배상책임까지 없애지 못한다.</p>
+<p><strong>서울고법77나2669,1978.7.6</strong>은 남은 임기 보수 상당 손해를, <strong>서울고법89나46297,1990.7.6</strong>은 보수·상여금·퇴직급여 등의 재산상 손해 문제와 해임 자체에 대한 위자료·과실상계 주장을 구별했다. 이들은 교재에 소개된 하급심 사례다. 별도의 모욕 등 불법행위가 있어도 절대 위자료가 없다는 규칙으로 확대하지 않는다.</p>
+<p>중대한 부정행위·법령 또는 정관 위반이 있는데도 총회가 해임을 부결하면 일반회사 <strong>3% 이상 주주가 결의일부터1개월 내 법원에 해임 청구</strong>를 할 수 있다. 상장회사 특례는6개월 계속 보유와0.5%, 일정 자본금 규모 회사0.25% 기준이다. 특례가 일반규정 경로를 없애지는 않는다.</p>
+<p><strong>92다53583,1993.4.9.</strong> 이사가 경쟁회사를 세워 이사·대표이사로 영업 준비를 하다가 실제 영업 직전 그 직책을 그만두었다. 법원은 준비 중인 경쟁회사도 문제되므로 경업금지 위반이라는 중대한 사실을 인정했다. <strong>번역:</strong> 가게 문을 열기 전이라고 경쟁 준비가 지워지는 것은 아니다. 자세한 이익 반환은4-3에서 연결한다.</p>
+<p><strong>시험:</strong> 사임 도달/해임 특별/정당한 이유 없는 중도해임 배상. <strong>키워드:</strong> 지위 종료와 보상. <strong>한 줄:</strong> 해임할 수 있다는 말과 공짜로 해임할 수 있다는 말은 다르다.</p>
+<h2 id="company-06-11" data-concept-id="company-06-11">2-5. 계속이사·임시이사·직무대행자는 왜 다른가 ★★★★☆</h2>
+<p><strong>교재212–216쪽 · 문단의 이유:</strong> 경영 공백을 막는 장치와 분쟁 중 임시 조치를 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>생기는 이유</th>
+<th>권한·주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>계속이사</td>
+<td>임기만료·사임으로 법·정관상 최소 인원 부족</td>
+<td>후임 취임까지 권리·의무 유지. 사망·해임을 그대로 포함하지 않음</td>
+</tr>
+<tr>
+<td>임시이사</td>
+<td>필요할 때 법원이386조에 따라 선임</td>
+<td>이사·감사·이해관계인의 청구. 보통 이사에 준하는 권한</td>
+</tr>
+<tr>
+<td>직무대행자</td>
+<td>이사 직무집행정지 가처분 등에 따라 선임</td>
+<td>가처분명령에 다른 정함 없으면 상무 외 행위는 법원 허가 필요</td>
+</tr>
+</tbody></table>
+<p><strong>2000마5632,2000.11.17.</strong> 사망·해임, 중병·장기부재 등으로 계속 직무를 맡기는 것이 불가능하거나 부적절한 구체적 상황에서는 임시이사 필요성을 검토한다. <strong>85그50,1985.5.28</strong>은 법원이 신청인이 추천한 사람에게 매이지 않고 적절한 사람을 고를 수 있음을, <strong>80다2511,1981.9.8</strong>은 회사와 기존 이해관계가 없는 사람도 임시이사가 될 수 있음을 보여 준다. <strong>번역:</strong> 공백을 메울 적임자를 법원이 정하는 것이지 신청인이 자기 사람을 확정하는 절차가 아니다.</p>
+<p>이사 선임을 다투는 소를 냈다고 그 이사의 일이 자동 정지되지는 않는다.407조의 가처분 요건과 필요성을 본다. <strong>90마818,1991.3.5</strong>은60% 주주의 이사 지위 관련 구체적 사정을 고려해 보전 필요성을 부정한 사례이지, 대주주라면 절차 위반이 허용된다는 판결이 아니다.</p>
+<p><strong>80다2424,1982.2.9.</strong> 직무정지 가처분은 회사를 피신청인으로 삼는 것이 아니라 직무를 수행하는 이사를 상대로 한다는 취지다. 교재의 구 민사소송법 조문은 현재 민사집행법의 가처분 체계와 연결한다. <strong>90그44,1990.10.31</strong>은 직무를 정지시킨 그 사람을 다시 대행자로 세워 정지를 무력화할 수 없음을 보여 준다.</p>
+<p><strong>2013다39551,2014.3.27.</strong> 직무정지 대상 이사가 그 전에 대표이사로 선임·등기된 사정만으로 직무정지 가처분과 대행자의 권한을 피하지 못했다. <strong>번역:</strong> 직함 하나를 더 달았다고 정지명령의 대상인 이사 직무가 살아나지 않는다. 새로 선임된 모든 별개 대표이사의 권한을 영구 부정하는 문장으로 바꾸지 않는다.</p>
+<p><strong>91다4355,1991.12.24.</strong> 회사 해산 전 법원이 선임한 대행자는 법정 청산인 제도와 연결하여 청산인 직무대행자 역할을 하게 된다. <strong>87다카2691,1989.9.12</strong>은 회사 소송·반소의 변호사 선임과 통상 비용 지급은 상무로 보면서 상대방 변호사 비용까지 부담하는 특별 약정은 별도 법원 허가 문제로 구별했다. <strong>번역:</strong> 일상적 방어와 회사에 새로운 큰 부담을 지우는 합의를 나눈다.408조에 따른 권한위반의 선의 제3자 보호도 별도로 검토한다.</p>
+<p><strong>시험:</strong>386조와407·408조. <strong>키워드:</strong> 공백/분쟁/상무. <strong>한 줄:</strong> 임시이사라고 모두 직무대행자처럼 일상 업무만 할 수 있는 것은 아니다.</p>
+<h2 id="company-06-12" data-concept-id="company-06-12">2-6. 이사의 보수는 스스로 마음대로 정하지 못한다 ★★★★★</h2>
+<p><strong>교재216–219쪽 · 문단의 이유:</strong> 경영권을 이용해 자기 보수를 부풀리는 이해충돌을 막는다.</p>
+<p>일반 이사는 이사회 구성원으로 결정·감독에 참여한다. 담당 이사가 내부 업무를 맡아도 당연히 대표권을 갖는 것은 아니다. 보수는 이름이 월급·상여금·퇴직금·퇴직위로금이든 직무 대가이면388조 통제를 받는다. 정관에 금액을 정하지 않았다면 <strong>총회가 결정</strong>한다. 총회가 구체적 총액·한도를 정하고 개인별 배분을 이사회에 맡기는 것과 금액 제한 없이 백지 위임하는 것은 다르다. 반드시 선임과 같은 날 결의해야 한다는 조문은 없다.</p>
+<p><strong>2004다25123,2004.12.10.</strong> 정관이 총회 결의에 맡긴 퇴직위로금을 결의 없이 청구했다. 법원은 이사로 선임되었다는 사실만으로 구체적 지급 약정까지 생긴다고 보지 않았다. <strong>번역:</strong> 직책을 맡겼다는 말과 그 퇴직금 액수를 약속했다는 말은 다르다.</p>
+<p><strong>2014다11888,2016.1.28.</strong> 경영권을 잃게 된 이사들이 회사 사정과 직무의 합리적 대가를 넘어 보수를 크게 늘리려는 상황이 문제되었다. 법원은 대주주의 표로 총회를 통과시켰더라도 충실의무 위반 여부를 따져야 한다고 보았다. <strong>번역:</strong> 절차를 갖췄다는 사실이 회사 돈을 빼가는 내용까지 정당화하지 않는다. 회사의 채무 이행과 재산상태도 살핀다.</p>
+<p><strong>79다1599,1979.11.27.</strong> 대표이사가3000주 중2000주를 가진 사람이어도 총회 없이 한 개인적 약정이 곧 회사의 적법한 보수 결정은 아니다. <strong>2003다16092·16108,2006.5.25</strong>은 정관 등이 이미 구체적 퇴직금 기준을 정하고 공로에 따라 이사회가 조정하는 구조에서, 이사회가 아무 조치도 안 했다는 이유만으로 이미 생긴 권리를 전부 없앨 수 없다고 보았다. 특별한 손해 가해 등 사정과 조정 범위를 구분한다.</p>
+<p><strong>시험:</strong> 정관→총회·퇴직금 포함·한도와 백지위임. <strong>키워드:</strong> 자기 보수 통제. <strong>한 줄:</strong> 이사는 자기 월급과 퇴직금을 자기 권한만으로 확정할 수 없다.</p>
+<h1>3. 대표이사의 계약은 언제 회사의 계약이 되는가</h1>
+<h2 id="company-06-13" data-concept-id="company-06-13">3-1. 사장이라는 직함만으로 대표권이 생기지는 않는다 ★★★★★</h2>
+<p><strong>교재219–222쪽 · 문단의 이유:</strong> 경제적 실력자와 법률상 대표자를 구별한다.</p>
+<p>대표이사는 원칙적으로 이사회가 이사 중에서 선임한다. 정관으로 총회 선임을 정할 수도 있다. 한 명일 수도 여러 명일 수도 있으며 여러 명이면 원칙적으로 각자 대표한다. 공동대표는 별도로 정해야 한다. 이사 전원을 대표이사로 둘 수 있는지의 학설 논의는 감독과 집행의 분리라는 관점의 심화다. 집행임원 설치회사는 대표이사를 두지 않고 대표집행임원을 둔다.</p>
+<p><strong>89다카14714,1989.10.24</strong>은 사실상 대표로 일했다는 이유만으로 적법한 대표이사 선임이 생기지 않는다고 보았다. <strong>94다7591,1994.12.2</strong>도 회사 경영을 인수했지만 이사회가 선임하지 않았다면 당연히 대표이사가 되는 것은 아니라고 보았다. <strong>번역:</strong> 경영권 인수와 대표자 선임 절차는 다르다. 선의의 상대방 보호는 표현대표 등 별도 규정에서 해결한다.</p>
+<p>대표이사의 성명·주민등록번호·주소는 등기한다. <strong>4291민상759,1959.7.23</strong>은 등기된 대표자의 적법한 선임을 추정하지만 반증을 허용했다. 이사의 지위를 잃으면 대표이사 지위도 잃는다. 이사는 유지하고 대표직만 사임할 수 있으며, 원칙적으로 이사회가 대표직을 해임한다. 총회 선임 구조에서는 정관과 선임기관을 함께 본다. 대표직 해임과 이사직 해임을 같다고 하지 않는다. 결원에는386조가 준용된다.</p>
+<p><strong>96다48282,1997.6.13.</strong> 법·정관에 명시된 결의사항이 아니더라도 일상업무가 아닌 중요한 사항이고 이사회가 위임하지 않았다면 이사회에 결정권이 있다고 보았다. <strong>번역:</strong> “법 조문에 정확히 안 적혀 있으니 사장 마음대로”는 아니다. 대표이사는 적법한 결정을 집행하고 위임받은 범위에서 일상 업무를 결정한다. 정관·명부·총회의사록 비치, 재무제표·청약서 작성 등 실무도 담당한다.</p>
+<p><strong>시험:</strong> 선임기관·이사 자격·직함≠권한. <strong>키워드:</strong> 적법한 선임. <strong>한 줄:</strong> 회사 사장처럼 보이는 것과 법률상 대표이사인 것은 다를 수 있다.</p>
+<h2 id="company-06-14" data-concept-id="company-06-14">3-2. 법정 대표권 제한과 내부적 제한을 구분한다 ★★★★★</h2>
+<p><strong>교재222–224쪽 · 문단의 이유:</strong> 상대방이 믿어도 넘지 못하는 법정 경계와 회사 내부 사정을 구별한다.</p>
+<p>대표이사는 회사 영업에 관한 재판상·재판 외 행위를 포괄적으로 한다. 하지만 <strong>회사와 이사 사이 소송에서는 감사가 회사를 대표</strong>하는394조 같은 법정 제한이 있다. 이사의 잘못을 그 이사 편에 서기 쉬운 대표이사에게만 맡기지 않으려는 것이다. 감사위원회·감사 없는 소규모 회사의 법정 특별대표 절차는7장과 연결한다.</p>
+<p><strong>89다카15199,1990.5.11.</strong> 회사 이사가 회사를 상대로 소를 내면서 대표이사를 회사 대표로 적었다. 법원과 변호사도 그대로 소송을 진행했다. 법원은 적법한 감사에게 송달되지 않은 문제를 지적하고 대표자 표시를 감사로 바로잡아 다시 송달하게 했다. <strong>번역:</strong>① 소송 상대는 회사지만 회사 대신 응할 사람이 잘못되었다.② 잘못된 대표자의 소송행위를 그대로 적법하다고 하지 않는다.③ 보정 가능한 흠결을 고쳐 적법한 소송관계를 만든다.</p>
+<p>정관·내규·이사회 결의가 ‘이 계약에는 이사회 승인을 받아라’고 정한 것은 내부적 제한이다. <strong>97다18059,1997.8.29</strong>은 그 제한을 모르는 제3자의 신뢰 보호를 강조했다. 교재 <strong>2010다11415,2012.4.26</strong>의 ‘알았거나 알 수 있었음’ 기준은1-5에서 본2021년 전원합의체에 따라 <strong>악의·중과실</strong>로 보완한다. 법정 총회 특별결의가 필요한 영업양도 등 서로 다른 제한까지 모두 같은 내부 제한으로 취급하면 안 된다.</p>
+<p><strong>시험:</strong>394조/209조2항·389조3항. <strong>키워드:</strong> 제한의 종류. <strong>한 줄:</strong> 누가 대표할 수 있는지와 내부 승인을 받았는지를 먼저 구분한다.</p>
+<h2 id="company-06-15" data-concept-id="company-06-15">3-3. 대표권 남용은 권한을 자기 이익에 쓰는 것이다 ★★★★★</h2>
+<p><strong>교재224–225쪽 · 문단의 이유:</strong> 겉으로 정상인 계약도 목적이 회사 배신일 수 있다.</p>
+<p>교재의 전형적 상황은 대표이사가 <strong>개인 채무를 갚기 위해 회사 명의 어음</strong>을 발행하는 것이다. 대표권 범위 안의 외형을 갖추었지만 회사 이익이 아니라 자기 또는 제3자의 이익을 위한 행동이다. 교재는 회사의 손실도 설명한다. 대표권의 범위 자체를 넘거나 필요한 승인을 누락한 쟁점과 구분하되, 실제 사건에서 여러 법적 문제가 동시에 생길 수 있다는 점도 기억한다.</p>
+<p><strong>89다카24360,1990.3.13.</strong> 개인 빚 변제에 회사 어음을 사용한 행위를 대표권 남용으로 보았다. <strong>번역:</strong> 회사가 사장의 지갑은 아니다. 다만 거래 상대방이 그 속사정을 모를 수도 있으므로 남용이라는 이유만으로 언제나 거래가 무효가 되는 것은 아니다.</p>
+<p><strong>2016다222453,2016.8.24</strong>은 회사 영리와 무관하게 자기·제3자의 이익을 도모한 행위라도 일단 회사 행위로 유효하며, 상대방이 남용 사정을 알았다면 회사가 악의를 입증해 효력을 부인할 수 있다고 설명했다. <strong>2012도2142,2012.5.24</strong>은 상대방이 진의를 알았거나 알 수 있었을 때 회사에 대하여 무효라는 기준을 밝혔다. <strong>번역:</strong>① 대표권이 있는가?② 어떤 목적으로 썼는가?③ 상대방은 무엇을 알았는가?를 나누어 본다.</p>
+<p>교재는 비진의의사표시 법리의 유추를 중심으로 설명하며, 권리남용설·이익교량설·대표권 제한설은 심화다. <mark class="pink">이사회 결의 누락의2021년 ‘선의·무중과실’ 기준을 대표권 남용의 모든 사안에 기계적으로 옮기지 않는다.</mark> 워크북093–095의 공통 지문은 개인 빚을 갚는 상황인데 상대방을 ‘채무자’라고 적어 관계가 어긋난다. 원문은 유지하되 개인 채무 변제를 위한 어음 발행이라는 출제 취지로 읽는다.</p>
+<p><strong>시험:</strong> 남용 요건과 상대방 보호 분리. <strong>키워드:</strong> 권한 안의 배신. <strong>한 줄:</strong> 적법한 대표권도 사익을 위해 쓰면 책임과 거래효력 문제가 생긴다.</p>
+<h2 id="company-06-16" data-concept-id="company-06-16">3-4. 공동대표는 ‘내보낼 때 함께, 받을 때 한 명’이다 ★★★★★</h2>
+<p><strong>교재225–228쪽 · 문단의 이유:</strong> 대표권 남용을 막으면서 상대방에게 지나친 불편은 주지 않는다.</p>
+<p>공동대표이사 갑·을·병이 있다면 회사가 계약을 체결하는 <strong>능동대표는 공동으로</strong> 한다. 회사가 상대방의 통지·이행을 받는 <strong>수동대표는 한 명에 대해서도</strong> 가능하다. 각자대표3명과 공동대표3명은 전혀 다른 구조다.</p>
+<p><strong>89다카3677,1989.5.23.</strong> 법원은 공동대표의 목적을 업무집행의 통일, 신중한 결정, 상호 견제로 보았다. 그래서 한 사람이 대표권을 다른 사람에게 <strong>일반적·포괄적으로 전부 넘기는 것은 허용하지 않았다.</strong> 특정 거래에 관한 개별 위임과는 다르다. 전부 넘길 수 있다면 공동대표 제도를 둔 의미가 없어진다.</p>
+<p><strong>92다19033,1992.10.27.</strong> 한 공동대표가 단독으로 한 거래는 나머지 공동대표 전원의 추인으로 하자를 고칠 수 있고, 추인의 뜻은 거래 상대방이나 단독행위자에게 표시할 수 있다고 보았다. <strong>번역:</strong> 사후에 적법한 공동 의사가 모일 수 있지만, 단독행위가 처음부터 각자대표처럼 당연히 유효한 것은 아니다.</p>
+<p><strong>95누14190,1996.10.25.</strong> 두 공동대표 중 한 명의 건물관리 행위를 다른 한 명이 용인·방임하고 상대방이 단독 대표권을 믿은 구체적 사정에서는 회사의 동의로 볼 수 있다고 했다. <strong>93다47653,1993.12.28</strong>도 공동대표 등기가 있어도 단독 대표행위를 회사가 용인·방임하면 표현대표 책임을 검토한다. <strong>번역:</strong> 공동대표라는 내부 보호장치를 회사 스스로 무너뜨린 외관을 상대방에게 떠넘길 수는 없다.</p>
+<p>불법행위는 별도로 본다. <strong>2011다50165,2013.6.27</strong>은 대표이사의 업무집행상 위법행위로 손해가 생기면 회사와 대표이사가 연대책임을 질 수 있다고 보았다. 객관적 외형상 직무행위인지도 중요하다. 공동대표 중 한 명의 업무상 불법행위라도 요건을 갖추면 회사가 책임진다. <strong>계약에 공동 의사가 필요한 것과 불법행위를 셋이 함께 해야만 배상하는 것은 다르다.</strong></p>
+<p><strong>시험:</strong> 능동·수동·포괄 위임 금지·불법행위. <strong>키워드:</strong> 함께 보내고 한 명이 받기. <strong>한 줄:</strong> 공동대표는 거래의 견제 장치이지 피해자에 대한 면책 장치가 아니다.</p>
+<h2 id="company-06-17" data-concept-id="company-06-17">3-5. 표현대표는 회사가 만든 믿음을 보호한다 ★★★★★</h2>
+<p><strong>교재228–233쪽 · 문단의 이유:</strong> 회사가 대표자처럼 보이게 해 놓고 계약 후 말을 바꾸는 것을 막는다.</p>
+<p>설명용 사례: 회사가 지훈에게 ‘사장’ 명함과 사무실을 주고 계약을 맡겨 두었다. 거래처는 대표권을 믿었다. 회사가 뒤늦게 “등기 대표가 아니야”라고 하면 외관을 만든 책임을 검토한다.395조의 세 축은 <strong>대표권이 있어 보이는 외관+회사 귀책사유+상대방의 선의·무중과실</strong>이다.</p>
+<p><strong>86다카2936,1988.10.11</strong>은 이 제도가 상거래의 신뢰와 안전을 위한 것이라고 설명했다. <strong>77다2436,1979.2.13</strong>은 대표이사가 따로 등기되어 있다는 사실만으로395조의 외관 보호를 배제하지 않았다. <strong>번역:</strong> 등기 대항력과 회사가 스스로 만든 외관의 책임은 다른 차원이다. <mark class="blue">상법기초에서 배운 명의대여·상업등기의 외관 보호와 연결하되 각 제도의 요건은 따로 확인한다.</mark></p>
+<table>
+<thead>
+<tr>
+<th>교재 판례</th>
+<th>사건의 갈등→법원의 결론→쉬운 번역</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>97다34709,1998.3.27</td>
+<td>이사 자격 없는 사람을 대표처럼 회사가 허용·묵인했다→395조 유추 적용 가능→이사 등기가 없다는 이유만으로 회사 책임이 사라지지 않음</td>
+</tr>
+<tr>
+<td>같은 판결</td>
+<td>행위자가 자기 직함 대신 다른 대표이사 명칭을 사용했다→적용 가능→외관과 귀책사유를 실질적으로 확인</td>
+</tr>
+<tr>
+<td>91다5365,1992.9.22</td>
+<td>누구의 허락을 회사의 허락으로 볼지 다툼→진정한 대표자 또는 정관상 결의 성립 수 등 필요한 이사들의 허용을 봄→아무 직원 한 명의 말로 회사의 묵인을 만들지 않음</td>
+</tr>
+<tr>
+<td>2004다17702,2005.9.9</td>
+<td>회사가 명칭 참칭을 알고도 동조·방치했다→묵시적 승인 가능→알면서 내버려 둔 것도 책임의 근거</td>
+</tr>
+<tr>
+<td>94다50908,1995.11.21</td>
+<td>회사가 명칭 사용을 승인하지 않았고 몰랐지만 발견 못 한 과실이 있었다→그 과실만으로395조 책임은 아님→알고 묵인과 모르고 못 막음을 구분</td>
+</tr>
+<tr>
+<td>99다19797,1999.11.12</td>
+<td>상대방이 대표권 있다고 믿었으나 중대한 과실이 문제됨→중과실이면 보호 제외→아주 현저한 의심을 외면한 믿음까지 보호하지 않음</td>
+</tr>
+<tr>
+<td>72다1907,1973.2.28</td>
+<td>선의 외 완전한 무과실까지 필요한지 다툼→그렇지 않음→작은 부주의와 중과실을 구분</td>
+</tr>
+</tbody></table>
+<p>97다34709의 선의는 ‘형식상 대표이사 직함이 아님을 몰랐다’만이 아니라 <strong>실제 대표권이 없음을 몰랐다</strong>는 뜻이다. 보호 대상도 그 표시를 신뢰한 제3자를 기준으로 본다. 표현대표가 개인적 이익을 얻어야만 회사가 책임지는 것은 아니다.</p>
+<p>효과는 회사가 대표권 없음을 이유로 외부 거래의 효과를 부인하지 못하는 것이다. 표현대표에게 진짜 이사 지위나 회사 내부 결정권을 창설하는 것은 아니다.97다34709가 지적한 별도 이사회 결의 누락 쟁점은 별도로 심사하되, 그 구판례의 상대방 과실 기준은1-5의2021년 변경을 함께 읽어야 한다. 법률상 별도 승인이 필요한 모든 거래를395조 하나로 구제하는 것도 아니다.</p>
+<p><strong>시험:</strong> 외관·귀책·선의 무중과실. <strong>키워드:</strong> 회사가 만든 믿음. <strong>한 줄:</strong> 대표가 아니어도 회사가 대표처럼 믿게 했다면 회사 책임이 생길 수 있다.</p>
+<h1>4. 이사는 무엇을 지켜야 하나</h1>
+<h2 id="company-06-18" data-concept-id="company-06-18">4-1. 주의 깊게, 충실하게, 비밀을 지키며 일한다 ★★★★★</h2>
+<p><strong>교재234–235쪽 · 문단의 이유:</strong> 개별 금지행위의 바탕이 되는 일반적 의무를 제시한다.</p>
+<p>선관주의의무는 맡은 직무·전문성·상황에 맞는 합리적 주의를 다하는 것이다. 결과가 나빴다는 사실만으로 언제나 위반하는 것은 아니다. 충실의무는 맡은 지위를 개인적 이익에 배신적으로 사용하지 말라는 방향을 강조한다. 두 의무의 관계에 관한 학설은 심화다.</p>
+<p><strong>현행382조의3은 회사 ‘및 주주’를 위하여 충실하게 직무를 수행하고, 총주주의 이익을 보호하며 전체 주주의 이익을 공평하게 대우하도록 한다.</strong>2025.7.22 개정 전 ‘회사만’ 적힌 교재 문장을 그대로 현행법이라고 하지 않는다. 그렇다고 특정 대주주의 요구가 언제나 회사의 이익보다 우선한다는 뜻도 아니다. 주주의 직접청구 요건과 회사 손해 회복의 소송구조는 구별한다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001702&lsRvsGubun=all">상법 개정문</a></p>
+<p><strong>84다카2490,1985.11.12.</strong> 회사가 돈을 갚을 능력이 있는데 단순히 지급을 늦춘 것만으로 이사가 제3자에게 고의·중과실의 임무해태 책임을 지는 것은 아니라고 보았다. <strong>번역:</strong> 회사의 계약상 지연과 이사 개인의 위법한 직무수행을 구분한다. 회사 채무가 자동으로 이사 개인 빚이 되지는 않는다.</p>
+<p>382조의4는 재임 중뿐 아니라 <strong>퇴임 후에도</strong> 직무상 알게 된 영업비밀을 누설하지 못하게 한다. 비공지성·경제적 가치·비밀관리가 핵심이다. 공시해야 할 정보나 이미 공개된 정보를 전부 비밀이라고 막을 수는 없다. 교재는 누설 금지뿐 아니라 비밀을 자기 이익에 이용하지 않을 의무까지 일반 의무와 연결한다.</p>
+<p><strong>시험:</strong> 결과 보장 아님·회사 및 주주·퇴임 후 비밀. <strong>키워드:</strong> 주의/충실/비밀. <strong>한 줄:</strong> 회사 일을 맡은 사람은 신중하게 일하고 맡긴 이익을 배신하지 않아야 한다.</p>
+<h2 id="company-06-19" data-concept-id="company-06-19">4-2. 이름만 올린 이사도 감시를 포기할 수 없다 ★★★★★</h2>
+<p><strong>교재235–236쪽 · 문단의 이유:</strong> 실제 경영자가 따로 있다는 이유로 이사들이 책임을 피하는 것을 막는다.</p>
+<p>평이사도 회의 안건에 찬반만 표시하면 끝나는 것은 아니다. 대표이사와 업무담당 이사의 전반적 업무를 감시하고 위법 의심이 있으면 자료 요청·보고 요구·이사회 논의 등 필요한 조치를 해야 한다. 회사에 현저한 손해를 미칠 우려가 있는 사실을 발견하면 즉시 감사에게 보고한다.</p>
+<p><strong>2007다31518,2008.9.11.</strong> 다른 이사의 업무가 위법하다고 의심할 사유가 있는데 악의·중과실로 감시를 게을리해 제3자에게 손해가 생긴 사건에서, 단순 비업무담당자라는 이유로 면책하지 않았다. <strong>번역:</strong>① 의심할 신호가 있었는가?② 확인할 지위·수단이 있었는가?③ 방치와 피해가 연결되는가?를 본다. 반대 결론이면 명목상 이사를 세워 책임을 비울 수 있다.</p>
+<p>실무에서는 합리적인 정보·보고 및 내부통제 체계가 작동하는지도 중요하다. 모든 부정을 반드시 발견해야 하는 결과 보장과는 다르지만, 정보가 들어오지 않는 구조를 아무 검토 없이 방치하는 것도 안전하지 않다. 사외·비상근이라는 이름만으로 면제되지 않는다는 판례 흐름도 확인된다. <a href="https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=6901">대법원 이사·감사 감시의무 사례</a></p>
+<p><strong>시험:</strong> 평이사도 일반적·능동적 감시. <strong>키워드:</strong> 의심 신호와 조치. <strong>한 줄:</strong> “나는 몰랐다”보다 “알아보려고 무엇을 했나”가 중요하다.</p>
+<h2 id="company-06-20" data-concept-id="company-06-20">4-3. 경쟁거래를 하면 개입권으로 이익을 돌려받는다 ★★★★★</h2>
+<p><strong>교재236–238쪽 · 문단의 이유:</strong> 회사에서 얻은 정보·기회를 경쟁 사업에 빼돌리지 못하게 한다.</p>
+<p>397조는 이사회 승인 없이 자기·제3자의 계산으로 회사 영업부류의 거래를 하거나 동종 영업 회사의 무한책임사원·이사가 되는 것을 금지한다. 실제 이익충돌이 핵심이므로 정관 사업목적 글자만 비교하지 않는다. 부동산회사 이사가 자기 주거용 집을 사는 것처럼 영리성·경쟁 충돌이 없는 거래는 다르다. 동종 회사가 아직 준비 단계여도 앞의92다53583처럼 포함될 수 있다.</p>
+<p>경업 승인에는 거래하는 이사가 특별이해관계인으로 투표하지 못한다. 승인 없는 경쟁거래 자체는 원칙적으로 유효하지만, 이사는 회사 손해를 배상하고 해임 사유가 될 수 있다. 승인 제도를 어기면 거래 상대방과의 계약이 모두 없어지는 것은 아니다.</p>
+<p>회사는 이사회 결의로 <strong>개입권</strong>을 행사할 수 있다. 자기 계산 거래이면 회사 계산으로 한 것으로 보고, 제3자 계산 거래이면 이사에게 이득 양도를 청구한다. <strong>거래일부터1년</strong>이 지나면 개입권이 소멸한다. 손해액 입증이 어려운 회사를 보호하려는 장치다.</p>
+<p>설명용 사례: 식품회사 이사 민서가 몰래 같은 상품을 자기 돈으로 팔아 이익을 얻었다. 회사는 적법한 개입권 행사로 그 경제적 이익을 돌리게 할 수 있다. 그렇다고 그 물건을 산 고객의 계약 상대방이 자동으로 회사로 바뀌는 것은 아니다. <strong>회사의 개입권은 회사와 이사 내부의 계산·이득 귀속을 바꾸는 것</strong>이다. 대표이사는 이사회 결정에 따라 이사에게 통지한다.</p>
+<p><strong>시험:</strong> 경업과 겸직·개입권1년·거래는 유효. <strong>키워드:</strong> 회사와 경쟁하지 않기. <strong>한 줄:</strong> 회사 일을 맡아 얻은 기회로 회사와 경쟁하면 그 이익을 내놓을 수 있다.</p>
+<h2 id="company-06-21" data-concept-id="company-06-21">4-4. 자기거래는 계약 양쪽의 이해가 충돌하는 문제다 ★★★★★</h2>
+<p><strong>교재238–244쪽 · 문단의 이유:</strong> 이사가 자기 편에 유리한 가격을 정해 회사에 손해를 주지 못하게 한다.</p>
+<p>398조의 핵심은 <strong>중요 사실 사전 공개+이사3분의2 이상 사전 승인+내용·절차의 공정성</strong>이다. 자기 또는 제3자 계산 거래에 적용한다. 승인을 얻으면 민법상 쌍방대리 제한 문제도 해결될 수 있지만 승인만 있으면 모든 손해배상책임까지 사라지는 것은 아니다.</p>
+<p>적용 대상은 이사뿐 아니라 주요주주, 그 배우자·직계존비속, 배우자의 직계존비속, 이들이 단독·공동으로 의결권 있는 주식50% 이상을 가진 회사와 그 자회사, 법이 정한 합산 지배 회사까지다. 주요주주 개념을 상장회사 조문에서 빌려 와도398조 자체는 비상장회사에도 적용된다. 거래 당시 이사가 아니더라도 <strong>주요주주·특수관계인 등 다른 적용 자격이 남아 있는지</strong> 확인한다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>교재 사례를 쉽게 풀기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>직접 거래</td>
+<td>이사가 자기 건물을 회사에 비싸게 판다. 양쪽 이해가 충돌한다.</td>
+</tr>
+<tr>
+<td>간접 거래</td>
+<td>회사가 이사 개인 빚에 보증을 선다. 상대방은 은행이어도 회사와 이사의 이해가 충돌한다.</td>
+</tr>
+<tr>
+<td>대표 겸임</td>
+<td>한 사람이 A·B회사 대표로 양쪽을 계약시킨다. 양 회사에서 필요한 승인을 검토한다.</td>
+</tr>
+<tr>
+<td>충돌이 없는 경우</td>
+<td>이사가 회사에 부담 없는 증여를 하거나 무이자·무담보로 돈을 빌려준다. 다만 다른 조건의 숨은 부담이 없는지 본다.</td>
+</tr>
+</tbody></table>
+<p>이미 적법하게 성립한 채무의 단순 이행·상계, 정형적 약관 거래도 구체적으로 충돌 위험을 살핀다. ‘약관을 썼으니 어떤 불공정 거래도 승인 불필요’라고 확대하지 않는다.</p>
+<h3>교재 판례 · 어떤 거래가 자기거래인가?</h3>
+<p><strong>88다카9098,1988.9.13.</strong> 거래 당시 이미 이사를 그만둔 사람은 그 이사 지위만을 이유로398조의 대상이 되지 않는다고 보았다. <strong>번역:</strong> 현재 거래 시점의 지위를 본다.2012년 이후 확대된 주요주주·특수관계인 범위는 따로 확인한다.</p>
+<p><strong>84다카1591,1984.12.11.</strong> 한 사람이 두 회사 대표를 겸하며 한 회사가 다른 회사 채무에 연대보증하게 했다. 법원은 직접 매매뿐 아니라 이런 간접적 이해충돌도 자기거래라고 보았다. <strong>95다12101·12118,1996.5.28</strong>은 대표를 겸한 두 회사 사이 토지·건물 매매에서 필요한 이사회 승인 없는 거래의 효력을 부정했다. <strong>번역:</strong> 서명자가 양쪽 회사 이름을 썼어도 이익이 저절로 일치하지 않는다.</p>
+<p><strong>94다24626,1994.10.11.</strong> 회사 명의 수표 배서도 이익충돌이 있다면 자기거래 규율 대상이 된다. 다만 회사가 제3자에게 무효를 주장하려면 상대방의 사정도 증명해야 한다. <strong>번역:</strong> 어음·수표라는 결제 형식이 이해충돌을 없애 주지는 않는다.</p>
+<p><strong>92도1564,1992.9.14.</strong>1인 주주의 의사와 의사록·등기가 일치하는 사안에서 문서·등기 관련 형사책임을 판단했다. 이는1인회사 기관 의사에 관한 판결이지, 현행398조의 사전 승인·공정성 요건을 무조건 생략해도 된다는 포괄 면허는 아니다. 교재의 채권자 보호설과1인 주주 이익 일치설은 심화로 구분한다.</p>
+<p><strong>2005다4284,2007.5.10.</strong> 필요한 이사회 승인을 못 받은 거래를 권한 없는 총회가 나중에 추인했다. 법원은 총주주 동의·정관상 권한 같은 특별사정이 없는 한 단순 추인으로 유효해지지 않는다고 보았다. <strong>번역:</strong> 총회가 더 높아 보인다는 이유만으로 기관 권한을 대체하지 못한다. 현행법의 ‘미리’ 승인·공정성을 전제로 읽고 모든 사후 추인이나 총주주 동의가 자동 치유라고 하지 않는다.</p>
+<p><strong>87누760,1989.1.31.</strong> 대표이사가 개인 용도로 회사 수표·어음 배서를 이용해 회사에 손해를 입혔다. 이사회 승인이 있었다 해도399조 또는 불법행위 책임을 검토할 수 있다고 보았다. <strong>번역:</strong> 승인받았다는 말이 회사 이익을 해칠 자유까지 준 것은 아니다.</p>
+<p><strong>2003다64688,2004.3.25.</strong> 승인 없는 자기거래는 회사와 이사 사이에서는 무효지만, 제3자에게 무효를 주장하려면 회사가 그 제3자의 악의 또는 중대한 과실을 입증해야 한다. <strong>번역:</strong> 이사는 승인 없음을 이용해 보호받기 어렵지만 무관한 선의의 제3자는 거래안전 때문에 보호될 수 있다. 상대적 무효설은 이 차이를 가리킨다.</p>
+<p>승인은 거래마다 가격·물량·기간·임대료·마진율 등 중요한 사실을 공개하여 받는다. 앞으로 할 모든 자기거래를 포괄적으로 허용한다는 결의는 적절하지 않다. 특별이해관계 이사는 해당 승인에 투표하지 못한다.</p>
+<p><strong>시험:</strong> 대상 확대·사전3분의2·공정성·상대적 무효. <strong>키워드:</strong> 양쪽 이해충돌. <strong>한 줄:</strong> 회사와 이사가 거래할 때는 누가 회사 편에서 공정하게 심사했는지 본다.</p>
+<h2 id="company-06-22" data-concept-id="company-06-22">4-5. 회사의 사업기회를 먼저 자기 회사에 가져가지 못한다 ★★★★★</h2>
+<p><strong>교재244–245쪽 · 문단의 이유:</strong> 아직 계약이 확정되지 않은 기회도 회사 재산처럼 보호할 필요가 있다.</p>
+<p>397조의2는 직무 중 알게 되었거나 회사 정보를 이용한 기회, 회사가 수행하거나 수행할 사업과 밀접한 기회를 승인 없이 자신·제3자 이익을 위해 이용하지 못하게 한다. 회사가 이미 계약서를 써 놓은 기회만 뜻하는 것은 아니다. 승인에는 <strong>이사3분의2 이상</strong>이 필요하다.</p>
+<h3>교재 판례 · 회사의 독점판매권을 새 회사로 옮겼다</h3>
+<p><strong>2016다16191,2018.10.25.</strong> 기존 회사의 이사가 별도 회사를 만들고 그 경영에 관여했다. 기존 회사가 외국 업체 제품의 독점판매를 하던 중 새 회사가 같은 제품을 수입·판매했고, 기존 계약이 끝나자 새 회사가 독점판매계약을 맺었다. 이후 영업을 팔아 이익을 얻었다. 기존 회사는 기회를 잃고 어려움을 겪다가 해산했고 주주가 이사 책임을 물었다.</p>
+<p>법원은 경쟁과 기회 유용으로 선관·충실의무를 위반했다고 보았다. 새 회사가 받은 영업권 대가에는 기존 회사가 잃은 사업기회의 가치도 들어 있다고 판단했다. <strong>문장 번역:</strong>① 이익이 될 기회는 먼저 회사에 제공해야 한다.② 계약 기간이 끝난다는 이유로 이사가 그 기회를 자기 것으로 삼는 것은 아니다.③ 회사가 잃은 가치가 새 회사 이익에 포함될 수 있다. 반대 결론이면 이사는 중요한 거래처를 옮기고 회사에는 빈 껍데기만 남길 수 있다.</p>
+<p>위반한 이사와 이를 승인한 이사는 법이 정한 요건 아래 연대책임을 지고, 그 위반으로 이사·제3자가 얻은 이익은 회사 손해로 <strong>추정</strong>한다. 추정이므로 반증 가능하며 손해와 관련 없는 이익까지 전부 자동 몰수하는 규정은 아니다. 경업 개입권과 회사기회 손해 추정을 구분한다.</p>
+<p><strong>시험:</strong> 기회 범위·3분의2·이익=손해 추정. <strong>키워드:</strong> 먼저 회사에 제공. <strong>한 줄:</strong> 회사에서 얻은 미래의 돈벌이 기회를 몰래 자기 주머니로 옮길 수 없다.</p>
+<h1>5. 잘못했을 때 누구에게 무엇을 배상하나</h1>
+<h2 id="company-06-23" data-concept-id="company-06-23">5-1. 회사 손해는 실패 자체가 아니라 임무 위반을 따진다 ★★★★★</h2>
+<p><strong>교재246–248쪽 · 문단의 이유:</strong> 권한을 준 만큼 책임을 지우되 모든 사업 실패를 처벌하지는 않는다.</p>
+<p>399조는 이사가 <strong>고의·과실로 법령·정관을 위반하거나 임무를 게을리해 회사에 손해를 입힌 경우</strong>의 책임이다. 책임 있는 이사들이 연대한다. 위법배당, 승인 없는 경업·자기거래, 자기주식 취득 규제 위반, 주주권 행사에 관한 이익공여 등이 예다. 자기주식은 현재 무조건 취득 금지가 아니라4장에서 배운 요건과2026년 개정 통제를 위반했는지 본다. 주주권 이익공여 조문은467조의2다.</p>
+<p><strong>서울고법79나821,1980.8.18.</strong> 대표이사가 이사회 결의 없이 임대차 관련 일부 차임을 포기했지만 장기 소유권 분쟁을 끝내 회사에 더 큰 이익을 확보한 사안이 소개된다. 법원은 전체 재산상 손해 유무를 따졌다. <strong>번역:</strong> 절차 위반과 손해 발생은 별도 요건이다. 불법행위를 통해 얻은 이익까지 언제나 손해에서 빼도 된다는 일반 규칙으로 확대하지 않는다.</p>
+<p><strong>96다30465·30472,1996.12.23.</strong> 금융회사의 대출금이 회수되지 않았다. 회사가 대표이사에게 책임을 물었지만 법원은 대출금을 반드시100% 회수할 결과 채무가 아니라 필요한 주의를 다할 의무라고 보았다. <strong>번역:</strong>① 결과가 나빴다는 사실만으로 임무위반이 추정되지 않는다.② 결정 당시 정보를 조사했는지 본다.③ 회사 이익을 위한 합리적 조치가 있었는지 본다. 모든 실패에 자동 책임을 지우면 필요한 사업 판단까지 멈출 수 있다. 명백한 법령 위반을 ‘경영 판단’이라는 말로 면제할 수는 없다.</p>
+<p>책임을 묻는 쪽은 어떤 의무를 어기고 어떤 손해가 생겼는지 특정해야 한다. 채무불이행 책임의 귀책사유 증명 문제와 결과 발생만으로 임무위반을 추정할 수 있는지는 구분한다. 결의 찬성 이사와 반대 기록 없는 참가 이사에 관한399조2·3항도1-6과 연결한다.</p>
+<p><strong>시험:</strong> 위반·고의과실·손해·인과관계. <strong>키워드:</strong> 결과 보장 아님. <strong>한 줄:</strong> 사업이 실패했는지보다 맡은 일을 제대로 판단하고 수행했는지를 본다.</p>
+<h2 id="company-06-24" data-concept-id="company-06-24">5-2. 책임 면제와 자본충실책임은 섞지 않는다 ★★★★★</h2>
+<p><strong>교재248쪽 · 문단의 이유:</strong> 주주들이 포기할 수 있는 청구와 채권자 보호를 위한 책임을 구분한다.</p>
+<p>399조 책임은 의결권 없는 주주까지 포함한 <strong>주주 전원의 동의</strong>로 면제할 수 있다. 총회 특별결의만으로 전체 면제는 안 된다.400조2항에 따른 정관상 제한은 별도다. 행위 전 최근1년 보수의 <strong>6배, 사외이사 및 독립이사는3배를 초과하는 부분</strong>을 면제할 수 있다. 보수에는 상여금·스톡옵션 행사 이익도 포함된다. 예컨대 일반 이사의 기준 보수1억원이면6억원까지 자동 면제한다는 말이 아니라6억원을 초과하는 부분에 대한 제한 장치다.</p>
+<p>고의·중과실, 경업금지·회사기회 유용·자기거래에 해당하는 경우에는 이 정관상 제한을 적용하지 않는다. 이 예외는400조2항의 제한에 관한 것이므로1항의 전원동의와 같은 문장으로 섞지 않는다. <a href="https://law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=059700000&languageType=KO&lsNm=%EC%83%81%EB%B2%95&paras=1">현행400조</a></p>
+<p><strong>84다카1954,1985.6.25.</strong> 이사의 회사에 대한 임무해태 책임은 위임관계의 채무불이행으로서10년 소멸시효를 적용한다고 보았다. <strong>번역:</strong> 일반 불법행위 단기시효와 바로 같다고 하면 안 된다. 구체적 청구의 성질·시효 기산점은 따로 검토한다.</p>
+<p>428조의 신주 인수담보책임은 다른 축이다. 신주발행 변경등기 후 아직 인수되지 않은 주식이나 인수청약이 취소된 주식이 있으면 이사들이 공동 인수한 것으로 보아 자본을 채우게 한다. 교재는 이를 무과실·면제 불가의 자본충실책임으로 설명한다. <strong>돈을 납입하지 않은 신주인수인은 당연실권되는 원칙이 있어 설립 시 발기인의 납입담보책임과 그대로 같지는 않다.</strong> 별도 손해배상청구도 가능하다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0428&lsiSeq=273629&urlMode=lsScJoRltInfoR">428조</a></p>
+<p><strong>시험:</strong> 전원동의/정관6·3배/인수담보 구별. <strong>키워드:</strong> 회사 청구와 자본 보호. <strong>한 줄:</strong> 손해배상 면제 규정을 주식 인수대금 충실 책임에 그대로 쓰지 않는다.</p>
+<h2 id="company-06-25" data-concept-id="company-06-25">5-3. 제3자 책임에는 고의·중과실의 임무해태가 필요하다 ★★★★★</h2>
+<p><strong>교재249–250쪽 · 문단의 이유:</strong> 계약 당사자는 회사여도 경영자의 중대한 잘못으로 피해를 본 외부자를 보호한다.</p>
+<p>401조는 이사가 고의 또는 중대한 과실로 임무를 게을리해 제3자에게 손해를 준 경우의 연대책임이다. 일반 불법행위와 동일한 것으로만 보지 않고 상법이 특별히 정한 제3자 보호책임으로 이해한다. <strong>회사에 대한399조는 경과실도 포함하지만401조는 고의·중과실</strong>이라는 차이가 핵심이다. 허위 재무정보, 지급 전망 없는 어음 등도 구체적 요건을 본다.</p>
+<p><strong>2004다26119,2006.8.25.</strong> 돈을 갚을 능력이 있는 회사의 단순 지급지체만으로 이사 개인의 임무해태를 인정할 수 없다고 했다. 반대로 이행 불능을 예상하면서 감추고 계약해 선급금을 받는 등 위법한 사정은 별도로 문제된다. <strong>번역:</strong> 회사의 빚을 자동으로 사장 빚으로 바꾸는 조문은 아니지만 경영자의 중대한 기망·방치를 무시하는 조문도 아니다.</p>
+<p><strong>2003다29661,2003.10.24.</strong> 이사가 회사 돈을 횡령해 회사 재산이 줄고 그 때문에 주식 가치가 하락했다. 법원은 이런 <strong>간접손해</strong>를 주주가401조로 직접 청구할 손해와 구별했다. 주주 자신이 직접 피해를 본 경우에는 요건 아래 청구할 수 있다. <strong>번역:</strong> 회사 금고 손실은 우선 회사에 돌려주고, 주주의 별도 직접 손실은 따로 구제한다. 이중 배상과 채권자 침해를 막기 위한 구분이다.2025년 충실의무 확대가 이 기존 손해 구분을 모든 사건에서 자동 폐기했다고 단정하지 않는다.</p>
+<p><strong>82누537,1983.7.12.</strong>401조를 지방자치단체의 급수사용료 부과처분 근거로 삼을 수 없다고 했다. <strong>번역:</strong> 손해배상 규정으로 공법상 요금 부과권을 새로 만들 수는 없다. 국가·지자체가 사법상 거래 피해자가 된 모든 경우까지 제3자에서 무조건 빠진다고 일반화하지 않는다.</p>
+<p><strong>시험:</strong> 고의·중과실·직접/간접손해. <strong>키워드:</strong> 외부 피해자 보호. <strong>한 줄:</strong> 회사 빚과 이사 개인의 중대한 잘못에 대한 배상은 다른 문제다.</p>
+<h2 id="company-06-26" data-concept-id="company-06-26">5-4. 등기 뒤에 숨은 실질 경영자도 책임질 수 있다 ★★★★☆</h2>
+<p><strong>교재250–251쪽 · 문단의 이유:</strong> 실권자가 명의상 이사만 앞세워 책임을 피하는 것을 막는다.</p>
+<p>401조의2는 다음 사람을 <strong>지시·집행한 업무에 관하여</strong> 책임 규정상 이사로 본다.① 회사에 대한 영향력으로 이사에게 업무집행을 지시한 사람,② 이사 이름으로 직접 집행한 사람,③ 이사가 아니지만 회장·사장·전무 등 업무집행 권한이 있어 보이는 명칭을 쓰며 실제 업무를 집행한 사람이다.</p>
+<p>설명용 사례: 등기에는 아들이 이사인데 아버지가 ‘회장’으로 모든 대출을 지시한다. 법정 요건이 있으면 아버지도 지시한 업무의 회사·제3자 손해에 책임을 질 수 있다. 단지 친족·대주주·명예회장이라는 명함만으로 자동 책임을 지는 것은 아니다. 실제 영향력과 행위를 연결해야 한다.</p>
+<p>399조·401조와 대표소송·다중대표소송 규정이 적용되고, 함께 책임 있는 이사와 연대한다. <strong>표현대표는 거래 상대방에 대한 회사의 책임, 업무집행지시자는 실질 경영자 자신의 배상책임</strong>이라는 차이를 기억한다. 기관책임설과 불법행위책임설은 심화다.</p>
+<p><strong>시험:</strong> 지시·명의 집행·직함+실제 집행. <strong>키워드:</strong> 실권자 책임. <strong>한 줄:</strong> 이름은 빼고 일은 시킨 사람이 법정 요건을 충족하면 책임도 진다.</p>
+<h1>6. 주주는 어떻게 막고 되돌리는가</h1>
+<h2 id="company-06-27" data-concept-id="company-06-27">6-1. 유지청구는 ‘계속해’가 아니라 ‘그만해’다 ★★★★★</h2>
+<p><strong>교재252–254쪽 · 문단의 이유:</strong> 회사가 크게 다치기 전에 위법행위를 막는다.</p>
+<p>402조의 <strong>유지(留止)</strong>는 멈추게 한다는 뜻이다. 이사가 법령·정관에 위반한 행위를 하여 회사에 회복할 수 없는 손해가 생길 염려가 있으면 감사 또는 일반회사1% 이상 주주가 회사를 위해 중지를 청구한다. 상대방은 그 행위를 하려는 이사다. 이사의 고의·과실이 있어야만 사전에 막는 것은 아니다. 회복 불가능은 법률상 절대 불가능만 아니라 사회통념상 회복 곤란도 본다.</p>
+<p>재판 밖 의사표시, 소송, 가처분을 이용할 수 있다. 소송으로만 해야 한다는 보기는 틀리다. 회사를 위한 소송이므로 판결의 회사에 대한 효력도 검토한다. 상장회사 특례는6개월 계속 보유와0.05%, 일정 자본금 규모 회사0.025% 기준이다. 일반규정으로 권리를 행사하는 길도 별도로 남는다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>402조 위법행위 유지</th>
+<th>424조 신주발행 유지</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>누가?</td>
+<td>감사·소수주주</td>
+<td>주주 각자</td>
+</tr>
+<tr>
+<td>무엇을?</td>
+<td>이사의 법령·정관 위반</td>
+<td>신주발행의 법령·정관 위반 또는 현저한 불공정</td>
+</tr>
+<tr>
+<td>피해 기준</td>
+<td>회사에 회복할 수 없는 손해 우려</td>
+<td>주주가 불이익을 받을 우려</td>
+</tr>
+<tr>
+<td>성격</td>
+<td>회사를 위한 공익권</td>
+<td>자기 주주 이익을 위한 자익권</td>
+</tr>
+</tbody></table>
+<p><strong>시험:</strong>1%·회사 손해·재판 외 가능. <strong>키워드:</strong> 사전 중지. <strong>한 줄:</strong> 회사가 돌이킬 수 없는 손해를 입기 전에 위법한 일을 멈춘다.</p>
+<h2 id="company-06-28" data-concept-id="company-06-28">6-2. 대표소송의 배상금은 주주가 아니라 회사로 간다 ★★★★★</h2>
+<p><strong>교재254–256쪽 · 문단의 이유:</strong> 회사가 친한 이사를 봐주며 청구하지 않을 때 주주가 대신 회사 권리를 실현한다.</p>
+<p>소수주주가 <strong>자기 이름으로 원고가 되어 회사 이익을 위해</strong> 이사 책임을 묻는 소송이다. 회사 명의로 대리인이 되어 소송하는 것과 다르다. 이사 외에도 준용규정에 따라 발기인·감사·청산인·업무집행지시자 등의 책임, 불공정 신주인수 대금 차액, 주주권 이익공여 반환 등을 추궁할 수 있다. 이사의 회사에 대한 일반 거래채무까지 범위에 넣을지에 대한 교재 학설은 심화다. ‘399조 손해배상만 유일한 대상’이라고 좁히지는 않는다.</p>
+<p><strong>2000마7839,2001.2.28.</strong> 주주는 회사 재산관계에 경제적 이해가 있지만 회사가 맺은 제3자 계약에 직접 끼어들어 언제나 무효를 주장할 수 있는 법적 지위는 아니라고 했다. <strong>번역:</strong>① 주주와 회사는 다른 법적 주체다.② 회사 손해는 법정 유지청구·대표소송 등 통로를 이용한다.③ 회사의 모든 계약을 주주 개인이 직접 취소하는 것은 아니다.</p>
+<p>일반회사 <strong>1% 이상 주주</strong>가 이유를 적은 서면으로 회사에 제소를 청구한다. 회사가 청구받은 날부터 <strong>30일 내</strong> 소를 내지 않으면 주주가 제소할 수 있다. 기다리면 재산 은닉·시효 완성 등 회복할 수 없는 손해가 생길 우려가 있는 경우에는 사전 청구나30일 대기를 생략할 수 있다. 상장회사 특례는6개월 계속 보유 <strong>0.01%</strong>다.</p>
+<p>제소 후1% 미만으로 줄어도 지분을 조금 유지하면 효력에 영향이 없지만, 주식을 전부 처분하는 경우는 구분한다. 피고는 책임 있는 이사 또는 전 이사다. 소를 낸 주주는 회사에 지체 없이 알리고 회사가 참가할 수 있다. 이사는 주주의 악의를 소명해 담보 제공을 요구할 수 있다. 취하·청구 포기·화해는 법원의 허가 없이 마음대로 하지 못한다.</p>
+<p>승소하면 배상은 회사가 받는다. 주주는 상당한 소송비용·지출비용을 회사에 청구할 수 있고 회사의 구상 문제도 있다. 패소했다고 주주가 자동 배상하는 것은 아니고 회사에 해를 끼치려는 악의 등 요건을 본다. 주주와 이사가 공모해 회사 권리를 해칠 판결을 만들었다면 회사 또는 주주가406조 재심을 제기할 수 있다.</p>
+<p><strong>시험:</strong> 원고 주주/이익 회사·1%·30일·법원 허가. <strong>키워드:</strong> 회사 권리 대신 실현. <strong>한 줄:</strong> 주주가 소송을 하지만 되찾은 회사 돈은 회사로 돌아간다.</p>
+<h2 id="company-06-29" data-concept-id="company-06-29">6-3. 다중대표소송은 모회사 주주가 자회사 손해를 되돌린다 ★★★★☆</h2>
+<p><strong>교재257–259쪽 · 문단의 이유:</strong> 모회사라는 한 겹 뒤에 숨은 자회사 이사도 감시한다.</p>
+<p>설명용 인물 지민은 A회사 주주이고 A는 B회사 주식 과반수를 보유한다. B이사가 B돈을 빼돌렸는데 B가 소송하지 않는다.406조의2는 요건을 갖춘 지민이 <strong>B를 위해 B이사에게</strong> 책임을 묻는 통로를 둔다. 배상은 지민이나 A가 아니라 손해 입은 B에 귀속된다.</p>
+<p>일반적으로 모회사 주식1% 이상 주주가 <strong>자회사에</strong> 이유를 적은 서면으로 제소를 청구하고30일을 기다린다. 급박한 회복 불가능 손해 우려에는 예외가 있다. 상장 모회사 특례는6개월 계속 보유0.5%다. 모회사 이사에게 무조건 소를 내는 제도가 아니다.</p>
+<p>청구 후 A의 B지분이50% 이하로 줄어도 원칙적으로 제소 효력이 유지되지만 <strong>A가 B주식을 전부 처분한 경우는 제외</strong>된다. 제소 주주 자신의 모회사 주식 보유 문제도 대표소송 준용규정을 본다. 관할은 <strong>자회사 본점 소재지 지방법원 전속</strong>이다. 절차·참가·재심·비용은 대표소송 규정을 준용한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026995145">406조의2</a></p>
+<p>교재 <strong>서울고법2002나13746,2003.8.22</strong>은 도입 전 인정 논리를, <strong>대법원2003다49221,2004.9.23</strong>은 당시 상법 아래 허용 곤란하다는 판단을 보여 준다. <strong>번역:</strong> 옛 판결이 틀렸다고 고치는 것이 아니라, 그 뒤2020년 입법으로 법적 토대가 생겼다는 순서로 읽는다. 다중대표소송이라는 학술 명칭이 무한한 계열회사의 모든 주주에게 자동 소권을 준다는 뜻도 아니다.</p>
+<p><strong>시험:</strong> 모회사 주주→자회사 청구→자회사 이사·자회사 이익. <strong>키워드:</strong> 회사 한 겹 건너 감독. <strong>한 줄:</strong> 자회사 손해를 회사 관계 뒤에 숨겨 두지 못하게 한다.</p>
+<h1>7. 보충강의1 · 주식매수선택권</h1>
+<h2 id="company-06-30" data-concept-id="company-06-30">7-1. 좋은 경영자를 데려오되 미래 성과를 함께 나눈다 ★★★★☆</h2>
+<p><strong>교재261–264쪽 · 문단의 이유:</strong> 당장 높은 보수를 지급하기 어려운 회사가 장래 주가 상승 이익을 보상으로 제시하는 이유를 설명한다.</p>
+<h3>교재 사례 · 부품 판매회사 A의 경영자 영입</h3>
+<p>A회사는 컴퓨터 조립·판매업을 하는 비상장회사다. 규모는 작지만 부품 공급·사후관리망이 튼튼해 성장성이 크다. 탁월한 경영자를 대표이사로 모셔 오고 싶으나 높은 연봉을 감당하기 어렵다. 그래서 상법상 <strong>주식매수선택권, 즉 스톡옵션</strong>을 주기로 한다. 이 사례에서 컴퓨터는 거래 상품일 뿐 법률을 프로그래밍으로 비유하는 것이 아니다.</p>
+<p>교재 숫자로 계산해 보자. 주당1000원에100주를 살 권리를 주었는데 행사할 때 주가가1500원이면10만원을 내고15만원 가치의 주식을 받아 차익은5만원이다. 주가가800원이면 굳이1000원에 살 필요가 없으므로 행사하지 않으면 된다. <strong>주식을 반드시 사야 하는 의무가 아니라 선택권</strong>이다. 주가가 오르도록 좋은 경영을 하게 만드는 것이 목적이다.</p>
+<p>자기주식양도형은 회사가 보유한 기존 주식을 넘기고, 신주발행형은 새 주식을 발행한다. 차액정산은 실질가액과 행사가액의 차이를 돈 또는 그에 상당하는 자기주식으로 주는 방식이다. 앞 사례에서 현금 정산이면5만원이다. 자기주식으로 주면 행사 시점의 실질가액으로 평가해야 하므로100주를 그냥 주는 것과 같지 않다. 소수점 등 실제 이행방법은 계약을 본다.</p>
+<p>신주발행은 발행주식 수가 늘어 기존 주주 지분율을 희석한다. 자기주식 이전은 발행주식총수를 새로 늘리는 것은 아니지만 기존 자기주식에 없던 권리 행사가 살아나 다른 주주의 상대적 영향에 영향을 준다. 현금 차액정산은 주식 수 변동을 줄이는 장점이 있으나 회사 돈이 나간다. 부여 당시 적법하게 정한 행사가격이 행사 때 시가보다 낮아졌다는 이유만으로 곧바로 통모에 의한 불공정 신주인수가 되는 것은 아니다.</p>
+<p><strong>시험:</strong> 선택권/주식 자체·신주/자기주식/차액. <strong>키워드:</strong> 성과 유인. <strong>한 줄:</strong> 잘 경영해 주가를 올리면 약속된 가격으로 살 기회를 주는 보상이다.</p>
+<h2 id="company-06-31" data-concept-id="company-06-31">7-2. 정관·특별결의·계약을 차례로 갖춘다 ★★★★★</h2>
+<p><strong>교재264–268쪽 · 문단의 이유:</strong> 기존 주주의 희생이 따르므로 보상 대상과 조건을 투명하게 정한다.</p>
+<p>일반회사에서는 회사의 설립·경영·기술혁신 등에 기여했거나 기여할 수 있는 이사·집행임원·감사·피용자에게 정관을 근거로 부여한다. 의결권 없는 주식을 제외한 발행주식10% 이상 보유자, 경영에 사실상 영향력을 행사하는 자, 법정 가족 등340조의2의 제외 대상도 확인한다. 일반회사 부여 한도는 발행주식총수10%다. 상장회사·벤처기업 특별법을 혼합하지 않는다.</p>
+<p>정관에는 부여할 수 있다는 뜻, 행사로 발행·양도할 주식 종류·수, 받을 사람의 자격, 행사기간, 일정 경우 이사회 결의로 취소할 수 있다는 뜻 등을 정한다. 정관만 있으면 특정인에게 권리가 즉시 생기는 것은 아니다. <strong>총회 특별결의</strong>로 다음 다섯 가지를 구체화하고 계약을 맺는다.</p>
+<table>
+<thead>
+<tr>
+<th>총회에서 정할 것</th>
+<th>A회사 사례에서 이해하기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>받을 사람 성명</td>
+<td>새 대표이사를 특정</td>
+</tr>
+<tr>
+<td>부여 방법</td>
+<td>신주를 줄지 자기주식을 줄지 등</td>
+</tr>
+<tr>
+<td>행사가액·조정</td>
+<td>얼마를 내고 살지, 증자·감자 때 어떻게 조정할지</td>
+</tr>
+<tr>
+<td>행사기간</td>
+<td>언제부터 언제까지 선택할지</td>
+</tr>
+<tr>
+<td>각 사람별 종류·수</td>
+<td>예: 보통주1만주에 대한 권리</td>
+</tr>
+</tbody></table>
+<p>회사는 결의대로 계약을 체결하고 상당한 기간 내 계약서를 작성한다. 계약서는 행사기간 종료까지 본점에 두고 주주가 영업시간에 열람하도록 한다. 기존 주주는 장차 지분·주식가치가 어떻게 달라질지 알아야 하기 때문이다. 총회 선임과 취임승낙으로 이사 지위가 생기는2-2와 스톡옵션의 별도 계약을 혼동하지 않는다.</p>
+<p><strong>상장회사 숫자 보완:</strong> 법률의 위임 상한20%와 실제 시행령 한도는 다르다. 현재 시행령상 전체 한도는 <strong>15%</strong>다. 이사회만으로 먼저 부여할 수 있는 범위도 법률의10% 상한 전체가 아니라 자본금3000억원 이상 회사 <strong>1%</strong>, 미만 <strong>3%</strong>다. 해당 회사의 이사는 이 이사회 부여 특례 대상에서 제외되는 등 대상 범위 제한이 있고, 이후 처음 열리는 총회 승인이 필요하다. 관계회사 임직원 대상 확대도 시행령상 관계회사 요건을 확인한다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0030&lsiSeq=287141&urlMode=lsScJoRltInfoR">상법 시행령30조</a></p>
+<p><strong>시험:</strong> 정관≠개별 부여·특별결의+계약·상장 실제 한도. <strong>키워드:</strong> 근거/결정/계약. <strong>한 줄:</strong> 회사의 약속을 정관과 총회로 승인받고 받을 사람과 계약한다.</p>
+<h2 id="company-06-32" data-concept-id="company-06-32">7-3. 행사가격의 하한은 부여 시점을 기준으로 정한다 ★★★★☆</h2>
+<p><strong>교재265–266쪽 · 문단의 이유:</strong> 싸게 주식을 넘겨 자본을 해치지 못하게 한다.</p>
+<p>신주발행형 행사가액은 <strong>부여일 실질가액과 액면가 중 높은 금액 이상</strong>, 자기주식양도형은 <strong>부여일 실질가액 이상</strong>이다. 신주발행은 자본충실 때문에 액면도 고려하고, 기존 자기주식 이전과는 구조가 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 계산</th>
+<th align="right">신주형 최소</th>
+<th align="right">자기주식형 최소</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>실질7000원·액면5000원</td>
+<td align="right">7000원</td>
+<td align="right">7000원</td>
+</tr>
+<tr>
+<td>실질4000원·액면5000원</td>
+<td align="right">5000원</td>
+<td align="right">4000원</td>
+</tr>
+</tbody></table>
+<p>비상장 A회사의 실질가액은 단순히 액면을 가져다 쓰는 것이 아니라 순자산·수익력 등 합리적 평가가 필요하다. 충분한 장외거래가격이 있다면 그 자료도 검토할 수 있다. 상장회사의 세부 산정은 관련 특례를 따른다.</p>
+<p>부여 후 증자·감자 등으로 주식의 경제적 내용이 달라지면 정해 둔 조정 조건에 따라 행사가액을 조정하는 문제가 생긴다. 교재는 신주형에서 액면 이하로 내리는 것을 허용하지 않는 원칙을 설명한다. 특별법상 특례가 주어진 문제는 별도다. ‘주가가 떨어졌으니 이사회가 기분대로 싸게 바꾼다’는 의미가 아니다.</p>
+<p><strong>시험:</strong> 부여일·신주형 높은 금액·자기주식형 실질가액. <strong>키워드:</strong> 가격 하한. <strong>한 줄:</strong> 나중에 싸게 살 가능성을 주되 처음부터 부당하게 싼 약속을 하지는 못한다.</p>
+<h2 id="company-06-33" data-concept-id="company-06-33">7-4. 부여와 행사, 양도와 상속을 구별한다 ★★★★★</h2>
+<p><strong>교재266–270쪽 · 문단의 이유:</strong> 일할 유인을 주는 권리를 바로 팔거나 바로 챙겨 떠나지 못하게 한다.</p>
+<p>일반회사에서는 부여 결의일부터 <strong>2년 이상 재임·재직</strong>해야 행사할 수 있다. 신입 임원에게 즉시 부여할 수 있지만 즉시 행사할 수는 없다. 행사기간의 시작·끝은 법과 정관 범위 안에서 계약으로 정하며, 상법 일반규정이 모두에게 동일한 마지막 행사일을 정하는 것은 아니다.</p>
+<p>스톡옵션 자체는 양도할 수 없다. A회사가 특정 경영자의 능력 때문에 준 유인이므로 다른 사람이 그 권리를 사 간다면 목적이 흔들린다. 교재는 그 성질상 입질·압류도 제한된다고 설명한다. 반면 행사로 적법하게 취득한 <strong>주식 자체</strong>의 양도는 별도의 주식양도 규율에 따른다.</p>
+<p>행사할 수 있는 사람이 사망하면 상속인이 행사할 수 있다. 일반회사에서2년 미만 재직한 채 사망했다면 상속이라는 이유만으로 최소재직 요건이 사라지지 않는다. <strong>2010다85027,2011.3.24</strong>은 비상장회사 임직원이 본인 책임 없는 이유로 퇴직했어도 일반규정의2년 요건을 임의로 완화할 수 없다고 보았다. <strong>번역:</strong> 상장회사 예외를 비상장회사에 그대로 가져오지 않는다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=149343">대법원 판례</a></p>
+<p>상장회사에는 사망·본인 책임 없는 퇴임·퇴직 등의 법정 예외가 있다. 시행령은 정년을 그 비귀책 예외에서 제외한다. 행사기한을 퇴직일로 정했을 때 비귀책 퇴직자에게 추가3개월 이상 주는 규정도 확인한다. 교재의 일반회사 사례와 구별한다.</p>
+<p>2년을 채운 뒤 퇴직했다고 언제나 모든 권리가 즉시 없어지는 것은 아니다. 정관·계약의 행사기간과 합리적 취소 사유를 본다. 정관이 정한 취소 사유가 발생하면 이사회가 취소하는 구조가 있고, 교재는 이를 이미 부여한 권리의 철회 성격으로 설명한다. 일반회사 규정과 상장회사 시행령상 취소 사유를 구분한다.</p>
+<p><strong>시험:</strong> 부여 즉시 가능/행사2년·양도 금지/상속 예외. <strong>키워드:</strong> 일하도록 유도. <strong>한 줄:</strong> 권리를 받는 날, 행사하는 날, 퇴직하는 날을 시간순으로 놓아야 풀린다.</p>
+<h2 id="company-06-34" data-concept-id="company-06-34">7-5. 행사 후 주주가 되는 과정과 교재의 오래된 조문을 확인한다 ★★★★☆</h2>
+<p><strong>교재268–273쪽 · 문단의 이유:</strong> 선택권이 실제 주식·돈으로 바뀌는 단계와 하자 구제를 설명한다.</p>
+<p>교재는 청구서2통에 주식 종류·수를 적고 서명 또는 기명날인하여 회사에 제출하는 단계, 회사의 이행방법 결정, 가액 납입, 주식 취득 순서를 설명한다. 차액정산 가능성과 회사 결정 지연의 효과에 관해서는 교재의 해석론이 포함되어 있다. <strong>회사가 계약으로 확정한 방식을 언제든 마음대로 바꿀 수 있다고 일반화하지 말고 총회 결의·계약·법정 요건을 함께 읽는다.</strong> 회사가 상당 기간 결정하지 않으면 자기주식양도·신주인수로 확정된다는 설명도 명문 조문 자체가 아닌 교재 해석임을 구분한다.</p>
+<p>현재340조의5는 관련 조문을 <strong>스톡옵션 행사로 신주를 발행하는 경우에</strong> 준용한다. 신주형 권리 행사에는 청구·행사가액 전액 납입 등의 준용 요건을 검토한다. ‘스톡옵션 청구는 어떤 경우에도 납입과 관계없다’고 외우면 안 된다. 자기주식양도형은 기존 주식 이전 방법을 따르고 회사에 대금을 지급하는 구조다. 실물 주권이 발행된 주식은 주권 교부, 전자등록주식은 전자등록에 따른 이전 등 주식 형태를 함께 본다.</p>
+<p>신주형에서는 납입 시 주주가 되는 준용 규정을 적용한다. 자기주식형에서 납입만으로 실물 주권 교부도 필요 없어진다고 하면 안 된다. 명부 폐쇄기간 중 신주를 취득한 경우에는 그 기간 총회의 의결권 제한도 검토한다.</p>
+<p><mark class="pink">교재272쪽의 ‘전년도 말 행사한 것으로 보아 배당’은 삭제된350조3항에 기댄 설명이다. 현행법 암기문장으로 쓰지 않는다. 변경등기도 단순 ‘행사일부터2주’가 아니라351조 준용에 따른 해당 월 말일부터2주를 확인한다.</mark> <a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1028616597">현행351조</a>, <a href="https://law.go.kr/lbook/lbFileDownload.do?flExt=pdf&lbookConflSeq=97205&lbookSeq=98759">현행340조의5 포함 조문 자료</a></p>
+<p>부여결의에 하자가 있고 아직 신주가 발행되지 않았다면 총회결의 취소·무효 등 맞는 구제와 계약 효력을 검토한다. 자기주식 이전·차액정산은 그 이행관계도 함께 따진다. <strong>이미 신주가 발행되었다면 신주발행무효의 소 체계</strong>로 연결되어6개월 제소기간 등8장 규정이 중요해진다.</p>
+<p><strong>시험:</strong> 신주형 준용·납입·월말 등기·하자 단계. <strong>키워드:</strong> 권리→이행→주식. <strong>한 줄:</strong> 선택권을 얻은 것과 실제 주주가 된 것은 서로 다른 시점이다.</p>
+<h1>8. 보충강의2 · 집행임원제도</h1>
+<h2 id="company-06-35" data-concept-id="company-06-35">8-1. 실행하는 사람과 감독하는 사람의 역할을 나눈다 ★★★★☆</h2>
+<p><strong>교재274–277쪽 · 문단의 이유:</strong> 이사회가 자기 일을 스스로 감시하는 한계를 보완한다.</p>
+<p>집행임원제도는 업무집행을 집행임원에게 맡기고 이사회가 감독에 집중하도록 하는 <strong>선택적 제도</strong>다. 모든 회사에 강제되지 않는다. 법정 집행임원과 회사가 직함만 ‘전무·임원’이라고 부르는 비등기 임원을 구분한다. 집행임원 설치회사에는 <strong>대표이사를 두지 못한다.</strong> 대신 대표집행임원이 대표한다.</p>
+<p>이사회가 집행임원을 선임·해임하고 성명·주민등록번호 등을 등기한다. 회사와의 관계에는 위임 규정이 적용된다. 정관에 다른 규정이 없으면 임기는2년을 초과하지 못하며 재선 가능하다. 이사의3년 상한과 같다고 하면 안 된다. 정관 규정이나 총회 승인이 없으면 이사회가 보수를 결정한다.</p>
+<p>집행임원은 회사 업무를 집행하고 정관·이사회가 위임한 업무집행 의사결정을 한다.1명이면 그 집행임원이 대표하고,2명 이상이면 이사회가 대표집행임원을 선임한다. 이사회는 선임·해임, 감독, 의사결정 위임, 직무분담, 보수 등 법정 권한을 가진다. 이사와 집행임원 겸임에 관한 명문 금지가 없다는 점과 분리 취지상 바람직한지의 정책 논의를 구별한다.</p>
+<p>집행임원은 선관·충실·비밀유지·경업·자기거래·기회유용 금지 등 준용되는 의무를 부담한다.3개월에1회 이상 이사회에 집행 상황을 보고하고 이사회 요구에도 보고한다. 대표집행임원은 다른 집행임원·직원의 업무 보고 요구에 응한다. 감사에 협조하고 회사에 현저한 손해 우려를 발견하면 즉시 보고한다.</p>
+<p>고의·과실 임무위반이면 회사에, 고의·중과실 임무해태이면 제3자에게 배상한다. 함께 책임 있는 다른 집행임원·이사·감사와 연대할 수 있다. 업무집행지시자 규정과 대표소송·다중대표소송도 연결된다. 법적 지위만 얻고 책임은 없는 제도가 아니다. 빠른 전문 경영과 독립적 감독을 함께 구현할 수 있는지가 도입 판단의 핵심이다.</p>
+<p><strong>시험:</strong> 선택적·대표이사 금지·이사회 선임·기본2년. <strong>키워드:</strong> 집행과 감독 분리. <strong>한 줄:</strong> 이사회가 감독하고 집행임원이 실행하는 별도의 법정 운영 방식이다.</p>
+<h1>교재15개 질문 · 말로 답하는 뼈대</h1>
+<ol>
+<li><strong>결의와 하자:</strong> 과반수 출석+출석 과반수. 가중 가능·완화 불가. 별도 가중 승인. 하자는 일반 무효 원칙과 외부 상대방 보호를 나눈다.</li>
+<li><strong>위원회:</strong> 정관·이사2명 이상·위임 불가 사항·전체 통지·재결의 원칙과 감사위원회 예외.</li>
+<li><strong>선임:</strong> 설립 시 발기인/창립총회, 성립 후 총회+승낙. 등기는 효력발생 요건 아님. 독립이사·상장 특례 별도.</li>
+<li><strong>종임:</strong> 임기만료·사임·사망·해임. 특별결의 해임과 정당한 이유 없는 중도해임 배상 구별.</li>
+<li><strong>계속·임시이사:</strong> 법정 인원 부족을 막는 계속직무와 법원 선임. 직무대행자의 상무 제한과 다름.</li>
+<li><strong>대표 선임·종임:</strong> 이사회 원칙·정관상 총회 가능. 이사 자격 전제. 이사직과 대표직 해임 구별.</li>
+<li><strong>대표권 제한:</strong> 감사의 소송대표 같은 법정 제한과 내부 승인 제한 구별. 구판례 과실 기준 보완.</li>
+<li><strong>공동대표:</strong> 능동 공동·수동1명·포괄 위임 불가·개별 위임 가능·불법행위 별도.</li>
+<li><strong>표현대표:</strong> 외관+회사 귀책+선의 무중과실. 등기만으로 배제하지 않음.</li>
+<li><strong>의무 전체:</strong> 선관·충실·비밀·감시·경업·자기거래·회사기회. 현행 회사 및 주주 보호.</li>
+<li><strong>경업:</strong> 승인 없는 경쟁거래·겸직 금지, 거래는 유효, 배상·해임·개입권1년.</li>
+<li><strong>자기거래:</strong> 확대된 대상·사전 중요사실 공개·3분의2·공정성·제3자 보호.</li>
+<li><strong>책임:</strong>399조 회사 고의과실/401조 제3자 고의중과실/428조 인수담보.</li>
+<li><strong>주주 감독:</strong> 사전 유지→사후 대표·다중대표소송→법정 해임청구.</li>
+<li><strong>유지·대표소송:</strong> 일반1% 공통, 전자는 위법행위 사전 중지·후자는 회사 권리 실현. 대표소송은 서면 제소청구·30일 원칙.</li>
+</ol>
+<h1>기출 연결과 새로운 사례</h1>
+<p>형성033–044, 워크북081–110을 연결했다. 이사회Ⅰ·Ⅱ·Ⅲ 각각14문항이다. <strong>실제 응시자 오답률 자료는 없다.</strong> 아래 TOP5는 결합 쟁점이 많아 먼저 풀 학습 추천이다.</p>
+<table>
+<thead>
+<tr>
+<th>TOP5</th>
+<th>출제자가 확인하는 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>워크북089</td>
+<td>총회와 이사회의 서면·대리·하자 규칙 구별</td>
+</tr>
+<tr>
+<td>워크북090</td>
+<td>해임·사임·소수주주 해임청구</td>
+</tr>
+<tr>
+<td>워크북100</td>
+<td>공동대표의 능동·수동·불법행위·위임</td>
+</tr>
+<tr>
+<td>워크북107</td>
+<td>회사/제3자 책임·간접손해·실질 경영자</td>
+</tr>
+<tr>
+<td>형성044</td>
+<td>대표소송 최소 지분과 ‘이상’ 문구의 함정</td>
+</tr>
+</tbody></table>
+<p>원자료 보완: 이사 자격에 ‘아무 제한 없음’, 이사회가 ‘모든 업무를 직접 결정’, 선임결의 ‘만으로’ 취임이라는 문장은 예외·취임승낙을 보충했다. 형성044는 최소 지분을 묻는 취지라 정답1번을 보존하지만,3%·5%·10% 주주도1% 이상이므로 문자 그대로는 제소권자가 될 수 있다. 질문을 ‘최소 기준’으로 이해해야 단일정답이 된다. 옛 판례·구법 문구는 본문에서 현행 기준을 별도로 표시했다.</p>
+<h3>새로운 사례5개</h3>
+<p><strong>문제1.</strong> 이사7명인 회사에서3명만 화상회의에 참여해 만장일치로 창고 매각을 승인했다. 대표이사는 계약을 체결했고 상대방에게 결의 누락에 관한 악의·중과실은 없었다. 결의와 계약은 모두 무효일까?</p>
+<p><strong>해설:</strong> 출석4명이 필요하므로 이사회 결의는 유효하지 않다. 그러나 중요자산 처분의 외부 거래효력은2021년 전원합의체의 상대방 보호를 별도로 검토한다. 주어진 사실 아래 결의무효만으로 계약무효를 단정하지 않는다. <strong>의도:</strong> 내부 결정과 외부 거래 분리.</p>
+<p><strong>문제2.</strong> 대규모 상장회사 주주 소연은2026년10월 적법한 기한·지분으로3명 이사 선임의 집중투표를 요구했다. 회사는 정관의 배제 문구를 이유로 거절했고, 해당 총회 소집에는 개정법이 적용된다. 타당한가?</p>
+<p><strong>해설:</strong>542조의7의 대상 회사는 정관으로 배제하지 못한다. 적법한 청구를 배제 문구만으로 거절할 수 없다. 모든 상장회사·한 명 선임·무청구 상황까지 확대하지 않는다. <strong>의도:</strong> 대상·시점·청구 요건 결합.</p>
+<p><strong>문제3.</strong> 이사 지호가 회사에 무이자·무담보로 돈을 빌려주려 한다. 다른 날에는 자기 회사가 그 회사의 독점판매 계약을 가로채게 했다. 둘 다 자기거래 승인 문제 하나로 끝날까?</p>
+<p><strong>해설:</strong> 첫 거래는 숨은 부담 없는 순수 대여라면 이해충돌 위험이 없는 경우로 검토한다. 둘째는 회사기회 유용·경업 문제로 회사에 기회를 제공했는지와 필요한 승인을 본다. 이름이 ‘이사와 관련된 거래’라는 이유로 같은 조문 하나에 넣지 않는다. <strong>의도:</strong> 자기거래·경업·기회유용 구별.</p>
+<p><strong>문제4.</strong> 비상장 A회사의2% 주주 나래가 회사에 제소청구 후30일을 기다려 이사를 상대로 손해배상을 구했다. 이사는 “배상금 절반을 네게 줄 테니 화해하자”고 했다. 나래가 마음대로 받아도 될까?</p>
+<p><strong>해설:</strong> 대표소송은 회사의 청구를 실현한다. 배상은 회사에 귀속되고 법원 허가 없이 화해할 수 없다. 원고 개인의 소송비용 보상과 회사 배상금을 구별한다. <strong>의도:</strong> 원고와 실질 이익 귀속 분리.</p>
+<p><strong>문제5.</strong> 비상장 일반회사 A는 실질가액4000원·액면5000원 주식을 대상으로 신주형 옵션을 부여했다. 임원은18개월 후 본인 잘못 없이 퇴직하고4000원에 행사하겠다고 했다. 무엇을 검토해야 할까?</p>
+<p><strong>해설:</strong> 신주형의 부여 시 최소가격은5000원이다. 일반회사2년 재직 요건을 상장회사 비귀책 예외로 낮출 수 없다. 적법한 정관·특별결의·계약과 행사가격을 모두 검토한다. 벤처 특별법 적용 사실은 주어지지 않았다. <strong>의도:</strong> 회사 유형·가격·재직기간 세 조건 결합.</p>
+<h1>용어 사전</h1>
+<h3>이사회·理事會</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 理(다스릴 리),事(일 사),會(모일 회). <strong>③ 합친 뜻:</strong> 일을 다스리는 사람들의 모임. <strong>④ 이름의 이유:</strong> 개별 집행자와 집단 결정을 구분한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중요 업무를 결정하고 이사의 집행을 감독하는 회의체. <strong>⑥ 쉬운 말:</strong> 중요한 회사 일을 의논하는 이사들의 회의. <strong>⑦ 사례:</strong> 공장 매각을 이사들이 결정한다.</p>
+<p><strong>⑧ 시험:</strong> 과반수 출석과 출석 과반수. <strong>⑨ 비교·기억법:</strong> 총회는 주주, 이사회는 이사.</p>
+<h3>대표이사·代表理事</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대),表(겉 표),理(다스릴 리),事(일 사). <strong>③ 합친 뜻:</strong> 회사를 대신해 밖에 드러내는 이사. <strong>④ 이름의 이유:</strong> 회사 의사를 외부에서 실행한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 업무집행과 대외 대표를 맡는 법정 기관. <strong>⑥ 쉬운 말:</strong> 회사 이름으로 계약하는 사람. <strong>⑦ 사례:</strong> 적법한 결정에 따라 공장 매매계약을 한다.</p>
+<p><strong>⑧ 시험:</strong> 이사회 선임 원칙·정관상 총회 가능. <strong>⑨ 비교·기억법:</strong> 사장 직함과 법정 대표권은 다르다.</p>
+<h3>업무집행·業務執行</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 業(일 업),務(힘쓸 무),執(잡을 집),行(다닐 행). <strong>③ 합친 뜻:</strong> 맡은 일을 실제로 수행함. <strong>④ 이름의 이유:</strong> 결정에서 실행으로 나아간다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사의 사업상 결정·실행을 구체적으로 처리하는 것. <strong>⑥ 쉬운 말:</strong> 정한 계획을 실제 일로 만드는 것. <strong>⑦ 사례:</strong> 계약 체결·재무제표 작성.</p>
+<p><strong>⑧ 시험:</strong> 결정권과 대표권 주체 구별. <strong>⑨ 비교·기억법:</strong> 집행과 감독은 역할이 다르다.</p>
+<h3>의사정족수·議事定足數</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의),事(일 사),定(정할 정),足(족할 족),數(셈 수). <strong>③ 합친 뜻:</strong> 회의에 필요한 충분한 수. <strong>④ 이름의 이유:</strong> 말을 나눌 회의부터 성립시킨다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회의 성립에 필요한 출석 기준. <strong>⑥ 쉬운 말:</strong> 회의를 시작할 최소 인원. <strong>⑦ 사례:</strong> 이사6명이면4명 이상 출석.</p>
+<p><strong>⑧ 시험:</strong> 특별이해관계 이사 산입 구별. <strong>⑨ 비교·기억법:</strong> 의결정족수는 통과할 찬성 기준.</p>
+<h3>의결정족수·議決定足數</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의),決(결단할 결),定(정할 정),足(족할 족),數(셈 수). <strong>③ 합친 뜻:</strong> 결정에 필요한 찬성 수. <strong>④ 이름의 이유:</strong> 출석과 찬성은 다른 단계다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결의를 성립시키는 의결 기준. <strong>⑥ 쉬운 말:</strong> 몇 명이 찬성해야 통과하는가. <strong>⑦ 사례:</strong> 의결권 있는 출석4명 중3명 찬성.</p>
+<p><strong>⑧ 시험:</strong> 정관 가중 가능·완화 불가. <strong>⑨ 비교·기억법:</strong> 과반수는 절반 초과.</p>
+<h3>특별이해관계·特別利害關係</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특),別(나눌 별),利(이로울 리),害(해칠 해),關(관계할 관),係(맬 계). <strong>③ 합친 뜻:</strong> 특별히 자신의 이익·손해가 걸린 관계. <strong>④ 이름의 이유:</strong> 자기 편에 유리한 표를 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해당 안건에 개인적 이해충돌이 있는 경우. <strong>⑥ 쉬운 말:</strong> 내 거래를 내가 승인하는 표를 못 던짐. <strong>⑦ 사례:</strong> 이사가 자기 건물을 회사에 파는 승인.</p>
+<p><strong>⑧ 시험:</strong> 일반결의 출석과 찬성 계산 분리. <strong>⑨ 비교·기억법:</strong> 주주 일반의 이해와 다르다.</p>
+<h3>위임·委任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 委(맡길 위),任(맡길 임). <strong>③ 합친 뜻:</strong> 일을 맡김. <strong>④ 이름의 이유:</strong> 회사와 이사 관계의 기본틀.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대방에게 사무 처리를 맡기는 계약 관계. <strong>⑥ 쉬운 말:</strong> 내 일을 믿고 맡기는 것. <strong>⑦ 사례:</strong> 회사 경영을 이사에게 맡긴다.</p>
+<p><strong>⑧ 시험:</strong> 선관주의·사임·회사 책임. <strong>⑨ 비교·기억법:</strong> 이사를 단순 근로자로만 보지 않는다.</p>
+<h3>선임·選任 / 해임·解任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 選(가릴 선),任(맡길 임),解(풀 해). <strong>③ 합친 뜻:</strong> 골라 맡김 / 맡긴 자리에서 풀어냄. <strong>④ 이름의 이유:</strong> 들어오는 절차와 나가는 절차를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기관 담당자를 정하거나 직위를 끝냄. <strong>⑥ 쉬운 말:</strong> 뽑기와 그만두게 하기. <strong>⑦ 사례:</strong> 이사 선임 보통·해임 특별.</p>
+<p><strong>⑧ 시험:</strong> 선임과 해임의 결의 차이. <strong>⑨ 비교·기억법:</strong> 사임은 본인이 그만두는 의사.</p>
+<h3>집중투표·集中投票</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 集(모을 집),中(가운데 중),投(던질 투),票(표 표). <strong>③ 합친 뜻:</strong> 표를 한곳에 모아 던짐. <strong>④ 이름의 이유:</strong> 소수주주의 이사 진출을 돕는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이사 여러 명 선임 시 복수 표를 후보에게 집중하는 방법. <strong>⑥ 쉬운 말:</strong> 세 자리 표를 한 후보에게 몰아줄 수 있음. <strong>⑦ 사례:</strong> 10주·3명 선임이면30표.</p>
+<p><strong>⑧ 시험:</strong> 일반3%·7일·대규모 상장 배제금지. <strong>⑨ 비교·기억법:</strong> 특별결의처럼 찬성 비율을 높이는 제도가 아니다.</p>
+<h3>계속이사·繼續理事</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 繼(이을 계),續(이을 속),理(다스릴 리),事(일 사). <strong>③ 합친 뜻:</strong> 자리를 이어 맡는 이사. <strong>④ 이름의 이유:</strong> 회사의 경영 공백을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 임기만료·사임 후 인원 부족이면 후임 취임까지 직무 유지. <strong>⑥ 쉬운 말:</strong> 후임 올 때까지 필요한 일을 계속함. <strong>⑦ 사례:</strong> 사임으로 최소 인원 부족.</p>
+<p><strong>⑧ 시험:</strong> 사망·해임과 구별. <strong>⑨ 비교·기억법:</strong> 법원이 새로 뽑는 임시이사와 다름.</p>
+<h3>임시이사·臨時理事</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 臨(임할 임),時(때 시),理(다스릴 리),事(일 사). <strong>③ 합친 뜻:</strong> 필요한 때 임시로 맡는 이사. <strong>④ 이름의 이유:</strong> 공백을 법원이 메운다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결원 등 필요에 따라 법원이 선임하는 이사. <strong>⑥ 쉬운 말:</strong> 회사가 멈추지 않도록 법원이 세운 사람. <strong>⑦ 사례:</strong> 후임 선임 곤란 시386조 청구.</p>
+<p><strong>⑧ 시험:</strong> 직무대행자의 상무 제한과 구별. <strong>⑨ 비교·기억법:</strong> 추천 후보에 법원이 항상 묶이지 않는다.</p>
+<h3>직무대행·職務代行</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 職(직분 직),務(힘쓸 무),代(대신할 대),行(행할 행). <strong>③ 합친 뜻:</strong> 직무를 대신함. <strong>④ 이름의 이유:</strong> 분쟁 결론 전 회사 일을 유지한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 가처분 등으로 정지된 이사 대신 임시 수행. <strong>⑥ 쉬운 말:</strong> 다툼이 끝날 때까지 대신 일함. <strong>⑦ 사례:</strong> 직무정지와 함께 대행자 선임.</p>
+<p><strong>⑧ 시험:</strong> 상무 외 행위 법원 허가 원칙. <strong>⑨ 비교·기억법:</strong> 임시이사와 법적 근거·권한 다름.</p>
+<h3>상무·常務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 常(항상 상),務(일 무). <strong>③ 합친 뜻:</strong> 늘 하는 일. <strong>④ 이름의 이유:</strong> 큰 새 결정과 일상 유지를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 통상적·일상적 회사 업무. <strong>⑥ 쉬운 말:</strong> 평소 운영을 유지하는 일. <strong>⑦ 사례:</strong> 통상 소송 대응과 변호사 선임.</p>
+<p><strong>⑧ 시험:</strong> 대행자의 특별 부담 약정 구별. <strong>⑨ 비교·기억법:</strong> 常務인 일과 常務라는 직함을 혼동하지 않는다.</p>
+<h3>가처분·假處分</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 假(임시 가),處(처리할 처),分(나눌 분). <strong>③ 합친 뜻:</strong> 잠정적 처분. <strong>④ 이름의 이유:</strong> 기다리는 동안 피해를 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본안 판단 전 권리·법률관계를 임시로 보호하는 재판. <strong>⑥ 쉬운 말:</strong> 판결 전 일단 멈추거나 임시 상태를 정함. <strong>⑦ 사례:</strong> 이사 직무집행 정지.</p>
+<p><strong>⑧ 시험:</strong> 소 제기만으로 자동 정지되지 않음. <strong>⑨ 비교·기억법:</strong> 최종 판결과 다르다.</p>
+<h3>추인·追認</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 追(뒤쫓을 추),認(인정할 인). <strong>③ 합친 뜻:</strong> 뒤에 인정함. <strong>④ 이름의 이유:</strong> 사후 동의가 하자에 영향을 줄 수 있다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권한 없는 행위 등의 효력을 사후 인정하는 것. <strong>⑥ 쉬운 말:</strong> 나중에 적법한 사람이 동의함. <strong>⑦ 사례:</strong> 공동대표의 단독행위를 나머지가 추인.</p>
+<p><strong>⑧ 시험:</strong> 총회가 무권한이면 무조건 치유 불가. <strong>⑨ 비교·기억법:</strong> 사전 승인을 요구하는 법과 구분.</p>
+<h3>대표권 남용·代表權濫用</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대),表(겉 표),權(권세 권),濫(넘칠 람),用(쓸 용). <strong>③ 합친 뜻:</strong> 대표 권한을 부당하게 씀. <strong>④ 이름의 이유:</strong> 권한의 목적 위반을 드러낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대표권 범위의 외형으로 자기·제3자 이익을 도모. <strong>⑥ 쉬운 말:</strong> 회사 도장을 개인 빚 갚는 데 씀. <strong>⑦ 사례:</strong> 회사 명의 어음을 사익에 사용.</p>
+<p><strong>⑧ 시험:</strong> 상대방 인식·거래효력 별도. <strong>⑨ 비교·기억법:</strong> 대표권 없음·내부 제한 위반과 구별.</p>
+<h3>공동대표·共同代表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공),同(같을 동),代(대신할 대),表(겉 표). <strong>③ 합친 뜻:</strong> 함께 회사를 대표함. <strong>④ 이름의 이유:</strong> 상호 견제로 남용을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여러 대표가 공동 의사로 능동 대표하는 구조. <strong>⑥ 쉬운 말:</strong> 계약을 내보낼 때 함께 결정. <strong>⑦ 사례:</strong> 갑·을·병 공동대표.</p>
+<p><strong>⑧ 시험:</strong> 능동 공동·수동 한 명·포괄 위임 금지. <strong>⑨ 비교·기억법:</strong> 여러 명이 각자 대표하는 것과 다름.</p>
+<h3>능동·수동 대표·能動·受動代表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 能(능할 능),動(움직일 동),受(받을 수),代(대신할 대),表(겉 표). <strong>③ 합친 뜻:</strong> 행동을 내보냄 / 받아들임. <strong>④ 이름의 이유:</strong> 공동대표의 행동 방향을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사 의사표시를 하는 것과 상대방 표시 등을 받는 것. <strong>⑥ 쉬운 말:</strong> 보내는 쪽과 받는 쪽. <strong>⑦ 사례:</strong> 회사 계약 체결/회사에 온 해지 통지.</p>
+<p><strong>⑧ 시험:</strong> 공동대표 수동은1인 가능. <strong>⑨ 비교·기억법:</strong> 모든 대표행위가 공동이어야 한다고 하지 않는다.</p>
+<h3>표현대표·表見代表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 表(겉 표),見(나타날 현),代(대신할 대),表(겉 표). <strong>③ 합친 뜻:</strong> 겉으로 나타난 대표. <strong>④ 이름의 이유:</strong> 회사 만든 외관을 책임지게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대표권 외관을 신뢰한 제3자에 대한 회사 책임 제도. <strong>⑥ 쉬운 말:</strong> 대표처럼 믿게 해 놓고 발뺌 못 하게 함. <strong>⑦ 사례:</strong> 회사 묵인 아래 사장 직함 사용.</p>
+<p><strong>⑧ 시험:</strong> 외관·회사 귀책·선의 무중과실. <strong>⑨ 비교·기억법:</strong> 表現이 아니라 表見, 보이는 외관.</p>
+<h3>금반언·禁反言</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 禁(금할 금),反(뒤집을 반),言(말씀 언). <strong>③ 합친 뜻:</strong> 앞선 태도를 뒤집는 말을 금함. <strong>④ 이름의 이유:</strong> 거래의 신뢰를 보호한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 신뢰를 만든 선행행위와 모순되는 주장 제한 원리. <strong>⑥ 쉬운 말:</strong> 믿게 해 놓고 나중에 딴말하지 말라는 뜻. <strong>⑦ 사례:</strong> 대표처럼 허용한 뒤 무권한 주장.</p>
+<p><strong>⑧ 시험:</strong> 표현대표의 이론적 근거. <strong>⑨ 비교·기억법:</strong> 어떤 말 변경이든 모두 금지되는 것은 아니다.</p>
+<h3>선관주의·善管注意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 善(착할 선),管(관리할 관),注(쏟을 주),意(뜻 의). <strong>③ 합친 뜻:</strong> 선량한 관리자의 주의를 기울임. <strong>④ 이름의 이유:</strong> 맡긴 재산을 신중히 다루게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 직무·상황에 맞는 합리적 주의의무. <strong>⑥ 쉬운 말:</strong> 필요한 정보를 살피며 제대로 일하기. <strong>⑦ 사례:</strong> 대출 전 회수 가능성 조사.</p>
+<p><strong>⑧ 시험:</strong> 결과가 나쁘다고 자동 위반 아님. <strong>⑨ 비교·기억법:</strong> 자기 재산에 쓰는 주의만으로 충분하지 않다.</p>
+<h3>충실의무·忠實義務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 忠(충성 충),實(참 실),義(옳을 의),務(힘쓸 무). <strong>③ 합친 뜻:</strong> 맡은 일에 참되게 힘쓸 의무. <strong>④ 이름의 이유:</strong> 신임관계를 배신하지 못하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현행 회사 및 주주를 위한 충실한 직무·총주주 보호·공평대우. <strong>⑥ 쉬운 말:</strong> 맡긴 이익을 자기 욕심 때문에 버리지 않기. <strong>⑦ 사례:</strong> 경영권 잃기 전 보수를 부당 인상.</p>
+<p><strong>⑧ 시험:</strong> 2025년 개정 회사 및 주주. <strong>⑨ 비교·기억법:</strong> 특정 대주주에게 복종하는 의무가 아니다.</p>
+<h3>경업·競業 / 겸직·兼職</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 競(다툴 경),業(일 업),兼(겸할 겸),職(직분 직). <strong>③ 합친 뜻:</strong> 사업으로 경쟁함 / 직책을 함께 맡음. <strong>④ 이름의 이유:</strong> 영업정보·거래처 유출을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 동종 거래 또는 경쟁회사 임원 등 지위. <strong>⑥ 쉬운 말:</strong> 회사와 같은 장사를 몰래 하거나 경쟁사 이사가 됨. <strong>⑦ 사례:</strong> 경쟁회사 설립·영업 준비.</p>
+<p><strong>⑧ 시험:</strong> 승인·개입권·거래 자체 유효. <strong>⑨ 비교·기억법:</strong> 집에서 살 주택 구입까지 무조건 경업 아님.</p>
+<h3>개입권·介入權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 介(끼일 개),入(들 입),權(권세 권). <strong>③ 합친 뜻:</strong> 끼어들 권리. <strong>④ 이름의 이유:</strong> 손해액 입증의 어려움을 보완한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경업거래 이익을 회사 계산에 귀속시키거나 이득 양도를 청구. <strong>⑥ 쉬운 말:</strong> 몰래 경쟁해서 번 이익을 회사로 돌림. <strong>⑦ 사례:</strong> 자기 계산 거래를 회사 계산으로 봄.</p>
+<p><strong>⑧ 시험:</strong> 거래일부터1년·경업 위반. <strong>⑨ 비교·기억법:</strong> 개입의무가 아니라 회사의 권리.</p>
+<h3>자기거래·自己去來</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자),己(몸 기),去(갈 거),來(올 래). <strong>③ 합친 뜻:</strong> 자신과 거래함. <strong>④ 이름의 이유:</strong> 회사 편의 공정한 심사가 필요하다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이사·주요주주 등과 회사의 이해충돌 거래. <strong>⑥ 쉬운 말:</strong> 자기 물건 가격을 회사 대신 스스로 정하는 문제. <strong>⑦ 사례:</strong> 개인 채무를 회사가 보증.</p>
+<p><strong>⑧ 시험:</strong> 중요사실 사전 공개·3분의2·공정성. <strong>⑨ 비교·기억법:</strong> 직접 매매만 아니라 간접 거래도 포함.</p>
+<h3>유용·流用</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 流(흐를 류),用(쓸 용). <strong>③ 합친 뜻:</strong> 원래 갈 곳에서 다른 곳으로 돌려 씀. <strong>④ 이름의 이유:</strong> 회사 몫이 밖으로 새는 것을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사에 귀속될 기회·자산을 사익에 이용. <strong>⑥ 쉬운 말:</strong> 회사 기회를 내 사업으로 빼옴. <strong>⑦ 사례:</strong> 기존 회사 총판 기회를 새 회사가 차지.</p>
+<p><strong>⑧ 시험:</strong> 기회유용 손해 추정·경업과 비교. <strong>⑨ 비교·기억법:</strong> 有用(쓸모 있음)과 다른 말.</p>
+<h3>임무해태·任務懈怠</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 任(맡길 임),務(힘쓸 무),懈(게으를 해),怠(게으를 태). <strong>③ 합친 뜻:</strong> 맡은 일을 게을리함. <strong>④ 이름의 이유:</strong> 책임의 원인이 되는 의무 위반을 지칭.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이사가 직무상 의무를 제대로 이행하지 않음. <strong>⑥ 쉬운 말:</strong> 해야 할 확인·조치를 하지 않음. <strong>⑦ 사례:</strong> 의심스러운 집행을 방치.</p>
+<p><strong>⑧ 시험:</strong> 회사 과실/제3자 중과실 차이. <strong>⑨ 비교·기억법:</strong> 단순한 회사 채무 지연과 다름.</p>
+<h3>연대책임·連帶責任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 連(이을 련),帶(띠 대),責(꾸짖을 책),任(맡길 임). <strong>③ 합친 뜻:</strong> 서로 연결되어 지는 책임. <strong>④ 이름의 이유:</strong> 피해 회복을 쉽게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여러 책임자에게 배상 전부를 청구할 수 있는 관계. <strong>⑥ 쉬운 말:</strong> 각자에게 나눠 청구만 해야 하는 것이 아님. <strong>⑦ 사례:</strong> 책임 있는 이사·집행지시자가 함께 배상.</p>
+<p><strong>⑧ 시험:</strong> 각 책임 요건 먼저 충족. <strong>⑨ 비교·기억법:</strong> 이중으로 손해액을 넘겨 받는 뜻은 아니다.</p>
+<h3>직접손해·간접손해·直接損害·間接損害</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 直(곧을 직),接(이을 접),間(사이 간),損(덜 손),害(해칠 해). <strong>③ 합친 뜻:</strong> 바로 입음 / 중간을 거쳐 입음. <strong>④ 이름의 이유:</strong> 배상 귀속과 중복 회복을 조정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주 자신의 직접 피해와 회사 손해가 반사된 피해 구별. <strong>⑥ 쉬운 말:</strong> 내 돈 피해인가 회사 금고 피해가 주가에 비친 것인가. <strong>⑦ 사례:</strong> 회사 횡령→주가 하락은 간접손해.</p>
+<p><strong>⑧ 시험:</strong> 401조와 대표소송 통로. <strong>⑨ 비교·기억법:</strong> 주주가 손해를 느끼면 전부 직접손해는 아니다.</p>
+<h3>업무집행지시자·業務執行指示者</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 業(일 업),務(힘쓸 무),執(잡을 집),行(행할 행),指(가리킬 지),示(보일 시),者(사람 자). <strong>③ 합친 뜻:</strong> 일을 하도록 지시한 사람. <strong>④ 이름의 이유:</strong> 등기 뒤에 숨는 것을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실질 영향력·직접 집행 등에 따라 이사와 같은 책임을 지는 자. <strong>⑥ 쉬운 말:</strong> 이름은 빼고 실제로 일을 시킨 실권자. <strong>⑦ 사례:</strong> 회장이 이사에게 부당 대출 지시.</p>
+<p><strong>⑧ 시험:</strong> 지시·집행한 업무의 책임. <strong>⑨ 비교·기억법:</strong> 표현대표는 회사 책임, 지시자는 본인 책임.</p>
+<h3>유지청구·留止請求</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 留(머무를 류),止(그칠 지),請(청할 청),求(구할 구). <strong>③ 합친 뜻:</strong> 멈춰 두라고 요구함. <strong>④ 이름의 이유:</strong> 사후 배상만으로 부족한 피해 예방.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법행위로 회사에 회복 불가능 손해가 생길 우려 시 중지 청구. <strong>⑥ 쉬운 말:</strong> 그 일을 하지 말라고 미리 막기. <strong>⑦ 사례:</strong> 회사 핵심 자산 위법 처분 중지.</p>
+<p><strong>⑧ 시험:</strong> 일반1%·감사·재판 외 가능. <strong>⑨ 비교·기억법:</strong> 維持(상태를 계속함)가 아니라 留止.</p>
+<h3>주주대표소송·株主代表訴訟</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주),主(주인 주),代(대신할 대),表(겉 표),訴(호소할 소),訟(송사할 송). <strong>③ 합친 뜻:</strong> 주주가 회사를 위해 하는 소송. <strong>④ 이름의 이유:</strong> 회사 경영진의 책임 봐주기를 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주가 자기 이름으로 회사의 이사 책임청구권을 실현. <strong>⑥ 쉬운 말:</strong> 회사가 안 하니 주주가 회사 돈을 되찾는 소송. <strong>⑦ 사례:</strong> 1% 주주가 제소청구 후30일 대기.</p>
+<p><strong>⑧ 시험:</strong> 배상은 회사·화해 법원 허가. <strong>⑨ 비교·기억법:</strong> 주주 개인 손해배상소송과 다름.</p>
+<h3>다중대표소송·多重代表訴訟</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 多(많을 다),重(겹칠 중),代(대신할 대),表(겉 표),訴(호소할 소),訟(송사할 송). <strong>③ 합친 뜻:</strong> 회사 관계를 겹쳐 넘어 하는 대표소송. <strong>④ 이름의 이유:</strong> 자회사 뒤에 숨은 책임도 실현.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 모회사 주주가 자회사 이사의 책임을 자회사를 위해 추궁. <strong>⑥ 쉬운 말:</strong> 내가 주주인 회사의 자회사 손해를 되찾기. <strong>⑦ 사례:</strong> A주주가 B이사에게 B손해 배상 청구.</p>
+<p><strong>⑧ 시험:</strong> 자회사에 먼저 청구·자회사 본점 관할. <strong>⑨ 비교·기억법:</strong> 모회사 이익과 자회사 배상 귀속 구별.</p>
+<h3>주식매수선택권·株式買受選擇權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주),式(법 식),買(살 매),受(받을 수),選(가릴 선),擇(가릴 택),權(권세 권). <strong>③ 합친 뜻:</strong> 주식을 사 받을지 고르는 권리. <strong>④ 이름의 이유:</strong> 일한 성과와 장래 주가 상승을 연결한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 약정 조건으로 주식 취득 또는 차액정산을 받을 성과보상 권리. <strong>⑥ 쉬운 말:</strong> 정한 가격으로 살 기회, 안 사도 됨. <strong>⑦ 사례:</strong> 1000원 권리·시가1500원.</p>
+<p><strong>⑧ 시험:</strong> 정관·특별결의·계약·일반2년. <strong>⑨ 비교·기억법:</strong> 반대주주의 주식매수청구권과 반대 방향.</p>
+<h3>차액정산·差額精算</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 差(다를 차),額(이마 액),精(정밀할 정),算(셈 산). <strong>③ 합친 뜻:</strong> 차이 금액을 계산해 마무리. <strong>④ 이름의 이유:</strong> 주식을 전부 이전하지 않고 보상한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 옵션의 실질가액과 행사가액 차이를 돈·자기주식으로 이행. <strong>⑥ 쉬운 말:</strong> 싸게 사서 얻을 이익만 따로 받음. <strong>⑦ 사례:</strong> 1500-1000=500원씩100주.</p>
+<p><strong>⑧ 시험:</strong> 자기주식 평가는 행사 시 실질가액. <strong>⑨ 비교·기억법:</strong> 행사가격을 회사가 마음대로 변경한다는 뜻 아님.</p>
+<h3>준용·準用</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 準(준할 준),用(쓸 용). <strong>③ 합친 뜻:</strong> 맞추어 적용함. <strong>④ 이름의 이유:</strong> 비슷한 절차를 다시 길게 적지 않는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 규정을 해당 제도에 맞게 적용. <strong>⑥ 쉬운 말:</strong> 비슷한 규칙을 알맞게 가져다 씀. <strong>⑦ 사례:</strong> 옵션 신주발행에 납입·등기 규정 준용.</p>
+<p><strong>⑧ 시험:</strong> 현행340조의5는 신주발행 경우. <strong>⑨ 비교·기억법:</strong> 모든 유형에 문구를 그대로 복사하지 않는다.</p>
+<h3>집행임원·執行任員</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 執(잡을 집),行(행할 행),任(맡길 임),員(인원 원). <strong>③ 합친 뜻:</strong> 집행을 맡은 사람. <strong>④ 이름의 이유:</strong> 이사회 감독과 집행 기능을 분리한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 제도로 이사회가 선임하여 업무집행을 맡기는 임원. <strong>⑥ 쉬운 말:</strong> 감독회의가 뽑은 실행 담당자. <strong>⑦ 사례:</strong> 대표집행임원이 회사를 대표.</p>
+<p><strong>⑧ 시험:</strong> 선택적·기본2년·대표이사 금지. <strong>⑨ 비교·기억법:</strong> 비등기 임원이라는 호칭만으로 법정 집행임원 아님.</p>
+<h1>시험 직전 A4 암기노트</h1>
+<div class="memory-sheet">
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 이사회·대표권 / 이해충돌 의무 / 회사·제3자 책임과 주주 구제.</p>
+<table><thead><tr><th>항목</th><th>반드시 기억</th></tr></thead><tbody>
+<tr><td>이사회</td><td>결정+감독+정보.10억 미만 실제1·2인 이사 특례</td></tr>
+<tr><td>소집·결의</td><td>각 이사 원칙·1주 전. 과반수 출석+출석 과반수. 정관 가중만</td></tr>
+<tr><td>참가·하자</td><td>서면·대리 불가, 동시 음성 가능. 총회 취소소송 체계와 다름</td></tr>
+<tr><td>위원회</td><td>정관·이사2명 이상. 총회 제안·대표 선임·위원회 인사 등 위임 제한</td></tr>
+<tr><td>이사 선임</td><td>총회+승낙, 등기 효력요건 아님. 기본3명·임기3년 이내</td></tr>
+<tr><td>집중투표</td><td>2명 이상·일반3%/7일, 상장6주·대규모1%.2026.9 배제 금지 특례</td></tr>
+<tr><td>종임·보수</td><td>해임 특별·정당한 이유 없는 중도해임 배상. 보수 정관/총회</td></tr>
+<tr><td>공백·분쟁</td><td>계속이사/법원 임시이사/직무대행자 구별. 대행은 상무 제한</td></tr>
+<tr><td>대표권</td><td>선임 이사회 원칙. 이사-회사 소송은 감사 등 법정 대표</td></tr>
+<tr><td>거래 효력</td><td>이사회 결의 누락: 제3자 악의·중과실. 남용은 별도 법리</td></tr>
+<tr><td>공동·표현</td><td>능동 공동/수동1인·포괄 위임X. 표현: 외관+귀책+선의 무중과실</td></tr>
+<tr><td>일반 의무</td><td>선관·회사 및 주주 충실·공평대우·퇴임 후 비밀·능동 감시</td></tr>
+<tr><td>경업</td><td>이사회 승인·거래 자체 유효·개입권 거래일부터1년</td></tr>
+<tr><td>자기거래·기회</td><td>이사3분의2. 자기거래 사전 공개·공정, 기회유용 이익=손해 추정</td></tr>
+<tr><td>책임</td><td>회사399 고의과실/제3자401 고의중과실. 회사 손해≠주주 직접손해</td></tr>
+<tr><td>면제</td><td>총주주 동의/정관6배·사외·독립3배 초과 제한. 고의중과실·충돌 예외</td></tr>
+<tr><td>유지·대표</td><td>일반1%. 유지=위법 사전 중지, 대표=서면 청구·30일·회사로 배상</td></tr>
+<tr><td>다중대표</td><td>모회사 주주→자회사 청구→자회사 이사. 자회사 이익·본점 관할</td></tr>
+<tr><td>옵션</td><td>정관+특별결의+계약·일반2년·양도X. 신주형 max(실질,액면)</td></tr>
+<tr><td>집행임원</td><td>선택적·이사회 선임·기본2년·대표이사X·대표집행임원O</td></tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “내부 결의 하자와 외부 거래는 나누어 본다.” “승인받았다고 모든 책임이 사라지지 않는다.” “대표소송의 돈은 회사로 간다.”</p>
+<p><strong>사례를 풀 순서:</strong> 회사 유형→행위자 지위→권한·결의→이해충돌→상대방 인식→손해 귀속→책임 요건→중지·배상·해임 통로.</p>
+</div>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>🟢 결의무효와 외부 거래효력을 나누고, 경업·자기거래·기회유용을 다른 사례로 설명하며, 대표소송 배상 귀속을 말할 수 있다. 🟡 숫자는 기억하나 이유·예외가 헷갈리면 해당 비교표와 사례를 복습한다. 🔴 대표이사만 책임진다거나 총회가 모든 일을 대신한다고 생각하면1·3·5절부터 돌아간다. 아직 답안을 받지 않았으므로 <strong>실제 이해도를 평가한 결과가 아니라 자기점검 기준</strong>이다.</p>
+<p>복습 TOP3는 <strong>① 이사회 결의·대표권·상대방 보호 ② 경업·자기거래·회사기회 구별 ③399·401조와 유지·대표소송의 연결</strong>이다. 보충강의는 가격·기간·회사 유형을 나누어 연습한다.</p>
+<p>출처는 제공 주식회사법 교재195–277쪽과 제공 JSON42문항이다. 원문 사례의 결론을 쉬운 말로 풀고 설명용 인물은 별도로 표시했다. 최신 보완은 본문에 연결한 국가법령정보센터·대법원·법무부 자료를 사용했다.2025년 충실의무,2026년 독립이사·집중투표 개정,2021년 대표권 제한 판례, 스톡옵션 한도·삭제 조문을 구판 설명과 구분한다. 주식매수선택권 관련 특별법 적용은 해당 사실이 있는 경우 별도 검토한다.</p>
+<h1>문제 부록 · 42문항·168개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-주식회사법_033"><h4>형성평가 · 주식회사법_033</h4><p class="question-stem">다음 중에서 이사회에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>업무집행에 관한 권한만 있고 감독권은 없다.</li><li>지배인의 선임과 해임에 대한 결정은 이사회의 권한이다.</li><li>주주총회의 권한사항을 제외한 모든 업무집행에 대한 사안을 결정한다.</li><li>이사회의 결의에 소집절차‧결의내용‧결의방법 등에 하자가 있는 경우에 대해 상법상 아무런 규정이 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 감독권도 있으므로 틀린 설명을 찾는 정답이다. 결정·감독·정보를 묶는다.</li><li><strong>비선택</strong> · 지배인 선임·해임은393조의 대표적 이사회 결정사항이다.</li><li><strong>비선택</strong> · 출제 취지는 총회와 이사회 권한 구별이다. 실제로는 일상업무 위임·소규모 회사 등 예외가 있어 모든 사안을 이사회가 직접 결정한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 총회처럼 별도 취소소송 체계가 없다는 의미다. 하자를 다툴 수 없다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 이사회는 업무집행에 관한 의사결정권과 이사의 직무집행 감독권, 정보접근권을 갖는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_034"><h4>형성평가 · 주식회사법_034</h4><p class="question-stem">이사회를 소집할 이사를 따로 정하지 않은 경우에 주식회사의 이사회 소집권은 누가 가지는가?</p><ol class="choices"><li>대표이사</li><li>각 이사</li><li>감사</li><li>소수주주</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표이사만의 전속 소집권이 아니다. 별도 소집 담당 이사로 정했다면 그 지위를 확인한다.</li><li><strong>선택</strong> · 소집 담당자를 따로 정하지 않으면 각 이사가 소집한다. 각자 감독할 수 있게 한 장치다.</li><li><strong>비선택</strong> · 감사는 별도 소집청구·불응 시 소집 규정이 있지만 이 문제의390조 원칙 정답은 각 이사다.</li><li><strong>비선택</strong> · 소수주주의 총회 소집청구와 이사회 소집권을 혼동하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제390조 제1항 참조. 이사회는 각 이사가 소집한다. 그러나 이사회의 결의로 소집할 이사를 정한 때에는 그러하지 아니하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_035"><h4>형성평가 · 주식회사법_035</h4><p class="question-stem">주주총회에서 2인 이상의 이사를 선임할 때 1주당 선임하고자 하는 이사 수에 상당하는 복수의 의결권을 부여하여 선임하는 방법을 무엇이라 하는가?</p><ol class="choices"><li>복수투표</li><li>가중투표</li><li>특별투표</li><li>집중투표</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 제도의 이름은 복수투표가 아니다. 복수 표를 집중할 수 있다는 구조를 이해한다.</li><li><strong>비선택</strong> · 표 수가 늘어도 법정 명칭은 가중투표가 아니다.</li><li><strong>비선택</strong> · 특별결의의 높은 찬성 비율과는 다른 제도다.</li><li><strong>선택</strong> · 집중투표다.10주로 이사3명을 뽑으면30표를 후보에게 집중·분산할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제382조의 2 참조. 2인 이상의 이사의 선임을 목적으로 하는 총회의 소집이 있는 때에는 의결권없는 주식을 제외한 발행주식총수의 100분의 3 이상에 해당하는 주식을 가진 주주는 정관에서 달리 정하는 경우를 제외하고는 회사에 대하여 집중투표의 방법으로 이사를 선임할 것을 청구할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_036"><h4>형성평가 · 주식회사법_036</h4><p class="question-stem">정관에서 이사의 보수를 정하지 않은 경우에 이사의 보수를 결정하는 주식회사의 기관은 무엇인가?</p><ol class="choices"><li>대표이사</li><li>이사회</li><li>감사</li><li>주주총회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표이사가 자기 보수를 임의 확정하지 못한다.</li><li><strong>비선택</strong> · 총회의 구체적 총액·한도 내 배분 위임과 보수 결정권 자체를 구별한다.</li><li><strong>비선택</strong> · 감사는 감시하는 기관이지 이사 보수의 기본 결정기관이 아니다.</li><li><strong>선택</strong> · 정관에 액수가 없으면 총회가 결정한다. 퇴직금·퇴직위로금도 직무 대가이면 포함된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제388조 참조. 이사의 보수는 정관에 그 액을 정하지 아니한 때에는 주주총회의 결의로 이를 정한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_037"><h4>형성평가 · 주식회사법_037</h4><p class="question-stem">상법에서 주식회사의 업무를 집행하고 회사를 대표하는 기관을 무엇이라 하는가?</p><ol class="choices"><li>사장</li><li>대표이사</li><li>이사회 의장</li><li>운영위원회 의장</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사장은 호칭이다. 호칭만으로 적법한 대표권이 생기지 않는다.</li><li><strong>선택</strong> · 대표이사다. 집행임원 설치회사의 대표집행임원 등 법정 예외는 별도로 본다.</li><li><strong>비선택</strong> · 이사회 의장에게 당연한 회사 대표권이 생기지 않는다.</li><li><strong>비선택</strong> · 운영위원회 의장은 상법상 일반적 대표기관의 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사에서 대내적으로 회사의 업무집행을 하고, 대외적으로 회사를 대표하는 권한을 가지는 주식회사의 필요적 상설기관은 대표이사이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_038"><h4>형성평가 · 주식회사법_038</h4><p class="question-stem">다음 중에서 대표이사의 대표권 남용행위의 요건에 해당하지 않는 것은?</p><ol class="choices"><li>외관상으로 적법한 행위이어야 한다.</li><li>상대방이 선의이고 중대한 과실이 없어야 한다.</li><li>대표이사 자신 또는 제3자의 이익을 위한 행위이어야 한다.</li><li>회사에 손실이 발생하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재는 대표권 범위 안의 적법한 외형을 대표권 남용의 출발점으로 설명한다.</li><li><strong>선택</strong> · 상대방 선의·무중과실은 남용 자체의 성립 요건이 아니다. 상대방 보호·효력 문제를 따로 묻는 문장이다.</li><li><strong>비선택</strong> · 자기 또는 제3자 이익을 위해 권한을 쓰는 것이 핵심이다.</li><li><strong>비선택</strong> · 교재가 제시한 요건에 포함된다. 남용 사실과 대외 효력은 별도로 판단한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대표이사의 대표권 남용의 요건은 첫째, 외관상 적법한 행위이어야 한다. 둘째, 자기 또는 제3자의 이익을 위한 행위이어야 한다. 셋째, 대표이사의 권한남용행위로 인하여 회사에 손실이 발생하여야 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_039"><h4>형성평가 · 주식회사법_039</h4><p class="question-stem">A주식회사는 甲, 乙, 丙 3명을 공동대표이사로 선임하였다.<br><br>위 지문에서 A주식회사는 거래상대방인 B가 있는데, B에 대한 의사표시에서 甲, 乙, 丙이 가지는 대표권의 범위는 어떻게 되는가?</p><ol class="choices"><li>B에 대한 의사표시는 甲, 乙, 丙 각자가 대표권을 갖는다.</li><li>B에 대한 의사표시는 甲, 乙, 丙 중 1인 만이 대표권을 갖는다.</li><li>B에 대한 의사표시는 甲, 乙, 丙이 아닌 감사가 대표권을 갖는다.</li><li>B에 대한 의사표시는 甲, 乙, 丙이 공동으로만 대표권을 갖는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 각자대표와 공동대표를 바꿔 놓은 함정이다.</li><li><strong>비선택</strong> · 공동대표 중 한 명에게 능동 대표권이 자동 집중되지 않는다.</li><li><strong>비선택</strong> · 감사의 회사-이사 소송대표와 일반 거래를 혼동했다.</li><li><strong>선택</strong> · 회사에서 B에게 의사표시하는 능동대표는 공동으로 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공동대표이사의 경우에 회사가 제3자에게 하는 의사표시, 즉 능동대표는 대표이사들이 공동으로만 회사를 대표할 수 있다. 따라서 공동대표이사 중의 1인이 다른 공동대표이사의 동의를 얻지 않고 단독으로 대표행위를 한 경우에 그 대표행위는 무효이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_040"><h4>형성평가 · 주식회사법_040</h4><p class="question-stem">A주식회사는 甲, 乙, 丙 3명을 공동대표이사로 선임하였다.<br><br>위 지문에서 丙이 자신의 대표권을 甲이나 乙에게 포괄적으로 위임하는 경우에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>甲 또는 乙 중에서 1인에게만 위임하는 것이 허용된다.</li><li>甲과 乙에게 공동으로 위임할 수 있을 뿐이다.</li><li>새로운 공동대표이사를 선임해서 그에게 위임할 수 있다.</li><li>누구에게든 일반적·포괄적 위임은 허용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한 명에게 몰아주는 일반적·포괄적 위임도 금지된다.</li><li><strong>비선택</strong> · 두 명에게 넘겨도 자기 견제를 통째로 포기하는 포괄 위임은 허용되지 않는다.</li><li><strong>비선택</strong> · 신임자 선임과 자신의 포괄적 위임은 다른 문제다.</li><li><strong>선택</strong> · 공동대표 취지 때문에 포괄 위임은 안 된다. 특정 거래의 개별 위임은 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [대법원 1989.5.23. 선고 89다카3677 판결] 공동대표이사의 1인이 그 대표권의 행사를 특정사항에 관하여 개별적으로 다른 공동대표이사에게 위임함은 별론으로 하고, 일반적, 포괄적으로 위임함은 허용되지 아니한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_041"><h4>형성평가 · 주식회사법_041</h4><p class="question-stem">다음 중에서 상법상 주식회사의 이사의 의무에 해당하지 않는 것은?</p><ol class="choices"><li>충실의무</li><li>개입의무</li><li>경업금지의무</li><li>자기거래금지의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 회사 및 주주를 위한 충실의무를 부담한다. 현재는 공평대우 내용도 확인한다.</li><li><strong>선택</strong> · 개입권은 경업 위반 때 회사가 행사하는 권리다. 이사의 개입의무가 아니다.</li><li><strong>비선택</strong> · 승인 없이 회사와 경쟁하거나 경쟁회사 임원 등이 되는 것을 제한한다.</li><li><strong>비선택</strong> · 사전 중요사실 공개·가중 승인·공정성을 요구하는 이해충돌 통제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사가 부담하는 의무로는 선관의무, 충실의무, 비밀유지의무, 감시의무, 경업금지의무, 자기거래금지의무, 회사의 기회 및 자산 유용금지의무 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_042"><h4>형성평가 · 주식회사법_042</h4><p class="question-stem">다음 중에서 주식회사의 이사가 동종영업을 목적으로 하는 다른 회사의 무한책임사원이나 이사가 되기 위해서 필요한 것은?</p><ol class="choices"><li>이사회의 승인</li><li>주주총회의 특별결의</li><li>감사의 승인</li><li>법원의 허가</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이사회가 있는 회사에서는397조의 이사회 승인이 원칙이다. 소규모1·2인 이사 회사는383조 특례를 별도 적용한다.</li><li><strong>비선택</strong> · 일반적인 총회 특별결의로 당연 대체하지 않는다. 소규모 특례가 별도인 점을 구별한다.</li><li><strong>비선택</strong> · 감사는 감독하지만 경업 승인권의 일반 주체가 아니다.</li><li><strong>비선택</strong> · 법원의 허가가397조의 기본 승인 절차는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제397조 제1항 참조. 이사는 이사회의 승인이 없으면 자기 또는 제삼자의 계산으로 회사의 영업부류에 속한 거래를 하거나 동종영업을 목적으로 하는 다른 회사의 무한책임사원이나 이사가 되지 못한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_043"><h4>형성평가 · 주식회사법_043</h4><p class="question-stem">다음 중에서 이사의 위법행위 유지청구권을 행사할 수 있는 자는 누구인가?</p><ol class="choices"><li>감사(위원회)</li><li>대표이사</li><li>채권자</li><li>이사회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 감사·감사위원회가 행사할 수 있고 법정 지분을 가진 주주도 가능하다.</li><li><strong>비선택</strong> · 대표이사라는 지위 자체가402조 청구권자 근거는 아니다.</li><li><strong>비선택</strong> · 회사 채권자에게402조의 주주·감사 권한이 자동 부여되지 않는다.</li><li><strong>비선택</strong> · 이사회는 감독기관이지만402조상 청구권자는 감사와 소수주주로 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제402조 참조. 감사 또는 발행주식총수의 100분의 1 이상을 보유한 주주가 위법행위 유지청구권을 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_044"><h4>형성평가 · 주식회사법_044</h4><p class="question-stem">다음 중에서 주주대표소송의 제소권자에 해당하는 자는?(상장법인이 아님)</p><ol class="choices"><li>발행주식총수의 100분의 1 이상을 보유한 주주</li><li>발행주식총수의 100분의 3 이상을 보유한 주주</li><li>발행주식총수의 100분의 5 이상을 보유한 주주</li><li>발행주식총수의 100분의 10 이상을 보유한 주주</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 최소 지분 기준은1% 이상이다. 그 의미에서 원본 정답1번을 유지한다.</li><li><strong>비선택</strong> · 문항 표현 주의:3% 보유자도1% 이상이므로 실제 제소권이 있다. 질문을 최소 기준으로 읽어야 단일정답이 된다.</li><li><strong>비선택</strong> · 5% 보유자 역시 요건을 충족한다.5%가 최소치라는 의미라면 틀리다.</li><li><strong>비선택</strong> · 10% 보유자도 제소권자다. 원문 선택지를 보존하되 최소치1%를 확인하는 문제로 이해한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제403조 참조. 주주대표소송의 제소권자는 발행주식총수의 100분의 1 이상을 보유한 주주이다. 2009년 개정 상법에서 상장회사의 특례로서 주주의 대표소송을 위한 주주의 지분율을 100분의 1에서 1만분의 1로 낮추는 한편, 당해 회사의 주식을 6개월 이상 보유한 주주만이 행사할 수 있도록 하였다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_081"><h4>워크북 · 주식회사법_워크북_081</h4><p class="question-stem">다음 중에서 이사회에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>이사회는 주식회사의 임시적 특별 기관이다.</li><li>회사의 업무 집행에 관한 의사 결정권과 업무 집행 감독권을 가진다.</li><li>대표이사가 소집권을 가지고, 개별 이사는 소집을 하지 못한다.</li><li>이사회 결의에 참석할 수 없는 이사는 서면 결의로 결의에 참가할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이사회는 원칙적으로 상설기관이다. 실제 이사1·2명인 소규모 회사 예외는 별도다.</li><li><strong>선택</strong> · 의사결정과 감독 모두 가진다. 감시하려면 정보 접근도 필요하다.</li><li><strong>비선택</strong> · 각 이사 소집이 원칙이고 지정된 소집자가 부당 거절하면 다른 이사의 소집도 가능하다.</li><li><strong>비선택</strong> · 서면 결의는 허용되지 않는다. 적법한 동시 음성회의는 서면과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 이사회는 주식회사의 필요적 상설 기관이다. ③ 이사회는 원칙으로 각 이사가 소집할 수 있으나 정관 또는 이사회의 결의로 대표이사 또는 이사회 의장과 같이 소집할 이사를 정한 때에는 그 이사만이 이사회를 소집할 수 있다. ④ 이사회의 결의는 적법하게 개최된 회의에서 이루어져야하며, 서면 결의는 인정되지 않는다. 또한 대리인에 의한 의결권 행사도 허용되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_082"><h4>워크북 · 주식회사법_워크북_082</h4><p class="question-stem">다음 중에서 이사의 선임에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상법상 이사의 자격에 아무런 제한을 두고 있지 않다.</li><li>감사는 회사 및 자회사의 이사가 되지 못한다.</li><li>이사의 수는 회사의 규모와 상관없이 5인 이상이어야 한다.</li><li>이사의 임기는 3년을 초과하지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 이사에게 일률적인 주주 자격을 요구하지 않는다는 출제 취지다. 겸직금지·독립이사 결격 등까지 없다는 문장은 아니다.</li><li><strong>비선택</strong> · 감사는 회사·자회사 이사 등을 겸할 수 없다. 감시 대상과 감시자를 분리한다.</li><li><strong>선택</strong> · 5명 이상이 아니다. 원칙3명, 자본금10억원 미만은1명 또는2명 가능하다.</li><li><strong>비선택</strong> · 원칙적 임기 상한3년이며 정관에 따른 최종 결산 정기총회 종결까지 연장 특례가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사의 수는 3인 이상이어야 한다. 다만, 자본금 총액이 10 억 원 미만인 회사(소규모 회사)는 1인 또는 2인의 이사를 둘 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_083"><h4>워크북 · 주식회사법_워크북_083</h4><p class="question-stem">주식회사의 이사회는 크게 세 가지 권한을 가진다. 다음 중에서 그에 해당하지 않는 것은?</p><ol class="choices"><li>정보 접근권</li><li>이사의 직무 집행 감독권</li><li>업무 집행에 관한 의사 결정권</li><li>감사 및 청산인의 선임 및 보수 결정권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정보를 얻어야 실질 감독을 할 수 있다. 보고 요구와 연결한다.</li><li><strong>비선택</strong> · 대표이사 등 이사 직무집행을 감독한다.</li><li><strong>비선택</strong> · 중요 업무집행에 관한 의사결정이 기본 권한이다.</li><li><strong>선택</strong> · 감사·청산인 선임·보수의 기본 권한을 이사회 일반 권한으로 넣은 것이 틀리다. 감사위원회 위원 선임 등 별도 제도와 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 이사회는 크게 세 가지 권한을 가진다. 즉, 업무 집행에 관한 의사 결정권, 이사의 직무 집행 감독권, 정보 접근권이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_084"><h4>워크북 · 주식회사법_워크북_084</h4><p class="question-stem">다음 중에서 이사회의 결의에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>이사 과반수의 출석과 출석 이사 3분의 2의 찬성으로 결의하여야 한다.</li><li>상법에서는 가부동수(可否同數)인 경우의 결의방법에 대해서 아무런 규정이 없다.</li><li>적법하게 개최된 회의에서 이루어져야하며, 서면 결의는 허용되지 않는다.</li><li>상법은 동시통시수단에 의한 결의를 허용하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 일반결의는 출석 이사 과반수다. 모든 결의에 출석3분의2를 요구하지 않는다. 자기거래 등 별도 가중 요건과 구별한다.</li><li><strong>비선택</strong> · 가부동수의 의장 결정표를 당연 인정하는 상법 규정은 없다.</li><li><strong>비선택</strong> · 실제 토론·판단의 회의가 필요하며 서면 찬성 취합으로 대체하지 못한다.</li><li><strong>비선택</strong> · 원문의 동시통시수단은 동시 통신수단 취지다. 모든 이사가 음성을 동시에 송수신하는 방식이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제391조 제1항 참조. 이사회의 결의는 이사 과반수의 출석과 출석 이사 과반수로 하여야 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_085"><h4>워크북 · 주식회사법_워크북_085</h4><p class="question-stem">다음 중에서 이사회에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>업무 집행에 관한 권한만 있고 감독권은 없다.</li><li>지배인의 선임과 해임도 이사회의 권한이다.</li><li>상법에서 정한 이사회 결의 요건은 정관으로 그 비율을 낮게 정할 수 있다.</li><li>이사회의 결의에 소집 절차·결의 내용·결의 방법 등에 하자가 있는 경우에 대해서 상법은 자세한 절차 규정을 두고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 감독권도 있다. 결정권만 외우면 놓치는 함정이다.</li><li><strong>선택</strong> · 393조가 명시한 지배인 선임·해임 결정권이다.</li><li><strong>비선택</strong> · 정관으로 비율을 높일 수 있지만 법정 요건보다 낮출 수 없다.</li><li><strong>비선택</strong> · 총회와 같은 별도 하자소송 상세 체계는 없다. 일반 민사원칙으로 다툰다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 이사회는 업무 집행에 관한 의사 결정권과 이사의 직무 집행 감독권, 정보 접근권을 가진다. ③ 상법 제391조 제1항 참조. 이사회의 결의는 이사 과반수의 출석과 출석 이사의 과반수로 하여야 한다. 그러나 정관으로 그 비율을 높게 정할 수 있다. ④ 이사회의 결의에 소집 절차·결의 내용·결의 방법 등에 하자가 있는 경우에 대해서 상법은 아무런 규정을 두고 있지 않다. 따라서 민법의 일반 원칙에 따라 당연 무효로 본다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_086"><h4>워크북 · 주식회사법_워크북_086</h4><p class="question-stem">2인 이상의 이사를 선임할 때 1주당 선임하고자 하는 이사 수에 상당하는 복수의 의결권을 부여하는 것을 무엇이라 하는가?</p><ol class="choices"><li>복수 투표</li><li>가중 투표</li><li>특별 투표</li><li>집중투표</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 복수 표라는 외형만 보고 이름을 고르지 않는다.</li><li><strong>비선택</strong> · 가중투표라는 상법상 해당 제도는 아니다.</li><li><strong>비선택</strong> · 특별결의와 집중투표는 목적·계산이 다르다.</li><li><strong>선택</strong> · 선임 인원만큼 표를 늘려 후보에게 집중하는 집중투표다. 상장 대규모 회사의 현행 배제금지 특례도 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제382조의2 참조.2인 이상의 이사의 선임을 목적으로 하는 총회의 소집이 있는 때에는 의결권 없는 주식을 제외한 발행주식총수의 100분의 3 이상에 해당하는 주식을 가진 주주는 정관에서 달리 정하는 경우를 제외하고는 회사에 대하여 집중투표의 방법으로 이사를 선임할 것을 청구할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_087"><h4>워크북 · 주식회사법_워크북_087</h4><p class="question-stem">정관에서 이사의 보수를 정하지 않은 경우 이사의 보수를 결정하는 주식회사의 기관은 무엇인가?</p><ol class="choices"><li>대표이사</li><li>이사회</li><li>감사</li><li>주주총회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표이사 자신이 보수를 마음대로 정하지 못한다.</li><li><strong>비선택</strong> · 총회가 정한 범위의 배분 권한과388조상 기본 결정권을 구별한다.</li><li><strong>비선택</strong> · 감사는 기본 보수 결정권자가 아니다.</li><li><strong>선택</strong> · 정관에 액수가 없으면 주주총회 결의로 정한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제388조 참조. 이사의 보수는 정관에 그 액을 정하지 아니한 때에는 주주총회의 결의로 이를 정한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_088"><h4>워크북 · 주식회사법_워크북_088</h4><p class="question-stem">다음 중에서 이사의 선임에 대한 설명으로서 옳지 않은 것은?</p><ol class="choices"><li>상법에서는 이사의 자격에 아무런 제한을 두고 있지 않다.</li><li>감사는 회사 및 자회사의 이사가 되지 못한다.</li><li>회사 설립 시에는 발기인이 선임하거나 창립 총회에서 선임한다.</li><li>이사를 선임하면 성명과 주민 등록 번호를 등기함으로써 이사 선임의 효력이 발생한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 이사에게 주주여야 한다는 제한이 없다는 취지다. 법정 겸직·결격사유까지 전부 없다는 것은 아니다.</li><li><strong>비선택</strong> · 감사 독립성을 위한 겸직 제한이다.</li><li><strong>비선택</strong> · 설립 방식에 따라 발기인 또는 창립총회가 선임한다.</li><li><strong>선택</strong> · 등기는 효력발생 요건이 아니다. 적법한 선임결의와 취임승낙을 갖추면 별도 대표이사 계약 없이 이사 관계가 생긴다. 원문 해설의 결의만이라는 표현을 보완한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사 선임의 효력은 주주총회의 선임 결의에 의해서 발생하고 등기 유무와는 무관하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_089"><h4>워크북 · 주식회사법_워크북_089</h4><p class="question-stem">다음 중에서 이사회의 결의에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>상법에서 정한 결의 요건은 정관으로 높거나 낮게 정할 수 있다.</li><li>서면에 의한 결의도 유효한 것으로 인정된다.</li><li>대리인에 의한 의결권 행사는 허용되지 않는다.</li><li>상법에서는 결의하자에 대해서 주주총회와 동일한 소송 절차를 규정하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정관은 법정 비율보다 높일 수만 있다.</li><li><strong>비선택</strong> · 서면 결의는 이사회 직접 심의의 대체 방식이 아니다.</li><li><strong>선택</strong> · 이사 본인의 토론·판단이 요구되므로 대리 표는 허용되지 않는다. 동시 음성 참가는 별도다.</li><li><strong>비선택</strong> · 총회의 취소·무효 소송 체계와 동일한 특별절차가 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 결의 요건은 정관으로 높일 수만 있을 뿐이다. ② 이사 본인이 직접 결의에 참여하여야 하고, 서면 결의나 의결권 대리 행사는 허용되지 않는다. ④ 이사회 결의가 하자 있는 경우에 대해서 상법은 아무런 규정을 두고 있지 않다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_090"><h4>워크북 · 주식회사법_워크북_090</h4><p class="question-stem">다음 중에서 이사의 종임에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>일반적인 이사의 종임 사유는 임기 만료이다.</li><li>이사는 수임인과 마찬가지로 언제든지 사임할 수 있다.</li><li>주주총회는 언제든지 특별결의로써 이사를 해임할 수 있다.</li><li>현행 상법에서는 소수주주의 이사 해임 청구권이 인정되고 있지 않다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 임기만료는 종임 사유지만 인원 부족 시 계속이사 규정을 확인한다.</li><li><strong>비선택</strong> · 원칙적으로 사임 가능하다. 불리한 시기의 사임에 따른 위임상 책임·계속직무는 별도 문제다.</li><li><strong>비선택</strong> · 총회는 언제든 특별결의로 해임할 수 있다. 정당한 이유 없는 중도해임은 배상 문제가 남는다.</li><li><strong>선택</strong> · 일반3% 주주는 중대한 위법 등에도 총회가 부결하면1개월 내 법원 해임을 청구할 수 있다. 따라서 없다는 문장이 틀리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제385조 제2항 참조. 이사가 그 직무에 관하여 부정 행위 또는 법령이나 정관에 위반한 중대한 사실이 있음에도 불구하고 주주총회에서 그 해임을 부결한 때에는 발행주식총수의 100분의 3 이상에 해당하는 주식을 가진 주주는 총회의 결의가 있은 날부터 1월 내에 그 이사의 해임을 법원에 청구할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_091"><h4>워크북 · 주식회사법_워크북_091</h4><p class="question-stem">다음 중에서 대표이사의 선임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>원칙적으로 주주총회의 권한 사항이다.</li><li>특별한 자격 제한은 없지만 그 회사의 이사여야 한다.</li><li>대표이사는 3인 이하여야 한다.</li><li>이사와 달리 대표이사의 성명, 주민 번호 등은 등기 사항이 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이사회 선임이 원칙이고 정관으로 총회 선임을 정할 수 있다.</li><li><strong>선택</strong> · 그 회사 이사 지위가 필요하다. 이사도 아닌 사람이 경영권을 샀다고 당연 대표가 되지 않는다.</li><li><strong>비선택</strong> · 대표이사의 수에 일률적3인 이하 제한은 없다.</li><li><strong>비선택</strong> · 성명·주민등록번호·주소는 등기사항이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대표이사의 선임은 원칙적으로 이사회의 권한이다. ③ 대표이사의 수에 대해서는 아무런 제한이 없다. ④ 대표이사의 성명, 주민 번호 및 주소는 등기 사항이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_092"><h4>워크북 · 주식회사법_워크북_092</h4><p class="question-stem">다음 중에서 법률에 의한 대표이사의 대표권 제한의 내용에 해당하는 것은?</p><ol class="choices"><li>이사와 회사 간의 소(訴)에 대해서는 감사가 회사를 대표한다.</li><li>대외적인 거래에서 이사회의 결의에 따라서 행하여야 한다.</li><li>신주발행 사항의 결정은 이사회에서 하여야 한다.</li><li>이사회의 결정에 따라 주주총회의 소집 절차를 진행한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 394조는 이사-회사 소송에서 감사가 회사를 대표하도록 한다. 감사위원회·소규모 특례는 별도다.</li><li><strong>비선택</strong> · 모든 대외 거래에 항상 이사회 결의가 필요한 것은 아니다. 내부 결정 제한과 대표권 자체 제한을 구별한다.</li><li><strong>비선택</strong> · 신주발행 사항의 기관 결정과 이사 상대 소송의 법정 대표자 문제는 다르다.</li><li><strong>비선택</strong> · 총회 소집 집행은 이사회의 내부 결정과 대표이사 실행의 분담이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제394조 제1항 참조. 회사가 이사에 대하여 또는 이사가 회사에 대하여 소를 제기하는 경우에 감사는 그 소에 관하여 회사를 대표한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_093"><h4>워크북 · 주식회사법_워크북_093</h4><p class="question-stem">다음 중에서 甲의 행위를 표현한 것으로 옳은 것은? (상법에 따름)<br><br>[공통 지문]<br>A주식회사의 대표이사 甲은 자신의 개인적인 채무를 변제하기 위해서 A주식회사의 대표이사 명의로 자신의 채무자인 乙에게 약속어음을 발행하였다.</p><ol class="choices"><li>대표권 남용</li><li>부당 대표 행위</li><li>표현대표이사</li><li>업무 집행 지시자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 개인 채무 변제를 위해 회사 대표권을 쓴 대표권 남용이다. 공통 지문의 채무자는 문맥상 채권자 관계와 어긋나는 원자료 표현이다.</li><li><strong>비선택</strong> · 부당 대표 행위는 여기서 찾는 법적 제도명이 아니다.</li><li><strong>비선택</strong> · 실제 대표이사의 사익 목적 행사이므로 대표권 외관만 있는 표현대표와 다르다.</li><li><strong>비선택</strong> · 실제 대표이사인 갑의 행위다. 등기 밖 실권자의 업무집행지시자 문제와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대표이사가 자신 또는 제3자의 이익을 위하여 대표 행위를 한 경우를 대표권 남용이라 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_094"><h4>워크북 · 주식회사법_워크북_094</h4><p class="question-stem">[문제 3]의 甲의 행위가 성립하기 위한 요건에 해당하지 않는 것은?<br><br>[공통 지문]<br>A주식회사의 대표이사 甲은 자신의 개인적인 채무를 변제하기 위해서 A주식회사의 대표이사 명의로 자신의 채무자인 乙에게 약속어음을 발행하였다.</p><ol class="choices"><li>외관상으로 적법한 행위여야 한다.</li><li>정관이나 이사회의 제한을 위반한 행위여야 한다.</li><li>자기 또는 제3자의 이익을 위한 행위여야 한다.</li><li>회사에 손실이 발생하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재는 권한 범위 안의 외형을 남용과 제한 위반 구별의 출발점으로 삼는다.</li><li><strong>선택</strong> · 대표권 제한을 위반해야만 남용이라는 것은 아니다. 외형상 권한 안의 행위를 사익에 쓰는 것이 문제다.</li><li><strong>비선택</strong> · 사익 목적이라는 남용의 핵심이다.</li><li><strong>비선택</strong> · 교재가 든 회사 손실 요건이다. 실제 손해배상·외부 거래효력은 따로 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대표권 남용 행위라고 하더라도 정관 및 이사회의 제한을 초과하거나 법률상 필요한 절차를 거치지 않은 행위는 위법한 행위이므로 대표권 남용에 해당하지 않는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_095"><h4>워크북 · 주식회사법_워크북_095</h4><p class="question-stem">다음 중에서 A 주식회사와 乙 사이의 법률 관계에 대한 설명으로 옳은 것은?<br><br>[공통 지문]<br>A주식회사의 대표이사 甲은 자신의 개인적인 채무를 변제하기 위해서 A주식회사의 대표이사 명의로 자신의 채무자인 乙에게 약속어음을 발행하였다.</p><ol class="choices"><li>甲이 대표이사 명의로 약속어음을 발행하였으므로 A는 어떠한 경우에도 乙에게 책임을 부담하여야 한다.</li><li>甲이 개인적 채무를 변제하기 위해서 약속어음을 발행하였으므로 A는 어떤 경우에도 乙에게 책임을 부담하지 않는다.</li><li>甲의 행위가 개인적 채무 변제 목적임을 乙이 알고 있었다는 것을 입증하여야 A는 甲의 행위의 효력을 부인할 수 있다.</li><li>甲의 행위로 인해서 A와 乙 사이에는 아무런 법률 관계가 발생하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표 명의만으로 상대방 악의 등과 무관하게 무조건 책임지지는 않는다.</li><li><strong>비선택</strong> · 개인 목적이라는 내부 사정만으로 선의 상대방에 대한 효과를 언제나 부인할 수도 없다.</li><li><strong>선택</strong> · 상대방이 개인 채무 변제 목적을 알았음을 회사가 입증하면 효력을 부인할 수 있다는 설명은 옳다. 이것만이 유일한 고려사정이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 거래효력과 상대방 인식을 검토해야 하므로 아무 법률관계도 없다고 단정하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대표권 남용 행위도 대표이사의 권한 범위 내의 행위이므로 원칙적으로 대외적 관계에서는 거래의 안전을 위하여 유효이다. 다만, 상대방이 대표권 남용의 사실을 알고 있는 때에는 회사는 이를 다투어서 책임을 면할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_096"><h4>워크북 · 주식회사법_워크북_096</h4><p class="question-stem">A 주식회사는 거래 상대방인 B가 있는데, B에 대한 의사 표시에서 甲, 乙, 丙이 가지는 대표권의 범위는 어떻게 되는가?<br><br>[공통 지문]<br>A 주식회사는 甲, 乙, 丙 3명을 공동대표이사로 선임하였다.</p><ol class="choices"><li>B에 대한 의사 표시는 甲, 乙, 丙 각자가 대표권을 갖는다.</li><li>B에 대한 의사 표시는 甲, 乙, 丙 중 1인만이 대표권을 갖는다.</li><li>B에 대한 의사 표시는 甲, 乙, 丙이 아닌 감사가 대표권을 갖는다.</li><li>B에 대한 의사 표시는 甲, 乙, 丙이 공동으로만 대표권을 갖는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 각자대표 규칙을 공동대표에 적용한 오류다.</li><li><strong>비선택</strong> · 한 명에게 능동대표권이 자동 집중되지 않는다.</li><li><strong>비선택</strong> · 감사는 일반 거래의 기본 대표자가 아니다.</li><li><strong>선택</strong> · B에게 의사표시하는 능동대표는 갑·을·병이 공동으로 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공동대표이사의 능동 대표는 공동으로만 대표권을 갖는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_097"><h4>워크북 · 주식회사법_워크북_097</h4><p class="question-stem">丙이 자신의 대표권을 甲이나 乙에게 일반적·포괄적으로 위임할 수 있는가?(판례에 따름)<br><br>[공통 지문]<br>A 주식회사는 甲, 乙, 丙 3명을 공동대표이사로 선임하였다.</p><ol class="choices"><li>甲 또는 乙 중에서 1 인에게만 위임하는 것이 허용된다.</li><li>甲과 乙 공동으로 위임할 수 있을 뿐이다.</li><li>새로운 공동대표이사를 선임해서 그에게 위임할 수 있다.</li><li>누구에게든 일반적·포괄적 위임은 허용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한 명에게 포괄 위임하는 것도 공동대표 견제를 없애므로 안 된다.</li><li><strong>비선택</strong> · 두 명에게 포괄 위임하더라도 결론은 같다.</li><li><strong>비선택</strong> · 신임 대표자 선임과 포괄 위임 허용 여부는 별개다.</li><li><strong>선택</strong> · 일반적·포괄적 위임은 금지된다. 특정 사항의 개별 위임까지 금지하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [대법원 1989.5.23. 선고 89다카3677 판결]공동대표이사의 1인이 그 대표권의 행사를 특정 사항에 관하여 개별적으로 다른 공동대표이사에게 위임함은 별론으로 하고, 일반적·포괄적으로 위임함은 허용되지 아니한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_098"><h4>워크북 · 주식회사법_워크북_098</h4><p class="question-stem">표현대표이사의 행위에 대해서 회사가 책임을 부담하기 위한 요건에 해당하지 않는 것은?</p><ol class="choices"><li>외관이 존재해야 한다.</li><li>회사의 귀책사유가 있어야한다.</li><li>표현대표이사의 독립적인 경제적 이익이 있어야한다.</li><li>외관에 대해 제3자의 신뢰(선의)가 있어야한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표권이 있는 것처럼 보이는 명칭·외관이 필요하다.</li><li><strong>비선택</strong> · 회사의 명시·묵시 허용 등 귀책사유가 필요하다. 단순히 못 알아챈 과실만과 구분한다.</li><li><strong>선택</strong> · 표현대표가 독립적 경제이익을 얻을 필요는 없다. 외관을 믿은 제3자 보호가 목적이다.</li><li><strong>비선택</strong> · 제3자가 대표권 없음을 몰랐어야 한다. 판례상 중과실이 있으면 보호되지 않지만 무과실까지 요구하지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제395조 참조. [대법원1988.10.11. 선고 86다카2936 판결]상법 제395조의 표현대표이사 책임에 관한 규정의 취지는 회사의 대표이사가 아닌 이사가 외관상 회사의 대표권이 있는 것으로 인정될 만한 명칭을 사용하여 거래 행위를 하고, 이러한 외관상 회사의 대표 행위에 대하여 회사에게 귀책사유가 있는 경우에 그 외관을 믿은 선의의 제3자를 보호함으로써 상거래의 신뢰와 안전을 도모하려는 데에 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_099"><h4>워크북 · 주식회사법_워크북_099</h4><p class="question-stem">OO 주식회사의 대표이사의 선임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주주총회의 추천으로 법원이 선임한다.</li><li>상법상 대표이사의 자격은 주주로 한정하고 있다.</li><li>상법상 대표이사의 수는 3인 이상이어야 한다.</li><li>대표이사의 성명, 주민 등록 번호, 주소는 등기 사항이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적으로 이사회가 선임한다. 법원이 언제나 주주 추천에 따라 선임하는 구조가 아니다.</li><li><strong>비선택</strong> · 주주 자격이 아니라 이사 자격이 전제다.</li><li><strong>비선택</strong> · 3명 이상은 일반 이사 인원 규칙이지 대표이사 인원 규칙이 아니다.</li><li><strong>선택</strong> · 대표이사의 성명·주민등록번호·주소는 등기사항이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대표이사는 이사회가 선임하고, 이사이면 충분하며, 대표이사의 수에 대해서는 아무런 제한이 없다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_100"><h4>워크북 · 주식회사법_워크북_100</h4><p class="question-stem">00 주식회사는 甲, 乙, 丙의 공동대표이사를 두었다. 공동대표이사의 대표권에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>거래 상대방에 대한 회사의 의사 표시는 甲, 乙, 丙 각자가 할 수 있다.</li><li>회사에 대한 거래 상대방의 이행은 甲, 乙, 丙 모두에게 하여야 한다.</li><li>甲, 乙, 丙 공동의 불법 행위에 대해서만 회사가 연대 책임을 부담한다.</li><li>甲은 자신의 대표권 행사를 일반적·포괄적으로 乙이나 丙에게 위임할 수 없다는 것이 판례의 입장이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 능동대표는 공동으로 한다. 각자대표와 반대다.</li><li><strong>비선택</strong> · 수동대표는 한 명에 대한 이행·표시로 가능하다.</li><li><strong>비선택</strong> · 한 공동대표의 업무상 불법행위도 요건을 갖추면 회사가 연대책임을 진다.</li><li><strong>선택</strong> · 포괄 위임은 공동대표의 상호 견제를 무너뜨리므로 허용되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 제3자에 대한 회사의 의사표시는 甲, 乙, 丙이 공동으로 하여야 한다. ② 회사에 대한 거래상대방의 이행은 甲, 乙, 丙 한 사람에게만 하여도 된다. ③ 甲, 乙, 丙 한 사람만의 불법행위에 대해서도 회사가 연대책임을 부담한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_101"><h4>워크북 · 주식회사법_워크북_101</h4><p class="question-stem">다음 중에서 이사의 의무에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>회사와 이사의 관계는 위임 관계이므로 이사는 회사에 대하여 선관주의의무를 부담한다.</li><li>이사는 재임 중에만 비밀 유지 의무를 부담하고 퇴임 후에는 부담하지 않는다.</li><li>이사의 경업금지의무에서 경업은 비록 영리 목적이 없다고 하더라도 금지된다.</li><li>이사회의 승인을 받지 않은 자기거래의 효력은 유효하다는 것이 판례의 입장이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 위임관계에 따라 선량한 관리자의 주의의무를 부담한다.</li><li><strong>비선택</strong> · 비밀유지는 퇴임 후에도 계속된다. 공개정보와 영업비밀을 구별한다.</li><li><strong>비선택</strong> · 자기 주거용 주택 취득처럼 영리·경쟁 충돌이 없는 행위까지 무조건 금지하지 않는다.</li><li><strong>비선택</strong> · 회사-이사 사이 무효와 선의 제3자 보호를 구별하는 상대적 무효가 판례 기준이다. 무조건 유효가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 상법 제382조의4 참조. 이사는 재임 중뿐만 아니라 퇴임 후에도 직무상 알게 된 회사의 영업상 비밀을 누설하여서는 안 된다. ③ 영리성이 없는 거래는 이익 충돌의 우려가 없으므로 금지되지 않는다. ④ [대법원 2004.3.25. 선고 2003다64688 판결] 참조. 이사회의 승인을 받지 않은 자기거래의 효력에 대해서 판례는 상대적 무효 설의 입장이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_102"><h4>워크북 · 주식회사법_워크북_102</h4><p class="question-stem">甲은 A 주식회사의 이사이다. 다음 중에서 A 주식회사가 甲의 행위에 대해서 개입권을 행사할 수 있는 경우는?</p><ol class="choices"><li>충실의무 위반</li><li>비밀 유지 의무 위반</li><li>경업금지의무 위반</li><li>자기거래 금지 의무 위반</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 충실의무 위반 전체에397조 개입권이 자동 생기지는 않는다.</li><li><strong>비선택</strong> · 비밀유지 위반은 배상 등 문제지만 개입권의 직접 요건은 경업거래다.</li><li><strong>선택</strong> · 승인 없는 경업거래에는 회사 계산 귀속 또는 이득 양도의 개입권이 있다. 거래일부터1년이다.</li><li><strong>비선택</strong> · 자기거래는398조 승인·공정성·무효·배상 문제다.397조 개입권과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제397조 제2항 참조. 이사가 이사회의 승인 없이 자기 또는 제3자의 계산으로 회사의 영업 부류에 속한 거래를 한 경우 회사는 이사회의 결의로 그 이사의 거래가 자기의 계산으로 한 것인 때에는 이를 회사의 계산으로 한 것이라고 볼 수 있고, 제3자의 계산으로 한 경우에는 그 이사에게 이로 인한 이득의 양도를 청구할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_103"><h4>워크북 · 주식회사법_워크북_103</h4><p class="question-stem">이사가 법령 또는 정관에 위반하여 회사에 회복할 수 없는 손해가 생길 염려가 있는 행위를 할 우려가 있는 때에 위법 행위 유지 청구권을 행사할 수 있는 자는?</p><ol class="choices"><li>대표이사</li><li>회사 채권자</li><li>사외이사</li><li>감사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대표이사 지위만으로402조 청구권자가 되지는 않는다.</li><li><strong>비선택</strong> · 채권자는402조가 정한 감사·소수주주가 아니다.</li><li><strong>비선택</strong> · 사외이사 지위 자체가402조 청구권자 근거는 아니다. 주주 지분을 별도로 충족한다면 그 지위로 검토한다.</li><li><strong>선택</strong> · 감사와 소수주주가 회사의 회복 불가능 손해를 사전에 막을 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제402조 참조. 이사가 법령 또는 정관에 위반한 행위를 하여 이로 인하여 회사에 회복할 수 없는 손해가 생길 염려가 있는 경우 감사와 소수주주는 위법 행위 유지 청구권을 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_104"><h4>워크북 · 주식회사법_워크북_104</h4><p class="question-stem">이사가 법령 또는 정관을 위반하여 회사의 이익을 침해하고 나아가 회사에 손해를 끼칠 염려가 있거나, 회사에 손해를 입힌 경우에 취할 수 있는 방법으로서 상법에서 규정하고 있지 않은 것은?</p><ol class="choices"><li>3배 배상 제도</li><li>위법 행위 유지 청구권</li><li>주주 대표 소송</li><li>해임 청구권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이사 임무위반에 일반적으로3배 배상을 부과하는 제도는 이 규정들에 없다. 다른 특별법의 배수배상과 혼동하지 않는다.</li><li><strong>비선택</strong> · 위법행위 유지청구는 사전 중지 수단이다.</li><li><strong>비선택</strong> · 대표소송은 회사가 게을리하는 이사 책임 추궁을 주주가 대신 실현한다.</li><li><strong>비선택</strong> · 중대한 위법 등과 총회 부결·지분·기간 요건을 갖춘 법원 해임청구가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사가 법령 또는 정관을 위반하여 회사의 이익을 침해하고 나아가 회사에 손해를 끼칠 염려가 있거나, 회사에 손해를 입힌 경우에 취할 수 있는 방법으로서 상법에서 규정하고 있는 것은 사전적으로 위법 행위 유지 청구권이 있고, 사후적으로 손배 배상 청구, 주주 대표 소송, 해임 청구권 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_105"><h4>워크북 · 주식회사법_워크북_105</h4><p class="question-stem">이사가 제3자의 계산으로 회사와 거래를 할 때에는 미리 해당 거래의 중요한 사실을 밝히고 승인을 얻어야한다. 다음 중에서 이사가 승인을 받아야하는 것은?</p><ol class="choices"><li>이사회 승인</li><li>주주총회 특별결의</li><li>채권자의 승인</li><li>법원의 인가</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이사회가 있는 회사에서는 중요사실 사전 공개와 이사3분의2 이상 승인·공정성을 갖춘다. 소규모 회사의 법정 대체기관은 별도다.</li><li><strong>비선택</strong> · 총회 특별결의라는 이유만으로 이사회 승인 없이 언제나 치유되지 않는다.</li><li><strong>비선택</strong> · 채권자가398조의 일반 승인기관은 아니다.</li><li><strong>비선택</strong> · 법원 인가가398조의 기본 승인 절차는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제398조 제1호\~제5호의 어느 하나에 해당하는 자가 자기 또는 제3자의 계산으로 회사와 거래를 하기 위하여는 미리 이사회에서 해당 거래에 관한 중요 사실을 밝히고 이사회의 승인을 받아야한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_106"><h4>워크북 · 주식회사법_워크북_106</h4><p class="question-stem">다음 중에서 이사의 위법 행위에 대한 유지 청구권에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>청구권자는 감사 또는 소수주주이다.</li><li>이사가 법령 또는 정관에 위반한 행위를 하려고 해야 한다.</li><li>유지 청구는 소송으로만 행사할 수 있다.</li><li>이사의 행위로 회사에 회복할 수 없는 손해가 발생할 염려가 있어야한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 감사 또는 법정 지분의 소수주주가 청구한다.</li><li><strong>비선택</strong> · 법령·정관 위반행위를 사전에 막는 제도다. 단순히 주주 마음에 안 드는 결정이면 부족하다.</li><li><strong>선택</strong> · 소송만이 아니다. 재판 외 청구나 가처분도 가능하므로 틀린 설명이다.</li><li><strong>비선택</strong> · 회사에 회복할 수 없는 손해의 우려가 필요하다. 신주발행 유지청구의 주주 불이익과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사의 위법 행위 유지 청구권은 소송으로만 행사할 수 있는 것은 아니고 재판 외의 방법인 의사 표시로도 행사할 수 있으며, 가처분의 방법으로도 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_107"><h4>워크북 · 주식회사법_워크북_107</h4><p class="question-stem">다음 중에서 상법상 이사의 책임에 대한 설명으로 올바른 것은?</p><ol class="choices"><li>이사가 과실로 정관에 위반한 행위를 한 경우에는 회사에 대해서 손해배상책임을 면한다.</li><li>이사의 회사에 대한 손해배상책임은 주주총회의 특별결의로 면제할 수 있다.</li><li>이사의 제3자에 대한 손해배상책임에서 간접 손해를 입은 주주도 제3자에 포함된다는 것이 판례의 입장이다.</li><li>이사가 아니면서 회사에 대한 자신의 영향력을 이용하여 업무 집행을 지시한 자도 이사와 연대하여 배상 책임을 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 회사에 대한399조는 과실도 포함한다. 제3자 책임의 중과실 기준을 섞은 오류다.</li><li><strong>비선택</strong> · 전체 면제는 총주주 동의가 원칙이다.400조2항 정관상 일정 범위 제한은 별도다.</li><li><strong>비선택</strong> · 회사 횡령에 따른 주가 하락 같은 간접손해는 기존401조 판례상 주주의 직접 청구손해와 다르다.</li><li><strong>선택</strong> · 영향력을 이용해 지시한 업무에 관하여401조의2 요건을 충족하면 책임 있는 이사와 연대책임을 질 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 이사가 고의 또는 과실로 법령 또는 정관에 위반하는 행위를 하거나 그 임무를 게을리 한 때에는 회사에 대하여 연대하여 손해를 배상하여야 한다. ② 이사의 회사에 대한 손해배상책임은 의결권 없는 주식을 포함한 주주 전원의 동의가 있어야만 면제할 수 있다. ③ [대법원 2003.10.24. 선고 2003다29661 판결]참조. 간접 손해를 입은 주주는 제3자에 포함되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_108"><h4>워크북 · 주식회사법_워크북_108</h4><p class="question-stem">이사가 아니면서 이사의 업무 집행을 지시하거나 경영권을 사실상 행사하는 자를 상법에서는 무엇이라 하는가?</p><ol class="choices"><li>업무 집행 지시자</li><li>명예 회장</li><li>지배 주주</li><li>총수</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 법적 책임 범주인 업무집행지시자를 묻는다. 실제 지시·집행 요건을 충족해야 한다.</li><li><strong>비선택</strong> · 명예회장은 직함이며 직함만으로 자동 책임지는 것은 아니다.</li><li><strong>비선택</strong> · 지배주주라는 지위만으로 언제나401조의2 책임이 생기지 않는다.</li><li><strong>비선택</strong> · 총수는 일반 호칭이다. 상법상 법적 책임 요건을 대신하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이사가 아니면서 명예 회장·회장·사장·부사장·전무·상무 등 이사의 업무 집행을 지시하거나 경영권을 사실상 행사하는 자를 업무 집행 지시자(사실상의 이사)라고 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_109"><h4>워크북 · 주식회사법_워크북_109</h4><p class="question-stem">다음 중에서 이사의 의무에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>판례에 따르면 평이사는 일반적인 감시 의무를 부담하지 않는다.</li><li>이사가 자기 또는 제3자의 계산으로 경업을 하기 위해서는 이사회의 승인을 얻어야한다.</li><li>판례에 따르면 이사와 회사 간의 어음 행위에 대해서는 이사회의 승인이 필요하지 않다.</li><li>이사가 자기거래 금지 의무를 위반하면 회사는 개입권을 행사할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 평이사도 일반적·능동적 감시의무를 부담한다.</li><li><strong>선택</strong> · 이사회가 있는 회사의 승인 없는 자기·제3자 계산 경업을 제한한다.</li><li><strong>비선택</strong> · 어음·수표 거래도 이해충돌이 있으면 자기거래 승인 대상이다.</li><li><strong>비선택</strong> · 개입권은 경업거래의 이익 귀속을 위한397조 권리다. 자기거래 일반의 효과가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 판례는 이사의 일반적·능동적 감시 의무를 인정하고 있다. ③ 판례는 이사와 회사 간의 어음 행위에 이사회의 승인을 요한다고 본다. ④ 이사의 의무 위반 시 회사가 개입권을 행사할 수 있는 경우는 이사의 경업금지의무 위반에 대해서이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_110"><h4>워크북 · 주식회사법_워크북_110</h4><p class="question-stem">다음 중에서'회사가 이사에 대한 책임 추궁을 게을리 하는 경우 주주가 회사를 위하여 이사의 책임을 추궁하기 위해 제기하는 소송'에 해당하는 것은?</p><ol class="choices"><li>위법 행위 유지 청구</li><li>주주 대표 소송</li><li>이사의 자본충실책임 청구</li><li>회사 대리 소송</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 유지청구는 사전에 위법행위를 멈추는 수단이다.</li><li><strong>선택</strong> · 회사가 게을리하는 이사 책임 추궁을 주주가 회사 이익을 위해 하는 대표소송이다.</li><li><strong>비선택</strong> · 자본충실책임은 추궁할 실체적 책임의 한 종류일 수 있지만 소송제도 이름은 아니다.</li><li><strong>비선택</strong> · 주주는 회사 대리인이 아니라 자기 이름으로 소송하는 제3자 소송담당자다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주 대표 소송은 회사가 이사에 대한 책임 추궁을 게을리 하는 경우 주주가 회사를 위하여 이사의 책임을 추궁하려고 제기하는 소송으로서, 주주들이 경영 감시 및 기업 경영의 투명성을 보장하는 데 기여할 수 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '주식회사법 · CHAPTER 06' : 'PART · COMPANY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(주식회사법 · CHAPTER 06|PART · COMPANY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('company-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제8강 상행위법과 상행위 특칙 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 08</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제8강 상행위법과 상행위 특칙 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>친구에게 물건을 잠깐 맡기거나 돈을 빌려 주는 상황과, 매일 수백 건의 주문·보관·대출을 처리하는 사업은 다르다. <mark class="yellow">상행위 특칙은 민법의 기본 규칙을 빠르고 반복되는 영업에 맞춰 조정한 규칙</mark>이다. 왜 달라지는지 이해하면 조문 숫자가 아니라 상황으로 기억할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나?</td>
+<td>대리·시효·담보·계약·이자·연대책임·보관에 관한 민법의 상사특칙</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td><mark class="green">많은 거래를 신속하고 안전하게 처리하면서 정당한 보수와 신용을 확보하기 위해</mark></td>
+</tr>
+<tr>
+<td>전체 위치는?</td>
+<td>상법 총칙과 각종 상행위 사이의 공통 규칙</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td><mark class="blue">상인·대리·외관 지식을 사용하며, 다음 상사매매·중개·운송의 바탕이 된다.</mark></td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>왜 상인은 무료 보관에도 엄격한 책임을 지고, 왜 어떤 채무는 연대책임인지 설명하기 어렵다.</td>
+</tr>
+</tbody></table>
+<p>교재149–172쪽·워크북53–59쪽과 제공7문항28개 보기를 다룬다. 노랑=결론, 초록=이유, 분홍=함정, 파랑=연결. <strong>교재 보험시효는 옛 숫자이므로 현행 규정으로 보완한다.</strong></p>
+<h1>1. 상행위법의 방향</h1>
+<h2 id="commercial-08-01" data-concept-id="commercial-08-01">1-1. 적용범위와 네 가지 성격 ★★★★☆</h2>
+<p><strong>교재151–153쪽 · 문단의 이유:</strong> 각 특칙이 서로 다른 방향으로 보이더라도 그 목적을 잡으면 연결된다.</p>
+<p>상행위는 영업으로 하는 기본적 상행위와 영업을 위해 하는 보조적 상행위를 포함한다. 자기 명의로 상행위를 하는 사람이 당연상인이다. 일반적으로 일방에게만 상행위여도 상법3조에 따라 적용되지만, <strong>58조 일반상사유치권처럼 조문이 쌍방적 상행위를 요구하는 예외</strong>를 확인한다. 한쪽이 상인이라는 신분만으로 그의 순수한 개인생활 거래까지 모두 상행위가 되는 것은 아니다.</p>
+<p>상법에는 임의규정과 강행규정이 함께 있다. 회사의 다수 이해관계자 보호에는 획일적 강행규정이 많고, 거래 내용은 사적 자치를 존중하는 임의규정이 많다. 민법도 모두 임의규정인 것은 아니다. ‘민법에서 허용하지 않는 유질약정을 상법이 허용’하는 것은 특별규정의 차이지 강행법규를 마음대로 무시할 수 있다는 뜻이 아니다.</p>
+<p><strong>유상성:</strong> 보수·대여금 이자를 인정하여 영업을 유지할 수 있게 한다. <strong>신속성:</strong> 낙부통지와 시효 단축으로 거래를 오래 불확실하게 두지 않는다. <strong>거래안전:</strong> 담보·연대책임·송부물 보관으로 이행과 신뢰를 지킨다. ‘정확성’이 중요하지 않다는 뜻은 아니지만 제공 문제의 정리 항목은 유상성·신속성·안전 등이다.</p>
+<p><strong>시험:</strong> <mark class="pink">모든 규정에 일방적 상행위면 충분 ×, 상법은 전부 강행규정 ×.</mark> <strong>키워드:</strong> 조문별 적용요건·영리·신속·신뢰. <strong>한 줄:</strong> 상법은 장사를 계속할 수 있게 거래의 속도와 안전을 함께 조절한다.</p>
+<h1>2. 민법총칙의 특칙</h1>
+<h2 id="commercial-08-02" data-concept-id="commercial-08-02">2-1. 비현명주의48조와 본인 사망50조 ★★★★★</h2>
+<p><strong>교재153–155쪽 · 문단의 이유:</strong> 대리 표시 누락이나 영업주 사망 때문에 기업 거래가 불필요하게 끊기지 않게 한다.</p>
+<p>민법상 대리인은 원칙적으로 본인을 위한다는 표시인 <strong>현명</strong>을 한다.48조는 본인에게 상행위가 되는 행위를 적법한 대리권으로 한 경우, 그 표시가 없어도 본인에게 효력이 생기게 한다. 상대방이 본인을 위한 행위인 줄 몰랐다면 대리인에게도 이행을 청구할 수 있다. 둘에게 중복 이행을 받아도 된다는 뜻은 아니다. <strong>표시의 특칙이지 없는 대리권을 만들어 주는 규정은 아니다.</strong> 상대방에게만 상행위인 경우는 이 특칙의 요건이 아니며, 일회적 대리도 가능하다. 문언·요식성이 중요한 어음·수표 대리는 별도로 본다.</p>
+<p><strong>94다41935·41942,1996.10.25.:</strong> 건물주를 대리할 권한이 있는 분양업체가 건물주 대리인이라는 표시 없이 점포를 분양했다. 분양의 규모·횟수·기간 등을 볼 때 건물주에게 상행위라면48조에 따라 건물주에게 계약효력이 귀속된다고 보았다. 법원의 고민은 실제 대리권과 상행위가 있는데 표시 하나로 거래를 뒤집을지였다. ‘본인의 상행위’ → 누구에게 사업상 거래인지가 중요하다. 같은 업체라도 대리권이 전혀 없다면 다른 법리가 필요하다.</p>
+<p>50조는 상행위의 위임에 의한 대리권이 <strong>본인 사망만으로 소멸하지 않게</strong> 한다. 영업주가 사망하자 직원·대리상 권한이 모두 사라지면 상속인이 새로 권한을 줄 때까지 영업이 중단된다. 기업의 계속성을 위해 대리인은 상속인의 대리인으로 활동할 수 있다. 모든 민사대리, 모든 소멸사유가 사라진다는 뜻은 아니다. 대리권의 범위·다른 종료사유는 별도다.</p>
+<p><strong>시험:</strong> 대리권 필수·본인에게 상행위·어음수표 제외·본인 사망. <strong>키워드:</strong> 표시 생략과 권한 부존재 구별. <strong>한 줄:</strong> 이름 표시와 영업주 생명에 거래의 계속성을 모두 묶어 두지 않는다.</p>
+<h2 id="commercial-08-03" data-concept-id="commercial-08-03">2-2. 상사시효64조와 오래된 보험 숫자 ★★★★★</h2>
+<p><strong>교재155–157쪽 · 문단의 이유:</strong> 반복 거래의 증거와 법률관계를 장기간 미결 상태로 남기지 않는다.</p>
+<p>일반 민사채권은 원칙10년, 상행위로 생긴 채권은 상법에 다른 규정이 없으면 <strong>5년</strong>이다. 다른 법령에 더 짧은 기간이 있으면 그 기간을 적용한다. 권리를 행사할 수 있는 때, 시효의 중단·정지 등도 함께 보므로 ‘계약일＋5년’만 기계적으로 계산하지 않는다.</p>
+<p><strong>2006다1381,2006.4.27.:</strong> 일방적 상행위도 포함하고 기본적 상행위뿐 아니라 영업을 위한 보조적 상행위로 생긴 채권도 포함한다고 했다. ‘상행위로 인한’ → 형식적인 업종명이나 양쪽 신분만으로 좁히지 않는다. 원상태와 동일성 있는 채무불이행 손해배상으로 변형되어도 상사법리가 적용될 수 있다.</p>
+<p>교재의 <strong>2014다200763·200770,2016.6.10.</strong>는 직접 시효기간 판결이 아니라 상행위 계약의 채무불이행 손해배상에 <strong>상사법정이율6%</strong>를 적용한 판례다. 이를 시효 판례로 제목만 외우지 않는다. <strong>2016다258124,2017.3.22.</strong>는 당사자가 시효항변을 해야 법원이 판단하지만, 적용할 기간이 민사10년인지 상사5년인지는 법률 적용 문제이므로 법원이 직권 판단할 수 있다고 했다. ‘항변 필요’ → 시효로 다툰다는 말은 당사자가 한다. ‘기간은 법률 판단’ → 당사자가 잘못 말한 법규에 법원이 묶이지 않는다.</p>
+<p>운송주선·운송·창고 분야에는1년의 단기책임·채권 규정이 있고 뒤 강에서 기산점·책임 형태·특칙을 구별한다. 민법163·164조의 단기시효도 있다. <strong>교재157쪽의 보험금·보험료 반환2년, 보험료청구1년은 현행법과 다르다. 현재662조는 보험금청구3년, 보험료·적립금 반환청구3년, 보험료청구2년</strong>이다. 오래된 사건은 당시 법과 경과규정을 확인한다. <a href="https://law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=064800000&languageType=KO&lsNm=%EC%83%81%EB%B2%95&paras=1">662조 공식 법령</a></p>
+<p><strong>시험:</strong> 시효 단축이지 연장 아님, 항변과 기간 선택 구별. <strong>키워드:</strong>5년·더 짧은 특칙·변형채권. <strong>한 줄:</strong> 상거래는 빨리 정리하되 모든 채권을 무조건5년으로 묶지 않는다.</p>
+<h1>3. 물적 담보의 특칙</h1>
+<h2 id="commercial-08-04" data-concept-id="commercial-08-04">3-1. 일반상사유치권58조: TV운임과 냉장고 ★★★★★</h2>
+<p><strong>교재157–160쪽 · 문단의 이유:</strong> 매번 별도 담보를 잡기 어려운 계속거래에서 이미 맡은 재산을 담보로 활용한다.</p>
+<p>일반상사유치권은 <strong>상인 간 쌍방적 상행위로 생긴 변제기 도래 채권</strong>을 위하여, 그 채무자에 대한 상행위로 점유한 <strong>채무자 소유 물건·유가증권</strong>을 돌려주지 않고 유치하는 권리다. 소상인도 가능하다. 민사유치권처럼 목적물과 피담보채권 사이의 개별적 <strong>견련성</strong>은 필요 없지만, 채무자 소유여야 한다는 제한이 있다. 완화됐다고 모든 요건이 없어지는 것은 아니다.</p>
+<p><strong>교재 사례:</strong> A는 운송업과 창고업을 함께 한다. 운송주선인B의 TV를 운송했는데 운임을 못 받았다. B가 이전에 자기 냉장고를A에게 맡겨 두었다. 민사유치권은 그 냉장고에서 생긴 채권이 아니므로 이 연결만으로 성립하지 않는다. 그러나 상사유치권은 다른 요건을 갖추면 TV운임 때문에B의 냉장고를 유치할 수 있다. <strong>냉장고가B 소유인지, 운임 변제기가 왔는지, 상거래로 점유했는지</strong>를 빠뜨리지 않는다.</p>
+<p><strong>2012다39769·39776,2013.5.24.:</strong> 법원은 상사유치권의 물건에 부동산도 포함된다고 했다. 법문이 동산으로 한정하지 않았기 때문이다. 다만 ‘채무자 소유’와 다른 권리자에 대한 대항 문제는 별도다. <strong>2012다37176,2012.9.27.</strong>는 상사유치권을 배제하는 특약은 묵시적으로도 가능하다고 했다. 당사자의 의사를 합리적으로 인정할 사정이 있어야 하며 침묵이면 언제나 포기라는 뜻은 아니다.</p>
+<p>효력의 빈 부분은 민법 유치권 규율을 따른다. 변제까지 유치하고 경매를 신청할 수 있으며, 정당한 이유 아래 감정평가에 따른 간이변제충당을 법원에 청구할 수 있다. 과실 수취·변제충당, 보존에 필요한 사용, 필요비 상환도 문제 된다. <strong>일반 경매대금에서 언제나 우선변제를 받는 저당권과 동일한 권리로 바꾸지 않는다.</strong> 보존을 넘는 사용·임대 등은 별도 제한을 지킨다.</p>
+<p><strong>시험:</strong> 견련성 불필요지만 채무자 소유 필요, 부동산 포함, 묵시 배제 가능. <strong>키워드:</strong> 쌍방 상행위·변제기·상사점유. <strong>한 줄:</strong> 다른 거래의 빚도 맡은 채무자 재산으로 담보할 수 있지만 요건은 엄격히 나눠 본다.</p>
+<h2 id="commercial-08-05" data-concept-id="commercial-08-05">3-2. 특별상사유치권과 유질약정59조 ★★★★☆</h2>
+<p><strong>교재160–162쪽 · 문단의 이유:</strong> 모든 상사유치권이58조와 같은 요건인 것은 아니고, 유치와 질권도 다른 담보다.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>담보하는 채권·목적물의 핵심</th>
+<th>견련성·소유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>민사유치권</td>
+<td>목적물에 관하여 생긴 변제기 도래 채권, 물건·유가증권</td>
+<td>개별 견련성 필요, 채무자 소유로 한정하지 않음</td>
+</tr>
+<tr>
+<td>일반상사유치권</td>
+<td>상인 간 상행위 채권, 상행위로 점유한 물건·유가증권</td>
+<td>개별 견련성 불필요, 채무자 소유 필요</td>
+</tr>
+<tr>
+<td>대리상·위탁매매인</td>
+<td>대리·중개 또는 위탁매매 이행으로 생긴 채권과 법정 보유물</td>
+<td>각 특별규정의 인도·권한 범위, 일반적 개별 견련성 요구와 구별</td>
+</tr>
+<tr>
+<td>운송주선인·운송인</td>
+<td>해당 운송물 관련 보수·운임·체당금·선대금 등</td>
+<td>해당 운송물과 관련, 채무자 소유로 일률 제한하지 않음</td>
+</tr>
+<tr>
+<td>해상운송인</td>
+<td>운임·부수비용·체당금·정박료·공동해손·구조 관련 부담 등 법정 채권</td>
+<td>운송물과 관련한 특별규정</td>
+</tr>
+</tbody></table>
+<p>교재 비교표의 ‘제한 없음’은 아무 물건이나 빼앗아 잡아도 된다는 뜻이 아니다. 각 조문의 적법한 점유·인도·채권 범위는 남는다. 대리상·위탁매매인·운송 부분에서 자세히 연결한다.</p>
+<p>민법339조는 변제기 전에 ‘못 갚으면 담보물을 그대로 내 것으로 하거나 법정 방식 아닌 방법으로 처분한다’는 <strong>유질약정</strong>을 원칙 금지한다. 급한 채무자의 사정을 이용해 값비싼 물건을 헐값에 취득하는 위험 때문이다. 상법59조는 상행위로 생긴 채권을 담보하는 질권에는 그 금지를 적용하지 않아 자금조달의 유연성을 높인다. 모든 불공정·위법 약정까지 허용하는 것은 아니다.</p>
+<p><strong>2017다207499,2017.7.18.:</strong> 피담보채권이 상행위로 생기면 충분하고 질권설정자가 상인일 필요는 없으며, 일방적 상행위도 포함된다고 했다. ‘설정자 상인성 불필요’ → 담보를 준 사람의 직업이 아니라 담보하는 채권의 원인을 본다.58조의 쌍방 상인 요건을59조에 그대로 붙이면 틀린다.</p>
+<p><strong>시험:</strong> 유치권과 질권,58조 쌍방/59조 일방 구별. <strong>키워드:</strong> 피담보채권·유질금지 예외. <strong>한 줄:</strong> 손에 든 물건을 유치하는 권리와 약정한 질권의 처분방식은 다른 문제다.</p>
+<h1>4. 계약의 성립과 청약받은 상인</h1>
+<h2 id="commercial-08-06" data-concept-id="commercial-08-06">4-1. 대화자·격지자와 낙부통지53조 ★★★★★</h2>
+<p><strong>교재163–164쪽 · 문단의 이유:</strong> 거래를 받아들였는지 빨리 정해야 재고·가격·다음 거래를 결정할 수 있다.</p>
+<p>51조는 대화자 간 청약을 즉시 승낙하지 않으면 원칙적으로 그 효력이 사라지게 한다. 대화자는 가까운 장소가 아니라 <strong>서로의 의사를 즉시 알 수 있는 상태</strong>다. 전화·실시간 화상회의도 가능하다. 전자적 수단이라는 이유만으로 지연된 이메일까지 모두 대화자로 분류하지 않는다. 승낙기간을 정한 등 구체적 사정도 살핀다.</p>
+<p>격지자 계약의 옛 상법52조는 삭제되었고 민법의 일반 규율을 따른다. 민법531조는 격지자 승낙통지의 발송 시 성립을 정한다. 전자거래 등 특별법·약정에 따른 예외도 확인한다. 민법에도 신속성을 위한 원칙이 있으므로 상법만 신속성을 고려한다고 할 수 없다.</p>
+<p>53조는 <strong>청약을 받은 상인</strong>이 상시 거래관계에 있는 자에게서 자기 영업부류의 계약 청약을 받으면 지체 없이 승낙·거절 통지를 발송하도록 한다. 게을리하면 승낙으로 본다. 청약자는 상인이 아니어도 된다. 상시 관계는 종전 계속거래와 장래 반복 기대가 있는 관계다. 단순히 자주 얼굴을 봤다는 뜻이 아니다.</p>
+<p><strong>98다48903,1999.1.29.:</strong> 청약자가 “며칠 안에 반대하지 않으면 동의한 것으로 알겠다”고 썼다. 법원은53조가 적용될 상시 거래관계 등의 요건이 없으면 그 일방적 문구로 상대에게 회답의무를 만들 수 없다고 보았다. ‘상대방을 구속하지 않는다’ → 혼자 정한 침묵의 의미를 남에게 강요하지 못한다. 반대라면 모르는 사람에게 청약을 보내 침묵만으로 계약을 만들어 버릴 수 있다.</p>
+<p><strong>시험:</strong> 상시 관계·영업부류·수신자 상인·발송·침묵의 예외. <strong>키워드:</strong> 낙부·지체 없이·승낙 의제. <strong>한 줄:</strong> 침묵은 보통 동의가 아니지만 계속되는 영업거래에는 특별한 회답책임이 있다.</p>
+<h2 id="commercial-08-07" data-concept-id="commercial-08-07">4-2. 거절했어도 견본을 보관하는60조 ★★★★☆</h2>
+<p><strong>교재164–165쪽 · 문단의 이유:</strong> 계약을 거절했다고 검토용으로 보낸 물건을 함부로 버리게 해서는 안 된다.</p>
+<p>상인이 자기 영업부류의 청약과 함께 견품·기타 물건을 받았다면, 청약을 거절해도 <strong>청약자의 비용으로 보관</strong>해야 한다. 상시 거래관계 요건을53조에서 그대로 가져오지 않는다. 물건값이 보관비를 충당하기에 부족하거나 보관 때문에 손해받을 염려가 있으면 예외다.</p>
+<p><strong>학습 장면:</strong> 원단업자가 옷가게에 원단 견본을 보냈다. 가게가 주문을 거절했다고 원단을 버려도 되는가? 영업부류의 청약으로 받은 물건이라면 원칙적으로 비용은 보낸 사람에게 부담시키되 보관한다. 반대로 위험한 물건을 맡아 가게에 큰 손해가 날 우려가 있다면 예외를 검토한다. 민법에서도 소유권·부당한 훼손 책임 등 일반규율은 남으므로 ‘상법 밖에서는 남의 물건을 버려도 된다’는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 거절 후에도 의무, 보관비는 청약자, 비용 부족·손해 우려 예외. <strong>키워드:</strong> 견품·거절·보관. <strong>한 줄:</strong> 계약을 안 맺을 자유와 받은 물건을 보호할 책임은 별개다.</p>
+<h1>5. 영업의 대가와 이행</h1>
+<h2 id="commercial-08-08" data-concept-id="commercial-08-08">5-1. 상당보수61조와 대여·체당금 이자55조 ★★★★★</h2>
+<p><strong>교재165–166쪽 · 문단의 이유:</strong> 상인이 영업으로 제공한 일을 약정이 없다는 이유만으로 모두 공짜로 만들지 않는다.</p>
+<p>상인이 영업범위에서 타인을 위해 행위하면 <strong>상당한 보수</strong>를 청구할 수 있다. 상대는 상인이 아니어도 되고, 보조적 행위도 포함된다. 중요한 것은 그 상대의 이익을 위하여 한 일인지다. 단지 결과적으로 누군가에게 도움이 됐다고 아무에게나 비용을 청구할 수 없다. 무상 특약이나 업종별 특별한 보수요건도 함께 본다. 민법의 위임·무상임치 등과 비교하되, 임대차까지 원칙 무상이라는 뜻으로 교재 표현을 읽지 않는다.</p>
+<p><strong>77다1889,1977.11.22.:</strong> 상대가 자신이 부동산소개업자인 줄 알았다는 이유로 중개보수를 청구했다. 법원은 상대의 이익을 위해 행위했다는 사실이 인정되지 않으면61조의 청구를 할 수 없다고 했다. ‘타인을 위하여’ → 청구받는 사람과 이익을 위한 행위의 관계가 필요하다. 반대라면 일방적으로 끼어든 사람도 전문업자라는 이유만으로 보수를 요구하게 된다. 상법상 중개인의100조 결약서 등 특별요건은11강에서 다룬다.</p>
+<p>55조1항은 상인이 영업에 관하여 돈을 빌려 주면 법정이자를 청구할 수 있게 한다.2항은 영업범위에서 타인을 위해 돈을 <strong>체당</strong>, 즉 대신 지급했다면 그 날 이후 법정이자를 청구할 수 있게 한다. 돈을 빌려 주는 소비대차와 비용을 대신 내는 체당을 구별한다. 위임·도급·고용·사무관리 등에서 체당이 문제 될 수 있다.</p>
+<p><strong>시험:</strong> 보수 약정 없다고 언제나 무상 ×, 실제 이익 결과와 타인을 위한 행위 구별. <strong>키워드:</strong> 상당보수·영업범위·대여·체당. <strong>한 줄:</strong> 사업으로 남을 위해 일하거나 돈을 부담한 대가는 원칙적으로 보장한다.</p>
+<h2 id="commercial-08-09" data-concept-id="commercial-08-09">5-2. 법정이율54조와 이행장소56조·시간63조 ★★★★☆</h2>
+<p><strong>교재167–168쪽 · 문단의 이유:</strong> 대가가 있다는 결론 뒤에 얼마를 언제 어디서 이행할지도 정해야 한다.</p>
+<p>상사법정이율은 <strong>연6%</strong>, 민사법정이율은 기본적으로 연5%다. 상사6%는 일방적 상행위에도 적용될 수 있다. <strong>이자를 낼 의무가 있는지</strong>와 <strong>그 이율이 얼마인지</strong>는 별도다. 이율 약정이 없다는 이유만으로 모든 무이자 대여가 유이자가 되는 것은 아니다.55조나 지체책임 등 이자를 낼 근거를 먼저 본다. 약정이율·이자제한 규정·소송촉진법상 지연손해금 등 별도 규율도 구별한다. <a href="https://law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=054300000&languageType=KO&lsNm=%EC%83%81%EB%B2%95&paras=1">54조 공식 법령</a></p>
+<p>이행장소는 약정·행위 성질로 특정되면 그에 따른다.56조는 채권자 지점 거래에서 <strong>특정물 인도 이외 채무</strong>의 장소가 정해지지 않으면 그 지점을 이행장소로 본다. 그 밖에는 민법의 원칙, 즉 특정물은 채권 성립 당시 소재지, 다른 채무는 채권자의 현주소·영업채무는 현영업소 등을 적용한다. 모든 채무가 본점으로 가는 것은 아니다.</p>
+<p>법령·관습상 영업시간이 정해졌다면63조에 따라 그 시간 내에 이행·청구한다. 교재의 ‘시간 외 이행은 효력이 없다’는 표현은 <strong>시간 외에는 상대에게 수령을 강요하거나 정상적 청구·제공의 효과를 당연히 주장하기 어렵다</strong>는 취지로 읽는다. 상대가 실제 유효하게 수령한 변제까지 무조건 무효가 되는 것은 아니다.</p>
+<p><strong>시험:</strong>6%·이자 발생근거·지점·특정물 제외·영업시간. <strong>키워드:</strong> 근거→이율, 약정→법정장소. <strong>한 줄:</strong> 이자가 붙는 이유와 비율, 갚는 장소와 시간을 순서대로 확인한다.</p>
+<h1>6. 사람의 담보와 보관책임</h1>
+<h2 id="commercial-08-10" data-concept-id="commercial-08-10">6-1. 연대채무57조1항과 연대보증2항 ★★★★★</h2>
+<p><strong>교재168–170쪽 · 문단의 이유:</strong> 여러 채무자가 각자 일부만 갚겠다고 하면 거래상 신용이 약해지므로 특별한 연대책임을 둔다.</p>
+<p>57조1항은 여러 사람이 <strong>그중1인 또는 전원에게 상행위가 되는 행위로 하나의 채무를 공동 부담</strong>하면 연대변제책임을 지게 한다. 채권자는 상인일 필요가 없다. 채권자에게만 상행위라는 이유로 이 항을 적용하지 않는다. 민법상 특별한 사정 없는 분할채무 원칙의 예외다.</p>
+<p><strong>86다카633,1987.6.23.:</strong> 인적 담보 강화와 거래안전을 위한 특칙이므로 채무자 쪽1인 또는 전원에게 상행위가 되는 원인행위를 요구한다고 했다. <strong>97다6919,1998.3.13.:</strong> 조합채무는 원칙적으로 지분비율·균분 청구가 문제 되지만, 조합원 전원을 위한 상행위 채무라면57조1항에 따른 연대책임을 인정한다고 했다. ‘조합원’이라는 신분만 보고 모든 채무가 언제나 연대라고 하는 것이 아니라 그 채무 원인을 본다.</p>
+<p><strong>교재 예시:</strong> 동업자들이 공동으로 사업자금을 빌렸다면 요건 아래 각자가 채권자에게 전액 이행의무를 진다. 채권자가 세 사람에게 세 번 전액을 받아도 된다는 뜻은 아니다. 내부 부담·구상은 별도다.</p>
+<p>57조2항은 <strong>보증 자체가 상행위이거나 주채무가 상행위로 생겼다면</strong> 주채무자와 보증인이 연대하여 책임지게 한다. 보증인은 비상인이어도 가능하며 일방적 상행위도 포함한다. 단순보증의 보충성에 따른 최고·검색 항변이 제한된다. 다만 주채무가 없거나 소멸했다는 등 보증의 다른 항변까지 모두 사라지는 것은 아니다. 보증계약의 적법한 성립·서면요건 등도 따로 필요하다.</p>
+<p><strong>교재 예시:</strong> 상인 매도인의 물건 인도의무를 비상인이 보증했다. 그 인도가 지체되어 약정한 위약금채무가 생겼다면 원래 상행위채무와 동일성 있는 변형채무에 대한 보증책임도 검토한다. 보증범위와 계약 내용은 먼저 확인한다.</p>
+<p><strong>시험:</strong>1항은 채무자 쪽 상행위,2항은 보증 또는 주채무 상행위. <strong>키워드:</strong> 공동채무·연대·최고검색 제한. <strong>한 줄:</strong> 공동 빚과 보증 빚을 구분한 뒤 각 항의 상행위 요건을 적용한다.</p>
+<h2 id="commercial-08-11" data-concept-id="commercial-08-11">6-2. 무료라도 전문가답게: 임치62조 ★★★★☆</h2>
+<p><strong>교재170–171쪽 · 문단의 이유:</strong> 영업으로 물건을 맡은 상인의 신용을 보수 유무만으로 낮추지 않는다.</p>
+<p>임치는 물건을 맡기는 계약이고 수치인은 맡아 보관하는 사람이다. 민법상 무상수치인은 원칙적으로 자기 재산과 같은 주의를 하지만,62조는 <strong>상인이 영업범위에서 받은 임치라면 무상이어도 선량한 관리자의 주의</strong>를 요구한다. 임치인은 상인이 아니어도 된다. 상인이 개인 친분으로 사업과 무관하게 맡은 모든 물건에 자동 적용하는 것은 아니다.</p>
+<p>선관주의는 해당 직업·지위의 사람에게 사회생활상 요구되는 객관적 주의다. 학습 예시로, 무료 보관 행사를 하는 판매점이 고객 물건을 받았는데 ‘나는 내 물건도 이렇게 둔다’며 위험한 곳에 방치할 수는 없다. 주의의무 위반으로 멸실·훼손 손해가 발생하면 배상책임을 검토한다. 보수를 안 받았다는 것이 무조건 면책도, 사고가 났다는 것만으로 무과실책임도 아니다. 창고업·공중접객업의 특별책임은14강에서 따로 본다.</p>
+<p><strong>시험:</strong> 영업범위·상인인 수치인·무상도 선관주의. <strong>키워드:</strong> 객관적 주의·신용. <strong>한 줄:</strong> 영업으로 맡은 물건은 무료라도 그 업의 관리수준으로 보호한다.</p>
+<h1>시험 연결과 교재 질문</h1>
+<p><strong>TOP5:</strong> 상법_034(적용범위), _036(총칙·물권 분류), _037(유치권 비교), _038(연대채무), _084(신속성과 시효). _035는 성격 분류, _085는 물권·채권 특칙 분류를 확인한다. 실제 오답률은 없다. 가장 주의할 표현은 ‘일방이면 모두 충분·소유자 제한 없음·시효 연장·채권자도 반드시 상인’이다.</p>
+<p>교재6문항 답 골격은 ① 기본·보조 상행위와 일방 원칙·조문별 예외 ② 임의/강행·유상·신속·안전 ③48조와50조 ④ 견련성·소유·쌍방 상행위 ⑤53조 낙부·60조 송부물 보관 ⑥61조 보수·55조 대여/체당 이자·54조 이율이다.</p>
+<h2>새로운 사례 문제5개</h2>
+<p><strong>1.</strong> 사장 명의를 말하지 않은 구매담당자가 권한 안에서 영업용 재료를 샀다. 대리 표시가 없으니 사장에게는 무조건 효력이 없을까? <strong>답:</strong> 본인에게 상행위이고 대리권이 있다면48조를 검토한다. <strong>의도:</strong> 표시와 권한 분리.</p>
+<p><strong>2.</strong> 운송업자가 다른 거래의 운임을 받으려고 보관 중인 냉장고를 유치한다. 냉장고는 채무자가 빌린 제3자의 물건이다. <strong>답:</strong> 일반상사유치권의 채무자 소유 요건이 부족하다. 다른 담보 근거는 별도다. <strong>의도:</strong> 견련성 완화와 소유 제한.</p>
+<p><strong>3.</strong> 처음 거래제안을 보낸 회사가 ‘내일까지 거절 안 하면100개 주문한 것’이라 썼다. 침묵하면 계약일까? <strong>답:</strong>53조 상시 거래관계 등의 요건 없이 일방 문구만으로 강제하지 못한다. <strong>의도:</strong> 침묵의 승낙 예외.</p>
+<p><strong>4.</strong> 비상인인 가족이 회사의 사업대출을 적법하게 보증했다. 자신이 상인이 아니므로 먼저 회사 재산부터 집행하라고 주장한다. <strong>답:</strong> 주채무가 상행위라면57조2항의 연대보증으로 최고·검색 항변이 제한될 수 있다. <strong>의도:</strong>1항·2항의 요건 차이.</p>
+<p><strong>5.</strong> 판매점이 무료 보관 중 고객 물건을 자기 물건처럼 대충 관리했다. 보수가 없으면 자기 재산 수준의 주의면 충분할까? <strong>답:</strong> 영업범위 내 임치라면62조상 선관주의가 필요하다. <strong>의도:</strong> 무료와 책임수준 구별.</p>
+<h1>용어 사전</h1>
+<h3>상행위·특칙 商行爲·特則</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 行(다닐 행), 爲(할 위), 特(특별할 특), 則(법칙 칙). <strong>③ 합친 뜻:</strong> 장사상의 행위·특별 규칙. <strong>④ 이름의 이유:</strong> 일반 사생활 거래와 영업거래를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업으로 또는 영업을 위해 하는 행위와 그에 적용되는 특별 규율. <strong>⑥ 쉬운 말:</strong> 사업 거래에 맞춘 규칙. <strong>⑦ 사례:</strong> 영업용 물건 구매와 상사담보.</p>
+<p><strong>⑧ 시험:</strong> 기본·보조,일방·쌍방을 나누기. <strong>⑨ 비교·기억법:</strong> 상인의 모든 사생활 행위가 상행위는 아님.</p>
+<h3>현명·비현명 顯名·非顯名</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 顯(나타날 현), 名(이름 명), 非(아닐 비). <strong>③ 합친 뜻:</strong> 이름을 드러냄·드러내지 않음. <strong>④ 이름의 이유:</strong> 누구에게 효과가 갈 행위인지 알리기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대리행위가 본인을 위한 것임을 표시하는지의 구별. <strong>⑥ 쉬운 말:</strong> 사장 대신 계약한다고 말했는가. <strong>⑦ 사례:</strong> 분양업체의 건물주 대리 표시 생략.</p>
+<p><strong>⑧ 시험:</strong> 48조는 본인의 상행위·대리권 필요. <strong>⑨ 비교·기억법:</strong> 비현명은 무권대리와 다름.</p>
+<h3>소멸시효 消滅時效</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 滅(멸할 멸), 時(때 시), 效(본받을 효): 효력. <strong>③ 합친 뜻:</strong> 시간 경과로 소멸 효과가 생김. <strong>④ 이름의 이유:</strong> 오래 방치된 관계의 증명·안정을 고려해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리를 행사할 수 있는데 법정 기간 행사하지 않은 경우의 제도. <strong>⑥ 쉬운 말:</strong> 권리를 끝없이 묵혀 둘 수는 없다. <strong>⑦ 사례:</strong> 상사채권 기본5년.</p>
+<p><strong>⑧ 시험:</strong> 더 짧은 특칙·기산점·항변 확인. <strong>⑨ 비교·기억법:</strong> 제척기간 등 다른 기간제도와 동일하지 않음.</p>
+<h3>변론주의 辯論主義</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 辯(말 잘할 변), 論(논할 론), 主(주인 주), 義(옳을 의): 원칙. <strong>③ 합친 뜻:</strong> 당사자 주장·증명에 기초하는 원칙. <strong>④ 이름의 이유:</strong> 재판의 사실자료와 법률판단을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소송의 주요 사실을 당사자가 제출하도록 하는 원칙. <strong>⑥ 쉬운 말:</strong> 시효로 다툰다는 말은 당사자가 한다. <strong>⑦ 사례:</strong> 법원이 시효기간 자체는 법률상 판단.</p>
+<p><strong>⑧ 시험:</strong> 항변 필요와 적용기간 직권 판단 구별. <strong>⑨ 비교·기억법:</strong> 법률 해석 의견까지 법원을 구속하지 않음.</p>
+<h3>유치권 留置權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 留(머무를 류), 置(둘 치), 權(권세 권). <strong>③ 합친 뜻:</strong> 계속 보유할 권리. <strong>④ 이름의 이유:</strong> 돌려주지 않는 힘으로 변제를 확보해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 요건 아래 채권변제까지 목적물 반환을 거절하는 담보물권. <strong>⑥ 쉬운 말:</strong> 갚을 때까지 맡은 물건을 보유한다. <strong>⑦ 사례:</strong> TV운임 때문에 요건 아래 채무자 냉장고 유치.</p>
+<p><strong>⑧ 시험:</strong> 58조 채무자 소유·변제기·상사점유. <strong>⑨ 비교·기억법:</strong> 물건 소유권을 자동 취득하는 것은 아님.</p>
+<h3>견련성 牽連性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 牽(끌 견), 連(이을 련), 性(성품 성). <strong>③ 합친 뜻:</strong> 서로 끌려 연결된 성질. <strong>④ 이름의 이유:</strong> 그 물건 때문에 생긴 빚인지 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 피담보채권과 유치물 사이에 필요한 관련성. <strong>⑥ 쉬운 말:</strong> 이 냉장고 때문에 생긴 돈인가. <strong>⑦ 사례:</strong> 다른 TV운임은 냉장고와 개별 견련성 없음.</p>
+<p><strong>⑧ 시험:</strong> 상사유치권은 개별 견련성 불필요. <strong>⑨ 비교·기억법:</strong> 다른 성립요건까지 불필요해지는 것은 아님.</p>
+<h3>피담보채권 被擔保債權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 被(입을 피), 擔(멜 담), 保(지킬 보), 債(빚 채), 權(권세 권). <strong>③ 합친 뜻:</strong> 담보로 보호받는 채권. <strong>④ 이름의 이유:</strong> 보호받는 돈과 담보물을 나누기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유치권·질권 등으로 변제를 확보하려는 채권. <strong>⑥ 쉬운 말:</strong> 무슨 돈을 받으려고 물건을 잡았나. <strong>⑦ 사례:</strong> 운임채권과 냉장고 담보.</p>
+<p><strong>⑧ 시험:</strong> 채권 발생원인·변제기 확인. <strong>⑨ 비교·기억법:</strong> 담보물의 소유권과 채권은 별개.</p>
+<h3>질권·유질 質權·流質</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 質(바탕 질): 담보물, 權(권세 권), 流(흐를 류). <strong>③ 합친 뜻:</strong> 질물에 대한 권리·질물이 흘러 넘어감. <strong>④ 이름의 이유:</strong> 못 갚으면 담보물이 넘어가는 약정이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 질권은 목적물을 담보로 하는 권리, 유질약정은 법정 처분방식 대신 소유취득 등을 미리 약정하는 것. <strong>⑥ 쉬운 말:</strong> 못 갚을 때 맡긴 물건을 그대로 가져도 될까. <strong>⑦ 사례:</strong> 상행위채권 담보 질권의59조 특칙.</p>
+<p><strong>⑧ 시험:</strong> 설정자 상인 불필요·일방적 상행위 가능. <strong>⑨ 비교·기억법:</strong> 유치권의 법정 보유와 구별.</p>
+<h3>낙부통지 諾否通知</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 諾(대답할 낙): 승낙, 否(아닐 부), 通(통할 통), 知(알 지). <strong>③ 합친 뜻:</strong> 받아들임·거절을 알림. <strong>④ 이름의 이유:</strong> 계약 여부를 신속히 확정하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 청약에 승낙할지 거절할지 보내는 통지. <strong>⑥ 쉬운 말:</strong> 주문 받을지 말지 빨리 답하기. <strong>⑦ 사례:</strong> 상시 거래처 영업부류의 청약.</p>
+<p><strong>⑧ 시험:</strong> 53조 침묵의 승낙 의제는 요건 필요. <strong>⑨ 비교·기억법:</strong> 처음 온 일방 청약의 침묵은 자동 동의 아님.</p>
+<h3>체당 替當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 替(바꿀 체), 當(마땅 당): 맡음. <strong>③ 합친 뜻:</strong> 대신 부담하여 지급함. <strong>④ 이름의 이유:</strong> 상대가 낼 돈을 우선 부담해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소비대차와 구별되는 타인을 위한 금전의 대신 지급. <strong>⑥ 쉬운 말:</strong> 내 돈으로 먼저 계산해 준다. <strong>⑦ 사례:</strong> 위임업무 비용을 먼저 지급.</p>
+<p><strong>⑧ 시험:</strong> 체당한 날 이후 법정이자. <strong>⑨ 비교·기억법:</strong> 대여는 돈을 빌려 줌, 체당은 대신 지급.</p>
+<h3>연대채무·연대보증 連帶債務·連帶保證</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 連(이을 련), 帶(띠 대), 債(빚 채), 務(힘쓸 무), 保(지킬 보), 證(증거 증). <strong>③ 합친 뜻:</strong> 함께 이어진 채무·함께 책임지는 보증. <strong>④ 이름의 이유:</strong> 채권자에게 이행을 확실히 해 주어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채권자가 각 연대채무자에게 전부 이행을 요구하거나 주채무자와 보증인에게 연대 이행을 요구하는 관계. <strong>⑥ 쉬운 말:</strong> 나눠 낸 몫만 책임진다고 할 수 없다. <strong>⑦ 사례:</strong> 공동 사업자금 차용·사업대출 보증.</p>
+<p><strong>⑧ 시험:</strong> 57조1항과2항의 요건 차이. <strong>⑨ 비교·기억법:</strong> 중복 만족은 금지, 내부 구상은 별도.</p>
+<h3>최고·검색 항변 催告·檢索抗辯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 催(재촉할 최), 告(알릴 고), 檢(검사할 검), 索(찾을 색), 抗(막을 항), 辯(말 잘할 변). <strong>③ 합친 뜻:</strong> 먼저 요구·재산집행을 하라는 다툼. <strong>④ 이름의 이유:</strong> 보증인이 뒤에서 보충하는 구조라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반보증의 보충성에 기초한 주채무자에 대한 우선 청구·집행 요구. <strong>⑥ 쉬운 말:</strong> 먼저 원래 빚진 사람에게 청구·집행하라. <strong>⑦ 사례:</strong> 연대보증이면 이 항변이 제한.</p>
+<p><strong>⑧ 시험:</strong> 주채무 소멸 항변까지 사라지는 것은 아님. <strong>⑨ 비교·기억법:</strong> 최고는 최고등급이 아니라 재촉 통지.</p>
+<h3>임치·수치·선관주의 任置·受置·善管注意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 任(맡길 임), 置(둘 치), 受(받을 수), 善(착할 선), 管(대롱 관): 관리, 注(물 댈 주), 意(뜻 의). <strong>③ 합친 뜻:</strong> 맡겨 둠·받아 둠·좋은 관리자의 주의. <strong>④ 이름의 이유:</strong> 전문 관리의 신뢰를 보호해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 임치는 보관 위탁, 수치는 맡아 보관, 선관주의는 직업·지위에 맞는 객관적 주의. <strong>⑥ 쉬운 말:</strong> 사업으로 맡았으면 사업에 맞게 조심한다. <strong>⑦ 사례:</strong> 판매점 무료 보관도62조 적용 가능.</p>
+<p><strong>⑧ 시험:</strong> 무상이라도 영업범위라면 선관주의. <strong>⑨ 비교·기억법:</strong> 민법 무상수치의 자기재산 동일주의와 비교.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 상행위 특칙</h2><p><b>TOP3:</b> 조문별 상행위 요건 /58조 유치권 /57조1항·2항 구별.</p><table><tr><th>조문</th><th>핵심</th></tr><tr><td>48·50</td><td>비현명도 본인 귀속: 대리권·본인의 상행위 필요 / 본인 사망만으로 대리권 소멸 안 함</td></tr><tr><td>64</td><td>기본5년, 더 짧은 특칙 확인. 시효항변 필요·기간 법률판단 직권 가능</td></tr><tr><td>58</td><td>쌍방 상인·상행위채권·변제기·상사점유·채무자 소유. 개별 견련성 불필요</td></tr><tr><td>59</td><td>상행위채권 담보 질권의 유질약정 허용. 설정자 상인 불필요·일방도 가능</td></tr><tr><td>53·60</td><td>상시 거래의 영업부류 청약→낙부 발송 / 거절해도 송부물 보관, 비용은 청약자</td></tr><tr><td>61·55·54</td><td>상당보수 / 영업대여·체당금 이자 / 상사법정이율 연6%</td></tr><tr><td>56·63</td><td>지점 거래 비특정물 채무의 지점 이행 / 법령·관습의 영업시간</td></tr><tr><td>57①</td><td>공동채무자의1인 또는 전원에게 상행위→연대. 채권자 상인 불필요</td></tr><tr><td>57②·62</td><td>보증 또는 주채무가 상행위→연대보증 / 영업임치는 무상도 선관주의</td></tr></table><p><b>반드시 외울 문장:</b> 일방적 상행위 원칙에는 조문별 예외가 있다. 견련성이 없어도 채무자 소유 요건은 남는다. 침묵이 언제나 승낙은 아니다. 이자 발생근거와 이율은 별개다.</p><p><b>현행법 보완:</b> 보험금·보험료/적립금 반환청구3년, 보험료청구2년. 교재의2년·1년은 옛 규정.</p><p><b>사례를 풀 순서:</b> 누구에게 상행위인가 → 어느 특칙인가 → 그 조문의 추가요건 → 약정·특별법 → 민법과 다른 효과.</p></section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>답안 미제출로 실제 이해도는 미평가다. 🟢58·59·57조 요건을 바꿔도 구별하면 이해 완료 / 🟡 숫자는 외웠지만 왜 다른지 설명이 어려우면 복습 필요 / 🔴 상인이 끼면 언제나 모든 특칙이 적용된다고 하면 이해 부족. <strong>복습TOP3: 일반상사유치권,연대채무와 보증,청약 수신자의 의무.</strong></p>
+<p>첨부 교재 제8강·워크북 및 제공 JSON을 중심으로 작성했다. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95">상법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95">민법</a>과 본문 공식 조문을 대조한다. 원자료의 보험시효·영업시간·일방적 상행위 표현은 법문 요건과 구별했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_034"><h4>형성평가 · 상법_034</h4><p class="question-stem">다음 중에서 상행위법에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>상행위란 상인이 영업으로서 또는 영업을 위해 하는 행위를 말한다.</li><li>자기명의로 상행위를 하는 자를 당연상인이라 하여 상법을 적용한다.</li><li>상행위법은 상행위를 규율하는 법이다.</li><li>상행위법은 거래당사자가 상인이거나 당사자의 쌍방이 상인인 경우에 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기본·보조 상행위의 강의상 설명으로 맞음. 순수 사생활 행위까지 자동 포함하지 않는다.</li><li><strong>비선택</strong> · 당연상인의 기본 정의로 맞음. 자기 명의로 반복·영업성을 갖추는 맥락을 함께 본다.</li><li><strong>비선택</strong> · 맞음. 상행위를 규율하는 법이다.</li><li><strong>선택</strong> · 원본 정답. 양쪽이 모두 상인이어야만 한다는 취지라면 틀리다. 다만 원문 앞부분 거래당사자가 상인이거나는 문장이 중복·불명확하다. 정확히는 일방적 상행위에도 적용하는 원칙과58조 등의 예외를 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상행위법은 거래당사자가 상인이거나 당사자의 일방이 상인인 경우에 적용된다.</p></details></section>
+
+<section class="question-card" id="question-상법_035"><h4>형성평가 · 상법_035</h4><p class="question-stem">다음 중에서 상행위법의 특성에 해당하지 않는 것은?</p><ol class="choices"><li>유상성</li><li>정확성</li><li>신속성</li><li>거래의 안전도모</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 유상성은 교재가 제시한 특성이다. 보수·대여금 이자를 연결한다.</li><li><strong>선택</strong> · 정답. 교재의 분류 항목에 없다는 뜻이지 법이 정확성을 무시한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 신속성은 낙부통지·시효 단축 등에 나타난다.</li><li><strong>비선택</strong> · 거래안전은 담보·연대책임·보관의무 등에 나타난다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 유상성 : 상법은 상인의 영리성을 보장하기 위한 규정을 두고 있음<br>신속성 : 상법 거래가 신속하게 처리되도록 하기 위한 규정을 두고 있음<br>거래의 안전도모 : 상법은 거래의 안전과 이행의 확보를 지원하기 위한 규정을 두고 있음</p></details></section>
+
+<section class="question-card" id="question-상법_036"><h4>형성평가 · 상법_036</h4><p class="question-stem">다음 중에서 민법총칙편에 대한 특칙에 해당하지 않는 상법규정은?</p><ol class="choices"><li>상사대리의 비현명주의</li><li>본인의 사망과 대리권의 존속</li><li>상사소멸시효</li><li>상사유치권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 민법총칙상 대리에 대한 특칙이다.</li><li><strong>비선택</strong> · 민법총칙상 대리권 소멸에 대한 특칙이다.</li><li><strong>비선택</strong> · 민법총칙상 소멸시효에 대한 특칙이다.</li><li><strong>선택</strong> · 정답. 유치권은 물권편의 담보물권에 대한 특칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상사유치권은 민법물권편에 대한 특칙으로 물적 담보를 강화하기 위해 상법에 규정된 것이다.</p></details></section>
+
+<section class="question-card" id="question-상법_037"><h4>형성평가 · 상법_037</h4><p class="question-stem">다음 중에서 유치권의 비교에 대한 설명으로 옳지 않은 것은?<br>번호	내용	민법상유치권	일반상사 유치권<br>①	피담보채권	제한없음	상행위로 인한 채권<br>②	유치물의 제한	제한없음	제한없음<br>③	유치물의 소유권	제한없음  제한없음<br>④	피담보채권과의 유치물과의 견련성	필요	불필요</p><ol class="choices"><li>1</li><li>2</li><li>3</li><li>4</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재표의 분류 취지상 맞음. 민사유치권도 변제기·목적물 관련성 등은 필요하며 제한없음을 무조건으로 읽지 않는다.</li><li><strong>비선택</strong> · 교재표는 업종별 특정 운송물 등으로 한정되지 않는다는 취지다. 양쪽 모두 법정 물건·유가증권과 점유 요건이 있다.</li><li><strong>선택</strong> · 틀림·정답. 일반상사유치권의 목적물은 채무자 소유여야 한다. 원문의 표 형식이 불완전하므로 소유권 제한 없음을 양쪽에 표시한 행을 고른다.</li><li><strong>비선택</strong> · 맞음. 민사유치권에는 개별 견련성, 일반상사유치권에는 이를 요구하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 민법상 유치권의 경우에는 유치물의 소유자를 묻지 않지만 일반 상사유치권의 경우에는 유치물이 채무자의 소유이어야 한다.</p></details></section>
+
+<section class="question-card" id="question-상법_038"><h4>형성평가 · 상법_038</h4><p class="question-stem">다음 중에서 상법상 연대채무의 특칙에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>채무자 중 1인과 채권자는 반드시 상인이어야 한다.</li><li>민법에서는 채무자가 여러 명일 경우 원칙적으로 각 채무자는 균등비율로 분할해서 채무를 부담한다.</li><li>채무는 채무자 중 1인에게는 상행위로 인해 발생해야 한다.</li><li>상행위로 인한 채무와 실질적으로 동일성을 갖는 채무도 상법상 연대채무 특칙의 적용대상이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답. 채무자 측1인 또는 전원에게 상행위인 공동채무가 필요하지만 채권자까지 반드시 상인일 필요는 없다.</li><li><strong>비선택</strong> · 특약·특별규정 없는 민법의 기본 분할채무 원칙으로 맞음.</li><li><strong>비선택</strong> · 맞음. 채권자에게만 상행위인 것으로57조1항의 요건을 대신할 수 없다.</li><li><strong>비선택</strong> · 맞음. 원상행위 채무와 동일성 있는 변형채무도 범위에 포함될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 채무자 중 1인은 반드시 상인이어야 하지만 채권자는 상인일 필요는 없다.</p></details></section>
+
+<section class="question-card" id="question-상법_084"><h4>워크북 · 상법_084</h4><p class="question-stem">다음 중에서 상행위법의 특성에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상법은 사법임에도 회사 관련 규정에는 강행규범성을 가진다.</li><li>상인의 영리성을 보장하기 위해 상인의 보수청구권을 인정하고 있다.</li><li>상거래의 신속성을 위해서 상사채권의 소멸시효를 연장하는 규정들을 두고 있다.</li><li>상사채권의 물적 담보를 강화하기 위해 유치권의 요건을 완화하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 회사법의 다수 이해관계자 보호를 위한 강행규정이 많다는 취지로 맞음. 모든 상법규정이 강행이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 맞음.61조 상당보수청구권은 영리성 보장과 연결된다.</li><li><strong>선택</strong> · 틀림·정답. 기본적인 상사시효 특칙은 민사 일반10년보다 짧은5년이다. 신속성과 연장을 연결한 것이 함정이다.</li><li><strong>비선택</strong> · 맞음. 개별 견련성 등을 완화하지만 채무자 소유 등 남은 조건을 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상거래의 신속성을 위해서 상사채권의 소멸시효를 단축하는 규정들을 두고 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_085"><h4>워크북 · 상법_085</h4><p class="question-stem">다음 중에서 민법채권편에 대한 상법의 특칙에 해당하지 않는 것은?</p><ol class="choices"><li>연대채무의 특칙</li><li>상사법정이율</li><li>상인의 보수청구권</li><li>상사유치권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 채권편의 다수당사자 채무 이행에 관한 특칙이다.</li><li><strong>비선택</strong> · 채권의 이율에 관한 특칙이다.</li><li><strong>비선택</strong> · 영업상 타인을 위한 행위의 대가에 관한 채권편 특칙이다.</li><li><strong>선택</strong> · 정답. 상사유치권은 물권편의 담보물권 특칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상사유치권은 민법물권편의 특칙으로 상사채권의 물적 담보를 강화하기 위하여 민법에 비해 유치권의 요건을 완화하고 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 08' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 08|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

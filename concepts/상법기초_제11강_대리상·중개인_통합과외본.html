@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제11강 대리상·중개인 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 11</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제11강 대리상·중개인 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>부산 제조업자가 전국에 제품을 팔고 싶다. 모든 지역에 자기 지점을 만들면 비용이 많이 든다. 지역 사정을 잘 아는 독립 사업자의 도움을 받을 수는 없을까? <strong>대리상은 특정 상인의 거래를 계속 돕고, 중개인은 거래하려는 사람들을 연결한다.</strong> 둘 다 회사 직원은 아니지만, 계약을 대신 맺을 수 있는지는 다시 나누어 보아야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나?</td>
+<td>외부 보조상인 대리상·중개인의 자격, 의무, 보수·보상, 거래상대방 보호</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>지점 설치 비용을 줄이고 지역·시장 전문지식을 이용하려고</td>
+</tr>
+<tr>
+<td>전체 위치는?</td>
+<td>상행위 각론 중 타인의 영업을 돕는 보조상 제도</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>3강 상업사용인은 내부 직원, 이번 강은 외부 독립상인. 다음 위탁매매인은 자기 이름으로 계약한다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>대리점 간판만 보고 대리권을 인정하거나, 중개인에게 돈을 주면 언제나 변제된다고 오해한다.</td>
+</tr>
+</tbody></table>
+<p>교재217–234쪽·워크북77–85쪽과 제공7문항28개 보기를 연결한다. 중요도는 통계가 아닌 학습 우선순위다. 노랑=외울 결론, 초록=이유, 분홍=함정, 파랑=다른 단원 연결. 판례는 교재에 제시된 사실·판단 범위에서 풀고, 별도 예시는 설명용으로 표시한다.</p>
+<h1>1. 세 보조상의 자리를 먼저 구별하기</h1>
+<h2 id="commercial-11-01" data-concept-id="commercial-11-01">1-1. 내부 직원과 외부 보조상, 그리고 계약의 이름 ★★★★★</h2>
+<p><strong>교재217–221쪽 · 문단의 이유:</strong> ‘남의 장사를 돕는다’는 공통점만으로 서로 다른 법적 지위를 섞지 않게 한다.</p>
+<p>지배인·상업사용인은 기업 내부에서 상인을 돕는다. 대리상·중개인·위탁매매인 등은 <strong>독립한 상인으로 기업 밖에서 보조</strong>한다. 법정 보조상 분류에 관한 상법_048에서 지배인을 고르는 이유다. 외부에서 돕는다는 말은 모든 책임이 같다는 뜻이 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>누구를·어떻게 돕나</th>
+<th>거래계약의 당사자</th>
+<th>본인의 상인성</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>체약대리상</td>
+<td>특정 상인의 영업거래를 계속 대리</td>
+<td>권한 내에서 본인과 상대방</td>
+<td>본인은 상인</td>
+</tr>
+<tr>
+<td>중개대리상</td>
+<td>특정 상인의 거래를 계속 중개</td>
+<td>본인과 상대방이 체결</td>
+<td>본인은 상인</td>
+</tr>
+<tr>
+<td>중개인</td>
+<td>불특정 타인 간 상행위를 중개</td>
+<td>거래하려는 양 당사자</td>
+<td>적어도 한쪽에 상행위</td>
+</tr>
+<tr>
+<td>위탁매매인</td>
+<td>자기 명의·타인 계산으로 매매</td>
+<td>위탁매매인과 상대방</td>
+<td>위탁자·상대방 모두 비상인 가능</td>
+</tr>
+</tbody></table>
+<p>대리상은 특정 본인의 대리·중개를 인수하면서 그 자격을 갖고, 중개인·위탁매매인은 불특정 고객을 상대로 자기 영업을 한다. 여기의 ‘자격 취득의 종속성’은 <strong>대리상이 근로자처럼 지휘·감독을 받는다는 뜻이 아니다</strong>. <mark class="yellow">대리상은 특정 상인의 거래를 계속 돕는 독립상인이다.</mark> 본인이 여럿이어도 특정되어 있고 경업금지 등에 위반하지 않으면 가능하다.</p>
+<p><strong>97다26593,1999.2.5. 판례 이야기:</strong> 제조회사, 대리점·총판이라고 불리는 판매자, 그와 거래한 제3자가 등장한다. 상대방은 대리점이라는 명칭·광고를 보고 제조회사의 대리권이 있는 것 아니냐고 주장한다. 법원은 실제 계약이 대리인지, 자기 계산의 특약점인지, 위탁매매인지 살펴야 한다고 했다. <strong>간판과 광고만으로 제품 판매의 대리권 수여 표시라고 단정할 수 없다는 결론</strong>이다.</p>
+<p>판례를 풀면 ‘명칭의 계약만으로 대리상은 아니다’ → 이름표 대신 실제 누가 계약하고 손익을 부담하는지 확인하라. ‘실질적 법률관계는 여러 형태’ → 같은 총판도 법적 구조가 다르다. ‘광고를 곧 대리권 수여 표시로 볼 수 없다’ → 표현대리의 요건까지 따로 심사한다. 반대로 이름만으로 모두 제조회사 책임이라고 하면 자기 계산의 판매상까지 본인 대리인으로 바뀌게 된다.</p>
+<p><strong>시험:</strong> 명칭보다 실질·지배인은 내부·위탁매매는 자기 명의. <strong>키워드:</strong> 이름·계산·계속성. <strong>한 줄:</strong> 누가 계약 당사자인지부터 그리면 세 보조상을 구별할 수 있다.</p>
+<h2 id="commercial-11-02" data-concept-id="commercial-11-02">1-2. 대리상87조의 일곱 단어 ★★★★★</h2>
+<p><strong>교재219–222쪽 · 문단의 이유:</strong> 긴 정의를 낱말별로 분해하여 자격 요건을 확인한다.</p>
+<p>① <strong>일정한 상인:</strong> 본인이 특정된 상인이어야 하며 소상인도 가능하다. 한 명일 필요는 없다. 교재는 비상인인 상호보험회사나 일정한 설비 없이 생산하는 농수산업자 등을 돕는 민사대리상과 구별한다. 구체적 사업형태의 상인성은 별도 판단한다.</p>
+<p>② <strong>그 상인을 위하여:</strong> 타인의 영업을 돕는 보조상이다. 대리상도 자기 영업의 주체이지만 그 업무 내용이 본인의 거래를 보조한다는 뜻이다. ③ <strong>상업사용인이 아니면서:</strong> 본인 조직의 직원이 아닌 독립상인이다. 본인에게 계약효과가 귀속되는지는 실제 대리권·표현대리 등을 본다.</p>
+<p>④ <strong>상시:</strong> 계속적 계약관계가 필요하지만, 이미 여러 차례 거래했어야만 하는 것은 아니다. 첫 거래라도 앞으로 계속·반복할 예정이면 된다. ⑤ <strong>영업부류에 속하는 거래:</strong> 본인의 기본적 영업거래다. 교재의 출판업자를 위한 금융거래 대리처럼 본인의 보조적 상행위만을 맡는 경우는87조 대리상과 구별한다.</p>
+<p>⑥ <strong>대리 또는 중개:</strong> 체약대리상은 권한 내에서 본인의 이름으로 계약할 수 있지만 중개대리상은 연결만 하고 계약체결권은 당연히 없다. 겸할 수도 있다. ⑦ <strong>영업으로:</strong> 대리·중개의 ‘인수’를 영업으로 하므로 당연상인이다. <mark class="pink">그 인수는 대리상의 기본적 상행위이고, 인수한 일을 실제로 수행하는 개별 대리·중개는 보조적 상행위라는 층위 차이</mark>를 본다.</p>
+<p><strong>시험:</strong> 특정·독립·계속 예정·기본 영업·인수. <strong>키워드:</strong> 첫 거래도 가능. <strong>한 줄:</strong> 특정 상인의 본업 거래를 계속 돕기로 사업하는 독립상인이 대리상이다.</p>
+<h1>2. 대리상의 의무와 권리</h1>
+<h2 id="commercial-11-03" data-concept-id="commercial-11-03">2-1. 경업금지·통지·영업비밀 ★★★★★</h2>
+<p><strong>교재222–224쪽 · 문단의 이유:</strong> 본인의 고객과 영업정보를 잘 아는 대리상이 그 기회를 자기 이익으로 돌리지 않도록 한다.</p>
+<p>위임관계를 기초로 하므로 선량한 관리자의 주의로 업무를 처리한다.89조는 본인 허락 없이 자기·제3자 계산으로 본인의 영업부류 거래를 하거나, 동종영업 회사의 <strong>무한책임사원 또는 이사</strong>가 되는 것을 제한한다. 상업사용인17조는 ‘다른 상인의 영업’ 자체의 제한과 회사 사원 범위 등 문구가 다르므로 무조건 동일하다고 외우지 않는다.</p>
+<p>위반했다고 그 거래 자체가 자동 무효는 아니다.17조2–4항 준용으로 본인은 개입권, 손해배상, 계약해지 등을 검토한다. 자기 계산의 거래는 본인 계산으로 취급하고 제3자 계산의 거래는 이익 양도를 청구하는 구조다. 개입권은 <strong>거래를 안 날부터2주·거래일부터1년</strong>의 기간을 놓치지 않는다. <mark class="green">고객을 관리하라고 맡겼더니 그 기회를 경쟁 영업으로 가져가는 이해충돌을 막으려는 규칙이다.</mark></p>
+<p>88조의 통지는 대리·중개를 했을 때 <strong>지체 없이 본인에게 발송</strong>한다. 본인이 요구할 때만 보고하는 민법 위임의 기본규칙보다 신속한 정보공유를 요구한다. 상대방이 물건의 하자를 알리는90조 통지수령권과 방향이 반대다.</p>
+<p>92조의3의 비밀준수의무는 <strong>계약 종료 후에도</strong> 계속된다. 경제적 가치가 있고 본인이 공개를 원치 않는 영업정보 등을 보호한다. 위반 시 요건에 따라 손해배상이 문제된다. 다만 모든 공개정보까지 무조건 비밀이 되는 것은 아니며 관련 특별법의 영업비밀 요건은 별도 구분한다.</p>
+<p><strong>시험:</strong> 허락·경쟁회사 이사·개입권·통지 발송·종료 후 비밀. <strong>키워드:</strong> 신뢰·보고·보호. <strong>한 줄:</strong> 독립 사업자라도 맡은 고객과 정보를 본인에게 불리하게 이용하면 안 된다.</p>
+<h2 id="commercial-11-04" data-concept-id="commercial-11-04">2-2. 보수·비용·특별 상사유치권 ★★★★☆</h2>
+<p><strong>교재224–225쪽 · 문단의 이유:</strong> 대리상에게 의무만 지우지 않고 일의 대가와 미지급 위험에 대한 보호수단을 준다.</p>
+<p>대리상은 상인이므로61조에 따라 보수 약정이 없더라도 상당한 보수를 청구할 수 있다. 구체적 금액·발생 조건은 계약을 먼저 본다. 교재는 기본적인 보수청구권 발생을 <strong>거래계약의 이행</strong>과 연결하여, 성립만으로 발생하는 중개인의 보수와 대비한다. 이를 모든 보수특약을 무효로 하는 강행규정으로 확대하지 않는다. 민법 위임규정에 따른 비용 선급·상환청구권도 특약과 함께 검토한다.</p>
+<p>91조는 대리·중개로 생긴 채권이 변제기에 있으면, 변제받을 때까지 <strong>본인을 위하여 점유하는 물건·유가증권</strong>을 유치할 수 있게 한다. 다른 약정이 있으면 달리 정할 수 있다. 보수·체당금 등을 담보하지만 임의로 물건 소유권을 가져가는 제도는 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>유치권</th>
+<th>채권과 목적물의 관련성</th>
+<th>채무자 소유 필요 여부</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>민사유치권</td>
+<td>목적물에 관해 생긴 채권이라는 견련성 필요</td>
+<td>반드시 채무자 소유일 필요 없음</td>
+</tr>
+<tr>
+<td>일반 상사유치권58조</td>
+<td>개별 견련성 불필요, 나머지 법정 요건 필요</td>
+<td>채무자 소유 요건</td>
+</tr>
+<tr>
+<td>대리상 유치권91조</td>
+<td>개별 견련성 불필요</td>
+<td>본인 소유일 필요 없음, 본인을 위한 점유</td>
+</tr>
+</tbody></table>
+<p>대리 업무 중에는 아직 본인 소유가 아닌 물건을 보관하는 경우도 많다. 그래서 일반 상사유치권의 소유 요건을 그대로 가져오지 않는다. 그렇다고 불법 취득 물건까지 아무 제약 없이 유치할 수 있다는 결론은 아니다.</p>
+<p><strong>시험:</strong> 보수와 보상 구분·이행 시점·본인을 위한 점유·소유 불요. <strong>키워드:</strong> 일의 대가·담보. <strong>한 줄:</strong> 받을 보수와 비용을 보호하기 위해 특별한 유치권도 인정한다.</p>
+<h2 id="commercial-11-05" data-concept-id="commercial-11-05">2-3. 계약이 끝나도 남는 고객: 보상청구권92조의2 ★★★★☆</h2>
+<p><strong>교재225–226쪽 · 문단의 이유:</strong> 대리상이 개척한 고객 덕분에 본인이 종료 후에도 이익을 얻는 상황의 불균형을 조절한다.</p>
+<p>설명용 장면으로 보자. 민지는5년간 새 거래처를 찾아 주었다. 대리상계약이 끝났는데 제조회사는 그 거래처와 계속 거래한다. 민지는 더 이상 수수료를 받지 못한다. <strong>대리상의 활동으로 새 고객을 얻었거나 거래가 현저히 증가했고, 그 결과 계약 종료 뒤에도 본인이 이익을 얻는다면 상당한 보상</strong>이 문제된다. 단순히 오래 일했다는 사실만으로 자동 발생하는 퇴직금이 아니다.</p>
+<p>대리상의 책임 있는 사유 때문에 계약이 종료했다면 배제된다. 금액의 상한은 종료 전5년간의 <strong>평균 연보수액</strong>이다. 계약이5년보다 짧으면 실제 존속기간의 평균 연보수액을 기준으로 한다.5년치 보수를 모두 지급하는 것도, 상한을 무조건 전액 지급하는 것도 아니다. 보상청구권은 종료일부터 <strong>6개월</strong>을 경과하면 소멸하는 제척기간을 둔다.</p>
+<p>교재는 보상 배제 특약이 가능하다는 입장에서 설명한다. 그 문장과 법문 자체를 구분하고, 실제 약관의 불공정성·계약 해석 등 별도 무효 사유까지 사라진다고 단정하지 않는다. 심화학습에서는 규정의 법적 성질에 관한 논의가 있음을 알아 둔다.</p>
+<p><strong>시험:</strong> 고객 증가→종료 후 본인 이익→책임 있는 종료 제외→평균 연보수 상한→6개월. <strong>키워드:</strong> 종료 후 남는 고객 가치. <strong>한 줄:</strong> 과거 일의 수수료가 아니라 종료 뒤에도 본인에게 남는 영업상 이익을 조정하는 보상이다.</p>
+<h2 id="commercial-11-06" data-concept-id="commercial-11-06">2-4. 통지수령권90조와 계약 종료92조 ★★★★☆</h2>
+<p><strong>교재226–227쪽 · 문단의 이유:</strong> 매수인이 누구에게 하자 통지를 하면 되는지, 계속관계를 어떻게 끝내는지 알려 준다.</p>
+<p>물건 판매 또는 그 중개를 위탁받은 대리상은 <strong>하자·수량부족 등 매매 이행에 관한 통지를 받을 권한</strong>이 있다. 중개대리상도 여기에 포함된다. 계약을 체결할 대리권이 없는 사람이라고 하여 이런 통지까지 받을 수 없는 것은 아니다. <mark class="blue">9강69조의 신속한 하자통지와 연결된다. 매수인이 판매를 맡은 대리상에게 알릴 수 있어 거래를 빨리 정리한다.</mark> 통지 수령권이 대금 수령권이나 모든 계약변경권까지 자동으로 주는 것은 아니다.</p>
+<p>계약 존속기간을 정하지 않았다면 각 당사자는 <strong>2개월 전에 예고</strong>하여 해지할 수 있다. 부득이한 사유가 있으면 언제든 해지할 수 있다. 보상청구권 행사기간6개월과 해지예고2개월을 바꾸지 않는다.</p>
+<p>기간 만료·위임의 일반 종료사유도 검토한다. 본인의 사망은 상법50조의 상행위 위임 특칙을 보아 당연 종료로 처리하지 않는다. 수임인 사망·파산·성년후견개시 등 민법690조의 현행 용어를 확인한다. 교재의 ‘금치산’은 옛 제도 용어이므로 그대로 현재 법률용어처럼 외우지 않는다.</p>
+<p><strong>시험:</strong> 중개대리상도 통지 수령·매도측 위탁·2개월 예고·본인 사망 특칙. <strong>키워드:</strong> 통지와 계약체결 권한 분리. <strong>한 줄:</strong> 계약권한이 없더라도 판매 관련 통지를 받을 수 있고, 무기한 계약은 예고를 거쳐 끝낸다.</p>
+<h1>3. 중개인은 양쪽 거래를 연결한다</h1>
+<h2 id="commercial-11-07" data-concept-id="commercial-11-07">3-1. 중개인93조·중개계약의 성질·중립 ★★★★★</h2>
+<p><strong>교재227–229쪽 · 문단의 이유:</strong> 거래를 연결하는 사실행위와 법률행위를 대신하는 대리를 분리한다.</p>
+<p>중개인은 <strong>타인 간 상행위의 중개를 영업으로 하는 독립상인</strong>이다. 거래 한쪽에는 상행위가 있어야 하고 기본적·보조적 상행위를 함께 본다. 우연히 친구의 거래를 한 번 소개한 것만으로 중개업을 영업하는 상인이 되는 것은 아니다. 불특정 고객을 위해 수시로 돕는다는 점에서 특정 본인의 거래를 계속 돕는 중개대리상과 다르다.</p>
+<p>중개는 계약 성립을 돕는 <strong>사실행위</strong>다. 중개인 자신이 거래계약의 당사자가 되거나 대리권을 당연히 얻지는 않는다. 교재의 부동산중개·직업소개·혼인중매는 상법상 상행위 중개와 민사중개의 구별을 위한 예다. 모든 부동산거래가 언제나 비상행위라는 뜻은 아니며 실제 거래 성질·특별법을 따로 본다.</p>
+<p><strong>심화—계약 성질:</strong> 교재는 적극적인 중개의무가 있는 쌍방적 중개계약을 위임, 그런 적극 의무가 없는 일방적 중개계약을 도급 유사계약으로 설명한다. 특약이 없으면 전자를 기본으로 본다. 이 구분을 ‘양쪽에서 의뢰했으면 쌍방, 한 명이 의뢰했으면 일방’이라는 일상어로 단순화하지 않는다.</p>
+<p>중개인은 이해가 다른 양쪽 사이에서 중립을 지키며 선량한 관리자의 주의로 설명·조사를 해야 한다. 한쪽에서 돈을 더 받았다고 다른 쪽을 속여도 되는 것이 아니다. 거래 전문성을 믿고 의뢰하므로 신용상태 등 필요한 사항을 적절히 확인한다.</p>
+<p><strong>시험:</strong> 사실행위·상행위 중개·불특정 고객·중립. <strong>키워드:</strong> 연결자이지 계약자 아님. <strong>한 줄:</strong> 중개인은 거래가 이루어지도록 돕지만 원래 거래의 주인이 되지는 않는다.</p>
+<h2 id="commercial-11-08" data-concept-id="commercial-11-08">3-2. 견품·결약서·일기장: 분쟁의 증거를 남기기 ★★★★★</h2>
+<p><strong>교재230–231쪽 · 문단의 이유:</strong> 계약이 끝난 뒤 ‘어떤 물건·가격으로 약속했는지’ 다툴 때 증거가 사라지지 않도록 한다.</p>
+<p>95조는 중개인이 받은 <strong>견품</strong>을 해당 행위가 완료될 때까지 보관하도록 한다. 교재는 품질 분쟁 가능성이 확실히 사라질 때까지라는 취지로 해설한다. 계약 도장 찍자마자 견본을 버려도 된다는 말이 아니다. 보관 종료 뒤 제공자에게 반환하고, 법정 보관의무만을 이유로 별도 약정 없는 추가 보수를 청구하지 않는다.</p>
+<p>96조의 <strong>결약서</strong>는 계약 성립 후 중개인이 작성하는 증거서면이다. 당사자 성명·상호, 계약일, 목적물·수량·가격·이행조건 등 요령을 적고 중개인이 기명날인·서명하여 지체 없이 교부한다. <strong>계약의 성립요건이 아니다.</strong> 즉시 이행하는 경우를 제외하면 당사자에게도 서명 등을 받아 상대방에게 교부한다. 수령·서명 거부가 있으면 지체 없이 상대방에게 통지를 발송하는96조3항도 함께 읽는다.</p>
+<p>97조의 <strong>일기장</strong>은 계약일 순서대로 중개 내용을 기록한 장부다. 일상 감정을 적는 일기가 아니라 거래 증거다. 남의 거래를 기록하므로 그 자체로 중개인 자신의 상업장부는 아니다. 자기 수수료 등도 함께 기록하면 상업장부를 겸할 수 있다. 당사자가 요구하면 자기 거래 관련 부분의 등본을 준다.</p>
+<p><strong>시험:</strong> 견품보관·계약 성립 후 결약서·증거 기능·자기 거래 여부. <strong>키워드:</strong> 분쟁 예방·증거 보전. <strong>한 줄:</strong> 견본과 서류를 남기는 이유는 나중에 약속 내용이 뒤바뀌지 않게 하려는 것이다.</p>
+<h2 id="commercial-11-09" data-concept-id="commercial-11-09">3-3. 이름을 숨기면 중개인에게 이행을 청구한다 ★★★★☆</h2>
+<p><strong>교재231–232쪽 · 문단의 이유:</strong> 상대방을 숨긴 채 거래를 성사시켰다면 거래상대방을 보호할 대상을 남겨야 한다.</p>
+<p>당사자가 성명·상호를 알리지 말라고 요구하면98조에 따라 <strong>상대방에게 주는 결약서·등본에는 그 이름을 쓰지 않는다</strong>. 그러나 중개인의 원본 일기장에는 실제 당사자를 기록한다. 비밀유지는 증거 자체를 없애라는 뜻이 아니다. 묵비 요청이 있는 상황에서 장부를 그대로 열람시켜 우회 공개하는 일도 해서는 안 된다.</p>
+<p>99조는 중개인이 스스로 또는 당사자 요청으로 성명·상호를 상대방에게 알리지 않으면 <strong>상대방이 중개인에게 이행을 청구할 수 있도록</strong> 한다. 교재가 말하는 개입의무·이행담보책임이다. 설명용으로, 은주는 중개인만 믿고 물건을 샀는데 실제 판매자의 이름을 모른다. 대금을 지급해도 물건을 안 주면 누구에게 청구할까? 중개인이 숨긴 상태를 만들었으므로 중개인이 이행책임을 부담한다.</p>
+<p><mark class="pink">대리상 경업 위반의 ‘개입권’은 본인의 권리이고, 중개인의 ‘개입의무’는 이행을 책임지는 의무다.</mark> 같은 개입이라는 단어라도 행사자와 이유가 정반대다. 중개인이 원래 모든 계약의 이행을 보증한다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 일기장 원본에는 기재·상대방 교부본에는 묵비·요구 여부와 무관한 비표시 책임. <strong>키워드:</strong> 비밀의 대가·청구 상대 확보. <strong>한 줄:</strong> 상대 이름을 숨겼다면 중개인만 믿고 거래한 사람에게 책임질 통로를 남긴다.</p>
+<h2 id="commercial-11-10" data-concept-id="commercial-11-10">3-4. 보수청구·대금 수령·계약 종료 ★★★★★</h2>
+<p><strong>교재232–233쪽 · 문단의 이유:</strong> ‘고생했으니 돈을 달라’와 ‘거래를 성사시킨 보수’를 나누고, 중개인에게 맡겨도 되는 권한을 확인한다.</p>
+<p>보수를 청구하려면 의뢰받은 계약이 <strong>중개인의 중개로 유효하게 성립</strong>해야 한다.100조에 따라96조의 결약서 절차를 마치기 전에는 보수청구를 하지 못한다. 계약 성립으로 생기는 권리와 실제 청구할 절차를 구별하자. 특약·관습이 없으면 보수는 양 당사자가 균등하게 부담한다.</p>
+<p><strong>4289민상81,1956.4.12. 판례 이야기:</strong> 중개인은 거래를 성사시키려고 노력했지만 그 중개로 매매가 성립하지 않았다. 중개인은 “노력한 만큼은 달라”고 요구한다. 법원은 중개로 매매가 성립해야 중개료청구권이 발생한다고 보았다. ‘노력의 비율에 상당한 보수도 청구 불가’ → 성사되지 않은 중개의 노력만으로 당연히 일부 성공보수를 받을 수 없다는 뜻이다. 별도 비용·보수 약정의 문제까지 무조건 지워 버리지 않는다. 반대 결론이면 의뢰인이 성공보수로 기대한 계약이 단순 시간급 계약으로 바뀔 수 있다.</p>
+<p><strong>68나2013,1969.12.17. 보수금 사건:</strong> 상인이 의뢰받아 상대방의 차관 도입 사무를 처리했다. 금액 약정이 없다는 이유로 보수를 안 줘도 되는지가 다투어졌다. 법원은 상당한 보수를 인정하고 노력·계약 성립에 기여한 이익·계약규모·관례상 요율 등을 고려했다. ‘액수 약정 없음’ → 무료 약정과 같지 않다. ‘제반 사정 참작’ → 일률적 숫자 대신 기여도를 따진다. 교재는 이를 대법원 판결이라고 표기하지만 사건번호와 공개 판례 목록에서는 서울고등법원 사건으로 확인되므로, 법리 학습과 법원 표기의 오류를 구분한다.</p>
+<p>일반적으로 중개 비용은 보수에 포함되어 별도 비용상환을 당연히 청구하지 않는다. 다만 별도 약정·특별규정은 확인한다. 교재의 중개요율 설명도 모든 종류의 중개업에 하나의 행정상 요율이 적용된다는 뜻은 아니다. 업종별 특별법과 약정이 다르다.</p>
+<p>94조에 따라 중개인은 원칙적으로 <strong>당사자를 대신해 대금 등 이행을 받을 권한이 없다</strong>. 다른 약정이나 관습이 있으면 예외다. 권한이 없는 중개인에게 지급했다고 무조건 원래 채무가 사라지는 것은 아니다. 추인·표현수령권 등 별도 일반법상 사유가 있는지는 따로 확인한다.</p>
+<p>중개계약은 기간 만료와 위임에 준하는 종료사유를 검토한다. 교재는 중개인 사망, 중개인·위탁자 파산을 들고 위탁자 사망에는 상법50조 특칙을 연결한다. 상행위 위임이라는 적용 범위를 먼저 확인한다.</p>
+<p><strong>시험:</strong> 성립·중개와 인과관계·결약서 절차·쌍방 균분·수령권 원칙 없음. <strong>키워드:</strong> 성공보수와 권한. <strong>한 줄:</strong> 중개 성공의 보수는 받을 수 있지만, 원래 거래대금을 받을 권한까지 저절로 생기지는 않는다.</p>
+<h1>4. 용어를 풀어서 이해하기</h1>
+<h3>보조상 補助商</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보), 助(도울 조), 商(장사 상). <strong>③ 합친 뜻:</strong> 장사를 돕는 상인. <strong>④ 이름의 이유:</strong> 본인 영업에 부족한 전문성·판매망을 보충해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기업 조직 밖에서 독립상인으로 타인의 영업을 보조하는 사람. <strong>⑥ 쉬운 말:</strong> 직원이 아니라 다른 사업자로서 장사를 돕는다. <strong>⑦ 사례:</strong> 지역 판매를 맡은 대리상.</p>
+<p><strong>⑧ 시험:</strong> 지배인은 상업사용인으로 내부 보조자. <strong>⑨ 비교·기억법:</strong> 보조상과 보조적 상행위는 서로 다른 분류.</p>
+<h3>대리상 代理商</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대), 理(다스릴 리), 商(장사 상). <strong>③ 합친 뜻:</strong> 대리 등을 맡는 상인. <strong>④ 이름의 이유:</strong> 상인의 거래를 대신하거나 연결해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 상인의 영업부류 거래를 계속 대리·중개하는 독립상인. <strong>⑥ 쉬운 말:</strong> 정해진 회사의 거래를 계속 돕는 별도 사업자. <strong>⑦ 사례:</strong> 특정 가구회사 판매를 계속 중개.</p>
+<p><strong>⑧ 시험:</strong> 특정·독립·상시·영업부류. <strong>⑨ 비교·기억법:</strong> 민법 대리인 모두가 상법 대리상인 것은 아님.</p>
+<h3>체약 締約</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 締(맺을 체), 約(맺을 약). <strong>③ 합친 뜻:</strong> 계약을 맺음. <strong>④ 이름의 이유:</strong> 계약을 실제 맺기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본인 명의로 거래계약을 체결하는 대리 활동. <strong>⑥ 쉬운 말:</strong> 도장 찍어 거래를 성립시킬 권한. <strong>⑦ 사례:</strong> 권한 내 판매계약 체결.</p>
+<p><strong>⑧ 시험:</strong> 중개대리상은 계약체결권 당연히 없음. <strong>⑨ 비교·기억법:</strong> 통지를 받는 권한과 계약을 맺는 권한은 다름.</p>
+<h3>중개 仲介</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 仲(버금 중): 사이, 介(낄 개). <strong>③ 합친 뜻:</strong> 사이에 끼어 연결함. <strong>④ 이름의 이유:</strong> 양쪽 사이에서 거래를 잇기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인의 법률행위 성립을 돕는 사실행위. <strong>⑥ 쉬운 말:</strong> 살 사람과 팔 사람을 만나게 돕는다. <strong>⑦ 사례:</strong> 판매조건을 조정하여 계약 성사.</p>
+<p><strong>⑧ 시험:</strong> 자신이 계약 당사자나 대리인 아님. <strong>⑨ 비교·기억법:</strong> 위탁매매인은 자기 명의로 계약.</p>
+<h3>보수 報酬</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 報(갚을 보), 酬(갚을 수). <strong>③ 합친 뜻:</strong> 일에 대해 갚는 대가. <strong>④ 이름의 이유:</strong> 일한 값을 갚아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 업무 수행 등에 대해 받는 금전적 대가. <strong>⑥ 쉬운 말:</strong> 거래를 도와준 수수료. <strong>⑦ 사례:</strong> 중개 성공 뒤 보수 청구.</p>
+<p><strong>⑧ 시험:</strong> 유효한 성립·결약서 절차. <strong>⑨ 비교·기억법:</strong> 보상92조의2는 종료 후 남는 고객가치 조정.</p>
+<h3>보상 補償</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보), 償(갚을 상). <strong>③ 합친 뜻:</strong> 부족을 메워 갚음. <strong>④ 이름의 이유:</strong> 남는 고객가치가 본인에게만 돌아가는 차이를 메워서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대리상 활동으로 계약 종료 후 본인이 얻는 이익에 관한 형평상 조정. <strong>⑥ 쉬운 말:</strong> 내가 만들어 둔 거래처 가치에 대한 정산. <strong>⑦ 사례:</strong> 종료 후에도 본인이 새 고객과 계속 거래.</p>
+<p><strong>⑧ 시험:</strong> 책임 있는 종료 제외·연평균 상한·6개월. <strong>⑨ 비교·기억법:</strong> 손해배상은 위법행위·채무불이행 손해와 관련.</p>
+<h3>견련성 牽連性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 牽(끌 견), 連(이을 련), 性(성품 성). <strong>③ 합친 뜻:</strong> 서로 끌려 연결되는 성질. <strong>④ 이름의 이유:</strong> 그 물건 때문에 생긴 채권인지 확인해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유치권에서 채권과 목적물 사이에 요구되는 관련성. <strong>⑥ 쉬운 말:</strong> 맡은 물건과 받을 돈이 이어져 있나. <strong>⑦ 사례:</strong> 민사유치권의 수리비와 수리 물건.</p>
+<p><strong>⑧ 시험:</strong> 대리상 특별유치권은 개별 견련성 불요. <strong>⑨ 비교·기억법:</strong> 일반 상사유치권의 다른 요건은 별도.</p>
+<h3>제척기간 除斥期間</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 除(덜 제), 斥(물리칠 척), 期(기약할 기), 間(사이 간). <strong>③ 합친 뜻:</strong> 권리 행사를 마감하는 기간. <strong>④ 이름의 이유:</strong> 분쟁을 일정 때까지 확정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 기간 경과로 권리가 소멸하는 행사기간. <strong>⑥ 쉬운 말:</strong> 이때까지 권리를 행사해야 하는 마감. <strong>⑦ 사례:</strong> 대리상 보상청구 종료일부터6개월.</p>
+<p><strong>⑧ 시험:</strong> 해지예고2개월과 혼동 금지. <strong>⑨ 비교·기억법:</strong> 소멸시효와 기간 성질·중단 등 규율 차이.</p>
+<h3>견품 見品</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 見(볼 견), 品(물건 품). <strong>③ 합친 뜻:</strong> 보여 주는 물품. <strong>④ 이름의 이유:</strong> 전체 물건을 대표하여 보여 주므로.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 거래할 물건의 품질·상태를 보여 주는 견본. <strong>⑥ 쉬운 말:</strong> 약속한 품질을 확인할 샘플. <strong>⑦ 사례:</strong> 원단 거래의 견본 조각.</p>
+<p><strong>⑧ 시험:</strong> 품질 분쟁에 대비한 보관. <strong>⑨ 비교·기억법:</strong> 계약 성립 즉시 버려도 되는 자료 아님.</p>
+<h3>결약서 結約書</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 結(맺을 결), 約(맺을 약), 書(글 서). <strong>③ 합친 뜻:</strong> 맺은 계약을 기록한 서면. <strong>④ 이름의 이유:</strong> 어떻게 계약했는지 남기기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중개인이 계약 성립 후 요령을 적어 교부하는 증거서면. <strong>⑥ 쉬운 말:</strong> 우리가 합의한 내용을 적어 주는 확인서. <strong>⑦ 사례:</strong> 목적물·가격·수량·일자 기록.</p>
+<p><strong>⑧ 시험:</strong> 계약 성립요건 아님·96조 절차. <strong>⑨ 비교·기억법:</strong> 계약을 새로 성립시키는 종이로 오해 금지.</p>
+<h3>일기장 日記帳</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 日(날 일), 記(기록할 기), 帳(휘장 장): 장부. <strong>③ 합친 뜻:</strong> 날짜 순서로 기록한 장부. <strong>④ 이름의 이유:</strong> 언제 누구 거래를 도왔는지 남기려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중개한 거래 내용을 계약일 순서로 기재하는 기록. <strong>⑥ 쉬운 말:</strong> 중개 거래의 날짜별 기록. <strong>⑦ 사례:</strong> 묵비 요구 있어도 원본에는 당사자 이름 기재.</p>
+<p><strong>⑧ 시험:</strong> 남의 거래 기록이므로 자체로 상업장부는 아님. <strong>⑨ 비교·기억법:</strong> 자기 수수료까지 기록하면 상업장부를 겸할 수 있음.</p>
+<h3>묵비 默祕</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 默(잠잠할 묵), 祕(숨길 비). <strong>③ 합친 뜻:</strong> 말하지 않고 숨김. <strong>④ 이름의 이유:</strong> 협상에서 신원을 드러내지 않을 필요가 있어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당사자 요청에 따라 상대방에게 성명·상호를 표시하지 않는 의무. <strong>⑥ 쉬운 말:</strong> 누가 거래하는지 상대에게 알리지 않는다. <strong>⑦ 사례:</strong> 결약서·등본에서 요청 당사자 이름 제외.</p>
+<p><strong>⑧ 시험:</strong> 원본 기록 유지·99조 이행책임. <strong>⑨ 비교·기억법:</strong> 형사절차의 진술거부권과 다른 문맥.</p>
+<h3>개입의무 介入義務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 介(낄 개), 入(들 입), 義(옳을 의), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 끼어들어 책임져야 하는 의무. <strong>④ 이름의 이유:</strong> 상대가 누군지 몰라 청구할 수 없는 위험을 메워서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당사자 이름을 숨긴 중개인이 상대방에 대해 부담하는 이행책임. <strong>⑥ 쉬운 말:</strong> 소개자만 믿었으면 소개자가 책임질 통로를 남긴다. <strong>⑦ 사례:</strong> 이름 숨긴 판매자의 미이행.</p>
+<p><strong>⑧ 시험:</strong> 임의·요청 모두 이름 비표시이면 문제. <strong>⑨ 비교·기억법:</strong> 경업금지 위반에 대한 개입권은 본인의 권리.</p>
+<h1>5. 기출 연결·교재 복습 질문</h1>
+<table>
+<thead>
+<tr>
+<th>TOP5</th>
+<th>연결</th>
+<th>묻는 지점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상법_048</td>
+<td>1-1</td>
+<td>지배인과 외부 보조상의 차이</td>
+</tr>
+<tr>
+<td>상법_049</td>
+<td>2-1</td>
+<td>계속적 신뢰관계 때문에 대리상에게 경업금지</td>
+</tr>
+<tr>
+<td>상법_050</td>
+<td>1-2</td>
+<td>실제 반복이 아닌 앞으로의 계속관계</td>
+</tr>
+<tr>
+<td>상법_051</td>
+<td>3-2</td>
+<td>중개인·대리상·위탁매매인의 의무 구별</td>
+</tr>
+<tr>
+<td>상법_052</td>
+<td>3-4</td>
+<td>성립하지 않은 거래에서 노력비율만큼 보수 청구 여부</td>
+</tr>
+</tbody></table>
+<p>상법_090은 대리상의 비밀준수의무를, 상법_091은 다음 강의 지정가액 준수의무를 대비한다.090④ 원문의 ‘계약의 종류’는 문맥상 ‘계약의 종료’의 오기다. 원문은 보존하고 해설에서 바로잡았다. 실제 오답률은 제공되지 않았으므로 빈도를 꾸미지 않는다. <strong>고위험 함정: 간판만으로 대리권 인정, 중개인에게 당연 수령권 인정, 성사 없이 노력비율 보수 인정.</strong></p>
+<p><strong>교재의 네 복습 질문:</strong> 대리상 정의에는 특정 상인·독립·상시·영업부류·대리/중개를 넣는다. 권리와 의무에는 보수·비용·유치·보상 / 경업금지·통지·비밀을 나눈다. 중개인 정의에는 타인 간 상행위·중개·영업을 넣는다. 권리와 의무에는 성공 보수 / 견품·결약서·일기장·묵비·개입을 말한다. 단어만 나열하지 말고 각 의무가 방지하는 분쟁도 설명하자.</p>
+<h1>6. 새로운 사례로 응용5문제</h1>
+<p><strong>문제1.</strong> 새로 문을 연 지역 사업자가 특정 가구회사의 판매 중개를3년간 맡았다. 아직 계약 한 건만 도왔다. 계속 반복 실적이 없으므로 대리상이 아니라고 할 수 있나?</p>
+<p><strong>해설:</strong> 아니다. 앞으로 계속할 계약관계면 실제 첫 거래라도 가능하다. 다른 자격 요건도 충족한다고 가정한다. <strong>의도:</strong> 상시와 과거 거래횟수 구분.</p>
+<p><strong>문제2.</strong> 판매를 중개만 하는 대리상에게 매수인이 배송된 물건의 수량부족을 알렸다. 본인은 그 사람에게 계약체결권을 안 줬으니 통지도 무효라고 한다.</p>
+<p><strong>해설:</strong>90조는 판매의 중개를 맡은 대리상에게도 이행 관련 통지수령권을 인정한다. 계약체결권과 구분한다. <strong>의도:</strong> 권한의 종류별 판단.</p>
+<p><strong>문제3.</strong> 대리상계약이4년간 계속되었고 연간 보수는2천·3천·3천·4천만원이었다. 고객증가와 종료 후 이익 등 요건이 있다면 법정 보상 상한은? 무조건 그 돈을 받나?</p>
+<p><strong>해설:</strong> 평균 연보수3천만원이 상한이다. 상당한 보상액을 따로 정하므로 자동3천만원은 아니며, 책임 있는 종료 제외와6개월 기간도 확인한다. <strong>의도:</strong> 평균·상한·요건 구분.</p>
+<p><strong>문제4.</strong> 중개인이 판매자 요청에 따라 이름을 숨겨 거래를 성사시켰다. 원본 일기장에서도 이름을 지웠고, 판매자가 물건을 안 주자 구매자에게 자기는 소개만 했다고 한다.</p>
+<p><strong>해설:</strong> 원본에는 이름을 기록해야 한다. 상대방 교부본의 묵비와 다르다.99조에 따라 구매자가 중개인에게 이행을 청구할 수 있다. <strong>의도:</strong> 비밀유지와 이행담보의 결합.</p>
+<p><strong>문제5.</strong> 중개인의 도움으로 매매가 성립하고 결약서 절차도 끝났다. 구매자는 특별한 약정·관습 없이 중개인에게 매매대금을 줬다. 중개인의 보수권이 있으므로 대금 수령도 유효한가?</p>
+<p><strong>해설:</strong> 보수청구권과 거래대금 수령권은 별개다.94조상 수령권은 원칙적으로 없으므로 그것만으로 채무 면제를 주장할 수 없다. 별도 권한·추인 등 사유는 추가 확인한다. <strong>의도:</strong> 성공보수≠대리권.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<div class="memory-sheet">
+
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 특정 상인·계속관계 / 중개는 사실행위 / 이름을 숨기면 개입의무.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>반드시 붙여 외우기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대리상87조</td>
+<td>특정 상인·독립상인·상시·본인의 영업부류·대리/중개</td>
+</tr>
+<tr>
+<td>계속성</td>
+<td>첫 거래도 앞으로 계속할 예정이면 가능</td>
+</tr>
+<tr>
+<td>체약 vs 중개대리상</td>
+<td>계약체결권 유무, 판매 관련 통지수령권은 둘 다 가능</td>
+</tr>
+<tr>
+<td>대리상 의무</td>
+<td>경업금지89·통지 발송88·종료 후에도 비밀92의3</td>
+</tr>
+<tr>
+<td>유치91</td>
+<td>변제기 채권·본인을 위한 점유·견련성/본인 소유 불요</td>
+</tr>
+<tr>
+<td>보상92의2</td>
+<td>고객·거래 증가→종료 후 본인 이익, 대리상 책임 있는 종료 제외</td>
+</tr>
+<tr>
+<td>보상 상한·기간</td>
+<td>직전5년 평균 연보수, 짧으면 실제기간 평균·종료 후6개월</td>
+</tr>
+<tr>
+<td>해지92</td>
+<td>무기한:2개월 전 예고·부득이한 사유:언제든</td>
+</tr>
+<tr>
+<td>중개인93</td>
+<td>타인 간 상행위·불특정·사실행위·계약 당사자 아님</td>
+</tr>
+<tr>
+<td>증거 의무</td>
+<td>견품95·결약서96·일기장/등본97</td>
+</tr>
+<tr>
+<td>묵비98·개입99</td>
+<td>원본에는 실명, 상대방 교부본은 묵비·비표시 시 이행담보</td>
+</tr>
+<tr>
+<td>보수100</td>
+<td>중개로 유효 성립·결약서 절차·원칙 쌍방 균분</td>
+</tr>
+<tr>
+<td>수령94</td>
+<td>대금 등 이행 수령권 원칙 없음·약정/관습 예외</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “대리점 간판만으로 대리권을 단정하지 않는다.” “중개인은 계약을 맺게 돕지만 계약자가 아니다.” “보수는 일의 대가, 보상은 종료 뒤 남는 고객가치의 조정이다.”</p>
+<p><strong>함정:</strong> 실제 여러 번 거래해야 대리상× / 결약서가 없으면 매매 불성립× / 견품보관 별도 보수 당연× / 비밀은 종료 즉시 소멸× / 중개 개입의무=대리상 개입권×.</p>
+<p><strong>사례를 풀 순서:</strong> 특정·계속성 → 누구 명의 계약인지 → 대리권·통지권·수령권 구분 → 의무 위반 → 보수·보상·기간.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 세 보조상 차이를 직접 사례로 설명하고 보수·보상·수령권까지 분리하면 이해 완료. 🟡 정의는 알지만2개월/6개월, 결약서/일기장이 섞이면 복습 필요. 🔴 중개인이 모든 계약의 당사자라고 생각하면1-1 비교표부터 재학습한다. 아직 답하지 않았으므로 상태를 임의로 확정하지 않는다. <strong>복습TOP3: 대리상 자격의 실질, 보상요건과 한도, 중개인의 묵비·개입의무.</strong></p>
+<h1>자료와 법령 대조</h1>
+<p>제공 교재·워크북·상법 JSON을 기준으로 구성했다.2026.10.23 기준 <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001702">국가법령정보센터 상법</a>의87–100조와 <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0096&lsiSeq=284143&urlMode=lsScJoRltInfoR">결약서96조</a>를 대조했다. 보상 제도의 법적 성질에 관한 논의는 <a href="https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART001594347">학술논문 정보</a>와 구별하여 교재 입장을 표시했다. 교재의 법원명·오래된 후견 용어·원본 오기는 본문 해설에서 따로 경고하고 원자료 문제는 바꾸지 않았다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_048"><h4>형성평가 · 상법_048</h4><p class="question-stem">우리 상법상 규정된 보조상제도가 아닌 것은?(법조문에 따름)</p><ol class="choices"><li>운송주선업</li><li>공중접객업</li><li>지배인</li><li>대리상</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보조상 제도다. 자기 명의로 타인 계산의 운송을 주선한다.</li><li><strong>비선택</strong> · 교재가 분류하는 보조상에 포함된다.</li><li><strong>선택</strong> · 정답. 지배인은 기업 내부의 상업사용인이다. 외부 독립상인인 보조상과 구별한다.</li><li><strong>비선택</strong> · 보조상이다. 특정 상인의 영업거래를 계속 돕는 독립상인이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 지배인은 기업조직 내부에서 상인을 보조하는 상업사용인이고, 보조상은 기업조직 외부에서 상인을 보조하는 자이다.</p></details></section>
+
+<section class="question-card" id="question-상법_049"><h4>형성평가 · 상법_049</h4><p class="question-stem">다음의 상인 중에서 상법상 “경업금지의무”를 부담하는 것은?(법조문에 따름)</p><ol class="choices"><li>대리상</li><li>운송인</li><li>중개인</li><li>위탁매매인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답.89조의 경업금지의무가 있다. 본인의 허락 여부와 동종영업 요건을 확인한다.</li><li><strong>비선택</strong> · 이 지위 자체에89조의 대리상 경업금지가 적용되는 것은 아니다. 별도 계약은 구별한다.</li><li><strong>비선택</strong> · 불특정 고객의 거래를 중개하는 중개인에게 같은 법정 경업금지가 적용되는 것은 아니다. 중립의무는 별개다.</li><li><strong>비선택</strong> · 위탁매매인이라는 이유만으로89조의 경업금지를 부담하지는 않는다. 지정가액 등 다른 의무와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제89조 참조. 대리상은 본인과 계속적 신뢰관계를 유지하여야 하므로 본인의 허락없이 자기나 제3자의 계산으로 본인의 영업부류에 속한 거래를 하거나, 동종영업을 목적으로 하는 회사의 무한책임사원 또는 이사가 되지 못한다.</p></details></section>
+
+<section class="question-card" id="question-상법_050"><h4>형성평가 · 상법_050</h4><p class="question-stem">대리상에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>본인은 반드시 상인이어야 하며, 1인이어야 할 필요는 없으나 반드시 특정되어야 한다.</li><li>대리상은 특정 상인에 종속되지 않는 독립된 상인이다.</li><li>대리상계약은 계속적 계약관계이어야 하므로 현실의 행위가 계속•반복되어야 한다.</li><li>대리상은 영업활동의 내용에 따라 거래를 대리하는 대리상을 체약대리상이라 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 특정되어야 하지만 한 명으로 제한되지는 않는다.</li><li><strong>비선택</strong> · 맞음. 기업 내부 직원이 아닌 독립상인이다.</li><li><strong>선택</strong> · 틀림·정답. 처음 한 번이라도 앞으로 계속·반복될 계약관계면 충분하다.</li><li><strong>비선택</strong> · 맞음. 권한 내 본인 명의 계약체결을 하는 유형이 체약대리상이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대리상계약은 계속적 계약관계이어야 하지만 현실의 행위가 계속•반복될 필요는 없으며 1회의 행위라도 앞으로 계속•반복될 것이면 족하다.</p></details></section>
+
+<section class="question-card" id="question-상법_051"><h4>형성평가 · 상법_051</h4><p class="question-stem">상법에서 정하고 있는 중개인의 의무에 해당하는 것은?</p><ol class="choices"><li>통지의무</li><li>견품보관의무</li><li>계산서제출의무</li><li>지정가액 준수의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이 문제의 의무 분류에서는88조 대리상 통지의무를 가리킨다. 다만 중개인도96조3항의 서명·수령 거부 통지는 있으므로 어떤 통지의무도 전혀 없다고 일반화하지 않는다.</li><li><strong>선택</strong> · 정답.95조의 견품보관의무다. 품질 분쟁에 대비하여 증거를 보관한다.</li><li><strong>비선택</strong> · 교재 분류에서 위탁매매인의 통지·계산서 제출과 연결되는 의무다.</li><li><strong>비선택</strong> · 위탁매매인의 의무다. 다음 강의 위탁자가 지정한 가격과 비교한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 중개인은 중개계약의 성질상 중립의무와 선관주의의무를 부담한다. 중개인은 계약을 체결하려는 당사자의 중간에서 양당사자의 상반된 이해관계를 조정하여 거래를 성사시키는 것이므로, 어느 일방에게 더 많은 보수를 받고서 그의 이해만을 고려하여 거래를 매개한다면 반대당사자의 이익은 침해될 수밖에 없을 것이다. 따라서 중개인은 기본적으로 양당사자 사이에서 중립을 지켜야 하는 의무를 부담한다. 여기에 더하여 중개인은 당사자에 대해 수임인의 지위를 가지기 때문에, 선량한 관리자의 주의로서 적절한 설명을 해 주고 상대방의 신용상태를 조사해 주는 등의 노력을 해야 한다. 이밖에 상법에서는 중개인에게 중개를 의뢰하는 쌍방을 위해 여러 가지 의무를 규정하고 있는데, 견품보관의무, 결약서교부의무, 일기장작성의무, 등본교부의무, 성명 및 상호묵비의무, 개입의무 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_052"><h4>형성평가 · 상법_052</h4><p class="question-stem">중개인에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>중개인은 불특정한 타인간의 상행위의 중개를 영업으로 한다.</li><li>중개인은 사실행위인 중개행위만을 하며 자신이 계약을 체결하는 것은 아니다.</li><li>중개계약은 위임에 유사하므로 위임의 종료사유인 중개인이 사망, 중개인 및 위탁자의 파산에 의하여 종료된다.</li><li>중개인의 보수청구권은 중개의 노력에 대한 대가이므로 매매가 성립하지 않더라도 노력의 비율에 상당한 보수를 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 특정 본인을 계속 돕는 중개대리상과 대비한다.</li><li><strong>비선택</strong> · 맞음. 중개는 계약 성립을 돕는 사실행위다.</li><li><strong>비선택</strong> · 교재가 드는 종료사유다. 상행위 위임의 특칙상 위탁자 사망은 따로 구분한다.</li><li><strong>선택</strong> · 틀림·정답. 중개로 매매가 성립하지 않으면 노력 비율만으로 당연히 중개보수를 청구하지 못한다. 별도 약정은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 매매중개료청구권은 매매가 중개인의 손을 거쳐 성립됨을 조건으로 발생하므로 중개행위로 매매가 성립되지 아니한 이상 중개인이 중개의 노력을 하였더라도 그 노력의 비율에 상당한 보수를 청구할 수 없다(대법원 1956.4.12. 선고, 4289민상81 판결).</p></details></section>
+
+<section class="question-card" id="question-상법_090"><h4>워크북 · 상법_090</h4><p class="question-stem">다음 중에서 대리상에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>대리상의 본인은 반드시 특정된 상인일 필요는 없다.</li><li>대리상 계약은 1회의 행위를 목적으로 하는 단발성 계약이다.</li><li>대리상이 수행하는 거래의 대리 또는 중개의 인수는 본인과 달리 기본적 상행위가 아니다.</li><li>대리상은 계약의 종류 후에도 계약과 관련하여 알게 된 본인의 영업상 비밀을 준수하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 대리상의 본인은 특정된 상인이어야 한다.</li><li><strong>비선택</strong> · 틀림. 계속적 계약관계다. 아직 첫 거래라는 사정은 별개다.</li><li><strong>비선택</strong> · 틀림. 대리·중개의 인수를 영업으로 하므로 그 인수는 기본적 상행위다. 개별 수행행위와 층위를 나눈다.</li><li><strong>선택</strong> · 정답. 원문의 종류는 문맥상 종료의 오기다.92조의3은 종료 후에도 비밀준수를 요구한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대리상의 본인은 반드시 특정된 상인이어야 한다. ② 대리상 계약은 계속적 계약관계이어야 한다. ③ 대리상은 기본적 상행위인 거래의 대리 또는 중개의 인수를 영업으로 하는 당연상인이다.</p></details></section>
+
+<section class="question-card" id="question-상법_091"><h4>워크북 · 상법_091</h4><p class="question-stem">다음 중에서 중개인의 의무에 해당하지 않는 것은?</p><ol class="choices"><li>견품보관의무</li><li>지정가액준수의무</li><li>성명·상호 묵비의무</li><li>결약서 작성·교부의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 중개인의 법정 의무다.95조.</li><li><strong>선택</strong> · 정답. 교재 분류상 위탁매매인의 의무다.</li><li><strong>비선택</strong> · 중개인의 의무다. 요청이 있으면 상대방 교부서류에서 이름을 숨기되 원본 일기장에는 기록한다.</li><li><strong>비선택</strong> · 중개인의 의무다. 계약 성립의 증거를 남기는96조 절차다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 지정가액준수의무는 위탁매매인의 의무이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 11' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 11|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

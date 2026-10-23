@@ -1,0 +1,1171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주식회사법 제2장 주식회사의 개념 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMPANY LAW · CHAPTER 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">주식회사법</span>
+    <span class="brand-sub">제2장 주식회사의 개념 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./주식회사법_개념.html">주식회사법 개념 목록</a><a href="../index.html?subject=주식회사법">문제 풀기</a></nav><h1>이 장의 큰 그림</h1>
+<p>친구100명이 조금씩 돈을 내면 큰 공장을 세울 수 있다. 그런데 사업이 실패할 때 친구들 집까지 모두 책임져야 한다면 누가 쉽게 투자할까? 반대로 투자자는 돈을 조금만 내고 회사 재산을 마음대로 가져가도 된다면 회사에 돈을 빌려줄 사람은 누가 있을까? <strong>주식회사는 투자는 쉽게 하되, 회사 안에 들어온 재산을 지키는 장치를 함께 둔 제도</strong>다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나?</td>
+<td>자본금·주식·주주 유한책임이라는 세 요소와 그 장단점·규제</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>여러 사람의 작은 돈을 큰 사업자금으로 모으고 투자 위험을 나누려고</td>
+</tr>
+<tr>
+<td>전체 위치는?</td>
+<td>1장의 회사 일반론에서 주식회사를 골라 내부 구조를 보는 입구</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>회사와 주주가 별개라는1장 → 돈·지위·책임의 설계 →3장의 실제 설립 절차</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>납입·현물출자·신주발행·배당·감자 규제가 왜 필요한지 이해하기 어렵다.</td>
+</tr>
+</tbody></table>
+<p>교재31–42쪽·제공14문항56개 보기를 연결한다. 중요도는 학습 우선순위이며 실제 출제 빈도·오답률 통계가 아니다. 교재 판례2개를 모두 다루고, 계산 사례는 설명용으로 표시했다. 색은 노랑=결론, 초록=이유, 분홍=함정, 파랑=단원 연결이다.</p>
+<h1>1. 자본금 · 회사 재산을 재는 법적 기준선</h1>
+<h2 id="company-02-01" data-concept-id="company-02-01">1-1. 세 본질적 요소와 자본금의 세 역할 ★★★★★</h2>
+<p><strong>교재31–32쪽 · 문단의 이유:</strong> 주식회사가 어떤 설계인지 먼저 알아야 뒤의 숫자와 절차를 이해할 수 있다.</p>
+<p>상법에는 주식회사를 한 문장으로 정의한 조문은 없다. 교재는 <strong>자본금·주식·주주의 유한책임</strong>을 본질적 요소로 든다. 자본금은 법정 기준액, 주식은 투자와 구성원 지위의 단위, 유한책임은 주주의 위험을 제한하는 원칙이다. ‘자산’은 회사에 중요하지만 이 세 가지를 묻는 문제의 답은 아니다.</p>
+<p>자본금은 회사에게 사업의 형성 기반이자 재산을 함부로 주주에게 돌려주지 못하게 하는 기준이다. 주주에게는 출자와 책임 구조를 이해하는 단서가 된다. 채권자에게는 등기 등을 통해 회사의 규모·신용을 판단하는 정보 중 하나다. 그러나 <strong>등기 자본금만 보고 현재 현금·순자산·지급능력이 보장된다고 믿으면 안 된다.</strong> 손익 때문에 실제 재산은 변한다.</p>
+<p>또한 자본금 액수와 개별 주주의 인수가액을 같다고 단순화하지 않는다. 액면보다 높은 금액으로 발행하거나 무액면주식을 발행하면 실제 납입액과 자본금으로 계상되는 금액이 다를 수 있다. 주주의 출자의무는 실제 인수 약정의 가액을 기준으로 본다.</p>
+<p><strong>시험:</strong> 자본금·주식·유한책임 세 단어. <strong>키워드:</strong> 기준액·공시·인수가액. <strong>한 줄:</strong> 자본금은 회사 통장 잔액이 아니라 법이 정한 재산 관리의 기준선이다.</p>
+<h2 id="company-02-02" data-concept-id="company-02-02">1-2. 자본금·순재산·차입금·수권주식수는 다르다 ★★★★★</h2>
+<p><strong>교재32–33쪽 · 문단의 이유:</strong> 비슷하게 ‘회사 돈’으로 보이는 숫자들이 다른 법적 역할을 한다.</p>
+<p>설명용 사례: 회사가 액면1천원 주식1만주를1천원에 발행하여1천만원을 받았다. 시작할 때 자본금과 순재산이1천만원으로 같을 수 있다. 이후 은행에서500만원을 빌리면 현금·자산은 늘지만 부채도500만원 늘어 <strong>대출 자체로 자본금이나 순재산이500만원 증가하지 않는다.</strong> 장사해서 순이익300만원을 남기면 순재산은 증가하지만 별도 자본금 변경이 없는 한 자본금은 그대로다. 반대로 손실을 보면 순재산은 줄어도 자본금이 자동으로 줄지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>말</th>
+<th>무엇을 뜻하나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자산</td>
+<td>현금·건물·채권 등 회사가 가진 경제적 자원</td>
+</tr>
+<tr>
+<td>부채</td>
+<td>회사가 갚아야 할 돈 등 의무</td>
+</tr>
+<tr>
+<td>순재산·순자산</td>
+<td>자산에서 부채를 뺀 실제 재산상태의 기준</td>
+</tr>
+<tr>
+<td>자본금</td>
+<td>법정 계산과 절차로 정해지는 회사법상 금액</td>
+</tr>
+<tr>
+<td>준비금</td>
+<td>법정 목적에 따라 적립한 자본준비금·이익준비금 등. 그 자체는 자본금과 다름</td>
+</tr>
+<tr>
+<td>사채·차입금</td>
+<td>회사가 빌린 자금. 회사가 발행한 사채는 채무이지 주식 출자가 아님</td>
+</tr>
+<tr>
+<td>발행할 주식의 총수</td>
+<td>정관상 주식 발행 한도. 아직 발행하지 않은 부분은 납입된 자본금이 아님</td>
+</tr>
+</tbody></table>
+<p>교재가 ‘재산’을 순재산액의 의미로 쓰는 대목은 위 표처럼 구별한다. <strong>수권자본</strong>이라는 전통적 용어도 현재 정관의 <strong>발행할 주식 총수</strong>를 중심으로 이해한다. 무액면주식까지 있는 제도에서 이를 언제나 고정된 원화 금액으로만 표현할 수는 없다.</p>
+<p><strong>65다880,1966.1.18. 판례 이야기:</strong> 회사에 돈을 제공한 사람이 그것을 주식회사에 대한 출자라고 주장했다. 법원은 주식 인수 등 주식 출자로 연결되는 사실이 확인되지 않은 상황을 보았다. ‘주식에 의한 출자’ → 주주 지위를 취득하는 구조와 연결되어야 한다. ‘그 밖의 직접 출자 불가’ → 단지 돈을 건넸다고 당연히 주주나 자본금이 되는 것은 아니다. 다만 <strong>종이 주권이 없으면 언제나 주주가 아니라는 판례는 아니다.</strong> 주식 인수·발행과 주권 발행을 구별한다. 대여·증여·출자의 실제 법률관계를 따져야 한다.</p>
+<p><strong>시험:</strong> 현금 증가=자본금 증가×·차입금=자본금×·주권 없으면 항상 주주 아님×. <strong>키워드:</strong> 자산-부채·법정 금액·납입 원인. <strong>한 줄:</strong> 회사에 돈이 들어왔다는 사실만으로 자본금이 늘거나 주주가 되지는 않는다.</p>
+<h2 id="company-02-03" data-concept-id="company-02-03">1-3. 총액인수와 수권자본 · 한 번에 다 모을까, 나눠 모을까 ★★★★☆</h2>
+<p><strong>교재33–34쪽 · 문단의 이유:</strong> 미래의 투자 계획과 설립 시 실제로 발행하는 주식을 나누어 자금 조달을 유연하게 한다.</p>
+<p><strong>총액인수제도·확정자본주의</strong>는 정관에 자본금을 정하고 그 전체에 해당하는 주식 인수가 설립 때 확정되어야 하는 방식이다. <strong>수권자본제도</strong>는 정관에 발행 가능한 주식 총수를 두고, 처음에는 그 일부를 발행하여 회사를 세운 뒤 필요할 때 남은 한도에서 추가로 발행할 수 있는 방식이다. 교재의 대륙법계/영미법계 비교는 전형적인 역사적 설명이며 각국 현재법이 언제나 둘 중 하나의 순수형이라는 뜻은 아니다.</p>
+<p>한국 상법은 정관에 <strong>발행할 주식 총수</strong>와 <strong>설립 시 발행하는 주식 총수</strong>를 기재하게 한다. 미발행 부분은 법령·정관에 따라 원칙적으로 이사회가 발행 사항을 정할 수 있다. 이 점에서 수권자본제도를 취한다. 그러나 <strong>설립 때 실제 발행하기로 한 주식</strong>의 출자는 전부 이행해야 한다. 이 점에서 총액인수·확정의 요소를 결합한다.</p>
+<p>설명용: 정관 한도10만주, 설립 시1만주라면1만주에 대한 인수·납입을 마쳐 설립하고 나머지9만주는 장래 발행 여지다. 처음부터10만주 대금 전부를 납입해야 하는 것도 아니고, 정해 둔1만주 중 일부 납입만 하고 넘어가도 되는 것도 아니다.</p>
+<p><mark class="pink">‘이사회 결의로 발행’은 결의만 하면 모든 절차가 끝난다는 뜻이 아니다.</mark> 신주인수권, 발행가액, 통지·공고, 납입, 주주총회가 결정할 예외 등도 지켜야 한다. <strong>시험:</strong> 발행 한도와 설립 발행분 구별. <strong>키워드:</strong> 한도·일부 발행·그 발행분은 전액. <strong>한 줄:</strong> 미래에 발행할 공간은 남겨 두되 지금 발행한 몫의 돈은 제대로 받는다.</p>
+<h2 id="company-02-04" data-concept-id="company-02-04">1-4. 액면·무액면주식의 자본금 계산 ★★★★★</h2>
+<p><strong>교재34·36쪽 · 문단의 이유:</strong> 주식 수만 알아서는 항상 자본금을 계산할 수 없다.</p>
+<p>액면주식의 자본금은 법이 달리 정한 경우 외에는 <strong>발행주식의 액면총액</strong>이다(451조1항). 액면1천원1만주를1주당3천원에 발행하면 납입 총액은3천만원이지만 원칙적 자본금은1천만원이다. 액면초과액은 자본준비금 문제로 연결된다. 액면가, 발행가, 주식시장에서의 거래가격은 서로 다르다.</p>
+<p>무액면주식은 액면가가 없다. 발행가액의 <strong>2분의1 이상</strong> 중 이사회 등 법정 결정기관이 자본금으로 계상하기로 한 총액이 자본금이다. 자본금으로 넣지 않은 나머지는 <strong>자본준비금</strong>으로 계상한다(451조2항). 예를 들어 총1억원을 납입받고6천만원을 자본금으로 정하면 나머지4천만원은 자본준비금이다. ‘언제나 정확히 절반’이나 ‘원하는 만큼1원만’은 모두 틀리다.</p>
+<p>액면주식을 무액면주식으로 또는 그 반대로 전환해도 <strong>전환 자체로 자본금을 바꿀 수 없다</strong>(451조3항). 주식 표시 방식을 바꾸는 일로 채권자 보호 기준액을 슬쩍 변경하지 못하게 한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1028615863">451조</a></p>
+<p>상법의 일반 주식회사 최저자본금5천만원 규정은2009년 폐지되었다. 그렇다고 금융업 등 특별법의 자본 요건까지 모두 없어졌거나 액면1주 최소금액도 없어졌다는 뜻은 아니다. <strong>시험:</strong> 액면총액·무액면 절반 이상·잔액 준비금·전환 불변. <strong>키워드:</strong> 계산 기준과 표시 방식. <strong>한 줄:</strong> 실제 납입한 돈 중 어떤 몫을 자본금으로 기록하는지는 주식 형태에 따라 다르다.</p>
+<h2 id="company-02-05" data-concept-id="company-02-05">1-5. 자본금3원칙 · 확정·유지·불변 ★★★★★</h2>
+<p><strong>교재34–35쪽 · 문단의 이유:</strong> 주주에게 회사 빚을 직접 청구하기 어렵다면 회사 재산을 믿고 거래할 장치가 필요하다.</p>
+<table>
+<thead>
+<tr>
+<th>원칙</th>
+<th>막으려는 문제</th>
+<th>기억 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자본확정</td>
+<td>출자 규모와 인수 주식이 흐릿한 채 설립</td>
+<td>얼마를 발행하고 누가 맡을지 정하자.</td>
+</tr>
+<tr>
+<td>자본유지·충실</td>
+<td>출자는 종이에만 적고 실제 재산은 없거나 주주에게 부당 유출</td>
+<td>실제로 받고 함부로 빼지 말자.</td>
+</tr>
+<tr>
+<td>자본불변·감소 제한</td>
+<td>보호 기준액을 마음대로 낮춤</td>
+<td>줄이려면 법정 절차를 지키자.</td>
+</tr>
+</tbody></table>
+<p><strong>확정:</strong> 총액인수제도의 전형에서 정관상 전체 자본을 확정한다. 우리법은 수권 한도 전체를 설립 때 다 인수시키지는 않지만, 설립 시 발행 주식은 확정한다. 신주발행에도 실제 발행 규모·인수·납입은 정해야 하므로, 교재의 ‘설립 후 자본확정 원칙 불인정’을 <strong>증자 때 수량도 인수자도 아무렇게나 해도 됨</strong>으로 읽으면 안 된다. 전통적인 원칙이 적용되는 범위를 설명한 것이다.</p>
+<p><strong>유지·충실:</strong> 현금 전액 납입·현물출자 전부 이행, 변태설립사항 검사, 발기인의 인수·납입담보책임, 신주발행 시 이사의 인수담보책임, 명의 인수인의 납입책임, 납입의무 임의 면제 금지, 할인발행 제한 등이 실제 출자를 확보한다. 자기주식 취득·질취 제한, 법정준비금, 배당가능이익 제한은 회사 재산이 주주에게 부당하게 돌아가는 것을 막는다. 교재의 이연자산 상각 설명은 비용·재산을 부풀려 배당하지 못하게 하는 취지로 읽되 실제 회계처리는 적용 기준에 따른다.</p>
+<p><mark class="green">자본충실은 사업에서 절대로 손실을 내지 말라는 보증이 아니라, 출자를 실제로 받고 자본거래·분배로 재산을 부당하게 빼지 말라는 보호 원리다.</mark> 자본금1억원 회사가 영업손실을 보았다고 모든 주주에게 그 차액을 강제로 다시 내게 하는 원칙은 아니다.</p>
+<p><strong>불변:</strong> 절대로 자본금을 바꾸지 못한다는 뜻이 아니다. 우리법에서는 신주발행을 비교적 탄력적으로 허용하는 반면 감자에는 주주총회 결의와 채권자 보호 등 법정 절차를 요구하므로 특히 <strong>자본감소 제한</strong>의 뜻으로 설명한다. 감자 종류에 따른 절차 예외는9장에서 배운다. ‘자본감소의 원칙’은 마음대로 줄여도 된다는 인상을 주므로3원칙 명칭의 답으로는 고르지 않는다.</p>
+<p><strong>시험:</strong> 담보책임·실제 납입=유지, 인수 확정=확정, 감자 절차=불변. <strong>키워드:</strong> 채권자 보호·받기·남기기·절차. <strong>한 줄:</strong> 기준을 정하고, 재산을 채우고, 기준을 함부로 낮추지 않는다.</p>
+<h1>2. 주식과 주주의 책임</h1>
+<h2 id="company-02-06" data-concept-id="company-02-06">2-1. 주식은 숫자 단위이면서 구성원 지위다 ★★★★★</h2>
+<p><strong>교재36쪽 · 문단의 이유:</strong> 주식을 단순히 가격이 오르내리는 상품으로만 보지 않게 한다.</p>
+<p>주식에는 <strong>자본금의 구성 단위</strong>와 <strong>주주권·주주의 지위</strong>라는 두 의미가 있다. 회사에 출자한 몫을 표준화하여 작게 나누면 소액 투자자도 참여할 수 있다. 지위를 다른 사람에게 양도하면 회사 돈을 되찾아 나가지 않고도 투입한 자금을 회수할 길이 열린다.</p>
+<p>액면주식의1주 금액은 균일하고100원 이상이어야 한다. 종류주식의 배당·의결권 조건이 다를 수 있다는 것과 액면금액의 균일성은 별개다. 무액면주식을 정관에 따라 발행할 때에는 <strong>주식 전부를 무액면으로</strong> 하며 액면주식을 함께 발행하지 못한다(329조). 무액면은 값이 없는 주식이 아니라 <strong>법정 액면가 표시가 없는 주식</strong>이다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1028615453">329조</a></p>
+<p>주주권에는 배당·잔여재산 분배처럼 자기 경제적 이익을 얻는 <strong>자익권</strong>, 의결권·감시권처럼 회사 운영에 참여하는 <strong>공익권</strong>이 있다. 여기서 공익은 국가·사회 봉사라는 뜻이 아니라 회사의 공동 운영을 향한다는 뜻이다. 같은 조건의 주식은 주식 수에 따라 권리 비율을 정하는 것이 기본이지만 종류주식·법정 의결권 제한 등은 별도다.</p>
+<p>교재의 ‘주권으로 증권화되어 주식시장에서 양도’는 전형적 설명이다. 모든 주식이 상장되어 있거나 종이 주권이 실제로 발행되어 있어야만 존재하는 것은 아니다. 전자등록·주권 미발행 등 방식도 구별한다. 주식은 권리, 주권은 이를 나타내는 증서다.</p>
+<p><strong>시험:</strong> 자익/공익·주식/주권·액면/발행가·혼합 발행 금지. <strong>키워드:</strong> 단위와 지위. <strong>한 줄:</strong> 주식은 회사에 참여하는 권리를 작게 나누어 거래하기 쉽게 만든 단위다.</p>
+<h2 id="company-02-07" data-concept-id="company-02-07">2-2. 주식 수가 줄어도 자본금이 그대로일 수 있다 ★★★★☆</h2>
+<p><strong>교재36–37쪽 · 문단의 이유:</strong> 액면총액이라는 기본 공식에도 법정 예외가 있다.</p>
+<p>액면주식에서는 원칙적으로 ‘주식 수×액면가=자본금’이다. 그러나 이익을 재원으로 하는 상환주식의 소각이나, 자본금 감소 절차에 따르지 않는 법정 자기주식 소각 등에서는 주식 수와 액면총액이 줄어도 자본금이 줄지 않을 수 있다. 법이 따로 인정한 불일치다.</p>
+<p>설명용: 자본금1억원, 액면1천원10만주에서 적법하게 자본금 감소 없이1만주를 소각했다면 남은 주식의 액면총액은9천만원이지만 자본금은1억원으로 남을 수 있다. 따라서 법정 예외가 있다는 조건을 무시한 단순 곱셈은 틀린다.</p>
+<p>자기주식의 취득·보유·처분·소각은 서로 다른 단계다. 최근 개정에 따른 자기주식 소각의무·예외와 경과조치도 있으므로, 교재의 ‘이익소각’이라는 표현만으로 모든 자기주식을 무기한 자유롭게 보유할 수 있다고 이해하지 않는다. 해당 최신 규정은4장의 자기주식 부분에서 구체적으로 대조한다.</p>
+<p><mark class="blue">주식 수의 변화는4장 주식, 신주 발행은8장, 자본금 감소는9장, 배당 재원은10장으로 연결된다.</mark> <strong>시험:</strong> 소각=언제나 감자×. <strong>키워드:</strong> 법정 예외·수량과 기준액 분리. <strong>한 줄:</strong> 주식이라는 단위를 없애는 일과 자본금 기준을 낮추는 일은 항상 같지 않다.</p>
+<h2 id="company-02-08" data-concept-id="company-02-08">2-3. 주주의 간접·유한책임331조 ★★★★★</h2>
+<p><strong>교재37–38쪽 · 문단의 이유:</strong> 소액 투자자가 예측 가능한 부담으로 참여하게 하는 핵심 보호 장치다.</p>
+<p>주주는 회사에 대하여 인수한 주식의 인수가액을 한도로 출자의무를 지며, <strong>주주라는 지위만으로 회사 채권자에게 직접 회사 빚을 갚을 의무를 지지 않는다.</strong> 이를 간접·유한책임이라고 한다. 투자한 주식 가치가0원이 될 위험까지 없애는 제도는 아니다.</p>
+<p>설명용: 민지가 주식 대금100만원을 모두 냈고, 회사가 거래처에5억원을 빚졌다. 민지가 개인 보증 등 별도 의무를 지지 않았다면 거래처는 ‘주주니까5억원을 나눠 내라’고 할 수 없다. 민지가 개인 재산3억원을 갖고 있다는 이유로 그3억원 한도에서 책임지는 것도 아니다. <strong>‘현재 가진 재산의 한도’와 ‘주식 인수가액의 한도’는 다르다.</strong></p>
+<p>합자회사의 유한책임사원은 회사 채권자에게 출자 미이행액 범위에서 직접 책임질 수 있다. ‘유한’이라는 단어는 같아도 주주의 간접책임과 구조가 다르다. 주식회사의 정관이나 다수결 결의로 반대 주주의 부담을 임의로 늘릴 수는 없다.</p>
+<p><strong>89다카890,1989.9.12. 판례 이야기:</strong> 주주들이 회사 사태를 수습하려고 회사 채무 등을 스스로 분담하기로 한 상황에서, 그 약정이 유한책임 원칙 때문에 금지되는지가 문제됐다. 법원은 <strong>주주의 뜻에 반하여 새로운 부담을 강요하는 것</strong>과 <strong>주주가 개별적으로 동의하여 부담하는 것</strong>을 나누었다. 전자는 제한되지만 후자까지331조가 금지하지 않는다. ‘동의 아래 분담’ → 주주 지위의 자동책임이 아니라 별도로 받아들인 의무다. ‘유한책임’ → 자발적 보증·채무인수 약정을 무효로 만드는 만능 방패는 아니다.</p>
+<p><strong>시험:</strong> 개인 동의와 총회 다수결 구별·보유재산 한도×. <strong>키워드:</strong> 회사에 출자·채권자에게 직접 책임 없음·별도 약정. <strong>한 줄:</strong> 투자자로서의 위험은 제한되지만, 따로 약속한 빚까지 사라지지는 않는다.</p>
+<h2 id="company-02-09" data-concept-id="company-02-09">2-4. 유한책임을 이유로 책임을 피할 수 없는 경우 ★★★★☆</h2>
+<p><strong>교재37–38쪽 · 문단의 이유:</strong> 투자자 보호가 사기·부당한 업무집행까지 면책하는 제도가 아님을 밝힌다.</p>
+<p>첫째, 법인격이 형해화되거나 남용된 경우에는1장에서 본 법인격부인이 문제된다. 둘째, 주주가 자신의 영향력을 이용하여 이사에게 업무집행을 지시하는 등401조의2의 <strong>업무집행지시자 등</strong>에 해당하면 그 조문의 요건에 따라 이사 책임 규정을 적용받을 수 있다. 단지 주식을 많이 가졌다는 사실만으로 해당 책임이 자동 발생하지는 않는다. 구체적 지시·집행과 책임 요건을 확인한다.</p>
+<p>셋째, 국세기본법39조 등 특별법은 일정한 <strong>과점주주</strong>에게 제2차 납세의무를 부과한다. 일반적으로 회사 재산으로 세금을 충당하기 부족할 때, 납세의무 성립 시점의 특수관계·지분·지배력 등 법정 요건을 검토한다. 적용 제외 법인과 책임 한도도 있으므로 ‘주주면 누구나 회사 세금 전액을 낸다’고 외우면 안 된다. 세부 세법 문제는 <strong>심화</strong>다. <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032553157">현행 국세기본법39조</a></p>
+<p>자신이 직접 저지른 불법행위나 별도로 체결한 보증·채무 부담 약정도 독립된 책임 근거다. 이들을 모두 주주라는 사실에서 생기는 자동책임으로 묶지 않는다. <strong>시험:</strong> 지위의 책임과 행위·약정·특별법 책임 분리. <strong>키워드:</strong> 부인·지시자·특별법·개별 동의. <strong>한 줄:</strong> 보통 투자했다는 이유만으로 빚을 지지는 않지만, 별도 책임 원인이 있으면 그에 맞게 책임진다.</p>
+<h1>3. 돈을 모으는 힘과 그 그림자</h1>
+<h2 id="company-02-10" data-concept-id="company-02-10">3-1. 자본집중·위험분산·소유와 경영의 분리 ★★★★☆</h2>
+<p><strong>교재38–39쪽 · 문단의 이유:</strong> 주식회사가 널리 쓰이는 경제적 이유를 세 요소와 연결한다.</p>
+<p>작은 단위 주식, 유한책임, 지위의 양도 가능성이 결합하면 많은 사람이 비교적 쉽게 투자할 수 있다. 회사는 작은 투자금을 모아 큰 사업자금을 만들고, 투자자는 여러 회사에 나누어 투자하여 위험을 분산할 수 있다. <strong>사업 위험이 사라지는 것은 아니고 여러 투자자·투자 대상에 나누어지는 것</strong>이다.</p>
+<p>주주가 많고 계속 바뀌면 모두가 매일 경영에 참여하기 어렵다. 투자한 주주와 실제 운영을 맡는 전문경영자가 분리되는 경향이 생긴다. 주주총회는 법정 중요사항을 결정하고, 이사회와 대표이사 등은 경영을 담당하는 구조로 이어진다. 교재의 CEO 권한 집중은 경제적 경향이지 CEO라는 명칭만 있으면 법정 기관 권한을 마음대로 가져갈 수 있다는 뜻은 아니다.</p>
+<p>다수 주주의 관심이 배당보다 주가 차익에 쏠릴 수 있다는 교재 설명도 일반적 경향의 한 예다. 모든 투자자의 동기를 단정하거나 주식회사는 언제나 대규모라고 보지 않는다.1인·가족회사도 주식회사일 수 있다.</p>
+<p><strong>시험:</strong> 규모가 커질수록 소유·경영 일치라는 보기×·위험 대주주 집중이라는 보기×. <strong>키워드:</strong> 작은 단위·집중·분산·전문경영. <strong>한 줄:</strong> 돈을 낼 사람과 사업을 운영할 사람을 나누어 더 큰 사업을 가능하게 한다.</p>
+<h2 id="company-02-11" data-concept-id="company-02-11">3-2. 지배권 집중·제도 남용·이해관계자 피해 ★★★☆☆</h2>
+<p><strong>교재39–40쪽 · 문단의 이유:</strong> 제도의 장점이 감시 부실과 만나면 어떤 문제가 생기는지 보여 준다.</p>
+<p>주식은 여러 사람에게 흩어졌는데 실질적 결정권은 소수 경영진·지배주주에게 집중될 수 있다. 각 소액주주가 “내가 감시해도 얻는 이익은 작다”고 생각하면 감시가 약해지고, 지배자가 회사 재산을 자기 이익에 이용하기 쉬워진다. <strong>자본집중</strong>은 사업자금이 모이는 장점이고, <strong>지배권 집중</strong>은 견제 없는 권력 집중의 문제다.</p>
+<p>법인격·유한책임의 남용은 회사와 개인을 부당하게 섞어 이익은 개인이 챙기고 손실은 회사·채권자에게 남기는 것이다. “기업은 망해도 기업주는 산다”는 비판은 이 위험을 드러낸다. 다만 적법한 유한책임에 따라 회사 손실이 곧 개인 파산으로 이어지지 않는 모든 경우가 불법 남용인 것은 아니다.</p>
+<p>교재의 이해관계자 사례를 시간 순서로 보자. 경영진의 잘못된 의사결정 → 회사 자금 악화 → 도산 → 노동자는 임금, 채권은행은 원리금, 소비자는 사후 서비스, 소액투자자는 투자금 회수에 피해를 입는다. 각자의 권리와 보호법은 다르지만 회사 운영이 주주 몇 사람만의 문제가 아니라는 점은 같다. 근로자·소비자 등이 항상 주주와 같은 의결권을 갖는다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 유한책임 자체와 남용, 자본집중과 지배권 집중 구별. <strong>키워드:</strong> 감시·사익 추구·이해관계. <strong>한 줄:</strong> 투자금을 모으는 힘이 클수록 남의 돈과 생활을 해치지 못하게 하는 견제도 필요하다.</p>
+<h1>4. 주식회사 규제의 네 기둥</h1>
+<h2 id="company-02-12" data-concept-id="company-02-12">4-1. 강행규정·공시·법원·집단적 처리 ★★★★★</h2>
+<p><strong>교재40–42쪽 · 문단의 이유:</strong> 장점은 살리고 폐해는 줄이기 위해 어떤 종류의 규칙을 두는지 정리한다.</p>
+<p><strong>강행법규성:</strong> 다수의 주주·채권자가 얽힌 관계를 다수결이나 당사자 약속만으로 정하면 힘센 사람이 약한 사람의 권리를 없앨 수 있다. 그래서 주식회사법에는 법정 절차·권리 보호를 임의로 배제하지 못하는 규정이 많다. 자율성을 전혀 허용하지 않는다는 말은 아니다.</p>
+<p><strong>공시주의:</strong> 회사의 중요한 사항을 등기·공고·서류 비치·열람 등으로 알린다. 정관에는 공고 방법을 정하고 법정 사항을 공개한다. 다만 교재의 ‘장부를 자유롭게 열람’은 모든 사람이 모든 장부를 무조건 본다는 뜻이 아니다. 정관·주주명부·재무제표·회계장부는 청구 자격·지분 요건·이유 제시·거절 사유가 서로 다르다. 각 장에서 따로 본다.</p>
+<p><strong>법원의 관여:</strong> 검사인 선임, 일정 요건의 총회 소집 허가, 사채권자 집회, 이사의 직무집행정지·해임 소송 등에 법원이 관여하여 이해 충돌을 조정한다. 법원이 회사의 일상 영업을 모두 대신 결정하는 것은 아니다. 청구권자·요건·절차를 갖춰야 한다.</p>
+<p><strong>집단적·획일적 처리:</strong> 한 번의 설립·총회결의·신주발행·감자·합병을 사람마다 유효·무효로 다르게 취급하면 혼란이 생긴다. 법은 특별한 소와 제소기간·원고 자격·판결 효력 등을 정해 조직 관계를 통일적으로 처리한다. 구체적으로 어떤 소는 취소, 어떤 소는 무효·부존재이며 효력 범위도 다르므로 <strong>모든 하자는 같은 소송으로 해결</strong>한다고 외우지 않는다.</p>
+<p><mark class="yellow">강행·공시·법원·집단처리: 힘센 사람의 자의, 정보 부족, 이해 충돌, 들쭉날쭉한 조직관계를 각각 막는다.</mark> <strong>시험:</strong> 임의법규성이 주된 규제 특징이라는 보기×. <strong>키워드:</strong> 보호·정보·조정·통일. <strong>한 줄:</strong> 지켜야 할 선을 정하고, 알리고, 다툼을 조정하며, 조직 문제의 결론을 통일한다.</p>
+<h1>5. 교재 질문과 시험 연결</h1>
+<p><strong>생각해 봅시다1:</strong> 자본확정은 인수 규모, 유지는 실제 출자와 재산 보전, 불변은 특히 감자 절차를 뜻한다. 모두 채권자 보호와 연결한다.</p>
+<p><strong>질문2:</strong> 유한책임은 투자자가 예측 가능한 손실 범위에서 참여하고 주식을 쉽게 거래하도록 한다. 대신 채권자 보호 규칙·남용 방지·별도 책임이 필요하다. 위험 제한의 이유와 비용을 함께 말하면 좋은 답안이다.</p>
+<p><strong>질문3:</strong> 강행법규성·공시주의·법원의 관여·집단적 처리를 각각 어떤 문제를 해결하는지로 설명한다.</p>
+<p><strong>질문4:</strong> 국내 대기업 규제가 효과적인지의 평가는 구체적인 자료가 필요하다. 답안은 ‘정보 공개가 실제 의사결정에 유용한가, 소수주주가 권리를 행사할 비용은 어떤가, 위법행위의 적발·배상·제재가 작동하는가, 경영 자율성과 균형이 맞는가’라는 기준으로 구성한다. 제공 자료만으로 모든 대기업의 규제가 성공·실패했다고 단정하지 않는다.</p>
+<h2>제공 문제 TOP5</h2>
+<table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>문제</th>
+<th>출제 의도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>주식회사법_워크북_013</td>
+<td>세 요소·유한책임의 정확한 한도</td>
+</tr>
+<tr>
+<td>2</td>
+<td>주식회사법_워크북_011</td>
+<td>출자 원인·자본금/재산·제도 결합</td>
+</tr>
+<tr>
+<td>3</td>
+<td>주식회사법_워크북_012</td>
+<td>담보책임을 자본유지에 연결</td>
+</tr>
+<tr>
+<td>4</td>
+<td>주식회사법_워크북_015</td>
+<td>총액인수와 수권자본의 차이</td>
+</tr>
+<tr>
+<td>5</td>
+<td>주식회사법_워크북_019</td>
+<td>네 가지 규제의 방향</td>
+</tr>
+</tbody></table>
+<p>14문항에서 반복되는 핵심은3원칙·유한책임·경제적 장단점·규제4특성이다. 실제 오답률은 제공되지 않았다. <strong>주의 보기:</strong> ‘보유재산 한도’, ‘자본감소 원칙’, ‘규모가 클수록 소유·경영 일치’, ‘모든 장부 무조건 열람’. 형성007④의 ‘이해관계자 이익 보호’는 그 자체로 나쁜 것이 아니라, 교재가 열거한 <strong>경제적 장점의 분류</strong>와 규제의 목표를 구별해 답한다.</p>
+<h2>새로운 사례5개</h2>
+<p><strong>문제1.</strong> 회사의 자본금은2천만원이다. 은행에서1억원을 빌리고 영업손실500만원이 났다. 대출로 자본금이1억2천만원이 되고 손실로1억1천5백만원이 되는가?</p>
+<p><strong>해설:</strong> 아니다. 대출은 자산과 부채를 늘리고 손실은 순재산을 줄이지만, 별도 자본금 변경 절차 없이 자본금이 그만큼 움직이지 않는다. <strong>의도:</strong> 자산·부채·순재산·자본금 분리.</p>
+<p><strong>문제2.</strong> 액면500원 주식2만주를1주당2천원에 발행했다. 자본금4천만원인가? 다른 회사는 무액면주식 발행대금4천만원 중1천만원만 자본금으로 정했다.</p>
+<p><strong>해설:</strong> 전자는 원칙적 자본금1천만원, 납입액4천만원이다. 후자는 적어도2천만원을 자본금으로 계상해야 하므로1천만원은451조의 기준에 맞지 않는다. <strong>의도:</strong> 액면과 발행가, 무액면 최소 비율.</p>
+<p><strong>문제3.</strong> 발행 한도8만주, 설립 발행분2만주인 회사가 ‘수권자본제니까1만주만 납입해도 된다’고 한다. 회사 성립 후 남은 한도는 절차 없이 판매할 수 있다고도 한다.</p>
+<p><strong>해설:</strong> 설립 발행분2만주의 인수·출자는 완결해야 한다. 미발행분은 장래 발행 여지일 뿐이며, 실제 신주발행 때에는 결정·신주인수권·납입 등 법정 절차를 따른다. <strong>의도:</strong> 유연성과 무절차의 구별.</p>
+<p><strong>문제4.</strong> 총회가75% 찬성으로 모든 주주에게 회사 빚을 추가 분담시키기로 했다. 반대한 주주와, 별도로 보증계약을 맺은 주주가 각각 유한책임을 주장한다.</p>
+<p><strong>해설:</strong> 다수결로 반대 주주의 출자 한도를 임의로 늘릴 수 없다. 그러나 개별적으로 유효한 보증 의무를 받아들인 주주는 그 약정 책임을 별도로 진다. <strong>의도:</strong> 집단 결정과 개별 동의 구별.</p>
+<p><strong>문제5.</strong> 상장되지 않은 작은 주식회사의 주주가 ‘종이 주권이 없으니 주식도 없고, 자본금만큼 현금을 금고에 보관해야 하므로 공장 설비를 사면 위법’이라고 한다.</p>
+<p><strong>해설:</strong> 주식과 종이 주권은 다르고 비상장 주식도 존재한다. 자본충실은 현금을 영원히 묶는 제도가 아니므로 적법한 사업 목적의 설비 취득까지 금지하지 않는다. 부당 유출·출자 이행·분배 제한을 따져야 한다. <strong>의도:</strong> 단위와 증서, 자본 보호와 영업 활용.</p>
+<h1>용어 사전</h1>
+<h3>자본금 資本金</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 本(근본 본), 金(쇠 금): 돈. <strong>③ 합친 뜻:</strong> 사업의 근본이 되는 법정 금액. <strong>④ 이름의 이유:</strong> 회사 재산 관리와 채권자 보호의 기준으로 삼아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식 발행 등의 법정 규칙으로 정해지는 회사법상 기준액. <strong>⑥ 쉬운 말:</strong> 회사 통장 잔액과 다른 법적 기준선. <strong>⑦ 사례:</strong> 액면1천원1만주면 원칙1천만원.</p>
+<p><strong>⑧ 시험:</strong> 순재산·발행가액과 구별. <strong>⑨ 비교·기억법:</strong> 회계상 넓은 자기자본 전체와도 같지 않음.</p>
+<h3>자산·부채·순재산 資産·負債·純財産</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 産(낳을 산), 負(질 부), 債(빚 채), 純(순수할 순), 財(재물 재). <strong>③ 합친 뜻:</strong> 가진 자원·진 빚·빚을 뺀 재산. <strong>④ 이름의 이유:</strong> 현재 지급능력과 재산상태를 보려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현재 자원과 의무 및 그 차액. <strong>⑥ 쉬운 말:</strong> 가진 것에서 갚을 것을 뺀 남은 몫. <strong>⑦ 사례:</strong> 자산1억원-부채4천만원=순재산6천만원.</p>
+<p><strong>⑧ 시험:</strong> 대출은 자산·부채 함께 증가. <strong>⑨ 비교·기억법:</strong> 자본금은 손익으로 자동 변하지 않음.</p>
+<h3>출자·인수·납입 出資·引受·納入</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 出(날 출), 資(재물 자), 引(끌 인), 受(받을 수), 納(들일 납), 入(들 입). <strong>③ 합친 뜻:</strong> 재산을 냄·맡음·실제로 넣음. <strong>④ 이름의 이유:</strong> 약속과 실제 이행 단계를 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식 참여를 위한 재산 제공, 주식을 맡는 행위, 대금 이행. <strong>⑥ 쉬운 말:</strong> 주식을 사기로 하고 그 값을 회사에 낸다. <strong>⑦ 사례:</strong> 설립 발행분의 인수와 전액 납입.</p>
+<p><strong>⑧ 시험:</strong> 단순 대여와 출자 구별. <strong>⑨ 비교·기억법:</strong> 인수 약정만으로 납입이 끝나지 않음.</p>
+<h3>수권자본 授權資本</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 授(줄 수), 權(권세 권), 資(재물 자), 本(근본 본). <strong>③ 합친 뜻:</strong> 발행 권한을 부여한 자본 범위. <strong>④ 이름의 이유:</strong> 필요할 때 탄력적으로 돈을 모으게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정관상 발행할 주식 총수의 한도 안에서 추가 발행하는 제도. <strong>⑥ 쉬운 말:</strong> 미리 발행 가능한 자리수를 정해 둔다. <strong>⑦ 사례:</strong> 한도10만주 중 먼저1만주 발행.</p>
+<p><strong>⑧ 시험:</strong> 미발행분은 실제 자본금 아님. <strong>⑨ 비교·기억법:</strong> 무액면주식도 있으므로 언제나 고정 원화액으로만 읽지 않음.</p>
+<h3>총액인수·확정자본 總額引受·確定資本</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 總(거느릴 총), 額(이마 액): 금액, 引(끌 인), 受(받을 수), 確(굳을 확), 定(정할 정). <strong>③ 합친 뜻:</strong> 전체 금액 인수·규모를 확정한 자본. <strong>④ 이름의 이유:</strong> 설립 자금 규모를 처음부터 완결하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 설립 때 정관상 자본 전체의 주식 인수가 확정되어야 하는 전형. <strong>⑥ 쉬운 말:</strong> 처음 계획한 전체를 맡을 사람이 정해져야 한다. <strong>⑦ 사례:</strong> 총액인수와 수권제 비교.</p>
+<p><strong>⑧ 시험:</strong> 우리법 설립 발행분 전액 납입과 연결. <strong>⑨ 비교·기억법:</strong> 수권 한도 전부를 납입해야 한다는 뜻으로 혼동 금지.</p>
+<h3>액면·무액면 額面·無額面</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 額(이마 액), 面(낯 면), 無(없을 무). <strong>③ 합친 뜻:</strong> 표시한 기본 금액·그 표시가 없음. <strong>④ 이름의 이유:</strong> 자본금 구성 방식이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식에 법정 액면금액이 있는지의 구별. <strong>⑥ 쉬운 말:</strong> 표준 금액이 적힌 주식과 적히지 않은 주식. <strong>⑦ 사례:</strong> 액면500원 주식을2천원에 발행.</p>
+<p><strong>⑧ 시험:</strong> 액면 균일·100원 이상·혼합 발행 불가. <strong>⑨ 비교·기억법:</strong> 무액면은 가치나 발행가격이 없다는 뜻 아님.</p>
+<h3>발행가액 發行價額</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발), 行(다닐 행), 價(값 가), 額(이마 액). <strong>③ 합친 뜻:</strong> 발행할 때 정한 가격. <strong>④ 이름의 이유:</strong> 실제 납입의 대가를 정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식을 새로 발행하여 인수받을 때의 대금. <strong>⑥ 쉬운 말:</strong> 회사가 새 주식을 내놓으며 받는 값. <strong>⑦ 사례:</strong> 액면1천원·발행가3천원.</p>
+<p><strong>⑧ 시험:</strong> 자본금과 실제 납입액 구별. <strong>⑨ 비교·기억법:</strong> 이미 발행된 주식의 시장 거래가격과도 다름.</p>
+<h3>준비금 準備金</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 準(준할 준), 備(갖출 비), 金(쇠 금). <strong>③ 합친 뜻:</strong> 대비하여 갖춘 금액. <strong>④ 이름의 이유:</strong> 재산 유출을 제한하고 재무 기반을 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자본준비금·이익준비금 등 법정 목적의 적립 금액. <strong>⑥ 쉬운 말:</strong> 법이 따로 적립해 두게 한 몫. <strong>⑦ 사례:</strong> 무액면 발행대금 중 자본금 아닌 부분.</p>
+<p><strong>⑧ 시험:</strong> 자본금 자체와 구별. <strong>⑨ 비교·기억법:</strong> 별도 현금 금고에 항상 같은 돈이 놓여 있다는 뜻 아님.</p>
+<h3>자본확정·유지·불변 資本確定·維持·不變</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 本(근본 본), 確(굳을 확), 定(정할 정), 維(맬 유), 持(가질 지), 不(아닐 불), 變(변할 변). <strong>③ 합친 뜻:</strong> 규모 정하기·실질 지키기·함부로 바꾸지 않기. <strong>④ 이름의 이유:</strong> 주주에게 직접 청구 못 하는 채권자를 보호해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인수 규모·재산 충실·자본금 변경 제한의 원리. <strong>⑥ 쉬운 말:</strong> 정하고 채우고 함부로 줄이지 않는다. <strong>⑦ 사례:</strong> 발기인 담보책임은 유지.</p>
+<p><strong>⑧ 시험:</strong> 각 제도가 어느 원칙인지 연결. <strong>⑨ 비교·기억법:</strong> 불변은 영원히 변경 금지, 유지는 손실 금지 아님.</p>
+<h3>현물출자 現物出資</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현), 物(물건 물), 出(날 출), 資(재물 자). <strong>③ 합친 뜻:</strong> 돈 대신 실제 재산으로 출자. <strong>④ 이름의 이유:</strong> 필요한 설비·권리를 사업에 넣어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 금전 이외의 재산을 출자의 목적으로 제공하는 것. <strong>⑥ 쉬운 말:</strong> 현금 대신 기계·부동산 등을 낸다. <strong>⑦ 사례:</strong> 기계 가치 과대평가 위험.</p>
+<p><strong>⑧ 시험:</strong> 검사·전부 이행은 자본충실. <strong>⑨ 비교·기억법:</strong> 노무를 언제나 주식회사 출자로 낼 수 있다는 뜻 아님.</p>
+<h3>담보책임 擔保責任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 擔(멜 담), 保(지킬 보), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 부족을 메우도록 보장하는 책임. <strong>④ 이름의 이유:</strong> 겉으로만 자본이 있는 상태를 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인수·납입 공백 등 법정 요건에 따라 부담하는 자본충실 책임. <strong>⑥ 쉬운 말:</strong> 비어 있는 출자 자리를 책임자가 메운다. <strong>⑦ 사례:</strong> 발기인 인수·납입담보.</p>
+<p><strong>⑧ 시험:</strong> 유지 원칙과 연결. <strong>⑨ 비교·기억법:</strong> 모든 회사 영업손실을 발기인이 보전한다는 뜻 아님.</p>
+<h3>주식·주권·주주권 株式·株券·株主權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주), 式(법 식), 券(문서 권), 主(주인 주), 權(권세 권). <strong>③ 합친 뜻:</strong> 참여 단위·그 증서·구성원의 권리. <strong>④ 이름의 이유:</strong> 권리와 표시 수단을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식이라는 지위와 이를 나타내는 증서 및 권리 묶음. <strong>⑥ 쉬운 말:</strong> 회사의 참여분과 그것을 적은 종이는 다르다. <strong>⑦ 사례:</strong> 주권 미발행·전자등록.</p>
+<p><strong>⑧ 시험:</strong> 주권 없다고 언제나 주식 없음×. <strong>⑨ 비교·기억법:</strong> 회사 재산의 직접 소유권과도 다름.</p>
+<h3>자익권·공익권 自益權·共益權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 益(더할 익), 共(함께 공), 權(권세 권). <strong>③ 합친 뜻:</strong> 자기 이익의 권리·공동 운영의 권리. <strong>④ 이름의 이유:</strong> 주주의 지위가 돈 받기와 운영 관여를 함께 포함해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 배당 등 경제적 권리와 의결·감시 등 운영 관련 권리. <strong>⑥ 쉬운 말:</strong> 배당을 받는 권리와 회사를 살피는 권리. <strong>⑦ 사례:</strong> 배당청구와 의결권.</p>
+<p><strong>⑧ 시험:</strong> 공익은 국가 공공사업이라는 뜻 아님. <strong>⑨ 비교·기억법:</strong> 종류주식·법정 제한은 별도 확인.</p>
+<h3>소각·감자 消却·減資</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 却(물리칠 각), 減(덜 감), 資(재물 자). <strong>③ 합친 뜻:</strong> 주식 소멸·자본금 감소. <strong>④ 이름의 이유:</strong> 수량과 기준액의 변화를 따로 나타내서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식을 없애는 것과 법정 자본금 기준액을 낮추는 것. <strong>⑥ 쉬운 말:</strong> 주식을 없애도 자본금이 그대로일 수 있다. <strong>⑦ 사례:</strong> 자본금 감소 없는 적법 소각.</p>
+<p><strong>⑧ 시험:</strong> 언제나 같은 효과×. <strong>⑨ 비교·기억법:</strong> 액면↔무액면 전환은 그 자체로 자본금 불변.</p>
+<h3>간접·유한책임 間接·有限責任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 間(사이 간), 接(이을 접), 有(있을 유), 限(한할 한), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 회사에 대한 제한된 부담. <strong>④ 이름의 이유:</strong> 소액 투자 위험을 예측 가능하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주의 인수가액 한도 출자의무와 회사 채권자에 대한 직접 책임 부재. <strong>⑥ 쉬운 말:</strong> 주식값은 내지만 주주라서 회사 빚을 바로 갚지는 않는다. <strong>⑦ 사례:</strong> 100만원 납입 주주와 회사5억원 채무.</p>
+<p><strong>⑧ 시험:</strong> 보유재산 한도라는 보기×. <strong>⑨ 비교·기억법:</strong> 개인 보증·자신의 가해행위는 별도 책임.</p>
+<h3>업무집행지시자 業務執行指示者</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 業(업 업), 務(힘쓸 무), 執(잡을 집), 行(다닐 행), 指(가리킬 지), 示(보일 시), 者(사람 자). <strong>③ 합친 뜻:</strong> 업무 실행을 지시하는 사람. <strong>④ 이름의 이유:</strong> 직함 없이 뒤에서 움직이며 책임을 피하지 못하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영향력을 이용한 지시 등401조의2 요건에 해당하는 자. <strong>⑥ 쉬운 말:</strong> 이사 이름은 아니어도 실제 업무를 지시한다. <strong>⑦ 사례:</strong> 지배주주의 구체적 집행 지시.</p>
+<p><strong>⑧ 시험:</strong> 지배주주라는 이유만으로 자동 책임×. <strong>⑨ 비교·기억법:</strong> 일반 주주 의결권 행사와 구별.</p>
+<h3>과점주주·제2차 납세의무 寡占株主·第二次納稅義務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 寡(적을 과), 占(차지할 점), 株(그루 주), 主(주인 주), 第(차례 제), 二(두 이), 次(버금 차), 納(들일 납), 稅(세금 세), 義(옳을 의), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 소수의 지배 주주·보충적 세금 의무. <strong>④ 이름의 이유:</strong> 법인 재산 부족 때 조세 징수를 확보해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특별법상 지분·지배력 등 요건을 갖춘 출자자에게 인정되는 보충 납세의무. <strong>⑥ 쉬운 말:</strong> 일정한 지배 주주가 회사 세금의 부족분을 법정 범위에서 낸다. <strong>⑦ 사례:</strong> 국세기본법39조.</p>
+<p><strong>⑧ 시험:</strong> 적용 대상·시점·한도. <strong>⑨ 비교·기억법:</strong> 주주 전원에게 체납 전액을 자동 부과하는 제도 아님.</p>
+<h3>공시·획일적 처리 公示·劃一的處理</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 示(보일 시), 劃(그을 획), 一(한 일), 的(과녁 적), 處(곳 처), 理(다스릴 리). <strong>③ 합친 뜻:</strong> 널리 알림·통일적으로 다룸. <strong>④ 이름의 이유:</strong> 정보 부족과 결론 충돌을 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사 정보 공개와 단체 법률관계의 일관된 처리. <strong>⑥ 쉬운 말:</strong> 알 수 있게 하고 조직 문제의 결론을 통일한다. <strong>⑦ 사례:</strong> 등기·공고·설립무효 소송.</p>
+<p><strong>⑧ 시험:</strong> 열람 자격·소 종류는 각각 확인. <strong>⑨ 비교·기억법:</strong> 모든 서류 무조건 공개·모든 소송 동일이라는 뜻 아님.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<div class="memory-sheet">
+
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 자본금/재산 분리 / 자본3원칙 / 주주의 간접·유한책임.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기억할 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3요소</td>
+<td>자본금·주식·주주 유한책임. 자산은 이 목록의 답 아님</td>
+</tr>
+<tr>
+<td>자본금 vs 순재산</td>
+<td>법정 기준액 vs 실제 자산-부채. 대출·손익이 자본금 자동 변경 아님</td>
+</tr>
+<tr>
+<td>수권제</td>
+<td>정관 발행 한도 / 설립 발행분은 인수·전액 납입</td>
+</tr>
+<tr>
+<td>액면</td>
+<td>원칙적 자본금=액면×발행주식수. 액면 균일·1주100원 이상</td>
+</tr>
+<tr>
+<td>무액면</td>
+<td>발행가액1/2 이상 자본금, 잔액 자본준비금. 액면과 혼합 발행×</td>
+</tr>
+<tr>
+<td>전환·소각</td>
+<td>액면↔무액면 전환 자체로 자본금 변경× / 소각과 감자는 불일치 가능</td>
+</tr>
+<tr>
+<td>3원칙</td>
+<td>확정=인수 규모 / 유지=실제 출자·부당 유출 방지 / 불변=특히 감자 제한</td>
+</tr>
+<tr>
+<td>유한책임</td>
+<td>회사에 인수가액 출자의무. 주주 지위만으로 채권자에 직접 책임×</td>
+</tr>
+<tr>
+<td>별도 책임</td>
+<td>개별 동의·보증, 법인격부인, 업무집행지시자, 특별법 등 요건 확인</td>
+</tr>
+<tr>
+<td>경제적 장점</td>
+<td>자본집중·위험분산·전문경영. 위험 소멸 아님</td>
+</tr>
+<tr>
+<td>폐해</td>
+<td>지배권 집중·법인격/유한책임 남용·이해관계자 침해</td>
+</tr>
+<tr>
+<td>규제4특성</td>
+<td>강행법규·공시·법원 관여·집단적/획일적 처리</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “자본금은 통장 잔액이 아니다.” “주식 인수가액이지 주주의 보유재산 한도가 아니다.” “유한책임은 자발적 보증까지 지우지 않는다.”</p>
+<p><strong>함정:</strong> 현재 자본금≠수권 한도, 무액면=절반 이상(정확히 절반 아님), 주식≠주권, 자본충실≠손실 금지·현금 동결, 감자는 절차 문제.</p>
+<p><strong>사례를 풀 순서:</strong> 숫자의 종류 → 주식 형태 → 납입·발행 원인 → 자본금/순재산 계산 → 주주 지위와 별도 책임 → 보호 절차.</p>
+</div>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>🟢 대출·손익·신주발행을 각각 자본금과 순재산에 연결하고, 주주와 보증인의 책임을 구별하면 이해 완료. 🟡3원칙 이름은 아는데 규정과 연결 못 하면1-5 복습. 🔴 회사 통장과 자본금을 같은 것으로 생각하면1-2부터 다시 읽기. 실제 답변 전에는 임의로 상태를 확정하지 않는다. <strong>복습TOP3: 자본금 계산, 자본3원칙, 간접·유한책임.</strong></p>
+<p>교재31–42쪽과 제공14문항을 모두 연결했다.2026.10.23 기준 본문 링크의329·451조와 <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001702">상법</a>, 국세기본법39조를 대조했다. 원문 문제·정답·해설은 보존하고 단정하기 쉬운 표현은 별도의 보기별 해설에서 보완했다. 최근 자기주식 개정의 세부 적용시점은 해당 장에서 별도로 표시한다.</p>
+<h1>문제 부록 · 14문항·56개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-주식회사법_005"><h4>형성평가 · 주식회사법_005</h4><p class="question-stem">다음 중에서 주식회사의 3가지 본질적 요소에 해당하지 않는 것은?</p><ol class="choices"><li>자본금</li><li>자산</li><li>주식</li><li>주주의 유한책임</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 본질적 요소다. 법정 재산 관리 기준액이다.</li><li><strong>선택</strong> · 정답. 자산도 회사에 중요하지만 교재의 세 본질적 요소 목록은 자본금·주식·유한책임이다.</li><li><strong>비선택</strong> · 본질적 요소다. 자본금 구성 단위이자 주주 지위다.</li><li><strong>비선택</strong> · 본질적 요소다. 투자 위험을 제한하여 자금 조달과 거래를 쉽게 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 3가지 본질적 요소는 자본금, 주식, 주주의 유한책임이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_006"><h4>형성평가 · 주식회사법_006</h4><p class="question-stem">다음 중에서 주식회사의 ‘자본(금)에 관한 3원칙’에 해당하지 않는 것은?</p><ol class="choices"><li>자본확정의 원칙</li><li>자본유지의 원칙</li><li>자본불변의 원칙</li><li>자본감소의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 3원칙 중 하나. 설립 발행 주식의 인수 규모 확정과 연결한다.</li><li><strong>비선택</strong> · 3원칙 중 하나. 실제 출자와 부당 유출 방지다.</li><li><strong>비선택</strong> · 3원칙 중 하나. 우리법에서는 특히 자본감소 제한으로 이해한다.</li><li><strong>선택</strong> · 정답. 자본감소 자체가3원칙은 아니다. 자본감소 제한은 불변 원칙의 설명이지만 제한을 뺀 자본감소 원칙과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 자본(금)에 관한 3원칙은 자본확정의 원칙, 자본유지(충실)의 원칙 그리고 자본불변의 원칙이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_007"><h4>형성평가 · 주식회사법_007</h4><p class="question-stem">다음 중에서 주식회사의 경제적 장점에 해당하는 것은?</p><ol class="choices"><li>자본집중과 위험분산</li><li>기업지배권의 집중</li><li>법인격과 유한책임의 한계</li><li>이해관계자의 이익 보호</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 작은 투자금을 모아 큰 자금으로 만들고 위험을 분산한다.</li><li><strong>비선택</strong> · 교재가 든 폐해다. 자본이 모이는 것과 권력이 견제 없이 집중되는 것을 구별한다.</li><li><strong>비선택</strong> · 교재의 장점 분류가 아니다. 제도의 한계·남용 문제는 별도로 다룬다.</li><li><strong>비선택</strong> · 보호 자체가 나쁜 것은 아니지만 교재가 든 경제적 장점의 항목은 아니다. 이해관계자 보호는 규제의 목적과 연결된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 경제적 장점으로는 자본집중과 위험분산 그리고 소유와 경영의 분리 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_008"><h4>형성평가 · 주식회사법_008</h4><p class="question-stem">다음 중에서 주식회사에 대한 법적 규제의 특징으로서 관계가 없는 것은?</p><ol class="choices"><li>임의법규성</li><li>철저한 공시주의</li><li>법원의 관여</li><li>법률관계의 집단적·획일적 처리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 주된 규제 특징은 강행법규성이다. 임의규정이 전혀 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 특징에 해당한다. 등기·공고·서류 비치 등으로 정보를 제공한다.</li><li><strong>비선택</strong> · 특징에 해당한다. 법정 요건 아래 검사인·소집 허가·소송 등에 관여한다.</li><li><strong>비선택</strong> · 특징에 해당한다. 단체의 조직 관계를 사람마다 다르게 취급하는 혼란을 막는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사에 대한 법적 규제의 특징으로는 강행법규성, 철저한 공시주의, 법원의 관여, 법률관계의 집단적·획일적 처리를 들 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_011"><h4>워크북 · 주식회사법_워크북_011</h4><p class="question-stem">다음 중에서 주식회사의 자본(금)에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>주식인수 이외의 방법으로 출자하는 것도 가능하다.</li><li>회사 채권자에 대해서는 회사 신용 도의 공시적 기능을 한다.</li><li>주식회사의 자본금과 재산은 언제나 일치하는 것은 아니다.</li><li>우리 상법은 총액 인수 제도와 수권자본제도를 모두 담고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답.65다880은 주식 인수 등 출자 관계가 없는 단순 금전 제공을 주식회사 출자로 보지 않았다. 주권이 없으면 항상 주주가 아니라는 뜻은 아니다.</li><li><strong>비선택</strong> · 맞음. 공시 정보 중 하나다. 현재 지급능력을 자본금 액수만으로 보장하는 것은 아니다.</li><li><strong>비선택</strong> · 맞음. 실제 순재산은 손익으로 변하고 자본금은 법정 절차로 정해진다.</li><li><strong>비선택</strong> · 맞음. 수권 한도 안에서 탄력 발행하되 설립 시 발행분은 인수·납입을 완결하는 구조다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대법원 65다880 판결. 주식인수 이외의 방법으로는 출자할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_012"><h4>워크북 · 주식회사법_워크북_012</h4><p class="question-stem">우리 상법에서'발기인의 자본충실책임'이나'이사의 인수 담보 책임'의 규정을 둔 것은 자본금에 관한 원칙 중에서 어떤 것을 인정한 것으로 볼 수 있는가?</p><ol class="choices"><li>자본 확정의 원칙</li><li>자본 감소의 원칙</li><li>자본 불변의 원칙</li><li>자본 유지의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 담보책임이 직접 확보하려는 것은 규모의 확정보다 실제 자본 충실이다.</li><li><strong>비선택</strong> · 3원칙의 정확한 명칭이 아니며 이 책임의 취지도 아니다.</li><li><strong>비선택</strong> · 감소 절차를 제한하는 문제와 구별한다.</li><li><strong>선택</strong> · 맞음·정답. 인수·납입의 공백을 메워 실제 재산을 확보하므로 자본유지·충실 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> '발기인의 자본충실책임'이나'이사의 인수 담보 책임'의 규정은 자본 유지(충실)의 원칙을 반영한 것이다. 자본 유지의 원칙이란 회사는 자본금에 상당하는 순 재산을 실질적으로 유지하여야 한다는 원칙으로 자본 충실의 원칙이라고도 한다. 상법에는 이 원칙을 반영한 규정이 매우 많은데, '발기인의 자본충실책임'이나'이사의 인수 담보 책임'의 규정이 그에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_013"><h4>워크북 · 주식회사법_워크북_013</h4><p class="question-stem">다음 중에서 주식회사의 본질적 요소에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>자본금은 주식회사의 성립과 존속의 기초가 된다.</li><li>주식은 자본금의 구성 단위와 주주권이라는 두 가지 의미를 가진다.</li><li>주주의 유한책임이란 주주가 회사의 채무에 대해서 자신이 보유한 재산의 한도 내에서 책임을 부담한다는 것이다.</li><li>주식회사의 자본금 3 대 원칙이란 자본 확정의 원칙, 자본 유지의 원칙 그리고 자본 불변의 원칙을 말한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기본 설명상 맞음. 다만 자본금이 실제 순재산을 항상 보장하는 것은 아니다.</li><li><strong>비선택</strong> · 맞음. 자본 구성의 단위와 구성원 지위라는 두 의미다.</li><li><strong>선택</strong> · 틀림·정답. 주주 개인이 현재 가진 모든 재산의 한도가 아니다. 회사에 대한 주식 인수가액 한도의 출자의무가 기본이다.</li><li><strong>비선택</strong> · 맞음. 확정·유지·불변이다. 유지=충실, 불변은 특히 감자 제한으로 읽는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주의 유한책임이란 회사에 대하여 주식의 인수 가액을 한도로 출자 의무를 부담한다는 것이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_014"><h4>워크북 · 주식회사법_워크북_014</h4><p class="question-stem">다음 중에서 주식회사의 경제적 기능에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주식회사는 다수의 일반 대중으로부터 자본금을 집중하기에 용이하다.</li><li>주식회사는 규모가 커질수록 소유와 경영이 일치하는 경향이 있다.</li><li>주식회사는 소액 다수의 투자자들이 존재하여 사업 위험이 대주주에게 집중되는 경향이 있다.</li><li>'기업은 망해도 기업주는 산다'라는 말은 주식회사와는 아무런 상관이 없는 말이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 주식 단위·유한책임·양도 가능성이 자본 집중을 돕는다.</li><li><strong>비선택</strong> · 틀림. 일반적 경향은 소유와 경영의 분리다. 모든 회사가 실제로 분리되어야 한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 틀림. 사업 위험을 여러 투자자에게 분산하는 기능이 있다. 위험이 전혀 없어지는 것은 아니다.</li><li><strong>비선택</strong> · 틀림. 법인격·유한책임의 남용을 비판하는 맥락에서 쓰인다. 적법한 유한책임의 모든 경우를 불법이라고 말하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 주식회사의 규모가 커지면서 회사 경영에서 소유와 경영이 분리되는 경향이 있다. ③ 주식회사는 소액으로 균일하게 세분화된 주식을 통해서 자금 조달을 하기 때문에 소액 다수의 투자자들에게 기업 위험을 분산시킬 수 있다. ④ 주식회사에서는 대주주가 회사의 법인격을 남용하거나 주주의 유한책임을 남용하여 자신의 사익을 추구하고, 그로 인한 회사의 손해와 회사의 거래 상대방의 손해에 대해서 대주주는 법인격과 유한책임을 근거로 아무런 책임을 지지 않는 일이 발생한다. 소위'기업은 망해도 기업주는 산다'라는 말은 이런 현상을 대변하는 것이기도하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_015"><h4>워크북 · 주식회사법_워크북_015</h4><p class="question-stem">다음 중에서 자본금에 관한 입법 례에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>수권자본제도는 대륙법계 국가의 입법 례이다.</li><li>총액 인수 제도는 영미법계 국가의 입법 례이다.</li><li>총액 인수 제도에서는 정관에 자본금 총액을 기재하여야 하고, 설립 시 자본금 전액에 대한 인수가 확정되어야한다.</li><li>수권자본제도에서는 정관에 자본금 총액을 기재하지 않지만, 설립 시 자본금 전액에 대한 인수가 확정되어야한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 전형적 비교와 반대다. 수권제는 영미법계의 전형으로 설명한다. 현재 각국이 모두 동일하다는 단정은 피한다.</li><li><strong>비선택</strong> · 교재의 전형적 비교와 반대다. 총액인수는 대륙법계의 전형으로 설명한다.</li><li><strong>선택</strong> · 맞음·정답. 정관상 자본 총액과 설립 시 전체 인수 확정을 연결하는 방식이다.</li><li><strong>비선택</strong> · 틀림. 수권 한도 전부의 인수를 설립 때 확정해야 하는 것은 아니다. 다만 실제 설립 발행분의 인수·납입은 완결해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 영미법계 국가에서는 수권자본제도를 채택하고 있다. ② 대륙법계 국가에서는 총액 인수 제도를 채택하고 있다. ④ 수권자본제도에서는 자본금 총액이 정관의 기재 사항이 아니다. 또한 자본 전액의 인수를 확정할 필요는 없고 그 액의 일부 내지 정관에 정한 최소한에 대해서 인수가 확정되면 회사 설립이 가능하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_016"><h4>워크북 · 주식회사법_워크북_016</h4><p class="question-stem">다음 중에서'자본금의 3 대 원칙'이 필요한 이유로 적절한 것은?</p><ol class="choices"><li>회사의 성립과 존속을 위해서</li><li>주주의 출자와 책임의 한계를 위해서</li><li>회사 채권자의 보호를 위해서</li><li>신주발행을 원활히 하기 위해서</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 관련 기능이지만3원칙이 특히 필요한 이유를 고르는 문제에서는 채권자 보호가 직접적이다.</li><li><strong>비선택</strong> · 주주의 출자·책임과 연결되지만 이 원칙들의 핵심 보호대상은 회사 재산을 신뢰하는 채권자다.</li><li><strong>선택</strong> · 맞음·정답. 주주 개인에게 회사 채무를 직접 청구하기 어려우므로 회사 재산 확보와 부당 유출 방지가 필요하다.</li><li><strong>비선택</strong> · 탄력적 자금 조달의 목표와 달리3원칙은 특히 채권자 보호 장치다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사는 회사 재산만이 채권자를 위한 유일한 담보가 되기 때문에, 이른바 자본금의 3 대 원칙이 요구되는 것은 특히 채권자의 보호를 위해서이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_017"><h4>워크북 · 주식회사법_워크북_017</h4><p class="question-stem">다음 중에서 주식회사의 법적 규제에 해당하지 않는 것은?</p><ol class="choices"><li>임의법규성</li><li>공시 주의</li><li>법원의 관여</li><li>법률 관계의 획일적 처리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 강행법규성이 대표적 특징이다. 일부 자율적 정함은 별도로 가능하다.</li><li><strong>비선택</strong> · 특징이다. 회사 정보에 접근하게 하여 이해관계자를 보호한다.</li><li><strong>비선택</strong> · 특징이다. 법정 신청·소송 등으로 이해 충돌을 조정한다.</li><li><strong>비선택</strong> · 특징이다. 특별한 조직법상 소송 제도 등으로 관계를 통일한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사에 대한 법적 규제의 내용으로'강행 법규성', '공시 주의', '법원의 관여', '법률 관계의 집단적·획일적 처리'등이 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_018"><h4>워크북 · 주식회사법_워크북_018</h4><p class="question-stem">'회사의 자본금이 실제로 출자되고, 자본금에 해당하는 재산을 현실적으로 유지하여야 한다'는 원칙을 무엇이라 하는가?</p><ol class="choices"><li>자본 확정의 원칙</li><li>자본 불변의 원칙</li><li>자본 공제의 원칙</li><li>자본 충실의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 규모·인수의 확정에 관한 원칙이지 실제 재산 유지라는 문제의 답은 아니다.</li><li><strong>비선택</strong> · 자본금 변경, 특히 감소의 절차적 제한에 주목한다.</li><li><strong>비선택</strong> · 교재3원칙의 명칭이 아니다.</li><li><strong>선택</strong> · 맞음·정답. 자본유지와 같은 설명이다. 영업손실을 금지하거나 주주가 언제나 손실을 보충해야 한다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 회사의 자본금이 실제로 출자되고, 자본금에 해당하는 재산을 현실적으로 유지하여야 한다는 원칙을 자본 유지의 원칙 또는 자본 충실의 원칙이라고 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_019"><h4>워크북 · 주식회사법_워크북_019</h4><p class="question-stem">다음 중에서 주식회사에 대한 법적 규제의 내용으로 올바른 것은?</p><ol class="choices"><li>주식회사에 관한 법률은 대부분 임의규정이고, 사적 자치가 폭넓게 허용되고 있다.</li><li>상법은 공시 주의를 채택하여 주주와 채권자들의 이익을 보호하고 있다.</li><li>다양한 이해관계자들의 이해 충돌을 사적 자치에 따라 해결하도록 법원의 관여를 배제하고 있다.</li><li>주주, 채권자, 거래 상대방 등의 이해관계를 조정하기 위해서 법률 관계의 개별적이고 다양한 처리를 위한 규정을 두고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 주식회사법에는 강행규정이 많아 사적 자치가 제한된다.</li><li><strong>선택</strong> · 맞음·정답. 공시를 통해 정보를 주어 판단·감시를 가능하게 한다. 문서별 열람 요건은 별도다.</li><li><strong>비선택</strong> · 틀림. 법원의 관여를 배제하지 않고 여러 법정 절차에 관여시킨다.</li><li><strong>비선택</strong> · 틀림. 조직관계의 집단적·획일적 처리가 원칙적 방향이다. 모든 분쟁의 요건과 판결 효과가 동일하다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 주식회사에 관한 법률은 대부분 강행 규정이다. ③ 다양한 이해관계자들의 이해 충돌을 해결하기 위해서 법원의 관여를 허용하고 있다. ④ 주식회사의 이해관계자들의 이해관계를 조정하기 위해서 법률 관계의 집단적·획일적 처리를 위한 규정을 두고 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_020"><h4>워크북 · 주식회사법_워크북_020</h4><p class="question-stem">다음 중에서 주식회사의 경제적 폐해에 해당하는 것은?</p><ol class="choices"><li>소액으로 많은 자본을 집중할 수 있다.</li><li>일반 대중의 주식 취득이 용이하다.</li><li>기업 지배권의 집중이 발생할 수 있다.</li><li>소유와 경영의 분리가 이루어져 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 경제적 장점이다. 작은 출자들을 모아 사업자금을 만든다.</li><li><strong>비선택</strong> · 소액 투자 참여와 거래를 돕는 장점이다.</li><li><strong>선택</strong> · 맞음·정답. 소수 지배주주·경영진에게 견제 없는 권력이 모일 위험이다.</li><li><strong>비선택</strong> · 교재에서는 전문경영을 가능하게 하는 장점으로 분류한다. 동시에 감시 비용·대리 문제의 배경이 될 수 있는 양면도 이해한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 경제적 폐해로는 기업 지배권의 집중, 법인격과 유한책임의 남용, 이해관계자의 이익 침해 등을 들 수 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '주식회사법 · CHAPTER 02' : 'PART · COMPANY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(주식회사법 · CHAPTER 02|PART · COMPANY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('company-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제15강 금융리스업·가맹업·채권매입업 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 15</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제15강 금융리스업·가맹업·채권매입업 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>작은 빵집을 열려면 오븐을 살 돈, 손님에게 알려진 브랜드, 외상대금을 기다리는 동안 쓸 현금이 필요하다. <strong>금융리스는 설비 취득 자금, 가맹은 브랜드·영업 방식, 채권매입은 외상채권의 현금화</strong>를 돕는다. 세 거래가 비슷해 보이는 이유는 단순히 물건 하나를 사고파는 것이 아니라 다른 사업자의 자금·신용·경험을 이용하기 때문이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나?</td>
+<td>금융리스·가맹·채권매입의 거래 구조와 당사자별 권리·의무</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>설비 자금과 영업 경험 부족, 외상대금 회수 지연을 해결하려고</td>
+</tr>
+<tr>
+<td>상법 전체 위치는?</td>
+<td>상행위 각칙의 마지막 현대 거래. 민법 전형계약 여러 요소가 결합한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>앞 강들의 명의·계산·보관·채권양도를 종합한다. 다음 과목 회사법에서는 이런 영업을 하는 조직의 설립·운영을 배운다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>리스를 단순 임대차로, 가맹점을 본사의 직원으로, 팩토링을 무조건 채무불이행 위험까지 넘기는 거래로 오해한다.</td>
+</tr>
+</tbody></table>
+<p>교재319–343쪽·워크북111–120쪽, 제공7문항28개 보기를 연결한다. 중요도는 학습 우선순위이며 실제 빈도 통계는 없다. 노랑=결론, 초록=이유, 분홍=함정, 파랑=연결. 설명용 빵집 사례와 판례 사실은 구분한다. 상법의 기본 구조 외에 가맹사업법·약관규제법 등 특별법의 적용 범위를 함께 확인한다.</p>
+<h1>1. 금융리스 · 물건을 빌리는 모습의 자금 조달</h1>
+<h2 id="commercial-15-01" data-concept-id="commercial-15-01">1-1. 금융리스168조의2의 뜻과 거래 목적 ★★★★★</h2>
+<p><strong>교재319·321–324쪽 · 문단의 이유:</strong> 사용료처럼 보이는 리스료가 왜 금융의 대가인지 이해시킨다.</p>
+<p>금융리스는 <strong>이용자가 고른</strong> 기계·시설 등 재산을 리스업자가 공급자에게서 취득하거나 대여받아 일정 기간 이용하게 하고 리스료를 받는 거래다. 업자는 이를 영업으로 하는 당연상인이고 이용자는 반드시 상인일 필요가 없다. 목적물은 특정 영업에 필요한 고가·비범용 설비인 경우가 많지만, 범용 물건이면 법적으로 무조건 금융리스가 불가능한 것은 아니다.</p>
+<p>설명용 사례: 은아가 빵집에 맞는 오븐의 종류·성능·가격과 공급업체를 고른다. 리스회사가 그 조건으로 오븐을 구입하여 은아가 사용하게 하고 은아는 나누어 리스료를 낸다. 겉으로는 임대차지만 실제로는 설비 취득 자금을 장기간 마련해 준 효과가 있다. 법적 소유는 구입형이면 리스회사에 두는 것이 전형적이나 법문은 업자가 대여받는 경우도 포함한다.</p>
+<p><strong>97다26098,1997.11.28. 판례 이야기:</strong> 리스거래를 단순 물건 대여로 보아야 하는지가 문제됐다. 법원은 이용자가 특정한 물건을 정하고 리스회사가 이를 취득해 사용하게 하며, 리스료로 취득 자금·이자·비용을 회수하는 구조를 보았다. ‘본질은 금융 편의’ → 회사의 핵심 역할은 필요한 설비를 쓸 자금을 마련하는 것이다. ‘직접 유지관리하지 않음’ → 뒤의 이용자 관리책임과 연결된다.</p>
+<p><strong>운용리스</strong>는 금융리스 외의 리스를 가리키며 교재는 범용 물건의 대여·업자의 유지관리를 전형으로 설명한다. 계약 명칭이나 자동차·복사기라는 물건 이름 하나로 둘을 결정하지 않는다. 실제 자금회수·관리·위험 배분을 본다. 여신전문금융업법은 시설대여업의 행정적 규율을, 상법은 당사자 사이 사법관계의 기본을 담당한다.1995년 기본적 상행위 추가와2010년 각칙 신설은 제도의 배경이다.</p>
+<p><strong>시험:</strong> 이용자가 선택·업자가 자금·이용자 상인 불요·범용성은 경향. <strong>키워드:</strong> 물적 금융. <strong>한 줄:</strong> 돈을 직접 빌려주기보다 필요한 설비를 쓰게 해 주는 방식으로 자금을 지원한다.</p>
+<h2 id="commercial-15-02" data-concept-id="commercial-15-02">1-2. 세 사람의 계약과 돈·물건의 흐름 ★★★★★</h2>
+<p><strong>교재324–326쪽 · 문단의 이유:</strong> 누가 누구와 계약했고 누구에게 이행을 요구하는지 구분한다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>누가 무엇을 하나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 선택</td>
+<td>이용자가 공급자와 설비 종류·규격·수량·가격·납기를 정한다.</td>
+</tr>
+<tr>
+<td>2 리스계약</td>
+<td>이용자와 리스업자가 사용 기간·리스료 등 약정.</td>
+</tr>
+<tr>
+<td>3 공급계약</td>
+<td>리스업자와 공급자가 선정 내용에 따라 매매 등 공급계약 체결.</td>
+</tr>
+<tr>
+<td>4 인도</td>
+<td>공급자가 물건을 <strong>이용자에게 직접</strong> 인도.</td>
+</tr>
+<tr>
+<td>5 정산</td>
+<td>리스업자→공급자에게 물건 대금 / 이용자→리스업자에게 리스료. 구체 시기는 약정·법 규칙 확인.</td>
+</tr>
+</tbody></table>
+<p>이용자는 물건을 실제로 쓰는 사람, 리스업자는 자금·취득을 맡는 사람, 공급자는 적합한 물건을 제공하는 사람이다. ‘공급계약의 매수인은 리스업자’와 ‘실제 받는 사람은 이용자’가 동시에 맞는다.</p>
+<p>법적 성질에는 특수 임대차설, 무명계약설, 특수 소비대차설이 있다. 앞 견해는 사용하게 하는 형식, 뒤 견해는 소유권을 담보로 자금을 빌려주는 실질에 주목한다. 통설·판례의 <strong>비전형계약</strong> 설명은 임대차·금융 등의 결합을 한 전형계약에 억지로 넣지 않는다는 뜻이다.</p>
+<p><strong>94다23388,1994.11.8. 판례 이야기:</strong> 리스가 임대차와 닮았으니 민법 임대차 규칙을 바로 적용할 것인가가 쟁점이다. 법원은 실질이 물적 금융인 특수한 계약이므로 <strong>민법 임대차 규정이 그대로 직접 적용되지 않는다</strong>고 했다. ‘무명계약’ → 법적 이름도 규칙도 전혀 없다는 뜻이 아니다. 지금은 상법의 명문 규정도 있다. ‘비전형’ → 민법상 전형 임대차 하나로 설명되지 않는다는 뜻이다.</p>
+<p><mark class="yellow">물건 대금은 리스업자가 공급자에게, 리스료는 이용자가 리스업자에게 낸다.</mark> <strong>시험:</strong> 세 사람·두 계약·직접 인도·지급 방향. <strong>키워드:</strong> 공급계약과 리스계약. <strong>한 줄:</strong> 계약 상대와 실제 물건 수령인이 다르므로 화살표를 먼저 그린다.</p>
+<h2 id="commercial-15-03" data-concept-id="commercial-15-03">1-3. 리스업자의 협력 의무와 이용자의 직접청구 ★★★★★</h2>
+<p><strong>교재327–328·330쪽 · 문단의 이유:</strong> 리스회사가 기계를 직접 검사하는 전문가가 아니라면 공급 문제를 누구에게 따질지 정해야 한다.</p>
+<p>168조의3 제1항상 리스업자는 이용자가 약정 시기에 적합한 물건을 수령할 수 있도록 해야 한다. <strong>2016다245418·245425·245432,2019.2.14.</strong>은 이를 원칙적으로 <strong>수령에 협력할 의무</strong>로 설명한다. 직접 공급을 담보하기로 약정하는 등의 특별한 사정이 없다면, 별개의 독자적 인도 의무나 검사·확인 의무까지 부담하지 않는다.</p>
+<p>판례를 장면으로 읽으면 이용자는 공급된 설비의 문제를 두고 리스회사에 책임을 묻고, 회사는 금융을 제공했을 뿐이라고 한다. 법원은 ‘아무 일도 안 해도 됨’과 ‘공급자처럼 물건을 직접 보증함’ 사이를 구분한다. ‘협력’ → 계약상 수령이 가능하도록 자기 역할을 해야 한다. ‘특별한 사정 없는 한 독자 검사 의무 없음’ → 이용자가 고른 물건의 성능을 모두 대신 검사할 일반 의무는 아니다. 특약이나 회사 자신의 의무 위반까지 면책하는 판결이 아니다.</p>
+<p>168조의4는 공급자에게 약정 시기의 이용자 인도 의무를 둔다. 공급이 약정 시기·내용대로 이루어지지 않으면 이용자는 공급자에게 <strong>직접 손해배상 또는 계약에 적합한 물건 인도</strong>를 청구할 수 있다. 공급계약의 직접 당사자가 아니어도 실제 사용자를 보호하는 법정 통로다. 리스업자는 이 권리행사에 필요한 협력을 한다. 공급자는 계약 상대인 리스업자에게 대금을 청구한다.</p>
+<p><strong>시험:</strong> 협력과 독자 인도/검사 구별·특약·공급자 직접청구·권리행사 협력. <strong>키워드:</strong>168조의3·4. <strong>한 줄:</strong> 기계 문제는 공급자에게 직접 따질 통로를 주고 리스회사는 그 해결에 협력한다.</p>
+<h2 id="commercial-15-04" data-concept-id="commercial-15-04">1-4. 수령증·리스료·유지관리와 위험 ★★★★★</h2>
+<p><strong>교재328–330쪽 · 문단의 이유:</strong> 리스료를 언제 내기 시작하고 누가 설비 상태를 관리하는지 정한다.</p>
+<p>적합한 물건 수령과 동시에 리스료 지급의무가 생기는 것이168조의3 제2항의 기본이고 다른 약정은 구별한다. 이용자가 수령증을 발급하면 <strong>적합한 물건을 받았다고 추정</strong>한다. 추정은 반대 증명이 가능한 것이지 모든 실제 하자가 영원히 없어진다는 확정이 아니다. 수령증은 권리·의무의 유일한 발생요건이 아니므로 물건을 실제로 받았다면 종이를 안 써 줬다는 이유로 지급을 피하지 못한다.</p>
+<p><strong>98다6565,1998.4.14. 판례 이야기:</strong> 공급자는 물건을 이용자에게 줬는데 이용자가 정당한 이유 없이 수령증을 안 줬다. 리스회사는 이를 알고도 공급자에게 대금 지급을 거절했다. 법원은 신의칙상 그렇게 할 수 없다고 했다. ‘수령증의 기능’ → 리스 개시와 공급 이행을 확인하는 증거다. ‘교부가 없다는 이유’ → 알고 있는 실제 이행을 종이 부재로 부정하지 못한다. 이 사건의 물건 대금과 이용자가 내는 리스료를 구별한다.</p>
+<p><strong>95다51915,1996.8.23. 판례 이야기:</strong> 계약에는 이용자가 인도·인수 확인서를 내면 정상 상태를 확인한 것으로 보는 조항이 있었다. 법원은 그 계약과 금융리스 성질 아래 리스회사의 하자담보 의무 범위를 인도 당시 상태와 이의 없는 확인서 발급에 맞추어 해석했다. ‘그 조항·그 책임 범위’ → 모든 수령증 발급이 법률상 무조건 면책이라는 뜻이 아니다. 현행 조문의 추정 효과, 특약 유효성, 별도 회사 의무 위반을 나누어 본다.</p>
+<p>이용자는 수령 후 <strong>선관주의로 유지·관리</strong>한다. 물건·공급자를 직접 고르고 실제 사용하는 사람이므로 금융리스에서는 민법623조의 임대인 유지의무를 그대로 붙이지 않는다. 리스료는 금융 대가여서 공급물 하자가 생겼다고 리스업자에 대한 지급의무가 당연히 사라지는 것은 아니다. 적합한 공급 전인지, 이미 수령했는지, 직접 공급 보증 특약·해제 등 사유가 있는지 따로 검토한다.</p>
+<p><mark class="pink">교재328쪽과 상법_067의②는 ‘금융리스업자가 리스료를 지급’한다고 적었지만 지급 주체는 <strong>금융리스이용자</strong>다. 원본 정답③을 보존하되②도 글자 그대로는 잘못된 문장임을 표시했다.</mark> <strong>시험:</strong> 추정≠간주·실제 수령·지급 방향·이용자 관리. <strong>키워드:</strong> 확인 증거와 실체. <strong>한 줄:</strong> 받은 사실은 종이만으로 정해지지 않고, 받은 뒤 관리는 이용자가 맡는다.</p>
+<h2 id="commercial-15-05" data-concept-id="commercial-15-05">1-5. 기능 설명의 한계와 중도해지168조의5 ★★★★☆</h2>
+<p><strong>교재323·330–331쪽 · 문단의 이유:</strong> 설비 자금을 오랫동안 회수하는 계약이라 중도 이탈의 비용을 정해야 한다.</p>
+<p>교재의 기능은 설비 자금 조달, 세제상 효과, 설비 노후화 위험 회피다. 다만 <strong>금융리스료는 언제나 전액 비용 처리되어 절세된다</strong>, <strong>노후화 위험은 언제나 리스회사가 전부 진다</strong>라는 설명은 일반 법칙으로 쓰기 어렵다. 현행 법인세법 시행령24조5항은 기업회계기준상 금융리스자산을 이용자의 감가상각자산으로 본다. 적용 회계기준·세법·계약의 잔존가치·반환·인수 조건을 확인해야 한다. 이용자 관리책임과 중도해지 제한까지 있는데 기술이 낡았다는 이유만으로 부담 없이 빠져나간다고 외우지 않는다. 원본066은 교재의 기능 분류를 묻는 문제로 구별한다.</p>
+<p>기간 만료하면 계약은 종료되고 물건 처분은 약정에 따른다. 계약기간 중에는 원칙적으로 임의해지가 제한된다. 금융업자가 예정한 자금 회수를 보호하기 때문이다.</p>
+<table>
+<thead>
+<tr>
+<th>해지하는 사람·이유</th>
+<th>168조의5의 처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>업자: 이용자 책임 있는 사유</td>
+<td>리스료 미지급 등 사유로 적법하게 해지하면 잔존 리스료 상당액 일시 지급 <strong>또는</strong> 물건 반환을 청구할 수 있다. 손해배상청구도 배제되지 않지만 중복 이익을 얻는 계산은 아니다.</td>
+</tr>
+<tr>
+<td>이용자: 중대한 사정 변경</td>
+<td>물건을 계속 사용할 수 없는 경우 <strong>3개월 전 예고</strong>로 해지 가능. 업자에게 발생한 손해를 배상해야 한다.</td>
+</tr>
+</tbody></table>
+<p>영업 폐지 등 지속 사용 불가능과 단순히 더 좋은 기계가 갖고 싶은 사정을 구별한다. 부득이한 사정의 구체성·계약 내용·손해 정산을 본다. <strong>시험:</strong> 중도해지 제한·3개월·손해배상·‘또는’·교재 기능과 법적 보장 차이. <strong>키워드:</strong> 자금 회수 보호. <strong>한 줄:</strong> 중도에 그만둘 통로가 있어도 금융 제공자의 손해까지 공짜로 넘기지는 못한다.</p>
+<h1>2. 가맹업 · 같은 간판을 쓰는 독립된 상인들</h1>
+<h2 id="commercial-15-06" data-concept-id="commercial-15-06">2-1. 가맹계약168조의6의 세 요소 ★★★★★</h2>
+<p><strong>교재332–334쪽 · 문단의 이유:</strong> 단순한 상표 허락이나 물품 매매를 넘어 영업 체계를 함께 이용하는 거래다.</p>
+<p>가맹업자는 자신의 상호·상표 등과 영업 방식·품질 기준에 관한 지원을 제공하고, 가맹상은 정해진 방식에 따라 영업하며 대가를 낸다. 특별법에서는 <strong>가맹본부·가맹점사업자</strong>라고 부른다. 핵심 세 요소는 <strong>영업표지 사용 허락, 지원·통제, 대가 지급</strong>이다. 간판·브랜드만 빌렸다는 이유로 모든 계약이 같은 가맹사업이 되는 것은 아니고 실제 내용을 본다.</p>
+<p>설명용 사례: 은아는 ‘새벽빵’ 이름과 조리법·교육을 받아 가게를 운영한다. 본부는 재료·조리·서비스 기준을 정하고 품질을 관리한다. 어느 지점에서 샀는지에 따라 맛·위생이 크게 다르면 같은 브랜드 전체가 피해를 보기 때문이다. 대신 본부도 입지 검토·교육·운영 조언 등 필요한 지원을 해야 한다.</p>
+<p>초보 사업자는 알려진 이름과 경험을 이용해 시장에 진입하고 실패 위험을 줄일 수 있다. 본부는 직접 모든 점포를 개설할 자금을 쓰지 않고 사업을 확장하며 새로운 수익을 얻는다. <strong>성공·수익 보장이라는 뜻은 아니다.</strong> 가맹금은 이름이 가입비·교육비·다른 형태라도 법정 대가의 실질을 본다. 상법에 세부 산정 규정이 없다고 무료 계약이 되는 것은 아니다.</p>
+<p>계약은 상품 공급의 매매, 건물·설비 사용의 임대차, 표지 사용 허락, 교육·지원 등 요소가 결합한 <strong>비전형계약</strong>이다. 본부와 가맹상은 법적으로 독립된 상인이다. <strong>시험:</strong> 세 요소·명칭보다 대가 실질·독립성·지원과 통제. <strong>키워드:</strong> 동일 브랜드·별도 사업자. <strong>한 줄:</strong> 같은 간판과 방법으로 장사해도 본부와 가맹점은 원칙적으로 별개의 사업자다.</p>
+<h2 id="commercial-15-07" data-concept-id="commercial-15-07">2-2. 본부의 지원·영업지역 보호168조의7 ★★★★★</h2>
+<p><strong>교재335–336쪽 · 문단의 이유:</strong> 가맹점이 투자한 뒤 본부가 지원을 끊거나 바로 옆에서 매출을 빼앗지 못하게 한다.</p>
+<p>본부는 영업에 필요한 지원을 한다. 사업 구상, 품질·판매기법 개선, 합리적인 설비·상품 공급, 직원 교육, 지속적인 운영 조언 등이 내용이다. 구체적 범위는 계약·사업 성질·특별법에 따라 정한다.</p>
+<p>상법168조의7 제2항은 <strong>다른 약정이 없으면</strong> 가맹상의 영업지역에서 동일·유사 업종을 직접 하거나 같은 종류의 가맹계약을 체결하지 못하게 한다. 그렇다고 본부가 일방 약관으로 언제든 같은 지역에 무제한 출점할 수 있다는 뜻은 아니다. 가맹사업법12조의4의 영업지역 설정·침해금지 등 특별 보호도 확인한다.</p>
+<p><strong>98다45553·45560·45577,2000.6.9. 판례 이야기:</strong> 가맹점이 점포에 투자했는데 본부가 같은 지역에 직영점·추가 가맹점을 제한 없이 둘 수 있다는 조항을 내세웠다. 가맹점은 기존 영업지역을 보호해 달라고 한다. 법원은 아무 제약 없이 언제라도 출점하게 하는 약관이 부당하게 불리하여 무효라고 했다. ‘판매지역권이 모든 옛 계약에 자동 보장되는가’와 ‘그 권익을 부당하게 침해해도 되는가’는 다르다. 판례는2010년 명문 규정 신설 전 사건이므로 지금은 현행 조문·특별법까지 함께 본다.</p>
+<p><mark class="green">본부의 통제는 브랜드를 지키기 위한 것이고, 가맹점의 영업지역 보호는 이미 투자한 사람이 본부의 일방 결정으로 기반을 잃지 않게 하려는 것이다.</mark> <strong>시험:</strong> 다른 약정과 불공정 약관의 구별·본부 직접 영업/추가 가맹 모두. <strong>키워드:</strong> 지원·지역 보호. <strong>한 줄:</strong> 같은 브랜드로 함께 성장하려는 계약을 본부의 일방 경쟁 수단으로 쓰지 못한다.</p>
+<h2 id="commercial-15-08" data-concept-id="commercial-15-08">2-3. 가맹상의 품질·비밀 의무168조의8 ★★★★☆</h2>
+<p><strong>교재336쪽 · 문단의 이유:</strong> 한 점포의 품질 저하나 비밀 유출이 전체 영업을 해칠 수 있다.</p>
+<p>가맹상은 본부의 영업상 권리를 침해하지 않도록 한다. 정해진 품질·설비 기준을 지키고 상품·서비스·영업방식을 변경할 때 필요한 협의를 하는 등 명성·신용을 보호한다. 설명용 사례: 승인 없이 원료를 낮은 품질로 바꾸면 손님은 개별 점포만 아니라 브랜드 전체를 불신한다.</p>
+<p>가맹계약과 관련하여 알게 된 <strong>영업상 비밀은 계약 종료 후에도 보호</strong>한다. 공개되지 않은 배합비·조리법·운영기술 등을 맡겼는데 계약이 끝나자 곧 경쟁자에게 넘기면 본부의 투자가 무너진다. 단, 모든 정보가 비밀인 것은 아니며 실제 비공개성·정보의 성질과 적용 법령을 확인한다. 계약 종료 후 비밀유지와 종료 후 모든 경쟁영업의 영구 금지는 서로 다른 문제다.</p>
+<p><strong>시험:</strong> 품질·신용·종료 후 비밀·경업금지와 구별. <strong>키워드:</strong> 브랜드 신뢰 유지. <strong>한 줄:</strong> 같은 이름으로 장사하는 동안 품질을 지키고, 배운 비밀은 끝난 뒤에도 함부로 퍼뜨리지 않는다.</p>
+<h2 id="commercial-15-09" data-concept-id="commercial-15-09">2-4. 손님에게 사고가 나면 본부도 책임지나 ★★★★☆</h2>
+<p><strong>교재337쪽 · 문단의 이유:</strong> 간판은 같아도 법적 책임은 어떤 근거가 성립하는지 따져야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>청구 근거</th>
+<th>판단할 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상법24조 명의대여</td>
+<td>본부의 명의 사용 허락과 영업주 오인·신뢰가 있는가? 상대방의 악의·중과실은 없는가?</td>
+</tr>
+<tr>
+<td>민법 표현대리</td>
+<td>본부를 대리하는 외관과 각 표현대리 유형의 요건이 충족되는가? 단순 간판 공유만으로 확정하지 않는다.</td>
+</tr>
+<tr>
+<td>민법756조 사용자책임</td>
+<td>품질 지원을 넘어 실질적 지휘·감독·사용관계가 있는가? 독립된 가맹상이라는 기본 구조와 구별한다.</td>
+</tr>
+<tr>
+<td>제조물책임</td>
+<td>본부가 제조·표시제조자 등 법정 책임 주체이고 제품 결함으로 보호 대상 손해가 발생했는가?</td>
+</tr>
+</tbody></table>
+<p>교재는24조 적용에 긍정·부정 견해를 소개한다. ‘오늘날 누구나 가맹점을 안다’고 모든 손님을 중과실로 몰거나, 간판이 같다는 이유로 모든 가맹상 채무를 본부가 연대 보증한다고 보지 않는다. 구체적인 외관과 거래자의 인식을 살핀다.</p>
+<p>사용자책임은 <strong>원칙적으로 별개의 독립 사업자여서 자동 성립하지 않는다.</strong> 다만 본부가 사실상 사용자처럼 통제하면 달라질 수 있다. 제조물책임도 본부가 만든 제품의 결함·손해·인과관계를 확인하며 모든 가맹점 사고를 제조물책임으로 처리하지 않는다.</p>
+<p><mark class="blue">5강의 명의대여, 민법의 표현대리·사용자책임, 채권각론의 불법행위가 같은 사례에서 서로 다른 청구 근거로 다시 등장한다.</mark> <strong>시험:</strong> 독립성·실질 통제·명의 신뢰·결함. <strong>키워드:</strong> 근거별 요건. <strong>한 줄:</strong> 본부 책임은 같은 간판 때문이 아니라 성립한 구체적 법적 근거 때문에 생긴다.</p>
+<h2 id="commercial-15-10" data-concept-id="commercial-15-10">2-5. 영업양도·갱신·해지168조의9·10 ★★★★☆</h2>
+<p><strong>교재338–339쪽 · 문단의 이유:</strong> 신뢰를 바탕으로 한 계약을 넘기거나 끝낼 때 양쪽 투자와 영업을 보호한다.</p>
+<p>가맹상은 <strong>본부 동의를 받아 영업양도</strong>할 수 있다. 누가 브랜드를 운영하는지 중요하기 때문이다. 반대로 본부도 <strong>특별한 사유가 없으면 동의</strong>해야 한다. 가맹점의 투자금 회수 통로를 자의적으로 막지 못한다.7강 영업양도의 일반 법리와 가맹계약상 승계 조건을 함께 본다.</p>
+<p>기간 만료는 종료 사유지만 가맹사업법13조의 갱신요구권도 살핀다. 적용 대상이면 만료 전 <strong>180일부터90일까지</strong>의 요구, 정당한 거절 사유, 최초 계약 포함 전체 <strong>10년 범위</strong> 등 법정 요건을 확인한다. 거절 사유에는 지급의무 위반·통상 적용 조건 미수락·중요 영업방침 미준수 등이 있고 단순히 본부가 싫다는 이유는 부족하다.10년이 지나면 모든 계약이 자동 종료한다는 뜻은 아니다.</p>
+<p>상법168조의10은 존속기간 약정 유무와 관계없이 <strong>부득이한 사정+상당한 기간의 예고</strong>로 각 당사자의 해지를 허용한다. 교재의 견해 차이는 채무불이행을 포함할지, 질병·공급 불가능 등 지속 곤란을 중심으로 볼지다. 해당 사정·해지의 일반 규칙을 구체적으로 본다.</p>
+<p>특별법이 적용되는 본부의 해지는 가맹사업법14조의 <strong>2개월 이상 유예·위반 사실과 시정 요구·서면2회 이상 통지</strong> 등을 지켜야 하고, 법정 예외가 아닌데 이를 생략한 해지는 효력이 없다. 상법의 예고 한 문장만으로 즉시 내보낼 수 있다고 하지 않는다. 종료 후 담보 성격의 예치 가맹금은 정산하여 반환하며 다른 약정 없으면 종전 상호·상표 사용을 중단한다. 모든 성격의 가맹금을 언제나 전액 반환하는 것은 아니다. 비밀유지는 남는다.</p>
+<p><strong>시험:</strong> 양도 동의와 거절 제한·180/90·10년 범위·해지 예고와 특별법·종료 후 효과. <strong>키워드:</strong> 투자 회수와 신뢰. <strong>한 줄:</strong> 가게를 넘기거나 계약을 끝내는 일에도 정당한 이유와 절차가 필요하다.</p>
+<h1>3. 채권매입업 · 외상값 받을 권리를 거래한다</h1>
+<h2 id="commercial-15-11" data-concept-id="commercial-15-11">3-1. 채권매입업168조의11과 세 가지 기능 ★★★★★</h2>
+<p><strong>교재339–342쪽 · 문단의 이유:</strong> 물건을 팔았어도 돈을 나중에 받는 사업자의 자금·회수 문제를 해결한다.</p>
+<p>채권매입업은 타인이 물건·유가증권 판매나 용역 제공 등으로 취득했거나 <strong>장래 취득할 영업채권을 매입하여 회수</strong>하는 것을 목적으로 하는 영업이다. 매입 또는 회수 중 아무 하나만 하면 된다는 정의가 아니다. 다른 사람의 채권 추심만 대행하는 영업과 구별한다. 교재는 영업채권을 파는 쪽을 판매상인이라고 부른다.</p>
+<p>설명용 사례: 은아의 빵집이 회사 행사에 빵을 납품하여 두 달 후1,000만원을 받을 채권이 생겼다. 당장 재료비가 필요하여 그 채권을 팩토링 업체에 팔고 약정 대가를 먼저 받는다. 나중에 업체가 원래 고객에게 대금을 받는다. 채권은 반드시 이미 생긴 것만 가능한 것이 아니지만, 장래채권도 특정 가능성과 양도 대상 범위를 확인해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>의미와 조건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>금융</td>
+<td>외상대금 받을 때까지 기다리지 않고 선급 대가로 자금을 마련한다. 모든 계약이 선급형인 것은 아니다.</td>
+</tr>
+<tr>
+<td>서비스</td>
+<td>채권 관리·회수·회계 등 업무를 전문가가 처리한다.</td>
+</tr>
+<tr>
+<td>신용위험 부담</td>
+<td>진정 팩토링에서는 채무자의 불이행 위험을 매입업자가 부담하는 기능이 있다. 모든 팩토링의 자동 효과는 아니다.</td>
+</tr>
+</tbody></table>
+<p>교재의 미국·국내 도입 연혁은 제도 배경이다. 현재 어떤 업자가 허가·등록 등으로 할 수 있는지는 업종별 금융법을 따로 확인하며 과거 참여업체 목록을 현행 자격요건으로 외우지 않는다. <strong>시험:</strong> 영업채권·장래채권·매입하여 회수·기능별 조건. <strong>키워드:</strong> 외상채권 현금화. <strong>한 줄:</strong> 돈을 받을 권리를 팔아 현금과 회수 서비스를 얻는다.</p>
+<h2 id="commercial-15-12" data-concept-id="commercial-15-12">3-2. 진정·부진정 팩토링과168조의12 상환청구 ★★★★★</h2>
+<p><strong>교재340–341쪽 · 문단의 이유:</strong> 채무자가 안 갚으면 마지막 손실을 누가 부담하는지 정한다.</p>
+<p>팩토링의 구분은 한 가지가 아니다. <strong>상환청구 가능 여부</strong>, <strong>채권양도 통지 여부</strong>, <strong>대가 선급 여부</strong>라는 서로 다른 축이다. 선급형이라고 반드시 진정 팩토링인 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>부진정 팩토링</td>
+<td>원래 채무자가 안 갚으면 매입업자가 채권을 판 상인에게 상환을 청구할 수 있다.</td>
+</tr>
+<tr>
+<td>진정 팩토링</td>
+<td>그 채무불이행에 대해 판매상인에게 상환청구하지 않는 구조. 신용위험을 인수하는 기능.</td>
+</tr>
+<tr>
+<td>통지·비통지 방식</td>
+<td>원래 채무자에게 채권양도 사실을 통지하는 방식인지 구별. 통지하지 않아도 대항요건이 자동 충족되지는 않는다.</td>
+</tr>
+<tr>
+<td>선급·비선급</td>
+<td>채권 변제기 전에 대가를 먼저 주는지, 변제기에 주는지 구별.</td>
+</tr>
+</tbody></table>
+<p>168조의12는 영업채권 채무자가 이행하지 않으면 매입업자가 <strong>채권매입계약의 채무자, 즉 판매상인에게 영업채권액 상환을 청구</strong>할 수 있게 한다. 따라서 상법의 기본 구조는 부진정 팩토링이다. 상환청구 배제 등 약정은 별도로 확인한다. 진정이라는 말은 진짜 합법, 부진정은 가짜 불법이라는 뜻이 아니다.</p>
+<p>설명용 사례의 회사 고객이 빵값을 안 내면, 상환청구 가능한 구조에서는 업체가 은아에게 돌아올 수 있다. 은아가 채권을 팔았다는 사실만으로 위험에서 완전히 벗어났다고 생각하면 틀린다. 진정 팩토링이어도 처음부터 존재하지 않는 채권을 속여 팔거나 원인거래가 잘못된 책임까지 전부 없어지는 것은 아니다. 계약의 위험 인수 범위를 확인한다.</p>
+<p><strong>시험:</strong> 상환청구 상대·기본은 부진정·세 분류 축·신용위험과 채권 하자. <strong>키워드:</strong> 최종 손실 부담. <strong>한 줄:</strong> ‘채권을 팔았다’ 다음 질문은 ‘원래 고객이 안 갚으면 나에게 돌아오나’다.</p>
+<h2 id="commercial-15-13" data-concept-id="commercial-15-13">3-3. 기본계약·개별 양도·채무자의 항변 ★★★★☆</h2>
+<p><strong>교재341–343쪽 · 문단의 이유:</strong> 채권이 새 사람에게 넘어가도 채무자의 기존 방어권을 함부로 빼앗지 못한다.</p>
+<p>당사자는 채권매입업자(factor), 판매상인(client), 영업채권 채무자(customer)다. 판매상인과 고객 사이에는 원래 매매·용역계약이 있다. 판매상인과 매입업자는 일정 기간의 채권을 어떤 조건으로 매입·관리·회수할지 <strong>기본계약</strong>을 맺고 그에 따라 개별 채권을 양도한다.</p>
+<p>기본계약은 매매·위임·금융 요소가 섞인 비전형계약으로 본다. 개별 거래의 성질에는 소비대차설, 채권매매설, 진정은 매매·부진정은 소비대차로 나누는 절충설이 있다. 이는 금융 기능과 위험 인수 중 무엇을 강조하는지의 심화 논의다. 학설 이름만으로 모든 계약의 세부 권리·의무를 정하지 않는다.</p>
+<p>현재·장래채권을 일괄 양도하거나 발생할 때마다 개별 양도할 수 있다. 교재는 당사자 의사가 명확하지 않을 때 일괄 양도로 해석한다고 소개하지만, <strong>단순히 표현이 불명확하다고 모든 장래채권이 자동 이전되는 법정 의제는 아니다.</strong> 구체적 기본계약의 문언·대상·특정 가능성으로 양도 범위를 확인한다.</p>
+<p>민법상 채권양도이므로 양도 자체의 합의와 채무자에 대한 <strong>통지 또는 승낙</strong>의 대항요건을 구별한다. 다른 제3자에 대한 대항에는 확정일자 등 추가 요건이 문제된다. 채무자는 양도 통지를 받을 때까지 양도인에게 주장할 수 있었던 사유를 양수인에게도 주장할 수 있다. 다만 이의 없는 승낙과 그 효과, 상계 등 개별 법리는 민법450·451조 등과 함께 본다.</p>
+<p>설명용 사례: 은아가 약속한 빵 수량을 제대로 납품하지 않아 고객에게 대금 감액·항변 근거가 있었다면, 채권이 업체로 넘어갔다는 이유만으로 그 방어가 모두 사라지지 않는다. 반대로 매입업자가 양도받았다는 사실만 있고 통지·승낙 등 요건을 갖추지 않으면 고객에 대한 대항 문제가 생긴다. <strong>시험:</strong> 기본/개별·현재/장래·통지/승낙·기존 항변. <strong>키워드:</strong> 양도해도 채권의 사정이 이어짐. <strong>한 줄:</strong> 돈 받을 사람이 바뀌어도 원래 채권의 문제와 채무자의 정당한 방어는 함께 검토한다.</p>
+<h1>4. 세 거래를 한 번에 구분하기</h1>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>금융리스</th>
+<th>가맹</th>
+<th>채권매입</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇이 필요한가?</td>
+<td>설비 취득 자금</td>
+<td>브랜드·영업 방식·지원</td>
+<td>외상채권의 대가·관리·회수</td>
+</tr>
+<tr>
+<td>중심 상대방</td>
+<td>이용자·리스업자·공급자</td>
+<td>본부·가맹상</td>
+<td>판매상인·매입업자·원채무자</td>
+</tr>
+<tr>
+<td>핵심 위험</td>
+<td>공급 하자·관리·중도해지</td>
+<td>품질·지역침해·비밀·종료</td>
+<td>원채무자 불이행·양도 항변</td>
+</tr>
+<tr>
+<td>시험에서 뒤집는 말</td>
+<td>업자가 선택/관리/리스료 지급</td>
+<td>같은 간판이면 직원·항상 본부 책임</td>
+<td>매입 또는 회수 하나만·무조건 신용 보증</td>
+</tr>
+<tr>
+<td>근거 조문</td>
+<td>168조의2–5</td>
+<td>168조의6–10</td>
+<td>168조의11–12</td>
+</tr>
+</tbody></table>
+<p>이 강으로 상법기초의 거래 규칙을 마무리한다. 상인·대리·등기·양도·상행위 특칙을 먼저 배운 이유는 이처럼 여러 계약이 결합해도 <strong>당사자, 명의, 권리, 책임, 대항요건</strong>을 순서대로 찾기 위해서였다. 주식회사법에서는 거래 유형보다 그 거래를 수행하는 회사의 조직·주주·이사·자본을 살핀다.</p>
+<h1>5. 어려운 용어를 쉬운 장면으로</h1>
+<h3>금융리스 金融리스</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 金(쇠 금): 돈, 融(녹을 융): 융통, 리스는 lease의 음역. <strong>③ 합친 뜻:</strong> 설비를 통한 자금 융통. <strong>④ 이름의 이유:</strong> 설비를 쓸 자금을 마련하는 기능이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이용자가 선정한 재산을 업자가 취득·대여받아 일정 기간 이용하게 하고 대가를 받는 거래. <strong>⑥ 쉬운 말:</strong> 필요한 기계를 회사가 마련하고 나는 나누어 대가를 낸다. <strong>⑦ 사례:</strong> 빵집 오븐.</p>
+<p><strong>⑧ 시험:</strong> 이용자 선택·관리·상인 불요. <strong>⑨ 비교·기억법:</strong> 단순 운용리스·임대차와 구조 구별.</p>
+<h3>물적 금융 物的金融</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 物(물건 물), 的(과녁 적), 金(쇠 금), 融(녹을 융). <strong>③ 합친 뜻:</strong> 물건을 통하여 제공하는 금융. <strong>④ 이름의 이유:</strong> 돈 대신 필요한 설비 이용을 마련해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 물건 취득·이용을 매개로 한 자금 편의. <strong>⑥ 쉬운 말:</strong> 기계를 쓰게 해 주는 방식으로 자금을 지원한다. <strong>⑦ 사례:</strong> 리스료로 취득자금·이자 회수.</p>
+<p><strong>⑧ 시험:</strong> 계약의 실질. <strong>⑨ 비교·기억법:</strong> 법적 소유와 경제적 위험은 항상 일치하지 않음.</p>
+<h3>비전형·무명 非典型·無名</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 非(아닐 비), 典(법 전), 型(거푸집 형), 無(없을 무), 名(이름 명). <strong>③ 합친 뜻:</strong> 정해진 한 유형에 속하지 않음. <strong>④ 이름의 이유:</strong> 임대·매매·금융 등 요소가 결합해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 민법의 전형계약 하나로 설명되지 않는 혼합·특수 계약. <strong>⑥ 쉬운 말:</strong> 한 가지 계약 틀에 다 넣기 어렵다. <strong>⑦ 사례:</strong> 금융리스·가맹·팩토링 기본계약.</p>
+<p><strong>⑧ 시험:</strong> 민법 임대차 규정 바로 적용하지 않음. <strong>⑨ 비교·기억법:</strong> 법적 규율이 전혀 없다는 뜻 아님.</p>
+<h3>운용 運用</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 運(옮길 운), 用(쓸 용). <strong>③ 합친 뜻:</strong> 움직여 사용함. <strong>④ 이름의 이유:</strong> 물건 사용 제공의 성격에 주목해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 금융리스 외 리스 유형을 설명하는 용어. <strong>⑥ 쉬운 말:</strong> 회사 물건을 빌려 쓴다. <strong>⑦ 사례:</strong> 범용 복사기 대여의 전형.</p>
+<p><strong>⑧ 시험:</strong> 실제 계약으로 구별. <strong>⑨ 비교·기억법:</strong> 자동차라는 이유만으로 운용리스 확정 아님.</p>
+<h3>수령증 受領證</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 受(받을 수), 領(거느릴 령): 받음, 證(증거 증). <strong>③ 합친 뜻:</strong> 받았음을 증명하는 문서. <strong>④ 이름의 이유:</strong> 공급 이행과 개시 시점을 분명히 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 리스물건 수령을 확인하는 증서. <strong>⑥ 쉬운 말:</strong> 기계를 받았다는 확인서. <strong>⑦ 사례:</strong> 적합 수령 추정.</p>
+<p><strong>⑧ 시험:</strong> 추정과 간주·실제 인도 구별. <strong>⑨ 비교·기억법:</strong> 화물상환증 같은 유통 유가증권 아님.</p>
+<h3>잔존 리스료 殘存리스料</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 殘(남을 잔), 存(있을 존), 料(헤아릴 료): 대가. <strong>③ 합친 뜻:</strong> 남아 있는 리스 대가. <strong>④ 이름의 이유:</strong> 앞으로 회수할 자금이 남아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 기간 중 아직 지급되지 않은 나머지 리스료. <strong>⑥ 쉬운 말:</strong> 계약 끝까지 남은 돈. <strong>⑦ 사례:</strong> 이용자 귀책 해지의 정산.</p>
+<p><strong>⑧ 시험:</strong> 168조의5 또는·손해 중복 방지. <strong>⑨ 비교·기억법:</strong> 반환 물건 가치를 무시한 이중 이익 아님.</p>
+<h3>사정변경 事情變更</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 事(일 사), 情(뜻 정): 사정, 變(변할 변), 更(고칠 경). <strong>③ 합친 뜻:</strong> 상황이 달라짐. <strong>④ 이름의 이유:</strong> 원래 예상한 사용 기반이 바뀌어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 지속에 영향을 주는 기초 사정의 변화. <strong>⑥ 쉬운 말:</strong> 영업 폐지 등으로 설비를 계속 못 쓴다. <strong>⑦ 사례:</strong> 이용자의 중도해지.</p>
+<p><strong>⑧ 시험:</strong> 중대성·3개월 예고·배상. <strong>⑨ 비교·기억법:</strong> 단순 변심과 구별.</p>
+<h3>가맹 加盟</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 加(더할 가), 盟(맹세 맹). <strong>③ 합친 뜻:</strong> 약속한 체계에 참여함. <strong>④ 이름의 이유:</strong> 공통된 이름과 방식에 들어가서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업표지와 지원을 받아 정해진 방식으로 영업하는 관계. <strong>⑥ 쉬운 말:</strong> 같은 브랜드 가게를 독립적으로 운영한다. <strong>⑦ 사례:</strong> 새벽빵 가맹점.</p>
+<p><strong>⑧ 시험:</strong> 표지·지원통제·대가. <strong>⑨ 비교·기억법:</strong> 본부 직원이나 지점과 다름.</p>
+<h3>영업표지 營業標識</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 營(경영할 영), 業(업 업), 標(표할 표), 識(표지 식). <strong>③ 합친 뜻:</strong> 영업을 구별하는 표시. <strong>④ 이름의 이유:</strong> 손님이 어느 영업인지 알아보게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상호·상표·휘장 등 영업 출처를 드러내는 표지. <strong>⑥ 쉬운 말:</strong> 가게 이름과 브랜드 표시. <strong>⑦ 사례:</strong> 같은 간판과 상품 표시.</p>
+<p><strong>⑧ 시험:</strong> 표지 사용 허락과 법적 독립성. <strong>⑨ 비교·기억법:</strong> 이름 공유가 모든 채무의 보증은 아님.</p>
+<h3>경업금지 競業禁止</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 競(다툴 경), 業(업 업), 禁(금할 금), 止(그칠 지). <strong>③ 합친 뜻:</strong> 경쟁 영업을 못하게 함. <strong>④ 이름의 이유:</strong> 가맹점 투자의 기반을 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본부의 가맹상 영업지역 내 동일·유사 영업 등을 제한. <strong>⑥ 쉬운 말:</strong> 본부가 바로 옆에서 매출을 빼앗지 못하게 한다. <strong>⑦ 사례:</strong> 직영·추가 가맹 출점.</p>
+<p><strong>⑧ 시험:</strong> 다른 약정과 불공정 약관·특별법. <strong>⑨ 비교·기억법:</strong> 상업사용인 경업금지와 주체·범위 구별.</p>
+<h3>영업비밀 營業秘密</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 營(경영할 영), 業(업 업), 秘(숨길 비), 密(빽빽할 밀): 은밀. <strong>③ 합친 뜻:</strong> 영업의 숨겨진 정보. <strong>④ 이름의 이유:</strong> 경험과 기술 투자를 지켜야 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 가맹계약 관련 알게 된 보호할 영업상 비밀. <strong>⑥ 쉬운 말:</strong> 공개하지 않은 배합·운영 노하우. <strong>⑦ 사례:</strong> 종료 후 조리 비밀 유출.</p>
+<p><strong>⑧ 시험:</strong> 계약 끝나도 보호. <strong>⑨ 비교·기억법:</strong> 모든 공개정보나 영구 경쟁금지와 같지 않음.</p>
+<h3>채권매입 債權買入</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 債(빚 채), 權(권세 권), 買(살 매), 入(들 입). <strong>③ 합친 뜻:</strong> 돈 받을 권리를 사들임. <strong>④ 이름의 이유:</strong> 외상대금 권리를 넘겨 자금·서비스를 얻어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업채권을 매입하여 회수하는 영업. <strong>⑥ 쉬운 말:</strong> 나중에 받을 돈의 권리를 판다. <strong>⑦ 사례:</strong> 납품대금 채권의 팩토링.</p>
+<p><strong>⑧ 시험:</strong> 매입하여 회수·장래채권. <strong>⑨ 비교·기억법:</strong> 남의 채권 추심 대행만과 구별.</p>
+<h3>상환청구 償還請求</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 償(갚을 상), 還(돌아올 환), 請(청할 청), 求(구할 구). <strong>③ 합친 뜻:</strong> 갚아 돌려달라고 요구함. <strong>④ 이름의 이유:</strong> 매입업자가 위험을 전부 떠안지 않는 구조여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 원채무자 불이행 때 판매상인에게 채권액 반환을 요구하는 권리. <strong>⑥ 쉬운 말:</strong> 고객이 안 내면 채권 판 사람에게 돌아간다. <strong>⑦ 사례:</strong> 168조의12.</p>
+<p><strong>⑧ 시험:</strong> 기본 부진정 팩토링. <strong>⑨ 비교·기억법:</strong> 원채무자에게 원래 채권 행사와 상대가 다름.</p>
+<h3>진정·부진정 眞正·不眞正</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 眞(참 진), 正(바를 정), 不(아닐 부). <strong>③ 합친 뜻:</strong> 완전한 유형·그와 다른 유형. <strong>④ 이름의 이유:</strong> 신용위험을 매입업자가 인수했는지 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 팩토링에서 판매상인에 대한 상환청구 부재·존재의 구분. <strong>⑥ 쉬운 말:</strong> 안 갚는 위험이 돌아오나 안 돌아오나. <strong>⑦ 사례:</strong> 진정은 상환청구 없음.</p>
+<p><strong>⑧ 시험:</strong> 선급·통지 축과 별개. <strong>⑨ 비교·기억법:</strong> 부진정이 불법·가짜라는 뜻 아님.</p>
+<h3>선급 先給</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선), 給(줄 급). <strong>③ 합친 뜻:</strong> 먼저 지급함. <strong>④ 이름의 이유:</strong> 외상값을 기다리지 않고 현금을 주어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업채권 변제기 전에 매입 대가를 지급하는 방식. <strong>⑥ 쉬운 말:</strong> 두 달 뒤 받을 돈을 지금 먼저 받는다. <strong>⑦ 사례:</strong> 팩토링의 금융 기능.</p>
+<p><strong>⑧ 시험:</strong> 선급이어도 상환청구 가능. <strong>⑨ 비교·기억법:</strong> 비선급도 회수·관리 서비스 기능 있음.</p>
+<h3>채권양도·항변 債權讓渡·抗辯</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 債(빚 채), 權(권세 권), 讓(사양할 양), 渡(건널 도), 抗(막을 항), 辯(말 잘할 변). <strong>③ 합친 뜻:</strong> 권리를 넘김·청구에 맞서 주장함. <strong>④ 이름의 이유:</strong> 채권자가 바뀌어도 채무자의 방어를 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채권 이전과 채무자가 지급을 거절·제한할 사유의 주장. <strong>⑥ 쉬운 말:</strong> 받을 사람은 바뀌어도 잘못 납품한 문제는 남는다. <strong>⑦ 사례:</strong> 양도 통지 전 하자 사유.</p>
+<p><strong>⑧ 시험:</strong> 통지 또는 승낙·민법450·451. <strong>⑨ 비교·기억법:</strong> 모든 항변이 어떤 승낙에도 무조건 유지되는 것은 아님.</p>
+<h1>6. 기출 연결과 교재 복습 질문</h1>
+<table>
+<thead>
+<tr>
+<th>TOP5</th>
+<th>연결</th>
+<th>출제 의도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상법_065</td>
+<td>1-1·1-4</td>
+<td>이용자 선택·관리·상인 불요</td>
+</tr>
+<tr>
+<td>상법_067</td>
+<td>1-2·1-3·1-4</td>
+<td>협력과 독자 인도/검사·리스료 지급 주체</td>
+</tr>
+<tr>
+<td>상법_068</td>
+<td>2-1·2-4</td>
+<td>지원·가맹금과 사용자책임의 구별</td>
+</tr>
+<tr>
+<td>상법_069</td>
+<td>3-1·3-2·3-3</td>
+<td>매입·회수·상환청구·채무자 항변</td>
+</tr>
+<tr>
+<td>상법_099</td>
+<td>2-2·2-3</td>
+<td>무제한 지역침해 약관과 종료 후 비밀</td>
+</tr>
+</tbody></table>
+<p>상법_098은 유지관리 책임,066은 교재가 분류한 기능을 복습한다. <strong>067②의 지급 주체 오기,066의 절세·노후화 위험 설명의 일반화 한계</strong>를 부록에 별도로 표시했다. JSON 원문·정답은 바꾸지 않았다. 실제 오답률 자료는 없다. ‘금융리스업자가 리스료를 낸다’처럼 돈 방향을 뒤집는 보기부터 경계한다.</p>
+<p><strong>교재 내용을 자기 말로 확인:</strong> 금융리스는 세 사람과 두 계약→협력/공급→수령증→관리·해지, 가맹은 표지·지원·대가→독립성→상호 의무→제3자 책임→양도·종료, 팩토링은 외상채권→매입·회수→상환청구→양도 대항요건 순서로 설명한다.</p>
+<h1>7. 새로운 사례5문제</h1>
+<p><strong>문제1.</strong> 꽃집 운영자가 자신이 고른 냉장설비를 금융리스로 사용한다. 리스회사가 설비를 직접 분해 검사하지 않았다며 당연히 의무 위반이라고 주장한다. 별도 보증 약정은 없다. 맞나?</p>
+<p><strong>해설:</strong> 회사는 적합한 설비를 수령하도록 협력할 의무가 있지만 특별한 사정 없이 독자적 검사·확인 의무가 당연히 있는 것은 아니다. 공급자에 대한 직접청구와 회사의 실제 협력 위반을 구분한다. <strong>의도:</strong> 결과 보증과 협력 구별.</p>
+<p><strong>문제2.</strong> 공급자는 약정한 설비를 제대로 줬지만 이용자는 수령증을 정당한 이유 없이 거부한다. 이를 아는 리스회사가 공급자에게 대금을 줄 수 없다고 한다. 이용자도 리스료를 안 내겠다고 한다.</p>
+<p><strong>해설:</strong> 수령증은 실제 수령을 확인하는 수단이지 모든 권리의 유일한 발생요건이 아니다. 회사의 공급자 대금 거절은98다6565의 신의칙을, 이용자의 리스료는 실제 적합한 수령과 계약을 본다. <strong>의도:</strong> 두 지급채무와 증거 기능 분리.</p>
+<p><strong>문제3.</strong> 프랜차이즈 본부가 가맹점 바로 옆에 언제든 같은 업종 점포를 무제한 낼 수 있다는 약관을 제시했다. 상법이 ‘다른 약정이 없으면’이라고 했으니 항상 유효한가?</p>
+<p><strong>해설:</strong> 아니다. 다른 약정 가능성과 불공정 약관의 유효성은 별개다. 무제한 침해 조항의 무효 판례와 가맹사업법의 영업지역 보호를 함께 확인한다. <strong>의도:</strong> 임의규정과 약관규제의 양립.</p>
+<p><strong>문제4.</strong> 가맹점이 독립적으로 영업하다 손님에게 불법행위를 했다. 본부는 품질 교육만 했고 실질적 사용자 통제는 없었다. 같은 간판이라는 이유만으로 본부 사용자책임이 자동 성립하나? 계약 종료 뒤 조리 비밀은 공개해도 되나?</p>
+<p><strong>해설:</strong> 사용자책임은 독립성·실제 지휘감독 관계를 따져야 한다. 다른 명의대여·제조물책임도 별도 요건이 필요하다. 종료 뒤에도168조의8의 영업비밀 보호는 남는다. <strong>의도:</strong> 제3자 책임과 내부 존속 의무 분리.</p>
+<p><strong>문제5.</strong> 식자재 판매상이 외상채권을 선급 방식으로 팔았는데 원래 고객이 지급하지 않았다. 상환청구를 배제한 약정은 없다. 판매상은 ‘미리 돈을 받았으니 진정 팩토링이고 끝났다’고 한다.</p>
+<p><strong>해설:</strong> 선급 여부와 상환청구 가능 여부는 다른 분류다.168조의12의 기본은 판매상인에 대한 상환청구 가능이다. 실제 계약·원채무자 항변·위험 인수 약정을 따로 확인한다. <strong>의도:</strong> 분류 축 혼동 방지.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<div class="memory-sheet">
+
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 리스의 세 사람·돈 방향 /가맹의 독립성과 지원·지역 보호 /팩토링의 상환청구.</p>
+<table>
+<thead>
+<tr>
+<th>장면</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>금융리스168의2</td>
+<td>이용자가 물건·공급자 선택, 업자는 취득·금융, 이용자 상인 불요</td>
+</tr>
+<tr>
+<td>지급 방향</td>
+<td>이용자→업자 리스료 / 업자→공급자 물건 대금</td>
+</tr>
+<tr>
+<td>168의3</td>
+<td>적합 수령 협력, 특별사정 없으면 업자 독자 인도·검사 의무 아님</td>
+</tr>
+<tr>
+<td>168의4</td>
+<td>공급자는 이용자에게 인도, 이용자는 직접 배상·적합 인도 청구, 업자 협력</td>
+</tr>
+<tr>
+<td>수령증·관리</td>
+<td>적합 수령 추정, 실제 인도와 증거 구별, 이용자가 선관주의 관리</td>
+</tr>
+<tr>
+<td>168의5 해지</td>
+<td>이용자 귀책→잔존 리스료 또는 반환+손해 검토 / 중대 사정변경→3개월 예고+배상</td>
+</tr>
+<tr>
+<td>168의6 가맹</td>
+<td>표지 사용+지원·통제+대가, 본부·가맹상은 독립 상인</td>
+</tr>
+<tr>
+<td>168의7·8</td>
+<td>본부 지원·영업지역 보호 / 가맹상 권리 침해 금지·종료 후 비밀</td>
+</tr>
+<tr>
+<td>제3자 책임</td>
+<td>24명의·표현대리·756실질 통제·제조물 결함 각각 요건</td>
+</tr>
+<tr>
+<td>168의9·10</td>
+<td>양도 본부 동의, 특별사유 없으면 동의 / 부득이 사정·상당기간 해지 예고</td>
+</tr>
+<tr>
+<td>특별법</td>
+<td>갱신180–90일·10년 범위 / 본부 해지2개월 유예·서면2회 원칙</td>
+</tr>
+<tr>
+<td>168의11·12</td>
+<td>영업채권 매입하여 회수, 장래채권도 가능, 기본은 판매상인에 상환청구</td>
+</tr>
+<tr>
+<td>팩토링 분류</td>
+<td>진정/부진정=상환 여부, 통지/비통지, 선급/비선급은 별도 축</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “수령증은 추정의 증거이지 현실을 지우는 종이가 아니다.” “가맹점은 직원이 아니지만 본부의 실질 통제는 따져 본다.” “선급 팩토링이 곧 진정 팩토링은 아니다.”</p>
+<p><strong>원자료 주의:</strong>067② 리스료 지급자 오기.066의 절세·노후화 위험은 모든 금융리스의 자동 효과 아님. 채권양도 통지·승낙 및 채무자 항변은 따로 확인.</p>
+<p><strong>사례를 풀 순서:</strong> 거래 유형 → 당사자·계약 → 돈/물건/권리 방향 → 위반 의무 → 특약·특별법 → 손해·종료.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 빵집의 오븐·브랜드·외상대금 사례에서 누구에게 무엇을 청구하는지 설명하면 이해 완료. 🟡 리스료와 물건 대금, 본부와 가맹점, 선급과 진정이 섞이면 비교표를 복습한다. 🔴 세 거래를 단순 임대·고용·매매 하나로만 이해하면1-1부터 다시 본다. 실제 답변 전 임의 평가하지 않는다. <strong>복습TOP3: 금융리스의 역할 분담, 가맹계약의 독립성과 보호, 팩토링 위험·채권양도.</strong></p>
+<h1>자료와 현행법 대조</h1>
+<p>교재·워크북·제공 JSON을 바탕으로 구성했다.2026.10.23 기준 <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001702">상법168조의2–12</a>, <a href="https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=6554">금융리스 협력 의무 대법원 설명</a>, <a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1022759797">법인세법 시행령24조5항</a>, <a href="https://www.law.go.kr/lsInfoP.do?lsId=009367">가맹사업법</a>, <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1034221799">가맹계약 해지 제한14조</a>를 확인했다. 교재의 리스료 지급 주체·수령증의 면책 일반화·자동 절세 설명을 보완하고 원본 문제는 그대로 보존했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_065"><h4>형성평가 · 상법_065</h4><p class="question-stem">금융리스에 관한 설명 중 옳은 것은?</p><ol class="choices"><li>금융리스에서는 금융리스업자가 금융리스물건을 선택한다.</li><li>금융리스물건의 유지 및 관리는 금융리스이용자의 책임 하에 놓인다.</li><li>금융리스의 대상은 범용성이 있는 물건인 경우가 많다.</li><li>금융리스이용자는 상인이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 이용자가 물건과 공급자를 선정하는 것이 금융리스의 기본이다.</li><li><strong>선택</strong> · 맞음·정답. 수령 후 이용자가 선관주의로 유지·관리한다.</li><li><strong>비선택</strong> · 교재의 전형적 설명과 반대다. 다만 범용성은 경향일 뿐 범용 물건의 금융리스를 법적으로 금지하는 요건이 아니다.</li><li><strong>비선택</strong> · 틀림. 이용자가 반드시 상인일 필요는 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 금융리스에서는 금융리스업자가 금융리스물건을 선택하는 것이 아니라, 금융리스이용자가 금융리스물건과 공급자 등을 결정한다. ③ 금융리스의 대상은 기계, 시설, 그 밖의 재산으로 금융리스물건은 금융리스이용자의 필요에 따라 결정하게 되므로 여러 용도로 사용될 수 있는 이른바 범용성이 있는 물건보다는 범용성이 없는 고가의 물건인 경우가 많다. ④ 금융리스이용자가 상인일 필요는 없다.</p></details></section>
+
+<section class="question-card" id="question-상법_066"><h4>형성평가 · 상법_066</h4><p class="question-stem">금융리스의 기능으로 옳지 않은 것은?</p><ol class="choices"><li>설비자금 조달효과</li><li>절세 효과</li><li>설비 등 노후화의 위험회피</li><li>본래의 사업 외에 새로운 수익 창출</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 금융리스 핵심 기능이다. 설비 취득 자금의 편의를 제공한다.</li><li><strong>비선택</strong> · 원본은 기능으로 분류한다. 그러나 금융리스료 전액이 자동 손비라는 일반화는 현행 세법상 정확하지 않다. 회계·세법·자산 분류를 확인한다.</li><li><strong>비선택</strong> · 원본은 기능으로 분류한다. 실제 노후화·잔존가치 위험은 계약에 따라 다르며 이용자 관리책임·해지 제한이 사라지는 것은 아니다.</li><li><strong>선택</strong> · 원본 정답. 교재에서 가맹본부의 가맹업 기능으로 설명한 항목이다. 기능 분류 문제이지 모든 실제 거래 수익을 배제하는 명제는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 금융리스의 기능으로는 설비자금 조달효과, 절세 효과, 설비 등 노후화의 위험회피가 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_067"><h4>형성평가 · 상법_067</h4><p class="question-stem">금융리스거래의 법률관계에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>금융리스물건이 공급계약에서 정한 시기와 내용에 따라 공급되지 아니한 경우 금융리스이용자는 공급자에게 직접 손해배상을 청구할 수 있다.</li><li>금융리스물건수령증이 발급되지 않았더라도 실제로 금융리스물건이 인도되었다면 금융리스업자는 금융리스료를 지급해야 한다.</li><li>금융리스업자가 금융리스물건의 인도의무나 검사의무 등을 부담한다.</li><li>금융리스물건의 공급자는 공급계약에서 정한 시기에 그 물건을 금융리스이용자에게 인도해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음.168조의4 제2항의 이용자 직접청구권이다.</li><li><strong>비선택</strong> · 원문 오기 주의. 리스료 지급자는 금융리스업자가 아니라 금융리스이용자다. 문장 그대로는 잘못되어 단일정답 문제에 흠이 있다. 원본 정답③을 그대로 보존하고 지급 방향을 별도로 바로잡는다.</li><li><strong>선택</strong> · 원본 정답. 특별한 보증 약정 등 없이 업자가 독자적 인도·검사 의무를 당연히 부담하지 않는다. 적합한 수령을 위한 협력 의무는 있다.</li><li><strong>비선택</strong> · 맞음. 공급계약에서 정한 시기에 공급자가 이용자에게 직접 인도한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 금융리스업자는 금융리스이용자가 금융리스계약에서 정한 시기에 금융리스계약에 적합한 금융리스물건을 수령할 수 있도록 하여야 한다(제168조의3 제1항). 실제로 금융리스물건을 인도하는 것은 공급자이지만 금융리스업자가 금융리스계약의 당사자이므로 이러한 의무를 부과한 것이다. 그러나 금융리스업자가 금융리스물건의 인도의무나 검사의무 등을 부담하지는 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_068"><h4>형성평가 · 상법_068</h4><p class="question-stem">다음 중에서 가맹업에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>가맹상은 가맹업자가 지정하는 품질기준이나 영업방식에 따라 영업을 해야 한다.</li><li>상호 등과 영업표지의 사용허락과 경영 및 영업활동 등에 대한 지원ㆍ교육과 통제에 대한 대가로 지급되는 금전은 명칭이나 지급 형태를 묻지 않고 가맹금이라고 한다.</li><li>가맹업자는 가맹상의 영업을 위하여 필요한 지원을 해야 한다.</li><li>가맹상이 영업과 관련하여 제3자에게 불법행위를 한 경우 원칙적으로 가맹업자는 민법 제756조의 사용자 배상책임을 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 가맹계약의 품질·영업방식 기준을 따른다.</li><li><strong>비선택</strong> · 기본 취지상 맞음. 법정 대가의 실질을 보고 명칭·지급 형태만으로 가맹금 여부를 피하지 못한다.</li><li><strong>비선택</strong> · 맞음.168조의7 제1항의 필요한 지원 의무다.</li><li><strong>선택</strong> · 틀림·정답. 독립 사업자 관계에서는 사용자책임이 자동 성립하지 않는다. 본부의 실질적 지휘·감독 등 사용관계가 있으면 별도로 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 가맹업자와 가맹상은 법적으로 독립된 관계로 가맹상이 영업과 관련하여 제3자에게 불법행위를 하더라도 원칙적으로 가맹업자는 민법 제756조의 사용자 배상책임을 부담하지 않는다. 다만, 가맹업자가 상호나 상표 등의 사용허락과 영업을 위한 지원을 넘어서 사용자와 피용자의 관계와 같이 가맹상을 통제하는 관계라면 민법 제756조의 사용자 배상책임을 물을 수 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_069"><h4>형성평가 · 상법_069</h4><p class="question-stem">다음 중에서 채권매입업에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>채권매입업은 타인의 영업상의 채권을 매입하거나 회수하는 것 중 한 가지를 해야 한다.</li><li>채권매입거래에서 채권을 회수할 수 없는 경우에 채권매입업자가 채권을 판매한 상인에게 상환청구를 할 수 있는 경우를 부진정팩토링이라고 한다.</li><li>채권매입업자는 채권을 판매한 상인이 수행해야 하는 채권의 관리나 회수, 회계 등의 업무를 대신 수행하게 되므로 관련 서비스를 제공하는 기능을 하게 된다.</li><li>판매상인이 영업채권을 채권매입업자에게 매도하는 것은 민법상 채권양도이므로 채무자는 채권양도를 통지받을 때까지 발생했던 모든 사유로 채권매입업자에게 대항할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답. 영업채권을 매입하여 회수하는 영업이다. 매입 또는 회수 중 하나만 하는 정의가 아니다.</li><li><strong>비선택</strong> · 맞음. 상환청구 가능하면 부진정, 배제된 구조가 진정 팩토링이다.</li><li><strong>비선택</strong> · 맞음. 채권 관리·회수·회계 등의 서비스 기능이다.</li><li><strong>비선택</strong> · 통지를 통한 대항의 기본 설명상 맞음. 채무자의 기존 항변을 보호한다. 이의 없는 승낙·상계 등 개별 민법 규율까지 생략하는 절대문장으로 읽지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 채권매입업은 타인의 영업상의 채권을 매입하여 회수하는 것을 동시에 해야 하며 이 중 하나만을 영업으로 하면 상법상 채권매입업에는 해당하지 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_098"><h4>워크북 · 상법_098</h4><p class="question-stem">다음 중에서 상법상 금융리스계약에서 금융리스물건에 대한 관리 책임을 부담하는 자에 해당하는 것은?</p><ol class="choices"><li>금융리스업자</li><li>금융리스이용자</li><li>공급자</li><li>리스중개업자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 비선택. 업자는 금융 제공·협력을 맡으며 이용자 수령 후 일반적 유지관리 주체와 다르다.</li><li><strong>선택</strong> · 정답. 이용자가 수령 후 선관주의로 유지·관리한다.</li><li><strong>비선택</strong> · 비선택. 공급자는 약정에 맞는 물건 인도 등 공급 의무를 부담한다.</li><li><strong>비선택</strong> · 비선택. 중개인이 법정 유지관리 주체라는 규정은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 금융리스에서는 금융리스물건의 공급자가 공급계약에서 정한 시기에 그 물건을 금융리스이용자에게 인도하므로 금융리스물건의 유지 및 관리 책임은 금융리스이용자가 부담한다.</p></details></section>
+
+<section class="question-card" id="question-상법_099"><h4>워크북 · 상법_099</h4><p class="question-stem">다음 중에서 상법상 가맹업에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>경험 없는 사업자의 시장진입을 용이하게 하는 기능이 있다.</li><li>가맹상은 가맹업자가 지정하는 품질기준이나 영업방식에 따라 영업을 하여야 한다.</li><li>상법에 따르면 가맹업자가 언제라도 가맹상의 영업지역 내에서 경업을 할 수 있는 가맹계약은 유효하다.</li><li>가맹상은 계약이 종료한 후에도 가맹계약과 관련하여 알게 된 가맹업자의 영업상의 비밀을 준수해야 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기능 설명상 맞음. 알려진 표지·경험을 활용해 진입을 돕지만 성공 보장은 아니다.</li><li><strong>비선택</strong> · 맞음. 품질과 영업방식의 통일을 위한 기본 의무다.</li><li><strong>선택</strong> · 틀림·정답. 아무 제약 없이 언제라도 같은 지역에 경쟁 출점하도록 하는 불공정 약관은 무효 문제다. 다른 약정 가능성과 특별법의 영업지역 보호를 함께 본다.</li><li><strong>비선택</strong> · 맞음.168조의8 제2항에 따라 계약 종료 후에도 영업상 비밀 보호의무가 남는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③ 대법원 2000. 6. 9. 선고 98다45553, 45560, 45577 판결 참조. 가맹업자가 언제라도 동일 또는 유사한 업종의 영업을 하거나, 동일 또는 유사한 업종의 가맹계약을 체결할 수 있도록 하는 가맹계약은 무효이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 15' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 15|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

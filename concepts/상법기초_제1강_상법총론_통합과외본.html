@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제1강 상법총론 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제1강 상법총론 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>상법은 <strong>사업하는 사람만 읽는 특별한 암호</strong>가 아니다. 동네 빵집이 밀가루를 주문하고, 직원이 계약하고, 은행이 돈을 빌려 주는 생활에서 “누가 책임지고, 어떤 규칙을 먼저 적용할까?”를 정하는 법이다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 던질 질문</th>
+<th>이번 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하는가?</td>
+<td>상법의 정체, 규칙을 찾는 순서, 기업거래를 다르게 다루는 이유, 적용 범위다.</td>
+</tr>
+<tr>
+<td>왜 생겼는가?</td>
+<td>매일 수많은 거래를 반복하는 기업에 일반적인 민법만 적용하면 속도·신뢰·자금조달의 필요를 충분히 다루기 어렵다.</td>
+</tr>
+<tr>
+<td>법 전체의 어디인가?</td>
+<td>민법이라는 일반 사법 위에 기업거래의 특별 규칙을 얹는 입구다.</td>
+</tr>
+<tr>
+<td>앞뒤 단원과 연결은?</td>
+<td>민법의 계약·대리·신의칙을 바탕으로, 다음 강에서 그 거래의 주체인 ‘상인’을 찾는다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>약관이 왜 계약을 구속하는지, 소비자에게도 상법이 적용될 수 있는지, 뒤의 상호·등기·상사매매가 왜 특별한지 연결되지 않는다.</td>
+</tr>
+</tbody></table>
+<p><strong>읽은 범위:</strong> 교재 제1강 1–13쪽, 보충학습 15–17쪽, 함께 수록된 워크북 제1강, 제공 JSON 7문항·28개 보기. 빈 쪽은 학습내용으로 세지 않았다. 중요도는 제공 문제의 반복과 후속 단원 연결을 바탕으로 한 학습 우선순위이며, 실제 시험 통계나 오답률은 아니다.</p>
+<p><strong>색의 약속:</strong> <mark class="yellow">노랑 = 정의·결론</mark> / <mark class="green">초록 = 이유</mark> / <mark class="pink">분홍 = 함정·예외</mark> / <mark class="blue">파랑 = 다른 개념과 연결</mark>. 원문을 색으로 덮지 않고 필요한 문장만 표시한다.</p>
+<h1>1. 상법은 어떤 법인가</h1>
+<h2 id="commercial-01-01" data-concept-id="commercial-01-01">1-1. 법률 이름을 보는가, 내용의 성질을 보는가 ★★★★★</h2>
+<p><strong>교재 3–4쪽 · 문단의 역할:</strong> ‘상법’이라는 이름만 보고 학습 범위를 좁히지 않도록, 형식과 실질을 나눈다.</p>
+<p>민지는 새로 문을 연 빵집의 계약 규칙을 찾는다. 법전의 제목이 ‘상법’이면 <strong>형식적 의미의 상법</strong>이다. 그런데 은행 거래나 전자증권에 관한 특별법에도 기업의 조직·거래 규칙이 있다. 이런 내용을 함께 묶어 보면 <strong>실질적 의미의 상법</strong>이다. 겉표지의 이름과 내용의 범위를 구별하는 것이다.</p>
+<p>여기서 商은 단순히 ‘물건을 사고팔기’보다 넓은 <strong>기업</strong>을 뜻한다. 기업은 이익을 얻으려는 목적 아래 자본과 노동을 조직하여 계획적·계속적으로 경제활동을 하는 조직이다. 상법은 이 기업의 조직과 활동에 특유한 <strong>사법</strong>을 중심으로 한다. 사법은 사람·회사 사이의 권리와 의무를 조정하는 법이다. 국가가 영업허가를 내주거나 제재하는 공법 규칙이 기업에 적용된다고 해서, 상법의 전통적 정의를 ‘기업관계의 공법 총체’로 바꾸면 안 된다.</p>
+<p><mark class="yellow">형식은 법률의 이름, 실질은 기업에 특유한 사법이라는 내용으로 판단한다.</mark></p>
+<p><strong>시험 질문:</strong> 기업 규율이면 전부 상법인가? → 아니다. <strong>키워드:</strong> 형식·실질, 기업, 특별사법. <strong>한 줄:</strong> 상법은 기업거래를 위한 사법의 특별 규칙이다.</p>
+<h2 id="commercial-01-02" data-concept-id="commercial-01-02">1-2. 상법전의 지도와 이 수업의 위치 ★★★☆☆</h2>
+<p><strong>교재 4쪽 · 넣은 이유:</strong> 지금 배우는 총칙과 상행위가 회사법·보험법 등과 어떻게 이어지는지 보여 준다.</p>
+<p>상법은 1962년 제정되어 1963년 시행되었고, 지금의 법전은 총칙·상행위·회사·보험·해상·항공운송의 여섯 편으로 구성된다. 이 과목은 앞의 <strong>총칙과 상행위</strong>를 중심으로 한다. 주식회사를 만드는 방법과 주주·이사의 관계는 뒤에 공부할 회사편의 문제다. 따라서 ‘상법기초를 끝냈다’는 말과 ‘상법전 전체를 끝냈다’는 말은 다르다.</p>
+<p><strong>시험 질문:</strong> 회사도 상법의 대상인가? → 그렇다. 이 수업의 집중 범위와 법전 전체를 구별한다. <strong>키워드:</strong> 6편, 총칙·상행위. <strong>한 줄:</strong> 이번 과목은 기업 공통 규칙과 각종 거래의 입구다.</p>
+<h1>2. 규칙은 어디에서 찾는가</h1>
+<h2 id="commercial-01-03" data-concept-id="commercial-01-03">2-1. 법원과 적용 순서 ★★★★★</h2>
+<p><strong>교재 4–5쪽 · 문단의 역할:</strong> 재판에서 어떤 규칙을 근거로 삼는지, 빈칸을 무엇으로 메우는지 설명한다. 여기서 법원은 法院(재판하는 기관)이 아니라 <strong>法源(법의 근원)</strong>이다.</p>
+<p>민지와 거래처가 분쟁을 일으켰다. 먼저 그 거래에 적용되는 상사 특별법과 상법을 확인한다. 규정이 비어 있으면 상관습법, 그것도 없으면 민법의 규정을 살핀다. 상법 제1조가 상관습법을 민법보다 앞에 둔 이유는 기업거래의 특수한 관행을 존중하기 위해서다. 그렇다고 강행법규를 관행으로 깨뜨릴 수 있는 것은 아니다.</p>
+<p><mark class="yellow">상사에 적용되는 특별 규정 → 상법 → 상관습법 → 민법의 순서로 검토한다.</mark> 특별법 내부의 우선관계와 강행규정은 따로 확인한다.</p>
+<p>상사제정법에는 상법전뿐 아니라 관련 특별법·시행령 등이 포함된다. 헌법에 따라 체결·공포된 조약도 국내법적 효력을 가지므로 해당 거래에서 검토할 수 있다. 다만 교재가 국제통일협약을 예로 들었다고 해서 우리나라가 그 협약을 모두 비준했다거나 모든 거래에 곧바로 적용된다고 읽으면 안 된다.</p>
+<p><strong>시험 질문:</strong> 상법에 없으면 바로 민법인가? → 상관습법 단계가 빠졌다. <strong>키워드:</strong> 제1조, 특별법, 상관습법 선순위. <strong>한 줄:</strong> 기업거래의 빈칸은 상관습법을 거친 뒤 민법으로 메운다.</p>
+<h2 id="commercial-01-04" data-concept-id="commercial-01-04">2-2. 상관습법과 사실인 상관습 ★★★★★</h2>
+<p><strong>교재 5–6쪽 · 넣은 이유:</strong> ‘다들 그렇게 한다’와 ‘법으로 지켜야 한다’는 다르기 때문이다.</p>
+<p>상관습법은 거래 방식이 오래 반복되었을 뿐 아니라, 사회가 그것을 법적으로 따라야 할 규칙이라고 받아들인 경우다. 이 <strong>법적 확신</strong>이 핵심이다. 반면 사실인 상관습은 관행으로 존재하지만 법이라는 확신까지 얻지는 못했다. 계약을 어떻게 해석할지에 도움을 줄 수 있을 뿐, 둘을 같은 법원이라고 부르면 틀린다.</p>
+<p><strong>이해용 사례:</strong> 거래처들이 늘 물건을 받은 다음 달 말일에 대금을 냈다고 하자. 그 사정만으로 당장 법률과 같은 상관습법이 생기는 것은 아니다. 계약에 지급일이 비어 있을 때 그 업계 관행을 해석자료로 쓸 수 있는지는 별도로 살핀다. 강행규정과 반대되는 관행은 그대로 우선하지 않는다.</p>
+<h3>판례 장면 · 1959.5.28. 4291민상1</h3>
+<p>교재는 사건의 구체적인 거래내용보다 <strong>관습을 법원이 어떻게 다루는가</strong>라는 법리를 제시한다. 따라서 아래 역할 설명은 실제 인물·대사를 복원한 것이 아니다. 분쟁 당사자들은 “우리 업계는 이렇게 한다”고 다투고, 재판부는 그것이 법인 관습인지 단지 거래관행인지 가려야 한다. 상관습법이라면 법원이 직권으로 조사·적용할 법규다. 사실인 관습은 당사자의 주장·입증 등 민사소송상 취급이 달라진다. 반대로 둘을 모두 법이라고 취급하면 주장하지 않은 관행까지 함부로 계약을 지배할 수 있다.</p>
+<p><strong>판례 문장 풀기:</strong> ‘직권 조사’ → 당사자가 법조문처럼 정확히 제출하지 않았다는 이유만으로 적용할 법을 외면하지 않는다. ‘사실인 관습’ → 법규 자체가 아니라 계약 의미를 정할 때 따져 볼 사실이다. 오래된 판결의 구 민법 조문 번호는 현재 민법 제106조와 구별해서 읽는다.</p>
+<p><strong>시험 질문:</strong> 반복만 있으면 관습법인가? → 법적 확신이 더 필요하다. <strong>키워드:</strong> 법적 확신, 직권조사, 제106조. <strong>한 줄:</strong> 반복된 관행과 법으로 굳어진 관행을 나눈다.</p>
+<h2 id="commercial-01-05" data-concept-id="commercial-01-05">2-3. 회사 정관과 보통거래약관 ★★★★★</h2>
+<p><strong>교재 6–7쪽 · 넣은 이유:</strong> 사인이 만든 규칙도 성격이 모두 같지는 않음을 보여 준다.</p>
+<p>회사의 <strong>정관</strong>은 회사의 조직·활동에 관한 기본 규칙이다. 회사 내부 단체질서를 정하는 상사자치법의 예로 설명하는 견해가 일반적이며, 법원성을 부정하는 견해도 있다. 반면 <strong>약관</strong>은 사업자가 여러 상대와 반복적으로 계약하기 위해 미리 마련한 계약내용이다. 이름이 ‘이용안내’여도 실질이 그러하면 약관일 수 있다.</p>
+<p>빵집의 납품업체가 거래처마다 대금·배송 규칙을 처음부터 협상한다면 비용이 많이 든다. 미리 준비한 약관은 이를 줄여 준다. 그러나 고객이 작은 글씨를 모두 바꾸기 어려우므로 사업자에게 유리한 조건을 일방적으로 넣을 위험도 생긴다.</p>
+<p>약관의 구속력에는 자치법설·상관습법설 등과 계약설이 대립한다. <strong>판례는 계약설</strong>이다. <mark class="pink">약관이 스스로 법이어서 구속하는 것이 아니라, 계약내용에 포함시키기로 한 합의 때문에 구속한다.</mark> 약관의 계약편입과 중요한 내용의 설명의무도 별도 문제다. 약관을 인쇄해 두었다는 사정만으로 모든 조항이 당연히 적용되는 것은 아니다.</p>
+<h3>판례 장면 · 2019.3.28. 2016다211224</h3>
+<p><strong>등장인물·사건:</strong> 보험계약자와 보험회사 사이에 태아를 대상으로 한 보험계약이 문제 되었다. <strong>갈등:</strong> 인쇄된 특별약관의 적용만 볼 것인지, 출생 전부터 보험대상으로 삼기로 한 개별 약정을 인정할 것인지가 다투어졌다. <strong>법원의 고민:</strong> 보험약관 자체가 법이라면 개별 합의를 배제해야 하지만, 보험계약은 형식에 얽매이지 않는 합의로 성립하는 계약이다. <strong>판단:</strong> 계약 경위와 보험기간·보험료 지급 등을 종합하여 태아를 피보험자로 삼는 개별 약정을 인정하였다. 이 강에서 기억할 부분은 태아에 관한 모든 법률문제를 일반화하는 것이 아니라, <strong>약관과 다른 개별 합의가 가능하다</strong>는 점이다.</p>
+<p><strong>문장별 번역:</strong> ‘불요식의 낙성계약’ → 특정 문서를 갖추는 것만이 계약 성립의 길은 아니고 합의가 중요하다. ‘약관에 국한되지 않는다’ → 작은 글씨 바깥의 실제 합의도 확인한다. ‘포함시키기로 합의’ → 약관의 힘은 당사자의 계약에서 나온다. 반대 결론이면 실제로 약속하고 보험료까지 받은 내용을 인쇄 문구만으로 지워 버릴 수 있다. <a href="https://www.scourt.go.kr/sjudge/1554084517379_110837.pdf">대법원 판결 원문</a></p>
+<p><strong>시험 질문:</strong> 판례가 약관을 상사자치법으로 보는가? → 아니다. <strong>키워드:</strong> 정관·약관 구별, 계약설, 개별약정. <strong>한 줄:</strong> 정관은 단체 규칙, 약관은 계약에 편입되는 미리 만든 조건이다.</p>
+<h2 id="commercial-01-06" data-concept-id="commercial-01-06">2-4. 약관은 어떻게 해석하고 언제 무효인가 ★★★★★</h2>
+<p><strong>교재 7–9쪽 · 문단의 역할:</strong> 약관이 계약에 들어와도 사업자의 문구가 언제나 그대로 관철되는 것은 아님을 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>차례</th>
+<th>쉬운 설명</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>개별약정 우선(약관법 4조)</td>
+<td>둘이 따로 합의한 내용이 약관과 다르면 그 합의를 먼저 본다.</td>
+<td>인쇄된 것이 언제나 우선하는 게 아니다.</td>
+</tr>
+<tr>
+<td>신의성실·공정·통일 해석(5조)</td>
+<td>같은 약관은 고객에 따라 자의적으로 뜻을 바꾸지 않고 공정하게 해석한다.</td>
+<td>특정 고객만 불리하게 읽지 않는다.</td>
+</tr>
+<tr>
+<td>뜻이 명확하지 않은 경우 고객 유리(5조)</td>
+<td>객관적 해석으로도 뜻이 불분명하면 작성자가 그 위험을 부담한다.</td>
+<td>고객이 마음에 안 든다는 이유만으로 무조건 유리한 뜻을 선택하지 않는다.</td>
+</tr>
+<tr>
+<td>불공정 조항의 무효(6조)</td>
+<td>신의칙을 어겨 공정성을 잃은 조항은 효력이 없다.</td>
+<td>계약 전체가 늘 무효인 것은 아니다.</td>
+</tr>
+</tbody></table>
+<p>고객에게 부당하게 불리하거나, 거래상 예상하기 어렵거나, 계약의 목적을 이루기 어려울 정도로 핵심 권리를 제한하는 조항은 불공정하다고 추정된다. 약관법 제7조는 고의·중과실 책임을 면제하는 경우, 상당한 이유 없이 손해배상 범위를 제한하거나 위험을 고객에게 떠넘기는 경우, 담보책임을 부당하게 없애거나 고객의 권리행사 요건을 가중하는 경우, 견본·표시한 품질보장을 부당하게 배제하는 경우 등을 규율한다. <mark class="green">다수에게 반복 적용되는 문구로 책임을 일방적으로 떠넘기지 못하게 하려는 장치다.</mark></p>
+<p><strong>이해용 사례:</strong> 배송업자가 “직원이 일부러 물건을 부숴도 우리는 책임지지 않는다”고 적었다. 고객이 약관에 동의했다는 사정만으로 고의 책임 면제조항을 유효하게 만들 수 없다. ‘계약에 편입되었는가’와 ‘편입된 내용이 유효한가’는 다른 심사다.</p>
+<h3>판례 장면 · 2022.5.12. 2020다278873</h3>
+<p>교재가 강조하는 것은 약관법 제6조의 판단기준이다. 당사자는 자신에게 불리한 조항을 문제 삼고, 법원은 단순한 손익과 <strong>부당한 불이익</strong>을 구별한다. <strong>불리하다는 사실 하나만으로 무효라고 결론낼 수 없다.</strong> 작성자가 거래상 지위를 남용하여 상대의 정당한 이익·합리적 기대를 거스르고 형평과 거래질서를 해쳤는지까지 살핀다. 이는 판결 전체 청구의 승패를 한 줄로 단정한 것이 아니라 교재의 법리를 풀어 쓴 것이다.</p>
+<p><strong>문장별 번역:</strong> ‘다소 불이익만으로 부족’ → 손해 보는 조건이면 모두 무효라는 말은 아니다. ‘지위 남용’ → 협상력 차이를 악용했는지 본다. ‘합리적 기대’ → 보통의 거래상대가 정당하게 예상할 내용을 지켰는지 본다. 반대로 조금만 불리해도 전부 무효라면 거래조건의 합의 자체가 불안정해진다.</p>
+<p><strong>시험 질문:</strong> 불리한 약관=당연무효? → 부당성과 전체 거래사정을 검토한다. <strong>키워드:</strong> 개별약정, 불명확, 불공정, 편입·유효 별개. <strong>한 줄:</strong> 약관은 합의로 들어오되 공정성 심사를 통과해야 한다.</p>
+<h2 id="commercial-01-07" data-concept-id="commercial-01-07">2-5. 판례와 조리를 읽는 정확한 방법 ★★★★☆</h2>
+<p><strong>교재 9쪽 · 넣은 이유:</strong> 실무에서 중요한 것과 일반적인 법원으로 인정되는 것을 구별한다.</p>
+<p>우리나라의 성문법 체계에서 판례는 교재의 분류상 일반적 법원으로 보지 않는다. 그렇다고 재판에서 무시해도 된다는 말은 아니다. 대법원의 해석은 실무에 강한 영향을 미치고, 해당 사건을 환송받은 법원이 상급심 판단에 구속되는 문제도 따로 있다. <strong>‘법원성 부정’과 ‘아무 영향 없음’은 다르다.</strong></p>
+<p>조리는 사물의 이치와 공동생활의 도리다. 교재와 제공 문제는 조리의 독립된 상법상 법원성을 부정하는 설명을 기본으로 하면서, 민법 제1조를 근거로 인정하는 견해도 소개한다. 상법 제1조가 민법을 보충적으로 적용하게 하므로 ‘조리는 법질서에서 절대로 쓰이지 않는다’고 외우면 과장이다. 문제의 질문이 이 교재의 법원 분류를 묻는지 먼저 본다.</p>
+<p><strong>시험 질문:</strong> 조리·판례의 법원성 여부. <strong>키워드:</strong> 교재의 분류, 실무 영향, 민법1조. <strong>한 줄:</strong> 시험상 분류를 익히되 그 의미를 지나치게 확대하지 않는다.</p>
+<h1>3. 상법은 왜 특별한가</h1>
+<h2 id="commercial-01-08" data-concept-id="commercial-01-08">3-1. 유지·속도·안전·유상성 ★★★★★</h2>
+<p><strong>교재 10–11쪽 · 문단의 역할:</strong> 앞으로 흩어져 나올 제도들을 네 가지 이유로 연결한다.</p>
+<table>
+<thead>
+<tr>
+<th>기업의 필요</th>
+<th>제도가 해결하는 문제</th>
+<th>기억할 연결</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>유지·존속·발전</td>
+<td>거래가 한 사람의 사정 때문에 쉽게 끊기지 않도록 기업조직과 자금조달을 돕는다.</td>
+<td>상호·상업장부·지배인·익명조합</td>
+</tr>
+<tr>
+<td>간이·신속</td>
+<td>반복 거래에서 절차를 지나치게 복잡하게 만들지 않고 빨리 권리관계를 확정한다.</td>
+<td>대리의 비현명주의48조, 낙부통지53조, 매수인 검사·통지69조, 상사시효64조</td>
+</tr>
+<tr>
+<td>거래안전</td>
+<td>밖으로 보이는 모습을 믿고 거래한 상대를 일정 요건 아래 보호한다.</td>
+<td>상업등기37조, 표현지배인14조, 점포사용인16조, 명의대여24조</td>
+</tr>
+<tr>
+<td>유상성</td>
+<td>사업으로 제공한 돈·서비스에는 대가가 붙는다는 특성을 반영한다.</td>
+<td>상사이율54조, 이자55조, 보수61조</td>
+</tr>
+</tbody></table>
+<p><strong>이해용 사례:</strong> 민지의 직원이 물건을 주문할 때마다 복잡한 증명서를 새로 받아야 한다면 장사는 멈춘다. 대신 권한이 있어 보이게 한 사람이 일정한 책임을 지게 하면 거래를 빠르게 하면서 신뢰도 지킬 수 있다. 하지만 외관을 믿기만 하면 항상 보호되는 것은 아니다. 각 제도의 선의·중과실 등 요건은 뒤에서 따로 배운다.</p>
+<p><mark class="pink">상행위 대리는 엄격한 현명주의가 아니라 비현명주의가 원칙이다.</mark> 민법상 법정이율 연5%, 상사법정이율 연6%라는 기본 규칙을 비교하되, 약정이율·이자제한·소송촉진법상 지연손해금 등 특별 규칙을 함께 확인한다. ‘상사면 언제나 6%’도 틀린 암기다.</p>
+<p><strong>시험 질문:</strong> 제도와 목적을 바꿔 놓은 보기. <strong>키워드:</strong> 유지·속도·안전·대가. <strong>한 줄:</strong> 상법은 기업을 계속 돌아가게 하되 거래상대의 신뢰도 지킨다.</p>
+<h1>4. 언제·누구에게·어디서 적용하는가</h1>
+<h2 id="commercial-01-09" data-concept-id="commercial-01-09">4-1. 시간·사람·장소 ★★★☆☆</h2>
+<p><strong>교재 11–12쪽 · 넣은 이유:</strong> 기업과 관련 있다고 모든 시점·모든 장소에 같은 법을 기계적으로 적용하지 않게 한다.</p>
+<p>새 법은 원칙적으로 과거에 완결된 법률관계를 거슬러 바꾸지 않는다. 다만 부칙의 시행일과 경과조치에 따라 적용 범위가 달라질 수 있다. ‘새 법이 이익이니 자동 소급’이라고 판단하면 안 된다. 사람에 대해서는 상인만이 아니라 거래상대인 일반인도 적용 대상이 될 수 있다. 국내의 외국인 거래나 외국과 연결된 계약도 국적 하나로 결론내리지 않고 국제사법·조약 등에 따라 적용 법을 찾는다. 장소 역시 대한민국 안이라는 원칙과 국제거래에서의 준거법 문제를 구별한다.</p>
+<p><strong>시험 질문:</strong> 상법은 상인에게만 적용되는가? 한국인 해외거래는 무조건 한국 상법인가? → 둘 다 단정 불가. <strong>키워드:</strong> 부칙, 경과조치, 준거법. <strong>한 줄:</strong> 적용 법과 적용 시점을 먼저 확인한다.</p>
+<h2 id="commercial-01-10" data-concept-id="commercial-01-10">4-2. 일방적 상행위와 쌍방적 상행위 ★★★★★</h2>
+<p><strong>교재 12–13쪽 · 문단의 역할:</strong> 일반 소비자도 상법을 만날 수 있는 이유와 그 한계를 설명한다.</p>
+<p>민지가 가게 물건을 손님 지수에게 판다. 민지에게는 영업상 거래, 지수에게는 개인 소비다. 상법 제3조는 당사자 중 한쪽의 행위가 상행위이면 원칙적으로 전원에게 상법을 적용한다. 같은 계약을 두 사람에게 전혀 다른 체계로만 처리하면 충돌하기 때문이다.</p>
+<p>그러나 상법의 각 조문이 별도로 ‘상인 간’이라는 요건을 두면 그 요건을 충족해야 한다. <strong>상인 간 매매</strong>에 적용되는 제67조 이하의 특별 규칙을 제3조만 들며 일반 소비자에게 그대로 확장하지 않는다. 소비자 지수가 냉장고의 하자를 뒤늦게 알았다고 해서 바로 “상사매매 검사·통지를 안 했으니 끝”이라고 하면 안 된다.</p>
+<p><mark class="yellow">일방적 상행위에도 상법 적용이 원칙이다.</mark> <mark class="pink">각 조문이 요구하는 쌍방 상인 요건은 별도로 확인한다.</mark></p>
+<p><strong>시험 질문:</strong> 한쪽이 일반인이면 무조건 민법만 적용되는가? → 아니다. <strong>키워드:</strong> 제3조 원칙, 상인 간 매매 예외. <strong>한 줄:</strong> 적용의 입구는 넓지만 개별 조문의 문턱은 남아 있다.</p>
+<h1>5. 보충학습 · 다른 법과 이어 보기</h1>
+<h2 id="commercial-01-11" data-concept-id="commercial-01-11">5-1. 민법·경제법·소비자법·노동법 ★★★☆☆</h2>
+<p><strong>교재 15–17쪽 · 심화 연결:</strong> 본문 뒤의 보충학습도 생략하지 않았다. 각 법이 보호하는 관계를 구분한다.</p>
+<p>민법은 사법의 일반법, 상법은 기업관계의 특별법이다. 민법의 대리나 계약 틀을 이용하면서 필요한 부분을 바꾸기도 하고, 상호·상업장부 같은 독자적 제도를 두기도 한다. 예를 들어 일반 채권의 10년 시효와 상사채권의 5년 시효를 비교할 수 있지만, 더 짧은 별도 시효가 적용되는지 반드시 확인한다.</p>
+<p>‘민법의 상화’는 상거래에 발달한 원칙이 일반 민사생활에도 넓어지는 현상을 말한다. 민상법을 한 법전으로 합칠 것인가라는 <strong>민상법 통일론</strong>도 있다. 법전을 합치는 것과 기업거래에 맞는 특별 규칙이 필요 없다는 것은 별개다.</p>
+<p>경제법은 시장질서·경쟁을 조정하는 측면을, 상법은 기업 관련 사적 이익 조정의 측면을 강조한다. 소비자법은 정보·협상력 차이 때문에 계약자유만으로 충분히 보호되지 않는 소비자를 위해 설명·정보제공·청약철회 등의 장치를 둔다. 다만 모든 소비자계약에 언제든 철회권이 있는 것은 아니다. 노동법은 근로자의 종속적 지위와 생활 보호가 중심이다. 한 회사가 임금을 체불하면 노동법 문제, 납품대금을 안 주면 계약·상법 문제가 될 수 있고 사안에 따라 법들이 함께 적용된다.</p>
+<p><strong>시험 질문:</strong> 특별법인 상법이 있으니 민법은 필요 없는가? → 일반 규칙으로 계속 보충한다. <strong>키워드:</strong> 일반·특별, 민법의 상화, 보호 대상. <strong>한 줄:</strong> 같은 기업이라도 어떤 관계를 묻는지에 따라 함께 볼 법이 달라진다.</p>
+<h1>6. 시험 연결과 스스로 설명하기</h1>
+<h2>먼저 풀 TOP5</h2>
+<ol>
+<li><strong>상법_003</strong> — 약관의 힘이 법규범인지 계약 합의인지 구별한다.</li>
+<li><strong>상법_005</strong> — 일방적 상행위의 원칙과 상인 간 매매의 조건을 나눈다.</li>
+<li><strong>상법_070</strong> — 시행령·조약·관습법·판례의 법원성을 분류한다.</li>
+<li><strong>상법_004</strong> — 유지·신속·안전·유상성을 실제 제도와 연결한다.</li>
+<li><strong>상법_001</strong> — 실질적 상법의 ‘사법’을 ‘공법’으로 바꾼 함정을 찾는다.</li>
+</ol>
+<p>제공 7문항 중 법원·약관 3문항, 특성 2문항, 정의·적용 범위 각 1문항이다. 반복되는 함정은 <strong>약관=자치법</strong>, <strong>대리=현명주의</strong>, <strong>일방적 상행위=민법만 적용</strong>이다. 실제 가장 많이 틀린 보기의 통계는 없어, 이를 ‘오답 유발 표현’으로 표시한다.</p>
+<p><strong>교재의 ‘생각해 봅시다’ 네 질문에 답하기:</strong> ① 상법은 기업 특유의 사법이며 형식·실질을 구분한다. ② 법원은 상사제정법·상관습법·상사자치법을 중심으로 분류하고 약관·판례·조리를 구별한다. ③ 특성은 기업 유지·거래 신속·안전·유상성이다. ④ 적용 범위는 시간·사람·장소·사항으로 나누고, 일방적 상행위의 원칙과 개별 조문 요건을 확인한다. 이 네 문장을 사례를 붙여 말할 수 있으면 본문 구조를 잡은 것이다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>문제 1.</strong> 제빵기 대여회사가 이메일로는 “수리비는 우리가 부담”이라고 별도 합의했으나 표준약관은 이용자 부담이다. 표준약관이 인쇄되어 있다는 이유로 항상 우선하는가?</p>
+<p><strong>답·출제 의도:</strong> 아니다. 유효한 개별약정이 약관보다 우선한다. 약관과 따로 합의한 내용의 증명은 필요하다. ‘미리 인쇄된 조건=상위 규칙’이라는 오해를 겨냥했다.</p>
+<p><strong>문제 2.</strong> 상인 갑은 일반 소비자 을에게 “당신도 상법 적용 대상이므로 모든 상인 간 거래 규칙을 지켜야 한다”고 말했다. 어느 부분이 잘못인가?</p>
+<p><strong>답·출제 의도:</strong> 일방적 상행위에도 상법을 적용한다는 출발점은 맞지만, 상인 간 매매 등 개별 조문의 요건까지 사라지는 것은 아니다. 적용 원칙과 특별 요건을 함께 읽는 문제다.</p>
+<p><strong>문제 3.</strong> 한 업종에서 3년 동안 같은 결제 관행이 반복되었다. 갑은 기간만 확인하면 상관습법이라고 한다. 무엇을 더 검토해야 하는가?</p>
+<p><strong>답·출제 의도:</strong> 법적 확신이 있는지, 법규로 인정될 내용인지 살펴야 한다. 인정되지 않더라도 사실인 관습으로 계약해석에 고려할 여지가 있다. 관행의 반복과 법원성을 나눈다.</p>
+<p><strong>문제 4.</strong> 사업자가 사고 위험을 모두 고객에게 넘기는 조항을 넣었다. 고객은 “나에게 불리한 약관은 전부 무효”라고 주장한다. 올바른 심사 순서는?</p>
+<p><strong>답·출제 의도:</strong> 먼저 계약에 편입되었는지, 다음으로 구체적 조항의 내용과 거래사정에 비추어 약관법상 무효인지 살핀다. 단순 불리함과 부당한 불이익을 구별하고 제7조의 책임전가 요건도 확인한다.</p>
+<p><strong>문제 5.</strong> 새 법이 시행되자 거래처가 2년 전 끝난 계약도 무조건 새 법으로 계산하자고 한다. 무엇부터 확인할까?</p>
+<p><strong>답·출제 의도:</strong> 시행일·부칙·경과조치와 해당 법률관계의 발생 시점을 본다. 원칙적 불소급과 구체적인 예외를 구분하는 문제다. 유리하다는 말만으로 소급하지 않는다.</p>
+<h1>용어 사전</h1>
+<h3>상법 商法</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상): 거래·장사, 法(법 법): 기준·규칙. <strong>③ 합친 뜻:</strong> 기업거래의 규칙. <strong>④ 이름의 이유:</strong> 기업을 뜻하는 商에 규칙 法을 붙였다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기업 조직과 활동에 특유한 사법을 중심으로 하는 법. <strong>⑥ 쉬운 말:</strong> 사업 관계에 맞춰 민법을 보완하는 규칙. <strong>⑦ 사례:</strong> 빵집과 납품업체의 거래에 적용할 법을 찾는다.</p>
+<p><strong>⑧ 시험:</strong> 사법을 공법으로 바꾸는 보기 주의. <strong>⑨ 비교·기억법:</strong> 민법은 일반 규칙, 상법은 기업관계의 특별 규칙.</p>
+<h3>법원 法源</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법): 규칙, 源(근원 원): 물이 시작되는 곳. <strong>③ 합친 뜻:</strong> 법이 나오는 근거. <strong>④ 이름의 이유:</strong> 규칙의 근원을 샘의 근원에 빗댔다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재판에서 적용할 법규범의 존재 형식. <strong>⑥ 쉬운 말:</strong> 판단 기준을 어디서 가져올지 묻는다. <strong>⑦ 사례:</strong> 상법에 규정이 없으면 상관습법을 찾는다.</p>
+<p><strong>⑧ 시험:</strong> 판례·조리의 법원성에 관한 교재 분류. <strong>⑨ 비교·기억법:</strong> 法院의 院(집 원)은 재판기관. 源은 근원.</p>
+<h3>상관습법 商慣習法</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 慣(익숙할 관), 習(익힐 습), 法(법 법). <strong>③ 합친 뜻:</strong> 거래에서 익숙해진 법. <strong>④ 이름의 이유:</strong> 습관이 법으로 굳어졌다는 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 반복된 상거래 관행이 법적 확신을 얻어 법규로 인정된 것. <strong>⑥ 쉬운 말:</strong> 오래 했다는 사실에 법으로 지켜야 한다는 인식까지 더해진 규칙. <strong>⑦ 사례:</strong> 결제 관행의 반복만 확인해서는 부족하다.</p>
+<p><strong>⑧ 시험:</strong> 반복＋법적 확신, 민법보다 먼저 적용. <strong>⑨ 비교·기억법:</strong> 사실인 관습은 법적 확신 없이 계약해석 자료로 쓰일 수 있다.</p>
+<h3>정관 定款</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 定(정할 정): 고정·결정, 款(조목 관): 항목·조항. <strong>③ 합친 뜻:</strong> 정해 둔 기본 조항. <strong>④ 이름의 이유:</strong> 단체가 지킬 사항을 조목별로 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사의 조직·활동에 관한 기본규칙. <strong>⑥ 쉬운 말:</strong> 회사 내부의 기본 약속책. <strong>⑦ 사례:</strong> 회사의 목적과 주식 관련 사항을 정한다.</p>
+<p><strong>⑧ 시험:</strong> 상사자치법의 예와 약관을 바꾸지 않기. <strong>⑨ 비교·기억법:</strong> 약관은 여러 고객과 계약하기 위한 사전 조건.</p>
+<h3>약관 約款</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 約(맺을 약): 약속, 款(조목 관): 조항. <strong>③ 합친 뜻:</strong> 계약을 위한 조항. <strong>④ 이름의 이유:</strong> 여러 계약에 사용할 약속의 항목이라는 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사업자가 다수와 계약하기 위해 미리 마련한 계약내용. <strong>⑥ 쉬운 말:</strong> 거래할 때 반복해서 꺼내 쓰는 조건표. <strong>⑦ 사례:</strong> 보험 약관과 따로 한 합의를 함께 확인한다.</p>
+<p><strong>⑧ 시험:</strong> 판례는 계약설, 개별약정 우선. <strong>⑨ 비교·기억법:</strong> 정관과 달리 그 자체의 법규성 때문이 아니라 계약편입으로 구속.</p>
+<h3>신의성실 信義誠實</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신), 義(옳을 의), 誠(정성 성), 實(열매 실): 참되고 실제임. <strong>③ 합친 뜻:</strong> 믿음과 올바름을 참되게 지킴. <strong>④ 이름의 이유:</strong> 말과 행동을 믿을 수 있어야 거래가 가능하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대의 정당한 신뢰를 고려해 권리·의무를 공정하게 행사·이행하는 원칙. <strong>⑥ 쉬운 말:</strong> 상대가 합리적으로 믿은 것을 부당하게 뒤집지 말자. <strong>⑦ 사례:</strong> 협상력을 악용한 불공정 약관을 심사한다.</p>
+<p><strong>⑧ 시험:</strong> 조금 불리함만으로 곧 무효는 아니다. <strong>⑨ 비교·기억법:</strong> 자유로운 합의와 그 자유의 남용을 나눈다.</p>
+<h3>비현명주의 非顯名主義</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 非(아닐 비), 顯(나타날 현), 名(이름 명), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 이름 드러냄을 반드시 요구하지 않는 원칙. <strong>④ 이름의 이유:</strong> 현명이라는 표시 요건을 완화해서 붙은 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상행위 대리에서 본인을 위한 행위임을 표시하지 않아도 본인에게 효력이 생기는 상법48조의 원칙. <strong>⑥ 쉬운 말:</strong> 사업 대리의 효과가 표시 하나 때문에 쉽게 막히지 않게 한다. <strong>⑦ 사례:</strong> 직원의 발주가 누구를 위한 거래인지와 효과를 판단한다.</p>
+<p><strong>⑧ 시험:</strong> 엄격한 현명주의라고 바꾸면 틀림. <strong>⑨ 비교·기억법:</strong> 대리권 자체가 필요 없다는 뜻은 아니다.</p>
+<h3>소급 遡及</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遡(거슬러 올라갈 소), 及(미칠 급). <strong>③ 합친 뜻:</strong> 거슬러 올라가 미침. <strong>④ 이름의 이유:</strong> 시간을 뒤로 거슬러 적용하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 새 규칙의 효과를 이전 법률관계에 미치게 하는 것. <strong>⑥ 쉬운 말:</strong> 오늘 생긴 규칙으로 어제 일을 다시 판단하는 문제. <strong>⑦ 사례:</strong> 새 법으로 끝난 계약을 바꾸려면 부칙 등을 확인한다.</p>
+<p><strong>⑧ 시험:</strong> 원칙적 불소급과 경과규정. <strong>⑨ 비교·기억법:</strong> 지금도 계속되는 관계에 새 법을 적용하는 문제와 구분.</p>
+<h3>준거법 準據法</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 準(기준 준), 據(의거할 거), 法(법 법). <strong>③ 합친 뜻:</strong> 기준으로 삼을 법. <strong>④ 이름의 이유:</strong> 여러 나라 법 중 무엇을 기준 삼을지 정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 외국과 관련된 법률관계에 적용하도록 정해지는 법. <strong>⑥ 쉬운 말:</strong> 국제거래에서 어느 나라 규칙으로 판단할지 고르는 것. <strong>⑦ 사례:</strong> 한국인 해외거래도 국적만으로 결론내리지 않는다.</p>
+<p><strong>⑧ 시험:</strong> 장소·국적 하나로 무조건 한국 상법이라 하지 않기. <strong>⑨ 비교·기억법:</strong> 관할은 어느 법원이 재판할지, 준거법은 어떤 법으로 판단할지.</p>
+<h3>조리 條理</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 條(가지 조): 조목·갈래, 理(다스릴 리): 이치. <strong>③ 합친 뜻:</strong> 사물의 갈래를 관통하는 이치. <strong>④ 이름의 이유:</strong> 여러 사정을 질서 있게 잇는 이치라는 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동생활에서 지켜야 할 합리적 도리. <strong>⑥ 쉬운 말:</strong> 규칙의 빈칸에서 살피는 사물의 합리적 이치. <strong>⑦ 사례:</strong> 교재상 상법 법원성 분류와 민법1조를 구분한다.</p>
+<p><strong>⑧ 시험:</strong> 교재 문제는 법원성 부정설을 기본으로 출제. <strong>⑨ 비교·기억법:</strong> 관습법은 사회적 관행과 법적 확신에서 출발한다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 상법총론</h2>
+<p><b>TOP3:</b> ① 상사법→상관습법→민법 ② 약관은 계약설·개별약정 우선 ③ 일방적 상행위 적용 원칙과 개별 조문 요건.</p>
+<table><tr><th>구분</th><th>판단 기준</th></tr><tr><td>형식 / 실질</td><td>‘상법’이라는 이름 / 기업 특유의 사법 내용</td></tr><tr><td>상관습법 / 사실인 관습</td><td>법적 확신을 갖춘 법규 / 계약해석 등에 쓰이는 거래관행</td></tr><tr><td>정관 / 약관</td><td>회사의 기본 단체규칙 / 반복 계약을 위한 사전 조건</td></tr><tr><td>약관 해석</td><td>개별약정 우선 → 공정·통일 해석 → 불명확하면 고객 유리</td></tr><tr><td>약관 무효</td><td>계약편입과 유효성 별개. 단순한 불리함과 부당함 구별</td></tr><tr><td>판례 / 조리</td><td>교재상 법원성 부정. 판례의 실무 영향·민법1조 관련 견해와 구별</td></tr></table>
+<p><b>특성:</b> 유지(상호·장부·지배인·익명조합) / 속도(비현명주의·통지·시효) / 안전(등기·외관) / 대가(이자·보수).</p>
+<p><b>반드시 외울 문장:</b> 약관은 그 자체가 법이라서가 아니라 계약내용으로 합의했기 때문에 구속한다. 한쪽만 상행위여도 상법을 적용하지만 개별 조문이 요구하는 요건은 따로 충족해야 한다.</p>
+<p><b>숫자:</b> 제1조 적용순서 / 제3조 일방적 상행위 / 제48조 비현명주의 / 제54조 상사법정이율 / 제64조 상사시효. 별도 규정·약정의 존재를 확인한다.</p>
+<p><b>사례를 풀 순서:</b> 거래 성질 → 적용 법·시점 → 특별 규정 → 관습법·민법 → 약관 편입·개별약정 → 공정성 → 결론.</p>
+<p><b>분홍 함정:</b> 공법 총체 × / 상법에 없으면 즉시 민법 × / 약관=자치법이라는 판례 × / 상행위대리 현명주의 × / 조금 불리하면 전부 무효 ×.</p>
+</section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>아직 답안을 받지 않았으므로 실제 이해도를 확정하지 않는다. 다음을 보지 않고 설명해 보자. <strong>① 관습법과 사실인 관습의 차이 ② 약관이 구속하는 이유와 무효 심사의 차이 ③ 소비자도 상법 적용 대상이 될 수 있는 이유와 한계.</strong></p>
+<p>🟢 세 가지를 사례와 예외까지 설명하면 이해 완료 / 🟡 결론은 맞지만 이유·예외가 빠지면 복습 필요 / 🔴 ‘약관은 법’, ‘한쪽이 일반인이면 상법 배제’라고 답하면 이해 부족. <strong>복습 TOP3는 위 세 질문이다.</strong></p>
+<p>교재: 박승룡, 『상법기초』 2024, 제1강·보충학습 및 첨부 워크북. 문제: 제공 <code>상법.json</code>의 해당 단원 전부. 조문은 <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95">국가법령정보센터 상법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%95%BD%EA%B4%80%EC%9D%98%EA%B7%9C%EC%A0%9C%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0">약관의 규제에 관한 법률</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95">민법</a>에서 시행일을 함께 확인한다. 교재의 과거 판례와 일반론을 현행 거래에 무조건 대입하지 않는다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_001"><h4>형성평가 · 상법_001</h4><p class="question-stem">다음 중에서 상법에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상법은 상(商)에 관한 법으로 상(商)이 무엇인가에 대해서는 기업으로 이해하는 것이 일반적이다.</li><li>기업법으로서 상법은 기업의 조직과 경영활동에 관한 특유한 법규의 전체라고 할 수 있다.</li><li>상법은 형식적 의의의 상법과 실질적 의의의 상법으로 나눌 수 있다.</li><li>기업관계는 불특정다수의 상대와 거래가 발생하며 이러한 상법을 기업관계에 특유한 공법규정의 총체로 이해하는 것이 전통적인 입장이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 여기서 商은 단순 매매보다 넓은 기업을 뜻한다. 키워드는 기업이다.</li><li><strong>비선택</strong> · 맞음. 조직과 경영활동이라는 두 축이 실질적 상법의 범위다. 회사도 조직의 문제로 포함된다.</li><li><strong>비선택</strong> · 맞음. 법률 제목을 기준으로 하는 형식과 내용을 기준으로 하는 실질을 나눈다.</li><li><strong>선택</strong> · 틀림·정답. 공법을 사법으로 고쳐야 한다. 기업에 공법 규제도 있다는 사실과 전통적인 상법의 정의는 별개다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기업관계에서는 사법적 규정과 공법적 규정이 존재하지만, 사유재산제도를 기초로 하는 자유자본주의경제체제 하에서는 기업관계에 있어서도 사법적 규정이 중요하며, 상법을 기업관계에 특유한 사법규정의 총체로 이해하는 것이 전통적인 입장이다.</p></details></section>
+
+<section class="question-card" id="question-상법_002"><h4>형성평가 · 상법_002</h4><p class="question-stem">다음 중에서 상법의 법원에 해당하지 않는 것은?</p><ol class="choices"><li>상사제정법</li><li>상관습법</li><li>상사자치법</li><li>조리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법원에 해당. 법률·명령 등 제정된 상사 규칙이다.</li><li><strong>비선택</strong> · 법원에 해당. 단순 관행이 아니라 법적 확신을 얻은 관습법이다.</li><li><strong>비선택</strong> · 교재상 법원에 해당. 회사 정관을 대표 예로 든다. 약관의 판례상 계약설과 혼동하지 않는다.</li><li><strong>선택</strong> · 교재의 기본 입장에서는 법원성 부정이므로 정답. 다만 원자료도 민법1조를 근거로 긍정하는 견해를 소개한다. 법질서에서 조리가 절대로 고려되지 않는다는 뜻으로 확대하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 일반적으로 조리(條理)란 사물의 이치를 말하며, 공동생활에서 지켜야 할 도리라고 할 수 있으나 법원으로는 인정될 수 없다. 다만, 민법 제1조에서 민사에 관하여 법률에 규정이 없으면 관습법에 의하고 관습법이 없으면 조리에 규정을 들어 조리의 법원성을 인정하는 견해도 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_003"><h4>형성평가 · 상법_003</h4><p class="question-stem">다음 중에서 보통거래약관에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>일반적으로 보통거래약관을 이용한 거래에서 계약당사자는 약관에 구속된다.</li><li>판례는 약관을 상사자치법으로 보며 구속력을 인정하는 입장이다.</li><li>약관에 의한 거래를 할 것인지 여부는 자유에 맡겨져 있다.</li><li>「약관의 규제에 관한 법률」에서는 신의성실의 원칙을 위반하여 공정성을 잃은 약관 조항은 무효라고 규정하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반적으로 맞음. 계약내용에 적법하게 편입된 약관에 구속된다는 의미다. 비편입·설명의무 위반·무효 조항까지 무조건 구속한다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀림·정답. 판례는 계약설이다. 약관 자체가 자치법이어서가 아니라 계약내용에 포함시키기로 합의했기 때문에 구속한다.</li><li><strong>비선택</strong> · 일반론으로 맞음. 체결 여부는 원칙적으로 자유지만 현실의 교섭력 차이 때문에 약관법의 통제가 필요하다.</li><li><strong>비선택</strong> · 맞음. 약관법6조의 기본 통제다. 다소 불리하다는 이유만으로 곧 공정성을 잃었다고 단정하지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 판례는 약관의 법원성을 부정하고 약관을 계약내용으로 하겠다는 당사자의 합의(의사표시)가 있어야만 계약내용이 된다고 보고 있다.<br><br>[2019. 3. 28. 선고 2016다211224 판결] 보험계약은 불요식의 낙성계약이므로 계약 내용이 반드시 보험약관의 규정에 국한되지는 아니한다. 보험약관이 계약당사자 사이에 구속력을 갖는 것은, 그 자체가 법규범이거나 또는 법규범적 성질을 가지기 때문이 아니라, 당사자가 그 약관의 규정을 계약 내용에 포함시키기로 합의하였기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-상법_004"><h4>형성평가 · 상법_004</h4><p class="question-stem">다음 중에서 상법의 특성에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>필요한 자금을 원활하게 조달하는 것을 지원하기 위해 익명조합제도를 두고 있다.</li><li>상법은 기업활동의 특성을 반영하여 상행위 대리의 현명주의를 택하고 있다.</li><li>상법은 외관과 진실이 불일치하는 경우 진실에 우위를 인정하는 규정을 두고 있다.</li><li>민사와 상사의 법정이율은 동일하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 익명조합은 출자와 이익분배를 통해 영업자의 자금조달을 돕는다. 기업 유지·발전과 연결한다.</li><li><strong>비선택</strong> · 틀림. 상법48조는 비현명주의다. 대리권 자체가 필요 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 틀림. 거래안전을 위해 일정 요건 아래 외관을 신뢰한 상대를 보호한다. 언제나 진실 우위라는 문구가 함정이다.</li><li><strong>비선택</strong> · 틀림. 기본 법정이율은 민사 연5%, 상사 연6%다. 약정·특별법이 있으면 별도 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 상법은 기업의 거래활동이 간단하고 신속하게 이루어지도록 상행위 대리에 대해 비현명주의 규정(제48조)을 두고 있다. ③ 상법은 외관과 진실이 불일치하는 경우 외관에 우위를 인정하는 외관주의를 적용한 표현지배인(제14조) 등의 규정을 두고 있다. ④ 상법은 민사법정이율보다 높은 상사법정이율(제54조)에 관한 규정을 두고 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_005"><h4>형성평가 · 상법_005</h4><p class="question-stem">다음 중에서 상법의 적용범위에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상법의 규정 중에는 신법을 소급적으로 적용하는 경우가 적지 않다.</li><li>상법은 원칙적으로 모든 대한민국 국민에게 적용된다.</li><li>쌍방적 상행위의 경우에는 상법이 적용되며 일방적 상행위의 경우에는 민법이 적용된다.</li><li>우리나라의 상법이 대한민국 영토가 아닌 곳에서 적용되는 경우도 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원자료상 옳은 보기로 처리. 다만 “적지 않다”는 빈도 표현을 일반 원칙으로 외우지 않는다. 원칙은 불소급이고 구체적인 시행일·부칙·경과조치에 따라 달라진다.</li><li><strong>비선택</strong> · 일반적 인적 적용범위 설명. 모든 한국인의 모든 거래가 상법이라는 뜻이나 외국인 거래를 배제한다는 뜻은 아니다. 상사성·국제사법도 확인한다.</li><li><strong>선택</strong> · 틀림·정답. 제3조상 일방적 상행위에도 상법 적용이 원칙이다. 상인 간 매매 등 조문별 요건이 있는 경우를 구분한다.</li><li><strong>비선택</strong> · 맞음. 국제거래에서는 준거법 등에 따라 해외 관련 사안에 한국 상법이 적용될 수 있다. 한국인이라는 사정만으로 자동 적용하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 우리 상법은 제3조에서 “당사자 중 그 1인의 행위가 상행위인 때에는 전원에 대하여 본법을 적용한다.”고 규정하여 일방적 상행위에도 상법이 적용됨을 밝히고 있다. 그러나 비(非)상인에게 적용되기에 적절하지 않다고 판단되는 경우(제67조 이하 상사매매 관련 규정)에 대해서는 쌍방적 상행위에만 상법이 적용되도록 하고 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_070"><h4>워크북 · 상법_070</h4><p class="question-stem">다음 중에서 상법의 법원(法源)으로 인정되지 않는 것은?</p><ol class="choices"><li>상법 시행령</li><li>헌법에 의해 체결된 조약</li><li>상관습법</li><li>판례</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법원에 해당. 적법한 위임과 범위 아래 상법을 구체화하는 제정 규칙이다.</li><li><strong>비선택</strong> · 법원에 해당하는 경우다. 헌법에 따라 체결·공포된 조약의 효력을 말한다. 모든 외국 조약이 국내법이 되는 것은 아니다.</li><li><strong>비선택</strong> · 법원에 해당. 제1조에 따라 민법에 앞서 검토한다. 강행규정 위반 관행까지 정당화하지 않는다.</li><li><strong>선택</strong> · 법원성 부정이 정답. 다만 판례의 강한 실무 영향과 해당 사건의 환송심 구속력까지 부정하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 우리나라와 같은 성문법 국가에서는 판례의 법원성은 인정되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_071"><h4>워크북 · 상법_071</h4><p class="question-stem">다음 중에서 상법의 특성에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상법은 기업의 독립성을 확보하기 위해 상호제도와 상업장부제도 등을 두고 있다.</li><li>기업활동이 간이, 신속하게 이루어지도록 상행위 대리의 엄격한 현명주의를 채택하고 있다.</li><li>거래안전의 보호를 위해 상업등기제도 등을 두고 있다.</li><li>상행위의 유상성을 인정하여 상사법정이율은 민사법정이율보다 높다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 상호로 거래주체를 식별하고 장부로 재산·거래 상태를 정리하여 기업의 독립적 운영을 돕는다.</li><li><strong>선택</strong> · 틀림·정답. 비현명주의를 현명주의로 뒤집었다. 속도를 위한 제도와 반대다.</li><li><strong>비선택</strong> · 맞음. 공시를 통해 거래상대가 확인할 자료를 주고 제37조 등으로 효력을 정한다. 등기되면 모두 사실이라고 보장한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 맞음. 기본 법정이율의 차이를 말한다. 모든 상사채무에 예외 없이 연6%가 적용된다는 표현으로 확장하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기업활동이 간이, 신속하게 이루어지도록 상법은 상행위 대리의 비현명주의를 채택하고 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 01' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 01|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

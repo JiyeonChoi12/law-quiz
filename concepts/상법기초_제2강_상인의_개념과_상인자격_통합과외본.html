@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제2강 상인의 개념과 상인자격 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제2강 상인의 개념과 상인자격 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>가게 간판은 ‘햇살문구’인데 계약서는 엄마가 쓰고 물건은 아들이 팔았다. 거래처는 누구에게 대금을 청구해야 할까? 이번 강은 <strong>가게라는 조직 뒤에서 권리와 의무를 받는 주인공, 상인</strong>을 찾는다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우는가?</td>
+<td>상인이 누구인지, 언제 그 자격을 얻고 잃는지, 스스로 영업할 능력은 있는지 구별한다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>기업이라는 활동조직과 법적 책임을 지는 사람은 같은 말이 아니기 때문이다.</td>
+</tr>
+<tr>
+<td>법 전체에서 위치는?</td>
+<td>민법의 권리능력·행위능력을 기업거래의 주체 문제로 연결한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td><mark class="blue">1강의 상법 적용범위를 구체화하고, 3강에서 상인을 돕는 대리인으로 넘어간다.</mark></td>
+</tr>
+<tr>
+<td>모르면 막히는 것은?</td>
+<td>미성년자 가게의 채무자, 사업자등록 명의와 실제 영업주, 회사의 설립·청산 시점을 판단하기 어렵다.</td>
+</tr>
+</tbody></table>
+<p>교재 19–33쪽과 첨부 워크북 제2강, 제공 문제 7문항·28개 보기를 연결했다. 중요도는 제공 문제와 후속 학습의 비중에 따른 우선순위다. 노랑은 결론, 초록은 이유, 분홍은 함정, 파랑은 연결이다.</p>
+<h1>1. 사람을 먼저 정할까, 거래를 먼저 정할까</h1>
+<h2 id="commercial-02-01" data-concept-id="commercial-02-01">1-1. 상인주의·상행위주의와 우리 법 ★★★★★</h2>
+<p><strong>교재 21–22쪽 · 문단의 이유:</strong> ‘상인이라 상법을 쓰는가, 상행위를 해서 상인인가’라는 순환을 풀어 준다.</p>
+<p><strong>상인주의</strong>는 먼저 상인을 정하고 그 상인의 거래를 상행위로 보는 방식이다. 출발점이 사람이므로 주관주의·형식주의라고도 부른다. <strong>상행위주의</strong>는 먼저 법이 상행위의 종류를 정하고 그것을 영업으로 하는 사람을 상인으로 본다. 출발점이 행위의 객관적 성질이라 객관주의·실질주의라고도 한다. ‘주관’은 마음대로 판단한다는 뜻이 아니라 주체를 먼저 본다는 뜻이다.</p>
+<p>우리 법은 제4조에서 자기 명의로 상행위를 하는 자를 상인으로 정한다. 행위→사람이므로 상행위주의 쪽이다. 제5조에서는 상인적 설비·방법이나 회사라는 형식을 통해 상인을 인정한다. 교재는 이를 <strong>절충적 입법</strong>으로 설명한다. 새 업종이 생길 때마다 목록에 없다는 이유로 상법을 적용하지 못하는 빈틈을 줄이려는 것이다.</p>
+<p><mark class="yellow">4조는 행위에서 상인으로, 5조는 기업적 형식으로 상인을 인정한다.</mark></p>
+<p><strong>시험:</strong> 4조와 5조를 바꿔 놓은 보기, ‘상행위주의=신분법’을 주의한다. <strong>키워드:</strong> 사람 먼저·행위 먼저·절충. <strong>한 줄:</strong> 우리 법은 한쪽 기준만 고집하지 않는다.</p>
+<h1>2. 상인은 누구인가</h1>
+<h2 id="commercial-02-02" data-concept-id="commercial-02-02">2-1. 당연상인: 자기 명의·상행위·영업성 ★★★★★</h2>
+<p><strong>교재 23–26쪽 · 문단의 이유:</strong> 상인의 정의를 실제로 판별할 세 조건으로 나눈다. 기업은 조직·활동을 가리키고, 개인사업에서는 개인, 회사사업에서는 회사가 권리·의무의 귀속주체가 된다.</p>
+<p><strong>첫째, 자기 명의.</strong> 간판에 이름이 있다는 뜻이 아니다. 계약으로 생긴 권리·의무가 그 사람에게 돌아간다는 뜻이다. 대리인이 대신 계약해도 본인이 법적 당사자이면 자기 명의의 영업일 수 있다. 반면 <strong>자기 계산</strong>은 최종적인 경제적 이익·손실이 누구에게 돌아가느냐의 문제다. 위탁매매인은 자신의 이름으로 거래하지만 위탁자의 계산으로 할 수 있다. 명의와 계산을 섞으면 뒤의 위탁매매를 이해하기 어렵다.</p>
+<h3>판례 두 장면 · 서류 이름과 실질</h3>
+<p><strong>1962.3.29. 61다962:</strong> 아내가 임차 명의자, 남편이 납세 명의자인 영업에서 누구의 영업인지 불명확한 상황이었다. 당시 법원은 <strong>구 민법</strong>의 부부재산 추정 규정에 따라 남편 경영을 추정했다. 법원의 고민은 명의가 갈릴 때 실제 귀속을 어떻게 정할지였다. <mark class="pink">이 결론을 현행법으로 외우면 안 된다.</mark> 현재 민법830조2항은 부부 누구에게 속하는지 불분명한 재산을 <strong>부부의 공유로 추정</strong>한다. 교재가 오래된 판례를 소개한 이유는 서류명의와 실제 영업주가 다를 수 있다는 점이지 남편 우선이라는 현재 규칙을 가르치기 위해서가 아니다. <a href="https://www.scourt.go.kr/nm/minwon/faq/FaqViewAction.work?bulletinid=10223&functioncode=119&mode=B">대법원 전자민원 안내</a></p>
+<p><strong>2008.12.11. 2007다66590:</strong> 인허가·사업자등록 명의와 실제 영업주가 다른 거래에서 상인을 누구로 볼지 문제 되었다. 교재에는 구체적인 거래 전모 대신 법리가 제시되어 있다. 법원은 권리·의무가 돌아가는 <strong>실제 영업주</strong>를 본다. ‘자기 명의’ → 법률효과의 귀속, ‘실질에 따라’ → 행정서류 이름만으로 끝내지 말라는 뜻이다. 반대 결론이면 서류만 빌린 사람이 실제 거래주체를 가리게 된다. 명의를 빌려 준 자의 별도 책임은 제5강에서 다룬다.</p>
+<p><strong>둘째, 상행위.</strong> 상법46조의 기본적 상행위와 특별법의 상행위를 본다. 오로지 임금을 받을 목적으로 제조·노무에 종사하는 행위는 46조 단서에 주의한다. 임금을 받는 직원이 물건을 만들었다고 곧 사업주인 상인이 되는 것은 아니다.</p>
+<p><strong>셋째, 영업성.</strong> 이익을 목적으로 같은 유형의 행위를 계속·반복하는 활동이어야 한다. 반드시 실제 흑자를 낼 필요는 없다. 창고의 헌책 한 권을 우연히 팔았다는 사실만으로 영업이 되지는 않는다. 단 한 번 체결한 계약이라도 계속할 영업 의사의 실현인지 전체 맥락을 본다.</p>
+<h3>판례 장면 · 비영리와 전문직</h3>
+<p><strong>1998.7.10. 98다10793:</strong> 새마을금고가 회원에게 대출했다. 돈을 빌려 주고 이자를 받으면 항상 상행위인지가 갈등이다. 법원은 설립 목적과 회원에 대한 상부상조 활동의 성격을 살펴, 일반적으로 영리 목적이라고 보기 어렵다고 판단했다. ‘영업’ → 돈의 이동만이 아니라 목적·반복적 사업 성질을 본다는 뜻이다. 모든 금융 관련 단체나 비회원 거래까지 동일하게 결론내리지 않는다.</p>
+<p><strong>서울지법 2003.12.17. 2003비단19:</strong> 변호사의 직무가 상행위인지가 쟁점이었다. 법원은 변호사법상 공공성·윤리성과 영리활동 제한을 보아, 변호사 자격으로 수행하는 직무를 상행위로 보지 않았다. ‘수임료를 받는다’와 ‘상법상 상인이다’는 별개다. 반대라면 전문직의 법적 성격을 보수 수령 하나로만 판단하게 된다. 변호사가 별도의 상업을 하는 경우는 그 별도 행위를 따로 검토한다.</p>
+<p><strong>시험:</strong> 자기 명의를 실제 계약행위자나 등록명의자로 단정하지 않기. <strong>키워드:</strong> 귀속·계산·영리·계속반복. <strong>한 줄:</strong> 돈을 버는 모습보다 누가 어떤 목적으로 법적 거래를 하는지 확인한다.</p>
+<h2 id="commercial-02-03" data-concept-id="commercial-02-03">2-2. 의제상인: 목록 밖 기업도 놓치지 않기 ★★★★☆</h2>
+<p><strong>교재 26–28쪽 · 넣은 이유:</strong> 경제생활은 법이 적어 놓은 업종 목록보다 빨리 변한다.</p>
+<p>제5조1항의 <strong>설비상인</strong>은 점포 등 유사한 설비를 갖추고 상인적 방법으로 기본적 상행위 이외의 영업을 하는 자다. 농업·임업·수산업 같은 원시산업은 이 경로가 문제 된다. 광업은 기본적 상행위에 포함된다는 차이가 있다. 책상이나 사무실이 있다는 사실 하나로 충분하지는 않다. 의제상인이 영업으로 하는 행위에는 제66조의 준상행위 규정도 연결된다.</p>
+<h3>판례 장면 · 과수원과 전문직 사무실</h3>
+<p><strong>1993.6.11. 93다7174·7181:</strong> 과수원을 경영하며 사과를 수확해 대부분 판매상에게 위탁판매한 사람이 등장한다. 수확물을 팔았으니 상인인지가 갈등이다. 법원은 판시된 경영·판매 사정만으로 영업으로 사과를 판매하는 상인이라고 볼 수 없다고 판단했다. ‘농산물 판매 가능성’과 ‘이 사건에서 상인적 영업이 인정되는지’는 다르다. 모든 농업인이 상인이라거나 모두 비상인이라는 두 극단을 피한다.</p>
+<p><strong>2007.7.26. 2006마334 / 2008.6.26. 2007마996:</strong> 각각 변호사와 법무사의 직무가 의제상인의 영업인지 문제 되었다. 법원은 직무의 공공성, 영리활동 제한, 같은 상법 규율을 적용할 사회경제적 필요를 살펴 의제상인성을 부정했다. ‘상인적 방법’ → 사무실을 차렸다는 외형보다 법령상 활동 성질을 보라는 뜻이다. 단순 설비 기준만 쓰면 공공적 전문직을 모두 상인으로 처리하게 된다.</p>
+<p>제5조2항은 <strong>회사</strong>를 상인으로 본다. 기본적 상행위를 영업으로 하는 상사회사는 당연상인, 농업 등 그 밖의 영업을 하는 민사회사는 의제상인으로 설명한다. 따라서 민사회사라는 이름에 ‘민’이 있어도 상법이 배제되지 않는다.</p>
+<p><strong>2005.5.27. 2005다7863:</strong> 회사가 한 행위의 상행위성이 다투어졌다. 법원은 회사는 상인이고, 상인의 행위는 영업을 위한 것으로 <strong>추정</strong>되므로 반증이 없으면 영업상 행위로 본다고 설명했다. ‘추정’ → 반대 증거로 뒤집을 수 있음, ‘간주’ → 같은 의미가 아님. 이 판례는 회사의 모든 행위를 어떤 사정에서도 무조건 영업행위라고 고정한 것이 아니다.</p>
+<p><strong>시험:</strong> 민사회사도 상인, 전문직은 사무실만으로 의제상인 아님. <strong>키워드:</strong> 설비·상인적 방법·회사·추정. <strong>한 줄:</strong> 목록을 보충하되 기업적 성질의 심사는 남는다.</p>
+<h2 id="commercial-02-04" data-concept-id="commercial-02-04">2-3. 소상인은 상인이 아닌가 ★★★★★</h2>
+<p><strong>교재 28쪽 · 문단의 이유:</strong> 작은 장사에 큰 기업의 공시·관리 부담을 모두 지우지 않으려는 예외다.</p>
+<p>소상인은 <strong>자본금액 1천만 원 미만인 상인으로서 회사가 아닌 자</strong>다. 소상인도 상인이다. 다만 제9조에 따라 <strong>지배인·상호·상업장부·상업등기</strong> 규정의 적용을 받지 않는다. 상행위 규칙 전체가 사라지는 것이 아니다. 법령상의 ‘소상공인’과도 같은 정의라고 단정하지 않는다.</p>
+<p><strong>사례:</strong> 자본금액 900만 원인 개인 문구점은 요건에 맞으면 소상인이다. 자본금 900만 원인 주식회사는 회사라서 이 정의에서 제외된다. 정확히 1천만 원인 개인상인도 ‘미만’이 아니므로 제외된다. 규모가 작아 관리 부담을 덜자는 취지라도, 회사까지 예외로 하지 않은 것이다.</p>
+<p><mark class="yellow">소상인 = 1천만 원 미만 ＋ 회사 아님.</mark> <mark class="pink">지·상·장·등만 적용 제외, 상인성 전체 부정 아님.</mark></p>
+<p><strong>시험:</strong> ‘미만’을 ‘이하’, ‘회사 아닌 자’를 ‘회사’로 바꾼다. <strong>키워드:</strong> 1천만·미만·비회사. <strong>한 줄:</strong> 작은 개인상인에게 일부 제도의 부담을 덜어 준다.</p>
+<h1>3. 상인이라는 지위는 언제 생기고 없어지는가</h1>
+<h2 id="commercial-02-05" data-concept-id="commercial-02-05">3-1. 자연인: 준비부터 잔무 종료까지 ★★★★★</h2>
+<p><strong>교재 28–30쪽 · 문단의 이유:</strong> 첫 매출과 폐업신고만 보고 법적 지위를 판단하면 빠지는 거래가 생긴다.</p>
+<p>사람은 출생과 함께 권리능력을 얻지만 곧 상인이 되는 것은 아니다. 영업을 준비하거나 시작하여 상인의 요건을 갖춰야 한다. 판례는 영업 의사를 상대방이 객관적으로 알아볼 수 있는 <strong>개업준비행위</strong>를 중요하게 본다.</p>
+<h3>판례 장면 · 1999.1.29. 98다1584</h3>
+<p>아직 첫 손님을 받기 전, 개업하려는 사람이 점포 구입·영업 양수·직원 고용 같은 준비거래를 했다. 법원의 고민은 “문 열기 전 계약이므로 상법 밖인가?”이다. 판례는 준비행위의 성질상 상대가 영업 의사를 객관적으로 알 수 있으면, 그때 상인자격을 취득하고 그 준비행위가 최초의 보조적 상행위가 된다고 본다. 반드시 간판·개업광고·상호등기로 널리 알릴 필요는 없다. 이는 판결 법리를 설명하는 거래 유형이며, 실제 사건에 모든 유형이 함께 등장했다는 뜻은 아니다.</p>
+<p><strong>문장 풀기:</strong> ‘의사를 실현’ → 머릿속 계획이 아니라 밖으로 드러난 준비행위. ‘객관적 인식’ → 상대방이 사업 준비임을 알아볼 수 있어야 한다. ‘보조적 상행위’ → 영업 자체의 판매가 아니라 영업을 돕는 계약도 포함된다. 첫 매출만 기준으로 잡으면 점포 임차·직원 고용 같은 중요한 준비거래가 빠진다.</p>
+<p>인허가나 세무신고는 행정법상 문제이고 상인자격을 정하는 사실과 원칙적으로 다르다. 허가 없이 영업했다고 관련 제재가 면제되는 것도 아니고, 행정법 위반 거래의 사법상 효력은 규정의 성질에 따라 별도 판단한다. ‘허가 불필요’가 아니라 <strong>상인성 판정과 영업의 적법성을 구별</strong>한다.</p>
+<p>상인자격은 영업을 종료하면 잃는다. 간판을 내리거나 폐업신고만 한 것으로 즉시 모든 문제가 끝나는 것은 아니다. 남은 물건 정리·대금 회수 등 <strong>잔무가 사실상 끝나는 시점</strong>도 본다.</p>
+<p><strong>시험:</strong> 출생·신고·첫 손님 대신 객관적인 개업준비행위. <strong>키워드:</strong> 준비·객관적 영업 의사·잔무. <strong>한 줄:</strong> 준비거래와 마무리거래도 영업의 생애에 포함한다.</p>
+<h2 id="commercial-02-06" data-concept-id="commercial-02-06">3-2. 법인: 회사·비영리단체·공법인 ★★★★☆</h2>
+<p><strong>교재 30–31쪽 · 문단의 이유:</strong> 이름에 법인이 들어간다고 모두 같은 목적의 상인은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>법인 유형</th>
+<th>상인성·시점</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>회사</td>
+<td>설립등기로 법인격과 상인자격을 취득, 청산 종료 때 상실</td>
+<td>해산과 청산 종료는 다르다.</td>
+</tr>
+<tr>
+<td>공익·비영리법인</td>
+<td>허용되는 부수적 수익사업을 하는 범위에서 문제 된다.</td>
+<td>비영리라는 이름만으로 모든 수익활동이 불가능한 것은 아니다.</td>
+</tr>
+<tr>
+<td>농협 등 중간법인</td>
+<td>설립 목적·사업 성질에 따라 원칙적으로 상인성 부정, 비회원 신용사업 등은 별도 검토</td>
+<td>모든 조합·모든 거래를 한 결론으로 묶지 않는다.</td>
+</tr>
+<tr>
+<td>국가·지방자치단체 등</td>
+<td>국영·공영사업으로 상행위를 할 때 특별 규정이 없으면 상법2조 적용</td>
+<td>교재는 상업사용인·상호·장부·등기 등의 적용 제한을 함께 설명한다. 특별법을 확인한다.</td>
+</tr>
+<tr>
+<td>특수 공법인</td>
+<td>법률이 정한 설립 목적·허용 활동에 따라 판단</td>
+<td>교재의 옛 단체명을 오늘의 조직과 그대로 동일시하지 않는다.</td>
+</tr>
+</tbody></table>
+<p><strong>판례 장면 · 2000.2.11. 99다53292:</strong> 농업협동조합이 조합원이 생산한 물자를 판매했다. 외형은 판매지만 법원은 조합원에 대한 차별 없는 봉사라는 사업 목적을 보아 상인성을 부정했다. ‘판매를 한다’ → 그 사실만으로 끝내지 않는다. ‘영리 목적이 아니다’ → 실제 이익금 유무와 법률상 사업 목적을 구별한다. 상호보험회사도 교재는 상인성을 부정하는 유형으로 설명한다. 이 점은 보험업을 하는 모든 주식회사와 같다는 뜻이 아니다.</p>
+<p><strong>사례:</strong> 주식회사가 해산결의를 해도 받을 돈·갚을 돈이 남아 청산 중이라면, 청산 목적 범위에서 존재한다. 죽은 회사라고 보고 책임 주체를 없애면 채권자 보호가 무너진다.</p>
+<p><strong>시험:</strong> 설립등기·청산 종료, 해산≠즉시 소멸. <strong>키워드:</strong> 목적·수익사업·법인격. <strong>한 줄:</strong> 법인은 이름보다 설립 목적과 구체적 사업을 본다.</p>
+<h1>4. 상인이라도 혼자 영업할 수 있을까</h1>
+<h2 id="commercial-02-07" data-concept-id="commercial-02-07">4-1. 상인자격과 영업능력 ★★★★★</h2>
+<p><strong>교재 32–33쪽 · 문단의 이유:</strong> 권리·의무의 주인이 될 수 있는가와 스스로 유효하게 거래할 수 있는가는 다르다.</p>
+<p>미성년자 수아가 가게의 주인이고 법정대리인이 대신 계약한다고 하자. 상인은 수아이고 대리인은 수아를 도울 뿐이다. <strong>법정대리인이 계약했다는 이유로 대리인이 상인이 되지는 않는다.</strong> 법인은 기관을 통하여 행위하므로 자연인의 나이·후견 상태와 같은 형태로 영업능력을 묻지 않지만, 대표권·기관의 적법한 행위 문제는 남는다.</p>
+<p>미성년자는 법정대리인이 허락한 <strong>특정한 영업</strong>에 관해서 성년자와 같은 행위능력을 갖는다(민법8조). 상법6조는 그 영업을 등기하도록 한다. 등기의무가 있다는 것과 등기해야만 허락의 효력이 생긴다는 것은 별개다. 법정대리인의 허락을 받아 회사의 무한책임사원이 된 미성년자는 그 사원자격으로 인한 행위에 관하여 능력자로 본다(7조). 모든 사생활까지 성년자로 취급하는 것이 아니다.</p>
+<p>법정대리인이 제한능력자를 위하여 영업하는 경우에도 등기가 요구된다(8조). 법정대리인의 대리권 제한은 선의의 제3자에게 대항하지 못한다. <mark class="green">상대가 거래할 때 알기 어려운 내부 제한을 내세워 거래를 뒤집지 못하게 하는 취지다.</mark></p>
+<p>피한정후견인은 가정법원이 동의를 요구한 범위를, 피성년후견인은 취소할 수 있는 행위와 법원이 정한 예외 등 민법의 체계를 따로 확인한다. <strong>미성년자의 특정 영업 허락 제도를 피성년후견인에게 그대로 복사할 수 없다.</strong> 제공 워크북의 ‘유효한 영업행위를 할 수 없다’는 문구를 처음부터 모든 행위가 당연무효라는 뜻으로 읽으면 안 된다. 취소 가능성과 무효는 다르다.</p>
+<p><strong>시험:</strong> 허락·등기·대리·상인의 귀속을 따로 묻는다. <strong>키워드:</strong> 특정 영업·등기의무·본인 귀속. <strong>한 줄:</strong> 대신 행동하는 사람과 법적 주인은 다를 수 있다.</p>
+<h2 id="commercial-02-08" data-concept-id="commercial-02-08">4-2. 영업의 자유와 제한 ★★★☆☆</h2>
+<p><strong>교재 33쪽 · 넣은 이유:</strong> 상인자격과 능력이 있어도 모든 영업이 무제한 허용되는 것은 아니다.</p>
+<p>헌법15조의 직업선택 자유는 영업의 자유를 뒷받침한다. 그러나 헌법37조2항에 따라 필요한 경우 법률로 제한할 수 있으며 본질적 내용을 침해해서는 안 된다. 위험한 영업의 금지·허가제, 상업사용인의 경업금지, 상표·특허권 및 부정경쟁 규율 등은 성질이 서로 다른 제한이다. <strong>교재의 홍삼 제조·판매 독점 같은 과거 제도 예시를 현재의 일반 금지로 외우지 않는다.</strong> 이 강의 핵심은 공익상 규제와 사법상 의무가 영업을 제한할 수 있다는 구조다.</p>
+<p><strong>사례:</strong> 금융업 허가가 필요한 사람이 상인으로 인정된다는 이유로 무허가 영업까지 적법해지는 것은 아니다. 상인성·행위능력·영업규제를 세 칸으로 나누어 판단한다.</p>
+<p><strong>시험:</strong> 헌법상 자유이므로 법률 제한 불가능? → 틀림. <strong>키워드:</strong> 자유·법률유보·경업. <strong>한 줄:</strong> 사업할 주체가 되는 것과 특정 사업을 허가받는 것은 다른 문제다.</p>
+<h1>시험 연결</h1>
+<p><strong>TOP5:</strong> 상법_007(당연상인 3요건), 상법_008(준비행위), 상법_010(미성년자 영업), 상법_073(소상인·회사·후견), 상법_006(입법주의). 제공 문항은 입법주의 2, 당연상인 1, 취득·상실 2, 영업능력 1, 종합 1문항이다. 실제 오답률은 없으며 오답 유발 표현은 ‘미만/이하’, ‘회사/회사 아닌 자’, ‘명의/계산’, ‘허락/등기’다.</p>
+<p><strong>교재 네 질문의 답 골격:</strong> ① 우리 법은 4조·5조를 병행한다. ② 당연상인은 자기 명의·상행위·영업, 의제상인은 설비상인·회사다. ③ 자연인은 객관적인 개업준비, 회사는 설립등기가 출발점이다. ④ 미성년자의 특정 영업 허락과 법정대리인의 대리를 구별하고 상인은 권리·의무가 귀속되는 본인임을 확인한다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>1.</strong> 서연은 인쇄소를 열려고 업무용 대형 인쇄기를 주문했다. 상대도 개업용임을 알았다. 아직 매출이 없어 상인이 아니라고 할 수 있을까? <strong>답:</strong> 객관적으로 영업 의사가 드러난 준비행위이면 그때 상인자격과 보조적 상행위가 인정될 수 있다. <strong>의도:</strong> 첫 매출 기준의 오류.</p>
+<p><strong>2.</strong> 자본금액 800만 원인 개인 가게와 같은 자본금의 주식회사 중 누가 소상인 규정의 대상이 될 수 있을까? <strong>답:</strong> 요건을 갖춘 개인 가게만 가능하다. <strong>의도:</strong> 회사 제외와 금액 요건을 함께 읽기.</p>
+<p><strong>3.</strong> 아버지가 미성년자 지우의 영업을 법정대리한다. 물품대금 채무의 귀속주체는 언제나 아버지인가? <strong>답:</strong> 적법한 대리의 효과는 본인 지우에게 귀속한다. 아버지의 별도 보증·불법행위 등은 따로 본다. <strong>의도:</strong> 행위자와 상인의 구별.</p>
+<p><strong>4.</strong> 농업을 하는 주식회사는 ‘민사회사’이므로 상법이 전혀 적용되지 않는다고 주장한다. <strong>답:</strong> 회사는 상인이고 기본적 상행위 이외의 영업을 하더라도 의제상인이 될 수 있다. <strong>의도:</strong> ‘민’이라는 이름에 속지 않기.</p>
+<p><strong>5.</strong> 미성년자에게 제과점 영업을 허락했다. 그가 전혀 관계없는 고가 보트를 사도 제한능력자 보호가 모두 사라질까? <strong>답:</strong> 특정 영업에 관한 능력 인정과 별개 행위다. 그 계약은 일반적인 제한능력 규칙에 따라 판단한다. <strong>의도:</strong> 특정 영업의 범위를 넘어 일반 성년자로 취급하지 않기.</p>
+<h1>용어 사전</h1>
+<h3>상인 商人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 人(사람 인). <strong>③ 합친 뜻:</strong> 기업거래의 주체. <strong>④ 이름의 이유:</strong> 기업활동을 법적으로 담당하는 주체라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업상의 권리·의무가 귀속되는 주체. <strong>⑥ 쉬운 말:</strong> 계약의 권리와 빚을 받는 주인공. <strong>⑦ 사례:</strong> 미성년자의 대리영업에서도 상인은 본인.</p>
+<p><strong>⑧ 시험:</strong> 행동한 직원과 귀속주체를 구별. <strong>⑨ 비교·기억법:</strong> 기업은 조직·활동, 상인은 법적 주체.</p>
+<h3>당연상인 當然商人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 當(마땅할 당), 然(그럴 연), 商(장사 상), 人(사람 인). <strong>③ 합친 뜻:</strong> 요건에 따라 당연히 인정되는 상인. <strong>④ 이름의 이유:</strong> 거래의 실질이 상행위라서 상인이 된다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자기 명의로 상행위를 영업으로 하는 자. <strong>⑥ 쉬운 말:</strong> 정해진 사업거래를 자기 이름의 법적 책임으로 계속하는 사람. <strong>⑦ 사례:</strong> 자기 문구점의 물품을 계속 매매한다.</p>
+<p><strong>⑧ 시험:</strong> 명의·상행위·영업성 세 가지. <strong>⑨ 비교·기억법:</strong> 의제상인은 설비·회사라는 형식으로 보충.</p>
+<h3>의제상인 擬制商人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 擬(본뜰 의), 制(지을 제), 商(장사 상), 人(사람 인). <strong>③ 합친 뜻:</strong> 법이 상인으로 보도록 정한 자. <strong>④ 이름의 이유:</strong> 같은 규율을 적용하도록 법이 지위를 정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본적 상행위 이외라도 제5조의 요건으로 상인으로 보는 자. <strong>⑥ 쉬운 말:</strong> 목록에 없는 업종도 기업답게 하면 상인으로 다룬다. <strong>⑦ 사례:</strong> 농업회사를 의제상인으로 다룬다.</p>
+<p><strong>⑧ 시험:</strong> 설비만 있으면 자동으로 인정되는 것은 아니다. <strong>⑨ 비교·기억법:</strong> 추정은 반증 가능, 의제·간주는 같은 말이 아니다.</p>
+<h3>명의 名義</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 名(이름 명), 義(옳을 의): 뜻·의미. <strong>③ 합친 뜻:</strong> 이름이 갖는 법적 뜻. <strong>④ 이름의 이유:</strong> 누구 이름의 법적 거래인지 묻는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 단원에서는 거래상 권리·의무 귀속주체를 판단하는 기준. <strong>⑥ 쉬운 말:</strong> 누가 계약의 주인인지. <strong>⑦ 사례:</strong> 등록 명의와 실제 영업주가 달라도 실질을 본다.</p>
+<p><strong>⑧ 시험:</strong> 명의와 계산을 섞지 않기. <strong>⑨ 비교·기억법:</strong> 계산 計算은 최종 경제적 손익의 귀속.</p>
+<h3>영업 營業</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 營(경영할 영), 業(일 업). <strong>③ 합친 뜻:</strong> 일을 경영함. <strong>④ 이름의 이유:</strong> 계속 운영하는 활동을 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 단원에서는 영리 목적으로 같은 유형의 행위를 계속·반복하는 활동. <strong>⑥ 쉬운 말:</strong> 한 번 물건을 파는 것과 사업으로 운영하는 것을 나누자. <strong>⑦ 사례:</strong> 중고책 우연한 매도와 서점 운영 비교.</p>
+<p><strong>⑧ 시험:</strong> 실제 흑자가 영업성의 필수조건은 아니다. <strong>⑨ 비교·기억법:</strong> 취미·임금노동·공익적 전문직을 구체적으로 구별.</p>
+<h3>보조적 상행위 補助的商行爲</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보): 보탬, 助(도울 조), 的(과녁 적): 성질, 商(장사 상), 行(다닐 행), 爲(할 위). <strong>③ 합친 뜻:</strong> 영업을 돕는 거래. <strong>④ 이름의 이유:</strong> 영업 자체뿐 아니라 이를 돕는 활동도 필요해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상인이 영업을 위하여 하는 행위. <strong>⑥ 쉬운 말:</strong> 장사를 준비하고 유지하려는 계약도 챙긴다. <strong>⑦ 사례:</strong> 개업을 위한 점포 구입.</p>
+<p><strong>⑧ 시험:</strong> 객관적으로 영업 의사를 알 수 있는 준비행위. <strong>⑨ 비교·기억법:</strong> 기본적 상행위는 사업의 주된 거래 유형.</p>
+<h3>소상인 小商人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 小(작을 소), 商(장사 상), 人(사람 인). <strong>③ 합친 뜻:</strong> 작은 규모의 상인. <strong>④ 이름의 이유:</strong> 일부 공시·관리 부담을 덜어 줄 작은 개인상인.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자본금액 1천만 원 미만이며 회사가 아닌 상인. <strong>⑥ 쉬운 말:</strong> 작은 개인 가게라고 상인이 아닌 것은 아니다. <strong>⑦ 사례:</strong> 자본금액 900만 원인 개인 가게.</p>
+<p><strong>⑧ 시험:</strong> 미만·회사 아님·지상장등. <strong>⑨ 비교·기억법:</strong> 다른 지원법의 소상공인과 동일 정의 아님.</p>
+<h3>법인격 法人格</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 人(사람 인), 格(격식 격): 지위. <strong>③ 합친 뜻:</strong> 법이 인정한 독립 주체의 지위. <strong>④ 이름의 이유:</strong> 법적으로 하나의 주체로 취급한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 단체 등이 독립적으로 권리·의무의 주체가 되는 자격. <strong>⑥ 쉬운 말:</strong> 회사와 주주를 별개 주인공으로 보는 것. <strong>⑦ 사례:</strong> 회사가 설립등기 후 자기 재산·채무를 가진다.</p>
+<p><strong>⑧ 시험:</strong> 회사 설립등기와 상인자격 연결. <strong>⑨ 비교·기억법:</strong> 사무실·간판만 있다고 법인격이 생기지 않는다.</p>
+<h3>청산 淸算</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 淸(맑을 청): 깨끗이 정리, 算(셈 산). <strong>③ 합친 뜻:</strong> 남은 계산을 정리함. <strong>④ 이름의 이유:</strong> 남은 계산을 깨끗이 끝낸다는 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해산 후 채권 추심·채무 변제 등 남은 법률관계를 마무리하는 절차. <strong>⑥ 쉬운 말:</strong> 문 닫기로 했어도 받을 돈과 갚을 돈을 정리해야 한다. <strong>⑦ 사례:</strong> 해산 회사가 남은 대금을 회수한다.</p>
+<p><strong>⑧ 시험:</strong> 해산과 청산 종료를 구별. <strong>⑨ 비교·기억법:</strong> 해산은 끝내기로 하는 단계, 청산은 마무리 과정.</p>
+<h3>법정대리 法定代理</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 定(정할 정), 代(대신할 대), 理(다스릴 리). <strong>③ 합친 뜻:</strong> 법에 따라 정해지는 대리. <strong>④ 이름의 이유:</strong> 본인의 위임만으로 생기는 대리와 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률상 근거에 따라 본인을 위하여 법률행위를 하는 제도. <strong>⑥ 쉬운 말:</strong> 보호가 필요한 사람 대신 적법한 대표자가 거래한다. <strong>⑦ 사례:</strong> 법정대리인이 미성년자의 가게를 대리한다.</p>
+<p><strong>⑧ 시험:</strong> 상인은 대리인이 아니라 본인. <strong>⑨ 비교·기억법:</strong> 영업허락은 본인의 특정 영업능력, 대리는 타인이 행동하는 방식.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 상인</h2><p><b>TOP3:</b> 당연상인의 3요건 / 개업준비행위 / 상인자격과 영업능력의 분리.</p><table><tr><th>구분</th><th>정리</th></tr><tr><td>상행위주의 / 상인주의</td><td>행위→사람(4조) / 사람·기업형식 먼저(5조)</td></tr><tr><td>당연상인</td><td>자기 명의로 상행위를 영업으로. 자기 명의=법률효과 귀속</td></tr><tr><td>의제상인</td><td>설비상인·회사. 변호사·법무사는 직무의 공공성에 주의</td></tr><tr><td>소상인</td><td>1천만 원 미만＋회사 아님. 지배인·상호·장부·등기 제외</td></tr><tr><td>자연인</td><td>객관적 개업준비 → 영업 → 잔무 종료. 신고와 구별</td></tr><tr><td>회사</td><td>설립등기로 시작, 해산 뒤 청산 중에도 존속, 청산 종료로 상실</td></tr><tr><td>미성년자</td><td>허락받은 특정 영업에서 능력 인정＋등기의무. 모든 행위가 아님</td></tr><tr><td>대리영업</td><td>상인은 제한능력자인 본인. 법정대리인의 내부 제한과 제3자 보호</td></tr></table><p><b>반드시 외울 문장:</b> 자기 명의는 법률효과, 자기 계산은 경제적 손익이다. 인허가 명의가 실제 영업주를 항상 결정하지 않는다. 상인성이 인정된다고 무허가 영업이 적법해지는 것은 아니다.</p><p><b>분홍 함정:</b> 회사도 소상인 × / 첫 손님부터 상인 × / 피성년후견인에게 미성년자 영업허락 규정 그대로 적용 × / 해산 즉시 소멸 × / 사업자등록 명의가 항상 상인 ×.</p><p><b>옛 판례 경고:</b> 1962년 남편 경영 추정은 구법이다. 현행 민법830조2항의 귀속불명재산은 부부 공유 추정.</p><p><b>사례를 풀 순서:</b> 법적 귀속주체 → 당연·의제 요건 → 자격 취득 시점 → 능력·대리 → 등기 → 해당 영업의 적법성.</p></section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>아직 답안을 받지 않아 실제 이해도는 미평가다. 🟢 명의·계산, 준비행위, 미성년자 대리를 사례로 구분하면 이해 완료 / 🟡 결론만 기억하면 복습 필요 / 🔴 신고가 상인자격을 만들거나 대리인이 언제나 상인이라고 답하면 이해 부족. <strong>복습 TOP3: 자기 명의, 개업준비, 특정 영업 허락과 대리.</strong></p>
+<p>근거는 첨부 『상법기초』 제2강·워크북 및 제공 JSON이다. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95">상법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C2%EC%A1%B0">상법 시행령 제2조</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95">민법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%8B%A0%ED%83%81%EB%B2%95/%EC%A0%9C4%EC%A1%B0">신탁법 제4조</a>를 대조한다. 신탁법4조를 신탁 인수의 상행위성 근거로 적은 원자료 해설은 현행 조문의 내용(신탁의 공시·대항)과 다르므로 보기 해설에서 보완했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_006"><h4>형성평가 · 상법_006</h4><p class="question-stem">다음 중에서 상법의 적용기준에 관한 ‘상행위주의’에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>우리 상법 제5조가 ‘상행위주의’의 입장을 취하고 있다.</li><li>‘상행위주의’에 따르면, 상법은 상인의 신분법으로서의 성질을 가지게 된다.</li><li>상인개념을 먼저 정하고 그 상인이 하는 행위를 상행위로 규정하는 입법주의이다.</li><li>거래행위의 성질이 상행위이냐가 문제될 뿐이고 거래주체가 누구인지는 문제되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 제4조가 상행위주의 쪽이고 제5조는 기업적 형식으로 보충한다.</li><li><strong>비선택</strong> · 틀림. 주체의 신분을 먼저 정하는 상인주의의 설명이다.</li><li><strong>비선택</strong> · 틀림. 사람을 먼저 정하므로 상인주의다.</li><li><strong>선택</strong> · 맞음·정답. 행위의 성질을 먼저 정하는 입법 방식이라는 뜻이다. 실제 상인 요건 심사까지 생략한다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①우리 상법 제4조는 ‘상행위주의’의 입장을 취하고 있다. ②상법이 상인의 신분법으로서 성질을 가지는 것은 상인주의에 따르는 경우이다. ③상행위주의란 상행위의 유형과 종류를 먼저 정하고 그 상행위를 영업으로 하는 자를 상인으로 규정하는 입법주의이다.</p></details></section>
+
+<section class="question-card" id="question-상법_007"><h4>형성평가 · 상법_007</h4><p class="question-stem">다음 중에서 당연상인의 요건에 해당하지 않는 것은?</p><ol class="choices"><li>상행위</li><li>영업성</li><li>자기명의</li><li>비현명주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 요건. 상법46조 등의 상행위를 말한다. 원자료 해설의 신탁법4조 인용은 현행 조문(신탁의 공시·대항)과 달라 그대로 암기하지 않는다.</li><li><strong>비선택</strong> · 요건. 영리 목적의 계속·반복이다. 실제 흑자가 필요하다는 뜻은 아니다.</li><li><strong>비선택</strong> · 요건. 법률효과의 귀속주체라는 의미다. 등록 명의나 실제 행위자와 다를 수 있다.</li><li><strong>선택</strong> · 요건 아님·정답. 비현명주의는 상행위 대리에서 본인을 위한 행위임의 표시를 완화하는 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제4조의 당연상인이 되기 위한 요건은 ‘자기명의로’ ‘상행위를’ ‘영업으로 하여야’ 한다. ‘자기명의’란 자신이 거래상 권리의무의 귀속주체가 되는 것을 말한다. ‘상행위’란 상법 제46조의 기본적 상행위(22종)와 특별법상의 상행위(신탁법 제4조에 의한 신탁의 인수와 담보부사채신탁법 제23조 제2항에 따른 사채총액의 인수)를 말한다. ‘영업으로’의 의미는 영리를 목적으로 동일한 유형의 행위를 계속적․반복적으로 해야 한다는 것이다.</p></details></section>
+
+<section class="question-card" id="question-상법_008"><h4>형성평가 · 상법_008</h4><p class="question-stem">다음 중에서 자연인의 상인자격의 취득시기에 대한 판례의 입장에 해당하는 것은?</p><ol class="choices"><li>출생한 때</li><li>세무서에 신고한 때</li><li>개업준비행위를 한 때</li><li>첫 번째 고객을 상대로 영업을 한 때</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 출생으로 일반 권리능력을 얻지만 상인이 자동으로 되는 것은 아니다.</li><li><strong>비선택</strong> · 틀림. 세무신고는 상인성의 결정 기준이 아니다. 실제 준비·영업 사실을 본다.</li><li><strong>선택</strong> · 맞음·정답. 영업 의사를 상대가 객관적으로 알 수 있는 준비행위여야 한다. 마음속 계획만으로는 부족하다.</li><li><strong>비선택</strong> · 틀림. 첫 고객을 받기 전의 객관적 준비행위부터 인정될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [대법원 1999.1.29. 선고 98다1584 판결] 영업의 목적인 기본적 상행위를 개시하기 전에 영업을 위한 준비행위를 하는 자는 영업으로 상행위를 할 의사를 실현하는 것이므로 그 준비행위를 한 때 상인자격을 취득한다.</p></details></section>
+
+<section class="question-card" id="question-상법_009"><h4>형성평가 · 상법_009</h4><p class="question-stem">다음 중에서 상인자격의 취득과 상실에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법인은 설립목적에 따라 상인자격의 인정 여부를 판단하여야 한다.</li><li>상인자격은 영업을 폐지하는 등 영업행위를 종료함으로써 상실한다.</li><li>상인이 상행위라는 법률행위를 할 수 있기 위해서는 상인자격을 취득하여야 한다.</li><li>자연인은 관할구청의 허가를 얻고, 관할세무서에 신고하여야 상인자격을 취득한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 비영리법인·회사·공법인 등을 목적과 구체적 사업에 따라 구별한다.</li><li><strong>비선택</strong> · 맞음. 종료는 단순 간판 철거뿐 아니라 잔무가 사실상 끝나는 의미까지 본다. 회사는 청산 종료와 연결된다.</li><li><strong>비선택</strong> · 원자료상 맞는 보기다. 상인자격을 행정허가처럼 먼저 취득해야 단 한 번의 거래도 할 수 있다는 뜻으로 읽으면 부정확하다. 준비·영업행위로 요건을 충족하면 자격이 인정된다.</li><li><strong>선택</strong> · 틀림·정답. 허가·신고 자체가 자연인의 상인자격을 만드는 기준은 아니다. 무허가 영업의 제재나 효력은 별도 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④행정관청의 허가, 인가, 신고 등의 유무는 상인자격의 취득과 관계가 없다. 상인자격은 오로지 영업개시 또는 영업준비 사실의 존재 여부에 따라 정해진다.</p></details></section>
+
+<section class="question-card" id="question-상법_010"><h4>형성평가 · 상법_010</h4><p class="question-stem">다음 중에서 영업능력에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법인은 기관을 통해서 활동을 하므로 영업능력이 문제되지 않는다.</li><li>미성년자는 법정대리인의 허락을 얻은 특정한 영업을 할 수 있으며, 이 경우 등기는 선택사항이다.</li><li>법정대리인은 제한능력자를 대리하여 영업을 할 수 있다.</li><li>법정대리인이 제한능력자를 대리하여 영업을 하는 경우, 상인은 법정대리인이 아니라 제한능력자가 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이 단원의 구분에서는 맞음. 법인은 기관을 통해 활동한다. 기관·대표권의 적법성까지 문제없다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀림·정답. 특정 영업 허락에 따른 등기는 의무다. 다만 등기의무와 행위능력 취득의 성립요건을 혼동하지 않는다.</li><li><strong>비선택</strong> · 맞음. 각 후견·대리권의 범위에 따라 본인을 위한 영업을 할 수 있다.</li><li><strong>비선택</strong> · 맞음. 대리의 법률효과가 본인에게 귀속하므로 상인은 제한능력자다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 미성년자는 법정대리인의 허락을 얻은 특정한 영업을 할 수 있다. 다만 이 경우에는 상업등기부에 등기하여야 한다(제6조).</p></details></section>
+
+<section class="question-card" id="question-상법_072"><h4>워크북 · 상법_072</h4><p class="question-stem">다음 중에서 상법의 적용기준에 대한 '상행위주의'에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>상인개념을 먼저 정하고 그 상인이 하는 행위를 상행위로 규정하는 입법주의이다.</li><li>'상행위주의'에 따르면, 상법은 상인의 신분법으로서의 성질을 가지게 된다.</li><li>거래행위의 성질이 상행위이냐가 문제될 뿐이고 거래주체가 누구인지는 문제되지 않는다.</li><li>우리 상법 제5조는 '상행위주의'의 입장을 취하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 상인주의 설명이다.</li><li><strong>비선택</strong> · 틀림. 신분법 성질은 상인주의 쪽이다.</li><li><strong>선택</strong> · 맞음·정답. 행위의 객관적 성질에서 출발하는 입법주의다.</li><li><strong>비선택</strong> · 틀림. 4조와 5조를 뒤집었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상행위주의란 상행위의 유형과 종류를 먼저 정하고 그 상행위를 영업으로 하는 자를 상인으로 규정하는 입법주의이다. ② 상법이 상인의 신분법으로서의 성질을 가지는 것은 상인주의에 따르는 경우이다. ④ 우리 상법 제4조는 '상행위주의'의 입장을 취하고 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_073"><h4>워크북 · 상법_073</h4><p class="question-stem">다음 중에서 상인에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>소상인은 자본금 1,000만 원 미만의 회사를 말한다.</li><li>회사는 설립등기를 한 때에 상인자격을 취득한다.</li><li>피성년후견인은 법정대리인의 동의를 얻어 영업을 할 수 있다.</li><li>영업의 자유는 헌법에서 보장된 권리이므로 법률로써 이를 제한할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 회사가 아닌 자여야 한다. 1천만 원 미만이라는 금액만 보아서는 안 된다.</li><li><strong>선택</strong> · 맞음·정답. 회사는 설립등기로 법인격과 상인자격을 취득한다.</li><li><strong>비선택</strong> · 틀림. 미성년자의 특정 영업 허락을 피성년후견인에게 그대로 적용할 수 없다. 원자료의 “유효한 행위를 할 수 없다”도 모든 행위가 처음부터 당연무효라는 뜻으로 외우지 말고 민법상 취소 가능성과 예외를 구분한다.</li><li><strong>비선택</strong> · 틀림. 헌법상 자유에도 헌법37조2항에 따른 법률상 제한이 가능하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 소상인은 자본금 1,000만 원 미만의 상인으로 회사가 아닌 자를 말한다. ③ 피성년후견인은 법정대리인의 허락을 얻는다 해도 유효한 영업행위를 할 수 없고 피성년후견인이 영업을 하기 위해서는 법정대리인의 대리를 통해서 하여야 한다. ④ 영업의 자유는 비록 헌법에서 보장된 권리이기는 하지만, 상법 그리고 기타 특별법에서 일정한 제한을 받는다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 02' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 02|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

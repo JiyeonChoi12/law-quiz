@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제5강 명의대여자의 책임 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 05</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제5강 명의대여자의 책임 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>“친구가 장사하는데 이름만 빌려 줬어요. 제가 돈을 받은 것도 아닌데요?” 그런데 거래처는 그 이름을 믿고 물건을 보냈다. 이번 강은 <strong>이름을 빌려 준 사람이 만들어 낸 신뢰에 어떤 책임을 져야 하는가</strong>를 다룬다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하나?</td>
+<td>명의대여책임의 외관·허락·신뢰 요건과 거래채무·불법행위의 구별이다.</td>
+</tr>
+<tr>
+<td>왜 필요하나?</td>
+<td><mark class="green">겉으로 영업주처럼 보이게 해 놓고 나중에 실제 사업자가 아니라고 빠지면 거래의 신뢰가 무너지기 때문이다.</mark></td>
+</tr>
+<tr>
+<td>법 전체에서 위치는?</td>
+<td>상법의 외관책임이다. 민법상 사용자책임과는 근거가 다르다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td><mark class="blue">상호·표현지배인을 바탕으로, 다음 강의 등기와 외관책임으로 이어진다.</mark></td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>명의만 있는 회사, 지입차량, 독립 대리점, 영업소·지점의 차이를 판단하기 어렵다.</td>
+</tr>
+</tbody></table>
+<p>본문 75–92쪽과 <strong>보충학습 ‘영업소와 상업장부’ 93–103쪽</strong>을 함께 설명한다. 제공 문제 7문항·28개 보기와 워크북을 연결했다. 별도 오답률 자료는 없으며 별점은 학습 우선순위다. 색은 노랑=결론, 초록=이유, 분홍=함정, 파랑=연결이다.</p>
+<h1>1. 이름만 빌려 주었는데 왜 책임질까</h1>
+<h2 id="commercial-05-01" data-concept-id="commercial-05-01">1-1. 상법24조의 등장인물 세 명 ★★★★★</h2>
+<p><strong>교재 77–78쪽 · 문단의 이유:</strong> 누구에게 누구의 책임을 추가하는 제도인지 먼저 잡는다.</p>
+<p>민지는 이름을 빌려 준 <strong>명의대여자</strong>, 준호는 그 이름으로 자신의 사업을 하는 <strong>명의차용자</strong>, 수진은 민지가 영업주인 줄 알고 거래한 <strong>제3자</strong>다. 준호가 자기 사업을 위해 물건을 샀지만 민지의 신용을 믿고 거래한 수진을 보호할 필요가 있다. <mark class="yellow">요건을 충족하면 민지도 준호와 연대하여 변제할 책임을 진다.</mark> 준호의 책임이 민지에게 옮겨 가서 준호가 빠지는 구조가 아니다.</p>
+<p><strong>판례 1987.3.24. 85다카2219:</strong> 법원은 명의를 빌려 준 사람이 만든 외관을 믿은 거래상대를 보호한다는 점을 강조한다. 이론적 근거는 <strong>금반언과 외관주의</strong>다. 금반언은 상대의 정당한 신뢰를 낳은 자신의 태도와 모순되는 주장을 함부로 하지 못한다는 뜻이다. 외관주의는 진실과 다른 겉모습을 만든 쪽이 보호받을 신뢰에 책임지는 원리다. 반대라면 이름의 신용을 이용할 때는 허용하고 빚을 갚을 때만 부정할 수 있다.</p>
+<p>교재의 금반언 설명은 영미법상 기록·증서·행위에 의한 유형도 소개한다. <strong>심화:</strong> 여기서는 그 분류를 모두 외우기보다, ‘표시를 만든 책임과 그 표시를 믿은 상대의 보호’를 연결한다. 외관주의가 민법상 모든 등기에 공신력을 인정한다는 뜻도 아니다. 부동산등기의 공신력 부정과 구별한다.</p>
+<p><strong>시험:</strong> 명의대여자가 반드시 상인이어야 한다는 보기 ×. 판례는 명의차용 영업의 상행위성도 필수로 요구하지 않는다. <strong>키워드:</strong> 허락한 외관·신뢰·책임 추가. <strong>한 줄:</strong> 이름을 믿게 만든 책임이지 실제 사업자가 바뀌었다는 선언은 아니다.</p>
+<h1>2. 세 단계 요건: 허락 → 외관 → 신뢰</h1>
+<h2 id="commercial-05-02" data-concept-id="commercial-05-02">2-1. 어떤 이름과 직함이 외관을 만드는가 ★★★★★</h2>
+<p><strong>교재 79–81쪽 · 문단의 이유:</strong> 글자 그대로의 성명·상호뿐 아니라 무엇으로 오인하게 했는지 본다.</p>
+<p>법문은 성명 또는 상호라고 하지만 영업주로 오인할 수 있는 명의의 사용을 검토한다. 회사 이름에 ‘지점·영업소·출장소’를 붙이면 회사에 속한 조직처럼 보일 수 있다. 반면 ‘대리점’은 독립사업자가 판매를 맡는 등 여러 관계에 쓰이므로 같은 뜻이 아니다. 단어만 외우지 말고 <strong>누가 독립적으로 자기 사업을 하는지</strong> 먼저 살핀다.</p>
+<h3>판례 장면 · 대리점, 출장소, 실제 직원</h3>
+<p><strong>1989.10.10. 88다카8354:</strong> 타인의 상호 아래 ‘대리점’을 붙여 사용하도록 허락한 사안이다. 일반 거래에서 대리점이라는 말은 대리상·특약점·위탁매매업 등 다양한 독립관계에도 쓰인다. 법원은 그 명칭의 허락만으로 상법24조 책임을 인정하지 않았다. ‘대리점’ → 반드시 본사의 종속 지점이라는 표시가 아니다. 다른 추가적 외관이나 별도 책임까지 모두 배제하는 판결은 아니다.</p>
+<p><strong>1976.9.28. 76다955:</strong> 운송회사가 출장소 운영계약을 맺고 출장소장으로 임명하여 자기 상호로 목적사업인 운송업을 하게 했다. 거래상대는 회사가 책임지는 영업으로 믿었다. 법원은 이런 외관을 제공한 회사에 요건 아래 대여금채무 변제책임을 인정했다. 대리점 사례와 달리 회사의 사업으로 보이게 한 구체적 표시가 중요하다.</p>
+<p><strong>대구고법 1978.2.17. 77나156:</strong> ‘부산영업소장’이라는 명칭을 썼더라도 실제로 회사에 종속된 점포의 피용자라면, 자기 계산으로 독립사업을 하도록 명의를 빌린 사람이 아니다. 이때는 실제 대리권·사용자관계 등 다른 법리를 봐야 한다. 같은 직함이라도 실질이 다르면 책임 근거도 달라진다.</p>
+<p><strong>시험:</strong> 출장소는 언제나 책임, 대리점은 모든 책임 없음 같은 단정은 피한다. <strong>키워드:</strong> 독립 영업·종속 직원·외관 의미. <strong>한 줄:</strong> 직함이 아니라 그 직함이 실제로 누구의 영업이라고 믿게 했는지 본다.</p>
+<h2 id="commercial-05-03" data-concept-id="commercial-05-03">2-2. 명시적 허락과 묵시적 허락 ★★★★★</h2>
+<p><strong>교재 81–83쪽 · 문단의 이유:</strong> 허락서를 써 주지 않았다는 이유만으로 책임을 피할 수 있는지 확인한다.</p>
+<p>명의사용의 허락은 말·문서로 분명히 할 수도, 알고도 허용하는 행동으로 드러날 수도 있다. 다만 아무런 관계도 없는 이름 도용을 단순히 몰랐다는 사정과는 다르다. 부작위가 문제 될 때는 외관 형성과 방치의 사정, 저지할 지위와 의무를 구체적으로 살핀다.</p>
+<h3>판례 묶음 · 무엇을 허용했는가</h3>
+<p><strong>1992.8.18. 91다30699:</strong> 아버지의 야채중매업과 아들의 판매업을 공동경영처럼 보이게 하고 상호·점포 사용을 허용한 사정이 있었다. 거래처가 아들 개인이 아닌 중매업 경영자와 거래한다고 믿었다. 법원은 외관을 만들고 방치한 책임을 인정하고, 당시 사정에서 거래처의 중과실도 쉽게 인정하지 않았다. ‘가족’이라서 책임지는 것이 아니라 <strong>공동영업처럼 보이게 한 행동</strong>이 이유다.</p>
+<p><strong>서울고법 1990.10.12. 90나26435:</strong> 회사가 무면허 업자에게 회사 명의로 시장 신축공사를 하게 하고 기공식 안내장·이사 호칭 등으로 외관을 만들었다. 하도급 상대는 회사를 영업주로 오인했다. 법원은 계약 종료에 따른 공사이행보증금 반환채권에도 책임을 인정했다. 원래 계약대금뿐 아니라 거래에서 파생된 반환의무도 연결된다.</p>
+<p><strong>서울고법 1987.3.19. 86나3297:</strong> 공동사업자가 탈퇴하면서 명의를 바꿀 때까지 종전 사업자등록을 쓰도록 승낙했다. 내부적으로 탈퇴했더라도 거래처가 그 뒤의 외관을 믿었다면 명의변경 전 발생한 물품대금채무에 책임이 문제 된다. ‘나는 이미 나갔다’는 내부사정과 남겨 둔 외관은 다르다.</p>
+<p><strong>1982.12.28. 82다카887:</strong> 상점·전화·창고를 쓰게 했으나 해당 거래에서 상호를 사용한 사실이 없는 경우다. 법원은 공간·시설을 빌려 준 사정만으로 묵시적 명의대여와 오인거래를 곧 인정하기 어렵다고 보았다. 반대라면 단순 임대인까지 모든 임차인 빚을 책임져야 한다.</p>
+<p><strong>1977.7.26. 77다797:</strong> 같은 업종의 다른 사람에게 회사 사무실 안에서 같은 사업을 하게 한 구체적 외관에서는, 상대가 별개 업체임을 알았다는 자료가 없다면 책임을 면하기 어렵다고 보았다. 앞 판결과 모순이 아니라 실제로 형성된 영업주 외관과 거래상대 인식이 다르다.</p>
+<p><strong>서울고법 1976.11.18. 76나1795:</strong> 하도급계약만 한 것이 아니라 원수급인의 상호 사용까지 허락했다. 하수급인을 원수급인 영업으로 오인해 거래한 제3자에게 책임이 문제 된다. 하도급이라는 이름만으로 무조건 책임을 지우거나 면제하지 않는다.</p>
+<p><strong>문장 풀기:</strong> ‘묵시적 허락’ → 말로 승인하지 않았어도 전체 행동으로 허용했는가. ‘오인하여 거래’ → 그 겉모습 때문에 거래했는가. <strong>시험:</strong> 공간 제공만으로 자동 책임 ×, 허락서 없으면 책임 없음 ×. <strong>한 줄:</strong> 허락은 행동으로도 드러나지만 거래와 외관의 연결을 증명해야 한다.</p>
+<h2 id="commercial-05-04" data-concept-id="commercial-05-04">2-3. 명의차용자의 직원까지 무조건 책임질까 ★★★★☆</h2>
+<p><strong>교재 83쪽·87–88쪽 · 넣은 이유:</strong> 이름을 빌린 사람과 그 밑의 직원의 별도 무권한 행위를 구별한다.</p>
+<p><strong>1989.9.12. 88다카26390:</strong> 상법24조 책임은 명의사용을 허락받은 사람의 영업거래채무를 대상으로 한다. 교재는 명의차용자의 피용자 행위에까지 당연히 확대할 수 없다고 설명한다. 이를 직원이 적법한 권한으로 한 모든 통상 거래도 언제나 제외된다는 뜻으로 단순화하지 말고, 누구에게 어떤 권한·명의 사용을 허락했는지와 채무의 귀속을 확인한다.</p>
+<p><strong>1987.11.24. 87다카1379:</strong> 회사 명의로 공사하던 업자의 현장소장이 회사 사업부소장처럼 행세하며 공사자금을 빌렸다. 대주는 회사 직원에게 차입권한이 있다고 믿은 상황이었다. 법원은 회사가 그 사용인 명칭을 허락했고 그러한 직원에게 통상 차입권한이 있는지 등 사정 없이, 공사 명의를 빌려 주었다는 사실만으로 회사 책임을 인정할 수는 없다고 보았다. ‘영업주를 오인’한 책임과 ‘직원에게 대리권이 있다고 오인’한 문제는 같지 않다.</p>
+<p><strong>시험:</strong> 명의차용 허락에서 모든 하위 직원의 대리권을 끌어내지 않는다. <strong>키워드:</strong> 행위자·권한·채무귀속. <strong>한 줄:</strong> 누구를 누구로 믿었는지 한 번 더 나누어 본다.</p>
+<h2 id="commercial-05-05" data-concept-id="commercial-05-05">2-4. 오인 가능한 외관과 보호받을 신뢰 ★★★★★</h2>
+<p><strong>교재 84–86쪽 · 문단의 이유:</strong> 이름을 빌렸어도 상대가 사정을 알고 거래했다면 그 신뢰를 보호할 이유가 없다.</p>
+<p>명의대여자가 영업을 하지 않는 경우 교재는 명의의 동일성으로 외관을 인정할 수 있다고 설명한다. 영업을 하는 경우에는 업종의 동일성을 엄격히 요구하는 견해와 사회통념에 따라 보는 견해가 나뉜다. 제공 문제는 후자의 설명을 사용한다. 어느 경우든 허락·외관·오인거래의 나머지 요건이 없어져서는 안 된다.</p>
+<p><strong>2001.4.13. 2000다10512:</strong> 나이트클럽 공동사업자로 등록되고 지분·결제 관련 명의까지 표시된 사람들이 실제 운영은 하지 않았다고 다투었다. 법원은 그 명의를 쓰게 하여 영업상의 외관을 나타낸 점을 보았다. ‘실제 운영 부정’이 곧 ‘외관 책임 부정’은 아니다.</p>
+<p><strong>1978.6.13. 78다236:</strong> 호텔 운영자가 자신의 허가 명의를 사용해 나이트클럽을 영업하도록 임차인에게 허락했다. 이를 믿은 거래처에 대해 영업 관련 채무의 연대책임을 인정했다. 장소 임대만이 아니라 <strong>허가 명의 사용 허락</strong>이 있었다.</p>
+<p>판례 <strong>2008.1.24. 2006다21330</strong>은 거래상대가 명의대여 사실을 알았거나 모르는 데 <strong>중과실</strong>이 있으면 책임을 부정한다. 보통의 가벼운 부주의만으로 항상 면책하는 것은 아니다. 악의·중과실은 면책을 주장하는 <strong>명의대여자가 입증</strong>한다. <strong>1992.6.23. 91다29781</strong>도 명의인과 실제 상대가 다름을 알고 거래한 경우를 보호하지 않는다.</p>
+<p><strong>대구고법 1980.2.1. 78나219:</strong> 회사 명의로 공사한 사람이 현장책임자를 고용했지만, 그 책임자는 실제 고용주가 회사가 아니라 그 개인임을 알고 있었다. 회사 영업으로 오인한 거래가 아니므로 명의대여책임이 인정되지 않았다. 반대로 알고 거래한 사람까지 보호하면 신뢰보호가 아니라 무조건적인 지급보증이 된다.</p>
+<p><strong>시험:</strong> 악의만 면책 ×, 경과실만 있어도 면책 ×. <strong>키워드:</strong> 선의·중과실 없음·명의대여자 입증. <strong>한 줄:</strong> 이름을 정말 믿었고 보호할 만한 신뢰였는지 본다.</p>
+<h1>3. 책임의 성질과 범위</h1>
+<h2 id="commercial-05-06" data-concept-id="commercial-05-06">3-1. 부진정연대와 구상 ★★★★★</h2>
+<p><strong>교재 86–87쪽 · 넣은 이유:</strong> 제3자가 누구에게 얼마나 청구할 수 있는지 정한다.</p>
+<p>요건을 갖추면 명의대여자와 차용자는 <strong>부진정연대</strong> 관계에 있다. 제3자는 어느 쪽에도 책임 범위의 변제를 청구할 수 있지만 두 번 돈을 받지는 못한다. <strong>2011.4.14. 2010다91886</strong>은 같은 경제적 목적의 채무가 중첩되는 부분에서 한쪽의 변제 등으로 만족을 얻으면 다른 쪽도 그만큼 소멸한다고 설명한다. ‘중첩 부분’ → 각 책임 범위가 다르면 겹치는 부분을 확인한다.</p>
+<p>명의대여자가 갚았다면 내부관계에 따라 명의차용자에게 구상할 수 있다. 상대가 어느 한쪽과 이야기했다는 사정만으로 다른 모든 채무에도 항상 동일 효과가 생긴다고 일반 연대채무 규정을 무비판적으로 옮기지 않는다.</p>
+<p><strong>시험:</strong> 차용자 책임 소멸 ×, 구상 불가능 ×. <strong>키워드:</strong> 책임 추가·중복 만족 금지·구상. <strong>한 줄:</strong> 청구할 상대는 늘지만 받을 돈이 두 배가 되지는 않는다.</p>
+<h2 id="commercial-05-07" data-concept-id="commercial-05-07">3-2. 영업범위의 거래채무·배상·원상회복·어음 ★★★★★</h2>
+<p><strong>교재 87–89쪽 · 문단의 이유:</strong> 명의를 빌렸다고 그 사람의 모든 빚을 떠안는 것은 아니다.</p>
+<p>영업상 거래로 생긴 채무가 기본이다. 계약대금뿐 아니라 채무불이행 손해배상, 계약 해소에 따른 원상회복 등 파생 채무도 포함될 수 있다. <strong>부산지법 1984.4.20. 84가합187</strong>은 표시된 영업범위 밖 거래는 대상이 아니라고 설명한다.</p>
+<p><strong>1983.3.22. 82다카1852:</strong> 정미소 임차인이 임대인의 상호를 계속 사용하면서 부지 안 창고·살림집을 제3자에게 임대했다. 창고 건축비를 마련하려는 목적이라고 해도, 그 부동산 임대는 이름이 나타내는 정미소 영업범위 밖이었다. 법원은 명의대여책임을 부정했다. ‘번 돈을 사업에 쓴다’와 ‘그 거래가 해당 영업범위 안이다’는 다르다.</p>
+<p><strong>1969.3.31. 68다2270:</strong> 회사 부산지사라는 명칭과 직인을 사용해 사무실 비품대금 조달을 위한 약속어음이 발행되었다. 법원은 외관과 영업 관련성, 상대의 중과실 여부를 검토하여 명의대여책임을 인정했다. 어음이라는 형식만으로 언제나 제외되는 것은 아니다. 그렇다고 이름을 빌리면 모든 개인 어음에 책임지는 것도 아니다.</p>
+<p><strong>시험:</strong> 영업범위·파생채무·영업 관련 어음. <strong>키워드:</strong> 거래와 신뢰의 연결. <strong>한 줄:</strong> 빌려 준 이름이 나타내는 영업의 거래채무를 책임진다.</p>
+<h2 id="commercial-05-08" data-concept-id="commercial-05-08">3-3. 불법행위는 24조와 민법756조를 갈라서 ★★★★★</h2>
+<p><strong>교재 88–91쪽 · 문단의 이유:</strong> 가장 자주 혼동하는 ‘명의대여자 책임 없음’의 범위를 정확히 한정한다.</p>
+<p><strong>1998.3.24. 97다55621:</strong> 명의차용자의 불법행위 피해자가 명의대여자를 영업주로 알았더라도, 그 오인이 피해 발생의 원인이 아니라면 거래 신뢰를 보호하는 상법24조로 책임지울 이유가 없다고 본다. 길에서 피해를 입은 사람은 그 회사 이름을 믿고 계약한 사람과 상황이 다르다.</p>
+<p>그러나 <strong>24조 책임 부정≠모든 법적 책임 부정</strong>이다. 객관적으로 지휘·감독할 사용자 지위가 있으면 민법756조의 사용자책임을 별도 검토한다. 실제 매일 지시했는지만 보는 것은 아니다.</p>
+<h3>판례 장면 · 지입차량과 숙박업</h3>
+<p><strong>2005.2.25. 2003다36133:</strong> 명의를 빌린 사업자가 내부적으로 독립적이더라도 외부에는 명의자의 사업·종업원처럼 나타난 관계에서 사용자책임이 문제 되었다. 법원은 객관적·규범적으로 지휘·감독해야 할 지위인지 보라고 설명한다. ‘실제 감독 안 했다’고 항상 면책되면 감독할 의무가 있는 쪽이 방치하여 이익을 얻는다. 판결의 개별 손해배상 범위·피해자 과실 등은 별도 판단이다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2003%EB%8B%A436133">판례</a></p>
+<p><strong>2000.10.13. 2000다20069 / 1987.4.14. 86다카899:</strong> 지입차량이나 지게차의 실질 소유자가 직접 운영하거나 운전자를 고용했더라도, 회사 명의로 등록하고 회사 사업으로 표시한 구조에서 객관적 사용자 지위를 인정하였다. 운전 과실로 피해가 생기면 그 사용자책임을 검토한다. ‘차가 내 돈으로 산 것’이라는 내부 소유·계산 구조만으로 회사의 외부 책임이 사라지지 않는다.</p>
+<p><strong>1993.3.26. 92다10081:</strong> 숙박업 허가 명의와 건물 수리비 지급 등이 문제 된 사례다. 임차인이 임대인의 돈을 받아 수리했다는 사실만으로 임대인의 피용자가 되는 것은 아니다. 당시 숙박업 허가의 시설 중심 성격 등을 보아 명의대여자의 지휘·감독 의무를 쉽게 인정하지 않았다. <mark class="pink">모든 명의대여관계에 사용자책임이 자동 발생하는 것도 아니다.</mark> 지입차량 사건과 법적·사실적 지휘감독 지위를 비교한다.</p>
+<p><strong>보충 개념 지입제:</strong> 외부에는 운송회사 명의 차량으로 등록하고 내부에서는 차주가 독립된 관리·계산으로 운영하며 지입료를 내는 형태다. 교재는 차주가 회사의 운행·관리를 대행하여 운송계약의 효과가 회사에 귀속되는 구조를 설명한다. 실제 계약의 당사자·대리관계와 현행 운송규제를 함께 봐야 한다.</p>
+<p><strong>시험:</strong> 불법행위도24조로 무조건 책임 × / 24조 아니면 사용자책임도 없음 ×. <strong>키워드:</strong> 거래 신뢰와 감독책임의 분리. <strong>한 줄:</strong> 같은 피해라도 책임을 묻는 법적 문이 다르다.</p>
+<h1>4. 보충학습 · 영업소</h1>
+<h2 id="commercial-05-09" data-concept-id="commercial-05-09">4-1. 본점·지점과 단순 작업장은 다르다 ★★★☆☆</h2>
+<p><strong>교재 93–94쪽 · 넣은 이유:</strong> 영업의 중심 장소는 등기·재판·변제와 연결된다.</p>
+<p>영업소는 내부적으로 지휘와 성과가 모이고 외부적으로 주요 영업활동이 이루어지는 중심 장소다. 간판이 아니라 실질을 본다. 단지 물건을 팔거나 보관하는 장소라는 이유만으로 항상 영업소가 되는 것은 아니다. 본점은 전체 영업을 총괄하고 지점은 본점의 일반적 지휘 아래 일정 범위에서 독립적으로 영업한다.</p>
+<p><strong>1978.12.13. 78다1567:</strong> 보험회사의 부산영업소가 모집·집금·송금·관리 등의 보조업무만 수행하고 기본업무를 독립적으로 처리하지 못한 경우, 표현지배인의 영업소 실체로 보지 않았다. ‘영업소’라는 이름만 있으면 14조상 지점이라는 주장은 틀리다. 3강의 외관요건과 이어진다.</p>
+<p><strong>시험:</strong> 영업소 이름≠독립적 영업 실체. <strong>키워드:</strong> 중심성·독립성·본점 종속. <strong>한 줄:</strong> 장소의 명칭보다 그곳에서 실제 무엇을 결정·처리하는지가 중요하다.</p>
+<h2 id="commercial-05-10" data-concept-id="commercial-05-10">4-2. 변제장소·재판적·송달·등기 ★★★☆☆</h2>
+<p><strong>교재 94–96쪽 · 문단의 이유:</strong> 장소를 정하는 것은 단순 주소 안내가 아니라 법적 효과를 정한다.</p>
+<p>특정물 인도 등 특별 사정이 없고 영업 관련 채무의 장소를 따로 정하지 않았다면 민법467조2항의 채권자 현 영업소가 문제 된다. 이는 돈 등을 가지고 가서 이행하는 <strong>지참채무</strong>의 구조다. 증권 등은 채무자 쪽에서 찾아 받는 <strong>추심채무</strong>에 관한 규정을 따로 본다. 상법56조는 채권자의 지점 거래로 생긴 채무의 이행장소를 다룬다.</p>
+<p><strong>2022.5.3. 2021마6868:</strong> 현 영업소는 본점에 한정되지 않고 해당 채권의 추심업무를 실제 담당하는 영업소도 포함한다고 보았다. 이행청구 소송의 관할과도 연결된다. <strong>2014.10.30. 2014다43076:</strong> 송달 장소인 영업소·사무소는 한시적 운영 장소라도 업무 내용·기간상 어느 정도 반복 송달을 객관적으로 기대할 수 있으면 포함된다. 앞의 표현지배인 영업소 개념과 모든 법률의 목적이 같지는 않다.</p>
+<p>회사의 보통재판적, 영업소 업무 관련 특별재판적, 송달장소를 각각 민사소송법5·12·183조와 연결한다. 회사 설립은 본점 소재지의 등기로 이루어지고, 주주총회 소집장소·정관·의사록·명부·재무제표 비치 등도 본점·지점과 관련된다. 자료마다 비치장소·열람자·요건이 다르므로 ‘회사 자료는 누구든 모든 지점에서 열람’이라고 넓히지 않는다.</p>
+<p><mark class="pink">현행법 보완: 2025년 1월31일부터 지점 소재지의 별도 등기제도가 폐지되었다.</mark> 교재의 구 상법35조에 따른 본점·지점 이중 등기 설명을 그대로 현재 절차로 외우지 않는다. 회사 관련 등기는 본점 소재지를 기준으로 정비되었고, 지점에 관한 사항 자체의 등기가 없어진 것은 아니다. <a href="https://www.law.go.kr/LSW/lsRvsRsnListP.do?chrClsCd=010102&lsId=010604">상업등기규칙 개정이유</a></p>
+<p><strong>시험:</strong> 본점만 현 영업소라는 단정, 지점 자체 등기사항과 지점 소재지 등기소의 구별. <strong>키워드:</strong> 이행·관할·송달·공시. <strong>한 줄:</strong> 같은 ‘영업소’라도 조문의 목적에 맞추어 판단한다.</p>
+<h1>5. 보충학습 · 상업장부</h1>
+<h2 id="commercial-05-11" data-concept-id="commercial-05-11">5-1. 무엇을 기록하고 누구에게 필요한가 ★★★☆☆</h2>
+<p><strong>교재 97–99쪽 · 문단의 이유:</strong> 영업주 자신뿐 아니라 출자자·채권자·과세기관도 기업의 재산상태를 알아야 한다.</p>
+<p>상업장부는 재산·손익을 명확히 하기 위한 <strong>회계장부와 대차대조표</strong>다(29조). 주주명부·사채원부·중개인의 일기장처럼 법이 작성하도록 한 모든 기록이 이 의미의 상업장부는 아니다. 소상인은 상법상 작성의무 적용이 제외되지만, 세법상 장부·증빙 의무까지 전부 없어지는 것은 아니다.</p>
+<p>회계장부는 거래와 재산에 영향을 준 사항을 기록한다. 거래 순서에 따른 분개장, 계정별 원장, 거래의 전표 등이 설명된다. 계약뿐 아니라 도난·재해도 재산에 영향을 주므로 기록 대상이다. 개인의 순수 사적 재산과 영업재산을 나누되, 사업자금을 사적으로 가져간 경우는 영업재산 변동이라 기록해야 한다.</p>
+<p><strong>시험:</strong> ‘법정 장부는 전부 상업장부’, ‘계약 아닌 손실은 미기재’ ×. <strong>키워드:</strong> 회계장부·대차대조표·재산 변동. <strong>한 줄:</strong> 돈과 재산이 어떻게 바뀌었는지를 남긴다.</p>
+<h2 id="commercial-05-12" data-concept-id="commercial-05-12">5-2. 대차대조표를 생활 숫자로 이해하기 ★★★☆☆</h2>
+<p><strong>교재 99–100쪽 · 문단의 이유:</strong> 일정 시점의 자산·부채·자본을 함께 보아야 재무상태가 드러난다.</p>
+<p>민지가 자기 돈 400만 원과 빌린 돈 600만 원으로 가게 자산 1천만 원을 마련했다. <strong>자산 1천 = 부채 600 + 자본 400</strong>이다. 자산은 자금이 어디에 사용되어 남아 있는지, 부채·자본은 그 자금이 어디서 왔는지 보여 준다. 차변에 자산, 대변에 부채·자본을 두는 계정식과 위에서부터 차례로 적는 보고식이 있다. 차변이 나쁘고 대변이 좋다는 뜻은 아니다.</p>
+<p>유동·비유동 자산과 부채를 나누고 자본금·자본잉여금·이익잉여금 등을 구별한다. 현금이 많아 보여도 곧 갚을 부채가 크면 안전하다고만 볼 수 없다. 대차대조표는 <strong>특정 시점의 상태</strong>, 회계장부는 그 상태로 이어진 <strong>변동 기록</strong>이라는 차이가 있다. 실무의 재무상태표라는 명칭과도 연결한다.</p>
+<p>계속영업을 전제로 개업·결산 때 작성하는 통상 대차대조표와, 청산·파산·합병 등의 특수 상황에서 작성하는 비상 대차대조표를 구별한다. 작성은 회계장부를 토대로 일반적으로 공정·타당한 회계관행에 따른다. 외부감사법 적용 기업의 회계기준과 모든 소규모 개인기업의 기준을 무조건 같다고 하지 않는다.</p>
+<p><strong>시험:</strong> 자산=부채＋자본, 시점과 기간의 구별. <strong>키워드:</strong> 조달과 운용·유동성·공정타당. <strong>한 줄:</strong> 가진 것의 크기와 그중 남의 돈의 크기를 함께 읽는다.</p>
+<h2 id="commercial-05-13" data-concept-id="commercial-05-13">5-3. 작성·확정·공시·보존·제출 ★★★☆☆</h2>
+<p><strong>교재 100–103쪽 · 문단의 이유:</strong> 만들어만 놓고 숨기거나 바로 버리면 이해관계인을 보호할 수 없다.</p>
+<p>상인은 장부를 작성하고, 회사에서는 담당 기관이 작성·승인·감사의 역할을 맡는다. 주식회사 재무제표는 원칙적으로 이사회·주주총회 승인 및 감사 절차를 연결하지만, 법정 요건을 갖춘 이사회 승인 특례 등도 구별한다. 유한회사·유한책임회사·인적회사의 승인·열람 구조는 형태별로 다르다. <strong>상업장부의 모든 낱장에 주주총회 승인이 필요한 것</strong>으로 과장하지 않는다. 재무제표 확정과 회계장부 자체를 구분한다.</p>
+<p>주주·사원·채권자 등의 열람을 위한 비치와 승인 대차대조표의 공고 등으로 정보를 공개한다. 외부감사법 적용 회사에는 독립된 외부감사도 있다. 해당 법이 정한 적용대상·자료·청구권자를 확인한다.</p>
+<p><strong>보존(33조):</strong> 상업장부·영업 중요서류는 <strong>10년</strong>, 전표나 유사서류는 <strong>5년</strong>이다. 상업장부는 폐쇄일부터 기간을 계산하고 법이 허용하는 전산정보 방식 등으로 보존할 수 있다. 분쟁의 증거를 남기려는 취지다. <strong>제출(32조):</strong> 법원은 신청 또는 직권으로 소송당사자에게 상업장부의 전부·일부 제출을 명할 수 있다. 상대 신청이 없으면 절대 제출명령을 못 한다는 말은 틀린다.</p>
+<p>의무 위반은 개별 규정에 따라 이사의 회사·제3자 책임, 부실기재 등 과태료, 도산절차에서 사기파산죄 등으로 이어질 수 있다. 교재의 ‘일반적 제재가 없다’는 문장을 <strong>아무 불이익도 없다</strong>고 읽지 않는다. 교재가 제시한 사기파산 유형은 목적·행위·도산법상 처벌조건 등을 갖춰야 하며, 단순히 장부 한 줄을 빠뜨렸다고 곧 그 범죄가 성립하는 것은 아니다. 민사소송상 제출 불응의 효과도 따로 확인한다.</p>
+<p><strong>시험:</strong> 10년·5년, 신청 또는 직권, 자료별 승인·열람 범위. <strong>키워드:</strong> 진실성·보존·증거·개별 제재. <strong>한 줄:</strong> 장부는 작성에서 끝나지 않고 확인·공개·보관·제출까지 이어진다.</p>
+<h1>시험 연결과 교재 질문</h1>
+<p><strong>TOP5:</strong> 상법_023(악의·중과실), 상법_025(책임 범위), 상법_079(24조와756조 혼합), 상법_021(대리점·외관), 상법_078(상인성 불요). 제공 7문항은 주로 요건·외관·효과를 반복한다. 보충학습은 이 묶음의 직접 문항은 없지만 회사 회계·등기 학습으로 이어져 따로 정리했다. 실제 오답률은 없다.</p>
+<p><strong>본문 세 질문:</strong> ① 명의를 믿고 거래한 상대를 금반언·외관주의로 보호. ② 허락·외관·선의이며 중과실 없는 오인거래. ③ 영업범위 거래채무·파생채무는24조, 불법행위는756조 등 별도 근거. <strong>보충 네 질문:</strong> ① 영업소는 이행·관할·송달·공시와 연결. ② 본점은 총괄, 지점은 일정 독립성을 가진 종속 영업소. ③ 상업장부는 회계장부와 대차대조표. ④ 작성·확정·공시·보존·제출의무와 개별 제재.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>1.</strong> 은퇴한 사람이 친구에게 자기 이름을 써 가게를 하도록 허락했다. 자신은 상인이 아니어서24조 책임이 없을까? <strong>답:</strong> 상인성 자체가 필수는 아니다. 허락·외관·신뢰 등 나머지 요건을 본다. <strong>의도:</strong> 주체 범위.</p>
+<p><strong>2.</strong> 거래처는 이름만 빌린 것임을 알면서 실제 운영자에게 물건을 공급했다. 나중에 명의자의 재산이 많다는 이유로24조를 주장한다. <strong>답:</strong> 영업주를 오인한 신뢰가 없어 이 규정으로 보호하지 않는다. <strong>의도:</strong> 악의와 신뢰보호.</p>
+<p><strong>3.</strong> 가게 이름을 빌린 사람이 정미업 자금을 마련한다며 개인 주택을 임대했다. 자금의 사용 목적만으로 명의자의 책임이 생길까? <strong>답:</strong> 해당 거래가 표시된 영업범위인지 따로 판단한다. 돈을 사업에 쓴다는 말만으로 범위가 넓어지지 않는다. <strong>의도:</strong> 목적과 거래 성질.</p>
+<p><strong>4.</strong> 지입차량이 운행 과실로 보행자를 다치게 했다. 피해자는 회사와 계약한 적이 없으니 회사에 아무 책임도 못 묻는가? <strong>답:</strong> 상법24조의 거래책임과 별도로 민법756조의 사용관계·사무집행 관련성 등 요건을 검토한다. <strong>의도:</strong> 청구 근거 분리.</p>
+<p><strong>5.</strong> 개인상인이 영업용 돈을 가족 생활비로 가져가고 ‘사생활이니 장부에 쓸 필요없다’고 한다. <strong>답:</strong> 영업재산이 변했으므로 그 변동은 기록해야 한다. <strong>의도:</strong> 보충학습의 회계기록 대상.</p>
+<h1>용어 사전</h1>
+<h3>명의대여·명의차용 名義貸與·名義借用</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 名(이름 명), 義(옳을 의): 뜻, 貸(빌릴 대): 빌려줌, 與(줄 여), 借(빌릴 차), 用(쓸 용). <strong>③ 합친 뜻:</strong> 이름을 빌려 주기·빌려 쓰기. <strong>④ 이름의 이유:</strong> 표시상의 이름과 실제 영업주가 갈리기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인이 자기 성명·상호 등을 사용하여 영업하도록 허락하는 관계. <strong>⑥ 쉬운 말:</strong> 이름 주인과 실제 장사하는 사람이 다르다. <strong>⑦ 사례:</strong> 민지 이름으로 준호가 자기 사업을 한다.</p>
+<p><strong>⑧ 시험:</strong> 실제 직원의 대리와 독립사업자의 명의차용 구별. <strong>⑨ 비교·기억법:</strong> 대여자는 제공, 차용자는 사용.</p>
+<h3>금반언 禁反言</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 禁(금할 금), 反(돌이킬 반), 言(말씀 언). <strong>③ 합친 뜻:</strong> 앞의 태도를 뒤집는 말을 제한함. <strong>④ 이름의 이유:</strong> 믿게 해 놓고 불리할 때 부정하지 못하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당한 신뢰를 낳은 자신의 선행 태도와 모순되는 주장을 제한하는 원리. <strong>⑥ 쉬운 말:</strong> 내 이름의 사업처럼 보이게 하고 나중에 무조건 남이라고 할 수 없다. <strong>⑦ 사례:</strong> 명의 사용을 허락해 납품을 받게 한 경우.</p>
+<p><strong>⑧ 시험:</strong> 외관주의와 함께24조의 근거. <strong>⑨ 비교·기억법:</strong> 모든 말 바꾸기를 항상 금지하는 만능 규칙 아님.</p>
+<h3>외관 外觀</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 外(바깥 외), 觀(볼 관). <strong>③ 합친 뜻:</strong> 밖으로 보이는 모습. <strong>④ 이름의 이유:</strong> 내부 사정과 다른 겉모습을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 권리·관계와 달라도 거래상대가 믿게 되는 객관적 표시. <strong>⑥ 쉬운 말:</strong> 밖의 사람이 보고 누구의 사업인지 판단하는 단서. <strong>⑦ 사례:</strong> 회사 출장소 명칭과 직인.</p>
+<p><strong>⑧ 시험:</strong> 외관·귀책·신뢰의 연결. <strong>⑨ 비교·기억법:</strong> 실제 거래주체와 같다고 확정하는 것은 아니다.</p>
+<h3>선의·악의 善意·惡意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 善(착할 선), 惡(악할 악), 意(뜻 의). <strong>③ 합친 뜻:</strong> 알지 못함·알고 있음이라는 법적 구별. <strong>④ 이름의 이유:</strong> 법률이 문제 삼는 사실에 대한 인식을 구분하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 사안에서는 명의대여라는 사실을 모르는지 아는지. <strong>⑥ 쉬운 말:</strong> 착한 사람인지가 아니라 속사정을 알았는지. <strong>⑦ 사례:</strong> 처음부터 실제 주인이 준호임을 알았다면 악의.</p>
+<p><strong>⑧ 시험:</strong> 무엇에 관한 선의인지 특정. <strong>⑨ 비교·기억법:</strong> 중과실은 몰랐지만 현저하게 주의를 놓친 경우.</p>
+<h3>중과실 重過失</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 重(무거울 중), 過(지날 과): 잘못, 失(잃을 실). <strong>③ 합친 뜻:</strong> 큰 부주의. <strong>④ 이름의 이유:</strong> 단순한 실수보다 중한 부주의를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 요구되는 주의를 현저하게 결여한 과실. <strong>⑥ 쉬운 말:</strong> 조금만 살피면 알 핵심 사정을 심하게 놓친 것. <strong>⑦ 사례:</strong> 명의대여 사실을 모른 데 중과실이 있는지 검토.</p>
+<p><strong>⑧ 시험:</strong> 가벼운 과실만으로 언제나 면책은 아님. <strong>⑨ 비교·기억법:</strong> 악의는 실제 앎, 중과실은 모르지만 심한 부주의.</p>
+<h3>부진정연대 不眞正連帶</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 부), 眞(참 진), 正(바를 정), 連(이을 연), 帶(띠 대). <strong>③ 합친 뜻:</strong> 통상의 연대채무와 다른 중첩 책임. <strong>④ 이름의 이유:</strong> 발생 근거가 달라도 같은 손해·급부를 충족하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 동일한 경제적 목적의 여러 채무가 중첩되어 한쪽의 만족으로 겹치는 부분이 소멸하는 관계. <strong>⑥ 쉬운 말:</strong> 청구할 사람은 여럿이어도 두 번 받을 수 없다. <strong>⑦ 사례:</strong> 명의대여자나 차용자 중 한쪽이 대금을 갚는다.</p>
+<p><strong>⑧ 시험:</strong> 중첩 부분·변제·중복 만족 금지. <strong>⑨ 비교·기억법:</strong> 진정연대 규칙의 모든 효과를 그대로 옮기지 않기.</p>
+<h3>구상 求償</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 求(구할 구), 償(갚을 상). <strong>③ 합친 뜻:</strong> 갚은 돈의 부담을 돌려 달라고 요구함. <strong>④ 이름의 이유:</strong> 외부에 갚은 뒤 내부 부담을 정리해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인의 부담 부분 등을 변제한 자가 내부관계에 따라 상환을 청구하는 것. <strong>⑥ 쉬운 말:</strong> 내가 대신 낸 몫을 실제 부담할 사람에게 청구한다. <strong>⑦ 사례:</strong> 명의대여자가 갚고 차용자에게 구상한다.</p>
+<p><strong>⑧ 시험:</strong> 외부 채권자 보호와 내부 분담은 별개. <strong>⑨ 비교·기억법:</strong> 구상 범위는 내부관계·개별 사정을 확인.</p>
+<h3>사용자책임 使用者責任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 使(부릴 사), 用(쓸 용), 者(사람 자), 責(꾸짖을 책): 책임, 任(맡길 임). <strong>③ 합친 뜻:</strong> 타인을 사용하는 자의 배상책임. <strong>④ 이름의 이유:</strong> 다른 사람을 이용한 사업의 위험과 감독을 고려해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 피용자의 사무집행 관련 불법행위에 대해 민법756조 요건 아래 지는 책임. <strong>⑥ 쉬운 말:</strong> 직원이 일하다 낸 사고에 회사 책임도 따로 확인한다. <strong>⑦ 사례:</strong> 지입차량 운행 과실과 회사의 사용자 지위.</p>
+<p><strong>⑧ 시험:</strong> 실제 감독 여부만 아니라 객관적 지위 검토. <strong>⑨ 비교·기억법:</strong> 24조는 거래 신뢰 보호,756조는 불법행위의 사용자책임.</p>
+<h3>지입 地入</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 地(땅 지), 入(들 입). <strong>③ 합친 뜻:</strong> 글자 그대로는 들어감이나 이 제도는 관행적 명칭. <strong>④ 이름의 이유:</strong> 제도의 의미는 글자 풀이가 아니라 실제 계약구조에서 이해해야 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 차주가 차량을 운송회사 명의로 등록하고 내부적으로 관리·계산하며 지입료를 지급하는 형태. <strong>⑥ 쉬운 말:</strong> 회사 이름의 차량과 실제 운영 차주가 나뉜다. <strong>⑦ 사례:</strong> 차주가 직접 운행해도 회사의 객관적 사용자 지위를 본다.</p>
+<p><strong>⑧ 시험:</strong> 외부 명의와 내부 계산 분리. <strong>⑨ 비교·기억법:</strong> 명의대여·대리·운송규제 각각의 요건을 따로 검토.</p>
+<h3>영업소·본점·지점 營業所·本店·支店</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 營(경영할 영), 業(일 업), 所(바 소): 장소, 本(근본 본), 店(가게 점), 支(지탱할 지): 갈래. <strong>③ 합친 뜻:</strong> 영업의 장소·중심 점포·갈래 점포. <strong>④ 이름의 이유:</strong> 여러 장소의 역할과 종속관계를 나누기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업소는 주요 활동의 중심, 본점은 총괄, 지점은 일정 독립성을 가진 종된 영업소. <strong>⑥ 쉬운 말:</strong> 간판보다 실제 계약·업무를 어떻게 처리하는지 보자. <strong>⑦ 사례:</strong> 단순 보험모집 연락소와 독립 지점 비교.</p>
+<p><strong>⑧ 시험:</strong> 표현지배·관할·송달에서 목적별 판단. <strong>⑨ 비교·기억법:</strong> 공장·창고가 항상 상법상 영업소인 것은 아님.</p>
+<h3>지참채무·추심채무 持參債務·推尋債務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 持(가질 지), 參(참여할 참), 債(빚 채), 務(힘쓸 무): 의무, 推(밀 추), 尋(찾을 심). <strong>③ 합친 뜻:</strong> 가지고 가서 이행·찾아가서 받는 채무. <strong>④ 이름의 이유:</strong> 이행 장소의 방향을 표현해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채권자 쪽에서 이행할지 채무자 쪽에서 수령할지에 관한 구별. <strong>⑥ 쉬운 말:</strong> 갚는 사람이 가져갈까 받을 사람이 찾으러 갈까. <strong>⑦ 사례:</strong> 영업채무의 현 영업소와 증권 변제장소 비교.</p>
+<p><strong>⑧ 시험:</strong> 당사자 약정·채무 성질·특칙을 먼저 확인. <strong>⑨ 비교·기억법:</strong> 관할법원 문제와 연결되지만 같은 개념은 아님.</p>
+<h3>상업장부 商業帳簿</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 業(일 업), 帳(휘장 장): 장부, 簿(장부 부). <strong>③ 합친 뜻:</strong> 사업의 재산기록. <strong>④ 이름의 이유:</strong> 사업의 상태를 장부로 정리해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재산·손익을 명백하게 하는 회계장부와 대차대조표. <strong>⑥ 쉬운 말:</strong> 누가 봐도 돈과 재산 변화를 확인할 자료. <strong>⑦ 사례:</strong> 재해로 잃은 재고도 기록한다.</p>
+<p><strong>⑧ 시험:</strong> 장부10년·전표5년, 모든 법정 기록이 상업장부는 아님. <strong>⑨ 비교·기억법:</strong> 주주명부·사채원부와 구별.</p>
+<h3>대차대조표 貸借對照表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 貸(빌릴 대): 빌려줌, 借(빌릴 차), 對(대할 대), 照(비칠 조): 대조, 表(겉 표): 표. <strong>③ 합친 뜻:</strong> 양쪽 항목을 맞춰 보는 재무표. <strong>④ 이름의 이유:</strong> 자금의 운용과 조달을 균형 있게 보여 주어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일정 시점의 자산·부채·자본을 나타내는 표. <strong>⑥ 쉬운 말:</strong> 가진 것과 그 돈의 출처를 같이 본다. <strong>⑦ 사례:</strong> 자산1000=부채600＋자본400.</p>
+<p><strong>⑧ 시험:</strong> 시점 정보, 자산=부채＋자본. <strong>⑨ 비교·기억법:</strong> 손익계산은 기간의 성과, 대차대조표는 시점의 상태.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 명의대여</h2><p><b>TOP3:</b> 허락·외관·신뢰 / 악의·중과실 / 거래책임24조와 사용자책임756조.</p><table><tr><th>구분</th><th>핵심</th></tr><tr><td>당사자</td><td>대여자=이름 제공, 차용자=실제 영업, 제3자=외관을 믿은 상대</td></tr><tr><td>요건</td><td>명의사용 명시·묵시 허락＋영업주 외관＋오인거래</td></tr><tr><td>상인성</td><td>대여자가 상인일 필요 없고 차용 영업의 상행위성도 필수 아님</td></tr><tr><td>보호의 한계</td><td>상대 악의·중과실이면 면책. 대여자가 입증</td></tr><tr><td>직함</td><td>지점·출장소의 외관과 독립 대리점 구별. 명칭만으로 결론내리지 않기</td></tr><tr><td>책임</td><td>부진정연대, 중복 만족 불가, 내부 구상 검토</td></tr><tr><td>범위</td><td>영업거래·채무불이행배상·원상회복·영업 관련 어음</td></tr><tr><td>불법행위</td><td>24조 아님. 객관적 지휘감독 지위 있으면756조 별도 검토</td></tr><tr><td>영업소</td><td>실질적 중심·독립성. 이행·관할·송달의 목적별 판단</td></tr><tr><td>상업장부</td><td>회계장부＋대차대조표. 장부·중요서류10년, 전표5년</td></tr></table><p><b>반드시 외울 문장:</b> 영업주를 믿은 것과 직원의 대리권을 믿은 것을 구별한다. 장소 제공만으로 항상 명의대여는 아니다.24조 책임이 없다는 것과 모든 법적 책임이 없다는 것은 다르다.</p><p><b>현행 보완:</b> 2025.1.31. 지점 소재지 별도 등기 폐지. 지점 관련 사항의 등기 자체가 없어진 것은 아님.</p><p><b>사례를 풀 순서:</b> 실제 사업자 → 명의 허락과 외관 → 상대의 오인·중과실 → 영업범위 → 채무 원인 → 책임 근거·중복 만족·구상.</p></section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>답안을 받지 않아 실제 이해도는 미평가다. 🟢 명의대여와 대리권 오인·사용자책임을 나눠 풀면 이해 완료 / 🟡 결과만 외웠으면 복습 필요 / 🔴 이름만 있으면 모든 채무·사고를 책임진다고 하면 이해 부족. <strong>복습 TOP3: 세 요건, 중과실·입증,24조와756조의 경계.</strong></p>
+<p>첨부 『상법기초』 제5강·보충학습·워크북, 제공 JSON을 근거로 했다. <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95">상법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95">민법</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EC%82%AC%EC%86%8C%EC%86%A1%EB%B2%95">민사소송법</a>을 함께 본다. 교재의 구 등기제도와 오래된 사례의 당시 법령은 현재 규칙과 구별했다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_021"><h4>형성평가 · 상법_021</h4><p class="question-stem">다음 중에서 명의대여자의 책임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>명의대여자는 상인이어야 한다.</li><li>명의대여자가 명의사용을 묵시적으로 허락하면 명의대여가 부정된다.</li><li>명의대여자가 영업을 하지 않으면 명의의 동일성이 존재하면 충분하다.</li><li>명의대여자의 상호에 대리점이라는 명칭을 붙여서 사용해도 명의대여가 인정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 명의대여자가 상인일 필요는 없다는 판례다.</li><li><strong>비선택</strong> · 틀림. 명시뿐 아니라 묵시적 허락도 가능하다. 다만 단순 시설 제공·무관한 방치만으로 자동 인정하지 않는다.</li><li><strong>선택</strong> · 원본 정답. 외관의 존재를 판단하는 교재 설명이다. 명의 동일성만 있으면 허락·오인거래 등 나머지 요건도 모두 충족된다는 뜻은 아니다.</li><li><strong>비선택</strong> · 틀림. 대리점 명칭 사용 허락만으로 본사와 종속관계를 나타내는 명의대여를 바로 인정하지 않는다. 추가 외관·다른 책임은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1 대법원 1987.3.24. 선고 85다카2219판결 참조. 명의대여자가 상인이 아니더라도 명의대여가 성립하는 데는 아무런 영향이 없다. 2 명의대여자가 명의사용을 허락하는 것은 명시적으로 하는 것뿐만 아니라 묵시적으로 허락하는 것도 포함한다. 4 대법원 1989.10.10. 선고 88다카8354판결 참조. 명의대여자의 상호에 대리점이라는 명칭을 붙인 경우는 명의대여로 인정되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_022"><h4>형성평가 · 상법_022</h4><p class="question-stem">다음 중에서 명의대여자의 책임에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>명의대여자 책임의 이론적 근거는 금반언의 법리와 자기책임의 원칙에 있다.</li><li>명의대여자가 명의차용자에게 대여하는 명의는 명의대여자를 영업주로 오인할 수 있는 외관이면 충분하다.</li><li>외관의 존재여부는 명의대여자가 영업을 하는 경우에는 사회통념에 따라 판단한다.</li><li>명의대여자는 명의차용자의 영업상의 거래와 관련하여 발생한 채무에 대해서만 책임을 부담하며, 거래의 효과로 발생한 채무불이행으로 인한 손해배상채무와 원상회복의무 등은 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답. 교재가 제시한 직접 근거는 금반언과 외관주의다.</li><li><strong>비선택</strong> · 맞음. 형식적 이름뿐 아니라 영업주로 오인하게 하는 표시의 실질을 본다.</li><li><strong>비선택</strong> · 교재가 소개하고 문제에서 채택한 설명. 엄격한 영업 동일성을 요구하는 견해와 사회통념상 판단 견해의 차이를 본다.</li><li><strong>비선택</strong> · 맞음. 표시된 영업범위의 거래채무와 그 파생 배상·원상회복이다. 모든 개인 채무까지 포함하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명의대여자 책임의 이론적 근거는 금반언의 법리와 외관주의에 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_023"><h4>형성평가 · 상법_023</h4><p class="question-stem">다음 중에서 명의대여자의 책임에 대한 판례의 태도로 옳지 않은 것은?</p><ol class="choices"><li>명의대여자의 상호에 출장소라는 명칭을 붙인 경우는 명의대여로 인정하고 있다.</li><li>명의대여자의 거래 상대방이 명의대여사실을 알았던 때에 한하여 책임을 지지 않는다.</li><li>회사가 같은 업종에 종사하는 타인에게 회사의 사무실 내에서 같은 사업을 경영할 수 있도록 허용하여 왔다면 명의대여자로서의 책임을 면하기 어렵다.</li><li>영업의 범위 외의 거래에 관하여는 명의대여자의 책임을 물을 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당 판례 사정에서는 맞음. 출장소 운영계약·임명·회사 상호 사용 등 외관을 함께 본다. 단어 하나만으로 언제나 책임지는 것은 아니다.</li><li><strong>선택</strong> · 틀림·정답. 실제로 안 경우뿐 아니라 모른 데 중대한 과실이 있으면 면책 가능하다. 대여자가 그 사정을 입증한다.</li><li><strong>비선택</strong> · 해당 판례 사정에서는 맞음. 동일 사무실·동일 업종 등으로 회사 영업의 외관을 만들었다. 시설만 빌린 모든 사안에 자동 적용하지 않는다.</li><li><strong>비선택</strong> · 맞음. 표시된 영업범위 밖 거래는24조 책임의 범위가 아니다. 다른 책임 근거는 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대법원 2008.1.24. 선고 2006다21330 판결 참조. 명의대여자의 책임은 명의자를 사업주로 오인하여 거래한 제3자를 보호하기 위한 것이므로 거래 상대방이 명의대여사실을 알았거나 모른 데 대하여 중대한 과실이 있는 때에는 책임을 지지 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_024"><h4>형성평가 · 상법_024</h4><p class="question-stem">다음 중에서 명의대여자책임의 요건에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>명의대여자가 명의차용자에게 자신의 명의를 사용할 것을 허락하였어야 하는데, 여기에서 명의는 성명 또는 상호만 해당한다.</li><li>명의차용자의 행위가 반드시 상행위이어야 한다.</li><li>명의차용자의 영업이 명의대여자의 영업으로 오인될 수 있는 외관이 존재해야 하는데, 명의대여자가 영업을 하지 않는 경우에는 명의의 동일성이 존재하면 충분하다.</li><li>판례는 거래상대방의 오인에 경과실만 있어도 면책된다는 견해에 따르고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 글자 그대로의 성명·상호로만 좁히지 않고 영업주로 오인할 외관을 검토한다.</li><li><strong>비선택</strong> · 틀림. 판례는 차용자의 영업이 반드시 상행위일 것을 요구하지 않는다.</li><li><strong>선택</strong> · 원본 정답. 외관 존재에 관한 설명이며 허락과 실제 오인거래 요건은 별도로 필요하다.</li><li><strong>비선택</strong> · 틀림. 판례는 중과실 면책설이다. 가벼운 과실만으로 항상 면책하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1 명의대여자가 명의차용자에게 대여하는 명의는 법문에는 ‘성명 또는 상호’로 규정하고 있지만, 명의대여자를 영업주로 오인할 수 있는 외관이면 충분하다. 2 명의대여자의 명의를 사용하여 실질적으로 영업을 하는 자는 명의차용자이므로 명의대여자는 상인이 아니어도 되며, 명의차용자의 행위가 반드시 상행위이어야 하는 것도 아니다. 4 대법원 2008.1.24. 선고 2006다21330 판결 참조. 거래 상대방이 명의대여사실을 알았거나 모른 데 대하여 중대한 과실이 있는 때에는 책임을 지지 않는다.</p></details></section>
+
+<section class="question-card" id="question-상법_025"><h4>형성평가 · 상법_025</h4><p class="question-stem">다음 중에서 명의대여자책임의 효과에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>명의차용자는 자신의 거래상대방에게 책임을 부담하지 않는다.</li><li>명의차용자의 불법행위에 대해서 명의대여자가 책임을 부담한다.</li><li>명의대여자가 변제를 한 경우에 명의차용자에게 구상권을 행사하지 못한다.</li><li>명의차용자의 영업활동과 관련한 어음행위에 대해서 명의대여자가 책임을 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 차용자도 거래채무를 부담하며 대여자 책임이 추가된다.</li><li><strong>비선택</strong> · 24조만을 묻는 취지에서 틀림. 불법행위에는 이 조항의 거래신뢰책임을 곧 적용하지 않는다. 민법756조 사용자책임 등은 별도 검토해야 한다.</li><li><strong>비선택</strong> · 틀림. 대여자가 변제하면 내부관계에 따라 구상할 수 있다.</li><li><strong>선택</strong> · 맞음·정답. 표시된 영업과 관련된 어음행위도 요건을 갖추면 책임 대상이다. 모든 개인 어음에 무조건 책임지는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1 명의대여자와 명의차용자는 거래상대방에 대해서 부진정연대책임을 부담한다. 2 명의차용자의 불법행위에 대해서 명의대여자가 책임을 부담하지 않는다. 3 명의대여자가 변제한 경우에는 명의차용자에게 구상권을 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_078"><h4>워크북 · 상법_078</h4><p class="question-stem">다음 중에서 명의대여자의 책임이 성립하기 위한 요건에 해당하지 않는 것은?</p><ol class="choices"><li>명의대여자가 명의차용자에게 자신의 명의를 사용할 것을 허락하였어야 한다.</li><li>명의대여자는 상인이어야 하고, 명의차용자의 행위는 반드시 상행위여야 한다.</li><li>명의차용자의 영업이 명의대여자의 영업으로 오인될 수 있는 외관이 존재해야 한다.</li><li>명의차용자의 거래상대방이 명의대여자를 영업주로 오인하여 거래하였어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 요건. 명시·묵시의 허락을 본다.</li><li><strong>선택</strong> · 요건 아님·정답. 대여자의 상인성·차용행위의 상행위성을 모두 필수로 붙인 문장이 틀리다.</li><li><strong>비선택</strong> · 요건. 실제와 다른 명의대여자의 영업이라는 외관이 있어야 한다.</li><li><strong>비선택</strong> · 요건. 외관을 실제로 믿고 거래해야 하며 악의·중과실이 없어야 보호된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대법원 1987. 3. 24. 선고 85다카2219 판결 참조. 명의대여자가 상인이 아니어도 무방하고, 나아가 명의차용자의 행위가 상행위가 아니어도 명의대여자의 책임을 부담시키는 데에는 아무런 영향이 없다.</p></details></section>
+
+<section class="question-card" id="question-상법_079"><h4>워크북 · 상법_079</h4><p class="question-stem">명의차용자의 영업에 대해서 명의대여자가 부담하는 책임의 범위에 포함되지 않는 것은?</p><ol class="choices"><li>명의차용자의 채무불이행으로 인한 손해배상책임</li><li>명의차용자의 채무불이행으로 인한 원상회복의무</li><li>명의차용자의 불법행위로 인한 손해배상책임</li><li>명의대여자와 명의차용자 간의 지휘감독관계로 인한 사용자책임</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 24조 범위에 포함 가능. 영업범위의 거래채무불이행에서 파생한 배상이다.</li><li><strong>비선택</strong> · 24조 범위에 포함 가능. 해당 거래가 해소되어 생기는 원상회복 등 파생 의무를 말한다.</li><li><strong>선택</strong> · 원본 정답. 순수 불법행위에24조를 적용하지 않는다는 취지다. 다만④처럼 별도 사용자책임 근거가 있으면 결과적으로 배상할 수 있으므로 “불법행위면 모든 책임 면제”로 읽지 않는다.</li><li><strong>비선택</strong> · 근거 혼합 주의. 이는24조 자체의 책임이 아니라 민법756조의 별도 사용자책임이다. 원문은 명의대여자가 질 수 있는 책임을 넓게 묻는 취지로 이 보기를 포함하지만,24조만의 범위를 묻는다면 부정확하다. 원본 정답을 보존하고 이 차이를 명시한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명의차용자의 불법행위에 대해서는 명의대여자가 책임을 부담하지는 않는다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 05' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 05|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

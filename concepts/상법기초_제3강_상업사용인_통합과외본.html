@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제3강 상업사용인 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 03</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제3강 상업사용인 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>사장은 한 명인데 지점은 열 곳이다. 거래처가 계약할 때마다 사장에게 전화해 “이 직원에게 권한이 있나요?”라고 확인해야 한다면 장사는 멈춘다. <strong>상업사용인 제도는 직원에게 줄 수 있는 권한을 정리하고, 그 권한을 믿은 상대를 언제 보호할지 정한다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>다섯 질문</th>
+<th>이번 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나?</td>
+<td>상업사용인의 종류·대리권·외관책임·의무다.</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>영업주 혼자 감당하지 못하는 거래를 빠르고 안전하게 나누기 위해서다.</td>
+</tr>
+<tr>
+<td>법 전체의 위치는?</td>
+<td>민법의 대리를 기업거래에 맞게 넓히고 정형화한 특별 규칙이다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td><mark class="blue">2강에서 찾은 상인을 누가 대신할지 배우고, 뒤의 대리상·중개인 등 외부 보조자와 비교한다.</mark></td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>지점장 계약이 회사에 효력이 있는지, ‘과장’이라는 명함만으로 회사를 책임지울 수 있는지 풀 수 없다.</td>
+</tr>
+</tbody></table>
+<p>교재 35–54쪽의 본문·판례·생각해 봅시다와 워크북, JSON 7문항·28개 보기를 연결한다. 판례에 구체적 사실이 제시되지 않은 부분은 법리를 풀어 썼고, 따로 만든 예는 ‘이해용 사례’라고 표시한다. 중요도는 학습 우선순위이지 실제 출제확률 통계가 아니다.</p>
+<h1>1. 기업을 돕는 사람의 지도</h1>
+<h2 id="commercial-03-01" data-concept-id="commercial-03-01">1-1. 내부의 대리인과 외부의 독립사업자 ★★★★☆</h2>
+<p><strong>교재 35–36쪽 · 넣은 이유:</strong> 기업에서 일하는 사람을 모두 같은 ‘직원’으로 묶으면 대리권이 뒤섞인다.</p>
+<p>기업보조자는 크게 영업적 보조자와 기술적 보조자로 나뉜다. 생산·운전·가사 등만 담당하고 영업상 대리권이 없는 사람을, 단순히 회사와 가까이 일한다는 이유로 상업사용인이라고 하지 않는다. 이들이 노동법의 보호를 받는지와 상법상 대리권을 가지는지는 다른 질문이다.</p>
+<p><mark class="yellow">상업사용인은 특정 상인의 지휘·명령에 종속하여, 대리권을 가지고 그 영업의 대외적 거래를 돕는 사람이다.</mark> 종속관계가 중요하지만 반드시 이름이 ‘고용계약’인 계약만 가능한 것은 아니다. 내부 보조자는 지배인·부분적 포괄대리권 사용인·점포사용인으로 나누고, 외부에서 독립적으로 보조하는 사람에는 대리상·중개인·위탁매매인·운송인·창고업자 등이 있다.</p>
+<p><strong>이해용 사례:</strong> 빵을 만드는 생산직 근로자, 재료 계약을 담당하는 구매부장, 독립된 운송업체는 모두 빵집을 돕지만 법적 역할이 다르다. 구매부장의 대리권을 생산직 직원에게 자동으로 옮겨 붙이면 안 된다.</p>
+<p><strong>시험:</strong> 기술적 보조자에 대한 상업사용인 규정이 있는지, 내부·외부의 구별. <strong>키워드:</strong> 특정 상인·종속·대리권·대외 거래. <strong>한 줄:</strong> 회사에서 일한다는 사실보다 어떤 권한으로 거래하는지가 중요하다.</p>
+<h1>2. 지배인: 영업 전체를 맡긴 대리인</h1>
+<h2 id="commercial-03-02" data-concept-id="commercial-03-02">2-1. 포괄성·정형성·획일성 ★★★★★</h2>
+<p><strong>교재 37쪽 · 문단의 역할:</strong> 거래할 때마다 권한을 처음부터 조사하지 않도록 지배권의 기본 틀을 정한다.</p>
+<p>지배인은 영업주에 갈음하여 <strong>그 영업에 관한 재판상·재판 외의 모든 행위</strong>를 할 수 있는 상업사용인이다(11조). ‘포괄성’은 영업 전반을 넓게 맡는다는 뜻, ‘정형성’은 기본 범위를 법이 정한다는 뜻, ‘획일성’은 영업주의 내부 제한을 보호받는 제3자에게 함부로 내세우지 못한다는 뜻이다.</p>
+<p>직함이 꼭 지배인일 필요는 없다. 본부장·지점장·영업소장이라는 이름을 써도 실제 받은 권한을 본다. 반대로 이름이 ‘지배인’이어도 실제 권한이 없으면 진짜 지배권과 외관책임을 구별한다.</p>
+<p>대표이사는 <strong>회사의 기관</strong>, 지배인은 <strong>영업의 대리인</strong>이다. 권한이 넓다는 공통점만으로 같은 지위가 아니다. 주식회사에서 지배인의 선임·해임은 이사회 권한과 연결되지만, 이사회가 없는 소규모 회사 등 조직상 특례를 별도 확인한다. 대표이사의 선임도 정관·법률이 정한 방식에 따른다.</p>
+<p><strong>시험:</strong> 개별성·비정형성을 넣으면 틀림. <strong>키워드:</strong> 포괄·정형·획일, 대리인≠기관. <strong>한 줄:</strong> 법이 넓고 일정한 권한의 틀을 제공한다.</p>
+<h2 id="commercial-03-03" data-concept-id="commercial-03-03">2-2. 선임·등기·종임 ★★★★☆</h2>
+<p><strong>교재 38–39쪽 · 넣은 이유:</strong> 권한이 생기는 때와 거래상대에게 주장할 수 있는 때를 나눈다.</p>
+<p>영업주인 상인이 지배인을 선임하며, 법정대리인도 선임할 수 있다. 지배인 자신이 또 다른 지배인을 선임하는 권한은 인정되지 않는다. 영업을 전제로 하는 제도여서 교재는 청산·파산 중 회사의 선임을 부정한다. 지배인은 의사능력이 있는 자연인이고, 민법117조상 반드시 완전한 행위능력자일 필요는 없다. 감사와 지배인을 겸하면 감시하는 사람이 자신을 감시하게 되므로 겸직 제한에 주의한다.</p>
+<p><strong>판례 1968.7.23. 68다442:</strong> 회사의 상무이사가 같은 회사의 사용인을 겸할 수 있는지가 문제 되었다. 법원은 이사라는 기관 지위와 사용인 지위의 겸직 가능성을 인정했다. ‘이사이면 절대 사용인이 될 수 없다’는 단정이 틀리다. 반대로 감사의 독립성을 위한 금지까지 없애는 판결은 아니다.</p>
+<p>선임은 등기사항이지만 등기가 지배권 발생 자체의 필수조건은 아니다. 선임·권한 수여와 등기의 대항효과를 구별한다. 종임 역시 등기해야 하며, 등기하지 않은 소멸을 선의의 제3자에게 주장하지 못하는 문제가 생긴다(13·37조).</p>
+<p>지배인의 사망·성년후견 개시·파산·기초관계 종료 등은 민법의 대리 규칙과 함께 검토한다. 그러나 상행위의 위임에 따른 대리권은 <strong>본인인 영업주의 사망으로 소멸하지 않는다</strong>(50조). 기업거래가 영업주 개인의 사망만으로 즉시 멈추지 않게 하는 취지다.</p>
+<p><strong>시험:</strong> 자연인, 선임·종임 등기의무, 영업주 사망. <strong>키워드:</strong> 발생≠대항, 보고적 등기. <strong>한 줄:</strong> 등기는 권한의 발생과 별도로 외부 거래를 안정시키는 장치다.</p>
+<h2 id="commercial-03-04" data-concept-id="commercial-03-04">2-3. 권한 범위와 내부 제한을 구별하기 ★★★★★</h2>
+<p><strong>교재 39–41쪽 · 문단의 이유:</strong> ‘영업에 관한 행위가 아닌 것’과 ‘영업에 관한 행위지만 내부 승인에 어긋난 것’은 다른 문제다.</p>
+<p>지배권은 해당 영업·영업소의 영업을 위한 권한이다. 영업주의 다른 모든 사업까지 자동으로 넓어지는 것은 아니다. 영업 자체의 양도·폐지나 혼인·입양 같은 신분행위는 통상의 지배권 범위를 벗어난다. 범위 판단은 지배인이 마음속으로 무엇을 생각했는지보다 행위의 객관적 성질을 본다.</p>
+<h3>판례 장면 · 96다36753, 97다6704</h3>
+<p>지배인이 영업주 명의로 어음행위를 하면서 개인적 목적을 품었다. 영업주는 “나를 위한 마음이 아니었으니 책임없다”고 다툴 수 있다. 법원은 영업 관련성을 지배인의 속마음이 아니라 행위의 객관적 성질로 판단한다. <strong>1997.8.26. 96다36753</strong>, <strong>1998.8.21. 97다6704</strong>가 연결된다. ‘객관적·추상적 판단’ → 통상 어떤 성질의 거래인지 본다는 뜻이다. 주관적 목적 하나로 효력을 뒤집으면 상대가 마음속 사정까지 조사해야 한다. 다만 상대와의 통모나 권한남용에 관한 별도 법리가 문제 되는 특별사정까지 면책하는 것은 아니다.</p>
+<p>이와 별도로 영업주는 내부적으로 “1억 원 이상 대출은 본점 승인”이라는 제한을 둘 수 있다. 제한 자체가 불가능한 것이 아니다. 위반한 지배인은 내부적으로 손해배상·해임 문제를 질 수 있다. 그러나 상법11조3항은 선의의 제3자에게 제한을 대항하지 못하도록 한다. 판례 <strong>96다36753</strong>은 상대가 제한을 알았거나 <strong>중대한 과실로 몰랐으면</strong> 영업주가 대항할 수 있고, 그 악의·중과실은 영업주가 주장·입증한다고 설명한다. 내부 제한을 등기해서 일반적으로 공시하는 방법도 없다.</p>
+<p><mark class="pink">내부 제한 가능 ≠ 그 제한으로 모든 거래상대에게 대항 가능.</mark></p>
+<p><strong>시험:</strong> 객관적 범위→내부 제한→상대 보호 순서. <strong>키워드:</strong> 객관성·내부 유효·선의·중과실·영업주 입증. <strong>한 줄:</strong> 속마음과 비공개 승인 규정을 거래상대에게 무조건 떠넘기지 않는다.</p>
+<h2 id="commercial-03-05" data-concept-id="commercial-03-05">2-4. 공동지배인: 함께 결정하되 통지는 한 명에게 ★★★★★</h2>
+<p><strong>교재 41–42쪽 · 문단의 이유:</strong> 넓은 지배권의 남용을 여러 사람의 공동 판단으로 막는다.</p>
+<p>같은 영업에 여러 지배인을 둘 수 있다. <strong>여럿이라는 사실만으로 공동지배가 되는 것은 아니다.</strong> 각자 행사하도록 두는 경우와 공동으로 행사하도록 정한 경우를 구별한다. 공동지배에 관한 사항·변경·소멸은 등기 대상이다.</p>
+<p>공동지배인의 <strong>능동대리</strong>는 계약 체결처럼 의사표시를 밖으로 보내는 것으로, 공동으로 해야 한다. 같은 시간·같은 자리에서 서명해야만 하는 것은 아니다. 반면 <strong>수동대리</strong>는 통지 등을 받는 것으로 한 명에게 해도 유효하다(12조2항). 상대가 세 사람을 모두 찾아다니도록 만들지 않으려는 것이다.</p>
+<p><strong>이해용 사례:</strong> A·B가 공동지배인이다. A 혼자 새 납품계약을 체결하는 문제와 거래처가 계약 해제통지를 A에게 전달하는 문제는 다르다. 전자는 공동행사, 후자는 1인 수령이 가능하다. 한 공동지배인이 다른 사람에게 자신의 권한을 포괄적으로 맡겨 버리면 견제 장치가 없어지므로 허용되지 않는다. 특정 거래에 관한 개별 위임은 견해가 대립하지만 통설은 허용한다.</p>
+<p><strong>시험:</strong> 제공 상법_075는 공동행사 약정이 질문에 명시되지 않아 원문만 읽으면 불명확하다. 해설은 공동지배인을 전제하므로 부록에서 그 누락을 표시했다. <strong>키워드:</strong> 복수≠공동, 능동 공동·수동 각자. <strong>한 줄:</strong> 결정은 함께, 통지는 한 명에게도 된다.</p>
+<h1>3. 진짜 권한은 없지만 그렇게 보였다면</h1>
+<h2 id="commercial-03-06" data-concept-id="commercial-03-06">3-1. 표현지배인의 네 가지 확인 ★★★★★</h2>
+<p><strong>교재 42–45쪽 · 넣은 이유:</strong> 권한이 있어 보이게 만든 영업주와 그것을 믿은 거래상대를 조정한다.</p>
+<p>표현지배인은 실제 지배인이 아니지만 본부장·지점장 등 지배인으로 보일 명칭을 사용하는 경우다. 일반 무권대리는 본인의 추인 등 없이는 본인에게 효력이 귀속되지 않는 것이 원칙이다. 그러나 영업주가 외관을 만들고 허용했다면 신뢰한 상대를 보호할 필요가 있다. ‘표현’은 말로 표현한다는 表現이 아니라 밖으로 드러난 모습을 뜻하는 <strong>表見</strong>이다.</p>
+<ol>
+<li><strong>본점·지점의 실체:</strong> 독립적으로 기본 영업을 처리할 실질이 있는지 본다.</li>
+<li><strong>그 책임자로 보이는 명칭:</strong> 본부장·지점장 등이다. 이름만이 아니라 주어진 외관을 확인한다.</li>
+<li><strong>영업주의 허락:</strong> 명시적 허락뿐 아니라 알고도 방치한 묵시적 허락도 문제 된다.</li>
+<li><strong>상대의 선의:</strong> 실제 지배권이 없음을 몰라야 한다. 교재는 과실 요건에 관한 견해 대립도 소개한다. 선의의 문언만 외워 중과실이 있는 모든 경우도 당연히 보호된다고 확대하지 않는다.</li>
+</ol>
+<h3>판례 장면 · 영업소의 실체와 지점장대리</h3>
+<p><strong>1998.10.13. 97다43819:</strong> 사용인의 근무 장소가 본·지점처럼 보이지만 단순 보조업무만 처리하는지 문제 되었다. 법원은 어느 정도 독립적으로 영업할 실체를 요구했다. ‘기계적 보조사무’ → 지휘받아 제한된 일만 하는 장소, ‘독립적 기본업무’ → 실질적인 영업소의 모습이다. 명칭만으로 모든 연락소를 지점으로 인정하면 영업주 책임이 지나치게 넓어진다.</p>
+<p><strong>1993.12.10. 93다36974:</strong> 증권회사 지점장대리가 등장한다. ‘대리’라는 말 자체가 위에 실제 지점장이 있음을 보여 주므로, 일반적으로 지점의 최고 책임자로 보이는 표현적 명칭은 아니라고 보았다. 모든 ‘출장소장’을 이름만으로 일괄 판단하지도 않는다. 장소의 독립적 영업 실질과 직함의 의미를 함께 살핀다.</p>
+<p><strong>효과:</strong> 요건을 갖추면 해당 영업소 지배인과 같은 권한이 있는 것으로 보지만, <strong>재판상 행위는 제외</strong>한다. 민지의 이해용 사례로, 회사가 직원에게 지점장 명함을 쓰게 해 거래한 경우와 그 직원이 회사 소송을 수행하는 경우는 같지 않다.</p>
+<p><strong>시험:</strong> 실체·명칭·허락·선의, 재판 외만. <strong>키워드:</strong> 외관·귀책·신뢰. <strong>한 줄:</strong> 외관을 만든 책임은 지우되 진짜 지배인과 모든 권한이 같지는 않다.</p>
+<h1>4. 영업주를 돕는 사람의 충실 의무</h1>
+<h2 id="commercial-03-07" data-concept-id="commercial-03-07">4-1. 경업금지와 개입권 ★★★★★</h2>
+<p><strong>교재 45–47쪽 · 문단의 이유:</strong> 고객정보·영업비밀을 아는 직원이 그것을 이용하여 영업주와 경쟁하지 못하게 한다.</p>
+<p>상업사용인은 영업주의 허락 없이 자기 또는 제3자의 계산으로 영업주의 영업 부류에 속하는 거래를 하면 안 된다(17조). <strong>명의보다 계산</strong>이 중요하다. 남의 이름으로 해도 경제적 이익이 자신이나 제3자에게 돌아가는 경쟁거래일 수 있다. 영리 목적이 없는 생활행위나 단순한 보조행위까지 모두 금지하는 것은 아니다. 부동산업체 지배인이 자기 가족이 살 집을 사는 것은 같은 물건을 다룬다는 이유만으로 경업이 되지 않는다. 영업주가 허락했다면 보호할 영업주의 의사에 따라 금지가 풀린다.</p>
+<p>위반 거래는 상대방과의 관계에서 당연무효가 아니다. 영업주는 <strong>자기 계산 거래는 영업주 계산으로 한 것으로 보는 권리</strong>, <strong>제3자 계산 거래는 사용인에게 그 이득의 양도를 청구하는 권리</strong>를 가진다. 이를 개입권·탈취권이라고 부른다. 거래 상대방에 대해 영업주가 자동으로 새 계약당사자가 되는 것은 아니다. 사용인은 취득한 재산·권리 등의 이전 문제를 부담한다.</p>
+<p><mark class="green">손해를 일일이 입증하기 어려우므로 경쟁거래의 이득을 돌려받는 특별 장치를 둔 것이다.</mark> 계약해지·손해배상 청구와도 연결된다. 개입권은 <strong>거래를 안 날부터 2주, 거래한 날부터 1년</strong> 중 어느 기간이라도 지나면 소멸한다. 두 기간을 더하거나 둘 다 지나야 한다고 외우면 안 된다.</p>
+<p><strong>이해용 사례:</strong> 신발 도매상 직원이 몰래 같은 도매거래를 자기 계산으로 한다. 신발계약이 곧 무효가 되는 것이 아니라 영업주의 개입권 등을 검토한다. 친구 계산으로 이익을 넘겼다고 경업금지를 피해 가는 것도 아니다.</p>
+<p><strong>시험:</strong> 허락·계산·영리·2주와1년. <strong>키워드:</strong> 외부 거래 유효·내부 이득 이전. <strong>한 줄:</strong> 경쟁거래를 무효로 만드는 대신 이득을 돌려받는 장치를 둔다.</p>
+<h2 id="commercial-03-08" data-concept-id="commercial-03-08">4-2. 겸직금지는 경업금지와 어떻게 다른가 ★★★★☆</h2>
+<p><strong>교재 47쪽 · 넣은 이유:</strong> 경쟁거래가 없어도 다른 직무에 노력이 분산될 수 있다.</p>
+<p>영업주의 허락 없이 회사의 무한책임사원·이사 또는 다른 상인의 사용인이 되는 것이 제한된다. 이 <strong>겸직금지</strong>는 같은 업종에서 경쟁하는지와 별개다. 반면 주주나 유한책임사원이 되는 것까지 이 조문으로 똑같이 금지하지 않는다. 위반하면 계약해지·손해배상 문제가 생긴다. <strong>겸직만 했다고 경업거래의 이득을 대상으로 하는 개입권이 자동 발생하는 것은 아니다.</strong> 경업 위반인지도 따로 확인한다.</p>
+<p><strong>시험:</strong> 경쟁업종 여부를 묻지 않는 겸직금지와 경업금지 구별. <strong>키워드:</strong> 무한책임사원·이사·다른 상인 사용인·허락. <strong>한 줄:</strong> 경쟁을 막는 의무와 다른 직무를 겸하지 않을 의무는 겹치지만 같지 않다.</p>
+<h1>5. 일부 업무 담당자와 점원</h1>
+<h2 id="commercial-03-09" data-concept-id="commercial-03-09">5-1. 부분적 포괄대리권: 맡긴 분야 안에서는 넓게 ★★★★★</h2>
+<p><strong>교재 48–51쪽 · 문단의 이유:</strong> 모든 부장·과장에게 영업 전체의 지배권을 줄 필요는 없지만 개별 계약마다 다시 위임할 필요도 없다.</p>
+<p>부분적 포괄대리권 사용인은 특정 종류·사항에 관하여 <strong>재판 외의 모든 행위</strong>를 할 권한을 받은 사람이다(15조). 특정 분야라는 ‘부분’과 그 안에서는 넓다는 ‘포괄’을 함께 읽는다. 영업주뿐 아니라 지배인도 선임·해임할 수 있고, 소상인도 둘 수 있으며, 선임·종임은 등기사항이 아니다. 구매업무를 맡았다면 자재 구매·대금 지급 등이 가능할 수 있지만 해당 분야 밖의 모든 채무보증까지 자동으로 허용되지는 않는다.</p>
+<h3>판례 묶음 · 실제 맡긴 일을 따라가기</h3>
+<p><strong>1994.9.30. 94다20884:</strong> 건설현장 소장은 특정 현장의 시공업무를 맡는다. 회사 영업 전체를 독립적으로 처리하는 지점 책임자와 다르므로 특별사정 없으면 표현지배인이 아니라 해당 시공업무의 부분적 포괄대리권 사용자로 본다. 법원의 고민은 ‘소장’이라는 말보다 수주와 시공 중 무엇을 맡았는지다.</p>
+<p><strong>1987.6.23. 86다카1418:</strong> 자금과장이고 지점장 다음 직위이며 예금 입출금을 해 본 사실이 있었다. 그렇다고 예금인출 권한을 포괄적으로 위임받았다고 바로 인정할 수는 없다. ‘직함·과거 행동’ → 권한을 인정할 자료일 수는 있지만 항상 결론을 보장하지는 않는다.</p>
+<p><strong>2007.8.23. 2007다23425:</strong> 사용인의 업무에 영업주를 대리한 법률행위가 포함되어야 한다. 단순 내부 업무만 맡은 사람에게 대리권을 붙이지 않는다. 부분적 포괄대리권자처럼 보이는 이름을 썼다는 이유로 표현지배인14조를 유추 적용하는 것도 부정한다. 그 권한의 범위는 지배인처럼 획일적이지 않기 때문이다. 민법상 표현대리나 사용자책임 등 다른 보호수단은 요건별로 검토할 수 있다.</p>
+<p><strong>1999.5.28. 98다34515:</strong> 도로공사 현장의 관리부서장이 노무·자재·안전·경리를 담당했다. 법원은 그 업무에 관한 대리권을 인정하지만 회사에 부담되는 일반적인 채무보증·채무인수 권한까지 있다고 보지 않았다. ‘부분’이라는 경계를 넘어섰기 때문이다.</p>
+<p><strong>1994.1.28. 93다49703:</strong> 증권회사 지점장대리와 고객 사이의 손실부담 약정이 문제 되었다. 직위와 업무 성질, 당시 증권거래법의 손실보전 규제 등을 고려하면 특별사정 없이 그 약정이 권한 범위에 속한다고 보기 어렵다. 옛 법률명은 당시 법의 이름이며 오늘은 현행 금융투자 규율도 확인해야 한다. 단순히 ‘고객 상대 직원이니 회사가 모든 손실을 약속했다’고 읽지 않는다.</p>
+<p><strong>2006.6.15. 2006다13117:</strong> 맡긴 특정 영업·사항 밖의 거래라면 제15조만으로 해결할 수 없다. 민법상 표현대리의 정당한 이유 등 요건을 검토해야 영업주 책임을 물을 수 있다. ‘범위 밖’과 ‘범위 안의 내부 제한 위반’을 나누라는 판결이다.</p>
+<p>모든 사례에서 법원의 공통 고민은 <strong>거래상대를 보호하면서도 맡기지 않은 모든 일까지 영업주에게 책임지우지 않기</strong>다. 내부 제한의 대외효는 제15조2항·11조3항을 연결한다. 경업·겸직 의무는 이 사용인에게도 적용된다.</p>
+<p><strong>시험:</strong> 실제 업무·특정 분야·재판 외·14조 유추 부정. <strong>키워드:</strong> 부분 안의 포괄, 범위 밖은 민법. <strong>한 줄:</strong> 맡긴 분야 안에서는 넓게, 다른 분야는 별도로 판단한다.</p>
+<h2 id="commercial-03-10" data-concept-id="commercial-03-10">5-2. 물건판매점포의 사용인 ★★★★☆</h2>
+<p><strong>교재 52–53쪽 · 문단의 이유:</strong> 손님이 매장 점원의 판매권한을 매번 확인할 수 없기 때문이다.</p>
+<p>물건판매점포의 사용인은 그 판매에 관한 권한이 있는 것으로 본다(16조). 권한이 없음을 아는 악의의 상대는 보호하지 않는다. 판매에 관한 권한이지 점원이 가게 전체를 팔거나 영업주 대신 소송할 포괄권한이 아니다.</p>
+<p><strong>서울고법 1977.9.7. 77나806:</strong> 점포 내 물건 판매·점포 안 매매뿐 아니라 거래관념상 점포 내 거래로 볼 수 있는 외부 거래도 검토한다. 물리적으로 문밖이라는 이유만으로 언제나 배제되는 것은 아니다. <strong>대법원 1976.7.13. 76다860:</strong> 백화점 지점의 외무사원은 이 조문의 점포사용인에 해당하지 않아, 그 지위만으로 판매나 선금 수령의 대리권을 인정할 수 없다고 보았다. 영업장 밖에서 고객을 찾아다니는 사원과 매장 점원을 같게 보면 권한을 지나치게 확장하게 된다.</p>
+<p><strong>이해용 사례:</strong> 손님이 매장 계산대 직원에게 신발값을 내는 경우와 외부에서 만난 직원에게 거액의 선금을 주는 경우를 구별한다. 후자가 언제나 무효라는 것이 아니라, 16조 외의 실제 대리권·표현대리 등을 따로 검토해야 한다는 뜻이다. 점포사용인도 상업사용인으로 경업·겸직 의무를 부담한다.</p>
+<p><strong>시험:</strong> 판매권한·점포 거래·악의 제외. <strong>키워드:</strong> 판매에 관한 권한, 외무사원 구별. <strong>한 줄:</strong> 매장 판매의 신뢰를 보호하는 규칙이지 모든 직원의 만능 대리권이 아니다.</p>
+<h1>시험 연결과 비교 정리</h1>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>범위</th>
+<th>재판상 행위</th>
+<th>선임·종임 등기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지배인</td>
+<td>특정 영업 전반</td>
+<td>포함</td>
+<td>필요</td>
+</tr>
+<tr>
+<td>표현지배인</td>
+<td>요건 충족 시 영업소 지배인에 준함</td>
+<td>제외</td>
+<td>실제 지배인 선임과 구별</td>
+</tr>
+<tr>
+<td>부분적 포괄대리권 사용인</td>
+<td>맡긴 특정 종류·사항</td>
+<td>제외</td>
+<td>필요 없음</td>
+</tr>
+<tr>
+<td>판매점포 사용인</td>
+<td>그 점포의 판매 관련</td>
+<td>포함되지 않음</td>
+<td>해당 선임등기 제도 아님</td>
+</tr>
+</tbody></table>
+<p><strong>TOP5:</strong> 상법_074(내부 제한), 상법_075(공동지배·문구 누락), 상법_014(표현지배), 상법_015(경업), 상법_013(선임·등기). 7문항은 기업보조자 1, 지배권 특성·범위 2, 선임·종임 1, 표현지배 1, 경업 1, 공동지배 1이다. 실제 오답률은 없고, ‘복수=공동’, ‘제한 자체 불가능’, ‘재판상 포함’, ‘직함만으로 권한 인정’이 오답 유발 표현이다.</p>
+<p><strong>교재의 일곱 질문 답 골격:</strong> ① 지배권은 영업 관련 재판상·외의 포괄권한. ② 내부 제한은 가능하나 제3자 보호. ③ 공동은 능동 공동·수동 각자. ④ 표현지배는 실체·명칭·허락·선의. ⑤ 경업·겸직금지와 위반 효과. ⑥ 부분권한은 특정 분야의 재판 외 행위·내부 제한과 범위 밖 구별. ⑦ 점원은 판매권한·악의 제외·공통 의무.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>1.</strong> 지배인이 내부 승인 없이 큰 계약을 했다. 상대는 제한을 몰랐고 모른 데 중과실도 없다. 영업주는 내부 규정만으로 거절할 수 있을까? <strong>답:</strong> 객관적 지배권 범위 안의 거래라면 내부 제한만으로 대항하지 못한다. <strong>의도:</strong> 범위와 제한 분리.</p>
+<p><strong>2.</strong> 두 지배인을 선임했으나 공동행사를 정하지 않았다. 한 명이 계약하면 항상 무권대리인가? <strong>답:</strong> 복수 선임과 공동지배는 다르므로 그렇게 단정할 수 없다. <strong>의도:</strong> 원자료의 생략된 조건을 읽는 힘.</p>
+<p><strong>3.</strong> 독립적 영업 기능이 없는 연락창구 직원이 임의로 ‘지점장’ 명함을 만들었다. 영업주가 몰랐다면? <strong>답:</strong> 실체와 명칭 사용 허락 등 표현지배 요건이 충족되는지부터 문제 된다. 명함만으로 책임을 확정하지 않는다. <strong>의도:</strong> 외관만이 아닌 귀책요건.</p>
+<p><strong>4.</strong> 구매부장이 회사의 구매업무와 무관한 친구 빚을 보증했다. 구매권한이 넓으니 보증도 유효한가? <strong>답:</strong> 특정 업무 범위 밖일 수 있다. 실제 권한·민법상 표현대리의 요건을 별도 검토한다. <strong>의도:</strong> 부분적 포괄의 경계.</p>
+<p><strong>5.</strong> 직원이 친구 계산으로 경쟁거래를 했다. 이익은 친구에게 갔으니 경업금지와 관계없다고 주장한다. <strong>답:</strong> 제3자 계산도 금지된다. 영업주는 요건에 따라 사용인에게 이득 양도를 청구할 수 있고 기간도 지켜야 한다. <strong>의도:</strong> 계산·이득 이전·2주/1년.</p>
+<h1>용어 사전</h1>
+<h3>상업사용인 商業使用人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 業(일 업), 使(부릴 사), 用(쓸 용), 人(사람 인). <strong>③ 합친 뜻:</strong> 영업주를 위해 일하는 거래 보조자. <strong>④ 이름의 이유:</strong> 기업 내부에서 영업주의 권한으로 활동하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 상인에 종속하여 대리권으로 대외 영업활동을 돕는 자. <strong>⑥ 쉬운 말:</strong> 가게를 대신해 거래하도록 맡은 사람. <strong>⑦ 사례:</strong> 구매부장이 재료 계약을 한다.</p>
+<p><strong>⑧ 시험:</strong> 단순 생산직·가사사용인과 구별. <strong>⑨ 비교·기억법:</strong> 독립사업자인 대리상 등은 외부 보조자.</p>
+<h3>지배인 支配人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 支(지탱할 지), 配(나눌 배): 배치·다스림, 人(사람 인). <strong>③ 합친 뜻:</strong> 영업을 맡아 처리하는 사람. <strong>④ 이름의 이유:</strong> 영업 전체를 맡기는 넓은 권한을 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업 관련 재판상·재판 외의 모든 행위를 할 수 있는 상업사용인. <strong>⑥ 쉬운 말:</strong> 특정 영업을 넓게 대신할 책임자. <strong>⑦ 사례:</strong> 지점장이 그 지점 영업계약을 체결한다.</p>
+<p><strong>⑧ 시험:</strong> 포괄성·정형성·획일성. <strong>⑨ 비교·기억법:</strong> 대표이사는 기관, 지배인은 대리인.</p>
+<h3>대항 對抗</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 對(대할 대), 抗(막을 항). <strong>③ 합친 뜻:</strong> 상대에게 맞서 주장함. <strong>④ 이름의 이유:</strong> 법률상 사유로 상대 주장에 맞서기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 사유나 법률효과를 상대에게 내세워 그 주장을 배척하는 것. <strong>⑥ 쉬운 말:</strong> 그 이유를 상대에게 들이댈 수 있나. <strong>⑦ 사례:</strong> 내부 승인 제한을 선의 상대에게 주장하지 못한다.</p>
+<p><strong>⑧ 시험:</strong> 내부 효력과 대외 대항은 별개. <strong>⑨ 비교·기억법:</strong> 무효 여부와 대항 가능성은 같은 질문이 아니다.</p>
+<h3>공동지배인 共同支配人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 同(같을 동), 支(지탱할 지), 配(나눌 배), 人(사람 인). <strong>③ 합친 뜻:</strong> 함께 지배권을 행사할 사람들. <strong>④ 이름의 이유:</strong> 권한을 나누어 공동 판단으로 남용을 막기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동으로 권한을 행사하도록 정해진 여러 지배인. <strong>⑥ 쉬운 말:</strong> 결정은 같이 하되 통지는 한 명이 받아도 된다. <strong>⑦ 사례:</strong> A·B 공동지배인 중 A가 해제통지를 받는다.</p>
+<p><strong>⑧ 시험:</strong> 복수 선임만으로 공동은 아님. <strong>⑨ 비교·기억법:</strong> 각자지배와 공동지배를 구분.</p>
+<h3>능동대리·수동대리 能動代理·受動代理</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 能(능할 능), 動(움직일 동), 受(받을 수), 代(대신할 대), 理(다스릴 리). <strong>③ 합친 뜻:</strong> 밖으로 행동하는 대리·받는 대리. <strong>④ 이름의 이유:</strong> 표시를 내보내는지 받는지 방향이 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 의사표시를 하는 것과 상대의 의사표시를 수령하는 것. <strong>⑥ 쉬운 말:</strong> 계약을 제안하기와 통지를 받아 주기. <strong>⑦ 사례:</strong> 공동지배인의 계약 체결과 해제통지 수령을 비교.</p>
+<p><strong>⑧ 시험:</strong> 능동 공동·수동 1인. <strong>⑨ 비교·기억법:</strong> 수동이라고 법률효과가 없는 것은 아니다.</p>
+<h3>표현지배인 表見支配人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 表(겉 표), 見(볼 견), 支(지탱할 지), 配(나눌 배), 人(사람 인). <strong>③ 합친 뜻:</strong> 겉으로 지배인처럼 보이는 자. <strong>④ 이름의 이유:</strong> 밖에서 보이는 지배인 외관을 신뢰한 상대를 보호해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 지배인이 아니지만 제14조 요건 아래 재판 외 권한이 인정되는 사용인. <strong>⑥ 쉬운 말:</strong> 회사도 책임져야 할 명함의 모습인지 확인하자. <strong>⑦ 사례:</strong> 영업주가 허락한 지점장 명칭.</p>
+<p><strong>⑧ 시험:</strong> 실체·명칭·허락·선의, 재판상 제외. <strong>⑨ 비교·기억법:</strong> 表現이 아니라 表見. 진짜 지배권과 구별.</p>
+<h3>경업 競業</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 競(다툴 경), 業(일 업). <strong>③ 합친 뜻:</strong> 사업으로 경쟁함. <strong>④ 이름의 이유:</strong> 영업주의 고객과 기회를 빼앗을 수 있어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업주의 영업부류에 속하는 경쟁거래를 하는 것. <strong>⑥ 쉬운 말:</strong> 맡은 가게와 몰래 경쟁 장사하기. <strong>⑦ 사례:</strong> 직원이 친구 계산으로 같은 도매거래를 한다.</p>
+<p><strong>⑧ 시험:</strong> 명의 아닌 계산, 허락 있으면 구별. <strong>⑨ 비교·기억법:</strong> 겸직은 다른 지위를 함께 갖는 것.</p>
+<h3>개입권 介入權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 介(끼일 개), 入(들 입), 權(권세 권). <strong>③ 합친 뜻:</strong> 거래 이익에 개입할 권리. <strong>④ 이름의 이유:</strong> 손해 입증 대신 경쟁거래의 이익을 돌려받게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경업거래를 영업주 계산으로 보거나 사용인에게 이득 양도를 청구하는 권리. <strong>⑥ 쉬운 말:</strong> 몰래 한 경쟁거래의 이득을 영업주에게 넘기게 하는 장치. <strong>⑦ 사례:</strong> 자기 계산 거래의 경제적 효과를 이전한다.</p>
+<p><strong>⑧ 시험:</strong> 2주·1년, 상대 계약당사자 자동교체 아님. <strong>⑨ 비교·기억법:</strong> 손해배상·계약해지와 별도 요건·효과.</p>
+<h3>겸직 兼職</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 兼(겸할 겸), 職(벼슬 직): 직무. <strong>③ 합친 뜻:</strong> 직무를 함께 맡음. <strong>④ 이름의 이유:</strong> 영업주를 위한 노력이 다른 직무로 분산되는 문제.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영업주 허락 없이 일정한 회사 지위나 다른 상인의 사용인 지위를 겸하는 것에 대한 제한. <strong>⑥ 쉬운 말:</strong> 다른 곳의 책임자 일을 동시에 맡기 전에 허락 확인. <strong>⑦ 사례:</strong> 다른 업종 회사의 이사가 되는 경우도 검토.</p>
+<p><strong>⑧ 시험:</strong> 경업 여부와 별개, 주주와 구별. <strong>⑨ 비교·기억법:</strong> 겸직만으로 경업 개입권이 자동 생기지 않는다.</p>
+<h3>부분적 포괄대리권 部分的包括代理權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 部(거느릴 부): 부분, 分(나눌 분), 的(과녁 적): 성질, 包(쌀 포), 括(묶을 괄), 代(대신할 대), 理(다스릴 리), 權(권세 권). <strong>③ 합친 뜻:</strong> 일부 분야를 넓게 묶어 맡긴 권한. <strong>④ 이름의 이유:</strong> 분야는 제한되지만 그 안의 거래는 포괄해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 종류·사항에 관한 재판 외 모든 행위의 대리권. <strong>⑥ 쉬운 말:</strong> 구매는 넓게 맡아도 회사 모든 일은 아니다. <strong>⑦ 사례:</strong> 구매부장의 자재 계약과 친구 빚 보증 비교.</p>
+<p><strong>⑧ 시험:</strong> 직함만으로 인정하지 않으며 14조 유추 부정. <strong>⑨ 비교·기억법:</strong> 지배인은 영업 전반·재판상도 포함.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 상업사용인</h2><p><b>TOP3:</b> 지배권 범위와 내부 제한 / 공동·표현지배 / 경업·겸직 구별.</p><table><tr><th>개념</th><th>암기</th></tr><tr><td>상업사용인</td><td>특정 상인에 종속＋대리권＋영업의 대외 거래</td></tr><tr><td>지배인</td><td>포괄·정형·획일. 영업 관련 재판상·재판 외. 실제 권한으로 판단</td></tr><tr><td>내부 제한</td><td>가능. 제3자 선의 보호, 악의·중과실은 영업주 주장·입증</td></tr><tr><td>공동지배</td><td>여럿≠자동 공동. 능동 공동·수동 1인. 포괄위임 불가</td></tr><tr><td>표현지배</td><td>영업소 실체·표현명칭·허락·선의. 재판상 행위 제외</td></tr><tr><td>부분적 포괄</td><td>특정 분야의 재판 외 모든 행위. 등기 불요. 14조 유추 부정</td></tr><tr><td>점포사용인</td><td>판매권한. 악의 제외. 외무사원과 구별</td></tr><tr><td>경업</td><td>허락 없이 자기·제3자 계산의 같은 영업부류 거래. 개입권·해지·배상</td></tr><tr><td>겸직</td><td>무한책임사원·이사·다른 상인 사용인. 경업 여부 불문. 주주와 구별</td></tr></table><p><b>숫자:</b> 11조 지배권 / 12조 공동 / 13조 등기 / 14조 표현 / 15조 부분 / 16조 점포 / 17조 의무. 개입권은 안 날부터 2주 또는 거래일부터 1년 경과 시 소멸.</p><p><b>반드시 외울 문장:</b> 영업 관련성은 객관적으로 판단한다. 내부 제한 위반과 권한 범위 밖은 다르다. 개입권으로 영업주가 상대방의 계약당사자로 자동 교체되는 것은 아니다.</p><p><b>사례를 풀 순서:</b> 실제 권한 → 영업·특정업무 범위 → 내부 제한과 상대의 인식 → 외관책임 요건 → 내부 의무 위반 → 권리행사 기간.</p></section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>답안 미제출 상태라 실제 이해도는 미평가다. 🟢 내부 제한·공동지배·경업 사례를 이유까지 구분하면 이해 완료 / 🟡 결론만 맞으면 복습 필요 / 🔴 명함만으로 모든 권한을 인정하면 이해 부족. <strong>복습 TOP3: 범위와 제한, 능동·수동대리, 경업과 겸직의 효과.</strong></p>
+<p>첨부 『상법기초』 제3강·워크북과 제공 JSON을 사용했다. 조문은 <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EB%B2%95">상법 10–17조·50조</a>, 일반 대리는 <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95">민법</a>을 확인한다. 개별 사건의 실제 결론을 옮길 때는 교재에 제시된 사실·법리 범위를 넘겨 만들어내지 않았다.</p>
+<h1>문제 부록 · 7문항·28개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_011"><h4>형성평가 · 상법_011</h4><p class="question-stem">다음 중에서 기업보조자에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>기업의 규모 및 활동범위 확대로 상인 단독으로 모든 영업활동을 하는 것이 사실상 불가능해짐에 따라 필요하게 되었다.</li><li>외부보조자는 외부에서 독립적으로 영업을 보조하는 자로 대리상이나 중개인 등이 있다.</li><li>기술적 보조자는 단순노무 등에 종사하는 자로 상법에 관련 규정이 있다.</li><li>상업사용인은 대리권의 크기를 기준으로 종류가 나뉜다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 영업이 커지면 사장 혼자 대외거래를 처리하기 어려워 보조제도가 필요하다.</li><li><strong>비선택</strong> · 맞음. 대리상·중개인은 독립된 외부 보조자다. 내부 종속 직원과 구별한다.</li><li><strong>선택</strong> · 틀림·정답. 단순 기술·노무 보조자에 대해 이 단원의 상업사용인 대리권 제도를 두는 것은 아니다. 노동법 적용은 별도다.</li><li><strong>비선택</strong> · 맞음. 지배인·부분적 포괄대리권 사용인·점포사용인으로 나눈다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기술적 보조자는 단순노무 등에 종사하는 자로 상법에는 관련 규정이 없다.</p></details></section>
+
+<section class="question-card" id="question-상법_012"><h4>형성평가 · 상법_012</h4><p class="question-stem">다음 중에서 상법상 지배인의 지배권이 가진 3가지 특성에 해당하지 않는 것은?</p><ol class="choices"><li>개별성</li><li>정형성</li><li>포괄성</li><li>획일성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 해당 없음·정답. 개별 거래마다 권한을 새로 정하는 제도라는 설명은 지배권의 정형화와 반대다.</li><li><strong>비선택</strong> · 해당. 법이 기본 권한의 틀을 정한다.</li><li><strong>비선택</strong> · 해당. 해당 영업 전반의 재판상·재판 외 행위를 넓게 포함한다.</li><li><strong>비선택</strong> · 해당. 내부 제한을 보호되는 제3자에게 함부로 주장하지 못하게 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법상 지배인의 지배권은 포괄성, 정형성, 획일성이라는 특성을 갖는다.</p></details></section>
+
+<section class="question-card" id="question-상법_013"><h4>형성평가 · 상법_013</h4><p class="question-stem">다음 중에서 상법상 지배인의 선임과 종임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>법인도 지배인이 될 수 있다.</li><li>지배인의 선임은 등기사항이다.</li><li>상법에서 지배인의 종임에 대해 자세히 규정하고 있다.</li><li>지배인의 사망으로 인한 종임은 등기하지 않아도 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 지배인은 의사능력이 있는 자연인이어야 한다. 완전한 행위능력까지 필수인 것은 아니다.</li><li><strong>선택</strong> · 맞음·정답. 제13조의 등기사항이다. 등기 자체가 권한 발생요건은 아니라는 점도 기억한다.</li><li><strong>비선택</strong> · 틀림. 상법이 모든 소멸 원인·시기를 자세히 정하지 않아 민법의 대리 규칙 등을 보충한다. 영업주 사망에 관한 상법50조 특칙에 주의한다.</li><li><strong>비선택</strong> · 틀림. 종임도 등기해야 한다. 원인에 사망이 포함된다고 등기의무가 사라지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1지배인은 자연인이어야 한다. 3상법에서는 지배권의 소멸시기와 원인에 대해서 아무런 규정을 두고 있지 않다. 4지배인이 종임하면 등기하여야 한다. 상법 제13조 및 제37조 참조.</p></details></section>
+
+<section class="question-card" id="question-상법_014"><h4>형성평가 · 상법_014</h4><p class="question-stem">다음 중에서 상법상 표현지배인의 책임이 성립하기 위한 요건에 해당하는 것은?(판례의 입장에 따름)</p><ol class="choices"><li>본점 또는 지점의 실질이 없을 것</li><li>지배인으로 인정될 만한 명칭을 사용하지 않을 것</li><li>명칭 사용에 대하여 영업주의 허락이 없을 것</li><li>상대방이 선의일 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 판례는 본·지점의 독립적인 영업 실체를 요구한다.</li><li><strong>비선택</strong> · 틀림. 지배인으로 보일 표현적 명칭을 사용하는 외관이 필요하다.</li><li><strong>비선택</strong> · 틀림. 명칭 사용에 명시·묵시적 허락 등 영업주 측 귀책이 필요하다.</li><li><strong>선택</strong> · 맞음·정답. 지배권이 없음을 몰라야 한다. 이 보기의 선의 요건을 이유로 중과실 등 별도 문제를 모두 생략하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 표현지배인책임의 성립요건은 ⅰ. 본점 또는 지점의 실질이 있을 것, ⅱ. 본점 또는 지점의 본부장, 지점장 그밖에 지배인으로 인정될 만한 명칭을 사용할 것, ⅲ 명칭 사용에 대해서 영업주의 허락이 있을 것, ⅳ 상대방이 선의일 것 등이다.</p></details></section>
+
+<section class="question-card" id="question-상법_015"><h4>형성평가 · 상법_015</h4><p class="question-stem">다음 중에서 상법상 지배인의 경업금지의무에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>영업주의 허락과 무관하게 금지된다.</li><li>제3자의 계산으로 하는 것도 금지된다.</li><li>영리목적이 없는 행위도 포함된다.</li><li>지배인이 자기의 계산으로 한 경우에만 영업주는 개입권을 행사할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 영업주가 허락하면 제17조의 경업금지가 문제 되지 않는 경우다.</li><li><strong>선택</strong> · 맞음·정답. 자기 계산뿐 아니라 제3자 계산도 포함한다. 자기 이름으로만 거래해야 한다는 요건은 아니다.</li><li><strong>비선택</strong> · 틀림. 영리 목적 없는 생활행위까지 모두 경업으로 묶지 않는다. 자기 거주용 집 매수 등의 예를 기억한다.</li><li><strong>비선택</strong> · 틀림. 제3자 계산 거래도 이득 양도청구가 가능하다. 자기 계산 때와 효과의 구체적 형태는 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1 영업주의 허락이 있는 경우에는 경업금지의무가 면제된다. 2자기 또는 제3자의 계산으로 하는 경우 모두 금지된다. 3 영리목적이 없는 행위는 포함되지 않는다. 4 상업사용인 자기의 계산이든 제3자의 계산이든 영업주는 경업금지의무위반에 대해 개입권을 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_074"><h4>워크북 · 상법_074</h4><p class="question-stem">甲은 신발도매업을 영업으로 하는 상인이다. 甲은 자신의 영업을 보조하도록 하기 위해서 A를 지배인으로 선임하였다.<br><br>다음 중에서 지배인으로서 A가 갖는 권한에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>상법에서는 제한적·비정형적으로 규정하고 있다.</li><li>영업에 관한 행위인지 여부는 A의 주관적 의사에 따라 판단한다.</li><li>甲은 A의 지배권에 대해서 임의로 제한을 가할 수가 없다.</li><li>甲이 A의 지배권에 대해서 제한을 가한 경우에 그 제한을 이유로 선의의 제3자에게는 대항할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 포괄적·정형적으로 법정한 권한이다.</li><li><strong>비선택</strong> · 틀림. 객관적 성질로 판단한다. 개인적 속마음 하나만으로 영업 관련성을 뒤집지 않는다.</li><li><strong>비선택</strong> · 틀림. 내부적으로 제한할 수 있다. 제한 자체의 가능성과 대외 대항을 나누어야 한다.</li><li><strong>선택</strong> · 원본 정답. 제11조3항의 선의 제3자 보호다. 판례상 제한을 중대한 과실로 모른 경우도 대항 가능하며 그 악의·중과실은 영업주가 주장·입증한다는 보완이 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상법에서는 지배인의 권한을 포괄적으로 정형화해서 규정하고 있다. ② 영업에 관한 행위인지 여부는 지배인의 행위 당시의 주관적인 의사와는 관계없이 그 행위의 객관적 성질에 따라 추상적으로 판단하여야 한다(대법원 1997. 8. 26. 선고 96다36753 판결). ③ 지배인이 갖는 지배권은 매우 포괄적이어서 남용의 우려가 크기 때문에 실무상으로 지배권을 제한하는 경우가 많다.</p></details></section>
+
+<section class="question-card" id="question-상법_075"><h4>워크북 · 상법_075</h4><p class="question-stem">甲은 자신의 영업에 대해서 A와 함께 B와 C를 지배인으로 선임하였다. 이러한 경우의 법률관계에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>하나의 영업에 대해서 복수의 지배인을 선임할 수 없다.</li><li>능동대리의 의사표시는 A, B, C 각자 독립적으로 할 수 있다.</li><li>수동대리의 의사표시는 A, B, C 중 1인에 대한 것도 유효하다.</li><li>A는 자신의 지배권을 B 또는 C에게 포괄적으로 위임할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 같은 영업에 여러 지배인을 둘 수 있다.</li><li><strong>비선택</strong> · 조건 누락 주의. 원자료 해설은 공동행사를 정한 공동지배인을 전제하므로 틀린 보기로 처리한다. 그러나 문제 지문은 복수 선임만 적어 놓았다. 공동 약정 없이 각자지배라면 각자 행사할 수 있어 지문을 보완해야 한다.</li><li><strong>선택</strong> · 원본 정답. 공동지배인이라도 수동대리는 그중 1인에게 한 의사표시로 유효하다. 원문 정답은 유지하되 공동행사 전제 누락을 명시한다.</li><li><strong>비선택</strong> · 공동지배를 전제로 틀림. 포괄위임은 공동견제 취지에 반한다. 특정 사안의 개별위임에 관한 통설과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 지배인은 영업이나 영업소를 단위로 해서 선임할 수 있으며, 그 수에는 제한이 없다. 따라서 하나의 영업에 대해서 복수의 지배인을 선임할 수 있다. ② 공동지배인의 능동대리의 의사표시는 공동으로 행사하여야 한다. ④ 공동지배인의 위임이 지배권을 포괄적으로 위임하는 것이라면 공동지배인 제도의 취지에 맞지 않는 것이므로 인정되지 않는다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 03' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 03|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

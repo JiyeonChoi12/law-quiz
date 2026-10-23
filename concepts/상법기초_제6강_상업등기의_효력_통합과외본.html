@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상법기초 제6강 상업등기의 효력 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMMERCIAL LAW · CHAPTER 06</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">상법기초</span>
+    <span class="brand-sub">제6강 상업등기의 효력 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./상법기초_개념.html">상법기초 개념 목록</a><a href="../index.html?subject=상법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>거래하려는 회사의 등기부에는 민수가 대표자로 적혀 있다. 그런데 회사가 나중에 “민수는 이미 해임됐어요”라고 한다. 상대방은 누구 말을 믿어야 할까? 이번 강의 중심은 <strong>기업의 정보를 공개하게 하고, 공개하지 않았거나 잘못 공개한 위험을 누구에게 부담시킬지</strong> 정하는 것이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하는가?</td>
+<td>등기 전·후·처음부터 틀린 등기의 효과를 구별한다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td><mark class="green">거래할 때마다 회사 내부회의까지 조사하게 하면 거래가 느려지고 불안해진다.</mark></td>
+</tr>
+<tr>
+<td>전체 위치는?</td>
+<td>상법 총칙의 기업 공시와 거래상대방 보호 장치다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td><mark class="blue">5강 이름의 외관에서 국가가 관리하는 등기의 외관으로 이동한다. 7강 영업양도에서 책임을 공시하는 문제로 이어진다.</mark></td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>대표권·상호양도·회사 설립과 합병에서 유효요건과 대항요건을 섞게 된다.</td>
+</tr>
+</tbody></table>
+<p>교재105–122쪽·워크북38–44쪽, 제공6문항24개 보기를 연결했다. 별은 제공 문제와 단원 구조에 따른 학습 우선순위이며 실제 시험 출제확률 통계가 아니다. 노랑=결론, 초록=이유, 분홍=함정, 파랑=연결. 교재의 심사권 설명과 부실등기 판례는 반드시 아래 보완과 함께 읽는다.</p>
+<h1>1. 등기부는 기업의 공개 안내판</h1>
+<h2 id="commercial-06-01" data-concept-id="commercial-06-01">1-1. 기업공시와 상업등기의 범위 ★★★★☆</h2>
+<p><strong>교재107–108쪽 · 문단의 이유:</strong> 거래상대에게 필요한 기업정보와 회사의 비밀을 구분하고, 정보를 전달하는 방식을 설명한다.</p>
+<p>기업공시는 조직·대표권·책임 등 일정한 법률관계와 사실을 이해관계인 또는 일반인에게 알리는 것이다. 회사가 주주 한 사람씩 소집통지를 보내면 <strong>직접적 공시</strong>, 필요한 사람이 찾아보도록 등기·공고·광고·주주명부 비치 등을 하면 <strong>간접적 공시</strong>다. ‘정부가 관리하니까 직접’이 아니라 <strong>정보를 상대방에게 보내는가, 찾아볼 수 있게 두는가</strong>가 구별 기준이다.</p>
+<p><mark class="yellow">상업등기는 상법에 따라 상인에 관한 정해진 사항을 상업등기부에 기록하는 간접적 공시다.</mark> 상인 아닌 협동조합·상호보험회사의 등기나 선박등기처럼 다른 등기부의 등기를 모두 상업등기로 묶지 않는다. 소상인에게는 상업등기 규정이 적용되지 않는다. 회사는 소액자본이라는 이유로 소상인이 되지 않는다.</p>
+<p>등기부 종류는 상호·미성년자·법정대리인·지배인·합자조합·합명회사·합자회사·유한책임회사·주식회사·유한회사·외국회사, 총11가지다. 회사의 재산소유권을 모두 기록하는 부동산등기부와 다르다. 교재의 ‘사실관계만 기재’는 <strong>대표권 같은 법률관계는 전혀 공시하지 않는다</strong>는 뜻으로 읽지 않는다.</p>
+<p>왜 국가가 장부를 관리할까? 처음 거래하는 사람도 최소한의 정보를 확인하고, 회사는 신용을 얻고, 분쟁 때 기록을 증거로 이용하게 하기 위해서다. 비밀을 모두 공개하라는 것이 아니라 법이 정한 중요 사항을 공개하는 것이다.</p>
+<p><strong>시험:</strong> 상업등기는 간접 공시, 소상인 제외, 다른 등기와 구별. <strong>키워드:</strong> 정보 접근·거래안전·증거. <strong>한 줄:</strong> 등기부는 기업에 관한 법정 정보를 누구나 확인할 수 있게 하는 안내판이다.</p>
+<h2 id="commercial-06-02" data-concept-id="commercial-06-02">1-2. 세 가지 분류 기준을 섞지 않기 ★★★★☆</h2>
+<p><strong>교재108–109쪽 · 넣은 이유:</strong> ‘누가·의무인가·무슨 효과인가’는 서로 다른 질문이다.</p>
+<table>
+<thead>
+<tr>
+<th>기준</th>
+<th>분류</th>
+<th>사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상인의 종류</td>
+<td>상인 일반 / 개인 / 회사</td>
+<td>지배인·상호 / 미성년자 영업 / 회사 설립·해산·청산</td>
+</tr>
+<tr>
+<td>등기 강제성</td>
+<td>절대적 / 상대적</td>
+<td>대부분은 의무, 개인상인의 최초 상호등기는 선택</td>
+</tr>
+<tr>
+<td>효력</td>
+<td>창설적 / 면책적·해소적 / 선언적·보고적</td>
+<td>회사 성립 / 책임 해소와 관련한 공시 / 이미 생긴 지배권 공시</td>
+</tr>
+</tbody></table>
+<p>개인상인이 처음 상호를 등기할지는 선택할 수 있어도 <strong>일단 등기한 내용의 변경·소멸은 등기해야 한다.</strong> 처음 선택이었다는 이유로 틀린 기록을 그대로 두게 하면 등기부를 믿는 사람이 피해를 입기 때문이다.</p>
+<p><strong>교재 표현 보완:</strong> ‘상호선정등기=창설적’을 이름의 존재 자체가 등기로 시작된다는 뜻으로 외우지 않는다. 개인상인의 상호는 미등기 상태에서도 사용할 수 있고 보호될 수 있다. 회사의 설립등기가 법인격을 만드는 것과, 그 등기에 회사상호가 포함되는 것도 구별한다. 지배인 해임·회사 해산도 언제나 등기 순간에 내부 효력이 생기는 것은 아니다. 분류명보다 <strong>해당 법조문이 등기에 어떤 효과를 붙였는지</strong> 먼저 본다.</p>
+<p><strong>시험:</strong> 임의적·상대적은 강제성의 분류이지 효력 분류가 아니다. <strong>키워드:</strong> 누가·해야 하나·효과. <strong>한 줄:</strong> 등기할 의무와 등기해야 생기는 권리는 다르다.</p>
+<h2 id="commercial-06-03" data-concept-id="commercial-06-03">1-3. 신청·심사·경정·말소와 교재의 심사권 설명 ★★★★★</h2>
+<p><strong>교재110–112쪽 · 문단의 이유:</strong> 잘못된 등기가 생길 수 있는 이유를 알아야 뒤의 부실등기가 이해된다.</p>
+<p>등기는 원칙적으로 <strong>당사자의 신청</strong>으로 한다. 개인은 상인 본인, 회사는 대표기관이 신청한다. 재판에 따른 법원의 촉탁이나 법률상 직권등기는 예외다. 서면신청 외 전자신청 절차도 있다. 관할과 필요서류를 갖추어 신청하면 등기관이 심사하고, 법정 각하사유가 있으면 이유를 밝혀 신청을 받아들이지 않는다. 현행 제도는2025.1.31부터 지점 소재지의 별도 등기를 폐지했으므로 예전 본·지점 이중등기 설명과 구별한다.</p>
+<p>형식적 심사는 <strong>신청서·법정 첨부서류·등기부로 요건을 판단</strong>하는 방식이다. 실질적 심사는 그 밖의 자료 조사 등으로 실제 사실의 진위를 적극 조사하는 방식이다. 형식적이라고 종이 수만 세는 것은 아니다. 서류에 드러난 무효 원인도 판단하지만, 사실조사의 범위가 제한된다.</p>
+<p><mark class="pink">교재는 상업등기법76조의 착오 발견·통지를 근거로 ‘절충주의’라고 설명한다. 그러나 대법원은 원칙적으로 형식적 심사권만 인정한다.</mark> 착오를 고치는 절차가 있다는 사실만으로 일반적 실질조사권이 생기는 것은 아니다. <strong>상법_026의④와 기존 해설은 이 차이가 있는 학습자료</strong>다. 원본 정답①은 보존하되, 현행 판례 문제에서는④를 일률적으로 틀렸다고 처리하지 않는다.</p>
+<p>추가 확인 판례2007마1154는 서로 양립하기 어려운 이사 선임등기 신청이 경합한 사건이다. 등기관은 법정 서류에 나타난 사실로 판단해야 하며, 별도 자료로 실제 결의의 진위를 자유롭게 조사할 수 없다고 설명했다. ‘형식적 심사권’ → 법정 자료 안에서 심사한다는 뜻이다. 반대로 무제한 조사권을 인정하면 등기절차가 본안소송처럼 되어 신속한 공시가 어려워진다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2007%EB%A7%881154&mode=0">판례 원문</a></p>
+<p>이미 마친 등기에 착오·누락이 있으면 당사자가 <strong>경정</strong>을 신청할 수 있고, 등기관의 통지·직권경정 절차도 있다. 무효 원인 등이 있으면 <strong>말소</strong>가 문제 된다. 글자·내용을 바로잡는 것과 기록을 지우는 것은 다르다. 1995년 폐지한 것은 법원이 등기사항을 일반적으로 공고하던 제도다. 회사의 각종 공고의무 전체가 없어진 것은 아니다.</p>
+<p><strong>시험:</strong> 신청 원칙·촉탁 예외, 경정 가능, 심사범위와 공신력 구별. <strong>키워드:</strong> 법정 자료·각하·경정·말소. <strong>한 줄:</strong> 등기부에 적혔다고 실제 진실까지 국가가 보증한 것은 아니다.</p>
+<h1>2. 진실한 사항의 등기 전과 등기 후</h1>
+<h2 id="commercial-06-04" data-concept-id="commercial-06-04">2-1. 등기 전: 소극적 공시력과 선의의 대상 ★★★★★</h2>
+<p><strong>교재112–114쪽 · 문단의 이유:</strong> 내부에서 바꾼 사실을 공개하지 않은 위험을 외부인에게 떠넘기지 못하게 한다.</p>
+<p>상법37조1항은 <strong>등기할 사항을 등기하지 않으면 선의의 제3자에게 대항하지 못하게</strong> 한다. 지배인 준호를 해임했는데 해임등기를 하지 않았다. 해임을 모른 거래상대 민지에게 영업주는 “준호는 해임됐으니 나는 책임 없다”고 주장할 수 없다. 해임이 내부적으로 무효라는 뜻이 아니라 <strong>보호되는 상대방에게 그 사실을 내세울 수 없다</strong>는 것이다.</p>
+<p>여기서 선의는 <strong>해임이라는 사실을 몰랐다</strong>는 뜻이다. ‘아직 해임등기가 안 된 것을 몰랐다’가 아니다. 절대적 사항뿐 아니라 상대적 등기사항도 포함하며, 선의는 거래 시점에서 판단한다. 상대가 실제로 알았다는 악의는 그것을 주장하는 쪽이 입증한다. 교재의 일반적 견해는37조1항에서 선의자에게 중과실이 있어도 보호하지만 반대 견해가 있음을 함께 소개한다. 24조·39조의 중과실 배제와 자동으로 같게 취급하지 않는다.</p>
+<h3>교재 판례 두 장면</h3>
+<p><strong>1960.4.21. 4290민상816:</strong> 법원이 말한 제3자는 직접 계약상대뿐 아니라 등기사항에 법률상 정당한 이해관계가 있는 사람이다. 반면 불법행위자가 이 제도를 자기 책임을 피하는 도구로 쓰는 것은 아니다. 원문 발췌에 구체적 사고 경위가 없으므로 임의의 실제 사건을 만들어 덧붙이지 않는다. ‘법률상 정당한 이해관계’ → 거래질서가 보호할 이유가 있는 관계를 말한다.</p>
+<p><strong>1996.10.29. 96다19321:</strong> 합자회사에 새 무한책임사원 Z를 가입시키는 합의는 했지만 변경등기를 하지 않았다. 기존 등기상 사원이 등기부상 사원들의 동의를 받아 제3자에게 지분 등을 양도했다. 회사와Z는 “새 사원Z의 동의를 안 받았다”고 반발했다. 법원의 고민은 내부 가입합의와 그 사실을 모르는 양수인의 신뢰 중 어느 쪽을 보호할지였다. <strong>선의의 제3자에게 미등기Z의 사원 지위를 주장하여 양도를 무효라고 할 수 없다고 보았다.</strong> ‘사원 지위를 취득하였더라도’ → 내부 가입은 인정하되, ‘대항하지 못한다’ → 모르는 상대에게 그 내부사정을 들이밀지 못한다. 반대 결론이면 확인 불가능한 새 사원을 이유로 거래를 뒤집게 된다. 판례의 ‘등기와 공고’는 개정 전 조문 표현이다.</p>
+<p><strong>시험:</strong> 선의의 대상·시점·입증책임. <strong>키워드:</strong> 사실 모름·거래 시·내부 효력과 대항력. <strong>한 줄:</strong> 알리지 않은 변화로 모르는 거래상대를 곤란하게 하지 못한다.</p>
+<h2 id="commercial-06-05" data-concept-id="commercial-06-05">2-2. 등기 후: 적극적 공시력과 정당한 사유 ★★★★★</h2>
+<p><strong>교재114–115쪽 · 넣은 이유:</strong> 공개를 제대로 한 뒤에도 언제나 ‘몰랐다’고 하면 등기할 의미가 사라진다.</p>
+<p>원칙적으로 등기 후에는 그 사실을 실제로 모르는 선의의 제3자에게도 대항할 수 있다. 다만37조2항의 <strong>정당한 사유로 몰랐을 때</strong>는 예외다. 천재지변 등으로 공공적 등기정보 시설 이용에 객관적 장애가 생긴 경우가 중심이다. “출장 중이었다, 바빴다, 개인적으로 아팠다”라는 사정만으로 일반적으로 인정되는 예외는 아니다. 보호를 구하는 제3자가 정당한 사유를 주장·입증해야 한다.</p>
+<p>등기 후 대항할 수 있다는 설명을 <strong>등기 내용이 거짓이어도 모두 진실로 확정된다</strong>고 바꾸면 틀린다. 이 부분은 실제로 존재하는 등기사항을 전제로 한다. 처음부터 거짓이라면39조의 별도 요건으로 간다.</p>
+<p><strong>시험:</strong> 단순 선의와 정당한 사유를 구별. <strong>키워드:</strong> 객관적 장애·예외. <strong>한 줄:</strong> 공개한 사실은 원칙적으로 주장할 수 있지만, 공개시설 이용 자체의 정당한 장애는 따로 보호한다.</p>
+<h2 id="commercial-06-06" data-concept-id="commercial-06-06">2-3. 일반적 효력의 적용 범위와 표현책임 ★★★★☆</h2>
+<p><strong>교재115–116쪽 · 문단의 이유:</strong> 등기부를 확인할 수 있다는 이유로 모든 법률관계에37조를 적용하지 않도록 한다.</p>
+<p>일반적 효력은 원칙적으로 법률행위에 따른 거래관계에 관한 것이다. 불법행위·부당이득 등 거래 외 관계에 얼마나 미치는지는 견해 대립이 있는 심화 문제다. 사건의 관계와 보호취지를 따져야 하며, 등기가 있다는 이유만으로 피해자나 가해자에게 일률적으로 적용하지 않는다.</p>
+<p><strong>상호양도25조2항:</strong> 등기상호의 양도는 등기하지 않으면 제3자에게 대항하지 못한다.37조처럼 법문에 선의로 제한하지 않는다는 차이가 있다. 이를 일반적 효력의 예외로 보는 설명과 적용대상이 다른 규정으로 보는 설명이 나뉘지만, 답안에서는25조의 별도 요건을 먼저 제시한다.</p>
+<p><strong>표현지배인14조·표현대표이사395조:</strong> 실제 지배인·대표이사를 등기해 두었다는 사실만으로 별도의 외관을 만들어 낸 책임이 자동 사라지지 않는다. 표현책임의 외관·귀책·상대방 보호 요건을 따로 검토해야 한다. 등기가 표현책임을 모두 무력하게 한다면 회사가 서로 모순되는 표시를 해도 외부인만 손해를 보게 된다.</p>
+<p><strong>1990.9.28. 90누4235:</strong> 국가는 조세권에 따라 세금을 부과하면서37조의 제3자라고 주장할 수 있는가? 법원은 대등한 거래관계가 아닌 공권력 관계라는 이유로 이를 부정했다. ‘보통의 거래관계’ → 국가라는 신분 자체가 아니라 어떤 관계로 행동하는지 본다. 국가가 일반 매매계약을 맺는 경우까지 언제나 제외되는 것은 아니다.</p>
+<p><strong>시험:</strong> 조세 부과와 대등한 계약, 등기와 표현책임 구별. <strong>키워드:</strong> 거래관계·특별규정·외관. <strong>한 줄:</strong> 등기의 대항력은 적용되는 관계와 별도 보호규정 안에서 작동한다.</p>
+<h1>3. 등기로 특별히 생기는 효과와 추정</h1>
+<h2 id="commercial-06-07" data-concept-id="commercial-06-07">3-1. 창설·보완·면책·해제적 효력 ★★★★☆</h2>
+<p><strong>교재116–117쪽 · 문단의 이유:</strong> 대부분의 등기는 기존 사실을 알리지만 특별히 법률관계를 만드는 등기도 있다.</p>
+<p><strong>창설:</strong> 회사 설립·합병등기는 법이 정한 법률관계 발생요건이다. 반면 지배인은 영업주의 선임으로 지위가 생기므로 선임등기는 보고적이다. “등기 안 했으니 지배인이 절대 아니다”는 틀린 말이다.</p>
+<p><strong>보완:</strong> 설립등기 후 주식인수의 특정 하자를 다투지 못하게 하는320조가 예다. 주식청약서 요건의 흠결을 이유로 한 무효, 사기·강박·착오에 의한 취소가 제한된다. 회사의 안정과 출자 확보를 위한 것이지만 <strong>모든 무효·취소 사유가 등기로 치유되는 것은 아니다.</strong> 또 창립총회에 출석해 권리를 행사한 사람에게는 성립 전에도 이 제한이 적용될 수 있다.</p>
+<p><strong>면책·해제:</strong> 합명·합자회사의 퇴사사원 책임에서 퇴사등기는2년의 책임 존속기간을 계산하는 기준이 된다. 퇴사등기 전에 생긴 회사채무에 대한 책임과,2년 안에 청구·압류를 한 채권자에 대한 예외도 확인한다(225조 및 준용규정). ‘등기하면 즉시 모든 채무 면제’가 아니다. 주식회사 성립 전 주권발행 제한이 풀리는 것도 해제적 효과의 예다. 성립 전 권리주의 양도 제한과 성립 후 주식양도 규율은 구별한다.</p>
+<p><strong>시험:</strong> 지배인 선임은 창설 아님, 보완은 특정 하자만, 퇴사 즉시면책 아님. <strong>키워드:</strong> 특별규정·발생·하자·기간. <strong>한 줄:</strong> 등기의 특별효과는 법이 붙여 준 만큼만 인정한다.</p>
+<h2 id="commercial-06-08" data-concept-id="commercial-06-08">3-2. 추정력과 공신력은 왜 다른가 ★★★★☆</h2>
+<p><strong>교재117–118쪽 · 문단의 이유:</strong> 등기부가 유력한 증거라는 것과 잘못된 등기를 믿어도 권리를 얻는다는 것은 다르다.</p>
+<p><strong>1991.12.27. 91다4409:</strong> 법인등기부상 이사·감사는 특별한 사정이 없는 한 적법하게 선임된 것으로 추정한다고 보았다. 법원의 고민은 공적 기록을 아무 의미 없다고 할지, 반박 가능한 출발점으로 삼을지다. ‘추정’ → 일단 그 방향으로 판단하지만 반대 사정으로 뒤집힐 수 있다. 구체적 선임 경위가 없는 교재 발췌에 가상의 실제 회의 사정을 붙이지 않는다.</p>
+<p>교재는 학설의 사실상 추정과 판례의 법률상 추정이라는 분류를 제시하고 상법_028은 그 구별을 묻는다. 핵심은 <strong>반증 불가능한 확정이 아니라는 점</strong>이다. 공신력은 기록이 실제와 달라도 그 기록을 믿은 사람을 보호하는 효력이다. 상업등기에 일반적 공신력은 없으며, 다음39조가 정한 요건에서 제한적으로 보호한다.</p>
+<p><strong>시험:</strong> 추정=진실 확정 ×, 일반적 공신력 ×. <strong>키워드:</strong> 반증·사실 인정·신뢰 보호. <strong>한 줄:</strong> 등기부는 유력한 출발점이지 거짓을 언제나 진실로 바꾸는 장치는 아니다.</p>
+<h1>4. 처음부터 잘못된 등기</h1>
+<h2 id="commercial-06-09" data-concept-id="commercial-06-09">4-1. 부실등기39조의 세 요건 ★★★★★</h2>
+<p><strong>교재118–121쪽 · 문단의 이유:</strong> 잘못된 기록의 위험을 아무 책임 없는 사람에게까지 무조건 지울 수는 없다.</p>
+<p>① 등기 당시부터 사실과 다른 기록이 있고 ② 그 기록을 만든 등기신청권자에게 고의·과실 등 귀책사유가 있고 ③ 거래상대가 그 거짓을 모르는 선의이며 중과실도 없어야 한다. <strong>등록 당시에는 맞았는데 나중에 해임된 사실을 안 고친 경우</strong>는 먼저37조의 변경·소멸 미등기를 검토한다. 재판 시가 아니라 등기 시의 불일치가39조 출발점이다.</p>
+<p>개인기업에서는 상인, 회사에서는 대표기관을 기준으로 고의·과실을 판단하며 대리인의 고의·과실도 포함된다. <strong>1981.1.27. 79다1618·1619</strong>는 합명회사의 대표사원을 기준으로 해야 하고, 대표사원 유고 때 정관에 따라 업무를 집행하던 사원이라는 이유만으로 그 사람을 기준으로 삼지 않는다고 했다. ‘업무를 한다’와 ‘회사를 대표한다’는 같지 않다는 뜻이다.</p>
+<p>제3자는 직접 계약상대뿐 아니라 등기에 법률상 이해관계가 있는 사람을 포함한다. 선의는 <strong>등기가 사실과 다름을 모르는 것</strong>이고 거래 당시를 기준으로 한다. 악의·중과실을 주장하여 책임을 피하려는 등기신청권자가 그 사정을 입증한다.37조1항의 교재 다수견해와 달리39조에서는 중과실자를 보호에서 제외한다.</p>
+<p><strong>시험:</strong> 등기 시·귀책·선의 무중과실, 사실 변경과 최초 허위 구별. <strong>키워드:</strong> 제한적 공신력. <strong>한 줄:</strong> 잘못된 등기를 책임 있게 만든 사람이 보호할 만한 신뢰의 위험을 부담한다.</p>
+<h2 id="commercial-06-10" data-concept-id="commercial-06-10">4-2. 타인이 위조한 등기를 방치한 두 판례 ★★★★★</h2>
+<p><strong>교재119–120쪽 · 문단의 이유:</strong> ‘남이 위조했다’와 ‘회사가 책임 있게 협조·방치했다’를 구별해야 한다.</p>
+<p>교재 예시에서는 A가 문서를 위조해 Z의 지배인으로 자신을 등기하고, 실제 지배인은B인데Z가 잘못된 기록을 방치한다. 거래상대는A가 지배인이라고 믿고 거래했다. 이때 위조가 있다는 말만으로 회사 책임을 무조건 인정하거나 부정하면 안 된다.</p>
+<p><strong>1975.5.27. 74다1366:</strong> 법원은 제3자가 문서위조로 만든 등기에 대하여 신청권자의 과실이 조금이라도 있다는 이유만으로 곧39조 책임을 지울 수 없다고 했다. ‘그 정도가 어떠하건 과실’ → 아무 부주의만 찾으면 충분하다는 뜻을 부정한다. 모든 위조사건을 무과실책임으로 만들지 않으려는 것이다.</p>
+<p><strong>2013.9.26. 2011다870:</strong> 신청권자가 직접 신청하지 않았어도 책임 있는 관여, 적법한 대표이사의 협조·묵인, 잘못된 등기의 존재를 알면서 시정하지 않은 사정 등이 <strong>스스로 고의·과실로 부실등기를 한 것과 동일시할 정도</strong>라면39조 책임을 인정할 수 있다고 했다. ‘동일시할 특별한 사정’ → 단순히 남이 했다는 형식 뒤로 숨을 수 없는 수준의 책임을 묻는다. <a href="https://www.law.go.kr/precInfoP.do?mode=0&precSeq=172596">판례 원문</a></p>
+<p>두 판례를 시간 순서로 읽으면 결론은 명확하다. <strong>단순 과실만으로 자동책임은 아니지만, 책임 있는 관여·방치로 동일시할 사정이 있으면 책임질 수 있다.</strong> 상법_029의④를 무조건 틀리다고만 외우거나, 원본 해설의 ‘인정되지 않는다’를 모든 방치에 확대하면2013년 판례를 놓친다.</p>
+<p><strong>시험:</strong> 위조=항상 면책 ×, 방치=항상 책임 ×. <strong>키워드:</strong> 귀책의 정도·동일시. <strong>한 줄:</strong> 누가 신청서를 냈는지뿐 아니라 누가 그 거짓 외관에 책임이 있는지 본다.</p>
+<h2 id="commercial-06-11" data-concept-id="commercial-06-11">4-3. 효과: 회사가 부인하지 못하지만 상대방의 선택은 남는다 ★★★★★</h2>
+<p><strong>교재121쪽 · 문단의 이유:</strong> 부실등기 제도는 선의자를 보호하기 위한 것이지 거짓 기록을 강제로 따르게 하려는 것이 아니다.</p>
+<p>39조 요건을 갖추면 등기한 쪽은 사실과 다르다는 이유로 보호되는 제3자에게 거래효력을 부인할 수 없다. 반면 제3자가 등기와 다른 실제 사실을 주장하는 것은 가능하다. 누구를 위한 보호인지를 보면 방향이 이해된다.</p>
+<p><strong>1974.2.12. 73다1070:</strong> 대표이사로 선임되어 등기된 사람을 믿고 제3자가 회사와 거래했다. 나중에 그 이사들을 선임한 주주총회 결의가 존재하지 않는다는 판결이 확정되었다. 회사는 이를 들어 거래를 부인하려 했다. 법원은 보호되는 선의의 제3자에 대하여 그렇게 할 수 없다고 보았다. ‘결의 부존재’ → 내부 선임의 토대가 없다는 뜻, ‘거래 효력을 부인할 수 없다’ → 그 내부 하자를 보호되는 외부인에게 전가하지 못한다는 뜻이다. 이를 모든 등기와 모든 상대방에게 무조건 적용하면39조 요건을 없애는 오류가 된다.</p>
+<p><strong>시험:</strong> 제3자도 진실 주장 불가 ×. <strong>키워드:</strong> 일방향 대항 제한. <strong>한 줄:</strong> 보호받는 사람이 거짓 기록의 포로가 되는 것은 아니다.</p>
+<h1>시험 연결과 교재 질문</h1>
+<p><strong>TOP5:</strong> 상법_026(절차·심사권 보완), _028(추정과 일반적 효력), _029(부실등기·판례 보완), _080(등기 분류), _081(선의의 대상). _027도 세 분류를 확인하는 기본문제다. 실제 오답률은 없으며 ‘선의의 대상 바꾸기·모든 하자 치유·위조 무조건 면책·공신력 일반화’가 문장상 함정이다.</p>
+<p>교재5문항의 답 골격은 ① 정보 제공·신용·거래안전·증거 ② 신청→심사→등기, 오류는 경정·말소 ③ 등기 전 선의자 대항 불가·등기 후 원칙 대항 가능과 정당한 사유 예외 ④ 창설·보완·면책·해제의 특별규정 ⑤ 최초 불일치·귀책·선의 무중과실과 대항 제한이다.</p>
+<h2>새로운 사례 문제 5개</h2>
+<p><strong>1.</strong> 해임등기를 안 한 회사와 거래하면서 민지는 해임 사실 자체를 이미 알았다. 등기가 없으므로 언제나 보호될까? <strong>답:</strong>37조1항의 선의자가 아니므로 그 조항의 보호를 받을 수 없다. <strong>의도:</strong> 선의의 대상.</p>
+<p><strong>2.</strong> 해임등기 후 폭우로 등기정보 공공시설이 사용 불가능했고 상대가 해임을 몰랐다. 단순히 등기 완료만으로 끝낼까? <strong>답:</strong> 객관적 장애와 정당한 사유를37조2항에서 검토한다. <strong>의도:</strong> 적극적 공시력의 예외.</p>
+<p><strong>3.</strong> 대표이사가 허위 선임등기에 필요한 자료를 직접 넘기며 협조했지만 신청서는 다른 사람이 제출했다. 회사는 신청자가 다르다고 면책될까? <strong>답:</strong> 자기 고의·과실의 등기와 동일시할 사정인지 본다. <strong>의도:</strong> 책임 있는 관여.</p>
+<p><strong>4.</strong> 설립 후 주식인수자가 “청약서 요건을 빠뜨렸다”고 인수 무효를 주장한다. 같은 결론을 모든 무효사유에 적용할까? <strong>답:</strong>320조가 정한 요건 흠결의 무효 주장은 제한되지만 모든 하자를 무차별 치유하지 않는다. <strong>의도:</strong> 보완효의 범위.</p>
+<p><strong>5.</strong> 세무관청은 “등기부의 대표자만 믿었으니37조로 보호해 달라”고 하며 조세를 부과한다. 물품을 매수하는 계약상대인 국가와 같을까? <strong>답:</strong> 조세권 행사와 대등한 거래는 다르다. 전자에37조의 일반적 효력을 적용하지 않는다. <strong>의도:</strong> 관계별 적용범위.</p>
+<h1>용어 사전</h1>
+<h3>공시·공고 公示·公告</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공): 공개, 示(보일 시), 告(알릴 고). <strong>③ 합친 뜻:</strong> 공개하여 보여 주기·널리 알리기. <strong>④ 이름의 이유:</strong> 정보의 외부 전달을 표현해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공시는 일정한 정보를 이해관계인에게 알리는 것, 공고는 그 방법 중 하나. <strong>⑥ 쉬운 말:</strong> 당사자만 아는 정보를 밖에서도 확인하게 한다. <strong>⑦ 사례:</strong> 등기는 간접 공시, 주주 소집통지는 직접 공시.</p>
+<p><strong>⑧ 시험:</strong> 공시가 모두 직접 통지는 아님. <strong>⑨ 비교·기억법:</strong> 공고제도 일부 폐지와 회사의 모든 공고 폐지는 다름.</p>
+<h3>상업등기 商業登記</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 商(장사 상), 業(일 업), 登(오를 등), 記(기록할 기). <strong>③ 합친 뜻:</strong> 영업의 일정 정보를 장부에 올려 기록함. <strong>④ 이름의 이유:</strong> 기업정보를 공적 장부에 올리기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상법에 따라 상인에 관한 사항을 상업등기부에 하는 등기. <strong>⑥ 쉬운 말:</strong> 회사에 거래하러 가기 전 확인하는 공개 정보. <strong>⑦ 사례:</strong> 대표이사·지배인 선임등기.</p>
+<p><strong>⑧ 시험:</strong> 일반적 효력과 특수적 효력 구별. <strong>⑨ 비교·기억법:</strong> 부동산등기·선박등기와 별개.</p>
+<h3>절대적·상대적 등기사항 絕對的·相對的</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 絕(끊을 절), 對(대할 대), 的(과녁 적), 相(서로 상). <strong>③ 합친 뜻:</strong> 의무적인 것과 선택 가능한 것의 분류. <strong>④ 이름의 이유:</strong> 강제성의 정도를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 절대적은 법정 등기의무, 상대적은 최초 등기 여부가 선택인 사항. <strong>⑥ 쉬운 말:</strong> 꼭 등록할 정보와 처음 등록은 고를 수 있는 정보. <strong>⑦ 사례:</strong> 개인상인의 최초 상호등기는 상대적.</p>
+<p><strong>⑧ 시험:</strong> 등록 후 변경·소멸은 의무. <strong>⑨ 비교·기억법:</strong> 창설·보고는 효과의 분류이므로 별개.</p>
+<h3>경정·말소 更正·抹消</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 更(고칠 경), 正(바를 정), 抹(지울 말), 消(사라질 소). <strong>③ 합친 뜻:</strong> 바로잡기·지워 없애기. <strong>④ 이름의 이유:</strong> 잘못된 기록의 정리 방식을 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경정은 착오·누락의 정정, 말소는 해당 등기의 제거. <strong>⑥ 쉬운 말:</strong> 오기 고치기와 기록 지우기는 다르다. <strong>⑦ 사례:</strong> 등기한 내용이 누락되어 경정신청.</p>
+<p><strong>⑧ 시험:</strong> 등기 후에도 경정 가능. <strong>⑨ 비교·기억법:</strong> 변경등기와 최초 오류의 경정도 구별.</p>
+<h3>대항력 對抗力</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 對(대할 대), 抗(막을 항): 맞섬, 力(힘 력). <strong>③ 합친 뜻:</strong> 상대에게 맞서 내세울 수 있는 힘. <strong>④ 이름의 이유:</strong> 당사자 내부와 외부 상대의 관계를 나눠서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률관계나 사실의 효력을 제3자에게 주장할 수 있는 힘. <strong>⑥ 쉬운 말:</strong> 우리끼리 바꾼 사실을 모르는 남에게도 주장할 수 있을까. <strong>⑦ 사례:</strong> 해임 미등기 사실로 선의 거래상대에게 대항 불가.</p>
+<p><strong>⑧ 시험:</strong> 성립요건과 대항요건 구별. <strong>⑨ 비교·기억법:</strong> 대항 불가는 항상 절대적 무효라는 뜻 아님.</p>
+<h3>소극적·적극적 공시력 消極的·積極的公示力</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 極(끝 극), 的(과녁 적), 積(쌓을 적), 公(공평할 공), 示(보일 시), 力(힘 력). <strong>③ 합친 뜻:</strong> 공시 전 주장의 제한·공시 후 주장의 허용. <strong>④ 이름의 이유:</strong> 공시 여부에 따라 주장의 방향이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 미등기 시 선의자에 대한 대항 제한, 등기 후 원칙적 대항 허용. <strong>⑥ 쉬운 말:</strong> 안 알렸으면 주장 못 하고 알렸으면 원칙적으로 주장한다. <strong>⑦ 사례:</strong> 지배인 해임등기 전후 거래 비교.</p>
+<p><strong>⑧ 시험:</strong> 등기 후 정당한 사유 예외. <strong>⑨ 비교·기억법:</strong> 공시력은 일반적 공신력과 다름.</p>
+<h3>창설·보완·면책 創設·補完·免責</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 創(비롯할 창), 設(베풀 설), 補(기울 보), 完(완전할 완), 免(면할 면), 責(꾸짖을 책): 책임. <strong>③ 합친 뜻:</strong> 새로 만듦·흠을 채움·책임을 벗음. <strong>④ 이름의 이유:</strong> 기존 사실 공개와 다른 효과를 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특별규정이 등기에 붙인 발생·하자 주장 제한·책임 해소 등의 효과. <strong>⑥ 쉬운 말:</strong> 등록이 특별히 시작점이나 책임기간의 기준이 된다. <strong>⑦ 사례:</strong> 설립등기,320조 주식인수 하자 제한.</p>
+<p><strong>⑧ 시험:</strong> 지배인 선임등기는 창설 아님. <strong>⑨ 비교·기억법:</strong> 모든 하자 치유·등기 즉시 모든 책임 면제 아님.</p>
+<h3>추정·의제 推定·擬制</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 推(밀 추): 미루어 봄, 定(정할 정), 擬(비길 의), 制(지을 제). <strong>③ 합친 뜻:</strong> 일단 미루어 정함·법으로 같게 취급함. <strong>④ 이름의 이유:</strong> 판단의 출발점과 법정 효과를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 추정은 반대 증명으로 번복될 수 있는 판단, 의제는 정해진 요건에서 법이 일정하게 취급하는 것. <strong>⑥ 쉬운 말:</strong> 일단 맞다고 볼까, 법이 그렇게 취급할까. <strong>⑦ 사례:</strong> 등기 임원의 적법 선임 추정.</p>
+<p><strong>⑧ 시험:</strong> 추정을 반증 불가능한 확정으로 바꾸지 않기. <strong>⑨ 비교·기억법:</strong> 사실상·법률상 추정의 교재 분류도 함께 확인.</p>
+<h3>공신력 公信力</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공): 공적, 信(믿을 신), 力(힘 력). <strong>③ 합친 뜻:</strong> 공적 표시를 믿은 자를 보호하는 힘. <strong>④ 이름의 이유:</strong> 기록의 진실성보다 거래신뢰를 보호해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공시 내용이 실제와 달라도 일정한 신뢰자를 보호하는 효력. <strong>⑥ 쉬운 말:</strong> 안내판이 틀려도 믿은 사람이 보호되는가. <strong>⑦ 사례:</strong> 39조 요건을 갖춘 부실등기 신뢰자 보호.</p>
+<p><strong>⑧ 시험:</strong> 상업등기의 일반적 공신력은 부정. <strong>⑨ 비교·기억법:</strong> 공시력·추정력과 별개.</p>
+<h3>부실등기·상위 不實登記·相違</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 부), 實(열매 실): 실제, 登(오를 등), 記(기록할 기), 相(서로 상), 違(어길 위). <strong>③ 합친 뜻:</strong> 실제와 다른 기록·서로 다름. <strong>④ 이름의 이유:</strong> 기록과 실질이 맞지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 39조에서 등기 당시 사실과 불일치하는 기록. <strong>⑥ 쉬운 말:</strong> 대표가 아닌데 대표라고 적혔다. <strong>⑦ 사례:</strong> 처음부터 허위 선임등기.</p>
+<p><strong>⑧ 시험:</strong> 등기 시 기준·귀책·선의 무중과실. <strong>⑨ 비교·기억법:</strong> 상위는 높은 지위의 상위가 아니라 서로 다르다는 뜻.</p>
+<h3>귀책사유 歸責事由</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 歸(돌아갈 귀), 責(꾸짖을 책), 事(일 사), 由(말미암을 유). <strong>③ 합친 뜻:</strong> 책임을 돌릴 근거. <strong>④ 이름의 이유:</strong> 잘못된 결과가 있다고 무조건 책임지우지 않기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 고의·과실 등 그 자에게 책임을 부담시킬 사정. <strong>⑥ 쉬운 말:</strong> 거짓 안내판에 그 사람 책임이 있는가. <strong>⑦ 사례:</strong> 허위등기에 협조하거나 책임 있게 방치.</p>
+<p><strong>⑧ 시험:</strong> 제3자 위조만으로 자동 책임·면책 모두 금물. <strong>⑨ 비교·기억법:</strong> 단순 부주의와 자기 허위등기에 동일시할 사정 구별.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 상업등기</h2><p><b>TOP3:</b>37조 등기 전후 /39조 귀책 있는 허위 / 추정과 공신력 구별.</p><table><tr><th>구분</th><th>핵심</th></tr><tr><td>공시·절차</td><td>간접 공시. 신청 원칙. 법정 자료에 의한 형식적 심사. 경정·말소 가능</td></tr><tr><td>등기 전37①</td><td>미등기 사실을 모르는 선의자에게 대항 불가. 거래 시 판단</td></tr><tr><td>등기 후37②</td><td>원칙 대항 가능. 정당한 사유로 몰랐다면 예외</td></tr><tr><td>선의의 대상</td><td>등기 누락 자체가 아니라 해임·가입 등 실제 사실</td></tr><tr><td>특수효</td><td>설립·합병 창설 / 특정 하자 보완 / 퇴사책임 기간의 기초 등</td></tr><tr><td>추정력</td><td>등기 임원의 적법 선임 추정. 반증 가능. 일반 공신력과 다름</td></tr><tr><td>39조 요건</td><td>등기 당시 불일치＋고의·과실 등 귀책＋선의·무중과실</td></tr><tr><td>위조·방치</td><td>단순 과실로 자동책임 × / 자기 허위등기와 동일시할 사정 ○</td></tr><tr><td>39조 효과</td><td>등록자가 거짓을 이유로 대항 못함. 제3자는 진실 주장 가능</td></tr></table><p><b>반드시 외울 문장:</b> 등기하지 않았다고 내부 법률관계가 항상 무효인 것은 아니다. 등기했다고 거짓이 언제나 진실이 되는 것도 아니다. 표현책임과 조세관계의 적용범위를 따로 본다.</p><p><b>자료 보완:</b> 심사권의 절충주의 설명은 판례의 형식적 심사권과 구별. 방치의 책임은2011다870의 동일시 기준과 함께 읽는다.</p><p><b>사례를 풀 순서:</b> 진실한 사실인가 → 처음부터 거짓인가 → 등기 전후 → 상대의 인식·시점 → 귀책·정당한 사유 → 일반효·특수효·다른 책임.</p></section>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>답안을 받지 않아 실제 이해도는 미평가다. 🟢 해임 미등기와 최초 허위등기를 나눠 해결하면 이해 완료 / 🟡 규정은 아는데 선의의 대상을 혼동하면 복습 필요 / 🔴 등기가 모든 진실·유효성을 보증한다고 생각하면 이해 부족. <strong>복습TOP3:37조 전후,39조 귀책과 방치,추정력과 공신력.</strong></p>
+<p>첨부 교재 제6강·워크북 및 제공 JSON을 주된 자료로 삼았다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001702">상법37·39·225·320조</a>, <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%83%81%EC%97%85%EB%93%B1%EA%B8%B0%EB%B2%95">상업등기법</a>, 위 판례 원문으로 쟁점을 대조했다. 법령 링크가 장래 시행본을 표시하면 적용일을 반드시 확인한다.</p>
+<h1>문제 부록 · 6문항·24개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-상법_026"><h4>형성평가 · 상법_026</h4><p class="question-stem">다음 중에서 상업등기에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>상업등기는 원칙적으로 당사자의 신청에 의한다.</li><li>등기에 착오가 있는 경우에 등기당사자에게는 경정신청권이 없다.</li><li>기업에 대한 법률관계 및 사실관계에 공신력을 인정해주는 제도이다.</li><li>상업등기법에서는 등기공무원의 실질적 심사권을 인정하지 않고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·원본 정답. 신청이 원칙이고 법원의 촉탁·직권은 예외다.</li><li><strong>비선택</strong> · 틀림. 상업등기법75조에 따른 경정신청이 가능하다.</li><li><strong>비선택</strong> · 틀림. 일반적 공신력은 없고39조 요건에서 제한적으로 신뢰를 보호한다.</li><li><strong>비선택</strong> · 자료 충돌 주의. 교재는 착오통지·경정규정을 실질적 요소로 설명하여 이 보기를 틀리게 처리한다. 그러나 대법원2007마1154는 원칙적으로 형식적 심사권만 인정한다. 현행 판례 기준에서는 이 문장을 곧바로 오답으로 단정할 수 없다. 원본 정답①을 보존하되 문제의 단일정답성이 교재 설명에 의존함을 표시한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 2 상업등기법 제75조 참조. 등기에 착오가 있거나 빠진 것이 있는 때에는 당사자는 그 등기의 경정을 신청할 수 있다. 3 상업등기제도는 공신력이 인정되지 않는다. 4 상업등기법 제76조 제1항 참조. 등기관은 등기를 한 후 그 등기에 착오가 있거나 빠진 것이 있음을 발견한 때에는 지체 없이 등기를 한 사람에게 그 뜻을 통지하여야 한다. 실질적 심사권을 인정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_027"><h4>형성평가 · 상법_027</h4><p class="question-stem">다음 중에서 상업등기사항의 효력에 따른 분류에 해당하지 않는 것은?</p><ol class="choices"><li>면책적 등기사항</li><li>선언적 등기사항</li><li>임의적 등기사항</li><li>창설적 등기사항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 효력 분류에 속한다. 책임 해소 등과 관련한 등기다.</li><li><strong>비선택</strong> · 효력 분류에 속한다. 이미 생긴 사항을 보고·공시한다.</li><li><strong>선택</strong> · 정답. 임의적·상대적이라는 구별은 등기 강제성의 분류다.</li><li><strong>비선택</strong> · 효력 분류에 속한다. 회사 성립 등 법률관계 발생과 연결된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상업등기사항의 효력에 따른 분류에는 일정한 법률관계의 창설을 내용으로 하는 창설적(설정적) 등기사항과 면책을 내용으로 하는 면책적(해소적) 등기사항, 그리고 일정한 사항을 알리는 것을 목적으로 하는 선언적(보고적) 등기사항이 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_028"><h4>형성평가 · 상법_028</h4><p class="question-stem">다음 중에서 상업등기의 효력에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>판례는 상업등기가 사실상 추정력을 갖는다고 하였다.</li><li>상업등기의 일반적 효력은 공법관계에는 적용되지 않는다.</li><li>등기사항에 대해서 등기한 후에는 선의의 제3자에게 대항할 수 있다.</li><li>상대적 등기사항은 등기하지 아니하면 선의의 제3자에게 대항하지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 교재가 고르는 틀린 보기·정답.91다4409의 적법 선임 추정을 교재는 법률상 추정으로 분류한다. 추정은 반증 가능한 것이므로 진실 확정이나 일반적 공신력과 혼동하지 않는다.</li><li><strong>비선택</strong> · 맞음. 조세권 행사 등 공법관계에는 적용하지 않는다. 국가와의 대등한 계약까지 모두 제외하는 것은 아니다.</li><li><strong>비선택</strong> · 원칙적으로 맞음. 다만37조2항의 정당한 사유로 몰랐다는 예외를 함께 기억한다.</li><li><strong>비선택</strong> · 맞음. 상대적 사항도 일반적 효력의 대상이다. 최초 등기 선택 여부와 제3자 대항력을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 판례는 상업등기가 법률상 추정력을 가지는 것으로 본다. [대법원 1991.12.27. 선고, 91다4409 판결] 법인등기부에 이사 또는 감사로 등재되어 있는 경우에는 특단의 사정이 없는 한 정당한 절차에 의하여 선임된 적법한 이사 또는 감사로 추정된다고 할 것이다.</p></details></section>
+
+<section class="question-card" id="question-상법_029"><h4>형성평가 · 상법_029</h4><p class="question-stem">다음 중에서 상법 제39조의 부실등기의 효력에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>사실과 등기의 상위 여부는 재판시를 기준으로 판단한다.</li><li>등기인의 고의·과실은 본인의 고의·과실뿐만 아니라 대리인의 고의·과실도 포함한다.</li><li>부실등기의 요건이 충족된 경우, 제3자는 등기와 다른 사실관계를 주장하지 못한다.</li><li>판례에 따르면, 적극적으로 부실등기를 하지 않고 누군가에 의해 이루어진 부실등기를 방치한 경우에도 부실등기의 효력이 인정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 등기 시의 불일치를 기준으로 한다. 나중에 실제 관계가 변경되고 등기를 고치지 않은 것은 우선37조 문제다.</li><li><strong>선택</strong> · 맞음·원본 정답. 본인뿐 아니라 대리인의 고의·과실도 포함한다.</li><li><strong>비선택</strong> · 틀림. 보호받는 제3자는 실제 사실을 주장할 수 있다. 거짓 기록을 강제로 따르게 하는 제도가 아니다.</li><li><strong>비선택</strong> · 조건 부족.1975년 판례는 단순 과실만으로 자동책임을 인정하지 않는다. 그러나2011다870은 책임 있는 관여·인지 후 방치 등 자기 고의·과실의 등기에 동일시할 사정이 있으면 책임을 인정한다. 따라서 방치는 언제나 책임 없다는 원본 해설은 보완해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1 등기시를 기준으로 판단한다.　3 제3자가 부실등기와 다른 사실관계를 주장하는 것은 무방하다. 4 인정되지 않는다. 대법원 1975.5.27. 선고, 74다1366 판결 참조. 부실등기의 효력을 규정한 상법 39조는 등기신청권자가 아닌 제3자의 문서위조 등의 방법으로 이루어진 부실등기에 있어서는 등기신청권자에게 그 부실등기의 경료 및 존속에 있어서 그 정도가 어떠하건 과실이 있다는 사유만 가지고는 회사가 선의의 제3자에게 대항할 수 없음을 규정한 취지가 아니다.</p></details></section>
+
+<section class="question-card" id="question-상법_080"><h4>워크북 · 상법_080</h4><p class="question-stem">다음 중에서 상업등기에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>소상인에 대해서는 상업등기에 관한 규정이 적용되지 않는다.</li><li>상호선정등기는 절대적 등기사항이면서 선언적 등기사항이다.</li><li>상업등기는 원칙적으로 법원의 촉탁 또는 직권에 의한다.</li><li>등기절차가 완료되면 등기에 착오가 있거나 빠진 것이 있더라도 경정은 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 소상인은 상업등기 규정 적용에서 제외되지만 소액자본 회사가 소상인인 것은 아니다.</li><li><strong>비선택</strong> · 틀림. 개인상인의 최초 상호등기는 상대적이다. 기존 해설의 회사 창설적 표현은 회사 설립등기의 효과와 상호 자체의 보호·선정을 구별하여 읽는다.</li><li><strong>비선택</strong> · 틀림. 당사자의 신청이 원칙이다. 촉탁·직권은 법률상 예외다.</li><li><strong>비선택</strong> · 틀림. 등기 후 착오·누락의 경정 절차가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 상호선정등기는 개인상인에게는 상대적 등기사항이고, 회사에게는 창설적 등기사항이다. ③ 상업등기는 원칙적으로 당사자의 신청에 의한다. 다만, 예외적으로 법원의 촉탁 또는 직권에 의한다. ④ 등기절차가 완료된 후 등기에 착오가 있거나 빠진 것이 있으면 당사자의 신청이나 직권에 의한 경정을 할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-상법_081"><h4>워크북 · 상법_081</h4><p class="question-stem">다음 중에서 상업등기의 효력에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상업등기의 소극적 공시력의 이론적 근거는 외관주의에 있다.</li><li>상업등기의 소극적 공시력에서 '선의'는 등기가 되어 있지 않았다는 사실을 알지 못하는 것을 의미한다.</li><li>상업등기의 일반적 효력은 원칙적으로 법률행위에 의한 거래에만 적용된다.</li><li>상업등기에 의하여 법률관계에 존재하던 일정한 하자가 치유되어 그 무효나 취소를 주장할 수 없게 되는 것은 보완적 효력이라 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 공시되지 않은 내부 사실의 위험을 선의자에게 넘기지 않는 외관 보호다.</li><li><strong>선택</strong> · 틀림·정답. 해임·가입 등 등기할 실제 사실을 모르는 것이 선의이지 등기 누락 자체를 모르는 것이 아니다.</li><li><strong>비선택</strong> · 교재의 원칙 설명으로 맞음. 거래 외 관계에는 견해 대립·별도 판단이 필요하며 공법관계 등 적용범위를 확인한다.</li><li><strong>비선택</strong> · 맞음. 보완적 효력이다.320조처럼 법이 정한 특정 하자에 한정되므로 모든 무효·취소가 치유된다고 확대하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 소극적 공시력에서 '선의'는 문제된 등기할 사항이 존재하는지 여부를 알지 못하는 것을 의미한다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '상법기초 · CHAPTER 06' : 'PART · COMMERCIAL LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(상법기초 · CHAPTER 06|PART · COMMERCIAL LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('commercial-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

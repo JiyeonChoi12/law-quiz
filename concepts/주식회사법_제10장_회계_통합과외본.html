@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주식회사법 제10장 회계 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMPANY LAW · CHAPTER 10</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">주식회사법</span>
+    <span class="brand-sub">제10장 회계 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./주식회사법_개념.html">주식회사법 개념 목록</a><a href="../index.html?subject=주식회사법">문제 풀기</a></nav><h1>이 장의 큰 그림</h1>
+<p>회사가 올해 돈을 벌었다고 사장이 그 돈을 전부 주주에게 나눠 줘도 될까? 아직 갚을 빚도 있고, 장부의 이익이 현금으로 들어오지 않았을 수도 있다. <strong>10장은 회사의 재산을 정확히 보여 주고, 남길 돈과 나눌 이익을 법에 맞게 결정하는 방법을 설명한다.</strong> 회계사처럼 모든 분개를 하는 장이 아니라, 주주와 채권자의 권리를 지키는 회계 규칙을 배우는 장이다.</p>
+<table>
+<thead>
+<tr>
+<th>첫 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하나?</td>
+<td>재무제표 확인→준비금 적립→적법한 배당→위법배당의 회수와 책임</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>주주는 투자 판단을, 채권자는 회수 가능성을 회사 재산에 기대기 때문이다.</td>
+</tr>
+<tr>
+<td>전체에서 위치는?</td>
+<td>경영 결과를 숫자로 보고하고 주주에게 이익을 분배하는 부분</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>7장 감사·8장 신주·9장 자본 조정→10장 결산→11장 합병 때 재산과 대가 평가</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>배당가능이익, 자기주식 취득 한도, 무상증자, 위법배당 책임</td>
+</tr>
+</tbody></table>
+<p>교재349–369쪽의 본문·두 판례·계산 예·끝 질문을 다룬다. 제공 JSON의 통합 주제14문항 중 회계 <strong>9문항36개 보기</strong>를 수록하고, 나머지5문항은9장에 연결했다. 별은 학습 우선순위이며 실측 출제빈도·오답률이 아니다. 현행법 점검 기준2026.10.23. 설명용 이름과 숫자는 판례 사실과 구분한다.</p>
+<h1>1. 회사의 성적표를 누가 확인하는가</h1>
+<h2 id="company-10-01" data-concept-id="company-10-01">1-1. 회계는 주주와 채권자가 같은 사실을 보게 하는 장치다 ★★★★☆</h2>
+<p><strong>교재349–350쪽 · 문단의 이유:</strong> 장부는 회계 담당자만 보는 문서가 아니라 회사법상 이해관계자를 보호하는 자료다.</p>
+<p>주주는 회사가 잘 벌어야 배당과 주가 상승을 기대할 수 있다. 채권자는 회사가 재산을 충분히 갖고 있어야 돈을 돌려받을 수 있다. 경영진이 “잘되고 있어요”라고 말하는 것으로는 부족하다. 정해진 방식으로 재산·빚·수익·비용을 표시하고 감사·승인·공시를 거치게 한다.</p>
+<p>446조의2는 상법과 대통령령의 특별 규정 외에는 <strong>일반적으로 공정하고 타당한 회계관행</strong>을 따르게 한다. 법률이 회계의 모든 세부 기술을 고정하지 않고, 공정한 회계기준을 통해 실제 경제 모습을 반영하게 하는 것이다. 회사가 편리한 방식으로 손실을 숨겨도 된다는 의미는 아니다.</p>
+<p><mark class="green">회계 규칙은 주주에게 나눌 이익을 계산하면서, 회사에 돈을 빌려준 사람의 회수 재원이 함부로 빠져나가지 않도록 한다.</mark></p>
+<p><strong>시험:</strong> 회계의 목적·446조의2·정보 제공. <strong>키워드:</strong> 정확성·공시·이해관계자. <strong>한 줄:</strong> 회사 회계는 성적표이자 주주와 채권자를 위한 안전장치다.</p>
+<h2 id="company-10-02" data-concept-id="company-10-02">1-2. 재무제표 네 종류와 상업장부를 구분한다 ★★★★★</h2>
+<p><strong>교재350–351쪽 · 문단의 이유:</strong> 모든 회계 문서를 같은 이름으로 부르면 작성·제출·승인 범위를 틀린다.</p>
+<table>
+<thead>
+<tr>
+<th>문서</th>
+<th>쉽게 말하면</th>
+<th>무엇을 보여 주나?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대차대조표(재무상태표)</td>
+<td>특정 날의 재산 사진</td>
+<td>자산·부채·자본의 상태</td>
+</tr>
+<tr>
+<td>손익계산서</td>
+<td>한 기간의 성과 기록</td>
+<td>그 기간 수익·비용·순손익</td>
+</tr>
+<tr>
+<td>자본변동표</td>
+<td>자본 항목의 변화 기록</td>
+<td>출자·손익·배당 등으로 달라진 자본</td>
+</tr>
+<tr>
+<td>이익잉여금 처분계산서 또는 결손금 처리계산서</td>
+<td>남긴 이익을 어디에 쓸지</td>
+<td>배당·준비금·결손 처리</td>
+</tr>
+</tbody></table>
+<p>상법447조와 시행령16조는 대차대조표·손익계산서 및 자본변동표 <strong>또는</strong> 이익잉여금 처분계산서/결손금 처리계산서 등을 규정한다. 모든 회사가 표의 각 문서를 동일하게 중복 작성한다는 뜻은 아니다. 외부감사 대상 등 회사 유형과 회계기준에 따른 서류도 확인한다.</p>
+<p><strong>상업장부</strong>와 범위가 완전히 같지 않다. 대차대조표는 둘에 들어가지만, 거래를 계속 기록하는 회계장부는 상업장부이지 결산 재무제표 자체가 아니다. 손익계산서 등은 재무제표지만 상법29조의 상업장부와 똑같은 분류는 아니다. 재무제표의 감사 제출·총회 승인이라는 특별 절차도 구별한다.</p>
+<p><strong>설명용 사례:</strong>12월31일 회사에 기계와 예금이 얼마나 남았는지는 재무상태표,1월부터12월까지 얼마를 벌고 썼는지는 손익계산서에서 본다. 잔액과1년간의 흐름은 다른 질문이다.</p>
+<p><strong>시험:</strong> 시점/기간·두 문서 범위의 교집합. <strong>키워드:</strong> 사진/기간 성과·대차대조표 공고. <strong>한 줄:</strong> 특정 날의 재산과 한 기간의 성과를 서로 다른 표로 보여 준다.</p>
+<h2 id="company-10-03" data-concept-id="company-10-03">1-3. 연결재무제표·부속명세서·영업보고서 ★★★☆☆</h2>
+<p><strong>교재351쪽 · 문단의 이유:</strong> 한 회사의 요약 숫자만으로 보이지 않는 관계와 세부 내용을 보완한다.</p>
+<p>외부감사법상 대상 회사로서 다른 회사를 지배하는 회사 등 법정 대상은 <strong>연결재무제표</strong>를 작성해 이사회 승인을 받는다. 모회사와 자회사 집단을 하나의 경제적 단위로 보아 보여 주는 자료다. 단순히 두 회사의 매출을 더해 내부거래를 두 번 세라는 의미는 아니다.</p>
+<p><strong>부속명세서</strong>는 큰 항목의 세부 내역이다. ‘기계10억원’이라는 합계만으로 부족하면 기계의 구성과 변동 등을 풀어 쓴다. 재무제표와 함께 작성·승인·비치 대상이 된다. <strong>영업보고서</strong>는 한 해 사업의 경과와 경영 상황을 설명하며, 재무제표와 달리 총회에서는 원칙적으로 승인이 아니라 <strong>보고</strong>한다.</p>
+<p><strong>시험:</strong> 연결 대상·부속 내역·영업보고서 보고. <strong>키워드:</strong> 집단·상세·사업 설명. <strong>한 줄:</strong> 연결은 집단 전체, 부속은 숫자의 속내, 영업보고서는 사업 이야기를 보여 준다.</p>
+<h2 id="company-10-04" data-concept-id="company-10-04">1-4. 결산의 시간표: 작성→감사→비치→승인→공고 ★★★★★</h2>
+<p><strong>교재351–352쪽 · 문단의 이유:</strong> 경영진이 작성한 숫자를 다른 사람들이 확인할 시간을 확보한다.</p>
+<p>이사는 매 결산기에 재무제표·부속명세서·영업보고서를 작성해 이사회 승인을 받는다. 이 단계의 승인은 감사와 총회에 낼 안을 확정하는 것이지, 일반적인 경우 총회 최종 승인을 없애는 것이 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>법정 기준</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>감사에게 제출</td>
+<td>정기총회6주 전</td>
+<td>검사할 자료를 미리 줌</td>
+</tr>
+<tr>
+<td>감사보고서 반환</td>
+<td>자료 받은 날부터4주 안</td>
+<td>감사가 검토 결과를 이사에게 줌</td>
+</tr>
+<tr>
+<td>비치</td>
+<td>정기총회1주 전부터</td>
+<td>주주·채권자가 확인할 기회</td>
+</tr>
+<tr>
+<td>보관</td>
+<td>본점5년·지점 등본3년</td>
+<td>승인 후에도 기록을 확인 가능</td>
+</tr>
+<tr>
+<td>총회</td>
+<td>재무제표 보통결의 승인·영업보고서 보고</td>
+<td>주주가 성적표를 확정함</td>
+</tr>
+<tr>
+<td>공고</td>
+<td>승인 후 지체 없이 대차대조표 공고</td>
+<td>외부에도 재산 상태를 알림</td>
+</tr>
+</tbody></table>
+<p>총회는 승인뿐 아니라 거부·수정도 할 수 있다. 감사는 법령·정관 위반이나 현저히 부당한 점을 보고하고, 필요한 경우 총회가 검사인을 선임해 재무제표·감사보고서를 조사하게 할 수 있다.448조의 열람·등초본 청구권도 이 자료가 경영진만의 비밀 서류가 아님을 보여 준다.</p>
+<p><strong>시험:</strong>6주·4주·1주·본5/지3, 승인과 보고. <strong>키워드:</strong> 사전 검증·시간 확보. <strong>한 줄:</strong> 작성자의 자기 확인만으로 끝내지 않고 감사와 주주가 검토할 순서를 둔다.</p>
+<h2 id="company-10-05" data-concept-id="company-10-05">1-5. 이사회가 최종 승인하는 특례의 세 조건 ★★★★★</h2>
+<p><strong>교재352쪽 · 문단의 이유:</strong> 신뢰할 만한 외부·내부 검증이 있으면 총회 절차를 간소화할 수 있다.</p>
+<p>449조의2에 따라 <strong>정관 근거</strong>, 재무제표가 적정하다는 <strong>외부감사인의 의견</strong>, <strong>감사 전원의 동의</strong>가 모두 있으면 이사회가 재무제표를 최종 승인할 수 있다. 감사위원회 설치 회사는 감사위원 전원의 동의다. 감사 과반수나 대표이사 한 명의 확인으로 바꾸지 않는다. 이때도 총회에 내용을 보고해야 한다. <a href="https://www.law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=019600000&languageType=KO&lsNm=%EC%83%81%EB%B2%95&paras=1">현행449조의2</a></p>
+<p><strong>설명용 사례:</strong> 외부감사인이 적정 의견을 냈더라도 감사3명 중1명이 동의하지 않으면 이 특례의 전원 동의 요건이 빠진다. 이사회가 초안을 승인하는 일반 절차와, 총회를 대신해 최종 승인하는 특별 절차를 혼동하지 않는다.</p>
+<p><strong>시험:</strong> 세 조건 모두·전원·총회 보고. <strong>키워드:</strong>449의2·최종 승인. <strong>한 줄:</strong> 이사회 승인 특례는 정관과 두 겹의 검증이 있을 때만 열린다.</p>
+<h2 id="company-10-06" data-concept-id="company-10-06">1-6. 판례: 재무제표 승인2년이면 모든 책임이 사라질까? ★★★★☆</h2>
+<p><strong>교재352–353쪽 · 문단의 이유:</strong> 결산 확정과 임원 책임 정리를 연결하되 숨긴 잘못까지 면책하지 않는다.</p>
+<p>재무제표를 승인하면 이익 배당·준비금 적립·결손 처리의 기준이 확정된다.450조는 승인 후2년 안에 다른 결의가 없으면 이사·감사의 책임을 해제한 것으로 보는 규정을 두지만, <strong>부정행위는 예외</strong>다. 아무 내용도 알려 주지 않고2년만 기다리면 면책되는 구조가 아니다.</p>
+<p><strong>대법원1969.1.28.68다305.</strong> 교재에 실린 사실의 범위는 ‘책임 해제를 주장하는 이사가 무엇을 입증해야 하는가’라는 법리다. 이사가 “총회에서 성적표를 승인한 지2년이 지났으니 책임이 없다”고 주장하는 장면을 떠올리자. 법원은 책임 사유가 총회에 제출·승인된 서류에 기재되어 있었다는 사실을 이사가 입증해야 한다고 판단했다.</p>
+<p>쉬운 번역: <strong>책임 해제 주장</strong>→‘이제 책임이 없다고 말함’, <strong>서류에 책임 사유 기재</strong>→‘주주들이 판단할 수 있도록 그 잘못의 내용이 드러나 있었음’, <strong>이사의 입증</strong>→‘면책받으려는 사람이 그 사실을 증명해야 함’. 반대로 보면 경영진이 잘못을 숨길수록 면책받기 쉬워져 회계 공시의 목적이 무너진다.</p>
+<p><strong>시험:</strong> 승인 자체 즉시 면책X·2년·부정행위 제외·입증. <strong>키워드:</strong>450·공개된 책임 사유. <strong>한 줄:</strong> 결산 승인은 숨겨진 모든 잘못을2년 후 지워 주는 제도가 아니다.</p>
+<h1>2. 준비금: 이익을 남겨 두는 규칙</h1>
+<h2 id="company-10-07" data-concept-id="company-10-07">2-1. 준비금은 별도 현금 봉투가 아니라 장부의 금액이다 ★★★★★</h2>
+<p><strong>교재353–354쪽 · 문단의 이유:</strong> 적립이라는 말을 실제 은행계좌에 돈을 따로 넣는 행위로만 오해하지 않게 한다.</p>
+<p>준비금은 순자산 중 자본금을 초과하는 부분에서 배당하지 않고 회사 안에 남겨 두는 계산상 금액이다. 영업 부진·재난·장기 사업에 대비하고 채권자의 회수 재원을 유지한다. 준비금이1억원이라고 반드시 현금1억원이 다른 금고에 보관되어 있는 것은 아니다. 재산은 기계나 재고 등의 형태일 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>왜 적립하나?</th>
+<th>재원·결정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>법정준비금</td>
+<td>법이 강제</td>
+<td>이익준비금·자본준비금</td>
+</tr>
+<tr>
+<td>임의준비금</td>
+<td>회사가 목적에 따라 선택</td>
+<td>정관 또는 총회 결의</td>
+</tr>
+<tr>
+<td>비밀준비금</td>
+<td>형식상 준비금 계정에 드러나지 않음</td>
+<td>교재의 회계상 분류, 부당한 은폐 허용 뜻 아님</td>
+</tr>
+<tr>
+<td>유사준비금</td>
+<td>감가상각 관련 항목 등 유사 기능</td>
+<td>법정준비금과 법적 성질·회계 처리 다름</td>
+</tr>
+</tbody></table>
+<p><strong>시험:</strong> 준비금=현금 보유액X·법정/임의. <strong>키워드:</strong> 유보·계산상 수액. <strong>한 줄:</strong> 준비금은 회사 안에 남겨 둔 재원의 법적·회계적 분류다.</p>
+<h2 id="company-10-08" data-concept-id="company-10-08">2-2. 이익준비금은 현금배당의1/10 이상, 자본금1/2까지 ★★★★★</h2>
+<p><strong>교재354쪽 · 문단의 이유:</strong> 벌어들인 이익을 전부 나누지 말고 최소한의 완충 재원을 남기게 한다.</p>
+<p>458조는 자본금의1/2에 이를 때까지 매 결산기의 <strong>금전에 의한 이익배당액의1/10 이상</strong>을 이익준비금으로 적립하게 한다. 기준은 전체 매출도 당기순이익도 아니고 <strong>현금배당액</strong>이다. 주식배당은 이미 회사 밖으로 재산이 나가지 않는 구조여서 이 규정의 현금배당과 구별된다.</p>
+<p><strong>설명용 계산:</strong> 자본금1억원, 기존 이익준비금4,800만원, 이번 현금배당3,000만원이다. 통상의10%는300만원이지만 법정 적립 목표5,000만원까지 남은 금액은200만원이다. 이 법정 목표까지200만원을 채우는 문제와 임의로 더 적립하는 문제를 나눈다. 목표를 넘겨 적립한 부분은 교재 설명상 임의준비금 성격을 검토한다.</p>
+<p><strong>시험:</strong>10%의 분모·50%의 기준. <strong>키워드:</strong>손익거래·배당1/10·자본1/2. <strong>한 줄:</strong> 현금으로 나누는 돈의 일부를 자본금 절반 수준까지 남기는 것이 이익준비금이다.</p>
+<h2 id="company-10-09" data-concept-id="company-10-09">2-3. 자본준비금은 영업이익이 아닌 자본거래에서 나온다 ★★★★★</h2>
+<p><strong>교재354–355쪽 · 문단의 이유:</strong> 주주 출자 등에서 생긴 차액을 상품 판매 이익처럼 바로 나누지 못하게 한다.</p>
+<p>자본준비금은 주식 발행·감자·합병 등 자본거래에서 생긴 잉여금을 재원으로 한다. 이익준비금의 자본금1/2 같은 일반 적립상한은 없다.459조와 회계기준에 따라 적립하며, ‘상한 없음’은 회사가 아무 숫자나 자본준비금이라고 정할 수 있다는 뜻이 아니다.</p>
+<p>교재가 소개하는 종래의 항목을 하나씩 읽자. <strong>액면초과금</strong>은 액면보다 비싸게 주식을 발행한 차액이다. <strong>주식 교환·이전 관련 초과금</strong>은 조직변경에서 순자산 등과 계상 자본 사이 차액이다. 교재354쪽의 항목 제목 ‘주식교환’과 본문 ‘포괄적 이전’은 서로 다른 제도를 섞은 표현이므로 구분한다. <strong>감자차익</strong>은 감소 자본에서 반환·결손 처리 등을 뺀 몫, <strong>합병차익</strong>은 승계재산에서 부채·지급대가·증가 자본 등을 공제한 차액, <strong>분할차익</strong>도 승계재산과 부채·대가·자본의 관계로 설명한다. 마지막으로 재평가 적립금 등 <strong>기타 자본거래 잉여금</strong>이 소개된다.</p>
+<p>이 목록은 과거 법률의 열거를 이해하기 위한 설명이다. 현재의 모든 기업결합 회계 금액을 이 옛 공식만으로 단정하지 않고, 현행 회계기준과 법정 분류를 적용한다.</p>
+<p><strong>시험:</strong> 자본준비금과 이익준비금의 재원·한도 바꾸기. <strong>키워드:</strong> 자본거래·적립상한 구별. <strong>한 줄:</strong> 출자와 조직변경에서 생긴 차액은 영업으로 번 이익과 다르게 묶어 둔다.</p>
+<h2 id="company-10-10" data-concept-id="company-10-10">2-4. 법정준비금의 사용·자본금 전입·감액은 세 갈래다 ★★★★★</h2>
+<p><strong>교재355–356쪽 · 문단의 이유:</strong> 준비금을 함부로 꺼내 쓰지 못하게 하면서 과도한 유보에는 출구를 둔다.</p>
+<p><strong>첫째, 결손 보전.</strong>460조는 자본 결손을 메우는 데 사용하도록 한다. 교재는 순자산이 자본금과 법정준비금 합계에 미달하는 상태를 설명한다. 이익준비금부터 반드시 먼저 써야 한다는 옛 순위 제한은 없어졌다.</p>
+<p><strong>둘째, 자본금 전입.</strong>461조에 따라 법정준비금을 더 강하게 묶이는 자본금으로 옮긴다. 일반적으로 이사회 결의이고, 정관이 총회 결정으로 정한 경우는 총회 결의를 따른다. 주주에게 보유 주식 수에 비례해 신주를 주므로 별도의 납입이나 제3자 인수권이 생기지 않는다. 순자산은 그대로이고 자본금·주식 수가 증가한다. 채권자 이의절차는 필요하지 않다. 임의준비금을461조의 재원이라고 바로 대입하지 않는다.</p>
+<p><strong>셋째, 준비금 감소.</strong>461조의2는 자본준비금+이익준비금 총액이 자본금의 <strong>1.5배를 초과</strong>하면 총회 결의로 초과분 범위에서 줄일 수 있게 한다. 자본금1억원, 법정준비금1억8,000만원이면 감액 가능 범위는3,000만원이다. 전체1억8,000만원을 모두 풀어도 된다는 뜻이 아니다. 감액 자체와 실제 배당 결의·배당가능이익 계산은 별도다. <a href="https://law.go.kr/lbook/lbFileDownload.do?flExt=pdf&lbookConflSeq=97205&lbookSeq=98759">상법461조의2·462조</a></p>
+<p><mark class="pink">‘법정준비금은 결손 보전과 자본금 전입으로만 처분 가능’이라는 문장은461조의2 감액 예외를 빠뜨린 절대적 표현이다. 교재 앞 문장과 뒤의 감액 설명을 함께 읽는다.</mark></p>
+<p><strong>시험:</strong> 재원·결정기관·순자산·1.5배 초과. <strong>키워드:</strong>460/461/461의2. <strong>한 줄:</strong> 메우기, 더 강하게 묶기, 법정 한도 안에서 풀기를 구별한다.</p>
+<h2 id="company-10-11" data-concept-id="company-10-11">2-5. 임의준비금: 쌓는 결정과 쓰는 결정은 다르다 ★★★★☆</h2>
+<p><strong>교재356–357쪽 · 문단의 이유:</strong> 선택적으로 적립하는 돈이라고 경영진이 모든 과정을 임의로 결정하는 것은 아니다.</p>
+<p>임의준비금은 법정 이익준비금 적립 후 남은 잉여금 등을 정관 또는 총회 결의로 유보하는 것이다. 사업 확장·사채 상환·종업원 복지시설 등 목적을 정할 수도 있고, 목적을 특정하지 않은 별도 적립금일 수도 있다. 일반적인 적립한도 숫자는 없다.</p>
+<p>목적을 정하지 않은 별도 적립금은 총회 결의로 필요에 따라 사용한다. 특정 목적을 정해 적립한 경우에는 이사회가 그 목적에 맞춰 사용하는 구조를 교재가 설명한다. 따라서 <strong>적립은 총회·정관</strong>, <strong>이미 정한 목적에 맞춘 집행은 이사회</strong>를 나눈다.</p>
+<p>교재는 당해 이익 전부를 임의준비금으로 쌓아 배당을 완전히 배제할 수 없다는 해석을 제시한다. 이를 모든 회사가 매년 반드시 현금배당을 해야 한다는 법정 최소배당률로 바꾸지는 않는다. 투자 필요·재무상태·주주권 침해 여부와 결의의 적법성을 함께 검토하는 문제다.</p>
+<p><strong>시험:</strong> 적립 주체와 사용 주체 바꾸기. <strong>키워드:</strong> 선택적 유보·정관/총회·목적별 집행. <strong>한 줄:</strong> 임의준비금도 정한 권한과 목적을 지켜 쌓고 쓴다.</p>
+<h1>3. 이익을 나눌 때의 조건과 권리</h1>
+<h2 id="company-10-12" data-concept-id="company-10-12">3-1. 배당가능이익은 통장 잔액도 당기순이익도 아니다 ★★★★★</h2>
+<p><strong>교재357–358쪽 · 문단의 이유:</strong> 회사에 돈이 보인다고 채권자의 몫까지 나누지 않게 한다.</p>
+<p>462조의 기본 계산은 <strong>대차대조표 순자산−자본금−기존 자본·이익준비금−이번에 적립할 이익준비금−법정 미실현이익</strong>이다. 순자산은 자산에서 부채를 뺀 값이다. 차입금으로 통장 잔액이 늘어도 그만큼 부채가 늘므로 배당 재원이 자동 증가하지 않는다. 미실현이익은 아직 실현되지 않은 평가이익 등을 시행령19조에 따라 다루는 항목이다.</p>
+<p><strong>설명용 계산:</strong> 순자산3억원, 자본금1억원, 기존 법정준비금8,000만원, 공제할 미실현이익1,000만원이면 새 적립 전 여유는1억1,000만원이다. 현금배당 D에10% 적립이 추가로 필요한 조건이라면 D+0.1D≤1억1,000만원이므로 D≤1억원이다. 적립한도에 이미 도달했는지에 따라 계산이 달라지므로 조건을 먼저 본다.</p>
+<p>임의준비금은462조1항이 열거한 법정 공제와 구분한다. 유효한 적립 목적과 결의를 그대로 둔 채 마음대로 배당에 쓰는 것은 별도 문제지만, 법정 계산식에 모든 임의준비금을 무조건 같은 항목으로 넣지 않는다.</p>
+<p><strong>시험:</strong> 자산/순자산·현금/이익·새 준비금 공제. <strong>키워드:</strong>462·자본 유지·미실현. <strong>한 줄:</strong> 배당은 남은 현금을 나누는 일이 아니라 법이 허용한 순자산의 범위에서 정하는 일이다.</p>
+<h2 id="company-10-13" data-concept-id="company-10-13">3-2. 추상적 권리가 구체적 채권으로 바뀌는 순간 ★★★★★</h2>
+<p><strong>교재358쪽 · 문단의 이유:</strong> 주주라는 이유만으로 회사에 임의 금액을 청구할 수 없음을 설명한다.</p>
+<p>주주는 이익 배당을 받을 <strong>추상적 권리</strong>를 갖는다. 실제 금액과 지급 내용이 적법한 배당 결의로 확정되면 <strong>구체적 배당금 채권</strong>이 된다. 재무제표 승인만 하고 배당하지 않기로 한 경우까지 자동으로 특정 금액의 채권이 생기는 것은 아니다. 교재의 ‘재무제표 승인하면 채권 발생’은 배당 내용을 함께 확정하는 일반 상황으로 읽는다.</p>
+<p>배당은 총회 결의가 원칙이며449조의2에 따라 이사회가 재무제표를 승인하는 회사는 이사회 결의로 정하는 특례가 있다. 구체화한 채권은 주주 지위에서 분리해 양도·압류·질권 설정할 수 있고 전부명령의 대상이 되며 시효에도 걸린다. 그러나 지급 시기·방법을 자의적으로 차별해도 된다는 뜻은 아니다.</p>
+<p>우선주는 정관·발행 조건의 우선배당 내용을 함께 본다. 누적 여부·참가 여부 등 조건이 다르므로 ‘우선주면 회사 사정과 결의에 무관하게 확정이자를 받는다’고 이해하지 않는다. 배당가능이익과 적법한 결의라는 기본 구조 안에서 보호받는다.</p>
+<p><strong>시험:</strong> 주주 지위/독립 채권·배당 결의·이사회 예외. <strong>키워드:</strong> 추상→구체·양도 가능. <strong>한 줄:</strong> 배당받을 가능성의 권리와 지금 얼마를 달라는 채권은 다르다.</p>
+<h2 id="company-10-14" data-concept-id="company-10-14">3-3. 주식 수 비례가 원칙, 차등배당 판례는 자발적 양보다 ★★★★★</h2>
+<p><strong>교재360쪽 · 문단의 이유:</strong> 주주평등은1인1몫이 아니라 같은 종류 주식의 수에 비례하는 평등이다.</p>
+<p>464조는 주식 수에 따른 배당을 기본으로 한다.100주 주주와1주 주주에게 같은 금액을 주는 ‘사람 수 균등’이 아니다. 다른 배당 조건의 적법한 종류주식은 그 조건대로 차등을 둘 수 있지만, 같은 종류 내부에서는 평등이 원칙이다.</p>
+<p><strong>대법원1980.8.26.80다1263.</strong> 대주주에게30%, 소액주주에게33%를 배당하는 결의가 문제 되었다. 등장인물은 자기 몫을 일부 양보한 대주주들과 더 받게 된 소액주주들이다. 갈등은 “비율이 다르면 곧바로 주주평등 위반인가?”였다. 법원은 대주주가 자기 몫 일부를 스스로 떼어 소액주주에게 나누는 것은 자신의 권리를 포기하거나 양도하는 것과 같아464조에 위반하지 않는다고 보았다.</p>
+<p>문장별 번역: <strong>자기 몫 일부를 떼어 줌</strong>→‘회사나 다른 사람이 강제로 빼앗은 것이 아님’, <strong>포기·양도와 같음</strong>→‘자기 권리를 본인이 처분함’, <strong>평등 원칙 위반 아님</strong>→‘자발적 양보까지 금지하는 규칙은 아님’. 반대로 보면 주주가 자신의 이익을 스스로 양보하는 일도 불가능해진다. 다수결만으로 반대 주주의 몫을 빼앗는 경우와는 다르며, 세금 문제까지 면제한다는 판례도 아니다.</p>
+<p><strong>시험:</strong> 같은 종류·주식 수·불이익 주주의 동의. <strong>키워드:</strong>80다1263·강제 차별≠자발적 양보. <strong>한 줄:</strong> 평등은 남의 몫을 강제로 빼앗지 못하게 하는 원칙이지 자기 몫의 자발적 처분을 금지하는 말이 아니다.</p>
+<h2 id="company-10-15" data-concept-id="company-10-15">3-4. 신주 일할배당의 옛 제도와 지급·시효 ★★★★☆</h2>
+<p><strong>교재360–361쪽 · 문단의 이유:</strong> 주식을 언제 취득했는지와 배당받을 사람을 언제 확정하는지를 나눈다.</p>
+<p>교재의 옛 일할배당 예는1월1일부터12월31일까지 회계연도에서10월1일 발행 신주에92/365의 비율을 적용하는 계산이다. 원리는 신주가 존재한 기간에 비례해 배당한다는 것이다. 하지만2020년 개정으로350조3항과 관련 준용 문구가 삭제되어 신주 발행일을 직전 연도 말로 소급하는 의제는 없어졌다. <strong>현재는 배당 기준일을 기준으로 신주·구주를 동등하게 배당할 수 있는 구조</strong>로 읽고, 옛92/365 공식을 모든 현행 신주에 강제하지 않는다.</p>
+<p>464조의2는 원칙적으로 배당 결의일부터1개월 안에 지급하도록 하고, 총회 또는 이사회가 지급 시기를 따로 정한 경우는 그에 따른다. 배당금 지급청구권의 소멸시효는5년이다. 권리를 행사할 수 있는 지급기한을 기준으로 시효가 진행한다. 기준일·결의일·지급기한은 서로 다른 날짜다.</p>
+<p><strong>시험:</strong> 구 소급 의제 삭제·지급1개월·시효5년. <strong>키워드:</strong> 기준일/지급일 분리. <strong>한 줄:</strong> 누가 받을지 정하는 날짜와 언제 받을 수 있는 날짜를 따로 적는다.</p>
+<h2 id="company-10-16" data-concept-id="company-10-16">3-5. 중간배당: 작년 한도와 올해 위험을 둘 다 본다 ★★★★★</h2>
+<p><strong>교재359–360쪽 · 문단의 이유:</strong> 연말까지 기다리지 않고 나눌 수 있게 하되 아직 확정되지 않은 손실 위험을 막는다.</p>
+<p>462조의3은 연1회 결산하는 회사가 정관에 근거를 두고 <strong>영업연도 중1회, 이사회 결의</strong>로 중간배당하도록 한다. 정관에 기준일이 없으면 이사회가 정하는 구조도 구별한다. 상장회사의 자본시장법상 분기배당은 별도 특례이지 일반 상법의 횟수 제한이 없다는 뜻이 아니다.</p>
+<p>한도는 <strong>직전 결산기 순자산−직전 자본금−기존 법정준비금−직전 정기총회에서 배당·지급하기로 한 금액−이번 중간배당에 따라 적립할 이익준비금</strong>이다. 이전에 이미 배당하기로 정한 금액을 또 나누지 않게 한다. 현행2항의 열거 항목과 정기배당462조의 미실현이익 항목을 그대로 같다고 쓰지는 않는다.</p>
+<p>작년 숫자로 한도가 남아도 <strong>당해 결산기 말에 법정 자본·준비금 등 보호액에 미달할 우려</strong>가 있으면 중간배당을 하면 안 된다. 실제로 부족해지면 이사는 부족 차액과 배당액 중 작은 금액을 회사에 연대 배상하는 책임을 질 수 있다. 우려가 없다고 판단할 때 주의를 다했다는 점을 증명하면 법정 면책을 검토한다.</p>
+<p><strong>현행 문언 보완:</strong> 교재와 제공 JSON은 중간배당을 ‘금전’으로 설명하지만, 현행462조의3 제1항에서는 그 한정 문구가 삭제되어 있다. 정관에 현물배당 근거가 있는 경우462조의4도 함께 검토한다. 이를 ‘중간배당은 주식배당까지 아무 제한 없이 가능’이라고 넓히지는 않는다. <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032333277">현행462조의3·4</a></p>
+<p><strong>시험:</strong> 정관·이사회·연1회·부족 우려·주의 입증. <strong>키워드:</strong>과거 한도+미래 안전. <strong>한 줄:</strong> 작년에 여유가 있어도 올해 말 위험이 보이면 중간배당을 멈춰야 한다.</p>
+<h1>4. 현금 대신 무엇을 줄 수 있는가</h1>
+<h2 id="company-10-17" data-concept-id="company-10-17">4-1. 주식배당·준비금 전입·주식분할은 재원이 다르다 ★★★★★</h2>
+<p><strong>교재362·365쪽 · 문단의 이유:</strong> 셋 모두 주식 수가 늘 수 있지만 돈의 출처와 자본금 변화가 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>재원·방법</th>
+<th>자본금</th>
+<th>회사 순자산</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주식배당</td>
+<td>배당가능이익을 자본화해 신주 지급</td>
+<td>증가</td>
+<td>그대로</td>
+</tr>
+<tr>
+<td>법정준비금 전입</td>
+<td>법정준비금을 자본으로 이동</td>
+<td>증가</td>
+<td>그대로</td>
+</tr>
+<tr>
+<td>단순 주식분할</td>
+<td>1주를 여러 주로 나눔</td>
+<td>그대로</td>
+<td>그대로</td>
+</tr>
+</tbody></table>
+<p>주식배당은 주주에게 현금을 주는 대신 새 주식을 발행해 준다. 회사 밖으로 현금이 나가지 않아도 이익배당이므로 배당가능이익이 필요하다. 교재는 이익배당설과 주식분할설을 소개하며 자기주식·종류주식·신주 배당 등에 대한 해석 차이를 설명한다. 이는 학설의 역사적 배경이다. <strong>2026년341조의3은 자기주식의 주주로서 권리를 부정하므로 자기주식 배당은 이 현행 규정부터 적용</strong>하고, 삭제된 일할배당 의제도 그대로 살리지 않는다.</p>
+<p><mark class="blue">8장의 신주발행은 외부 자금을 받는 경우가 중심이었다. 여기서는 이미 회사 안에 있는 이익·준비금의 이름을 자본금으로 바꾸면서 신주를 주는 경우를 비교한다.</mark></p>
+<p><strong>시험:</strong> 회사 재산 유입 없는 신주발행·재원 차이. <strong>키워드:</strong>이익/준비금/분할. <strong>한 줄:</strong> 주식 수가 늘었다고 모두 새 돈이 들어온 것은 아니다.</p>
+<h2 id="company-10-18" data-concept-id="company-10-18">4-2. 주식배당의 요건: 이익·절반 한도·수권 범위 ★★★★★</h2>
+<p><strong>교재363쪽 · 문단의 이유:</strong> 현금배당을 전부 없애거나 신주를 무제한 발행하는 것을 막는다.</p>
+<p>일반 상법상 주식배당은 <strong>배당가능이익이 있고, 이익배당총액의1/2 이하이며, 미발행 수권주식 범위 안</strong>이어야 한다. 총 배당1억원이면 주식배당은5,000만원까지가 기본이다. 상장법인은 자본시장법상 이익배당총액까지 주식배당 가능한 특례를 따로 본다. 다만 주식의 시가가 액면액에 못 미치면 일반 상법의 절반 제한으로 돌아간다. 일반 규칙을 묻는 문제에서는1/2를 고른다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=900425170">자본시장법165조의13</a></p>
+<p>필요한 신주가 발행예정주식총수의 여유를 넘으면 먼저 정관을 특별결의로 고쳐 상한을 늘려야 한다. <strong>주식배당 자체는 총회 보통결의</strong>다. 정관변경의 특별결의가 함께 필요할 수 있다는 사실을 이유로 주식배당 자체도 언제나 특별결의라고 답하지 않는다.</p>
+<p><strong>시험:</strong>1/2·보통결의·수권 여유. <strong>키워드:</strong>세 요건·상장 특례 분리. <strong>한 줄:</strong> 주식으로 준다고 이익 요건이나 발행 상한이 사라지지 않는다.</p>
+<h2 id="company-10-19" data-concept-id="company-10-19">4-3. 주식배당의 실행: 액면·단주·통지·총회 종결 ★★★★★</h2>
+<p><strong>교재363–365쪽 · 문단의 이유:</strong> 배당을 실제 주식 권리로 바꾸는 순간과 후속 절차를 정한다.</p>
+<p>배당안은 이익잉여금 처분계산서 등에 반영해 이사회 검토 후 총회에서 승인한다. 같은 조건의 주주에게 일부는 현금, 일부는 주식으로 자의적으로 차별하는 것은 안 된다.462조의2 제2항은 주식의 권면액을 기준으로 하며, 액면 이하나 이상으로 마음대로 계산하지 않는다. 종류주식을 발행한 회사는 각 주주에게 그와 같은 종류의 주식으로 배당할 수 있다. 무액면주식에 대해서는 권면액을 전제로 한 조문의 적용 문제가 별도이므로 이 규정을 곧바로 액면 없는 주식의 고정 액면 규칙처럼 설명하지 않는다.</p>
+<p>배당액을 주식으로 환산하면서1주 미만 단수가 생기면443조 방식의 매각·대금 지급으로 처리한다. 이사는 지체 없이 주주와 등록질권자에게 받을 주식의 종류와 수를 통지한다. <strong>주주가 되는 때는 배당 결의가 있는 주주총회의 종결 때</strong>다. 보통 신주의 납입기일 다음 날이나 준비금 전입의 총회 결의 때와 구별한다.</p>
+<p>발행주식·자본금의 변경등기는 본점에서 법정2주 안에 하며, 교재364쪽의 ‘지점3주’는 지점소재지 등기 폐지 전의 설명이다. 주권은 지체 없이 발행하되 전자등록주식은 해당 제도에 따른다. 등록질권은 배당 신주에도 미치고 등록질권자는 법정 요건에 따라 주권 교부를 청구할 수 있다. 약식질의 범위는 교재가 소개하는 학설 문제로 구분한다.</p>
+<p><mark class="yellow">주식배당의 새 주주는 ‘주주총회가 끝날 때’ 된다. 결의 때·납입기일 다음 날·등기 때를 섞지 않는다.</mark></p>
+<p><strong>시험:</strong>권면액·단주·등록질·총회 종결. <strong>키워드:</strong>462의2·등기는 공시. <strong>한 줄:</strong> 이익이 신주로 바뀌는 법정 시점은 주식배당 총회가 끝나는 때다.</p>
+<h2 id="company-10-20" data-concept-id="company-10-20">4-4. 현물배당은 정관 근거와 주주 보호 장치를 본다 ★★★★☆</h2>
+<p><strong>교재365–366쪽 · 문단의 이유:</strong> 배당 재산을 다양하게 하면서 소액주주의 불편을 줄인다.</p>
+<p>462조의4는 정관으로 금전 외 재산을 배당할 수 있게 한다. 예를 들어 회사가 보유한 다른 회사의 주식 등을 주는 경우다. 자기 회사의 신주를 발행하는462조의2 주식배당과 구별한다.</p>
+<p>회사는 주주가 현물 대신 돈을 청구할 수 있게 할 경우 <strong>금액과 청구기간</strong>을 정할 수 있다. 일정 수 미만의 주식을 가진 주주에게 현물 대신 돈을 줄 경우에는 <strong>기준 주식 수와 금액</strong>을 정할 수 있다. 법이 언제나 무조건 현금 선택권을 자동 보장한다는 뜻이 아니라, 이러한 보호 장치를 정할 수 있도록 한 구조다.</p>
+<p><strong>설명용 사례:</strong> 회사가 보유한 다른 회사 주식을 배당하려는데 소액주주 몫이 너무 잘게 나뉜다면, 정관과 적법한 결정에 따라 일정 기준 아래는 금전으로 지급하는 방식을 마련할 수 있다.</p>
+<p><strong>시험:</strong>정관 필수·자사 신주와 구별·선택권 설정. <strong>키워드:</strong>금전 외 재산·소액 보호. <strong>한 줄:</strong> 현물배당은 돈 대신 재산을 주는 방식이며 그 근거와 교환 조건을 미리 정한다.</p>
+<h1>5. 잘못 나눈 이익은 어떻게 되돌리는가</h1>
+<h2 id="company-10-21" data-concept-id="company-10-21">5-1. 돈이 부족한 배당과 절차가 잘못된 배당은 다르다 ★★★★★</h2>
+<p><strong>교재366–367쪽 · 문단의 이유:</strong> 위법 원인에 따라 채권자의 반환청구권 범위도 달라진다.</p>
+<p><strong>배당가능이익이 없거나 한도를 넘는 현금배당</strong>은 자본 유지 규칙을 침해한다. 회사는 부당이득 반환을 청구할 수 있고,462조3항은 회사 채권자가 회사에 반환하도록 청구하는 길도 둔다. 채권자가 “나한테 바로 주라”고 하는 권리가 아니라 <strong>회사 재산을 회복시키는 청구</strong>다. 교재는 배당 후 채권자도 포함하고, 자본 유지 목적상 수령 주주의 선의·악의를 불문한 반환을 설명한다.</p>
+<p>반면 배당가능이익 범위 안에서 결의·시기·방법에 하자가 있다면 <strong>하자의 종류에 따라 결의취소·무효 등을 먼저 구별</strong>한다. 교재367쪽의 설명을 ‘취소사유만 있어도 소송 없이 결의가 처음부터 자동 무효’라는 뜻으로 넓히면5장 법리와 충돌한다. 취소사유는 법정 소와 기간에 따른 취소가 필요한 구조다. 적법하게 효력이 부정되면 회사의 반환 문제가 생긴다.</p>
+<p>배당 재원은 충분하고 순수한 절차 하자만 문제 되는 경우에는462조3항의 자본충실 보호를 위한 채권자 반환청구를 당연히 적용하지 않는다는 것이 교재의 구별이다. 주주 보호 문제와 채권자 보호 문제를 같은 이유로 처리하지 않는다.</p>
+<p><strong>시험:</strong>재원 위법/결의 하자·회사에 반환·취소와 무효. <strong>키워드:</strong>462·부당이득·청구 귀속. <strong>한 줄:</strong> 무엇이 위법한지부터 나누어야 누가 무엇을 되돌리라고 할 수 있는지 보인다.</p>
+<h2 id="company-10-22" data-concept-id="company-10-22">5-2. 위법한 주식배당은 신주 효력도 처리해야 한다 ★★★★☆</h2>
+<p><strong>교재367–368쪽 · 문단의 이유:</strong> 이미 주식이 발행되었다면 현금만 돌려받는 방식으로 끝낼 수 없다.</p>
+<p>배당가능이익 없이 주식배당을 했다면 발행된 신주의 효력을 다루어야 하므로 교재는 <strong>신주발행 무효의 소에 준한 해결</strong>을 설명한다. 주주는 신주를 받기 위해 실제 돈을 납입하지 않았으므로 납입금 환급 문제가 생기지 않는다. 회사 재산이 실제로 주주에게 나간 것도 아니어서 현금배당처럼 채권자가 주주에게 돈을 반환하라고 할 상황과 다르다.</p>
+<p>이익은 충분하지만 신주발행 요건만 어긴 경우도 신주 효력은 같은 방식으로 다투되, <strong>이익배당 결정 자체가 유효하다면 그에 해당하는 배당금 지급 의무는 남는다</strong>는 것이 교재의 설명이다. 신주가 무효라는 이유만으로 유효한 배당 채권까지 무조건 없애지 않는다.</p>
+<p><strong>시험:</strong>재산 유출 없음·납입금 없음·배당과 발행 효력 분리. <strong>키워드:</strong>신주무효 준용·환급X. <strong>한 줄:</strong> 주식배당의 하자는 배당 재원과 발행 주식의 효력을 두 층으로 나누어 해결한다.</p>
+<h2 id="company-10-23" data-concept-id="company-10-23">5-3. 이사·감사의 책임은 각자의 의무 위반을 따진다 ★★★★☆</h2>
+<p><strong>교재368쪽 · 문단의 이유:</strong> 위법배당을 받은 주주에게 반환시키는 것만으로 경영진의 잘못이 사라지지 않는다.</p>
+<p>위법한 배당안을 만들거나 집행한 이사, 이를 승인한 이사, 필요한 감사를 게을리한 감사·감사위원은 각 법정 요건 아래 손해배상 책임을 질 수 있다. 회사에 대한399·414조 책임과 제3자에 대한401·414조 책임은 귀책 요건을 구분한다. 위법배당이 있었다는 사실만으로 모든 임원에게 같은 책임을 자동 부과하는 것은 아니다.</p>
+<p>해임 사유와 형사 벌칙도 문제 될 수 있다. 배당액 반환과 손해배상이 함께 문제 되더라도 동일한 손해를 두 번 회복하는 방식으로 계산하지 않는다. 중간배당의 특별한 연대책임·주의 입증 구조는3-5와 연결한다.</p>
+<p><strong>시험:</strong>행위자·승인자·감독자·회사/제3자. <strong>키워드:</strong>의무 위반·손해·인과관계. <strong>한 줄:</strong> 주주에게 돈을 돌려받는 문제와 임원이 잘못한 책임은 따로 심사한다.</p>
+<h1>6. 기출과 사례로 확인한다</h1>
+<p>교재 끝 질문1은 재무제표의 종류와 시점/기간 구별,2는 법정·임의준비금 및 사용·감액,3은 배당가능이익과 적법한 결의·평등,4는 주식배당의 이익·절반·수권 요건,5는 현금/주식·재원/절차 위법을 나누어 답한다.</p>
+<h3>관련 문제 TOP5</h3>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>출제 의도·주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성055</td>
+<td>임의준비금 적립을 이사회 집행과 바꾸는 함정</td>
+</tr>
+<tr>
+<td>형성056</td>
+<td>현금만/횟수 무제한/1인 균등 모두 틀림</td>
+</tr>
+<tr>
+<td>워크북135</td>
+<td>중간배당은 정관+이사회·부족 우려 시 금지</td>
+</tr>
+<tr>
+<td>워크북138</td>
+<td>주식배당 보통결의·이익·절반·수권</td>
+</tr>
+<tr>
+<td>워크북139</td>
+<td>구체적 채권에도 평등·자발적 차등배당 판례</td>
+</tr>
+</tbody></table>
+<p>워크북136의3번은 ‘법정준비금 사용은 두 방법만’이라고 단정해461조의2 감액 예외를 빠뜨렸다. <strong>원본 정답2번을 보존하되3번도 절대문장으로는 부정확</strong>하다고 표시한다.056·137의 총회 승인 설명과139의 이사회 승인 부정은449조의2 특례를 함께 읽는다. 실제 오답률 자료는 없으므로 ‘잘 틀리는 함정’은 문장 구조상 주의점이지 측정된 순위가 아니다.</p>
+<h3>새로운 사례5개</h3>
+<p><strong>문제1.</strong> 회사가 재무제표를 이사회에서 승인했다. 외부감사인의 적정 의견과 정관 근거는 있지만 감사3명 중2명만 동의했다. 총회에는 보고만 해도 될까?</p>
+<p><strong>해설:</strong>449조의2의 감사 전원 동의가 없다. 일반적인 이사회 초안 승인과 최종 승인 특례를 구별해 총회 승인 절차를 밟아야 한다. <strong>의도:</strong>전원과 과반수, 두 번의 승인 의미를 비교.</p>
+<p><strong>문제2.</strong> 자본금2억원, 자본준비금2억5,000만원, 이익준비금1억원이다. 총회가461조의2로 법정준비금1억원을 풀려고 한다. 가능한가?</p>
+<p><strong>해설:</strong>합계3억5,000만원에서 자본금1.5배인3억원을 뺀5,000만원만 감액 가능하다.1억원은 초과한다. 감액 후 배당은 별도 요건을 갖춰야 한다. <strong>의도:</strong>1.5배의 기준과 초과분 계산.</p>
+<p><strong>문제3.</strong> 작년 숫자로 중간배당 한도는 넉넉하다. 그러나 올해 대형 거래처 부도로 결산기 말 순자산이 법정 보호액보다 부족해질 우려가 뚜렷하다. 이사회는 작년 한도만 믿고 배당할 수 있을까?</p>
+<p><strong>해설:</strong>안 된다. 과거 계산 한도와 올해 말 부족 우려 금지는 별도 요건이다. 주의의무와 실제 부족 발생 시 책임도 검토한다. <strong>의도:</strong>숫자 하나만 맞춰 안전요건을 놓치는 함정.</p>
+<p><strong>문제4.</strong> 비상장 일반회사가 총 배당8,000만원 전부를 신주로 주려 한다. 발행 상한 여유와 배당가능이익은 충분하다. 총회 특별결의면 가능할까?</p>
+<p><strong>해설:</strong>일반462조의2 주식배당 한도는4,000만원이다. 특별결의라는 높은 찬성률로 법정 절반 제한을 없애지 못한다. 상장 특례가 없는 전제다. <strong>의도:</strong>요건 중 하나라도 빠지면 절차 강도로 대체할 수 없음.</p>
+<p><strong>문제5.</strong> 배당가능이익을 넘겨 현금배당한 회사의 채권자가 수령 주주에게 자신에게 직접 지급하라고 요구한다. 한편 다른 회사는 배당 재원은 충분하지만 결의 소집통지에 하자가 있다. 두 경우를 똑같이 처리할까?</p>
+<p><strong>해설:</strong>첫 경우462조3항의 반환은 회사로 돌려주는 청구다. 둘째는 결의 하자의 종류와 취소소송 등을 먼저 검토하고, 자본충실 침해를 전제로 한 같은 채권자 청구를 자동 적용하지 않는다. <strong>의도:</strong>위법 원인·반환 주체·귀속 구별.</p>
+<h1>용어 사전</h1>
+<h3>회계·會計</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 會(모을 회),計(셈할 계). <strong>③ 합친 뜻:</strong> 모아 계산함. <strong>④ 이름의 이유:</strong> 여러 거래를 모아 회사 상태를 설명한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재산·부채·성과 등을 일정 기준에 따라 기록·측정·보고하는 체계. <strong>⑥ 쉬운 말:</strong> 회사가 가진 것과 번 것을 알아보게 하는 숫자 기록. <strong>⑦ 사례:</strong> 주주가 재무제표로 투자 판단.</p>
+<p><strong>⑧ 시험:</strong> 공정하고 타당한 회계관행. <strong>⑨ 비교·기억법:</strong> 회계상 이익과 현금 잔액은 다름.</p>
+<h3>재무제표·財務諸表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 財(재물 재),務(힘쓸 무),諸(모두 제),表(겉 표). <strong>③ 합친 뜻:</strong> 재무에 관한 여러 표. <strong>④ 이름의 이유:</strong> 한 표만으로 모든 상태를 알 수 없다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결산 때 재무상태와 경영성과 등을 나타내는 법정 서류. <strong>⑥ 쉬운 말:</strong> 회사의 돈·재산 성적표 묶음. <strong>⑦ 사례:</strong> 재무상태표와 손익계산서.</p>
+<p><strong>⑧ 시험:</strong> 상업장부와 범위 불일치. <strong>⑨ 비교·기억법:</strong> 대차대조표는 두 범위에 모두 들어감.</p>
+<h3>대차대조표·貸借對照表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 貸(빌려줄 대),借(빌릴 차),對(대할 대),照(비출 조),表(겉 표). <strong>③ 합친 뜻:</strong> 양쪽을 대조하는 표. <strong>④ 이름의 이유:</strong> 재산의 구성과 조달 원천을 맞춰 본다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 시점의 자산·부채·자본을 나타내는 재무제표. <strong>⑥ 쉬운 말:</strong> 그날 회사가 가진 것과 빚의 사진. <strong>⑦ 사례:</strong> 12월31일 예금·기계·대출.</p>
+<p><strong>⑧ 시험:</strong> 시점과 기간 구별·공고 대상. <strong>⑨ 비교·기억법:</strong> 오늘날 재무상태표라는 이름도 사용.</p>
+<h3>손익계산서·損益計算書</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 損(덜 손),益(더할 익),計(셈할 계),算(셈 산),書(글 서). <strong>③ 합친 뜻:</strong> 손실과 이익을 계산한 문서. <strong>④ 이름의 이유:</strong> 기간 동안 얼마를 벌었는지 계산한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일정 기간의 수익·비용·성과를 표시하는 서류. <strong>⑥ 쉬운 말:</strong> 한 해 동안 벌고 쓴 성적표. <strong>⑦ 사례:</strong> 매출에서 비용을 공제한 성과.</p>
+<p><strong>⑧ 시험:</strong> 재무상태표의 시점과 비교. <strong>⑨ 비교·기억법:</strong> 매출액이 곧 배당가능이익은 아님.</p>
+<h3>자본변동·資本變動</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자),本(근본 본),變(변할 변),動(움직일 동). <strong>③ 합친 뜻:</strong> 자본 항목의 변화. <strong>④ 이름의 이유:</strong> 자본이 왜 달라졌는지 추적한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 출자·성과·배당 등에 따른 자본 구성의 증감. <strong>⑥ 쉬운 말:</strong> 회사 자기 몫이 바뀐 이유. <strong>⑦ 사례:</strong> 배당으로 이익잉여금 감소.</p>
+<p><strong>⑧ 시험:</strong> 자본금과 자본 전체 구별. <strong>⑨ 비교·기억법:</strong> 자본금은 자본 항목 중 하나.</p>
+<h3>이익잉여금·利益剩餘金</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 利(이로울 리),益(더할 익),剩(남을 잉),餘(남을 여),金(쇠 금). <strong>③ 합친 뜻:</strong> 이익에서 남은 금액. <strong>④ 이름의 이유:</strong> 벌어들인 이익 중 남긴 부분이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이익의 누적·처분 결과 회사에 남은 회계상 금액. <strong>⑥ 쉬운 말:</strong> 그동안 벌어 남겨 놓은 몫. <strong>⑦ 사례:</strong> 배당과 준비금 적립의 검토.</p>
+<p><strong>⑧ 시험:</strong> 자본거래 잉여금과 비교. <strong>⑨ 비교·기억법:</strong> 현금으로만 보관된 돈은 아님.</p>
+<h3>연결재무제표·聯結財務諸表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 聯(연이을 련),結(맺을 결),財(재물 재),務(힘쓸 무),諸(모두 제),表(겉 표). <strong>③ 합친 뜻:</strong> 관련 회사를 연결한 재무 표. <strong>④ 이름의 이유:</strong> 집단 전체 상태를 함께 보게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 지배·종속 관계의 기업집단을 경제적 단위로 표시한 자료. <strong>⑥ 쉬운 말:</strong> 모회사와 자회사를 묶어 보는 성적표. <strong>⑦ 사례:</strong> 모자회사 내부거래의 중복 조정.</p>
+<p><strong>⑧ 시험:</strong> 법정 작성 대상. <strong>⑨ 비교·기억법:</strong> 개별 회사 표의 단순 덧셈과 다름.</p>
+<h3>부속명세서·附屬明細書</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 附(붙을 부),屬(무리 속),明(밝을 명),細(가늘 세),書(글 서). <strong>③ 합친 뜻:</strong> 붙어 있는 상세 문서. <strong>④ 이름의 이유:</strong> 요약 숫자 속 내용을 밝힌다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재무제표 중요 항목의 세부 내용을 적은 자료. <strong>⑥ 쉬운 말:</strong> 합계 안에 무엇이 있는지 적은 내역. <strong>⑦ 사례:</strong> 기계 합계의 구성 설명.</p>
+<p><strong>⑧ 시험:</strong> 작성·승인·비치 대상. <strong>⑨ 비교·기억법:</strong> 영업보고서는 사업 경과를 설명.</p>
+<h3>비치·備置/공고·公告</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 備(갖출 비),置(둘 치),公(공평할 공),告(알릴 고). <strong>③ 합친 뜻:</strong> 갖추어 둠/공개해 알림. <strong>④ 이름의 이유:</strong> 자료 접근을 두 방식으로 보장한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 열람할 수 있게 보관하는 것과 법정 방식으로 외부에 알리는 것. <strong>⑥ 쉬운 말:</strong> 찾아볼 수 있게 두기와 밖에 알리기. <strong>⑦ 사례:</strong> 총회1주 전 비치·승인 후 대차대조표 공고.</p>
+<p><strong>⑧ 시험:</strong> 시기와 대상 서류 구별. <strong>⑨ 비교·기억법:</strong> 비치했다고 공고까지 끝난 것은 아님.</p>
+<h3>준비금·準備金</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 準(준할 준),備(갖출 비),金(쇠 금). <strong>③ 합친 뜻:</strong> 미리 갖추어 둔 금액. <strong>④ 이름의 이유:</strong> 위험과 미래 사업에 대비한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사 안에 적립한 잉여금의 법정·임의 분류. <strong>⑥ 쉬운 말:</strong> 지금 나누지 않고 남겨 둔 몫. <strong>⑦ 사례:</strong> 이익준비금과 자본준비금.</p>
+<p><strong>⑧ 시험:</strong> 계산상 수액·현금 봉투 아님. <strong>⑨ 비교·기억법:</strong> 충당금·감가상각과 법적 성질 구별.</p>
+<h3>법정·法定/임의·任意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법),定(정할 정),任(맡길 임),意(뜻 의). <strong>③ 합친 뜻:</strong> 법이 정함/뜻에 따라 정함. <strong>④ 이름의 이유:</strong> 누가 적립을 요구했는지 묻는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 준비금 적립이 법정 의무인지 정관·총회 선택인지의 구별. <strong>⑥ 쉬운 말:</strong> 꼭 남길 돈과 회사가 선택해 남길 돈. <strong>⑦ 사례:</strong> 법정 적립 후 사업확장 적립금.</p>
+<p><strong>⑧ 시험:</strong> 임의준비금 적립 주체. <strong>⑨ 비교·기억법:</strong> 임의라고 이사회가 모든 내용을 마음대로 정하지 않음.</p>
+<h3>자본금 전입·資本金轉入</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자),本(근본 본),金(쇠 금),轉(구를 전),入(들 입). <strong>③ 합친 뜻:</strong> 자본금으로 옮겨 넣음. <strong>④ 이름의 이유:</strong> 회사 안 재원의 법적 묶임을 강화한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정준비금 등을 법정 절차에 따라 자본금 계정으로 이동. <strong>⑥ 쉬운 말:</strong> 같은 회사 재산의 이름을 준비금에서 자본금으로 바꿈. <strong>⑦ 사례:</strong> 무상증자에 따른 신주.</p>
+<p><strong>⑧ 시험:</strong> 순자산 불변·이사회 원칙·정관 총회 예외. <strong>⑨ 비교·기억법:</strong> 외부 돈이 들어오는 유상증자와 다름.</p>
+<h3>배당·配當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 配(나눌 배),當(마땅할 당). <strong>③ 합친 뜻:</strong> 마땅한 몫을 나눔. <strong>④ 이름의 이유:</strong> 주주에게 투자 성과를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사의 이익을 적법한 기준과 결의에 따라 주주에게 분배. <strong>⑥ 쉬운 말:</strong> 회사 이익 중 나눌 수 있는 몫을 주는 것. <strong>⑦ 사례:</strong> 100주와1주는 주식 수에 비례.</p>
+<p><strong>⑧ 시험:</strong> 배당가능이익·결의·평등. <strong>⑨ 비교·기억법:</strong> 사람 수로 똑같이 나누는 것이 아님.</p>
+<h3>순자산·純資産</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 純(순수할 순),資(재물 자),産(낳을 산). <strong>③ 합친 뜻:</strong> 순수하게 남은 재산. <strong>④ 이름의 이유:</strong> 남에게 갚을 몫을 제외한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자산총액에서 부채총액을 뺀 금액. <strong>⑥ 쉬운 말:</strong> 가진 것에서 빚을 뺀 몫. <strong>⑦ 사례:</strong> 자산5억·빚2억이면 순자산3억.</p>
+<p><strong>⑧ 시험:</strong> 배당 계산의 출발점. <strong>⑨ 비교·기억법:</strong> 자산총액·현금·자본금과 다름.</p>
+<h3>미실현이익·未實現利益</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 未(아닐 미),實(열매 실),現(나타날 현),利(이로울 리),益(더할 익). <strong>③ 합친 뜻:</strong> 아직 실현되지 않은 이익. <strong>④ 이름의 이유:</strong> 장부 이익만 믿고 재산을 나누는 위험을 줄인다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 평가 등으로 인식했으나 실현되지 않은 이익 중 법정 공제 대상. <strong>⑥ 쉬운 말:</strong> 값이 올랐다고 적혔지만 아직 실제 성과로 확정되지 않은 부분. <strong>⑦ 사례:</strong> 보유자산 평가이익의 법정 공제 검토.</p>
+<p><strong>⑧ 시험:</strong> 시행령19조·정기와 중간배당 문언 구별. <strong>⑨ 비교·기억법:</strong> 모든 회계상 평가항목을 같은 방식으로 단순 공제하지 않음.</p>
+<h3>추상·抽象/구체·具體</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 抽(뽑을 추),象(모양 상),具(갖출 구),體(몸 체). <strong>③ 합친 뜻:</strong> 일반적 성질/정해진 실제 내용. <strong>④ 이름의 이유:</strong> 가능성과 실제 청구를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반적 배당권과 금액 등이 확정된 배당금 채권의 구별. <strong>⑥ 쉬운 말:</strong> 배당받을 권리가 있다는 것과 지금 얼마 달라는 것. <strong>⑦ 사례:</strong> 배당 결의 후 독립 채권.</p>
+<p><strong>⑧ 시험:</strong> 재무제표 승인만으로 금액 자동 발생X. <strong>⑨ 비교·기억법:</strong> 구체 채권은 지위와 분리해 양도 가능.</p>
+<h3>전부명령·轉付命令</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 轉(구를 전),付(줄 부),命(목숨 명),令(하여금 령). <strong>③ 합친 뜻:</strong> 채권을 옮겨 주는 명령. <strong>④ 이름의 이유:</strong> 현금 대신 채권 자체를 넘겨 집행한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 강제집행에서 압류한 채권을 지급에 갈음해 채권자에게 이전하는 법원 명령. <strong>⑥ 쉬운 말:</strong> 받을 돈의 권리를 채권자에게 넘기는 재판 절차. <strong>⑦ 사례:</strong> 구체적 배당금 채권의 전부.</p>
+<p><strong>⑧ 시험:</strong> 배당 채권의 독립성. <strong>⑨ 비교·기억법:</strong> 추심명령은 직접 받아내는 권한과 구별.</p>
+<h3>중간배당·中間配當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 中(가운데 중),間(사이 간),配(나눌 배),當(마땅할 당). <strong>③ 합친 뜻:</strong> 회계연도 중간에 나눔. <strong>④ 이름의 이유:</strong> 연말 외에도 이익 환원을 허용한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정관 근거 아래 법정 요건을 갖춰 연중1회 이사회가 정하는 배당. <strong>⑥ 쉬운 말:</strong> 연말 결산을 기다리기 전에 한 번 나누는 것. <strong>⑦ 사례:</strong> 작년 한도와 올해 손실 우려 심사.</p>
+<p><strong>⑧ 시험:</strong> 정관·이사회·연1회. <strong>⑨ 비교·기억법:</strong> 상장 분기배당 특례와 구별.</p>
+<h3>일할·日割</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 日(날 일),割(나눌 할). <strong>③ 합친 뜻:</strong> 날짜 수로 나눔. <strong>④ 이름의 이유:</strong> 기간만큼 몫을 계산한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일수의 비율에 따라 금액을 계산하는 방식. <strong>⑥ 쉬운 말:</strong> 1년 중 해당 날짜 비율로 계산. <strong>⑦ 사례:</strong> 옛10월1일 신주92/365 예.</p>
+<p><strong>⑧ 시험:</strong> 2020년 소급 의제 삭제. <strong>⑨ 비교·기억법:</strong> 현행 모든 신주에 일할 강제라는 뜻 아님.</p>
+<h3>주식배당·株式配當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주),式(법 식),配(나눌 배),當(마땅할 당). <strong>③ 합친 뜻:</strong> 주식으로 이익을 나눔. <strong>④ 이름의 이유:</strong> 현금 유출 없이 주주에게 신주를 준다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 배당가능이익을 자본화해 새 주식을 지급하는 배당. <strong>⑥ 쉬운 말:</strong> 배당금 대신 새 주식을 받음. <strong>⑦ 사례:</strong> 총 배당1억 중 일반 한도5천만원.</p>
+<p><strong>⑧ 시험:</strong> 보통결의·총회 종결·수권. <strong>⑨ 비교·기억법:</strong> 준비금 전입은 재원이 다름.</p>
+<h3>현물배당·現物配當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현),物(물건 물),配(나눌 배),當(마땅할 당). <strong>③ 합친 뜻:</strong> 금전 외 재산으로 나눔. <strong>④ 이름의 이유:</strong> 재산 유형을 다양하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정관 근거에 따라 금전 아닌 재산을 주는 배당. <strong>⑥ 쉬운 말:</strong> 돈 대신 회사가 가진 다른 재산을 받음. <strong>⑦ 사례:</strong> 다른 회사 주식의 배당.</p>
+<p><strong>⑧ 시험:</strong> 정관·금전 선택 조건. <strong>⑨ 비교·기억법:</strong> 자기 회사 신주발행인 주식배당과 구별.</p>
+<h3>등록질·登錄質/약식질·略式質</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 登(오를 등),錄(기록할 록),質(바탕 질),略(간략할 략),式(법 식). <strong>③ 합친 뜻:</strong> 등록된 질권/간단한 방식의 질권. <strong>④ 이름의 이유:</strong> 등록 여부에 따라 회사 상대 권리 행사가 달라진다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주명부 등 법정 등록을 갖춘 질권과 그 등록 없는 주식 질권의 구별. <strong>⑥ 쉬운 말:</strong> 회사 기록에 담보권자가 적혀 있는지. <strong>⑦ 사례:</strong> 배당 신주에 미치는 등록질.</p>
+<p><strong>⑧ 시험:</strong> 신주 통지·교부 청구. <strong>⑨ 비교·기억법:</strong> 약식질의 확장 범위는 교재 학설 구별.</p>
+<h3>위법배당·違法配當</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어길 위),法(법 법),配(나눌 배),當(마땅할 당). <strong>③ 합친 뜻:</strong> 법을 어겨 나눈 배당. <strong>④ 이름의 이유:</strong> 재원과 절차의 한계를 넘었다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령·정관이나 적법한 결의 요건을 위반한 배당. <strong>⑥ 쉬운 말:</strong> 나눠선 안 될 돈이나 방식으로 배당함. <strong>⑦ 사례:</strong> 배당가능이익 초과 현금 지급.</p>
+<p><strong>⑧ 시험:</strong> 재원/절차·금전/주식 구별. <strong>⑨ 비교·기억법:</strong> 취소사유와 당연무효는 다름.</p>
+<h3>부당이득·不當利得</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불),當(마땅할 당),利(이로울 리),得(얻을 득). <strong>③ 합친 뜻:</strong> 정당한 근거 없이 얻은 이익. <strong>④ 이름의 이유:</strong> 받을 법적 이유가 없으면 되돌린다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률상 원인 없이 얻고 타인에게 손해를 준 이익의 반환 관계. <strong>⑥ 쉬운 말:</strong> 받아선 안 될 돈을 돌려주는 문제. <strong>⑦ 사례:</strong> 위법 현금배당의 반환.</p>
+<p><strong>⑧ 시험:</strong> 채권자 청구도 회사로 반환. <strong>⑨ 비교·기억법:</strong> 손해배상은 의무 위반의 책임을 별도로 따짐.</p>
+<h1>시험 직전 A4 암기노트</h1>
+<div class="memory-sheet"><h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 준비금 세 갈래 / 배당가능이익과 결의 / 현금·주식 위법배당 구별.</p>
+<table><thead><tr><th>항목</th><th>반드시 기억</th></tr></thead><tbody>
+<tr><td>재무제표</td><td>재무상태표=시점 / 손익=기간 / 자본변동·처분계산</td></tr>
+<tr><td>절차</td><td>총회6주 전 감사 제출→4주 내 보고→1주 전 비치</td></tr>
+<tr><td>승인</td><td>총회 보통·영업보고서는 보고·대차대조표 공고</td></tr>
+<tr><td>449의2</td><td>정관+외부 적정 의견+감사 전원 동의→이사회 승인·총회 보고</td></tr>
+<tr><td>450</td><td>승인2년·다른 결의 없음·부정행위 제외·기재 사유 입증</td></tr>
+<tr><td>이익준비금</td><td>현금배당1/10 이상·자본금1/2까지</td></tr>
+<tr><td>자본준비금</td><td>자본거래 잉여금·이익준비금 같은 상한 없음</td></tr>
+<tr><td>법정준비금</td><td>결손 보전/자본 전입/1.5배 초과분 총회 감액</td></tr>
+<tr><td>임의준비금</td><td>정관·총회 적립 / 특정 목적 집행은 이사회 구별</td></tr>
+<tr><td>배당가능</td><td>순자산−자본−기존 법정준비금−새 적립−미실현</td></tr>
+<tr><td>권리·평등</td><td>배당 결의로 구체화·주식 수 비례·자발적 양보 판례</td></tr>
+<tr><td>시기</td><td>지급1개월 원칙·시효5년·구 신주 소급 의제 삭제</td></tr>
+<tr><td>중간배당</td><td>연1회 결산·정관·연중1회·이사회·올해 부족 우려 시 금지</td></tr>
+<tr><td>주식배당</td><td>이익+일반1/2+수권·보통결의·총회 종결 때 주주</td></tr>
+<tr><td>세 비교</td><td>이익→자본 / 법정준비금→자본 / 분할은 자본 불변</td></tr>
+<tr><td>현물배당</td><td>정관 근거·현금 선택권 등 보호 조건 설정 가능</td></tr>
+<tr><td>위법배당</td><td>재원/절차·현금/주식 구별·채권자는 회사로 반환 청구</td></tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “준비금은 별도 현금 봉투가 아니다.” “주식배당도 배당가능이익이 필요하다.” “취소사유와 당연무효를 섞지 않는다.”</p>
+<p><strong>사례를 풀 순서:</strong> 재무자료→재원·공제→결정기관→배당 종류→평등·기준일→지급→하자 종류→반환·임원 책임.</p></div>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>🟢준비금의 재원·한도를 말하고, 주식배당과 무상증자를 구별하며, 채권자가 누구에게 반환시키는지 설명할 수 있다. 🟡숫자는 알지만 자본금·순자산·현금이 섞이면2–4절 비교표를 복습한다. 🔴당기순이익 전부를 곧바로 나눌 수 있다고 생각하면3-1부터 다시 읽는다. 실제 답안을 받지 않았으므로 <strong>자가진단 기준</strong>이다.</p>
+<p>복습 TOP3: <strong>①이익준비금10%·50%와 법정준비금1.5배 ②중간배당의 한도와 위험 금지 ③위법 현금배당과 주식배당의 효과</strong>.</p>
+<p>출처는 제공 교재349–369쪽, JSON9문항과 본문에 연결한 현행 법령이다. 교재 판례68다305·80다1263은 제공된 사실과 법리의 범위에서 해설했다. 현금만의 중간배당·지점3주 등기·준비금의 절대적 처분금지·절차 하자의 자동 무효 표현은 현행 규정이나 결의 하자 체계에 맞춰 따로 보완했다.</p>
+<h1>문제 부록 · 9문항·36개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-주식회사법_055"><h4>형성평가 · 주식회사법_055</h4><p class="question-stem">다음 중에서 주식회사의 준비금에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법정준비금과 임의준비금으로 구분된다.</li><li>법정준비금에는 이익준비금과 자본준비금이 있다.</li><li>이익준비금과 자본준비금은 재원과 적립한도에 차이가 있다.</li><li>임의준비금은 이사회의 결의로 이익처분의 방법에 의해 적립되는 준비금을 말한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 적립 근거가 법인지 정관·총회 선택인지로 법정과 임의를 구분한다. 이름만 달리한 같은 규칙이 아니다.</li><li><strong>비선택</strong> · 맞다. 법정준비금에는 이익준비금과 자본준비금이 있다. 손익거래인지 자본거래인지 재원이 다르다.</li><li><strong>비선택</strong> · 맞다. 이익준비금은 현금배당액1/10 이상을 자본금1/2까지 적립하는 기본 규칙이고 자본준비금에는 같은 일반 적립한도가 없다.</li><li><strong>선택</strong> · 틀려서 정답이다. 임의준비금 적립은 정관 또는 총회 결의다. 특정 목적 적립금을 이사회가 그 목적에 맞게 사용하는 단계와 섞은 보기다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 임의준비금이란 정관의 규정 내지 주주총회의 결의로 이익처분의 방법에 의해 적립되는 준비금이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_056"><h4>형성평가 · 주식회사법_056</h4><p class="question-stem">다음 중에서 주식회사의 배당에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>금전배당만 가능하고 주식배당은 할 수 없다.</li><li>중간배당은 영업연도 중에 횟수의 제한없이 할 수 있다.</li><li>배당가능이익을 주주의 수로 나누어 모든 주주에게 균분하여야 한다.</li><li>배당가능이익이 존재하고 주주총회가 재무제표를 승인하여야 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다.462조의2는 신주를 발행하는 주식배당을 허용한다. 현물배당도 정관 근거 아래 가능하므로 금전만이라는 단정은 틀린다.</li><li><strong>비선택</strong> · 틀리다. 일반462조의3은 연1회 결산 회사의 연중1회 중간배당을 정한다. 상장회사의 별도 분기배당 제도를 일반 규칙의 무제한 허용으로 바꾸지 않는다.</li><li><strong>비선택</strong> · 틀리다. 주주의 사람 수가 아니라 가진 주식 수에 비례하는 것이 원칙이다. 종류주식의 배당 조건은 별도다.</li><li><strong>선택</strong> · 일반 원칙상 정답이다. 배당가능이익과 적법한 결의가 필요하다. 다만 재무제표 승인만으로 모든 경우 특정 배당 채권이 자동 발생하는 것은 아니고,449조의2에 따른 이사회 승인·배당 결정 특례도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상법 제462조의2 제1항 참조. 회사는 주주총회의 결의에 의하여 이익의 배당을 새로이 발행하는 주식으로써 할 수 있다. ② 상법 제462조의3 제1항 참조. 연 1회의 결산기를 정한 회사는 영업연도중 1회에 한하여 이사회의 결의로 일정한 날을 정하여 그날의 주주에 대하여 금전으로 이익을 배당(중간배당)할 수 있음을 정관으로 정할 수 있다. ③ 상법 제464조 참조. 이익이나 이자의 배당은 각 주주가 가진 주식의 수에 따라 지급한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_133"><h4>워크북 · 주식회사법_워크북_133</h4><p class="question-stem">다음 중에서 ( ) 안에 들어갈 말로 알맞은 것은? 주식배당은 이익배당 총액의 ( )에 상당하는 금액을 초과하지 못한다.</p><ol class="choices"><li>10%</li><li>2분의 1</li><li>30%</li><li>5분의 1</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다.10%는 현금배당에 대한 이익준비금 최소 적립률과 혼동한 숫자다. 주식배당의 비중 한도를 묻는다.</li><li><strong>선택</strong> · 정답이다. 일반 상법상 이익배당총액의1/2 이하가 원칙이다. 상장법인의 자본시장법 특례는 별도로 구분한다.</li><li><strong>비선택</strong> · 틀리다.30%가 일반 주식배당의 상한이라는 규정은 없다. 배당총액과 주식배당액의 관계를 본다.</li><li><strong>비선택</strong> · 틀리다.1/5는 이 문제의 법정 비율이 아니다. 주식배당 일반 한도는1/2다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제462조의2 제1항 단서 참조. 주식배당은 이익배당 총액의 2분의 1에 상당하는 금액을 초과하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_134"><h4>워크북 · 주식회사법_워크북_134</h4><p class="question-stem">주식회사는 법률, 정관 또는 주주총회 결의로 순 재산 액이 자본금을 초과하는 경우 일정한 금액을 회사에 유보하여야 한다. 이때 유보된 금액을 상법에서는 무엇이라 하는가?</p><ol class="choices"><li>준비금</li><li>유보 금</li><li>적립금</li><li>순 익 금</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 법률·정관·총회 결의 등에 따라 회사 안에 적립한 계산상 금액을 준비금이라고 한다. 별도 현금 계좌가 반드시 있다는 뜻은 아니다.</li><li><strong>비선택</strong> · 일반어로 남겨 둔 돈이라는 느낌은 있지만 질문이 요구하는 상법상 분류명은 준비금이다. 모든 유보액의 세법상 분류와 섞지 않는다.</li><li><strong>비선택</strong> · 일상·회계 표현으로 쓰일 수 있지만 제시한 정의의 상법상 기본 용어는 준비금이다. 임의준비금의 별도 적립금 등 하위 표현을 구별한다.</li><li><strong>비선택</strong> · 순이익은 기간 성과의 결과를 가리킨다. 그중 배당하지 않고 법정·임의로 적립하는 준비금과 동일하지 않다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 순 재산 액 중에서 자본금을 초과한 금액으로서 회사가 주주에게 배당하지 아니하고 사내에 적립한 금액을 준비금이라 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_135"><h4>워크북 · 주식회사법_워크북_135</h4><p class="question-stem">상법상 주식회사는 영업연도 중에 중간배당을 할 수 있다. 다음 중에서 중간배당에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>연 1회의 결산기를 정하여야 한다.</li><li>정관에 중간배당을 할 수 있다는 규정을 두어야한다.</li><li>주주총회의 결의로 중간배당을 하여야 한다.</li><li>결산기에 배당 가능 이익이 발생하지 않을 우려가 있을 때에는 중간배당을 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 요건으로 비선택이다. 일반 중간배당 제도는 연1회 결산기를 정한 회사를 전제로 한다.</li><li><strong>비선택</strong> · 맞는 요건이다. 이사회가 하고 싶다는 이유만으로는 부족하고 중간배당을 허용하는 정관 근거가 필요하다.</li><li><strong>선택</strong> · 틀려서 정답이다. 일반 중간배당의 결정기관은 이사회다. 정관변경에 필요한 총회 절차와 실제 중간배당 결정기관을 구별한다.</li><li><strong>비선택</strong> · 맞다. 올해 말 법정 보호액에 미달할 우려가 있으면 중간배당을 금지한다. 작년 숫자상 한도가 있다고 이 위험 요건이 사라지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법에서는 연 1회의 결산기를 정한 회사는 영업연도 중 1회에 한하여 이사회의 결의로 이익을 배당할 수 있음을 정관으로 정할 수 있도록하였다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_136"><h4>워크북 · 주식회사법_워크북_136</h4><p class="question-stem">다음 중에서 상법상 주식회사의 준비금에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법률에 의해서 강제적으로 적립되는 것을 법정준비금이라 한다.</li><li>이익준비금은 자본 거래로부터 발생한 잉여금을 재원으로 무제한 적립하여야 한다.</li><li>법정준비금은 자본금 결손의 보전에 충당하거나 자본금 전입으로만 처분할 수 있다.</li><li>임의 준비금은 정관 또는 주주총회의 결의로 적립할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 법정준비금은 법이 적립을 강제한다. 임의준비금과 적립 근거가 다르다.</li><li><strong>선택</strong> · 원본 정답이다. 이 보기의 자본거래·일반 적립상한 없음은 자본준비금의 설명이다. 이익준비금은 손익거래 재원·현금배당1/10·자본금1/2를 연결한다.</li><li><strong>비선택</strong> · 보완이 필요한 보기다. 결손 보전·자본 전입 제한은 기본 원칙이지만461조의2는 자본금1.5배 초과 법정준비금의 총회 감액을 허용한다. 오직 두 방법뿐이라는 절대문장으로 읽으면 이 보기 역시 부정확하다. 원본 정답2번은 보존했다.</li><li><strong>비선택</strong> · 맞다. 임의준비금은 정관 또는 총회 결의로 적립한다. 특정 목적에 따른 사용·집행 단계에서 이사회가 등장하는 것과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이익준비금은 손익 거래에서 발생한 잉여금을 재원으로 자본금의 2분의 1에 달할 때까지 적립하여야 한다. 임의 준비금이란 정관의 규정 내지 주주총회의 결의로 이익 처분의 방법에 의해 적립되는 준비금이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_137"><h4>워크북 · 주식회사법_워크북_137</h4><p class="question-stem">다음 중에서 상법상 주식회사의 배당에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>금전 배당만 가능하고 주식배당은 할 수 없다.</li><li>중간배당은 영업연도 중에 횟수의 제한 없이 할 수 있다.</li><li>배당 가능 이익을 주주의 수로 나누어 모든 주주에게 균분하여야 한다.</li><li>배당 가능 이익이 존재하고 주주총회가 재무제표를 승인하여야 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 신주를 주는 주식배당을 허용한다. 금전 외 재산의 현물배당도 정관 근거 아래 가능하다.</li><li><strong>비선택</strong> · 틀리다. 일반 중간배당은 영업연도 중1회다. 별도의 상장 분기배당 특례를 일반 상법의 횟수 무제한으로 읽지 않는다.</li><li><strong>비선택</strong> · 틀리다. 같은 종류의 주식은 주식 수에 비례한다.100주와1주 주주가 한 사람씩이라는 이유로 같은 돈을 받는 것이 아니다.</li><li><strong>선택</strong> · 일반 원칙상 정답이다. 배당 재원과 적법한 승인·배당 결의가 필요하다.449조의2 이사회 승인 특례와 단순 재무제표 승인만으로 배당액이 자동 확정되지는 않는다는 점을 보완한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상법 제462조의2 제1항 참조. 회사는 주주총회의 결의에 의하여 이익의 배당을 새로이 발행하는 주식으로써 할 수 있다. ② 상법 제462조의3 제1항 참조. 연 1회의 결산기를 정한 회사는 영업연도 중 1회에 한하여 이사회의 결의로 일정한 날을 정하여 그 날의 주주에 대하여 금전으로 이익을 배당(중간배당)할 수 있음을 정관으로 정할 수 있다. ③ 상법 제464조 참조. 이익이나 이자의 배당은 각 주주가 가진 주식의 수에 따라 지급한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_138"><h4>워크북 · 주식회사법_워크북_138</h4><p class="question-stem">OO 주식회사가 주식배당을 하려고 한다. 이에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>주주총회의 특별결의에 의한 승인을 얻어야한다.</li><li>금전 배당과 마찬가지로 배당 가능 이익이 있어야한다.</li><li>이익배당 총액의 2분의 1에 해당하는 금액을 초과하지 않아야한다.</li><li>아직 발행하지 않은 발행예정주식총수의 범위 내여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 정답이다. 주식배당 자체는 총회 보통결의다. 수권주식 부족으로 정관을 바꿔야 한다면 그 별도 정관변경에 특별결의가 필요할 수 있다.</li><li><strong>비선택</strong> · 맞다. 현금이 회사 밖으로 안 나가더라도 주식배당은 이익배당이므로 배당가능이익이 필요하다.</li><li><strong>비선택</strong> · 일반 상법 규칙으로 맞다. 상장 특례가 없는 회사는 이익배당총액의1/2를 넘을 수 없다. 특별결의로 이 법정 제한을 없애지 못한다.</li><li><strong>비선택</strong> · 맞다. 배당으로 새 주식이 발행되므로 정관의 발행 상한에 여유가 있어야 한다. 부족하면 먼저 적법한 정관변경을 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식배당은 주주총회의 보통결의에 의한 승인을 얻어야한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_139"><h4>워크북 · 주식회사법_워크북_139</h4><p class="question-stem">다음 중에서 상법상 주식회사의 이익배당에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>배당 가능 이익이 발생하지 않을 우려가 있는 때에는 중간배당을 해서는 안 된다.</li><li>이익 잉여금 처분 계산서에 기재된 이익처분안은 이사회에서 승인하면 확정된다.</li><li>구체적 이익배당 청구권은 채권에 불과하기 때문에 주식 평등의 원칙이 적용되지 않는다.</li><li>주주들의 동의가 있다고 하더라도 같은 종류의 주식에 차등 배당을 하는 것은 위법하다는 것이 판례의 입장이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 당해 결산기 말에 법정 보호액보다 순자산이 부족해질 우려가 있으면 중간배당을 할 수 없다.</li><li><strong>비선택</strong> · 일반 절차에서는 틀리다. 이사회의 안 승인과 총회의 최종 승인을 구분한다. 다만449조의2 요건을 모두 갖춘 이사회 최종 승인 특례는 있으므로 어떤 경우에도 이사회로 확정 불가라는 뜻은 아니다.</li><li><strong>비선택</strong> · 틀리다. 독립 채권으로 구체화해도 지급 시기·방법을 자의적으로 차별해도 된다는 의미가 아니다. 주식평등의 보호 취지를 함께 본다.</li><li><strong>비선택</strong> · 틀리다.80다1263은 대주주가 자기 배당 몫 일부를 자발적으로 양보하는 차등배당을 허용했다. 불이익을 받는 주주의 의사와 강제 차별을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 이익 잉여금 처분 계산서에 기재된 이익처분안은 주주총회에서 승인하면 확정된다. ③ 구체적 이익배당 청구권은 채권에 불과하지만, 법률 관계의 획일적 확정과 주주 보호를 위하여 주식 평등의 원칙이 적용되어야한다. ④ 주주들의 동의가 있으면 같은 종류의 주식에 대한 차등 배당은 적법하다는 것이 판례의 입장이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '주식회사법 · CHAPTER 10' : 'PART · COMPANY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(주식회사법 · CHAPTER 10|PART · COMPANY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('company-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

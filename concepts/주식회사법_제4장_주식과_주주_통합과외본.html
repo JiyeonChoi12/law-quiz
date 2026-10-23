@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주식회사법 제4장 주식과 주주 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMPANY LAW · CHAPTER 04</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">주식회사법</span>
+    <span class="brand-sub">제4장 주식과 주주 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./주식회사법_개념.html">주식회사법 개념 목록</a><a href="../index.html?subject=주식회사법">문제 풀기</a></nav><h1>이 장의 큰 그림</h1>
+<p>민호가 가영의 회사 주식을 샀다. 돈을 주었으니 끝일까? 회사는 “이름이 주주명부에 없는데요”라고 한다. 가영은 종이 주권을 아직 갖고 있고, 회사는 자기 주식을 사서 보관 중이다. <strong>누가 주주인가, 회사에 무엇을 요구할 수 있는가, 주식은 어떻게 넘기는가</strong>를 각각 구별해야 이 상황이 풀린다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 장의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나?</td>
+<td>주식의 내용·주주의 권리·주권과 명부·양도와 제한</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>투자자가 쉽게 바뀌어도 회사 운영과 거래 안전을 지키려는 장치다.</td>
+</tr>
+<tr>
+<td>전체 위치</td>
+<td>설립으로 생긴 주주 지위를 운영·거래 단계에서 다룬다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>3장 출자·인수 → 4장 주주 지위 → 5장 총회·6장 이사·8장 신주</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>의결권, 배당, 경영권 분쟁, 자기주식, 합병 때 주식 배정</td>
+</tr>
+</tbody></table>
+<p>교재89–145쪽과 보충학습146–154쪽을 다룬다. 주식과 주주Ⅰ·Ⅱ의 <strong>28문항112개 보기</strong>를 원문 그대로 보존하고 따로 해설했다. 별은 통계가 아닌 학습 우선순위다. 노랑=결론, 초록=이유, 분홍=함정, 파랑=연결. 설명용 인물·대화는 실제 판결문에 없는 재구성이다. 판례의 구체적 사실이 교재에 없으면 임의로 채우지 않는다. 법령 기준일은2026.10.23이며, 옛 판례와 현행법,2027년 시행 예정 규정을 구별한다.</p>
+<h1>1. 주식이라는 단위와 여러 종류의 투자 약속</h1>
+<h2 id="company-04-01" data-concept-id="company-04-01">1-1. 주식은 종이가 아니라 자본의 단위이자 주주 지위다 ★★★★★</h2>
+<p><strong>교재89–91쪽 · 문단의 이유:</strong> 주식·주권·주주를 같은 말로 생각하지 않게 한다.</p>
+<p>주식에는 두 뜻이 있다. 하나는 자본을 구성하는 단위이고, 다른 하나는 그 단위를 가진 사람의 회사에 대한 사원 지위다. ‘사원’은 직원이 아니라 회사 구성원이다. 액면주식은1주 금액이 균일하고 최소100원이다. 무액면주식은 액면금액을 적지 않는 제도이며 같은 회사가 액면주식과 섞어 발행하지 못한다. 무액면이라고 자본금이나 납입 의무가 없는 것은 아니다. 발행가액 중 법정 범위에서 자본금으로 계상한다.</p>
+<p>100주를 가진 민호는 단지 ‘한 사람 몫’만 가진 것이 아니라100개의 주식 단위를 가진다. 이것이 <strong>지분복수주의</strong>다. 합명회사의 인적 지분을 설명하는 지분단일주의와 대비된다. 한 사람이 여러 주식을 가질 수 있기 때문에 주식 수에 따라 배당과 의결권을 계산하는 것이 기본이다.</p>
+<p><mark class="yellow">1주를0.5주씩 독립된 주식으로 쪼개 양도하지는 못하지만,1주를 여러 사람이 공유할 수는 있다.</mark> 공유와 분할은 다르다. 갑·을이1주를 공동으로 가지면 권리를 행사할 대표자를 정해 회사에 알린다. 대표자를 정하지 않으면 회사는 공유자 한 사람에게 통지·최고할 수 있다. 공동으로 인수한 경우 납입은 연대책임이다(333조). 교재의 인수담보 설명에 이사까지 포함한 부분은 현행321조의 <strong>발기인 책임</strong>과 구별한다.</p>
+<p>추상적인 의결권만 떼어 주식을 남겨 두고 양도하는 것도 원칙적으로 안 된다. 다만 적법한 배당결정으로 이미 발생한 <strong>구체적 배당금채권</strong>은 별도의 금전채권으로 양도할 수 있다. 소수점 주식 거래 서비스 역시 신탁·수익권 등의 구조를 통해 구현되는 것으로, 상법상 모든0.1주가 독립된1주의 주식이 되었다는 뜻은 아니다.</p>
+<p><strong>설명용 사례:</strong> 남매가 상속으로1주를 함께 받았다. 둘이 각각0.5표를 따로 던지는 것이 아니라 권리행사자를 정한다. 배당이 확정되어 받을10만원 채권을 다른 사람에게 양도하는 문제는 별개다.</p>
+<p><strong>시험:</strong>100원·액면/무액면·복수/공유/불가분. <strong>키워드:</strong> 단위와 지위. <strong>한 줄:</strong> 주식은 권리의 묶음이고 주권은 그 권리를 나타내는 증서다.</p>
+<h2 id="company-04-02" data-concept-id="company-04-02">1-2. 주식분할·병합·주권분할을 구별한다 ★★★★☆</h2>
+<p><strong>교재91–92쪽 · 문단의 이유:</strong> 숫자가 바뀐다고 회사 재산도 자동으로 바뀌는 것은 아니다.</p>
+<p>액면1만원짜리1주를 액면1천원짜리10주로 바꾸면 주식분할이다. 보유 비율과 자본금이 그 자체로 늘지 않는다.329조의2에 따라 주주총회 특별결의가 필요하고 액면주식의 최소금액 제한도 지킨다. 반대로 여러 주식을 하나로 묶으면 병합이다. 교재는 감자·합병과 연결하지만 <strong>병합이 언제나 자본금 감소를 뜻하는 것은 아니다.</strong> 액면금액을 함께 올려 자본금을 유지하는 병합도 구별해야 한다. 병합 과정의 단주 처리와 주권 제출 등은 법정 절차에 따른다.</p>
+<p>민호가 가진‘100주권1장’을‘10주권10장’으로 교환하는 것은 주권분할이다. 주식 수는100주 그대로다. 종이 묶음 크기만 바뀐다. <mark class="pink">주식분할≠주권분할, 주식병합≠무조건 감자.</mark></p>
+<p><strong>시험:</strong> 문제에서 바뀌는 것이 액면·주식 수·종이 장수 중 무엇인지 확인. <strong>키워드:</strong> 단위 조정. <strong>한 줄:</strong> 먼저 주식 수와 자본금, 주권 장수를 따로 써 본다.</p>
+<h2 id="company-04-03" data-concept-id="company-04-03">1-3. 종류주식은 권리의 조합을 정관으로 설계한다 ★★★★☆</h2>
+<p><strong>교재92–94쪽 · 문단의 이유:</strong> 모든 투자자가 같은 조건만 원하는 것은 아니다.</p>
+<p>보통주식과 다른 배당·잔여재산·의결권·상환·전환 내용을 가진 주식을 종류주식이라 한다. 정관에 종류별 내용과 수를 정하고 관련 청약서·증서 등 법정 서류에 필요한 사항을 알려야 한다. 법이 정한 종류주식 제도 안에서 설계한다. 단지 ‘종류’라는 이름을 붙였다고 강행규정과 주주 보호를 피할 수는 없다.</p>
+<p>우선주는 특정 권리에서 먼저 받는 주식, 후배주는 뒤에 받는 주식이다. 혼합주는 어떤 권리는 우선하고 다른 권리는 뒤에 있을 수 있다. 우선주라고 언제나 보통주보다 <strong>실제 배당액이 더 많다</strong>고 단정하지 않는다. 우선권의 내용과 회사 이익, 누적·참가 조건 등을 확인한다. 금전 아닌 재산으로 배당한다면 그 조건도 법에 맞춰 정한다.</p>
+<p>과거의 최저배당률 의무가 폐지되었다는 말은 배당 조건을 전혀 정하지 않아도 된다는 뜻이 아니다. 건설이자 제도도 폐지되었다. 영업 준비 기간의 자금 조달을 돕겠다는 취지였지만 출자 반환·채권자 보호와의 긴장, 활용도 등의 문제가 있었다. 현재 제도인 것처럼 외우지 않는다.</p>
+<p>기명주식과 무기명주식의 옛 구분은 역사적 설명이다. 무기명주식 제도는2014년 개정으로 폐지되었다. 아래의 주권 교부에 의한 유통을 <strong>무기명주식의 부활</strong>로 이해하지 않는다.</p>
+<p><strong>시험:</strong> 종류별 권리 내용을 읽고 판단. <strong>키워드:</strong> 정관·권리 조합·공시. <strong>한 줄:</strong> 같은 회사라도 법이 허용하는 서로 다른 투자 조건을 만들 수 있다.</p>
+<h2 id="company-04-04" data-concept-id="company-04-04">1-4. 의결권 제한은 배당 특혜와 자동으로 묶이지 않는다 ★★★★☆</h2>
+<p><strong>교재94–95쪽 · 문단의 이유:</strong> 경제적 권리와 경영 참여권을 분리하여 자금을 모을 수 있다.</p>
+<p>정관에 따라 의결권이 없거나 특정 사항에서 제한되는 종류주식을 발행할 수 있다. 그 총수는 발행주식총수의1/4을 넘지 못하며, 초과하면 필요한 조치를 해야 한다. 제한의 범위와 의결권 행사·부활 조건을 정관에 정한다. ‘의결권이 없으니 반드시 배당우선주다’는 자동 연결은 틀리다.</p>
+<p>과거370조 아래에서 배당을 받지 못한 우선주의 의결권 부활을 설명하던 규칙을 현행법에 그대로 옮기면 안 된다. 지금은344조의3과 정관의 내용을 확인한다. 특정 주주에게 회사의 모든 결정을 막는 법정 거부권 종류주식이 일반적으로 도입되었다고 할 수도 없다. 다만 별도의 투자계약상 사전동의권의 유효성은 <strong>1-7의2023년 판례</strong>처럼 따로 판단한다.</p>
+<p><strong>설명용 사례:</strong> 수진이‘일반 안건에서는 무의결권, 합병 안건에서는 의결권 있음’이라는 주식을 샀다면 안건별로 본다. 배당을 못 받았다는 사실 하나만으로 모든 표가 자동 부활한다고 결론내지 않는다.</p>
+<p><strong>시험:</strong>1/4·정관 조건·법정 주식 내용과 계약권리. <strong>키워드:</strong> 권리 제한의 범위. <strong>한 줄:</strong> 표가 있는지는 주식 종류와 해당 안건을 함께 본다.</p>
+<h2 id="company-04-05" data-concept-id="company-04-05">1-5. 상환주식은 회사가 빌린 돈을 반드시 갚는 제도와 다르다 ★★★★☆</h2>
+<p><strong>교재95–97쪽 · 문단의 이유:</strong> 투자금을 회수할 길을 주면서 회사 재산을 함부로 돌려주지 못하게 한다.</p>
+<p>상환주식은 정해진 조건에 따라 회사 이익으로 소각할 수 있도록 만든 종류주식이다. 회사가 상환을 선택하는 방식과 주주가 상환을 청구하는 방식이 있다. 회사 선택형은 정관에 가액·기간·방법·수 등을, 주주 청구형은 청구권과 그 조건을 정해야 한다. 구체적 발행사항은 정관과416조에 따라 정한다.</p>
+<p><mark class="green">상환 재원은 배당가능이익이다. 회사가 돈을 빌린 채무처럼 이익이 없어도 언제나 원금을 반환해야 하는 것은 아니다.</mark> ‘이익이 조금이라도 있다’는 이유로 재원을 넘겨 전부 상환할 수는 없다. 금전 외 유가증권·재산을 대가로 할 수 있지만345조의 제한을 지키고 장부가액이 배당가능이익을 넘지 않아야 한다. 다른 종류의 주식을 상환 대가로 주어 전환 제도와 뒤섞는 방식은 해당 조문의 제한을 본다.</p>
+<p>회사 선택형의 상환은 취득일2주 전까지 주주와 주주명부상 권리자에게 통지하며 법정 공고 대체도 가능하다. 정한 조건과 종류 내 평등을 지킨다. 일부 수량을 상환할 수는 있어도1주를 반만 없애는 식으로 주식불가분을 깨지 않는다.345조5항의 종류주식 범위를 확인하되, <strong>상환전환우선주 자체가 전부 금지된다는 뜻으로 읽지 않는다.</strong> 배당우선권에 상환·전환 조건을 함께 붙인 구조는 개별 법정 요건을 검토한다.</p>
+<p>상환으로 발행주식 수가 줄어도 이익에 의한 소각은 그 자체로 자본금 감소가 아니다. 따라서 감자와 같은 채권자 이의절차를 그대로 요구하지 않는다. 상환 후 수권 범위의 재발행 가능성을 둘러싼 이론은 심화이며,‘상환했으니 자본금과 정관상 발행 가능 주식 수도 자동으로 같이 감소한다’는 결론은 피한다.</p>
+<p><strong>설명용 사례:</strong> 투자자가3억원 상환을 청구했는데 법정 배당가능이익은1억원이다. 계약서의 날짜만 보고3억원 전액을 회사 재산에서 빼내도 된다고 할 수 없다. 우선 재원·조건·수량을 확인한다.</p>
+<p><strong>시험:</strong> 선택권자·정관·이익 재원·자본금 불변. <strong>키워드:</strong> 조건부 투자 회수. <strong>한 줄:</strong> 상환권은 채권자의 무조건적 원금반환청구권과 다르다.</p>
+<h2 id="company-04-06" data-concept-id="company-04-06">1-6. 전환주식은 권리의 종류를 바꾼다 ★★★★☆</h2>
+<p><strong>교재97–100쪽 · 문단의 이유:</strong> 처음에는 우선 배당을 원하다가 나중에는 보통주 지위를 원할 수 있다.</p>
+<p>주주가 전환을 청구하거나 정관이 정한 사유가 발생하면 회사가 전환하는 종류주식이다. 전환 조건·기간·대상 종류·수와 회사 전환 사유 등을 정관으로 정한다. 전환될 주식 수를 발행할 수 있는 수권 범위를 확보한다. 정관과 발행 공시를 빼놓고 회사가 임의로 종류를 바꾸는 제도가 아니다.</p>
+<p>주주 청구형은 청구서2통과 주권을 제출하는 등 법정 절차를 갖추며 청구 시 효력이 생긴다. 회사 전환형은 주권 제출을 위한2주 이상 기간 등 법정 통지·공고 절차를 거쳐 그 기간이 끝난 때 효력이 생긴다. 전환은 상대방이 다시 승낙해야만 성립하는 보통 매매가 아니라 법정 조건 아래 지위를 바꾸는 형성적 작용이다.</p>
+<p>전환 전후 <strong>발행가액 총액</strong>은 같아야 한다(348조). 이것을 액면금액 총액과 혼동하지 않는다. 교재의‘1:1이면 자본금 불변,1:여러 주면 증가,여러 주:1주면 감자 문제가 생긴다’는 설명은 <strong>같은 액면금액을 전제로 한 설명</strong>이다. 무액면주식의 자본금 계상까지 이 산식 하나로 단정하지 않는다. 감자절차를 우회하는 전환은 문제될 수 있다.</p>
+<p>주주명부 폐쇄 중에도 전환 청구 자체는 가능하다. 다만 그 기간 중 총회에서는 전환으로 발행된 주식의 의결권을 행사하지 못하는350조2항을 구별한다. 변경등기는 전환 청구 등이 있는 달의 말일부터2주 내라는351조의 기준을 본다. 기존 질권은339조에 따라 전환으로 받는 주식에도 미친다.</p>
+<p><strong>설명용 사례:</strong> 민호가 우선주를 보통주로 바꿨다. 회사에 새 돈을 추가 납입한 신주인수와는 다르다. 명부 폐쇄 중 전환했다면‘전환 자체 무효’가 아니라 해당 총회의 의결권 제한을 따져야 한다.</p>
+<p><strong>시험:</strong> 청구/회사 전환의 효력 시점·348조·350조. <strong>키워드:</strong> 종류 교체. <strong>한 줄:</strong> 전환은 지위를 바꾸지만 출자 재원을 새로 넣는 것과 같지 않다.</p>
+<h2 id="company-04-07" data-concept-id="company-04-07">1-7. 주주평등은1인1표가 아니라 합리적인 비례 대우다 ★★★★★</h2>
+<p><strong>교재100–101쪽 · 문단의 이유:</strong> 다수 주주나 경영자가 마음에 드는 사람만 우대하지 못하게 한다.</p>
+<p>같은 조건의 주식에는 주식 수에 비례한 평등한 대우를 하는 것이 원칙이다. 주주가3명이라고 배당을3등분하지 않는다. 같은 종류100주와10주라면 기본적으로10:1이다. 법이 허용하는 종류주식, 감사 선임의 의결권 제한, 소수주주권의 지분 요건, 단주 처리 등은 동일한 단순 비례에서 벗어나는 제도다. 정관·총회결의로 아무 차별이나 정당화할 수는 없다.</p>
+<p><strong>현재 판례 보완:</strong> 대법원2021다293213(2023.7.13)은 주주 사이 차등 대우라도 회사와 전체 주주의 이익, 투자 목적·경위, 차등 내용·정도, 다른 주주의 불이익 등을 종합하여 <strong>정당화할 특별한 사정</strong>이 있으면 허용될 수 있다고 보았다. 투자자의 사전동의권과 위반 시 손해배상 약정이 언제나 무효인 것은 아니다. 반면 회사가 특정 주주의 투자원금이나 별도 이익을 무조건 보장하는 약정까지 일반적으로 허용한 것은 아니다. <a href="https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=9349">대법원 설명</a></p>
+<p><strong>사건을 읽는 순서:</strong> 투자자와 회사가 투자 보호 장치를 약정했다 → 회사 운영과 다른 주주의 이익에 어떤 영향을 주는지가 다투어졌다 → 법원은‘다르다’는 사실만으로 끝내지 않고 합리적 이유를 심사했다 → 정당한 투자 유치와 불공정한 특혜를 구별해야 한다. 반대로 모든 약정을 무효로 하면 필요한 투자 조건을 만들기 어렵고, 모두 유효로 하면 회사 재산을 특정인에게 돌려줄 수 있다.</p>
+<p><strong>쉬운 번역:</strong>① 같은 종류는 기본적으로 비례 대우한다.② 법정 예외와 합리적 이유가 있는 차등을 구별한다.③ 투자원금 보장을 아무 조건 없이 허용한 판례가 아니다.</p>
+<p><strong>시험:</strong>‘어떤 차별도 절대 불가’와‘계약이면 전부 가능’ 모두 경계. <strong>키워드:</strong> 비례·합리성·전체 이익. <strong>한 줄:</strong> 평등은 자의적 특혜를 막는 원칙이다.</p>
+<h1>2. 주주가 얻는 권리와 부담하는 의무</h1>
+<h2 id="company-04-08" data-concept-id="company-04-08">2-1. 주주 지위는 마음대로 빼앗거나 버릴 수 없다 ★★★★☆</h2>
+<p><strong>교재101–102쪽 · 문단의 이유:</strong> 주주 구성의 변동은 법적 절차로 정해야 한다.</p>
+<p>적법하게 주식을 인수·취득하면 주주가 되고, 양도·소각 등 법정 원인에 따라 지위를 잃는다. 주주총회에서‘저 사람은 마음에 들지 않으니 제명’이라고 결의하거나, 사적 약정만으로 법이 정하지 않은 실권을 만들 수는 없다. 일반적인 주식회사에는 인적 회사와 같은 임의의 사원 제명 제도가 없다.</p>
+<p>교재의 발기인 사이 특약 사례는 <strong>법정 사유 밖의 주주권 상실 약정으로 지위를 없앨 수 없다</strong>는 취지다. 교재 표기‘62다302’는 사건번호 대조에 주의할 부분이므로 이를 확정된 식별번호로 암기하지 않는다. 대법원2002다54691(2002.12.24) 역시 주식을 단순히 포기한다는 의사표시만으로 주주 지위를 상실한다고 보지 않는다. <strong>갈등:</strong> 회사는 손쉽게 관계를 정리하고 싶다 → 그러나 주식의 귀속·자본 관계·다른 이해관계자에게 영향을 준다 → 법원은 지위 변동의 법정 구조를 지킨다. ‘소유권 일반의 포기’와 똑같이 생각하지 않는다.</p>
+<p>자연인뿐 아니라 법인도 주주가 될 수 있고 외국인·미성년자라는 이유만으로 일반적으로 배제되지 않는다. 다만 제한능력자의 행위 요건, 업종별 외국인 지분 제한 등 특별 규정은 따로 지킨다. 회사는 법이 허용하는 절차 없이 주주의 권리를 임의로 없애지 못한다.</p>
+<p><strong>시험:</strong> 취득·양도·소각과 단순 포기·제명 구별. <strong>키워드:</strong> 법정 지위. <strong>한 줄:</strong> 주주 지위는 사적인 말 한마디로 지워지지 않는다.</p>
+<h2 id="company-04-09" data-concept-id="company-04-09">2-2. 자익권과 공익권은 목적이 다르다 ★★★★★</h2>
+<p><strong>교재102–104쪽 · 문단의 이유:</strong> 돈을 받는 권리와 회사를 움직이고 감시하는 권리를 나눈다.</p>
+<p>자익권은 주주가 자기 경제적 이익을 얻는 권리다. 배당·잔여재산 분배, 주권 교부, 전환, 명의개서, 신주인수, 준비금 자본전입에 따른 신주 배정 등이 여기에 속한다. 직접 돈을 받는 순간만 자익권인 것은 아니다. 주권을 받는 권리도 투자 지위의 경제적 실현을 돕는다.</p>
+<p>공익권의‘공’은 공공기관의 公이 아니라 <strong>함께할 共</strong>이다. 회사 운영에 참여하거나 공동 이익을 지키는 권리다. 의결권, 총회 소집, 설립무효·총회결의 하자·신주발행무효·합병무효 소송, 대표소송, 위법행위·신주발행 유지, 회계장부 열람, 임원 해임청구, 업무·재산 검사, 해산판결 청구 등이 있다. 각 권리의 지분·기간·사유 요건은 별개다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>자익권</th>
+<th>공익권</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 위해?</td>
+<td>자기 투자 이익의 실현</td>
+<td>운영 참여·감시·공동 이익 보호</td>
+</tr>
+<tr>
+<td>대표 예</td>
+<td>배당·명의개서·신주인수</td>
+<td>의결권·대표소송·장부 열람</td>
+</tr>
+<tr>
+<td>흔한 함정</td>
+<td>돈을 바로 받지 않아도 자익권 가능</td>
+<td>소송이면 모두 개인 돈을 받는 것은 아님</td>
+</tr>
+</tbody></table>
+<h3>교재 판례 · 이사를 추천할 권리 대신 매달 돈을 받았다</h3>
+<p><strong>2015다68355·68362,2017.1.12.</strong> 투자·대여 거래에서 이사1명을 추천할 계약상 권리를 정하고 그 대신 월정액 지급을 약정한 사안이다. 주주권 행사와 관련하여 회사 재산상 이익을 주는467조의2 위반인지 문제됐다. 법원은 해당 조항의 주주권을 법령·정관에 따른 사원권으로 보면서, 별도 계약에서 생긴 추천권을 바로 같은 권리로 보지 않았다.</p>
+<p><strong>번역:</strong>① 주주가 가진 모든 계약권리가 법정 주주권은 아니다.② 계약상 추천권의 대가인지, 법정 의결권 행사의 대가인지 구별한다.③ 한 규정에 위반되지 않는다는 판단은 모든 법리에 따라 영원히 적법하다는 뜻이 아니다.</p>
+<p>실제로 후속 <strong>2018다9920·9937</strong>에서는 투자·대여 합계6억원이 반환되어 자금 제공에 따른 지위가 사라진 뒤에도 주주라는 이유만으로 월정액을 받는 부분을 주주평등 원칙에서 문제 삼았다. 정리하면 <strong>권리의 근거와 지급 시점·이유를 모두 확인</strong>한다. 회사가 임의로 특정 주주에게 돈을 주어도 된다는 사례가 아니다. <a href="https://www.law.go.kr/precStmdInfoP.do?precSeq=184100">첫 판결</a>, <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=203032">후속 판결</a></p>
+<p><strong>시험:</strong> 권리 분류와 계약상 권리·법정 권리를 구별. <strong>키워드:</strong> 自益/共益. <strong>한 줄:</strong> 무엇을 위한 권리인지부터 본다.</p>
+<h2 id="company-04-10" data-concept-id="company-04-10">2-3. 단독주주권·소수주주권과 자료 열람 ★★★★★</h2>
+<p><strong>교재103–105쪽 · 문단의 이유:</strong> 누구나 행사할 권리와 일정한 지분을 모아 행사할 권리를 나눈다.</p>
+<p>단독주주권은 원칙적으로1주를 가진 주주도 행사한다. 자익권과 의결권·일부 하자소송 등이 대표적이다. 소수주주권은 법이 정한 지분을 모아야 하는 권리다.‘소수’라는 말이 무조건50% 미만이라는 뜻은 아니다. 남용 방지와 소수의 감시 가능성을 조절하는 장치다.</p>
+<table>
+<thead>
+<tr>
+<th>일반회사 학습 기준</th>
+<th>대표 권리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1%</td>
+<td>이사의 위법행위 유지, 대표소송 등</td>
+</tr>
+<tr>
+<td>3%</td>
+<td>총회 소집·주주제안·집중투표 청구·임원 해임청구·회계장부 열람·업무재산 검사 등</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>해산판결 청구</td>
+</tr>
+</tbody></table>
+<p>각 조문의 분모·예외·추가 요건이 다르다. 다중대표소송은 모자회사 요건까지 확인한다. 상장회사에는542조의6의 완화된 비율과 보유기간 등 특례가 있으므로 일반회사 표를 그대로 대입하지 않는다. 집중투표도2026년 대규모 상장회사 개정과 연결해6장에서 본다.</p>
+<p>주주명부 열람과 회계장부 열람은 다르다.396조의 정관·총회의사록·주주명부·사채원부는 주주와 회사채권자가 영업시간 내 열람·등사를 청구할 수 있다. <strong>1%·3% 보유가 필요한 주주명부 열람권</strong>이라고 외우면 틀린다.448조 재무서류도 별도 규칙을 따른다.466조 회계장부·서류는 일반적으로3% 주주가 이유를 붙인 서면으로 청구하며 회사는 청구가 부당함을 증명해 거절할 수 있다. 이사회 의사록은391조의3에 따라 주주가 청구하고, 회사가 사유를 들어 거절하면 법원 허가 절차가 문제된다. 모든 회사 문서를 무조건 무제한 열람하는 권리는 아니다.</p>
+<p><strong>설명용 사례:</strong>1주 주주 수진이 주주명부를 보자 회사가‘3%를 사 오라’고 한다. 명부와 회계장부를 혼동한 거절이다. 반대로 영업비밀이 든 모든 회계자료를 아무 이유 없이 무제한 요구하는 것도 같은 문제가 아니다.</p>
+<p><strong>시험:</strong> 자료 이름·청구 주체·지분·거절 절차. <strong>키워드:</strong> 권리마다 다른 문턱. <strong>한 줄:</strong> 먼저 무슨 자료를 보려는지 정확히 읽는다.</p>
+<h2 id="company-04-11" data-concept-id="company-04-11">2-4. 주주의 기본 의무는 출자이며 회사 빚을 전부 갚는 것이 아니다 ★★★★★</h2>
+<p><strong>교재105쪽 · 문단의 이유:</strong> 유한책임의 대가로 실제 출자는 확실하게 해야 한다.</p>
+<p>주주는 인수가액을 납입할 의무를 부담한다. 금전 출자가 기본이고 현물출자는 법정 평가·조사 등 절차를 지켜야 한다. 노동이나 신용만을 주식회사 출자로 삼지 못한다. 회사가 주금납입채권을 임의로 포기하면 자본충실을 해치므로 허용되지 않는다. 약속한 돈 대신 엉뚱한 물건을 받는 방식으로 현물출자 심사를 우회해서도 안 된다.</p>
+<p><mark class="pink">상계가 예외 없이 금지된다는 설명은 틀리다. 신주발행에서는421조2항에 따라 회사 동의를 얻은 상계가 가능하다.</mark> 이를 설립 시 모든 납입에 무조건 적용하지 않는다. 회사 채무를 주식으로 바꾸는 거래도 회사의 동의와 정해진 절차가 중요하다.</p>
+<p><strong>63다494,1963.10.22. 교재 사례:</strong> 이사 개인이 자기 돈으로 주주의 납입을 대신하는 경우와 회사가 자기 돈을 내어 출자가 들어온 것처럼 만드는 경우는 다르다. 후자는 회사 안의 돈만 돌기 때문에 새 재산이 확보되지 않는다. <strong>법원의 고민:</strong> 서류상 납입과 실제 자본충실을 구별해야 한다 → 회사가 스스로 납입한 외관만으로 출자 의무를 없애지 못한다.‘이사가 마련한 돈’이라는 말만 보고 회사 돈인지 개인 돈인지 생략하지 않는다.</p>
+<p>법인격 남용의 특별한 사안에서는 특정 법률관계에서 배후자의 책임을 인정할 수 있다. 그렇다고 모든 주주가 무한책임으로 바뀌는 것은 아니다. 주주의 개인 보증이나 자기 불법행위 책임도 출자 의무와 별개다. 지배주주의 충실의무에 관한 학설 문제와2025년 개정된 <strong>이사의 회사·주주에 대한 충실의무</strong>는 주체가 다르다.</p>
+<p><strong>시험:</strong> 출자의 실질·상계의 적용 장면·예외책임. <strong>키워드:</strong> 실제 납입·유한책임. <strong>한 줄:</strong> 회사 빚을 대신 갚지는 않지만 자신이 약속한 출자는 해야 한다.</p>
+<h1>3. 주권과 주주명부가 하는 서로 다른 일</h1>
+<h2 id="company-04-12" data-concept-id="company-04-12">3-1. 주권은 이미 있는 권리를 나타내는 증서다 ★★★★★</h2>
+<p><strong>교재106–109쪽 · 문단의 이유:</strong> 종이를 언제 만들었는지와 주주권이 언제 생겼는지를 분리한다.</p>
+<p>주식은 설립의 경우 회사 성립 등 법정 요건에 따라 생기고, 신주인수인은 원칙적으로 납입기일 다음 날부터 주주권을 가진다(423조1항). 주권은 그 권리를 표창하므로 <strong>비설권증권</strong>이다. 종이를 처음 썼다고 그때부터 주식이 생기는 것이 아니다.</p>
+<p>법정 기재사항과 대표이사의 기명날인·서명 등을 요구하므로 요식증권이지만, 모든 사소한 누락이 무효를 만드는 엄격한 문언증권과 같지는 않다. 권리 내용은 종이 문구만 아니라 법령·정관 등으로 정해져 비문언증권이고, 원인관계와 연결되는 요인증권이다. 배서가 있어야만 양도되는 당연한 지시증권도 아니다. 주권 교부로 유통한다는 점에서 무기명증권과 닮은 성질을 설명하지만 무기명주식 제도와는 구별한다.</p>
+<p>356조의 기재사항은 회사 상호, 성립일, 발행예정주식총수, 액면주식의1주 금액, 성립 후 발행한 경우 그 발행일, 종류주식 내용, 정관상 양도승인 제한 등이다. 번호를 붙이고 대표이사가 기명날인·서명한다.1주권과 여러 주식을 묶은 주권은 담긴 수량이 다르다.</p>
+<p><strong>94다24039,1996.1.26.</strong> 주권 발행에 별도의 주주총회·이사회 결의를 반드시 요구하지 않으며 대표이사의 권한으로 발행한다. 주주 성명이나 발행연월일 같은 비본질적 사항의 누락만으로 곧 무효라고 하지 않았다. <strong>번역:</strong>① 발행 권한과 결의를 구별한다.② 빠진 사항이 무엇인지 본다.③ 대표이사의 진정한 발행 등 핵심 요건까지 필요 없다는 판결은 아니다.</p>
+<p><strong>시험:</strong> 비설권·비문언·요인·요식의 뜻을 말로 설명. <strong>키워드:</strong> 주식≠주권. <strong>한 줄:</strong> 종이는 권리를 표시하고 유통시키지만 주식과 같은 존재는 아니다.</p>
+<h2 id="company-04-13" data-concept-id="company-04-13">3-2. 주권은 지체 없이 발행하고 주주에게 교부해야 한다 ★★★★★</h2>
+<p><strong>교재109–111쪽 · 문단의 이유:</strong> 회사가 증서 발행을 미뤄 투자자의 회수를 막지 못하게 한다.</p>
+<p>355조는 회사 성립 후 또는 신주의 납입기일 후 <strong>지체 없이</strong> 주권을 발행하도록 한다. 성립 전이나 납입기일 전의 주권은 무효이며 손해배상 문제가 별도다. 주주에게 교부되어야 주권의 효력이 생긴다는 것이 판례의 교부시설이다. 회사가 작성만 했다는 작성시설, 밖으로 내보내기만 하면 된다는 발행시설과 구별한다.</p>
+<p><strong>99다67529,2000.3.23. 교재 사례:</strong> 회사가 증서를 만들었지만 적법한 주주에게 교부한 것이 아니라면 그것만으로 유효한 주권이 되지 않는다. 주식 취득 관계와 무관한 제3자에게 종이를 주었다고 그 사람이 자동으로 주주가 되는 것도 아니다. <strong>법원의 고민:</strong> 회사가 종이를 임의 발행하여 진짜 권리자를 바꿀 수 있게 해서는 안 된다. <strong>번역:</strong> 작성 완료≠효력 발생, 적법한 교부가 중요하다.</p>
+<p>워크북041의 원본 정답은‘6월 이내’지만 이를355조의 무조건적인 유예기간으로 외우지 않는다. <strong>6개월은 주권 미발행 상태의 양도에 관한335조3항 단서와 연결되는 기준</strong>이다. 정당한 이유 없이6개월 동안 발행을 미뤄도 된다는 뜻이 아니다. 주권 발행 의무와 미발행 양도의 구제를 분리해야 한다.</p>
+<p><strong>시험:</strong> 작성/교부·지체 없이/6개월·성립 전후. <strong>키워드:</strong> 적법한 발행과 실제 교부. <strong>한 줄:</strong> 증서를 늦게 주는 회사 때문에 주식 거래가 영원히 막히지 않도록 별도 구제가 있다.</p>
+<h2 id="company-04-14" data-concept-id="company-04-14">3-3. 불소지와 분실, 전자등록은 각각 다른 제도다 ★★★★☆</h2>
+<p><strong>교재111–113쪽 · 문단의 이유:</strong> 주권 보관의 번거로움과 분실 위험을 해결한다.</p>
+<p>주권불소지는 주주가 종이 주권을 갖고 있지 않겠다고 회사에 신고하는 제도다. 정관이 금지하지 않으면 가능하므로 반드시 정관의 허용 조항이 있어야 하는 것은 아니다. 회사는 지체 없이 주주명부와 복본에 적고 알려야 한다. 이미 제출받은 주권은 무효로 하거나 명의개서대리인에게 임치하는 법정 방식으로 처리한다. 주주는 나중에 언제든지 발행을 청구할 수 있고 회사는 지체 없이 발행해야 한다. 이 재발행 청구를 정관으로 막지 못한다.</p>
+<p>분실은 불소지 신고와 다르다. 주권을 잃었다고 주식이 즉시 소멸하지는 않지만, 다른 사람이 선의취득할 위험이 있다. 공시최고와 제권판결로 분실 주권의 효력을 없애고 재발행받는 절차를 밟는다(360조). 회사가 분실 신고만 듣고 중복 주권을 마음대로 발행하면 이중 유통 위험이 생긴다.</p>
+<p>전자등록 주식은 종이 주권을 전제로 한 이 두 제도와 구별한다. 전자증권법35조상 계좌 간 대체의 전자등록이 양도의 효력 요건이다. 전자등록계좌부상의 권리를 믿고 선의·무중과실로 등록한 사람의 보호도 별도 규정에 따른다. <strong>전자주주명부를 사용한다는 사실만으로 모든 주식이 전자증권이 되는 것은 아니다.</strong> <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1026823089">전자등록의 효력</a></p>
+<p><strong>시험:</strong> 불소지 허용 원칙·발행 재청구·제권판결·전자등록. <strong>키워드:</strong> 보관 포기≠권리 포기. <strong>한 줄:</strong> 종이가 없다는 같은 모습에도 법적 원인은 다르다.</p>
+<h2 id="company-04-15" data-concept-id="company-04-15">3-4. 주주명부는 회사가 권리행사자를 정하는 기준이다 ★★★★★</h2>
+<p><strong>교재113–116쪽 · 문단의 이유:</strong> 회사가 총회 때마다 모든 거래의 진짜 주인을 다시 조사하기 어렵다.</p>
+<p>주주명부는 주주 성명·주소, 종류와 수, 주권 번호, 취득일 등 법정 사항을 적는 장부다. 재산·손익을 기록하는29조의 상업장부와는 다르다. 정관에 따라 전자주주명부도 만들 수 있다(352조의2). 이는 주식 권리 자체를 전자등록하는 제도와 다르다. 본점이나 명의개서대리인의 영업소에 비치하는 등 법정 의무를 지킨다. 교재의‘39조’표기는 관련 비치·열람 규정인<strong>396조</strong>와 구별한다.</p>
+<p><mark class="yellow">주권 교부 등으로 주식을 취득한 것과 회사에 주주권을 행사할 수 있는 것은 별개다. 회사 상대 권리행사에는 원칙적으로 명의개서가 필요하다.</mark> 명의개서는 취득자의 이름 등을 명부에 올리는 일이다. 이를 회사에 대한 대항요건이라고 한다. 적법하게 명부에 기재되면 회사 상대 권리행사의 자격이 주어져 매번 실질 취득을 증명하지 않아도 된다. 회사 역시 그 기준에 따라 처리함으로써 단체적 운영의 안정을 얻는다.</p>
+<h3>옛 판례와2017년 변경을 같이 읽기</h3>
+<p><strong>2001다12973,2001.5.15.</strong> 과거에는 명의개서가 없더라도 회사가 실제 취득자를 주주로 인정하는 것을 허용하는 취지로 설명했다. <strong>2015다248342 전원합의체,2017.3.23.</strong> 이후에는 적법한 명부 기재를 기준으로 회사와 주주 모두를 구속하는 방향이 분명해졌다. 회사가 실제 권리자를 알았다는 사정만으로 명부의 사람과 다른 사람을 임의 선택하여 권리를 행사시키지 못한다. 다만 회사가 정당한 명의개서 요구를 부당하게 거절·지연한 특별한 경우 등은 예외를 검토한다.</p>
+<p><strong>판결의 고민:</strong> 회사가‘오늘은 명부, 내일은 실제 주인’을 골라 표를 계산하면 총회가 흔들린다 → 객관적인 기준으로 관계를 통일한다 → 그렇다고 회사 스스로 명의개서를 막고 그 잘못을 방패로 쓰게 하지 않는다.</p>
+<p><strong>2005다45537,2006.9.14.</strong> 실질 취득이 전혀 없는 사람이 명부 기재만으로 다른 사람의 주식을 소유하게 되는 것은 아니라는 문제다.2017년 판례의 회사 상대 행사 기준과, 당사자 사이의 실제 주식 귀속을 혼동하지 않는다. <strong>92다11008,1993.1.26.</strong> 명부 기재를 주장하는 쪽이 그 사실을 증명할 문제이지 상대방에게‘기재되지 않았음’을 먼저 증명시키는 것이 아니다. <strong>96다45818,1998.9.8.</strong>의 악의·중과실 회사 면책 논의는 구판례의 배경을 전제로 읽는다. 현재 회사가 이미 적법하게 등재된 사람을 무시하고 실제 권리자를 임의 선정할 근거로 사용하지 않는다.</p>
+<p>등록질권은 질권자의 성명·주소 등을 주주명부에 적고 주권에도 표시하는340조의 구조다. 명부는 질권 등록, 불소지 신고 등에도 쓰인다. 명부에 적는 모든 내용이‘주식의 소유권을 새로 만드는 공신력’인 것은 아니다.</p>
+<p><strong>시험:</strong> 소유 귀속/회사 상대 행사/제3자 대항을 각각 구분. <strong>키워드:</strong> 명의개서·자격·2017년. <strong>한 줄:</strong> 명부는 회사의 운영 기준이지 모든 무권리자를 진짜 소유자로 만드는 마법 장부가 아니다.</p>
+<h2 id="company-04-16" data-concept-id="company-04-16">3-5. 명부폐쇄는 잠시 정지, 기준일은 하루의 모습 확정 ★★★★☆</h2>
+<p><strong>교재116–118쪽 · 문단의 이유:</strong> 주주가 계속 바뀌어도 특정 총회·배당의 대상자를 확정해야 한다.</p>
+<p>명부폐쇄는 일정 기간 주주명부의 기재 변경을 멈추는 방법이다.3개월을 넘길 수 없다. 기준일은 어느 날 명부에 기재된 사람을 정해진 권리의 행사자로 확정하는 방법이다. 권리행사일에 앞선3개월 이내의 날이어야 한다. 원칙적으로2주 전 공고하며, 정관에 정한 경우의 예외를 확인한다. 목적을 정해 두 제도를 함께 쓸 수도 있다.</p>
+<p>폐쇄 기간에는 명의개서·질권 등록 등 명부 변경을 제한하지만 <strong>주식 양도계약이나 주권 교부 자체를 금지하는 것은 아니다.</strong> 기준일만 정했다면 그 뒤 명의개서 자체까지 정지되는 것이 아니다. 특정 총회의 유권자 명단을 한 번 확정하는 것과 명부 전체 변경을 멈추는 것은 다른 조치다.</p>
+<p>전환주식·전환사채의 전환 청구나 신주인수권 행사는 폐쇄 중에도 가능한 경우가 있다. 그러나 폐쇄 중 발행된 전환주식의 해당 총회 의결권 등은 별도 제한을 본다. 폐쇄 중 잘못 한 명의개서의 효력, 위법한 폐쇄의 정도에 따른 효과는 심화 쟁점이며 모든 경우를 같은 무효로 처리하지 않는다.</p>
+<p>예탁주식의 실질주주명부는 법이 정한 범위에서 주주명부와 같은 효력이 있다. 오늘날 전자등록 주식의 소유자명세를 종이 주권 예탁만으로 설명해서는 안 된다. 주식의 관리 방식에 맞는 법정 명세·통지 규칙을 적용한다.</p>
+<p><strong>설명용 사례:</strong>3월1일을 총회 기준일로 정한 회사에서 민호가3월2일 주식을 샀다. 매매가 무효인 것은 아니지만 그 총회의 표는 기준일을 기준으로 정한다. 폐쇄 기간이 아니라면 명의개서까지 금지되는 것도 아니다.</p>
+<p><strong>시험:</strong>3개월 두 기준·2주·거래와 명부 변경. <strong>키워드:</strong> 정지와 스냅사진. <strong>한 줄:</strong> 사람을 확정하려는 제도이지 주식 거래 자체를 없애려는 제도가 아니다.</p>
+<h1>4. 주식을 넘길 때의 원칙과 제한</h1>
+<h2 id="company-04-17" data-concept-id="company-04-17">4-1. 양도계약과 주식 이전의 완성을 구별한다 ★★★★★</h2>
+<p><strong>교재118–119·137–139쪽 · 문단의 이유:</strong> 회사는 유지하면서 투자자는 빠져나갈 수 있게 한다.</p>
+<p>주주는 출자금을 언제든 회사에서 돌려받는 대신, 주식을 다른 사람에게 넘겨 투자금을 회수한다. 그래서 양도 자유가 원칙이다. 다만 주식을 팔기로 하는 <strong>원인계약</strong>과 주식 자체를 이전하는 <strong>처분행위</strong>를 나누어 본다. 종이 주권이 유효하게 발행된 주식은336조에 따라 주권을 교부해야 이전된다. 명의개서는 회사에 대한 행사 요건이고 교부는 양도의 효력 요건이다.</p>
+<p>현실로 건네주는 것 외에 이미 가진 사람에게 넘기는 간이인도, 제3자에게 맡긴 주권의 반환청구권 양도, 양도인이 보관자로 남는 점유개정 등의 인도 방법을 구별한다. <strong>76다1292,1977.3.8.</strong>은 주권 교부를 전제로 이런 인도 방식의 의미를 생각하게 한다. 다만 일반 양도에서 가능한 점유개정이 <strong>선의취득에도 그대로 충분한지는 다른 문제</strong>다.</p>
+<p>예탁된 주식은 자본시장법311조의 계좌부 대체와 교부 간주 규정을, 전자등록 주식은 전자증권법35조의 효력 규정을 적용한다. 종이 주권의 법리만으로 모든 증권계좌 거래를 설명하지 않는다.</p>
+<p><strong>93다44906,1994.6.28.</strong> 양도계약이 적법하게 해제되어 양수인이 실질 권리를 잃은 경우 주권을 아직 들고 있다는 사정만으로 권리를 유지하는 것은 아니다. 그러나 회사 상대 권리행사는 명부 문제를 다시 본다. <strong>2000다69927,2002.12.24.</strong>에서 원래 양도인이 해제를 이유로 주주권을 행사하려면 자신의 명의 회복 문제를 해결해야 했다. <strong>번역:</strong>① 계약 해제로 실질 관계가 바뀐다.② 주권의 점유만으로 실질 권리가 보장되지 않는다.③ 회사에서 표를 던질 자격은 명의개서 원칙과 함께 판단한다.</p>
+<p><strong>시험:</strong> 매매·교부·명의개서 세 단계. <strong>키워드:</strong> 원인/이전/행사. <strong>한 줄:</strong> 돈을 주었다는 사실 하나로 모든 단계가 끝나는 것은 아니다.</p>
+<h2 id="company-04-18" data-concept-id="company-04-18">4-2. 정관상 승인 제한은 출구까지 마련해야 한다 ★★★★★</h2>
+<p><strong>교재119–122쪽 · 문단의 이유:</strong> 낯선 주주의 진입을 관리하되 기존 주주를 영원히 가두지 않는다.</p>
+<p>회사는 정관으로 주식 양도에 이사회 승인을 받게 할 수 있다. 승인 제한은 정관·등기와 관련 증서·청약서 등 법정 공시 대상이다. 이사장이 마음대로 허락하거나 모든 주주 동의를 요구하는 것을335조의 일반적 제한 방법으로 바꿀 수는 없다. <strong>단, 자본금10억원 미만으로 이사가1명 또는2명인 회사는383조4항에 따라 이사회 대신 주주총회가 승인하는 예외</strong>가 있다. 형성021·워크북056의‘이사회’를 모든 회사에 예외 없이 적용하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>누구의 행동·기한</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>승인 청구</td>
+<td>양도인은 상대방과 주식 종류·수를 적어 서면 청구. 양수인도 법정 방식으로 승인 청구 가능</td>
+</tr>
+<tr>
+<td>회사 답변</td>
+<td>청구일부터1개월 내 서면으로 승인 여부 통지. 기간 내 거절 통지가 없으면 승인 간주</td>
+</tr>
+<tr>
+<td>거절 뒤 출구</td>
+<td>거절 통지일부터20일 내 다른 매수인 지정 또는 회사의 매수 청구</td>
+</tr>
+<tr>
+<td>매수인 지정</td>
+<td>청구일부터2주 내 지정해 양도인·지정인에게 통지. 법정 기한을 지키지 않으면 승인 간주</td>
+</tr>
+<tr>
+<td>지정인의 매도청구</td>
+<td>지정 통지를 받은 날부터10일 내 양도인에게 서면 청구</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>당사자 협의. 매도청구 후30일 내 협의가 안 되면335조의5와374조의2의 법원 결정 절차</td>
+</tr>
+<tr>
+<td>회사 매수</td>
+<td>335조의6이 정한 청구 후2개월 내 매수 규칙 적용</td>
+</tr>
+</tbody></table>
+<p>지정인이 행사하는 것은 법정 <strong>매도청구권</strong>이지, 이미 정해진 거래를 무조건 같은 가격에 가로채는 단순 선매권으로만 설명하지 않는다. 가격 결정의 법정 절차를 보장한다. 승인 없이 넘긴 경우 회사에 대해서 효력이 없지만 양도인·양수인 사이의 계약까지 당연히 무효라고 하지는 않는다.</p>
+<p><strong>설명용 사례:</strong> 가족회사가 민호의 매수인을 거절했다. 그렇다고 “영원히 팔지 마”라고 끝낼 수 없다. 민호는 법정 기간 안에 매수인 지정이나 회사 매수를 요구할 수 있다. 회사가 기한을 넘기면 승인 간주가 문제된다.</p>
+<p><strong>시험:</strong>1개월→20일→2주→10일, 가격30일·회사 매수2개월. <strong>키워드:</strong> 통제와 회수의 균형. <strong>한 줄:</strong> 회사가 문을 막으려면 법정 출구도 지켜야 한다.</p>
+<h2 id="company-04-19" data-concept-id="company-04-19">4-3. 권리주와 주권 발행 전 주식은 시점부터 다르다 ★★★★★</h2>
+<p><strong>교재122–126쪽 · 문단의 이유:</strong> 아직 회사가 생기기 전과, 회사는 있지만 종이가 없는 상태를 구별한다.</p>
+<p><strong>권리주</strong>는 회사 성립 전 인수인의 지위다.319조상 양도는 회사에 대하여 효력이 없고 회사가 임의로 승인하여 그 제한을 없앨 수 없다. 신주발행에도425조의 준용 관계를 확인한다. <strong>65다2069,1965.12.7.</strong>은 회사 측 승낙만으로 권리주 양도의 제한을 무력화할 수 없다는 취지다. 제한을 어긴 관여자의 제재 문제도 별개다.</p>
+<p>반면 회사 성립 후에는 주주권이 이미 생겼어도 주권을 발행하지 않았을 수 있다.335조3항은 주권발행 전 양도가 원칙적으로 회사에 효력이 없다고 하면서, <strong>회사 성립 후 또는 신주의 납입기일 후6개월이 지났으면 예외</strong>를 인정한다. 회사가 발행 의무를 계속 미루면서 양도도 못 하게 해서는 안 되기 때문이다. 주권이 이미 발행되었다면6개월이 지났다는 이유로 교부를 생략할 수 없다.</p>
+<h3>교재의 옛 사례를 현재 규칙에 놓아 보기</h3>
+<p><strong>86다카982,1987.5.26.</strong> 주권 발행 전 양도를 해 놓고 나중에 주권을 발행했다고 예전 양도가 언제나 자동 치유된다고 할 수 없다는 사례다. <strong>83도1622,1983.9.27.</strong>은 회사에 효력 없는 양수인들만을 주주로 취급한 총회의 문제를 보여 준다. <strong>4294민상1114,1962.5.17.</strong>은 효력 없는 양수인이 회사 상대 주주 지위를 전제로 소를 제기할 수 있는지 문제 삼았다. 이들은 <strong>1995년 도입된6개월 예외 전의 판례</strong>이므로‘주권 없으면 언제나 영구 무효’의 근거가 아니다.</p>
+<p><strong>82다카21,1982.9.28.</strong>은 회사 상대 효력 제한과 당사자 사이 채권적 계약의 유효성을 나눈다. 옛 조문번호335조2항은 현행3항과 구별한다. <strong>2011다62076·62083,2012.2.9.</strong>과 <strong>2000두1850,2002.3.15.</strong>은 주권 미발행 상태에서6개월이 지나면 회사 상대 효력도 인정될 수 있다는 현재의 출구를 설명한다. 주권이 발행되지 않은 경우라는 전제를 빼지 않는다.</p>
+<p><strong>설명용 시간표:</strong> 설립→2개월에 가영이 민호에게 매도→회사는 계속 주권 미발행→6개월 경과. 이 경우 당사자 계약과 회사 상대 효력의 시점을 나누어 본다. 반대로1개월에 유효한 주권을 발행해 가영이 보관했다면, 민호는7개월째라는 이유만으로 종이를 안 받아도 된다고 할 수 없다.</p>
+<p><strong>시험:</strong> 성립 전/후, 발행 전/후,6개월 전/후. <strong>키워드:</strong> 세 개의 시계. <strong>한 줄:</strong> 언제 무엇이 없었는지를 먼저 표시한다.</p>
+<h2 id="company-04-20" data-concept-id="company-04-20">4-4. 미발행 주식의 이중양도는 확정일자와 통지를 본다 ★★★★★</h2>
+<p><strong>교재125–126·137–140쪽 · 문단의 이유:</strong> 종이 주권이 없을 때 누가 먼저 권리를 확보했는지 정해야 한다.</p>
+<p>성립 후6개월이 지났고 주권이 여전히 발행되지 않았다면, 당사자의 의사표시로 주식 양도가 가능하다. <strong>99다67529</strong>는 이런 적법한 취득 뒤 회사가 제3자에게 잘못 준 종이만으로 그 제3자가 권리자가 되지 않는다는 점과 연결된다. <strong>2015다71795,2016.3.24.</strong>은 양수인이 양수 사실을 증명하여 단독으로 명의개서를 청구할 수 있고 양도인의 협력이 언제나 필요한 것은 아니라는 취지다.</p>
+<p>하지만 회사에 이름을 올렸다고 이중양도의 상대방에게 언제나 이기는 것은 아니다. <strong>94다36421,1995.5.23.</strong>은 주권 미발행 주식의 제3자 대항 문제에 민법450조의 지명채권 양도 규칙을 준용하여 <strong>확정일자 있는 통지 또는 승낙</strong>을 요구한다. <strong>2004도7112,2006.6.2.</strong>은 담보 목적의 양도에서도 이런 대항 구조가 문제됨을 보여 준다. 실제 우열은 통지 도달·승낙의 선후 등 법리를 적용하며 문서에 적힌 날짜만 빠르다고 끝내지 않는다.</p>
+<p><strong>설명용 사례:</strong> 가영이 같은 미발행 주식을 민호와 수진에게 각각 팔았다. 민호가 먼저 계약했지만 수진 쪽이 먼저 적법한 확정일자 통지를 회사에 도달시켰다면 단지 계약일만 비교할 수 없다. 반면 회사 총회에 누가 참가할지는 명부와 기준일을 또 확인한다.</p>
+<p><strong>시험:</strong> 회사 상대 대항=명의개서, 제3자 대항=확정일자 있는 통지·승낙. <strong>키워드:</strong> 누구를 상대로 주장하나. <strong>한 줄:</strong> 대항요건이라는 말이 같아도 상대방이 다르면 갖출 요건이 다르다.</p>
+<h1>5. 자기주식과 상호주식의 위험을 통제하기</h1>
+<h2 id="company-04-21" data-concept-id="company-04-21">5-1. 회사가 자기 주식을 살 때에는 재원과 절차를 본다 ★★★★★</h2>
+<p><strong>교재127–129쪽 · 문단의 이유:</strong> 회사 돈이 특정 주주에게 빠져나가고 경영진의 지배 수단이 될 수 있다.</p>
+<p>자기주식은 회사가 자기 회사의 주식을 취득한 것이다. 일반 취득은 자기 명의와 자기 계산으로,341조가 정한 방법과 한도 안에서 한다. 자기 계산이란 손익을 회사가 부담한다는 뜻이다. 명의만 타인으로 바꿔 실질이 회사 계산인 거래도 규제를 피하는 수단이 되어서는 안 된다. 반대로 회사 명의지만 진정으로 타인 계산인 수탁 거래는 일반적인 자기 계산 취득과 같은 개념으로 단정하지 않는다.</p>
+<p>일반 취득 한도는 직전 결산기 대차대조표의 순자산에서462조1항의 자본금·준비금 등 공제 항목을 뺀 배당가능이익 범위다.‘올해 통장에 돈이 많다’만으로 되는 것이 아니다. 해당 영업연도 말 순자산이 법정 기준에 미달할 우려가 있으면 취득하지 못한다. 위반에 따른 부족액에 이사들이 연대책임을 질 수 있으나 주의를 게을리하지 않았음을 증명하는 면책 규정까지 구별한다.</p>
+<p>거래소 시세가 있는 경우 시장 취득, 그 밖에 각 주주에게 비례·균등한 조건으로 기회를 주는 법정 방법 등341조와 시행령을 따른다. 주주총회가 미리 종류·수, 취득가액 총액, <strong>1년을 넘지 않는 취득 기간</strong>을 정한다. 정관상 이사회 배당이 가능한 경우 등 법정 조건에서는 이사회 결의로 갈음한다. 상장회사 공개매수 등에는 특별법 규율도 더해진다.</p>
+<p><strong>특정 목적 취득341조의2:</strong>① 합병·다른 회사 영업 전부 양수 ② 회사 권리 실행에 필요한 경우 ③ 단주 처리 ④ 주주의 주식매수청구권 행사. 이때는 일반적인 배당가능이익 한도 방식과 다른 예외를 인정한다. 영업‘일부’양수나 회사의 임의 담보 제공이 모두 열거 사유가 되는 것은 아니다. 단주 처리의 별도 절차도 지킨다.</p>
+<p><strong>2005다75729,2006.10.12.</strong>은 당시 일반적 금지 구조 아래 법정 예외나 자본기초·주주·채권자를 해칠 우려가 없는 특별한 경우를 검토했고, 위법한 자기주식 취득의 효력을 선의·악의와 무관하게 부정하는 취지다. <strong>현재의 적법한 취득 후 소각 기한 위반까지 과거 취득계약이 언제나 소급 무효라는 뜻으로 확대하지 않는다.</strong> 취득 단계의 위법인지 이후 보유·처분 의무 위반인지 구분한다.</p>
+<p><strong>시험:</strong> 재원·방법·사전결의·특정 목적 예외. <strong>키워드:</strong> 취득이 전면 금지된 것은 아님. <strong>한 줄:</strong> 살 수 있는가를 먼저 판단하고, 산 뒤의 의무는 다음 단계에서 본다.</p>
+<h2 id="company-04-22" data-concept-id="company-04-22">5-2.2026년 개정: 자기주식에는 주주권이 없고 소각이 원칙이다 ★★★★★</h2>
+<p><strong>교재129–132쪽 · 문단의 이유:</strong> 자기주식이 경영권 강화나 선택적 이익 제공에 이용되는 것을 통제한다.</p>
+<p>2026.3.6 시행 개정은 자기주식의 의결권뿐 아니라 신주인수권·무상신주 배정권·배당권 등 <strong>주주로서의 권리 행사를 금지</strong>했다(341조의3). 회사가 자기주식으로 교환·상환할 수 있는 사채를 발행하는 것도 금지한다. 보유 자기주식을 질권의 목적으로 제공할 수도 없다.</p>
+<p>이를‘다른 주주의 주식을 회사가 담보로 받는 것’과 구별한다. 회사가 자기 주식을 질권의 목적으로 <strong>받는</strong> 것은 발행주식총수의1/20을 넘지 못하되,341조의2제1·2호 사유에는 한도 예외가 있다. 내 주식을 담보로 내주는 것과, 남이 가진 내 주식을 담보로 받는 것은 방향이 반대다.</p>
+<p><mark class="yellow">자기주식을 취득하면 원칙적으로 취득일부터1년 내 소각한다. 법정 사유의 보유처분계획을 주주총회가 승인하면 그 계획에 따른 보유·처분이 가능하다.</mark></p>
+<table>
+<thead>
+<tr>
+<th>소각 대신 계획에 따른 보유·처분 사유</th>
+<th>조건의 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기존 주주에게 처분</td>
+<td>보유 주식 수에 비례하고 균등한 조건</td>
+</tr>
+<tr>
+<td>임직원 보상</td>
+<td>법정 주식매수선택권 등 보상 목적</td>
+</tr>
+<tr>
+<td>우리사주제도</td>
+<td>관련 법령에 따른 활용</td>
+</tr>
+<tr>
+<td>법정 조직거래</td>
+<td>포괄적 교환·이전·합병 등 법이 정한 활용</td>
+</tr>
+<tr>
+<td>경영상 필요</td>
+<td>신기술 도입·재무구조 개선 등의 사유를 특별결의로 정관에 규정</td>
+</tr>
+</tbody></table>
+<p>계획은 <strong>매년 주주총회 승인</strong>을 받아야 한다. 이사 전원이 기명날인·서명하고 목적, 주식 종류·수·취득방법, 보유 개시·예정 처분 시점의 자기주식과 나머지 주식 수·비율 변화, 예정 보유기간과 처분 시기를 적는다.‘한 번 이사회에서 허락하면 무기한 보유’가 아니다.</p>
+<p>342조상 처분은 기존 주주에게 비례·균등하게 기회를 주는 것이 원칙이다. 위 표의 임직원·우리사주·법정 활용·경영상 필요 사유이면 제3자 처분이 가능하다. 구체적인 종류·수·가격·납입일·상대방·방법은 정관, 법과 이사회의 권한 배분에 따른다. 신주발행의 일부 보호 규정도 성질에 반하지 않는 범위에서 준용된다.343조는 취득 사유와 관계없이 보유 자기주식을 이사회 결의로 소각할 수 있게 한다.</p>
+<p><strong>설명용 사례:</strong> 회사가 자기주식을 사서 친한 투자자에게 주려 한다.‘원래 회사가 가진 주식이니 마음대로 팔아도 된다’가 아니다. 취득 적법성,1년 소각 원칙, 계획 승인, 제3자 처분 사유·절차를 차례로 확인한다.</p>
+<p><strong>시험:</strong> 취득기간1년과 취득 후 소각1년을 분리. <strong>키워드:</strong> 권리 없음·1년·매년 승인·균등 처분. <strong>한 줄:</strong> 자기주식은 사는 순간 끝나는 재산이 아니라 이후 처리가 통제되는 주식이다.</p>
+<h2 id="company-04-23" data-concept-id="company-04-23">5-3. 기존 자기주식·신탁·합병에는 경과 규칙도 있다 ★★★★☆</h2>
+<p><strong>교재131–133쪽 · 문단의 이유:</strong> 새 규칙을 과거 보유분과 우회 취득에도 맞춰 적용한다.</p>
+<p>2026.3.6 당시 직접 보유한 자기주식은 원칙적으로 <strong>시행일부터6개월 경과한 날부터1년 내</strong> 소각하는 경과 규칙을 따른다. 기존 질권이 시행 후 해제된 경우나 기존 자기주식 교환·상환 사채의 채권 소멸·기간 도과에는 별도의 기산점이 있다. 기존 신탁 간접취득분은 시행 후 회사가 반환받은 날부터1년이 기준이다. 승인된 계획에 따른 예외도 함께 검토한다.</p>
+<p>외국인 지분 규제를 적용받는 회사가 기존 자기주식을 소각하여 법정 제한을 위반하게 되면, 준수에 필요한 범위는 시행일부터3년 내 처분하는 특례를 둔다. 관련 법은 공기업 민영화, 방송, 신문, 인터넷멀티미디어방송, 자본시장, 전기통신, 항공안전법의 열거 규정이다. 모든 회사에3년 유예를 주는 것이 아니다. 승인 계획에 따른 보유·처분 가능성도 부칙에서 정한다.</p>
+<p>상장회사가 신탁으로 자기주식을 사면 신탁업자는 계약 존속 중 처분하지 못하고 종료·해지 후 지체 없이 반환해야 한다. 일반적인 소각 기산일은 신탁업자의 취득일로 본다. 다만 방금 설명한 <strong>시행 전 간접취득분</strong>은 부칙을 따로 적용한다. 현재 이 신탁 조항은 <strong>542조의14</strong>,2027.1.1부터 전자주주총회 조항이 시행되면서 <strong>542조의16</strong>으로 이동한다. 교재가 미래 번호를 사용한 부분과 현재 번호를 혼동하지 않는다.</p>
+<p>합병 존속회사가 가진 소멸회사 주식과 소멸회사의 자기주식에 합병 신주를 배정하거나 자기주식을 이전하지 못한다(529조의2). 분할·분할합병에서도 분할회사 자기주식에 신주를 배정하거나 그 자기주식을 승계회사 등에 이전하는 것을 금지한다(530조의13). <strong>자기주식에 새 표를 붙여 지배력을 늘리는 우회</strong>를 막는 연결이다.</p>
+<p>상장회사의 소각·계획 위반에는635조3항9·10호의5천만원 이하 과태료 규정도 확인한다. 해당 과태료의 주체·요건을 모든 비상장회사에 똑같이 확대하지 않는다. <a href="https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001702&lsRvsGubun=all">2026년 개정문과 부칙</a></p>
+<p><strong>시험:</strong> 기존/신규·직접/신탁·시행일·미래 조문번호. <strong>키워드:</strong> 날짜와 우회 차단. <strong>한 줄:</strong> 같은 자기주식도 언제 어떻게 샀는지에 따라 시계를 달리 센다.</p>
+<h2 id="company-04-24" data-concept-id="company-04-24">5-4. 자회사의 모회사 주식 취득은 자본을 돌아오게 한다 ★★★★★</h2>
+<p><strong>교재133–135쪽 · 문단의 이유:</strong> 서로의 주식을 사면 실제 외부 재산 없이 자본과 지배력이 부풀 수 있다.</p>
+<p>설명용으로 A가 B주식60%를 가지고 B가 A주식40%를 가지면, A가 B를 통해 자기 자신에 연결되는 고리가 생긴다.60%×40%=24%는 경제적 순환을 보여 주는 계산일 뿐 <strong>A가 법적으로 자기 주식24%를 직접 소유한다</strong>는 뜻은 아니다. 서로 출자금을 돌려 장부상 투자를 늘려도 그룹 밖에서 새 재산이 그만큼 들어온 것은 아닐 수 있다. 경영진이 서로의 표를 이용해 자리를 지킬 위험도 있다.</p>
+<p>342조의2는 다른 회사의 발행주식총수 <strong>50% 초과</strong>를 가진 회사를 모회사로 보아 자회사의 모회사 주식 취득을 원칙적으로 금지한다. 모회사와 자회사 또는 자회사들이 합해50%를 초과하는 경우의 간주 규정도 확인한다. 정확히50%인 경우와‘초과’를 구별한다.</p>
+<p>예외는 포괄적 주식교환·이전, 합병, 다른 회사 영업 전부 양수, 회사 권리 실행에 필요한 취득 등이다. 예외 취득분도 원칙적으로6개월 내 처분한다. 삼각합병 등 다른 조문의 특례는11장과 연결한다. <strong>2024두34641</strong>처럼 취득 시점과 지배관계의 형성을 함께 보아야 하는 문제는1장의 모자회사 사례와 이어진다. 회사 이름만으로 모자관계를 고정해 두지 않는다.</p>
+<p><strong>시험:</strong>50% 초과·합산 간주·예외·6개월 처분. <strong>키워드:</strong> 순환 출자와 자본충실. <strong>한 줄:</strong> 자회사를 이용해 모회사가 자신을 사는 효과를 경계한다.</p>
+<h2 id="company-04-25" data-concept-id="company-04-25">5-5.10% 상호주 규칙은 취득 금지가 아니라 표의 제한이다 ★★★★★</h2>
+<p><strong>교재135–136쪽 · 문단의 이유:</strong> 모자관계가 아니어도 서로 표를 밀어주는 위험이 있다.</p>
+<p>A가 B의 주식을10% 초과 보유하면, B가 가진 A주식에는369조3항에 따른 의결권 제한이 생긴다. 양쪽 모두 상대방 주식을10% 초과 보유하면 양쪽의 상대방 회사 의결권이 제한될 수 있다. <strong>10% 딱 맞음과10% 초과는 다르다.</strong> 다른 회사의 주식을10% 초과 취득한 회사는342조의3에 따라 상대 회사에 지체 없이 통지한다.</p>
+<p><mark class="pink">369조3항은 의결권 제한이다. 자기주식의341조의3처럼 모든 공익권·자익권을 일괄 배제하는 조항이 아니다.</mark> 교재135쪽의 공익권·자익권 전부 배제 설명은 이 점에서 구별해야 한다. 배당권까지 자동으로 없어진다고 외우지 않는다. 또한 모자관계가 없는 회사의 모든 상호주 보유가 금지된다는 뜻도 아니다.</p>
+<p><strong>문제 사례:</strong> A가 B12%를 취득했다. B가 A주식을10% 초과 취득하면 A가 가진 B주식의 의결권도 제한될 수 있다. 처음 A의 취득으로 직접 제한되는 것은‘B가 가진 A의 표’라는 방향을 정확히 그린다.</p>
+<p><strong>2025마6793,2026.4.2. 보완:</strong> 상호주 의결권 제한을 판단하는 지분관계의 시점은 총회일을 기준으로 보며, 누가 그 총회에서 권리를 행사할 주주인지를 확정하는 기준일 문제와 구별한다. 외국회사라는 이유만으로 적용을 전부 배제하지 않고 우리 법상 주식회사와 동일하거나 가장 유사한 회사인지 등을 본다. <a href="https://www.scourt.go.kr/sjudge/1775710188178_134948.pdf">대법원 판결 자료</a></p>
+<p><strong>시험:</strong>50%는 모자 취득 규제,10%는 상호주 의결권·통지. <strong>키워드:</strong> 초과·방향·표만. <strong>한 줄:</strong> 누가 누구의 주식을 가지고, 어느 회사에서 표를 쓰려는지 나누어 쓴다.</p>
+<h1>6. 명의개서와 선의취득으로 거래의 끝을 확인하기</h1>
+<h2 id="company-04-26" data-concept-id="company-04-26">6-1. 명의개서 청구·부당 거절·실기주 ★★★★★</h2>
+<p><strong>교재139–142쪽 · 문단의 이유:</strong> 양수인이 실제 회사 관계에 들어가는 길을 설명한다.</p>
+<p>유효한 주권 소지자는 권리자로 추정된다(336조2항). 교재의‘336조의2’와 조문 표기를 구별한다. <strong>2009다89665,2010.10.14.</strong>에 따르면 명의개서는 원칙적으로 양수인이 청구하고 양도인이 당연히 단독 청구권자가 되는 것은 아니다. 주권이 있으면 제시하고, 미발행6개월 경과 주식이면 양수 사실을 증명한다. 불소지 신고 주식은 주권을 발행받아 이전하는 절차와 연결한다.</p>
+<p>회사는 주권 소지자의 자격 등에 관하여 법정 형식심사를 하며 모든 과거 거래를 무한히 조사할 의무를 지는 것은 아니다. 그러나 명백한 이상이나 중대한 부주의를 무시해도 된다는 뜻은 아니며 별도 책임을 검토한다. 적법한 명부에 기재된 주주의 권리행사를 회사가 자의적으로 배제하는 문제와, 새 명의개서 신청의 적정성을 심사하는 문제도 다르다.</p>
+<p><strong>92다40952,1993.7.13. 교재 사례:</strong> 회사 대표자가 양도를 알고 관여·승인한 사정이 있는데 정당한 명의개서를 부당하게 거절했다. 회사가 스스로 만든 미기재 상태를 내세워 권리행사를 막을 수 있는지가 문제됐다. <strong>법원의 고민:</strong> 객관적 명부 기준은 필요하지만 회사의 부당한 거절을 보호하는 도구가 되어서는 안 된다. 이 취지는2017년 판례가 인정하는 부당 거절·지연의 예외와 함께 읽는다.‘대표자가 알기만 하면 명의개서가 언제나 필요 없다’고 확대하지 않는다.</p>
+<p>실기주는 명의개서 시기를 놓쳐 신주 배정 등 권리행사에서 빠진 주식을 말하며, 넓게는 배당·합병대가 등의 문제도 포함해 설명한다. 회사가 적법한 명부 기준으로 지급하여 면책되는 것과, 양도인·양수인 사이에서 그 이익을 누가 최종 보유할지는 별개다. 매매계약의 내용·귀속·부당이득 등 민사관계를 살핀다. 명부상 옛 주주가 받았다고 언제나 최종적으로 가져도 되는 것은 아니다.</p>
+<p><strong>시험:</strong> 양수인 청구·추정·부당 거절 예외·실기주. <strong>키워드:</strong> 회사 관계와 내부 정산. <strong>한 줄:</strong> 회사가 누구에게 지급해도 되는지와 누가 최종 이익을 갖는지는 다른 질문이다.</p>
+<h2 id="company-04-27" data-concept-id="company-04-27">6-2. 명의개서대리인은 명부 업무를 맡아 처리한다 ★★★☆☆</h2>
+<p><strong>교재142쪽 · 문단의 이유:</strong> 주주가 많은 회사의 변경 업무를 전문적으로 처리한다.</p>
+<p>정관에 근거하여 명의개서대리인을 두고 법정 방식으로 선임·공시할 수 있다. 대리인의 영업소에서 명부 복본을 관리하고 거기에 한 명의개서도337조2항에 따라 효력을 가진다. 회사가 일일이 창구를 운영하지 않아도 된다. 상장회사는 상장 관련 규정의 선임 요구도 확인해야 한다.</p>
+<p>이름에‘대리인’이 들어가지만 모든 행위를 민법상 법률행위 대리와 완전히 같게 설명하지 않는다. 회사의 명부 관리 사무를 위임받아 수행하는 성격과 구체적 권한·책임을 본다. 법정 요건을 갖춘 기관이 담당하며, 특정 기관의 현재 영업 여부까지 교재 목록만으로 단정하지 않는다.</p>
+<p><strong>설명용 사례:</strong> 수진이 회사 본점이 아닌 적법한 명의개서대리인에게 신청해 복본에 기재되었다.‘본점 장부에 직접 쓰지 않았으니 무효’라고 할 수 없다.</p>
+<p><strong>시험:</strong> 정관 근거·복본의 효력·업무 위임. <strong>키워드:</strong> 전문 창구. <strong>한 줄:</strong> 처리 장소는 달라도 법정 명의개서의 효력은 연결된다.</p>
+<h2 id="company-04-28" data-concept-id="company-04-28">6-3. 선의취득은 진짜 주권을 믿고 거래한 사람을 보호한다 ★★★★★</h2>
+<p><strong>교재142–145쪽 · 문단의 이유:</strong> 매번 과거 소유관계를 완벽히 조사해야 한다면 주권이 유통되기 어렵다.</p>
+<p>상법359조와 수표법21조의 준용 구조는 유효한 주권을 믿고 거래한 선의·무중과실 취득자를 보호한다. 주권을 훔친 사람에게서 샀더라도 요건을 갖추면 권리를 취득할 수 있어 원래 소유자와 충돌한다. 그래서 보호 요건을 빠짐없이 확인한다.</p>
+<table>
+<thead>
+<tr>
+<th>요건</th>
+<th>왜 필요한가?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>유효한 주권</td>
+<td>위조·실효·적법한 발행 전 증서까지 진짜로 만들지는 않는다.</td>
+</tr>
+<tr>
+<td>양도인의 권한 흠결</td>
+<td>무권리자·판례상 무권대리인의 처분 권한 부족을 보완한다. 모든 다른 계약 하자를 치유하는 것은 아니다.</td>
+</tr>
+<tr>
+<td>거래에 의한 취득</td>
+<td>상속·합병 같은 포괄승계는 이 거래 신뢰 보호의 대상이 아니다.</td>
+</tr>
+<tr>
+<td>교부 등 점유 취득</td>
+<td>단순히 계약만 하거나 양도인이 계속 보관하는 점유개정만으로는 부족하다.</td>
+</tr>
+<tr>
+<td>선의·무중과실</td>
+<td>취득 당시 권한 없음을 모르고 현저히 주의를 빠뜨리지 않아야 한다.</td>
+</tr>
+</tbody></table>
+<p><strong>76다2990,1978.7.25.</strong> 일본인 소유로 국가에 귀속된 주권은 적법한 처분 절차가 없으면 선의취득의 대상이 되지 않는다는 역사적 사례다. <strong>번역:</strong> 외관을 믿었다고 법이 처분을 금한 재산까지 유통 가능한 것으로 바뀌지 않는다. 오늘날 모든 주식에 국가 허가가 필요하다는 뜻은 아니다.</p>
+<p><strong>95다49646,1997.12.12.</strong>은 양도인이 무권리자인 경우뿐 아니라 무권대리인인 경우에도 선의취득이 인정될 수 있다고 했다.‘나는 주인을 대리한다’고 하며 권한 없이 넘긴 경우도 거래 보호를 검토한다. 제한능력, 사기·강박 등 양도계약의 다른 흠까지 전부 없애 준다고 확대하지 않는다.</p>
+<p><strong>99다58471,2000.9.8. 교재 사례:</strong> 소유자가 맡긴 주권을 보관자가 다시 제3자에게 맡겼다. 보관자가 이를 팔면서 실제 종이를 직접 주지 않고 반환청구권을 넘겼다고 했다. 법원은 제3자에 대한 반환청구권 양도와 지명채권 양도의 대항요건까지 갖추었는지 보았다. <strong>갈등:</strong> 양수인은‘받을 권리를 샀으니 충분하다’고 한다 → 원래 소유자는‘아직 누가 보관하고 누가 반환받는지 바뀌지 않았다’고 한다 → 법원은 실제 점유 이전에 해당하는 법정 요건을 확인한다. <strong>번역:</strong>① 제3자가 보관 중이면 반환청구권을 넘긴다.② 그 양도에 필요한 통지·승낙을 갖춘다.③ 선의·중과실은 주권 취득 시점을 기준으로 판단한다.</p>
+<p>점유개정은 일반적인 양도 방식으로 인정될 수 있지만 선의취득에서는 외부적으로 권리 상태가 바뀌지 않아 인정되지 않는다고 본다. 선의취득을 부정하려는 원래 권리자는 양수인의 악의·중과실을 입증할 문제를 부담한다. 무과실이 아니라 <strong>중과실 없음</strong>이라는 문언을 정확히 기억한다.</p>
+<p>요건이 충족되면 취득자는 주식 또는 질권 등 해당 권리를 적법하게 취득하고 원래 소유자는 그 범위의 권리를 잃는다. 기존 담보권의 소멸 등은 취득한 권리와 부담에 관한 선의의 범위를 구체적으로 살핀다. 회사에서 주주권을 행사하려면 다시 명의개서 원칙을 따른다. <mark class="blue">선의취득으로 소유권 문제를 해결해도 주주명부·기준일이라는 회사 운영 단계가 남는다.</mark></p>
+<p><strong>시험:</strong> 유효·거래·교부·선의무중과실·명의개서. <strong>키워드:</strong> 외관 신뢰의 한계. <strong>한 줄:</strong> 선의취득은 권한 흠결을 메우는 제도이지 가짜 종이까지 진짜로 만드는 제도가 아니다.</p>
+<h1>7. 보충학습 · 누가 회사를 움직이고 누구를 보호하는가</h1>
+<h2 id="company-04-29" data-concept-id="company-04-29">7-1. 주주총회·이사회·대표이사·감사는 역할을 나눈다 ★★★★☆</h2>
+<p><strong>교재146–148쪽 · 문단의 이유:</strong> 법인은 사람이 아니므로 의사결정·행동·감시를 맡을 조직이 필요하다.</p>
+<p>기관은 회사 안의 물리적 부서나 건물을 뜻하지 않는다. 일정한 권한을 가진 사람·회의체를 통해 회사의 뜻과 행동이 만들어진다는 법적 구조다. 주주총회는 법률·정관이 정한 기본사항을 결정한다. 이사회는 주요 업무집행을 결정하고 이사를 감독한다. 대표이사는 회사를 대표하며 업무를 수행한다. 감사 또는 감사위원회는 업무·회계를 감시한다. 어느 기관이든‘회사를 위한 일이니 아무거나 할 수 있다’고 권한을 섞지 않는다.</p>
+<p>교재의‘2인 이상의 이사로 이사회’라는 설명은 현행법의 기준과 다르다. <strong>이사는 원칙적으로3명 이상이고, 자본금10억원 미만 회사는1명 또는2명으로 할 수 있다.</strong> 이 작은 회사에는 일반적인 이사회가 구성되지 않으며383조의 대체 권한 규칙을 적용한다. 감사 생략 특례도 별도로 본다. 집행임원 제도를 선택한 회사는 대표이사 방식과 다른 구조를 가지므로6장의 보충학습에서 연결한다.</p>
+<p><strong>설명용 사례:</strong> 대표이사가 자기 보수를 마음대로 정하고, 감사는 회사를 대신해 영업계약을 체결한다고 한다. 각자의 기본 역할을 넘어서는지 관련 조문을 확인해야 한다. 직함이 높거나‘회사 이익’이라는 이유만으로 다른 기관의 권한을 가져올 수는 없다.</p>
+<p><strong>시험:</strong> 의사결정/집행·대표/감시, 이사 수. <strong>키워드:</strong> 기관별 권한. <strong>한 줄:</strong> 회사가 한 몸처럼 움직이려면 역할을 먼저 나누어야 한다.</p>
+<h2 id="company-04-30" data-concept-id="company-04-30">7-2. 소유와 경영의 분리, 지배구조의 두 갈등 ★★★☆☆</h2>
+<p><strong>교재148–153쪽 · 문단의 이유:</strong> 투자자와 경영자, 다수와 소수의 이해가 항상 같지는 않다.</p>
+<p>큰 회사에는 수많은 투자자가 있고 매일 경영할 전문성이 필요하다. 주주가 자금을 제공하고 전문 경영자가 운영하는 소유·경영 분리가 나타난다. 모든 회사에서 소유자와 경영자가 반드시 다른 사람이어야 한다는 법적 명령은 아니다. 작은 회사에서는 같은 사람이 양쪽 역할을 맡기도 한다.</p>
+<p>첫 갈등은 <strong>주주 대 경영자</strong>다. 맡겨 둔 사람이 자기 보수·지위·편의를 위해 회사 자원을 쓸 수 있으므로 선임·해임·감사·책임추궁 장치를 둔다. 모든 주주는 위험을 싫어하고 모든 경영자는 위험을 좋아한다는 고정된 성격론이 아니다. 거래 상황에 따라 서로 다른 유인이 생긴다는 설명이다.</p>
+<p>둘째 갈등은 <strong>지배주주 대 소수주주</strong>다. 지배주주가 임원을 장악해 자기가 가진 다른 회사에 이익을 옮기거나 자신에게만 유리한 거래를 시킬 수 있다. 소수주주권, 이해관계자 거래 통제, 이사의 책임이 필요하다.2025년 개정382조의3은 이사가 회사 및 주주를 위하여 충실하게 일하고 총주주 이익을 보호하며 전체 주주를 공평하게 대우하도록 규정한다. 특정 대주주의 이익을 곧 회사 전체의 이익이라고 할 수 없다.</p>
+<p>교재의 지분10%, 부채비율200%, 대주주1–2% 같은 숫자는 문맥상 사례·경제적 설명이다. 모든 회사의 최신 통계나 통일된 법정 지배 기준이 아니다. 소수 지분으로 사실상 지배할 수 있다는 설명과342조의2의 법정50% 초과 모자관계를 구별한다.</p>
+<p><strong>시험:</strong> 감시 문제의 상대방이 경영자인가 지배주주인가. <strong>키워드:</strong> 권한과 이익의 불일치. <strong>한 줄:</strong> 회사법은 회사를 키우는 규칙인 동시에 힘 있는 사람이 이익을 독차지하지 못하게 하는 규칙이다.</p>
+<h2 id="company-04-31" data-concept-id="company-04-31">7-3. 주주 중심 구조라도 다른 이해관계자가 사라지는 것은 아니다 ★★★☆☆</h2>
+<p><strong>교재149–154쪽 · 문단의 이유:</strong> 회사가 누구를 위해 존재하는지에 관한 논쟁을 보여 준다.</p>
+<p>주주는 채권자 등에게 지급하고 남는 이익을 받는 잔여청구권자라는 설명 때문에 경영 감시의 중요한 지위를 가진다. 그러나 회사 재산을 주주가 직접 공유하는 것은 아니다. 재산의 소유자는 회사다. 근로자·채권자도 임금 미지급이나 부도 등으로 위험을 부담하고, 소비자·지역사회·국가도 회사 활동의 영향을 받는다.</p>
+<p>주주총회의 표를 중심으로 회사 기관을 구성한다는 설명과‘다른 이해관계자는 회사에 관해 아무 권리도 없다’는 주장은 다르다. 노동법·도산법·계약·소비자 및 환경 규제 등에서 별도 보호를 받는다. 교재의 이해관계자 관련 강한 표현은 주주 중심 기관 구조를 설명하는 맥락으로 읽되 법적 보호가 전혀 없다는 일반명제로 확장하지 않는다. 어떤 지배구조가 가장 좋은지는 기업 규모·자금 조달·규제 환경에 따라 논쟁이 있는 심화 주제다.</p>
+<p>상장회사는542조의9에 따라 주요주주와 특수관계인, 이사·감사·집행임원 등에게 하는 신용공여가 원칙적으로 제한된다. 대여·보증·자금지원 성격 거래 등이 대상이며 법정 예외는 따로 확인한다.398조의 이사회 승인만 받으면542조의9의 금지가 모두 풀리는 것은 아니다. 일정 규모 회사의 큰 이해관계자 거래는 추가 이사회 승인·주주총회 보고도 문제된다.</p>
+<p>교재의 특수관계인 범위는 적용 법령별로 확인해야 한다. 이 문맥의 상법 시행령34조4항은2026.7.23 시행본에서도 배우자,6촌 이내 혈족·4촌 이내 인척 등과 관련 기업 관계를 정한다. 다른 법률의 친족 범위와 섞지 않는다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1030375721">상법 시행령34조</a></p>
+<p><strong>설명용 사례:</strong> 지배주주가‘내 회사니까 회사 통장으로 내 대출을 보증해도 된다’고 한다. 회사 재산은 개인 재산이 아니며, 상장회사 신용공여 금지·이해상충·이사 책임을 각각 검토해야 한다.</p>
+<p><strong>시험:</strong> 회사 재산과 주주 재산, 신용공여 금지와 거래 승인. <strong>키워드:</strong> 주주 중심≠타인 무보호. <strong>한 줄:</strong> 여러 이해관계 중 누구의 어떤 권리를 어떤 법으로 보호하는지 나누어 본다.</p>
+<h1>교재 마지막13개 질문 · 구두 답안</h1>
+<ol>
+<li><strong>주식의 의의:</strong> 자본 구성 단위이자 주주 지위다. 주권과 다르며 지분복수·불가분·공유를 구별한다.</li>
+<li><strong>전환주식:</strong> 법·정관 조건에 따라 다른 종류로 바꾸는 주식이다. 주주 청구형과 회사 전환형, 효력 시점, 발행가액 총액, 명부폐쇄 중 의결권을 본다.</li>
+<li><strong>상환주식:</strong> 배당가능이익을 재원으로 조건에 따라 소각한다. 회사 선택형·주주 청구형과 재원·통지·자본금 효과를 구별한다.</li>
+<li><strong>평등:</strong> 같은 조건 주식에는 수에 비례한 대우가 원칙이다. 종류주식 등 법정 예외와2023년 판례의 합리적 차등 허용을 함께 본다.</li>
+<li><strong>권리·의무:</strong> 자익/공익, 단독/소수라는 서로 다른 분류가 있다. 의무는 인수가액 납입이 기본이며 개인 보증·불법행위 등 별도 책임과 구별한다.</li>
+<li><strong>주권 성질:</strong> 비설권·비문언·요인·요식증권이며 교부를 통한 유통을 전제로 한다. 무기명주식 제도가 다시 생긴 것은 아니다.</li>
+<li><strong>주권 효력 시점:</strong> 단순 작성이 아니라 적법한 주주에게 교부되어야 한다. 성립·납입기일 전 발행은 금지된다.</li>
+<li><strong>명부 효력:</strong> 회사 상대 대항·권리행사 자격·회사 처리의 안정을 위한 기준이다. 실질 소유권의 공신력과는 다르며2017년 판례를 반영한다.</li>
+<li><strong>폐쇄/기준일:</strong> 폐쇄는 변경 정지, 기준일은 특정 권리행사자 확정이다. 각3개월 제한·2주 전 공고 원칙을 구별한다.</li>
+<li><strong>정관상 제한:</strong> 이사회 승인 원칙과 소규모1·2인 이사 회사의 총회 대체 예외를 확인한다. 거절 뒤 지정매수인·회사 매수의 출구가 있다.</li>
+<li><strong>법률상 제한:</strong> 권리주, 주권발행 전 양도, 자기주식, 자회사의 모회사 주식 취득 등이다. 제한의 내용과 상대방이 서로 다르다.</li>
+<li><strong>양도 대항:</strong> 종이 주권 교부는 이전 요건, 명의개서는 회사 상대 요건, 미발행 주식의 확정일자 통지·승낙은 제3자 상대 요건이다.</li>
+<li><strong>선의취득:</strong> 유효한 주권·거래·적법한 점유 취득·선의무중과실이 필요하다. 상속·가짜 주권·점유개정만으로는 안 되고 회사 상대 행사에는 명의개서를 본다.</li>
+</ol>
+<h1>기출 연결과 새로운 사례</h1>
+<p>제공 형성017–024, 워크북041–060을 연결했다. 이 범위에서는 주식의 뜻, 주주권 분류, 주권·주주명부, 양도 제한과 자기주식이 반복된다. 실제 국가시험 빈도·오답률 자료는 없으므로 수치나‘가장 많이 틀린 문제’라는 순위를 만들지 않는다. 다음은 개념 연결을 위한 우선순위다.</p>
+<table>
+<thead>
+<tr>
+<th>TOP5</th>
+<th>핵심 학습</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주식회사법_017</td>
+<td>주식의 단위·최소 액면·공유</td>
+</tr>
+<tr>
+<td>주식회사법_워크북_051</td>
+<td>명부와 양도, 열람권, 폐쇄의 구별</td>
+</tr>
+<tr>
+<td>주식회사법_워크북_056</td>
+<td>승인 제한의 일반 원칙과 소규모 회사 예외</td>
+</tr>
+<tr>
+<td>주식회사법_워크북_057</td>
+<td>상호주 의결권 제한의 방향과10% 초과</td>
+</tr>
+<tr>
+<td>주식회사법_024</td>
+<td>주권 선의취득과 포괄승계의 차이</td>
+</tr>
+</tbody></table>
+<p><strong>특히 주의할 원자료 표현:</strong> 워크북041‘지체 없이=6개월’은 발행 의무의 무조건적 유예로 외우지 않는다.045②는 액면주식 전제를 붙인다.046의 상계 허용은 신주발행의 회사 동의 규칙을 본다.056의 승인 기관에는383조 예외가 있다.057 해설의‘상호주 보유 금지’는 이 사례에서는 의결권 제한이라는 뜻으로 보완한다.058①은 <strong>주권 미발행</strong> 전제가 빠져 있으므로 발행된 주식까지 성립6개월 내 양도할 수 없다는 의미가 아니다.형성022①도 자기 계산 취득과 진정한 타인 계산의 수탁을 구별한다. 원본 정답은 바꾸지 않고 보기별로 조건을 표시한다.</p>
+<h2>새 사례5개 · 정답보다 판단 순서를 말해 보기</h2>
+<p><strong>문제1.</strong> 자본금5억원 회사에 이사가2명 있다. 정관상 승인 제한 주식을 가진 가영이 매수인을 정해 승인 청구를 했는데, 회사는‘이사회가 없으니 승인도 못 한다’고 한다. 한편 회사는 승인 거절 통지도 하지 않은 채 두 달을 기다리게 했다.</p>
+<p><strong>해설:</strong>383조4항의 주주총회 대체 규칙을 보아야 한다. 적법한 승인 청구 후1개월 내 거절 통지가 없다면 승인 간주도 문제된다. 이사회 부재를 영구 양도 금지로 사용할 수 없다. <strong>의도:</strong> 소규모 회사 예외와 기한 보호를 함께 적용.</p>
+<p><strong>문제2.</strong> 설립8개월이 지나도 주권을 발행하지 않은 회사의 주식을 민호가 샀다. 가영은 같은 주식을 수진에게도 팔았고 수진 쪽 확정일자 있는 양도 통지가 먼저 회사에 도달했다. 민호는 먼저 계약하고 먼저 명의개서를 했으니 무조건 이긴다고 한다.</p>
+<p><strong>해설:</strong> 미발행6개월 예외로 양도 가능성과, 제3자 우열을 정하는 확정일자 통지·승낙을 나눈다. 명의개서는 회사 상대 권리행사 요건이지 이중양도의 우열을 모두 대신하지 않는다. 각 통지의 적법성·도달 등을 구체적으로 확인한다. <strong>의도:</strong> 취득·회사 대항·제3자 대항을 분리.</p>
+<p><strong>문제3.</strong>2026년 새로 자기주식을 취득한 회사가 이사회에서‘경영권 안정에 필요하니5년 보유’라고 결의했다. 그 주식에 배당을 하여 다시 자기주식을 사겠다고도 한다.</p>
+<p><strong>해설:</strong>341조의3에 따라 자기주식의 배당권 등 주주권 행사는 금지된다. 취득일부터1년 소각 원칙의 예외는 법정 사유·보유처분계획·매년 총회 승인이 필요하다. 경영상 목적 사유는 특별결의로 정관에 정하는 요건까지 본다. 이사회 결의 한 번으로 충분하지 않다. <strong>의도:</strong>2026년 개정의 권리·보유·승인 세 층을 확인.</p>
+<p><strong>문제4.</strong> A가 B주식12%, B가 A주식9%를 가지고 있다. B는 A총회에서 표를 쓰고, A는 B총회에서 표를 쓰려 한다. B가 총회 전에 A주식을 추가로 사11%가 되었으니 양쪽 배당도 모두 없어졌다고 주장한다.</p>
+<p><strong>해설:</strong> 처음부터 B가 가진 A주식의 의결권은 제한될 수 있다. B의 보유가10%를 넘으면 A가 가진 B주식의 표도 제한되는 관계가 된다.369조3항은 배당권까지 일괄 박탈하는 규정이 아니다. 총회일의 지분관계와 기준일의 행사자 확정을 구별한다. <strong>의도:</strong> 방향·초과·권리 범위의 함정.</p>
+<p><strong>문제5.</strong> 도난된 진짜 주권을 매수한 민호가 매도인에게 계속 맡겨 두기로만 약속했다. 별도로 수진은 회사가 아직 주주에게 교부하지 않은 증서를 훔친 사람에게서 받았다. 둘 다‘나는 몰랐으니 선의취득’이라고 한다.</p>
+<p><strong>해설:</strong> 민호는 점유개정만으로 선의취득의 인도 요건을 갖추었다고 할 수 없다. 수진의 증서는 적법한 주권 발행·교부 전이므로 유효한 주권이라는 전제부터 문제된다. 선의만으로 모든 요건을 대체하지 못한다. <strong>의도:</strong> 외관 신뢰 보호의 출발점과 교부 방식.</p>
+<h1>용어 사전</h1>
+<h3>주식·주권·주주 株式·株券·株主</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주), 式(법 식), 券(문서 권), 主(주인 주). <strong>③ 합친 뜻:</strong> 지분 단위·그 증서·보유자. <strong>④ 이름의 이유:</strong> 투자 지위를 단위와 증서로 나누어 표현해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자본 구성 단위와 사원 지위, 이를 표창하는 증서, 그 지위의 주체. <strong>⑥ 쉬운 말:</strong> 권리 묶음과 그것을 나타내는 종이, 그 권리를 가진 사람. <strong>⑦ 사례:</strong> 종이를 잃어도 즉시 주주 지위가 없어지지 않음.</p>
+<p><strong>⑧ 시험:</strong> 소유·교부·명의개서 분리. <strong>⑨ 비교·기억법:</strong> 주식은 증서 자체가 아니며 주주는 회사 재산의 직접 소유자가 아님.</p>
+<h3>액면·무액면 額面·無額面</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 額(이마 액), 面(낯 면), 無(없을 무). <strong>③ 합친 뜻:</strong> 표면 금액·그 금액 없음. <strong>④ 이름의 이유:</strong> 발행가액과 구별되는 기준금액의 유무에서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식에 일정한1주 금액이 있거나 없는 제도. <strong>⑥ 쉬운 말:</strong> 가격표의 실제 거래가격과 법정 단위금액을 구별. <strong>⑦ 사례:</strong> 액면1000원 주식을5000원에 발행.</p>
+<p><strong>⑧ 시험:</strong> 액면 최소100원·혼용 금지. <strong>⑨ 비교·기억법:</strong> 무액면도 납입과 자본금이 있음.</p>
+<h3>지분복수·불가분·공유 持分複數·不可分·共有</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 持(가질 지), 分(나눌 분), 複(겹칠 복), 數(셀 수), 不(아닐 불), 可(옳을 가), 共(함께 공), 有(있을 유). <strong>③ 합친 뜻:</strong> 여러 지분 단위·쪼갤 수 없음·함께 가짐. <strong>④ 이름의 이유:</strong> 단위의 수와 단위 안의 공동관계를 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여러 주식 보유 가능,1주의 독립 분할 불가,1주 공동 보유 가능. <strong>⑥ 쉬운 말:</strong> 100개는 가질 수 있지만1개를0.5개씩 독립시키지는 않음. <strong>⑦ 사례:</strong> 상속인 둘이1주를 공유하고 행사자 지정.</p>
+<p><strong>⑧ 시험:</strong> 공유 가능과 불가분은 모순 아님. <strong>⑨ 비교·기억법:</strong> 공유는 주식 수가 늘어나는 분할과 다름.</p>
+<h3>분할·병합·단주 分割·倂合·端株</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 分(나눌 분), 割(나눌 할), 倂(아우를 병), 合(합할 합), 端(끝 단), 株(그루 주). <strong>③ 합친 뜻:</strong> 나눔·묶음·끝에 남은 주식 부분. <strong>④ 이름의 이유:</strong> 단위를 바꾸는 과정과 나머지를 표현.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주식 단위 조정과 병합 등에서1주에 못 미치는 부분. <strong>⑥ 쉬운 말:</strong> 10개로 나누거나10개를1개로 묶음. <strong>⑦ 사례:</strong> 100원10주를1000원1주로 병합.</p>
+<p><strong>⑧ 시험:</strong> 자본금·주식 수·증서 장수 분리. <strong>⑨ 비교·기억법:</strong> 주권분할은 종이만 나누는 것.</p>
+<h3>종류·우선·후배주 種類·優先·後配株</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 種(씨 종), 類(무리 류), 優(넉넉할 우), 先(먼저 선), 後(뒤 후), 配(나눌 배), 株(그루 주). <strong>③ 합친 뜻:</strong> 성질별 무리·먼저 또는 뒤에 배정. <strong>④ 이름의 이유:</strong> 투자자의 여러 요구를 조합해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법과 정관에 따른 서로 다른 권리 내용의 주식. <strong>⑥ 쉬운 말:</strong> 배당·의결권 등의 조건이 다른 투자 자리. <strong>⑦ 사례:</strong> 배당 우선이지만 의결권이 제한된 종류.</p>
+<p><strong>⑧ 시험:</strong> 정관 내용·수·공시. <strong>⑨ 비교·기억법:</strong> 우선이라고 모든 권리나 실제 배당액이 항상 더 큰 것은 아님.</p>
+<h3>상환주식 償還株式</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 償(갚을 상), 還(돌아올 환), 株(그루 주), 式(법 식). <strong>③ 합친 뜻:</strong> 정한 대가를 주고 회수하는 주식. <strong>④ 이름의 이유:</strong> 조건부 투자 회수를 허용해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법·정관 조건에 따라 배당가능이익으로 소각하는 종류주식. <strong>⑥ 쉬운 말:</strong> 이익이 있어야 약속대로 되사 없앨 수 있는 주식. <strong>⑦ 사례:</strong> 주주 청구형이라도 배당가능이익 확인.</p>
+<p><strong>⑧ 시험:</strong> 선택권자·재원·통지·자본금. <strong>⑨ 비교·기억법:</strong> 대여금의 무조건 원금반환과 다름.</p>
+<h3>전환·형성권 轉換·形成權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 轉(구를 전), 換(바꿀 환), 形(모양 형), 成(이룰 성), 權(권세 권). <strong>③ 합친 뜻:</strong> 바꿈·법률관계를 만들어 바꾸는 권리. <strong>④ 이름의 이유:</strong> 지위를 교체하는 작용이라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정한 종류의 주식을 다른 종류로 바꾸는 권리와 그 일방적 법률효과. <strong>⑥ 쉬운 말:</strong> 조건을 갖춰 신청하면 다른 종류의 주주가 됨. <strong>⑦ 사례:</strong> 우선주를 보통주로 전환.</p>
+<p><strong>⑧ 시험:</strong> 효력 시점·348조·폐쇄 중 의결권. <strong>⑨ 비교·기억법:</strong> 새 돈을 내는 신주인수와 다름.</p>
+<h3>주주평등 株主平等</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 株(그루 주), 主(주인 주), 平(평평할 평), 等(같을 등). <strong>③ 합친 뜻:</strong> 주주를 동등한 기준으로 대우. <strong>④ 이름의 이유:</strong> 자의적 특혜를 막으려는 것.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 같은 조건의 주식에는 수에 비례한 평등 대우 원칙. <strong>⑥ 쉬운 말:</strong> 같은 투자 조건이면 가진 수만큼 대우. <strong>⑦ 사례:</strong> 100주와10주를 사람 수로 반씩 배당하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 법정 예외·2023년 합리적 차등. <strong>⑨ 비교·기억법:</strong> 1인1표·모든 계약상 차등 무효와 다름.</p>
+<h3>자익권·공익권 自益權·共益權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 益(더할 익), 共(함께 공), 權(권세 권). <strong>③ 합친 뜻:</strong> 자기 이익·공동 이익의 권리. <strong>④ 이름의 이유:</strong> 권리의 목적이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경제적 이익 실현 권리와 운영 참여·감시 권리. <strong>⑥ 쉬운 말:</strong> 배당을 받는 일과 회사 잘못을 바로잡는 일. <strong>⑦ 사례:</strong> 배당/대표소송.</p>
+<p><strong>⑧ 시험:</strong> 명의개서는 자익·장부 열람은 공익. <strong>⑨ 비교·기억법:</strong> 公이 아니라共이며 소수주주권 분류와 축이 다름.</p>
+<h3>단독·소수주주권 單獨·少數株主權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 單(홑 단), 獨(홀로 독), 少(적을 소), 數(셀 수), 株(그루 주), 主(주인 주), 權(권세 권). <strong>③ 합친 뜻:</strong> 혼자 가능·정한 소수 지분 필요. <strong>④ 이름의 이유:</strong> 권리 남용과 감시 필요를 조절해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 1주도 가능한 권리와 일정 비율 이상 보유해야 하는 권리. <strong>⑥ 쉬운 말:</strong> 혼자 신청할 수 있느냐, 지분을 모아야 하느냐. <strong>⑦ 사례:</strong> 명부 열람1주 가능·일반 회계장부3%.</p>
+<p><strong>⑧ 시험:</strong> 1·3·10%와 상장 특례. <strong>⑨ 비교·기억법:</strong> 소수는 모든 경우50% 미만이라는 뜻 아님.</p>
+<h3>대표소송·유지청구 代表訴訟·留止請求</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대), 表(겉 표), 訴(하소연할 소), 訟(송사할 송), 留(머무를 류), 止(그칠 지), 請(청할 청), 求(구할 구). <strong>③ 합친 뜻:</strong> 회사를 대신한 소송·행위를 멈추라는 요구. <strong>④ 이름의 이유:</strong> 회사가 스스로 경영진을 통제하지 않는 때를 대비.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주가 회사 이익을 위해 책임을 추궁하거나 위법행위를 중지시키는 권리. <strong>⑥ 쉬운 말:</strong> 회사 돈을 빼돌린 이사에게 회사에 갚으라 소송. <strong>⑦ 사례:</strong> 대표소송 배상은 주주 개인 보너스가 아님.</p>
+<p><strong>⑧ 시험:</strong> 공익권·각 지분과 절차. <strong>⑨ 비교·기억법:</strong> 유지는 계속 유지한다는維持가 아니라 멈춤의留止.</p>
+<h3>출자·상계·대물변제 出資·相計·代物辨濟</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 出(날 출), 資(재물 자), 相(서로 상), 計(셀 계), 代(대신할 대), 物(물건 물), 辨(분별할 변), 濟(건널 제). <strong>③ 합친 뜻:</strong> 재산을 냄·서로 계산해 없앰·다른 급부로 갚음. <strong>④ 이름의 이유:</strong> 실제 회사 재산 확보 방식을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인수가액 납입과 채권채무 상쇄 및 다른 재산에 의한 이행. <strong>⑥ 쉬운 말:</strong> 돈을 넣는 것과 서로 받을 돈을 정산하는 것. <strong>⑦ 사례:</strong> 신주 납입채무와 회사 대여금채권 상계.</p>
+<p><strong>⑧ 시험:</strong> 421조2항 회사 동의·현물 심사 우회 금지. <strong>⑨ 비교·기억법:</strong> 설립 때도 모든 상계가 자유로운 것은 아님.</p>
+<h3>비설권·비문언·요인·요식 非設權·非文言·要因·要式</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 非(아닐 비), 設(베풀 설), 權(권세 권), 文(글월 문), 言(말씀 언), 要(요긴할 요), 因(인할 인), 式(법 식). <strong>③ 합친 뜻:</strong> 권리를 새로 만들지 않음·문구만이 전부 아님·원인 필요·형식 필요. <strong>④ 이름의 이유:</strong> 주권의 효력과 권리 내용을 정확히 설명하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주권이 기존 권리를 표시하고 법정 형식을 갖추며 원인과 관련되는 성질. <strong>⑥ 쉬운 말:</strong> 종이를 만들었다고 없는 주식이 생기지는 않음. <strong>⑦ 사례:</strong> 정관과 법에서 권리 내용 결정.</p>
+<p><strong>⑧ 시험:</strong> 성질별 이유를 설명. <strong>⑨ 비교·기억법:</strong> 요식이라고 모든 비본질적 누락이 곧 무효는 아님.</p>
+<h3>교부·간이인도·점유개정 交付·簡易引渡·占有改定</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 交(사귈 교), 付(줄 부), 簡(대쪽 간), 易(쉬울 이), 引(끌 인), 渡(건널 도), 占(차지할 점), 有(있을 유), 改(고칠 개), 定(정할 정). <strong>③ 합친 뜻:</strong> 건넴·간단한 인도·점유 관계 변경. <strong>④ 이름의 이유:</strong> 물건의 이전을 현실 전달 외에도 설명해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현실 전달, 이미 가진 자에 대한 인도, 양도인이 보관자로 남는 인도 방식. <strong>⑥ 쉬운 말:</strong> 종이를 건네거나 이미 가진 사람에게 소유를 넘김. <strong>⑦ 사례:</strong> 매도인이 계속 보관하는 점유개정.</p>
+<p><strong>⑧ 시험:</strong> 일반 양도와 선의취득 구별. <strong>⑨ 비교·기억법:</strong> 점유개정만으로 선의취득 인정×.</p>
+<h3>불소지·임치 不所持·任置</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 所(바 소), 持(가질 지), 任(맡길 임), 置(둘 치). <strong>③ 합친 뜻:</strong> 가지고 있지 않음·맡겨 둠. <strong>④ 이름의 이유:</strong> 분실 위험과 보관 부담을 줄여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주권을 소지하지 않겠다는 신고와 보관을 맡기는 법률관계. <strong>⑥ 쉬운 말:</strong> 종이를 직접 보관하지 않겠다고 회사에 알림. <strong>⑦ 사례:</strong> 불소지 뒤에도 발행 재청구 가능.</p>
+<p><strong>⑧ 시험:</strong> 정관 금지 없으면 가능·복본 기재. <strong>⑨ 비교·기억법:</strong> 주식 포기·전자증권 전환과 다름.</p>
+<h3>공시최고·제권판결 公示催告·除權判決</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 示(보일 시), 催(재촉할 최), 告(고할 고), 除(덜 제), 權(권세 권), 判(판단할 판), 決(결단할 결). <strong>③ 합친 뜻:</strong> 공개적으로 신고를 촉구·증서 효력 제거 판결. <strong>④ 이름의 이유:</strong> 이중 유통과 진짜 소지자의 피해를 막아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 분실 증서의 권리 신고 기회를 주고 그 효력을 없애는 재판 절차. <strong>⑥ 쉬운 말:</strong> 잃어버린 종이가 다시 거래되지 않도록 법원에서 정리. <strong>⑦ 사례:</strong> 제권판결 뒤 재발행.</p>
+<p><strong>⑧ 시험:</strong> 분실만으로 즉시 재발행×. <strong>⑨ 비교·기억법:</strong> 주식 자체를 소각하는 판결이 아님.</p>
+<h3>명의개서·대항·자격수여 名義改書·對抗·資格授與</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 名(이름 명), 義(옳을 의), 改(고칠 개), 書(글 서), 對(대할 대), 抗(막을 항), 資(재물 자), 格(격식 격), 授(줄 수), 與(줄 여). <strong>③ 합친 뜻:</strong> 명의를 고쳐 적음·상대에게 주장·자격을 부여. <strong>④ 이름의 이유:</strong> 회사가 권리행사자를 안정적으로 확인하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 명부 기재를 통해 회사 상대 주주권 행사의 기준을 갖춤. <strong>⑥ 쉬운 말:</strong> 회사 명단에 새 주주 이름을 올림. <strong>⑦ 사례:</strong> 주식은 샀지만 총회 행사는 명부 문제 확인.</p>
+<p><strong>⑧ 시험:</strong> 2017년 판례·부당 거절 예외. <strong>⑨ 비교·기억법:</strong> 소유권 공신력·제3자 대항요건과 다름.</p>
+<h3>폐쇄·기준일 閉鎖·基準日</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 閉(닫을 폐), 鎖(쇠사슬 쇄), 基(터 기), 準(법도 준), 日(날 일). <strong>③ 합친 뜻:</strong> 변경을 닫음·판단 기준의 날. <strong>④ 이름의 이유:</strong> 계속 바뀌는 주주 중 특정 권리자를 정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일정 기간 명부 변경 정지와 특정일의 행사자 확정. <strong>⑥ 쉬운 말:</strong> 잠시 명단 수정을 멈추거나 하루의 명단을 기준으로 삼음. <strong>⑦ 사례:</strong> 기준일 다음 날 매수해도 매매는 가능.</p>
+<p><strong>⑧ 시험:</strong> 3개월 제한·2주 공고. <strong>⑨ 비교·기억법:</strong> 폐쇄가 주식 매매 자체의 금지는 아님.</p>
+<h3>질권·등록질 質權·登錄質</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 質(바탕 질), 權(권세 권), 登(오를 등), 錄(기록할 록). <strong>③ 합친 뜻:</strong> 담보 권리·등록한 담보. <strong>④ 이름의 이유:</strong> 돈을 못 받을 때를 대비해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채권 담보로 주식 등에 설정하는 권리와 명부에 기재하는 형태. <strong>⑥ 쉬운 말:</strong> 주식을 담보로 잡되 주주와 담보권자는 다를 수 있음. <strong>⑦ 사례:</strong> 340조 명부와 주권 표시.</p>
+<p><strong>⑧ 시험:</strong> 자기주식 담보 제공/받기 구별. <strong>⑨ 비교·기억법:</strong> 주식 소유권 양도와 같지 않음.</p>
+<h3>권리주 權利株</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 利(이로울 리), 株(그루 주). <strong>③ 합친 뜻:</strong> 장래 주식을 받을 권리 지위. <strong>④ 이름의 이유:</strong> 회사 성립 전후를 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사 성립 전 주식인수인의 지위. <strong>⑥ 쉬운 말:</strong> 아직 회사가 태어나기 전 투자자의 자리. <strong>⑦ 사례:</strong> 319조 양도 회사 상대 무효.</p>
+<p><strong>⑧ 시험:</strong> 성립 전·신주 준용. <strong>⑨ 비교·기억법:</strong> 성립 후 주권 미발행 주식과 다름.</p>
+<h3>확정일자·양도담보 確定日字·讓渡擔保</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 確(굳을 확), 定(정할 정), 日(날 일), 字(글자 자), 讓(사양할 양), 渡(건널 도), 擔(멜 담), 保(지킬 보). <strong>③ 합친 뜻:</strong> 확실한 날짜·이전 방식 담보. <strong>④ 이름의 이유:</strong> 이중양도 우열과 채권 보호를 설명해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 방식으로 인정된 문서 날짜와 소유권 이전 형식의 담보. <strong>⑥ 쉬운 말:</strong> 나중에 날짜를 마음대로 바꾸지 못하게 하는 증명. <strong>⑦ 사례:</strong> 미발행 주식의 확정일자 통지.</p>
+<p><strong>⑧ 시험:</strong> 회사 도달·승낙과 제3자 대항. <strong>⑨ 비교·기억법:</strong> 명의개서가 이 요건을 전부 대신하지 않음.</p>
+<h3>자기주식·소각 自己株式·燒却</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 己(몸 기), 株(그루 주), 式(법 식), 燒(사를 소), 却(물리칠 각). <strong>③ 합친 뜻:</strong> 자신의 주식·없앰. <strong>④ 이름의 이유:</strong> 출자 환급·지배력 문제를 통제하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사가 자기 발행 주식을 취득하고 법적으로 소멸시키는 것. <strong>⑥ 쉬운 말:</strong> 회사가 자기 투자 지분을 되사서 없앰. <strong>⑦ 사례:</strong> 2026년 취득 후1년 소각 원칙.</p>
+<p><strong>⑧ 시험:</strong> 계획 매년 승인·권리 없음·부칙. <strong>⑨ 비교·기억법:</strong> 종이를 태우는 행위만으로 소각되는 것 아님.</p>
+<h3>배당가능이익 配當可能利益</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 配(나눌 배), 當(마땅 당), 可(옳을 가), 能(능할 능), 利(이로울 리), 益(더할 익). <strong>③ 합친 뜻:</strong> 법적으로 나누어 줄 수 있는 이익. <strong>④ 이름의 이유:</strong> 주주 환급과 채권자 보호를 조절해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 순자산에서 자본금·법정 공제액 등을 뺀 배당 재원 한도. <strong>⑥ 쉬운 말:</strong> 통장 잔액 전부가 아니라 법이 나눠도 된다고 한 몫. <strong>⑦ 사례:</strong> 자기주식 일반 취득·상환 재원.</p>
+<p><strong>⑧ 시험:</strong> 462조와 결산 기준. <strong>⑨ 비교·기억법:</strong> 매출·현금·당기순이익 자체와 같지 않음.</p>
+<h3>모자회사·상호주 母子會社·相互株</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 母(어미 모), 子(아들 자), 會(모일 회), 社(모일 사), 相(서로 상), 互(서로 호), 株(그루 주). <strong>③ 합친 뜻:</strong> 지배하는 회사와 지배받는 회사·서로 가진 주식. <strong>④ 이름의 이유:</strong> 우회 자기취득과 표의 순환을 막아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 지분 기준의 모자관계와 회사 사이의 주식 교차 보유. <strong>⑥ 쉬운 말:</strong> A가 B를 지배하는데 B가 A주식을 사는 구조. <strong>⑦ 사례:</strong> 50% 초과 취득 규제와10% 초과 표 제한.</p>
+<p><strong>⑧ 시험:</strong> 분모·초과·의결권 방향. <strong>⑨ 비교·기억법:</strong> 상호주라고 배당권까지 자동 박탈되지 않음.</p>
+<h3>실기주 失期株</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 失(잃을 실), 期(기약할 기), 株(그루 주). <strong>③ 합친 뜻:</strong> 기한을 놓친 주식. <strong>④ 이름의 이유:</strong> 소유와 회사 명단의 시차를 설명해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 명의개서 지연으로 신주 배정 등 권리행사에서 빠진 주식. <strong>⑥ 쉬운 말:</strong> 사기는 샀는데 명단을 제때 못 고쳐 배정을 놓침. <strong>⑦ 사례:</strong> 옛 명의자에게 배당 지급.</p>
+<p><strong>⑧ 시험:</strong> 회사 면책과 당사자 정산 분리. <strong>⑨ 비교·기억법:</strong> 주식 자체가 항상 무효가 되는 것 아님.</p>
+<h3>선의·중과실·포괄승계 善意·重過失·包括承繼</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 善(착할 선), 意(뜻 의), 重(무거울 중), 過(지날 과), 失(잃을 실), 包(쌀 포), 括(묶을 괄), 承(이을 승), 繼(이을 계). <strong>③ 합친 뜻:</strong> 모름·큰 부주의·한꺼번에 이어받음. <strong>④ 이름의 이유:</strong> 거래 신뢰의 보호 범위를 정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권한 흠결을 모름, 현저한 주의 결여, 상속·합병 등 포괄 이전. <strong>⑥ 쉬운 말:</strong> 몰랐다고 다 보호하지 않고 크게 이상한 점을 놓쳤는지도 봄. <strong>⑦ 사례:</strong> 도난된 진짜 주권 매수와 상속 구별.</p>
+<p><strong>⑧ 시험:</strong> 취득 당시·유효 증서·교부. <strong>⑨ 비교·기억법:</strong> 착한 성품의 뜻 아님, 포괄승계는 선의취득의 거래 아님.</p>
+<h3>기관·지배구조·충실의무 機關·支配構造·忠實義務</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 機(틀 기), 關(관계할 관), 支(지탱할 지), 配(나눌 배), 構(얽을 구), 造(지을 조), 忠(충성 충), 實(열매 실), 義(옳을 의), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 조직의 기능 주체·통제 구조·맡은 일에 충실한 의무. <strong>④ 이름의 이유:</strong> 법인이 사람을 통해 행동하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회사의 의사·행동을 담당하는 기관과 권한·감시 체계, 이사의 회사·주주를 위한 의무. <strong>⑥ 쉬운 말:</strong> 총회는 정하고 이사는 일하며 감사가 살핀다. <strong>⑦ 사례:</strong> 대주주 개인 이익을 회사 이익으로 착각하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 3인 이사회 원칙·소규모 예외·2025년382조의3. <strong>⑨ 비교·기억법:</strong> 회사 건물·대주주의 사유재산과 다름.</p>
+<h3>신용공여·잔여청구권 信用供與·殘餘請求權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신), 用(쓸 용), 供(이바지할 공), 與(줄 여), 殘(남을 잔), 餘(남을 여), 請(청할 청), 求(구할 구), 權(권세 권). <strong>③ 합친 뜻:</strong> 신용 위험을 부담하며 제공·남는 몫 요구. <strong>④ 이름의 이유:</strong> 관련자 지원의 위험과 주주의 경제적 위치를 설명해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대여·보증 등 자금 지원 거래와 다른 권리자 지급 후 잔여 이익을 받는 주주 지위. <strong>⑥ 쉬운 말:</strong> 남의 빚을 보증하는 것과 채무를 갚은 뒤 남는 몫. <strong>⑦ 사례:</strong> 상장회사의 주요주주 보증 제한.</p>
+<p><strong>⑧ 시험:</strong> 542조의9와398조 별도 심사. <strong>⑨ 비교·기억법:</strong> 주주가 회사의 개별 재산을 직접 소유하는 뜻 아님.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<div class="memory-sheet">
+
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 주식·주권·명부의 분리 / 양도의 세 시점 / 자기주식과 상호주 규제.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>반드시 기억</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주식</td>
+<td>자본 단위+사원 지위. 액면≥100원. 복수·불가분, 공유는 가능</td>
+</tr>
+<tr>
+<td>분할·종류</td>
+<td>주식분할≠주권분할. 상환=이익 소각, 전환=종류 변경</td>
+</tr>
+<tr>
+<td>의결권 제한 종류</td>
+<td>전체1/4 이하. 배당 미지급만으로 자동 부활×, 정관 확인</td>
+</tr>
+<tr>
+<td>평등</td>
+<td>주식 수 비례·같은 조건. 법정 예외+2023년 합리적 차등 심사</td>
+</tr>
+<tr>
+<td>권리·의무</td>
+<td>자익=경제, 공익=운영·감시. 납입 의무·신주 상계는 회사 동의</td>
+</tr>
+<tr>
+<td>소수주주권</td>
+<td>일반1%·3%·10% 구별. 명부 열람은1주도 가능. 상장 특례 별도</td>
+</tr>
+<tr>
+<td>주권</td>
+<td>비설권·요인·비문언·요식. 적법한 주주에게 교부. 지체 없이≠무조건6개월 유예</td>
+</tr>
+<tr>
+<td>불소지</td>
+<td>정관 금지 없으면 신고 가능. 언제든 발행 청구. 분실은 제권판결</td>
+</tr>
+<tr>
+<td>명부</td>
+<td>회사 상대 행사 기준.2017년 판례·부당 거절 예외. 소유 귀속과 별개</td>
+</tr>
+<tr>
+<td>폐쇄/기준일</td>
+<td>변경 정지/행사자 확정.3개월 제한 각각, 원칙2주 전 공고</td>
+</tr>
+<tr>
+<td>승인 양도</td>
+<td>이사회 원칙·소규모1/2인 이사 회사 총회 대체.1월→20일→2주→10일</td>
+</tr>
+<tr>
+<td>시점</td>
+<td>권리주319 / 미발행335③6개월 / 발행되면 주권 교부</td>
+</tr>
+<tr>
+<td>대항</td>
+<td>회사=명의개서 / 미발행 주식 제3자=확정일자 통지·승낙</td>
+</tr>
+<tr>
+<td>자기주식 취득</td>
+<td>배당가능이익·균등기회·사전결의. 특정 목적341②가 아니라341조의2</td>
+</tr>
+<tr>
+<td>2026 자기주식</td>
+<td>주주권 없음·취득 후1년 소각. 법정 계획 매년 총회 승인, 기존분 부칙</td>
+</tr>
+<tr>
+<td>상호주</td>
+<td>모자50% 초과→취득 제한·예외6개월 처분 /10% 초과→반대 방향 표 제한·통지</td>
+</tr>
+<tr>
+<td>선의취득</td>
+<td>유효 주권+거래+교부+선의무중과실. 가짜·상속·점유개정만으로×</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “샀는가, 회사에 행사하는가, 제3자에게 이기는가는 다른 질문이다.” “상호주 의결권 제한은 배당권 전부 박탈이 아니다.”</p>
+<p><strong>사례를 풀 순서:</strong> 회사 성립·납입 시점 → 주권 발행 여부 → 양도 방식 → 승인 제한 → 명부·기준일 → 제3자 우열·선의취득 → 자기·상호주 여부.</p>
+</div>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>🟢 미발행 주식 이중양도와 상호주 사례를 종이에 표시하여 설명할 수 있으면 이해 완료. 🟡 숫자는 기억하지만 회사 상대 행사와 소유권을 섞으면3-4·4-4를 복습. 🔴‘주식을 샀으니 무조건 총회 표도 내 것’,‘자기주식은 아무 조건 없이 평생 보유’라고 생각하면4-1·5-2부터 다시 읽기. 실제 답변 없이 학습 상태를 확정하지 않는다. <strong>복습TOP3: 주권·명의개서, 양도 시점·대항요건, 자기주식·상호주 비교.</strong></p>
+<p>교재89–154쪽과 제공28문항을 토대로 설명했다.2026.10.23 기준 <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001702">상법</a>, <a href="https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001702&lsRvsGubun=all">2026년 자기주식 개정문·부칙</a>, <a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1027001013">소규모 회사의383조 특례</a>, <a href="https://law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1006005295">335조의5 가격 결정</a>, <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032335603">369조 의결권 제한</a>을 대조했다. 전환의 자본금 효과는 <a href="https://taxlaw.nts.go.kr/qt/USEQTA002P.do?ntstDcmId=200000000000008086">국세청 공개자료가 인용한 등기선례</a>의 액면·감자 맥락을 구별했고, 자본금 불변 병합은 <a href="https://www.insanga.co.kr/prCenter/news/newsView.asp?board_num=622&key=&keyWord=&page=1">발행회사의 공고 사례</a>로 교재의 제한적 설명을 보완했다. 소수점 거래는 <a href="https://fsc.go.kr/no010101/77381?curPage=184&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=">금융위원회 안내</a>의 제도 구조를 참고했다. 출처가 제시한 구체적 조건을 생략하여 일반 투자 조언으로 확대하지 않는다.</p>
+<h1>문제 부록 · 28문항·112개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-주식회사법_017"><h4>형성평가 · 주식회사법_017</h4><p class="question-stem">다음 중에서 주식에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>자본금의 구성단위이다.</li><li>주주의 지위를 의미한다.</li><li>액면주식 1주의 최소금액에 대한 아무런 제한이 없다.</li><li>1주의 주식을 공유하는 것은 허용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 자본을 구성하는 단위이며 주주의 지위라는 뜻도 있다.</li><li><strong>비선택</strong> · 맞음. 사원 지위를 의미하며 종이 주권과 구별한다.</li><li><strong>선택</strong> · 틀림·정답. 액면주식1주 금액은100원 이상이다. 무액면 제도와 혼동하지 않는다.</li><li><strong>비선택</strong> · 맞음.1주 공유는 가능하다.0.5주씩 독립된 주식을 만드는 것과 다르고 권리행사자를 정한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 1주의 금액은 최소 100원 이상이어야 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_018"><h4>형성평가 · 주식회사법_018</h4><p class="question-stem">다음의 주주권 중에서 공익권(共益權)에 해당하는 것은?</p><ol class="choices"><li>이익배당 청구권</li><li>주권교부 청구권</li><li>명의개서 청구권</li><li>주주총회소집 청구권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자익권이다. 경제적 이익을 받으려는 권리다.</li><li><strong>비선택</strong> · 자익권이다. 주권을 받아 투자 지위를 실현한다. 돈을 바로 받지 않아도 자익권이다.</li><li><strong>비선택</strong> · 자익권이다. 회사 상대 행사 자격을 갖추기 위한 권리다.</li><li><strong>선택</strong> · 공익권·정답. 총회를 열어 회사 의사결정에 참여하려는 권리다. 일반회사 지분 요건과 상장 특례는 별도로 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주총회 소집청구권, 설립무효의 소 제기권, 의결권, 총회결의의 하자에 관한 각종 소의 제기권, 대표소송제기권, 이사의 위법행위 유지청구권, 위법한 신주발행유지청구권, 신주발행무효의 소의 제기권, 회계장부열람권, 이사․감사의 해임청구권, 회사의 업무 및 재산상태의 검사청구권, 해산판결청구권, 합병무효의 소의 제기권 등이 공익권에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_019"><h4>형성평가 · 주식회사법_019</h4><p class="question-stem">다음 중에서 주권불소지제도에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>주주는 주권을 소지하지 않겠다는 뜻을 회사에 신고할 수 있다.</li><li>불소지신고를 받은 회사는 지체없이 주주명부와 그 복본에 기재하여야 한다.</li><li>불소지신고에 따라 회사에 제출된 주권은 무효로 되거나 명의개서대리인에게 임치하여야 한다.</li><li>불소지신고를 한 주주가 주권의 발행을 청구하면 회사는 불소지신고를 이유로 발행할 수 없음을 통지하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 정관에서 금지하지 않으면 불소지 신고가 가능하다.</li><li><strong>비선택</strong> · 맞음. 명부와 복본에 지체 없이 적고 법정 통지 절차를 따른다.</li><li><strong>비선택</strong> · 맞음. 제출받은 주권을 무효로 하거나 명의개서대리인에게 임치하는 법정 처리를 한다.</li><li><strong>선택</strong> · 틀림·정답. 주주는 언제든 발행을 청구할 수 있고 회사는 지체 없이 발행해야 한다. 정관으로 그 청구를 막지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 불소지신고를 한 주주가 주권의 발행을 청구한 경우 회사는 지체없이 주권을 발행하여야 하고, 정관으로 이를 제한하거나 금지할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_020"><h4>형성평가 · 주식회사법_020</h4><p class="question-stem">주식양수인이 주주명부에 명의개서를 하면 주주로서 추정되어 실질적 권리를 증명하지 않고 주주로서의 권리를 행사할 수 있다. 이것은 주주명부의 어떤 효력인가?</p><ol class="choices"><li>대항력</li><li>면책력</li><li>공신력</li><li>자격수여적 효력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 회사에 양도 사실을 주장할 수 있는 효력이다. 질문의 추정·자격 부여 표현과 구별한다.</li><li><strong>비선택</strong> · 명부를 기준으로 적법하게 처리한 회사의 보호에 초점을 둔 말이다.</li><li><strong>비선택</strong> · 명부 기재를 믿었다고 무권리자가 항상 실질 소유권을 취득하는 공신력을 인정하는 것은 아니다.</li><li><strong>선택</strong> · 정답. 자격수여적 효력을 묻는다. 현재는2017년 전원합의체에 따른 회사 상대 권리행사 기준까지 함께 이해한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주명부의 자격수여적 효력(추정력)에 따라 주주명부에 명의개서를 하면 주식양수인은 주주로서 추정되어 실질적 권리를 증명하지 않고 주주로서의 권리를 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_021"><h4>형성평가 · 주식회사법_021</h4><p class="question-stem">주식회사의 정관에서 주식양도를 제한한다면, 주주가 주식을 양도하기 위해서 어느 기관의 승인을 얻어야 하는가?(상법에 따름)</p><ol class="choices"><li>이사회</li><li>대표이사</li><li>주주총회</li><li>감사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 일반 원칙상 정답.335조의 승인 기관이다. 단 자본금10억원 미만·이사1명 또는2명 회사에는383조4항의 주주총회 대체 예외가 있다.</li><li><strong>비선택</strong> · 일반적인 승인 기관이 아니다. 대표권이 있다고 승인 제한의 결정권까지 모두 가지는 것은 아니다.</li><li><strong>비선택</strong> · 일반 원칙의 답은 아니다. 다만 소규모1·2인 이사 회사에서 총회로 대체되는 법정 예외는 중요하다.</li><li><strong>비선택</strong> · 감사는 감독기관이지335조의 통상적 양도승인 기관이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제335조의2 내지 제335조의7 참조. 정관에 의한 주식양도제한에서 주식양도 승인기관은 이사회이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_022"><h4>형성평가 · 주식회사법_022</h4><p class="question-stem">다음 중에서 상법상 자기주식취득에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>회사는 자기명의와 타인계산으로 취득할 수 있다.</li><li>배당가능한 이익이 없으면 자기주식취득이 금지된다.</li><li>회사가 가진 자기주식은 의결권이 없다.</li><li>위법하게 자기주식을 취득하더라도 당사자간에는 유효하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원자료는341조 일반 취득을 자기 명의·자기 계산으로 묻는다. 다만 진정한 타인 계산의 수탁 취득까지 이 문장만으로 언제나 위법이라고 단정하면 안 된다. 개념상 보완이 필요한 보기다.</li><li><strong>비선택</strong> · 틀림.341조의2의 합병·영업 전부 양수 등 특정 목적 예외가 있다. 배당가능이익 없는 모든 취득이 금지되는 것은 아니다.</li><li><strong>선택</strong> · 맞음·정답. 자기주식은 의결권이 없다.2026년341조의3은 신주인수·배당 등 주주권 행사 제한도 명시한다.</li><li><strong>비선택</strong> · 틀림. 인용된 판례는 위법한 취득 자체의 효력을 부정한다. 다만 적법 취득 뒤 소각·계획 의무 위반까지 과거 계약의 당연한 소급 무효로 일반화하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상법 제341조 참조. 주식회사는 자기명의와 자기계산으로 자기주식을 취득할 수 있다. ② 배당가능한 이익과 무관하게 회사의 합병이나 영업전부 양수 등 특정목적에 의한 자기주식취득이 허용된다. ④ 위법한 자기주식취득은 선의·악의를 불문하고 무효이다. 대법원 2006.10.12. 선고 2005다75729 판결 참조.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_023"><h4>형성평가 · 주식회사법_023</h4><p class="question-stem">주식회사 성립 이후에 주식을 양도한 경우 주식양수인을 주주명부에 기재하는 것을 무엇이라 하는가?</p><ol class="choices"><li>양도등록</li><li>명의개서</li><li>주주변동</li><li>회사기재</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 용어가 아니다. 주식 양도 자체와 회사 장부의 기재를 분리한다.</li><li><strong>선택</strong> · 정답. 주식 취득자를 주주명부에 기재하는 것을 명의개서라 한다.</li><li><strong>비선택</strong> · 주주가 바뀌었다는 현상을 넓게 표현할 뿐 해당 절차의 정확한 명칭이 아니다.</li><li><strong>비선택</strong> · 일반적인 표현이며 상법상 이 절차의 명칭은 명의개서다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식의 이전으로 주주가 교체되었을 경우 그 취득자를 주주명부에 기재하는 것을 명의개서라고 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_024"><h4>형성평가 · 주식회사법_024</h4><p class="question-stem">다음 중에서 주권의 선의취득의 요건에 해당하지 않는 것은?</p><ol class="choices"><li>주권 자체가 유효하여야 한다.</li><li>무권리자로부터 양수하여야 한다.</li><li>상속과 같은 포괄승계에 의한 취득이어야 한다.</li><li>양수인은 선의이며 중과실이 없어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 필요하다. 위조·실효 주권이나 아직 적법하게 발행되지 않은 종이는 선의만으로 유효해지지 않는다.</li><li><strong>비선택</strong> · 핵심 대상이다. 판례는 무권대리인의 양도에도 적용 가능성을 인정한다.</li><li><strong>선택</strong> · 요건이 아님·정답. 거래에 의한 취득을 보호하므로 상속·합병 등 포괄승계는 해당하지 않는다.</li><li><strong>비선택</strong> · 필요하다. 권한 없음을 모르고 중대한 부주의가 없어야 한다. 일반 과실도 전혀 없어야 한다는 뜻과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주권의 선의취득이 성립하기 위해서는 주식의 양도에 의해 주권을 취득하였어야 한다. 상속·합병 등과 같은 포괄승계에 의해서는 주권의 선의취득이 인정되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_041"><h4>워크북 · 주식회사법_워크북_041</h4><p class="question-stem">주식회사는 성립 후 지체 없이 주권(株券)을 발행하여야 한다. 여기서 '지체 없이'에 해당하는 기간은?</p><ol class="choices"><li>설립등기 완료 시</li><li>성립 후 1월 이내</li><li>성립 후 3월 이내</li><li>성립 후 6월 이내</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원자료 정답이 아니다. 회사 성립과 즉시 모든 주권 교부가 동시에 이루어져야 한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 법이 지체 없이를 일률적으로1개월이라고 정한 것은 아니다.</li><li><strong>비선택</strong> · 법이 일률적으로3개월이라고 정한 것은 아니다. 명부폐쇄의3개월과 섞지 않는다.</li><li><strong>선택</strong> · 원본 정답. 다만355조의 지체 없이는 무조건6개월 유예라는 뜻이 아니다.6개월은335조3항의 미발행 양도 예외 기준이다. 이 보기는 교육상 단순화가 있어 일반 법명제로 외우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제355조 제1항 및 제335조 제3항 단서 참조. 주권발행전에 한 주식의 양도는 회사에 대하여 효력이 없다. 그러나 회사 성립 후 또는 신주의 납입 기일 후 6월이 경과한 때에는 그러하지 아니하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_042"><h4>워크북 · 주식회사법_워크북_042</h4><p class="question-stem">다음 중에서 주식 평등의 원칙에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>이익배당, 잔여 재산 분배는 주식 수에 비례하여 이루어져야한다.</li><li>정관의 규정이나 주주총회의 결의로 제한할 수 있다.</li><li>의결권의 행사에서 주주평등의 원칙과 차이가 있다.</li><li>종류주식, 감사의 선임에서도 예외 없이 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 기본 원칙상 맞음·정답. 같은 종류·조건이라면 주식 수에 비례한다. 종류주식의 구체적 권리는 별도로 본다.</li><li><strong>비선택</strong> · 자의적인 제한은 안 된다. 법정 허용과2023년 판례의 정당화되는 차등까지 모든 예외를 부인하는 식으로도 읽지 않는다.</li><li><strong>비선택</strong> · 틀림. 의결권도 원칙적으로 주식 수에 비례한다. 주주평등과 주식평등은 같은 기본 원리를 설명한다.</li><li><strong>비선택</strong> · 틀림. 종류주식·감사 선임 의결권 제한 등이 단순한 비례 원칙의 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 강행 규정이므로 법적 예외가 아니고서는 제한할 수 없고, 주주평등의 원칙이라고도 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_043"><h4>워크북 · 주식회사법_워크북_043</h4><p class="question-stem">'주권(株券)은 이미 발생한 주주의 권리를 표창하는 유가 증권이다'라는 말은 주권의 어떤 성질을 나타내는 것인가?</p><ol class="choices"><li>요식증권성</li><li>비설권증권성</li><li>비문언증권성</li><li>요인증권성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 형식이 필요하다는 성질이다. 이미 발생한 권리를 나타낸다는 설명과는 다르다.</li><li><strong>선택</strong> · 정답. 증서를 만들어 권리를 새로 설정하는 것이 아니라 이미 있는 주주권을 표창한다.</li><li><strong>비선택</strong> · 권리 내용이 증서 문구만으로 결정되지 않는다는 성질이다.</li><li><strong>비선택</strong> · 주권이 기초가 되는 원인관계와 관련된다는 성질이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> '주권은 이미 발생한 주주의 권리를 표창하는 유가 증권이다'라는 말은 주권의 비설권증권성을 나타내는 것이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_044"><h4>워크북 · 주식회사법_워크북_044</h4><p class="question-stem">다음 중에서 주식에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>자본금의 구성 단위이다.</li><li>지분 단일 주의가 타당하다.</li><li>1주의 주식을 둘로 나누어 타인에게 양도할 수 있다.</li><li>1 만 원짜리 1 주를 1 천 원짜리 10 주로 나누는 것을 주식의 병합이라고 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 사원 지위라는 의미와 함께 기억한다.</li><li><strong>비선택</strong> · 틀림. 여러 주식을 각각의 지분 단위로 가지는 지분복수주의다.</li><li><strong>비선택</strong> · 틀림.1주를0.5주씩 독립 주식으로 나누는 것은 안 된다. 공유는 별개다.</li><li><strong>비선택</strong> · 틀림. 주식분할이다. 병합은 여러 주식을 더 적은 주식으로 묶는 반대 방향이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 이익배당을 주식 수에 따라 하고, 1주 1의결권이 인정되므로 지분복수주의가 타당하다. ③ 1주의 주식을 둘로 나누어 타인에게 양도할 수 없다. 주식불가분의 원칙이라 한다. ④ 1만 원짜리 1주를 1천 원짜리 10주로 나누는 것을 주식의 분할이라고 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_045"><h4>워크북 · 주식회사법_워크북_045</h4><p class="question-stem">다음 중에서 주식에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>자본금의 구성 단위를 의미한다.</li><li>자본금을 균일하게 나눈 단위인 금액을 표시하여야 한다.</li><li>주주의 회사에 대한 권리는 주주가 가진 주식 수에 따라 계산된다.</li><li>우리 상법에서는 주식의 병합을 금지하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 자본 구성 단위라는 의미다.</li><li><strong>비선택</strong> · 액면주식을 전제로 한 설명이다. 현행법은 무액면주식도 허용하므로 모든 주식에 액면금액 표시가 필수라는 일반명제는 아니다.</li><li><strong>비선택</strong> · 기본 원칙상 맞음. 종류주식·법정 의결권 제한 등 조건과 예외를 함께 본다.</li><li><strong>선택</strong> · 틀림·원본 정답. 병합은 허용된다. 감자·합병뿐 아니라 액면을 함께 조정하는 자본금 불변 병합과도 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④ 우리 상법에서는 자본금 감소(상법 제440조)와 회사 합병(상법 제530조 제3항)의 경우에 주식 병합을 할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_046"><h4>워크북 · 주식회사법_워크북_046</h4><p class="question-stem">A 주식회사의 주주로서 甲, 乙, 丙, 丁이 부담하는 의무에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>A 주식회사는 주주에 대한 주금 납입 청구권을 포기하지 못한다.</li><li>주주는 A 주식회사에 대해서 주식인수 가액의 납입 의무만 부담한다.</li><li>A 주식회사의 자본 충실을 위해서 납입 의무의 상계는 예외 없이 금지된다.</li><li>주주의 출자는 금전 출자가 원칙이고, 현물출자는 엄격한 절차에 따라 인정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 주금납입채권을 임의 포기하여 출자의 실질을 없앨 수 없다.</li><li><strong>비선택</strong> · 주주 지위의 기본 의무를 설명한다. 개인 보증이나 자기 불법행위 등 별도 원인의 책임까지 없다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀림·정답. 신주발행의421조2항에 따라 회사 동의가 있으면 상계 가능하다. 설립 시 모든 상계에 그대로 확대하지 않는다.</li><li><strong>비선택</strong> · 맞음. 금전과 법정 절차의 현물출자를 구별한다. 노무·신용 출자나 심사 우회는 허용되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 회사의 동의가 있으면 주주의 납입 의무의 상계가 가능하다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_047"><h4>워크북 · 주식회사법_워크북_047</h4><p class="question-stem">다음 중에서 주권불소지 제도에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>정관에 주권불소지를 허용한다는 규정이 있어야한다.</li><li>주주는 주권을 소지하지 않겠다는 뜻을 회사에 신고하여야 한다.</li><li>불소지 신고를 받은 회사는 지체 없이 주주명부와 그 복본에 기재하여야 한다.</li><li>불소지 신고를 한 주주는 언제든지 회사에 대해서 주권발행을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답. 정관에 금지 규정이 없는 한 가능하므로 적극적 허용 조항을 요구하지 않는다.</li><li><strong>비선택</strong> · 맞음. 회사에 불소지 의사를 신고하는 제도다.</li><li><strong>비선택</strong> · 맞음. 명부와 복본의 기재로 상태를 명확히 한다.</li><li><strong>비선택</strong> · 맞음. 나중에 언제든 주권 발행을 청구할 수 있고 회사는 지체 없이 발행한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주권불소지 제도는 상법에서 인정하고 있는 제도로 정관에 주권불소지를 불허한다는 규정이 있는 경우 외에는 허용된다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_048"><h4>워크북 · 주식회사법_워크북_048</h4><p class="question-stem">다음의 주주권 중에서 자익권(自益權)에 해당하는 것은?</p><ol class="choices"><li>대표 소송 제기권</li><li>의결권</li><li>이익배당 청구권</li><li>회계 장부 열람권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공익권이다. 회사에 생긴 손해를 회복하려는 소송이다.</li><li><strong>비선택</strong> · 공익권이다. 회사의 의사결정에 참여한다.</li><li><strong>선택</strong> · 자익권·정답. 경제적 이익을 주주 자신이 받는 권리다.</li><li><strong>비선택</strong> · 공익권이다. 회사의 회계·운영을 감시한다. 일반회사는466조의 지분·이유서 요건 등을 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주가 회사로부터 경제적 이익을 받는 것을 목적으로 하는 것을 자익권이라 한다. 이익배당 청구권, 주권 교부 청구권, 주식 전환 청구권, 명의개서 청구권, 신주인수권, 준비금 자본 전입 시의 신주 배정 청구권, 잔여 재산 분배 청구권 등이자익권에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_049"><h4>워크북 · 주식회사법_워크북_049</h4><p class="question-stem">다음 중에서&quot;이익배당, 잔여 재산 분배 등은 주식 수에 비례하여 행해져야한다”라는 말이 뜻하는 것은?</p><ol class="choices"><li>배당 평등의 원칙</li><li>평등 분배의 원칙</li><li>재산 평등의 원칙</li><li>주식 평등의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 배당만이 아니라 잔여재산·의결권 등 회사 상대 지위 전반을 포함하는 원칙을 묻는다.</li><li><strong>비선택</strong> · 사람마다 무조건 똑같이 나눈다는 의미가 아니다. 주식 수에 비례하는 기준이다.</li><li><strong>비선택</strong> · 일반 재산을 모두 똑같이 나누는 원칙이 아니다.</li><li><strong>선택</strong> · 정답. 주식평등 또는 주주평등 원칙이다. 같은 조건과 법정 예외를 함께 고려한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이익배당, 잔여 재산 분배, 의결권 등 주주가 회사와의 관계에서 평등한 권리를 갖는다는 것으로 개별 주주의 권리 의무는 주식 수에 비례한다. 주주평등의 원칙이라고도 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_050"><h4>워크북 · 주식회사법_워크북_050</h4><p class="question-stem">다음의 주주권 중에서 공익권에 해당하는 것은?</p><ol class="choices"><li>이익배당 청구권</li><li>신주인수권</li><li>대표 소송 제기권</li><li>주권 교부 청구권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자익권이다. 주주 개인의 배당 이익을 실현한다.</li><li><strong>비선택</strong> · 자익권이다. 지분 비율과 투자 이익의 유지를 위한 권리다.</li><li><strong>선택</strong> · 공익권·정답. 회사가 추궁하지 않는 임원 책임을 회사 이익을 위해 묻는 장치다.</li><li><strong>비선택</strong> · 자익권이다. 주권을 받아 투자 지위를 실현하는 권리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주식회사의 운영에 참가하는 것으로 목적으로 하는 주주권을 공익권(共益權)이라 한다. 주주총회 소집권, 설립무효의 소 제기권, 의결권, 총회 결의의 하자에 관한 각종 소의 제기권, 대표 소송 제기권, 이사의 위법 행위 유지 청구권, 위법한 신주발행 유지 청구권, 신주발행 무효의 소의 제기권, 회계 장부 열람권, 이사·감사의 해임 청구권, 회사의 업무 및 재산 상태의 검사 청구권, 해산 판결 청구권, 합병 무효의 소의 제기권 등이 공익권에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_051"><h4>워크북 · 주식회사법_워크북_051</h4><p class="question-stem">다음 중에서 주주명부에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주주 및 주권에 관한 사항을 명확히 하기 위해서 상법의 규정에 의하여 회사가 작성·비치하여야 하는 장부이다.</li><li>주주명부에 주주의 이름과 소유 주식이 기재되지 않더라도 회사에 대해 주주권을 주장하는 데에는 아무런 문제가 없다.</li><li>주식을 1% 이상 보유한 주주만이 주주명부의 열람 청구권을 행사할 수 있다.</li><li>주주명부폐쇄 기간 중에 명의개서는 인정되지만, 전환주식 또는 전환 사채의 전환 청구는 인정되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞음·정답. 주주·주식 등의 사항을 명확히 하는 법정 장부다.</li><li><strong>비선택</strong> · 틀림. 원칙적으로 명의개서가 필요하다. 회사의 부당한 거절·지연 같은 예외는 따로 검토한다.</li><li><strong>비선택</strong> · 틀림. 주주명부 열람에는1% 요건이 없다.1주 주주와 회사채권자도396조에 따른 청구가 가능하다.</li><li><strong>비선택</strong> · 틀림. 폐쇄는 명의개서 등 변경을 제한한다. 전환 청구 자체는 가능하며 해당 총회의 의결권은 따로 제한될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 상법 제337조 제1항 참조. 주주명부에 주주의 이름과 소유 주식이 기재되지 않으면 회사에 대해 주주권을 행사할 수 없다. 따라서 주권을 교부 받아 주식을 양수하였더라도 명의개서를 하지 않아 자신의 이름이 주주명부에 등재되어 있지 않으면 주주권을 행사할 수 없다. ③ 상법 제396조 제2항 참조. 주주 또는 회사 채권자는 영업 시간 내에 언제든지 주주명부 열람 청구를 할 수 있다. 이때 주주의 자격에 대해서는 아무런 제한이 없고, 1 주를 보유한 주주도 행사할 수 있다. ④ 주주명부폐쇄 기간 중에는 명의개서는 물론이고 질권의 등록, 신탁 재산의 표시나 말소도 할 수 없다. 다만, 전환주식 또는 전환 사채의 전환 청구는 인정된다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_052"><h4>워크북 · 주식회사법_워크북_052</h4><p class="question-stem">다음 중에서 주주명부에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>회사 채권자도 주주명부의 열람 청구를 할 수 있다.</li><li>일정한 기간을 정하여 주주로서 권리를 행사할 자를 확정하는 제도를 주주명부폐쇄라고 한다.</li><li>회사가 상법의 규정과 무관하게 작성해야 하는 상업장부에 속한다.</li><li>일정한 날을 정하여 그 날에 주주명부에 기재되어 있는 주주를 권리 행사자로서 일률적으로 확정할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음.396조의 주주명부 열람 주체에는 회사채권자도 포함된다.</li><li><strong>비선택</strong> · 기본 취지상 맞음. 일정 기간 명부 변경을 정지해 행사자를 확정한다. 거래 자체를 금지하는 것은 아니다.</li><li><strong>선택</strong> · 틀림·정답. 주주명부는29조의 재산·손익을 기록하는 상업장부와 다르고 상법에 근거한 장부다.</li><li><strong>비선택</strong> · 맞음. 기준일 제도다. 특정 권리에 관한 행사자를 정하며 그 뒤 모든 명의개서까지 정지하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주명부는 회사의 영업상의 재산 및 손익의 상황을 명백히 하기 위하여 작성하는 것이 아니므로 상업장부는 아니다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_053"><h4>워크북 · 주식회사법_워크북_053</h4><p class="question-stem">주주명부에 명의개서를 하면 주식 양수인은 주주로서 추정되어 실질적 권리를 증명하지 않고 주주로서의 권리를 행사할 수 있다. 이것은 주주명부의 어떤 효력인가?</p><ol class="choices"><li>대항력</li><li>면책력</li><li>공신력</li><li>자격 수여적 효력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 회사에 양도 사실을 주장할 수 있는 측면이다. 질문은 자격 부여에 초점을 둔다.</li><li><strong>비선택</strong> · 명부를 기준으로 한 회사의 적법한 처리 보호와 연결된다.</li><li><strong>비선택</strong> · 명부에 잘못 적혔다고 실질 권리 없는 사람이 항상 소유권을 취득하는 것은 아니다.</li><li><strong>선택</strong> · 정답. 자격수여적 효력이다.2017년 판례의 회사 상대 권리행사 기준까지 보완하여 이해한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주주명부의 자격 수여적 효력(추정력)에 따라 주주명부에 명의개서를 하면 주식 양수인은 주주로서 추정되어 실질적 권리를 증명하지 않고 주주로서의 권리를 행사할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_054"><h4>워크북 · 주식회사법_워크북_054</h4><p class="question-stem">다음 중에서 정관에 의한 주식 양도제한에 해당하는 것은?</p><ol class="choices"><li>이사회 승인에 의한 주식 양도</li><li>주권발행전 주식 양도</li><li>권리주의 양도</li><li>자기주식 취득 금지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답.335조1항 단서의 정관상 제한이다. 소규모1·2인 이사 회사의 기관 대체는 별도다.</li><li><strong>비선택</strong> · 335조3항의 법률상 제한이다.6개월 경과 예외를 확인한다.</li><li><strong>비선택</strong> · 319조의 법률상 제한이다. 회사 성립 전 지위를 다룬다.</li><li><strong>비선택</strong> · 법률상 규율이다. 현재는 전면적 취득 금지가 아니라341조의 취득 허용 요건과2026년 보유·처분·소각 규제가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제335조 제1항 단서 참조. 권리주의 양도제한(제319조), 주권발행전 주식 양도(제335조 제3항 본문)및 자기주식 취득 금지(제341조), 상호주 보유 금지(제342조의2)등은 상법에 의한 주식 양도제한이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_055"><h4>워크북 · 주식회사법_워크북_055</h4><p class="question-stem">甲 주식회사가 乙 주식회사의 주식을 취득하고자 한다. 이때 甲 주식회사는 乙 주식회사 발행주식총수의 얼마를 취득한 때 乙 주식회사에 그 사실을 통지하여야 하는가?</p><ol class="choices"><li>1%초과 취득</li><li>3%초과 취득</li><li>5%초과 취득</li><li>10% 초과 취득</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이 통지 규정의 기준이 아니다. 대표소송 등 다른 소수주주권 숫자와 섞지 않는다.</li><li><strong>비선택</strong> · 이 통지 규정의 기준이 아니다. 장부 열람 등의 일반회사 비율과 다르다.</li><li><strong>비선택</strong> · 이 조문의 기준이 아니다. 다른 법의 대량보유 보고와 구별한다.</li><li><strong>선택</strong> · 정답.342조의3은10% 초과 취득 시 상대 회사에 지체 없이 통지하도록 한다. 정확히10%와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제342조의3 참조. 회사가 다른 회사의 발행주식총수의 10분의 1을 초과하여 취득한 때에는 그 다른 회사에 대하여 지체 없이 이를 통지하여야 한다. 회사가 다른 회사의 주식을 10% 초과하여 취득한 때에 그 다른 회사에 그 사실을 통지하도록 한 것은, 그 다른 회사가 그 사실을 알고 경영권 방어 등의 일정한 조치를 취할 수 있도록 하기 위해서이다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_056"><h4>워크북 · 주식회사법_워크북_056</h4><p class="question-stem">다음 중에서 정관에 의한 주식 양도제한의 방법에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>대표이사의 승인을 얻어야 양도할 수 있다.</li><li>이사회의 승인을 얻어야 양도할 수 있다.</li><li>주주총회의 특별결의를 거쳐서 양도 할 수 있다.</li><li>총주주의 동의를 얻어야 양도할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반적인 법정 승인 기관은 대표이사가 아니라 이사회다.</li><li><strong>선택</strong> · 일반 원칙상 정답. 단383조4항의 자본금10억원 미만·이사1명 또는2명 회사에서는 주주총회로 대체된다. 원자료 해설의 예외 없는 표현을 보완한다.</li><li><strong>비선택</strong> · 모든 회사에서 주주총회 특별결의를 요구하는 방식이 아니다. 소규모 회사 기관 대체와 특별결의 요구는 같은 말이 아니다.</li><li><strong>비선택</strong> · 335조의 일반적인 승인 제한 방법이 아니다. 총주주의 동의를 언제나 요구하면 양도 자유를 과도하게 막게 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제335조 제1항 단서 참조. 이사회의 승인을 얻도록하였다. 이외의 다른 제한 방법은 허용되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_057"><h4>워크북 · 주식회사법_워크북_057</h4><p class="question-stem">甲 회사가 乙 회사의 주식을 12%를 취득하고 그 사실을 乙 회사에 통보하였다. 이에 경영권 위기에 빠진 乙 회사는 甲 회사가 보유한 乙 회사 주식의 의결권을 행사할 수 없도록 甲 회사의 주식을 역취득하였다. 이때 乙 회사는 甲 회사의 주식을 얼마나 취득하여야 하는가?</p><ol class="choices"><li>1주만 취득해도 된다.</li><li>3% 초과 취득하여야 한다.</li><li>5% 초과 취득하여야 한다.</li><li>10%초과 취득하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 부족하다.10% 초과라는 지분 요건이 필요하다.</li><li><strong>비선택</strong> · 기준이 아니다. 일반 소수주주권의3%와 혼동하지 않는다.</li><li><strong>비선택</strong> · 기준이 아니다. 자본시장법의 다른 보고 기준과 구별한다.</li><li><strong>선택</strong> · 정답.乙이甲주식10% 초과를 가지면甲이 가진乙주식의 표도 제한될 수 있다. 해설의 상호주 보유 금지는 여기서는 의결권 제한으로 이해해야 하며 배당까지 자동 소멸하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제342조의3 및 제369조 제3항 참조. 甲 회사와 乙 회사가 서로 상대방 회사의 주식을 10% 초과 취득하면 상법상 주식의 상호주 보유 금지 규정에 따라 서로가 상대방 회사에 대한 의결권을 행사할 수 없게 된다. 따라서 乙 회사는 甲 회사의 주식을 10% 초과 취득하여야 한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_058"><h4>워크북 · 주식회사법_워크북_058</h4><p class="question-stem">다음 중에서 상법에서의 주식 양도제한에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>회사 성립 후 6월 이전에 주식 양도를 하면 회사에 대해서 효력이 인정된다.</li><li>상법상 자기주식 취득은 출자 환급이 되므로 전면 금지되고 예외 허용은 인정되지 않는다.</li><li>회사 성립 전에 주식인수인의 지위에 의한 권리주의 양도는 회사에 대하여 효력이 없다.</li><li>주식회사에서 상호주 소유는 모자회사 관계가 있는 경우에만 허용되고 모자회사 관계가 없는 경우에는 금지된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주권 미발행을 전제로 하면 회사 상대 효력이 제한된다. 다만 이 보기에는 그 전제가 생략되어 있다. 이미 유효한 주권이 발행됐다면 성립6개월 내에도 교부 등 요건을 갖춘 양도가 가능하다.</li><li><strong>비선택</strong> · 틀림.341조의 일반 취득과341조의2의 특정 목적 예외가 있다. 전면 금지가 아니다.</li><li><strong>선택</strong> · 맞음·정답.319조의 권리주 양도 제한이다. 당사자 사이 채권적 계약까지 모두 무효라는 의미는 아니다.</li><li><strong>비선택</strong> · 틀림. 모자관계에서는 자회사의 모회사 주식 취득이 원칙적으로 금지된다. 비모자 상호주는 취득 전면 금지와 의결권 제한을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 상법 제335조 제3항 참조. 주권발행전에 한 주식의 양도는 회사에 대하여 효력이 없다. 그러나 회사 성립 후 또는 신주의 납입 기일 후 6월이 경과한 때에는 그러하지 아니하다. ② 상법 제341조 참조. 회사는 자기의 명의와 계산으로 자기의 주식을 취득할 수 있다. 다만, 그 취득 가액의 총액은 직전 결산기의 대차대조표상의 순자산 액에서 제462조 제1항 각 호의 금액을 뺀 금액을 초과하지 못한다. ④ 상법 제342조의2 제1항 참조. 다른 회사의 발행 주식의 총수의 100분의 50을 초과하는 주식을 가진 회사(모회사)의 주식은 그 다른 회사(자회사)가 이를 취득할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_059"><h4>워크북 · 주식회사법_워크북_059</h4><p class="question-stem">다음 중에서 모자회사 간에 상호주 소유가 예외적으로 허용되는 경우에 해당하는 것은?(상법의 규정에 따름)</p><ol class="choices"><li>주식 소각으로 인한 경우</li><li>주식매수선택권의 행사로 인한 경우</li><li>주식의 포괄적 교환으로 인한 경우</li><li>주식 병합으로 인한 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당 열거 사유가 아니다. 소각은 주식을 없애는 처리다.</li><li><strong>비선택</strong> · 그 자체가342조의2의 이 예외 사유인 것은 아니다. 다른 회사법 제도를 섞은 보기다.</li><li><strong>선택</strong> · 정답. 포괄적 교환·이전, 합병·영업 전부 양수, 권리 실행 필요 등이 예외다. 취득 후 원칙6개월 처분도 기억한다.</li><li><strong>비선택</strong> · 그 자체가 이 조문의 예외 사유로 열거된 것은 아니다.341조의2의 단주 처리와도 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제342조의2 제1항 각 호 참조. 주식의 포괄적 교환, 주식의 포괄적 이전, 회사의 합병 또는 다른 회사의 영업 전부의 양수로 인한 때, 회사의 권리를 실행함에 있어 그 목적을 달성하기 위하여 필요한 때에 예외적으로 모자회사 간의 상호주 소유가 허용된다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_060"><h4>워크북 · 주식회사법_워크북_060</h4><p class="question-stem">상법 제341조의2에서는 특정 목적에 의한 자기주식 취득을 허용하고 있다. 다음 중에서 특정 목적에 해당하지 않는 것은?</p><ol class="choices"><li>회사의 합병으로 인한 때</li><li>다른 회사의 영업 전부의 양수로 인한 때</li><li>회사의 담보 제공으로 인한 때</li><li>주주가 주식매수청권을 행사한 때</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당한다.341조의2의 특정 목적 취득이다.</li><li><strong>비선택</strong> · 해당한다. 영업 전부 양수라는 문구를 확인한다. 일부 양수까지 자동 확대하지 않는다.</li><li><strong>선택</strong> · 해당하지 않음·정답. 회사의 담보 제공 자체는 열거된 특정 목적 취득 사유가 아니다.2026년 자기주식 질권 제공 금지와 받는 한도도 구별한다.</li><li><strong>비선택</strong> · 해당한다. 법정 주식매수청구권의 행사에 따른 취득이다. 보통 매매 요청 전부를 말하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법은 제341조의2에서 회사의 합병 또는 다른 회사의 영업 전부의 양수로 인한 경우, 회사의 권리를 실행함에 있어 그 목적을 달성하기 위하여 필요한 경우, 단주의 처리를 위하여 필요한 경우, 주주가 주식매수청구권을 행사한 경우에는 배당 가능 이익의 존재 여부와 관계없이 자기주식의 취득을 허용하고 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '주식회사법 · CHAPTER 04' : 'PART · COMPANY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(주식회사법 · CHAPTER 04|PART · COMPANY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('company-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

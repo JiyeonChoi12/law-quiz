@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주식회사법 제7장 감사제도 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">COMPANY LAW · CHAPTER 07</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">주식회사법</span>
+    <span class="brand-sub">제7장 감사제도 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./주식회사법_개념.html">주식회사법 개념 목록</a><a href="../index.html?subject=주식회사법">문제 풀기</a></nav><h1>이 장의 큰 그림</h1>
+<p>사장은 회사 돈을 쓰고, 이사회는 사장을 감독한다. 그런데 이사회까지 사장 편이면 누가 장부를 열어 볼까? <strong>7장은 경영진을 독립적으로 확인하는 사람과 그 사람의 권한·책임을 설명한다.</strong> 감사는 도장을 찍어 주는 사람이 아니라, 이상한 거래를 찾아 질문하고 필요한 조치를 해야 하는 사람이다.</p>
+<table>
+<thead>
+<tr>
+<th>첫 질문</th>
+<th>이 장의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나?</td>
+<td>감사·감사위원회·외부감사인·검사인의 서로 다른 역할</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>돈을 낸 주주와 돈을 쓰는 경영자가 다르고, 경영진 내부 감시만으로 부족하기 때문이다.</td>
+</tr>
+<tr>
+<td>전체에서 위치는?</td>
+<td>주주총회와 이사회를 배운 뒤 완성하는 회사의 감독 장치</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>6장 이사의 의무→7장 감사의 확인→8장 신주발행·10장 회계의 적법성</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나?</td>
+<td>감사 선임의3% 제한, 회사-이사 소송 대표, 부실감사 책임, 재무제표 승인 절차</td>
+</tr>
+</tbody></table>
+<p>교재279–296쪽의 본문·판례·정리 질문을 다루며, 제공 JSON <strong>13문항52개 보기</strong>를 뒤에 그대로 싣고 각각 별도 해설을 붙였다. 별은 출제 통계를 계산한 값이 아니라 학습 우선순위다. 사례 속 별도 이름과 대화는 설명용이며, 실제 판례에 없는 사실을 판례 사실로 보태지 않는다. 현행법 점검 기준은2026.10.23이다.</p>
+<h1>1. 누가 누구를 감시하는가</h1>
+<h2 id="company-07-01" data-concept-id="company-07-01">1-1. 감사는 경영진 밖에서 확인하는 상설기관이다 ★★★★★</h2>
+<p><strong>교재279–281쪽 · 문단의 이유:</strong> 주주총회와 이사회가 있는데도 감사가 필요한 이유부터 이해해야 한다.</p>
+<p>주주가 많아지면 모두가 매일 회사에 와서 장부를 확인할 수 없다. 이사회가 경영자를 감독하지만, 지배주주가 이사들을 사실상 지휘하거나 대표이사가 정보를 독점하면 서로 감싸 줄 수 있다. <mark class="green">그래서 경영을 맡는 사람과 경영을 검사하는 사람을 나누어, 돈을 맡긴 사람에게 정확한 정보를 제공하게 한다.</mark></p>
+<p><strong>감사(監事)</strong>는 회사의 기관 또는 그 사람을 말한다. <strong>감사(監査)</strong>는 살피고 검사하는 활동이다. 이름은 같아도 ‘감사가 감사를 한다’에서 앞은 사람, 뒤는 일이다. 주식회사는 원칙적으로 감사를 두며, 일시적 사건이 끝나도 계속 존재하므로 필요적 상설기관이라고 한다. 다만 소규모 회사의 생략 특례와 감사위원회 대체가 있다. 유한회사의 감사는 원칙적으로 선택적이라는 점도 비교한다.</p>
+<p>감사가 여러 명이라고 자동으로 감사회의가 생기지는 않는다. 각 감사가 독립적으로 권한을 행사한다. 반대로 감사위원회는 여러 이사로 구성된 회의체다. 회사와 감사의 관계는 이사와 마찬가지로 위임관계이고, 보수는 정관 또는 총회 결의에 따른다. 일반 직원처럼 대표이사의 지시만 따르면 되는 관계가 아니다.</p>
+<p><strong>설명용 사례:</strong> 투자자 수진은 “대표이사가 괜찮다는데 왜 또 검사해요?”라고 묻는다. 감사는 “그 대표이사가 쓴 돈이니, 다른 사람이 자료를 확인해야 믿을 수 있어요”라고 답한다. 감시자를 두는 것은 모든 경영자를 범인으로 본다는 뜻이 아니라, 잘못을 예방하고 설명을 검증할 통로를 만드는 것이다.</p>
+<p><strong>시험:</strong> 필요적·상설 원칙과 예외, 독임기관. <strong>키워드:</strong> 독립·업무감사·회계감사. <strong>한 줄:</strong> 감사는 경영을 대신하지 않고 경영의 적법성을 독립적으로 확인한다.</p>
+<h2 id="company-07-02" data-concept-id="company-07-02">1-2. 네 가지 감사 장치를 먼저 나눈다 ★★★★★</h2>
+<p><strong>교재280·290·293–295쪽 · 문단의 이유:</strong> ‘감사’라는 말이 들어간다고 모두 같은 선임 방법과 권한을 갖는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>누구인가?</th>
+<th>주요 기능</th>
+<th>기억할 차이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>감사</td>
+<td>총회가 뽑는 회사 내부의 독립 기관</td>
+<td>업무·회계 감사</td>
+<td>1명 이상, 여러 명이어도 각자 권한</td>
+</tr>
+<tr>
+<td>감사위원회</td>
+<td>감사를 대신하는 이사회 내 위원회</td>
+<td>감사에 해당하는 감독</td>
+<td>이사3명 이상·원칙2/3 이상 사외이사</td>
+</tr>
+<tr>
+<td>외부감사인</td>
+<td>외부의 회계법인·감사반 등</td>
+<td>법정 대상 회사의 회계감사</td>
+<td>회사 기관이 아니며 전문적 외부 검증</td>
+</tr>
+<tr>
+<td>검사인</td>
+<td>특정 사안을 조사하도록 선임된 사람</td>
+<td>설립·현물출자·의심되는 부정 등</td>
+<td>임시기관, 정해진 조사가 끝나면 종료</td>
+</tr>
+</tbody></table>
+<p>상장회사 특례에서는 사외이사 대신 <strong>독립이사</strong>라는 현행 명칭과 강화된 자격 기준을 함께 본다. 외부감사인을 두었다고 내부 감사를 없앨 수 있는 것은 아니다. 반면 정관에 따라 적법한 감사위원회를 설치하면 감사를 별도로 둘 수 없다. ‘대체 관계’와 ‘함께 작동하는 관계’를 구별하자.</p>
+<p><mark class="blue">3장 설립 당시 검사인→7장 상시 감독기관→8장 현물출자 검사인→10장 결산과 외부감사로 이어진다.</mark> 같은 검사인이 여러 장에 나오는 것은 회사의 큰 변화 때 출자와 재산을 다시 확인해야 하기 때문이다.</p>
+<p><strong>시험:</strong> 내부·외부, 상설·임시, 개인·회의체. <strong>키워드:</strong> 네 기관 비교. <strong>한 줄:</strong> 이름보다 ‘누가 뽑고 무엇을 언제 조사하는가’를 먼저 묻는다.</p>
+<h1>2. 감사는 어떻게 뽑고 언제 물러나는가</h1>
+<h2 id="company-07-03" data-concept-id="company-07-03">2-1. 총회 선임과 승낙으로 취임한다 ★★★★★</h2>
+<p><strong>교재281–283쪽 · 문단의 이유:</strong> 감시받는 경영진이 감사의 취임 자체를 통제하지 못하게 한다.</p>
+<p>회사 성립 후 감사는 <strong>주주총회 보통결의</strong>로 선임한다(409조). 이사회가 뽑는 것이 아니다. 총회의 적법한 선임과 선임된 사람의 승낙이 결합하면 회사와 감사의 위임관계가 성립한다. 등기는 공시를 위한 것이지 그때부터만 감사가 되는 효력요건이 아니다.</p>
+<p><strong>판례를 장면으로 —2017.3.23.2016다251215 전원합의체의 법리:</strong> 등장인물은 선임된 임원, 회사, 대표이사다. 총회가 임원을 뽑고 그 사람이 받아들였는데, 대표이사가 별도 계약을 맺지 않았다는 이유로 지위를 부인하는 문제가 생긴다. 법원의 고민은 “총회가 뽑은 사람을 대표이사가 다시 골라낼 수 있는가?”였다. 결론은 선임결의와 취임승낙으로 관계가 성립한다는 것이다. 감사에게도 적용되는 취지다. 반대로 보면 감시받는 대표이사가 마음에 들지 않는 감사의 취임을 막을 수 있다.</p>
+<p>문장별 쉬운 번역: <strong>선임결의</strong>는 ‘주주들이 이 사람에게 맡기자고 정했다’, <strong>취임승낙</strong>은 ‘그 사람도 맡겠다고 했다’, <strong>별도의 임용계약 불요</strong>는 ‘대표이사의 두 번째 허락까지 필요하지 않다’는 뜻이다. 단, 선임결의만 있고 본인이 거절했다면 승낙 요건이 빠진다.</p>
+<p><strong>시험:</strong> 총회·보통결의·승낙·등기. <strong>키워드:</strong> 경영진으로부터 독립. <strong>한 줄:</strong> 주주가 뽑고 본인이 받아들이면 취임하며, 대표이사가 다시 허가하지 않는다.</p>
+<h2 id="company-07-04" data-concept-id="company-07-04">2-2. 감사 선임의3% 제한은 초과분만 막는다 ★★★★★</h2>
+<p><strong>교재281–282쪽 · 문단의 이유:</strong> 지배주주가 자신의 감시자까지 독점하지 못하게 한다.</p>
+<p>409조2항은 <strong>의결권 없는 주식을 제외한 발행주식총수의3%</strong>를 초과해 가진 주주의 <strong>초과분</strong>에 감사 선임 의결권을 제한한다. 정관으로 비율을 낮출 수는 있어도 높여서 제한을 없앨 수 없다. ‘3% 이상 가진 사람은 한 표도 못 쓴다’가 아니다. 정확히3%까지는 행사한다.</p>
+<p><strong>설명용 계산:</strong> 의결권 있는 주식이1,000주이고 민호가400주를 갖고 있다. 감사 선임에서는30주만 표로 쓰고370주는 쓰지 못한다. 무의결권주식200주가 별도로 있어도 기준을1,200주의3%인36주로 잡지 않는다. 총주식과 의결권 있는 주식의 분모가 다르다.</p>
+<p>일반409조는 감사의 <strong>선임</strong> 제한이다. 이를 모든 비상장회사의 감사 해임에 그대로 적용하지 않는다. 상장회사는542조의12 제7항에 따라 선임·해임 특례를 따로 검토한다. 최대주주와 특수관계인 등의 합산도 그 상장 특례에서 확인한다.</p>
+<p><mark class="pink">‘3% 초과 주주’와 ‘그 주주의 모든 주식’을 섞지 말 것. 제한되는 것은 초과 주식이며, 기준에서 무의결권주식을 제외한다.</mark></p>
+<p><strong>시험:</strong> 분모·초과분·정관 하향·회사 유형. <strong>키워드:</strong> 감시자 독립. <strong>한 줄:</strong> 큰 주주의 감사 선임 표는3%까지만 남기되, 주주 자격 자체를 없애지는 않는다.</p>
+<h2 id="company-07-05" data-concept-id="company-07-05">2-3. 정족수 판례와 전자투표 특례를 나누어 읽는다 ★★★★☆</h2>
+<p><strong>교재282쪽 · 문단의 이유:</strong> 표를 제한하면서 결의의 분모를 그대로 두면 감사 선임 자체가 막힐 수 있다.</p>
+<p><strong>실제 판례 —2016.8.17.2016다222996:</strong> 발행주식1,000주를 세 주주가340주·330주·330주씩 보유했다. 감사 선임에서는 각30주만 행사할 수 있다. 두 주주가 찬성해60표가 모였는데, 원래1,000주의1/4인250표가 필요하다면 아무리 찬성해도 통과할 수 없다. 법원은 당시 사건에서3% 초과 제한 주식을 결의에 필요한 발행주식총수 계산에서도 제외하는 해석을 취했다. 제한 후90주를 기준으로 보면60표 찬성은 요건을 충족한다. <a href="https://www.law.go.kr/precStmdInfoP.do?precSeq=183240">대법원 판결</a></p>
+<p>법원의 고민을 쉬운 말로 바꾸면 “법이 큰 주주의 표를 줄여 놓고, 줄이기 전 숫자로 통과하라고 하면 감사가 영영 뽑히지 않는 것 아닌가?”다. 판례의 문장은 <strong>제한 주식 제외</strong>→‘못 쓰는 표 때문에 법정 기관을 못 만드는 모순을 피한다’로 읽는다. 이 판례를 소개한 뒤, 교재가 설명하는 후속 입법은 별개의 제도라는 점을 구분하자.</p>
+<p>현행409조3항은 회사가368조의4에 따라 <strong>전자적 의결권 행사를 할 수 있도록 한 경우</strong>, 감사 선임을 <strong>출석한 주주 의결권의 과반수</strong>로 정할 수 있도록 한다. 보통결의의 발행주식총수1/4 요건을 요구하지 않는 특례다. 정관에 언젠가 전자투표를 할 수 있다고 써 둔 것만으로, 이번 총회에서 실제로 전자적 의결권 행사 기회를 부여하지 않은 상황까지 적용하는 것은 아니다. <a href="https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1008161829">현행409조</a></p>
+<p><strong>시험:</strong> 구체적 판례 계산과 현재 전자투표 특례를 혼동하지 않기. <strong>키워드:</strong>3%·분모·출석 과반수. <strong>한 줄:</strong> 표 제한과 정족수는 함께 보되, 판례 법리와 전자투표 완화 규정은 따로 설명한다.</p>
+<h2 id="company-07-06" data-concept-id="company-07-06">2-4. 작은 회사·상장회사는 기관 설치 기준이 다르다 ★★★★★</h2>
+<p><strong>교재282–284쪽 · 문단의 이유:</strong> 모든 회사에 같은 규모의 감시 장치를 강제하면 비용이 지나치고, 큰 회사에는 감시가 부족해진다.</p>
+<table>
+<thead>
+<tr>
+<th>회사 조건</th>
+<th>감사 장치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>일반 주식회사</td>
+<td>감사1명 이상 원칙, 정관으로 감사위원회 대체 가능</td>
+</tr>
+<tr>
+<td>자본금10억원 미만</td>
+<td>감사를 선임하지 않을 수 있음. 설립할 때만의 특례 아님</td>
+</tr>
+<tr>
+<td>최근 사업연도 말 자산총액1,000억원 이상 상장회사</td>
+<td>상근감사1명 이상 원칙. 법정 요건의 감사위원회로 대체 가능</td>
+</tr>
+<tr>
+<td>최근 사업연도 말 자산총액2조원 이상 상장회사</td>
+<td>감사위원회 의무 설치</td>
+</tr>
+</tbody></table>
+<p>‘자본금’과 ‘자산총액’을 바꾸면 안 된다. 자본금8억원이라도 자산이 훨씬 클 수 있다. 상장 특례에서는 해당 기준과 법정 예외를 함께 본다. 상근은 출근하며 일상적으로 그 업무를 담당한다는 뜻이지, 감사 권한이 대표이사에게 종속된다는 뜻이 아니다.</p>
+<p>소규모 회사가 감사를 생략하면 감사의 조사·보고 관련 일부 권한은 총회가 맡는다(409조6항). 회사와 이사 사이 소송에서는 회사·이사·이해관계인이 법원에 회사를 대표할 사람의 선임을 청구한다(409조5항). 대표이사가 자기 상대 소송에서 회사 편까지 마음대로 대표하게 두지 않는 것이다. ‘감사가 없으니 감사 권한은 전부 대표이사에게 간다’는 결론은 틀리다.</p>
+<p><strong>시험:</strong>10억은 자본금,1,000억·2조는 상장회사 자산 기준. <strong>키워드:</strong> 생략·상근·위원회. <strong>한 줄:</strong> 회사 규모에 따라 감시 장치의 형태를 바꾸지만 이해충돌 방지는 남긴다.</p>
+<h2 id="company-07-07" data-concept-id="company-07-07">2-5. 겸직 제한·임기·해임은 독립성을 지키는 장치다 ★★★★★</h2>
+<p><strong>교재283–284쪽 · 문단의 이유:</strong> 자기 업무를 자기가 감사하지 못하게 하고, 경영진이 감사를 쉽게 압박하지 못하게 한다.</p>
+<p>감사는 회사와 자회사의 이사·지배인·그 밖의 사용인을 겸하지 못한다(411조). 본인이나 자기 상사의 업무를 독립적으로 검사하기 어렵기 때문이다. 일반 감사의 수는1명 이상이면 되고, 감사위원회의3명 이상 기준과 다르다. 상장회사 상근감사는 추가 결격사유도 검토한다.</p>
+<p>임기는 <strong>취임 후3년 내의 최종 결산기에 관한 정기주주총회 종결 시</strong>까지다(410조). 단순히 취임일부터 정확히3년 되는 날 끝난다는 뜻도, ‘어떤 경우에도3년 초과 불가’라는 뜻도 아니다. 결산과 정기총회를 연결해 감사 업무가 중간에 끊기지 않게 만든 것이다. 원자료 워크북117의 ‘3년 초과 불가’ 해설은 이 정확한 구조로 보완해야 한다.</p>
+<p><strong>설명용 날짜:</strong>12월 결산 회사에서2026년3월25일 취임했다면,3년 내 마지막 결산기는2028년12월 말이다. 그 결산기에 관한2029년 정기총회가 끝날 때 임기가 끝난다. 총회가2029년3월28일이면 달력으로는 취임 후3년을 조금 넘길 수 있다. 실제 계산은 회사 결산기·취임일·총회일을 확인한다.</p>
+<p>사임·임기만료·사망·해임 등으로 종임한다. 해임은 총회 특별결의이고, 소수주주의 법정 해임청구도 연결된다. 회사가 해산했다고 감사가 곧바로 없어지는 것은 아니다. 청산 업무도 감사해야 한다. 법정 인원이 부족하면 권리·의무를 계속하는 규정과 법원의 임시감사 선임이 문제 된다. 직무집행 정지·직무대행자 제도도 준용된다.</p>
+<p>자기 해임 안건에 관해 감사가 총회에서 의견을 말할 수 있는 것은 <strong>권리</strong>다. 뒤에서 배우는 위법한 총회 서류에 대한 보고 <strong>의무</strong>와 구별한다.</p>
+<p><strong>시험:</strong> 겸직 금지·410조 임기·해임 특별결의. <strong>키워드:</strong> 자기감사 금지·결산 연속성. <strong>한 줄:</strong> 감사를 뽑는 것만큼 독립적으로 일하고 마무리하게 하는 것이 중요하다.</p>
+<h1>3. 감사는 무엇을 할 수 있는가</h1>
+<h2 id="company-07-08" data-concept-id="company-07-08">3-1. 회계감사에 갇히지 않는 업무감사 ★★★★☆</h2>
+<p><strong>교재284–285쪽 · 문단의 이유:</strong> 장부 숫자만 맞는다고 회사 운영이 적법한 것은 아니다.</p>
+<p>412조는 이사의 직무집행을 감사하게 한다. 회계감사는 재무제표와 장부가 제대로 작성됐는지 확인하는 일이다. 업무감사는 이사의 일 전반이 법령·정관에 맞는지 확인한다. 법을 어긴 자기거래, 승인 없이 한 경쟁행위도 장부가 맞다는 이유로 넘어갈 수 없다.</p>
+<p>적법성 감사와 타당성 감사의 경계는 심화 쟁점이다. “불법인가?”와 “그중 가장 좋은 경영판단인가?”는 다른 질문이다. 교재는 적법성을 원칙으로 하되 법이 특별히 요구한 타당성 사항은 검사한다는 견해, 현저히 불합리한 경영을 예외적으로 살핀다는 견해, 회사에 큰 영향을 주는 결정의 타당성까지 폭넓게 보는 견해를 소개한다. 이를 하나의 확정 판례처럼 적지 않는다.</p>
+<p><strong>설명용 사례:</strong> 감사가 “그 신제품은 내가 싫으니 판매하지 마세요”라고 경영권을 행사하는 것은 감사의 본래 역할이 아니다. 그러나 대표이사 친척 회사에 시가의 몇 배를 지급하려는 거래라면, 이해충돌·승인·공정성을 확인해야 한다. 경영 취향에 개입하는 것과 위법 징후를 조사하는 것은 다르다.</p>
+<p>감사는 회사 비용으로 전문가 도움을 구할 수 있다. 회계·법률 쟁점이 복잡하다는 이유로 조사를 포기하지 않게 한 장치다. 다만 필요한 감사 업무와 무관한 개인 비용까지 회사에 넘길 수 있다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 업무+회계, 적법성/타당성 구별. <strong>키워드:</strong> 감독이지 경영 대행 아님. <strong>한 줄:</strong> 감사는 숫자뿐 아니라 이사가 적법하게 일했는지도 확인한다.</p>
+<h2 id="company-07-09" data-concept-id="company-07-09">3-2. 보고 요구·재산 조사·자회사 확인 ★★★★☆</h2>
+<p><strong>교재285–286쪽 · 문단의 이유:</strong> 감사에게 책임만 지우고 정보를 볼 권한을 주지 않으면 감시가 불가능하다.</p>
+<p>감사는 언제든 이사에게 영업 보고를 요구하고 회사 업무·재산 상태를 조사할 수 있다(412조2항). 정기총회 직전에만 장부를 보는 사람이 아니다. 이사가 회사에 현저한 손해를 미칠 염려가 있는 사실을 발견하면 즉시 감사에게 보고해야 한다(412조의2). 일단 사고가 난 뒤가 아니라 위험을 알았을 때 알리라는 뜻이다.</p>
+<p>회사가 자회사를 통해 돈을 빼돌릴 가능성도 있으므로, 감사는 필요한 경우 자회사에 영업 보고를 요구할 수 있다. 자회사가 지체 없이 보고하지 않거나 보고를 확인할 필요가 있으면 업무·재산을 조사할 수 있다(412조의5). 자회사는 정당한 이유가 있으면 보고나 조사를 거절할 수 있다. 아무 관련 없는 사생활까지 제한 없이 조사하는 권한은 아니다.</p>
+<p><strong>설명용 사례:</strong> 모회사 장부에는 자회사에 빌려준 돈이라고 적혀 있지만 실제 자금 흐름이 보이지 않는다. 감사는 먼저 자회사 보고를 요구하고, 보고가 오지 않거나 내용이 의심스러우면 필요한 범위에서 직접 조사한다. “다른 법인이니 절대 못 봅니다”도, “자회사니까 모든 자료를 무조건 내놓으세요”도 정확하지 않다.</p>
+<p>법이 요구하는 감사 자료 제출·조사에 부당하게 응하지 않으면635조의 과태료 문제가 생길 수 있다. 이를 곧바로 징역이나 벌금이라고 쓰지 않는다. 필요한 조사를 못 했다면 감사보고서에 그 취지와 이유를 밝혀야 한다. 자료가 없는데 확인했다고 서명해서는 안 된다.</p>
+<p><strong>시험:</strong> 언제든 보고·조사, 자회사 단계와 정당한 거절 사유. <strong>키워드:</strong> 정보 접근·조사 불능 기록. <strong>한 줄:</strong> 모르면 질문하고, 확인이 막히면 그 사실까지 남겨야 한다.</p>
+<h2 id="company-07-10" data-concept-id="company-07-10">3-3. 이사회 참석과 두 가지 회의 소집 절차 ★★★★★</h2>
+<p><strong>교재286쪽 · 문단의 이유:</strong> 위법 징후를 발견했을 때 실제로 회의를 열어 문제를 다룰 수 있어야 한다.</p>
+<p>감사는 이사회에 출석해 의견을 진술할 수 있다. 이사회 소집 통지는 원칙적으로1주 전에 감사에게도 해야 하며, 출석한 감사는 의사록에 기명날인 또는 서명한다. 그러나 감사라는 지위로 이사회의 의결권을 갖지는 않는다. ‘회의에 앉을 수 있다’와 ‘이사처럼 표결한다’는 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>필요한 회의</th>
+<th>먼저 하는 일</th>
+<th>지체 없이 소집하지 않으면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주주총회</td>
+<td>목적 사항·소집 이유를 적은 서면으로 이사회에 청구</td>
+<td>법원 허가를 받아 감사가 총회 소집(412조의3)</td>
+</tr>
+<tr>
+<td>이사회</td>
+<td>회의 목적 사항·이유를 적은 서면으로 이사 또는 소집권자에게 청구</td>
+<td>감사가 직접 이사회 소집(412조의4)</td>
+</tr>
+</tbody></table>
+<p><strong>설명용 사례:</strong> 대표이사가 부당한 거래를 강행한다. 감사가 이사회 소집을 청구했는데 이사가 계속 미루면 직접 이사회를 열 수 있다. 더 큰 문제로 총회를 열어야 하고 이사회가 총회 소집을 미룬다면 법원 허가 단계가 필요하다. <mark class="pink">총회와 이사회 소집 절차에서 ‘법원 허가’를 서로 바꾸는 것이 핵심 함정이다.</mark></p>
+<p><strong>시험:</strong> 의견권≠의결권, 총회 허가 필요/이사회 직접. <strong>키워드:</strong> 청구→불응→후속 권한. <strong>한 줄:</strong> 감사는 경영진이 회의를 막아도 법이 정한 다음 단계로 나아갈 수 있다.</p>
+<h2 id="company-07-11" data-concept-id="company-07-11">3-4. 중지 청구와 소송대표권은 서로 다른 권한이다 ★★★★★</h2>
+<p><strong>교재286–287쪽 · 문단의 이유:</strong> 회사를 보호하는 소송이라도 누가 원고이고 누가 회사를 대표하는지 구분해야 한다.</p>
+<p>이사가 법령·정관에 위반한 행위를 해 회사에 회복할 수 없는 손해가 생길 염려가 있으면 감사는402조에 따라 그 행위의 중지를 구할 수 있다. 유지(留止)는 ‘계속 유지한다’가 아니라 ‘붙잡아 멈춘다’는 뜻이다. 감사 자신의 법정 권한이며 주식1%를 보유해야만 행사하는 주주권이 아니다.</p>
+<p>회사와 이사 사이에 소송이 생기면394조에 따라 감사가 그 소송에서 회사를 대표한다. <strong>설명용 사례:</strong> 대표이사가 회사 돈을 빼돌려 회사가 그 대표이사에게 배상을 청구한다. 그 대표이사가 원고 회사의 전략까지 결정하면 이해충돌이 생긴다. 그래서 감사가 회사 편을 대표한다. 대표소송·다중대표소송 전에 회사에 제소를 청구할 때 감사가 받는 절차도 연결된다.</p>
+<p>감사에게는 설립무효의 소(328조), 총회결의 취소의 소(376조), 신주발행 무효의 소(429조), 감자무효의 소(445조), 합병무효의 소(529조) 등 법이 정한 제소권도 있다. 감사가 자기 법정 권한으로 소를 내는 것과 회사의 대표자로 소송하는 것은 구분한다. 모든 회사 관련 소송에서 대표이사를 자동으로 밀어내는 것은 아니다.</p>
+<p>감사는 위법행위 중지를 청구할 수 있지만, 이사 해임의 소를 감사 지위만으로 제기하는 일반적 권한은 없다. 소수주주의 법정 해임청구와 섞지 않는다. 자신이 별도로 주주 요건을 갖춘 경우는 다른 자격의 문제다.</p>
+<p><strong>시험:</strong> 회사-이사 소송대표/감사 자신의 제소권/주주 해임청구. <strong>키워드:</strong> 소송의 당사자와 대표자. <strong>한 줄:</strong> 소송을 할 수 있다는 말과 회사 편을 대표한다는 말은 다르다.</p>
+<h1>4. 감사가 해야 할 일과 잘못했을 때의 책임</h1>
+<h2 id="company-07-12" data-concept-id="company-07-12">4-1. 선관주의·보고·감사록을 구별한다 ★★★★☆</h2>
+<p><strong>교재287–288쪽 · 문단의 이유:</strong> 권한은 행사할 수 있는 도구이고, 의무는 필요한 상황에서 그 도구를 써야 한다는 요구다.</p>
+<p>감사는 위임받은 전문가로서 선량한 관리자의 주의를 기울여야 한다. 회사가 맡긴 일을 성실하고 신중하게 처리해야 한다는 뜻이다. 비밀유지의무도 적용된다. 감사라는 지위 자체에는 이사에 대한 경업금지·자기거래 승인 규정이 그대로 적용되는 것은 아니지만, 선관주의·비밀유지·이해충돌 문제가 사라지는 것은 아니다. 그 사람이 주요주주 등 별도398조 대상이면 그 자격에 따른 규정을 따르고, 감사위원은 이사이므로 이사의 의무도 함께 검토한다.</p>
+<p>감사가 이사의 법령·정관 위반 또는 그 염려를 발견하면 이사회에 보고해야 한다(391조의2). 이미 손해가 났을 때만 보고하는 것이 아니다. 총회에 내는 의안·서류도 조사하여 위법하거나 현저히 부당한 사항이 있으면 총회에서 의견을 진술해야 한다(413조). 자기 해임에 대한 의견진술권과 달리, 이 경우에는 필요한 의견을 밝힐 의무가 있다.</p>
+<p>감사록에는 감사의 실시 요령과 결과를 적고 실제 감사를 한 감사가 기명날인 또는 서명한다(413조의2). 나중에 “확인했습니다”라고만 말하지 않고 무엇을 어떻게 확인했는지 남기는 것이다. 이사회 의사록은 이사회 회의 기록, 감사록은 감사 업무 기록, 감사보고서는 법정 보고 문서다.</p>
+<p><strong>시험:</strong> 보고 시점·권리와 의무·세 기록의 구별. <strong>키워드:</strong> 선관·위법 보고·감사 흔적. <strong>한 줄:</strong> 감사는 의심되는 사실을 조사하고, 필요한 곳에 알리며, 확인한 과정을 남겨야 한다.</p>
+<h2 id="company-07-13" data-concept-id="company-07-13">4-2. 결산서류를 받으면 감사보고서로 답한다 ★★★★☆</h2>
+<p><strong>교재288쪽 · 문단의 이유:</strong> 주주가 재무제표를 승인하기 전에 독립적인 검토 결과를 읽을 수 있어야 한다.</p>
+<p>이사는 원칙적으로 정기총회6주 전에 재무제표·부속명세서·영업보고서를 감사에게 제출한다(447조의3). 감사는 받은 날부터4주 내에 감사보고서를 이사에게 제출한다(447조의4). 상장회사는 정기총회1주 전까지 제출하는542조의12 제6항 특례도 확인한다. 교재에 붙은 조문 번호가 뒤섞인 부분은 현행 조문 체계로 바로잡아 읽는다.</p>
+<p>감사보고서에 담는 항목은 단순한 ‘적정합니다’ 한마디가 아니다. 교재의 열 가지를 질문으로 바꾸면 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>검토 항목</th>
+<th>쉬운 확인 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 감사 방법의 개요</td>
+<td>무엇을 어떤 방법으로 확인했는가?</td>
+</tr>
+<tr>
+<td>2. 장부·재무제표의 기재</td>
+<td>빠진 내용·거짓 내용·장부와 다른 숫자가 있는가?</td>
+</tr>
+<tr>
+<td>3. 재산·손익의 적정 표시</td>
+<td>회사 상태와 성과를 법령·정관에 맞게 보여 주는가?</td>
+</tr>
+<tr>
+<td>4. 부적정 이유</td>
+<td>적정하지 않다면 무엇 때문에 그런가?</td>
+</tr>
+<tr>
+<td>5. 회계처리 변경</td>
+<td>방법을 바꾼 이유가 타당한가?</td>
+</tr>
+<tr>
+<td>6. 영업보고서</td>
+<td>회사의 실제 사업 상황을 정확하게 보여 주는가?</td>
+</tr>
+<tr>
+<td>7. 이익처분·결손처리</td>
+<td>이익을 나누거나 손실을 처리하는 안이 법령·정관에 맞는가?</td>
+</tr>
+<tr>
+<td>8. 현저히 부당한 처리</td>
+<td>회사 재산 상태 등을 볼 때 지나치게 부당한 안은 아닌가?</td>
+</tr>
+<tr>
+<td>9. 부속명세서</td>
+<td>빠짐·거짓·주요 서류와 불일치가 있는가?</td>
+</tr>
+<tr>
+<td>10. 이사의 부정·중대한 위반</td>
+<td>임무 수행에 부정행위나 중대한 법령·정관 위반이 있는가?</td>
+</tr>
+</tbody></table>
+<p>필요한 조사를 하지 못했다면 그 취지와 이유도 적는다. <strong>설명용 사례:</strong> 재고 창고에 접근하지 못해 실제 물건이 있는지 확인할 수 없었다면, 확인한 것처럼 보고해서는 안 된다. 제한된 자료로 어떤 부분까지 확인했고 무엇이 막혔는지 구분한다.</p>
+<p><strong>시험:</strong>6주·4주·상장1주, 조사 불능 표시. <strong>키워드:</strong> 결산 검증·보고서. <strong>한 줄:</strong> 감사보고서는 결론뿐 아니라 방법·문제·확인 못 한 한계까지 주주에게 알려 준다.</p>
+<h2 id="company-07-14" data-concept-id="company-07-14">4-3. 회사에 대한 책임과 제3자 책임은 요건이 다르다 ★★★★★</h2>
+<p><strong>교재288–289쪽 · 문단의 이유:</strong> 감사도 권한만 갖고 잘못에 책임지지 않는 지위는 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>누구에게 생긴 손해인가?</th>
+<th>414조의 기본 구조</th>
+<th>사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>회사</td>
+<td>임무를 게을리한 데 따른 손해배상</td>
+<td>쉽게 확인할 횡령 징후를 부주의하게 넘겨 회사 손해 확대</td>
+</tr>
+<tr>
+<td>제3자</td>
+<td>악의 또는 중대한 과실의 임무해태가 필요</td>
+<td>심각한 분식 징후를 방치해 허위 재무자료를 믿은 채권자 손해</td>
+</tr>
+</tbody></table>
+<p>회사의 경우 통상적인 과실도 문제 되지만, 제3자 책임은 악의·중과실이라는 더 강한 요건을 둔다. 임무위반·귀책·손해·인과관계를 확인해야 한다. 회사가 망했다고 감사가 자동으로 모든 채무를 갚는 것은 아니다. 여러 감사나 이사가 같은 손해에 책임을 지면 법정 요건 아래 연대책임이 생길 수 있지만, 같은 직함을 가졌다는 이유만으로 전원이 무조건 책임지는 것도 아니다.</p>
+<p>총주주 동의에 의한 회사 책임 면제, 정관에 의한 일정 범위의 책임 제한 등400조의 준용도 검토한다. 면제·제한의 요건과 예외를 충족해야 하며, 회사가 제3자의 권리까지 마음대로 없앨 수는 없다. 대표소송과 다중대표소송을 통한 회사 책임 추궁도 연결된다.</p>
+<p><strong>시험:</strong> 회사는 일반 과실까지/제3자는 악의·중과실, 실제 책임 있는 사람의 연대. <strong>키워드:</strong> 임무해태·손해·인과관계. <strong>한 줄:</strong> 잘못을 발견하지 못했다는 결과만이 아니라, 해야 할 감사를 얼마나 게을리했는지 판단한다.</p>
+<h2 id="company-07-15" data-concept-id="company-07-15">4-4. 판례 — 자료를 막을수록 감사의 역할은 더 중요하다 ★★★★★</h2>
+<p><strong>교재289쪽 ·2008.9.11.2006다68636 · 문단의 이유:</strong> 조직이 허술하거나 감사가 소외됐다는 사정을 쉽게 면책 이유로 삼지 못하게 한다.</p>
+<p><strong>등장인물:</strong> 대규모 회사의 경영진, 내부 감사, 재무자료를 믿고 거래한 채권자. <strong>사건:</strong> 회사에 분식회계를 막을 정보·보고 체계가 제대로 없고, 일부 경영진의 지시 아래 조직적인 회계 조작이 이루어졌다. 중요 재무정보에 대한 접근이 제한되고 이사회의 감독도 형식화됐다. <strong>갈등:</strong> 감사는 사무분장과 정보 접근의 어려움을 들어 자신이 전부 알기 어려웠다고 주장했다.</p>
+<p><strong>재판과 법원의 고민:</strong> 자료가 잘 공개되는 회사보다 감춰지는 회사의 위험이 더 크다. 그렇다면 감시가 어려운 구조라는 이유로 감사를 면책하면, 가장 감시가 필요한 회사에서 감사의 책임이 사라지는 모순이 생긴다. <strong>판단:</strong> 구체적 규모·조직·경력·근무 사정 등을 살피되, 중요한 정보 접근이 조직적으로 막히는 사정은 오히려 더 적극적인 주의를 요구한다. 사건에서 심각한 감사 소홀에 대한 책임이 인정됐다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2006%EB%8B%A468636">대법원 판결</a></p>
+<p>판례 논리를 문장별로 풀어 보자. <strong>내부통제 부재</strong>는 ‘거짓 숫자가 올라와도 걸러 낼 장치가 없다’, <strong>조직적 접근 차단</strong>은 ‘알아야 할 사람이 자료를 계속 못 보게 한다’, <strong>주의의무 가중</strong>은 ‘그렇다면 더 묻고 확인해야 한다’, <strong>감사 소홀의 책임</strong>은 ‘그 위험을 방치해 연결된 손해가 나면 책임이 생긴다’는 뜻이다.</p>
+<p><mark class="yellow">‘대표이사가 알려 주지 않았다’는 말만으로 감사가 면책되는 것은 아니다.</mark> 그렇다고 숨긴 사실을 끝내 발견하지 못하면 언제나 책임진다는 무과실책임도 아니다. 요구·조사·보고 등 당시 필요한 조치를 했는지를 판단한다. 외부감사인이 따로 있었다는 사정 역시 내부 감사의 임무를 통째로 없애지 않는다.</p>
+<p><strong>시험:</strong> 정보 차단=자동 면책이라는 함정. <strong>키워드:</strong> 위험 징후·능동 조사·주의의무. <strong>한 줄:</strong> 정보가 막히면 포기할 이유가 아니라 필요한 감사를 더 해야 할 신호가 될 수 있다.</p>
+<h1>5. 감사위원회·외부감사인·검사인</h1>
+<h2 id="company-07-16" data-concept-id="company-07-16">5-1. 일반 감사위원회는 이사회의 특별한 위원회다 ★★★★★</h2>
+<p><strong>교재290–291쪽 · 문단의 이유:</strong> 한 사람의 감사 대신 여러 이사가 함께 감독하는 방식을 마련한다.</p>
+<p>정관에 따라 감사 대신 감사위원회를 설치할 수 있다(415조의2). 감사위원회가 있으면 감사를 따로 둘 수 없다. 구성원은 <strong>이사3명 이상</strong>, 그중 <strong>3분의2 이상은 사외이사</strong>가 원칙이다. 상장 특례의 독립이사 명칭·요건은 다음 항목에서 구분한다. 일반 이사회 내 위원회의2명 이상 기준을 그대로 넣으면 틀린다.</p>
+<p>일반415조의2 방식에서는 이사회가 감사위원을 선임하고, 해임에는 <strong>이사 총수3분의2 이상</strong> 결의가 필요하다. 이사 지위의 선임·해임과 위원 지위의 선임·해임은 다르다. 이사직은 총회에서 얻고, 일반형 감사위원 지위는 이사회에서 맡는다. 모든 상장회사 감사위원에게 같은 규칙을 적용하지 않는다.</p>
+<p>위원회는 자신을 대표할 사람을 선정하며 여러 명이 공동으로 대표하도록 할 수 있다. 감사 업무의 독립성을 위해 <strong>감사위원회 결의는 이사회가 다시 결의할 수 없다</strong>. 보통 위원회는 이사회가 재결의할 수 있다는6장 원칙의 중요한 예외다. 감독받을 이사회가 감사 결론을 마음대로 뒤집지 못하게 한다. 회사 비용으로 전문가 도움을 받을 수 있고, 감사의 권한·의무·책임 관련 규정도 준용된다. 구성원은 이사이므로 이사 책임과의 관계도 검토한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1008159949">현행415조의2</a></p>
+<p><strong>시험:</strong> 이사3명·2/3·이사회 해임 가중·재결의 불가. <strong>키워드:</strong> 이사회 내부의 독립적 감독. <strong>한 줄:</strong> 이사회 안에 있지만 감사 결론까지 이사회가 뒤집을 수 있는 평범한 위원회는 아니다.</p>
+<h2 id="company-07-17" data-concept-id="company-07-17">5-2. 상장회사 감사위원은 회사 규모와 현행 시점을 확인한다 ★★★★★</h2>
+<p><strong>교재291–292쪽 · 문단의 이유:</strong> 큰 상장회사는 감사위원 선임을 경영진 내부에만 맡기기 어렵다.</p>
+<p>자산총액2조원 이상 상장회사의 감사위원회는 의무 설치 대상이고, 회계·재무 전문가1명 이상, 대표의 독립성 등 추가 구성을 확인한다. 상근감사 의무 대상인1,000억원 이상 회사가 제13절 요건의 감사위원회로 대체하는 경우도 일반 임의 위원회와 구분한다. 반면 그보다 작은 회사의 임의 감사위원회까지 이름만 보고 모두 같은 특례 대상이라고 단정하지 않는다.</p>
+<p>542조의12 적용 감사위원은 총회에서 선임·해임한다. 이사 선임 뒤 그중 감사위원을 정하는 기본 방식과, 다른 이사들과 <strong>분리하여 감사위원이 되는 이사를 선임하는 방식</strong>이 있다. <strong>2026.9.10부터 분리선임 최소 인원은2명</strong>으로 늘었다. 정관으로3명 이상 정할 수 있다. 교재의 ‘1명’은 개정 전 기준으로 따로 읽는다. 분리선임은 감사위원으로 일할 이사를 처음부터 별도 절차로 뽑는 것이지, 이사가 아닌 감사위원을 뽑는다는 뜻이 아니다.</p>
+<p>해임은 총회 특별결의다. 분리선임된 감사위원이 해임되면 이사와 감사위원 지위를 함께 상실한다. 일반형의 ‘이사회 총수2/3 해임’과 바꾸면 안 된다. 전자투표가 가능하도록 한 경우에는 감사위원 선임에도 출석 의결권 과반수 특례가 적용되며, 분리선임 이사에도 연결된다.</p>
+<p>현행3% 제한에서는 최대주주와 그 특수관계인 등 법정 합산 대상의 주식을 합쳐 제한하는 점이 중요하다. <strong>2026.7.23부터 독립이사인 감사위원인지 아닌지에 따라 최대주주 합산을 달리하던 구분이 바뀌었다.</strong> 최대주주가 아닌 주주에게까지 아무 관련 없는 다른 주주의 주식을 모두 합산하는 것은 아니다. 상장회사의 감사 선임·해임도7항 준용을 확인한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1025496577">현행542조의12</a>, <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001702&lsRvsGubun=all">개정법·시행 경과 확인</a></p>
+<p><strong>설명용 사례:</strong> A상장회사의 최대주주가 친족·법정 관련 보유자에게 지분을 나누고 “각자3%씩 표를 내겠다”고 한다. 이때 합산 대상 관계인지 확인해야 한다. 이름을 나누었다고 제한을 각각 새로 받을 수 있는 것은 아니다. 다만 구체적 합산 대상·기준일은 해당 법령과 사실관계로 판단한다.</p>
+<p><strong>시험:</strong> 일반형/상장 특례, 분리2명, 최대주주 합산. <strong>키워드:</strong> 회사 유형→자산→선임 방식→시점. <strong>한 줄:</strong> ‘감사위원 해임은 이사회’라는 문장은 일반형에서는 맞지만 상장 특례까지 포괄하면 틀린다.</p>
+<h2 id="company-07-18" data-concept-id="company-07-18">5-3. 외부감사인은 독립적인 회계 검증을 더한다 ★★★★☆</h2>
+<p><strong>교재293쪽 · 문단의 이유:</strong> 회사 내부 사람의 확인만으로는 투자자·채권자가 재무정보를 충분히 신뢰하기 어렵다.</p>
+<p>현행 법률 이름은 <strong>주식회사 등의 외부감사에 관한 법률</strong>이다. 일정 요건의 회사는 독립된 회계법인 또는 적법한 감사반 등에 회계감사를 받아야 한다. 회사와 외부감사인의 관계는 감사계약에 따른 것이고, 외부감사인이 상법상 감사라는 회사 기관이 되는 것은 아니다.</p>
+<p>외부감사인은 회사의 재무제표가 회계처리 기준에 맞게 작성됐는지를 전문적으로 검증한다. 경영진이 원래 정확한 재무제표를 만들 책임과 내부 감사의 감독 책임이 없어지지는 않는다. 외부감사도 모든 횡령을 반드시 발견한다는 무조건적인 보증은 아니다. 업무의 범위·감사기준·주의의무 위반과 손해의 연결을 따로 판단한다.</p>
+<p>선임은 단순히 대표이사 마음대로 외부 업체를 고르는 절차가 아니다. 외부감사법10조는 회사 유형에 따라 감사위원회 또는 감사·감사인선임위원회 등의 선정 절차를 둔다. 상장회사·대형비상장회사·금융회사는 원칙적으로3개 사업연도에 걸쳐 동일 감사인을 선임하는 규정이 있고, 법정 지정·교체 사유는 따로 확인한다. 교재가 상장회사를 중심으로 설명한3년 규칙을 모든 회사에 무조건 확대하지 않는다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1027658491">외부감사법10조</a></p>
+<p><strong>설명용 사례:</strong> 사장이 회계법인에 “감사 비용을 냈으니 우리 뜻대로 적정이라고 써 달라”고 한다. 계약상 보수를 지급한다고 감사의견을 주문할 수는 없다. 외부 검증의 의미는 회사가 원하는 말이 아니라 독립적인 판단을 제공하는 데 있다.</p>
+<p><strong>시험:</strong> 외부 기관 아님·회계 전문성·선정 절차·내부 책임 존속. <strong>키워드:</strong> 독립된 검증. <strong>한 줄:</strong> 외부감사는 내부 감사의 대체물이 아니라 재무정보의 신뢰를 높이는 별도 장치다.</p>
+<h2 id="company-07-19" data-concept-id="company-07-19">5-4. 검사인은 특정 사건만 맡는 임시 감사기관이다 ★★★★★</h2>
+<p><strong>교재293–295쪽 · 문단의 이유:</strong> 설립·출자·특별한 의심처럼 필요한 때 특정 사안을 깊게 조사할 수 있어야 한다.</p>
+<p>검사인은 상설기관이 아니다. 선임과 동시에3년 임기가 생기는 것이 아니라 맡은 조사가 끝나면 지위가 종료된다. 회사와의 관계는 위임관계로 이해하며 고용관계라고 단정하지 않는다. 원칙적으로 무보수 위임이라는 민법 원칙을 출발점으로 하되, 총회가 보수를 정하거나 법원이 선임한 검사인에게 법원이 보수를 정하여 회사가 부담하는 구조가 있다. ‘무조건 공짜로 일해야 한다’는 뜻은 아니다.</p>
+<p>선임 주체는 <strong>법원·창립총회·주주총회</strong>로 나눈다. 이사회가 필요하다고 요청하거나 절차를 진행하는 것과 이사회가 법정 검사인을 직접 선임하는 것은 다르다. 총회가 선임했다면 총회 결의로 해임할 수 있고, 법원이 선임했다면 법원에 의한 해임 구조를 본다.</p>
+<table>
+<thead>
+<tr>
+<th>법원 선임의 주요 장면</th>
+<th>무엇을 조사하나?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>설립 시 변태설립사항(298·310조)</td>
+<td>현물출자 등 특별한 출자 사항과 이행</td>
+</tr>
+<tr>
+<td>액면미달 신주발행(417조)</td>
+<td>재산 상태와 발행 허가 판단에 필요한 사항</td>
+</tr>
+<tr>
+<td>신주발행 때 현물출자(422조)</td>
+<td>현물출자의 내용·가치 등</td>
+</tr>
+<tr>
+<td>중대한 부정 의심과 소수주주 청구(467조)</td>
+<td>회사의 업무와 재산 상태</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>총회 선임의 주요 장면</th>
+<th>무엇을 조사하나?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>창립총회(313조)</td>
+<td>설립 경과에 관한 필요한 조사</td>
+</tr>
+<tr>
+<td>소수주주 청구로 소집된 총회(366조3항)</td>
+<td>업무와 재산 상태</td>
+</tr>
+<tr>
+<td>주주총회(367조)</td>
+<td>이사가 제출한 서류와 감사보고서</td>
+</tr>
+<tr>
+<td>청산 중 총회(542조 준용)</td>
+<td>청산인이 제출한 서류와 감사보고서</td>
+</tr>
+</tbody></table>
+<p><mark class="yellow">‘이사가 낸 서류와 감사보고서 조사’는 총회 선임 검사인의 대표 장면이다.</mark> 신주 현물출자와 액면미달 발행의 법원 검사인과 바꾸어 놓는 보기를 조심한다. 현물출자 검사 면제 등 각 절차의 예외는3·8장의 해당 요건과 함께 본다.</p>
+<p><strong>시험:</strong> 임시·위임·선임 주체·조사 대상. <strong>키워드:</strong> 특정 목적 조사. <strong>한 줄:</strong> 검사인은 회사에 계속 머무는 감사가 아니라 법이 정한 특정 문제를 확인하러 온다.</p>
+<h2 id="company-07-20" data-concept-id="company-07-20">5-5. 의심만으로 회사를 뒤집어 조사할 수는 없다 ★★★☆☆</h2>
+<p><strong>교재294–295쪽 · 문단의 이유:</strong> 소수주주 보호와 회사 운영의 안정을 함께 지켜야 한다.</p>
+<p>467조의 검사인 선임청구에는 회사 업무집행의 부정행위나 법령·정관 위반의 중대한 사실을 의심할 만한 사유가 필요하다. 일반 규정은 발행주식총수3% 이상 주주의 청구를 출발점으로 한다. 상장 특례의 보유기간·지분 완화는 해당 소수주주권 조문을 별도로 확인한다. 단순히 경영진과 사이가 나쁘거나 주가가 떨어졌다는 사실만으로 요건이 자동 충족되는 것은 아니다.</p>
+<p><strong>교재 판례 —1996.7.3.95마1335:</strong> 등장인물은 검사를 요구한 주주와 회사다. 주주는 회사에 부정이나 위법이 있을 것이라고 주장했지만 이를 뒷받침하는 자료가 충분하지 않았다. 법원의 고민은 “검사로 확인해야 할 의심과 아무 근거 없는 추측을 어떻게 나눌까?”였다. 법원은 막연한 추측만으로는 부족하다고 보았다. 그렇다고 검사 전에 부정행위 전부를 확정판결 수준으로 이미 밝혀야 한다는 뜻은 아니다. 법정 의심 사유를 뒷받침할 구체적인 자료가 필요하다는 취지다.</p>
+<p>판례 문장을 풀면 <strong>의심할 만한 사유</strong>는 ‘자료에 근거한 구체적 이상 징후’, <strong>막연한 추측</strong>은 ‘왠지 그랬을 것 같다는 말’, <strong>입증 부족</strong>은 ‘법정 조사를 시작할 만큼의 근거가 제시되지 않았다는 판단’이다. 반대로 소문만으로 광범위한 조사를 허용하면 경영을 압박하는 수단으로 남용될 수 있다.</p>
+<p>검사인도 임무를 게을리하면 책임이 생긴다. 회사와의 위임관계상 책임을 검토하고,325조는 법원이 선임한 검사인의 악의·중과실 임무해태로 인한 회사·제3자 손해배상을 정한다. 적용 조문의 준용 범위와 선임 절차를 확인한다. 위법한 행위에는625조·630조 등의 형사책임,635조의 과태료 등 각각 정한 제재가 문제 될 수 있다. 모든 실수를 한 가지 처벌로 설명하지 않는다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026823243">325조</a></p>
+<p><strong>시험:</strong> 구체적 의심 근거·선임 절차·책임 요건. <strong>키워드:</strong> 보호와 남용 방지. <strong>한 줄:</strong> 특별조사는 구체적 근거로 시작하고, 조사한 사람도 임무에 책임진다.</p>
+<h1>교재의 정리 질문에 답하기</h1>
+<p><strong>감사의 법적 지위는?</strong> 주식회사의 필요적 상설기관이 원칙이고, 소규모 생략·감사위원회 대체가 있다. 회사와 위임관계이며 여러 감사는 독립적으로 권한을 행사한다.</p>
+<p><strong>감사의 선임·종임은?</strong> 총회 보통결의+승낙,3% 초과 제한,410조의 결산기 연동 임기,사임·임기만료·특별결의 해임,공백 시 계속직무·임시감사를 설명한다.</p>
+<p><strong>감사의 권한·의무·책임은?</strong> 업무·회계감사, 보고·재산 조사, 회의 소집, 유지청구·소송대표·법정 제소권을 갖는다. 선관주의·위법 보고·총회 서류 검사·감사록·감사보고서 의무가 있고, 회사와 제3자 책임의 귀책 요건을 구분한다.</p>
+<p><strong>감사위원회는?</strong> 정관으로 감사를 대체하는 이사회 내 위원회,3명·2/3 원칙, 일반형과 상장 특례의 선임·해임 구별, 이사회 재결의 금지가 핵심이다.</p>
+<p><strong>외부감사인과 검사인은?</strong> 외부감사인은 외부 전문가의 회계 검증, 검사인은 특정 목적의 임시 회사기관이다. 검사인은 법원·창립총회·총회의 선임 장면을 구별한다.</p>
+<h1>기출 연결과 새로운 사례</h1>
+<p>형성045–048,워크북111–119의13문항을 연결했다. 제공 자료에서 반복되는 것은 <strong>감사 선임과3% 제한, 감사 권한, 감사위원회와 검사인의 구별</strong>이다. 실제 응시자별 오답률은 제공되지 않았으므로 ‘가장 많이 틀렸다’고 통계를 꾸미지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>우선 풀 TOP5</th>
+<th>출제 의도·오답 유발 지점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>워크북118</td>
+<td>의결권 있는 주식이 분모, 초과분만 제한</td>
+</tr>
+<tr>
+<td>형성046</td>
+<td>감사의 중지청구·의견권과 주주의 이사 해임청구 구별</td>
+</tr>
+<tr>
+<td>형성047</td>
+<td>비상장 일반형이라는 전제, 이사3명·이사회 해임</td>
+</tr>
+<tr>
+<td>워크북115</td>
+<td>감사의 제소권과 회사 소송대표권 구별</td>
+</tr>
+<tr>
+<td>워크북119</td>
+<td>법원 검사인과 총회 검사인의 조사 대상 구별</td>
+</tr>
+</tbody></table>
+<p>원자료 보완은 두 가지를 특히 기억한다. 워크북114의4번은 <strong>일반415조의2 감사위원회</strong>를 전제로 정답이다. 모든 상장 특례까지 포함하는 문장으로 읽으면 불완전하다. 워크북117의 기존 해설은 임기를 단순3년 상한으로 설명하지만, 정확한 법문은 <strong>취임 후3년 내 최종 결산기 관련 정기총회 종결 시</strong>다. 원본 문제·정답·기존 해설은 부록에서 보존하고 별도 과외 해설에 이를 표시했다.</p>
+<h3>새로운 사례5개</h3>
+<p><strong>문제1.</strong> 비상장 A회사는 의결권 있는 주식2,000주와 무의결권주식500주를 발행했다. 지연은 의결권 있는 주식600주를 갖고 감사 선임에 참여한다.75표를 쓸 수 있다고 주장한다. 맞을까?</p>
+<p><strong>해설:</strong> 기준은2,000주의3%인60주다.600주 전체를 배제하는 것도, 전체2,500주를 분모로75표를 주는 것도 틀리다. 정관상 더 낮은 비율을 정한 사실은 없다. <strong>출제 의도:</strong> 분모와 초과분을 동시에 계산하기.</p>
+<p><strong>문제2.</strong> 자본금7억원인 비상장 회사는 감사를 두지 않았다. 대표이사의 횡령으로 회사가 그 이사를 상대로 소송하려 한다. 대표이사가 회사 편도 대표하겠다고 한다. 어떻게 해야 할까?</p>
+<p><strong>해설:</strong> 감사 생략이 허용되는 회사라도 회사-이사 소송의 이해충돌을 방치하지 않는다.409조5항에 따라 회사·이사·이해관계인이 법원에 회사를 대표할 사람의 선임을 청구하는 절차를 검토한다. <strong>출제 의도:</strong> 소규모 생략과 소송대표의 연결.</p>
+<p><strong>문제3.</strong> 감사가 목적·이유를 적어 이사회와 총회 소집을 각각 적법하게 청구했다. 경영진이 둘 다 미룬다. 감사는 둘 다 법원 허가 없이 직접 소집할 수 있을까?</p>
+<p><strong>해설:</strong> 이사회 소집 청구에 불응하면 감사가 직접 이사회를 소집할 수 있다. 총회는 법원 허가가 필요하다. 두 권한의 다음 단계를 다르게 정한 조문을 적용한다. <strong>출제 의도:</strong> 비슷한 권한의 절차 차이.</p>
+<p><strong>문제4.</strong> 일반 비상장 회사의 감사위원회가 부당한 거래를 지적하는 결의를 했다. 이사회는 “우리 안의 위원회니 우리가 다시 결의해 없애겠다”고 한다. 가능한가?</p>
+<p><strong>해설:</strong> 일반 위원회에 대한 재결의 원칙을 감사위원회에 그대로 적용하지 못한다.415조의2 제6항이 이사회 재결의를 막는다. 감독받는 이사회가 감사 결론을 뒤집지 못하도록 독립성을 지키는 장치다. <strong>출제 의도:</strong> 원칙과 특별한 예외의 이유.</p>
+<p><strong>문제5.</strong> 감사 서현은 특정 임원이 장부 접근을 계속 막는다는 사실을 알면서도 외부감사인이 있으니 괜찮다며 확인 없이 보고서에 서명했다. 이후 조작된 자료를 믿은 채권자가 손해를 입었다. 감사는 자동 면책될까?</p>
+<p><strong>해설:</strong> 외부감사 존재나 정보 차단만으로 면책되지 않는다. 위험 징후 아래 필요한 요구·조사·보고를 했는지, 악의·중과실 임무해태와 채권자 손해의 인과관계가 있는지 검토한다. 단순히 결과적으로 부정을 못 찾았다는 사실만으로 무과실책임을 지우지도 않는다. <strong>출제 의도:</strong> 권한을 행사할 의무와 제3자 책임의 결합.</p>
+<h1>용어 사전</h1>
+<h3>감사·監事/監査</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 監(볼 감),事(일 사),査(조사할 사). <strong>③ 합친 뜻:</strong> 일을 감독하는 사람/살피고 조사하는 활동. <strong>④ 이름의 이유:</strong> 사람과 활동을 같은 소리로 부른다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이사의 직무집행과 회계를 감독하는 기관 및 그 활동. <strong>⑥ 쉬운 말:</strong> 회사가 제대로 운영되는지 확인하는 사람과 확인하는 일. <strong>⑦ 사례:</strong> 감사가 장부를 조사한다.</p>
+<p><strong>⑧ 시험:</strong> 업무감사와 회계감사 모두 포함. <strong>⑨ 비교·기억법:</strong> 監事는 기관,監査는 검사 활동.</p>
+<h3>상설기관·常設機關</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 常(항상 상),設(베풀 설),機(틀 기),關(관계할 관). <strong>③ 합친 뜻:</strong> 계속 설치해 두는 조직. <strong>④ 이름의 이유:</strong> 회사 경영을 계속 살펴야 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 사건에 한정되지 않고 지속적으로 존재하는 회사기관. <strong>⑥ 쉬운 말:</strong> 한 번 조사하고 끝나는 사람이 아니다. <strong>⑦ 사례:</strong> 감사는 결산 후에도 직무를 계속한다.</p>
+<p><strong>⑧ 시험:</strong> 검사인의 임시성과 비교. <strong>⑨ 비교·기억법:</strong> 상설이라고 같은 사람이 영원히 재임하는 것은 아님.</p>
+<h3>독임기관·獨任機關</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 獨(홀로 독),任(맡길 임),機(틀 기),關(관계할 관). <strong>③ 합친 뜻:</strong> 각자가 독립해 맡는 기관. <strong>④ 이름의 이유:</strong> 다수결을 기다리지 않고 필요한 감사를 하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여러 감사가 있어도 각자 독립적으로 감사권한을 행사하는 구조. <strong>⑥ 쉬운 말:</strong> 감사 둘이 반드시 합의해야 움직이는 것은 아니다. <strong>⑦ 사례:</strong> 한 감사가 독자적으로 보고를 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 감사회가 자동 구성되는지. <strong>⑨ 비교·기억법:</strong> 감사위원회는 회의체.</p>
+<h3>상근감사·常勤監事</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 常(항상 상),勤(부지런할 근),監(볼 감),事(일 사). <strong>③ 합친 뜻:</strong> 일상적으로 근무하는 감사. <strong>④ 이름의 이유:</strong> 회사 정보를 지속적으로 접하며 감독한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상장 특례 등에서 상근하면서 감사 직무를 수행하는 기관. <strong>⑥ 쉬운 말:</strong> 회사에 상시 근무하며 확인하는 감사. <strong>⑦ 사례:</strong> 자산 기준을 충족한 상장회사에 설치.</p>
+<p><strong>⑧ 시험:</strong> 자본금과 자산총액을 혼동하지 않기. <strong>⑨ 비교·기억법:</strong> 상근과 대표이사에 대한 종속은 다름.</p>
+<h3>의결권·議決權</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의),決(결단할 결),權(권세 권). <strong>③ 합친 뜻:</strong> 회의에서 결정하는 권리. <strong>④ 이름의 이유:</strong> 결정에 참여하는 힘이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주주총회 등의 안건에 찬반 의사를 표시하는 권리. <strong>⑥ 쉬운 말:</strong> 회의에서 표를 던질 수 있는 권리. <strong>⑦ 사례:</strong> 감사 선임에서3% 초과 표 제한.</p>
+<p><strong>⑧ 시험:</strong> 권리 있는 주식의 분모와 초과분. <strong>⑨ 비교·기억법:</strong> 주식을 갖는 것과 모든 안건에서 전부 표를 쓰는 것은 다름.</p>
+<h3>선임·選任/해임·解任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 選(가릴 선),任(맡길 임),解(풀 해). <strong>③ 합친 뜻:</strong> 골라 맡김/맡긴 자리에서 풀어냄. <strong>④ 이름의 이유:</strong> 맡기고 거두는 방향이 반대다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기관 담당자를 정하거나 직무에서 물러나게 하는 행위. <strong>⑥ 쉬운 말:</strong> 누구에게 일을 맡길지, 그만두게 할지 정함. <strong>⑦ 사례:</strong> 감사 선임 보통결의·해임 특별결의.</p>
+<p><strong>⑧ 시험:</strong> 이사 지위와 감사위원 지위 구별. <strong>⑨ 비교·기억법:</strong> 사임은 본인이 그만두는 것.</p>
+<h3>겸직·兼職</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 兼(겸할 겸),職(벼슬 직). <strong>③ 합친 뜻:</strong> 직무를 함께 맡음. <strong>④ 이름의 이유:</strong> 두 역할을 겸하는 관계다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 두 가지 이상의 지위를 동시에 갖고 수행하는 것. <strong>⑥ 쉬운 말:</strong> 한 사람이 두 자리를 맡는 것. <strong>⑦ 사례:</strong> 감사가 자회사 이사를 겸하면 금지 문제.</p>
+<p><strong>⑧ 시험:</strong> 회사 및 자회사 이사·사용인 겸직 금지. <strong>⑨ 비교·기억법:</strong> 자기 일을 자기가 검사하지 못하게 함.</p>
+<h3>적법성·適法性/타당성·妥當性</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 適(맞을 적),法(법 법),性(성품 성),妥(온당할 타),當(마땅할 당). <strong>③ 합친 뜻:</strong> 법에 맞음/내용이 알맞음. <strong>④ 이름의 이유:</strong> 옳다는 말의 두 기준을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령·정관 준수 여부와 경영판단의 합리성 여부. <strong>⑥ 쉬운 말:</strong> 불법인지와 좋은 선택인지는 다른 질문. <strong>⑦ 사례:</strong> 합법적인 상품을 판매해도 사업적으로 실패할 수 있다.</p>
+<p><strong>⑧ 시험:</strong> 감사의 타당성 감사 범위는 학설 구별. <strong>⑨ 비교·기억법:</strong> 감사에게 모든 경영을 대신 정할 권한이 있는 것은 아님.</p>
+<h3>소집청구·召集請求</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 召(부를 소),集(모을 집),請(청할 청),求(구할 구). <strong>③ 합친 뜻:</strong> 모이라고 불러 달라고 요구함. <strong>④ 이름의 이유:</strong> 직접 개최하기 전에 정식 요청한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기관의 회의를 열도록 법정 주체에게 요구하는 것. <strong>⑥ 쉬운 말:</strong> 회의를 열어 이 문제를 다루자고 요청함. <strong>⑦ 사례:</strong> 감사가 이사회에 총회 소집을 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 불응 시 총회는 법원 허가·이사회는 직접. <strong>⑨ 비교·기억법:</strong> 소집청구와 직접 소집을 구별.</p>
+<h3>유지청구·留止請求</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 留(머무를 류),止(그칠 지),請(청할 청),求(구할 구). <strong>③ 합친 뜻:</strong> 행위를 멈추어 달라고 요구함. <strong>④ 이름의 이유:</strong> 유지의 한자는 계속함이 아니라 멈춤이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법한 이사 행위로 회복할 수 없는 손해가 생길 염려가 있을 때 중지를 구하는 권리. <strong>⑥ 쉬운 말:</strong> 잘못된 행동을 하기 전에 막는 것. <strong>⑦ 사례:</strong> 회사 돈을 위법하게 빼돌릴 거래의 중지.</p>
+<p><strong>⑧ 시험:</strong> 감사와 주주의 요건 구별. <strong>⑨ 비교·기억법:</strong> 이미 생긴 손해의 배상과 다름.</p>
+<h3>소송대표·訴訟代表</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 訴(하소연할 소),訟(송사할 송),代(대신할 대),表(겉 표). <strong>③ 합친 뜻:</strong> 재판에서 당사자를 대신함. <strong>④ 이름의 이유:</strong> 회사는 스스로 말할 수 없어 사람이 대신한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법인인 회사의 소송행위를 담당하는 대표 지위. <strong>⑥ 쉬운 말:</strong> 재판에서 회사 편의 법적 행동을 하는 것. <strong>⑦ 사례:</strong> 회사-이사 소송에서 감사가 회사 대표.</p>
+<p><strong>⑧ 시험:</strong> 감사 자신의 제소권과 구별. <strong>⑨ 비교·기억법:</strong> 회사가 당사자이고 감사는 대표자일 수 있음.</p>
+<h3>선관주의·善管注意</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 善(착할 선),管(맡을 관),注(부을 주),意(뜻 의). <strong>③ 합친 뜻:</strong> 선량한 관리자로서 기울이는 주의. <strong>④ 이름의 이유:</strong> 대충 하지 말고 그 지위에 기대되는 주의를 다하라는 뜻.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 맡은 직무와 전문성에 맞게 신중하게 사무를 처리할 의무. <strong>⑥ 쉬운 말:</strong> 의심스러운 장부를 그냥 넘기지 않는 것. <strong>⑦ 사례:</strong> 이상한 송금을 확인하고 근거 자료를 요구.</p>
+<p><strong>⑧ 시험:</strong> 결과적 실패와 주의의무 위반 구별. <strong>⑨ 비교·기억법:</strong> 주관적으로 열심히 했다는 말만으로 충분하지 않음.</p>
+<h3>감사록·監査錄</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 監(볼 감),査(조사할 사),錄(기록할 록). <strong>③ 합친 뜻:</strong> 검사한 일을 남긴 기록. <strong>④ 이름의 이유:</strong> 무엇을 확인했는지 사후에 알게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 감사의 실시 요령과 결과 등을 적은 법정 기록. <strong>⑥ 쉬운 말:</strong> 조사 방법과 결과를 남기는 문서. <strong>⑦ 사례:</strong> 재고 확인 방법과 발견한 차이를 기록.</p>
+<p><strong>⑧ 시험:</strong> 이사회 의사록·감사보고서와 구별. <strong>⑨ 비교·기억법:</strong> 감사록은 활동 기록, 보고서는 보고 목적.</p>
+<h3>분식회계·粉飾會計</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 粉(가루 분),飾(꾸밀 식),會(모을 회),計(셈할 계). <strong>③ 합친 뜻:</strong> 회계 숫자를 겉보기 좋게 꾸밈. <strong>④ 이름의 이유:</strong> 분장을 하듯 손실을 숨기는 표현이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재무상태나 성과를 사실과 다르게 표시하는 부정 회계. <strong>⑥ 쉬운 말:</strong> 돈을 못 벌었는데 잘 번 것처럼 장부를 꾸밈. <strong>⑦ 사례:</strong> 없는 매출을 적어 회사가 건강한 것처럼 보이게 함.</p>
+<p><strong>⑧ 시험:</strong> 감사 소홀과 채권자 손해의 연결. <strong>⑨ 비교·기억법:</strong> 실제 이익 증가와 숫자 조작은 다름.</p>
+<h3>내부통제·內部統制</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 內(안 내),部(떼 부),統(거느릴 통),制(절제할 제). <strong>③ 합친 뜻:</strong> 조직 안에서 관리하고 점검함. <strong>④ 이름의 이유:</strong> 한 사람의 말만 믿지 않고 확인 구조를 둔다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 부정·오류를 예방·발견하고 법규 준수를 돕는 체계. <strong>⑥ 쉬운 말:</strong> 잘못을 미리 막고 발견할 회사 안의 장치. <strong>⑦ 사례:</strong> 송금 승인과 장부 대조를 서로 다른 사람이 수행.</p>
+<p><strong>⑧ 시험:</strong> 형식적 제도 존재보다 실제 작동. <strong>⑨ 비교·기억법:</strong> 감사를 대신하는 면책 장치가 아님.</p>
+<h3>악의·惡意/중과실·重過失</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 惡(악할 악),意(뜻 의),重(무거울 중),過(허물 과),失(잃을 실). <strong>③ 합친 뜻:</strong> 알면서 한 잘못/중대한 부주의. <strong>④ 이름의 이유:</strong> 일반적 부주의보다 책임 문턱을 높인다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 감사의 제3자 책임 등에서 요구되는 강한 귀책 요건. <strong>⑥ 쉬운 말:</strong> 문제를 알면서 넘기거나 조금만 살펴도 알 일을 심하게 놓침. <strong>⑦ 사례:</strong> 명백한 회계 조작 징후를 확인 없이 승인.</p>
+<p><strong>⑧ 시험:</strong> 회사 책임과 제3자 책임의 요건 차이. <strong>⑨ 비교·기억법:</strong> 민법의 선의·악의는 문맥상 사실 인식 의미도 있으므로 문맥 확인.</p>
+<h3>감사위원회·監査委員會</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 監(볼 감),査(조사할 사),委(맡길 위),員(인원 원),會(모일 회). <strong>③ 합친 뜻:</strong> 감사를 맡은 구성원의 모임. <strong>④ 이름의 이유:</strong> 한 사람이 아닌 여러 이사가 함께 감독한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 감사를 대신해 감사 기능을 수행하는 이사회 내 위원회. <strong>⑥ 쉬운 말:</strong> 감독을 맡은 이사들의 특별한 회의체. <strong>⑦ 사례:</strong> 3명 중2명 이상이 사외이사인 일반형.</p>
+<p><strong>⑧ 시험:</strong> 상장 특례·재결의 금지·해임 주체. <strong>⑨ 비교·기억법:</strong> 감사 여러 명이 있다고 자동 감사위원회가 되는 것은 아님.</p>
+<h3>분리선임·分離選任</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 分(나눌 분),離(떠날 리),選(가릴 선),任(맡길 임). <strong>③ 합친 뜻:</strong> 나누어 별도로 골라 맡김. <strong>④ 이름의 이유:</strong> 감사 담당 이사를 뽑는 단계부터 지배력 제한을 적용한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상장 특례에서 감사위원이 될 이사를 다른 이사들과 분리해 선임하는 방식. <strong>⑥ 쉬운 말:</strong> 감사할 이사를 별도 안건으로 뽑는 것. <strong>⑦ 사례:</strong> 현행 최소2명을 분리선임하는 대상 회사.</p>
+<p><strong>⑧ 시험:</strong> 2026.9.10 개정과 회사 유형. <strong>⑨ 비교·기억법:</strong> 이사가 아닌 감사위원을 선임하는 것이 아님.</p>
+<h3>외부감사인·外部監査人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 外(밖 외),部(떼 부),監(볼 감),査(조사할 사),人(사람 인). <strong>③ 합친 뜻:</strong> 외부에서 회계를 검사하는 사람. <strong>④ 이름의 이유:</strong> 회사 내부 이해관계와 거리를 둔 전문 검증이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 외부감사법에 따라 회계감사를 수행하는 회계법인·감사반 등. <strong>⑥ 쉬운 말:</strong> 회사의 재무자료를 밖에서 확인하는 전문가. <strong>⑦ 사례:</strong> 회계법인이 재무제표를 감사.</p>
+<p><strong>⑧ 시험:</strong> 회사기관 여부와 내부 감사 책임 존속. <strong>⑨ 비교·기억법:</strong> 감사위원회와 달리 회사의 이사회 내 기관이 아님.</p>
+<h3>검사인·檢査人</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 檢(검사할 검),査(조사할 사),人(사람 인). <strong>③ 합친 뜻:</strong> 검사하는 사람. <strong>④ 이름의 이유:</strong> 특정 문제를 확인할 때 불러온다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법이 정한 특정 사안을 조사하도록 선임하는 임시 감사기관. <strong>⑥ 쉬운 말:</strong> 필요한 사건만 조사하고 일을 마치는 사람. <strong>⑦ 사례:</strong> 신주 현물출자의 가치를 확인.</p>
+<p><strong>⑧ 시험:</strong> 법원·창립총회·총회 선임을 구별. <strong>⑨ 비교·기억법:</strong> 형사사건의 검사와 다름.</p>
+<h3>현물출자·現物出資</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현),物(물건 물),出(날 출),資(재물 자). <strong>③ 합친 뜻:</strong> 돈 대신 실제 재산을 내어 투자함. <strong>④ 이름의 이유:</strong> 가격을 부풀릴 위험이 있어 검사 절차가 연결된다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 금전 외 재산을 출자하고 주식을 취득하는 것. <strong>⑥ 쉬운 말:</strong> 현금 대신 땅이나 기계를 회사에 내는 것. <strong>⑦ 사례:</strong> 기계를 내고 신주를 받는다.</p>
+<p><strong>⑧ 시험:</strong> 설립·신주발행의 검사와 예외. <strong>⑨ 비교·기억법:</strong> 단순 매매와 출자는 법적 구조가 다름.</p>
+<h3>임무해태·任務懈怠</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 任(맡길 임),務(힘쓸 무),懈(게으를 해),怠(게으를 태). <strong>③ 합친 뜻:</strong> 맡은 일을 게을리함. <strong>④ 이름의 이유:</strong> 의무가 있는데 필요한 일을 하지 않은 상태다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령·정관·위임관계에 따라 해야 할 의무를 이행하지 않는 것. <strong>⑥ 쉬운 말:</strong> 확인해야 할 것을 알면서도 또는 부주의로 안 함. <strong>⑦ 사례:</strong> 자료 요구가 막혔는데 아무 조치 없이 보고서 서명.</p>
+<p><strong>⑧ 시험:</strong> 손해·귀책·인과관계 함께 판단. <strong>⑨ 비교·기억법:</strong> 직함을 가졌다는 사실만으로 책임이 자동 생기는 것은 아님.</p>
+<h1>시험 직전 A4 암기노트</h1>
+<div class="memory-sheet">
+<h2>한 장으로 마지막 확인</h2>
+<p><strong>TOP3:</strong> 감사 선임3% / 감사의 권한·의무·책임 / 감사위원회·외부감사인·검사인 구별.</p>
+<table><thead><tr><th>항목</th><th>반드시 기억</th></tr></thead><tbody>
+<tr><td>감사 지위</td><td>필요적 상설 원칙·위임·여러 감사 각자 독립</td></tr>
+<tr><td>선임</td><td>총회 보통결의+승낙. 등기 효력요건 아님</td></tr>
+<tr><td>3% 제한</td><td>무의결권 제외한 총수·초과분만. 정관 하향 가능</td></tr>
+<tr><td>전자투표</td><td>실시 가능하도록 하면 선임 출석 과반수 특례</td></tr>
+<tr><td>소규모</td><td>자본금10억 미만 감사 생략 가능·소송대표 법원 선임</td></tr>
+<tr><td>상장 규모</td><td>자산1,000억 상근감사/2조 감사위원회. 법정 대체·예외 확인</td></tr>
+<tr><td>겸직·임기</td><td>회사·자회사 이사/사용인 금지.3년 내 최종 결산기 정기총회 종결</td></tr>
+<tr><td>종임</td><td>해임 특별결의·해산만으로 종료X·공백 계속직무</td></tr>
+<tr><td>감사 범위</td><td>업무+회계·경영 대행X·전문가 도움 가능</td></tr>
+<tr><td>정보</td><td>언제든 보고·재산 조사·필요한 자회사 조사·불능 이유 기록</td></tr>
+<tr><td>회의</td><td>이사회 출석·의견, 의결권X. 총회 직접소집 법원 허가 필요</td></tr>
+<tr><td>이사회 소집</td><td>청구 후 불응→감사 직접, 법원 허가 불요</td></tr>
+<tr><td>소송</td><td>402 유지·394 회사-이사 소송대표·법정 제소권은 구별</td></tr>
+<tr><td>의무</td><td>선관·비밀·위법 보고·총회 서류 검사·감사록·감사보고서</td></tr>
+<tr><td>결산</td><td>이사6주 전 제출→감사4주 내 보고·상장1주 전 특례</td></tr>
+<tr><td>책임</td><td>회사 일반 과실/제3자 악의·중과실. 정보 차단 자동 면책X</td></tr>
+<tr><td>일반 위원회</td><td>이사3명·2/3 사외·이사회 해임 총수2/3·재결의X</td></tr>
+<tr><td>상장 특례</td><td>총회 선임·해임,2026.9 분리2명·2026.7 최대주주 합산 강화</td></tr>
+<tr><td>외부감사인</td><td>외부 회계 전문가·회사 기관X·내부 감사 책임 대체X</td></tr>
+<tr><td>검사인</td><td>임시·위임·법원/창립총회/총회 선임·직무 종료로 지위 끝</td></tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> “3% 초과분만 제한한다.” “감사 선임과 이사 선임은 다르다.” “정보를 막는 구조는 감사가 더 주의해야 할 신호다.”</p>
+<p><strong>사례를 풀 순서:</strong> 회사 유형·규모→기관 종류→선임·임기→권한과 절차→해야 할 조치→손해 당사자→귀책·인과관계.</p>
+</div>
+
+<h1>학습 상태 진단과 출처</h1>
+<p>🟢3% 표를 계산하고, 총회·이사회 소집 절차를 구별하며, 네 감사 장치를 사례로 설명할 수 있다. 🟡숫자는 기억하지만 회사 유형·절차가 헷갈리면 비교표와TOP5를 다시 푼다. 🔴감사가 이사를 직접 해임한다거나 외부감사인이 내부 감사를 대체한다고 생각하면1·3·5절부터 돌아간다. 아직 답안을 받지 않았으므로 실제 이해도를 평가한 결과가 아니라 <strong>자기점검 기준</strong>이다.</p>
+<p>복습 TOP3는 <strong>①3% 제한의 분모·초과분 ②감사의 소집·중지·소송대표권 ③일반 감사위원회와 상장 특례·검사인 구별</strong>이다.</p>
+<p>출처는 제공 교재279–296쪽, 제공 JSON13문항, 본문에 연결한 국가법령정보센터·대법원 자료다. 교재 수록95마1335의 설명은 교재가 제시한 법리를 범위로 삼았다. 현행 보완은2026.10.23 기준으로 분리 표시했으며, 법률 개정의 시행 시점과 사건에 적용되는 시점을 함께 확인한다.</p>
+<h1>문제 부록 · 13문항·52개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-주식회사법_045"><h4>형성평가 · 주식회사법_045</h4><p class="question-stem">다음 중에서 주식회사의 감사에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주식회사의 필요적 상설기관이다.</li><li>감사는 이사회에서 선임한다.</li><li>감사의 수는 3인 이상이어야 한다.</li><li>자회사의 이사 또는 지배인의 직무를 겸할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원칙상 맞아 정답이다. 주식회사의 감사는 필요적 상설기관이다. 다만10억원 미만 회사의 감사 생략과 감사위원회 대체를 함께 기억한다.</li><li><strong>비선택</strong> · 틀리다. 회사 성립 후 감사 선임은 총회 권한이며 보통결의가 원칙이다. 경영진인 이사회가 자기 감시자를 직접 뽑는다고 섞지 않는다.</li><li><strong>비선택</strong> · 틀리다. 감사는1명 이상이면 된다.3명 이상은 감사위원회의 구성 기준이다.</li><li><strong>비선택</strong> · 틀리다. 회사뿐 아니라 자회사의 이사·지배인·그 밖의 사용인 겸직도 금지된다. 자회사라는 말을 예외로 생각하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②상법 제409조 제1항 참조. 감사는 주주총회에서 선임한다. ③감사의 수에 대해서는 아무런 제한이 없으므로 1인 이상이면 된다. ④상법 제411조 참조. 감사는 회사 및 자회사의 이사 또는 지배인 기타의 사용인의 직무를 겸하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_046"><h4>형성평가 · 주식회사법_046</h4><p class="question-stem">다음 중에서 주식회사의 감사의 권한에 해당하지 않는 것은?</p><ol class="choices"><li>영업보고청구권</li><li>재산상태조사권</li><li>이사에 대한 해임청구권</li><li>이사회에서 의견진술권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 권한에 해당한다. 감사는 언제든 이사에게 영업 보고를 요구할 수 있다. 정기총회 직전으로 한정하지 않는다.</li><li><strong>비선택</strong> · 권한에 해당한다. 회사 업무와 재산 상태를 조사할 수 있다. 책임 있는 감사를 위한 정보 접근권이다.</li><li><strong>선택</strong> · 정답이다. 감사라는 자격만으로 이사 해임의 소를 제기하는 일반적 권한은 없다. 소수주주의 해임청구와 감사의 위법행위 중지청구를 구별한다.</li><li><strong>비선택</strong> · 권한에 해당한다. 이사회에 출석해 의견을 진술할 수 있다. 다만 감사 지위로 이사회 표결권을 갖는다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 감사의 권한은 영업보고청구권, 재산상태의 조사권(412조 2항), 이사회 출석권, 이사회에서 의견진술권, 감사의 해임에 관한 의견진술권, 이사의 보고를 받을 권리, 이사의 위법행위유지청구권, 주주총회소집청구권, 회사와 이사간의 소가 제기된 경우의 회사대표권 등 많은 권한이 주어져 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_047"><h4>형성평가 · 주식회사법_047</h4><p class="question-stem">다음 중에서 감사위원회에 대한 설명으로 옳은 것은?(비상장회사 기준)</p><ol class="choices"><li>이사회내 위원회가 아니다.</li><li>감사위원은 이사가 아닌 자여야 한다.</li><li>그 수는 2인 이상이어야 한다.</li><li>감사위원의 해임은 이사회의 권한이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 감사위원회는 이사회 내 위원회다. 다만 독립성을 위해 이사회가 그 결의를 재결의하지 못하는 특례가 있다.</li><li><strong>비선택</strong> · 틀리다. 구성원은 이사여야 한다. 사외이사도 이사이며, 회사 외부의 회계법인과 다르다.</li><li><strong>비선택</strong> · 틀리다. 일반 위원회의2명 기준과 달리 감사위원회는3명 이상이다. 그중2/3 이상 사외이사 원칙도 함께 본다.</li><li><strong>선택</strong> · 정답이다. 문제에 비상장회사라고 명시되어 일반415조의2 방식이 적용된다. 해임은 이사 총수2/3 이상 결의다. 상장 특례의 총회 해임과 섞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제415조의2 참조. 감사위원회는 이사회내 위원회이므로 구성원인 감사위원은 이사이어야 하며, 그 수는 3인 이상이어야 한다. 다만, 사외이사가 위원의 3분의 2 이상이어야 한다. 그리고 감사위원회는 이사회내 위원회이므로 이사회가 감사위원을 선임하고 해임한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_048"><h4>형성평가 · 주식회사법_048</h4><p class="question-stem">다음 중에서 상법상 검사인에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주식회사의 필요적 상설기관이다.</li><li>검사인은 선임과 동시에 3년의 임기가 보장된다.</li><li>검사인과 회사의 관계는 위임관계가 아니라 고용관계이다.</li><li>주주총회에서 검사인을 선임하는 경우에 주주총회 결의로 해임할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 검사인은 특정 사건을 조사하기 위한 임시기관이다. 필요적 상설기관인 감사의 원칙을 가져오면 안 된다.</li><li><strong>비선택</strong> · 틀리다. 고정3년 임기를 보장하는 제도가 아니다. 맡은 직무가 종료되면 검사인 지위가 끝난다.</li><li><strong>비선택</strong> · 틀리다. 회사와 검사인의 관계는 위임관계로 이해한다. 선임된 사람이 회사의 일반 직원이 되는 것은 아니다.</li><li><strong>선택</strong> · 정답이다. 총회가 선임한 검사인은 총회 결의로 해임할 수 있다. 법원 선임 검사인은 그 선임·해임 절차를 따로 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①검사인은 주식회사의 임시적 감사기관이다. ②검사인은 임기가 없고, 직무의 종료로 검사인의 지위는 소멸한다. ③검사인과 회사의 관계는 이사, 감사와 마찬가지로 위임관계로 이해한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_111"><h4>워크북 · 주식회사법_워크북_111</h4><p class="question-stem">다음 중에서 감사의 선임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>감사위원회에서 선임한다.</li><li>주주총회의 보통결의로 선임한다.</li><li>이사회에서 선임한다.</li><li>금융 감독 위원회의 추천을 받아 선임한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 감사위원회는 감사를 대체하는 기관이지 별도 감사를 선임하는 기관이 아니다. 감사와 위원회의 병존 금지도 기억한다.</li><li><strong>선택</strong> · 정답이다.409조1항에 따라 총회가 선임하며 보통결의가 원칙이다.3% 제한과 전자투표 정족수 특례는 별도로 적용한다.</li><li><strong>비선택</strong> · 틀리다. 이사회 선임은 일반형 감사위원의 위원 지위와 혼동한 것이다. 이사의 지위와 감사의 선임은 총회 단계다.</li><li><strong>비선택</strong> · 틀리다. 금융감독 관련 기관의 추천이 상법상 일반 감사 선임의 필수 요건은 아니다. 회사 기관의 선임 주체를 묻는 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제409조 제1항 참조. 감사는 주주총회에서 선임한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_112"><h4>워크북 · 주식회사법_워크북_112</h4><p class="question-stem">다음 중에서 감사 선임 시 의결권 제한에 대한 내용으로 옳은 것은?(상법의 규정에 따름)</p><ol class="choices"><li>의결권 있는 주식의 100분의 1을 초과하는 주식</li><li>의결권 있는 주식의 100분의 2를 초과하는 주식</li><li>의결권 있는 주식의 100분의 3을 초과하는 주식</li><li>의결권 있는 주식의 100분의 5를 초과하는 주식</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 법정 기준이 아니어서 비선택이다. 정관으로 더 낮출 수 있으므로1%가 어떤 경우에도 불가능하다고까지 말하면 안 된다. 질문은 법정 기본비율을 묻는다.</li><li><strong>비선택</strong> · 일반 법정 기준이 아니어서 비선택이다.2%와 법정3%를 구별한다. 정관 하향 가능 여부는 별도 쟁점이다.</li><li><strong>선택</strong> · 정답이다. 무의결권주식을 제외한 발행주식총수3%의 초과분이 제한된다.3%까지 가진 표를 모두 없애지 않는다.</li><li><strong>비선택</strong> · 틀리다.5%를 기본 한도로 정하면 법정3% 제한을 느슨하게 만든다. 정관으로 비율을 높여 제한을 피할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제409조 제2항 참조. 의결권 없는 주식을 제외한 발행 주식의 총수의 100분의 3을 초과하는 수의 주식을 가진 주주는 그 초과하는 주식에 관하여 감사의 선임에 있어서는 의결권을 행사하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_113"><h4>워크북 · 주식회사법_워크북_113</h4><p class="question-stem">다음 중에서 감사의 권한에 해당하지 않는 것은?</p><ol class="choices"><li>영업 보고 청구권</li><li>재산 상태 조사권</li><li>이사회에서 의견 진술권</li><li>이사에 대한 해임 청구권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 감사 권한이다. 업무집행을 감시하려면 이사에게 영업 내용을 보고받을 수 있어야 한다.</li><li><strong>비선택</strong> · 감사 권한이다. 장부 설명만 듣는 데 그치지 않고 업무·재산을 조사할 수 있다.</li><li><strong>비선택</strong> · 감사 권한이다. 이사회에서 문제를 지적할 수 있지만 감사 지위의 의결권과는 다르다.</li><li><strong>선택</strong> · 정답이다. 이사 해임청구는 법정 소수주주권과 구별해야 한다. 감사는 위법행위 중지·법정 소송을 할 수 있어도 모든 해임권을 갖지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 감사의 권한은 영업 보고 청구권, 재산 상태의 조사권(상법 제412조 제2항), 이사회 출석권, 이사회에서 의견 진술권, 감사의 해임에 관한 의견 진술권, 이사의 보고를 받을 권리, 이사의 위법 행위 유지 청구권, 주주총회 소집 청구권, 회사와 이사 간의 소가 제기된 경우의 회사 대표권 등 많은 권한이 주어져 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_114"><h4>워크북 · 주식회사법_워크북_114</h4><p class="question-stem">다음 중에서 감사위원회에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>이사회 내의 위원회가 아니다.</li><li>감사 위원은 이사가 아닌 자여야 한다.</li><li>그 수는 2인 이상이어야 한다.</li><li>감사 위원의 해임은 이사회의 권한이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 감사위원회는 이사회 내 위원회다. 이사회가 감사 결의를 뒤집지 못한다는 예외 때문에 외부기관이 되는 것은 아니다.</li><li><strong>비선택</strong> · 틀리다. 감사위원은 이사다. 사외·독립이사라는 이름에서 이사 자격 자체를 부정하면 안 된다.</li><li><strong>비선택</strong> · 틀리다.3명 이상이고 일반형에서는2/3 이상 사외이사 기준을 충족해야 한다. 일반 위원회2명 기준과 구별한다.</li><li><strong>선택</strong> · 원본 정답을 보존한다. 일반415조의2 감사위원회를 전제로 이사회 해임이 맞고 이사 총수2/3 결의가 필요하다. 다만 문제에 회사 유형이 빠져 있어 모든 상장 특례까지 맞는 문장으로 읽으면 안 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제415조의2 참조. 감사위원회는 이사회 내 위원회이므로 이사회가 감사 위원을 선임하고 해임한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_115"><h4>워크북 · 주식회사법_워크북_115</h4><p class="question-stem">다음 중에서 감사가 회사를 대표하는 경우에 해당하는 것은?</p><ol class="choices"><li>회사와 이사 사이의 소송</li><li>설립무효의 소송</li><li>주주총회 결의 취소의 소송</li><li>위법 행위 유지 청구권의 행사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 회사가 이사를 상대로 하거나 이사가 회사를 상대로 소송할 때 감사가 해당 소송에서 회사를 대표한다. 자기 상대 소송을 경영진이 지배하지 못하게 한다.</li><li><strong>비선택</strong> · 이 소를 제기할 수 있는 감사의 법정 권한과 회사 대표를 구별해야 한다. 설립무효 사건이라는 이름만으로 감사가 언제나 피고 회사를 대표하는 것은 아니다.</li><li><strong>비선택</strong> · 감사는 법정 요건 아래 총회결의 취소의 소를 제기할 수 있다. 자기 제소권을 행사하는 것과 회사의 소송대표자가 되는 것은 다르다.</li><li><strong>비선택</strong> · 감사 자신의 법정 중지청구권 행사다. 회사-이사 사이의 소송에서 회사를 대표하는394조 장면과 동일하게 취급하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제394조 참조. 회사가 이사에 대하여 또는 이사가 회사에 대하여 소를 제기하는 경우에 감사는 그 소에 관하여 회사를 대표한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_116"><h4>워크북 · 주식회사법_워크북_116</h4><p class="question-stem">상법에서 정하고 있는 검사인의 선임에 해당하지 않는 것은?</p><ol class="choices"><li>법원에서 선임하는 경우</li><li>창립 총회에서 선임하는 경우</li><li>주주총회에서 선임하는 경우</li><li>이사회에서 선임하는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법원 선임이 가능하므로 비선택이다. 설립 변태사항·액면미달 발행·신주 현물출자·소수주주 청구 등 법정 장면을 확인한다.</li><li><strong>비선택</strong> · 창립총회 선임이 가능하므로 비선택이다.313조의 설립 조사와 관련된다. 회사 성립 후 총회만 검사인을 선임할 수 있다고 생각하면 틀린다.</li><li><strong>비선택</strong> · 주주총회 선임이 가능하므로 비선택이다. 이사가 제출한 서류와 감사보고서 조사 등이 대표 장면이다.</li><li><strong>선택</strong> · 정답이다. 이사회가 법정 검사인을 직접 선임하는 방식은 이 목록에 없다. 이사들이 법원에 선임을 신청하거나 절차를 수행하는 것과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법에서 정하고 있는 검사인의 선임은 법원에서 선임하는 경우(상법 제298조, 제310조, 제417조), 창립 총회에서 선임하는 경우(상법 제313조), 주주총회에서 선임하는 경우(상법 제366조, 제367조, 제542조)가 있다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_117"><h4>워크북 · 주식회사법_워크북_117</h4><p class="question-stem">OO 주식회사는 설립 후 감사를 새로 선임하려고 한다. 다음 중에서 설립 후 감사 선임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>주주총회에서 선임한다.</li><li>감사를 새로 선임하므로 감사 선임 시 의결권 제한은 적용되지 않는다.</li><li>감사의 임기는 1년을 초과할 수 없다.</li><li>감사의 수에 대해서는 이사와 같이 3인 이상이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 회사 성립 후 감사는 총회가 선임한다. 선임결의와 취임승낙을 결합해 지위가 생기고 등기는 효력발생 요건이 아니다.</li><li><strong>비선택</strong> · 틀리다. 새 감사를 뽑는다는 이유로3% 의결권 제한이 사라지지 않는다. 대주주가 새로운 감시자 선임을 독점하지 못하게 한 규정이다.</li><li><strong>비선택</strong> · 틀리다.1년 상한이 아니다. 원본 해설의 단순3년 상한 설명도 보완해야 한다.410조는 취임 후3년 내 최종 결산기에 관한 정기총회 종결 시까지여서 달력상3년을 넘길 수 있다.</li><li><strong>비선택</strong> · 틀리다. 감사의 수는1명 이상이면 된다. 감사위원회3명 기준과 혼동시키는 보기다. 소규모 회사 감사 생략 특례는 별도로 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 상법 제409조 제1항 참조. 감사 선임 시 의결권 제한은 회사 설립 시 인지 회사 설립 후인지를 묻지 않는다. ③ 감사의 임기는 3년을 초과할 수 없다. ④ 감사의 수에 대해서는 아무런 제한이 없으므로 1인 이상이면 된다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_118"><h4>워크북 · 주식회사법_워크북_118</h4><p class="question-stem">다음 중에서 주식회사의 감사 선임 시 주주의 의결권 행사 제한에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>의결권 있는 주식의 3%를 초과하는 수의 주식을 가진 주주는 그 초과하는 주식에 대하여 의결권을 행사할 수 없다.</li><li>의결권 있는 주식의 3%를 초과하는 수의 주식을 가진 주주는 보유 주식 전체에 대하여 의결권을 행사할 수 없다.</li><li>전체 주식의 3%를 초과하는 수의 주식을 가진 주주는 그 초과하는 주식에 대하여 의결권을 행사할 수 없다.</li><li>전체 주식의 3%를 초과하는 수의 주식을 가진 주주는 보유 주식 전체에 대하여 의결권을 행사할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 의결권 있는 주식의3%를 기준으로 초과 주식만 제한한다. 예컨대1,000주 중400주 보유자는 원칙적으로30표를 쓸 수 있다.</li><li><strong>비선택</strong> · 틀리다. 보유 주식 전부가 아니라3% 초과분을 제한한다. 주주를 통째로 의결권 없는 사람으로 만드는 제도가 아니다.</li><li><strong>비선택</strong> · 틀리다. 무의결권주식도 포함하는 전체 주식이라고 쓰면 분모가 잘못된다. 조문은 의결권 없는 주식을 제외한 총수를 사용한다.</li><li><strong>비선택</strong> · 틀리다. 분모도 전체 주식으로 잘못 잡았고 제한 범위도 보유 주식 전체로 확대했다. 두 함정이 겹친 보기다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상법 제409조 제2항 참조. 의결권 없는 주식을 제외한 발행주식총수의 100분의 3을 초과하는 수의 주식을 가진 주주는 그 초과하는 주식에 관하여 의결권을 행사하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-주식회사법_워크북_119"><h4>워크북 · 주식회사법_워크북_119</h4><p class="question-stem">다음 중에서 법원이 검사인을 선임하는 경우 검사인의 직무에 해당하지 않는 것은?</p><ol class="choices"><li>회사 설립 시 변태설립사항 조사</li><li>이사가 제출한 서류와 감사의 보고서 조사</li><li>액면 미달의 신주발행 시 회사의 재산 상태 조사</li><li>신주발행 시 현물출자를 하는 경우 현물출자의 내용 검사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법원 선임 검사인의 대표 업무다. 변태설립사항과 현물출자 이행 등을 검토한다. 법정 면제 요건이 있는지는 별도로 확인한다.</li><li><strong>선택</strong> · 정답이다. 이사가 제출한 서류와 감사보고서를 조사하기 위해 총회가 선임하는367조 장면이다. 법원 선임과 총회 선임을 구별한다.</li><li><strong>비선택</strong> · 법원 검사인의 업무다. 액면미달 발행 허가 과정에서 회사 재산 상태와 필요한 사항을 조사한다. 이는8장 발행가격 문제와 연결된다.</li><li><strong>비선택</strong> · 법원 검사인의 업무다. 신주발행의 현물출자 가치·내용을 검사하여 자본 충실과 기존 주주를 보호한다.422조 면제 사항은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [검사인의 법률관계 — 원문 표를 텍스트로 정리]<br><br>법원에서 선임한 경우의 직무<br>1. 회사설립의 경우 변태사항이 있는 경우 변태설립사항과 현물출자의 이행 여부 조사<br>2. 액면미달의 신주발행 시 회사의 재산상태, 기타 필요한 사항을 조사<br>3. 신주발행 시 현물출자한 경우 출자내용을 조사<br>4. 회사의 업무집행에 관해 부정행위 또는 법령, 정관에 위반한 중대한 사실이 있음을 의심할 만한 사유가 있는 때 소수주주의 청구로 회사의 재산상태 조사<br><br>주총에서 선임한 경우의 직무<br>1. 소수주주의 청구에 의해 소집된 주주총회에서 회사의 업무와 재산상태 조사<br>2. 주주총회에서 이사가 제출한 서류와 감사의 보고서를 조사하기 위해 선임<br>3. 청산 중인 회사의 주주총회에서 청산인이 제출한 서류와 감사의 보고서를 조사하기 위해 선임</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '주식회사법 · CHAPTER 07' : 'PART · COMPANY LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(주식회사법 · CHAPTER 07|PART · COMPANY LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('company-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
