@@ -1,0 +1,1284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제4장 결함제품과 소비자안전 - 제조물책임 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 04</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제4장 결함제품과 소비자안전 - 제조물책임 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>위험한 물건 때문에 사람이 다치거나 다른 재산까지 망가졌다면, 피해자가 공장 안의 잘못을 일일이 밝혀내지 못하더라도 구제받게 하자는 장</strong>이다. 다만 사고만 났다고 제조사가 무조건 배상하는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나</td>
+<td>제조물·제조업자·결함·손해·인과관계와 입증 완화, 면책·청구기간</td>
+</tr>
+<tr>
+<td>왜 생겼나</td>
+<td>소비자는 공장 내부 정보를 모르고, 제조사와 직접 계약하지도 않은 경우가 많음</td>
+</tr>
+<tr>
+<td>전체에서의 자리</td>
+<td>3장의 사전 안전관리·리콜에 이어 이미 생긴 피해를 배상하는 사후 구제</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>위험 예방 → 결함제품 배상 → 5장의 가습기살균제 등 유해물질 피해와 특별구제</td>
+</tr>
+<tr>
+<td>모르면 어려운 것</td>
+<td>제품 자체 고장과 확대손해, 과실 없는 책임과 입증 없는 책임을 혼동함</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 112–128쪽, 관련 25문제·100보기. 식기세척기 화재, 자동차 급발진, 콘택600, 장미 재배 비료, 혈액제제 감염, 고엽제 판례를 모두 연결한다. 중요도는 제공 문제와 핵심성 기준이며 통계적 출제 확률은 아니다. 2026.10.25 법령 확인. 현재 제조물 책임법의 핵심 개정은 2018.4.19 시행본이며, 신설된 3배 배상·법정 추정 등의 적용은 <strong>시행 후 최초 공급 제품</strong>인지도 확인한다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=002039&lsRvsGubun=all">법령 및 부칙</a></p>
+<p><mark class="yellow">노랑: 요건·결론</mark> / <mark class="green">초록: 피해자 보호 이유</mark> / <mark class="pink">분홍: 예외·함정</mark> / <mark class="blue">파랑: 다른 책임과 연결</mark>.</p>
+<h1>1. 왜 민법만으로 충분하지 않았을까</h1>
+<h2 id="consumer-04-01" data-concept-id="consumer-04-01">1-1. 제조물책임과 확대손해 ★★★★★</h2>
+<p><strong>교재 112–115쪽 / 문단의 목적:</strong> 단순히 고장 난 물건을 바꿔 달라는 문제와, 그 물건 때문에 삶이 파괴된 문제를 나눈다. 제조물책임은 제품이 통상 기대되는 안전성을 갖추지 못하여 생명·신체 또는 제품 외 다른 재산에 손해를 낸 경우의 책임이다. 산 사람뿐 아니라 옆에서 다친 제3자도 보호한다.</p>
+<p>TV가 폭발하여 손을 다치고 집이 타거나, 의약품·식품으로 건강이 침해되거나, 결함 자동차로 사람이 다치는 경우가 그 예다. 교재가 담배·고엽제도 든 이유는 결함과 인과관계 증명이 특히 어려운 피해가 있기 때문이다. <strong>예시에 들어 있다고 그 모든 사건에서 배상책임이 자동 인정된다는 뜻은 아니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>먼저 찾을 책임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>식기세척기만 작동하지 않음</td>
+<td>매매계약의 하자담보·채무불이행 등</td>
+</tr>
+<tr>
+<td>세척기 결함으로 주방·천장·가재도구까지 탐</td>
+<td>제조물책임에 의한 확대손해 배상 검토</td>
+</tr>
+<tr>
+<td>세척기를 사지 않은 가족이 화상 입음</td>
+<td>구매계약 당사자가 아니어도 제조물책임 검토</td>
+</tr>
+</tbody></table>
+<p><mark class="yellow">제품 자체에만 생긴 손해는 제조물 책임법의 배상 대상에서 제외한다.</mark> 98다35525 판결이 제시한 구별이다. 교재는 이 판결의 법리를 인용한 것이며, 모든 제품 화재에서 결함을 추정한 판결은 아니다. 2012다4824 판결은 제조물의 결함 때문에 생긴 영업손실도 그 사건에서 법 적용 대상이 아닌 손해로 보았다. 제품 외 재산을 실제로 훼손한 사고의 후속 손해까지 언제나 제외된다고 확대하지 않는다. <strong>시험:</strong> 2013-41·2014-68·2019-68. <strong>한 줄:</strong> 물건값 문제와 물건이 일으킨 안전사고 문제를 나눈다.</p>
+<h2 id="consumer-04-02" data-concept-id="consumer-04-02">1-2. 계약책임과 불법행위책임의 한계 ★★★★★</h2>
+<p><strong>교재 113–114쪽 / 문단의 목적:</strong> 왜 별도 법이 필요했는지 보여 준다. 계약책임은 원칙적으로 계약 상대방 사이에서 문제 된다. 가게에서 제품을 산 소비자가 제조사와 직접 계약한 것은 아니므로 제조사에 구매계약 위반을 바로 주장하기 어렵다. 제3자는 더 어렵고, 영세한 판매상에게만 배상을 요구하면 충분한 돈을 받지 못할 수도 있다.</p>
+<p>하자담보책임은 매도인의 고의·과실이 없어도 일정 요건 아래 성립하지만, 구체적으로 해제·손해배상·완전물 급부 등을 청구할 수 있는지는 매매 종류와 요건을 구별한다. 교재에 열거된 구제수단이 모든 매매에서 한꺼번에 인정되는 것은 아니다. 하자로 확대손해가 생긴 문제는 귀책사유 등 추가 쟁점이 있다.</p>
+<p>채무불이행은 고의뿐 아니라 <strong>과실도</strong> 귀책사유가 된다. 다만 교재의 ‘소비자가 채무자의 고의·과실을 입증해야 한다’는 설명은 일반적 증명책임 분배와 구분할 필요가 있다. 일반적으로 채권자는 채무·불이행·손해·인과관계를 주장·증명하고, 채무자가 자신에게 귀책사유가 없음을 증명하는 구조다. 모든 계약책임에서 피해자가 상대방 과실까지 증명한다고 외우지 않는다.</p>
+<p>민법 750조의 일반 불법행위는 계약이 없어도 가능하지만 피해자가 가해자의 고의·과실, 위법한 행위, 손해와 인과관계를 증명하는 어려움이 있다. 생산은 전문적·복잡하고 공정은 회사 내부에 있다. <mark class="green">밖에 있는 소비자에게 공장 안의 잘못을 완벽하게 밝히라는 것은 구제의 문을 사실상 닫는 결과가 될 수 있다.</mark> <strong>시험:</strong> 016은 ‘고의만 되고 과실은 안 된다’가 틀리다. <strong>한 줄:</strong> 계약의 거리와 정보의 격차를 보완하려고 제조물책임을 둔다.</p>
+<h1>2. 어떤 물건, 누구에게, 어떤 결함을 묻나</h1>
+<h2 id="consumer-04-03" data-concept-id="consumer-04-03">2-1. 제조물의 범위 ★★★★★</h2>
+<p><strong>교재 115쪽 / 문단의 목적:</strong> 안전사고라고 모든 대상에 이 법을 적용하지 않는다. 법 2조의 제조물은 <strong>제조되거나 가공된 동산</strong>이다. 다른 동산·부동산의 일부여도 포함한다. 완성품뿐 아니라 부품·원재료, 신제품·중고품·재생품·수공업품·예술작품도 해당 요건을 갖추면 들어간다.</p>
+<table>
+<thead>
+<tr>
+<th>포함되는 방향</th>
+<th>제외되는 방향</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TV·승강기·창호·배관·조명·공조시설 등 제조·가공된 동산</td>
+<td>부동산 그 자체, 무형의 서비스</td>
+</tr>
+<tr>
+<td>가공된 원료·부품, 조각 등 동산인 예술작품</td>
+<td>가공하지 않은 농산물</td>
+</tr>
+<tr>
+<td>특정 고객에게 계약으로 직접 납품한 제품</td>
+<td>교재상 독립된 소프트웨어·정보 등 무형물</td>
+</tr>
+</tbody></table>
+<p>승강기는 건물에 붙었다고 제조물에서 빠지지 않는다. ‘소프트웨어 제외’도 소프트웨어가 들어간 자동차·가전제품의 안전 결함은 책임을 전혀 물을 수 없다는 뜻이 아니다. <strong>독립 무형물의 해당성</strong>과 <strong>유형 제품 전체의 결함</strong>을 나누어 읽는다.</p>
+<p>2006다17539 판결은 여러 유통단계를 거쳐 불특정 다수에게 팔린 것만 아니라, 특정 상대방에게 직접 공급한 제품도 포함한다고 보았다. 정부의 주문에 맞춰 만든 제품도 자동 제외되지 않는다. <strong>시험:</strong> 017·2013-38·2014-56·2018-68·2019-66. <strong>키워드:</strong> 제조·가공, 동산, 일부 구성 포함. <strong>한 줄:</strong> 어디에 붙었는가보다 무엇을 만들거나 가공했는가를 본다.</p>
+<h2 id="consumer-04-04" data-concept-id="consumer-04-04">2-2. 제조·수입·표시제조업자와 OEM ★★★★★</h2>
+<p><strong>교재 116–117쪽 / 문단의 목적:</strong> 소비자가 제조사의 복잡한 분업 때문에 책임자를 못 찾는 일을 막는다. 제조·가공·수입을 업으로 하는 자연인·법인이 기본 책임자다. 반복·계속하는 업이면 반드시 이익 추구가 필수는 아니다. 자기 이름·상표 등을 붙여 자신을 제조·가공·수입업자로 표시하거나 그렇게 오인하게 한 <strong>표시제조업자</strong>도 포함한다.</p>
+<p>완성품 제조자는 전체 제품을, 원재료·부품 제조자는 자신의 원재료·부품에 기인한 결함을 책임진다. 수입업자는 국내에서 책임을 물을 상대를 마련하는 의미가 있다. 표시제조업자는 자기 상표에 대한 소비자의 신뢰를 책임진다.</p>
+<p><strong>OEM 추가 예시:</strong> A회사가 상품을 기획하고 자기 상표를 붙이며 B공장이 실제로 만든다. B는 상표에 이름이 없더라도 실제 제조자이므로 책임질 수 있다. A도 표시제조업자이면 책임질 수 있다. B가 ‘A가 시켜서 만들었다’고 말하는 것만으로 면책되지 않는다. 부품·원재료의 지시 면책은 뒤에서 따로 엄격히 본다. 정부의 지시를 따른 고엽제 공급자도 책임 주체에서 빠지지 않았다. <strong>시험:</strong> 018·2014-57·2015-59·2017-67·2018-67. <strong>한 줄:</strong> 만든 사람과 제조자로 믿게 만든 사람을 함께 본다.</p>
+<h2 id="consumer-04-05" data-concept-id="consumer-04-05">2-3. 제조자를 모를 때 공급자의 책임과 연대책임 ★★★★★</h2>
+<p><strong>교재 116쪽 / 문단의 목적:</strong> 제품에 책임자 이름이 없다고 피해자가 막막해지지 않게 한다. 피해자가 제조업자를 알 수 없으면 <strong>영리 목적으로 판매·대여 등 공급한 자</strong>가 배상책임을 진다. 다만 피해자 또는 법정대리인의 요청을 받고 상당한 기간 안에 제조업자 또는 자신에게 공급한 자를 알려 주면 면책될 수 있다. 공급자의 모든 판매에 무조건 책임을 묻는 규정은 아니다.</p>
+<p><mark class="pink">제조업자에게 영리성은 필수 아님 / 제조자 불명 시 공급자 책임에는 영리 목적 필요.</mark> ‘비영리 공급자 제외’를 ‘비영리 제조자도 모두 제외’로 바꾸면 틀린다. 순수한 자선 공급자와 반복하여 제조하는 비영리 단체를 같은 말로 취급하지 않는다.</p>
+<p>같은 손해에 책임질 사람이 둘 이상이면 법 5조에 따라 <strong>연대책임</strong>이다. 피해자는 각 책임자에게 전부 배상을 청구할 수 있지만 실제 손해를 중복하여 여러 번 받는 것은 아니다. 내부적으로 누가 얼마를 부담할지는 별도 문제다. <strong>시험:</strong> 019·2013-39. <strong>한 줄:</strong> 제조자를 못 찾으면 영리 공급자에게 경로를 밝히게 하고, 책임자가 여럿이면 피해자의 회수를 보강한다.</p>
+<h2 id="consumer-04-06" data-concept-id="consumer-04-06">2-4. 제조·설계·표시 결함의 세 갈래 ★★★★★</h2>
+<p><strong>교재 117–120쪽 / 문단의 목적:</strong> 안전이 부족해진 지점을 나눈다. 결함은 세 유형 또는 그 밖에 통상 기대되는 안전성 결여다. 원인이 무엇인지에 따라 증거와 판단이 달라진다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>쉬운 질문</th>
+<th>법적 핵심</th>
+<th>추가 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제조상 결함</td>
+<td>도면대로 만들었나?</td>
+<td>의도한 설계와 다르게 제조·가공되어 불안전</td>
+<td>정상 설계는 절연재 두 겹인데 한 겹만 시공</td>
+</tr>
+<tr>
+<td>설계상 결함</td>
+<td>도면 자체를 합리적으로 더 안전하게 만들 수 있었나?</td>
+<td>합리적 대체설계 미채용으로 불안전</td>
+<td>가능하고 효과적인 과열 차단장치를 생략</td>
+</tr>
+<tr>
+<td>표시상 결함</td>
+<td>필요한 설명·지시·경고를 제대로 했나?</td>
+<td>합리적 표시로 줄일 위험을 알리지 않음</td>
+<td>밀폐 공간에서 사용하면 위험한데 용법 안내 누락</td>
+</tr>
+</tbody></table>
+<p>제조상 결함은 정상 제품·원래 설계와 비교하기 쉽고, 제조자가 얼마나 조심했는지를 별도로 따질 필요가 없다. 설계 결함은 같은 설계를 적용한 제품군 전체에 이어질 수 있어 범위가 넓다. 다만 더 안전해 보이는 장치가 있다는 말만으로 합리적인 대체설계가 입증된 것은 아니다. 효과·비용·사용자 기대·위험 회피 가능성 등을 함께 본다. 표시는 위험의 성격과 일반적인 사용 방법에 맞아야 한다.</p>
+<p><strong>시험:</strong> 2015-60의 ‘제조상 결함에 고의·과실도 입증’은 틀림. 2014-69는 표시상 결함. 2019-67의 ‘마켓팅상 결함’은 법정 세 분류가 아니다. 다만 실질적으로 경고 누락을 다루는 외국 용어와 단순히 이름만 비교하지 말고 시험의 법정 정의를 적용한다. <strong>한 줄:</strong> 만들기·설계하기·알리기 중 어디가 안전하지 못했는지 묻는다.</p>
+<h1>3. 판례를 사건의 흐름으로 읽기</h1>
+<h2 id="consumer-04-07" data-concept-id="consumer-04-07">3-1. 자동차 급발진과 쉬프트록: 가능한 장치가 있으면 곧 결함일까 ★★★★☆</h2>
+<p><strong>교재 118–120·126쪽 / 2003다16771, 2004.3.12. / 사건의 목적:</strong> 설계와 표시 결함을 구체적인 당시 사정에서 판단하는 법을 익힌다.</p>
+<p><strong>등장인물 → 사건 → 갈등:</strong> 운전자가 주차한 자동변속 차량에 타서 시동을 켜고 레버를 전진으로 바꾸자 차량이 갑자기 움직여 재산 피해가 났다. 운전자는 브레이크를 밟아야 레버를 바꿀 수 있는 쉬프트록을 달았으면 사고를 막았을 것이라고 주장했다. 제조사는 장치의 효과와 운전방법을 문제 삼았다.</p>
+<p><strong>법원의 고민 → 결론:</strong> 운전자 오조작 가능성이 있어도 합리적 대체설계가 위험을 줄였다면 설계 결함을 검토할 수 있다. 그러나 당시 쉬프트록은 주차 위치에서 레버를 옮기는 특정 상황에만 효과가 있고 모든 급발진 유형을 막지 못했다. 기본 운전요령, 대체 장치, 해당 차량의 사고 전후 상태, 비용·효과 등을 종합하여 <strong>이 사건에서 쉬프트록 미장착만으로 설계 결함을 인정하지 않았다.</strong> 설명서에는 페달 위치 확인, 브레이크를 밟고 시동·변속하라는 안내가 있어 표시 결함도 부정했다.</p>
+<table>
+<thead>
+<tr>
+<th>판례의 논리 한 단위</th>
+<th>쉬운 번역</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대체설계를 채용했을 경우의 위험 감소 가능성을 검토</td>
+<td>다른 방식이 실제로 사고를 얼마나 막았을까?</td>
+</tr>
+<tr>
+<td>여러 사정을 종합하여 사회통념으로 판단</td>
+<td>좋아 보이는 장치 하나만 보지 말고 당시 효과·비용·사용방식을 함께 보자</td>
+</tr>
+<tr>
+<td>운전자의 기대·위험 인식·회피 가능성을 고려</td>
+<td>면허를 가진 운전자에게 통상 기대되는 기본 사용법도 보자</td>
+</tr>
+<tr>
+<td>합리적인 표시로 피할 위험인지 판단</td>
+<td>설명서가 실제로 위험을 피하는 방법을 충분히 알려 주었나?</td>
+</tr>
+</tbody></table>
+<p><strong>다른 결론이면:</strong> 신기술이 하나 나오기만 해도 기존 제품 모두가 자동으로 결함품이 될 수 있다. 반대로 운전자 실수라는 말만으로 설계 검토를 닫아도 부당하다. <strong>주의:</strong> 2004년 개별 사건의 결론이지 현재 모든 급발진 사고·안전장치를 면책하는 규칙이 아니다. 같은 판결의 입증 완화 법리는 다음 절에서 본다. <strong>한 줄:</strong> 대체설계의 존재와 합리적 대체설계의 입증은 다르다.</p>
+<h2 id="consumer-04-08" data-concept-id="consumer-04-08">3-2. 콘택600: 부작용 발생과 법적 결함을 나누기 ★★★★☆</h2>
+<p><strong>교재 119–121쪽 / 2007다52287, 2008.2.28. / 등장인물:</strong> 감기약을 복용한 사람과 유족, 제조사. <strong>사건:</strong> 페닐프로판올아민(PPA)을 포함한 콘택600을 먹은 뒤 출혈성 뇌졸중으로 사망하였다. <strong>갈등:</strong> 위험한 성분을 쓴 설계와 경고가 충분했는지가 문제였다.</p>
+<p><strong>법원의 고민:</strong> 의약품은 치료 작용과 부작용 가능성이 함께 있다. 정상적으로 만들어도 부작용이 있다는 사실만으로 모든 약이 법적 결함품은 아니다. 제조·공급 당시의 연구 결과, 기술 수준·경제성을 본 결과 이 사건에서 책임을 인정할 정도의 설계 결함을 부정했다.</p>
+<p>표시에는 출혈성 뇌졸중의 부작용, 고혈압·뇌졸중 병력·심장질환 환자 투여 금지, 다른 PPA 의약품과 병용 금지 등이 적혀 있었다. 교재는 당시 1일 2회, PPA 최대 80mg이라는 사실도 들고 있다. <strong>이 숫자는 과거 사건 사실이지 현재 복약 안내가 아니다.</strong> 법원은 당시 적절한 경고가 있었고, 해당 피해자에게 특별히 복용하지 말라고 더 경고해야 할 의무까지 인정하기 어렵다고 보았다.</p>
+<p><strong>문장별 번역:</strong> ‘의약품의 본질적 부작용’ → 약이 치료하는 동시에 해로울 가능성도 본다. ‘당시 연구·기술’ → 나중에 알게 된 사실을 그대로 과거에 대입하지 않는다. ‘적절한 경고 표시’ → 실제 위험과 피해야 할 사람·병용 상황을 알렸는지 본다. <strong>다른 결론의 문제:</strong> 부작용이 생겼다는 결과만으로 자동 배상시키면 결함 판단이 사라지고, 반대로 작은 경고 한 줄이면 무조건 면책해도 안전 보호가 무너진다. <strong>한 줄:</strong> 부작용 발생만이 아니라 당시 합리적인 설계와 경고를 살핀다.</p>
+<h2 id="consumer-04-09" data-concept-id="consumer-04-09">3-3. 장미가 말라 죽은 비료: 용법 안내가 잘못되었다면 ★★★★☆</h2>
+<p><strong>교재 121쪽 / 2005다31361, 2006.3.10. / 등장인물 → 사건:</strong> 비닐하우스에서 다년생 장미를 기르는 농민이 비료를 뿌렸다. 포장에는 암모니아가스가 15–20일 발생한다고 되어 있었지만 40일 넘게 가스가 생겨 장미가 고사했다.</p>
+<p><strong>갈등:</strong> 회사는 농민이 포장 설명을 그대로 지키지 않았다고 했다. <strong>법원의 고민:</strong> 문제의 비료는 이미 정식되어 자라는 다년생 화훼에 쓰기 부적절했다. 그런데 그 사용의 위험이 제대로 안내되었는가? <strong>결론:</strong> 용법 표시의 결함을 인정하였다. 농민이 일반적 사용을 전제로 쓴 설명을 그대로 따르지 않았다는 사정만으로, 피해자 책임인 비정상적 사용 때문에 사고가 났다고 볼 수 없었다.</p>
+<p><strong>문장별 번역:</strong> ‘정식되어 생육 중인 다년생 화훼에 부적절’ → 이미 자라는 장미에는 맞지 않는 비료였다. ‘표시상 결함’ → 어떤 작물·상황에서 쓰면 위험한지 안내가 부족했다. ‘비정상적인 사용이라고 보기 어려움’ → 잘못된 안내를 전제로 농민에게 모든 책임을 돌릴 수 없다. <strong>다른 결론이면:</strong> 제조사가 부적절한 사용범위를 숨겨 놓고 세부 사용법 위반만 들어 책임을 피하게 된다. <strong>한 줄:</strong> 사용법을 안 지켰다는 주장 전에 사용범위 안내 자체가 적절했는지 본다.</p>
+<h2 id="consumer-04-10" data-concept-id="consumer-04-10">3-4. 혈액제제 감염: 완벽한 과학적 증명만 요구하지 않는 이유 ★★★★☆</h2>
+<p><strong>교재 126–127쪽 / 2008다16776, 2011.9.29. / 등장인물:</strong> 혈액제제를 투여받은 환자들과 제약회사. <strong>사건·갈등:</strong> 환자들이 바이러스 감염이 약 때문이라고 주장했지만 원료와 제조 공정은 회사 내부에 있었다. 환자가 직접 모든 제조 과정을 밝혀야 하는가?</p>
+<p><strong>법원의 고민 → 판단:</strong> 투여 전에는 감염 의심 증상이 없고, 투여 후 감염이 확인되며, 혈액제제가 오염되었을 상당한 가능성이 증명되면 결함 또는 회사 과실과 감염 사이 인과관계를 추정할 수 있다. 상당한 가능성은 투여·감염의 시간적 근접성, 통계적 관련성, 제조 공정, 바이러스 특성, 진단법의 정확성 등으로 판단한다. 자연과학적으로 완벽한 증명만 허용하지 않는다.</p>
+<p>회사는 자기 제품이 원인이 아님을 증명하여 뒤집을 수 있지만, 환자가 다른 회사 제품이나 수혈도 받았다는 사실만으로 추정이 자동 번복되지는 않는다. 공식 판결의 결론은 해당 피고에 대한 원심 부분을 파기환송한 것으로, 이 판결만으로 모든 원고의 배상액까지 확정되었다고 말하지 않는다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2008%EB%8B%A416776">대법원 판결</a></p>
+<p><strong>문장별 번역:</strong> ‘상당한 가능성’ → 막연한 의심이 아니라 여러 증거가 뒷받침하는 가능성. ‘추정’ → 우선 연결을 인정하되 반대 증명 가능. ‘다른 제품 투여만으로 부족’ → 다른 가능성을 입에 올리는 것과 실제 원인이 다른 곳임을 증명하는 것은 다르다. <strong>다른 결론이면:</strong> 내부 자료가 없는 환자는 사실상 구제받기 어렵다. <strong>한 줄:</strong> 전문정보의 격차를 고려하여 증명 문턱을 합리적으로 낮춘다.</p>
+<h1>4. 입증·배상·면책·기간을 한 흐름으로</h1>
+<h2 id="consumer-04-11" data-concept-id="consumer-04-11">4-1. 무과실책임과 결함 등의 추정 ★★★★★</h2>
+<p><strong>교재 121–123·126쪽 / 문단의 목적:</strong> 누가 무엇을 증명해야 하는지를 정한다. 제조물책임은 <strong>무과실책임·엄격책임</strong>이므로 소비자가 제조자의 고의·과실을 입증할 필요는 없다. 그러나 결함·손해·인과관계라는 책임의 연결고리가 사라지는 것은 아니다. 법 8조는 특별규정이 없는 부분에 민법을 적용한다.</p>
+<table>
+<thead>
+<tr>
+<th>피해자가 법 3조의2에서 증명할 기초사실</th>
+<th>왜 필요한가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>정상적인 사용 상태에서 손해 발생</td>
+<td>엉뚱하게 사용한 사고까지 바로 제조사 책임으로 돌리지 않음</td>
+</tr>
+<tr>
+<td>제조업자의 실질적 지배영역에 속하는 원인</td>
+<td>외부의 별개 사고와 제품 내부 문제를 구별</td>
+</tr>
+<tr>
+<td>결함 없이는 통상 생기지 않을 손해</td>
+<td>제품 때문이라는 합리적인 연결을 확보</td>
+</tr>
+</tbody></table>
+<p>세 가지를 증명하면 <strong>공급 당시의 결함과 결함으로 인한 손해 발생</strong>을 추정한다. 제조사가 결함이 아닌 다른 원인으로 사고가 났음을 증명하면 뒤집힌다. 사고 발생만 증명하면 모든 책임이 인정되는 제도가 아니다.</p>
+<p>과거 판례는 정상 사용·제조자의 배타적 지배영역·과실 없이는 통상 발생하지 않을 사고 등을 근거로 <strong>사실상 추정</strong>을 인정했다. 현행 법정 추정의 문구는 ‘실질적 지배영역’과 ‘결함 없이는’이다. <mark class="pink">과거 판례 문구와 2018년부터 적용되는 신설 조문을 섞지 않는다.</mark> 과실을 요건으로 하지 않는 책임과 증명책임 완화는 서로 다른 두 장치다. <strong>시험:</strong> 019·2014-68·2015-61. <strong>한 줄:</strong> 과실 증명은 불필요하지만 사고와 제품을 잇는 기초사실은 필요하다.</p>
+<h2 id="consumer-04-12" data-concept-id="consumer-04-12">4-2. 실제 손해와 최대 3배 배상 ★★★★★</h2>
+<p><strong>교재 122–123쪽 / 문단의 목적:</strong> 무엇을 얼마나 배상하는지 정한다. 원칙은 결함으로 인한 생명·신체·다른 재산 손해다. 제조물 자체에만 생긴 손해를 이 법으로 바꾸어 청구할 수는 없다.</p>
+<p>법 3조 2항의 가중배상은 <strong>결함을 알고도 필요한 조치를 하지 않아 생명 또는 신체에 중대한 손해가 생긴 경우</strong>다. 그 손해의 <strong>3배 이내</strong>이며 항상 3배, 일반배상에 추가로 3배, 재산손해만 있어도 자동 3배가 아니다. 020의 5배는 틀리다.</p>
+<p>법원은 고의성, 손해 정도, 제조사의 이익, 관련 형사처벌·행정처분, 공급 기간·규모, 재산상태, 피해구제 노력의 7항목을 고려한다. <strong>추가 예시:</strong> 회사가 발화 결함을 알았는데 계속 팔아 중대한 화상이 발생했다면 가중배상 요건을 검토한다. 단순 초기 불량으로 제품만 교환한 사건과 다르다. <mark class="blue">3장의 리콜·사후 조치의무를 무시한 일이 4장의 배상책임과 연결된다.</mark> <strong>한 줄:</strong> 알고도 방치한 중대한 인명 피해에는 최대 3배, 모든 사고에는 아니다.</p>
+<h2 id="consumer-04-13" data-concept-id="consumer-04-13">4-3. 면책 네 가지와 사후 조치의무 ★★★★★</h2>
+<p><strong>교재 123–125쪽 / 문단의 목적:</strong> 결함책임에도 한계가 있지만, 위험을 뒤늦게 알고 방치하는 행위는 보호하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>면책 사유</th>
+<th>쉽게 말하면</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>해당 제품을 공급하지 않음</td>
+<td>그 제품은 내가 시장에 내놓은 것이 아님</td>
+<td>피해자도 책임자·공급 사실을 특정해야 함</td>
+</tr>
+<tr>
+<td>공급 당시 과학·기술로 발견 불가능</td>
+<td>당시 객관적인 기술 수준으로 알 수 없었음</td>
+<td>우리 회사만 몰랐다는 사정 아님</td>
+</tr>
+<tr>
+<td>법령 기준 준수로 결함 발생</td>
+<td>법을 지키느라 그 결함이 불가피하게 생김</td>
+<td>법을 어기지 않았다는 것만으로 부족</td>
+</tr>
+<tr>
+<td>부품·원재료가 완성품 제조자 지시로 결함 발생</td>
+<td>지시된 설계·제작 때문에 해당 결함이 생김</td>
+<td>모든 OEM 완성품 제조자가 지시만 들면 면책되는 것 아님</td>
+</tr>
+</tbody></table>
+<p>공급 후 결함을 알거나 알 수 있었는데 적절한 피해 방지조치를 하지 않으면 <strong>둘째부터 넷째 면책은 주장할 수 없다.</strong> 뒤늦게 위험을 알았는데 ‘처음에는 몰랐다’며 손을 놓아도 된다는 제도가 아니다.</p>
+<p>교재는 첫째 공급하지 않았다는 항목에 대해 실질적으로 피해자가 공급자를 증명하는 문제라는 학술적 설명도 한다. <strong>심화:</strong> 조문에 면책 사유로 적혔다는 사실과, 소송에서 책임 발생 사실을 누가 특정·증명하는지는 나누어 본다. <strong>시험:</strong> 020④·2015-61④. <strong>한 줄:</strong> 처음의 불가피한 사유가 있어도 나중에 알게 된 위험까지 방치하면 안 된다.</p>
+<h2 id="consumer-04-14" data-concept-id="consumer-04-14">4-4. 고엽제: 정부가 시켰고 법을 안 어겼다는 항변 ★★★★☆</h2>
+<p><strong>교재 115·117·124–125쪽 / 2006다17539, 2013.7.12. / 등장인물 → 사건:</strong> 베트남전 참전 군인들이 고엽제의 TCDD 노출로 건강 피해를 주장했고 제조·판매사에 배상을 요구했다. 회사는 정부 공급계약·지시, 당시 과학 수준, 미국 법령을 근거로 책임을 부정하려 했다.</p>
+<p><strong>법원의 고민 → 교재가 인용한 결론:</strong> 특정 정부에 납품한 물건도 제조물이다. 위험을 예견하거나 예견할 수 있었는데 고도의 주의의무를 어겼다고 인정되는 상황이라면 당시 과학·기술로 전혀 알 수 없었다는 항변은 받아들이기 어렵다. 당시 미국 법령이나 공급 명세서에 TCDD 함유량을 강제하는 기준도 없었다. 결함은 법령 준수 때문에 불가피하게 발생한 것이 아니라 안전 확보 조치를 충분히 하지 않은 데서 생겼다고 보았다.</p>
+<p><strong>문장별 번역:</strong> ‘정부 공급계약도 제조물’ → 특별 주문이라고 소비자 안전책임이 사라지지 않는다. ‘객관적 기술 수준’ → 그 회사의 지식 부족을 기준 삼지 않는다. ‘준수로 인하여 발생’ → 법을 지켰다는 말과 법 때문에 피할 수 없었다는 말은 다르다. <strong>다른 결론이면:</strong> 금지 규정이 없다는 이유만으로 대부분의 위험 제품을 면책하게 된다. 이 부분은 면책 항변에 대한 설명으로, 고엽제 관련 모든 질병·모든 청구의 인과관계를 일괄 인정했다는 뜻은 아니다. <strong>한 줄:</strong> 정부 지시·법령 비위반만으로 안전 결함이 정당화되지 않는다.</p>
+<h2 id="consumer-04-15" data-concept-id="consumer-04-15">4-5. 3년·10년의 출발점과 잠복성 손해 ★★★★★</h2>
+<p><strong>교재 125쪽 / 문단의 목적:</strong> 오래된 분쟁의 증명 곤란과 늦게 드러나는 건강 피해를 함께 고려한다.</p>
+<table>
+<thead>
+<tr>
+<th>기간</th>
+<th>출발점</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3년</td>
+<td>피해자 또는 법정대리인이 <strong>손해와 책임자 모두</strong>를 알게 된 날</td>
+<td>손해 하나만 또는 책임자 하나만 알고 시작한다고 단정하지 않음</td>
+</tr>
+<tr>
+<td>원칙적 10년</td>
+<td>제조업자가 손해 발생 제품을 공급한 날</td>
+<td>사고일·피해자 발견일로 바꾸지 않음</td>
+</tr>
+<tr>
+<td>누적·잠복성 손해의 10년</td>
+<td>그 손해가 발생한 날</td>
+<td>제품을 공급한 날로부터라고 하면 틀림</td>
+</tr>
+</tbody></table>
+<p>둘은 선택하여 유리한 하나만 적용하는 것이 아니다. 장기기간이 남아 있어도 손해·책임자를 안 뒤 단기기간을 넘기면 문제가 된다. 중단·정지 등 구체적 기간 문제는 별도로 확인한다. <strong>추가 사례:</strong> 유해물질 제품 공급 후 한참 지나 잠복성 손해가 나타났다. 공급 시점에 피해자가 알 수도 없던 손해의 권리가 사라지지 않게 장기기간 출발점을 조정한다. 그러나 손해와 책임자를 모두 안 뒤 3년 규칙까지 없애는 것은 아니다.</p>
+<p><strong>기출 주의:</strong> 2017-68의 원본은 ④를 정답으로 정했지만 ①·②도 ‘손해 및 책임자 모두’를 완전하게 쓰지 않았다. 정답 데이터를 바꾸지 않고, 학습할 정확한 문장은 위 표로 보완한다. 2013-40, 2014-70도 단기기간 설명의 생략에 주의한다. <strong>한 줄:</strong> 둘 다 안 날 3년, 공급부터 10년, 누적·잠복은 손해 발생부터 10년.</p>
+<h2 id="consumer-04-16" data-concept-id="consumer-04-16">4-6. 면책특약은 원칙 무효, 영업용 재산은 예외 ★★★★☆</h2>
+<p><strong>교재 125–126쪽 / 문단의 목적:</strong> ‘사고 나도 책임 없다’는 문구 하나로 안전책임을 지우지 못하게 한다. 법 6조상 책임을 배제·제한하는 특약은 원칙적으로 무효다. 소비자가 서명했어도 그 법정 보호를 마음대로 없애지 못한다.</p>
+<p>다만 <strong>자신의 영업에 이용하기 위해 공급받은 자가 자신의 영업용 재산에 생긴 손해</strong>에 대해 체결한 특약은 예외가 될 수 있다. 모든 사업자 거래에서 유효하다는 뜻도, 생명·신체 손해까지 포기할 수 있다는 뜻도 아니다. <strong>추가 사례:</strong> 음식점의 영업용 설비 손해를 대상으로 한 특약과, 그 설비 폭발로 직원이 다친 손해를 구별한다. <strong>시험 키워드:</strong> 자신의 영업·영업용 재산 두 조건. <strong>한 줄:</strong> 안전책임 면제 문구는 원칙 무효이며, 영업용 재산 예외는 좁게 본다.</p>
+<h2 id="consumer-04-17" data-concept-id="consumer-04-17">4-7. 식기세척기 화재 사례를 처음부터 끝까지 풀기 ★★★★★</h2>
+<p><strong>교재 112·127–128쪽 / 서울중앙지법 2016가단5155648, 2017.8.11.</strong></p>
+<p><strong>등장인물:</strong> 세척기를 산 A와 가족, 제조사 SK매직, A의 주택 화재보험사 B, 제조사 측 생산물배상책임 보험사 C. <strong>사건:</strong> A가 주방 싱크대 위 세척기를 작동하고 외출한 사이 불이 나 주방·천장·가재도구가 탔다. B는 A에게 보험계약 범위에서 약 3,300만 원을 지급한 뒤 C에게 구상금을 청구했다. 보험사가 대신 책임을 묻는 구조라도 핵심은 제품 결함과 화재의 연결이다.</p>
+<p><strong>갈등:</strong> 불에 탄 기계 내부의 정확한 결함을 A가 어떻게 증명할까? <strong>법원의 고민:</strong> 경찰 감식은 세척기 내부 전기적 원인을 지목했다. 가족은 외출했고 외부 침입 흔적이 없었다. 제조사가 지배할 수 있는 제품 내부의 제조·설계 결함으로 화재가 발생했다고 추정할 수 있다고 보았다.</p>
+<p><strong>판단:</strong> 책임을 인정하되 <strong>제조사 측 책임을 60%로 제한</strong>했다. A가 작동 후 외출해 초기에 진화하지 못한 사정, 제조 후 8년 넘게 쓰면서 안전점검을 받지 않은 사정 등을 고려했다. ‘소비자는 가전을 켜고 외출하면 항상 40% 책임’이라는 일반 규칙으로 만들지 않는다. 사건의 사실을 종합한 비율이다.</p>
+<p><strong>판례 문장별 번역:</strong> ‘정상 사용 중 사고’ → 엉뚱한 용도로 쓴 것이 아니었다. ‘배타적 지배영역’ → 내부 전기적 문제는 소비자가 확인하기 힘든 제조사 영역이었다. ‘다른 원인 입증’ → 회사가 외부 화재 등 별개 원인을 증명하면 추정을 깨뜨릴 수 있었다. ‘책임 60% 제한’ → 결함 인정 여부와 배상 범위 조정은 다른 단계다.</p>
+<p><strong>다른 결론이면:</strong> 완전히 타버린 제품의 미세한 결함까지 소비자가 입증해야 한다면 배상받기 어렵다. 반면 피해 확대 사정을 전혀 고려하지 않는 것도 손해의 공평한 부담과 어긋날 수 있다. 이 판결은 2017년으로 2018년 신설 법정 추정·3배 배상을 소급 적용한 사례가 아니다. <strong>한 줄:</strong> 증명 문턱을 낮추되 사고 원인과 배상 범위를 차례로 심사한다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>製造物責任 제조물책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 製(지을 제), 造(지을 조), 物(만물 물), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 만든 물건에 대해 맡는 책임. <strong>④ 이름의 이유:</strong> 물건을 시장에 낸 쪽에 안전 위험을 부담시킴.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결함 제품으로 인한 생명·신체·다른 재산 손해의 배상책임. <strong>⑥ 쉬운 말:</strong> 위험한 물건 때문에 다친 손해를 만든 쪽에 묻는다. <strong>⑦ 사례:</strong> 세척기 화재로 주방 소실.</p>
+<p><strong>⑧ 시험:</strong> 2019-68: 제품 자체 손해 제외. <strong>⑨ 비교·기억법:</strong> 매매계약상 하자담보와 다름.</p>
+<h3>瑕疵擔保 하자담보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 瑕(허물 하), 疵(흠 자), 擔(멜 담), 保(지킬 보). <strong>③ 합친 뜻:</strong> 흠에 대한 책임을 떠맡아 보장. <strong>④ 이름의 이유:</strong> 정상 물건을 받을 거래상 기대를 보호.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 매매 목적물 하자에 관한 법정 책임. <strong>⑥ 쉬운 말:</strong> 산 물건에 흠이 있을 때 판매자에게 묻는다. <strong>⑦ 사례:</strong> 제품이 아예 작동하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 016: 계약책임과 비교. <strong>⑨ 비교·기억법:</strong> 안전사고의 제3자 피해와 구별.</p>
+<h3>債務不履行 채무불이행</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 債(빚 채), 務(힘쓸 무), 不(아니 불), 履(밟을 리), 行(다닐 행). <strong>③ 합친 뜻:</strong> 해야 할 의무를 실행하지 않음. <strong>④ 이름의 이유:</strong> 약속한 의무의 실행 여부를 문제 삼음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채무 내용에 따른 이행을 하지 않는 것. <strong>⑥ 쉬운 말:</strong> 약속한 물건을 제대로 주지 않았다. <strong>⑦ 사례:</strong> 안전한 제품 인도의무 위반.</p>
+<p><strong>⑧ 시험:</strong> 016: 고의만 아니라 과실도. <strong>⑨ 비교·기억법:</strong> 계약관계가 불필요한 불법행위와 비교.</p>
+<h3>動産 동산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 動(움직일 동), 産(낳을 산). <strong>③ 합친 뜻:</strong> 움직일 수 있는 재산. <strong>④ 이름의 이유:</strong> 토지·건물과 구별하여 물건의 성질을 나눔.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 부동산 이외의 물건을 중심으로 한 법적 분류. <strong>⑥ 쉬운 말:</strong> 이동 가능한 물건이라고 먼저 생각하되 법적 분류를 확인. <strong>⑦ 사례:</strong> 가전·부품·수공업품.</p>
+<p><strong>⑧ 시험:</strong> 017: 부동산 일부 제품도 포함. <strong>⑨ 비교·기억법:</strong> 건물 자체와 건물의 승강기를 구별.</p>
+<h3>擴大損害 확대손해</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 擴(넓힐 확), 大(클 대), 損(덜 손), 害(해칠 해). <strong>③ 합친 뜻:</strong> 제품 밖으로 넓어진 손해. <strong>④ 이름의 이유:</strong> 물건 하나의 값 문제를 넘어섰기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제품 결함이 생명·신체·다른 재산에 일으킨 피해. <strong>⑥ 쉬운 말:</strong> 고장 난 물건이 다른 것까지 망가뜨림. <strong>⑦ 사례:</strong> 전열기 결함으로 옷장 소실.</p>
+<p><strong>⑧ 시험:</strong> 2014-68: 자체 손해와 비교. <strong>⑨ 비교·기억법:</strong> 영업손실이면 언제나 확대손해인 것은 아님.</p>
+<h3>表示製造業者 표시제조업자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 表(겉 표), 示(보일 시), 製(지을 제), 造(지을 조), 業(업 업), 者(놈 자). <strong>③ 합친 뜻:</strong> 제조업자라고 겉에 드러낸 사람. <strong>④ 이름의 이유:</strong> 상표·이름으로 얻은 소비자 신뢰를 책임짐.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자신을 제조·가공·수입업자로 표시하거나 오인하게 한 자. <strong>⑥ 쉬운 말:</strong> 내 회사가 만든 것처럼 보이게 팔았다. <strong>⑦ 사례:</strong> 자기 상표를 붙인 OEM 주문자.</p>
+<p><strong>⑧ 시험:</strong> 2017-67: 실제 제조자 표시 불필요. <strong>⑨ 비교·기억법:</strong> 실제 제조자와 동시에 책임 가능.</p>
+<h3>缺陷 결함</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 缺(이지러질 결), 陷(빠질 함). <strong>③ 합친 뜻:</strong> 빠져 있거나 모자란 흠. <strong>④ 이름의 이유:</strong> 법이 요구하는 안전이 빠진 것을 가리킴.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 통상 기대되는 안전성이 부족한 상태. <strong>⑥ 쉬운 말:</strong> 제대로 써도 위험한 이유가 있다. <strong>⑦ 사례:</strong> 잘못된 배선·불충분한 경고.</p>
+<p><strong>⑧ 시험:</strong> 2015-60: 제조·설계·표시. <strong>⑨ 비교·기억법:</strong> 외관 흠집 등 모든 품질 하자와 동일하지 않음.</p>
+<h3>代替設計 대체설계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대), 替(바꿀 체), 設(베풀 설), 計(셀 계). <strong>③ 합친 뜻:</strong> 대신 채택할 설계. <strong>④ 이름의 이유:</strong> 똑같은 기능을 더 안전하게 만드는 방법을 비교.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위험을 줄일 수 있는 합리적인 다른 설계. <strong>⑥ 쉬운 말:</strong> 다르게 만들었다면 사고를 줄일 수 있었나. <strong>⑦ 사례:</strong> 과열 차단장치 추가 설계.</p>
+<p><strong>⑧ 시험:</strong> 쉬프트록: 효과·비용 등 종합. <strong>⑨ 비교·기억법:</strong> 가능한 모든 최신 설계가 자동으로 합리적인 것은 아님.</p>
+<h3>無過失責任 무과실책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 無(없을 무), 過(지날 과), 失(잃을 실), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 잘못의 증명을 요구하지 않는 책임. <strong>④ 이름의 이유:</strong> 행위자의 부주의보다 제품 안전 결함에 초점을 둠.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 과실을 성립 요건으로 하지 않는 손해배상책임. <strong>⑥ 쉬운 말:</strong> 회사가 얼마나 부주의했는지까지 밝힐 필요는 없다. <strong>⑦ 사례:</strong> 제조자가 조심했어도 불안전한 제조 결함.</p>
+<p><strong>⑧ 시험:</strong> 020: 과실 입증 불필요. <strong>⑨ 비교·기억법:</strong> 결함·손해·인과관계까지 불필요한 것은 아님.</p>
+<h3>因果關係 인과관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 因(인할 인), 果(열매 과), 關(관계할 관), 係(맬 계). <strong>③ 합친 뜻:</strong> 원인과 결과의 연결. <strong>④ 이름의 이유:</strong> 책임과 무관한 손해를 떠넘기지 않게 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결함 또는 행위가 해당 손해를 일으킨 연결. <strong>⑥ 쉬운 말:</strong> 바로 그 위험 때문에 다쳤나. <strong>⑦ 사례:</strong> 혈액제제와 감염 사이 연결.</p>
+<p><strong>⑧ 시험:</strong> 2015-61: 증명과 추정. <strong>⑨ 비교·기억법:</strong> 시간상 뒤에 생겼다고 모두 원인은 아님.</p>
+<h3>推定 추정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 推(밀 추), 定(정할 정). <strong>③ 합친 뜻:</strong> 근거를 밀어 나가 우선 정함. <strong>④ 이름의 이유:</strong> 직접 증명하기 어려운 사실의 합리적 연결.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기초사실로 다른 사실을 인정하되 반증 허용. <strong>⑥ 쉬운 말:</strong> 단서가 갖춰지면 일단 그렇게 보되 뒤집을 수 있음. <strong>⑦ 사례:</strong> 정상 사용 중 제품 내부 발화.</p>
+<p><strong>⑧ 시험:</strong> 019: 법정 기초사실 세 가지. <strong>⑨ 비교·기억법:</strong> 번복을 허용하지 않는 간주와 구별.</p>
+<h3>免責 면책</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 免(면할 면), 責(꾸짖을 책). <strong>③ 합친 뜻:</strong> 책임을 면함. <strong>④ 이름의 이유:</strong> 모든 위험을 무제한 떠맡기는 것은 아니기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 요건에 따라 배상책임에서 벗어남. <strong>⑥ 쉬운 말:</strong> 책임을 지지 않아도 되는 특별한 이유. <strong>⑦ 사례:</strong> 공급 당시 객관적 기술로 결함 발견 불가.</p>
+<p><strong>⑧ 시험:</strong> 2015-61: 법령 준수로 불가피한 결함. <strong>⑨ 비교·기억법:</strong> 처음 면책 사유와 이후 조치의무를 구별.</p>
+<h3>連帶責任 연대책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 連(이을 련), 帶(띠 대), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 이어져 함께 지는 책임. <strong>④ 이름의 이유:</strong> 피해자가 책임자의 내부 분담 때문에 회수에 곤란을 겪지 않게 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 동일 손해에 책임자들이 전부 배상의무를 부담. <strong>⑥ 쉬운 말:</strong> 한 사람에게 전액 청구할 수 있으나 중복으로 받지는 않는다. <strong>⑦ 사례:</strong> 완성품·결함 부품 제조자의 공동 책임.</p>
+<p><strong>⑧ 시험:</strong> 법 5조: 2명 이상. <strong>⑨ 비교·기억법:</strong> 나중의 내부 구상관계와 피해자에 대한 책임 구별.</p>
+<h3>消滅時效·起算 소멸시효·기산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 滅(멸할 멸), 時(때 시), 效(본받을 효), 起(일어날 기), 算(셀 산). <strong>③ 합친 뜻:</strong> 시간의 경과에 따른 소멸·셈의 시작. <strong>④ 이름의 이유:</strong> 오래된 법률관계 정리와 피해자 보호의 균형.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리 미행사 기간과 그 출발점. <strong>⑥ 쉬운 말:</strong> 몇 년인지뿐 아니라 언제부터 세는지 봐야 한다. <strong>⑦ 사례:</strong> 잠복성 질환은 장기기간을 손해 발생일부터.</p>
+<p><strong>⑧ 시험:</strong> 2019-69: 3년·10년. <strong>⑨ 비교·기억법:</strong> 두 기간을 마음대로 골라 적용하지 않음.</p>
+<h3>潛伏期間 잠복기간</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 潛(잠길 잠), 伏(엎드릴 복), 期(기약할 기), 間(사이 간). <strong>③ 합친 뜻:</strong> 숨어 드러나지 않는 기간. <strong>④ 이름의 이유:</strong> 피해가 즉시 보이지 않는 특성을 반영.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 원인 노출 후 증상이 나타나기 전 기간. <strong>⑥ 쉬운 말:</strong> 몸에 문제가 생겨도 한동안 겉으로 안 보일 수 있다. <strong>⑦ 사례:</strong> 유해물질 노출 뒤 나중에 나타나는 손해.</p>
+<p><strong>⑧ 시험:</strong> 2013-40: 손해 발생일 기준 예외. <strong>⑨ 비교·기억법:</strong> 공급일·증상 확인일·손해 발생일을 기계적으로 동일시하지 않음.</p>
+<h3>求償 구상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 求(구할 구), 償(갚을 상). <strong>③ 합친 뜻:</strong> 갚은 돈의 부담을 다시 구함. <strong>④ 이름의 이유:</strong> 최종 부담자에게 비용을 돌리는 구조.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인을 위해 지급한 자가 법정 요건 아래 부담자에게 상환 요구. <strong>⑥ 쉬운 말:</strong> 먼저 보상한 쪽이 책임 있는 쪽에 다시 청구한다. <strong>⑦ 사례:</strong> 세척기 사건 B보험사가 C보험사에 청구.</p>
+<p><strong>⑧ 시험:</strong> 사례 당사자 구별. <strong>⑨ 비교·기억법:</strong> 피해자에게 보험금을 줬다고 제조사 책임이 자동 확정되지는 않음.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>개념</th>
+<th>출제자의 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>017·2018-68</td>
+<td>제조물</td>
+<td>예술작품 제외, 가공하지 않은 농산물 포함</td>
+</tr>
+<tr>
+<td>2017-67</td>
+<td>책임 주체</td>
+<td>실제 제조자도 이름 표시된 경우만 책임진다고 바꿈</td>
+</tr>
+<tr>
+<td>2015-60</td>
+<td>결함 세 유형</td>
+<td>제조상 결함에 고의·과실 증명 추가</td>
+</tr>
+<tr>
+<td>020</td>
+<td>배상·면책</td>
+<td>최대 3배를 5배로 변경</td>
+</tr>
+<tr>
+<td>2019-69</td>
+<td>기간</td>
+<td>누적성 손해도 공급일부터 10년이라고 함</td>
+</tr>
+</tbody></table>
+<p>반복 주제는 제품 범위, 실제·표시·수입 제조자, 제품 자체 손해 제외, 무과실책임, 3년·10년이다. ‘가장 많이 틀릴 보기’는 실제 오답 통계가 없으므로 <strong>함정이 강한 보기</strong>라는 뜻으로 읽는다. 전체 25문제의 원문·정답·모든 보기 해설은 뒤에 보존했다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 도자기 전등.</strong> 작가가 반복 판매한 도자기 전등의 배선 결함으로 구매자 친구가 다쳤다. 작가는 예술품이고 친구와 계약이 없다고 한다. <strong>정답·의도:</strong> 제조·가공된 동산인 예술품도 포함되고 제3자도 피해자다. 계약관계 부재만으로 제조물책임을 부정할 수 없다.</p>
+<p><strong>응용2 · 이름 없는 전열기.</strong> 판매점은 제조자를 모르는 피해자의 요청을 받고 자신에게 물건을 공급한 도매상을 상당한 기간 안에 알려 주었다. 판매점 책임이 반드시 확정되는가? <strong>정답·의도:</strong> 영리 공급자 책임의 면책 단서를 검토한다. 제조자를 직접 알려 주는 것만이 아니라 공급자 고지도 법정 요건이다.</p>
+<p><strong>응용3 · 창고 화재.</strong> 회사가 결함을 알고도 방치한 기계 때문에 창고 상품만 소실되었고 인명 피해는 없다. 법 3조 2항으로 무조건 3배인가? <strong>정답·의도:</strong> 다른 재산의 일반 배상은 검토하지만 생명·신체의 중대한 손해라는 가중배상 요건을 충족하지 않는다. 다른 법의 별도 책임은 별개다.</p>
+<p><strong>응용4 · 늦은 경고.</strong> 공급 당시 객관적 기술로 발견 불가능했던 결함을 회사가 2년 뒤 알았지만 회수·경고를 하지 않았다. <strong>정답·의도:</strong> 개발위험 면책 사유가 처음에 있었더라도 후속 위험 방지조치를 하지 않으면 면책 주장이 제한된다. 3장 리콜과 연결한다.</p>
+<p><strong>응용5 · 두 종류 손해.</strong> 카페 설비 공급계약에 영업용 재산 손해 면책특약이 있다. 결함으로 카페 탁자가 타고 손님이 화상을 입었다. <strong>정답·의도:</strong> 자신의 영업용 재산에 관한 특약 예외와 제3자 신체손해를 나눈다. 탁자 손해의 특약 효력을 검토하더라도 손님의 손해까지 그 특약으로 배제하지 못한다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제4장</h1>
+<p><strong>TOP3:</strong> 결함 세 유형 / 무과실책임과 입증 완화 / 3년·10년의 출발점.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>암기 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제조물</td>
+<td>제조·가공된 동산. 부동산의 일부도 포함. 생농산물·무형 서비스 제외.</td>
+</tr>
+<tr>
+<td>책임자</td>
+<td>실제 제조·가공·수입 + 표시제조자. 실제 제조자는 이름 표시 불필요.</td>
+</tr>
+<tr>
+<td>공급자</td>
+<td>제조자 불명 + 영리 공급. 요청 후 상당 기간 내 제조자·공급자 고지 예외.</td>
+</tr>
+<tr>
+<td>결함</td>
+<td>제조=설계와 다름 / 설계=합리적 대체설계 미채용 / 표시=합리적 경고 부족.</td>
+</tr>
+<tr>
+<td>손해</td>
+<td>생명·신체·다른 재산. 제품 자체에만 생긴 손해 제외.</td>
+</tr>
+<tr>
+<td>무과실</td>
+<td>과실 입증 불필요 ≠ 아무 증명도 불필요.</td>
+</tr>
+<tr>
+<td>법정 추정</td>
+<td>정상 사용 + 실질적 지배영역 원인 + 결함 없이 통상 생기지 않을 손해.</td>
+</tr>
+<tr>
+<td>3배</td>
+<td>결함 알고 조치 안 함 → 생명·신체 중대한 손해. 최대 3배.</td>
+</tr>
+<tr>
+<td>면책</td>
+<td>미공급 / 개발위험 / 법령 준수로 불가피 / 원재료·부품의 지시 결함.</td>
+</tr>
+<tr>
+<td>사후 방치</td>
+<td>뒤늦게 알거나 알 수 있었는데 조치 안 함 → 뒤 세 면책 제한.</td>
+</tr>
+<tr>
+<td>기간</td>
+<td>손해·책임자 모두 안 날 3년 / 공급일부터 10년 / 누적·잠복은 손해 발생부터.</td>
+</tr>
+<tr>
+<td>특약·연대</td>
+<td>면책특약 원칙 무효, 자신의 영업용 재산 예외 / 책임자 여럿이면 연대.</td>
+</tr>
+<tr>
+<td>판례</td>
+<td>쉬프트록·콘택600 부정 / 장미 비료 표시결함 인정 / 세척기 책임 60%.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 안전사고와 단순 품질 고장은 다르다. ‘법령에 반하지 않음’만으로 면책되지 않는다. 과거 판례와 현행 법정 추정의 적용 시점을 나눈다.</p>
+<p>사례를 풀 순서: 제조물 → 책임자 → 결함·손해 → 추정·반증 → 면책·가중배상 → 특약·기간.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 세척기 사건에서 왜 소비자가 내부 결함을 완벽하게 증명하지 않아도 되는지 설명하고, 60% 책임을 일반화하지 않는다. 🟡 결함 세 유형은 알지만 면책·기간을 섞는다. 🔴 사고만 나면 자동 3배 배상이라고 생각한다. 실제 답변을 받지 않았으므로 현재 등급을 임의 판정하지 않고 자기점검 기준으로 제시한다.</p>
+<p><strong>반드시 복습할 TOP3:</strong> 제조·설계·표시 결함 / 추정의 세 기초사실 / 손해와 책임자를 모두 안 날 3년 및 장기기간의 예외.</p>
+<h1>문제 부록 · 25문항·100개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_016"><h4>형성평가 · 소비자법_016</h4><p class="question-stem">다음의 설명 중에서 옳지 않은 것은?</p><ol class="choices"><li>제조물책임에서 말하는 제조물이란 제조되거나 가공된 동산을 말한다.</li><li>계약상 채무불이행책임을 물을 경우에는 채무자의 고의가 존재해야 하기 때문에 채무자의 과실이 있는 경우에는 구제받을 수가 없다.</li><li>일반불법행위책임을 묻기 위해서는 반드시 계약관계가 존재할 것을 요건으로 하지는 않기 때문에 피해를 입은 소비자 또는 제3자가 제조업자를 상대로 책임을 묻는 것이 가능하다.</li><li>하자담보책임이나 채무불이행책임에 의해 책임을 물을 수 있는 것은 계약관계의 당사자뿐이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 제조·가공된 동산이 출발점이고 부동산 일부를 구성해도 포함한다.</li><li><strong>선택</strong> · 틀리다. 고의뿐 아니라 과실도 귀책사유가 된다. 다만 일반적 채무불이행에서 채무자의 무귀책 증명 구조와 제조물책임의 무과실책임은 구별한다.</li><li><strong>비선택</strong> · 옳다. 불법행위는 계약 상대방인지와 별개다.</li><li><strong>비선택</strong> · 원칙적으로 옳다. 계약책임과 제3자의 제조물책임을 구별하는 취지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 계약상 채무불이행책임을 물을 경우에는 채무자의 고의 또는 과실이 존재해야 하기 때문에 채무자의 고의 또는 과실이 있는 경우에는 피해를 구제받을 수 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_017"><h4>형성평가 · 소비자법_017</h4><p class="question-stem">다음 중에서 제조물책임법상 제조물에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조물이란 제조되거나 다른 동산이나 부동산의 일부를 구성하는 경우를 포함한 가공된 동산이다.</li><li>제조물은 제조 또는 다른 동산이나 부동산의 일부를 구성하는 경우를 포함한 가공된 동산에 해당하는 한 완성품뿐만 아니라 부품, 원재료가 모두 포함된다.</li><li>제조물책임법상 제조물에는 신제품, 중고품, 재생품이 포함되지만, 예술작품은 제조물에 포함되지 않는다.</li><li>제조물책임의 대상이 되는 제조물은 특정 소비자와의 공급계약에 따라 그 소비자에게 직접 납품되어 사용되는 것도 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 부동산에 부착되어도 동산인 구성 제품을 포함한다.</li><li><strong>비선택</strong> · 옳다. 완성품뿐 아니라 부품·원재료도 제조·가공된 동산 요건을 갖추면 포함한다.</li><li><strong>선택</strong> · 틀리다. 동산인 예술작품도 포함될 수 있다. 예술이라는 목적만으로 제외하지 않는다.</li><li><strong>비선택</strong> · 옳다. 불특정 다수에게 유통해야만 하는 것은 아니다. 정부 등 특정 상대방에게 납품한 제품도 포함한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제조물책임법상 제조물에는 신제품, 중고품, 재생품, 수공업품, 예술작품 등도 포함된다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_018"><h4>형성평가 · 소비자법_018</h4><p class="question-stem">다음 중에서 제조물책임법상 제조업자에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조물의 제조 · 가공 또는 수입을 업으로 하는 자이다.</li><li>자신을 제조물의 제조 · 가공 또는 수입을 업으로 하는 자로 표시한 자이다.</li><li>자연인 및 법인을 모두 포함한다.</li><li>상품의 제조를 영업으로 반복 · 계속하여 제조하는 자를 말하며 반드시 영리성을 갖추어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 수입업자도 법정 제조업자다.</li><li><strong>비선택</strong> · 옳다. 표시제조업자를 포함하여 상표에 대한 신뢰를 보호한다.</li><li><strong>비선택</strong> · 옳다. 개인사업자와 법인 모두 해당 가능하다.</li><li><strong>선택</strong> · 틀리다. 업으로 반복·계속하면 영리성을 반드시 요구하지 않는다. 영리 목적은 제조자 불명 시 공급자 책임 요건과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상품의 제조를 영업으로 반복 · 계속하여 제조하는 자를 말하며 반드시 영리성을 요건으로 하는 것은 아니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_019"><h4>형성평가 · 소비자법_019</h4><p class="question-stem">다음 중에서 제조물책임에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>원재료의 제조자는 제조물책임을 부담하지 않는다.</li><li>피해자가 제조물의 제조업자를 알 수 없는 경우에는 그 제조물을 영리 목적으로 판매 · 대여 등의 방법으로 공급한 자가 제조물책임에 따른 손해배상책임을 부담하게 된다.</li><li>제조상의 결함은 다른 결함유형들에 비하여 비교적 입증이 쉽다.</li><li>제조물책임법은 민법과는 다르게 일정한 경우 결함을 추정하는 규정을 두어서 소비자의 입증책임을 경감하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 원재료 결함에서 발생한 손해에 대해 원재료 제조자도 책임질 수 있다.</li><li><strong>비선택</strong> · 원칙적으로 옳다. 다만 요청 후 상당한 기간 내 제조자 또는 자신에게 공급한 자를 알려 주는 면책 단서가 있다.</li><li><strong>비선택</strong> · 옳다. 의도한 설계·정상 제품과 비교할 수 있어 상대적으로 쉽다는 뜻이지 언제나 쉬운 것은 아니다.</li><li><strong>비선택</strong> · 옳다. 정상 사용·지배영역·결함 없이는 통상 생기지 않을 손해를 증명하면 결함과 인과관계가 추정된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원재료, 부품의 제조자는 제조물의 결함이 원재료, 부품에 기인한 경우에는 원재료, 부품에 대한 책임을 진다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_020"><h4>형성평가 · 소비자법_020</h4><p class="question-stem">다음 중에서 제조물책임법상 손해배상에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조업자는 제조물의 결함으로 인하여 생명, 신체, 다른 재산에 손해를 입힌 경우에 손해배상책임을 부담한다.</li><li>피해를 입은 소비자는 제조물에 존재하는 결함이 제조업자 등의 과실에 의한 것임을 입증할 필요가 없다.</li><li>제조물책임법은 제조업자가 제조물의 결함을 알면서도 그 결함에 대하여 필요한 조치를 취하지 않은 결과로 생명 또는 신체에 중대한 손해를 입은 자가 있는 경우에는 그 자에게 발생한 손해의 5배를 넘지 않는 범위에서 배상책임을 지도록 하고 있다.</li><li>제조업자가 해당 제조물을 공급할 당시의 과학 · 기술 수준으로는 결함의 존재를 발견할 수 없었다는 사실을 입증하는 경우 면책된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 제품 자체에만 생긴 손해와 확대손해를 구별한다.</li><li><strong>비선택</strong> · 옳다. 무과실책임이다. 결함·손해·인과관계까지 불필요하다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀리다. 5배가 아니라 3배 이내다. 알고도 미조치·중대한 생명신체 손해라는 요건도 필요하다.</li><li><strong>비선택</strong> · 원칙적으로 옳다. 객관적인 당시 과학·기술 수준이어야 하고, 나중에 결함을 알면서 적절히 조치하지 않았다면 면책 주장이 제한된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제조물책임법은 제조업자가 제조물의 결함을 알면서도 그 결함에 대하여 필요한 조치를 취하지 않은 결과로 생명 또는 신체에 중대한 손해를 입은 자가 있는 경우에는 그 자에게 발생한 손해의 3배를 넘지 않는 범위에서 배상책임을 지도록 하고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_038"><h4>기출문제 · 소비자법_기출2013_038</h4><p class="question-stem">[2013 기말고사 · 38번 / 자체 풀이]<br>제조물책임법상 ‘제조물’에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>동산에 해당하는 부품, 원재료도 제조물에 포함된다.</li><li>가공되지 않은 농산물도 제조물에 포함된다.</li><li>소프트웨어, 정보 등의 지적재산물도 제조물에 포함된다.</li><li>부동산의 일부를 구성하고 있는 승강기는 제조물에 포함되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 부품·원재료도 제조·가공된 동산이면 포함한다.</li><li><strong>비선택</strong> · 틀리다. 가공되지 않은 농산물은 제외한다.</li><li><strong>비선택</strong> · 교재상 틀리다. 독립된 무형의 소프트웨어·정보와 이를 장착한 유형 제품 전체를 나누어 본다.</li><li><strong>비선택</strong> · 틀리다. 승강기가 건물 일부라고 제외되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>제조·가공된 동산인 부품과 원재료도 제조물이다. 가공되지 않은 농산물이나 무형 정보와 구별되며, 부동산에 부착된 동산도 제외되지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_039"><h4>기출문제 · 소비자법_기출2013_039</h4><p class="question-stem">[2013 기말고사 · 39번 / 자체 풀이]<br>제조물책임법상 책임을 지는 ‘제조자’의 범위에 포함되지 않는 자는?</p><ol class="choices"><li>제조물의 제조자를 알 수 없는 경우의 판매업자</li><li>비영리목적으로 제조물을 공급한 자</li><li>수입업자</li><li>제조물의 결함이 부품에 기인한 경우에의 부품 제조자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 영리 공급자 책임이 문제 된다. 요청 후 상당 기간 내 책임 경로를 고지하는 예외까지 함께 기억한다.</li><li><strong>선택</strong> · 원본 정답. 비영리 단순 공급자는 이 보충적 공급자 책임에서 제외한다. 비영리 제조업자가 모두 제외되는 것은 아니다.</li><li><strong>비선택</strong> · 법정 제조업자에 포함한다. 외국 제조사만 쫓아가야 하는 어려움을 줄인다.</li><li><strong>비선택</strong> · 해당 부품의 결함에 기인했다면 책임질 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>출제 보기의 ‘공급한 자’를 제조자 불명 시 책임지는 공급업자의 의미로 해석하면 ②이다. 당시 제조물책임법 제3조제2항은 영리 목적으로 공급한 자의 책임을 정했다. 다만 직접 제조·수입하는 자의 책임까지 비영리라는 이유만으로 모두 제외된다는 뜻은 아니다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.<br>참고: <a href="https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&amp;lsId=002039&amp;lsRvsGubun=all" target="_blank" rel="noopener noreferrer">제조물책임법 제3조 · 제정·개정문</a></p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_040"><h4>기출문제 · 소비자법_기출2013_040</h4><p class="question-stem">[2013 기말고사 · 40번 / 자체 풀이]<br>( )안에 들어갈 내용으로 맞게 짝지어진 것은?<br>제조물책임법에 따라 손해를 배상 받으려는 피해소비자나 그 법정대리인은 손해배상책임을 지는 사람을 알게 된 날부터 ( )년 이내, 제조업자가 손해를 발생시킨 제조물을 공급한 날부터 ( )년 이내, 신체에 누적되어 사람의 건강을 해치는 물질로 인해 발생한 손해 또는 일정한 잠복기간이 경과한 후에 증상이 나타나는 손해인 경우에는 그 손해가 발생된 날부터 ( )년 이내의 기간 내에 제조업자에게 손해배상을 청구해야 한다.</p><ol class="choices"><li>3, 10, 10</li><li>3, 7, 10</li><li>5, 10, 10</li><li>5, 7, 10</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 3·10·10. 단기기간은 엄밀히 손해 및 책임자를 모두 안 날이다. 누적·잠복성 손해는 장기기간의 출발점을 손해 발생일로 바꾼다.</li><li><strong>비선택</strong> · 7년이 아니라 10년이다.</li><li><strong>비선택</strong> · 단기는 5년이 아니라 3년이다.</li><li><strong>비선택</strong> · 단기 3년·장기 10년을 모두 틀렸다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>피해자의 인식에 따른 3년과 공급 후 10년을 구분한다. 누적성 물질·잠복성 손해의 장기기간은 해당 손해가 발생한 날을 기준으로 한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_041"><h4>기출문제 · 소비자법_기출2013_041</h4><p class="question-stem">[2013 기말고사 · 41번 / 자체 풀이]<br>제조물책임법에 따른 손해배상에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조물의 결함으로 인하여 생명, 신체, 다른 재산에 손해를 입힌 경우에 손해배상책임이 발생한다.</li><li>제조물의 결함으로 인하여 제조물 자체에 대해서 손해가 발생하면 성립한다.</li><li>제조물책임상 결함이란 제조․설계 또는 표시상의 결함이 있는 경우를 말한다.</li><li>제조물책임은 무과실책임 또는 엄격책임으로서 그 성립에 있어 과실을 요건으로 하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 다른 재산 손해를 포함한다.</li><li><strong>선택</strong> · 틀리다. 제품 자체에만 생긴 손해는 이 법 대상이 아니다. 계약책임 등은 별도로 검토한다.</li><li><strong>비선택</strong> · 옳다. 세 유형 외 통상 기대되는 안전성 결여도 정의에 들어간다.</li><li><strong>비선택</strong> · 옳다. 과실이 아니라 안전 결함을 중심으로 책임을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>제조물 자체에만 생긴 손해는 제조물책임법의 배상 대상에서 제외된다. 다른 재산이나 생명·신체의 손해가 문제되는 경우와 구분한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_056"><h4>기출문제 · 소비자법_기출2014_056</h4><p class="question-stem">[2014 기말고사 · 56번]<br>제조물책임법이 적용되는 제조물이 아닌 것은?</p><ol class="choices"><li>스마트 TV</li><li>수공업품</li><li>예술작품</li><li>무형의 서비스</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제조·가공된 동산이므로 포함한다.</li><li><strong>비선택</strong> · 수공업이라는 방식은 제외 사유가 아니다.</li><li><strong>비선택</strong> · 동산인 예술품도 포함될 수 있다.</li><li><strong>선택</strong> · 정답. 무형 서비스 자체는 제조·가공된 동산이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_057"><h4>기출문제 · 소비자법_기출2014_057</h4><p class="question-stem">[2014 기말고사 · 57번]<br>제조물책임법상 제조업자에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>완성품제조자는 완성품 전체에 대해 제조물책임을 진다.</li><li>제조물에 상호 등을 표시함으로써 제조자로 표시한 자는 제조물책임을 진다.</li><li>주문자상표부착제조자는 실제 제조물을 만든 자가 아니기 때문에 제조물책임을 지지 않는다.</li><li>제조물의 제조자를 알 수 없는 경우에는 당해 제조물의 공급자가 제조물책임을 진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 완성품 제조자의 책임이다.</li><li><strong>비선택</strong> · 옳다. 표시제조업자는 외관·신뢰에 따른 책임자다.</li><li><strong>선택</strong> · 틀리다. 실제 제조자는 표시 없이도 책임지고, 상표를 붙인 자도 표시제조자 책임을 질 수 있다. OEM 구조를 책임 공백으로 만들 수 없다.</li><li><strong>비선택</strong> · 원칙적으로 옳다. 영리 목적과 상당 기간 내 고지 면책의 구체적 요건을 함께 보완한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_068"><h4>기출문제 · 소비자법_기출2014_068</h4><p class="question-stem">[2014 기말고사 · 68번]<br>제조물책임법상 손해배상책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조물책임은 무과실책임 또는 엄격책임으로서 그 성립에 있어 과실을 요건으로 하지 않는다.</li><li>소비자인 피해자는 일단 결함의 존재, 손해발생 및 사실상의 인과관계에 대해서는 입증책임을 부담한다.</li><li>판례는 인과관계의 사실상 추정에 의하여 소비자의 입증책임을 완화하고 있다.</li><li>제조물의 결함으로 인하여 생명, 신체, 다른 재산에 손해를 입힌 경우뿐만 아니라, 제조물 자체에 대해서만 손해가 발생한 경우에도 제조물책임이 성립한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 고의·과실은 요건이 아니다.</li><li><strong>비선택</strong> · 옳다. 무과실책임과 무증명책임은 다르다.</li><li><strong>비선택</strong> · 옳다. 당시 판례의 사실상 추정 법리다. 현재에는 법정 추정 규정도 있다.</li><li><strong>선택</strong> · 틀리다. 제조물 자체에만 생긴 손해는 제외된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_069"><h4>기출문제 · 소비자법_기출2014_069</h4><p class="question-stem">[2014 기말고사 · 69번]<br>다음 설명은 제조물책임법상 어떤 유형의 결함에 관한 설명인가?<br>“제조업자가 합리적인 설명․지시․경고나 그 밖에 표시를 하였더라면 해당 제조물에 의해 발생될 수 있는 피해나 위험을 줄이거나 피할 수 있었음에도 이를 하지 않은 경우를 말한다.”</p><ol class="choices"><li>제조상의 결함</li><li>설계상의 결함</li><li>표시상의 결함</li><li>유통상의 결함</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 설계와 다르게 만든 경우로 질문과 다르다.</li><li><strong>비선택</strong> · 합리적인 대체설계 문제이므로 질문과 다르다.</li><li><strong>선택</strong> · 정답. 설명·지시·경고 누락이 결정적 단서다.</li><li><strong>비선택</strong> · 법 2조의 세 유형에 해당하는 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 69번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_070"><h4>기출문제 · 소비자법_기출2014_070</h4><p class="question-stem">[2014 기말고사 · 70번]<br>제조물책임법상 손해배상청구권의 행사기간(소멸시효)에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>피해소비자나 그 법정대리인은 손해배상책임을 지는 사람을 알게 된 날부터 10년 이내에 제조업자에게 손해배상을 청구해야 한다.</li><li>피해소비자나 그 법정대리인은 제조업자가 손해를 발생시킨 제조물을 공급한 날부터 10년 이내에 제조업자에게 손해배상을 청구해야 한다.</li><li>피해소비자나 그 법정대리인은 신체에 누적되어 사람의 건강을 해치는 물질로 인해 발생한 손해인 경우에는 그 손해가 발생된 날부터 10년 이내에 제조업자에게 손해배상을 청구해야 한다.</li><li>피해소비자나 그 법정대리인은 일정한 잠복기간이 경과한 후에 증상이 나타나는 손해인 경우에는 그 손해가 발생된 날부터 10년 이내에 제조업자에게 손해배상을 청구해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 손해와 책임자를 모두 안 날부터 3년이다. 숫자뿐 아니라 빠진 손해 요건도 보완한다.</li><li><strong>비선택</strong> · 옳다. 원칙적 장기기간의 기준이다.</li><li><strong>비선택</strong> · 옳다. 누적성 손해는 손해 발생일부터 장기기간을 센다.</li><li><strong>비선택</strong> · 옳다. 잠복성 손해도 같은 기산점 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 70번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_059"><h4>기출문제 · 소비자법_기출2015_059</h4><p class="question-stem">[2015 기말고사 · 59번]<br>제조물책임에서 책임주체로서의 제조업자의 범위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>주문자상표부착(OEM) 제조자의 경우, 이 표시제조업자의 지시에 따른 경우에는 공급자인 실제의 제조업자는 원칙적으로 제조물책임을 면할 수 있다.</li><li>제조물의 결함이 원재료, 부품에 기인한 경우에는 원재료, 부품의 제조자가 책임을 진다.</li><li>상호 등을 표시함으로써 제조자로 표시한 자는 제조업자의 외관을 만듦으로써 소비자의 신뢰를 보호해야 할 책임을 진다.</li><li>수입업자는 제조물을 국내시장에 유통시키는 공급자로서 책임주체인 제조자의 범위에 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. OEM 실제 제조자는 주문자의 지시를 따랐다는 말만으로 면책되지 않는다. 부품·원재료의 특정 지시 면책과 구별한다.</li><li><strong>비선택</strong> · 옳다. 자신의 원재료·부품에 기인한 결함을 책임진다.</li><li><strong>비선택</strong> · 옳다. 제조자로 믿게 한 표시와 신뢰가 이유다.</li><li><strong>비선택</strong> · 옳다. 수입업자도 직접 책임 주체다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2015년 법학과 소비자법 59번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_060"><h4>기출문제 · 소비자법_기출2015_060</h4><p class="question-stem">[2015 기말고사 · 60번]<br>제조물책임법상 결함의 개념과 판단 기준에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조상의 결함의 입증은 원래 의도한 설계나 정상제품과 비교해 다른 점이 있는지 여부를 판단하면 된다.</li><li>제조상의 결함의 경우에는 제조업자 측의 고의, 과실도 입증해야 한다.</li><li>설계상의 결함을 입증하기 위해서는 실제 채용된 설계보다 합리적인 대체설계가 존재하는지를 포함한 여러 요소를 고려한다.</li><li>설계상의 결함의 경우에는 해당 설계를 채용하여 제조한 모든 제조물에 결함이 존재해야하기 때문에 제조업자의 책임이 보다 넓게 된다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 정상 설계·제품과의 차이가 핵심이다.</li><li><strong>선택</strong> · 틀리다. 고의·과실 증명은 필요하지 않다.</li><li><strong>비선택</strong> · 옳다. 합리적 대체설계와 비용·효과 등 여러 요소를 본다.</li><li><strong>비선택</strong> · 출제 취지는 옳다. 공통 설계가 문제이면 동일 설계 제품군에 영향이 넓다는 의미다. 피해자가 모든 개별 제품의 실제 사고를 증명해야 한다는 뜻으로 읽지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2015년 법학과 소비자법 60번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_061"><h4>기출문제 · 소비자법_기출2015_061</h4><p class="question-stem">[2015 기말고사 · 61번]<br>제조물책임법상 손해배상에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>피해자는 일단 결함의 존재, 손해발생 및 사실상의 인과관계에 대해서는 입증책임을 부담하는 것으로 해석된다.</li><li>판례는 인과관계의 사실상 추정에 의하여 소비자의 입증책임을 완화하고 있다.</li><li>소비자가 제조물에 존재하는 결함이 제조업자 등의 과실에 의한 것임을 입증할 필요는 없다.</li><li>제조물의 결함이 제조업자가 해당 제조물을 공급할 당시의 법령이 정하는 기준을 준수함으로써 발생한 사실을 입증하더라도 면책되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 결함·손해·인과관계가 기본 연결이다.</li><li><strong>비선택</strong> · 옳다. 당시 판례의 사실상 추정이다.</li><li><strong>비선택</strong> · 옳다. 무과실책임이기 때문이다.</li><li><strong>선택</strong> · 틀리다. 법령 준수로 결함이 불가피하게 생긴 사실은 면책 사유다. 단순 비위반만으로는 부족하고, 사후 위험 방치 시 면책 제한도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2015년 법학과 소비자법 61번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_067"><h4>기출문제 · 소비자법_기출2017_067</h4><p class="question-stem">[2017 기말고사 · 67번]<br>제조물책임법상 책임주체로서의 제조업자의 범위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>완성품 제조자는 완성품 전체에 대해 제조물 책임을 진다.</li><li>주문자상표부착(OEM) 제조자의 경우 공급자인 진정한 제조업자는 실제로 제조물을 만든 자로서 표시된 경우에만 책임을 부담한다.</li><li>표시제조업자의 지시에 따른 경우에도 공급자인 제조업자는 원칙적으로 제조물책임을 면할 수 없다.</li><li>제조물의 결함이 부품에 기인한 경우에는 부품의 제조자가 책임을 진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 완성품 전체의 책임을 부담한다.</li><li><strong>선택</strong> · 틀리다. 실제 제조자는 표시와 무관하게 책임진다.</li><li><strong>비선택</strong> · 옳다. OEM 주문자의 지시만으로 일반적 면책은 안 된다.</li><li><strong>비선택</strong> · 옳다. 자기 부품 결함에 기인한 책임이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2017년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_068"><h4>기출문제 · 소비자법_기출2017_068</h4><p class="question-stem">[2017 기말고사 · 68번]<br>제조물책임법에 따른 손해배상청구권의 행사기간(소멸시효)에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>피해자가 손해를 알게 된 날부터 3년간 행사하지 않으면 시효가 완성되어 소멸한다.</li><li>피해자의 법정대리인이 손해배상책임을 지는 자를 알게 된 날부터 3년간 행사하지 않으면 시효가 완성되어 소멸한다.</li><li>제조업자가 손해를 발생시킨 제조물을 공급한 날부터 10년 이내에 행사하여야 한다.</li><li>신체에 누적되어 사람의 건강을 해치는 물질에 의하여 발생한 손해는 그 물질을 공급한 날부터 기산한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 출제 의도상 옳게 처리했으나 문장이 불완전하다. 손해뿐 아니라 책임자도 알아야 3년이 시작된다.</li><li><strong>비선택</strong> · 출제 의도상 옳게 처리했으나 손해를 안다는 요건도 필요하다. 책임자 하나만 아는 것으로 단정하지 않는다.</li><li><strong>비선택</strong> · 옳다. 원칙적 장기기간이다.</li><li><strong>선택</strong> · 원본 정답. 누적성 손해는 공급일이 아니라 손해 발생일부터 장기기간을 센다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_067"><h4>기출문제 · 소비자법_기출2018_067</h4><p class="question-stem">[2018 기말고사 · 67번]<br>제조물책임법상 책임주체인 제조업자의 범위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>주문자상표부착(OEM) 제조자의 경우 공급자인 진정한 제조업자는 실제로 제조물을 만든 자로서 표시된 경우에만 책임을 부담한다.</li><li>표시제조업자의 지시에 따른 경우에도 공급자인 제조업자는 원칙적으로 제조물책임을 면할 수 없다.</li><li>완성품 제조자는 완성품 전체에 대해 제조물 책임을 진다.</li><li>제조물의 결함이 부품에 기인한 경우에는 부품의 제조자가 책임을 진다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 실제 제조자에게 이름 표시가 필수는 아니다.</li><li><strong>비선택</strong> · 옳다. 지시만으로 면책되지 않는다.</li><li><strong>비선택</strong> · 옳다. 완성품 전체 책임이다.</li><li><strong>비선택</strong> · 옳다. 자신의 부품 결함에 기인했다면 책임진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_068"><h4>기출문제 · 소비자법_기출2018_068</h4><p class="question-stem">[2018 기말고사 · 68번]<br>제조물책임법상 제조물의 개념과 범위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조되거나 가공된 동산을 말한다.</li><li>동산인 수공업품, 예술작품도 해당된다.</li><li>부동산의 일부를 구성하고 있는 동산인 조명시설, 배관시설도 해당된다.</li><li>동산인 가공되지 않은 농산물도 해당된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 제조물의 기본 정의다.</li><li><strong>비선택</strong> · 옳다. 제작 방식·예술 목적은 제외 사유가 아니다.</li><li><strong>비선택</strong> · 옳다. 건물 일부여도 해당 동산은 포함한다.</li><li><strong>선택</strong> · 틀리다. 동산이어도 제조·가공 요건이 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_066"><h4>기출문제 · 소비자법_기출2019_066</h4><p class="question-stem">[2019 기말고사 · 66번]<br>제조물책임법의 제조물에 해당되지 않는 것은?</p><ol class="choices"><li>소프트웨어</li><li>동산인 부품</li><li>부동산의 일부를 구성하고 있는 동산인 승강기</li><li>동산인 수공업품</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 교재상 독립된 무형 소프트웨어는 제외한다. 소프트웨어를 탑재한 유형 제품 전체의 결함까지 제외하는 뜻은 아니다.</li><li><strong>비선택</strong> · 부품도 제조·가공된 동산이면 포함한다.</li><li><strong>비선택</strong> · 건물에 붙어 있어도 포함한다.</li><li><strong>비선택</strong> · 수공업이라는 이유로 제외하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_067"><h4>기출문제 · 소비자법_기출2019_067</h4><p class="question-stem">[2019 기말고사 · 67번]<br>제조물책임법의 결함으로 옳지 않은 것은?</p><ol class="choices"><li>제조상의 결함</li><li>설계상의 결함</li><li>표시상의 결함</li><li>마켓팅상의 결함</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 유형이다. 원래 설계와 다르게 제조한 결함.</li><li><strong>비선택</strong> · 법정 유형이다. 합리적 대체설계를 채택하지 않은 결함.</li><li><strong>비선택</strong> · 법정 유형이다. 필요한 설명·지시·경고가 부족한 결함.</li><li><strong>선택</strong> · 정답. 이 법이 명시한 세 분류 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2019년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_068"><h4>기출문제 · 소비자법_기출2019_068</h4><p class="question-stem">[2019 기말고사 · 68번]<br>제조물책임법의 손해배상에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>제조물의 결함으로 생명, 신체에 손해를 입힌 경우에 손해배상책임이 발생한다.</li><li>제조물 자체에 대해서만 손해가 발생한 경우에도 손해배상책임이 있게 된다.</li><li>제조물의 결함으로 소비자의 다른 재산에 손해를 입힌 경우에 손해배상책임이 발생한다.</li><li>소비자가 제조물에 존재하는 결함이 제조업자 등의 과실에 의한 것임을 입증할 필요는 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 인명 피해는 법의 주요 보호 대상이다.</li><li><strong>선택</strong> · 틀리다. 제조물 자체에만 발생한 손해를 제외한다.</li><li><strong>비선택</strong> · 옳다. 제품 밖 다른 재산의 확대손해다.</li><li><strong>비선택</strong> · 옳다. 과실 증명은 불필요하나 결함·손해·인과관계는 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2019년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_069"><h4>기출문제 · 소비자법_기출2019_069</h4><p class="question-stem">[2019 기말고사 · 69번]<br>제조물책임법의 손해배상의 소멸시효에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>피해소비자나 그 법정대리인은 손해 및 손해배상책임을 지는 사람을 알게 된 날부터 3년 이내에 손해배상을 청구해야 한다.</li><li>제조업자가 손해를 발생시킨 제조물을 공급한 날부터 10년 이내에 행사하여야 한다.</li><li>신체에 누적되어 사람의 건강을 해치는 물질로 인해 발생한 손해인 경우에는 그 제조물을 공급한 날부터 10년 이내에 손해배상을 청구해야 한다.</li><li>일정한 잠복기간이 경과한 후에 증상이 나타나는 손해인 경우에는 그 손해가 발생된 날부터 10년 이내에 손해배상을 청구해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 손해와 책임자를 모두 안 날이라는 정확한 문장이다.</li><li><strong>비선택</strong> · 옳다. 원칙적 10년이다.</li><li><strong>선택</strong> · 틀리다. 누적성 손해는 손해 발생일부터 10년이다.</li><li><strong>비선택</strong> · 옳다. 잠복성 손해의 기산점 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 69번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 04' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 04|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

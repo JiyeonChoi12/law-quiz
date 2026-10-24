@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제12장 금융상품거래와 금융소비자보호 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 12</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제12장 금융상품거래와 금융소비자보호 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>돈을 맡기거나 빌리는 계약은 내용이 복잡하고 손실도 크다. 그래서 판매 단계의 약속, 계약에서 나오는 권리, 과도한 이자의 한계를 함께 정한다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>이 장의 대답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나</td>
+<td>금융상품 판매 원칙 → 철회·해지·자료·배상 → 분쟁조정 → 대부 이자 제한</td>
+</tr>
+<tr>
+<td>왜 생겼나</td>
+<td>회사가 가진 전문지식과 소비자의 이해력·증거 사이의 격차를 줄이기 위해</td>
+</tr>
+<tr>
+<td>과목의 위치</td>
+<td>일반 소비자법을 예금·투자·보험·대출에 구체화하는 특수 거래 분야</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>11장 신용정보·피해구제 → 12장 금융계약 → 13장 전자금융 사고·사기</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>적합성과 적정성, 철회와 해지, 회사 배상과 투자손실, 초과이자와 원금의 구별</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 496–525쪽 전체. JSON 제14장 주제 <strong>16문제·64보기</strong>. 본문의 라임·DLF 문제 제기, KIKO 판례, 설명의무 사례, 중도상환수수료 판례를 빠짐없이 연결한다. 중요도는 제공 문제의 반복과 이해상 비중이며 오답률 통계는 제공되지 않았다. 법령 대조일 2026.10.25. 시험 연도와 현재 규정을 분리한다.</p>
+<p><strong>교재·문제 주의:</strong> DLS와 DLF는 ‘어느 회사가 팔았나’가 아니라 상품 구조가 다르다. 자료 열람은 <strong>6영업일</strong>이지 단순 6일이나 옛 8일이 아니다. 형성 060의 ③·④는 다른 장의 권리 문구가 섞인 보기다. 옛 미등록업자 이자 규칙과 2025.7.22. 이후 불법사금융 규칙을 구별한다.</p>
+<p><mark class="yellow">노랑: 결론·암기</mark> / <mark class="green">초록: 이유</mark> / <mark class="pink">분홍: 함정</mark> / <mark class="blue">파랑: 연결</mark>.</p>
+<h1>1. 예금과 투자는 같은 ‘금융상품’이어도 다르다</h1>
+<h2 id="consumer-12-01" data-concept-id="consumer-12-01">1-1. 라임·DLF 사건을 첫머리에 놓은 이유 ★★★★☆</h2>
+<p><strong>교재 496–497쪽 / 문단의 목적:</strong> 금융상품의 겉모습과 실제 위험이 다를 수 있음을 보여 준다. 라임자산운용 펀드는 투자자 돈을 모아 운용하다 자산의 유동성·부실 문제 등이 드러나 환매가 중단되었다. ‘원하면 돌려받는다’는 기대와 실제 회수 가능성이 충돌했다. DLF 손실 사태에서는 파생상품에 연결된 위험을 예금처럼 받아들인 고령자 등의 피해가 문제 됐다.</p>
+<p><strong>이야기로:</strong> 은퇴한 영희가 생활비를 마련하려 은행을 찾는다 → 직원은 수익을 강조한다 → 영희는 ‘은행에서 파니까 예금처럼 안전하겠지’라고 생각한다 → 기초자산 가격이 크게 변하자 원금 손실을 입는다. 여기서 질문은 단순히 ‘손실이 났나’가 아니라 <strong>무슨 상품을 누구에게 어떤 설명으로 팔았나</strong>다. 적법하게 위험을 설명한 투자손실과 불완전판매로 인한 손해는 같지 않다.</p>
+<p><strong>DLS</strong>는 금리·환율·상품가격 등 기초자산에 수익이 연계된 파생결합증권, <strong>DLF</strong>는 그런 파생결합증권 등에 투자하는 펀드다. 증권인지 펀드인지의 차이지 ‘증권사가 팔면 DLS, 은행이 팔면 DLF’라는 분류가 아니다. 주가연계 ELS·그에 투자하는 ELF와 예금 형태의 ELD도 구별한다. 이름·판매 창구보다 <strong>계약 구조, 원금손실 가능성, 보장 조건</strong>을 본다.</p>
+<p><strong>시험·한 줄:</strong> <mark class="pink">은행에서 샀다는 사실은 원금 보장 약속이 아니다.</mark> 교재의 고위험상품 비판은 보호 필요성을 설명하는 것이지 모든 개인의 모든 파생상품 계약이 당연무효라는 뜻이 아니다.</p>
+<h2 id="consumer-12-02" data-concept-id="consumer-12-02">1-2. 금융소비자·전문소비자·일반소비자 ★★★★☆</h2>
+<p><strong>교재 497–498쪽 / 문단의 목적:</strong> 어떤 상대에게 더 두터운 보호를 적용할지 정한다. 금융소비자는 금융상품 계약·권유·청약에 관한 판매업자의 거래 상대 또는 자문업자의 자문 상대다. 계약을 끝내 체결한 사람만을 뜻하지 않는다.</p>
+<p>전문금융소비자는 전문성·자산 규모 등으로 위험을 감수할 능력이 있다고 법이 정한 한국은행·금융회사 등이다. 일반금융소비자는 그 밖의 금융소비자다. <strong>개인＝언제나 일반, 법인＝언제나 전문</strong>이라는 단순 공식은 쓰지 않는다. 구체적인 법정 유형과 전환 요건을 확인한다.</p>
+<p><strong>사례:</strong> 같은 파생상품을 사더라도 전문 금융회사의 운용부서와 은퇴자의 이해·협상 능력은 다르다. <strong>시험·한 줄:</strong> 형성 058의 ‘일반은행은 일반금융소비자’가 틀리다. ‘일반은행’이라는 은행 종류의 이름을 소비자 분류와 섞었다.</p>
+<h2 id="consumer-12-03" data-concept-id="consumer-12-03">1-3. 네 상품 유형과 비교공시 ★★★☆☆</h2>
+<p><strong>교재 498–501쪽 / 문단의 목적:</strong> 금융상품을 경제적 기능에 따라 묶는다. 둘 이상 성질이 있으면 해당 규율을 함께 따질 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>무엇을 주고받나</th>
+<th>교재의 예와 구별</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>예금성</td>
+<td>돈을 맡기고 약정에 따라 돌려받음</td>
+<td>은행·저축은행·신협·농협·수협·산림조합·새마을금고 등의 예금·적금. 법정 분류의 예외인 입주자저축 등은 따로 확인</td>
+</tr>
+<tr>
+<td>대출성</td>
+<td>먼저 돈·신용을 제공받고 갚음</td>
+<td>은행 대출, 신용카드 신용공여, 할부금융·시설대여, 대부, 온라인연계대출, 어음할인·상환청구권 있는 매출채권 매입·지급보증 등</td>
+</tr>
+<tr>
+<td>투자성</td>
+<td>수익을 기대하며 손실 위험을 부담</td>
+<td>증권·파생상품·펀드, 신탁·투자일임 등. 예금처럼 무조건 원금 보장으로 읽지 않음</td>
+</tr>
+<tr>
+<td>보장성</td>
+<td>보험료 등을 내고 위험 발생 시 급부</td>
+<td>보험·공제 등. 저축·투자 기능과 결합된 상품도 구조별 판단</td>
+</tr>
+</tbody></table>
+<p>금융위원회는 소비자 보호와 건전한 거래질서를 위해 비교공시를 할 수 있다. 예금·적금·대출·펀드·보험·연금저축·퇴직연금 등을 비교할 때 <strong>금리·수익률뿐 아니라 수수료, 중도해지·상환 조건, 위험, 판매회사와 연락처, 공시 기준일</strong>을 함께 본다. 작년 최고 수익률이 내년 보장 수익률은 아니다.</p>
+<p><strong>한 줄:</strong> <mark class="green">이름이 비슷해도 ‘맡김·빌림·투자·보장’의 역할부터 나누면 판매 규칙을 찾기 쉽다.</mark></p>
+<h1>2. 판매할 때 지켜야 할 여섯 가지 원칙</h1>
+<h2 id="consumer-12-04" data-concept-id="consumer-12-04">2-1. 적합성: 맞지 않는 상품을 권하지 말 것 ★★★★★</h2>
+<p><strong>교재 501–502쪽 / 조문의 목적:</strong> 회사가 먼저 권할 때 소비자에게 과도한 위험을 떠넘기지 못하게 한다. 일반·전문 여부를 확인하고, 법정 대상 상품에 대해 연령·재산·소득·부채·경험·이해도·거래 목적 등 필요한 정보를 파악하여 서명·기명날인·녹취 등으로 확인하고 확인 내용을 지체 없이 제공한다.</p>
+<p>소비자의 손실 감수 능력이나 상환 능력 등에 비추어 적합하지 않으면 권유해서는 안 된다. 자문에 응하는 경우도 법정 범위를 본다. <strong>서류에 ‘적극 투자형’이라고 찍어 두면 실제 사정을 무시해도 되는 규칙이 아니다.</strong></p>
+<p><strong>사례:</strong> 민수는 다음 달 병원비로 쓸 돈이라고 분명히 말했는데 직원이 전액 손실 가능한 장기상품을 적극 권한다. ‘수익률이 높다’보다 투자 목적·기간·손실 감수 능력을 먼저 보아야 한다. <strong>한 줄:</strong> <mark class="yellow">적합성＝권유하는 상품이 이 고객에게 맞는가.</mark></p>
+<h2 id="consumer-12-05" data-concept-id="consumer-12-05">2-2. KIKO 판례: 환위험을 막으려다 더 큰 위험을 떠안았다 ★★★★☆</h2>
+<p><strong>교재 502쪽 / 대법원 2013.9.26. 2011다53683·53690 전원합의체 / 쟁점 중심 재구성:</strong> 수출회사에는 앞으로 받을 달러가 있다 → 환율 하락에 대비하려 은행과 통화옵션 거래를 한다 → 계약 규모가 실제 유입될 외화보다 크거나 위험 부담이 지나치면 환위험 방어가 아니라 추가 위험이 된다 → 회사는 은행의 권유 책임을 다툰다.</p>
+<p>법원이 살필 것은 회사의 외화 유입 전망·자산·매출·거래 목적·이해도·기존 환헤지 계약이다. 이를 제대로 보지 않고 과대한 위험의 거래를 적극 권유하면 적합성 원칙 위반에 따른 불법행위 책임이 문제 된다. 모든 KIKO 계약이 일괄 무효이거나 모든 손실을 은행이 보장한다는 결론은 아니다.</p>
+<p><strong>판례 문장 번역:</strong> ‘고객의 경영상황 등을 파악’＝무엇을 벌고 어떤 돈이 필요한지 먼저 묻기 → ‘과대한 위험성을 수반’＝방어하려던 손실보다 더 큰 위험을 지우기 → ‘적극적으로 권유’＝전문가인 은행이 부적절한 거래를 밀기 → ‘보호의무’＝고객 사정을 고려할 책임. 은행에 대한 신뢰와 전문성도 중요하다. 반대로 고객 사정을 묻지 않아도 된다면 위험을 모르는 고객에게 손실을 몰아주기 쉬워진다.</p>
+<p><strong>시험·한 줄:</strong> 손실 결과만이 아니라 <strong>권유 시점의 고객 사정·규모·위험</strong>을 대조한다.</p>
+<h2 id="consumer-12-06" data-concept-id="consumer-12-06">2-3. 적정성: 권유 없이 사더라도 위험을 경고할 것 ★★★★★</h2>
+<p><strong>교재 503쪽 / 문단의 목적:</strong> 소비자가 스스로 찾아온 경우에도 법정 대상 상품의 부적절한 위험은 알려 준다. 상품에 따라 재산·연령·이해도 등을 파악하고 적정하지 않다고 판단하면 그 사실을 알린 뒤 서명·기명날인·녹취 등으로 확인받는다. 모든 금융상품에 예외 없이 같은 조사가 붙는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>적합성</th>
+<th>적정성</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>누가 먼저 권했나</td>
+<td>회사가 권유</td>
+<td>권유 없이 고객이 계약하려 함</td>
+</tr>
+<tr>
+<td>부적절하면</td>
+<td>권유 금지</td>
+<td>부적정 사실 고지·확인</td>
+</tr>
+<tr>
+<td>기억 장면</td>
+<td>“이 상품 하세요” 전에 점검</td>
+<td>“그 상품 살래요”에도 경고</td>
+</tr>
+</tbody></table>
+<p><strong>시험·한 줄:</strong> 형성 059의 <strong>‘권유하지 않고’</strong>를 찾으면 적정성이다. <mark class="pink">적정성 경고를 받았다는 사실이 모든 다른 위법 판매를 면책하지는 않는다.</mark></p>
+<h2 id="consumer-12-07" data-concept-id="consumer-12-07">2-4. 설명의무: 서명이 아니라 이해가 목적 ★★★★★</h2>
+<p><strong>교재 504쪽 / 조문의 목적:</strong> 회사만 알고 소비자는 모르는 핵심 위험을 줄인다. 일반금융소비자에게 권유하거나 설명을 요청받으면 중요한 사항을 이해할 수 있게 설명하고 설명서를 제공하며 이해 여부를 법정 방법으로 확인한다. 소비자가 일부만 설명해 달라고 요청한 경우 등의 범위와 동일 내용 갱신 등 법정 예외도 따진다.</p>
+<p>원금손실 가능성·위험 정도·수익 구조·수수료·중도해지 조건 등 핵심을 거짓·왜곡하거나 빠뜨려서는 안 된다. 소비자에게 불리한 내용이라고 감출 수 없다. 자문이라면 자문 범위·비용 등도 중요하다.</p>
+<p><strong>교재 515쪽 사례와 연결:</strong> 영희가 펀드 손실 후 “위험 설명을 듣지 못했다”고 다툰다. 회사는 서명만 보여 주기보다 실제 설명 자료·녹취·확인 과정을 제시해야 한다. 다만 법 제44조 제2항이 옮기는 것은 <strong>고의·과실 없음의 입증 부담</strong>이다. 모든 위반 사실·손해·인과관계가 아무 증명 없이 자동 인정된다는 뜻은 아니다. <strong>한 줄:</strong> <mark class="green">설명은 서류를 끝내는 절차가 아니라, 고객이 위험을 알고 결정하게 하는 절차다.</mark></p>
+<h2 id="consumer-12-08" data-concept-id="consumer-12-08">2-5. 불공정영업·부당권유·광고 규제 ★★★★☆</h2>
+<p><strong>교재 505–507쪽 / 문단의 목적:</strong> 우월한 지위·말솜씨·광고를 악용한 선택 강요를 막는다.</p>
+<table>
+<thead>
+<tr>
+<th>원칙</th>
+<th>교재의 금지 장면</th>
+<th>주의할 조건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>불공정영업 금지</td>
+<td>대출하려면 다른 상품도 가입, 과도한 담보·보증, 부당한 금품 요구, 특정 상환 방식 강요</td>
+<td>정상적인 법정 담보와 모든 부수 거래가 무조건 금지되는 것은 아님</td>
+</tr>
+<tr>
+<td>중도상환수수료 제한</td>
+<td>조기상환에 부당 비용 부과</td>
+<td>법정 예외인 계약 후 3년 이내 상환 등 적용 범위·허용 비용 기준 확인</td>
+</tr>
+<tr>
+<td>연계 혜택 부당 변경 금지</td>
+<td>약속한 부가서비스를 알리지 않고 부당하게 축소</td>
+<td>불가피한 사유·동등 보상, 파산 등 법정 사정. 3년 경과와 수익성 저하 조건도 무제한 변경권 아님</td>
+</tr>
+<tr>
+<td>부당권유 금지</td>
+<td>확실한 수익처럼 단정, 허위·은폐, 근거 없는 비교, 보험 병력 숨기기 유도</td>
+<td>소비자의 거짓 기재를 판매자가 유도해도 안 됨</td>
+</tr>
+<tr>
+<td>접촉·반복 권유 제한</td>
+<td>법정 대상 투자상품을 원치 않는 방문·전화로 권유, 거절 뒤 계속 권유</td>
+<td>상품별 법정 적용·예외를 함께 확인</td>
+</tr>
+<tr>
+<td>기타 부당권유</td>
+<td>미자격자의 판매, 투자성향 조작, 원치 않는 대출정보로 투자 유도, 합리적 판단 방해</td>
+<td>형식상 동의만 받아 위법을 덮을 수 없음</td>
+</tr>
+<tr>
+<td>광고 규제</td>
+<td>보장되지 않은 수익을 보장처럼 표시</td>
+<td>명확·공정하게 전달하고 중요 위험을 오인시키지 말 것</td>
+</tr>
+</tbody></table>
+<p>부당권유의 구체적인 유형과 예외는 <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1031469225">현행 금융소비자보호법 제21조</a>와 상품별 하위규정을 같이 본다. <strong>시험·한 줄:</strong> 여섯 원칙은 적합성·적정성·설명의무·불공정영업 금지·부당권유 금지·광고 규제다.</p>
+<h1>3. 계약 뒤 소비자가 쓸 수 있는 네 가지 권리</h1>
+<h2 id="consumer-12-09" data-concept-id="consumer-12-09">3-1. 청약철회: 짧은 숙려기간 안에 돌아서기 ★★★★★</h2>
+<p><strong>교재 507–510쪽 / 조문의 목적:</strong> 일반금융소비자가 법정 대상 상품을 계약한 뒤 생각을 정리할 시간을 준다. 위법 판매를 먼저 증명해야만 행사하는 권리는 아니다. 예금성 상품까지 전부 포함하지 않고, 투자성도 모든 주식·펀드에 일률적으로 적용되는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>법정 대상</th>
+<th>기본 행사기간</th>
+<th>기산점·추가 조건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>보장성</td>
+<td>보험증권 수령 15일과 청약 30일 중 먼저 오는 때</td>
+<td>상품·계약의 법정 제외 및 더 유리한 약정 등 확인</td>
+</tr>
+<tr>
+<td>투자성</td>
+<td>7일</td>
+<td>계약서류 받은 날, 교부 의무가 없으면 계약일 등 법정 기준</td>
+</tr>
+<tr>
+<td>대출성</td>
+<td>14일</td>
+<td>계약서류 수령일 등. 금전 등의 지급이 더 늦으면 그 지급일을 기준으로 판단</td>
+</tr>
+<tr>
+<td>금융자문</td>
+<td>7일</td>
+<td>계약서류 수령일, 교부 의무가 없으면 계약일 등</td>
+</tr>
+</tbody></table>
+<p>서면·전자우편·문자 등 법정 방식으로 철회 의사를 표시한다. <strong>대출성은 의사표시만 하지 말고 원금, 실제 이용기간 이자, 법정 제3자 비용 등 반환 조건까지 갖춰야 한다.</strong> 아무 비용 없이 이미 쓴 대출금을 계속 보유하는 권리는 아니다.</p>
+<p>판매자는 보장·투자·자문은 철회 접수, 대출은 반환받은 날 등 법정 기산점부터 <strong>3영업일</strong> 안에 반환할 금액을 반환하고 지연 시 정해진 지연이자를 부담한다. 적법한 철회에 손해배상·위약금을 청구할 수 없다. 보장성에서 이미 보험사고가 발생했다면 소비자가 그 발생을 알면서 철회한 경우 등을 제외하고 철회 효력을 인정하지 않는 보호 규정도 있다. 사고를 몰랐던 소비자가 보호를 스스로 잃는 상황을 막는 취지다.</p>
+<p><strong>한 줄:</strong> <mark class="yellow">철회는 ‘기간·대상·방식·반환 조건’을 한 묶음으로 확인한다.</mark></p>
+<h2 id="consumer-12-10" data-concept-id="consumer-12-10">3-2. 위법계약 해지: 잘못 팔린 계속거래에서 나오기 ★★★★★</h2>
+<p><strong>교재 510–512쪽 / 조문의 목적:</strong> 판매원칙을 어겨 체결한 계속적 거래에서 해지 비용 없이 벗어나게 한다. 적합성·적정성·설명의무·불공정영업·부당권유의 다섯 위반이 법정 근거다. <strong>광고 규제 위반만을 제47조의 독립 사유처럼 추가하지 않는다.</strong> 다른 법적 구제는 별도다.</p>
+<p>계속적 거래이고 해지 시 재산상 불이익이 있는 법정 대상 계약이어야 한다. 온라인투자연계금융 계약, 원화 양도성예금증서, 표지어음 등 법정 제외를 확인한다. <strong>위반을 안 날부터 1년</strong>, 동시에 <strong>계약일부터 5년 이내</strong>다. ‘3년’은 형성 060의 함정이다.</p>
+<p>상품명·위반 사실을 적은 요구서와 증명 자료를 직접 판매업자·자문업자에게 낸다. 자동차 의무 책임보험은 다른 동종 책임보험 가입 요건도 갖춰야 한다. 회사는 <strong>10일 이내 수락 여부와 거절 이유</strong>를 통지한다. 정당한 이유 없이 거부하면 소비자가 해지할 수 있다.</p>
+<p><strong>회사의 정당한 거절 사유:</strong> 근거 미제시·허위, 계약 후 사정변경을 계약 당시 위반으로 주장, 소비자 동의를 얻은 시정, 기한 안에 위반 없음을 뒷받침하는 객관적·합리적 자료 제시, 계약 전 위반을 이미 알았다고 볼 명백한 사유 등이다. 연락 불능 사유 해소 뒤 지체 없는 통지 또는 소비자 동의를 얻은 자료 확인 기한 연장은 정해진 조건을 갖춰야 한다.</p>
+<p><strong>효력:</strong> 해지는 장래를 향해 계약관계를 끝낸다. 해지 수수료·위약금은 요구할 수 없지만, 그때까지 적법하게 제공된 서비스의 대출이자·카드연회비·펀드 비용 등이 전부 소급하여 돌아오는 것은 아니다. 교재의 ‘이후부터 무효’는 <strong>장래적 종료</strong>로 이해한다. 무효·취소·원상회복과 같은 말이 아니다.</p>
+<p><strong>한 줄:</strong> <mark class="pink">위법계약 해지＝1년·5년·10일·장래 종료. 철회와 달리 위반 근거가 필요하다.</mark></p>
+<h2 id="consumer-12-11" data-concept-id="consumer-12-11">3-3. 자료 열람: 증거가 회사에 있을 때 ★★★★☆</h2>
+<p><strong>교재 513–514쪽 / 조문의 목적:</strong> 분쟁조정·소송 등 권리구제에 필요한 증거를 소비자도 확보하게 한다. 계약 체결·이행, 광고, 열람 연기·거절·철회·해지 등 권리행사, 내부통제 운영, 업무위탁 및 이에 준하는 자료를 대상으로 한다. 사본 제공·녹취 청취도 포함한다.</p>
+<p>열람의 <strong>목적, 범위와 목적 사이의 관련성, 방법</strong>을 적어 요구한다. 원칙은 <strong>요구받은 날부터 6영업일 이내</strong>다. 교재 513쪽의 ‘6일’은 영업일을 빠뜨렸고 514쪽의 ‘8일’은 옛 기간이 남아 있어 함께 바로잡는다. 정당한 사유가 있으면 이유를 알려 연기하되 사유 소멸 후 지체 없이 제공한다. 실비 수수료·우송료가 가능하다. <a href="https://www.law.go.kr/lsLinkProc.do?joNo=002600&lsNm=%EA%B8%88%EC%9C%B5%EC%86%8C%EB%B9%84%EC%9E%90+%EB%B3%B4%ED%98%B8%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0+%EC%8B%9C%ED%96%89%EB%A0%B9&mode=11&print=print">현행 시행령 제26조</a></p>
+<p>법령상 제한, 다른 사람의 생명·신체·재산·이익 침해 위험, 영업비밀의 현저한 침해, 사생활의 부당 침해, 목적과 무관함이 명백한 자료 등은 이유를 알리고 제한·거절할 수 있다. 단순히 ‘회사 내부 자료’라는 말만으로 전부 거절할 수는 없다. <strong>한 줄:</strong> <mark class="blue">11장 개인정보 열람권과 목적·범위·기간이 다른 금융 분쟁 증거 확보권이다.</mark></p>
+<h2 id="consumer-12-12" data-concept-id="consumer-12-12">3-4. 손해배상과 판매 대리·중개의 책임 ★★★★☆</h2>
+<p><strong>교재 514–515쪽 / 조문의 목적:</strong> 판매원칙 위반의 손해를 회사가 책임지게 한다. 원칙적으로 고의·과실로 법을 위반하여 소비자에게 손해를 발생시키면 배상책임을 진다. 설명의무 위반은 회사가 <strong>고의·과실 없음을 입증하지 못하면 면책되지 않는</strong> 특칙이다. 손해·인과관계 등 나머지 요건과 구별한다.</p>
+<p>직접 판매업자는 법정 판매대리·중개업자나 관련 임직원이 업무 중 낸 손해에 책임을 질 수 있다. 보험업법의 보험중개사는 해당 조문의 제외 범주다. <strong>선임·감독에 적절한 주의를 다하고 손해 방지에 노력한 경우</strong>의 면책도 있다. 판매를 외부에 맡겼다고 책임이 자동 사라지는 것은 아니다.</p>
+<p><strong>교재 사례:</strong> 펀드 가입자 영희에게 담당자가 손실 위험을 설명하지 않았다 → 손실이 발생했다 → 법원은 실제 위반·손해의 연결과 회사의 무과실 입증 등을 본다. ‘투자는 자기 책임’이라는 한 문장으로 불완전판매 책임을 지우지도, 손실 전부를 자동 보상하지도 않는다. <strong>한 줄:</strong> 법 위반과 손실의 연결을 설명하고 입증 특칙을 정확히 적용한다.</p>
+<h1>4. 금융분쟁조정과 재판의 연결</h1>
+<h2 id="consumer-12-13" data-concept-id="consumer-12-13">4-1. 금융감독원 조정의 30일·60일·20일 ★★★★★</h2>
+<p><strong>교재 516–518쪽 / 문단의 목적:</strong> 전문적인 금융분쟁을 재판 전에 풀 수 있도록 한다. 금융감독원에 금융분쟁조정위원회를 두며 금융회사·소비자·이해관계인이 신청할 수 있다. 인터넷·방문·우편 등의 신청 방식, 공동 신청이면 <strong>3명 이내 대표자</strong>를 활용한다.</p>
+<p>신청 → 관계자 통지·합의 권고 → 신청일부터 <strong>30일</strong> 내 합의 불성립 시 위원회 회부 → 회부 후 <strong>60일</strong> 내 조정안 작성 → 제시받은 날부터 <strong>20일</strong> 내 수락 여부가 기본 흐름이다. 금융감독원장은 의견·자료 제출을 요구할 수 있고, 성립하면 참가위원과 당사자가 서명·날인한 조서를 작성한다.</p>
+<p>조정 부적합, 법령·객관 자료상 절차 실익 없음, 회부 전 소 제기, 보완 요구 2회 이상 불응, 직접 이해관계 없음 등에는 합의 권고·회부를 하지 않을 수 있다. 그 사실과 이유는 서면으로 알린다.</p>
+<p><strong>양쪽이 수락하면 재판상 화해와 같은 효력. 20일 안에 수락하지 않으면 불수락이다.</strong> <mark class="pink">11장 개인정보조정의 ‘15일 침묵＝수락’을 이 절차에 옮기지 않는다.</mark></p>
+<h2 id="consumer-12-14" data-concept-id="consumer-12-14">4-2. 시효·소송·2천만 원 이하 소액분쟁 ★★★★☆</h2>
+<p><strong>교재 518–519쪽 / 조문의 목적:</strong> 조정하느라 권리가 소멸하거나 회사가 먼저 소송을 내서 조정을 무력화하는 일을 줄인다. 조정 신청에는 시효중단 효력이 있다. 합의 권고·회부를 하지 않는 경우 등 법정 예외에는 중단되지 않지만, 그 경우 <strong>1개월 내 재판상 청구·파산절차 참가·압류·가압류·가처분</strong> 등 법정 조치를 하면 최초 신청 시 중단된 것으로 본다. 수락 또는 절차 종료 등 법정 시점부터 새로 진행한다.</p>
+<p>같은 사건에 소송이 진행되면 법원이 소송절차를 중지할 수 있다. 법원이 멈추지 않으면 위원회는 해당 조정절차를 중지해야 한다. 같은 원인의 동종·유사 사건 소송은 위원회 결정으로 중지할 수 있다. 소 제기·중지 등의 사실은 정해진 주체가 지체 없이 통지한다.</p>
+<p><strong>일반금융소비자가 신청하고 주장하는 권리·이익 가액이 2천만 원 이하</strong>인 소액분쟁은 조정안 제시 전까지 회사의 소 제기를 제한한다. 회부하지 않는다는 서면 통지나 법정 60일 안에 조정안 미제시 등의 예외가 있다. 소비자의 제소까지 일괄 금지하는 규정은 아니다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1033001109">현행 제42조</a></p>
+<p><strong>한 줄:</strong> <mark class="green">작은 피해를 입은 소비자가 조정 대신 비싼 소송으로 끌려가지 않게 보호한다.</mark></p>
+<h2 id="consumer-12-15" data-concept-id="consumer-12-15">4-3. 법원 민사조정과 민사소송 ★★★☆☆</h2>
+<p><strong>교재 519–521쪽 / 문단의 목적:</strong> 기관 조정으로 끝나지 않을 때 법원의 절차를 보여 준다. 민사조정은 서면 또는 법원 담당 직원 앞의 구술로 신청할 수 있다. 기일을 통지하고 합의 내용을 조서에 적으면 성립하며 재판상 화해의 효력이 생긴다. 불이행 시 집행할 수 있다.</p>
+<p>조정을 하지 않기로 한 결정, 조정 불성립, 조정을 갈음하는 결정에 대한 <strong>정본 송달 후 2주 내 이의</strong> 등은 법정 요건에 따라 조정 신청 때 소가 제기된 것으로 보아 소송으로 이어진다. 합의가 된 조정과 재판부가 내린 갈음결정의 이의제기를 섞지 않는다.</p>
+<p>민사소송은 소장 제출 → 피고에게 부본 송달 → 다투는 피고의 <strong>30일 내 답변서</strong> → 주장·증거 정리와 변론준비 → 변론 → 판결이다. 답변이 없거나 자백 취지이면 법정 예외를 전제로 무변론 판결이 가능하다. 패소자는 법정 기간 내 불복할 수 있고 불복 없이 확정되면 효력이 고정된다. <strong>한 줄:</strong> 조정·소송은 모두 해결 절차지만 성립 방식과 불복 방법이 다르다.</p>
+<h1>5. 대부업의 등록·이자·초과 지급</h1>
+<h2 id="consumer-12-16" data-concept-id="consumer-12-16">5-1. 대부업과 중개업, 등록 여부의 의미 ★★★★★</h2>
+<p><strong>교재 521–522쪽 / 문단의 목적:</strong> 영업으로 돈을 빌려주는 사람을 등록·감독 범위에 넣는다. 대부업은 이익을 얻을 목적으로 계속적·반복적으로 금전을 빌려주거나 법정 채권을 양수하여 추심하는 업이다. 어음할인·양도담보 등 유사한 금전 제공도 포함한다. 등록한 자가 대부업자, 등록 없이 사실상 영업하는 자가 현행 <strong>불법사금융업자</strong>다. 한 번의 사인 간 대여와 무등록 영업은 구별한다.</p>
+<p>종업원에 대한 사용자의 대부, 조합원에 대한 노동조합 대부, 국가·지자체 대부, 비영리법인의 정관 목적 범위 대부, 금융기관의 법정 비거주자 등에 대한 외화대부 등 시행령상 제외가 있다. ‘노동조합이 구성원에게 빌려주면 대부업’이라는 2017-63 보기는 틀리다.</p>
+<p>대부중개업은 이익 목적으로 반복·계속하여 대부를 실질적으로 알선·중개하는 업이다. 등록증 대여, 불법사금융업자에게의 중개, 이용자에게 중개수수료 요구, 법이 금지한 미등록 중개를 통한 대부·채권 양수 등은 허용되지 않는다. 상호 사용과 채권 양도도 제한한다. 다만 금융기관 등 <strong>법이 허용한 양수 주체</strong>까지 ‘대부업자 등록 없음’만으로 전부 금지한다고 외우지 않는다.</p>
+<p><strong>기출 보충:</strong> 위탁 중개업자의 위반으로 손해가 생기면 위탁한 대부업자·금융기관의 책임이 문제 되고, 상당한 주의와 손해방지 노력의 면책 요건이 있다. 배상 후 중개업자에 대한 구상도 가능하다. 업무 전 보증금·보험·공제 등 배상 보장 장치도 본다. <strong>한 줄:</strong> 등록은 무제한 영업 면허가 아니라 감독의 출발이다.</p>
+<h2 id="consumer-12-17" data-concept-id="consumer-12-17">5-2. 최고 연 20%와 실제 받은 돈 ★★★★★</h2>
+<p><strong>교재 522–523쪽 / 조문의 목적:</strong> 급한 사람에게 과도한 이자를 물리는 행위를 막는다. 등록대부업자가 개인·법정 소기업 법인에게 대부할 때 최고금리는 <strong>연 20%</strong>다. 월·일 기준도 이를 단리로 환산한다. 옛 시험의 39%·30% 숫자는 출제 당시 규정이지 현재 답이 아니다.</p>
+<p>사례금·할인금·수수료·공제금·연체이자·체당금 등 <strong>이름에 관계없이 대부 대가로 받는 돈</strong>을 합산한다. 담보권 설정비용과 법정 신용조회 비용 같은 제한된 부대비용 제외를 확인한다. ‘서류비’라고 이름만 바꾸어 제외할 수 없다. 체당금은 대신 지급하고 나중에 돌려받는 돈이라는 말이다.</p>
+<p><strong>선이자 예시:</strong> 명목상 100만 원을 빌리지만 10만 원을 먼저 떼고 90만 원만 받았다면, 제한금리 계산의 기준은 <strong>실제 받은 90만 원</strong>이다. 1년 후 100만 원을 갚는 단순 예에서 이자율은 10÷90≈11.11%다. 명목 원금 100으로 나눠 10%라고 낮추지 않는다. 기간이 짧으면 연율로 환산해 따져야 한다.</p>
+<p>연체이자율은 약정 대부금리＋<strong>연 3%포인트</strong> 이내이면서 최고 <strong>연 20%</strong>를 넘을 수 없다. 약정 19%이면 22%가 아니라 최대 20%다. <strong>한 줄:</strong> <mark class="yellow">실수령액·실제 기간·명목 불문 합산으로 제한금리를 계산한다.</mark></p>
+<h2 id="consumer-12-18" data-concept-id="consumer-12-18">5-3. 중도상환수수료 판례와 기한 전 변제 ★★★★★</h2>
+<p><strong>교재 523쪽 / 대법원 2012.3.15. 2010도11258:</strong> 대부업자가 3개월 대출을 하면서 1개월 선이자를 뗀다 → 차주는 5일 뒤 돈을 갚는다 → 업자는 남은 선이자를 ‘중도상환수수료’라고 하며 돌려주지 않는다 → 실제 5일의 제한금리를 넘었는지가 다투어진다.</p>
+<p>대법원은 <strong>실제 대부기간</strong>을 기준으로 계산하고 중도상환수수료도 대부의 대가라면 간주이자에 포함한다고 보아, 수수료라는 명칭으로 제한을 피한 원심 판단을 파기환송했다. <a href="https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=3656">대법원 판결 요지</a></p>
+<p><strong>문장 번역:</strong> ‘명목이나 명칭에도 불구하고’＝이름표를 떼고 실제 돈의 성격을 보라 → ‘일체의 금원’＝법정 제외 비용 외의 대가를 합하라 → ‘실제 대부기간’＝약속했던 3개월이 아니라 실제 사용한 5일을 보라. 반대로 판단하면 모든 초과이자에 수수료라는 이름만 붙이면 된다.</p>
+<p><strong>기출 연결:</strong> 차주는 기한 전에도 전부·일부 상환할 수 있다. 적법한 약정·법률에 따른 비용 문제와 상환 자체의 금지는 다르다. 미리 정한 수수료라도 최고금리·약관·금융소비자보호 규율을 넘을 수 없다. 2016-68·2018-64의 ‘상환 불가’와 ‘어떤 약정에도 비용 없음’ 양극단을 함께 피한다.</p>
+<h2 id="consumer-12-19" data-concept-id="consumer-12-19">5-4. 초과이자만 무효인가, 이자 전부·원금도 무효인가 ★★★★★</h2>
+<p><strong>교재 523–524쪽 / 문단의 목적:</strong> 금리를 위반했을 때 어느 부분이 살아남는지 나눈다. 교재의 초과 부분 무효 원칙에 더해 2025.7.22. 시행 개정을 함께 보아야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>거래 유형</th>
+<th>현재 판단의 출발점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>등록업자의 통상적 제한금리 위반</td>
+<td>최고금리 초과 이자 부분 무효. 원금까지 항상 무효인 것은 아님</td>
+</tr>
+<tr>
+<td>불법사금융업자의 법정 적용 대부</td>
+<td>이자 약정 전부 무효. 단순히 20%까지만 인정하는 옛 사고방식 금지</td>
+</tr>
+<tr>
+<td>법정 반사회적 대부계약</td>
+<td>성착취·인신매매·신체상해, 폭행·협박 등 법정 사정 또는 연 60% 초과 초고금리 등 요건이면 원금·이자 모두 무효</td>
+</tr>
+<tr>
+<td>2013–2018년 기출</td>
+<td>그 당시 정답을 보존하고 현행 차이를 따로 학습</td>
+</tr>
+</tbody></table>
+<p>개정의 계약 적용 시점·갱신 등 경과규정을 확인해야 한다. 기존의 모든 거래가 언제 체결됐든 자동으로 새 규정과 동일해지는 것은 아니다. 연 60% <strong>초과</strong> 기준을 60% 이상으로 바꾸지 않는다. 반사회성의 다른 법정 요건이나 민법상 판단은 별도다. <a href="https://fsc.go.kr/po010101/84930?curPage=1&srchBeginDt=&srchCtgry=1&srchEndDt=&srchKey=&srchText=">금융위원회 2025.7.22. 시행 안내</a></p>
+<p><strong>초과 지급의 순서:</strong> 안 냈으면 무효 부분을 낼 의무가 없다. 이미 냈으면 <strong>먼저 원본에 충당하고 남은 금액 반환</strong>을 구한다. 최고금리를 알고 서명했다는 이유로 강행규정 보호가 사라지지 않는다. 이는 유효한 채무를 일부 갚을 때의 일반 원칙 <strong>비용 → 이자 → 원금</strong>과 다른 특칙이다.</p>
+<p><strong>한 줄:</strong> <mark class="pink">‘대출은 언제나 원금만 유효’도, ‘고금리면 언제나 전부 무효’도 틀리다. 거래 시점·등록·위반 유형을 나눈다.</mark></p>
+<h2 id="consumer-12-20" data-concept-id="consumer-12-20">5-5. 채무를 다투는 세 가지 소송 ★★★★☆</h2>
+<p><strong>교재 524–525쪽 / 문단의 목적:</strong> 지금 돈을 요구받는지, 이미 냈는지, 집행하려는지에 맞춰 구제를 선택한다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>구제</th>
+<th>쉬운 말</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무효인 이자를 아직 요구받음</td>
+<td>채무부존재확인</td>
+<td>“그 부분은 갚을 빚이 없다는 것을 확인해 주세요.”</td>
+</tr>
+<tr>
+<td>무효인 초과분을 이미 지급</td>
+<td>부당이득반환</td>
+<td>“법적 근거 없이 가져간 돈을 돌려주세요.” 원본 충당 후 잔액 관계도 계산</td>
+</tr>
+<tr>
+<td>집행권원에 기한 강제집행을 다툼</td>
+<td>청구이의의 소</td>
+<td>“그 권원으로 지금 강제집행할 수 있는 채무가 아닙니다.”</td>
+</tr>
+</tbody></table>
+<p>판결에 대한 청구이의는 원칙적으로 변론종결 뒤 생긴 사유 등 제한을 본다. 모든 과거 주장을 판결 확정 후 다시 꺼낼 수 있는 절차가 아니다. 소송을 냈다고 집행이 자동 멈추는 것도 아니므로 집행정지 등 별도 요건을 구별한다. <strong>한 줄:</strong> <mark class="blue">민법의 무효·부당이득과 민사집행법의 절차가 소비자 피해구제에서 만난다.</mark></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>金融 금융</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 金(쇠 금) 融(녹을 융). <strong>③ 합친 뜻:</strong> 돈이 돌며 융통됨. <strong>④ 이름의 이유:</strong> 필요한 곳으로 돈이 움직이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자금의 조달·운용·중개. <strong>⑥ 쉬운 말:</strong> 돈을 맡기고 빌리고 투자하는 활동. <strong>⑦ 사례:</strong> 은행 예금과 대출.</p>
+<p><strong>⑧ 시험:</strong> 네 상품 기능 구별. <strong>⑨ 비교·기억법:</strong> 투자와 예금은 위험이 다름.</p>
+<h3>專門金融消費者 전문금융소비자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 專(오로지 전) 門(문 문) 金(쇠 금) 融(녹을 융) 消(사라질 소) 費(쓸 비) 者(사람 자). <strong>③ 합친 뜻:</strong> 전문성 있는 금융 거래 상대. <strong>④ 이름의 이유:</strong> 보호 필요성의 차이를 반영.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 전문성·자산 등으로 위험능력이 인정되는 소비자. <strong>⑥ 쉬운 말:</strong> 금융을 잘 아는 법정 큰손 유형. <strong>⑦ 사례:</strong> 한국은행·금융회사.</p>
+<p><strong>⑧ 시험:</strong> 일반은행이라는 명칭 함정. <strong>⑨ 비교·기억법:</strong> 일반금융소비자는 나머지 법정 범주.</p>
+<h3>派生 파생</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 派(갈래 파) 生(날 생). <strong>③ 합친 뜻:</strong> 다른 것에서 갈라져 나옴. <strong>④ 이름의 이유:</strong> 독립된 값이 아니라 다른 값에서 나오기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기초자산 가격 등에 가치가 연결됨. <strong>⑥ 쉬운 말:</strong> 환율이 움직이면 내 상품 값도 변함. <strong>⑦ 사례:</strong> 통화옵션.</p>
+<p><strong>⑧ 시험:</strong> 구조·손실 위험 설명. <strong>⑨ 비교·기억법:</strong> 판매 장소와 상품 구조는 별개.</p>
+<h3>還買 환매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 還(돌아올 환) 買(살 매). <strong>③ 합친 뜻:</strong> 다시 사들임. <strong>④ 이름의 이유:</strong> 투자자가 자금을 회수하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 펀드 지분 등을 돌려주고 금전을 받는 과정. <strong>⑥ 쉬운 말:</strong> 펀드에서 돈을 빼는 절차. <strong>⑦ 사례:</strong> 환매 중단으로 생활비 회수 불가.</p>
+<p><strong>⑧ 시험:</strong> 유동성과 손실 구별. <strong>⑨ 비교·기억법:</strong> 원금 전액 보장의 뜻 아님.</p>
+<h3>適合性 적합성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 適(맞을 적) 合(합할 합) 性(성품 성). <strong>③ 합친 뜻:</strong> 고객에게 맞는 성질. <strong>④ 이름의 이유:</strong> 전문가의 권유 책임을 묻기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권유 상품이 고객 사정에 적합한지 판단. <strong>⑥ 쉬운 말:</strong> 내 형편에 맞는 것을 권해야 함. <strong>⑦ 사례:</strong> 생활비로 고위험 투자 권유.</p>
+<p><strong>⑧ 시험:</strong> 권유 있음. <strong>⑨ 비교·기억법:</strong> 적정성은 권유 없는 법정 거래의 경고.</p>
+<h3>適正性 적정성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 適(맞을 적) 正(바를 정) 性(성품 성). <strong>③ 합친 뜻:</strong> 거래가 알맞은지의 성질. <strong>④ 이름의 이유:</strong> 자발적 구매자도 위험을 알아야 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권유 없는 법정 대상 계약에서 부적정 고지·확인. <strong>⑥ 쉬운 말:</strong> 스스로 사러 와도 위험하면 알려줌. <strong>⑦ 사례:</strong> 고위험상품 부적정 경고.</p>
+<p><strong>⑧ 시험:</strong> 권유하지 않고라는 문구. <strong>⑨ 비교·기억법:</strong> 적합성의 권유 금지와 구별.</p>
+<h3>說明義務 설명의무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 說(말씀 설) 明(밝을 명) 義(옳을 의) 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 중요 내용을 밝혀 줄 의무. <strong>④ 이름의 이유:</strong> 정보 격차를 줄임.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 고객이 이해하도록 핵심 위험·조건을 설명. <strong>⑥ 쉬운 말:</strong> 어떤 때 얼마를 잃는지 알려주기. <strong>⑦ 사례:</strong> 펀드 손실 위험 설명.</p>
+<p><strong>⑧ 시험:</strong> 서명만으로 충족 아님. <strong>⑨ 비교·기억법:</strong> 상품 광고와 개별 설명 구별.</p>
+<h3>撤回 철회</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 撤(거둘 철) 回(돌 회). <strong>③ 합친 뜻:</strong> 한 의사표시를 거둠. <strong>④ 이름의 이유:</strong> 충동적 결정을 다시 생각할 기회.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 숙려기간의 계약 철회. <strong>⑥ 쉬운 말:</strong> 잠깐 생각해 보니 안 하겠어요. <strong>⑦ 사례:</strong> 대출 14일 내 법정 반환.</p>
+<p><strong>⑧ 시험:</strong> 대상·기간·방법·반환 조건. <strong>⑨ 비교·기억법:</strong> 위법해지는 위반 근거 필요.</p>
+<h3>違法契約解止 위법계약 해지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어길 위) 法(법 법) 契(맺을 계) 約(맺을 약) 解(풀 해) 止(그칠 지). <strong>③ 합친 뜻:</strong> 법을 어긴 계약을 끝냄. <strong>④ 이름의 이유:</strong> 잘못된 판매의 계약 구속에서 벗어나기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 판매원칙 위반의 계속거래를 장래 종료. <strong>⑥ 쉬운 말:</strong> 잘못 팔았으니 이제 나가겠어요. <strong>⑦ 사례:</strong> 설명의무 위반 해지 요구.</p>
+<p><strong>⑧ 시험:</strong> 1년·5년·10일. <strong>⑨ 비교·기억법:</strong> 취소·무효와 소급 효과가 다름.</p>
+<h3>閱覽 열람</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 閱(볼 열) 覽(볼 람). <strong>③ 합친 뜻:</strong> 살펴봄. <strong>④ 이름의 이유:</strong> 회사에 있는 증거 접근.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리구제에 필요한 기록·사본·녹취 확인. <strong>⑥ 쉬운 말:</strong> 녹음된 설명 내용을 들어 보기. <strong>⑦ 사례:</strong> 분쟁 관련 계약 자료 요구.</p>
+<p><strong>⑧ 시험:</strong> 6영업일·목적 관련성. <strong>⑨ 비교·기억법:</strong> 모든 영업자료 무제한 공개 아님.</p>
+<h3>時效中斷 시효중단</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 時(때 시) 效(본받을 효) 中(가운데 중) 斷(끊을 단). <strong>③ 합친 뜻:</strong> 흐르던 시효를 끊음. <strong>④ 이름의 이유:</strong> 권리 행사 중 기간 상실 방지.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 사유로 진행한 기간의 효력을 끊음. <strong>⑥ 쉬운 말:</strong> 시간을 새로 세게 하는 법적 효과. <strong>⑦ 사례:</strong> 금융분쟁조정 신청.</p>
+<p><strong>⑧ 시험:</strong> 예외와 1개월 보완 조치. <strong>⑨ 비교·기억법:</strong> 소송 절차의 중지와 다름.</p>
+<h3>貸付 대부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 貸(빌릴 대) 付(줄 부). <strong>③ 합친 뜻:</strong> 돈을 빌려줌. <strong>④ 이름의 이유:</strong> 빌리는 쪽에서 보이는 대출의 반대편.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 금전 등을 제공하고 반환받는 거래. <strong>⑥ 쉬운 말:</strong> 급한 돈을 빌려주고 받기. <strong>⑦ 사례:</strong> 등록 대부업체 계약.</p>
+<p><strong>⑧ 시험:</strong> 영업성과 등록 구별. <strong>⑨ 비교·기억법:</strong> 일회 대여가 모두 대부업은 아님.</p>
+<h3>斡旋 알선</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 斡(돌 알) 旋(돌 선). <strong>③ 합친 뜻:</strong> 사이를 돌아 주선. <strong>④ 이름의 이유:</strong> 당사자 사이를 이어 줌.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 거래가 이루어지도록 연결. <strong>⑥ 쉬운 말:</strong> 빌릴 사람과 빌려줄 사람 연결. <strong>⑦ 사례:</strong> 대부중개.</p>
+<p><strong>⑧ 시험:</strong> 이용자 수수료 금지. <strong>⑨ 비교·기억법:</strong> 직접 돈을 빌려주는 업과 다름.</p>
+<h3>先利子 선이자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선) 利(이로울 리) 子(아들 자). <strong>③ 합친 뜻:</strong> 먼저 떼는 이자. <strong>④ 이름의 이유:</strong> 나중 대가를 앞당겨 받기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대출 실행 때 미리 공제한 이자. <strong>⑥ 쉬운 말:</strong> 100만 원 계약인데 90만 원만 줌. <strong>⑦ 사례:</strong> 10만 원 사전 공제.</p>
+<p><strong>⑧ 시험:</strong> 실수령액 기준. <strong>⑨ 비교·기억법:</strong> 명목 원금 기준과 다름.</p>
+<h3>元本 원본</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 元(으뜸 원) 本(근본 본). <strong>③ 합친 뜻:</strong> 이익의 기초인 돈. <strong>④ 이름의 이유:</strong> 이자와 나누기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이자가 발생하는 기본 자금. <strong>⑥ 쉬운 말:</strong> 처음 빌린 기본 돈. <strong>⑦ 사례:</strong> 초과이자를 남은 원금에 충당.</p>
+<p><strong>⑧ 시험:</strong> 실제 받은 금액과 약정액 구별. <strong>⑨ 비교·기억법:</strong> 이자·수수료와 별개.</p>
+<h3>充當 충당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 充(채울 충) 當(마땅 당). <strong>③ 합친 뜻:</strong> 갚을 부분에 채워 넣음. <strong>④ 이름의 이유:</strong> 조금 갚으면 모두 없어지지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 지급한 돈을 어떤 채무부터 소멸시킬지 정함. <strong>⑥ 쉬운 말:</strong> 이 돈으로 무엇부터 갚았는지. <strong>⑦ 사례:</strong> 비용·이자·원금 순서.</p>
+<p><strong>⑧ 시험:</strong> 초과이자 특칙 별도. <strong>⑨ 비교·기억법:</strong> 반환 청구 전 원본 충당.</p>
+<h3>强行規定 강행규정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 强(굳셀 강) 行(행할 행) 規(법 규) 定(정할 정). <strong>③ 합친 뜻:</strong> 반드시 따를 규정. <strong>④ 이름의 이유:</strong> 약자의 궁박을 이용한 합의 방지.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당사자 합의로 배제하지 못하는 법. <strong>⑥ 쉬운 말:</strong> 서명했어도 법보다 넘겨 받을 수 없음. <strong>⑦ 사례:</strong> 최고금리 초과 약정.</p>
+<p><strong>⑧ 시험:</strong> 알고 계약해도 보호. <strong>⑨ 비교·기억법:</strong> 임의규정과 구별.</p>
+<h3>求償 구상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 求(구할 구) 償(갚을 상). <strong>③ 합친 뜻:</strong> 대신 낸 것을 갚으라 구함. <strong>④ 이름의 이유:</strong> 피해자 보호와 내부 부담 조정.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 배상 후 실제 책임자에게 부담 회수. <strong>⑥ 쉬운 말:</strong> 내가 먼저 물었으니 네 몫을 돌려줘. <strong>⑦ 사례:</strong> 대부업자가 중개업자에 구상.</p>
+<p><strong>⑧ 시험:</strong> 배상하면 구상 금지라는 함정. <strong>⑨ 비교·기억법:</strong> 피해자의 최초 배상 청구와 다름.</p>
+<h3>不當利得 부당이득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 부) 當(마땅 당) 利(이로울 리) 得(얻을 득). <strong>③ 합친 뜻:</strong> 정당한 근거 없이 얻은 이익. <strong>④ 이름의 이유:</strong> 근거 없는 재산 이동을 되돌림.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률상 원인 없이 타인 손해로 얻은 이익. <strong>⑥ 쉬운 말:</strong> 받을 이유 없는 돈을 돌려주기. <strong>⑦ 사례:</strong> 무효인 초과이자 반환.</p>
+<p><strong>⑧ 시험:</strong> 원본 충당 뒤 잔액. <strong>⑨ 비교·기억법:</strong> 모든 이익이 위법행위 손해배상인 것은 아님.</p>
+<h3>請求異議 청구이의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청) 求(구할 구) 異(다를 이) 議(의논할 의). <strong>③ 합친 뜻:</strong> 집행 청구에 다른 뜻을 밝힘. <strong>④ 이름의 이유:</strong> 이미 갚은 빚의 집행 등을 막기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 집행권원상 청구의 집행력 배제 소송. <strong>⑥ 쉬운 말:</strong> 그 판결로 지금 또 돈을 걷으면 안 된다. <strong>⑦ 사례:</strong> 판결 뒤 변제로 청구이의.</p>
+<p><strong>⑧ 시험:</strong> 변론종결 뒤 사유 원칙. <strong>⑨ 비교·기억법:</strong> 항소로 판결 자체를 다투는 것과 다름.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>중점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성 059</td>
+<td>권유 있음 적합성 / 권유 없음 적정성</td>
+</tr>
+<tr>
+<td>형성 060</td>
+<td>위법계약 해지 1년·5년. ③·④ 혼입된 보기 주의</td>
+</tr>
+<tr>
+<td>2013-36·37</td>
+<td>당시 금리와 현행, 실수령액 기준</td>
+</tr>
+<tr>
+<td>2015-58·2017-64</td>
+<td>초과 부분 무효와 현행 불법·반사회적 계약 특칙</td>
+</tr>
+<tr>
+<td>2018-64·65</td>
+<td>기한 전 상환, 일반 충당 순서와 초과이자 특칙</td>
+</tr>
+</tbody></table>
+<p>대부업 규제가 제공 기출의 큰 비중을 차지한다. 2021년 시행 금소법의 새로운 권리는 옛 기출이 적다는 이유로 중요도를 낮추지 않는다. 실제 오답률 자료는 없으며, 함정은 ‘대출계약 전부 무효’, ‘수수료는 이자 아님’, ‘기한 전 상환 금지’, ‘미등록도 20%까지 가능’이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 먼저 찾아간 고객.</strong> 지훈이 권유 없이 법정 적정성 대상 상품을 사러 왔고 조사 결과 부적정하다. <strong>정답·출제 의도:</strong> 적정성 고지·확인 절차다. 판매자가 먼저 권했을 때의 적합성 위반과 구별한다.</p>
+<p><strong>응용2 · 4년 된 위법계약.</strong> 계약 4년 뒤 위반을 알았고 8개월 뒤 해지를 요구했다. <strong>정답·출제 의도:</strong> 안 날 1년과 계약 5년을 모두 충족한다. 다른 요건과 증명 자료를 확인하고 회사 10일 응답을 본다.</p>
+<p><strong>응용3 · 주말을 낀 자료 열람.</strong> 회사가 “6일째가 일요일이니 이미 늦었다”고 한다. <strong>정답·출제 의도:</strong> 법정 기준은 6영업일이다. 단순 달력 일수로 계산하지 않는다.</p>
+<p><strong>응용4 · 19% 대출의 연체.</strong> 등록업자가 연체 가산 3%포인트라며 22%를 요구한다. <strong>정답·출제 의도:</strong> 총 연체이율 최고 20% 제한도 함께 적용한다.</p>
+<p><strong>응용5 · 먼저 받은 초과이자.</strong> 유효 원금 잔액 40만 원이 있는데 무효 초과이자를 50만 원 냈다. <strong>정답·출제 의도:</strong> 원금에 40만 원 충당하고 남은 10만 원 반환 관계를 본다. 비용·이자·원금의 일반 순서를 기계적으로 적용하지 않는다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제12장</h1>
+<p><strong>TOP3:</strong> 판매 6원칙 / 철회·위법해지 / 등록·불법대부의 이자 효력.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상품</td>
+<td>예금·대출·투자·보장. 판매 창구가 원금 보장을 뜻하지 않음.</td>
+</tr>
+<tr>
+<td>적합·적정</td>
+<td>권유하면 적합성, 권유 없이 법정 대상 구매하면 적정성 경고·확인.</td>
+</tr>
+<tr>
+<td>6원칙</td>
+<td>적합·적정·설명·불공정영업 금지·부당권유 금지·광고.</td>
+</tr>
+<tr>
+<td>철회</td>
+<td>보장 15일·30일 중 선도래, 투자·자문 7일, 대출 14일. 대상·예외 확인.</td>
+</tr>
+<tr>
+<td>대출철회</td>
+<td>의사표시＋원금·실제기간 이자·법정 비용 반환. 환급은 법정 기산 3영업일.</td>
+</tr>
+<tr>
+<td>위법해지</td>
+<td>5개 판매원칙 위반, 안 날 1년·계약 5년, 회사 10일 응답. 장래 종료.</td>
+</tr>
+<tr>
+<td>자료</td>
+<td>권리구제 목적·범위·방법 특정, 원칙 6영업일. 무제한 내부자료 공개 아님.</td>
+</tr>
+<tr>
+<td>배상</td>
+<td>설명의무 위반에서 회사가 고의·과실 없음을 입증. 손실 전부 자동 보장 아님.</td>
+</tr>
+<tr>
+<td>금융조정</td>
+<td>30일 합의 → 회부 60일 조정안 → 20일 수락. 침묵 불수락.</td>
+</tr>
+<tr>
+<td>소액분쟁</td>
+<td>일반금융소비자·2천만 원 이하, 법정 예외 외 조정안 전 회사 제소 제한.</td>
+</tr>
+<tr>
+<td>등록대부</td>
+<td>개인·소기업 최고 연 20%. 연체 약정＋3%포인트, 총 20% 이내.</td>
+</tr>
+<tr>
+<td>이자 계산</td>
+<td>실수령액·실제 기간. 이름 불문 대가 합산, 법정 비용만 제외.</td>
+</tr>
+<tr>
+<td>무효 구별</td>
+<td>통상 초과 부분 / 불법사금융 이자 전부 / 법정 반사회적 계약 원금·이자.</td>
+</tr>
+<tr>
+<td>충당</td>
+<td>일반 비용→이자→원금 / 무효 초과이자는 원본 충당 후 잔액 반환.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 서명만으로 설명이 완성되지 않는다. 해지는 소급 무효가 아니다. 수수료라는 이름으로 최고금리를 피할 수 없다.</p>
+<p>사례를 풀 순서: 상품·소비자 유형 → 권유 여부·판매 의무 → 철회/위법해지 → 증거·배상·조정 → 대부는 시점·등록·실수령액·기간.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 적합성·적정성과 철회·해지를 설명하고 이자 충당 계산을 한다. 🟡 숫자는 알지만 기산점·영업일·출제 연도를 섞는다. 🔴 투자손실은 전부 은행 책임이거나 고금리 계약은 언제나 전부 무효라고 생각한다. 답안을 아직 받지 않았으므로 자기점검 기준이다.</p>
+<p><strong>복습 TOP3:</strong> 권유 여부에 따른 두 원칙 / 1년·5년·10일과 6영업일 / 초과·불법·반사회적 이자의 효력.</p>
+<h1>문제 부록 · 16문항·64개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_058"><h4>형성평가 · 소비자법_058</h4><p class="question-stem">다음 중에서 금융소비자에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>금융소비자란 금융상품에 관한 계약의 체결 또는 계약체결의 권유를 하거나 청약을 받는 것에 관한 금융상품판매업자의 거래 상대방 또는 금융상품자문업자의 자문업무의 상대방을 말한다.</li><li>금융소비자는 전문금융소비자와 일반금융소비자로 나뉜다.</li><li>일반은행은 일반금융소비자에 속한다.</li><li>한국은행은 전문금융소비자에 속한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약·권유·청약 또는 자문 관계의 상대방이다. 실제 가입 완료자만은 아니다.</li><li><strong>비선택</strong> · 위험 감수 능력에 따른 법정 분류다.</li><li><strong>선택</strong> · 틀리다. 일반은행은 전문금융소비자 범주다. 은행 종류의 일반이라는 말을 소비자 분류와 섞었다.</li><li><strong>비선택</strong> · 한국은행은 법정 전문금융소비자다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 전문금융소비자란 금융상품에 관한 전문성 또는 소유자산규모 등에 비추어 금융상품 계약에 따른 위험감수능력이 있는 금융소비자로서 한국은행, 금융회사 등을 말하며, 일반금융소비자란 전문금융소비자가 아닌 금융소비자를 말한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_059"><h4>형성평가 · 소비자법_059</h4><p class="question-stem">다음의 설명에 해당하는 것은?금융상품판매업자 등은 일반금융상품소비자에게 계약체결을 권유하지 않고 금융상품 판매계약을 체결하려는 경우에는 금융상품에 따라 연령, 재산상황 상품이해도 등 금융소비자보호법 제17조 제2항 각 호의 구분에 따른 정보를 고려하여, 그 일반금융소비자에게 적정하지 않다고 판단되는 경우에는 그 사실을 알리고 그 일반금융소비자로부터 서명, 기명날인, 녹취, 그 밖에 대통령령으로 정하는 방법으로 확인을 받아야 한다.</p><ol class="choices"><li>적정성 원칙</li><li>불공정영업행위의 금지</li><li>부당권유행위의 금지</li><li>적합성 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 권유하지 않고 계약하는 법정 대상 상품에서 부적정 사실을 고지·확인하는 적정성이다.</li><li><strong>비선택</strong> · 끼워팔기·부당 담보 등 우월한 지위를 이용한 행위의 규제다.</li><li><strong>비선택</strong> · 허위·단정적 설명이나 거절 뒤 권유 등의 규제다.</li><li><strong>비선택</strong> · 적합성은 권유할 때 고객에게 맞는지 판단하는 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 적정성 원칙에 관한 설명임</p></details></section>
+
+<section class="question-card" id="question-소비자법_060"><h4>형성평가 · 소비자법_060</h4><p class="question-stem">다음 중에서 위법계약 해지권에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>금융상품판매업자 등이 설명의무를 위반해서 금융상품에 관한 계약을 체결한 경우에 금융소비자가 해당 계약의 해지를 요구할 수 있는 권리이다.</li><li>위법계약 해지권은 금융소비자가 계약체결에 대한 위반사항을 안 날부터 3년 이내, 계약체결일부터 5년 이내의 범위에서 행사할 수 있다.</li><li>신용조회 사실의 통지 요청 및 개인신용정보 삭제 요구권</li><li>열람 및 정정 청구권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 설명의무 위반은 위법계약 해지의 법정 근거다. 대상 계약·기간 등 다른 요건도 필요하다.</li><li><strong>선택</strong> · 원본 정답. 안 날 3년이 아니라 1년이며 계약일부터 5년 이내여야 한다.</li><li><strong>비선택</strong> · 원본에 다른 장의 개인신용정보 권리 문구가 섞여 있다. 위법계약 해지 설명이 아니므로 이 보기를 옳다고 학습하면 안 된다. 원본 정답은 변경하지 않았다.</li><li><strong>비선택</strong> · 원본에 열람·정정 권리 문구가 혼입되어 있다. 위법계약 해지의 설명이 아니므로 ②만 문제인 깔끔한 단일정답 문항이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 위법계약의 해지는 금융소비자가 계약체결에 대한 위반사항을 안 날부터 1년 이내에 요구할 수 있으며, 이 경우 해당 기간은 계약체결일부터 5년 이내의 범위에 있어야 한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_036"><h4>기출문제 · 소비자법_기출2013_036</h4><p class="question-stem">[2013 기말고사 · 36번 / 자체 풀이]<br>( )의 내용으로 맞게 짝지어진 것은?<br>대부업자가 개인에 대부를 하는 경우 그 이자율은 연 ( )퍼센트를 초과할 수 없다. 대부업법과 이자제한법상 미등록대부업자의 금전대차에 관한 계약상의 최고이자율은 연 ( )퍼센트이다.</p><ol class="choices"><li>35, 30</li><li>39, 40</li><li>39, 30</li><li>30, 30</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 당시 등록업자 기준 35%가 틀리다.</li><li><strong>비선택</strong> · 당시 미등록업자 기준 40%가 틀리다.</li><li><strong>선택</strong> · 2013년 당시 정답 39%·30%. 현재 등록대부 최고 연 20%와 2025.7.22. 시행 불법사금융 이자 전부 무효 등은 별도로 본다.</li><li><strong>비선택</strong> · 당시 등록업자 기준이 틀리다. 현재에 맞는 보기도 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>2013년 출제 당시 등록 대부업자의 상한은 연 39%, 미등록 대부업자 등 이자제한법 적용 거래의 상한은 연 30%였다. 현재 금리 기준으로 풀면 안 되는 연혁 문항이다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.<br>참고: <a href="https://archives.nanet.go.kr/upload/namo/files/000034/%EA%B5%AD%ED%9A%8C%ED%9A%8C%EC%9D%98%EB%A1%9D_19%EB%8C%80_321%ED%9A%8C_2%EC%B0%A8_%EA%B5%AD%ED%9A%8C%EB%B3%B8%ED%9A%8C%EC%9D%98.pdf" target="_blank" rel="noopener noreferrer">2013년 국회 본회의록 · 당시 39%·30% 이자율 논의</a></p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_037"><h4>기출문제 · 소비자법_기출2013_037</h4><p class="question-stem">[2013 기말고사 · 37번 / 자체 풀이]<br>대부업 및 대부중개업에 대해 설명한 것으로 옳은 것은?</p><ol class="choices"><li>대부업자 또는 대부중개업자가 타인에게 등록증을 대여해 주어 대부업을 하게 하는 행위는 허용된다.</li><li>대부중개업자는 미등록대부업자에게도 대부중개를 할 수 있다.</li><li>대부중개업자는 대부업체와 대부업체 이용자 사이의 대부계약을 중개한 경우 중개수수료를 대부업자와 대부업체 이용자 모두로부터 받을 수 있다.</li><li>대부업자가 선이자를 사전에 공제하는 경우에는 그 공제액을 제외하고 채무자가 실제로 받은 금액을 원본으로 하여 이자율을 산정한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 등록증 대여는 허용되지 않는다.</li><li><strong>비선택</strong> · 미등록업자에게 중개하는 행위는 금지된다. 현행 명칭은 불법사금융업자다.</li><li><strong>비선택</strong> · 이용자에게 중개수수료를 받을 수 없다. 대부업자 측 수수료도 법정 제한을 따진다.</li><li><strong>선택</strong> · 정답. 선이자 공제 뒤 실제 받은 금액을 기준으로 제한금리를 계산한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>선이자를 미리 공제했다면 실제 교부받은 금액을 원본으로 이자율을 계산한다. 등록증 대여, 미등록업자에 대한 중개 및 이용자에 대한 중개수수료 청구는 허용되는 행위가 아니다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_068"><h4>기출문제 · 소비자법_기출2013_068</h4><p class="question-stem">[2013 기말고사 · 68번 / 자체 풀이]<br>대부업법 등의 제한 이자율을 초과하는 대부계약의 효력에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자 또는 미등록대부업자가 이자율 제한을 위반하여 대부계약을 체결한 경우 이자율을 초과하는 부분에 대한 이자계약은 무효이다.</li><li>이자를 지급하지 않은 경우에는 초과부분에 대한 이자를 지급할 필요가 없다.</li><li>이자를 이미 지급한 경우에는 대부계약 자체는 유효하기 때문에 초과하는 이자부분에 대한 반환을 청구할 수가 없다.</li><li>법정 최고이자율을 초과해 무효로 되는 이자부분에 대해 변제를 강요받는 경우에는 채무부존재확인소송, 부당이득반환청구소송 및 청구이의의 소 등을 제기할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 당시 초과 부분 무효의 설명이다. 현행 불법사금융의 이자 전부 무효·반사회적 계약 특칙과 구별한다.</li><li><strong>비선택</strong> · 무효인 초과 부분은 지급할 의무가 없다.</li><li><strong>선택</strong> · 틀리다. 원본에 충당하고 남는 초과 지급액은 반환을 구할 수 있다. 대부 원금 유효와 초과이자 무효는 양립한다.</li><li><strong>비선택</strong> · 아직 지급 전·이미 지급·집행 단계에 따라 적절한 청구와 요건을 선택한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>법정 상한을 초과한 이자약정 부분은 무효이다. 이미 지급한 초과이자는 원본 충당 및 남은 금액의 반환 문제가 생기므로 무조건 반환청구할 수 없다는 주장은 틀리다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_056"><h4>기출문제 · 소비자법_기출2015_056</h4><p class="question-stem">[2015 기말고사 · 56번]<br>대부업법상 대부업에 관한 규제 내용을 설명한 것으로 옳은 것은?</p><ol class="choices"><li>대부업법에 따른 대부업자 등이 아닌 자라도 그 상호 중에 대부, 대부중개 또는 이와 유사한 상호를 사용할 수가 있다</li><li>대부업자는 미등록대부업자로부터 대부계약에 따른 채권을 양도받아 이를 추심하는 행위를 할 수 있다.</li><li>대부업자는 미등록대부중개업자로부터 대부중개를 받은 거래상대방에게 대부를 해서는 안 된다.</li><li>대부업자는 등록한 대부업자가 아닌 자에게 대부계약에 따른 채권을 양도할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대부업자 등이 아닌 자의 유사 상호 사용은 제한된다.</li><li><strong>비선택</strong> · 미등록 대부채권 양수·추심을 허용한다는 말이 틀리다.</li><li><strong>선택</strong> · 정답. 미등록 중개업자를 거쳐 받은 상대에게 대부하는 금지행위다.</li><li><strong>비선택</strong> · 등록업자 아닌 누구에게나 자유 양도할 수는 없다. 다만 금융기관 등 법정 허용 양수 주체는 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_057"><h4>기출문제 · 소비자법_기출2015_057</h4><p class="question-stem">[2015 기말고사 · 57번]<br>대부중개를 위탁한 대부업자 또는 여신금융기관의 배상책임과 대부업자 등의 거래상대방에 대한 배상책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자 또는 여신금융기관은 대부중개업자 등이 그 위탁받은 대부중개를 하면서 대부업법을 위반하여 거래상대방에게 손해를 발생시킨 경우에는 그 손해를 배상할 책임이 있다.</li><li>손해배상을 한 대부업자 또는 여신금융기관은 해당 대부중개업자 등에게 구상권을 행사할 수 있다.</li><li>대부업자 등은 업무를 개시하기 전에 손해배상책임을 보장하기 위하여 보증금을 예탁하거나 보험 또는 공제에 가입하여야 한다.</li><li>대부업자 또는 여신금융기관이 대부중개업자 등에게 대부중개를 위탁하면서 상당한 주의를 하였고 대부중개업자 등이 거래상대방에게 손해를 입히는 것을 막기 위해 노력한 경우라도 손해배상책임을 져야만 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 위탁받은 중개 과정의 위반과 손해에 대한 위탁자 책임이다. 법정 면책 요건은 별도다.</li><li><strong>비선택</strong> · 배상한 뒤 책임 있는 중개업자에게 구상할 수 있다.</li><li><strong>비선택</strong> · 업무 개시 전 배상책임 보장 장치를 마련한다.</li><li><strong>선택</strong> · 틀리다. 상당한 주의와 손해방지 노력을 한 법정 면책 경우까지 무조건 책임을 지우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2015년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_058"><h4>기출문제 · 소비자법_기출2015_058</h4><p class="question-stem">[2015 기말고사 · 58번]<br>대부업법상 이자율 제한을 초과하는 계약의 효력에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자 또는 미등록대부업자가 이자율 제한을 위반하여 대부계약을 체결한 경우 당해 대부계약 자체가 무효이다.</li><li>이자를 지급하지 않은 경우에는 초과부분에 대한 이자를 지급할 필요가 없다.</li><li>이자를 이미 지급한 경우에는 초과하는 이자부분에 대한 반환을 청구할 수 있다.</li><li>대부업자가 선이자를 사전에 공제하는 경우에는 그 공제액을 제외하고 채무자가 실제로 받은 금액을 원본으로 하여 법정 최고이자율을 산정한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 당시 틀린 보기로 정답. 통상 초과이자 위반은 대부 전체가 아니라 초과 부분 무효다. 현재는 불법사금융·반사회적 계약 특칙을 구별한다.</li><li><strong>비선택</strong> · 무효 초과이자를 지급하지 않아도 된다.</li><li><strong>비선택</strong> · 원본 충당 후 남는 돈 반환 관계를 본다. 원본이 남아 있는데 초과액 전부가 바로 현금 반환되는 것으로 단순화하지 않는다.</li><li><strong>비선택</strong> · 실수령액이 금리 계산의 기준이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2015년 법학과 소비자법 58번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_068"><h4>기출문제 · 소비자법_기출2016_068</h4><p class="question-stem">[2016 기말고사 · 68번]<br>대부업에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자는 미등록대부업자로부터 대부계약에 따른 채권을 양도받아 추심하는 행위를 해서는 안 된다.</li><li>대부중개업자는 미등록대부업자에게 대부중개를 하여서는 안 된다.</li><li>대부업체 이용자는 대부금을 변제기 전에는 상환할 수 없다.</li><li>대부업체 이용자가 대부금을 변제기 전에 상환하는 경우에 대부업자의 손해는 배상해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 미등록 채권 양수·추심을 금지한다.</li><li><strong>비선택</strong> · 미등록업자에게 중개할 수 없다.</li><li><strong>선택</strong> · 틀리다. 기한 전에도 전부·일부 상환할 수 있다.</li><li><strong>비선택</strong> · 원본 비선택. 조기변제로 인한 적법한 약정·법률상 손해배상 가능성이지 무제한 수수료 허용이 아니다. 최고금리·관련 판매규제와 함께 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_063"><h4>기출문제 · 소비자법_기출2017_063</h4><p class="question-stem">[2017 기말고사 · 63번]<br>대부업의 개념에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>금전의 대부를 업으로 하는 자를 말한다.</li><li>대부업법 제3조에 따라 대부업의 등록을 한 자이다.</li><li>여신금융기관에 해당하는 자로부터 대부계약에 따른 채권을 양도받아 이를 추심하는 것을 업으로 하는 자이다.</li><li>노동조합 및 노동관계조정법에 따라 설립된 노동조합이 그 구성원에게 대부하는 경우 대부업에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 업으로 계속·반복하는 금전 대부가 핵심이다. 일회적 사인 대여와 구별한다.</li><li><strong>비선택</strong> · 등록한 영업자를 대부업자라 한다. 업의 정의와 업자의 자격을 구별한다.</li><li><strong>비선택</strong> · 법정 금융기관 등의 채권을 양수하여 추심하는 영업도 포함한다.</li><li><strong>선택</strong> · 틀리다. 법정 노동조합이 구성원에게 빌려주는 경우는 시행령상 제외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 63번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_064"><h4>기출문제 · 소비자법_기출2017_064</h4><p class="question-stem">[2017 기말고사 · 64번]<br>대부업법상 이자율 제한을 초과하는 계약의 효력에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자가 이자율 제한을 위반하여 대부계약을 체결한 경우 당해 대부계약 자체는 무효가 된다.</li><li>대부업자가 선이자를 사전에 공제하는 경우에는 그 공제액을 제외하고 채무자가 실제로 받은 금액을 원본으로 하여 법정 최고이자율을 산정한다.</li><li>이자를 지급하지 않은 경우에는 초과부분에 대한 이자를 지급할 필요가 없다.</li><li>이자를 이미 지급한 경우에는 초과하는 이자부분에 대해서 반환을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 당시 틀린 보기. 통상 제한금리 위반만으로 대부 전체가 무효가 되지 않는다. 현행 반사회적 계약 특칙과 구별한다.</li><li><strong>비선택</strong> · 실제 받은 금액을 원본으로 제한금리를 계산한다.</li><li><strong>비선택</strong> · 무효인 초과 부분은 지급할 의무가 없다.</li><li><strong>비선택</strong> · 원본 충당 후 남은 금액은 반환 청구할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2017년 법학과 소비자법 64번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_066"><h4>기출문제 · 소비자법_기출2017_066</h4><p class="question-stem">[2017 기말고사 · 66번]<br>대부중개를 위탁한 대부업자 또는 여신금융기관의 배상책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>대부업자는 대부중개업자가 그 위탁받은 대부중개를 하면서 대부업법을 위반하여 거래상대방에게 손해를 발생시킨 경우에는 그 손해를 배상할 책임이 있다.</li><li>여신금융기관은 대부중개업자가 그 위탁받은 대부중개를 하면서 대부업법을 위반하여 거래상대방에게 손해를 발생시킨 경우에는 그 손해를 배상할 책임이 있다.</li><li>대부업자가 대부중개업자에게 대부중개를 위탁하면서 상당한 주의를 하였고, 대부중개를 하면서 거래상대방에게 손해를 입히는 것을 막기 위하여 노력한 경우에는 손해배상책임을 지지 않는다.</li><li>대부업자가 손해배상을 한 경우에는 해당 대부중개업자에게 구상권을 행사할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 위탁 중개 업무 중 위반으로 난 손해에 대한 책임이다.</li><li><strong>비선택</strong> · 위탁한 금융기관에도 법정 책임이 문제 된다.</li><li><strong>비선택</strong> · 상당한 주의·손해방지 노력이라는 법정 면책 요건이다.</li><li><strong>선택</strong> · 틀리다. 배상 후 해당 중개업자에게 구상권을 행사할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_063"><h4>기출문제 · 소비자법_기출2018_063</h4><p class="question-stem">[2018 기말고사 · 63번]<br>다음은 대부업법상 대부업에 관한 규제 내용을 설명한 것이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 대부업법에 따른 대부업자 등이 아닌 자라도 그 상호 중에 대부, 대부중개 또는 이와 유사한 상호를 사용할 수가 있다.<br>(b) 대부업자는 등록한 대부업자가 아닌 자에게 대부계약에 따른 채권을 양도해서는 안 된다.</p><ol class="choices"><li>(a) ○, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ×, (b) ○</li><li>(a) ×, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · (a)가 틀리다. 등록 없이 유사 상호를 자유롭게 사용할 수 없다.</li><li><strong>비선택</strong> · (a)를 옳다고 한 오류다. (b)는 무등록 일반인에게 자유 양도할 수 없다는 취지로 읽는다.</li><li><strong>선택</strong> · 원본 정답. 상호 사용 제한과 채권 양도 제한이다. 다만 (b)를 금융기관 등 법정 허용 양수 주체까지 모두 금지하는 절대 문장으로 확대하지 않는다.</li><li><strong>비선택</strong> · (b)는 원본상 옳은 문장이다. 양도 제한의 취지와 허용 주체 예외를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2018년 법학과 소비자법 63번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_064"><h4>기출문제 · 소비자법_기출2018_064</h4><p class="question-stem">[2018 기말고사 · 64번]<br>다음은 대부금의 기한 전의 상환에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 채무자는 약정한 상환기일이 도래하기 전이라도 원금의 전부 또는 일부를 상환할 수 있다.<br>(b) 대부계약 체결 시 채무자와 기한 전의 임의 변제로 대부업자가 받을 손해에 대해 미리 약정한 경우에도 수수료 등을 채무자가 부담하지는 않는다.</p><ol class="choices"><li>(a) ○, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ×, (b) ○</li><li>(a) ×, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · (b)가 틀리다. 적법한 약정에 따른 비용이 문제 될 수 있다.</li><li><strong>선택</strong> · 정답. 기한 전 상환은 가능하고 적법한 손해·비용 약정은 별도다. 수수료도 간주이자·최고금리 제한을 받을 수 있다.</li><li><strong>비선택</strong> · (a)를 틀리다고 한 것이 오류다.</li><li><strong>비선택</strong> · (a)는 옳다. 상환 자체를 금지하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2018년 법학과 소비자법 64번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_065"><h4>기출문제 · 소비자법_기출2018_065</h4><p class="question-stem">[2018 기말고사 · 65번]<br>다음은 대부금의 일부 상환에 관한 설명이다. ( )에 들어갈 내용으로 옳은 것은?<br><br>원칙적으로 채무자의 채무변제 시 채무 전액을 소멸시키기에 부족한 때에는 비용, ( a ), ( b )의 순서로 충당하기로 한다.</p><ol class="choices"><li>ⓐ 이자, ⓑ 원금</li><li>ⓐ 원금, ⓑ 이자</li><li>ⓐ 이자, ⓑ 손해배상금</li><li>ⓐ 원금, ⓑ 손해배상금</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 유효한 채무의 일반적인 충당은 비용→이자→원금이다. 무효인 초과이자는 원본에 먼저 충당하는 별도 특칙이다.</li><li><strong>비선택</strong> · 이자와 원금을 뒤집었다.</li><li><strong>비선택</strong> · 마지막은 원금이다. 손해배상금으로 바꾸지 않는다.</li><li><strong>비선택</strong> · 이자·원금의 순서와 충당 대상을 잘못 썼다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 65번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 12' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 12|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제9장 전자상거래와 소비자보호 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 09</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제9장 전자상거래와 소비자보호 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>온라인에서 샀다는 사실보다, 누가 팔았고 어떻게 계약했으며 왜 반품하는지가 환불·배송비·플랫폼 책임을 결정한다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나</td>
+<td>전자상거래·통신판매의 구별, 정보·공급 의무, 철회·환급, 구매안전, 중개자 책임</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>얼굴과 실물을 보지 못한 채 돈과 개인정보를 먼저 건네기 때문</td>
+</tr>
+<tr>
+<td>전체의 위치</td>
+<td>특수판매 보호를 온라인·통신수단 거래로 확장하고 플랫폼의 역할을 나눔</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>8장 방문판매 14일과 비교 → 9장 통신판매 7일 → 10장 개인정보 자체의 보호</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>카드 결제만 하면 7일 철회, 오픈마켓은 무조건 무책임, 모든 반품은 무료라는 오해</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 322–360쪽 전체, JSON 제10장 주제 <strong>28문제·112개 보기</strong>. 중요도는 제공 문제의 반복과 개념상 비중을 기준으로 한다. 실제 오답률 자료는 없다. 현행법 확인일 2026.10.25.</p>
+<p><strong>먼저 고쳐 읽기:</strong> 교재의 개인 간 거래 중개 정보 규정은 2026.7.21. 개정 내용과 나누어 읽는다. 정기결제 증액·유료 전환, 다크패턴, 후기 관리 정보 공개도 현재 기준으로 보완한다. 다만 국내대리인 지정 의무는 <strong>2027.1.21. 시행 예정</strong>이므로 현재 의무라고 쓰지 않는다. 원본 문제·정답은 바꾸지 않고 필요한 조건과 당시 법 차이를 해설에 표시한다.</p>
+<p><mark class="yellow">노랑: 정의·기간·결론</mark> / <mark class="green">초록: 보호 이유</mark> / <mark class="pink">분홍: 조건·함정</mark> / <mark class="blue">파랑: 개념 연결</mark>.</p>
+<h1>1. 전자상거래·통신판매·중개는 같은 말이 아니다</h1>
+<h2 id="consumer-09-01" data-concept-id="consumer-09-01">1-1. 전자는 처리 방식, 통신은 비대면 거래 방식이다 ★★★★★</h2>
+<p><strong>교재 322–324쪽 / 문단의 목적:</strong> 두 개념의 기준이 달라 겹칠 수도, 하나만 해당할 수도 있음을 보여 준다. 전자상거래는 재화·용역의 거래 전부 또는 일부를 전자문서 등 전자적 방식으로 처리하는 상행위다. 전자문서는 정보처리시스템으로 전자적 형태로 작성·송신·수신·저장된 정보다. 정보 제공·청약·승낙·결제·이행 중 일부가 이 방식이면 해당할 수 있다.</p>
+<p>통신판매는 우편·전기통신·방송·신문·카탈로그 등 법정 수단으로 판매 정보를 제공하고 소비자의 청약을 받아 판매하는 비대면 거래다. 정보 제공과 청약의 비대면성이 핵심이며, 전화권유판매는 제외되어 방문판매법으로 간다.</p>
+<table>
+<thead>
+<tr>
+<th>거래 모습</th>
+<th>전자상거래</th>
+<th>통신판매</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인터넷 쇼핑몰에서 주문·결제</td>
+<td>해당</td>
+<td>해당</td>
+</tr>
+<tr>
+<td>가게에서 만나 카드 결제</td>
+<td>결제 부분이 전자적이므로 해당 가능</td>
+<td>그 사실만으로는 아님</td>
+</tr>
+<tr>
+<td>종이 카탈로그를 보고 우편으로 주문</td>
+<td>전자적 처리가 없으면 아닐 수 있음</td>
+<td>해당</td>
+</tr>
+<tr>
+<td>인터넷 광고만 보고 매장에 가서 처음 주문</td>
+<td>전자적 처리 부분은 별도 판단</td>
+<td>정보만 온라인이어서 통신판매가 되지는 않음</td>
+</tr>
+<tr>
+<td>적극적인 전화 대화·권유로 구매</td>
+<td>전자적 처리 여부는 별도</td>
+<td>전화권유판매는 통신판매 정의에서 제외</td>
+</tr>
+</tbody></table>
+<p><strong>시험·한 줄:</strong> <mark class="yellow">전자상거래가 반드시 비대면일 필요는 없다. 통신판매가 반드시 전자문서일 필요도 없다.</mark> 그래서 현금 대신 카드로 계산했다는 이유만으로 모든 점포 구매에 7일 철회권이 생기지는 않는다.</p>
+<h2 id="consumer-09-02" data-concept-id="consumer-09-02">1-2. 카드사·쿠폰 회사·배송대행사의 역할을 구별한다 ★★★★★</h2>
+<p><strong>교재 324–326쪽 / 문단의 목적:</strong> 플랫폼 이름이 아니라 실제 수행한 일을 보고 판매자·중개자를 찾는다. 통신판매업자는 통신판매를 업으로 하거나 그와 약정해 판매 업무를 수행하는 자다. 통신판매중개는 사이버몰 이용을 허락하거나 자기 명의의 광고수단 등을 통해 정보 제공·청약 접수 등 거래 일부를 맡아 당사자 거래를 알선하는 것이다. 사이버몰은 정보통신설비로 거래하도록 만든 가상의 영업장이다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>왜 그렇게 분류하는가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>카드사 C가 여행사 D의 카탈로그 광고와 비대면 청약 접수까지 수행</td>
+<td>약정에 따라 판매 업무를 수행하는 통신판매업자 해당 여부를 봄</td>
+</tr>
+<tr>
+<td>C의 명의 우편물에 여행 광고, 접수·판매는 D가 수행</td>
+<td>교재에서는 C를 통신판매중개자로 구별</td>
+</tr>
+<tr>
+<td>E가 음식점 F와 계약하고 자기 몰에서 할인 이용권을 직접 발행·판매</td>
+<td>이용권 판매의 당사자인 통신판매업자. 단순 장소 제공자가 아님</td>
+</tr>
+<tr>
+<td>G가 해외 상품의 배송 용역을 안내하고 주문받음</td>
+<td>배송 용역을 파는 통신판매</td>
+</tr>
+<tr>
+<td>G가 해외 상품 정보를 올리고 주문받아 대신 구입·배송</td>
+<td>해외 구매대행의 거래 실질에 맞는 통신판매 규율</td>
+</tr>
+<tr>
+<td>포털에 배너만 있고 다른 사이트에서 거래의 중요 부분 진행</td>
+<td>단순 광고만으로 언제나 통신판매중개자가 되는 것은 아님</td>
+</tr>
+<tr>
+<td>다른 사이트임을 분명히 알리지 않아 포털 자체 판매로 신뢰하게 함</td>
+<td>표시·관여 방식에 따라 중개자 또는 판매자로서 책임 검토</td>
+</tr>
+</tbody></table>
+<p><strong>소셜커머스</strong>는 교재에서 SNS 홍보로 할인 이용권·쿠폰 등을 판매하는 형태를 뜻한다. 서비스 업체와 쿠폰 회사의 계약, 쿠폰 회사와 소비자의 판매계약을 나누면 책임 주체가 보인다. 모든 오늘날 SNS 거래를 이 쿠폰 구조 하나로 한정하지는 않는다. <strong>한 줄:</strong> <mark class="blue">광고만 했나 → 주문을 받았나 → 직접 이용권을 팔았나를 따라간다.</mark></p>
+<h2 id="consumer-09-03" data-concept-id="consumer-09-03">1-3. 소비자 범위와 전체·일부 적용 제외 ★★★★☆</h2>
+<p><strong>교재 327–329쪽 / 문단의 목적:</strong> 법 전체를 적용하지 않는 경우와 특정 조문만 제외하는 경우를 나눈다. 소비생활용 이용자가 중심이며, 법정 최종 이용자, 사실상 소비자와 같은 지위·조건의 사업자, 농·축·어업용 구매자 등도 정한 범위에서 포함한다. 원재료·중간재·자본재 이용과 허가받은 원양어업 등은 해당 정의의 제외 조건을 확인한다. 사업자는 제조·가공·포장·수입·판매·용역 제공자다.</p>
+<p>상행위 목적으로 사업자가 구입하는 거래는 원칙 제외하지만 방문판매법상 다단계판매원은 그 사업자 제외 문구에서 구별한다. <strong>소비자와 사실상 같은 지위·조건</strong>으로 구입하는 사업자라면 적용되는 예외도 있다. 다른 법과 겹치면 전자상거래법 우선, <strong>다른 법이 더 유리하면 그 법</strong>을 적용한다.</p>
+<table>
+<thead>
+<tr>
+<th>부분 적용 제외</th>
+<th>무엇을 구별하나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>계약서 교부가 곤란한 정형적·수시 거래, 다른 특별법의 다른 교부 방법</td>
+<td>법정 요건에서 13조 2항 교부 규정의 예외. 민법·방문판매법을 그 다른 법으로 아무렇게나 넣지 않음</td>
+</tr>
+<tr>
+<td>통신판매업자가 아닌 사람 사이의 거래를 중개하는 통신판매업자</td>
+<td>13–15·17–19조의 해당 의무 제외와 별도의 개인 간 거래 중개 의무를 나눔</td>
+</tr>
+<tr>
+<td>법정 금융기관 등의 증권·금융상품, 생활용품·음식료 인접 지역 판매</td>
+<td>12–15·17–20·20조의2 등 열거한 조문 제외. 모든 법적 책임 면제는 아님</td>
+</tr>
+</tbody></table>
+<p>개인 B의 물건 정보를 올리고 일반 소비자의 청약까지 접수하는 A몰은 개인 간 거래 중개 규율을 검토한다. 생활정보 사이트 C는 개인 D의 광고만 싣고 D가 직접 전화로 주문받는다면 그와 동일한 판매 업무를 하는 중개업자라고 단정하지 않는다. <strong>한 줄:</strong> ‘온라인’이라는 한 단어보다 거래 주체와 제외되는 조문을 정확히 본다.</p>
+<h1>2. 계약하기 전에 반드시 확인할 것</h1>
+<h2 id="consumer-09-04" data-concept-id="consumer-09-04">2-1. 쇼핑몰의 신원과 광고 속 판매자 표시 ★★★★☆</h2>
+<p><strong>교재 329–330쪽 / 문단의 목적:</strong> 실물 점포가 보이지 않아도 누가 책임질 사업자인지 확인하도록 한다. 사이버몰 첫 화면에는 <strong>상호·대표자, 영업소 주소, 전화·전자우편, 사업자등록번호, 이용약관, 호스팅 제공자 상호</strong> 등 법정 정보를 표시한다. 약관은 연결 화면으로 보여 줄 수 있고 공정위의 사업자 정보 공개 페이지로 연결해 진위를 확인할 수 있게 한다. 작은 모바일 화면에는 법정 순차 표시·연결 방식 예외가 있다.</p>
+<p>청약을 받으려는 표시·광고에는 통신판매업자의 상호·대표자, 주소·전화·전자우편 및 신고번호·신고기관 등 <strong>통신판매업 신고를 확인할 정보</strong>를 포함한다. 사업자등록번호와 통신판매업 신고번호는 다른 관리 정보다.</p>
+<p><strong>쉬운 사례:</strong> 예쁜 상품 사진만 있고 주소·운영자가 없다면, 문제가 생겼을 때 누구에게 반환·청구할지 막힌다. 화면 하단의 신원 표시는 장식이 아니라 책임자를 찾는 길이다. <strong>시험·한 줄:</strong> 판매자 표시 의무는 상품의 품질을 국가가 보증한다는 뜻이 아니다.</p>
+<h2 id="consumer-09-05" data-concept-id="consumer-09-05">2-2. 거래 기록은 6개월·5년·5년·3년 ★★★★★</h2>
+<p><strong>교재 330–331쪽 / 문단의 목적:</strong> 화면이 사라진 뒤에도 계약 내용을 입증하도록 한다.</p>
+<table>
+<thead>
+<tr>
+<th>기록</th>
+<th>보존 기간</th>
+<th>왜 남기나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>표시·광고</td>
+<td>6개월</td>
+<td>어떤 설명을 보고 샀는지</td>
+</tr>
+<tr>
+<td>계약·청약철회</td>
+<td>5년</td>
+<td>무슨 약속을 하고 언제 철회했는지</td>
+</tr>
+<tr>
+<td>대금 결제·공급</td>
+<td>5년</td>
+<td>돈과 물건이 오갔는지</td>
+</tr>
+<tr>
+<td>불만·분쟁 처리</td>
+<td>3년</td>
+<td>무엇을 요구하고 어떻게 처리했는지</td>
+</tr>
+</tbody></table>
+<p>중개자는 자기 시스템으로 처리한 범위의 기록을 보존한다. 소비자가 몰에서 열람·확인하고 전자적으로 저장하거나, 방문·전화·팩스·전자우편 등으로 열람·복사할 방법도 제공한다. 저작권법상 복제가 허용되지 않는 저작물의 복사 요구 등은 별도로 판단한다.</p>
+<p>정보 이용 동의를 철회했더라도 법정 거래 기록과 관련 식별 정보는 정한 기간 보존할 수 있다. 이때 동의를 유지한 고객 정보와 <strong>분리 보존</strong>하고 거래 보존 목적을 넘어 광고에 계속 쓰면 안 된다. 교재의 주민등록번호 예시를 ‘쇼핑몰이 누구에게나 번호를 수집해도 된다’는 허가로 읽지 않는다. 수집·처리의 별도 법적 근거는 10장에서 다시 본다. <strong>한 줄:</strong> <mark class="yellow">광고 6개월, 계약·결제 5년, 분쟁 3년. 보존 허용은 무제한 이용 허용이 아니다.</mark></p>
+<h2 id="consumer-09-06" data-concept-id="consumer-09-06">2-3. 전체 가격·반품 조건·구매안전 정보를 알려야 한다 ★★★★☆</h2>
+<p><strong>교재 331–333쪽 / 문단의 목적:</strong> 클릭 전에 실제 부담과 문제 해결 방법을 알게 한다. 공급자·판매자 신원, 재화·용역의 명칭·내용·정보, 가격과 지급 시기·방법, 공급 시기·방법을 고지한다. 가격이 정해지지 않았다면 결정 방법을 구체적으로 밝힌다.</p>
+<p>철회·해제의 기한·행사 방법·효과와 서식, 교환·반품·보증·환불·지연배상 조건, 전송·설치의 기술 사항, 불만·피해보상·분쟁 처리, 약관, 교환·반품 등 추가 비용, 판매 일시·지역·수량·인도 제한도 포함한다. 법정 선지급식 거래에서는 <strong>결제대금예치 또는 피해보상보험 등의 선택 가능성</strong>을 알려야 한다. 카드 결제 등 법정 예외는 뒤에서 분리한다.</p>
+<p>계약이 맺어지면 이 내용을 담은 서면·전자문서를 <strong>공급할 때까지</strong> 교부한다. 계약자가 동의했거나, 사업자에게 잘못 없이 계약자의 주소를 알 수 없는 등 법정 사유가 있으면 권리를 해치지 않는 범위에서 받는 사람에게 줄 수 있다. 주문자와 수령인이 다르다는 이유만으로 아무 곳에 보내도 되는 것은 아니다.</p>
+<p>미성년자 거래에서는 법정대리인 동의 없는 계약을 본인·대리인이 취소할 수 있음을 알린다. 민법상 예외까지 무시하고 모든 계약에 똑같은 결론을 붙이지 않는다. <strong>한 줄:</strong> <mark class="green">사진과 할인율뿐 아니라 실제 총부담과 빠져나오는 조건을 보여 주는 의무다.</mark></p>
+<h2 id="consumer-09-07" data-concept-id="consumer-09-07">2-4. 청약 확인·실수 정정과 몰래 빠져나간 음원 요금 ★★★★☆</h2>
+<p><strong>교재 333–334쪽 / 문단의 목적:</strong> 잘못 누른 주문과 본뜻 없는 결제를 막는다. 판매자는 청약을 받으면 수신 확인·판매 가능 여부를 신속히 알리고, 계약 전 소비자가 내용을 확인·정정·취소할 절차를 둔다. 결제 직전 확인 화면, 전화 주문의 주요 조건 반복 안내, 숫자·한글 병기처럼 중요 가격을 분명히 인식할 조치가 예다.</p>
+<p><strong>교재 사례:</strong> A는 음원 사이트 무료 행사에 가입한다 → 매월 9,500원씩 6개월 휴대폰 소액 결제가 나간다 → 연락도 되지 않고 결제 안내를 받은 적 없다 → 사업자는 진정한 결제 의사를 확인하고 금액·시기·방법 등을 고지했는지 설명해야 한다. 동의 없는 자동결제는 반환·구제 대상이다. 교재의 ‘2개월 이상’ 표현을 <strong>첫 달 무단 결제는 허용된다는 뜻으로 읽지 않는다.</strong></p>
+<p>현행은 무료에서 유료 정기결제로 바꾸거나 정기결제 금액을 올릴 때 <strong>변경 전 30일 내에</strong> 변경 시점·전후 가격·결제방법에 대한 동의를 받고, 취소·해지 조건과 효과를 고지해야 한다. ‘30일보다 더 일찍 아무 때나 동의받으면 된다’ 또는 ‘무조건 30일 전에만 받는다’가 아니다. <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148939436">공정위의 시행 안내</a></p>
+<p><strong>한 줄:</strong> <mark class="pink">회원 가입 동의 ≠ 구매 동의 ≠ 향후 모든 가격 인상 동의.</mark></p>
+<h2 id="consumer-09-08" data-concept-id="consumer-09-08">2-5. 가격을 잘못 적었다면 계약을 마음대로 취소할 수 있나 ★★★★★</h2>
+<p><strong>교재 334–335쪽과 관련 기출 / 문단의 목적:</strong> 소비자 철회와 판매자 착오 취소를 구별한다. ‘청바지 만 원 특가’를 보고 주문한다 → 다른 몰에도 같은 광고가 있다 → 판매자는 입력 실수라며 이틀 뒤 환급한다 → 소비자는 계약대로 달라고 한다. 교재는 통상가의 10% 이하라는 사정을 들어 착오 취소 가능성을 설명하지만 그 숫자가 자동 취소 기준은 아니다.</p>
+<p>먼저 <strong>계약 성립</strong>을 본다. 실질적인 승낙과 단순한 자동 접수 안내는 다르다. 성립했다면 약속대로 이행하는 것이 원칙이다. 착오 취소는 <strong>중요 부분의 착오·표의자의 중과실</strong> 등을 따진다. 사업자의 확인 소홀과 소비자의 오류 인식도 중요하다. <a href="https://law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20230628&joNo=010900&lsiSeq=246569&urlMode=lsInfoP">민법 109조</a></p>
+<p><strong>사례를 재판 순서로 풀기:</strong> 등장인물은 쇼핑몰과 구매자다 → 가격 오류와 주문 발생 → 계약 이행 여부가 갈등 → 법원은 승낙·가격 착오의 중요성·중과실을 심사 → 요건이 갖춰지면 취소, 아니면 계약상 책임을 검토한다. 3영업일 안에 환급했다는 사실은 환급 의무 이행일 뿐 <strong>착오 취소의 적법성이나 허위 유인 책임을 모두 해결하지 않는다.</strong></p>
+<p>2015-51·2017-57·2019-58은 환급 외에 거래를 유효하다고 믿어 쓴 수수료·배송비·전화료 등 <strong>신뢰손해</strong>를 구별하는 문제다. 다만 손해배상은 실제 손해·귀책·인과관계 등 별도 법적 근거가 필요하다. 취소했다는 사실만으로 모든 소비자에게 일정액을 자동 배상하는 제도가 아니다. 2019-58의 ‘50% 넘는 할인’ 역시 법정 절대 기준이 아니다. <strong>한 줄:</strong> <mark class="pink">저렴한 가격, 환급, 착오 취소, 손해배상은 각각 다른 요건이다.</mark></p>
+<h1>3. 공급·개인정보·금지행위</h1>
+<h2 id="consumer-09-09" data-concept-id="consumer-09-09">3-1. 주문 후 7일, 선지급 후 3영업일은 공급에 필요한 조치다 ★★★★★</h2>
+<p><strong>교재 335–336쪽 / 문단의 목적:</strong> 돈을 받고 무기한 기다리게 하지 못한다. 원칙적으로 청약일부터 <strong>7일 이내 공급에 필요한 조치</strong>를 해야 한다. 대금을 전부 또는 일부 먼저 받는 선지급식 통신판매에서는 지급일부터 <strong>3영업일 이내</strong>다. 따로 공급 시기를 약정했다면 그 약정을 따른다.</p>
+<p>이것은 모든 물건이 7일 또는 3영업일 안에 반드시 집에 도착해야 한다는 의미와 다르다. 주문제작을 의뢰하거나 배송업자에게 필요한 최소 정보를 주고 배송을 지시하는 행위 등이 공급 조치다. 소비자가 진행 상황을 확인할 방법도 마련한다.</p>
+<p>공급이 곤란함을 알면 지체 없이 사유를 알리고, 선지급식이면 <strong>지급일부터 3영업일 내 환급 또는 필요한 조치</strong>를 한다. 일부러 싼 가짜 가격으로 끌어들였다가 취소·환급했다고 기만 책임까지 없어지지 않는다. <strong>한 줄:</strong> <mark class="yellow">공급 조치 7일·선지급 3영업일, 따로 정한 공급 시기와 실제 도착을 구별한다.</mark></p>
+<h2 id="consumer-09-10" data-concept-id="consumer-09-10">3-2. 정보를 모으는 과정도 공정해야 하고 도용 피해를 회복한다 ★★★★☆</h2>
+<p><strong>교재 336–337쪽 / 문단의 목적:</strong> 거래 편의를 핑계로 정보를 부정하게 얻거나 쓰지 못한다. 3개월 무료 이용을 약속하며 정보를 받고 약속을 지키지 않는 것은 공정한 수집이라고 보기 어렵다. 적법하게 얻었다고 목적 밖 사용까지 자동 허용되는 것은 아니다.</p>
+<p>도용으로 재산상 손해가 났거나 날 우려가 있는 특별한 사유가 있으면 <strong>본인 요청에 따른 도용 확인·거래 기록 제공, 변조 정보의 원상회복, 피해 회복에 필요한 조치</strong>를 해야 한다. ‘도용’은 몰래 훔친 정보만의 문제가 아니다. 2013-65는 관리 중인 정보를 허락 없이 또는 허락 범위를 넘어 사용한 경우도 문제 삼는다. 다만 계약 이행·법적 의무 등 별도의 적법 처리 근거가 있는 모든 무동의 처리를 곧바로 도용이라 하지는 않는다.</p>
+<p><strong>한 줄:</strong> <mark class="blue">수집의 적법성과 이용의 적법성은 별개이며, 10장의 개인정보 보호 원칙으로 이어진다.</mark></p>
+<h2 id="consumer-09-11" data-concept-id="consumer-09-11">3-3. 가짜 후기·연락 차단·미주문 결제 등 7가지 금지행위 ★★★★☆</h2>
+<p><strong>교재 337–340쪽 / 문단의 목적:</strong> 소비자가 선택하고 권리를 행사하는 전 과정의 방해를 막는다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>교재 사례를 풀어 읽기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 거짓·과장·기만</td>
+<td>유료임을 숨긴 문자, 연락한 척·가짜 당첨, 닫기 버튼을 누르면 판매 사이트로 이동, 제한 수량을 숨긴 반값 광고</td>
+</tr>
+<tr>
+<td>후기·인기 조작도 ①</td>
+<td>불리한 진실 후기를 지우고 고용인·후원자가 거짓 호평 작성, 대량 구매 후 취소로 구매자 수 부풀림</td>
+</tr>
+<tr>
+<td>② 철회 방해용 연락 변경</td>
+<td>주소·전화·도메인을 바꾸거나 없앰</td>
+</tr>
+<tr>
+<td>③ 민원 인력·설비 방치</td>
+<td>전화는 안 받고 이메일만 강제, 끝없이 도는 ARS, 허위 이메일·수신 차단, 정당한 이유 없이 3영업일 내 콜백 없음</td>
+</tr>
+<tr>
+<td>④ 주문 없는 공급·청구</td>
+<td>신용 조사라며 받은 카드번호로 임의 결제, 물건도 안 주고 청구</td>
+</tr>
+<tr>
+<td>⑤ 거절 후 강요</td>
+<td>구매 의사 없다는 소비자에게 전화·팩스·온라인 등으로 강요</td>
+</tr>
+<tr>
+<td>⑥ 정보 남용</td>
+<td>허락·법정 근거 없이 또는 허용 범위 밖 이용</td>
+</tr>
+<tr>
+<td>⑦ 무단 프로그램 설치</td>
+<td>동의나 쉽고 명확한 설명 없이 설치</td>
+</tr>
+</tbody></table>
+<p>회신 지연에 소비자의 잘못된 연락처·부재 등 부득이한 사유가 있는 경우는 구별한다. 정보 처리에는 배송·전송·설치·AS 등 계약 이행에 불가피한 위탁, 결제 정산, 법정 본인확인·도용 방지, 미성년자 동의 확인 등 예외가 있지만 목적 범위를 넘는 광고까지 허용하지 않는다. 프로그램은 설치 전 <strong>용량·기능·기존 프로그램에 미치는 영향·제거 방법</strong> 등을 알린다.</p>
+<p><strong>한 줄:</strong> 정보를 꾸미고, 원치 않는 돈을 빼가고, 문제를 말할 통로를 막는 행동을 금지한다.</p>
+<h2 id="consumer-09-12" data-concept-id="consumer-09-12">3-4. 현재 보완: 다크패턴과 후기 관리 정보 공개 ★★★☆☆</h2>
+<p><strong>교재의 현행 보완 / 문단의 목적:</strong> 사람을 직접 속이는 말뿐 아니라 화면 구조도 선택을 왜곡할 수 있음을 이해한다. 2025.2.14. 시행 규율은 숨은 정기결제 갱신과 함께 <strong>① 필수 총금액을 첫 화면에서 일부만 제시 ② 원치 않는 다른 구매 옵션을 미리 선택 ③ 선택지의 크기·색 등으로 특정 항목만 가능·필수인 것처럼 오인 ④ 가입보다 취소를 복잡하게 하거나 다른 방법만 허용 ⑤ 이미 한 결정을 바꾸라고 반복 간섭</strong>하는 유형을 다룬다.</p>
+<p>모든 버튼 색 차이가 불법이라는 뜻은 아니다. 법정 오인 가능성·정당한 사유 등을 심사한다. 반복 요구를 7일 이상 받지 않도록 선택하게 하는 법정 예외도 있다. 사업자가 자율규약·지침을 만드는 것과 법의 금지 규정은 구별한다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=009318&lsRvsGubun=all">개정 조문</a></p>
+<p>2026.7.21.부터 사용후기를 게시할 때는 <strong>작성 권한자 범위, 게시 기간, 등급평가 기준·효과, 삭제 기준·삭제 이의제기 절차</strong> 등 관리 정보를 공개한다. 후기 첫 화면 또는 공간 제약 시 직접 연결 화면에서 볼 수 있게 한다. ‘마음에 안 드는 후기를 아무 설명 없이 없애도 된다’는 생각을 막는 투명성 장치다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=009338&lsRvsGubun=all">시행령 27조의3</a></p>
+<p><strong>한 줄:</strong> <mark class="green">선택을 몰래 유도하는 화면과 후기를 관리하는 숨은 기준도 소비자에게 드러나야 한다.</mark></p>
+<h1>4. 반품과 환급을 실제로 해결하기</h1>
+<h2 id="consumer-09-13" data-concept-id="consumer-09-13">4-1. 통신판매는 기본 7일, 불일치는 3개월·30일 ★★★★★</h2>
+<p><strong>교재 340–342쪽 / 문단의 목적:</strong> 실물을 못 보고 산 소비자에게 재고려 기회를 준다. 법정 통신판매에서 계약 내용의 서면을 받은 날부터 7일, 공급이 늦으면 공급받거나 시작된 날부터 7일이다. 계약서를 못 받았거나 주소 누락·변경 등으로 행사할 수 없었다면 주소를 알거나 알 수 있었던 날부터 계산한다. <strong>철회 방해가 있으면 끝난 날부터 7일</strong>도 확인한다. 더 긴 약정은 인정한다.</p>
+<p>표시·광고와 다르거나 계약과 다르게 이행되면 <strong>공급일부터 3개월 안이면서 그 사실을 알거나 알 수 있었던 날부터 30일 안</strong>이라는 두 기간을 함께 본다. 2018-52·2019-54 등의 원문 ‘또는’을 한쪽을 자유롭게 선택하는 뜻으로 외우지 않는다. 이 특별 철회는 일반 7일과 보통 제한 사유에도 불구하고 인정되는 별도 규정이다. <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1024961473">현행 17조</a></p>
+<p>서면 또는 다른 방법으로 행사할 수 있고, 서면은 <strong>발송일</strong> 효력이 생긴다. 내용증명은 증거를 남기는 방법이지 유일한 법정 형식이 아니다. 귀책 훼손, 계약 성립·시점, 공급 사실·시점 등의 다툼에는 법정 사업자 입증 책임이 있다. <strong>한 줄:</strong> <mark class="yellow">온라인 통신판매 7일, 방문판매 14일, 계약 불일치 3개월·30일을 구별한다.</mark></p>
+<h2 id="consumer-09-14" data-concept-id="consumer-09-14">4-2. 제한 사유와 디지털콘텐츠·맞춤 제작의 예외 ★★★★★</h2>
+<p><strong>교재 341–342쪽 / 문단의 목적:</strong> 반품 물건의 가치와 소비자의 확인 기회를 함께 보호한다. ① 소비자 책임 멸실·훼손 ② 사용·소비로 가치 현저 감소 ③ 시간 경과로 재판매 곤란할 정도의 가치 감소 ④ 복제 가능한 재화 포장 훼손 ⑤ 용역·디지털콘텐츠 제공 개시 ⑥ 법정 개별 주문제작 등이 제한 유형이다.</p>
+<p><strong>내용 확인을 위한 포장 훼손</strong>은 ①에서 제외한다. ②–⑤는 제한 안내·시험 사용 등 필요한 조치를 하지 않으면 철회를 제한하지 못하는 예외가 있다. 디지털콘텐츠는 제한 사실을 표시하는 것에 더해 <strong>미리 보기·미리 듣기, 일정 기간 체험, 기능 제한 체험판</strong>, 그런 제공이 곤란하면 법정 정보 제공 등의 조치가 필요하다. 나눌 수 있는 용역·콘텐츠에서는 <strong>아직 제공을 시작하지 않은 부분</strong>을 구별한다.</p>
+<p>주문제작은 철회 시 회복할 수 없는 중대한 피해가 예상되는 개별 생산 등 법정 대상이어야 하고 <strong>사전 별도 고지＋서면·전자문서 동의</strong>를 갖춰야 한다. ‘옵션을 골랐으니 주문제작’ 또는 ‘환불 불가라고 어디엔가 썼다’만으로는 부족하다.</p>
+<p><strong>한 줄:</strong> <mark class="pink">스티커·개봉·디지털·주문제작이라는 단어 하나가 자동 철회 금지 사유는 아니다.</mark></p>
+<h2 id="consumer-09-15" data-concept-id="consumer-09-15">4-3. 반품비는 변심이면 소비자, 계약 불일치면 사업자 ★★★★★</h2>
+<p><strong>교재 342–345쪽 / 문단의 목적:</strong> 철회 원인과 공급 형태에 따라 정산을 나눈다. 소비자는 받은 재화를 반환한다. 이미 제공한 용역·디지털콘텐츠를 같은 모습으로 돌려주는 의무는 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>환급 3영업일의 출발점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>물건을 받았다가 반품</td>
+<td>사업자가 반환받은 날</td>
+</tr>
+<tr>
+<td>용역·디지털콘텐츠의 적법한 철회</td>
+<td>철회한 날</td>
+</tr>
+<tr>
+<td>아직 공급받지 않음</td>
+<td>철회한 날</td>
+</tr>
+</tbody></table>
+<p>환급 지연은 법정 <strong>연 15%</strong> 지연배상금을 계산한다. 단순 변심 등 일반 7일 철회의 반환 비용은 <strong>소비자</strong>, 표시·광고·계약 불일치는 <strong>사업자</strong> 부담이다. 법정 철회에 벌금처럼 위약금·손해배상을 붙일 수 없다. 사용 때문에 재판매가 곤란하거나 가격이 현저히 떨어진 소모성 부품의 공급 비용, 동일 가분물 중 소비한 부분의 공급 비용 등 법정 정산은 별도로 본다.</p>
+<p><strong>주의:</strong> 왕복 배송비가 항상 두 번 새로 생기는 것은 아니다. 처음 무료 배송 조건이었는지, 이미 편도 배송비를 냈는지, 실제 반품비·약정이 무엇인지 확인하여 중복 청구를 막는다. 사업자는 반환 비용 부담을 소비자가 알기 쉽게 표시해야 한다. <strong>한 줄:</strong> <mark class="blue">8장은 일반 철회도 사업자 반환비, 9장은 일반 변심이면 소비자 반환비다.</mark></p>
+<h2 id="consumer-09-16" data-concept-id="consumer-09-16">4-4. 카드 취소·상계·연대책임으로 돈의 흐름을 잇는다 ★★★★☆</h2>
+<p><strong>교재 343–345쪽 / 문단의 목적:</strong> 물건은 돌려줬는데 카드값은 계속 나가는 상황을 해결한다. 사업자는 카드사 등 결제업자에게 청구 정지·취소를 요청한다. 이미 대금을 받았다면 지체 없이 결제업자에게 돌려주고 소비자에게 알린다. 결제업자는 소비자에게 환급하거나 필요한 조치를 한다. 사업자의 지연으로 소비자가 결제한 부분은 지연배상도 따진다.</p>
+<p>사업자가 환급하지 않으면 소비자는 자료를 붙여 결제업자에게 상계를 요청할 수 있다. <strong>카드사가 그 사업자에게 지급할 돈</strong>과 소비자 환급금을 서로 계산한다는 뜻이다. 환급액·철회·반품 사실 자료, 반품 수취 거절이면 그 증명 자료 등을 제출한다. 상계한 사실과 명세는 사업자·소비자에게 알려야 한다. 카드사가 정당한 이유 없이 게을리하면 소비자는 결제를 거절할 수 있고, 그 때문에 연체자로 처리하는 등 불이익을 주어서는 안 된다.</p>
+<p>판매자·대금 받은 사람·계약 당사자가 다르면 법정 환급 의무에 <strong>연대책임</strong>을 진다. 일부 사용 비용과 정상 반환비 부담까지 모든 사람에게 같은 방식으로 무제한 적용한다는 뜻은 아니다. <strong>교재 사례:</strong> 원피스를 적법하게 철회해 반품했는데 돈을 주지 않는다 → 카드사에 취소·상계 절차를 요청한다 → 판매자에게 지급 예정인 돈이 있는지와 필요한 자료를 확인한다. <strong>한 줄:</strong> 결제업자의 역할은 단순히 ‘판매자에게 문의하세요’로 끝나지 않는다.</p>
+<h2 id="consumer-09-17" data-concept-id="consumer-09-17">4-5. 교재의 반품 사례 여덟 가지를 한 번에 구별하기 ★★★★★</h2>
+<p><strong>교재 322·345–348·359–360쪽 / 문단의 목적:</strong> 같은 반품 요구도 사실관계에 따라 기간·비용·제한이 달라짐을 확인한다.</p>
+<p><strong>① 운동화가 내 발에 안 맞음.</strong> 주문한 사이즈가 정확히 왔지만 착화감이 마음에 안 든다 → 기간·제품 상태 등 요건을 갖춰 철회한다 → 소비자 사정이므로 법정 반환비는 소비자 부담이다. 처음 배송비와 중복 청구하는지까지 확인한다.</p>
+<p><strong>② 40만 원 다이어트식품의 겉상자만 개봉.</strong> 두 종류 식품을 카드 할부로 사고 충동구매를 후회한다 → 내용 확인을 위해 겉상자만 열었고 내부 포장은 그대로다 → 개봉했다는 이유만으로 철회를 막지 못한다 → 적법한 단순 변심 철회이면 소비자가 반환 비용을 부담한다.</p>
+<p><strong>③ 원피스 반품 뒤 카드값만 남음.</strong> 7일 내 철회·반품을 했는데 판매자가 환급하지 않는다 → 카드사에 정지·취소·상계 요청 자료를 낸다 → 판매자 미환급과 결제업자 조치 의무를 연결한다.</p>
+<p><strong>④ 사이즈·굽 높이만 고른 구두.</strong> 디자인·색은 정해져 있고 표준 옵션만 고른 제품이다 → 업체는 주문제작이라며 수선만 해 주겠다고 한다 → 표준 규격품인지, 정말 다른 사람에게 팔 수 없는 개별 제작인지 따진다 → 중대한 회복 불가능 피해와 사전 별도 고지·서면 동의까지 갖추지 않았다면 그 예외로 철회를 거절하지 못한다. 주문을 받은 뒤 생산한다는 사실만으로 충분하지 않다.</p>
+<p><strong>⑤ 오른발 270, 왼발 260인 운동화.</strong> 상자에는 270이라 적혀 있고 한쪽도 맞아 보인다 → 일주일쯤 뒤 신으려다 불일치를 안다 → 판매자는 7일 지났다고 거절한다 → 계약 불일치의 <strong>3개월·30일</strong> 특칙을 본다. 통상적 주의로 알 수 있었던 시점도 따지며, 실제 착용·수선·세탁을 했다는 이유만으로 모든 특별 철회가 자동 배제되지는 않는다. 사용 비용도 법정 허용 범위이지 임의의 감가 벌금이 아니다.</p>
+<p><strong>⑥ 순모 100% 코트가 혼방.</strong> 광고를 믿고 샀는데 합성섬유가 섞였다 → 구매 20일이 지나 거절당한다 → 광고 화면·상품 표시 등 자료를 남겨 불일치를 확인한다 → 두 기간 내 철회·환급을 검토하고 반환비는 사업자가 부담한다. 내용증명은 권리 행사 증거를 남기는 수단이다. 공정위의 광고 시정과 개별 소비자 환급·배상은 서로 다른 절차다.</p>
+<p><strong>⑦ SNS 해외 구매대행 카디건 30만 원, 한 시간 뒤 취소.</strong> 해외 구매대행도 법정 통신판매 철회를 검토한다. ‘한 시간밖에 안 지남’만으로 비용이 반드시 0원인 것은 아니지만, 해외라는 말만으로 임의 배송비를 뺄 수도 없다. 실제 출고·배송 지시, 발생 비용, 사전 안내, 철회 원인을 확인한다. 이미 발생한 적정 반환 비용은 문제 될 수 있으나 아직 들지 않은 가상의 비용이나 위약금을 배송비로 바꾸어 청구하지 못한다. 내역·증빙을 요구하여 과다 여부를 판단한다.</p>
+<p><strong>⑧ 건강기능식품의 금지 스티커만 제거.</strong> ‘제거하면 환불 불가’ 스티커만 떼었고 본품은 개봉하지 않았다 → 사업자가 반품을 거절한다 → 단순 스티커 제거가 가치의 현저한 감소나 귀책 훼손인지 따진다 → 교재 사정에서는 내용 확인 포장 훼손으로 철회 가능하다. <strong>다만 의약·식품의 실제 밀봉을 뜯어 위생·안전에 중대한 영향을 준 전혀 다른 사건까지 같다고 하지 않는다.</strong></p>
+<p><strong>한 줄:</strong> <mark class="yellow">내가 원하지 않는가, 주문과 다른가, 확인만 했는가, 실제 비용이 생겼는가를 차례로 묻는다.</mark></p>
+<h2 id="consumer-09-18" data-concept-id="consumer-09-18">4-6. 불이행 해제의 배상 상한과 휴업 중 처리 의무 ★★★☆☆</h2>
+<p><strong>교재 348–349쪽 / 문단의 목적:</strong> 소비자 잘못에 따른 해제에서도 배상을 무제한 청구하지 못한다. 물건이 돌아오면 <strong>통상 사용료·사용이익</strong>과 <strong>판매가격−반환 당시 가치</strong> 중 큰 금액, 돌아오지 않으면 판매가격을 법정 기준으로 하고 미납에 따른 지연배상금을 더한 상한을 본다. 두 손해 항목을 마음대로 모두 더하는 규정이 아니다. 공정위의 산정 기준 고시도 활용할 수 있다.</p>
+<p>휴업·영업정지 중에도 철회·환급 업무를 계속 처리해야 한다. 폐업 신고 없이 파산 등 실질적으로 영업할 수 없는 상태이면 관할 기관은 법정 신고 사항을 직권 말소할 수 있다. 신고 말소가 기존 채무까지 없애는 것은 아니다. <strong>한 줄:</strong> 법정 철회와 소비자 불이행 해제의 정산을 구별하고, 쉬는 회사에도 기존 환급 의무가 남는다.</p>
+<h1>5. 돈을 먼저 보낼 때의 구매안전</h1>
+<h2 id="consumer-09-19" data-concept-id="consumer-09-19">5-1. 결제대금예치는 물건을 받을 때까지 제3자가 돈을 맡는다 ★★★★★</h2>
+<p><strong>교재 349–351·353–354쪽 / 문단의 목적:</strong> 판매자가 물건을 주기 전에 돈을 갖고 사라지는 위험을 줄인다. <strong>결제대금예치, 에스크로</strong>는 법정 예치업자·금융기관 등이 돈을 맡았다가 배송 완료 등 약정·법정 절차에 따라 사업자에게 지급하는 거래안전 장치다. 사업자가 자기 통장 이름에 ‘안전계좌’라고 쓴 것과 다르다. 예치업자 자격, 별도 예치 계좌·피해보상 장치 등 요건도 있다.</p>
+<p>일반적인 피해보상보험 등 이용은 권장 구조가 있지만, <strong>선지급식 통신판매에서 소비자가 법정 구매안전 서비스를 선택하면</strong> 이를 이용하게 하거나 법정 피해보상 계약을 체결할 의무를 본다. 보험만 모든 사업자에게 일률적으로 강제하는 제도도, 모두 선택 사항이라 아무것도 안 해도 되는 제도도 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>법정 적용 예외</th>
+<th>이유와 주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>신용카드 지급</td>
+<td>다른 결제 보호 장치. 미배송 시 카드사의 피해 예방·회복 협력 의무는 남음</td>
+</tr>
+<tr>
+<td>정보통신망 전송·제3자가 배송 확인 불가능</td>
+<td>배송 확인형 예치 구조가 곤란</td>
+</tr>
+<tr>
+<td>일정 기간 분할 공급</td>
+<td>단순한 1회 배송 완료 확인과 다름</td>
+</tr>
+<tr>
+<td>다른 법의 충분한 안전장치·법정 공공기관 등 거래</td>
+<td>정한 대상·조건에서 예외</td>
+</tr>
+</tbody></table>
+<p>과거 5만 원 미만 소액 예외는 <strong>2013년 개정으로 삭제</strong>되었다. 교재 332쪽 각주의 오래된 금액 예외 문구와 351쪽의 설명이 충돌하면 삭제된 현행 기준을 따른다. 소액이라고 자동 제외되지 않는다.</p>
+<p><strong>교재 사례:</strong> A가 20만 원 등산화를 무통장입금하려고 걱정한다 → 실제 예치 이용 여부를 확인한다 → 돈을 판매자에게 곧바로 보내는 대신 적법한 예치 절차를 선택한다 → 미배송 시 그 절차로 반환을 요구한다. 표지만 믿지 말고 실제 서비스 연결·적용 범위를 확인한다. <strong>한 줄:</strong> <mark class="green">돈과 물건의 시간 차이를 제3자의 보관으로 줄인다.</mark></p>
+<h2 id="consumer-09-20" data-concept-id="consumer-09-20">5-2. 피해보상보험의 수혜자는 소비자이고 거짓 안전표시는 금지한다 ★★★☆☆</h2>
+<p><strong>교재 350–353쪽 / 문단의 목적:</strong> ‘보험에 들었다’는 이름뿐인 보호를 막는다. 소비자피해보상보험 등은 보험회사와의 보험, 은행 지급보증, 공제조합 공제 중 법정 방식이다. 환급 의무·공급 의무 불이행 등의 피해를 보상하고, 구매자를 피보험자·수혜자로 하며, 매매대금 한도에서 법정·고시 기준 이상 금액을 갖춘다.</p>
+<p>정당한 이유 없이 책임·보상 범위를 좁히지 못하고, 신속한 보상과 지연배상, 지나친 입증 부담이나 표현 방법 제한 금지, 예상하기 어려운 불리한 약정 금지 등을 충족해야 한다. 지급 사유가 생기면 지체 없이 지급하고 지연하면 배상한다. 체결을 위해 매출 자료를 낼 때 거짓으로 제출하지 못한다.</p>
+<p>사이버몰에서 미리 대가를 받고 구매·이용에 쓰게 하는 <strong>법정 전자적 결제수단 발행자</strong>는 별도 피해보상 계약 의무를 본다. 교재의 발행잔액 10% 범위에서 공정위가 정하는 금액과 법정 예치·보증 공제 등의 산식은 <strong>그 제도의 보장 규모 기준</strong>이다. 소비자가 손해의 10%만 돌려받는다는 뜻도, 현재 모든 선불수단이 10%만 별도 관리하면 된다는 뜻도 아니다. 전자금융거래법의 별도 선불충전금 보호는 13장에서 구별한다.</p>
+<p>적법하게 보험·예치를 이용하면 법정 표지를 쓸 수 있고, 첫 화면·광고·결제수단 선택 전 등에 내용을 알린다. 작은 단말기 표시 방식 예외가 보험 가입 의무 자체의 예외는 아니다. 가입하지 않고 비슷한 표지를 만드는 행위는 금지된다. <strong>한 줄:</strong> 안전장치의 이름보다 수혜자·보장 내용·실제 체결을 확인한다.</p>
+<h1>6. 오픈마켓과 가격비교 사이트의 책임</h1>
+<h2 id="consumer-09-21" data-concept-id="consumer-09-21">6-1. 판매자가 아니라고 미리 알리고 실제 판매자를 확인한다 ★★★★★</h2>
+<p><strong>교재 354–356쪽 / 문단의 목적:</strong> 소비자가 ‘사이트 운영자에게 샀다’고 생각하는 혼동을 줄인다. 통신판매중개자는 <strong>자신이 거래 당사자가 아니라는 사실</strong>을 소비자가 쉽게 알도록 미리 고지한다. 중개 의뢰자가 사업자이면 성명·상호·대표자, 주소·전화·전자우편, 신고 확인 사항·사업자등록번호 등 법정 신원정보를 확인해 청약 전에 제공한다. 보유한 법정 인증·신용 관련 정보도 범위에 따라 포함한다.</p>
+<p>중개자는 불만·분쟁을 접수할 인력·설비와 처리 기준을 마련하고, 원인·피해를 조사해 <strong>3영업일 안에 진행 경과, 10영업일 안에 조사 결과 또는 처리 방안</strong>을 알려야 한다. 반드시 그 기간 안에 모든 민사 분쟁을 최종 해결하라는 뜻과는 다르다.</p>
+<p>개인의 성명·생년월일·주소·전화·전자우편을 모두 확인해 상대방이 열람하게 한다는 교재 설명은 <strong>개정 전</strong> 내용이다. 현재 개인 간 거래는 뒤의 6-3에서 별도로 읽는다. ‘공인인증기관’이라는 과거 명칭도 현재 전자서명인증사업자 등 법정 정보 확인 방식과 구별한다. <strong>한 줄:</strong> <mark class="yellow">비당사자 고지＋판매자 확인＋분쟁 처리, 세 의무가 함께 있다.</mark></p>
+<h2 id="consumer-09-22" data-concept-id="consumer-09-22">6-2. 고지했으니 모든 책임이 끝난다는 말은 틀리다 ★★★★★</h2>
+<p><strong>교재 356–358쪽 / 문단의 목적:</strong> 중개자·판매자의 책임을 한꺼번에 지우거나 전가하지 못하게 한다.</p>
+<table>
+<thead>
+<tr>
+<th>법정 상황</th>
+<th>책임을 나누는 법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>비당사자 고지 안 함</td>
+<td>판매자의 고의·과실로 난 재산상 손해에 중개자도 연대 배상</td>
+</tr>
+<tr>
+<td>법정 판매자 신원정보 미제공·허위 제공</td>
+<td>그 때문에 난 재산상 손해에 연대책임. 상당한 주의의 법정 면책 가능성 구별</td>
+</tr>
+<tr>
+<td>중개자가 동시에 통신판매업자</td>
+<td>고지만으로 판매업자 자신의 신고·정보·청약 확인·공급·환급·철회 책임을 면하지 못함</td>
+</tr>
+<tr>
+<td>사업자인 판매자의 중개 의뢰</td>
+<td>중개자 잘못이라는 이유만으로 판매자 면책 불가. 상당한 주의의 법정 예외는 별도</td>
+</tr>
+</tbody></table>
+<p>판매업자의 의뢰를 받아 중개하면서 <strong>의뢰자가 책임지기로 약정하고 소비자에게 고지한 부분</strong>의 책임을 의뢰자가 지는 특칙도 있다. 이것을 플랫폼이 아무 문구나 써서 법정 모든 책임을 없애는 만능 면책조항으로 읽지 않는다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancNo=21312&ancYd=20260120&efYd=20260721&lsiSeq=282793">현행 20조·20조의2·20조의3</a></p>
+<p>중개업자가 <strong>청약을 접수</strong>하면 판매자가 이행하지 않는 철회·해제 정보와 청약 확인을 대신 이행한다. <strong>대금을 받으면</strong> 조작 실수 방지·전자적 대금지급 신뢰 확보 의무의 대행을 본다. ‘장소만 빌려줬다’고 해도 실제로 맡은 중요한 업무의 책임을 따진다.</p>
+<p><strong>교재 게임기 사례의 흐름:</strong> A가 X마켓의 판매자 Z에게 게임기를 산다 → 불량인데 Z와 연락이 안 된다 → X는 중개자라고 답한다 → 먼저 비당사자 고지 여부를 본다 → 고지 누락이면 해당 연대책임, 고지했어도 신원정보·업무 대행·자체 판매업자 책임 등의 다른 근거를 따진다. 교재의 ‘고지하지 않은 경우에만 책임’은 20조의2 1항의 한 근거에 한정해 읽어야 한다. <strong>다른 결론이면:</strong> 플랫폼이 고지 한 줄로 자신의 별도 잘못까지 숨기게 된다. <strong>한 줄:</strong> <mark class="pink">중개자 고지는 한 책임의 요건이지 모든 책임의 면제장이 아니다.</mark></p>
+<h2 id="consumer-09-23" data-concept-id="consumer-09-23">6-3. 현재 개인 간 거래는 정보 최소화와 분쟁 협조를 함께 한다 ★★★★☆</h2>
+<p><strong>교재 355–356쪽의 개정 보완 / 문단의 목적:</strong> 개인 판매자의 사생활을 과도하게 노출하지 않으면서 분쟁 해결 길을 남긴다. 2026.7.21. 시행 법 20조의4에 따라 플랫폼은 개인 판매자의 <strong>전화번호와 전자우편 등 법정 신원정보</strong>를 확인한다. 법정 본인확인기관으로 확인한 정보를 보유하면 전자우편 확인은 제외될 수 있고, 이미 보유한 법정 인증·신용 관련 정보도 정한 범위에서 포함한다.</p>
+<p>분쟁이 생기면 법정 분쟁조정기구·재판상 필요에 따른 법원 요청 등에 신원정보·거래내역을 제공하여 협조한다. 소비자에게 직접 제공하는 경우는 <strong>개인 판매자가 그 제공에 동의한 경우</strong> 등 법정 조건을 구별한다. 누구나 판매자의 집주소·생년월일을 볼 수 있게 한다는 옛 구조를 그대로 적용하지 않는다.</p>
+<p>에스크로를 이용할 수 있으면 개인 판매자·소비자에게 알리고 이용을 권고하며, 사업자 판매와 개인 판매가 섞인 플랫폼은 적절히 구분해 표시한다. 이 보완으로 모든 개인 중고거래에 사업자 통신판매의 7일 변심 철회가 자동 적용되는 것은 아니다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=009318&lsRvsGubun=all">법 개정문</a>, <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=009338&lsRvsGubun=all">시행령 25조의3</a></p>
+<p><strong>시행일 주의:</strong> 국내 주소·영업소 없는 일정 해외 사업자의 국내대리인 지정 규정은 <strong>2027.1.21.부터</strong>다. 개정법에 보인다고 2026.10.25. 현재 이미 시행 중이라고 하지 않는다. <strong>한 줄:</strong> <mark class="blue">정보를 덜 노출하면서 분쟁기관에는 필요한 정보가 가도록 역할을 나눈다.</mark></p>
+<h2 id="consumer-09-24" data-concept-id="consumer-09-24">6-4. 가격비교는 같은 조건의 실제 가격을 보여 주어야 한다 ★★★☆☆</h2>
+<p><strong>교재 358–359쪽 / 문단의 목적:</strong> ‘최저가’라는 표시 뒤에 필수 옵션·특정 카드 조건을 숨기지 못하게 한다. 교재의 권고는 <strong>모든 이용자에게 별도 조건 없이 적용되는 가격</strong>, 필수 선택사항을 합친 가격을 비교하고, 지역·품목별 배송·설치비를 알기 쉽게 따로 표시하라는 것이다.</p>
+<p>정렬 기준이 가격·판매량·출시일 중 무엇인지 설명하고, 클릭한 상품과 가격·크기·수량이 다른 비싼 상품으로 이어지는 기만적 연결을 막는다. 가격 정보만 단순히 제공한 경우와 청약·판매의 중요한 일부를 수행한 경우는 중개자 판단에서도 구별한다.</p>
+<p>교재의 권고는 자율 준수를 유도하는 성격이다. 더 불리한 약관을 쓰면 그 차이를 알기 쉽게 표시·고지해야 하고 이를 지키지 않으면 법정 시정조치 문제가 생길 수 있다. 현재의 필수 총금액 표시 등 <strong>직접적인 다크패턴 금지</strong>와도 겹치므로 ‘권고니까 어떤 방식도 괜찮다’고 해석하지 않는다. <strong>한 줄:</strong> 서로 다른 조건의 가격을 같은 값인 것처럼 비교하지 않는다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>電子商去來 전자상거래</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 電(번개 전): 전기, 子(아들 자): 구성 요소, 商(장사 상): 상업, 去(갈 거): 감, 來(올 래): 옴. <strong>③ 합친 뜻:</strong> 전자적 방식의 상업 거래. <strong>④ 이름의 이유:</strong> 처리 매체가 전자적이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 전부 또는 일부를 전자문서 등 전자적 방식으로 처리하는 상행위. <strong>⑥ 쉬운 말:</strong> 주문이나 결제 일부를 전자적으로 처리하는 거래. <strong>⑦ 사례:</strong> 가게 카드 결제도 전자적 처리다.</p>
+<p><strong>⑧ 시험:</strong> 비대면 필수 아님. <strong>⑨ 비교·기억법:</strong> 통신판매는 비대면 정보·청약이라는 다른 기준.</p>
+<h3>通信販賣 통신판매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 通(통할 통): 전달, 信(믿을 신): 소식, 販(팔 판): 판매, 賣(팔 매): 팖. <strong>③ 합친 뜻:</strong> 통신수단으로 정보를 보내 판매함. <strong>④ 이름의 이유:</strong> 얼굴을 마주하지 않고 소식을 주고받아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 통신수단으로 비대면 정보 제공·청약을 받아 파는 거래. <strong>⑥ 쉬운 말:</strong> 화면·카탈로그를 보고 멀리서 주문하는 것. <strong>⑦ 사례:</strong> 인터넷 쇼핑·카탈로그 우편 주문.</p>
+<p><strong>⑧ 시험:</strong> 전화권유판매 제외. <strong>⑨ 비교·기억법:</strong> 전자문서 없이도 통신판매 가능.</p>
+<h3>仲介 중개·依賴 의뢰</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 仲(버금 중): 사이, 介(끼일 개): 중간에 섬, 依(의지할 의): 기댐, 賴(의뢰할 뢰): 부탁. <strong>③ 합친 뜻:</strong> 사이에서 연결함, 일을 부탁함. <strong>④ 이름의 이유:</strong> 판매 당사자 사이를 연결하는 역할이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 거래 일부를 수행하여 판매자와 소비자의 통신판매를 알선. <strong>⑥ 쉬운 말:</strong> 물건 주인과 살 사람을 만나 거래하게 돕는 것. <strong>⑦ 사례:</strong> 오픈마켓에 판매자가 상품을 올린다.</p>
+<p><strong>⑧ 시험:</strong> 판매자·중개자·중개 의뢰자 구별. <strong>⑨ 비교·기억법:</strong> 광고만 제공과 중요한 판매 업무 수행은 다름.</p>
+<h3>電子文書 전자문서</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 電(번개 전): 전기, 子(아들 자): 요소, 文(글월 문): 글, 書(글 서): 기록. <strong>③ 합친 뜻:</strong> 전자적 형태로 남긴 정보. <strong>④ 이름의 이유:</strong> 종이가 아니라 전자적 형태여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정보처리시스템으로 작성·송신·수신·저장된 전자 정보. <strong>⑥ 쉬운 말:</strong> 주문 이메일이나 저장된 결제 기록도 해당할 수 있음. <strong>⑦ 사례:</strong> 온라인 계약 내용을 전자우편으로 받는다.</p>
+<p><strong>⑧ 시험:</strong> 전부 또는 일부 전자 처리. <strong>⑨ 비교·기억법:</strong> 문서는 종이만 뜻하지 않음.</p>
+<h3>請約 청약·承諾 승낙</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청): 요청, 約(맺을 약): 약속, 承(이을 승): 받아들임, 諾(대답할 낙): 허락. <strong>③ 합친 뜻:</strong> 계약을 제안함과 받아들임. <strong>④ 이름의 이유:</strong> 양쪽 의사가 맞아야 계약이 생겨서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 내용을 정해 제안하고 그 내용에 동의하는 의사표시. <strong>⑥ 쉬운 말:</strong> 이 조건으로 살게요와 그 조건으로 팔게요. <strong>⑦ 사례:</strong> 주문 접수 알림이 승낙인지 확인한다.</p>
+<p><strong>⑧ 시험:</strong> 계약 성립 시점. <strong>⑨ 비교·기억법:</strong> 광고·단순 접수 확인이 언제나 승낙은 아님.</p>
+<h3>錯誤 착오·重過失 중과실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 錯(섞일 착): 어긋남, 誤(그르칠 오): 잘못, 重(무거울 중): 중함, 過(지날 과): 잘못, 失(잃을 실): 실수. <strong>③ 합친 뜻:</strong> 잘못 알음, 중대한 부주의. <strong>④ 이름의 이유:</strong> 의사와 실제 사정이 어긋났기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중요 부분 착오의 취소에서 표의자의 중대한 과실 등을 심사. <strong>⑥ 쉬운 말:</strong> 가격 숫자를 틀렸어도 왜 틀렸는지까지 따지는 것. <strong>⑦ 사례:</strong> 300만 원을 30만 원으로 입력한다.</p>
+<p><strong>⑧ 시험:</strong> 중요 착오·중과실·계약 성립. <strong>⑨ 비교·기억법:</strong> 단순히 반값 이하이면 무조건 취소라는 기준 없음.</p>
+<h3>信賴利益 신뢰이익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신): 믿음, 賴(의뢰할 뢰): 의존, 利(이로울 리): 이익, 益(더할 익): 이익. <strong>③ 합친 뜻:</strong> 믿고 행동한 데 따른 이익. <strong>④ 이름의 이유:</strong> 약속을 믿지 않았다면 쓰지 않았을 돈이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 등이 유효하다고 믿어 지출한 비용 등의 손해 문제. <strong>⑥ 쉬운 말:</strong> 거래가 될 줄 알고 들인 배송비·수수료 등을 따지는 것. <strong>⑦ 사례:</strong> 가격 오류 취소 후 실제 지출 손해를 청구한다.</p>
+<p><strong>⑧ 시험:</strong> 취소 가능성과 배상 요건은 별도. <strong>⑨ 비교·기억법:</strong> 이행이익은 계약이 제대로 이행됐을 때 얻을 이익.</p>
+<h3>請約撤回 청약철회</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청): 요청, 約(맺을 약): 약속, 撤(거둘 철): 거둠, 回(돌 회): 되돌림. <strong>③ 합친 뜻:</strong> 계약 의사를 거두어 되돌림. <strong>④ 이름의 이유:</strong> 실물을 보지 못한 선택을 재고려하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특별법이 일정 기간 보장하는 재고려 권리. <strong>⑥ 쉬운 말:</strong> 집에 받아 보고 법정 조건에서 구매를 돌리는 것. <strong>⑦ 사례:</strong> 수령 후 7일 내 적법하게 철회한다.</p>
+<p><strong>⑧ 시험:</strong> 일반 7일·불일치 3개월과 30일. <strong>⑨ 비교·기억법:</strong> 미성년자 취소·판매자 착오 취소와 별개.</p>
+<h3>可分 가분·原狀回復 원상회복</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 可(옳을 가): 가능, 分(나눌 분): 분리, 原(근원 원): 원래, 狀(형상 상): 상태, 回(돌 회): 되돌림, 復(회복할 복): 돌아감. <strong>③ 합친 뜻:</strong> 나눌 수 있음, 원래 상태로 돌아감. <strong>④ 이름의 이유:</strong> 아직 시작 안 한 부분과 이미 받은 부분을 나누기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 부분별 구별 가능한 급부와 종료 후 반환 관계. <strong>⑥ 쉬운 말:</strong> 나눌 수 있는 강좌의 남은 부분을 따로 보는 것. <strong>⑦ 사례:</strong> 일부 강좌만 시작한 디지털 묶음.</p>
+<p><strong>⑧ 시험:</strong> 미개시 가분 부분·용역 반환 예외. <strong>⑨ 비교·기억법:</strong> 한 부분 시작으로 전체 철회가 자동 배제되지 않음.</p>
+<h3>相計 상계·連帶責任 연대책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 相(서로 상): 서로, 計(셀 계): 계산, 連(이을 연): 연결, 帶(띠 대): 묶음, 責(꾸짖을 책): 책임, 任(맡길 임): 맡음. <strong>③ 합친 뜻:</strong> 서로 계산함, 함께 묶인 책임. <strong>④ 이름의 이유:</strong> 환급을 실제 돈의 흐름으로 연결하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대등액 채권 소멸과 여러 책임자의 전액 이행 책임. <strong>⑥ 쉬운 말:</strong> 카드사가 가게에 줄 돈과 돌려줄 돈을 정리하는 것. <strong>⑦ 사례:</strong> 반품 후 카드사에 자료를 붙여 상계를 요청한다.</p>
+<p><strong>⑧ 시험:</strong> 누구의 채무와 무엇을 상계하는지. <strong>⑨ 비교·기억법:</strong> 연대책임이 각자 일부만 부담한다는 뜻은 아님.</p>
+<h3>決濟代金預置 결제대금예치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 決(결단할 결): 마무리, 濟(건널 제): 처리, 代(대신할 대): 대가, 金(쇠 금): 돈, 預(미리 예): 미리, 置(둘 치): 둠. <strong>③ 합친 뜻:</strong> 지급할 거래 대금을 미리 맡겨 둠. <strong>④ 이름의 이유:</strong> 물건을 받기 전에 판매자에게 돈이 모두 넘어가는 위험을 줄여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 제3자가 대금을 보관하고 배송 확인 등 절차에 따라 지급. <strong>⑥ 쉬운 말:</strong> 물건 올 때까지 믿을 수 있는 곳이 돈을 맡는 것. <strong>⑦ 사례:</strong> 등산화 대금을 에스크로로 낸다.</p>
+<p><strong>⑧ 시험:</strong> 소액 예외 삭제·법정 제외 거래. <strong>⑨ 비교·기억법:</strong> 보험은 피해 보상 장치이고 예치는 지급 보관 장치.</p>
+<h3>先支給式 선지급식</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선): 먼저, 支(지탱할 지): 지급, 給(줄 급): 줌, 式(법 식): 방식. <strong>③ 합친 뜻:</strong> 먼저 돈을 주는 방식. <strong>④ 이름의 이유:</strong> 물건·서비스보다 지급이 앞서서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공급 전에 대금 전부 또는 일부를 지급하는 통신판매. <strong>⑥ 쉬운 말:</strong> 먼저 입금하고 택배를 기다리는 것. <strong>⑦ 사례:</strong> 선입금 주문의 공급 조치 3영업일.</p>
+<p><strong>⑧ 시험:</strong> 7장 선불식 할부와 요건이 다름. <strong>⑨ 비교·기억법:</strong> 모든 선지급 통신판매가 상조 같은 선불식 할부는 아님.</p>
+<h3>告知 고지·免責 면책</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 告(알릴 고): 알림, 知(알 지): 앎, 免(면할 면): 벗어남, 責(꾸짖을 책): 책임. <strong>③ 합친 뜻:</strong> 알려 줌, 책임을 벗어남. <strong>④ 이름의 이유:</strong> 어떤 정보와 주의를 갖췄는지에 따라 책임이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 정보를 알리는 의무와 책임이 배제되는 요건. <strong>⑥ 쉬운 말:</strong> 중개자라고 알렸어도 자기 잘못은 따로 보는 것. <strong>⑦ 사례:</strong> 판매자 허위 신원정보로 피해가 난다.</p>
+<p><strong>⑧ 시험:</strong> 고지 누락 책임·정보 책임·자체 판매 책임 분리. <strong>⑨ 비교·기억법:</strong> 고지는 모든 책임 면제 약속이 아님.</p>
+<h3>盜用 도용·變造 변조</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 盜(훔칠 도): 훔침, 用(쓸 용): 이용, 變(변할 변): 바꿈, 造(지을 조): 만듦. <strong>③ 합친 뜻:</strong> 권한 없이 쓰고 내용을 바꿈. <strong>④ 이름의 이유:</strong> 주인의 뜻·적법 권한과 다르게 사용해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소비자 정보를 불법 사용·변경하여 피해를 일으키는 행위. <strong>⑥ 쉬운 말:</strong> 내 정보로 남이 결제하거나 주소를 바꾸는 것. <strong>⑦ 사례:</strong> 도용 확인·기록 제공·원상회복을 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 적법 수집이 무제한 이용 허가는 아님. <strong>⑨ 비교·기억법:</strong> 다른 적법 처리 근거가 있는 무동의 처리와 구별.</p>
+<h3>Dark pattern 다크패턴(외래어)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 한자어가 아니다. dark는 어두운·숨겨진, pattern은 반복되는 방식·유형이라는 영단어다. <strong>③ 합친 뜻:</strong> 화면의 숨은 눈속임 방식. <strong>④ 이름의 이유:</strong> 눈에 잘 띄지 않는 방식으로 선택을 유도해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 화면 구조로 소비자의 자유로운 의사결정을 왜곡하는 법정 금지 유형. <strong>⑥ 쉬운 말:</strong> 가입은 한 번인데 탈퇴는 여러 번 막는 화면. <strong>⑦ 사례:</strong> 원치 않는 상품이 미리 선택되어 있다.</p>
+<p><strong>⑧ 시험:</strong> 총가격·사전 선택·오인 위계·해지 방해·반복 간섭. <strong>⑨ 비교·기억법:</strong> 모든 색상 차이나 모든 안내가 불법이라는 뜻은 아님.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성 043·044·2016-58</td>
+<td>전자 처리·비대면·판매·중개를 구분하는 출발점</td>
+</tr>
+<tr>
+<td>2012-62</td>
+<td>광고 6개월·계약 5년·결제 5년·분쟁 3년</td>
+</tr>
+<tr>
+<td>2017-57·2019-58</td>
+<td>가격 오류의 착오 취소와 신뢰손해를 별도로 판단</td>
+</tr>
+<tr>
+<td>2018-52·53</td>
+<td>불일치 철회기간과 반품 배송비 부담</td>
+</tr>
+<tr>
+<td>2013-64·2019-55</td>
+<td>중개자 고지로 모든 책임이 사라지지 않음</td>
+</tr>
+</tbody></table>
+<p>반복 축은 <strong>반품 배송비와 중개자 책임</strong>이다. 실제 오답 통계가 없으므로 ‘많이 틀린 보기’라고 단정하지 않고 혼동하기 쉬운 문장을 표시한다. 구매안전의 소액 예외 삭제, 7일 공급 조치와 7일 철회기간, 가격 오기의 자동 취소 주장을 함께 점검한다. 28문제·112보기 모두 부록에 연결한다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 광고는 인터넷, 계약은 매장.</strong> 지수가 인터넷 광고를 보고 매장에서 제품을 고른 뒤 카드로 결제했다. 무조건 통신판매 7일 철회를 주장할 수 있을까? <strong>정답·의도:</strong> 전자적 결제와 비대면 청약은 다르다. 다른 특별한 약정·법적 근거 없이 카드 결제만으로 통신판매 철회권이 생기지 않는다.</p>
+<p><strong>응용2 · 아직 시작하지 않은 강좌.</strong> 온라인 강의 묶음 중 한 부분만 제공을 시작했고 나머지는 나눌 수 있다. 사업자는 디지털이라 전부 환불 불가라고 한다. <strong>정답·의도:</strong> 가분적인 미개시 부분을 구별하고 제한 안내·시험 제공 조치 등도 확인한다. 일부 시작을 전체 권리 소멸로 바꾸지 않는다.</p>
+<p><strong>응용3 · 잘못 온 보온병.</strong> 빨간 500mL 제품을 주문했는데 파란 300mL가 왔다. 판매자는 7일 지났고 반품비도 소비자 몫이라고 한다. <strong>정답·의도:</strong> 계약 불일치의 3개월·30일을 함께 판단하고 적법한 특별 철회 반환비는 사업자 부담이다.</p>
+<p><strong>응용4 · 값싼 거래와 에스크로.</strong> 2만 원 상품을 선입금하려 하자 소액이라 구매안전 서비스 대상이 아니라고 한다. <strong>정답·의도:</strong> 소액 예외는 삭제되었다. 다른 법정 제외 사유가 없는지 확인한 뒤 소비자의 선택에 따른 의무를 본다.</p>
+<p><strong>응용5 · 개인 판매자의 집주소 요구.</strong> 중고거래 분쟁이 생긴 소비자가 플랫폼에 주소·생년월일을 무조건 공개하라고 한다. <strong>정답·의도:</strong> 현행 개인 간 거래 규정의 확인 범위와 제공 상대·동의 요건을 확인한다. 분쟁조정기구·법원의 법정 요청 협조와 소비자에게 직접 공개하는 것은 다르다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제9장</h1>
+<p><strong>TOP3:</strong> 거래 유형 / 철회 원인·비용 / 판매자와 중개자의 책임.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>시험 직전 암기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>전자·통신</td>
+<td>전자문서 처리 vs 비대면 정보·청약. 점포 카드 결제 ≠ 통신판매.</td>
+</tr>
+<tr>
+<td>전화·쿠폰</td>
+<td>전화권유는 방문판매법. 이용권을 직접 팔면 그 판매 당사자.</td>
+</tr>
+<tr>
+<td>적용</td>
+<td>사업용 원칙 제외, 소비자 동일 지위 예외. 더 유리한 다른 법 우선.</td>
+</tr>
+<tr>
+<td>기록</td>
+<td>광고 6개월 / 계약·철회 5년 / 결제·공급 5년 / 분쟁 3년.</td>
+</tr>
+<tr>
+<td>정보·결제</td>
+<td>총가격·반품·추가 비용·신원. 변경 전 30일 내 정기결제 증액·전환 동의.</td>
+</tr>
+<tr>
+<td>공급</td>
+<td>청약 7일, 선지급 3영업일 내 필요한 조치. 별도 공급 약정 예외.</td>
+</tr>
+<tr>
+<td>가격 착오</td>
+<td>계약 성립 → 중요 착오·중과실 → 취소·환급 → 별도 손해배상 요건.</td>
+</tr>
+<tr>
+<td>철회</td>
+<td>기본 7일, 늦은 공급·주소·방해별 기산, 서면 발송 효력.</td>
+</tr>
+<tr>
+<td>불일치</td>
+<td>공급 3개월과 인식·인식 가능 30일. 7일 경과만으로 거절 못 함.</td>
+</tr>
+<tr>
+<td>제한</td>
+<td>확인 개봉 예외, 개별 제작 고지·서면 동의, 가분 콘텐츠 미개시 부분.</td>
+</tr>
+<tr>
+<td>정산</td>
+<td>변심 반환비 소비자, 불일치 사업자. 법정 철회 위약금 불가.</td>
+</tr>
+<tr>
+<td>환급</td>
+<td>물건 반환일 / 용역·미공급 철회일부터 3영업일. 지연 연 15%.</td>
+</tr>
+<tr>
+<td>안전</td>
+<td>에스크로·보험. 5만 원 소액 예외 삭제, 카드 등 법정 예외 구별.</td>
+</tr>
+<tr>
+<td>중개</td>
+<td>고지＋신원정보＋분쟁 처리. 3영업일 경과·10영업일 결과 안내.</td>
+</tr>
+<tr>
+<td>현행 개인거래</td>
+<td>신원정보 최소화·분쟁 협조·개인/사업자 구분. 7일 철회 자동 적용 아님.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 전자상거래와 통신판매는 같은 말이 아니다. 중개자 고지는 모든 책임을 없애지 않는다. 반품 이유가 배송비 부담을 바꾼다.</p>
+<p>사례를 풀 순서: 판매·중개 주체 → 비대면 청약·적용 법 → 철회 원인·기간 → 제한·예외 → 반환·환급·카드 조치.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 점포 카드 결제·계약 불일치 반품·중고거래 플랫폼을 서로 다른 기준으로 설명한다. 🟡 7일과 3영업일은 기억하지만 무엇의 기간인지 섞는다. 🔴 개봉하면 무조건 환불 불가 또는 중개자는 무조건 무책임이라고 생각한다. 실제 답안을 받지 않았으므로 자기점검 기준으로 제시한다.</p>
+<p><strong>반드시 복습할 TOP3:</strong> 전자상거래·통신판매·중개 / 변심과 계약 불일치의 기간·배송비 / 중개자의 독립된 의무와 연대책임.</p>
+<h1>문제 부록 · 28문항·112개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_043"><h4>형성평가 · 소비자법_043</h4><p class="question-stem">다음 중에서 전자상거래에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>재화 또는 용역을 거래할 때 그 전부 또는 일부가 전자문서 등 전자적 방법으로 처리되는 거래의 방법으로 상행위를 하는 것을 말한다.</li><li>전자상거래에서의 전자문서란 정보처리시스템에 의하여 전자적 형태로 작성, 송신 · 수신 또는 저장된 정보를 말한다.</li><li>전자상거래는 반드시 비대면의 형태로 이루어져야 한다.</li><li>전자상거래는 거래가 반드시 전자문서로 이루어져야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 거래 전부 또는 일부의 전자적 처리가 기준이다.</li><li><strong>비선택</strong> · 전자문서의 법정 의미다. 종이만 문서가 아니다.</li><li><strong>선택</strong> · 틀리다. 매장에서 만나 카드 결제하는 전자적 거래도 가능하다.</li><li><strong>비선택</strong> · 전자문서 등 전자적 처리라는 기준이다. 모든 단계가 전자문서여야 한다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 전자상거래는 반드시 비대면일 필요는 없다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_044"><h4>형성평가 · 소비자법_044</h4><p class="question-stem">다음 중에서 통신판매에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>통신판매의 특징은 사업자의 정보제공과 이에 따른 소비자의 청약이 모두 비대면의 방식으로 이루어지는 것이다.</li><li>인터넷쇼핑은 통신판매에 해당한다.</li><li>통신중개판매의 예로는 신용카드사가 자신의 명의로 발행되는 우편물에 여행상품에 대한 판매 정보를 제공하지만 청약의 접수 및 판매는 여행사가 하는 경우를 들 수 있다.</li><li>통신판매에는 TV홈쇼핑, 카탈로그 쇼핑, 전화권유판매 등이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통신판매의 비대면 정보 제공·청약 구조다.</li><li><strong>비선택</strong> · 온라인에서 정보 제공과 청약이 이루어지는 인터넷 쇼핑이다.</li><li><strong>비선택</strong> · 자기 명의 광고수단을 제공하되 판매·접수는 여행사가 하는 교재상 중개 사례다.</li><li><strong>선택</strong> · 틀리다. 전화권유판매는 통신판매에서 제외하고 방문판매법으로 규율한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 전화권유판매는 통신판매의 범위에서 제외되며, 방문판매법에서 규율하고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_045"><h4>형성평가 · 소비자법_045</h4><p class="question-stem">다음 중에서 전자상거래 사업자의 계약체결 관련 의무에 해당하지 않는 것은?</p><ol class="choices"><li>전자상거래 사업자의 재화 등의 공급 및 환급 조치의무</li><li>사이버몰의 운영자 및 통신판매업자의 신원에 대한 정보제공의무</li><li>거래조건에 대한 정보제공 의무</li><li>거래기록의 보존의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원본 정답. 공급·환급은 계약 이행 단계라는 교재의 분류다. 사업자에게 그런 법적 의무 자체가 없다는 뜻이 절대 아니다.</li><li><strong>비선택</strong> · 소비자가 상대방을 확인하도록 하는 계약 전 의무다.</li><li><strong>비선택</strong> · 가격·기간·반품 조건을 알리는 계약 관련 의무다.</li><li><strong>비선택</strong> · 계약·광고·이행 기록을 남기는 의무다. 계약 이후에도 계속된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 전자상거래 사업자의 재화 등의 공급 및 환급 조치의무는 계약체결과 관련한 의무는 아니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_046"><h4>형성평가 · 소비자법_046</h4><p class="question-stem">다음 중에서 전자상거래와 관련한 사업자에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>전자상거래와 관련하여 소비자의 피해를 보상하기 위해 사업자에게 보험계약 등을 체결하거나, 안전한 거래를 위해 소비자의 결제대금을 공신력 있는 결제대금예치업자가 맡아두도록 하는 결제대금예치의 이용을 권장하고 있다.</li><li>통신판매중개업자는 고지의무를 이행함으로써 모든 책임이 사라진다.</li><li>소비자피해보상보험계약 등을 체결하려는 사업자는 소비자피해보상보험계약 등을 체결하기 위해 매출액 등의 자료를 제출할 때에는 거짓 자료를 제출하여서는 안 된다.</li><li>통신판매중개자는 자신이 통신판매의 당사자가 아니라는 사실을 소비자가 쉽게 알 수 있도록 미리 고지해야 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 권장과 선지급·결제수단 발행자의 특정 의무를 구별한다.</li><li><strong>선택</strong> · 틀리다. 신원정보·자체 판매업자·중요 업무 대행 등 별도 책임은 남는다.</li><li><strong>비선택</strong> · 실제 거래 규모를 속여 보호 장치를 약화하지 못한다.</li><li><strong>비선택</strong> · 비당사자 고지 의무다. 모든 책임 면제 문구와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 고지의무를 이행하였더라도 통신판매중개업자는 통신판매업자의 신고, 신원 및 거래조건에 대한 정보제공, 청약확인, 재화의 공급 및 환급 그리고 청약철회에 따른 통신판매업자의 책임을 면하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_061"><h4>기출문제 · 소비자법_기출2012_061</h4><p class="question-stem">[2012 기말고사 · 61번 / 자체 풀이]<br>전자상거래법상 소비자가 구매의 안전을 위해 원할 경우에 은행 등이 소비자가 결제할 대금을 맡아두고 있다가 재화 등의 배송이 완료된 뒤 사업자에게 그 대금을 지급하게 하는 것을 무엇이라고 하는가?</p><ol class="choices"><li>결제대금유예제도</li><li>결제대금예치제도</li><li>소비자피해보상보험제도</li><li>소비자보호예금제도</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 지급을 단순히 늦추는 유예가 아니라 제3자가 보관하는 예치다.</li><li><strong>선택</strong> · 정답. 에스크로라고도 한다.</li><li><strong>비선택</strong> · 보험은 사고 발생 후 약정·법정 보상을 제공하는 다른 구조다.</li><li><strong>비선택</strong> · 소비자보호예금이라는 제도명이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>제3자가 대금을 보관하고 배송 등 이행을 확인한 뒤 판매자에게 지급하는 방식은 결제대금예치, 즉 에스크로이다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_062"><h4>기출문제 · 소비자법_기출2012_062</h4><p class="question-stem">[2012 기말고사 · 62번 / 자체 풀이]<br>전자상거래법은 사업자에게 전자상거래 및 통신판매에서의 표시․광고, 계약내용 및 그 이행 등 거래에 관한 기록을 상당 기간 보존하도록 하고 있다. 기록 보존의 기간이 옳은 것은?</p><ol class="choices"><li>표시․광고에 관한 기록은 8개월</li><li>계약 또는 청약철회 등에 관한 기록은 3년</li><li>대금결제 및 재화 등의 공급에 관한 기록은 3년</li><li>소비자의 불만 또는 분쟁처리에 관한 기록은 3년</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 광고는 8개월이 아니라 6개월이다.</li><li><strong>비선택</strong> · 계약·철회는 5년이다.</li><li><strong>비선택</strong> · 결제·공급도 5년이다.</li><li><strong>선택</strong> · 정답. 불만·분쟁 처리는 3년이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>소비자 불만·분쟁처리 기록은 3년, 계약·청약철회 및 대금결제·공급 기록은 5년, 표시·광고 기록은 6개월을 구분한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_063"><h4>기출문제 · 소비자법_기출2012_063</h4><p class="question-stem">[2012 기말고사 · 63번 / 자체 풀이]<br>전자상거래법상 청약철회를 한 경우 원상회복의무에 따라 소비자가 재화 등을 반환하는 데 필요한 비용은 ( )가 부담해야 한다. 재화 등의 내용이 표시․광고 내용과 다르거나 계약내용과 다르게 이행된 경우의 반환비용은 ( )가 부담한다. ( )의 내용으로 바르게 짝지어 진 것은?</p><ol class="choices"><li>소비자, 사업자</li><li>소비자, 소비자</li><li>사업자, 사업자</li><li>사업자, 소비자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 일반 변심은 소비자, 표시·광고·계약 불일치는 사업자다.</li><li><strong>비선택</strong> · 불일치 반환비를 소비자에게 전가했다.</li><li><strong>비선택</strong> · 일반 통신판매 변심을 방문판매의 반환비 규칙과 섞었다.</li><li><strong>비선택</strong> · 두 부담 주체를 모두 반대로 했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>단순한 청약철회의 반환비용은 소비자, 표시·광고 또는 계약과 다르게 이행된 경우에는 사업자가 부담한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_064"><h4>기출문제 · 소비자법_기출2013_064</h4><p class="question-stem">[2013 기말고사 · 64번 / 자체 풀이]<br>통신판매중개자 및 중개의뢰자의 책임에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>통신판매중개자는 통신판매중개의뢰자의 성명․주소․전화번호 등의 정보를 확인하여 청약이 이루어지기 전까지 소비자에게 제공할 의무는 없다.</li><li>통신판매중개자가 고지의무를 이행하였다면, 통신판매업자인 통신판매중개자는 청약철회에 따른 통신판매업자의 책임을 지지 않아도 된다.</li><li>통신판매중개자가 고지 및 정보제공의무를 위반한 경우, 통신판매중개의뢰자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개의뢰자와 연대하여 배상할 책임을 진다.</li><li>통신판매중개자가 소비자에게 제공한 정보가 사실과 달라서 소비자에게 발생한 재산상 손해에 대하여는 전적으로 통신판매중개자만이 배상할 책임을 진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 사업자인 의뢰자의 법정 신원정보를 확인·제공해야 한다.</li><li><strong>비선택</strong> · 틀리다. 통신판매업자 지위를 가진 중개자의 해당 판매 책임은 고지만으로 사라지지 않는다.</li><li><strong>선택</strong> · 원본 정답. 고지 누락과 정보 누락·허위의 책임 근거를 나누어 읽고, 정보 책임에는 상당한 주의의 법정 면책도 있음을 보완한다.</li><li><strong>비선택</strong> · 틀리다. 요건을 갖추면 의뢰자와 연대책임이지 중개자만의 책임이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>고지·정보제공 의무를 위반한 중개자는 의뢰자의 고의·과실로 발생한 재산상 손해에 대해 법정 요건 아래 연대배상책임을 진다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_065"><h4>기출문제 · 소비자법_기출2013_065</h4><p class="question-stem">[2013 기말고사 · 65번 / 자체 풀이]<br>전자상거래법의 “소비자에 관한 정보가 도용된 경우로서 소비자의 재산상 손해가 발생할 우려가 있는 경우”에 해당하는 설명으로 옳지 않은 것은?</p><ol class="choices"><li>정보가 도용된 경우는 제3자가 타인의 개인정보를 불법적인 방법으로 사용하는 경우를 말한다.</li><li>적법하게 취득하여 관리하고 있는 개인정보라면 정보주체의 동의를 받지 않고서 사용하더라도 정보가 도용된 경우라고 보지 않는다.</li><li>적법하게 취득하여 관리하고 있는 개인정보라도 정보주체의 동의를 받지 않고서 사용하면 정보가 도용된 경우에 해당된다.</li><li>적법하게 취득하여 관리하고 있는 개인정보를 정보주체의 동의를 받은 범위를 넘어 사용하면 정보가 도용된 경우에 해당된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제3자의 불법 사용은 도용의 기본 유형이다.</li><li><strong>선택</strong> · 틀리다. 적법한 취득이 모든 무동의·목적 외 이용을 허용하지 않는다. 다만 별도 적법한 처리 근거가 있는 경우까지 도용으로 단정하지 않는다.</li><li><strong>비선택</strong> · 출제 취지는 적법한 취득과 위법한 이용을 구별하는 것이다. 동의 외의 다른 법적 처리 근거가 없는 경우를 전제로 읽는다.</li><li><strong>비선택</strong> · 허락한 범위를 넘는 위법 이용도 문제 된다. 법정 허용 근거와 목적 범위는 별도 심사한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>적법하게 취득한 정보라도 동의 없이 사용하거나 동의 범위를 넘어서 사용하는 경우는 별개이다. 최초 취득이 적법했다는 이유만으로 정보 도용을 부정할 수 없다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_055"><h4>기출문제 · 소비자법_기출2014_055</h4><p class="question-stem">[2014 기말고사 · 55번]<br>전자상거래의 경우 재화 등의 내용물을 확인하기 위하여 포장 등을 훼손한 경우에는 청약철회가 가능하다. 이때 그 제품을 반환할 때 소요되는 비용은 어떻게 처리되는가?</p><ol class="choices"><li>소비자피해보상보험으로 처리된다.</li><li>예치된 결제대금에서 처리된다.</li><li>사업자가 부담한다.</li><li>소비자가 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 기본 반환비 부담을 보험으로 대체하는 규정은 아니다.</li><li><strong>비선택</strong> · 예치 자체가 반환 배송비 부담자를 정하지 않는다.</li><li><strong>비선택</strong> · 불일치가 아닌 단순 변심 전제에서는 사업자 부담이 아니다.</li><li><strong>선택</strong> · 정답. 내용 확인 개봉은 철회 가능하고 일반 변심 반환비는 소비자 부담이다. 불일치이면 달라진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_065"><h4>기출문제 · 소비자법_기출2014_065</h4><p class="question-stem">[2014 기말고사 · 65번]<br>전자상거래법의 적용이 제외되는 경우를 설명한 것으로 옳지 못한 것은?</p><ol class="choices"><li>사업자(방문판매법의 다단계판매원은 제외)가 상행위를 목적으로 구입하는 거래에는 적용하지 않는다.</li><li>사업자라고 하더라도 사실상 소비자와 같은 지위에서 다른 소비자와 같은 거래조건으로 거래하는 경우에는 적용이 제외되지 않는다.</li><li>전자상거래 또는 통신판매에서의 소비자보호에 관하여 전자상거래법과 다른 법률이 경합하는 경우에는 전자상거래법을 우선 적용한다.</li><li>위 ③의 경우에 다른 법률을 적용하는 것이 소비자에게 유리한 경우에라도 그 법을 적용하지 않고, 전자상거래법이 우선 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적인 사업용 거래 제외다. 법정 예외와 다단계판매원 문구를 함께 읽는다.</li><li><strong>비선택</strong> · 소비자 동일 지위·조건의 예외다.</li><li><strong>비선택</strong> · 특별법 우선의 원칙이다. 다음 보기의 더 유리한 법 예외를 함께 본다.</li><li><strong>선택</strong> · 틀리다. 다른 법이 소비자에게 더 유리하면 그 법을 적용한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 65번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_051"><h4>기출문제 · 소비자법_기출2015_051</h4><p class="question-stem">[2015 기말고사 · 51번]<br>인터넷 쇼핑몰이 가격을 입력하는 과정에서 담당직원의 착오로 잘못 기재하였다며 소비자와의 계약을 취소하는 경우에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>소비자가 물품 주문 후 주문확인 통지를 받은 경우에는 구속력 있는 계약관계가 이미 성립되어 원칙적으로 쇼핑몰은 특별한 사정이 없는 한 계약내용대로 소비자에게 물품을 제공해야 한다.</li><li>사업자가 상품의 가격 등록에 착오가 있고 그러한 착오를 하는 것에 있어 사업자에게 중대한 과실이 없다면 사업자는 착오를 이유로 하여 거래를 취소할 수 있다.</li><li>쇼핑몰이 착오를 이유로 거래를 취소할 수 있다고 하더라도 쇼핑몰은 소비자에게 소비자가 무효가 된 거래를 유효라고 믿었기 때문에 입은 손해에 대해서는 배상해야 한다.</li><li>소비자는 쇼핑몰에 대해 물품 대금의 환급만을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주문 확인이 승낙으로 평가되는 출제 전제다. 단순 자동 접수 알림까지 항상 계약 성립이라고 단정하지 않는다.</li><li><strong>비선택</strong> · 중요 부분의 착오이며 중대한 과실이 없는 등 민법상 요건을 갖춘 경우다.</li><li><strong>비선택</strong> · 원본은 신뢰손해의 별도 배상을 말한다. 실제 손해·귀책·인과관계 등 근거가 필요한 것이지 적법한 취소만으로 무조건 배상은 아니다.</li><li><strong>선택</strong> · 원본 정답. 환급 외 손해배상 근거를 검토할 수 있으므로 물품대금만 가능하다고 한정하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2015년 법학과 소비자법 51번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_052"><h4>기출문제 · 소비자법_기출2015_052</h4><p class="question-stem">[2015 기말고사 · 52번]<br>통신판매중개자 및 통신판매중개의뢰자의 책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>통신판매중개자가 소비자에게 제공한 정보가 사실과 달라 소비자에게 발생한 재산상 손해에 대하여 통신판매중개의뢰자와 연대하여 배상할 책임을 진다.</li><li>'사업자인 통신판매중개의뢰자'는 통신판매중개자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개자의 행위라는 사유의 항변으로 면책된다.</li><li>통신판매업자의 의뢰를 받아 통신판매를 중개하는 경우 통신판매중개의뢰자가 책임을 지는 것으로 약정하여 소비자에게 고지한 부분에 대하여는 통신판매중개의뢰자가 책임을 진다.</li><li>통신판매중개자가 고지의무를 이행하였더라도, 통신판매업자인 통신판매중개자는 통신판매업자의 청약확인, 재화의 공급 및 환급 그리고 청약철회에 따른 책임을 면하지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 신원정보의 미제공·허위로 난 손해의 연대책임이다. 상당한 주의의 면책 예외도 있다.</li><li><strong>선택</strong> · 틀리다. 단순히 중개자 행동이라는 이유만으로 면책되지 않는다.</li><li><strong>비선택</strong> · 법정 약정·소비자 고지를 갖춘 부분의 책임 배분 특칙이다.</li><li><strong>비선택</strong> · 고지가 중개자의 통신판매업자 책임까지 지우지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2015년 법학과 소비자법 52번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_053"><h4>기출문제 · 소비자법_기출2015_053</h4><p class="question-stem">[2015 기말고사 · 53번]<br>전자상거래업자의 소비자피해보상보험계약 체결의무에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>공정거래위원회는 전자상거래로 발생한 소비자피해를 보상해 주는 것을 내용으로 하는 보험계약 등을 사업자에게 체결하도록 권장할 수 있다.</li><li>선지급식 통신판매의 경우에는 소비자가 선택한 경우에 소비자가 결제대금예치를 이용하도록 하거나 소비자피해보상보험계약 등을 체결하도록 의무를 부과하고 있다.</li><li>선지급식 통신판매인 경우 1회 결제금액이 5만 원 이하의 소액 거래에 대해서는 구매안전서비스제공의무규정이 적용되지 않는다.</li><li>결제수단의 발행자는 소비자피해보상보험계약 등을 체결해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반적인 보험 등 권장 구조다. 별도 의무 대상은 구별한다.</li><li><strong>비선택</strong> · 법정 선지급 거래에서 소비자 선택에 따른 의무를 설명한다.</li><li><strong>선택</strong> · 틀리다. 소액 예외는 2013년 개정으로 삭제되었다.</li><li><strong>비선택</strong> · 법 8조 4항 등의 법정 전자적 선지급 결제수단 발행자에 관한 의무다. 모든 결제 도구를 무제한 가리키는 표현으로 외우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 53번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_058"><h4>기출문제 · 소비자법_기출2016_058</h4><p class="question-stem">[2016 기말고사 · 58번]<br>다음은 통신판매의 개념에 관한 설명이다. ( ) 안에 들어갈 내용이 바르게 짝지어진 것은? “A는 인터넷 사이버몰에서 B의 X제품 광고를 본 후, B의 상 점을 직접 방문해서 X제품을 구매했다면, 이 거래는 ( ).” “가격비교사이트를 운영하는 사업자 C의 사이버몰에서 중개의 뢰자인 통신판매업자 D의 재화 등에 관한 가격 관련 정보만이 제공되는 경우, C는 통신판매업자인 통신판매중개자에 ( ).”</p><ol class="choices"><li>통신판매에 해당한다, 해당한다</li><li>통신판매에 해당하지 않는다, 해당하지 않는다</li><li>통신판매에 해당한다, 해당하지 않는다</li><li>통신판매에 해당하지 않는다, 해당한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 매장 대면 구매를 통신판매로, 단순 가격 정보를 해당 판매업자로 잘못 보았다.</li><li><strong>선택</strong> · 정답. 정보만 온라인인 대면 구매와 중요한 판매 업무를 하지 않는 단순 가격 제공을 구별한다.</li><li><strong>비선택</strong> · 첫째가 틀리다. 청약도 비대면이어야 한다.</li><li><strong>비선택</strong> · 둘째가 틀리다. 명칭보다 실제 수행 업무를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2016년 법학과 소비자법 58번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_059"><h4>기출문제 · 소비자법_기출2016_059</h4><p class="question-stem">[2016 기말고사 · 59번]<br>다음은 통신판매중개자 및 통신판매중개의뢰자의 책임에 관한 설명이다. 설명의 당부를 바르게 짝지어 놓은 것은? “통신판매중개자가 소비자에게 제공한 정보가 사실과 달라 소비자에게 발생한 재산상 손해에 대하여 통신판매중개의뢰 자와 연대하여 배상할 책임을 진다.” ( ) “사업자인 통신판매중개의뢰자는 통신판매중개자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중 개자의 행위라는 사유의 항변으로 면책된다.” ( )</p><ol class="choices"><li>Ｏ, Ｏ</li><li>X, X</li><li>Ｏ, X</li><li>X, Ｏ</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 둘째는 틀리다. 남의 잘못이라는 말만으로 판매자 면책은 안 된다.</li><li><strong>비선택</strong> · 첫째는 원칙적으로 옳다. 상당한 주의의 법정 면책은 별도다.</li><li><strong>선택</strong> · 정답. 연대책임 원칙과 사업자인 의뢰자의 면책 제한을 연결한다.</li><li><strong>비선택</strong> · 두 판단을 반대로 했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 59번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_060"><h4>기출문제 · 소비자법_기출2016_060</h4><p class="question-stem">[2016 기말고사 · 60번]<br>다음의 ( ) 안에 들어갈 금액은? “선지급식 통신판매인 경우에 종전에는 소비자가 1회 결제 금액이 ( ) 미만인 거래를 한 경우에는 구매안전서비스제 공의무규정을 적용하지 않았으나, 전자상거래법 개정(2013년 5월 28일)으로 이를 삭제하여 ( ) 이하의 소액 거래에 대해서도 구매안전서비스제공의무규정이 적용되도록 했다.”</p><ol class="choices"><li>3만원</li><li>5만원</li><li>6만원</li><li>7만원</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기존 소액 예외의 금액이 아니다.</li><li><strong>선택</strong> · 정답. 종전 5만 원 미만 예외가 삭제되어 소액도 적용한다.</li><li><strong>비선택</strong> · 개정 대상 숫자와 다르다.</li><li><strong>비선택</strong> · 개정 대상 숫자와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2016년 법학과 소비자법 60번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_061"><h4>기출문제 · 소비자법_기출2016_061</h4><p class="question-stem">[2016 기말고사 · 61번]<br>다음은 전자상거래에 있어 소비자의 청약철회에 관한 설명이다. ( ) 안에 들어갈 내용이 바르게 짝지어진 것은? “청약철회 기간 내의 청약철회의 경우 재화의 반환에 필요한 비용은 ( )가 부담한다.” “통신판매업자는 소비자의 청약철회 등과 관련해서 소비자에 게 위약금 또는 손해배상을 ( ).”</p><ol class="choices"><li>소비자, 청구할 수 없다</li><li>소비자, 청구할 수 있다</li><li>판매자, 청구할 수 없다</li><li>판매자, 청구할 수 있다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 일반 변심의 반환비는 소비자지만 철회를 벌주는 위약금은 금지다.</li><li><strong>비선택</strong> · 위약금·손해배상을 허용한 부분이 틀리다.</li><li><strong>비선택</strong> · 반환비를 방문판매 규칙과 섞었다. 불일치의 경우는 별도다.</li><li><strong>비선택</strong> · 반환비와 위약금 규칙 모두 틀렸다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2016년 법학과 소비자법 61번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_056"><h4>기출문제 · 소비자법_기출2017_056</h4><p class="question-stem">[2017 기말고사 · 56번]<br>통신판매중개자 및 통신판매중개의뢰자의 책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>통신판매중개자가 소비자에게 제공한 정보가 사실과 달라 소비자에게 발생한 재산상 손해에 대하여 통신판매중개의뢰자와 연대하여 배상할 책임을 진다.</li><li>통신판매업자의 의뢰를 받아 통신판매를 중개하는 경우 통신판매중개의뢰자가 책임을 지는 것으로 약정하여 소비자에게 고지한 부분에 대하여는 통신판매중개의뢰자가 책임을 진다.</li><li>'사업자인 통신판매중개의뢰자'는 통신판매중개자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개자의 행위라는 사유의 항변으로 면책된다.</li><li>통신판매중개자가 고지의무를 이행하였더라도, 통신판매업자인 통신판매중개자는 통신판매업자의 청약확인, 재화의 공급 및 환급 그리고 청약철회에 따른 책임을 면하지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 신원정보 관련 손해의 연대책임 원칙이다. 상당한 주의 예외를 보완한다.</li><li><strong>비선택</strong> · 법정 약정과 소비자 고지가 있는 부분의 책임 배분이다.</li><li><strong>선택</strong> · 틀리다. 중개자가 한 일이라는 이유만으로 사업자인 판매자 면책은 안 된다.</li><li><strong>비선택</strong> · 자체 통신판매업자 책임은 고지만으로 사라지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2017년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_057"><h4>기출문제 · 소비자법_기출2017_057</h4><p class="question-stem">[2017 기말고사 · 57번]<br>인터넷 쇼핑몰에서 담당직원의 착오로 가격을 잘못 입력하여 기재하였고, 이에 소비자와의 계약을 취소하려고 한다. 이 경우에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>소비자가 물품 주문 후 주문확인 통지를 받은 경우에는 구속력 있는 계약관계가 이미 성립되어 원칙적으로 쇼핑몰은 특별한 사정이 없는 한 계약내용대로 소비자에게 물품을 제공해야 한다.</li><li>사업자에게 중대한 과실이 없다면 사업자는 착오를 이유로 하여 거래를 취소할 수 있다.</li><li>쇼핑몰이 착오를 이유로 취소하는 경우 소비자가 무효가 된 거래를 유효라고 믿었기 때문에 입은 손해에 대해서는 배상하지 않아도 된다.</li><li>소비자는 쇼핑몰에 대해 물품 대금의 환급과 거래에 따른 수수료, 구매자가 지급한 배송료, 전화료 등의 금전적 손해배상을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주문 확인이 계약 승낙인 사실관계를 전제한다. 자동 접수 확인과 구별한다.</li><li><strong>비선택</strong> · 중요 부분의 착오 등 나머지 요건을 갖춘 경우다. 중과실만 없으면 어떤 착오든 취소할 수 있는 것은 아니다.</li><li><strong>선택</strong> · 원본 정답. 취소 가능성과 별도 신뢰손해 배상 가능성을 구별한다. 다만 배상은 실제 손해와 법적 책임 요건을 필요로 한다.</li><li><strong>비선택</strong> · 그런 실제 지출에 대해 별도 법적 근거·인과관계 등을 갖추면 청구 가능하다. 모든 비용을 자동 인정하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2017년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_052"><h4>기출문제 · 소비자법_기출2018_052</h4><p class="question-stem">[2018 기말고사 · 52번]<br>다음은 전자상거래에 있어 소비자의 청약철회에 관한 설명이다. ( )에 들어갈 내용으로 옳은 것은?<br><br>재화 등의 내용이 표시·광고와 다르게 이행된 경우에는 재화 등을 공급받은 날부터 ( ) 이내 또는 그 사실을 안 날 또는 알 수 있었던 날부터 ( ) 이내에 청약철회를 할 수 있다.</p><ol class="choices"><li>2개월, 14일</li><li>2개월, 30일</li><li>3개월, 30일</li><li>3개월, 14일</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두 기간 모두 잘못 놓았다.</li><li><strong>비선택</strong> · 인식 후 30일은 맞지만 공급 후는 3개월이다.</li><li><strong>선택</strong> · 정답 숫자다. 원문의 또는를 편한 한쪽을 고르는 의미로 읽지 말고 두 제한을 함께 확인한다.</li><li><strong>비선택</strong> · 인식 후 기간은 14일이 아니라 30일이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2018년 법학과 소비자법 52번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_053"><h4>기출문제 · 소비자법_기출2018_053</h4><p class="question-stem">[2018 기말고사 · 53번]<br>다음은 전자상거래에 있어 소비자의 청약철회와 관련한 설명이다. ( )에 들어갈 내용으로 옳은 것은?<br><br>(a) 청약철회 기간 내의 청약철회의 경우 재화의 반환에 필요한 비용은 ( )가 부담한다.<br>(b) 재화의 내용이 계약내용과 다르게 이행되어 청약을 철회한 경우 그 반환비용은 ( )가 부담한다.</p><ol class="choices"><li>통신판매업자, 통신판매업자</li><li>소비자, 통신판매업자</li><li>소비자, 소비자</li><li>통신판매업자, 소비자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 변심의 반환비를 사업자 부담으로 잘못 놓았다.</li><li><strong>선택</strong> · 정답. 변심 소비자, 계약 불일치 사업자다.</li><li><strong>비선택</strong> · 불일치 반환비까지 소비자에게 넘겼다.</li><li><strong>비선택</strong> · 두 부담 주체를 반대로 놓았다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2018년 법학과 소비자법 53번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_054"><h4>기출문제 · 소비자법_기출2018_054</h4><p class="question-stem">[2018 기말고사 · 54번]<br>다음은 통신판매중개자 및 통신판매중개의뢰자의 책임에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 통신판매업자의 의뢰를 받아 통신판매를 중개하는 경우 통신판매중개의뢰자가 책임을 지는 것으로 약정하여 소비자에게 고지한 부분에 대하여는 통신판매중개의뢰자가 책임을 진다.<br>(b) ‘사업자인 통신판매중개의뢰자’는 통신판매중개자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개자의 행위라는 사유의 항변으로 면책된다.</p><ol class="choices"><li>(a) ○, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ×, (b) ○</li><li>(a) ×, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · b가 틀리다. 중개자 잘못이라는 항변만으로 면책되지 않는다.</li><li><strong>선택</strong> · 정답. a의 법정 책임 배분과 b의 부당한 면책 주장을 구별한다.</li><li><strong>비선택</strong> · a는 법정 요건을 갖춘 특칙이고 b는 틀리므로 둘 다 반대다.</li><li><strong>비선택</strong> · a의 책임 배분을 잘못 부정했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2018년 법학과 소비자법 54번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_054"><h4>기출문제 · 소비자법_기출2019_054</h4><p class="question-stem">[2019 기말고사 · 54번]<br>전자상거래에 있어 소비자의 청약철회에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>재화 등의 내용이 표시·광고와 다르게 이행된 경우에는 재화 등을 공급받은 날부터 3개월 이내 또는 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에 청약철회를 할 수 있다.</li><li>청약철회 기간 내의 청약철회의 경우 재화의 반환에 필요한 비용은 판매자가 부담한다.</li><li>재화의 내용이 계약내용과 다르게 이행된 경우의 반환비용은 통신판매업자가 부담한다.</li><li>통신판매업자는 소비자의 청약철회 등과 관련해서 소비자에게 위약금 또는 손해배상을 청구할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 숫자는 맞지만 원문의 또는는 보완해야 한다. 공급 3개월과 인식·인식 가능 30일을 모두 확인한다.</li><li><strong>선택</strong> · 원본 정답. 일반 변심 철회 반환비는 소비자 부담이다. 불일치이면 다음 보기처럼 달라진다.</li><li><strong>비선택</strong> · 계약과 다른 이행의 반환비는 사업자가 부담한다.</li><li><strong>비선택</strong> · 법정 철회 자체에 대한 위약금·손해배상은 금지한다. 법정 사용 비용과 반환 비용은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2019년 법학과 소비자법 54번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_055"><h4>기출문제 · 소비자법_기출2019_055</h4><p class="question-stem">[2019 기말고사 · 55번]<br>통신판매중개자 및 중개의뢰자의 책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>통신판매중개자가 고지의무를 위반한 경우, 통신판매중개의뢰자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개의뢰자와 연대하여 배상할 책임을 진다.</li><li>고지의무를 이행하였더라도, 통신판매업자인 통신판매중개자는 통신판매업자의 신고, 신원 및 거래조건에 대한 정보제공, 청약확인, 재화의 공급 및 환급 그리고 청약철회에 따른 통신판매업자의 책임을 면하지 못한다.</li><li>'사업자인 통신판매중개의뢰자'는 통신판매중개자의 고의 또는 과실로 소비자에게 발생한 재산상 손해에 대하여 통신판매중개자의 행위라는 이유를 내세움으로써 면책될 수 있다.</li><li>통신판매업자의 의뢰를 받아 통신판매를 중개하는 경우 통신판매중개의뢰자가 책임을 지는 것으로 약정하여 소비자에게 고지한 부분에 대하여는 통신판매중개의뢰자가 책임을 진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 비당사자 고지 누락 시 해당 요건의 연대배상 책임이다.</li><li><strong>비선택</strong> · 중개자가 판매업자 지위도 가졌다면 해당 책임이 남는다.</li><li><strong>선택</strong> · 틀리다. 남의 행위라는 이유만으로 면책될 수 없다. 상당한 주의의 법정 예외와는 다르다.</li><li><strong>비선택</strong> · 법정 약정·소비자 고지를 갖춘 해당 부분은 의뢰자가 책임진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_056"><h4>기출문제 · 소비자법_기출2019_056</h4><p class="question-stem">[2019 기말고사 · 56번]<br>다음 ( )에 들어갈 내용으로 옳은 것은?<br><br>통신판매업자는 소비자가 청약을 한 날부터 ( ) 이내에 재화 등의 공급에 필요한 조치를 할 의무가 있으며, 만약 청약을 받은 재화 등을 공급하기 어렵다는 것을 알았을 경우 지체 없이 그 사유를 소비자에게 알려야 한다.</p><ol class="choices"><li>7일</li><li>14일</li><li>30일</li><li>3개월</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 공급에 필요한 조치이지 반드시 수령 완료가 아니다. 선지급 3영업일과 별도 공급 시기 약정도 구별한다.</li><li><strong>비선택</strong> · 방문판매 철회기간을 가져왔다.</li><li><strong>비선택</strong> · 일반 공급 조치 기간이 아니다.</li><li><strong>비선택</strong> · 계약 불일치 철회기간과 섞었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_057"><h4>기출문제 · 소비자법_기출2019_057</h4><p class="question-stem">[2019 기말고사 · 57번]<br>소셜네트워크서비스(트위터, 페이스북 등의 SNS)를 활용한 광고를 하여 재화나 서비스를 할인된 가격으로 이용할 수 있는 쿠폰을 판매하는 전자상거래를 무엇이라고 하는가?</p><ol class="choices"><li>소셜커머스</li><li>네트워크판매</li><li>SNS사업</li><li>쿠폰 네트워크사업</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 교재의 SNS 홍보·할인 이용권 판매 형태다.</li><li><strong>비선택</strong> · 교재의 해당 거래 명칭이 아니다.</li><li><strong>비선택</strong> · SNS 이용 사실만 적은 말이고 묻는 개념명이 아니다.</li><li><strong>비선택</strong> · 법정·교재 개념이 아닌 혼동 보기다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_058"><h4>기출문제 · 소비자법_기출2019_058</h4><p class="question-stem">[2019 기말고사 · 58번]<br>“A가 운영하는 인터넷쇼핑몰에서 B씨는 명품가방 1개를 300,000원에 구입하였다. 그러나 인터넷쇼핑몰은 당해 물품의 가격은 원래 3,000,000원인데 착오로 인하여 0을 빼먹어 가격이 300,000원으로 잘못 표기되었음을 확인하고 B씨에게 계약을 취소한다고 하였다.” 이에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자가 상품의 가격에 대하여 처음부터 정확하게 알았다면 그렇게 등록하지 않았을 정도로 상품의 가격 등록에 착오가 있고 그러한 착오를 하는 것에 있어 사업자에게 중대한 과실이 없다면 사업자는 착오를 이유로 하여 거래를 취소할 수 있다.</li><li>물품의 정상가격에서 50%를 넘는 할인된 가격으로 게시되어 있고 쇼핑몰의 그러한 가격 오기에 중대한 과실이 인정되지 않으면 쇼핑몰은 착오를 이유로 거래를 취소할 수 있다.</li><li>쇼핑몰이 착오를 이유로 거래를 취소할 수 있는 경우에 쇼핑몰은 소비자에게 소비자가 무효가 된 거래를 유효라고 믿었기 때문에 입은 손해, 즉 계약이행비용, 계약체결비용, 구매시 배송비용 등을 배상할 필요가 없다.</li><li>쇼핑몰이 착오를 이유로 거래를 취소할 수 있는 경우에 소비자는 쇼핑몰에 물품 대금의 환급을 요구하는 외에 거래에 따른 수수료, 구매자가 지급한 배송료, 전화료 등의 금전적 손해의 배상을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 중요 가격 착오와 중대한 과실 없음이라는 요건을 갖추면 취소를 검토한다.</li><li><strong>비선택</strong> · 교재 취지는 중요 착오·중과실을 심사한다는 것이다. 50% 할인 자체가 민법상 자동 취소 기준은 아니므로 표현을 보완한다.</li><li><strong>선택</strong> · 원본 정답. 취소 가능하다는 이유로 별도의 신뢰손해 배상까지 전부 배제하지 못한다. 구체적 책임 요건은 별도다.</li><li><strong>비선택</strong> · 실제 발생한 비용의 귀책·인과관계 등 법적 근거를 갖추면 환급 외 배상을 청구할 수 있다. 자동 배상이라는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 58번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 09' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 09|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

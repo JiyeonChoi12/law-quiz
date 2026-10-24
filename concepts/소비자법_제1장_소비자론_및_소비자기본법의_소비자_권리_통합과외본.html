@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제1장 소비자론 및 소비자기본법의 소비자 권리 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제1장 소비자론 및 소비자기본법의 소비자 권리 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p>소비자법은 <strong>“돈을 냈으니 알아서 책임져”로 끝낼 수 없는 거래의 불균형을 바로잡고, 소비자가 스스로 선택하고 피해를 구제받도록 하는 법</strong>이다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나</td>
+<td>소비자에 해당하는 사람, 소비자문제의 원인, 권리와 책무, 권리를 돕는 기관</td>
+</tr>
+<tr>
+<td>왜 생겼나</td>
+<td>기업과 소비자는 계약서에서는 대등해도 정보·경제력·협상력은 다르기 때문</td>
+</tr>
+<tr>
+<td>전체에서의 위치</td>
+<td>각론의 문을 여는 총론. 이후 안전·제품·약관·특수판매·정보·금융 문제에 공통 적용</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>민법의 사적 자치를 전제로 실제 선택의 자유를 보완하고,2장에서 구제 절차로 이동</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>누가 보호 대상인지, 단체와 소비자원이 무엇을 할 수 있는지, 기본권과 구체적 청구권의 차이</td>
+</tr>
+</tbody></table>
+<p><strong>읽은 범위:</strong>2025년 개정 교재2-33쪽. 문제28개·106개 보기. 제공 문제는 형성평가와 과거 기출이 섞여 있으며,2012·2013년 일부는 ‘자체 풀이’ 표시가 있다. 공식 정답과 자체 풀이를 같은 신뢰도로 취급하지 않는다. 현행 확인 기준은2026.10.25이다.</p>
+<p>중요도는 제공 문제의 반복과 개념의 중요성에 따른 학습 우선순위다. 실제 정답률·오답률은 제공되지 않았다. ★★★★★필수, ★★★★☆빈출, ★★★☆☆이해, ★★☆☆☆심화, ★☆☆☆☆학문 중심.</p>
+<p><mark class="yellow">노랑은 정의·암기</mark> / <mark class="green">초록은 이유</mark> / <mark class="pink">분홍은 함정</mark> / <mark class="blue">파랑은 연결</mark>. 각 절 끝의 시험·한 줄은 복습용 여백 메모다.</p>
+<h1>1. 누가 소비자이고, 왜 특별히 보호할까</h1>
+<h2 id="consumer-01-01" data-concept-id="consumer-01-01">1-1. 소비자는 ‘돈을 낸 모든 사람’이 아니다 ★★★★★</h2>
+<p><strong>교재2-3쪽 / 문단의 목적:</strong> 법의 보호 대상부터 정한다. 사업자는 물품·시설·서비스를 계속 제공하고 대가를 받는 쪽이고, 소비자는 사업자가 제공하는 것을 소비생활에 사용·이용하는 쪽이다. 물건을 산 사람뿐 아니라 용역을 이용하는 사람도 포함된다.</p>
+<p>소비자기본법2조1호는 일정한 생산활동 이용자도 대통령령에 따라 포함한다. 시행령2조의 핵심은 <strong>최종적으로 사용하는가, 그것을 생산의 재료·설비처럼 써서 부가가치를 만드는가</strong>다. 원재료·중간재·자본재 등에 준하는 생산용 이용자는 원칙적으로 제외된다. 사무실에서 최종 소비하는 사무용품을 구입한 경우처럼 사업 관련 구매라고 무조건 제외되는 것은 아니다. 법인인지 자연인인지, 직업이 있는지만으로 답하지 않는다.</p>
+<p>농업·축산업·어업을 위해 이용하는 사람은 영세 생산자의 보호 필요 때문에 특별히 포함하되, 법정 허가를 받아 원양어업을 하는 사람은 제외한다. ‘생산활동이면 전부 제외’와 ‘농어업이면 예외 없이 포함’이라는 두 극단을 함께 피한다. 독일 민법13조가 개인의 영업·독립 직업활동에 속하지 않는 목적으로 법률행위를 하는 자연인을 기준으로 삼는다는 교재의 비교는 심화다. 우리 법과 문구가 같다고 외우지 않는다.</p>
+<p><strong>시험:</strong>003·2012-37. 키워드:최종 사용, 원재료·중간재·자본재, 농축어업 예외. <strong>한 줄:</strong> 직업보다 해당 거래에서 물품·용역을 어떤 목적으로 쓰는지를 본다.</p>
+<h2 id="consumer-01-02" data-concept-id="consumer-01-02">1-2. 교재 사례:쇼핑몰 배송과 지방의원의 출장 ★★★★★</h2>
+<p><strong>교재4-5쪽 / 사례를 넣은 이유:</strong> 같은 ‘사업 관련 이용’도 결론이 달라질 수 있음을 보여 준다.</p>
+<p><strong>사례1 - 쇼핑몰 운영자 A와 택배회사.</strong> A가 자기 쇼핑몰에서 판 상품을 택배회사에 맡겼다. A는 “배송서비스를 산 나도 소비자 아닌가요?”라고 묻는다. 그러나 구매·배송·반품·사후처리는 쇼핑몰 판매의 중요한 과정이다. A는 배송을 자기 생활에서 끝내는 것이 아니라 판매 거래를 완성하며 부가가치를 만든다. 법제처07-0115(2007.5.4)는 이 경우 소비자기본법의 소비자에 해당하지 않는다고 해석했다. 인용된2003두8296은 쇼핑몰의 공신력과 거래 구조를 설명하는 근거이지, 법제처 회신 자체를 대법원 판결로 바꾸면 안 된다.</p>
+<p>쉬운 번역:‘자본재에 준하는 생산활동’→남에게 팔 상품의 판매·배송 과정을 수행하는 데 서비스를 쓴다. 만약 돈을 내고 서비스를 쓰기만 하면 모두 소비자라고 하면 대기업의 원료 운송 계약도 생활 소비와 같아져 보호 범위의 구별이 사라진다.</p>
+<p><strong>사례2 - 지방의원 B와 여행업자.</strong> B가 의정활동을 위한 해외출장 여행계약을 맺었다. 공무상 여행이라는 이름 때문에 생산거래라고 단정하기 쉽지만, 법제처09-0052(2009.4.2)는 제시된 사실관계에서 B가 여행계약의 이행·불이행에 따른 비용·손실을 부담하고 다른 생산단계로 이전하는 구조가 아니라고 보아 소비자로 해석했다. 정치적 책임과 상품 생산을 통한 위험 전가는 다르다. 이 사례를 근거로 모든 국가기관의 계약이나 모든 공무출장 계약이 무조건 소비자계약이라고 일반화하지 않는다.</p>
+<p><mark class="pink">2013년46번은 저장된 자체 풀이 정답이③이지만, ③은 쇼핑몰 운영자를 소비자라고 한다. 교재 사례와2019년36번의 논리에 따르면④가 맞는다. 채점 원문은 보존하고 이 불일치를 별도로 표시했다.</mark></p>
+<p><strong>시험:</strong>004·2013-46·2019-36. <strong>한 줄:</strong> 서비스를 사는 사람이 아니라, 그 서비스가 거래 사슬에서 하는 역할을 보자.</p>
+<h2 id="consumer-01-03" data-concept-id="consumer-01-03">1-3. 계약 자유만으로 공정해지지 않는 이유 ★★★★★</h2>
+<p><strong>교재3·6-8쪽 / 문단의 목적:</strong> 소비자법이 민법의 계약 자유를 왜 보완하는지 설명한다.</p>
+<p>가상사례:냉장고를 만든 회사는 부품·시험 결과·고장 가능성을 알지만, 주연은 매장 설명과 광고만 보고 산다. 회사가 정해 둔 계약서를 거절하면 제품을 못 살 뿐, 주연이 조항을 한 줄씩 협상하기는 어렵다. ‘서명했으니 완전히 대등한 선택’이라는 형식과 실제 협상력 사이에 틈이 생긴다. 소비자법은 당사자의 의사만이 아니라 내용의 실질적 공정성도 보려는 것이다.</p>
+<p>산업사회는 기계기술, 대량생산·대량소비, 대중매체, 교통·통신의 발달로 움직인다. 소비자는 유통의 끝에 있어 피해를 다음 거래 단계로 넘기기 어렵다. 자본·전문지식의 집중은 이 불균형을 키운다. <mark class="green">계약 자유를 제한하는 이유는 선택을 없애기 위해서가 아니라, 정보와 힘의 격차 때문에 형식에 그친 자기결정을 실제 선택으로 만들기 위해서다.</mark> 교재는 재산권의 사회적 구속성과 정의·형평을 그 정당화 근거로 든다.</p>
+<p>발생 원인은 네 갈래다.①경제력·정보 보유·접근의 차이로 거래상 지위가 불균등하다.②잦은 신상품·모델 변경으로 수명주기가 짧아져 충분히 파악하기 전에 교체를 유도한다.③허위·과장광고와 복잡한 판매전략이 합리적 선택을 흐리고 과대포장은 자원·환경에도 부담을 준다.④독과점·담합·인위적인 가격 통제는 소비자의 조건 선택을 줄인다. 모든 신제품이나 광고가 위법하다는 말은 아니다. 시험은 이런 구조적 위험과 정당한 경쟁을 구별시킨다.</p>
+<p><strong>시험:</strong>001·2014-36·2016-36. 키워드:불균등·정보격차·계약공정. <strong>한 줄:</strong> 균등한 지위와 충분한 정보·경쟁은 문제의 원인이 아니라 완화 조건이다.</p>
+<h2 id="consumer-01-04" data-concept-id="consumer-01-04">1-4. 소비자피해는 작고 단순한 돈 문제인가 ★★★★★</h2>
+<p><strong>교재8-10쪽 / 문단의 목적:</strong> 예방·집단 대응·입증 부담 완화가 필요한 까닭을 찾는다.</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>생활 속 의미</th>
+<th>다음 제도의 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>보편적·구조적</td>
+<td>누구나 시장을 이용하고 복잡한 생산·유통 중 결함이 생길 수 있음</td>
+<td>개인의 부주의 탓만으로 처리하지 않음</td>
+</tr>
+<tr>
+<td>광범위·중대</td>
+<td>같은 식품·약품이 널리 팔리고 생명·신체·사생활까지 손상</td>
+<td>안전 규제·리콜·집단적 구제</td>
+</tr>
+<tr>
+<td>예방·회피 곤란</td>
+<td>전문기술과 영업비밀 때문에 소비자가 위험을 미리 알기 어려움</td>
+<td>정보 제공·시험·검사</td>
+</tr>
+<tr>
+<td>원인 규명 곤란</td>
+<td>어느 부품·공정·유통 단계가 원인인지, 누구 책임인지 밝히기 어려움</td>
+<td>전문기관 조사·책임법의 보완</td>
+</tr>
+</tbody></table>
+<p>가상사례:한 사람의 환불액은2만 원이지만 같은 결함을 겪은 사람이10만 명이라면 전체 피해는 작지 않다. 개인이 전문가 감정에 수십만 원을 써야 한다면 옳은 주장을 포기할 수도 있다. 반대로 의약품·자동차·유해식품 사고는 한 사람의 생명에도 중대한 피해를 준다. 숙박 화재·놀이시설 사고 같은 서비스 피해와 개인정보 유출에 따른 정신적 손해도 포함된다.</p>
+<p>005의 원문은 교재의 정책 설명과 반대로 자율해결·법원 소송 중심이라고 적어 X로 처리한다. 여기서는 행정적 사전예방과 소비자원 등 대안적 해결의 중요성을 묻는다. 별도의 최신 통계 없이 ‘현재 소송보다 몇 배 많다’ 같은 실측 비율을 만들어 붙이지 않는다. <strong>시험:</strong>2012-36·2014-37·2016-37·2017-36·2018-36. <strong>한 줄:</strong> 피해의 금액·범위·원인을 개인 혼자 감당하기 어렵다는 점이 핵심이다.</p>
+<h1>2. 소비자권리와 불매운동의 한계</h1>
+<h2 id="consumer-01-05" data-concept-id="consumer-01-05">2-1. 헌법124조와 소비자주권 ★★★★☆</h2>
+<p><strong>교재10-13쪽 / 문단의 목적:</strong> 소비자법의 헌법적 근거와 이론을 구별한다.</p>
+<p>1962년 케네디의 소비자권리 선언은 안전·정보·선택·의견 반영의 네 권리를 제시했다. 우리 헌법은1980년부터 소비자보호운동을 규정했고 현행124조가 이를 잇는다. 헌법 문구의 빈칸에 들어가는 것은 <strong>소비자보호운동</strong>이다. 소비자주권·소비자기본권이라는 이론 이름을 문언에 대신 넣으면 틀린다.</p>
+<p>교재는 세 견해를 소개한다. 제도보장론은 경제의 장에 놓인 운동 보장을 객관적 법질서의 보장으로 본다. 기본권론은 운동이 소비자의 실질적 권리 실현을 전제하므로 권리도 함께 보장한다고 본다. 기본권유사적 권리론은 기본권 장 밖의 규정이라는 형식적 위치를 고려한다. 저자는124조뿐 아니라10조·17조·37조1항과 소비자기본법의 능동적 권리 보장을 함께 보아 기본권으로 이해한다. <strong>견해의 설명과 조문의 직접 문언을 구별</strong>하자. 헌법 조항만으로 모든 환불액·배상액이 자동 결정되는 것은 아니다.</p>
+<p>소비자주권은 구매 선택이 무엇을 얼마나 생산·공급할지에 영향을 미치는 시장의 원리다. 소비자권익은 특정 거래에서 누리는 구체적 권리·이익이다. 과거 ‘구매자가 스스로 검사하고 위험을 부담’하는 구매자주의(Caveat Emptor)는 대등한 거래를 전제했지만 대기업과 정보가 부족한 소비자의 관계에서 한계가 드러났다. 교재는1965년 자동차 결함 고발 운동 등을 배경으로 설명한다. 경쟁·충분한 정보·자의적 간섭 억제라는 이론적 조건과 현실의 소비자보호 규제 필요는 함께 읽는다.</p>
+<p>소비자는 흩어져 있어 조직화가 쉽지 않다. 운동 보장은 목소리를 모아 국가 정책에 의견을 내고 기업과 협상할 기반을 준다. 교재12쪽의 ‘4조2호가8대 권리’라는 표현은 보완해야 한다.8개 전체는4조 각 호이고2호는 정보 제공을 받을 권리다. <strong>시험:</strong>2016-38. <strong>한 줄:</strong> 헌법은 운동을 보장하고, 구체적인 거래 권리는 법률이 자세히 만든다.</p>
+<h2 id="consumer-01-06" data-concept-id="consumer-01-06">2-2. 광고주 압박 불매운동:보장되는 운동도 수단을 따진다 ★★★★★</h2>
+<p><strong>교재14-17쪽 / 판례2010헌바54등,2011.12.29:</strong> 등장인물은 신문 보도에 항의하는 소비자들, 신문사, 그 신문에 광고하는 업체들이다. 미국산 쇠고기 수입 관련 보도가 편향됐다고 생각한 사람들이 인터넷 모임을 만들고 광고주 명단을 게시해 집중 항의 전화를 독려했다. 검찰은 조직적 압박이 업무방해 등에 해당한다며 기소했다. 청구인들은 “헌법이 소비자운동을 보장하는데 형사처벌할 수 있나요?”라고 다퉜다.</p>
+<p>헌재가 고민한 것은 소비자들이 힘을 합칠 자유와 상대방·제3자의 영업 자유를 어떻게 함께 지킬지였다. 운동의 주체는 등록된 단체에 한정되지 않는다. 잠재적 소비자도 가능하고, 의사를 모은 조직 활동도 포함된다. 불매에는 실제 구매 중단뿐 아니라 불매 의견 표현·참여 촉구·조직 행위도 들어간다. 권익은 이 판례의 소비자보호운동 문맥에서 품질·가격·유통·안전 등 소비생활의 시장적 이익을 중심으로 본다. 정치적 의견 표현 일반의 헌법적 보호까지 모두 부정하는 말은 아니다.</p>
+<p>사실의 객관적 진실성과 참여의 자유가 필요하다. 다만 믿을 만한 정보에 근거했고 전체 취지에 영향 없는 작은 오류라면 모든 사실이 완벽히 일치하지 않는다는 이유만으로 정당성을 무너뜨리지 않는다. 참여를 강요하거나 불참자에게 불이익을 주면 정도에 따라 정당성을 잃을 수 있다. 영업소 침입·기물 파괴·폭행·협박 등 위법한 수단은 목적이 좋다는 이유로 정당화되지 않는다.</p>
+<p>특히 공급자가 아닌 제3자 광고주까지 대상으로 삼으면 그를 선택할 필요성, 운동 목적과 수단의 관계, 권리 침해의 정도를 더 따진다. 제3자는 해당 상품의 소비자피해를 발생시킨 당사자와 같은 위치가 아니기 때문이다. <strong>결론:</strong>업무방해·강요·공갈 및 공동정범 관련 심판대상 조항에 대해 합헌으로 판단했다. 모든 불매운동을 금지한 판결도, 해당 형사사건의 모든 피고인에게 동일한 유죄를 확정한 판결도 아니다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=1000208&cbIdx=1195">헌재 공식 결정 요지</a></p>
+<p>판례를 쉬운 말로 순서대로:①등록하지 않은 소비자도 모일 수 있다→②구매를 멈추는 것 외에 함께하자고 제안할 수 있다→③거짓과 강요를 정당화할 수는 없다→④상대와 특히 제3자의 권리도 살핀다→⑤허용 한계를 넘으면 일반 법적 책임을 질 수 있다. 반대 결론으로 모든 수단을 면책하면 ‘소비자’라는 이름만으로 협박도 보호하게 된다.</p>
+<p><strong>시험:</strong>2014-38·2017-37·2018-37. <strong>한 줄:</strong> 운동은 넓게 보장하지만 목적·사실·자발성·수단·제3자 권리를 따져 정당성을 판단한다.</p>
+<h2 id="consumer-01-07" data-concept-id="consumer-01-07">2-3. 소비자기본법의 여덟 권리와 소비자의 책무 ★★★★★</h2>
+<p><strong>교재18·22쪽 / 조문4·5조의 목적:</strong> 소극적 보호 대상에서 능동적인 권리자로 옮겨 간다.</p>
+<table>
+<thead>
+<tr>
+<th>권리</th>
+<th>쉽게 기억하기</th>
+<th>구체적 장면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>안전</td>
+<td>다치지 않을 권리</td>
+<td>위험한 전기제품으로 생명·신체·재산 피해 예방</td>
+</tr>
+<tr>
+<td>정보</td>
+<td>알고 고를 권리</td>
+<td>성분·위험·조건을 설명받음</td>
+</tr>
+<tr>
+<td>선택</td>
+<td>상대·장소·가격·조건을 고를 권리</td>
+<td>특정 판매처만 강요받지 않음</td>
+</tr>
+<tr>
+<td>의견 반영</td>
+<td>정책과 기업활동에 목소리를 낼 권리</td>
+<td>안전기준 개선 건의</td>
+</tr>
+<tr>
+<td>피해 보상</td>
+<td>신속·공정한 절차로 적절히 구제받을 권리</td>
+<td>하자·사고에 대한 분쟁 해결</td>
+</tr>
+<tr>
+<td>교육</td>
+<td>합리적 소비를 배울 권리</td>
+<td>할부·대출의 위험을 배움</td>
+</tr>
+<tr>
+<td>단체 조직·활동</td>
+<td>함께 힘을 모을 권리</td>
+<td>소비자모임을 만들고 조사</td>
+</tr>
+<tr>
+<td>소비생활 환경</td>
+<td>안전하고 쾌적한 환경에서 소비할 권리</td>
+<td>환경을 해치지 않는 소비조건</td>
+</tr>
+</tbody></table>
+<p><mark class="yellow">기억 순서:안전-정보-선택-의견-보상-교육-단체-환경.</mark> 영업·기업의 자유를 포함하는 직업의 자유는 중요한 헌법상 기본권이지만4조의 소비자8대 권리 항목은 아니다. ‘중요한 권리냐’가 아니라 ‘어느 목록의 권리냐’를 묻는다.</p>
+<p>소비자의 책무는①올바른 선택과 권리의 정당한 행사, ②필요한 지식·정보 습득 노력, ③자주적·합리적 행동과 자원 절약·환경친화적 소비다. 교재는 이를 다섯 항목으로 풀어 설명한다. 책무를 못 지켰다고 모든 사업자 책임이 사라지거나 피해보상청구권이 일괄 소멸하는 것은 아니다. <strong>시험:</strong>2016-39·2017-38. <strong>한 줄:</strong> 권리를 적극적으로 쓰되 사실·정보·환경에 대한 책임도 함께 생각한다.</p>
+<h2 id="consumer-01-08" data-concept-id="consumer-01-08">2-4. 자도소주 구입명령:경쟁 제한이 소비자에게 미치는 영향 ★★★★☆</h2>
+<p><strong>교재18-19쪽 / 판례96헌가18,1996.12.26:</strong> 지역 소주를 일정 비율 이상 사도록 요구받은 주류판매업자가 불복했다. 교재가 이 사건을 넣은 것은 판매자의 직업 자유와 소비자의 선택이 연결되기 때문이다. 국가가 공급·구입 경로를 강제로 고정하면 업체의 경쟁뿐 아니라 소비자가 고를 수 있는 시장도 좁아진다.</p>
+<p>헌재는 지역 산업 보호 등의 목적이 있다고 해도 경제정책의 광범위한 재량이 기본권 심사를 없애지는 않는다고 보았다. 목적에 맞는 수단인지, 덜 제한적인 대안이 있는지, 침해와 공익의 균형이 맞는지 따져 해당 구입명령제도를 위헌으로 판단했다. 경쟁의 자유는 직업의 자유에서 나오고 소비자 선택에도 이익이 된다. 경쟁을 위한 모든 규제를 위헌으로 선언한 것은 아니다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=135400&mode=2">공식 결정문</a></p>
+<p>쉬운 번역:‘형성의 자유’→정책을 설계할 여지는 넓다. ‘비례원칙 준수’→그렇더라도 사람의 자유를 필요한 정도 이상 막으면 안 된다. 반대로 지역 보호라는 말만으로 어떤 강제구입도 허용하면 소비자의 선택은 정책 구호에 밀려난다. <strong>한 줄:</strong> 사업자의 정당한 경쟁과 소비자의 선택은 서로 연결된다.</p>
+<h2 id="consumer-01-09" data-concept-id="consumer-01-09">2-5. 로마켓 사건:알 권리와 개인정보는 무엇을 비교하나 ★★★★★</h2>
+<p><strong>교재19-22쪽 / 사례의 목적:</strong> 정보가 소비자에게 유용하다는 한마디로 모든 공개를 정당화하지 않는다.</p>
+<p>변호사 정보 사이트가 학력·경력 등 신상정보와 사건 수임내역을 모아 인맥지수·승소율·전문성지수를 제공했다. 변호사들은 동의 없는 수집·재가공이 자기정보통제권과 인격권을 침해한다며 중지·배상을 청구했다. 사이트는 이미 공개된 정보를 정리해 소비자의 변호사 선택을 도울 뿐이라고 맞섰다.</p>
+<p>서울중앙지법2006가합22413(2007.7.6)은 직업적 신상정보와 이를 기초로 한 정보 제공에는 알 권리의 가치를 인정하면서, 개별 수임내역과 이를 재가공한 승소율 등의 제공은 개인정보 침해라고 판단했다. 그런데 <strong>대법원2008다42430 전원합의체(2011.9.2)의 결론은 항목별로 달랐다.</strong> 인맥지수는 사적 성격·왜곡 가능성·연고주의 등 공적 폐해와 인격적 침해 우려를 고려해 위법하다고 보았다. 반면 사건정보를 이용한 승소율·전문성지수 제공은 이 사건의 공공성, 공적 직업인 지위, 산출 방법의 합리성, 정보 필요성 등을 비교해 위법하다고 평가하지 않았다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=166324">대법원 판결문</a></p>
+<p>법원의 고민을 번역하면①누구의 어떤 정보인가→②공개하면 소비자에게 무슨 도움이 되는가→③수집·재가공 방식이 합리적인가→④당사자의 인격적 피해는 얼마나 큰가→⑤두 이익 중 무엇이 우월한가다. 공개정보도 개인별로 재가공하면 새로운 개인정보 문제가 생길 수 있다. ‘공개됐으니 마음대로’도 ‘동의 없으면 어떤 정보도 절대 공개 불가’도 이 판례의 결론이 아니다. 또한2011년 판결을 오늘의 개인정보보호법상 모든 데이터 처리의 포괄적 허가로 읽지 않는다. 이후 법률의 처리 근거·요건은10장에서 별도로 배운다.</p>
+<p><strong>한 줄:</strong> 같은 사이트의 서비스라도 인맥지수와 승소율의 결론을 바꿔 외우지 않는다.</p>
+<h1>3. 누가 무엇을 해야 권리가 현실이 될까</h1>
+<h2 id="consumer-01-10" data-concept-id="consumer-01-10">3-1. 국가·지방자치단체의 책무 지도 ★★★★☆</h2>
+<p><strong>교재23-24쪽 / 표1-1을 넣은 이유:</strong> 권리 선언을 실제 행정 업무와 연결한다.6조의 기본 책무는 법령·조례 정비, 행정조직 정비·운영 개선, 시책 수립·실시, 소비자 조직의 지원·육성이다.</p>
+<table>
+<thead>
+<tr>
+<th>정책 분야</th>
+<th>해야 할 일</th>
+<th>주체·문구의 차이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지역 소비자 보호7조</td>
+<td>지역 행정조직 설치·운영 지원</td>
+<td>국가의 지원 가능 규정</td>
+</tr>
+<tr>
+<td>위해 방지8조</td>
+<td>안전기준 제정, 준수 여부 시험·검사·조사</td>
+<td>국가</td>
+</tr>
+<tr>
+<td>계량·규격9조</td>
+<td>양·규격 때문에 소비자가 손해 보지 않도록 시책</td>
+<td>국가·지자체</td>
+</tr>
+<tr>
+<td>표시10조·광고11조</td>
+<td>잘못 고르거나 쓰게 하는 표시·광고 방지 기준</td>
+<td>국가</td>
+</tr>
+<tr>
+<td>거래 적정화12조</td>
+<td>불공정 조건·방식 예방, 부당행위 지정·고시, 특수거래 시책</td>
+<td>국가 중심, 특수거래 시책은 국가·지자체</td>
+</tr>
+<tr>
+<td>정보13조</td>
+<td>권익 관련 정책·결정과 거래정보를 알림</td>
+<td>국가·지자체</td>
+</tr>
+<tr>
+<td>능력 향상14조</td>
+<td>교육, 프로그램 개발, 학교·평생교육 연계, 매체 활용</td>
+<td>국가·지자체, 수단별 의무·재량 구별</td>
+</tr>
+<tr>
+<td>개인정보15조</td>
+<td>분실·도난·누출·변조·훼손 피해 예방</td>
+<td>시책은 국가·지자체, 기준은 국가</td>
+</tr>
+<tr>
+<td>분쟁 해결16조</td>
+<td>처리 기구 마련과 해결기준</td>
+<td>기구·조치는 국가·지자체, 기준 제정은 국가</td>
+</tr>
+<tr>
+<td>시험·검사17조</td>
+<td>시설·기구, 외부 의뢰, 결과 공표·조치, 단체 지원·연구</td>
+<td>국가·지자체, 각 조항의 ‘하여야’와 ‘할 수’를 구별</td>
+</tr>
+</tbody></table>
+<p>국가가 반드시 특정 개인에게 원하는 금액을 지급한다는 뜻과 일반적 정책 책무는 다르다. 교재는 특히 소비자능력 향상과 개인정보보호가 보호 중심 정책에서 권익 증진 중심 정책으로 옮기는 중요한 분야임을 강조한다. <strong>한 줄:</strong> 안전·정보·선택·구제를 실제로 가능하게 만드는 행정 기반을 마련한다.</p>
+<h2 id="consumer-01-11" data-concept-id="consumer-01-11">3-2. 사업자의 거래상 책무와 시책상 책무 ★★★★★</h2>
+<p><strong>교재25쪽 / 조문18-20조의 목적:</strong> 소비자의 권리에 대응하여 사업자가 해야 할 일을 정한다.</p>
+<p>거래 관련19조는①위해 방지 조치, ②부당한 조건·방법의 사용 금지, ③성실·정확한 정보, ④개인정보의 성실한 취급, ⑤하자 불만·피해 해결과 채무불이행 손해배상이다. 예를 들어 위험한 사용법을 숨기거나, 해지할 수 없다는 부당한 조건을 강요하거나, 계약을 어기고도 책임을 부인하는 문제다.</p>
+<p>시책 관련18·20조는 국가·지자체 시책 협력, 소비자단체·소비자원의 자료 요청 협력, 환경친화적 기술·재활용 노력, 국가가 정한 위해·표시·광고·개인정보 기준 준수, 지정·고시한 부당행위 금지 등이다. 모두 소비자와 관련되지만 <strong>직접 거래에서 지켜야 할 책무인지, 공적 기준·시책에 협력·준수하는 책무인지</strong>를 출제한다. ‘부당한 조건 사용 금지’와 ‘국가가 고시한 부당행위 금지’의 표현 차이에 주의한다.</p>
+<p><strong>시험:</strong>2013-47·2014-39. <strong>한 줄:</strong> 실제 거래의 안전·정확·공정은19조, 정책 협력과 국가 기준 준수는18·20조로 정리한다.</p>
+<h2 id="consumer-01-12" data-concept-id="consumer-01-12">3-3. 소비자단체:활동·등록·지원은 서로 다르다 ★★★★★</h2>
+<p><strong>교재26·28-29쪽 / 문단의 목적:</strong> 자율적인 조직과 특별한 법적 지위를 나눈다. 소비자들이 권익 증진을 위해 조직하면 단체 활동을 할 수 있지만, 그것만으로 등록단체가 되거나 보조금을 자동으로 받는 것은 아니다.</p>
+<p>업무는 정책 건의, 물품·용역의 시험·검사 및 거래조건 조사·분석, 소비자문제 조사·연구, 소비자교육, 상담·정보 제공·합의 권고다. 등록은 전반적 소비자문제 취급, 법정 설비·인력, 비영리민간단체 요건 등을 심사한다. 전산장비·사무실·상근5명 이상이 중요하다. 비영리민간단체의 요건은 불특정 다수 수혜, 이익 비분배, 특정 정당·후보 지원 또는 종교 교리 전파를 주된 목적으로 하지 않음, 상시 구성원100명 이상, 최근1년 이상 공익활동, 비법인 단체의 대표자·관리인이다. 상근과 비상근, 회원100명과 직원5명을 바꾸지 않는다.</p>
+<p><strong>교재 문구의 정확한 보완:</strong> 교재는 정책 건의를 제외한 모든 업무 수행처럼 설명하지만, 현행29조1항1호가 직접 요구하는 것은28조1항 <strong>2호의 시험·검사·조사·분석과5호의 상담·정보 제공·합의 권고</strong>다. 교육은 단체의 법정 업무이지만 이 등록 조항이 직접 열거한 필수 업무와 동일한 목록은 아니다.2017년39번은 교육을 등록요건의 옳은 보기로 취급하는 출제 의도를 보존하되 엄밀한 조문과 구별한다. <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1029484553">현행 등록 조항</a></p>
+<p>거짓·부정한 방법의 등록은 취소해야 한다. 나중에 요건을 잃으면3개월 이내 보완을 명할 수 있고 미보완 시 취소할 수 있다. 처음부터 속인 경우의 필요적 취소와 사후 미충족의 보완·재량 절차가 다르다. <strong>시험:</strong>002·2012-70·2014-40·2015-66·2017-39. <strong>한 줄:</strong> 단체 결성은 자유지만 특별한 등록·지원에는 공공성·능력 요건이 따른다.</p>
+<h2 id="consumer-01-13" data-concept-id="consumer-01-13">3-4. 보험소비자연맹 등록거부 사건 ★★★★☆</h2>
+<p><strong>교재29-30쪽 / 판례2005두1978,2008.6.12:</strong> 보험 관련 정보를 주는 단체가 등록을 신청했다가 거부당했다. 단체는 소비자를 돕는다는 목적을 내세웠지만, 법원은 실제로 무엇을 하고 누구를 위해 운영되는지 살폈다.</p>
+<p>보험 분야만을 대상으로 하고, 회비를 낸 정회원에게 상세 정보를 제공하며, 보험회사 광고료와 영리업자 연계 등의 사정이 있었다. 물품·용역 전반을 조사할 적절한 설비·인력도 갖추었다고 보기 어려웠다. 대법원은 등록거부를 적법하다고 판단한 원심을 유지했다. 단체의 이름이나 좋은 목적만으로 공공적 등록 요건이 충족되는 것은 아니라는 뜻이다. <a href="https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=1496">대법원 공식 안내</a></p>
+<p>문장 번역:‘물품 및 용역 전반’→한 분야만이 아니라 전체 소비자문제를 다룰 역량. ‘영리 추구에 가깝다’→간판보다 돈과 서비스가 누구에게 어떻게 돌아가는지를 본다. 그렇다고 회비 수납 하나만으로 모든 비영리단체가 영리단체가 된다는 뜻은 아니다. 전문분야 단체의 결성 자체를 금지한 판결도 아니다. <strong>한 줄:</strong> 자율 단체로 활동할 수 있는지와 법정 등록 지위를 얻는지는 다른 질문이다.</p>
+<h2 id="consumer-01-14" data-concept-id="consumer-01-14">3-5. 시험 결과 공표와 자료 요청의 조건 ★★★★☆</h2>
+<p><strong>교재26-28·33쪽 / 문단의 목적:</strong> 소비자단체의 힘도 신뢰성과 목적의 제한을 받는다.</p>
+<p>물품·거래조건 조사 결과는 공표할 수 있다. 다만 전문 인력·설비가 필요한 시험은 법정 검사기관을 거쳐야 한다. 교재의 분야는 역학, 화학, 전기, 열·온도, 비파괴, 음향·진동, 광학·광도, 의학, 생물학이다. 기관은 국공립 검사기관, 한국소비자원, 능력을 인정받거나 관계 법령에 따라 지정된 검사기관 등이다. 전문검사 결과 공표는 예정일7일 전까지 해당 사업자의 의견을 듣는다. 의견을 들으라는 것은 업체의 동의가 있어야만 사실을 발표한다는 뜻과 다르다.</p>
+<p>자료 요청은 등록단체가 업무에 필요한 범위에서 한다. 시험·검사·거래 조사 자료 및 공신력 있는 검사에서 중대한 하자·결함 판정을 받은 물품의 처리계획·실적 등이 해당하고, 영업비밀은 제외한다. 사용 목적·절차를 미리 알리고 소비자정보요청협의회의 협의·조정을 거치며, 사업자에게 의견 진술 기회를 준다. 요건을 갖춘 요청이면 사업자는 정당한 사유 없이 거부할 수 없다. 부당한 거부·방해·기피·거짓 제출의 경우 법정 방식으로 명칭과 사실·사유를 일간신문에 게재할 수 있다.</p>
+<p>얻은 정보를 소비자권익 증진 외의 목적으로 써서는 안 된다. 목적 외 사용으로 사업자에게 손해를 끼치면 배상책임도 진다. 한국소비자원의 자료 요청에도 관련 법정 절차가 적용된다. <strong>한 줄:</strong> 조사 권한은 무제한 비밀 열람권이 아니라 목적·절차·책임이 붙은 권한이다.</p>
+<h2 id="consumer-01-15" data-concept-id="consumer-01-15">3-6. 자율적 분쟁조정과 한국소비자원 ★★★★☆</h2>
+<p><strong>교재30-31쪽 / 문단의 목적:</strong> 단체협의체·소비자원·전문분쟁기구의 역할을 구별한다.</p>
+<p>공정거래위원회에 등록한 소비자단체협의체는 자율적 분쟁조정을 할 수 있다. 다만 금융·의료·환경·저작권·방송통신·개인정보·전기·우체국보험 등 법령이 별도 전문기구의 담당으로 정한 사안은 범위를 확인해야 한다. 교재의 기관명은 그 판본의 명칭이다. 기관 개편이 있으면 현재 담당기관을 별도로 확인하며, ‘어떤 단체든 모든 분야를 강제 중재한다’고 읽지 않는다.2장에서 조정 성립과 법적 효력을 구체적으로 배운다.</p>
+<p>한국소비자원은 정부 출연으로 설립된 특수 공익법인이다. 교재의 조직은 원장·부원장·소비자안전센터 소장 각1명을 포함한10명 이내 이사와 감사1명, 임기3년이다. 원장은 공정거래위원장 제청으로 대통령이, 부원장·이사·소장은 원장 제청으로 공정거래위원장이, 감사는 공정거래위원장이 임명하는 구조로 설명한다. 단체 회원들이 선거로 구성하는 민간 협회와 다르다. 조직 숫자는 심화이고 기관의 역할이 우선이다.</p>
+<p>업무는 제도·정책 연구·건의, 시험·검사·거래조사, 정보 수집·제공·국제협력, 교육·홍보·방송, 불만처리·피해구제, 종합조사·연구, 국가·지자체 의뢰 조사, 그 밖의 권익·안전 업무다. 국가·지자체가 제공한 물품 등의 피해구제는 법정 예외 범위를 확인하며, 다른 법률의 전문분쟁기구에 이미 신청된 법정 제외 사건도 있다. ‘정부 출연기관이니 정부 관련 모든 분쟁을 처리’하는 것은 아니다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031519741">소비자원 업무 조항</a></p>
+<p><strong>한 줄:</strong> 상담·조사·합의 권고·분쟁조정·법원 재판을 하나의 권한으로 뭉뚱그리지 않는다.</p>
+<h2 id="consumer-01-16" data-concept-id="consumer-01-16">3-7. 막걸리 유해물질 공표:좋은 목적이어도 확인은 엄격하게 ★★★★★</h2>
+<p><strong>교재32-33쪽 / 판례97다57689,1998.5.22:</strong> 당시 한국소비자보호원이 막걸리 시료를 사서 검사하고 특정 업체 제품에서 유해물질이 나왔다고 공표했다. 그런데 시료는 제조업체의 직접 공급지역 밖에서 일반 유통가격보다 싸게 샀고, 당시 가짜 제품도 유통되고 있었다. 외관만 보고 실제 그 회사 제품인지 확인하지 않았다. 업체가 명예·신용을 훼손했다며 손해배상을 청구했다.</p>
+<p>법원의 고민은 소비자의 안전을 위해 빨리 알릴 필요와, 권위 있는 기관의 발표가 기업에 주는 큰 피해를 어떻게 조절할지였다. 공표 내용이 진실이거나 진실로 믿을 상당한 이유가 있으면 위법성이 부정될 수 있지만, 공적 기관에는 광범한 조사능력과 국민의 높은 신뢰 때문에 더 엄격한 근거가 요구된다. 대법원은 시료가 진짜 원고 제품이라는 객관적·타당한 확증 없이 공표한 이 사안에서 상당한 이유가 있다고 보기 어렵다고 판단했다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=97%EB%8B%A457689">공식 판결문</a></p>
+<p>쉬운 번역:①공익 목적이 있다고 면책은 아니다→②검사 수치만이 아니라 검사한 물건의 정체도 확인한다→③공적 발표의 권위만큼 확인 의무가 무겁다. 반대로 겉모양만 맞으면 발표를 허용하면 가짜 상품 때문에 진짜 제조업체가 피해를 떠안을 수 있다.</p>
+<p>한국소비자원은 소비자권익·피해 확산 방지·품질·생활 향상에 필요한 사실을 공표해야 하지만, 영업비밀 보호 필요 또는 공익상 필요가 있으면 공표하지 않는 법정 예외도 있다(35조3항). 기출2019-37④의 ‘사업자 또는 사업자단체의 공익상’이라는 어색한 표현은 사업자의 사익을 공익과 같게 보는 말이 아니다. <strong>시험:</strong>2019-37. <strong>한 줄:</strong> 공표할 필요, 공표의 예외, 내용을 믿을 객관적 근거를 각각 따진다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>消費者 소비자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 費(쓸 비), 者(사람 자). <strong>③ 합친 뜻:</strong> 물건·서비스를 사용하여 생활하는 사람. <strong>④ 이름의 이유:</strong> 소비하는 쪽을 공급하는 사업자와 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소비생활 이용자와 시행령이 포함한 생산활동 이용자. <strong>⑥ 쉬운 말:</strong> 내 생활을 위해 사서 쓰는 사람. <strong>⑦ 사례:</strong> 지연이 집에서 쓸 선풍기를 산다.</p>
+<p><strong>⑧ 시험:</strong> 003·004·2012-37: 생산용 제외. <strong>⑨ 비교·기억법:</strong> 소비자는 거래 목적에 따른 지위이지 직업 이름이 아니다.</p>
+<h3>資本財 자본재</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 本(근본 본), 財(재물 재). <strong>③ 합친 뜻:</strong> 생산 밑바탕이 되는 재화. <strong>④ 이름의 이유:</strong> 최종 소비와 달리 생산 기반을 마련하므로 자본.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 재화·용역의 생산에 사용하는 설비 등. <strong>⑥ 쉬운 말:</strong> 빵을 만드는 가게의 오븐. <strong>⑦ 사례:</strong> 제과업자가 판매할 빵을 굽기 위해 오븐을 구입.</p>
+<p><strong>⑧ 시험:</strong> 2013-46: 생활용 구매와 구별. <strong>⑨ 비교·기억법:</strong> 원재료는 제품에 들어가고 자본재는 만드는 수단이다.</p>
+<h3>私的自治 사적 자치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 私(사사로울 사), 的(과녁 적), 自(스스로 자), 治(다스릴 치). <strong>③ 합친 뜻:</strong> 개인의 일을 스스로 정함. <strong>④ 이름의 이유:</strong> 국가가 모든 거래 내용을 대신 정하지 않음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사법관계를 자기 의사로 형성하는 원칙. <strong>⑥ 쉬운 말:</strong> 누구와 무엇을 얼마에 살지 내가 정한다. <strong>⑦ 사례:</strong> A와 B가 물건 가격을 합의.</p>
+<p><strong>⑧ 시험:</strong> 001·005: 실제 불균형을 보완하는 규제. <strong>⑨ 비교·기억법:</strong> 자유의 원칙과 약자 보호를 함께 본다.</p>
+<h3>消費者主權 소비자주권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 費(쓸 비), 者(사람 자), 主(주인 주), 權(권세 권). <strong>③ 합친 뜻:</strong> 소비자가 시장 선택의 주도권을 가짐. <strong>④ 이름의 이유:</strong> 선택을 통해 기업 생산을 움직인다는 의미.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구매 선택이 생산 종류·수량에 영향을 준다는 관념. <strong>⑥ 쉬운 말:</strong> 안 팔리면 회사도 만들기 어렵다. <strong>⑦ 사례:</strong> 소비자가 안전한 제품을 골라 기업이 품질을 개선.</p>
+<p><strong>⑧ 시험:</strong> 2016-38: 헌법 124조 문언과 다름. <strong>⑨ 비교·기억법:</strong> 시장 원리인 주권과 구체적 법적 권리를 구별.</p>
+<h3>不買運動 불매운동</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 買(살 매), 運(옮길 운), 動(움직일 동). <strong>③ 합친 뜻:</strong> 사지 않는 행동을 함께 펼침. <strong>④ 이름의 이유:</strong> 구매 여부를 의사 표현과 개선 요구의 수단으로 사용.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소비자가 정당한 목적·수단 아래 구매 거절 등을 하는 운동. <strong>⑥ 쉬운 말:</strong> 문제 있는 제품을 사지 말자고 함께 말한다. <strong>⑦ 사례:</strong> 소비자들이 안전 개선 때까지 해당 제품을 사지 않는다.</p>
+<p><strong>⑧ 시험:</strong> 2014·2017·2018: 잠재적 소비자·조직화·자발성. <strong>⑨ 비교·기억법:</strong> 불매와 협박·강요는 다르며 제3자 압박도 별도 판단.</p>
+<h3>權利·責務 권리·책무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 利(이로울 리), 責(꾸짖을 책), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 누릴 이익과 맡아 해야 할 일. <strong>④ 이름의 이유:</strong> 혜택만이 아니라 정보 습득·합리적 행동도 요구.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 보호받을 법적 지위와 소비자로서 수행할 책임. <strong>⑥ 쉬운 말:</strong> 안전한 물건을 받을 권리와 주의사항을 살필 책임. <strong>⑦ 사례:</strong> 사업자는 위험을 알리고 소비자는 사용 설명을 읽는다.</p>
+<p><strong>⑧ 시험:</strong> 2016-39·2017-38: 8대 권리 목록. <strong>⑨ 비교·기억법:</strong> 소비자의 책무가 사업자의 배상책임을 자동 소멸시키지 않는다.</p>
+<h3>登錄 등록</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 登(오를 등), 錄(기록할 록). <strong>③ 합친 뜻:</strong> 명부에 올려 기록함. <strong>④ 이름의 이유:</strong> 단순 결성과 법정 지원·권한을 구별하기 위함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정해진 요건을 갖춘 단체를 법정 절차에 따라 등록. <strong>⑥ 쉬운 말:</strong> 모임을 만드는 것과 공적 자격을 확인받는 것은 별개. <strong>⑦ 사례:</strong> 소비자단체가 인력·공익성 등 요건을 갖춰 신청.</p>
+<p><strong>⑧ 시험:</strong> 002·2014-40·2017-39: 전반·비영리·5명. <strong>⑨ 비교·기억법:</strong> 결성 자유≠등록≠지원 자동 지급.</p>
+<h3>紛爭調停 분쟁조정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 紛(어지러울 분), 爭(다툴 쟁), 調(고를 조), 停(머무를 정). <strong>③ 합친 뜻:</strong> 다툼을 조절하여 멈추게 함. <strong>④ 이름의 이유:</strong> 승패만 가르기보다 해결안을 통해 다툼을 끝내려 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 중립 기관 등이 당사자 사이의 해결을 돕는 절차. <strong>⑥ 쉬운 말:</strong> 환불 문제로 다투는 둘 사이에서 타협안을 제시. <strong>⑦ 사례:</strong> 제품 불량의 환불 범위를 조정기관에서 협의.</p>
+<p><strong>⑧ 시험:</strong> 002: 자율적 조정의 주체·제외 분야. <strong>⑨ 비교·기억법:</strong> 재판·중재·조정의 효력 차이는 2장에 연결.</p>
+<h3>公表 공표</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 表(겉 표). <strong>③ 합친 뜻:</strong> 공개적으로 드러냄. <strong>④ 이름의 이유:</strong> 위험을 널리 알려 피해를 막기 위함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 시험·조사 결과 등을 일반에 알림. <strong>⑥ 쉬운 말:</strong> 검사 결과를 많은 사람에게 알려 조심하게 한다. <strong>⑦ 사례:</strong> 소비자원이 제품 안전시험 결과를 발표.</p>
+<p><strong>⑧ 시험:</strong> 2019-37: 공표 의무와 비공개 예외. <strong>⑨ 비교·기억법:</strong> 공익 목적이라도 틀린 제품 확인·허위 결과까지 면책되지 않는다.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 풀 문제</th>
+<th>출제 의도</th>
+<th>놓치기 쉬운 점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2019-36</td>
+<td>쇼핑몰 택배 사례의 소비자 개념</td>
+<td>서비스 구매만으로 소비자가 되지 않음</td>
+</tr>
+<tr>
+<td>2014-38</td>
+<td>불매운동의 주체·행위·자발성</td>
+<td>등록단체만 가능하다는 함정</td>
+</tr>
+<tr>
+<td>2017-38</td>
+<td>8대 권리의 정확한 목록</td>
+<td>직업 자유와 소비자의 선택권을 바꾸기</td>
+</tr>
+<tr>
+<td>2014-39</td>
+<td>사업자 책무의 분류</td>
+<td>직접 거래와 국가 기준 준수</td>
+</tr>
+<tr>
+<td>2019-37</td>
+<td>공표 의무와 예외</td>
+<td>영업비밀이면 언제나 공표 가능하다는 주장</td>
+</tr>
+</tbody></table>
+<p>반복은 소비자 개념, 피해의 특징, 불매운동, 단체 등록에 집중되어 있다. <strong>실측 오답률은 없으므로</strong> ‘많이 틀리는 보기’는 통계가 아니라 ‘가장 위험한 함정’으로 읽는다.2013-46의 자체 풀이 정답 충돌,2015-66의 단체 결성과 등록 혼용,2017-39의 등록업무 문구는 아래 보기별 해설에서 구분했다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 카페의 두 주문.</strong> 카페 사장이 손님에게 팔 빵의 밀가루와 직원 휴게실에서 쓸 최종 소비용품을 각각 샀다. ‘둘 다 사업자가 샀으므로 소비자일 수 없다’는 말이 맞을까? <strong>답:</strong>아니다. 원재료 생산투입과 최종 사용의 기능을 나눠야 한다. 다만 구체적인 품목·용도와 적용 법령을 확인한다. <strong>의도:</strong>사람의 직업과 거래 목적을 분리한다.</p>
+<p><strong>응용2 · 반대자를 공개하는 불매모임.</strong> 소비자들이 안전문제를 알리며 불매에 참여하지 않은 이웃의 이름을 공개하고 불이익을 주자고 했다. ‘목적이 소비자안전이니 정당하다’고 할 수 있을까? <strong>답:</strong>목적만으로 부족하다. 사실의 진실성, 참여의 자유, 수단의 위법성, 타인의 권리를 따져야 한다. <strong>의도:</strong>운동 보장과 수단 면책을 구별한다.</p>
+<p><strong>응용3 · ‘친분점수’와 검증된 업무정보.</strong> 전문가 비교 사이트가 공개된 경력으로 친분점수를 만들고, 별도로 합리적 기준의 업무성과 정보를 제공한다. 둘을 ‘공개자료이니 모두 허용’해도 될까? <strong>답:</strong>각 정보의 공공성, 가공의 왜곡, 필요성, 인격적 피해를 구체적으로 비교한다. 로마켓 사건의 서비스별 결론 차이가 단서다. 현행 개인정보법 요건도 별도로 확인한다. <strong>의도:</strong>같은 원자료라도 처리방식과 공개이익이 다름을 이해한다.</p>
+<p><strong>응용4 · 등록하지 않은 작은 모임.</strong> 이웃20명이 결함제품 피해를 조사하는 소비자모임을 만들었다. ‘등록 못 했으니 모임도 불법이고 불매도 못 한다’는 지적은? <strong>답:</strong>단체 결성·소비자운동과 특별한 등록 지위는 다르다. 다만 등록단체만의 자료 요청 권한이나 지원을 당연히 요구할 수는 없다. <strong>의도:</strong>활동 자유·등록·특별 권한을 세 단계로 나눈다.</p>
+<p><strong>응용5 · 너무 싼 검사 시료.</strong> 조사기관이 정품보다 훨씬 싸게 산 화장품을 검사해 유해성분을 발견했다. 판매경로·정품 여부 확인 없이 원제조업체 이름으로 발표해도 될까? <strong>답:</strong>안전을 위한 신속성은 중요하지만 시료의 진정성과 공표 내용의 객관적 근거를 확인해야 한다. 공적 기관의 발표 신뢰가 높을수록 주의의무도 무겁다. <strong>의도:</strong>검사 정확성과 시료의 동일성은 별도라는 점을 묻는다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제1장</h2><p><strong>TOP3:</strong>소비자의 범위 / 불매운동의 정당성 / 단체·소비자원의 권한과 한계.</p><table><tr><th>쟁점</th><th>기억할 내용</th></tr><tr><td>소비자</td><td>소비생활·최종 사용.원재료·중간재·자본재 원칙 제외.농축어업 예외, 허가 원양어업 제외.</td></tr><tr><td>두 사례</td><td>판매상품 배송을 맡긴 쇼핑몰은 제외.교재의 지방의원 여행계약은 포함.</td></tr><tr><td>원인</td><td>지위 불균등, 잦은 모델 변경, 허위·과장광고, 독과점·담합.</td></tr><tr><td>피해</td><td>보편·구조, 광범위·중대, 예방 곤란, 원인 규명 곤란.돈 손해만 아님.</td></tr><tr><td>헌법124조</td><td>문언은 소비자보호운동.주권=구매선택의 시장 영향, 권익=구체적 거래의 이익.</td></tr><tr><td>8대 권리</td><td>안전·정보·선택·의견·보상·교육·단체·환경.직업의 자유는 이 목록 아님.</td></tr><tr><td>불매운동</td><td>잠재적 소비자·미등록 모임 가능.진실·자발성·적법수단·제3자 권리.</td></tr><tr><td>로마켓 대법원</td><td>인맥지수 위법 / 사건정보 승소율·전문성은 해당 사안에서 위법 부정.</td></tr><tr><td>사업자 책무</td><td>거래19조:안전·공정·정확정보·개인정보·배상.시책18·20조:협력·기준 준수.</td></tr><tr><td>단체 등록</td><td>전반적 소비자문제, 전산·사무실·상근5명, 비영리 요건.구성원100명·공익1년.</td></tr><tr><td>정확한 조문</td><td>29조 직접 요구 업무는28조1항2호·5호.교재의 모든 업무라는 설명과 구별.</td></tr><tr><td>공표·자료</td><td>전문검사기관, 공표7일 전 의견.자료 목적·절차·영업비밀 제한.목적 외 사용 책임.</td></tr><tr><td>막걸리</td><td>공적 공표는 엄격한 확인.시료가 그 업체 제품인지도 검증.</td></tr></table><p><strong>반드시 외울 문장:</strong>단체 결성·등록·지원은 다르다.소비자보호 목적이 모든 수단을 정당화하지 않는다.2013-46 저장 정답③과 교재상④가 충돌한다.</p><p>사례를 풀 순서:해당 거래의 이용 목적→권리→의무 주체→권한의 조건·한계→피해와 구제.</p></section>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 사례의 소비자 여부와 불매·공표의 한계를 이유까지 설명한다. 🟡 목록은 기억하지만 사건 결론을 바꿔 말한다. 🔴 돈을 내면 모두 소비자이고 좋은 목적이면 모든 행위가 정당하다고 생각한다. 아직 답안을 받지 않았으므로 실제 이해도를 단정하지 않는다. <strong>복습 TOP3:</strong>최종 사용과 생산투입, 불매운동의 주체·수단, 단체 결성과 등록의 차이.</p>
+<p><mark class="blue">다음 장:권리를 알았으니 이제 사업자 협의, 소비자원, 조정위원회, 법원 중 어디로 가야 하는지 배운다.</mark></p>
+<h1>문제 부록 · 28문항·106개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_001"><h4>형성평가 · 소비자법_001</h4><p class="question-stem">다음 중에서 소비자문제가 발생하는 원인이 아닌 것은?</p><ol class="choices"><li>거래상 지위의 균등</li><li>신상품의 빈번한 출시 및 모델 변경으로 인한 소비 강요</li><li>허위, 과장광고를 통한 소비자기만</li><li>독과점 등으로 인한 소비자 이익의 침해</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원인이 아니다. 당사자의 지위가 대등하면 정보·협상력 격차로 인한 문제가 줄어든다. 함정은 불균등을 균등으로 바꾸는 것.</li><li><strong>비선택</strong> · 원인이다. 잦은 모델 변경은 기존 제품의 사용가치와 별개로 교체 소비를 압박한다.</li><li><strong>비선택</strong> · 원인이다. 허위·과장 정보는 제대로 비교하여 고를 기회를 빼앗는다.</li><li><strong>비선택</strong> · 원인이다. 경쟁이 줄면 가격·품질을 비교하고 다른 사업자를 선택하기 어렵다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 거래 당사자인 사업자(기업)와 소비자 사이에는 경제력과 정보보유 및 정보에 대한 접근성에서 매우 큰 격차가 존재하므로 사업자(기업)와 소비자는 대등한 거래 당사자가 되지 못하며 소비자문제가 발생하는 원인이 된다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_002"><h4>형성평가 · 소비자법_002</h4><p class="question-stem">다음 중에서 소비자단체에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>공정거래위원회에 등록한 소비자단체의 협의체는 소비자의 불만 및 피해를 처리하기 위하여 자율적 분쟁조정(紛爭調停)을 할 수 있다.</li><li>소비자들이 권익을 증진하기 위해 조직한 단체이면 제한 없이 소비자단체가 될 수 있으며 국가나 지방자치단체로부터 지원을 받게 된다.</li><li>소비자단체의 기본업무 중 하나로는 국가 및 지방자치단체의 소비자의 권익과 관련된 시책에 대한 건의가 있다.</li><li>금융분쟁조정위원회, 의료심사조정위원회 등과 같은 전문기관의 담당사항인 경우에는 소비자단체의 협의체는 자율적 분쟁을 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 공정거래위원회에 등록한 협의체가 자율적 분쟁조정을 할 수 있다. 모든 미등록 모임의 법정 조정권이라는 뜻은 아니다.</li><li><strong>선택</strong> · 틀리다. 단체의 결성은 자유롭지만 국가 지원을 자동으로 받는 것은 아니다. 등록과 지원 요건·재량을 따로 본다.</li><li><strong>비선택</strong> · 옳다. 소비자의 권익과 관련된 시책을 국가·지방자치단체에 건의하는 것이 기본업무다.</li><li><strong>비선택</strong> · 취지는 옳다. 법령이 정한 전문 분쟁조정 분야는 자율적 조정에서 제외된다. 보기의 옛 기관 명칭을 현재 기관명이라고 외우지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 소비자들이 권익을 증진하기 위해 조직한 단체이면 제한 없이 소비자단체가 될 수 있지만, 국가나 지방자치단체로부터 지원을 받기 위해서는 일정한 요건을 갖추고 등록해야 한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_003"><h4>형성평가 · 소비자법_003</h4><p class="question-stem">소비자기본법과 시행령에서는 제공된 물품 등을 원재료(중간재를 포함), 자본재 또는 이에 준하는 용도로 생산활동에 사용하는 자 및 제공된 물품 또는 용역을 최종적으로 사용하는 자가 모두 소비자개념에 포함된다.</p><ol class="choices"><li>O</li><li>X</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀린 명제이므로 O가 아니다. 원재료·중간재·자본재 등 생산에 쓰는 사람을 최종 사용자와 똑같이 모두 포함하지 않는다.</li><li><strong>선택</strong> · X가 맞다. 최종 사용이라는 원칙과 생산용 원재료·설비의 제외를 함께 보자. 농축어업의 특별 포함도 별도 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 소비자기본법에 따라 시행령에서는 “제공된 물품 등을 원재료(중간재를 포함), 자본재 또는 이에 준하는 용도로 생산활동에 사용하는 자”는 소비자의 범위에서 제외하고, “제공된 물품 또는 용역을 최종적으로 사용하는 자”를 소비자로 보고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_004"><h4>형성평가 · 소비자법_004</h4><p class="question-stem">인터넷 쇼핑몰을 운영하는 A가 자신의 쇼핑몰에서 판매한 제품을 배달하기 위해 택배회사를 이용하는 경우, A는 소비자기본법상의 소비자라고 할 수 있다.</p><ol class="choices"><li>O</li><li>X</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · O가 아니다. 쇼핑몰의 배송 위탁은 상품 판매를 완성하며 부가가치를 만드는 생산활동에 해당한다.</li><li><strong>선택</strong> · X가 맞다. 법제처 07-0115는 이 사실관계의 쇼핑몰 운영자를 소비자기본법상 소비자로 보지 않았다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 인터넷 쇼핑몰에서 판매한 물건을 택배회사를 통해 배달하는 것은 인터넷 쇼핑의 중요한 또는 본질적인 과정의 하나라고 볼 수 있고, 인터넷 쇼핑몰 운영자는 이 과정에서 부가가치를 창출하는 것으로 보아야 한다. 따라서, 인터넷 쇼핑몰 운영자가 그 쇼핑몰에서 판매한 제품을 택배회사를 통하여 배송하는 것은, 제공된 물품 또는 용역을 원재료(중간재를 포함)·자본재 또는 이에 준하는 용도로 생산활동에 사용하는 것에 포함된다고 보아야 할 것이므로, 쇼핑몰 운영자는 소비자기본법상의 소비자에 해당되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_005"><h4>형성평가 · 소비자법_005</h4><p class="question-stem">현행 소비자법 정책은 행정규제를 통한 행정적, 사전적 피해예방과 소비자문제 해결보다는 당사자의 자치적인 해결을 더 중요시하고 있고, 사후적 피해구제에 있어서도 한국소비자원을 통한 대안적 분쟁해결보다는 법원의 소송절차가 더 많이 이용되고 있다.</p><ol class="choices"><li>O</li><li>X</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · O가 아니다. 소비자정책을 사적 자치와 소송만으로 설명하면 예방·행정규제·대체적 분쟁해결을 빠뜨린다.</li><li><strong>선택</strong> · X가 맞다. 정보·안전 규제와 신속한 구제 절차가 중요하다. 이 문제는 정책 방향을 묻는 것이지 소송·조정 건수의 통계 비교가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 현행 소비자법 정책은 당사자의 자치적인 해결보다 행정규제를 통한 행정적, 사전적 피해예방과 소비자문제 해결을 더 중요시하고 있다. 사후적 피해구제에 있어서도 법원의 소송절차를 통하기보다는 한국소비자원을 통한 대안적 분쟁해결이 더 많이 이용되고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_036"><h4>기출문제 · 소비자법_기출2012_036</h4><p class="question-stem">[2012 기말고사 · 36번 / 자체 풀이]<br>소비자피해의 특징을 바르게 설명한 것은?</p><ol class="choices"><li>소비자피해는 보편적이고 구조적으로 발생한다.</li><li>소비자의 피해는 제한적이고 경미하다.</li><li>소비자피해는 예방 및 회피가 완전히 가능하다.</li><li>소비자피해는 그 피해원인을 규명하는 것이 쉽다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 옳다. 시장 구조에 뿌리를 두고 여러 소비자에게 반복되는 보편적 문제다.</li><li><strong>비선택</strong> · 틀리다. 대량 유통 때문에 피해가 광범위하고 심각해질 수 있다.</li><li><strong>비선택</strong> · 틀리다. 소비자의 주의만으로 완전히 예방할 수 없다.</li><li><strong>비선택</strong> · 틀리다. 제조·유통 정보를 가진 사업자와 달리 소비자는 원인 규명에 어려움을 겪는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>소비자피해는 상품의 대량 생산·유통 과정에서 구조적·보편적으로 발생하며, 피해가 작거나 사전 예방이 완전하다고 볼 수 없다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_037"><h4>기출문제 · 소비자법_기출2012_037</h4><p class="question-stem">[2012 기말고사 · 37번 / 자체 풀이]<br>소비자기본법과 시행령에서 규정하는 소비자개념에 대한 설명으로 맞는 것은?</p><ol class="choices"><li>제공된 물품을 원재료로 생산활동에 사용하는 자는 소비자이다.</li><li>제공된 물품을 중간재로 생산활동에 사용하는 자는 소비자이다.</li><li>제공된 물품을 자본재로 생산활동에 사용하는 자는 소비자이다.</li><li>제공된 물품을 최종적으로 사용하는 자는 소비자이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 생산용 원재료 이용자는 원칙적으로 제외된다.</li><li><strong>비선택</strong> · 중간재도 다른 제품을 만드는 과정에 투입되므로 원칙적으로 제외된다.</li><li><strong>비선택</strong> · 생산설비 등 자본재 이용자도 원칙적으로 제외된다.</li><li><strong>선택</strong> · 최종적으로 사용하는 사람이 원칙적인 포함 대상이다. 다만 문구 하나만 떼어 생산용 원재료까지 포함한다고 확대하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>원재료·중간재·자본재로 생산활동에 사용하는 경우와 최종 소비생활을 위한 사용을 구분한다. 이 보기에서는 최종 사용자를 고른다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_070"><h4>기출문제 · 소비자법_기출2012_070</h4><p class="question-stem">[2012 기말고사 · 70번 / 자체 풀이]<br>소비자기본법상 소비자단체의 등록 요건으로 옳은 것은?</p><ol class="choices"><li>소비자가 사용하는 물품 및 용역 중 어느 한 분야에 대한 소비자문제만을 다루는 것이어도 된다.</li><li>영리를 목적으로 하여도 무방하다.</li><li>업무를 처리할 수 있는 전산장비와 사무실, 비상근인력 5명 이상을 갖추면 된다.</li><li>소비자단체의 업무로 인한 직접 수혜자는 불특정 다수이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 등록요건은 소비자문제 전반을 다루는 것이다. 한 분야만 다루면 된다는 말이 함정.</li><li><strong>비선택</strong> · 틀리다. 영리 추구와 구성원에 대한 이익 분배를 목적으로 하는 단체는 맞지 않는다.</li><li><strong>비선택</strong> · 틀리다. 상시 근무하는 인력 5명 이상이라는 요건을 비상근 인원으로 바꾸었다.</li><li><strong>선택</strong> · 옳다. 특정 회원의 사적 이익만이 아니라 불특정 다수의 이익을 목적으로 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>등록 소비자단체의 사업은 불특정 다수를 위한 것이어야 한다. 영리 목적이나 특정 분야만의 취급을 허용한다는 설명은 등록요건과 다르다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_046"><h4>기출문제 · 소비자법_기출2013_046</h4><p class="question-stem">[2013 기말고사 · 46번 / 자체 풀이]<br>소비자의 개념에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>제공된 물품을 중간재로 생산활동에 사용하는 자는 소비자이다.</li><li>제공된 물품을 자본재로 생산활동에 사용하는 자는 소비자이다.</li><li>인터넷 쇼핑몰을 운영하는 A가 자신의 쇼핑몰에서 판매한 제품을 배달하기 위해 택배회사를 이용하는 경우, A는 소비자기본법상의 소비자라고 할 수 있다.</li><li>위의 ③의 경우 A는 소비자기본법상의 소비자라고 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳지 않은 내용이다. 생산용 중간재는 원칙적으로 제외된다. 이 문항은 원본 정답 자체에도 불일치가 있다.</li><li><strong>비선택</strong> · 옳지 않은 내용이다. 자본재 등 생산활동 이용자를 일률적으로 포함하지 않는다.</li><li><strong>선택</strong> · 원본은 이 보기를 정답으로 저장했지만 교재·법제처 해석과 반대다. 쇼핑몰 판매를 위한 배송 위탁자는 이 사례에서 소비자가 아니다. 원본 정답을 보존하되 오류 가능성을 명시한다.</li><li><strong>비선택</strong> · 교재상 옳은 설명이므로 실질 정답은 이 보기다. 같은 사례를 다룬 2019년 36번과 함께 확인한다. 원본 채점값과 구분해서 학습해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>소비자기본법상 생산활동을 위한 이용자 중 시행령이 정한 범위도 소비자가 될 수 있다. 판매물품 배송을 위해 택배용역을 이용한 사례를 원재료·중간재·자본재 사용과 구별한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_047"><h4>기출문제 · 소비자법_기출2013_047</h4><p class="question-stem">[2013 기말고사 · 47번 / 자체 풀이]<br>소비자기본법상 사업자의 책무에는 시책관련상의 책무와 거래관련상의 책무가 있다. 다음 중 거래관련상의 책무에 해당하는 것은?</p><ol class="choices"><li>국가가 정한 각종 기준(위해방지, 표시, 광고, 개인정보보호)의 준수 책무</li><li>부당한 거래조건이나 방법의 사용금지 책무</li><li>국가 및 지방자치단체의 소비자권익 증진시책에 적극 협력할 책무</li><li>국가가 지정 고시한 부당거래행위의 금지 책무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사업자 책무이지만 국가의 기준 준수라는 일반적 책무다. 문제는 거래 단계의 책무를 구별한다.</li><li><strong>선택</strong> · 정답. 소비자의 합리적 선택을 막는 불공정 거래조건·방법을 사용하지 않는 거래상 책무다.</li><li><strong>비선택</strong> · 정부의 권익증진 시책에 협력하는 일반적 책무다.</li><li><strong>비선택</strong> · 국가가 정한 부당행위 금지를 준수하는 일반적 책무와 거래상 공정성의 구분을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>부당한 거래조건·방법을 사용하지 않을 책무는 거래 관련 책무이다. 국가 기준 준수와 정책 협력 등 시책 관련 책무와 구별한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_036"><h4>기출문제 · 소비자법_기출2014_036</h4><p class="question-stem">[2014 기말고사 · 36번]<br>소비자문제의 발생 원인으로 타당하지 못한 것은?</p><ol class="choices"><li>소비자는 거래대상이 되는 물품, 용역 등이 가지는 특성과 효용성을 제대로 파악하는 데에 필요한 지식, 정보가 매우 부족하다.</li><li>소비자는 거래관계에서 발생되는 권리와 의무의 내용 등을 파악하기 위해 필요한 지식이나 정보 및 판단력이 매우 부족하다.</li><li>소비자는 기업의 기만, 현혹, 허위, 과장광고에 유혹되어 물품을 구매하기 쉽다.</li><li>소비자에게 물품, 용역 등에 관한 정보를 충분히 제공하여 소비자의 선택과 권리를 충분히 보장한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원인이다. 제품의 성능·위험을 모르면 합리적 선택이 어렵다.</li><li><strong>비선택</strong> · 원인이다. 자신의 권리와 구제 방법을 모르므로 피해를 회복하기 어렵다.</li><li><strong>비선택</strong> · 원인이다. 기만적 광고는 소비자의 판단을 왜곡한다.</li><li><strong>선택</strong> · 원인이 아니다. 충분한 정보를 바탕으로 선택하는 것은 오히려 소비자문제를 줄이는 조건이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 36번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_037"><h4>기출문제 · 소비자법_기출2014_037</h4><p class="question-stem">[2014 기말고사 · 37번]<br>소비자피해의 특징을 설명한 것으로 옳지 못한 것은?</p><ol class="choices"><li>소비자피해는 상품의 생산공정과 유통을 통해 구조적이고 보편적으로 발생한다.</li><li>소비자피해를 모두 사전에 예방하고 조치하는 것은 곤란하다.</li><li>소비자피해는 경제적인 손해만 발생한다.</li><li>소비자피해 중에서는 그 원인규명이 매우 어려운 경우가 많다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 반복되는 시장 구조와 거래력 격차에서 생기므로 특정 개인의 부주의로만 볼 수 없다.</li><li><strong>비선택</strong> · 옳다. 잠재된 결함·정보 부족 때문에 사전에 완전히 막기 어렵다.</li><li><strong>선택</strong> · 틀리다. 재산뿐 아니라 생명·신체·개인정보 등에도 피해가 생긴다. 경제적 손실에만 한정이라는 말이 함정.</li><li><strong>비선택</strong> · 옳다. 전문적인 제조 과정과 정보의 편중 때문에 소비자가 원인과 책임자를 입증하기 어렵다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 37번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_038"><h4>기출문제 · 소비자법_기출2014_038</h4><p class="question-stem">[2014 기말고사 · 38번]<br>소비자불매운동에 대한 헌법재판소의 판결내용으로서 옳지 못한 것은?</p><ol class="choices"><li>헌법이 보장하는 소비자보호운동에는 소비자들이 동일한 목표로 함께 의사를 합치하여 단체를 조직하고 이를 통하여 활동하는 형태가 포함된다.</li><li>불매행위에는 다른 소비자들에게 불매운동을 촉구하는 행위, 불매운동 실행을 위한 조직행위, 직접적으로 불매를 실행하는 행위 등이 모두 포괄될 수 있다.</li><li>소비자불매운동의 주체는 소비자보호법상 등록된 소비자단체에 한정되며, 잠재적으로 소비자가 될 가능성이 있는 것으로는 운동의 주체가 될 수 없다.</li><li>소비자불매운동에 참여하는 소비자의 의사결정의 자유가 보장되어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 공동의 이익을 위한 조직적·집단적 행동을 포함한다.</li><li><strong>비선택</strong> · 옳다. 불매 권유·조직화·실제 불매는 모두 운동의 가능한 방식이다.</li><li><strong>선택</strong> · 틀리다. 등록단체만 운동할 수 있는 것도 아니고 잠재적 소비자가 배제되는 것도 아니다.</li><li><strong>비선택</strong> · 옳다. 참여는 자발적이어야 하며 협박·강요 등 수단은 정당성 판단에서 문제가 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 38번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_039"><h4>기출문제 · 소비자법_기출2014_039</h4><p class="question-stem">[2014 기말고사 · 39번]<br>소비자기본법은 사업자에게 거래 관련상의 책무(제19조)와 시책 관련상의 책무(제18조, 제20조)를 규정하고 있다. 다음 중 거래 관련상의 책무에 해당하지 않는 것은?</p><ol class="choices"><li>국가가 정한 각종 기준(위해방지, 표시, 광고, 개인정보보호)을 준수할 책무</li><li>물품 등에 대한 정보를 성실하고 정확하게 제공할 책무</li><li>물품 등으로 인해 소비자에게 위해가 발생하지 않도록 필요한 조치를 강구할 책무</li><li>물품 등의 하자로 인한 소비자의 불만이나 피해 해결과 채무불이행 등으로 인한 소비자의 손해를 배상할 책무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 국가가 정한 기준 준수는 일반적 책무를 묻는 표현이다. 소비자와의 거래상 책무를 묻는 문항과 구별한다.</li><li><strong>비선택</strong> · 거래상 책무다. 소비자가 판단할 수 있도록 필요한 정보를 성실하고 정확하게 제공한다.</li><li><strong>비선택</strong> · 거래상 책무다. 물품·용역으로 인한 생명·신체·재산의 위해를 방지한다.</li><li><strong>비선택</strong> · 거래상 책무다. 하자·채무불이행으로 인한 피해를 배상하고 불만을 해결한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 39번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_040"><h4>기출문제 · 소비자법_기출2014_040</h4><p class="question-stem">[2014 기말고사 · 40번]<br>소비자기본법상 소비자단체의 등록요건에 대한 것으로 옳지 않은 것은?</p><ol class="choices"><li>소비자가 사용하는 물품 및 용역 중 어느 한 분야에 대한 소비자문제만을 취급할 것</li><li>사업의 직접 수혜자가 불특정 다수일 것</li><li>구성원 상호간에 이익분배를 하지 아니할 것</li><li>상시 구성원수가 100인 이상일 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 특정 분야가 아니라 소비자문제 전반을 취급해야 한다.</li><li><strong>비선택</strong> · 옳다. 불특정 다수의 이익을 위한 공익적 활동이어야 한다.</li><li><strong>비선택</strong> · 옳다. 구성원 상호 간 이익 분배를 목적 삼지 않는다.</li><li><strong>비선택</strong> · 교재상 옳다. 회원 100명 이상 등 비영리민간단체 등록요건을 함께 본다. 숫자 하나만으로 모든 요건이 충족되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 40번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_066"><h4>기출문제 · 소비자법_기출2015_066</h4><p class="question-stem">[2015 기말고사 · 66번]<br>소비자기본법상 소비자단체로 인정되기 위한 요건(판단기준)으로 틀린 것은?</p><ol class="choices"><li>소비자가 사용하는 물품 및 용역 중 어느 한 분야에 대한 소비자문제를 다룰 것</li><li>영리를 목적으로 하지 않을 것</li><li>업무를 처리할 수 있는 전산장비와 사무실, 상근인력 5명 이상을 갖출 것</li><li>소비자단체의 업무로 인한 직접 수혜자는 불특정 다수일 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 소비자문제의 특정 분야만 취급한다는 것은 등록요건과 맞지 않는다. 문항의 인정요건이라는 말은 법정 등록요건을 묻는 뜻으로 읽는다.</li><li><strong>비선택</strong> · 비영리성은 등록요건에 부합한다. 다만 단체 자체를 결성할 자유와 등록은 별개다.</li><li><strong>비선택</strong> · 상시 근무 인력 5명 이상이라는 교재상 등록요건에 부합한다.</li><li><strong>비선택</strong> · 불특정 다수의 이익을 목적으로 한다는 공익성 요건에 부합한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2015년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_036"><h4>기출문제 · 소비자법_기출2016_036</h4><p class="question-stem">[2016 기말고사 · 36번]<br>다음 중 소비자문제의 발생 원인이 아닌 것은?</p><ol class="choices"><li>자유경쟁을 통한 적절한 가격경쟁</li><li>신상품의 빈번한 출시 및 모델변경</li><li>허위․과장광고를 통한 소비자기만</li><li>거래상 지위의 불균등</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원인이 아니다. 공정한 경쟁은 소비자의 선택권과 가격·품질 경쟁을 높인다.</li><li><strong>비선택</strong> · 원인이다. 잦은 모델 변경은 기존 제품의 사용가치와 별개로 교체 소비를 압박한다.</li><li><strong>비선택</strong> · 원인이다. 허위·과장 정보는 제대로 비교하여 고를 기회를 빼앗는다.</li><li><strong>비선택</strong> · 원인이다. 거래상 지위의 불균등은 정보·경제력의 차이로 나타난다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2016년 법학과 소비자법 36번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_037"><h4>기출문제 · 소비자법_기출2016_037</h4><p class="question-stem">[2016 기말고사 · 37번]<br>소비자피해의 특징이 아닌 것은?</p><ol class="choices"><li>피해는 경제적 손해에 한정된다.</li><li>피해발생이 광범위하다.</li><li>피해원인에 대한 규명이 어렵다.</li><li>피해발생이 구조적이고 보편적이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 재산뿐 아니라 생명·신체·개인정보 등에도 피해가 생긴다. 경제적 손실에만 한정이라는 말이 함정.</li><li><strong>비선택</strong> · 옳다. 대량 생산·유통에 따라 여러 소비자에게 피해가 확산될 수 있다.</li><li><strong>비선택</strong> · 옳다. 전문적인 제조 과정과 정보의 편중 때문에 소비자가 원인과 책임자를 입증하기 어렵다.</li><li><strong>비선택</strong> · 옳다. 반복되는 시장 구조와 거래력 격차에서 생기므로 특정 개인의 부주의로만 볼 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2016년 법학과 소비자법 37번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_038"><h4>기출문제 · 소비자법_기출2016_038</h4><p class="question-stem">[2016 기말고사 · 38번]<br>( ) 안에 들어갈 내용으로 옳은 것은? 우리 헌법 제124조는 “국가는 건전한 소비행위를 계도하고 생산품의 품질향상을 촉구하기 위한 ( )을 법률이 정하는 바에 의하여 보장한다.”</p><ol class="choices"><li>소비자주권</li><li>소비자기본권</li><li>소비자단결권</li><li>소비자보호운동</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 소비자주권은 시장 선택이 생산에 영향을 준다는 경제적 관념이다. 헌법 124조의 해당 문구가 아니다.</li><li><strong>비선택</strong> · 소비자기본권이라는 평가와 헌법 조문의 정확한 문언은 구별한다.</li><li><strong>비선택</strong> · 단결권은 이 조문 빈칸의 표현이 아니다.</li><li><strong>선택</strong> · 정답. 헌법 124조는 소비자보호운동의 보장을 규정한다. 소비자만의 모든 청구권을 바로 나열한 조문은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2016년 법학과 소비자법 38번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_039"><h4>기출문제 · 소비자법_기출2016_039</h4><p class="question-stem">[2016 기말고사 · 39번]<br>소비자기본법 제4조 소비자의 권리로서 옳지 않은 것은?</p><ol class="choices"><li>물품 또는 용역으로 인한 생명·신체 또는 재산에 대한 위해 로부터 보호받을 권리</li><li>물품 등을 선택함에 있어서 필요한 지식 및 정보를 제공받을 권리</li><li>영업의 자유와 기업의 자유를 포함한 직업의 자유를 누릴 권리</li><li>안전하고 쾌적한 소비생활 환경에서 소비할 권리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 소비자기본법 4조의 안전할 권리다.</li><li><strong>비선택</strong> · 필요한 지식·정보를 제공받을 권리다.</li><li><strong>선택</strong> · 정답. 직업선택·기업활동의 자유는 소비자 8대 권리 목록에 속하지 않는다. 다른 헌법상 자유까지 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 쾌적한 환경에서 소비할 권리는 8대 권리에 포함된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 39번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_036"><h4>기출문제 · 소비자법_기출2017_036</h4><p class="question-stem">[2017 기말고사 · 36번]<br>소비자피해의 특징이 아닌 것은?</p><ol class="choices"><li>경제적 손해에 한정된다.</li><li>광범위하게 발생한다.</li><li>피해원인 규명이 어려운 경우가 많다.</li><li>피해발생이 구조적이고 보편적이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 재산뿐 아니라 생명·신체·개인정보 등에도 피해가 생긴다. 경제적 손실에만 한정이라는 말이 함정.</li><li><strong>비선택</strong> · 대량 유통으로 피해가 광범위해지는 것은 특징이다.</li><li><strong>비선택</strong> · 옳다. 전문적인 제조 과정과 정보의 편중 때문에 소비자가 원인과 책임자를 입증하기 어렵다.</li><li><strong>비선택</strong> · 옳다. 반복되는 시장 구조와 거래력 격차에서 생기므로 특정 개인의 부주의로만 볼 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2017년 법학과 소비자법 36번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_037"><h4>기출문제 · 소비자법_기출2017_037</h4><p class="question-stem">[2017 기말고사 · 37번]<br>소비자불매운동의 성립요건에 관한 헌법재판소의 설명으로 옳지 않은 것은?</p><ol class="choices"><li>잠재적으로 소비자가 될 가능성이 있는 것만으로는 운동의 주체가 될 수 없다.</li><li>참여하는 소비자의 의사결정의 자유가 보장되어야 한다.</li><li>불매행위에는 직접적으로 불매를 실행하는 행위가 포함된다.</li><li>불매행위에는 불매운동 실행을 위한 조직행위도 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 현재 구매자뿐 아니라 잠재적 소비자도 주체가 될 수 있다.</li><li><strong>비선택</strong> · 옳다. 자발성을 벗어난 강요는 정당성을 해칠 수 있다.</li><li><strong>비선택</strong> · 옳다. 실제 불매행위도 소비자보호운동에 포함될 수 있다.</li><li><strong>비선택</strong> · 옳다. 공동의 목적을 위해 조직적으로 활동할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2017년 법학과 소비자법 37번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_038"><h4>기출문제 · 소비자법_기출2017_038</h4><p class="question-stem">[2017 기말고사 · 38번]<br>소비자기본법 제4조 소비자의 권리로서 옳지 않은 것은?</p><ol class="choices"><li>안전하고 쾌적한 소비생활 환경에서 소비할 권리</li><li>물품 또는 용역으로 인한 생명·신체 또는 재산에 대한 위해로부터 보호받을 권리</li><li>물품 등을 선택함에 있어서 필요한 지식 및 정보를 제공받을 권리</li><li>영업의 자유와 기업의 자유를 포함한 직업의 자유를 누릴 권리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 환경에서 소비할 권리는 포함된다.</li><li><strong>비선택</strong> · 위해로부터 안전할 권리는 포함된다.</li><li><strong>비선택</strong> · 필요한 지식·정보를 받을 권리는 포함된다.</li><li><strong>선택</strong> · 정답. 직업선택의 자유는 소비자기본법의 8대 권리에 속하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 38번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_039"><h4>기출문제 · 소비자법_기출2017_039</h4><p class="question-stem">[2017 기말고사 · 39번]<br>소비자기본법상 소비자단체의 등록요건에 관한 것으로 옳지 않은 것은?</p><ol class="choices"><li>소비자의 교육에 관한 업무를 수행할 것</li><li>물품 및 용역 중 어느 한 분야에 대한 소비자문제를 다룰 것</li><li>비영리민간단체로서의 요건을 갖출 것</li><li>업무를 처리할 수 있는 전산장비와 사무실, 상근인력 5명 이상을 갖출 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원본은 옳은 보기로 처리했으나 주의가 필요하다. 소비자교육은 단체의 기본업무이지만 현행 29조 1항 1호가 등록 필수업무로 직접 열거한 것은 28조 1항 2호·5호다. 교육 자체를 직접 열거한 필수요건이라고 단정하지 않는다.</li><li><strong>선택</strong> · 원본 정답이며 분명히 틀린 설명이다. 소비자문제 전반을 취급해야 한다.</li><li><strong>비선택</strong> · 비영리민간단체 요건에 따른 비영리성은 등록요건에 부합한다.</li><li><strong>비선택</strong> · 시행령상 상시 근무 인력 5명 이상이라는 요건에 부합한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2017년 법학과 소비자법 39번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_036"><h4>기출문제 · 소비자법_기출2018_036</h4><p class="question-stem">[2018 기말고사 · 36번]<br>소비자피해의 특징이 아닌 것은?</p><ol class="choices"><li>피해발생이 구조적이고 보편적이다.</li><li>피해원인 규명이 어려운 경우가 많다.</li><li>경제적 손해에 한정된다.</li><li>모든 피해를 사전에 예방하고 조치하는 것이 어렵다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 반복되는 시장 구조와 거래력 격차에서 생기므로 특정 개인의 부주의로만 볼 수 없다.</li><li><strong>비선택</strong> · 옳다. 전문적인 제조 과정과 정보의 편중 때문에 소비자가 원인과 책임자를 입증하기 어렵다.</li><li><strong>선택</strong> · 틀리다. 재산뿐 아니라 생명·신체·개인정보 등에도 피해가 생긴다. 경제적 손실에만 한정이라는 말이 함정.</li><li><strong>비선택</strong> · 옳다. 잠재된 결함·정보 부족 때문에 사전에 완전히 막기 어렵다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2018년 법학과 소비자법 36번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_037"><h4>기출문제 · 소비자법_기출2018_037</h4><p class="question-stem">[2018 기말고사 · 37번]<br>소비자불매운동의 성립요건에 관한 헌법재판소의 설명으로 옳지 않은 것은?</p><ol class="choices"><li>참여하는 소비자의 의사결정의 자유가 보장되어야 한다.</li><li>잠재적으로 소비자가 될 가능성이 있다면 운동의 주체가 될 수 있다.</li><li>불매행위에는 직접적으로 불매를 실행하는 행위가 포함된다.</li><li>불매행위에는 불매운동 실행을 위한 조직행위는 포함되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자발성은 정당한 운동을 판단하는 중요한 조건이다.</li><li><strong>비선택</strong> · 잠재적 소비자도 주체에 포함될 수 있다.</li><li><strong>비선택</strong> · 실제 불매도 운동의 방식이다. 모두 위법하거나 모두 적법하다고 단정하지 않는다.</li><li><strong>선택</strong> · 틀리다. 권유·조직화도 포함된다. 실제 구매 거절만 인정한다고 범위를 좁히는 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 37번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_036"><h4>기출문제 · 소비자법_기출2019_036</h4><p class="question-stem">[2019 기말고사 · 36번]<br>인터넷 쇼핑몰을 운영하는 A가 자신의 쇼핑몰에서 판매한 제품을 배달하기 위해 택배회사를 이용하는 경우, A는 소비자기본법상의 소비자라고 할 수 있는가에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>상품구매, 배송, 반품, 사후 서비스 등에 관한 불만 사항 처리 등과 관련하여 인터넷 쇼핑몰 운영자의 공신력이 중요한 의미를 가지게 된다.</li><li>인터넷쇼핑몰에서 판매한 물건을 택배회사를 통해 배달하는 것은 인터넷쇼핑의 중요한 또는 본질적인 과정의 하나이고, 이 과정에서 부가가치를 창출하는 것이다.</li><li>인터넷쇼핑몰 운영자가 그 쇼핑몰에서 판매한 제품을 택배회사를 통하여 배송하는 것은, 제공된 물품 또는 용역을 원재료(중간재를 포함)·자본재 또는 이에 준하는 용도로 생산활동에 사용하는 것에 포함된다.</li><li>인터넷 쇼핑몰을 운영하는 A는 택배회사가 제공하는 배송서비스를 소비생활을 위하여 구입하여 사용하는 자로 볼 수 있으므로 소비자기본법상 소비자에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 쇼핑몰이 제공하는 거래 과정 전체의 공신력을 기준으로 고객이 구매한다는 점이 논거다.</li><li><strong>비선택</strong> · 옳다. 배송은 판매 거래의 중요한 과정이며 부가가치 창출에 기여한다.</li><li><strong>비선택</strong> · 옳다. 이 사실관계의 배송서비스 이용은 자본재 등에 준하는 생산활동으로 평가한다.</li><li><strong>선택</strong> · 틀리다. 최종적으로 서비스를 받는다는 외형만으로 소비생활 이용자가 되는 것은 아니다. 2013년 46번 원본 정답 오류와 교차 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2019년 법학과 소비자법 36번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_037"><h4>기출문제 · 소비자법_기출2019_037</h4><p class="question-stem">[2019 기말고사 · 37번]<br>한국소비자원의 소비자권익 관련 사실의 공표에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>업무수행 과정에서 취득한 사실 중 소비자피해의 확산 방지를 위해 필요하다고 인정되는 사실은 이를 공표해야 한다.</li><li>업무수행 과정에서 취득한 사실 중 물품 등의 품질향상 그 밖에 소비생활의 향상을 위하여 필요하다고 인정되는 사실은 이를 공표해야 한다.</li><li>사업자 또는 사업자단체의 영업비밀을 보호할 필요가 있다고 인정되는 경우에도 공표할 수 있다.</li><li>사업자 또는 사업자단체의 공익상 필요하다고 인정되는 때에는 공표할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 피해 확산 방지 등 법정 목적에 필요한 결과는 공표한다.</li><li><strong>비선택</strong> · 옳다. 소비생활의 향상과 국민경제 발전도 법정 목적이다.</li><li><strong>선택</strong> · 틀리다. 영업비밀 보호나 공익상 필요와 같은 법정 예외를 무시할 수 없다. 공표 전 내용의 진실성·상당한 확인도 중요하다.</li><li><strong>비선택</strong> · 원본은 예외를 설명하는 보기로 처리한다. 다만 사업자의 공익이라는 어색한 표현을 사적 이익이면 무조건 비공개라는 뜻으로 읽으면 안 된다. 조문의 영업비밀 보호·공익상 필요를 기준으로 기억한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 37번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 01' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 01|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

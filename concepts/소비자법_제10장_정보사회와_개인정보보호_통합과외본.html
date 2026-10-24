@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제10장 정보사회와 개인정보보호 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 10</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제10장 정보사회와 개인정보보호 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>내 정보는 거래를 편리하게 만드는 재료이지만, 회사가 마음대로 모으고 돌려 쓰거나 나를 평가할 수 있는 소유물은 아니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>먼저 물을 것</th>
+<th>이 장의 대답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇인가</td>
+<td>개인정보의 범위 → 수집·이용·제공 조건 → 특별히 위험한 정보 → 내가 행사할 권리</td>
+</tr>
+<tr>
+<td>왜 생겼나</td>
+<td>한 번 퍼진 정보는 회수하기 어렵고, 몰래 합쳐지면 생활·성향·위치까지 드러남</td>
+</tr>
+<tr>
+<td>전체에서 위치</td>
+<td>물건·계약 보호에서 정보와 디지털 인격의 보호로 확장</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>9장 온라인 거래 기록 → 10장 개인정보 통제 → 11장 신용정보·침해 구제</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>광고 동의 강요, 주민번호 요구, CCTV, AI의 부당한 판단에 대응하기 어려움</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 362–429쪽의 전 내용을 논점별로 풀고, 번호가 붙은 사례 1–14를 모두 설명한다. 제공 JSON의 제11장 주제 <strong>25문제·100보기</strong>를 연결한다. ★는 제공 기출 반복과 개념 중요도이며 실제 출제 확률·오답률 통계가 아니다. 현행법 확인일 2026.10.25.</p>
+<p><strong>교재와 다르게 읽어야 할 곳:</strong> 특별법 우선 원칙, 법인 임원의 개인정보, 실종신고와 실종선고, 수술실 CCTV의 특별법, 자동화된 결정에 대한 권리다. 특히 개인정보 보호법 37조의2는 <strong>2024.3.15.부터 시행</strong>되었으므로 “국내에 규정이 전혀 없다”는 교재 설명을 현재 사실로 외우지 않는다. 기출 원문·원본 정답은 보존하고 오류·시점 차이는 해설에 표시했다.</p>
+<p><mark class="yellow">노랑: 정의·결론</mark> / <mark class="green">초록: 이유</mark> / <mark class="pink">분홍: 함정</mark> / <mark class="blue">파랑: 연결</mark>.</p>
+<h1>1. 무엇을 개인정보라고 부르는가</h1>
+<h2 id="consumer-10-01" data-concept-id="consumer-10-01">1-1. 헌법의 권리를 일반법과 특별법이 구체화한다 ★★★★★</h2>
+<p><strong>교재 362–364쪽 / 문단의 목적:</strong> 정보가 경제적 자원이 되어도 사람의 자유를 희생시켜서는 안 된다는 출발점이다. 정보의 빠른 이동은 편리하지만 정보가 어디서 누구에게 전달됐는지 본인은 모를 수 있다. 재산 피해뿐 아니라 불안·감시·차별도 문제다.</p>
+<p>헌법의 인간의 존엄과 행복추구권, 사생활의 비밀과 자유 등을 바탕으로 <strong>개인정보자기결정권</strong>이 인정된다. 개인정보 보호법은 공공·민간을 아우르는 일반법이다. 신용정보법·위치정보법·금융실명법·의료법·교육 관계 법령 등에는 분야별 특별규정이 있다. <strong>다른 법에 특별규정이 있으면 그 규정, 없으면 일반법</strong>이다. 교재의 “일반법이 우선” 표현을 조건 없이 외우면 틀린다. <a href="https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0006&lsiSeq=283839&urlMode=lsScJoRltInfoR">개인정보 보호법 6조</a></p>
+<p>정보통신망법의 개인정보 보호에 관한 주요 규정은 2020.8.5. 개인정보 보호법으로 통합되었다. 옛 기출의 “온라인 사업자는 정보통신망법”은 <strong>출제 당시 구도</strong>다. 현재 정보통신망법에 남은 접근권한·속이는 정보 수집 등의 규정까지 없어진 것은 아니다. 소비자기본법도 국가의 정보 보호 시책, 사업자의 안전한 취급과 관련 기준을 연결한다.</p>
+<p><strong>시험·한 줄:</strong> <mark class="yellow">기본권의 뿌리는 헌법, 일반적 실현 수단은 보호법, 분야별 특별규정은 우선 적용.</mark> 형성 047의 정답 ③은 ‘자기결정권의 헌법적 근거’를 묻는 취지로 읽는다. 보호법이 그 권리를 전혀 보장하지 않는다는 뜻은 아니다.</p>
+<h2 id="consumer-10-02" data-concept-id="consumer-10-02">1-2. 살아 있는 개인·식별 가능성·가명정보 ★★★★★</h2>
+<p><strong>교재 364–370쪽 / 문단의 목적:</strong> 이름표가 붙은 비밀만 보호하는 것이 아님을 설명한다. 살아 있는 자연인에 관한 정보로, 이름·주민번호·영상 등으로 알아보거나 다른 정보와 <strong>쉽게 결합</strong>해 알아볼 수 있으면 개인정보다. 쉽게 결합되는지는 시간·비용·기술 등 합리적인 사정을 따진다. 일부를 지우거나 다른 값으로 바꾸어 추가 정보 없이는 알아볼 수 없게 만든 <strong>가명정보도 포함</strong>한다.</p>
+<p>법인의 매출·상호 자체와 그 회사에서 일하는 <strong>자연인 임원·직원의 이름·연락처</strong>는 다르다. 교재의 임원 정보까지 제외하는 표현은 바로잡는다. 사망자만의 정보는 정의상 제외되지만 유전질환·가족관계 등 <strong>살아 있는 유족을 드러내면 그 유족의 개인정보</strong>가 될 수 있다. 실종신고를 했다는 사실만으로 사망 간주되지 않는다. 민법상 요건과 재판을 갖춘 <strong>실종선고</strong>와 구별한다.</p>
+<p>혈액형 ‘A형’ 하나만으로 누구인지 모르면 식별성이 부족하다. 주민번호와 묶이면 특정인의 건강 관련 정보가 된다. 서비스 중 생긴 이용기록·구매내역·접속기록·IP·요금·분석 정보도 식별 가능하면 포함한다. 이메일·아이디·가상공간 활동도 같은 기준이다. 쿠키가 항상 모든 방문·모든 상품 기록을 담는 것은 아니며 실제 저장·연계 내용을 본다.</p>
+<table>
+<thead>
+<tr>
+<th>교재의 정보 유형</th>
+<th>쉬운 예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>일반·가족·교육훈련·병역</td>
+<td>이름, 가족관계, 학력·자격, 복무</td>
+</tr>
+<tr>
+<td>부동산·소득·기타 수익·신용</td>
+<td>집, 급여, 연금·혜택, 대출·연체</td>
+</tr>
+<tr>
+<td>고용·법적·의료·조직</td>
+<td>직장, 소송·범죄경력, 진료, 단체 가입</td>
+</tr>
+<tr>
+<td>통신·위치·신체·습관</td>
+<td>통화·접속, 이동, 지문·얼굴, 취향·소비 성향</td>
+</tr>
+</tbody></table>
+<p>공개된 정보도 개인정보다. <strong>공개되어 있나</strong>와 <strong>적법하게 재이용할 수 있나</strong>는 별도 질문이다. 형성 048의 원본 정답 ①은 유족의 정보가 될 여지를 배제한 절대적 문장을 문제 삼는다. 사망자 자신도 당연히 보호법상 살아 있는 사람에 해당한다는 설명은 틀리다. <strong>한 줄:</strong> <mark class="pink">이름 없음 ≠ 개인정보 아님. 인터넷 공개 ≠ 자유 이용 허가.</mark></p>
+<h2 id="consumer-10-03" data-concept-id="consumer-10-03">1-3. 가명·익명과 민감·고유식별은 서로 다른 구분이다 ★★★★★</h2>
+<p><strong>교재 365–371쪽 / 문단의 목적:</strong> 위험의 종류에 따라 별도 보호를 붙인다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>가명정보</td>
+<td>추가 정보 없이는 특정인을 알아보기 어렵게 바꾼 개인정보. 연결키·대응표 등은 따로 관리</td>
+</tr>
+<tr>
+<td>익명정보</td>
+<td>시간·비용·기술을 합리적으로 고려해 다른 정보와 결합해도 개인을 더 이상 알아볼 수 없는 정보. 보호법 58조의2 적용 제외</td>
+</tr>
+<tr>
+<td>민감정보</td>
+<td>사상·신념, 노동조합·정당 가입·탈퇴, 정치적 견해, 건강·성생활 등 사생활 침해 위험이 큰 정보</td>
+</tr>
+<tr>
+<td>시행령상 민감정보</td>
+<td>유전정보·범죄경력자료·개인 식별 목적으로 기술 처리한 생체특징·인종이나 민족</td>
+</tr>
+<tr>
+<td>고유식별정보</td>
+<td>주민등록번호·여권번호·운전면허번호·외국인등록번호의 법정 네 종류</td>
+</tr>
+</tbody></table>
+<p><strong>가명은 보호 수준을 낮춘 처리 방식이지 법 밖으로 나가는 마술이 아니다.</strong> 익명 판단에서도 한 사람을 골라낼 수 있는지, 여러 기록을 연결할 수 있는지, 개인 특성을 추론할 수 있는지를 살핀다. 교재의 세 위험은 유럽의 익명화 검토 틀로 이해하고 GDPR 조문에 그대로 열거된 정의로 외우지 않는다.</p>
+<p>공공기관이 보호법 18조 2항 5–9호에 따라 처리하는 경우의 시행령 단서는 범위를 정확히 읽는다. 민감정보 시행령 18조의 단서는 <strong>그 시행령이 정한 항목들</strong>에 관한 것이지 법률이 직접 정한 건강·신념 등이 공공기관 손에 들어가면 전부 민감정보가 아니게 된다는 뜻이 아니다. 고유식별정보 시행령 19조에도 한정된 단서가 있다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1029907813">민감정보 시행령 18조</a>, <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1033078149">고유식별정보 19조</a></p>
+<p><strong>시험·한 줄:</strong> <mark class="yellow">이메일은 개인정보일 수 있지만 법정 고유식별정보는 아니다. 주민번호와 민감정보도 같은 분류명이 아니다.</mark></p>
+<h1>2. 정보를 모으고 돌려 쓰는 조건</h1>
+<h2 id="consumer-10-04" data-concept-id="consumer-10-04">2-1. 처리 원칙과 동의 외의 적법한 근거 ★★★★★</h2>
+<p><strong>교재 371–374쪽 / 문단의 목적:</strong> 정보를 ‘받는 순간’만이 아니라 전체 생애를 규율한다. 수집·생성·연계·기록·저장·가공·검색·출력·정정·복구·이용·제공·공개·파기 모두 처리다.</p>
+<table>
+<thead>
+<tr>
+<th>보호법 3조의 원칙</th>
+<th>학생의 말로 바꾸면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적 명확·최소 수집·적법 정당</td>
+<td>왜 필요한지 먼저 정하고 필요한 만큼만 받기</td>
+</tr>
+<tr>
+<td>목적 범위 처리</td>
+<td>배송용 주소를 다른 용도로 마음대로 쓰지 않기</td>
+</tr>
+<tr>
+<td>정확·완전·최신</td>
+<td>잘못된 이름·주소·연체기록을 방치하지 않기</td>
+</tr>
+<tr>
+<td>위험에 맞는 안전 관리</td>
+<td>유출되었을 때의 위험에 맞추어 보호하기</td>
+</tr>
+<tr>
+<td>처리방침·권리 보장</td>
+<td>무엇을 하는지 알리고 요구할 길 마련하기</td>
+</tr>
+<tr>
+<td>사생활 침해 최소</td>
+<td>편하다는 이유만으로 과도하게 추적하지 않기</td>
+</tr>
+<tr>
+<td>익명 우선·필요하면 가명</td>
+<td>이름이 필요 없으면 지우고, 연결이 필요하면 가명 처리하기</td>
+</tr>
+<tr>
+<td>책임 준수·신뢰</td>
+<td>규정을 문서에만 써 두지 말고 실제로 지키기</td>
+</tr>
+</tbody></table>
+<p>15조의 수집·이용 근거는 <strong>동의 하나뿐이 아니다.</strong> ① 동의 ② 법률의 특별규정·법령상 의무 ③ 공공기관의 법정 업무 ④ 계약 이행 또는 계약 체결 과정에서 본인이 요청한 조치 ⑤ 급박한 생명·신체·재산의 이익 ⑥ 처리자의 정당한 이익이 명백히 우선하고 상당한 관련·합리적 범위가 있는 경우 ⑦ 공중위생 등 공공의 안전·안녕을 위한 긴급 필요를 나눈다.</p>
+<p><strong>쉬운 사례:</strong> 주문한 상품의 배송주소 처리는 계약 이행 근거를 검토한다. 고객이 쓰러져 응급 구조가 필요할 때는 생명 보호 근거를 검토한다. 광고 매출을 올리고 싶다는 이유만으로 정당한 이익이 무조건 우선하지 않는다. <strong>시험·한 줄:</strong> <mark class="green">동의서가 없어도 적법할 수 있고, 동의서가 있어도 과잉 수집이면 문제가 된다.</mark></p>
+<h2 id="consumer-10-05" data-concept-id="consumer-10-05">2-2. 무엇에 동의하는지 따로 알고 선택해야 한다 ★★★★★</h2>
+<p><strong>교재 374–378쪽 / 문단의 목적:</strong> 긴 약관의 ‘전체 동의’로 선택권을 없애지 못하게 한다. 수집·이용 동의에는 <strong>목적·항목·보유 이용기간·거부권과 불이익</strong>을 알린다. 내용을 바꾸면 다시 필요한 동의를 받는다. 수집·제공·목적 외 이용·민감·고유식별·마케팅 등 구별되는 동의는 구분해서 받고 중요한 내용을 명확히 표시한다. 동의 없이 처리할 법적 근거가 있는 항목과 선택 항목도 분리한다.</p>
+<p>필요한 최소한이라는 입증책임은 처리자에게 있다. 선택 정보나 홍보 동의를 거절했다고 본래 상품·서비스까지 거절할 수 없다. 원래 목적과 합리적으로 관련된 추가 이용·제공에는 관련성, 예측 가능성, 부당한 불이익 여부, 가명·암호화 등 안전조치를 함께 본다. 지속적으로 한다면 판단 기준을 처리방침에 공개하고 보호책임자가 점검한다.</p>
+<p><strong>사례1 · 돌잔치 상담:</strong> 부모가 예약 가능 여부만 묻는다 → 업소가 부모와 아이의 상세 생년월일·주소·전화 등을 필수로 요구한다 → 상담에 필요한 범위를 넘는지 심사한다 → 목적과 기간도 알리지 않았다면 설명·동의 문제까지 생긴다. <strong>전화 문의에 필요한 것과 실제 계약·행사에 필요한 것을 시간 순서로 나눈다.</strong></p>
+<p><strong>사례2 · 정수기 임대:</strong> 임대계약, 개인정보 수집, 다른 회사 제공, 광고 수신을 하나의 서명으로 묶는다 → 소비자는 임대만 원한다 → 회사는 각 동의 내용을 구분하고 선택을 보장해야 한다. ‘계약서에 서명했으니 모든 제공에 동의’가 아니다.</p>
+<p><strong>사례3 · 건강검진:</strong> 진료·검진을 위해 필요한 정보와 광고 발송은 목적이 다르다 → 광고 동의를 하지 않았다고 검진을 막아서는 안 된다. 의료법상 기록 의무가 있다고 홍보 이용까지 허용되는 것도 아니다. <strong>한 줄:</strong> <mark class="pink">필수는 목적이 정하고, 사업자의 욕심이 정하지 않는다.</mark></p>
+<h2 id="consumer-10-06" data-concept-id="consumer-10-06">2-3. 제3자 제공과 목적 외 이용은 따로 판단한다 ★★★★★</h2>
+<p><strong>교재 379–386쪽 / 문단의 목적:</strong> 내가 준 회사 안에서 쓰는 것과 다른 회사에 넘기는 것은 위험이 다르다. 제공 동의에는 수집 동의의 항목 외에 <strong>받는 사람과 그 사람의 이용 목적</strong>까지 분명히 알린다. 17조의 무동의 제공은 열거된 법적 근거를 확인한다. 15조의 계약 이행 근거가 있다는 이유만으로 모든 제3자 제공이 자동 허용되지는 않는다.</p>
+<p>18조의 목적 외 이용·제공은 원칙 금지다. 별도 동의, 다른 법의 특별규정, 급박한 생명·신체·재산, 공공기관의 다른 법정 업무와 위원회 심의·의결, 조약·국제협정, 범죄수사·공소, 재판, 형·감호·보호처분 집행, 공중위생 등 긴급 필요처럼 법정 예외를 본다. <strong>5–9호는 공공기관에 한정</strong>된다. 10호의 공중위생 예외까지 공공기관 전용이라고 넓히지 않는다. 당사자·제3자의 이익을 부당하게 침해할 우려가 있는지도 심사한다.</p>
+<p><strong>사례4 · 공개된 업무 전화:</strong> 홈페이지에서 번호를 찾은 광고업자가 영업전화를 한다 → 공개 목적이 업무 연락인지 광고 수신인지 따진다 → 공개 정보도 보호 대상이며 공개 맥락에서 객관적으로 인정되는 이용 범위를 넘어서는지 판단한다. ‘인터넷에 있었음’만으로 충분하지 않다.</p>
+<p><strong>사례5 · 중국 단체비자:</strong> 여행사가 여행자 10명의 성명·여권번호가 함께 적힌 명단 사본을 나누어 준다 → 서로의 정보가 보인다 → 공동 명단 사용과 공유 범위를 사전에 설명하고 필요한 최소 정보·기간으로 제한하며 다른 용도로 쓰지 않도록 해야 한다. 이는 <strong>교재의 당시 여행 사례</strong>를 설명하는 것이지 현재 중국 비자 절차를 안내하는 문장이 아니다.</p>
+<p><strong>사례6 · 민원 전화번호:</strong> 공공기관이 “사업자와 잘 풀어 보라”며 민원인의 번호를 피민원인에게 준다 → 민원인은 공개에 동의하지 않았다 → 편의·화해 목적만으로 제공 근거가 생기지 않는다. 민원인의 비밀 보호 규정과 법적 제공 요건을 확인해야 한다. <strong>한 줄:</strong> 수집할 권한과 남에게 줄 권한은 별도다.</p>
+<h2 id="consumer-10-07" data-concept-id="consumer-10-07">2-4. 위탁·영업양도·출처 통지를 구분한다 ★★★★☆</h2>
+<p><strong>교재 375·379–383쪽 / 문단의 목적:</strong> 정보가 이동하는 이유에 따라 책임과 알림이 달라진다.</p>
+<p><strong>위탁</strong>은 회사의 일을 다른 업체가 대신 처리하는 구조다. 배송·전산관리 등을 맡길 때 목적 외 처리 금지, 기술·관리 보호조치, 업무 범위·목적, 재위탁 제한, 접근 제한, 점검·감독, 손해배상 등 법정 사항을 문서로 정한다. 위탁 내용·수탁자를 공개하고, 홍보·판매 권유 업무 등 별도 통지 요건도 확인한다. 교육·감독은 맡긴 회사의 몫이다. 재위탁에는 위탁자의 동의가 필요하다. 손해배상 책임에서 수탁자는 법정 범위상 위탁자의 소속 직원처럼 취급된다.</p>
+<p><strong>영업양도·합병 등</strong>으로 옮길 때는 원칙적으로 미리 이전 사실, 받는 자의 이름·주소·연락처, 거부 방법·절차를 알린다. 알릴 수 없는 법정 사유가 있으면 홈페이지 30일 이상 게시 등 대체 절차를 쓴다. 받은 자도 원칙적으로 지체 없이 알려야 하지만 이미 적법한 통지가 된 경우는 예외다. 받은 뒤에는 원래 목적 범위에서만 이용한다.</p>
+<p><strong>다른 사람에게서 내 정보를 받았다면</strong> 내가 요구할 때 수집 출처·처리 목적·처리정지나 동의철회 권리를 즉시 알려야 한다. 법정 규모에 해당하는 처리자의 동의에 기초한 제3자 제공 등에는 요구 없이 알릴 의무도 있다. 교재 기준은 민감·고유식별 5만 명 이상 또는 일반 정보 100만 명 이상 등 시행령 요건이다. 국가안전·외교비밀 파일이나 다른 사람의 생명·신체·재산 등을 보호할 예외는 <strong>정보주체 권리보다 명백히 우선하는 경우</strong>에 한정한다. <strong>시험·한 줄:</strong> <mark class="blue">위탁은 대신 일함, 제공은 받는 자의 목적, 영업양도는 사업 승계다.</mark></p>
+<h1>3. 더 엄격하게 지켜야 할 정보</h1>
+<h2 id="consumer-10-08" data-concept-id="consumer-10-08">3-1. 민감·고유식별의 별도 동의와 주민번호의 예외 ★★★★★</h2>
+<p><strong>교재 386–391쪽 / 문단의 목적:</strong> 유출되면 바꾸기 어렵거나 차별로 이어지는 정보를 특별히 보호한다. 민감정보·고유식별정보는 원칙적으로 제한하고 <strong>다른 정보 동의와 구별한 별도 동의</strong> 또는 법령이 요구·허용하는 근거를 확인한다. 민감정보가 서비스 과정에서 공개될 수 있다면 공개 가능성과 비공개 선택 방법도 알린다.</p>
+<p>주민번호는 고유식별정보 중에서도 더 엄격하다. <strong>별도 동의만으로 처리할 수 없다.</strong> 법률·대통령령 및 법정 기관 규칙의 구체적 근거, 급박한 생명·신체·재산 보호, 그에 준하는 위원회 고시상 사유 등을 본다. 암호화 저장과 인터넷 회원 가입의 주민번호 외 대체 방법도 중요하다. 관리계획, 접근권한 제한, 암호화, 접속기록 보관·위변조 방지, 보안 프로그램, 물리적 보호조치가 기본 축이다.</p>
+<p><strong>사례7 · 5천 원 경품:</strong> 작은 경품을 주면서 무조건 세금 신고를 이유로 주민번호를 요구한다 → 실제 원천징수·신고 의무가 있는지 먼저 확인한다 → 해당 경품에 법적 처리가 필요하지 않으면 ‘세금용’이라는 말만으로 근거가 되지 않는다. 모든 경품의 세금 기준을 같은 금액으로 단정하지 않고 소득 종류·필요경비·과세최저한을 구별한다.</p>
+<p><strong>사례8 · 입사 지원:</strong> 아직 지원 단계인데 장래 급여 지급을 핑계로 주민번호를 받는다 → 지원 심사에 필요한 정보와 채용 후 세금·사회보험 의무는 다르다 → 채용된 뒤 실제 법적 의무가 생겼을 때 필요한 범위에서 처리한다.</p>
+<p><strong>사례9 · 신문사 민원:</strong> 기사 정정·불만을 접수하는 데 주민번호를 강제한다 → 특별한 법적 근거 없는 본인확인 편의는 충분하지 않다 → 동의서를 받아도 주민번호 제한을 우회할 수 없다. <strong>시험·한 줄:</strong> <mark class="yellow">민감·고유식별은 별도 동의 가능, 주민번호는 동의만으로 불가.</mark></p>
+<h2 id="consumer-10-09" data-concept-id="consumer-10-09">3-2. 고정형·이동형 영상정보처리기기의 조건 ★★★★☆</h2>
+<p><strong>교재 391–398쪽 / 문단의 목적:</strong> 설치 장소·기기 형태·촬영 목적에 맞춰 조건을 정한다. 고정형은 일정 공간을 지속·주기적으로 찍는 CCTV·네트워크 카메라다. 이동형은 몸에 착용·휴대하거나 이동 물체에 붙이거나 거치하는 카메라다.</p>
+<p>공개 장소의 고정형 설치는 원칙 제한하고 법령의 구체적 허용, 범죄 예방·수사, 정당한 권한자의 시설 안전·화재 예방, 교통단속·교통정보 수집, 저장하지 않는 법정 방식 등의 예외를 본다. 안내판에는 설치 목적·장소, 촬영 범위·시간, 관리책임자 연락처 등을 표시한다. 건물 전체는 출입구 표시가 가능하고 산불 감시 등 현장 표시가 곤란한 법정 사유에는 홈페이지 등 대체 방식을 따른다.</p>
+<p>운영방침에는 근거·목적·대수·위치·범위, 담당자와 접근권한, 촬영·보관 기간과 장소, 확인 방법, 열람 요구, 안전조치 등을 정한다. 공공기관은 행정예고·공청회·주민설명·설문 등 법정 의견수렴을 거친다. 위탁 시 목적 제한·재위탁·안전·감독·책임을 문서화하고 안내판에 수탁자 연락처도 알린다.</p>
+<p>고정형은 목적을 벗어나 임의로 돌리거나 다른 곳을 비추면 안 되고 <strong>녹음기능을 사용할 수 없다.</strong> 이동형은 업무 목적으로 공개 장소의 개인 관련 영상을 찍을 때 15조 근거, 명확한 촬영 표시와 거부 의사 없음 및 권리 비침해·합리적 범위 등 법정 요건을 확인한다. 안내 표시만 붙이면 어떤 촬영도 허용되는 것은 아니다.</p>
+<p>목욕실·화장실·탈의실 등 현저한 사생활 침해 장소는 고정형·이동형 모두 특별히 제한한다. 법정 교정·정신의료 시설의 예외나 이동형의 긴급 구조 예외를 모든 병원·모든 편의 촬영으로 넓히지 않는다. <strong>한 줄:</strong> <mark class="pink">설치 가능 → 안내 → 목적 범위 → 안전 관리가 모두 필요하다.</mark></p>
+<h2 id="consumer-10-10" data-concept-id="consumer-10-10">3-3. 거리·승강기·병원 카메라 사례를 풀기 ★★★★☆</h2>
+<p><strong>교재 사례10 · 거리 영상의 광고 전용:</strong> 범죄 예방 카메라를 설치했다 → 주변 가게가 그 영상을 광고에 쓰려 한다 → 처음 설치가 적법해도 광고 활용은 별개다 → 영상 속 사람들의 개인정보 처리·제공 근거를 다시 확인한다. 광고 안내판 하나로 처음 목적이 무제한 확장되지 않는다.</p>
+<p><strong>사례11 · 공동 승강기:</strong> 5층 소유자가 자기 층 안전을 이유로 공용 승강기를 촬영한다 → 다른 층 방문자도 찍힌다 → 공용시설의 관리 권한과 설치 목적·촬영 범위를 따진다. 한 층 소유권이 건물 전체 이용자 촬영 권한은 아니다.</p>
+<p><strong>사례12 · 수술실·회복실:</strong> 누구나 드나드는 장소가 아니라면 공개 장소 고정형 규정만으로 결론을 낼 수 없다 → 일반적인 수집·이용 근거와 민감정보·사생활 보호를 검토한다. <strong>비공개 장소이므로 무규제라는 뜻이 아니다.</strong></p>
+<p>현재는 의료법의 별도 규정도 반드시 보아야 한다. <strong>의식이 없는 상태에서 수술하는 의료기관의 수술실 CCTV 설치</strong>, 환자·보호자 요청에 따른 촬영과 법정 거부 사유, 보관·열람 조건이 2023.9.25.부터 시행되었다. 이 특별법을 빼고 교재 사례를 현재 모든 수술실에 그대로 적용하지 않는다. 회복실이 곧바로 같은 설치 의무 대상이라는 뜻도 아니다. <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148925182">보건복지부 수술실 CCTV 안내</a></p>
+<p><strong>시험·한 줄:</strong> 공개·비공개 구분과 의료법 특별규정을 함께 판단한다.</p>
+<h2 id="consumer-10-11" data-concept-id="consumer-10-11">3-4. 가명정보의 연구 활용과 재식별 금지 ★★★☆☆</h2>
+<p><strong>교재 398–400쪽 / 문단의 목적:</strong> 연구와 보호를 함께 달성하려는 특례다. 통계작성·과학적 연구·공익적 기록보존에는 법정 조건 아래 가명정보를 동의 없이 처리할 수 있다. 아무 광고·영업에나 쓰는 일반 면허가 아니다. 제공할 때 특정인을 알아볼 추가 정보를 함께 주면 안 된다.</p>
+<p>서로 다른 처리자의 정보를 결합할 때는 지정된 결합전문기관을 통하고 외부 반출에는 가명·익명 처리 수준과 승인 절차를 갖춘다. 추가 정보를 따로 보관하고 불필요하면 파기한다. 접근권한을 나누고, 목적·항목·이용·제공받는 자·기간 등 처리 기록을 남긴다. 법정 기록은 가명정보 파기 후 <strong>3년 이상</strong> 보관하는 기준을 구별한다.</p>
+<p>특정인을 알아보려고 처리하면 안 된다. 처리 과정에서 식별 정보가 생기면 즉시 중지하고 회수·파기 등 조치를 한다. <strong>쉬운 사례:</strong> 연구용 진료자료에서 이름을 코드로 바꿨는데 대응표까지 함께 제공하면 가명 처리 취지를 무너뜨린다. <strong>한 줄:</strong> <mark class="green">연구의 문은 열되, 사람에게 다시 이름표를 붙이는 문은 닫는다.</mark></p>
+<h1>4. 내 정보에 대해 무엇을 요구할 수 있나</h1>
+<h2 id="consumer-10-12" data-concept-id="consumer-10-12">4-1. 자기결정권과 공개 정보의 보호 ★★★★★</h2>
+<p><strong>교재 367–368·400–402쪽 / 문단의 목적:</strong> 비밀을 감출 권리보다 넓은 권리를 이해한다. 언제·누구에게·어느 범위까지 알려지고 이용되는지 스스로 정할 권리다. 공적인 생활에서 생긴 정보도 포함한다.</p>
+<p><strong>헌재 99헌마513 등, 2005.5.26.을 이야기로:</strong> 주민등록증 발급자의 지문을 국가가 수집하고 경찰이 보관·전산화해 이용한다 → 당사자는 자기정보 통제를 주장한다 → 쟁점은 보호되는 권리인지, 공익을 위한 제한이 지나친지다 → 헌재는 개인정보자기결정권을 독립적인 기본권으로 인정하면서 해당 제도의 제한이 과잉금지원칙에 위반되지 않는다고 판단했다. <strong>권리를 인정했다는 결론과 그 사건에서 위헌이라는 결론은 같지 않다.</strong></p>
+<p>이 판단의 쉬운 번역은 “내 정보의 사용에 내가 관여할 권리가 있다 → 국가도 제한하려면 근거와 정당성이 필요하다 → 다만 공익·수단·침해 정도를 따져 허용되는 제한도 있다”다. 모든 수집을 무조건 금지하면 신원 확인·공공업무가 막히고, 모든 공익 주장을 허용하면 무제한 감시가 되므로 양쪽을 심사한다. <a href="https://www.law.go.kr/detcInfoP.do?detcSeq=190075">헌재 판례의 지문정보 선례 설명</a></p>
+<p><strong>공개 정보의 비교 판례:</strong> 대학 교수의 공개 프로필을 법률정보 회사가 수집하여 제공한 사건에서 대법원은 공개 경위·목적·형태, 정보의 성격, 이용 목적과 방식, 이익을 따졌다. 해당 사건에서는 객관적으로 인정되는 공개 동의 범위 등을 고려해 위법한 침해로 보지 않았다. “공개도 보호된다”와 “공개 정보를 이용하면 언제나 불법”을 구별한다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=183259">대법원 2014다235080</a></p>
+<p>교재의 <strong>2012다105482</strong>는 공개 프로필 사건이 아니라 <strong>수사기관 요청에 따른 통신자료 제공</strong>에 관한 사건이다. 교재가 여기서 인용하는 ‘공적·공개 정보도 개인정보’라는 법리를 프로필 사건의 사실관계와 혼동하지 않는다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=182863">대법원 2012다105482</a> <strong>한 줄:</strong> 권리의 범위와 개별 처리의 적법성은 두 단계다.</p>
+<h2 id="consumer-10-13" data-concept-id="consumer-10-13">4-2. 열람·정정·삭제·정지·철회의 순서 ★★★★★</h2>
+<p><strong>교재 402–407쪽 / 문단의 목적:</strong> 권리를 실제로 행사하는 방법을 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>권리</th>
+<th>무엇을 요구하고 어떤 한계가 있나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>열람 35조</td>
+<td>항목·내용·목적·기간·제공·동의 내역을 확인. 원칙 10일 내 조치, 정당한 연기 사유는 알림</td>
+</tr>
+<tr>
+<td>열람 제한</td>
+<td>법률상 금지, 다른 사람의 생명·신체·재산 등 부당 침해, 조세·시험·입시·보상·진행 중 평가·감사 등 중대한 업무 지장 사유를 한정해 판단</td>
+</tr>
+<tr>
+<td>정정·삭제 36조</td>
+<td>열람한 내 정보가 틀렸으면 정정, 불필요하면 삭제 요구. 필요한 증빙 확인 가능. 법령이 수집 대상으로 명시한 정보의 삭제 요구는 제한</td>
+</tr>
+<tr>
+<td>삭제 방법</td>
+<td>복구·재생할 수 없게 처리. 나중에 쓸 수 있도록 숨겨 두는 것은 삭제가 아님</td>
+</tr>
+<tr>
+<td>처리정지 37조</td>
+<td>전체·일부 중단. 법적 의무, 다른 사람의 이익, 공공기관 업무, 종료 의사 불명확한 계약 이행 등 법정 거절 사유 구별</td>
+</tr>
+<tr>
+<td>동의철회</td>
+<td>동의에 기초한 처리를 중지하고 필요한 파기 등 조치. 별도의 법적 보존 근거까지 자동 소멸하지는 않음</td>
+</tr>
+</tbody></table>
+<p>정정·삭제·정지 등의 결과와 거절 이유·이의 방법은 시행령의 <strong>10일</strong> 통지 기준을 확인한다. 정보주체·적법한 대리인이 행사할 수 있고 만 14세 미만 아동은 법정대리인의 역할을 보장한다. 요구 방법을 수집할 때보다 어렵게 만들지 말고 이의제기 절차도 마련해야 한다.</p>
+<p><strong>사례13 · 남의 카드 문자:</strong> 내 휴대폰에 타인의 카드 사용 안내가 온다 → 카드사는 내 번호가 어느 경위로 등록됐는지 확인하게 하고 잘못된 연결을 정정·삭제해야 한다 → 다른 카드 고객의 전체 거래자료를 나에게 공개하거나 모두 삭제할 문제는 아니다.</p>
+<p><strong>사례14 · 탈퇴 메뉴 없는 공공 사이트:</strong> 가입은 쉬운데 철회·삭제 메뉴가 없고 요청도 무시한다 → 직접 권리를 요구하고 필요하면 개인정보 포털 등을 통해 절차를 밟는다 → 단, 법정 기록 보존은 따로 설명받는다. 현재 담당 기관 명칭은 개인정보보호위원회 기준으로 이해하며 교재의 옛 행정안전부 표현을 그대로 연락 안내로 쓰지 않는다.</p>
+<p><strong>한 줄:</strong> <mark class="yellow">열어 보고 → 틀린 것은 고치고 → 불필요한 것은 지우고 → 부당한 처리는 멈춘다.</mark></p>
+<h1>5. 앱과 위치정보</h1>
+<h2 id="consumer-10-14" data-concept-id="consumer-10-14">5-1. 앱 접근권한·본인확인·속이는 수집 ★★★☆☆</h2>
+<p><strong>교재 407–410쪽 / 문단의 목적:</strong> 휴대폰 기능 접근과 정보 수집을 연결한다. 정보통신망법 22조의2상 접근권한 동의에서는 필수·선택 항목과 이유를 알리고 선택 거부 가능성을 보장한다. 선택 접근권한을 거부했다는 이유로 본래 서비스를 막지 않는다. 운영체제·기기·앱 공급자도 동의·철회가 가능한 구조를 마련한다.</p>
+<p>예컨대 손전등 기능에 필요하지 않은 연락처 접근을 필수로 요구하면 필요성을 의심해야 한다. 다만 특정 기능 수행에 실제 필요한 권한과 앱 전체 이용을 구별한다. 주민번호 본인확인은 법정 본인확인기관, 지정 이동통신사의 본인확인업무를 수행하는 법정 알뜰폰 사업자 등 구체적 허용 범위를 확인한다. 주민번호가 아닌 아이핀·휴대전화 확인 등 대체 수단도 있다.</p>
+<p>피싱처럼 속여 정보를 수집하는 행위는 금지된다. 서비스 제공자는 신고·관계기관 통지 등 법정 조치를 하고, 관계기관은 차단·경고·정보 공유로 피해를 막는다. <strong>한 줄:</strong> ‘허용’ 버튼이 있다는 이유로 필요성·설명·기망 문제가 없어지지 않는다.</p>
+<h2 id="consumer-10-15" data-concept-id="consumer-10-15">5-2. 위치정보는 ‘어디에 산다’라는 모든 말과 다르다 ★★★★★</h2>
+<p><strong>교재 366·410–412쪽 / 문단의 목적:</strong> 법정 수집 방식과 정보의 주체를 구별한다. 위치정보법의 위치정보는 이동성 있는 물건이나 개인이 특정 시간에 존재·존재했던 장소를 <strong>전기통신설비·회선설비 등을 이용해 수집</strong>한 정보다. 개인위치정보는 특정인을 알아보거나 다른 정보와 쉽게 결합해 알아볼 수 있는 정보다.</p>
+<p>GPS 좌표, 통화기록의 기지국 위치, 전파를 이용한 위치 확인 등이 전형적이다. 단순 주소·오랜 거주 사실·부동산 위치·통화 대화 속 장소·사진 모습만으로 파악한 장소와 구별한다. 다만 사진에 GPS 메타데이터가 붙는 등 실제 측정·결합이 있으면 기출의 단순 사진 사례와 달리 판단할 수 있다.</p>
+<p>휴대폰 가입 명의자가 남편이지만 아내가 실제로 들고 다닌다면 위치가 드러나는 <strong>아내가 주체</strong>다. 명의자의 동의가 다른 사람의 추적 허가가 되지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>사업 구조</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>위치정보사업</td>
+<td>수집한 위치정보를 위치기반서비스사업자에게 제공하는 사업</td>
+</tr>
+<tr>
+<td>위치기반서비스사업</td>
+<td>위치정보를 이용해 친구 찾기·보안·주변 상점 안내 등 서비스를 제공</td>
+</tr>
+<tr>
+<td>회사 내부 관리·단순 수집</td>
+<td>그 사실만으로 위 법정 제공 사업에 해당한다고 단정하지 않음. 다른 보호 의무는 별도</td>
+</tr>
+</tbody></table>
+<p><strong>시험·한 줄:</strong> <mark class="pink">명의자 ≠ 실사용자. 장소를 말한 정보 ≠ 법정 방식으로 측정한 위치정보.</mark></p>
+<h2 id="consumer-10-16" data-concept-id="consumer-10-16">5-3. 위치 수집·제공 동의와 아동 보호의 예외 ★★★★★</h2>
+<p><strong>교재 411–415쪽 / 문단의 목적:</strong> 추적의 민감성과 구조 필요를 함께 고려한다. 원칙적으로 개인위치정보주체의 동의 없이 수집·이용·제공하지 못한다. 법정 긴급 구조·경찰 구조 요청·다른 법률의 특별규정 등 예외는 구체적 요건에 한정한다. 거짓말·부정 수단이나 복제 휴대전화로 몰래 수집하는 것도 금지된다.</p>
+<p>추적 장치가 붙은 물건을 판매·대여·양도하는 사람은 그 사실을 알려야 한다. <strong>렌터카 사례:</strong> 차에 GPS가 있다고 알리는 의무와, 운전자의 이동경로를 어떤 목적·범위에서 수집할 수 있는지는 별도다. 장치 고지만으로 무제한 추적에 동의한 것은 아니다.</p>
+<p>수집·이용 약관에는 사업자 이름·연락처, 주체·법정대리인 권리, 서비스, 수집·이용·제공 사실 확인자료의 근거·보유기간, 목적·보유기간 등 법정 항목을 알린다. 일부 동의를 유보할 수 있다. 제3자 제공에는 받는 자·목적을 알리고 동의를 받으며, <strong>매회 즉시 누구에게 언제 왜 제공했는지</strong> 알리는 것이 원칙이다. 동의가 있으면 법정 범위에서 횟수·기간을 묶어 통지할 수 있다. 교재의 묶음 기준은 30일 범위에서 10회 단위 또는 10·20·30일이다.</p>
+<p><strong>만 14세 미만</strong>은 법정대리인의 동의와 확인이 필요하다. 동의를 받기 위한 최소한의 대리인 이름·연락처는 아동에게서 직접 받을 수 있다. 친권자·법정 후견인을 확인하며 교재의 지방자치단체 ‘의장’ 표현을 후견의 일반 규칙으로 외우지 않는다.</p>
+<p><strong>8세 이하 아동·피성년후견인·등록된 정신적 장애가 심한 사람</strong>은 법정 보호의무자가 <strong>생명·신체 보호 목적</strong>으로 동의하면 본인의 동의로 보는 특례가 있다. 14세 미만의 일반 동의 규칙과 다른 제도다. 모든 사설 시설장이 당연히 보호의무자인 것은 아니며 법정 시설·설치 주체·자격을 확인한다. 서면 동의와 자격 증명도 필요하다. <strong>한 줄:</strong> <mark class="yellow">14세 미만은 법정대리인, 8세 이하 등은 생명·신체 보호를 위한 보호의무자 특례.</mark></p>
+<h2 id="consumer-10-17" data-concept-id="consumer-10-17">5-4. 위치정보의 삭제·정지·승계 통지 ★★★★☆</h2>
+<p><strong>교재 415–416쪽 / 문단의 목적:</strong> 수집 후에도 통제권을 남긴다. 동의 목적을 벗어난 이용·제공은 원칙 금지하며 별도 동의, 요금 정산에 필요한 사실 확인자료, 특정인을 알아볼 수 없는 통계·학술·시장조사 등 한정된 예외를 구별한다.</p>
+<p>목적을 달성하면 즉시 파기하는 것이 원칙이다. 법정 사실 확인자료나 다른 법령·정당한 보존 근거는 따로 관리한다. 영업양도·합병·상속으로 승계한 사업자는 <strong>30일 이내</strong> 이전 사실과 승계자, 권리 행사 방법·안전조치 등을 알린다. 개인정보 보호법의 원칙적인 사전 통지와 기간을 섞지 않는다.</p>
+<p>주체는 수집·이용·제공 동의의 전부·일부를 철회할 수 있다. 이에 해당하는 정보·사실 확인자료는 법정 의무에 맞게 파기해야 한다. <strong>일시 정지</strong>는 언제든 요구할 수 있고 사업자는 이를 거절하지 못하며 필요한 기술을 갖춰야 한다. 수집·이용·제공 사실 확인자료와 법정 제3자 제공 이유를 열람·고지받고 오류를 정정할 권리도 있다. <strong>한 줄:</strong> 처음에 동의했다는 이유로 영원히 추적할 수 있는 것은 아니다.</p>
+<h1>6. AI가 나를 평가하는 시대</h1>
+<h2 id="consumer-10-18" data-concept-id="consumer-10-18">6-1. 데이터와 계산 결과가 항상 공정한 것은 아니다 ★★★☆☆</h2>
+<p><strong>교재 416–420쪽 / 문단의 목적:</strong> 자동화가 사람의 편견을 없애 주리라는 믿음을 점검한다. 정보가 오래되거나 틀렸거나 특정 집단만 많이 포함되면 계산 결과도 치우친다. 무엇을 중요한 변수로 삼고 무엇을 우선할지 정하는 과정에는 사람의 판단과 기업의 수익 목적이 들어간다. 과거의 차별적 기록을 학습하면 차별을 다시 반복할 수 있다.</p>
+<p><strong>교재가 소개하는 세 사례의 논점:</strong> ① 성별에 따라 다르게 노출되는 채용 광고는 기회 차별을 묻는다. ② Beauty.AI 같은 외모 평가 사례는 학습자료와 평가 기준의 편향을 묻는다. ③ 정치 영상 추천 사례는 비슷한 정보만 반복해서 접하는 위험을 묻는다. 이 책의 특정 서비스·승자 구성·추천 비율·가짜뉴스 비중에 관한 세부 수치는 이 작업에서 원 연구까지 독립 검증하지 못했으므로 <strong>확정된 사실·현재 서비스 전체의 특성으로 단정하지 않는다.</strong> 특히 ‘특정 인종·성별만 전부 수상’ 같은 절대적 문장을 편향의 정의로 외우지 않는다.</p>
+<p><strong>이해용 새 사례:</strong> 아르바이트 지원자 민서의 우편번호가 과거 불합격률 높은 지역과 같다는 이유로 탈락한다 → 실제 능력 대신 지역이 대리 기준이 된다 → 회사는 관련성·차별 효과·데이터 정확성을 점검해야 한다. 자동이라는 사실이 정당성의 증거는 아니다.</p>
+<p>OECD 개인정보 원칙과 유럽 GDPR은 국제적 보호 틀을 발전시켰다. 데이터 활용과 보호를 무조건 반대편으로 놓지 말고 <strong>예측 가능하고 설명 가능한 처리로 신뢰를 얻는 것</strong>을 공통 목표로 본다. <strong>한 줄:</strong> <mark class="green">숫자로 계산했다는 말은 왜 그런 기준을 썼는지에 대한 답이 아니다.</mark></p>
+<h2 id="consumer-10-19" data-concept-id="consumer-10-19">6-2. 한국에도 자동화된 결정에 대한 권리가 있다 ★★★★☆</h2>
+<p><strong>교재 420–422·428–429쪽의 현행 보완:</strong> ‘보호법에 아무 규정이 없다’는 설명은 현행과 다르다. 37조의2는 AI 등을 포함한 <strong>완전히 자동화된 시스템으로 개인정보를 처리한 결정</strong>을 규율한다. 행정기본법 20조의 행정청 자동적 처분은 이 조의 정의에서 제외된다.</p>
+<p>권리·의무에 중대한 영향을 미치는 결정에는 <strong>거부권</strong>이 원칙적으로 인정되지만, 15조 1항의 동의·법률상 근거·계약 이행 등 해당 법정 근거에 의한 결정은 거부권 예외가 있다. 반면 <strong>설명 등 요구권을 똑같이 없애는 것은 아니다.</strong> 정당한 사유가 없다면 적용 중지, 인적 개입에 의한 재처리, 이해할 수 있는 설명 등 필요한 조치를 한다. 기준·절차·개인정보 처리 방식도 공개한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1029334889">보호법 37조의2</a></p>
+<p>설명·검토 요구에는 결정 기준·과정 설명, 추가 정보·의견을 반영할 수 있는지의 검토가 포함된다. 시행령상 조치는 원칙적으로 <strong>30일 이내</strong>이며 정당한 연장·거절에는 정한 통지를 해야 한다. 단순히 컴퓨터가 보조하고 사람이 실질적으로 최종 판단한 경우와 이름만 사람 검토인 경우를 구별한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1027192967">시행령 44조의2–4</a></p>
+<p>교재의 개선 제안 중 권리를 쉽게 안내하고 이메일·앱 등으로 접근성을 높이며 질문할 창구를 마련하자는 취지는 여전히 중요하다. 다만 저자의 <strong>입법 제안</strong>을 모두 이미 시행 중인 세부 의무라고 바꾸지 않는다. 신용평가에는 다음 장의 신용정보법상 권리를 함께 본다. <strong>한 줄:</strong> <mark class="pink">현행 규정 있음 / 거부와 설명은 다름 / 사람이 실제로 검토했는지가 중요.</mark></p>
+<h2 id="consumer-10-20" data-concept-id="consumer-10-20">6-3. GDPR의 프로파일링·이의권·자동 결정 금지 ★★☆☆☆</h2>
+<p><strong>교재 421–427쪽 / 심화·문단의 목적:</strong> 한국법과 비교할 기준이다. 프로파일링은 개인정보를 자동 처리하여 직무능력·경제상황·건강·선호·신뢰성·행동·위치 등 개인 측면을 <strong>평가·예측</strong>하는 것이다. 단순 나이별 목록도 평가 목적과 결합 여부를 따지며 모든 분류가 무조건 같은 법적 효과를 갖는 것은 아니다.</p>
+<p>GDPR 21조는 공적 임무·정당한 이익 등에 기초한 처리에 본인의 특별한 상황을 이유로 이의를 제기할 권리를 둔다. 처리자는 우선하는 중대한 정당 근거나 법적 청구 필요 등을 입증해야 계속할 수 있다. <strong>직접 마케팅의 이의는 별개로 강하게 보장</strong>되므로 회사 이익이 더 크다는 일반 주장으로 계속하지 못한다. 최초 연락 때 다른 안내와 구분해 권리를 알린다. 연구·통계는 공익상 필요한 임무 예외 등을 본다. 아동 보호를 특히 중시하지만 아동의 모든 정당한 이익 처리가 언제나 절대 금지라는 뜻은 아니다.</p>
+<p>22조의 대상은 프로파일링을 포함한 <strong>오로지 자동 처리에 근거하고 법적 효과 또는 유사하게 중대한 영향을 주는 결정</strong>이다. 온라인 대출 거절, 자동 채용 탈락, 법정 급여 거절·입국 거절·계약 서비스 중단, 사실상 구매 불가능한 차등가격 같은 교재 예시는 영향의 정도를 판단하는 사례다. 사소한 추천과 중대한 배제를 같게 취급하지 않는다.</p>
+<p>예외는 ① 계약 체결·이행에 필요 ② 보호조치를 갖춘 EU·회원국 법률의 허용 ③ 명시적 동의다. 계약상 필요는 좁게 판단하고 덜 침해적인 대안이 있으면 편리하다는 이유만으로 충분하지 않다. 명시적 동의는 내용이 분명하게 확인되는 적극적 의사표시여야 하며 침묵·모호한 포괄 문구로 대신하지 않는다. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1671832038722&uri=CELEX%3A32016R0679">GDPR 21·22조 원문</a></p>
+<p><strong>한 줄:</strong> 프로파일링 전체와 중대한 완전자동 결정은 범위가 다르다.</p>
+<h2 id="consumer-10-21" data-concept-id="consumer-10-21">6-4. 인간의 실질적 검토와 민감한 정보의 이중 보호 ★★☆☆☆</h2>
+<p><strong>교재 426–429쪽 / 심화·문단의 목적:</strong> 예외가 인정되어도 권리 보호를 끝내지 않는다. GDPR 22조 3항의 계약·명시적 동의 예외에는 인간의 개입, 본인의 의견 제시, 결정에 대한 다툼 등 적절한 보호조치가 필요하다. 법률 허용 예외도 그 법률이 보호조치를 갖춰야 한다. 검토자가 결론을 바꿀 권한이 없거나 자동 결과를 그대로 눌러 주기만 하면 의미 있는 개입이 아니다.</p>
+<p>정확한 자료·적절한 통계 방법·오류 시정·안전조치·차별 방지를 설계 단계부터 계속 고려한다. 인종·정치·종교·노조·유전·개인 식별 생체·건강·성생활·성적 지향 등 GDPR 특수 범주의 정보는 9조가 별도 제한한다. 이를 중대한 자동 결정에 쓰려면 <strong>22조의 허용 조건에 더해</strong> 9조의 명시적 동의 또는 상당한 공익에 관한 법률 근거와 적절한 보호조치를 충족해야 한다. 단순 계약 필요만으로 민감한 정보의 추가 장벽을 넘지 못한다. 국가법이 동의로도 금지를 해제하지 못하게 한 경우도 구별한다.</p>
+<p><strong>쉬운 사례:</strong> “보험 계약이니 건강정보를 어떤 자동 평가에도 쓴다”는 말은 부족하다. 계약·자동 결정·민감정보의 각 단계 근거와 보호조치를 따로 살핀다. <strong>한 줄:</strong> <mark class="blue">자동 결정 예외를 통과해도 민감정보의 문은 별도로 통과해야 한다.</mark></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>個人情報 개인정보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 個(낱 개): 개별, 人(사람 인): 사람, 情(뜻 정): 사정, 報(알릴 보): 알림. <strong>③ 합친 뜻:</strong> 한 사람에 관한 사정을 알려 주는 것. <strong>④ 이름의 이유:</strong> 개별 사람을 드러내는 정보여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 살아 있는 자연인과 관련해 식별되거나 쉽게 결합해 식별할 수 있는 정보 및 가명정보. <strong>⑥ 쉬운 말:</strong> 이름뿐 아니라 누구인지 알 수 있는 기록. <strong>⑦ 사례:</strong> 고객의 구매 내역과 회원번호를 연결한다.</p>
+<p><strong>⑧ 시험:</strong> 생존·자연인·식별·가명. <strong>⑨ 비교·기억법:</strong> 법인 매출과 임원 개인 연락처는 다름.</p>
+<h3>自己決定權 자기결정권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자): 자신, 己(몸 기): 자기, 決(결단할 결): 정함, 定(정할 정): 확정, 權(권세 권): 권리. <strong>③ 합친 뜻:</strong> 자기에 관한 일을 스스로 정할 권리. <strong>④ 이름의 이유:</strong> 정보의 주인인 사람이 사용에 관여해야 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 내 정보가 언제 누구에게 어느 범위로 알려지고 사용될지 결정할 권리. <strong>⑥ 쉬운 말:</strong> 내 기록의 사용을 묻고 고치고 멈추게 하는 힘. <strong>⑦ 사례:</strong> 앱에 정보 출처와 삭제를 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 헌법적 근거와 법률의 구체화. <strong>⑨ 비교·기억법:</strong> 동의서 서명 한 번으로 영원히 포기하는 권리 아님.</p>
+<h3>識別 식별</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 識(알 식): 알아봄, 別(나눌 별): 구별. <strong>③ 합친 뜻:</strong> 다른 사람과 가려 알아봄. <strong>④ 이름의 이유:</strong> 많은 사람 중 한 사람을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 자연인이 누구인지 직접 또는 쉽게 결합해 알아볼 수 있음. <strong>⑥ 쉬운 말:</strong> 이 기록이 누구 것인지 찾을 수 있는가. <strong>⑦ 사례:</strong> 혈액형에 주민번호를 붙인다.</p>
+<p><strong>⑧ 시험:</strong> 합리적 시간·비용·기술. <strong>⑨ 비교·기억법:</strong> 정보의 비밀 여부와 식별 여부는 다름.</p>
+<h3>假名 가명·匿名 익명</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 假(거짓 가): 대신 빌림, 名(이름 명): 이름, 匿(숨을 닉): 숨김. <strong>③ 합친 뜻:</strong> 이름을 대신함, 이름을 숨김. <strong>④ 이름의 이유:</strong> 이름표를 바꾸는 것과 찾을 길을 없애는 것이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 가명은 추가 정보가 필요하고 익명은 합리적으로 재식별 불가능한 상태. <strong>⑥ 쉬운 말:</strong> 가명은 연결 열쇠가 남을 수 있고 익명은 합리적으로 누구인지 못 찾음. <strong>⑦ 사례:</strong> 연구 자료의 성명을 코드로 바꾼다.</p>
+<p><strong>⑧ 시험:</strong> 가명정보도 보호법 대상. <strong>⑨ 비교·기억법:</strong> 이름만 삭제했다고 익명인 것은 아님.</p>
+<h3>敏感情報 민감정보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 敏(민첩할 민): 예민함, 感(느낄 감): 느낌, 情(뜻 정): 사정, 報(알릴 보): 알림. <strong>③ 합친 뜻:</strong> 드러나면 예민한 영향을 주는 정보. <strong>④ 이름의 이유:</strong> 차별·사생활 침해 위험이 커서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 신념·건강·성생활 등과 법정 추가 유형의 특별 보호 정보. <strong>⑥ 쉬운 말:</strong> 함부로 알려지면 특히 곤란한 내 정보. <strong>⑦ 사례:</strong> 병력이나 개인 식별 얼굴 특징을 처리한다.</p>
+<p><strong>⑧ 시험:</strong> 별도 동의·법령 근거. <strong>⑨ 비교·기억법:</strong> 민감과 고유식별은 분류 기준이 다름.</p>
+<h3>固有識別 고유식별</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 固(굳을 고): 고정, 有(있을 유): 가짐, 識(알 식): 앎, 別(나눌 별): 구분. <strong>③ 합친 뜻:</strong> 사람을 특정하도록 정해 놓은 식별. <strong>④ 이름의 이유:</strong> 공식 번호로 특정인을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주민·여권·운전면허·외국인등록번호의 법정 분류. <strong>⑥ 쉬운 말:</strong> 법에 딱 네 종류로 정해진 개인 번호. <strong>⑦ 사례:</strong> 이메일은 개인정보여도 이 네 종류는 아님.</p>
+<p><strong>⑧ 시험:</strong> 주민번호는 동의만으로 불가. <strong>⑨ 비교·기억법:</strong> 모든 회원번호를 고유식별정보라 부르지 않음.</p>
+<h3>處理 처리·破棄 파기</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 處(곳 처): 다룸, 理(다스릴 리): 정리, 破(깨뜨릴 파): 부숨, 棄(버릴 기): 버림. <strong>③ 합친 뜻:</strong> 정보를 다룸, 없애 버림. <strong>④ 이름의 이유:</strong> 정보의 전 생애를 보호하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 수집부터 이용·제공·삭제까지 처리하며 파기는 복구 불가능하게 없앰. <strong>⑥ 쉬운 말:</strong> 받는 순간뿐 아니라 쓰고 지우는 순간도 규칙이 있음. <strong>⑦ 사례:</strong> 탈퇴 후 불필요한 자료를 복구 불가능하게 삭제.</p>
+<p><strong>⑧ 시험:</strong> 수집만 처리라는 보기 주의. <strong>⑨ 비교·기억법:</strong> 숨김·휴지통 이동이 항상 파기는 아님.</p>
+<h3>目的外 목적 외·最小 최소</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 目(눈 목): 목표, 的(과녁 적): 지향, 外(바깥 외): 밖, 最(가장 최): 가장, 小(작을 소): 작음. <strong>③ 합친 뜻:</strong> 정한 목표 밖, 가장 적은 범위. <strong>④ 이름의 이유:</strong> 정보를 받은 이유가 이용 범위를 정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 원래 처리 목적을 벗어난 이용과 필요한 범위만 수집하는 원칙. <strong>⑥ 쉬운 말:</strong> 배송 주소를 광고회사에 마음대로 넘기지 않는 것. <strong>⑦ 사례:</strong> 검진과 광고 동의를 따로 받는다.</p>
+<p><strong>⑧ 시험:</strong> 선택 거부로 본서비스 거절 금지. <strong>⑨ 비교·기억법:</strong> 많이 모으면 편하다는 사정은 최소 필요와 다름.</p>
+<h3>同意 동의·撤回 철회</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 同(한가지 동): 함께, 意(뜻 의): 의사, 撤(거둘 철): 거둠, 回(돌 회): 되돌림. <strong>③ 합친 뜻:</strong> 뜻을 함께함, 거두어 되돌림. <strong>④ 이름의 이유:</strong> 내 선택을 전제로 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 알린 처리에 찬성하고 동의 기반 처리의 중지를 요구하는 행위. <strong>⑥ 쉬운 말:</strong> 광고에 응했다가 그만 받겠다고 바꾸는 것. <strong>⑦ 사례:</strong> 마케팅 수신 동의를 철회한다.</p>
+<p><strong>⑧ 시험:</strong> 동의 외 법적 근거·법정 보존 구별. <strong>⑨ 비교·기억법:</strong> 철회가 모든 법정 기록을 즉시 없애는 것은 아님.</p>
+<h3>委託 위탁·提供 제공</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 委(맡길 위): 맡김, 託(부탁할 탁): 부탁, 提(끌 제): 내놓음, 供(이바지할 공): 줌. <strong>③ 합친 뜻:</strong> 일을 맡김, 다른 이에게 내어 줌. <strong>④ 이름의 이유:</strong> 정보가 움직이는 이유가 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대신 처리하는 업무 위탁과 받는 자의 목적에 쓰는 제3자 제공. <strong>⑥ 쉬운 말:</strong> 우리 배송 일을 대신함과 다른 회사 광고에 줌은 다름. <strong>⑦ 사례:</strong> 배송업체와 마케팅업체를 구분한다.</p>
+<p><strong>⑧ 시험:</strong> 문서·공개·감독·재위탁 동의. <strong>⑨ 비교·기억법:</strong> 명칭만 위탁으로 붙여도 실질이 제공이면 달라짐.</p>
+<h3>營業讓渡 영업양도·承繼 승계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 營(경영할 영): 운영, 業(일 업): 사업, 讓(사양할 양): 넘김, 渡(건널 도): 건넘, 承(이을 승): 이음, 繼(이을 계): 이어감. <strong>③ 합친 뜻:</strong> 사업을 넘기고 지위를 이어받음. <strong>④ 이름의 이유:</strong> 사업 주체가 바뀌어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사업 이전에 수반한 개인정보 이전과 책임의 승계. <strong>⑥ 쉬운 말:</strong> 가게가 통째로 넘어가며 고객자료도 옮겨짐. <strong>⑦ 사례:</strong> 회원에게 받는 회사와 거부 방법을 알린다.</p>
+<p><strong>⑧ 시험:</strong> 일반 사전 통지와 위치정보 30일 구별. <strong>⑨ 비교·기억법:</strong> 아무 목적 이용까지 승계되는 것은 아님.</p>
+<h3>閱覽 열람·訂正 정정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 閱(볼 열): 살펴봄, 覽(볼 람): 봄, 訂(바로잡을 정): 고침, 正(바를 정): 바로 함. <strong>③ 합친 뜻:</strong> 열어 보고 바로잡음. <strong>④ 이름의 이유:</strong> 모르면 고칠 수 없어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자기정보 내용·처리 내역 확인과 오류 수정 요구. <strong>⑥ 쉬운 말:</strong> 내 기록부터 확인하고 잘못된 것을 고치는 것. <strong>⑦ 사례:</strong> 남의 카드 알림에 연결된 내 번호를 바로잡는다.</p>
+<p><strong>⑧ 시험:</strong> 10일 조치·통지와 법정 제한. <strong>⑨ 비교·기억법:</strong> 내 번호 정정과 다른 사람 전체 거래 공개는 다름.</p>
+<h3>位置情報 위치정보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 位(자리 위): 자리, 置(둘 치): 놓임, 情(뜻 정): 사정, 報(알릴 보): 알림. <strong>③ 합친 뜻:</strong> 어디에 있었는지 알려 주는 정보. <strong>④ 이름의 이유:</strong> 장소와 시간을 연결해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 통신설비 등으로 수집한 이동성 물건·사람의 특정 시간 장소 정보. <strong>⑥ 쉬운 말:</strong> 어느 때 어디에 있었나를 기기로 파악한 것. <strong>⑦ 사례:</strong> 휴대전화 기지국·GPS 좌표.</p>
+<p><strong>⑧ 시험:</strong> 주체는 실제 위치가 드러나는 사람. <strong>⑨ 비교·기억법:</strong> 주소나 통화에서 말한 장소와 구별.</p>
+<h3>法定代理人 법정대리인·保護義務者 보호의무자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법): 규범, 定(정할 정): 정함, 代(대신할 대): 대신, 理(다스릴 리): 처리, 人(사람 인): 사람, 保(지킬 보): 보호, 護(도울 호): 지킴, 義(옳을 의): 마땅함, 務(힘쓸 무): 의무, 者(놈 자): 사람. <strong>③ 합친 뜻:</strong> 법에 따라 대신하는 사람, 보호할 의무가 있는 사람. <strong>④ 이름의 이유:</strong> 본인이 충분히 결정하기 어려운 상황을 보호하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 아동 등의 동의를 대신하거나 생명·신체 보호의 위치정보 특례에 관여하는 법정 자격자. <strong>⑥ 쉬운 말:</strong> 부모·후견인 등의 자격과 목적을 확인하는 것. <strong>⑦ 사례:</strong> 어린아이 실종 구조에 필요한 위치 이용.</p>
+<p><strong>⑧ 시험:</strong> 14세 미만과 8세 이하를 구별. <strong>⑨ 비교·기억법:</strong> 모든 시설장·가족이 모든 목적에 동의 가능한 것은 아님.</p>
+<h3>自動化 자동화·人的介入 인적 개입</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자): 스스로, 動(움직일 동): 움직임, 化(될 화): 바뀜, 人(사람 인): 사람, 的(과녁 적): 성질, 介(끼일 개): 사이, 入(들 입): 들어옴. <strong>③ 합친 뜻:</strong> 자동으로 처리함, 사람이 판단 과정에 들어옴. <strong>④ 이름의 이유:</strong> 자동 결과에 이의를 제기할 길이 필요해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 완전자동 결정과 사람이 실질적으로 재검토하는 조치. <strong>⑥ 쉬운 말:</strong> 기계 결과를 사람이 자료를 보고 다시 판단하는 것. <strong>⑦ 사례:</strong> 소득 오류를 반영해 장학 탈락을 재검토한다.</p>
+<p><strong>⑧ 시험:</strong> 37조의2의 거부·설명·검토 구별. <strong>⑨ 비교·기억법:</strong> 사람이 단순 확인 버튼만 누르는 것은 실질 검토와 다름.</p>
+<h3>프로파일링 Profiling(외래어)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 한자어가 아니다. profile은 개인의 특성을 정리한 기록, profiling은 그러한 평가·분석 과정이다. <strong>③ 합친 뜻:</strong> 자료로 개인의 특성을 평가함. <strong>④ 이름의 이유:</strong> 흩어진 기록을 개인의 특성표로 만들기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자동 개인정보 처리로 행동·성향·경제상황 등을 평가·예측하는 것. <strong>⑥ 쉬운 말:</strong> 구매·이동 기록으로 이 사람이 어떤 사람인지 판단하는 것. <strong>⑦ 사례:</strong> 방문 지역을 이용해 신용·광고 대상을 정한다.</p>
+<p><strong>⑧ 시험:</strong> 프로파일링과 중대한 완전자동 결정 구별. <strong>⑨ 비교·기억법:</strong> 모든 통계·분류가 동일한 금지 대상은 아님.</p>
+<h3>異議 이의·明示 명시</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 異(다를 이): 다름, 議(의논할 의): 의견, 明(밝을 명): 분명, 示(보일 시): 드러냄. <strong>③ 합친 뜻:</strong> 다른 의견을 냄, 분명히 드러냄. <strong>④ 이름의 이유:</strong> 선택과 다툼을 실질적으로 보장하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 처리에 반대하거나 내용이 명확히 확인되는 의사표시를 하는 것. <strong>⑥ 쉬운 말:</strong> 이 처리에 반대한다, 이 내용에 분명히 동의한다. <strong>⑦ 사례:</strong> 직접 마케팅에 이의를 제기한다.</p>
+<p><strong>⑧ 시험:</strong> GDPR 21조와 22조의 서로 다른 구조. <strong>⑨ 비교·기억법:</strong> 침묵은 명시적 동의가 아님.</p>
+<h3>失踪宣告 실종선고</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 失(잃을 실): 잃음, 踪(발자취 종): 자취, 宣(베풀 선): 알림, 告(알릴 고): 고함. <strong>③ 합친 뜻:</strong> 자취를 잃은 사람에 대해 법원이 선언함. <strong>④ 이름의 이유:</strong> 오랫동안 생사를 모르는 법률관계를 정리하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 실종기간·절차를 거쳐 사망으로 보는 효과를 발생시키는 재판. <strong>⑥ 쉬운 말:</strong> 단순 신고가 아니라 조건을 갖춘 법원의 결정. <strong>⑦ 사례:</strong> 실종신고만 한 사람을 사망자로 단정하지 않는다.</p>
+<p><strong>⑧ 시험:</strong> 신고와 선고를 섞는 교재·보기 주의. <strong>⑨ 비교·기억법:</strong> 민법의 사망 간주 효과와 개인정보 생존 판단을 연결.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 풀 문제</th>
+<th>출제 의도·주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성 048·2014-66</td>
+<td>살아 있는 자연인·식별·서비스 생성 기록. 유족 정보와 사망자 자체 구별</td>
+</tr>
+<tr>
+<td>형성 049·2018-57</td>
+<td>최소 수집·선택 거부·민감정보 별도 동의. 동의 외 법적 근거 보완</td>
+</tr>
+<tr>
+<td>2017-60·2019-61</td>
+<td>고유식별 네 종류. 이메일과 구별</td>
+</tr>
+<tr>
+<td>2012-68·2016-62</td>
+<td>실사용자가 위치정보 주체. 측정 정보와 말·사진 구별</td>
+</tr>
+<tr>
+<td>2018-60</td>
+<td>정정·삭제와 법정 보존. 복구 가능한 삭제라는 함정</td>
+</tr>
+</tbody></table>
+<p>원문 정답을 바꾸지 않았으며 <strong>2018-56의 ②·④ 중복</strong>, 2012-66의 통화내역 관련 불명확한 보기, 2018-57의 ‘동의가 언제나 필요’처럼 조건을 생략한 문장도 부록에서 설명한다. 실제 오답률 자료가 없으므로 ‘많이 틀리는’ 대신 혼동 지점을 표시한다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 독서실 얼굴 등록.</strong> 출입에 카드도 쓸 수 있는데 얼굴 인식에 동의하지 않으면 계약을 거절한다고 한다. <strong>정답·의도:</strong> 개인 식별을 위해 기술 처리한 생체정보의 민감성, 필요한 최소 범위, 대체 수단과 동의의 자율성을 함께 검토한다. 보안 목적이라는 말만으로 모든 강제가 정당해지지 않는다.</p>
+<p><strong>응용2 · 사망한 아버지의 유전질환.</strong> 회사는 사망자 정보라며 자녀의 질환 위험을 계산했다. <strong>정답·의도:</strong> 사망자만의 정보와 살아 있는 자녀에 대한 식별 가능한 건강 추론은 다르다. 자녀의 개인정보·민감정보 처리 근거가 필요하다.</p>
+<p><strong>응용3 · 분실 방지용 가방.</strong> 대여업체가 위치 장치 부착을 알렸지만 일주일 동안 모든 방문지를 광고회사에 보냈다. <strong>정답·의도:</strong> 장치 고지와 수집·제공 동의를 구별하고 목적·범위·제3자 제공 통지 의무를 따진다.</p>
+<p><strong>응용4 · 자동 장학금 탈락.</strong> 민간 장학재단이 잘못된 소득자료만으로 완전자동 탈락시킨 뒤 “국내에는 AI 결정 규정이 없다”고 답한다. <strong>정답·의도:</strong> 현행 37조의2의 대상·중대성·처리 근거를 판단하고 정정·설명·검토, 해당하면 거부를 요구한다. 법정 예외 확인 없이 무조건 거부 가능이라 단정하지 않는다.</p>
+<p><strong>응용5 · 탈퇴해도 영수증은 남긴다.</strong> 쇼핑몰이 탈퇴 후 법정 거래기록을 분리 보존하면서 광고를 중단했다. 고객은 즉시 모든 기록을 지우라고 한다. <strong>정답·의도:</strong> 9장의 법정 보존 근거와 10장의 철회를 연결한다. 필요한 기간·범위의 보존과 광고 재이용은 별개다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제10장</h1>
+<p><strong>TOP3:</strong> 정보의 분류 / 처리의 근거·목적 / 정보주체의 권리.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>적용</td>
+<td>특별규정 우선, 없으면 개인정보 보호법. 온라인 일반 보호의 2020년 통합.</td>
+</tr>
+<tr>
+<td>범위</td>
+<td>살아 있는 자연인＋식별 가능성. 공개·서비스 생성 정보도 포함.</td>
+</tr>
+<tr>
+<td>가명·익명</td>
+<td>가명은 개인정보, 합리적으로 식별 불가능한 익명은 적용 제외.</td>
+</tr>
+<tr>
+<td>특별 분류</td>
+<td>민감은 위험한 내용, 고유식별은 주민·여권·면허·외국인번호.</td>
+</tr>
+<tr>
+<td>동의</td>
+<td>수집 목적·항목·기간·거부권, 제공은 받는 자·목적도. 선택 거부로 본서비스 차단 금지.</td>
+</tr>
+<tr>
+<td>주민번호</td>
+<td>별도 동의만으로 처리 불가. 구체적 법적 근거 등 필요.</td>
+</tr>
+<tr>
+<td>위탁·제공</td>
+<td>대신 처리 vs 받는 자의 목적. 재위탁 동의·교육·감독.</td>
+</tr>
+<tr>
+<td>CCTV</td>
+<td>고정형 목적 외 조작·녹음 금지. 수술실 의료법 특별규정 구별.</td>
+</tr>
+<tr>
+<td>가명 활용</td>
+<td>통계·과학연구·공익기록. 전문기관 결합, 재식별 금지.</td>
+</tr>
+<tr>
+<td>권리</td>
+<td>열람·정정·삭제·정지·철회. 법정 보존 예외, 삭제는 복구 불가.</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>측정·수집 방식과 실제 주체. 명의 남편·실사용 아내 → 아내.</td>
+</tr>
+<tr>
+<td>아동</td>
+<td>14세 미만 법정대리인 / 8세 이하 등 생명·신체 보호 특례.</td>
+</tr>
+<tr>
+<td>자동 결정</td>
+<td>국내 규정 있음. 거부의 중대성·예외와 설명·검토를 구별.</td>
+</tr>
+<tr>
+<td>유럽 심화</td>
+<td>프로파일링 ≠ 모두 22조. 완전자동＋중대효과, 예외·보호조치.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 동의는 유일한 처리 근거가 아니다. 공개는 무제한 이용 허가가 아니다. 주민번호는 동의만으로 처리할 수 없다.</p>
+<p>사례를 풀 순서: 누구의 어떤 정보 → 일반·특별법 → 수집·이용·제공 근거 → 목적·최소 범위 → 특별 정보 조건 → 열람·정정·삭제·정지·설명.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 가명·익명, 민감·고유식별, 동의·법적 의무를 구별하고 사례에 적용한다. 🟡 정의는 기억하지만 제공·위탁이나 14세·8세 기준을 섞는다. 🔴 공개 정보는 마음대로 써도 되고 주민번호는 동의만 받으면 된다고 생각한다. 실제 답안을 받지 않았으므로 자기점검 기준이다.</p>
+<p><strong>복습 TOP3:</strong> 개인정보의 범위·특별 분류 / 최소 수집과 목적·제공 제한 / 정보주체의 권리와 자동 결정의 현행 규정.</p>
+<h1>문제 부록 · 25문항·100개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_047"><h4>형성평가 · 소비자법_047</h4><p class="question-stem">다음 중에서 개인정보보호에 관련된 법률에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>헌법상 기본권을 통해 개인정보를 보호하고 있다.</li><li>개인정보보호법은 개인정보 보호에 대한 일반적 · 포괄적 보호법제이다.</li><li>개인정보보호법에서는 개인정보자기결정권을 규정하여 개인정보를 보호하고 있다.</li><li>금융분야에 대해서는 신용정보법에서 개인정보를 보호하는 규정을 두고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법의 존엄·사생활과 개인정보자기결정권이 보호의 바탕이다.</li><li><strong>비선택</strong> · 공공·민간에 걸친 일반적 법제다. 특별규정이 있는 분야에서는 그 규정을 먼저 본다.</li><li><strong>선택</strong> · 원본 정답. 자기결정권의 헌법적 근거와 보호법의 구체적 권리 보장을 구별하려는 취지다. 보호법이 자기정보 통제를 전혀 보장하지 않는다는 뜻으로 읽으면 안 된다.</li><li><strong>비선택</strong> · 개인신용정보의 분야별 특별규정을 둔다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 개인정보자기결정권은 헌법상 기본권이다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_048"><h4>형성평가 · 소비자법_048</h4><p class="question-stem">다음 중에서 개인정보에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>개인정보 보호법상 개인정보란 살아 있는 개인에 관한 정보로 사망한 사람의 정보는 개인정보보호법의 적용대상이 될 수 없다.</li><li>해당 정보만으로는 특정 개인을 알아볼 수 없더라도 다른 정보와 쉽게 결합하여 알아볼 수 있는 정보는 개인정보에 포함된다.</li><li>개인정보의 일부를 삭제하거나 일부 또는 전부를 대체하는 등의 방법으로 추가 정보가 없이는 특정 개인을 알아볼 수 없도록 처리한 정보도 개인정보에 포함된다.</li><li>개인정보 보호의 원칙은 식별된 또는 식별될 수 있는 개인에 관한 일체의 정보에 적용되며, 익명정보는 보호대상에서 제외된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원본 정답은 ①. 사망자만의 정보는 정의상 제외되는 것이 맞지만 그 정보가 살아 있는 유족도 식별하면 유족의 개인정보로 보호될 수 있어 적용 불가능이라는 절대 표현을 보완한다. 사망자 자신이 생존자로 취급된다는 뜻은 아니다.</li><li><strong>비선택</strong> · 쉽게 결합되는지는 합리적인 시간·비용·기술 등으로 판단한다.</li><li><strong>비선택</strong> · 가명정보의 설명이다. 가명 처리했다고 보호법 적용이 사라지지 않는다.</li><li><strong>비선택</strong> · 법정 기준에 맞춰 더 이상 개인을 알아볼 수 없는 익명정보는 적용 제외다. 이름만 지운 자료가 전부 익명인 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 개인정보 보호법상 개인정보란 살아 있는 개인에 관한 정보이지만, 사망한 사람의 정보가 생존하는 유족 등 후손과 관련이 있는 경우에는 유족 등 후손의 개인정보로서 적용대상이 될 수 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_049"><h4>형성평가 · 소비자법_049</h4><p class="question-stem">다음 중에서 개인정보처리자의 의무에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>개인정보처리자는 정보주체의 동의를 받은 경우나 법률에 특별한 규정이 있거나 법령상 의무를 준수하기 위하여 불가피한 경우에는 개인정보를 수집할 수 있다.</li><li>개인정보처리자는 정보주체가 필요한 최소한의 정보 외의 개인정보 수집에 동의하지 않은 경우에는 정보주체에게 재화 또는 서비스의 제공을 거부할 수 있다.</li><li>개인정보처리자는 그 목적에 필요한 최소한의 개인정보를 수집해야 한다.</li><li>개인정보처리자는 동의를 서면(전자문서 포함)으로 받을 때에는 개인정보의 수집 · 이용 목적, 수집 · 이용하려는 개인정보의 항목 등 중요한 내용을 개인정보보호위원회가 고시로 정하는 방법에 따라 명확히 표시하여 알아보기 쉽게 해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 동의나 법적 의무 등 여러 적법한 근거가 있다. 동의만이 유일한 근거는 아니다.</li><li><strong>선택</strong> · 틀리다. 필요 최소한을 넘는 선택 정보 수집 거부를 이유로 본래 재화·서비스를 거절할 수 없다.</li><li><strong>비선택</strong> · 최소 수집 원칙이며 최소한이라는 입증은 처리자가 해야 한다.</li><li><strong>비선택</strong> · 중요 내용을 명확히 표시해 알아볼 수 있게 해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 개인정보처리자는 정보주체가 필요한 최소한의 정보 외의 개인정보 수집에 동의하지 않는다는 이유로 정보주체에게 재화 또는 서비스의 제공을 거부해서는 안 된다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_050"><h4>형성평가 · 소비자법_050</h4><p class="question-stem">다음 중에서 영상정보처리기기에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>영상정보처리기기는 고정형과 이동형으로 나뉜다.</li><li>이동형 영상정보처리기기란 사람이 신체에 착용 또는 휴대하거나 이동 가능한 물체에 부착 또는 거치하여 사람 또는 사물의 영상 등을 촬영하거나 이를 유 · 무선망을 통하여 전송하는 장치로 착용형 장치, 휴대형 장치, 부착 · 거치형 장치가 이에 해당한다.</li><li>고정형의 경우, 법령에서 구체적으로 허용하고 있는 경우나 범죄의 예방 및 수사를 위하여 필요한 경우에는 공개된 장소에 설치 · 운영할 수 있다.</li><li>영상정보처리기기의 설치 목적과 다른 목적으로 고정형 영상정보처리기기를 임의로 조작하거나 다른 곳을 비춰서는 안 되며, 녹음기능은 사용할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 설치·이동 형태에 따라 구별한다.</li><li><strong>비선택</strong> · 착용·휴대·이동 물체 부착 등의 이동형 정의다.</li><li><strong>비선택</strong> · 공개 장소 설치 금지 원칙에 대한 법정 예외다. 안내·안전 등 후속 의무는 남는다.</li><li><strong>선택</strong> · 틀리다. 고정형의 목적 외 조작·다른 곳 촬영 금지뿐 아니라 녹음기능 사용도 금지한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 영상정보처리기기의 설치 목적과 다른 목적으로 고정형 영상정보처리기기를 임의로 조작하거나 다른 곳을 비춰서는 안 되며, 녹음기능은 사용할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_064"><h4>기출문제 · 소비자법_기출2012_064</h4><p class="question-stem">[2012 기말고사 · 64번 / 자체 풀이]<br>정보통신망법상 개인정보의 개념에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>개인정보의 주체는 자연인뿐만 아니라 법인 또는 단체의 정보도 포함된다.</li><li>사망한 사람의 정보도 개인정보로 볼 수 있다.</li><li>사업자가 서비스를 제공하는 과정에서 생성되는 이용자에 관한 정보도 개인정보에 포함된다.</li><li>혈액형 정보만으로도 개인정보가 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정보주체는 살아 있는 자연인이다. 법인 자체 정보와 법인 임원·직원의 개인정보는 구별한다.</li><li><strong>비선택</strong> · 사망자 자체는 제외한다. 살아 있는 유족을 드러내는 경우는 유족 정보로 별도 판단한다.</li><li><strong>선택</strong> · 정답. 이용·접속 등 서비스 과정의 생성 기록도 식별 가능한 개인에 관한 정보면 포함한다.</li><li><strong>비선택</strong> · 어느 누구인지 알아볼 수 없는 혈액형 값만으로는 부족하다. 다른 정보와의 쉬운 결합은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>개인정보에는 서비스 이용 과정에서 생성되는 기록도 포함될 수 있다. 살아 있는 개인에 관한 식별가능한 정보라는 요건에 유의한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_065"><h4>기출문제 · 소비자법_기출2012_065</h4><p class="question-stem">[2012 기말고사 · 65번 / 자체 풀이]<br>위치정보보호법상 개인위치정보의 개념에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>법인이나 단체, 개인집합체 등의 위치정보가 포함된다.</li><li>고정된 개인의 주소 또는 몇 년 동안 특정 지방에 거주하였다는 거주사실 등에 관한 정보는 해당되지 않는다.</li><li>건물 같은 부동산의 위치정보나 지리정보가 포함된다.</li><li>전화통화의 내용을 통해서 수집된 위치정보가 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 개인위치정보는 특정 자연인에 관한 것이다. 사물 위치정보 전체와 같지 않다.</li><li><strong>선택</strong> · 정답. 단순 고정 주소·과거 거주 사실과 법정 방식으로 특정 시점 위치를 측정한 정보를 구별한다.</li><li><strong>비선택</strong> · 부동산·지리정보를 곧바로 개인위치정보로 보지 않는다.</li><li><strong>비선택</strong> · 통화에서 말로 들은 장소는 전형적인 법정 측정·수집 위치정보와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>위치정보법의 개인위치정보는 통신설비 등을 통해 수집되는 특정 시점의 소재 정보와 관련된다. 고정된 주소나 과거 거주사실만을 뜻하지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_066"><h4>기출문제 · 소비자법_기출2012_066</h4><p class="question-stem">[2012 기말고사 · 66번 / 자체 풀이]<br>개인정보에 대한 이용자의 자기정보통제권의 설명으로 옳은 것은?</p><ol class="choices"><li>정보통신서비스 제공자로부터 이용자의 개인정보를 제공받은 자에 대하여는 이용자가 개인정보 수집․이용․제공 등의 동의를 철회할 수가 없다.</li><li>법정대리인은 만 14세 미만 아동의 개인정보에 대해 이용자의 권리를 행사하여 열람이나 자료제공을 요구할 수 있는데, 이때 이용자의 개인정보에는 이동전화 통화내역도 포함된다.</li><li>만 14세 미만 아동의 법정대리인은 해당 아동의 개인정보에 대한 동의를 철회할 수 있다.</li><li>정보통신서비스 제공자는 개인정보의 열람․제공 또는 오류의 정정 요구방법을 개인정보의 수집방법보다 더 쉽게 해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제공받은 자에 대한 동의철회도 원천적으로 막히지 않는다.</li><li><strong>비선택</strong> · 원본에서는 비선택. 통화내용·통신사실확인자료·가입자 이용내역을 구별해야 한다. 법정대리인이라는 이유만으로 상대방 정보까지 포함한 모든 통화자료를 무제한 받을 수 있다는 취지라면 틀리지만, 모든 통화내역이 아동 개인정보에서 제외된다는 해설도 부정확하다. 보기 표현에 한계가 있다.</li><li><strong>선택</strong> · 정답. 법정대리인은 만 14세 미만 아동에 대한 동의를 철회할 수 있다.</li><li><strong>비선택</strong> · 방향이 반대다. 권리 행사 방법을 수집할 때보다 어렵게 해서는 안 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>만 14세 미만 아동의 법정대리인은 아동의 개인정보 처리 동의를 철회할 수 있다. 이동전화 통화내역 등에는 별도의 제한이 문제될 수 있다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_067"><h4>기출문제 · 소비자법_기출2012_067</h4><p class="question-stem">[2012 기말고사 · 67번 / 자체 풀이]<br>다음 중 위치정보사업에 해당하는 것은?</p><ol class="choices"><li>위치정보를 수집하여 회사 안에서의 근무실태 등의 관리에만 활용하는 경우</li><li>위치정보를 수집하여 보안시설 내에서의 보안관리에만 활용하는 경우</li><li>위치정보를 수집만 할 뿐 위치기반서비스사업자에게 제공하지 않는 경우</li><li>위치정보를 수집하여 위치기반서비스사업자에게 제공하는 것을 사업으로 활용하는 것이 위치정보사업이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사내 관리만 한다는 사실은 서비스사업자에게 제공하는 법정 위치정보사업의 정의와 다르다. 개인정보 보호 의무가 전혀 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 보안시설 내부 활용만으로 해당 제공 사업이 되는 것은 아니다.</li><li><strong>비선택</strong> · 단순 수집과 사업자로서 다른 서비스사업자에 제공하는 것을 구별한다.</li><li><strong>선택</strong> · 정답. 수집한 위치정보를 위치기반서비스사업자에게 제공하는 사업이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>위치정보를 수집하여 위치기반서비스사업자에게 제공하는 것을 사업으로 하는 경우를 말한다. 내부 관리만을 위한 수집과 구별한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_068"><h4>기출문제 · 소비자법_기출2012_068</h4><p class="question-stem">[2012 기말고사 · 68번 / 자체 풀이]<br>이동통신서비스 가입자는 남편이고 휴대전화의 실사용자는 아내인 경우, 이때 개인위치정보주체는 ( )이다. 이동통신사는 ( )의 동의를 받아서 개인위치정보를 수집․이용 또는 제공할 수가 있다. ( )의 내용으로 바르게 짝지어 진 것은?</p><ol class="choices"><li>아내, 아내</li><li>아내, 남편</li><li>남편, 남편</li><li>남편, 아내</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 실제 이동·위치가 드러나는 아내가 주체이므로 그 동의를 받는다.</li><li><strong>비선택</strong> · 주체를 아내라고 하면서 남편의 동의로 대신하는 오류다.</li><li><strong>비선택</strong> · 명의자와 실제 위치정보주체를 혼동했다.</li><li><strong>비선택</strong> · 주체의 판단을 잘못했다. 핵심은 가입 명의가 아니라 실제 누구의 위치인가다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>명의상 가입자가 아니라 휴대전화를 실제 사용하는 아내의 소재가 드러나는 정보이므로 아내가 개인위치정보주체이며 아내의 동의가 필요하다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_067"><h4>기출문제 · 소비자법_기출2013_067</h4><p class="question-stem">[2013 기말고사 · 67번 / 자체 풀이]<br>개인정보 및 위치정보에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>이미 사망하였거나 실종신고 등 관계법령에 의하여 사망한 것으로 간주되는 사람에 관한 정보도 개인정보로 볼 수 있다.</li><li>혈액형 정보만으로는 개인정보로 보기 어렵지만, 혈액형이 주민등록번호와 결합하는 경우에는 개인정보로 볼 수 있다.</li><li>법인이나 단체, 개인 집합체 등의 위치정보는 개인위치정보의 대상에서 제외된다.</li><li>전화통화의 내용을 통해서 수집된 위치정보는 개인위치정보의 대상에서 제외된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀린 보기. 사망자 자체의 정보는 제외된다. 추가로 실종신고만으로 사망 간주되는 것도 아니며 법정 요건과 재판을 갖춘 실종선고와 구별해야 한다.</li><li><strong>비선택</strong> · 결합으로 특정인 식별이 가능해지는 사례다.</li><li><strong>비선택</strong> · 법인·단체 자체의 위치와 특정 자연인의 개인위치정보는 구별한다.</li><li><strong>비선택</strong> · 대화 속 장소 정보와 전기통신설비 등을 이용해 측정한 위치정보는 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>출제 당시 개인정보는 살아 있는 개인의 식별가능한 정보를 뜻한다. 사망한 사람의 정보 자체를 개인정보로 본다는 설명은 맞지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_066"><h4>기출문제 · 소비자법_기출2014_066</h4><p class="question-stem">[2014 기말고사 · 66번]<br>정보통신망 이용촉진 및 정보보호에 관한 법률상 개인정보의 개념에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>개인정보란 사망자 및 살아 있는 개인에 관한 정보이다.</li><li>개인정보의 주체는 법인, 단체도 포함된다.</li><li>개인정보에는 사업자의 서비스제공 과정에서 생성된 서비스이용기록도 포함된다.</li><li>혈액형만으로도 개인정보가 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 살아 있는 개인을 대상으로 한다. 유족의 정보가 함께 드러나는 예외적 관계는 별도 판단한다.</li><li><strong>비선택</strong> · 법인·단체 자체는 자연인인 정보주체가 아니다.</li><li><strong>선택</strong> · 정답. 서비스 이용기록도 특정인을 식별할 수 있으면 개인정보다.</li><li><strong>비선택</strong> · 혈액형 값만으로 누구인지 알 수 없는 경우를 말한다. 결합 가능성을 함께 보아야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_067"><h4>기출문제 · 소비자법_기출2014_067</h4><p class="question-stem">[2014 기말고사 · 67번]<br>위치정보의 보호 및 이용 등에 관한 법률상 위치정보사업자 등의 개인위치정보 수집․이용 또는 제공에 관한 다음 설명 중 틀린 것은?</p><ol class="choices"><li>정보통신서비스 제공자는 만 14세 미만의 아동으로부터 개인정보 수집․이용․제공 등의 동의를 직접 받을 수 있다.</li><li>위치정보를 수집할 수 있는 장치가 부착된 물건을 대여하는 자는 위치정보 수집 장치가 부착된 사실을 대여 받는 자에게 알려주어야 한다.</li><li>8세 이하의 아동에 대한 개인위치정보의 수집, 이용 또는 제공에 보호의무자가 동의하는 경우에는 본인의 동의가 있는 것으로 본다.</li><li>중증 정신장애인으로서 장애인복지법에 따라 장애인등록을 한 자에 대해서는 보호의무자가 그들의 생명 또는 신체의 보호를 위하여 그들의 개인위치정보의 수집, 이용 또는 제공에 동의하는 경우에는 본인의 동의가 있는 것으로 본다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 만 14세 미만의 법정 동의는 법정대리인을 통해야 한다. 대리인 동의를 받기 위한 최소 성명·연락처 수집은 별도 허용된다.</li><li><strong>비선택</strong> · 장치 부착 사실 고지 의무다. 위치 수집·제공 동의와는 별도다.</li><li><strong>비선택</strong> · 생명·신체 보호라는 법정 목적과 보호의무자 요건을 전제로 한 특례다. 모든 목적에 무조건 허용하는 문장은 아니다.</li><li><strong>비선택</strong> · 당시 중증 정신장애인 표현에 해당하는 법정 범주·등록·보호 목적을 충족해야 한다. 현재 용어와 법정 자격도 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_062"><h4>기출문제 · 소비자법_기출2015_062</h4><p class="question-stem">[2015 기말고사 · 62번]<br>개인정보보호 관련 법률에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>개인정보보호는 헌법과 개별 법률에서 보호된다.</li><li>헌법상 개인정보자기결정권과 사생활의 비밀 및 자유의 기본권을 기초로 한다.</li><li>공공영역과 민간영역을 구분하여 보호한다.</li><li>개인정보 보호법이 일반적이고 포괄적인 법률이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법과 분야별 법률이 함께 보호한다.</li><li><strong>비선택</strong> · 헌법상 자기결정권과 사생활 보장의 연결이다.</li><li><strong>선택</strong> · 틀리다. 보호법은 공공·민간을 함께 규율한다. 공공기관 전용 특칙의 존재와 전체 법제의 분리는 다르다.</li><li><strong>비선택</strong> · 일반적·포괄적 법률이며 특별법과 함께 적용한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 62번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_063"><h4>기출문제 · 소비자법_기출2015_063</h4><p class="question-stem">[2015 기말고사 · 63번]<br>개인정보 보호법상 개인정보의 수집·제공·이용 제한에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>개인정보 수집·이용의 경우 정보주체에게 목적, 항목, 기간, 동의거부권을 고지하여 별도로 동의를 얻은 경우에는 민감정보의 처리가 가능하다.</li><li>정보주체 또는 제3자의 급박한 생명, 신체, 재산의 이익을 위하여 명백히 필요하다고 인정되는 경우에는 주민등록번호 처리가 가능하다.</li><li>개인정보 제공의 경우 정보주체에게 개인정보를 제공받는 자, 이용목적, 항목, 이용기간, 동의거부권을 고지하여 별도로 동의를 얻은 경우에는 고유식별정보의 처리가 가능하다.</li><li>만 14세 미만 아동의 개인정보를 처리하는 경우에 법정대리인의 동의를 받기 위하여 해당 아동으로부터 직접 법정대리인의 성명·연락처에 관한 정보를 수집해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 민감정보는 구별된 별도 동의를 갖추면 처리 가능성이 있다. 다른 안전·최소 수집 의무도 충족해야 한다.</li><li><strong>비선택</strong> · 주민번호의 법정 예외 중 급박한 생명·신체·재산 이익을 위한 명백한 필요다.</li><li><strong>비선택</strong> · 고유식별정보의 별도 동의와 제공 고지 요건이다. 다만 주민번호에는 동의만으로 충분하지 않은 별도 제한이 있으므로 네 종류 모두를 포괄하는 절대 문장으로 읽지 않는다.</li><li><strong>선택</strong> · 틀리다. 대리인의 동의를 받기 위한 최소한의 성명·연락처는 아동에게서 직접 받을 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2015년 법학과 소비자법 63번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_062"><h4>기출문제 · 소비자법_기출2016_062</h4><p class="question-stem">[2016 기말고사 · 62번]<br>다음 중 개인위치정보에 해당하는 것은?</p><ol class="choices"><li>전화통화 내용을 통해 수집한 정보</li><li>부동산의 위치정보</li><li>국가공간정보기본법의 적용을 받는 지리정보</li><li>휴대전화 통화내역상의 기지국 정보</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대화로 들은 장소와 설비로 측정한 위치를 구별한다.</li><li><strong>비선택</strong> · 고정 부동산 자체의 위치는 개인위치정보가 아니다.</li><li><strong>비선택</strong> · 지리정보 일반과 특정인의 시간별 측정 위치는 다르다.</li><li><strong>선택</strong> · 정답. 기지국 정보를 통해 개인의 특정 시점 위치를 파악하는 경우다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2016년 법학과 소비자법 62번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_065"><h4>기출문제 · 소비자법_기출2016_065</h4><p class="question-stem">[2016 기말고사 · 65번]<br>8세 이하의 아동 또는 피성년후견인, 중증 정신장애인으로 등록을 한 사람의 생명 또는 신체의 보호를 위하여 그들 개인 위치정보를 수집․이용 또는 제공하는 경우에 그 동의는 보호 의무자가 한다. 다음 중 동의권 있는 보호의무자가 아닌 경우는?</p><ol class="choices"><li>8세 이하의 아동의 법정대리인</li><li>보호시설에 있는 미성년자의 후견 직무에 관한 법률상 후견인</li><li>피성년후견인의 법정대리인</li><li>정신보건법상 사인이 설치ㆍ운영하는 정신질환자사회복귀 시설의 장</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정대리인은 법이 정한 보호의무자 범주다. 생명·신체 보호 목적 등 요건이 필요하다.</li><li><strong>비선택</strong> · 해당 특별법상 후견인은 법정 범주에 포함한다.</li><li><strong>비선택</strong> · 피성년후견인의 법정대리인인 성년후견인을 확인한다.</li><li><strong>선택</strong> · 정답. 사인이 설치·운영하는 시설의 장이라는 사실만으로 해당 법정 보호의무자가 되지 않는다. 당시 법률 용어와 현재 시설 유형을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2016년 법학과 소비자법 65번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_060"><h4>기출문제 · 소비자법_기출2017_060</h4><p class="question-stem">[2017 기말고사 · 60번]<br>다음 중 개인정보의 고유식별정보에 해당하지 않는 것은?</p><ol class="choices"><li>운전면허의 면허 번호</li><li>주민등록번호</li><li>여권 번호</li><li>이메일주소</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 네 종류 중 하나다.</li><li><strong>비선택</strong> · 법정 네 종류이며 처리 근거는 더욱 엄격하다.</li><li><strong>비선택</strong> · 법정 네 종류 중 하나다.</li><li><strong>선택</strong> · 정답. 이메일은 개인정보일 수 있지만 열거된 고유식별정보는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 60번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_055"><h4>기출문제 · 소비자법_기출2018_055</h4><p class="question-stem">[2018 기말고사 · 55번]<br>개인정보보호 관련 법률에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>공공영역과 민간영역을 구분하여 보호한다.</li><li>개인정보보호는 헌법과 개별 법률에서 보호된다.</li><li>헌법상 개인정보자기결정권과 사생활의 비밀 및 자유의 기본권을 기초로 한다.</li><li>개인정보 보호법이 일반적이고 포괄적인 법률이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 공공·민간을 함께 아우르는 개인정보 보호법이 있다.</li><li><strong>비선택</strong> · 헌법과 개별 법률이 함께 작용한다.</li><li><strong>비선택</strong> · 헌법적 권리의 근거를 설명한다.</li><li><strong>비선택</strong> · 일반법이라는 점과 특별규정 우선 원칙을 같이 기억한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_056"><h4>기출문제 · 소비자법_기출2018_056</h4><p class="question-stem">[2018 기말고사 · 56번]<br>다음은 개인정보보호 관련 법률들의 상호 적용 원칙에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 개별법에 특별한 규정이 없다면, 개인정보 보호법이 우선 적용된다.<br>(b) 온라인에서 개인정보를 처리하는 경우는 정보통신서비스 제공자(사업자)인 경우에 한하여 정보통신망법이 적용된다.</p><ol class="choices"><li>(a) ○, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ×, (b) ×</li><li>(a) ○, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 출제 당시 원본 정답. (a)는 특별규정이 없다는 조건이 중요하다. (b)는 2020년 개인정보 규정 통합 전 구도다.</li><li><strong>비선택</strong> · 현행에는 온라인 일반 개인정보 보호를 보호법으로 통합했다는 점에서 과거와 판단이 달라진다. 원본에서 ④와 같은 조합인 점도 보존했다.</li><li><strong>비선택</strong> · (a)를 틀리다고 표시한 부분은 특별규정이 없다는 조건을 놓쳤다.</li><li><strong>비선택</strong> · 원본에서 ②와 같은 중복 보기다. 임의로 고치지 않았다. 현행 법제와 출제 당시 정답을 분리한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.<br>원문 확인: ②와 ④의 조합이 같지만 임의로 수정하지 않았습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_057"><h4>기출문제 · 소비자법_기출2018_057</h4><p class="question-stem">[2018 기말고사 · 57번]<br>개인정보 보호법상 개인정보의 수집·제공·이용의 제한에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>개인정보의 수집·제공·이용을 위해서는 정보주체의 동의를 얻어야 한다.</li><li>개인정보처리자는 원칙적으로 주민등록번호를 처리할 수 없다.</li><li>개인정보처리자는 원칙적으로 고유식별정보를 처리할 수 없다.</li><li>정보주체에게 목적, 항목, 기간, 동의거부권을 고지하여 별도로 동의를 얻은 경우라도 민감정보는 수집할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원본 비선택이지만 동의는 유일한 근거가 아니다. 법령상 의무·계약 이행 등 다른 법정 근거가 있으면 동의 없이도 가능하므로 무조건 동의 필요라는 절대 문장은 부정확하다.</li><li><strong>비선택</strong> · 원칙 제한에 법정 예외가 있다. 주민번호는 동의만으로 충분하지 않다.</li><li><strong>비선택</strong> · 별도 동의·법령상 근거 등 예외를 가진 원칙 제한이다.</li><li><strong>선택</strong> · 원본 정답. 별도 동의 등 법정 예외를 갖춘 민감정보 처리가 가능하므로 어떤 동의에도 불가능하다는 말은 틀리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_058"><h4>기출문제 · 소비자법_기출2018_058</h4><p class="question-stem">[2018 기말고사 · 58번]<br>정보주체 이외로부터 수집한 개인정보를 처리하는 경우에 정보주체의 요구가 있으면 개인정보처리자는 즉시 출처 등의 사항을 정보주체에게 알려야 한다. 하지만 일정한 경우에는 그러한 고지의무가 제외된다. 이에 해당하는 경우로 옳지 않은 것은?</p><ol class="choices"><li>고지를 요구하는 대상이 되는 개인정보가 국가안전에 해당하는 개인정보파일에 포함되어 있는 경우</li><li>고지를 요구하는 대상이 되는 개인정보가 외교상 비밀에 해당하는 개인정보파일에 포함되어 있는 경우</li><li>고지로 인하여 다른 사람의 생명·신체를 해할 우려가 있는 경우</li><li>개인정보 보호법에 따른 정보주체의 권리보다 명백히 우선하지 않는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 해당 파일이며 주체 권리보다 명백히 우선하는 조건까지 갖춘 경우다.</li><li><strong>비선택</strong> · 외교상 비밀의 법정 범위와 우선성 조건을 함께 본다.</li><li><strong>비선택</strong> · 다른 사람의 생명·신체 보호라는 예외 사유다. 단서의 우선성도 요구된다.</li><li><strong>선택</strong> · 틀리다. 주체 권리보다 명백히 우선해야 예외가 될 수 있다. 우선하지 않는 경우라는 방향이 반대다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 58번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_060"><h4>기출문제 · 소비자법_기출2018_060</h4><p class="question-stem">[2018 기말고사 · 60번]<br>개인정보의 정정·삭제 요구권에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>자신의 개인정보를 열람한 정보주체는 개인정보처리자에게 그 개인정보의 정정 또는 삭제를 요구할 수 있다.</li><li>다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 삭제를 요구할 수 없다.</li><li>개인정보를 삭제할 때에는 복구 또는 재생되지 않도록 조치해야 한다.</li><li>개인정보를 삭제할 때에는 필요한 경우 복구 또는 재생될 수 있도록 조치해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 열람한 개인정보의 정정·삭제를 요구하는 기본 구조다.</li><li><strong>비선택</strong> · 법령이 수집 대상으로 명시한 경우의 삭제 요구 제한이다.</li><li><strong>비선택</strong> · 삭제는 복구·재생 불가능하게 해야 한다.</li><li><strong>선택</strong> · 틀리다. 복구 가능하게 남겨 두는 것은 법정 삭제 취지와 반대다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 60번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_059"><h4>기출문제 · 소비자법_기출2019_059</h4><p class="question-stem">[2019 기말고사 · 59번]<br>개인정보보호 관련 법률들의 상호 적용원칙에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>개별법에 특별한 규정이 없다면, 개인정보 보호법이 우선 적용된다.</li><li>온라인에서 개인정보를 처리하는 경우는 정보통신서비스제공자(사업자)인 경우에 한하여 정보통신망법이 적용된다.</li><li>개별법에 특별한 규정이 있더라도, 개인정보 보호법이 우선 적용된다.</li><li>개인신용정보는 신용정보법이 적용되며, 온라인에서 수집·이용되는 정보 중 신용정보가 아닌 경우에는 정보통신망법이 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특별규정이 없다는 조건 아래 일반법을 적용한다.</li><li><strong>비선택</strong> · 2019년 당시 법제 설명이다. 현행 온라인 일반 개인정보 규율은 보호법으로 통합되었다.</li><li><strong>선택</strong> · 정답. 특별규정이 있어도 일반법이 항상 우선한다는 말이 틀리다.</li><li><strong>비선택</strong> · 당시 온라인·신용정보법의 구도를 설명한다. 현재 일반 온라인 보호를 계속 정보통신망법 전속으로 외우지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 59번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_060"><h4>기출문제 · 소비자법_기출2019_060</h4><p class="question-stem">[2019 기말고사 · 60번]<br>다음 중 개인위치정보에 해당되지 않는 것은?</p><ol class="choices"><li>사진촬영을 통해 수집한 정보</li><li>휴대전화 통화내역상의 기지국 정보</li><li>GPS 단말기의 좌표 값</li><li>전기통신설비 및 전기통신회선설비를 이용하여 수집된 정보</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 원본 정답. 사진의 외관만 보고 장소를 아는 경우를 뜻한다. 사진에 GPS 좌표가 결합된 경우까지 항상 제외한다고 확대하지 않는다.</li><li><strong>비선택</strong> · 기지국을 통해 측정한 개인 위치정보가 될 수 있다.</li><li><strong>비선택</strong> · GPS 단말기로 측정한 좌표는 전형적인 유형이다.</li><li><strong>비선택</strong> · 정해진 수집 방식으로 특정인의 시간별 위치를 파악하는 경우다. 모든 통신자료 자체가 위치정보라는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 60번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_061"><h4>기출문제 · 소비자법_기출2019_061</h4><p class="question-stem">[2019 기말고사 · 61번]<br>주민등록번호, 여권번호, 운전면허의 면허번호, 외국인등록번호와 같은 정보를 무엇이라고 하는가?</p><ol class="choices"><li>고유식별정보</li><li>일반식별정보</li><li>개인위치정보</li><li>통신정보</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 시행령이 열거하는 고유식별정보 네 종류다.</li><li><strong>비선택</strong> · 이 문제의 법정 분류명은 고유식별정보다.</li><li><strong>비선택</strong> · 특정 시간의 장소에 관한 위치정보와 다르다.</li><li><strong>비선택</strong> · 통화·접속 등의 통신정보라는 일반 분류와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 61번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 10' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 10|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

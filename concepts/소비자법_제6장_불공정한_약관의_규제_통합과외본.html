@@ -1,0 +1,1585 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제6장 불공정한 약관의 규제 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 06</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제6장 불공정한 약관의 규제 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>사업자가 미리 써 놓은 계약서를 받았다고 해서, 거기에 적힌 불공정한 조건까지 전부 따라야 하는 것은 아니다.</strong> 먼저 계약 내용에 들어왔는지, 다음으로 무슨 뜻인지, 마지막으로 공정한지를 살핀다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나</td>
+<td>약관의 편입·해석·내용 통제, 불공정 조항, 공정위 시정과 분쟁조정</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>고객은 긴 계약서를 고치기 어렵고 사실상 가입 또는 포기만 선택하는 경우가 많음</td>
+</tr>
+<tr>
+<td>전체에서 어디인가</td>
+<td>앞 장까지 제품의 안전, 여기부터 계약 조건과 거래 방식의 공정성</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>위험 제품의 책임 → 부당한 면책·환불 조건을 통제 → 할부·방문판매·온라인 거래의 특별 보호</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나</td>
+<td>‘서명했으니 끝’과 ‘불공정하니 계약 전체 취소’를 모두 잘못 이해함</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 174–231쪽 전체. JSON의 제6·7장 주제는 교재의 이 한 장에 대응하여 <strong>45문제·180보기</strong>를 연결했다. 중요도는 제공 자료와 개념의 중심성에 따른 우선순위이며 실제 오답률·출제 확률은 아니다. 2026.10.25. 법령 확인: 현행 약관법은 2024.8.7. 시행본이다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=000667&lsRvsGubun=all">법령 및 개정 이력</a></p>
+<p><strong>교재·기출 보완:</strong> 명시·설명 의무 위반 과태료는 교재 187쪽의 5천만 원이 아니라 <strong>500만 원 이하</strong>다. 불공정 조항은 법정 요건을 충족하면 무효이며, 판결이 있어야 처음 무효가 되는 것은 아니다. 2013-56은 원자료가 복수정답으로 관리하므로 그대로 보존한다.</p>
+<p><mark class="yellow">노랑: 정의·요건·결론</mark> / <mark class="green">초록: 보호 이유</mark> / <mark class="pink">분홍: 한 단어 함정</mark> / <mark class="blue">파랑: 단계·다른 장 연결</mark>.</p>
+<h1>1. 약관을 쓰는 이유와 규제의 지도</h1>
+<h2 id="consumer-06-01" data-concept-id="consumer-06-01">1-1. 약관은 이름이 아니라 미리 정한 계약 내용이다 ★★★★★</h2>
+<p><strong>교재 174–176쪽 / 문단의 목적:</strong> 규제를 피하려고 제목만 바꾸는 일을 막는다. 약관은 한쪽 당사자가 여러 상대방과 계약하기 위해 일정 형식으로 <strong>미리 마련한 계약 내용</strong>이다. 약정서·회칙·규정·이용안내라는 이름, 손글씨·입장권 뒷면·출입구 안내판이라는 형식, 계약 전체인지 일부인지에 좌우되지 않는다.</p>
+<p>회사가 직접 쓴 것만이 아니라 업계 단체나 다른 사업자가 만든 양식을 가져와 제시한 것도 해당할 수 있다. 여러 고객용으로 미리 준비했는지가 핵심이지 실제 계약을 몇 번 체결했는지가 유일한 기준은 아니다. 특정 사람과 대등하게 협상해 새로 정한 내용과 구별한다. <strong>026·2012-45·2018-41의 함정:</strong> 명칭 필수, 체결하면서 처음 작성, 특정 고객만 대상으로 함, 쌍방 협의로 작성이라는 문장.</p>
+<p>보험·교통·은행·통신·영화관·창고·병원·연예 활동·인터넷 이용처럼 반복 거래마다 모든 조건을 새로 협상하면 오래 걸린다. 약관은 그 <strong>거래비용</strong>을 줄이고 새 거래에서 법이 세세히 정하지 못한 사항을 보완한다. 그러나 회사가 책임과 위험을 고객에게 넘기기도 쉽다. <mark class="green">약관 자체가 나쁜 것이 아니라, 편리한 양식을 이용해 상대방 권리를 빼앗는 것이 문제다.</mark> <strong>한 줄:</strong> 미리 만든 여러 고객용 조건은 제목과 모양이 달라도 약관이다.</p>
+<h2 id="consumer-06-02" data-concept-id="consumer-06-02">1-2. 사업자와 고객, 적용 제외와 특별법 ★★★★★</h2>
+<p><strong>교재 176–178쪽 / 문단의 목적:</strong> 보호받는 사람을 일반 소비자로만 좁히지 않는다. 사업자는 약관을 계약 내용으로 제안하는 쪽, 고객은 그 제안을 받는 쪽이다. 이 법에서는 업종·영리성 자체보다 거래에서의 역할이 중요하다. 고객은 상인이나 법인·지방자치단체일 수도 있고 계약을 맺기 전 제안을 받은 단계도 포함한다. 97다24009는 비영리 사업을 하는 지방자치단체도 고객에서 당연 제외되지 않는다고 보았다.</p>
+<p>약관법상 고객은 소비자기본법상 소비자보다 넓다. 다만 <strong>뒤의 공정거래조정원 약관 분쟁조정 절차</strong>는 소비자를 제외하는 별도 범위가 있으므로 이 일반 정의와 섞지 않는다.</p>
+<p>특정 거래 약관에 다른 법의 특별 규정이 있으면 해당 규정이 우선한다. 할부·방문·전자상거래, 은행·보험·금융, 에너지·운송 등 별도 규율을 함께 본다. 상법 제3편 회사, 근로기준법, 대통령령으로 정하는 비영리 사업 분야의 계약 등은 적용 제외를 살핀다. <strong>모든 비영리 사업이 일괄 제외되는 것은 아니다.</strong></p>
+<p><strong>판례 98다32564를 풀기:</strong> 보험사는 “상법에 설명 위반에 따른 취소권이 있으니 약관법은 빠진다”고 한다 → 법원은 두 조문의 효과가 정말 충돌하는지 살핀다 → 상법의 취소권과 설명하지 않은 조항을 계약 내용으로 주장하지 못하는 약관법의 효과는 동일 문제가 아니다 → 취소권을 행사하지 않았다고 설명 없는 조항을 승인한 것도 아니다. <strong>다른 결론이면:</strong> 취소하지 않고 보험을 유지한 고객은 몰랐던 면책에 묶이게 된다. <strong>한 줄:</strong> 특별법이 있다는 이유로 일반 보호가 전부 사라지는 것은 아니다.</p>
+<h2 id="consumer-06-03" data-concept-id="consumer-06-03">1-3. 편입·해석·불공정성, 서로 다른 세 질문 ★★★★★</h2>
+<p><strong>교재 179–180쪽 / 문단의 목적:</strong> 결론부터 ‘무효’라고 외우지 않고 심사 순서를 세운다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>쉬운 질문</th>
+<th>통제 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>편입 통제</td>
+<td>이 약속이 우리 계약 안에 들어왔나?</td>
+<td>명시·설명, 개별 약정 우선</td>
+</tr>
+<tr>
+<td>해석 통제</td>
+<td>들어온 문장은 무슨 뜻인가?</td>
+<td>신의성실·객관적 통일·불명확하면 고객 유리</td>
+</tr>
+<tr>
+<td>불공정성 통제</td>
+<td>그 뜻대로 적용해도 공정한가?</td>
+<td>일반 조항과 개별 금지조항에 따른 효력 판단</td>
+</tr>
+<tr>
+<td>추상적 통제</td>
+<td>특정 소송을 떠나 조항 자체가 문제인가?</td>
+<td>공정거래위원회 중심</td>
+</tr>
+<tr>
+<td>구체적 통제</td>
+<td>이 당사자의 실제 계약에서 어떤 효과인가?</td>
+<td>법원이 편입·해석·효력을 심사</td>
+</tr>
+<tr>
+<td>직접적 통제</td>
+<td>불공정하여 무효라고 판단</td>
+<td>내용 통제</td>
+</tr>
+<tr>
+<td>간접적 통제</td>
+<td>편입되지 않거나 제한된 뜻으로 적용</td>
+<td>편입·해석을 통한 통제</td>
+</tr>
+</tbody></table>
+<p><strong>추가 사례:</strong> 헬스장 계약서의 “모든 사고는 회원 책임”을 받았다. 설명하지 않아 편입이 안 되는지, 문구의 뜻은 무엇인지, 고의·중과실까지 면제하여 무효인지 차례로 본다. 서로 다른 단계에서 문제될 수 있다. <strong>시험:</strong> 2012-46·2014-47·034. <strong>한 줄:</strong> 들어왔나 → 무슨 뜻인가 → 공정한가.</p>
+<h1>2. 계약에 들어오는 문턱: 편입 통제</h1>
+<h2 id="consumer-06-04" data-concept-id="consumer-06-04">2-1. 약관의 힘은 회사의 명령이 아니라 합의에서 나온다 ★★★☆☆</h2>
+<p><strong>교재 180–181쪽 / 문단의 목적:</strong> 약관은 법률이 아니라 계약 내용이라는 출발점이다. <strong>심화:</strong> 자치법설은 회사가 만든 자율 규범에 가입하여 구속된다고 보지만 회사에 입법권이 있는 것은 아니다. 상관습설은 관행에 근거를 찾지만 새 약관이나 일방적인 관행을 설명하기 어렵다. 계약설은 당사자가 계약 내용으로 받아들이기로 합의한 데서 구속력을 찾는다.</p>
+<p>84다카2543·2000다66492의 보험 약관, 91다5624의 은행 약관 판례도 약관 자체가 법규이기 때문이 아니라 계약 편입 합의 때문에 구속된다고 설명한다. <strong>법리 문장 번역:</strong> ‘계약의 초안·예문’ → 아직 고객과 합의하기 전의 준비된 문안이다. ‘계약 내용에 포함시키기로 합의’ → 이 문안을 우리 약속으로 삼는다. ‘모른다는 이유만으로 배제 불가’ → 편입 합의가 있으면 단순히 읽지 않았다는 사정만으로 모두 벗어나는 것은 아니다.</p>
+<p>다만 과거 판례의 ‘몰라도 구속’만 떼어 <strong>현재 명시·설명 의무까지 없다는 뜻으로 읽으면 안 된다.</strong> 구법 적용 시점과 법정 편입 통제를 함께 본다. <strong>한 줄:</strong> 합의가 근거이고, 설명 의무는 그 합의를 실질적으로 보호한다.</p>
+<h2 id="consumer-06-05" data-concept-id="consumer-06-05">2-2. 작성·명시·교부·설명을 구분하기 ★★★★★</h2>
+<p><strong>교재 182–183·187쪽 / 문단의 목적:</strong> 네 가지 의무를 하나로 뭉개지 않는다. 약관을 한글과 표준화·체계화된 용어로 쉽게 쓰고 중요한 부분을 색·기호·굵은 글씨 등으로 알아보기 좋게 표시하는 것은 <strong>작성 의무</strong>다. 명시·설명 의무와 같은 독자적 제재 조항을 그대로 적용하지 않는다는 점이 030의 출제 취지다. 읽기 어렵게 숨긴 결과 명시·설명도 실패했다면 별도 위반을 검토한다.</p>
+<table>
+<thead>
+<tr>
+<th>의무</th>
+<th>무엇을 해야 하나</th>
+<th>시험 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>명시</td>
+<td>거래에서 일반적으로 예상되는 방법으로 내용을 분명히 알림</td>
+<td>홈페이지 어디든 올렸으니 끝이라는 말은 틀림</td>
+</tr>
+<tr>
+<td>교부</td>
+<td>고객이 요구하면 사본을 줌</td>
+<td>모든 거래에 언제나 요구 없이 교부라고 일반화 금지</td>
+</tr>
+<tr>
+<td>설명</td>
+<td>중요한 내용을 고객이 이해하도록 설명</td>
+<td>모든 조항을 똑같이 전부 읽어 줄 의무는 아님</td>
+</tr>
+</tbody></table>
+<p>인가 약관 중 신속한 거래가 필요한 법정 업종인 여객운송, 전기·가스·수도, 우편, 공중전화 서비스 등에서는 명시·교부 예외를 검토하지만 영업소에 비치하여 볼 수 있게 해야 한다. <strong>모든 통신업·모든 인가 약관에 자동 면제</strong>가 아니다.</p>
+<p>설명해야 하는 중요 내용은 계약할지, 얼마를 낼지에 직접 영향을 주는 사항이다. 2007마1328처럼 구체적 계약 사정을 보아야 하며 일률적 목록만으로 결정하지 않는다. <strong>시험:</strong> 2015-43·2019-44. <strong>한 줄:</strong> 잘 쓰기, 보이기, 사본 주기, 중요한 뜻 풀어 주기는 다른 의무다.</p>
+<h2 id="consumer-06-06" data-concept-id="consumer-06-06">2-3. 중요한 내용을 설명해야 했던 판례 세 장면 ★★★★★</h2>
+<p><strong>교재 183–184쪽 / 문단의 목적:</strong> ‘중요’는 글자 크기가 아니라 계약 선택에 미치는 영향이다.</p>
+<p><strong>오토바이 고지 — 94다52492:</strong> 보험 가입자와 모집인이 계약한다 → 약관에는 오토바이 운전 여부를 알리라는 내용이 있으나 설명하지 않는다 → 보험사는 그 고지 위반으로 해지를 주장한다 → 법원은 보험상품·보험료 체계·중요 고지사항의 구체적인 설명이 필요하다고 본다 → 설명하지 않은 해당 약관을 근거로 해지할 수 없다. <strong>번역:</strong> ‘명시·설명 위반’은 가입자가 모르는 중요한 부담을 뒤늦게 들이밀었다는 뜻이다. 그렇지 않으면 보험을 든 이유가 사라진다.</p>
+<p><strong>귀금속 경비 — 2010다19990:</strong> 가게 주인은 도난 대비 경비계약을 맺는다 → 물건을 감지기 부착 금고 안에 넣지 않으면 책임지지 않는 조항이 있다 → 법원은 이 면책이 계약 여부·가격에 직접 영향을 주는 중요 사항이라고 본다. <strong>번역:</strong> ‘금고 밖은 보상 제외’라는 조건을 알아야 보관 방법과 가입을 결정할 수 있다. 사고가 있었다는 이유로 모든 보상이 확정되었다는 판결은 아니다.</p>
+<p><strong>다른 사람 명의의 자가용 — 96다12009:</strong> 실제 차주는 사정상 다른 사람 명의로 등록한 차량을 운행한다 → 보험의 ‘자기 소유 자가용’에 포함되는지가 다툼이다 → 법원은 실제 매수·인도받아 자기 위해 운행하는 자와 명의신탁자를 고려한다 → 등록명의자만 뜻한다면 실제 소유자가 계약했을 이유가 없으므로 그 제한은 중요 내용이다. <strong>번역:</strong> ‘소유자’라는 단어를 회사만의 좁은 뜻으로 쓰려면 고객의 합리적 기대를 무시할 수 없다. <strong>한 줄:</strong> 보장받을 핵심 조건은 계약 전에 알아야 한다.</p>
+<h2 id="consumer-06-07" data-concept-id="consumer-06-07">2-4. 설명 예외와 위반 효과: 곤란하다는 말만으로 부족하다 ★★★★★</h2>
+<p><strong>교재 184–187쪽 / 문단의 목적:</strong> 이미 아는 일까지 반복 설명시키지는 않지만 중요한 위험을 숨기는 핑계를 막는다.</p>
+<table>
+<thead>
+<tr>
+<th>예외</th>
+<th>교재 판례·의미</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>일반적·공통되어 충분히 예상 가능</td>
+<td>2010다96454: 배우자 자격을 전제로 가입한 종피보험자가 이혼하면 자격을 잃는 해당 약관</td>
+</tr>
+<tr>
+<td>해당 업종의 통상 거래 내용</td>
+<td>2003두7484: 치킨 가맹점의 깍두기·양배추 샐러드 등 보조음식 무료 제공</td>
+</tr>
+<tr>
+<td>법령 내용을 단순 반복·부연</td>
+<td>법이 이미 정한 내용의 확인. 법보다 넓힌 불이익까지 예외 아님</td>
+</tr>
+<tr>
+<td>고객·대리인이 이미 충분히 앎</td>
+<td>99다55533: 그 사실은 <strong>사업자·보험자 측이 증명</strong></td>
+</tr>
+<tr>
+<td>계약 성질상 설명이 현저히 곤란</td>
+<td>2002가합62628: 당시 대규모·단기간 토익 접수의 부정행위 처리규정 설명 문제</td>
+</tr>
+</tbody></table>
+<p>토익 하급심은 당시 연간 응시 규모와 여러 접수처·짧은 접수기간·온라인 접수 등을 종합했다. 모든 온라인 계약은 설명 불가라는 뜻이 아니다. <strong>2016-51의 ‘다소 곤란’은 틀리고 ‘현저하게 곤란’이 기준</strong>이다. 2010다96454의 취지도 ‘사업자가 예상 가능’이 아니라 <strong>고객이 일반적으로 예상 가능한 내용</strong>인지다.</p>
+<p>위반하면 사업자는 해당 조항을 계약 내용으로 주장하지 못한다. 계약 전체가 곧 무효가 되는 것은 아니고, 고객은 보호 취지에 따라 자신에게 유리한 조항을 포함시키는 선택을 할 수 있다. 2014-48·2016-47의 반복 함정이다. <strong>교재 정정:</strong> 명시·교부·설명 위반 과태료는 법 34조 3항상 <strong>500만 원 이하</strong>이며, 5천만 원은 표준약관 표지 부정사용·조사 거부 등 다른 항목이다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=&chrClsCd=010202&efYd=20240209&lsiSeq=253655&urlMode=lsInfoP">34조 확인</a> <strong>한 줄:</strong> 예외는 좁게, 위반 효과는 해당 조항부터 본다.</p>
+<h2 id="consumer-06-08" data-concept-id="consumer-06-08">2-5. 개별 약정 우선: 체크 표시와 재확인 각서는 협상이 아니다 ★★★★★</h2>
+<p><strong>교재 187–189쪽 / 문단의 목적:</strong> 회사가 직접 해 준 약속을 인쇄된 양식으로 뒤집지 못하게 한다. 약관과 다르게 합의한 사항은 약관보다 우선하고, 구두 합의도 가능하다. 직원이 약관과 다르게 설명해 고객이 그 내용을 계약으로 받아들인 경우도 실질적인 합의를 살핀다. 다만 강행법규 위반까지 유효하게 만드는 원칙은 아니다.</p>
+<p><strong>담보대출 비용 — 2013다214864:</strong> 고객이 보험회사 등의 대출계약에서 등록·감정·말소·인지세 등 비용 부담 칸에 체크했다 → 회사는 직접 선택했으니 개별 약정이라고 한다 → 법원은 미리 정한 제한적 선택지 자체가 약관이라고 본다 → 거의 대등한 위치에서 충분히 검토·흥정하고 제시된 범위 밖으로 내용을 바꿔 이익을 조정할 기회가 있었는지 확인해야 한다 → 그 구체적 사정은 <strong>개별 약정이라고 주장하는 사업자가 증명</strong>한다. <strong>번역:</strong> 체크했다는 사실과 협상할 수 있었다는 사실은 다르다.</p>
+<p><strong>재확인 각서 — 98다18506:</strong> 무효 조항으로 계약한 고객이 이행 독촉을 받자 기존 약정대로 갚겠다는 각서를 썼다 → 법원은 그것만으로 새로운 개별 약정이 되거나 무효 조항이 살아나지 않는다고 보았다. <strong>다른 결론이면:</strong> 사업자는 불공정 조항에 다시 서명만 받아 규제를 피할 수 있다. <strong>시험:</strong> 2015-44·2013-54. <strong>한 줄:</strong> 진짜 흥정은 우선하지만 고정 양식의 선택·재확인은 별개다.</p>
+<h1>3. 계약 문장의 뜻을 정하기</h1>
+<h2 id="consumer-06-09" data-concept-id="consumer-06-09">3-1. 신의성실·객관적 통일·작성자 불이익 ★★★★★</h2>
+<p><strong>교재 189–192쪽 / 문단의 목적:</strong> 회사의 속뜻이나 어느 한 고객의 특수한 생각만으로 약관의 의미를 바꾸지 않는다. 법 5조는 신의성실에 따른 공정한 해석, 평균적 고객의 이해를 기준으로 한 객관적·통일적 해석, 뜻이 불명확할 때 고객에게 유리한 해석을 요구한다.</p>
+<p>90다카23899 전원합의체는 보험의 손해 보전에 대한 합리적 기대와 전체 보험집단의 이해관계를 함께 보았다. <strong>문장별 번역:</strong> ‘정당한 이익·합리적 기대’ → 보험료를 낸 사람이 보통 기대하는 보장을 무너뜨리지 않는다. ‘객관적·획일적’ → 같은 조항을 사람마다 다른 뜻으로 바꾸지 않는다. ‘내용 통제’ → 회사가 작성했다는 자유에도 공정성의 한계가 있다.</p>
+<p>99나69012 보증보험 사건에서는 보험금을 받으려는 피보험자가 보험계약자에게 갚아야 할 채무도 있으면, 관련 채권을 대등액에서 상계하여 손해를 줄일 의무를 해석했다. <strong>쉽게:</strong> 받을 돈과 줄 돈을 맞춰 실제 손해를 줄일 수 있는데 전액 보험금부터 달라고 하는 것이 언제나 공정하지는 않다. 교재가 제시한 구체적 보증보험 관계의 법리다.</p>
+<p>2005다35226처럼 객관적으로도 뜻이 모호하면 작성자가 그 위험을 부담한다. <mark class="pink">항상 고객이 원하는 뜻으로 바꾸는 원칙은 아니다.</mark> 문장이 명확하지만 부당하면 해석을 억지로 바꾸기보다 강행규정·불공정성 통제로 효력을 검토한다. 2018-43 원문은 해석 원칙 조문을 6조로 표시하지만 정확한 해석 조항은 <strong>5조 1항</strong>이며 신의성실이라는 정답은 같다. <strong>한 줄:</strong> 평균적 고객 기준으로 공정하게 읽고, 끝내 모호하면 작성자가 불이익을 진다.</p>
+<h1>4. 불공정한 약관의 유형과 교재 사례</h1>
+<h2 id="consumer-06-10" data-concept-id="consumer-06-10">4-1. 불공정성 추정의 세 갈래 ★★★★★</h2>
+<p><strong>교재 193–196쪽 / 문단의 목적:</strong> 모든 불공정 유형을 일일이 예상할 수 없어 일반 기준을 둔다. 법 6조는 신의성실을 위반하여 공정성을 잃은 조항을 무효로 하고, <strong>부당한 불리함·예상하기 어려움·본질적 권리 제한</strong>의 세 경우를 불공정한 것으로 추정한다. 단순히 고객에게 의무가 있다는 이유만으로 무효는 아니다. 거래 목적·관행·상품 특성·필요·대가와 불이익 등을 종합한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재의 사례 묶음</th>
+<th>왜 문제인가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>강의 시작 전에도 선납 수강료 전부 환불 금지 / 고객 위약금만 과다</td>
+<td>상대방의 정당한 반환·균형을 깨뜨림</td>
+</tr>
+<tr>
+<td>빈 계약 내용을 회사 혼자 결정 / 해지 통지를 발송한 즉시 효력</td>
+<td>합의·도달이라는 보호를 빼앗음</td>
+</tr>
+<tr>
+<td>승패와 무관하게 소송비 전부 고객 부담</td>
+<td>권리구제의 위험을 일방 전가</td>
+</tr>
+<tr>
+<td>카드 단말기 임대 해지 때 자동 매수·반환 금지</td>
+<td>빌린 사람이 뜻밖에 사야 하는 계약으로 변함</td>
+</tr>
+<tr>
+<td>환자의 중도 퇴원·사망에도 월 선납 진료비 전액 불환급</td>
+<td>예상하기 어려운 불이익</td>
+</tr>
+<tr>
+<td>병원의 수술·검사 모든 결과 면책 / 정당한 수리·사후 서비스 배제</td>
+<td>거래에서 기대하는 기본 보호를 제거</td>
+</tr>
+<tr>
+<td>강습을 교재 제공으로 대체</td>
+<td>수업을 받을 본질적 권리를 빼앗음</td>
+</tr>
+<tr>
+<td>상가 입주자의 판매·교환·환불 등 운영 전부 회사 지시</td>
+<td>계약 목적에 중요한 영업 결정권 침해</td>
+</tr>
+</tbody></table>
+<p>의외성은 평균적 고객 기준이다. 대리점 계약서에 뜻밖의 고용 조건을 끼우는 것처럼 명칭과 실질의 괴리도 살핀다. 본질적 권리는 주된 급부만이 아니라 계약 목적에 필수인 부수적 의무와도 연결될 수 있다. <strong>시험:</strong> 031·2012-47·2016-49·2018-45·2019-46. <strong>한 줄:</strong> 부당·기습·핵심 박탈이라는 세 신호를 찾는다.</p>
+<h2 id="consumer-06-11" data-concept-id="consumer-06-11">4-2. 고의·중과실까지 책임 없다는 조항 ★★★★★</h2>
+<p><strong>교재 196–198쪽 / 법 7조 1호의 목적:</strong> 회사가 일부러 또는 매우 부주의하게 낸 사고까지 계약서로 면책되지 않게 한다. 사업자뿐 아니라 이행보조자·피고용자의 고의·중과실 책임도 포함하며 채무불이행·계약 체결상 의무·불법행위 등 책임 이름만 바꾸어 피할 수 없다.</p>
+<p>교재의 <strong>입점 후 화재·도난 전부 면책, 주차장 도난·파손·분실·화재 전부 면책, 요양원 부주의 사고 면책, 체육시설 하자·과실로 인한 부상까지 면책</strong>은 공통적으로 책임 있는 사고까지 지워 버리는 문제다. 요양원 2012-49의 정답도 이 유형이다.</p>
+<p>경과실 면책은 7조 1호에 의해 곧바로 모두 무효가 되는 것은 아니지만, 6조의 신의성실이나 7조 다른 호의 부당한 위험 전가 등으로 무효가 될 수 있다. <strong>‘경과실이면 무조건 유효’는 틀리다.</strong> <strong>한 줄:</strong> 심각한 자기 잘못의 책임을 작은 글씨로 지울 수 없다.</p>
+<h2 id="consumer-06-12" data-concept-id="consumer-06-12">4-3. 손해배상 축소와 위험 떠넘기기 ★★★★☆</h2>
+<p><strong>교재 198–199쪽 / 법 7조 2호의 목적:</strong> 회사가 부담해야 할 손실을 정당한 이유 없이 고객에게 돌리지 못하게 한다. 배상 한도가 있으면 항상 무효가 아니라 가격·급부·위험 분담 등 <strong>상당한 이유</strong>를 살핀다. 교재의 낮은 운임과 일정 배상 한도 예시는 사정을 종합할 수 있다는 설명이지 싸면 모든 면책이 허용된다는 뜻이 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>쉽게 풀이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>카드 분실·비밀번호 유출에 고객 잘못이 없어도 부정사용 전부 부담</td>
+<td>카드사의 책임과 법정 위험 분담을 지움</td>
+</tr>
+<tr>
+<td>렌터카 자체 결함·쌍방 무과실 사고까지 모두 임차인 책임</td>
+<td>차량 관리의무와 사업상 위험을 고객에게 전가</td>
+</tr>
+<tr>
+<td>예상 못 한 건물 수리·개축으로 영업 못 해도 임대인 무책임</td>
+<td>사용·수익을 제공할 계약상 의무를 약화</td>
+</tr>
+<tr>
+<td>불가항력으로 목적물 공급이 불가능한데 매수인이 대금 위험 전부 부담</td>
+<td>쌍무계약의 위험부담 원칙과 공정성을 검토</td>
+</tr>
+</tbody></table>
+<p>민법 537조는 쌍방 책임 없는 이행불능 때 원칙적으로 상대 급부를 청구하지 못하게 한다. 538조의 채권자 귀책·수령지체 등 예외는 별도 요건이다. ‘등기나 인도 전후’만으로 모든 매매 위험 문제를 기계적으로 결정하지 않는다. <strong>한 줄:</strong> 내 책임이 아닌 위험까지 떠맡게 한다면 이유와 법정 분담을 확인한다.</p>
+<h2 id="consumer-06-13" data-concept-id="consumer-06-13">4-4. 하자·견본·품질보증 책임을 없애는 조항 ★★★★☆</h2>
+<p><strong>교재 200–201쪽 / 법 7조 3·4호의 목적:</strong> 정상 물건과 약속한 품질을 받을 기대를 보호한다. 상당한 이유 없이 담보책임을 배제·제한하거나 권리행사 요건을 무겁게 하는 조항, 제시한 견본·표시한 품질·성능의 책임을 지우는 조항은 무효다. 매매 하자 규정은 유상계약 준용과 개별 계약의 특칙을 함께 보며 해제·배상·감액·완전물 급부가 모든 경우에 동시에 인정되는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>문제의 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>아파트 계약 면적과 등기 면적 차이를 무조건 정산하지 않음</td>
+<td>수량·면적에 관한 책임을 전부 배제</td>
+</tr>
+<tr>
+<td>중고차 인수 뒤 고장·불량에 어떤 책임도 묻지 못함</td>
+<td>중고품이라는 이유로 법정 하자책임 전부 삭제</td>
+</tr>
+<tr>
+<td>대리점 공급품 반품·교환을 회사가 인정할 때만 허용</td>
+<td>법정 권리를 회사 허락 사항으로 바꿈</td>
+</tr>
+<tr>
+<td>주택 내부 모든 보수·관리 책임을 임차인에게 전가</td>
+<td>임대인의 사용·수익 유지의무까지 제거</td>
+</tr>
+</tbody></table>
+<p>작은 수선의 합리적 분담과 모든 하자책임 배제는 다르다. <strong>한 줄:</strong> 보여 준 품질과 정상 사용의 약속을 계약서 뒤에서 없애면 안 된다.</p>
+<h2 id="consumer-06-14" data-concept-id="consumer-06-14">4-5. 과도한 위약금: 무효와 감액은 다르다 ★★★★★</h2>
+<p><strong>교재 201–202·220–221쪽 / 법 8조의 목적:</strong> 계약 위반의 책임이 지나친 벌처럼 변하는 것을 막는다. 손해배상액 예정은 위반 때 줄 금액을 미리 정하는 것이고 위약금은 원칙적으로 배상액 예정으로 추정한다. 명칭보다 실질을 보되 순수한 위약벌과 배상액 예정의 차이도 구별한다. 경제적 지위·계약 목적·채무와 예정액 비율·예상 손해·관행 등을 종합한다.</p>
+<p>교재 예시는 <strong>LPG 공급기간 위반 때 시설비 2배, 분양대금 20–30% 위약금, 예정된 위약금 외 손해를 중복 청구하는 구조, 상조 중도해지 시 과도한 회차별 공제율</strong>이다. 교재가 비교한 거래대금 10%는 그 예시의 관행 설명이지 모든 계약에 적용되는 법정 상한이 아니다. 연체료도 무엇의 손해를 보상하는지와 중복 여부를 구체적으로 봐야 한다.</p>
+<p><strong>96다19758 사건:</strong> 토지 분양 당첨자가 계약을 맺지 않자 공급가액 10% 예약금을 몰수하려 한다 → 회사는 정당한 사유 없이 안 맺을 때만 적용하거나 금액을 줄여 살리자고 한다 → 법원은 해당 조항이 부당하게 과중하여 무효라고 판단했다 → 유효함을 전제로 하는 민법 398조 2항 감액이나 일부 감액으로 그 조항을 유지할 수 없다고 보았다. <strong>번역:</strong> 불공정한 약관을 처음부터 크게 써 놓고 재판에서 적당히 줄여 받는 방식이 항상 허용되면 규제의 의미가 약해진다. <strong>한 줄:</strong> ‘큰 위약금은 무조건 10%로 깎는다’가 아니라 약관의 무효 여부부터 본다.</p>
+<h2 id="consumer-06-15" data-concept-id="consumer-06-15">4-6. 고객의 해제는 막고 회사의 해제는 쉽게 하는 조항 ★★★★★</h2>
+<p><strong>교재 202–204쪽 / 법 9조 1·2호의 목적:</strong> 계약을 끝내는 권한을 한쪽에 몰아주지 않는다. 법률이 준 고객의 해제·해지권을 배제·제한하는 조항은 무효다. 이 규정의 직접 대상은 <strong>법정 해제·해지권</strong>이며 약정 해제·해지권을 똑같이 넣는 보기가 반복된다. 다만 약정권 제한이 다른 일반조항으로도 언제나 규제 불가능하다는 뜻은 아니다.</p>
+<p>교재의 <strong>회사가 정당하다고 허락해야만 해제, 회사 채무불이행에도 해제 불가, 새시 설치 착수 여부와 무관하게 계약 후 7일만 해제 가능</strong>은 고객의 법정 권리를 막는 예시다. 계약금 포기에 의한 해약은 상대방의 이행 착수 등 요건을 따지며, 모든 계약에 무조건 7일 철회권이 있다는 뜻이 아니다.</p>
+<p>반대로 <strong>중도금·잔금 1회 연체만으로 최고 없이 회사가 해제, 회사의 포괄적인 관리 요구를 거절하면 즉시 해지, 경미한 의무 위반만으로 절차 없이 해지</strong>는 사업자의 권한을 과도하게 넓힌다. 민법상 최고 없는 해제가 가능한 특별한 경우도 있으므로 ‘모든 해제는 항상 최고 필수’라고 외우지는 않는다. <strong>시험:</strong> 032·2015-45·2016-50·2017-48. <strong>한 줄:</strong> 법이 준 출구는 막지 말고 회사만 마음대로 계약을 끝내지 못하게 한다.</p>
+<h2 id="consumer-06-16" data-concept-id="consumer-06-16">4-7. 원상회복과 계속계약의 기간·자동 갱신 ★★★★☆</h2>
+<p><strong>교재 204–207쪽 / 법 9조 3–5호의 목적:</strong> 계약이 끝난 뒤 정산과 장기간의 묶임도 공정해야 한다. 해제는 원상회복, 해지는 계속관계의 장래 종료·정산이라는 기본 차이를 둔다. 금전 반환의 이자, 필요비·유익비 상환, 동시이행, 통상·특별손해 등의 법정 요건을 함께 본다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>왜 문제인가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>반환 못 할 물건의 가격을 회사 혼자 산정</td>
+<td>고객의 원상회복 부담을 자의적으로 결정</td>
+</tr>
+<tr>
+<td>상가 해제 때 필요비·유익비를 모두 포기</td>
+<td>법정 비용 상환권을 부당하게 제거</td>
+</tr>
+<tr>
+<td>스포츠클럽 입회비 이유 불문 불환급 / 귀책 여부 없이 계약금 전부 몰수</td>
+<td>정당한 반환청구까지 막음</td>
+</tr>
+<tr>
+<td>고객만 원상회복을 먼저 이행</td>
+<td>동시이행 등 고객의 방어를 약화</td>
+</tr>
+<tr>
+<td>회사 잘못으로 끝나도 일부만 환불 / 이자·연체료 일괄 제외</td>
+<td>회사의 정산·배상 의무를 부당하게 줄임</td>
+</tr>
+<tr>
+<td>환불기한을 매우 늦춤 / 한 달 전 탈퇴통지를 요구하면서 보증금 반환은 지연</td>
+<td>회사만 돈을 오래 보유</td>
+</tr>
+<tr>
+<td>학습지 구독 만료 뒤 중지 요청 없으면 자동 연장</td>
+<td>실질적 선택 없이 계속계약에 묶일 위험</td>
+</tr>
+<tr>
+<td>주채무 연장 때 보증인 동의 없이 보증기간도 자동 연장</td>
+<td>보증인의 책임 범위를 임의 확대</td>
+</tr>
+<tr>
+<td>콘도 보증금 환불을 지나치게 긴 존속기간 뒤로 미룸</td>
+<td>투자회수 필요만으로 고객의 회수권을 과도하게 제한</td>
+</tr>
+</tbody></table>
+<p>교재의 콘도 20년은 해당 사례에서 부당한 장기성을 검토하는 예시이지 모든 20년 계약의 자동 무효 기준이 아니다. 자동 갱신도 고지·동의·해지 가능성 등 구체적 구조를 따져야 한다. <strong>한 줄:</strong> 나갈 권리뿐 아니라 나간 뒤 돌려받을 권리도 지킨다.</p>
+<h2 id="consumer-06-17" data-concept-id="consumer-06-17">4-8. 약속한 급부를 마음대로 바꾸거나 멈추는 조항 ★★★★☆</h2>
+<p><strong>교재 207–209쪽 / 법 10조의 목적:</strong> 무엇을 주고받을지 정한 계약을 회사 마음대로 바꾸지 못하게 한다. 급부는 상품·서비스 제공뿐 아니라 고객의 대금 지급도 포함한다. 수량·성질·시기·장소·방법의 변경, 일시·영구 중지, 제3자 대행을 정당한 이유 없이 일방 결정할 수 있게 하는 조항을 통제한다.</p>
+<p>교재는 <strong>카드 포인트 서비스 무예고 변경·취소, 회사 사정만으로 공급 중지·한도 축소, 상가 용도·구조·위치 임의 변경, 동의 없는 게임 서비스 수정·삭제, ‘항공·현지 사정’이라는 포괄적 이유의 여행 일정 변경</strong>을 든다. 여행 안전을 위해 불가피한 변경과 회사 편의를 위한 포괄적 변경권은 다르다.</p>
+<p>또한 <strong>정당한 해지절차 없이 임대인이 단전·점포 폐쇄, 운전면허 취득만으로 약속한 남은 교습 종료, 통고 없이 다른 운송인으로 교체</strong>도 문제다. 자기 책임 아래 직원을 써서 이행하는 <strong>이행보조자 사용</strong>과 계약상 이행을 다른 자에게 넘기는 대행은 다르다. 이해관계 있는 제3자의 변제 등 법정 제도까지 모두 금지하는 것은 아니다. <strong>시험:</strong> 2015-46의 ‘보조자도 대행’은 틀림. 033은 실질적 동의를 전제로 한 변경을 일방 변경과 구별한다. <strong>한 줄:</strong> 상품과 서비스의 핵심 약속을 일방적으로 바꾸지 못한다.</p>
+<h2 id="consumer-06-18" data-concept-id="consumer-06-18">4-9. 항변·상계·기한·거래 자유·비밀의 보호 ★★★★★</h2>
+<p><strong>교재 209–212쪽 / 법 11조의 목적:</strong> 고객이 이미 가진 방어권과 선택권을 지킨다. 권리행사 제한에 상당한 이유가 있는지, 비밀 제공에 정당한 이유가 있는지 따진다.</p>
+<table>
+<thead>
+<tr>
+<th>권리</th>
+<th>교재의 빠뜨리지 말아야 할 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>항변·상계 등</td>
+<td>회사의 민형사 조치에 아무 이의도 못 제기 / 임차권 등기 협력청구 일괄 배제 / 고객의 변제충당 지정권을 없애고 회사만 지정</td>
+</tr>
+<tr>
+<td>관련 권리</td>
+<td>유치권, 필요비·유익비 상환 등도 공평상 부여된 권리로 검토</td>
+</tr>
+<tr>
+<td>기한의 이익</td>
+<td>일부 미납 즉시 전액 변제 / 은행 약정 어느 하나 위반 또는 자의적인 채권보전 필요로 상실 / 분양계약의 경미한 위반만으로 분할납부 박탈</td>
+</tr>
+<tr>
+<td>제3자와 거래 자유</td>
+<td>지정 보험사만 가입 / 지정 대리인만 소유권 등기 / 정당한 이유 없는 회원권 양도 전면 금지 / 보증금 반환채권 양도·질권 설정 금지</td>
+</tr>
+<tr>
+<td>고객 비밀</td>
+<td>카드 연체자의 신용정보를 임의 제공 / 필요하지 않은 정보 활용 동의를 가입 필수로 묶어 선택 기회 제거</td>
+</tr>
+</tbody></table>
+<p><strong>기한의 이익</strong>은 약속한 날까지 미리 갚지 않아도 되는 이익이다. 거래 자유 제한도 합리적인 기간·지역·업종 범위에 한정된 경우와 지나친 제한을 구별한다. <strong>2019-47의 ‘적당한 범위의 제한도 무효’는 틀리다.</strong> 개인정보·신용정보는 동의 또는 별도의 법률상 근거, 목적·범위·최소성 등을 확인한다. 교재의 오래된 신용정보법 조문번호를 현재 번호로 암기하지 말고 10·11장과 연결한다. <strong>한 줄:</strong> 계약서가 방어권·시간·거래 선택·비밀을 모두 빼앗을 수는 없다.</p>
+<h2 id="consumer-06-19" data-concept-id="consumer-06-19">4-10. 침묵을 동의로, 안 온 통지를 도달로 만드는 조항 ★★★★☆</h2>
+<p><strong>교재 213–216쪽 / 법 12조의 목적:</strong> 고객이 모르는 사이 법적 효과가 생기는 일을 막는다. 아무 행동이나 침묵을 고객의 동의·부동의로 간주하는 조항은 원칙적으로 금지한다. 다만 상당한 기간 내 응답하지 않으면 어떤 효과가 생기는지 <strong>필요할 때 명확히 따로 고지</strong>하거나 부득이한 사유로 고지할 수 없는 등의 법정 예외를 살핀다. 가입 때 긴 약관에 한 줄 넣는 것과 별도 고지는 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>통제하는 문제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>가스 사용자 변경 신고 없으면 종전 사용자의 모든 채무 승계</td>
+<td>침묵으로 남의 의무까지 떠맡김</td>
+</tr>
+<tr>
+<td>보증인 통지 없으면 보증 자동 연장 / 연체 시 물건 회수에 동의한 것으로 간주</td>
+<td>진짜 의사 없이 책임·재산 침해</td>
+</tr>
+<tr>
+<td>원한 카드 발급 불가 시 다른 카드 신청으로 바꿈</td>
+<td>다른 계약에 대한 동의를 만들어 냄</td>
+</tr>
+<tr>
+<td>특별 필요 없이 예약 전날 특정 시각까지 병원 방문해야만 취소</td>
+<td>의사표시 방법을 부당하게 어렵게 함</td>
+</tr>
+<tr>
+<td>보험사가 새 주소를 알거나 알 수 있어도 옛 주소 송부를 도달로 간주</td>
+<td>회사의 부주의까지 고객에게 전가</td>
+</tr>
+<tr>
+<td>카드 약관 변경 통지가 안 와도 통상 도착일에 도달 / 금융기관 모든 우편의 일괄 도달 간주</td>
+<td>실제 도달 없는 중대한 불이익</td>
+</tr>
+<tr>
+<td>회사가 중요한 의사표시를 할 기한을 지나치게 길거나 불확정하게 둠</td>
+<td>고객의 계약상 지위를 불안정하게 함</td>
+</tr>
+</tbody></table>
+<p>도달은 상대방이 실제로 읽은 순간이 아니라 일반적으로 내용을 알 수 있는 지배 범위에 들어간 상태다. 해제·취소·급부 변경·이행청구 등 중대한 통지를 특히 본다. 정보 고지·승인·상계 통지 등의 중요성은 법적 효과와 구체적 사정에 따라 판단하며, 교재의 예시만으로 언제나 중요하지 않다고 단정하지 않는다. <strong>한 줄:</strong> 침묵과 미도착을 회사 편한 동의·도달로 바꾸지 않는다.</p>
+<h2 id="consumer-06-20" data-concept-id="consumer-06-20">4-11. 대리인 책임과 재판받을 권리 ★★★★☆</h2>
+<p><strong>교재 216–218쪽 / 법 13·14조의 목적:</strong> 단순히 계약을 대신한 사람에게 채무를 떠넘기거나 고객의 소송 기회를 막지 않는다. 대리인은 원칙적으로 본인의 법률관계를 연결하는 사람이다. <strong>본인이 이행하지 않으면 대리인이 대신 이행, 무효·취소되면 대리인이 무과실 배상</strong>이라는 조항은 문제 된다. 무권대리도 민법 135조의 법정 범위를 넘어 책임을 늘릴 수 없다. 98두17494는 단순 계약 대리인이 아니라 계약 이행자의 지위도 겸하는 경우를 구별했다.</p>
+<p>부당한 부제소 합의, 고객에게 부당하게 불리한 재판 관할 합의, 상당한 이유 없는 입증책임 전가도 무효다. 여기에는 본안 소송뿐 아니라 보전·집행 등 권리구제 절차의 부당한 봉쇄도 포함한다. 관할 합의가 있다는 사실만으로 모두 무효인 것은 아니며 실질적인 불이익을 본다.</p>
+<p>교재 사례는 <strong>아파트의 수인한도를 넘는 소음·일조·조망 침해에도 이의 금지, 무조건 회사 소재지·지정 법원에서만 소송, 게임 접속 장애 책임을 회사가 인지 못했다는 말로 일괄 배제, 운송사에게 명백한 고의·과실이 있을 때만 책임</strong>이다. 회사 영역의 사실을 고객에게 과도하게 증명시키는 구조를 찾아야 한다. <strong>한 줄:</strong> 계약 대행과 빚 보증은 다르고, 약관이 재판의 문을 닫아서는 안 된다.</p>
+<h1>5. 무효 뒤의 처리와 행정적 시정</h1>
+<h2 id="consumer-06-21" data-concept-id="consumer-06-21">5-1. 일부 무효의 특칙과 효력유지적 축소해석 ★★★★☆</h2>
+<p><strong>교재 218–221쪽 / 문단의 목적:</strong> 나쁜 조항을 지우되 고객이 원한 거래까지 함부로 무너뜨리지 않는다. 법 16조는 편입되지 못한 조항이나 불공정하여 무효인 조항을 제외하고 <strong>나머지 계약을 원칙적으로 존속</strong>시킨다. 다만 나머지만으로 목적 달성이 불가능하거나 한쪽 당사자에게 부당하게 불리하면 전체 무효다. 민법 137조의 일부 무효 원칙에 대한 특칙이다. 빈자리는 임의규정과 보충적 계약해석 등으로 메운다.</p>
+<p><strong>심화 — 축소해석 논쟁:</strong> 불공정 조항을 조금 고쳐 유효한 범위만 남길 수 있는가? 부정론은 회사가 최대한 불리하게 써 놓고 재판에서 줄이면 된다고 생각하게 된다는 점, 고객이 효력을 알기 어렵다는 점을 우려한다. 긍정·예외론은 기준이 불명확하거나 판례 변경·드문 상황, 분리 가능한 문구 등에서 구체적 타당성을 찾을 수 있다고 본다. 판례가 모든 조항을 무효 선언 전에 반드시 수정해석해야 한다고 보는 것은 아니다. 앞의 96다19758처럼 감액으로 살리지 못하는 경우와 분리 가능한 부분을 존속시키는 경우를 구별한다.</p>
+<p>국제적으로 통용되는 운송·금융·보험 및 무역보험 등은 법 15조와 시행령에 따라 <strong>7–14조 적용을 조항·업종별로 제한</strong>할 수 있다. 모든 국제 약관에서 법 전체나 6조까지 자동 제외된다고 외우지 않는다. <strong>시험:</strong> 2013-56은 원자료의 ①·②·④ 복수정답을 그대로 유지한다. <strong>한 줄:</strong> 나쁜 조항만 빼는 것이 원칙이지만 나머지 계약도 유지할 수 있는지 확인한다.</p>
+<h2 id="consumer-06-22" data-concept-id="consumer-06-22">5-2. 공정위 심사·권고·명령과 두 판례 ★★★★★</h2>
+<p><strong>교재 221–223쪽 / 문단의 목적:</strong> 개별 피해자가 모두 소송하지 않아도 불공정 조항의 반복 사용을 막는다. 공정위는 직권 또는 법률상 이익이 있는 자·등록 소비자단체·한국소비자원·사업자단체 등의 청구로 심사할 수 있다. 조사를 하고 당사자·이해관계인에게 심사 사실을 알려 출석·의견·자료 제출 기회를 보장한다.</p>
+<p>시정권고와 시정명령은 다르다. 명령은 시장지배적 사업자, 거래상 지위 남용, 긴급·신속 거래로 변경 곤란, 선택의 제한과 현저한 우월, 취소·해지의 불가능·중대한 손해, 정당한 이유 없는 권고 불이행으로 다수 피해 우려 등 법정 사유를 검토한다. 같은 업종의 다른 사업자에게 사용 중단을 권고할 수도 있다. 명령 불이행에는 제재가 따르지만 권고 자체를 같은 강제력으로 보지 않는다.</p>
+<p><strong>2003두3734 — 쇼핑몰 임대 약관:</strong> 임차인은 관리규칙·임차권 등기·업종 변경·세금 부담 등 불공정 조항으로 계약했다 → 공정위는 회사에 해당 고객 전부에게 문제를 알리라고 명했다 → 법원은 이미 피해를 입었는지와 관계없이 통지하여 앞으로 적용되지 않게 하는 조치가 적법하다고 보았다. <strong>번역:</strong> 피해가 터진 사람만 아니라 그 약관으로 묶인 사람 모두에게 알려야 재발을 막는다.</p>
+<p><strong>2001두1604 — 수정명령의 한계:</strong> 불공정 조항을 삭제하면 함께 존재할 의미가 없는 연결 조항도 삭제·수정 대상으로 삼을 수 있다 → 그러나 공정위가 계약 당사자 대신 새 계약 내용을 적극적으로 정하는 데는 한계가 있다. <strong>번역:</strong> 불공정을 없애라고 할 수 있지만 거래 조건 전부를 대신 만드는 기관은 아니다.</p>
+<p><strong>교재 222쪽 보완:</strong> 공정위의 추상적 판단이 개별 소송의 확정판결과 같지는 않다. 그렇다고 법정 무효인 조항이 판결 전에는 유효한 것도 아니다. 무효는 법에 의해 생기고, 다툼이 있으면 법원이 구체적 효력과 반환·배상 여부를 판단한다. <strong>한 줄:</strong> 공정위는 시장의 조항 사용을 바로잡고 법원은 실제 계약의 권리·의무를 판단한다.</p>
+<h2 id="consumer-06-23" data-concept-id="consumer-06-23">5-3. 넷플릭스의 여섯 조항을 한 사건으로 읽기 ★★★★☆</h2>
+<p><strong>교재 224–225쪽 / 행정 시정 사례:</strong> 이용자는 영상을 보기 위해 가입했다 → 회사가 요금·계정·책임을 넓게 바꿀 수 있는 약관을 썼다 → 공정위가 여섯 유형을 심사했다 → 불공정한 구조를 고쳤다. 법원의 확정판결 사건으로 바꾸어 설명하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>당시 조항</th>
+<th>왜 문제였나 → 시정 방향</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>요금·멤버십 변경을 통지만 하면 적용</td>
+<td>계약의 핵심 대가를 일방 변경 → 고지와 동의·해지 선택</td>
+</tr>
+<tr>
+<td>계정 종료·보류 사유가 포괄적</td>
+<td>자의적인 서비스 박탈 위험 → 중대한 사유의 구체화</td>
+</tr>
+<tr>
+<td>해킹 등 계정의 모든 활동을 회원 책임</td>
+<td>회원 잘못 없는 사고까지 전가 → 책임 범위 조정</td>
+</tr>
+<tr>
+<td>손해배상 청구를 지나치게 제한</td>
+<td>회사 고의·과실과 예견 가능한 특별손해까지 배제 → 책임 원칙 반영</td>
+</tr>
+<tr>
+<td>회원 계약을 일방 양도·이전</td>
+<td>새 상대방·개인정보 이전에 관한 고객 보호 침해 → 해당 조항 삭제 등</td>
+</tr>
+<tr>
+<td>일부 무효여도 나머지는 무조건 전부 유효</td>
+<td>법 16조의 전체 무효 예외 삭제 → 해당 조항 삭제</td>
+</tr>
+</tbody></table>
+<p><strong>자료 보완:</strong> 교재 제목은 ‘시정명령’이라고 표현하지만 2020.1.15. 공정위 발표는 회사가 <strong>자진 시정하여 1월 20일부터 시행</strong>했다고 설명한다. 권고·명령·자진 시정을 같은 법적 형식으로 외우지 않는다. 현재 서비스 약관 전체를 평가하는 자료가 아니라 당시 조치의 학습 사례다. <a href="https://www.korea.kr/news/policyNewsView.do?newsId=156371174">공정위 발표</a> <strong>한 줄:</strong> 영상 서비스에서도 가격·종료·책임·계약 이전·일부 무효의 기본 원칙은 같다.</p>
+<h2 id="consumer-06-24" data-concept-id="consumer-06-24">5-4. 인가 약관과 표준약관: 승인 표지가 면죄부는 아니다 ★★★★☆</h2>
+<p><strong>교재 225–227쪽 / 문단의 목적:</strong> 행정 인가가 있거나 업계 표준이라고 해서 불공정성 검토를 멈추지 않는다. 공정위는 다른 관청 인가 대상 약관 심사에 앞서 의견을 요구할 수 있다. 행정관청이 작성·인가한 불공정 약관은 해당 관청에 시정조치를 요청하고, 은행 약관은 법 18조가 정한 금융감독원 통보·권고 등 경로를 따른다. 같은 사안에 일반 사업자 대상 시정권고·명령 경로를 중복 적용하는 것과 구별한다.</p>
+<p>사업자·단체는 표준약관 제·개정안을 마련해 심사를 청구할 수 있고, 등록 소비자단체·한국소비자원은 마련을 요청할 수 있다. 공정위는 피해 발생·우려, 법령 개정 등 법정 사유에 따라 제·개정을 권고한다. 권고 뒤 <strong>4개월</strong> 안에 필요한 조치를 하지 않으면 의견 청취·관계 부처 협의를 거쳐 직접 마련할 수 있다.</p>
+<p>공시된 표준약관은 사용을 권장하는 것이지 모든 사업자의 모든 계약에 강제로 편입되는 법률이 아니다. 사용 권장을 받은 사업자가 다르게 정하면 주요 차이를 알기 쉽게 표시해야 한다. 다른 내용을 쓰면서 표준약관 표지를 붙이면 안 되며, 위반하여 표지를 붙인 경우 <strong>표준보다 고객에게 불리한 내용은 무효</strong>다. <strong>한 줄:</strong> 표준은 공정한 출발점이며 표지는 내용과 일치해야 한다.</p>
+<h1>6. 약관 분쟁을 조정으로 풀기</h1>
+<h2 id="consumer-06-25" data-concept-id="consumer-06-25">6-1. 일반 조정과 20명 집단조정, 소송과의 관계 ★★★★☆</h2>
+<p><strong>교재 227–231쪽 / 문단의 목적:</strong> 대리점·가맹점·납품업체 등 영세 사업자인 고객도 소송 외의 구제 통로를 갖게 한다. 한국공정거래조정원의 약관 분쟁조정협의회가 담당한다. <strong>보완:</strong> 이 절차의 고객은 소비자기본법상 소비자를 제외한다. 일반 소비자는 한국소비자원 등의 피해구제·분쟁조정과 연결한다. 약관법 전체의 고객 정의가 넓다는 사실과 절차별 신청 대상을 구별한다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0025&lsiSeq=260021&urlMode=lsScJoRltInfoR">법 25조</a></p>
+<p>불공정 약관 또는 이름·작성자는 달라도 법률상 쟁점이 같은 약관의 피해가 대상이다. 신청 전에 공정위가 조사 중인 사건, 단순 해석·이행만 요구하는 사건, 약관 무효 판정 자체를 요구하는 사건, 이미 합의한 사건·중재 진행 또는 신청 사건 등 법정 제외 사유는 각하를 검토한다. 법원처럼 모든 약관의 무효를 선언해 달라는 절차가 아니다.</p>
+<p>협의회는 자료·출석을 요구하거나 사실을 조사하고 자율 조정 권고·조정안을 제시한다. 성립, 원칙 <strong>60일</strong> 경과(쌍방 연장 동의 시 <strong>90일</strong>), 일방 거부 등 실익 없음의 사유로 종료한다. 각하·종료를 공정위와 당사자에게 알린다. 위원·당사자의 기명날인·서명으로 조서를 작성하면 <strong>동일 내용의 합의가 성립한 것으로 본다.</strong> 이 법의 문구를 소비자분쟁조정의 ‘재판상 화해와 동일 효력’과 혼동하지 않는다.</p>
+<p>소송이 함께 진행되면 법원은 조정 때까지 소송을 중지할 수 있다. 법원이 중지하지 않으면 협의회는 해당 조정절차를 중지해야 한다. 동일 원인의 다수 동종·유사 소송은 협의회 결정으로 중지할 수 있다. 소송이 제기되면 언제나 즉시 조정 종료라는 옛 설명과 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>집단조정 절차</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>출발</td>
+<td>이미 조정 성립한 사항과 같거나 비슷한 다수 피해 가능성</td>
+</tr>
+<tr>
+<td>인원</td>
+<td>합의·중재·소송 중인 고객 등을 제외한 피해 고객 <strong>20명 이상</strong></td>
+</tr>
+<tr>
+<td>신청·의뢰</td>
+<td>공정위·고객·사업자</td>
+</tr>
+<tr>
+<td>개시 공고</td>
+<td>홈페이지·전국 일간신문 등 법정 방식, <strong>14일 이상</strong></td>
+</tr>
+<tr>
+<td>참가·대표</td>
+<td>추가 참가 신청, 공동 이익을 대표하는 1명 또는 여러 명 선임</td>
+</tr>
+<tr>
+<td>기간 시작</td>
+<td>개시 공고가 끝난 다음 날</td>
+</tr>
+<tr>
+<td>일부가 소송</td>
+<td>전체를 멈추지 않고 해당 소 제기 고객을 제외</td>
+</tr>
+<tr>
+<td>사업자 수락</td>
+<td>참가하지 않은 피해 고객의 보상계획 제출 권고 가능</td>
+</tr>
+</tbody></table>
+<p><mark class="blue">2장 소비자기본법 집단조정의 50명과 여기의 20명은 다르다.</mark> <strong>한 줄:</strong> 누가 신청하는 어떤 조정인지부터 정한 뒤 인원·기간·효력을 외운다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>約款 약관</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 約(맺을 약), 款(조목 관). <strong>③ 합친 뜻:</strong> 약속의 조목. <strong>④ 이름의 이유:</strong> 거래 조건을 미리 조목별로 정함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여러 상대방과 계약하기 위해 일방이 미리 마련한 계약 내용. <strong>⑥ 쉬운 말:</strong> 많은 손님에게 공통으로 내미는 계약 조건. <strong>⑦ 사례:</strong> 입장권 뒷면 면책 문구.</p>
+<p><strong>⑧ 시험:</strong> 026: 명칭·형식 불문. <strong>⑨ 비교·기억법:</strong> 실제 개별 교섭 내용과 다름.</p>
+<h3>編入 편입</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 編(엮을 편), 入(들 입). <strong>③ 합친 뜻:</strong> 엮인 내용 안으로 들어감. <strong>④ 이름의 이유:</strong> 계약의 일부로 들어가는 문턱.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 약관이 당사자 계약 내용이 되는 것. <strong>⑥ 쉬운 말:</strong> 이 문장이 우리 약속에 들어왔는지 본다. <strong>⑦ 사례:</strong> 설명 안 한 면책 조항.</p>
+<p><strong>⑧ 시험:</strong> 2012-46. <strong>⑨ 비교·기억법:</strong> 편입과 내용의 공정성은 별개.</p>
+<h3>解釋 해석</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 解(풀 해), 釋(풀 석). <strong>③ 합친 뜻:</strong> 뜻을 풀어 밝힘. <strong>④ 이름의 이유:</strong> 문장의 법적 뜻을 찾음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 문구가 의미하는 권리·의무를 확정. <strong>⑥ 쉬운 말:</strong> 들어온 약속이 무슨 말인지 정한다. <strong>⑦ 사례:</strong> 보험의 자기 소유 차량.</p>
+<p><strong>⑧ 시험:</strong> 평균적 고객 기준. <strong>⑨ 비교·기억법:</strong> 불명확과 불공정은 다름.</p>
+<h3>明示 명시</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 明(밝을 명), 示(보일 시). <strong>③ 합친 뜻:</strong> 분명히 보임. <strong>④ 이름의 이유:</strong> 몰래 숨겨진 조건을 막음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 약관 내용을 예상되는 방식으로 분명히 알림. <strong>⑥ 쉬운 말:</strong> 손님이 알아볼 수 있게 보여 준다. <strong>⑦ 사례:</strong> 찾기 쉬운 계약 화면.</p>
+<p><strong>⑧ 시험:</strong> 2015-43: 게시만으로 부족. <strong>⑨ 비교·기억법:</strong> 교부·설명과 다름.</p>
+<h3>交付 교부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 交(사귈 교), 付(줄 부). <strong>③ 합친 뜻:</strong> 건네줌. <strong>④ 이름의 이유:</strong> 계약 내용을 보관·확인하게 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 고객이 요구할 때 약관 사본을 주는 의무. <strong>⑥ 쉬운 말:</strong> 필요하면 계약 조건 사본을 준다. <strong>⑦ 사례:</strong> 종이 약관 사본 제공.</p>
+<p><strong>⑧ 시험:</strong> 030: 요구가 기준. <strong>⑨ 비교·기억법:</strong> 열람 가능과 사본 제공 구별.</p>
+<h3>個別約定 개별약정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 個(낱 개), 別(나눌 별), 約(맺을 약), 定(정할 정). <strong>③ 합친 뜻:</strong> 따로 정한 약속. <strong>④ 이름의 이유:</strong> 인쇄된 양식보다 직접 합의를 존중.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해당 당사자 사이 실질적 교섭 등으로 정한 내용. <strong>⑥ 쉬운 말:</strong> 우리 둘이 실제로 따로 정한 조건. <strong>⑦ 사례:</strong> 협상해 바꾼 대출 비용.</p>
+<p><strong>⑧ 시험:</strong> 2015-44: 사업자 증명. <strong>⑨ 비교·기억법:</strong> 정해진 칸에 체크만 한 것과 다름.</p>
+<h3>信義誠實 신의성실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신), 義(옳을 의), 誠(정성 성), 實(열매 실). <strong>③ 합친 뜻:</strong> 믿음과 옳음에 맞게 성실히 함. <strong>④ 이름의 이유:</strong> 형식적 권리행사에도 공정성 요구.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대방의 정당한 이익·기대를 존중하는 원칙. <strong>⑥ 쉬운 말:</strong> 약속을 핑계로 상대를 뜻밖에 해치지 않는다. <strong>⑦ 사례:</strong> 보험 보장 기대를 무너뜨리는 면책.</p>
+<p><strong>⑧ 시험:</strong> 2018-43: 법 5조. <strong>⑨ 비교·기억법:</strong> 내 마음대로 착한 결론을 만드는 원칙 아님.</p>
+<h3>推定 추정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 推(밀 추), 定(정할 정). <strong>③ 합친 뜻:</strong> 근거에서 미루어 정함. <strong>④ 이름의 이유:</strong> 증명 부담을 조정.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일정 사실에 따라 법적 판단을 우선 인정하되 반증 가능. <strong>⑥ 쉬운 말:</strong> 세 신호가 있으면 우선 불공정하다고 본다. <strong>⑦ 사례:</strong> 예상하기 어려운 기습 조항.</p>
+<p><strong>⑧ 시험:</strong> 031의 세 유형. <strong>⑨ 비교·기억법:</strong> 간주와 구별.</p>
+<h3>免責 면책</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 免(면할 면), 責(꾸짖을 책). <strong>③ 합친 뜻:</strong> 책임을 면함. <strong>④ 이름의 이유:</strong> 책임에서 벗어나게 하는 조건.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 발생할 책임을 배제하거나 제한. <strong>⑥ 쉬운 말:</strong> 사고 나도 나는 책임 없다는 말. <strong>⑦ 사례:</strong> 주차장 모든 사고 면책.</p>
+<p><strong>⑧ 시험:</strong> 고의·중과실 배제 금지. <strong>⑨ 비교·기억법:</strong> 경과실도 항상 유효하지 않음.</p>
+<h3>過失 과실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(허물 과), 失(잃을 실). <strong>③ 합친 뜻:</strong> 주의를 놓친 잘못. <strong>④ 이름의 이유:</strong> 고의가 아닌 부주의를 표현.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 필요한 주의를 다하지 못한 것. <strong>⑥ 쉬운 말:</strong> 일부러는 아니지만 조심하지 않았다. <strong>⑦ 사례:</strong> 요양원 안전관리 소홀.</p>
+<p><strong>⑧ 시험:</strong> 고의·중과실과 경과실. <strong>⑨ 비교·기억법:</strong> 고의는 결과를 알면서 의도하는 등 별도 문제.</p>
+<h3>擔保責任 담보책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 擔(멜 담), 保(지킬 보), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 보장할 부담을 맡음. <strong>④ 이름의 이유:</strong> 약속한 정상적 거래를 보호.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목적물·권리의 하자 등에 관한 법정 책임. <strong>⑥ 쉬운 말:</strong> 받은 물건에 흠이 있으면 책임을 묻는다. <strong>⑦ 사례:</strong> 중고차 모든 하자 면책.</p>
+<p><strong>⑧ 시험:</strong> 상당한 이유 없는 배제 금지. <strong>⑨ 비교·기억법:</strong> 모든 구제수단이 항상 동시에 인정되지는 않음.</p>
+<h3>違約金 위약금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어길 위), 約(맺을 약), 金(쇠 금). <strong>③ 합친 뜻:</strong> 약속을 어겼을 때 주는 돈. <strong>④ 이름의 이유:</strong> 위반의 경제적 효과를 미리 정함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계약 위반 시 지급하기로 정한 금액. <strong>⑥ 쉬운 말:</strong> 약속을 깨면 얼마를 낼지 정한다. <strong>⑦ 사례:</strong> 분양 예약금 몰수.</p>
+<p><strong>⑧ 시험:</strong> 원칙 손해배상액 예정 추정. <strong>⑨ 비교·기억법:</strong> 위약벌과 실질로 구별.</p>
+<h3>解除 해제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 解(풀 해), 除(덜 제). <strong>③ 합친 뜻:</strong> 계약 관계를 풀어 없앰. <strong>④ 이름의 이유:</strong> 원래 상태로 돌리는 효과.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 성립한 계약을 소급하여 해소하는 제도. <strong>⑥ 쉬운 말:</strong> 계약 전으로 되돌려 정산한다. <strong>⑦ 사례:</strong> 매매의 채무불이행 해제.</p>
+<p><strong>⑧ 시험:</strong> 법정 해제권 제한 금지. <strong>⑨ 비교·기억법:</strong> 해지는 원칙 장래 종료.</p>
+<h3>解止 해지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 解(풀 해), 止(그칠 지). <strong>③ 합친 뜻:</strong> 관계를 풀고 그침. <strong>④ 이름의 이유:</strong> 이미 계속된 관계의 종료.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계속적 계약을 장래에 향하여 끝냄. <strong>⑥ 쉬운 말:</strong> 앞으로 이용하지 않고 남은 관계를 끝낸다. <strong>⑦ 사례:</strong> 계속 구독 종료.</p>
+<p><strong>⑧ 시험:</strong> 부당한 장기·자동 갱신. <strong>⑨ 비교·기억법:</strong> 과거 급부까지 모두 없애는 해제와 차이.</p>
+<h3>催告 최고</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 催(재촉할 최), 告(알릴 고). <strong>③ 합친 뜻:</strong> 재촉하여 알림. <strong>④ 이름의 이유:</strong> 위반을 바로잡을 기회.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상당한 기간을 정해 이행을 요구하는 통지 등. <strong>⑥ 쉬운 말:</strong> 언제까지 약속을 지키라고 정식 요구한다. <strong>⑦ 사례:</strong> 연체 대금 지급 요구.</p>
+<p><strong>⑧ 시험:</strong> 경미한 연체 무최고 해지. <strong>⑨ 비교·기억법:</strong> 가장 높다는 最高와 다른 말.</p>
+<h3>原狀回復 원상회복</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 原(근원 원), 狀(형상 상), 回(돌 회), 復(돌아올 복). <strong>③ 합친 뜻:</strong> 원래 상태로 돌아감. <strong>④ 이름의 이유:</strong> 계약이 사라진 뒤 이익을 되돌림.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해제 등으로 받은 급부를 반환하여 정리. <strong>⑥ 쉬운 말:</strong> 받은 돈과 물건을 서로 돌려준다. <strong>⑦ 사례:</strong> 해제 대금과 이자 반환.</p>
+<p><strong>⑧ 시험:</strong> 사업자 의무 부당 경감 금지. <strong>⑨ 비교·기억법:</strong> 손해배상과 별도 문제.</p>
+<h3>給付 급부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 給(줄 급), 付(줄 부). <strong>③ 합친 뜻:</strong> 주거나 이행함. <strong>④ 이름의 이유:</strong> 계약에서 약속한 이행 내용.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채무자가 해야 할 행위·제공. <strong>⑥ 쉬운 말:</strong> 돈을 주고 물건·서비스를 제공한다. <strong>⑦ 사례:</strong> 강의 제공·수강료 지급.</p>
+<p><strong>⑧ 시험:</strong> 2015-46: 중지·대행. <strong>⑨ 비교·기억법:</strong> 회사 측 서비스만을 뜻하지 않음.</p>
+<h3>抗辯 항변</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 抗(막을 항), 辯(말씀 변). <strong>③ 합친 뜻:</strong> 대항하여 주장함. <strong>④ 이름의 이유:</strong> 정당한 이유를 들어 청구에 대항.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대 청구에 맞서 이행 거절 등 법정 방어를 함. <strong>⑥ 쉬운 말:</strong> 물건도 안 줬는데 돈부터 달라는 요구를 막는다. <strong>⑦ 사례:</strong> 동시이행 항변.</p>
+<p><strong>⑧ 시험:</strong> 법 11조 방어권 보호. <strong>⑨ 비교·기억법:</strong> 단순 항의와 법적 권리 구별.</p>
+<h3>相計 상계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 相(서로 상), 計(셀 계). <strong>③ 합친 뜻:</strong> 서로 계산함. <strong>④ 이름의 이유:</strong> 서로 받을 몫을 맞춰 정리.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 마주 선 같은 종류 채권을 요건 아래 대등액에서 소멸. <strong>⑥ 쉬운 말:</strong> 서로 빚이 있으면 같은 액수만큼 맞춘다. <strong>⑦ 사례:</strong> 보증보험 관련 채권 상계.</p>
+<p><strong>⑧ 시험:</strong> 부당한 상계권 배제 금지. <strong>⑨ 비교·기억법:</strong> 채무가 있다는 이유만으로 언제나 자동 상계 아님.</p>
+<h3>期限利益 기한이익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 期(기약할 기), 限(한할 한), 利(이로울 이), 益(더할 익). <strong>③ 합친 뜻:</strong> 정한 때까지의 이익. <strong>④ 이름의 이유:</strong> 약속한 시간 자체가 가치.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기한 전 이행을 요구받지 않는 등 기한으로 누리는 이익. <strong>⑥ 쉬운 말:</strong> 내년까지 갚기로 했으면 오늘 다 갚지 않아도 된다. <strong>⑦ 사례:</strong> 일부 연체로 전액 즉시 청구.</p>
+<p><strong>⑧ 시험:</strong> 상당한 이유 없는 박탈 금지. <strong>⑨ 비교·기억법:</strong> 이자 수익이라는 뜻에 한정되지 않음.</p>
+<h3>擬制 의제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 擬(견줄 의), 制(지을 제). <strong>③ 합친 뜻:</strong> 같은 것으로 만들어 봄. <strong>④ 이름의 이유:</strong> 특정 사실을 있는 것으로 간주.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제와 달라도 법적으로 일정 효과가 있다고 취급. <strong>⑥ 쉬운 말:</strong> 말하지 않았는데 동의한 것으로 처리한다. <strong>⑦ 사례:</strong> 무응답 자동 변경 동의.</p>
+<p><strong>⑧ 시험:</strong> 별도 명확 고지·상당 기간. <strong>⑨ 비교·기억법:</strong> 단순 사실 추정과 다름.</p>
+<h3>到達 도달</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 到(이를 도), 達(통할 달). <strong>③ 합친 뜻:</strong> 상대에게 이름. <strong>④ 이름의 이유:</strong> 통지가 효력을 낼 기준.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대가 일반적으로 내용을 알 수 있는 범위에 들어감. <strong>⑥ 쉬운 말:</strong> 읽을 수 있는 상대방 영역까지 통지가 간다. <strong>⑦ 사례:</strong> 해지 통지 수령.</p>
+<p><strong>⑧ 시험:</strong> 발송과 도달 구별. <strong>⑨ 비교·기억법:</strong> 실제로 읽어야만 도달하는 것은 아님.</p>
+<h3>不提訴 부제소</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 提(끌 제), 訴(하소연할 소). <strong>③ 합친 뜻:</strong> 소를 제기하지 않음. <strong>④ 이름의 이유:</strong> 재판 청구 제한을 표현.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소송을 하지 않기로 하는 합의. <strong>⑥ 쉬운 말:</strong> 법원에 문제 삼지 않겠다는 약속. <strong>⑦ 사례:</strong> 모든 피해에 소송 금지.</p>
+<p><strong>⑧ 시험:</strong> 부당하게 불리하면 무효. <strong>⑨ 비교·기억법:</strong> 모든 관할 합의가 곧 부제소는 아님.</p>
+<h3>管轄 관할</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 管(대롱 관), 轄(다스릴 할). <strong>③ 합친 뜻:</strong> 맡아 다스릴 범위. <strong>④ 이름의 이유:</strong> 재판할 곳을 정함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 어느 법원이 사건을 처리할 권한을 가지는지. <strong>⑥ 쉬운 말:</strong> 어느 법원에서 다툴지 정한다. <strong>⑦ 사례:</strong> 회사 소재 법원만 강제.</p>
+<p><strong>⑧ 시험:</strong> 부당한 불리함 검토. <strong>⑨ 비교·기억법:</strong> 법원 선택 합의가 모두 무효는 아님.</p>
+<h3>是正 시정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 是(옳을 시), 正(바를 정). <strong>③ 합친 뜻:</strong> 옳고 바르게 고침. <strong>④ 이름의 이유:</strong> 문제의 제거가 목적.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법·불공정 상태를 바로잡음. <strong>⑥ 쉬운 말:</strong> 불공정 문구를 지우거나 고친다. <strong>⑦ 사례:</strong> 공정위 삭제·수정 요구.</p>
+<p><strong>⑧ 시험:</strong> 권고와 명령 차이. <strong>⑨ 비교·기억법:</strong> 개별 피해자에게 자동 배상금 지급과 다름.</p>
+<h3>標準約款 표준약관</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 標(표할 표), 準(법도 준), 約(맺을 약), 款(조목 관). <strong>③ 합친 뜻:</strong> 거래 조건의 기준 문안. <strong>④ 이름의 이유:</strong> 불공정을 미리 예방할 본보기.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 거래 분야에서 표준이 되는 약관. <strong>⑥ 쉬운 말:</strong> 공정하게 계약하도록 마련한 공통 기준. <strong>⑦ 사례:</strong> 표지 사용과 실제 내용 일치.</p>
+<p><strong>⑧ 시험:</strong> 다른데 표지 사용, 불리한 부분 무효. <strong>⑨ 비교·기억법:</strong> 모든 계약에 자동 편입되는 법률 아님.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>함정과 연결</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2014-45</td>
+<td>고객은 최종 소비자만이 아니라 상인·계약 전 제안받은 사람도 포함</td>
+</tr>
+<tr>
+<td>2016-51</td>
+<td>설명이 ‘다소 곤란’과 ‘현저히 곤란’을 바꿈</td>
+</tr>
+<tr>
+<td>2015-44</td>
+<td>실질적 개별 교섭의 증명책임을 고객에게 넘김</td>
+</tr>
+<tr>
+<td>2014-49</td>
+<td>평균적 고객이 아니라 개별 고객의 속뜻으로 해석한다고 바꿈</td>
+</tr>
+<tr>
+<td>2017-48</td>
+<td>법 9조 1호의 법정 해제권에 약정 해제권을 섞음</td>
+</tr>
+</tbody></table>
+<p>반복 개념은 약관의 네 특성, 고객 범위, 명시·설명 예외와 효과, 해석 3원칙, 불공정 추정 3유형이다. 실제 오답 통계는 없으므로 ‘많이 틀릴 보기’는 <strong>틀리기 쉬운 표현</strong>을 뜻한다. 원본 2013-56의 복수정답, 2018-43의 조문번호 오류를 별도 해설로 구별한다. 전체 45문제의 각 보기는 뒤에 빠짐없이 해설한다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 공방의 예약 카드.</strong> 입구의 손글씨 안내에 “어떤 사고도 책임 없음”이라고 써 두었다. 공방은 약관이라는 제목이 없다고 한다. <strong>정답·의도:</strong> 다수 방문객용으로 미리 정한 계약 조건이면 약관이다. 편입 여부와 고의·중과실 면책 등의 불공정성을 차례로 본다.</p>
+<p><strong>응용2 · 선택지 두 개.</strong> 대출 고객에게 비용을 직접 내거나 정해진 가산금리를 내는 두 칸만 주고 서명시켰다. <strong>정답·의도:</strong> 선택 표시만으로 개별 약정이 되지 않는다. 고정된 선택지 밖으로 내용을 협상·조정할 실질적 기회가 있었는지 사업자가 증명해야 한다.</p>
+<p><strong>응용3 · 명확하지만 부당한 문구.</strong> 수업 약관에 회사가 마음대로 실제 강의를 녹음파일 한 개로 바꿀 수 있다고 명확히 적었다. 고객은 모호하니 유리하게 해석해 달라고 한다. <strong>정답·의도:</strong> 명확하다면 모호성 원칙을 억지 적용하지 않는다. 본질적 권리 박탈·일방 급부 변경의 내용 통제를 검토한다.</p>
+<p><strong>응용4 · 무응답이면 고가 요금제로.</strong> 회사가 1년 전 약관에만 ‘답하지 않으면 변경 동의’라고 적고 이번에는 별도 안내를 하지 않았다. <strong>정답·의도:</strong> 필요할 때 별도로 명확히 고지하고 상당한 응답 기간을 주는 등의 예외 요건과 다르다. 침묵을 자동 동의로 만드는 조항을 검토한다.</p>
+<p><strong>응용5 · 가맹점 23곳.</strong> 같은 불공정 조항 피해를 입은 23개 점포 중 2곳은 합의했고 2곳은 소송 중이다. 나머지가 집단조정을 신청한다. <strong>정답·의도:</strong> 제외 후 19곳이므로 20명 요건에 못 미친다. 이미 성립한 유사 조정 등 다른 요건도 별도로 필요하다. 소비자 집단조정 50명을 가져오지 않는다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제6장</h1>
+<p><strong>TOP3:</strong> 편입·해석·효력 / 설명 예외와 효과 / 불공정 추정 3유형.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>암기 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>약관</td>
+<td>명칭·형식 불문, 미리·일방·다수용. 거래비용 절감.</td>
+</tr>
+<tr>
+<td>당사자</td>
+<td>사업자와 고객. 고객은 소비자보다 넓고 제안받은 계약 전도 포함.</td>
+</tr>
+<tr>
+<td>통제</td>
+<td>편입=들어왔나 / 해석=뜻 / 효력=공정한가. 공정위 추상·법원 구체.</td>
+</tr>
+<tr>
+<td>설명</td>
+<td>중요 내용. 예상 가능·법령 반복·이미 앎·현저한 곤란 등의 예외.</td>
+</tr>
+<tr>
+<td>위반</td>
+<td>사업자가 해당 조항을 주장 못 함 ≠ 계약 전체 자동 무효. 과태료 500만 원 이하.</td>
+</tr>
+<tr>
+<td>개별 약정</td>
+<td>실제 협상은 우선, 구두도 가능. 체크만으로 부족. 사업자가 증명.</td>
+</tr>
+<tr>
+<td>해석</td>
+<td>신의성실·객관적 통일·불명확하면 고객 유리. 해석 조항은 5조.</td>
+</tr>
+<tr>
+<td>불공정 추정</td>
+<td>부당한 불리함 / 예상 곤란 / 목적을 막는 본질적 권리 제한.</td>
+</tr>
+<tr>
+<td>금지 7–14조</td>
+<td>면책·과다 배상·해제해지·급부 변경·권익 제한·의사 의제·대리인·소송.</td>
+</tr>
+<tr>
+<td>중요 예외</td>
+<td>경과실도 항상 유효 아님. 법 9조 1호는 법정 해제권. 별도 고지와 충분한 기간.</td>
+</tr>
+<tr>
+<td>무효 효과</td>
+<td>원칙 잔존 계약 유효, 목적 불능·부당 불리면 전체 무효. 판결 전에도 법정 무효.</td>
+</tr>
+<tr>
+<td>행정·표준</td>
+<td>권고와 명령 구별. 표준과 다른데 표지 사용 시 더 불리한 내용 무효.</td>
+</tr>
+<tr>
+<td>약관 조정</td>
+<td>소비자 제외 고객. 60일·동의 시 90일, 조서는 합의. 집단 20명·공고 14일.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 계약서를 받았다는 사실과 설명받았다는 사실은 다르다. 체크한 사실과 협상한 사실도 다르다. 무효 조항과 전체 계약을 구별한다.</p>
+<p>사례를 풀 순서: 약관 해당성 → 적용 범위 → 편입 → 해석 → 불공정 유형 → 일부 무효·시정·조정.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 공방 면책·대출 체크·자동 요금 변경 사례를 서로 다른 통제 단계로 설명한다. 🟡 정의는 알지만 설명 예외와 개별 약정의 증명책임을 섞는다. 🔴 서명했으면 모든 조항이 유효하거나, 한 조항이 무효면 계약 전체가 언제나 무효라고 생각한다. 실제 응답 없이 등급을 임의 판정하지 않으므로 자기점검에 사용한다.</p>
+<p><strong>반드시 복습할 TOP3:</strong> 명시·설명 의무와 예외 / 평균적 고객 기준 및 모호성 원칙 / 불공정 추정과 일부 무효의 효과.</p>
+<h1>문제 부록 · 45문항·180개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_026"><h4>형성평가 · 소비자법_026</h4><p class="question-stem">다음 중에서 약관의 특성에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>명칭이나 형태를 묻지 않는다.</li><li>사업자가 사전에 미리 준비한 것이어야 한다.</li><li>사업자와 소비지가 협의를 통해 작성하여 제시한다.</li><li>다수의 상대방을 대상으로 한 것이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 안내판·입장권 뒷면도 실질을 본다.</li><li><strong>비선택</strong> · 옳다. 여러 계약을 위해 미리 준비한 내용이다.</li><li><strong>선택</strong> · 틀리다. 실제 쌍방 교섭으로 정한 개별 약정과 구별한다.</li><li><strong>비선택</strong> · 옳다. 다수 상대방용이라는 목적이 핵심이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관은 사업자가 일방적으로 작성하여 제시하는 것이어야 한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_027"><h4>형성평가 · 소비자법_027</h4><p class="question-stem">약관은 거래조건에 관한 협상 및 계약체결에 소요되는 시간과 비용 등의 (        )을 절감시켜 주는 기능을 하고 있는 것이다. 앞의 괄호에 들어갈 것으로 옳은 것은?</p><ol class="choices"><li>노력비용</li><li>계약비용</li><li>협상비용</li><li>거래비용</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통상적 표현이지만 해당 법학 개념의 정답은 아니다.</li><li><strong>비선택</strong> · 계약에 드는 비용 일부를 떠올릴 수 있지만 교재의 포괄 명칭은 거래비용이다.</li><li><strong>비선택</strong> · 협상비용도 일부이나 제시된 정의의 명칭과 다르다.</li><li><strong>선택</strong> · 정답. 반복 협상·체결에 드는 시간과 비용을 절약한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관은 거래조건에 관한 협상 및 계약체결에 소요되는 시간과 비용 등의 ‘거래비용(transaction cost)’을 절감시켜 주는 기능을 하고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_028"><h4>형성평가 · 소비자법_028</h4><p class="question-stem">약관규제법의 적용에서 당사자는 (      )과 (      )이다. 앞의 괄호에 들어갈 것으로 옳은 것은?</p><ol class="choices"><li>사업자와 고객</li><li>기업과 고객</li><li>사업자와 구매자</li><li>기업과 구매자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 약관 제안자와 제안받은 상대방이라는 역할이다.</li><li><strong>비선택</strong> · 사업자는 기업 법인에 한정되지 않는다.</li><li><strong>비선택</strong> · 고객은 물건을 사는 구매자에만 한정되지 않는다.</li><li><strong>비선택</strong> · 두 범주를 모두 지나치게 좁혔다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관규제법의 적용에서 당사자는 사업자와 고객이다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_029"><h4>형성평가 · 소비자법_029</h4><p class="question-stem">다음 중에서 약관(또는 약관규제법)에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>약관규제법과 별도로 특정한 거래분야의 약관에 대하여 다른 법률에 특별한 규정이 있는 경우에는 그 법률의 규정이 우선하여 적용된다.</li><li>약관규제법상 고객은 소비자기본법에서의 소비자 개념보다는 좁은 개념이라고 할 수 있다.</li><li>약관의 불공정성 통제는 약관조항의 내용이 고객에게 부당한 불이익을 주고 있는지를 심사하여 그 조항의 효력 유무를 심사하는 것을 말한다.</li><li>약관규제법은 민법의 특별법이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 다만 특별법이 있다는 이유로 모든 일반 규정이 빠지는 것은 아니다.</li><li><strong>선택</strong> · 틀리다. 고객은 소비자보다 넓고 상인·지자체도 해당할 수 있다.</li><li><strong>비선택</strong> · 옳다. 효력을 판단하는 단계다.</li><li><strong>비선택</strong> · 옳다. 계약에 관한 민법 일반규정을 보완하는 특별 규율이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관규제법상 고객은 소비자기본법에서의 소비자 개념보다는 넓은 개념이라고 할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_030"><h4>형성평가 · 소비자법_030</h4><p class="question-stem">다음의 설명 중에서 옳지 않은 것은?</p><ol class="choices"><li>약관의 명시의무란 고객에게 약관의 내용을 계약의 종류에 따라 일반적으로 예상되는 방법으로 분명하게 밝히도록 하는 의무를 말한다.</li><li>약관의 교부의무란 고객이 요구할 경우 그 약관의 사본을 고객에게 내주어야 할 의무를 말한다.</li><li>약관의 작성의무를 위반하는 경우 약관규제법에 따라 시정조치를 취할 수 있다.</li><li>사업자는 약관에 정하여져 있는 중요한 내용을 고객이 이해할 수 있도록 설명할 의무가 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 실제로 내용을 알 수 있는 방식이어야 한다.</li><li><strong>비선택</strong> · 옳다. 일반적인 약관법상 교부는 고객의 요구를 전제로 한다.</li><li><strong>선택</strong> · 틀리다. 작성 형식 의무에 대해 명시·설명 위반과 같은 독자 제재를 그대로 두지 않는다. 숨겨서 명시·설명도 실패한 경우는 별도다.</li><li><strong>비선택</strong> · 옳다. 모든 세부 내용이 아니라 중요한 내용이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관규제법에서는 사업자가 약관의 작성의무를 위반한 경우에도 이에 대한 시정 및 제재 수단이 마련되어 있지 않다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_031"><h4>형성평가 · 소비자법_031</h4><p class="question-stem">다음 중에서 약관규제법상 공정성을 잃은 것으로 추정되는 경우가 아닌 것은?</p><ol class="choices"><li>고객에게 부당하게 불리한 조항</li><li>고객이 계약의 거래형태 등 관련된 모든 사정에 비추어 예상하기 어려운 조항</li><li>계약목적을 달성할 수 없을 정도로 계약에 다른 본질적 권리를 제한하는 조황</li><li>계약의 해제 또는 해지로 인한 고객의 원상회복의무나 손해배상의무를 경감하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 불공정성 추정의 첫 유형이다.</li><li><strong>비선택</strong> · 평균적 고객에게 뜻밖의 기습 조항이다.</li><li><strong>비선택</strong> · 본질적 권리 박탈 유형이다. 원문 오타는 의미를 보완해 읽는다.</li><li><strong>선택</strong> · 정답. 고객의 부담을 줄이는 내용은 제6조 2항의 세 추정 유형 자체가 아니다. 사업자와 고객을 바꿔 읽지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 약관규제법상 공정성을 잃은 것으로 추정되는 경우는 ①, ②, ③이다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_032"><h4>형성평가 · 소비자법_032</h4><p class="question-stem">다음 중에서 무효가 되는 약관조항으로 옳지 않은 것은?</p><ol class="choices"><li>사업자, 이행 보조자 또는 피고용자의 고의 또는 중대한 과실로 인한 법률상의 책임을 배제하는 조항</li><li>상당한 이유 없이 사업자의 손해배상 범위를 제한하거나 사업자가 부담하여야 할 위험을 고객에게 떠넘기는 조항</li><li>법률의 규정에 의한 고객의 해제권 또는 해지권을 완화하는 조항</li><li>부당하게 과도한 손해배상의무를 부담시키는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 무효 사유다. 고의·중과실 책임은 약관으로 없애지 못한다.</li><li><strong>비선택</strong> · 무효 사유다. 상당한 이유 없는 책임·위험 전가를 금지한다.</li><li><strong>선택</strong> · 정답. 고객의 권리행사를 완화하는 것과 배제·제한하는 것은 반대다.</li><li><strong>비선택</strong> · 무효 사유다. 부당하게 과중한 배상 의무를 금지한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률의 규정에 의한 고객의 해제권 또는 해지권을 배제하거나 그 행사를 제한하는 조항은 무효로 한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_033"><h4>형성평가 · 소비자법_033</h4><p class="question-stem">다음 중에서 고객의 권익을 불공정하게 침해하는 조항에 해당하지 않는 것은?</p><ol class="choices"><li>게임이용자의 동의가 있는 경우 사업자가 필요에 따라 게임서비스를 수정 또는 삭제할 수 있도록 한 약관조항</li><li>법률의 규정에 의한 고객의 항변권, 상계권 등의 권리를 상당한 이유 없이 배제 또는 제한하는 조항</li><li>고객에게 주어진 기한의 이익을 상당한 이유 없이 박탈하는 조항</li><li>고객이 제3자와 계약을 체결하는 것을 부당하게 제한하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 문제는 실질적인 고객 동의가 있다는 전제로, 일방 변경과 구별한다. 형식적 포괄 동의만으로 모든 변경이 정당해지는 것은 아니다.</li><li><strong>비선택</strong> · 무효 사유다. 법정 방어권을 정당한 이유 없이 없앤다.</li><li><strong>비선택</strong> · 무효 사유다. 약속한 날까지 갚지 않아도 될 이익을 부당하게 빼앗는다.</li><li><strong>비선택</strong> · 무효 사유다. 다른 상대방과 거래할 자유를 지나치게 제한한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 강의참조</p></details></section>
+
+<section class="question-card" id="question-소비자법_034"><h4>형성평가 · 소비자법_034</h4><p class="question-stem">다음 중에서 공정거래위원회의 약관의 심사 및 시정조치에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>불공정한 약관조항이 시정명령으로 삭제 또는 수정의 대상이 되면 그 조항과 독립하여 존속할 아무런 의미가 없는 약관조항에 대하여도 삭제 또는 수정을 명한 시정명령은 적법하다.</li><li>공정거래위원회의 약관심사는 구체적 규범통제이다</li><li>공정거래위원회는 심사대상이 된 약관이 다른 법률에 따라 행정관청의 인가를 받았거나 받아야 할 것인 경우에는 심의에 앞서 그 행정관청에 의견을 제출하도록 요구할 수 있다.</li><li>공정거래위원회는 사업자가 불공정약관조항에 대한 공정거래위원회의 시정권고를 정당한 사유 없이 따르지 아니하여 여러 고객에게 피해가 발생하거나 발생할 우려가 현저한 경우에는 사업자에게 해당 불공정약관조항의 삭제 · 수정 등 약관을 시정하기 위하여 필요한 조치를 명할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 독립 존속 의미가 없는 연결 조항도 함께 시정할 수 있다.</li><li><strong>선택</strong> · 틀리다. 공정위는 추상적 통제, 법원은 구체적 계약 통제다.</li><li><strong>비선택</strong> · 옳다. 관할 행정청과의 절차적 협의를 둔다.</li><li><strong>비선택</strong> · 옳다. 단순 불응만 아니라 정당한 이유 없음과 다수 피해·현저한 우려라는 요건을 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공정거래위원회의 약관심사는 추상적 규범통제이다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_045"><h4>기출문제 · 소비자법_기출2012_045</h4><p class="question-stem">[2012 기말고사 · 45번 / 자체 풀이]<br>약관의 개념 및 특성에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>반드시 약관이라는 명칭을 사용해야 한다.</li><li>약관은 사업자가 계약체결과 동시에 작성할 수 있다.</li><li>약관은 사업자가 일방적으로 작성하여 제시하는 것이다.</li><li>약관은 특정한 상대방을 대상으로 한 것이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 제목은 중요하지 않다.</li><li><strong>비선택</strong> · 틀리다. 미리 마련한 내용이어야 한다.</li><li><strong>선택</strong> · 정답. 일방이 여러 상대방용으로 준비한다.</li><li><strong>비선택</strong> · 틀리다. 특정 상대방과의 개별 협상 내용과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>약관은 사업자가 다수의 계약을 위해 미리 일방적으로 마련한 계약내용이다. 명칭은 중요하지 않고 특정 상대방만을 대상으로 한 개별 합의와 구별한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_046"><h4>기출문제 · 소비자법_기출2012_046</h4><p class="question-stem">[2012 기말고사 · 46번 / 자체 풀이]<br>약관에 대한 통제 중 “사업자와 고객이 체결한 계약에 약관이 계약의 내용으로 되었느냐를 심사”하는 통제방법은?</p><ol class="choices"><li>편입통제</li><li>해석통제</li><li>불공정성 통제</li><li>추상적 통제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 계약 안으로 들어왔는지가 편입이다.</li><li><strong>비선택</strong> · 들어온 조항의 뜻을 정하는 단계다.</li><li><strong>비선택</strong> · 조항의 공정성과 효력을 판단하는 단계다.</li><li><strong>비선택</strong> · 구체적 계약 없이 조항 자체를 보는 다른 분류 기준이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>약관이 계약내용에 들어왔는지를 심사하는 것은 편입통제이다. 의미 해석이나 조항 내용의 불공정성 심사와 단계가 다르다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_047"><h4>기출문제 · 소비자법_기출2012_047</h4><p class="question-stem">[2012 기말고사 · 47번 / 자체 풀이]<br>약관규제법은 약관이 공정성을 잃은 것으로 추정되는 경우를 규정하고 있다. 다음 중 이에 해당되지 않는 것은?</p><ol class="choices"><li>고객에게 부당하게 불리한 조항</li><li>고객이 계약의 거래형태 등 관련된 모든 사정에 비추어 예상하기 어려운 조항</li><li>계약의 목적을 달성할 수 없을 정도로 계약에 따른 본질적 권리를 제한하는 조항</li><li>사업자의 손해배상범위를 상당한 이유에 따라 제한하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 불공정 추정 사유다.</li><li><strong>비선택</strong> · 예상 곤란한 조항도 추정 사유다.</li><li><strong>비선택</strong> · 목적 달성을 막는 본질적 권리 제한도 추정 사유다.</li><li><strong>선택</strong> · 정답. 상당한 이유가 있는 제한 자체를 무조건 불공정하다고 보지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>고객에게 부당한 불이익, 예상 곤란한 조항, 본질적 권리 제한이 불공정성 추정사유이다. 상당한 이유가 있는 손해배상범위 제한 자체가 언제나 불공정한 것은 아니다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_048"><h4>기출문제 · 소비자법_기출2012_048</h4><p class="question-stem">[2012 기말고사 · 48번 / 자체 풀이]<br>약관의 해석통제에 사용되는 해석상 원칙으로서 옳지 않은 것은?</p><ol class="choices"><li>신의성실의 원칙</li><li>약관내용의 공정성 추정의 원칙</li><li>객관적이고 통일적인 해석의 원칙</li><li>작성자 불이익의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해석 원칙이다. 합리적 기대를 존중한다.</li><li><strong>선택</strong> · 정답. 공정성을 추정한다는 해석 원칙은 없다. 법 6조는 특정 경우 불공정성을 추정한다.</li><li><strong>비선택</strong> · 해석 원칙이다. 평균적 고객 기준이다.</li><li><strong>비선택</strong> · 해석 원칙이다. 객관적으로 모호할 때 작성자가 위험을 부담한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>약관 해석에는 신의성실, 객관적·통일적 해석 및 불명확할 때 고객에게 유리하게 해석하는 원칙이 적용된다. 공정성 추정은 해석원칙이 아니다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_049"><h4>기출문제 · 소비자법_기출2012_049</h4><p class="question-stem">[2012 기말고사 · 49번 / 자체 풀이]<br>다음 예시하는 약관의 조항은 개별적인 불공정조항의 무효사유 중 무엇에 해당하는가? <br>요양원 운영 사업자가 자신의 고의․과실로 요양자에게 불의의 사고가 생겼을 경우 사업자는 계약내용에 따른 의무를 다하지 못한데 대한 손해배상책임이 있음에도, 입원기간 중 부주의로 발생하는 사고에 대하여 책임을 지지 않는다는 조항</p><ol class="choices"><li>상당한 이유 없이 사업자가 부담하여야 할 위험을 고객에게 떠넘기는 조항</li><li>사업자, 피고용자의 고의 또는 중대한 과실로 인한 법률상의 책임을 배제하는 조항</li><li>상당한 이유 없이 사업자의 담보책임을 배제하는 조항</li><li>법률의 규정에 의한 고객의 해제권 또는 해지권을 배제하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 위험 전가 규정도 관련될 수 있으나 사례의 직접 초점은 자기 잘못의 포괄 면책이다.</li><li><strong>선택</strong> · 정답. 고의·중과실까지 포함하여 책임을 없앤 조항이다.</li><li><strong>비선택</strong> · 제품 하자 담보책임의 배제 사례가 아니다.</li><li><strong>비선택</strong> · 계약을 끝내는 권리를 제한하는 사례가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>사업자나 피고용자의 고의·중과실에 대한 법률상 책임까지 포괄적으로 배제하는 면책조항은 무효사유에 해당한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_054"><h4>기출문제 · 소비자법_기출2013_054</h4><p class="question-stem">[2013 기말고사 · 54번 / 자체 풀이]<br>약관규제법상 약관의 내용에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>약관은 사업자가 사전에 미리 준비한 것이어야 하고, 특정한 상대방을 대상으로 한 것이어야 한다.</li><li>약관규제법의 당사자로서 고객에는 재화를 최종적으로 소비하는 소비자만이 해당된다.</li><li>약관의 불공정성통제란 약관이 사업자와 고객이 체결한 계약에 편입되었는지의 여부를 심사하는 것이다.</li><li>약관에서 정하고 있는 사항에 관하여 사업자와 고객이 약관의 내용과 다르게 합의한 사항이 있을 때에는 원칙적으로 그 합의 사항은 약관보다 우선한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 사전성은 맞지만 다수 상대방용이다.</li><li><strong>비선택</strong> · 틀리다. 상인 등도 고객이다.</li><li><strong>비선택</strong> · 틀리다. 그 설명은 편입 통제다.</li><li><strong>선택</strong> · 정답. 실제 개별 합의는 약관보다 우선한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>개별적으로 합의한 사항은 원칙적으로 약관보다 우선한다. 약관은 다수 계약을 위해 미리 마련되며 고객이 반드시 최종 소비자여야 하는 것도 아니다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_055"><h4>기출문제 · 소비자법_기출2013_055</h4><p class="question-stem">[2013 기말고사 · 55번 / 자체 풀이]<br>약관규제법과 판례상 사업자의 약관에 대한 명시․설명의무의 내용으로 옳은 것은?</p><ol class="choices"><li>사업자는 약관에 정하여져 있는 모든 내용을 고객이 이해할 수 있도록 설명할 의무가 있다.</li><li>계약의 성질상 설명하는 것이 현저하게 곤란한 경우에는 사업자의 설명의무가 면제된다.</li><li>고객이 충분히 예상할 수 있는 내용이라도 명시․설명의무가 있다.</li><li>법령에 정하여진 것을 반복하거나 부연하는 내용이라도 명시․설명의무가 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 중요한 내용의 설명 의무다.</li><li><strong>선택</strong> · 정답. 단순 불편이 아니라 현저한 곤란이어야 한다.</li><li><strong>비선택</strong> · 틀리다. 일반적·공통되어 충분히 예상 가능한 내용은 예외를 검토한다.</li><li><strong>비선택</strong> · 틀리다. 단순 법령 반복·부연은 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>계약의 성질상 설명이 현저히 곤란한 때에는 설명의무 예외가 인정된다. 모든 내용을 빠짐없이 설명해야 한다거나 법령 반복 내용에도 언제나 설명해야 한다는 주장은 맞지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_056"><h4>기출문제 · 소비자법_기출2013_056</h4><p class="question-stem">[2013 기말고사 · 56번 / 자체 풀이 · 원문 복수정답 가능]<br>약관의 해석 및 불공정성 통제(효력통제)에 대한 설명으로 옳은 것은?<br>※ 원문 표현상 복수정답 가능성이 있어, 옳은 보기를 모두 선택하는 방식으로 채점합니다. 공식 정답은 미확인입니다.</p><ol class="choices"><li>약관의 전부 또는 일부의 조항이 약관의 불공정성 통제(효력통제)에 따라 불공정한 것으로 되면, 해당 약관조항은 더 이상 그 계약관계에 적용될 수 없다.</li><li>위 ①의 경우 원칙적으로 그 계약은 나머지 부분만으로 유효하게 존속한다.</li><li>위 ①의 경우 유효한 부분만으로는 계약의 목적 달성이 불가능하거나 그 유효한 부분이 한쪽 당사자에게 부당하게 불리한 경우에라도 그 계약이 무효가 되지는 않는다.</li><li>약관에 대한 해석통제에는 신의성실의 원칙, 객관적이고 통일적인 해석의 원칙, 작성자 불이익 또는 고객에게 유리한 해석의 원칙 등이 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번 · 2번 · 4번</p><ol class="choice-notes"><li><strong>선택</strong> · 옳다. 불공정하여 무효인 조항은 적용할 수 없다. 원본 복수정답의 하나다.</li><li><strong>선택</strong> · 옳다. 일부 무효의 특칙은 잔존 계약의 존속을 원칙으로 한다.</li><li><strong>비선택</strong> · 틀리다. 목적 달성 불가능·부당한 불리함이면 전체 무효라는 단서가 있다.</li><li><strong>선택</strong> · 옳다. 해석의 세 원칙이다. 공식 정답 미확인 상태와 원본 자체 복수정답 표시를 유지한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①, ②, ④<br><br>원문은 ‘옳은 것은?’이라고 되어 있으나 ①·②·④가 모두 옳은 설명이다. 불공정 조항은 적용되지 않고 원칙적으로 나머지 계약은 존속하며, 해석원칙도 ④와 같다. ③은 약관규제법 제16조 단서에 반한다. 공식 정답표가 없으므로 원문을 ‘옳지 않은 것은?’으로 임의 수정하지 않고 자체 복수정답으로 처리했다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.<br>참고: <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=80022" target="_blank" rel="noopener noreferrer">약관규제법 제16조 · 연혁법령</a></p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_057"><h4>기출문제 · 소비자법_기출2013_057</h4><p class="question-stem">[2013 기말고사 · 57번 / 자체 풀이]<br>다음 예시하는 약관의 조항은 개별적인 불공정조항의 무효사유 중 무엇에 해당하는가?<br>“카드사업자가 신용카드 회원이 규약을 위반하여 채무를 불이행하는 경우 개인 신용정보를 본인의 동의나 최고 없이 관련업체에 임의로 제공하는 약관조항”</p><ol class="choices"><li>사업자가 업무상 알게 된 고객의 비밀을 정당한 이유 없이 누설하는 것을 허용하는 조항</li><li>일정한 작위 또는 부작위가 있을 때 고객의 의사표시가 표명되거나 표명되지 아니한 것으로 보는 조항</li><li>고객의 의사표시의 형식이나 요건에 대하여 부당하게 엄격한 제한을 가하는 조항</li><li>상당한 이유 없이 사업자가 부담하여야 할 위험을 고객에게 떠넘기는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 고객 비밀의 부당한 누설을 허용하는 조항이다.</li><li><strong>비선택</strong> · 침묵·행동을 의사표시로 간주하는 문제와 다르다.</li><li><strong>비선택</strong> · 취소를 반드시 방문으로 하라는 식의 형식 제한과 다르다.</li><li><strong>비선택</strong> · 손해 위험 전가보다 비밀 제공의 정당성이 직접 쟁점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>신용정보를 정당한 이유나 동의 없이 관련 업체에 임의 제공하도록 한 조항은 업무상 알게 된 고객 비밀의 부당한 누설을 허용하는 조항에 해당한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_045"><h4>기출문제 · 소비자법_기출2014_045</h4><p class="question-stem">[2014 기말고사 · 45번]<br>약관의 규제에 관한 법률의 적용에서 당사자에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>고객은 약관의 채용에 관해 수동적인 지위에 있다는 것을 뜻하며, 반드시 소비자일 것을 요구한다.</li><li>상법상 상인이라도 어떤 거래에 있어서 계약내용의 결정에 관하여 수동적 당사자라면 약관규제법에서 말하는 고객에 해당될 수 있다.</li><li>사업자의 개념은 약관을 작성․제안하는 것에 중점을 두고 있을 뿐만 아니라 그 영위하는 사업의 내용까지도 특별히 문제 삼고 있다.</li><li>고객은 약관을 계약의 내용으로 할 것을 제안 받은 자이기 때문에 제안이 있었더라도 아직 계약을 체결하기 전이라면 약관규제법의 적용을 받는 고객에 포함되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 반드시 소비자일 필요가 없다.</li><li><strong>선택</strong> · 정답. 거래에서 약관을 제안받는 역할이면 상인도 포함된다.</li><li><strong>비선택</strong> · 틀리다. 업종 자체보다 약관을 제안하는 역할이 중심이다.</li><li><strong>비선택</strong> · 틀리다. 제안받은 단계부터 고객에 포함한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2014년 법학과 소비자법 45번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_046"><h4>기출문제 · 소비자법_기출2014_046</h4><p class="question-stem">[2014 기말고사 · 46번]<br>사업자의 약관의 명시․설명의무에 대해 예외를 인정하는 기준을 판례가 제시하고 있다. 다음 중 그 기준으로 옳지 않은 것은?</p><ol class="choices"><li>고객이 예상할 수 없는 내용은 명시․설명의무의 예외가 된다.</li><li>법령에 정하여진 것을 반복하거나 부연하는 내용은 명시․설명의무의 예외가 된다.</li><li>고객이 약관의 내용을 잘 알고 있는 경우에는 명시․설명의무의 예외가 된다.</li><li>계약의 성질상 설명하는 것이 현저하게 곤란한 경우에는 사업자의 설명의무가 면제된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 예상할 수 없는 중요 내용은 오히려 설명 필요성이 크다.</li><li><strong>비선택</strong> · 옳다. 법령의 단순 반복·부연 예외다.</li><li><strong>비선택</strong> · 옳다. 이미 충분히 안다는 사실은 사업자가 증명한다.</li><li><strong>비선택</strong> · 옳다. 현저하게 곤란해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 46번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_047"><h4>기출문제 · 소비자법_기출2014_047</h4><p class="question-stem">[2014 기말고사 · 47번]<br>다음은 약관의 규제에 관한 법률의 통제원리를 설명한 것이다. ( )안에 들어갈 것을 각각 바르게 짝지어 놓은 것은?<br>“추상적 통제는 구체적인 계약관계를 전제로 하지 않고 오로지 약관조항 자체의 불공정성을 심사하여 그 효력유무를 결정하는 것을 말한다. 이러한 추상적 통제를 담당하는 기관은 ( ㉠ )이다. 구체적 통제는 구체적인 계약관계에 있어서의 분쟁을 그 대상으로 하여 편입, 해석, 불공정성 통제의 모두를 심사하는 것을 말한다. 이러한 구체적 통제를 담당하는 기관은 ( ㉡ )이다.”</p><ol class="choices"><li>㉠ 공정거래위원회, ㉡ 공정거래위원회</li><li>㉠ 법원, ㉡ 법원</li><li>㉠ 공정거래위원회, ㉡ 법원</li><li>㉠ 법원, ㉡ 공정거래위원회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 구체적 통제의 주체를 잘못 연결했다.</li><li><strong>비선택</strong> · 추상적 통제의 주체를 잘못 연결했다.</li><li><strong>선택</strong> · 정답. 공정위는 조항 자체, 법원은 실제 계약 분쟁을 심사한다.</li><li><strong>비선택</strong> · 두 주체를 반대로 연결했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2014년 법학과 소비자법 47번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_048"><h4>기출문제 · 소비자법_기출2014_048</h4><p class="question-stem">[2014 기말고사 · 48번]<br>약관의 명시․설명의무 위반의 효과에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자가 명시․설명의무를 위반하여 계약을 체결한 경우에는 해당 약관을 계약의 내용으로 주장할 수 없다.</li><li>‘계약의 내용으로 주장할 수 없다’는 것은 사업자가 해당 약관을 계약의 내용에 편입된다고 주장할 수 없다는 것을 말한다.</li><li>고객은 사업자가 명시․설명의무를 위반한 경우에도 해당 약관을 계약의 내용에 포함시킬 수가 있다.</li><li>사업자가 명시․설명의무를 위반하였다면 이미 체결한 계약 자체가 무효로 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 사업자의 해당 조항 주장 제한이다.</li><li><strong>비선택</strong> · 옳다. 편입을 주장하지 못하는 효과다.</li><li><strong>비선택</strong> · 옳다. 보호받는 고객의 선택까지 막는 규정은 아니다.</li><li><strong>선택</strong> · 틀리다. 계약 전체가 자동 무효가 되지 않는다. 잔존 계약과 예외를 따로 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 48번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_049"><h4>기출문제 · 소비자법_기출2014_049</h4><p class="question-stem">[2014 기말고사 · 49번]<br>약관의 해석통제에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>약관은 신의성실의 원칙에 따라 공정하게 해석되어야 한다.</li><li>약관은 개별 계약자의 의사나 구체적인 사정 등을 고려해야 하므로, 평균적인 고객의 이해가능성을 기준으로 하지 않고, 개별적인 고객의 이해가능성을 기준으로 한다.</li><li>약관은 상대방이 누구냐에 따라서 다르게 해석되어서는 안 된다.</li><li>약관의 내용이 불명확한 경우에는 약관을 작성한 사업자에게 불리하게 해석하고, 고객에게는 유리하게 해석하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 법 5조 1항의 원칙이다.</li><li><strong>선택</strong> · 틀리다. 평균적 고객을 기준으로 객관적·통일적으로 읽는다.</li><li><strong>비선택</strong> · 옳다. 같은 약관을 상대방마다 임의로 달리 해석하지 않는다.</li><li><strong>비선택</strong> · 옳다. 객관적으로 불명확할 때의 보충 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2014년 법학과 소비자법 49번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_043"><h4>기출문제 · 소비자법_기출2015_043</h4><p class="question-stem">[2015 기말고사 · 43번]<br>약관의 명시·설명의무에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자가 홈페이지에 약관을 게시하였다면 고객이 홈페이지를 통해 계약을 체결하는 과정에서 당해 약관의 내용을 명확하게 식별할 수 없었다고 하더라도 명시의무를 이행한 것이 된다.</li><li>다른 법률에 따라 행정관청의 인가를 받은 약관으로서 신속한 거래를 위하여 필요하다고 인정되는 업종의 경우에는 약관의 명시 및 교부의무가 면제된다.</li><li>설명의무의 대상이 되는 중요한 내용이란 사회통념에 비추어 고객이 계약체결의 여부나 대가를 결정하는 데에 직접적인 영향을 미칠 수 있는 사항을 말한다.</li><li>계약의 성질상 설명하는 것이 현저하게 곤란한 경우에는 설명의무가 면제된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 접근·식별하기 어려우면 게시만으로 명시를 다했다고 볼 수 없다.</li><li><strong>비선택</strong> · 옳다. 법정 업종·인가 등 요건을 갖춘 예외이며 영업소 비치도 살핀다.</li><li><strong>비선택</strong> · 옳다. 계약 여부·가격 결정에 직접 영향을 주는 중요 사항이다.</li><li><strong>비선택</strong> · 옳다. 현저한 곤란이라는 법정 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2015년 법학과 소비자법 43번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_044"><h4>기출문제 · 소비자법_기출2015_044</h4><p class="question-stem">[2015 기말고사 · 44번]<br>약관의 편입통제에 있어 개별약정우선의 원칙에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자와 고객이 약관의 내용과 다르게 합의한 사항이 있을 때에는 그 합의 사항은 약관보다 우선한다.</li><li>사업자가 약관에 의한 계약을 체결하면서 고객과 특정 조항에 관하여 개별적인 교섭을 거친 경우, 그 조항이 개별적인 약정으로 인정되기 위한 증명책임은 고객에게 있다.</li><li>사업자와 고객 사이의 개별약정은 서면뿐만 아니라 말 (구두)로도 가능하다.</li><li>사업자나 그 고용인이 고객에게 약관의 내용과 다른 설명을 해 주어 고객이 그것을 계약내용으로 알고 계약한 경우라면 그 사업자의 설명은 개별약정이 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 개별 약정 우선 원칙이다.</li><li><strong>선택</strong> · 틀리다. 실질적 교섭을 거친 개별 약정이라고 주장하는 사업자 측이 증명한다.</li><li><strong>비선택</strong> · 옳다. 반드시 서면만 가능한 것은 아니다.</li><li><strong>비선택</strong> · 옳다. 그 내용을 계약으로 삼은 실제 합의를 살핀다. 단순 광고와의 구별은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2015년 법학과 소비자법 44번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_045"><h4>기출문제 · 소비자법_기출2015_045</h4><p class="question-stem">[2015 기말고사 · 45번]<br>약관의 개별적인 불공정 조항의 통제로서 계약 해제·해지 관련 불공정 조항에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법률의 규정에 의한 고객의 해제권·해지권을 배제하거나 그 행사를 제한하는 약관조항은 무효이다.</li><li>고객의 경미한 의무위반에 대하여 사업자가 법률이 규정하고 있는 최고 등의 절차 없이도 일방적으로 해제·해지할 수 있도록 하는 약관조항은 무효이다.</li><li>법정해제권·해지권, 약정해제권·해지권 모두 해당된다.</li><li>계약의 해제·해지로 인한 사업자의 원상회복의무를 부당하게 경감하는 약관조항은 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 법정 해제·해지권을 보호한다.</li><li><strong>비선택</strong> · 옳다. 경미한 위반을 핑계로 회사의 해지권을 부당하게 넓혔다.</li><li><strong>선택</strong> · 틀리다. 법 9조 1호의 직접 대상은 법정 권리다. 약정권이 다른 일반 통제까지 면제된다는 뜻은 아니다.</li><li><strong>비선택</strong> · 옳다. 회사의 정산 의무도 공정해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 45번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_046"><h4>기출문제 · 소비자법_기출2015_046</h4><p class="question-stem">[2015 기말고사 · 46번]<br>상당한 이유 없이 사업자가 이행하여야 할 급부를 일방적으로 중지할 수 있게 하거나 제3자로 하여금 대행할 수 있게 하는 약관조항은 무효가 된다. 이에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자가 이를 위반한 경우 채무불이행 책임이 발생한다.</li><li>급부의 중지에는 일시적 중지와 영구적 중지를 모두 포함한다.</li><li>이행보조자를 사용하는 것도 이행대행에 해당한다.</li><li>여기에서 금지되는 대행은 이해관계 없는 제3자에 대한 업무위탁에 한한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 약속한 급부를 정당한 이유 없이 하지 않는 책임을 검토한다.</li><li><strong>비선택</strong> · 옳다. 잠깐 중단과 영구 중단 모두 해당할 수 있다.</li><li><strong>선택</strong> · 틀리다. 자기 책임 아래 이행보조자를 쓰는 것과 계약상 대행을 구별한다.</li><li><strong>비선택</strong> · 교재의 설명으로 옳다. 이해관계 있는 제3자의 법정 이행까지 일률 금지하는 취지가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 46번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_047"><h4>기출문제 · 소비자법_기출2015_047</h4><p class="question-stem">[2015 기말고사 · 47번]<br>약관의 개별적인 불공정 조항의 통제(무효사유)에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>면책조항의 금지에 있어 경과실인 경우의 면책조항은 원칙적으로 유효한 것으로 본다.</li><li>고객이 제3자와 계약을 체결하는 것에 대해 사업자가 고객과의 거래관계에서 적당한 범위 내에서 기간, 구역, 업종 등을 한정하고 있는 경우에는 유효하다.</li><li>고객에게 상당한 기간 내에 의사표시를 하지 않으면 의사표시가 표명되거나 표명되지 않은 것으로 본다는 뜻을 명확히 따로 고지를 한 경우에는 예외적으로 의사표시 의제조항이 허용될 수 있다.</li><li>고객의 대리인에 의하여 체결된 계약이 무효·취소로 되는 경우 대리인이 그에 대한 무과실의 손해배상책임을 지도록 하는 약관조항은 유효하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 출제 취지상 옳다. 다만 경과실도 6조·7조 다른 호에 따라 무효일 수 있어 무조건 유효는 아니다.</li><li><strong>비선택</strong> · 옳다. 합리적 범위의 제한과 부당한 제한을 구별한다.</li><li><strong>비선택</strong> · 옳다. 상당한 기간과 명확한 별도 고지 등 예외 요건을 확인한다.</li><li><strong>선택</strong> · 틀리다. 단순 대리인에게 법정 범위를 넘어 책임을 가중한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2015년 법학과 소비자법 47번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_047"><h4>기출문제 · 소비자법_기출2016_047</h4><p class="question-stem">[2016 기말고사 · 47번]<br>사업자의 약관에 관한 명시․설명의무 위반의 효과로 옳지 않은 것은?</p><ol class="choices"><li>사업자는 해당 약관을 계약의 내용으로 주장할 수 없다.</li><li>고객은 해당 약관을 계약의 내용에 포함시킬 수가 있다.</li><li>이미 체결한 계약 자체가 무효로 된다.</li><li>이미 체결한 계약 자체가 무효로 되는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 해당 조항을 근거로 고객을 구속하지 못한다.</li><li><strong>비선택</strong> · 옳다. 고객 보호를 위한 선택 가능성이다.</li><li><strong>선택</strong> · 틀리다. 전체 무효를 곧바로 단정할 수 없다.</li><li><strong>비선택</strong> · 옳다. 해당 조항 배제와 계약 전체의 효력을 나눈다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 47번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_048"><h4>기출문제 · 소비자법_기출2016_048</h4><p class="question-stem">[2016 기말고사 · 48번]<br>약관의 해석통제에 적용되는 원칙들에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>신의성실의 원칙에 따라 공정하게 해석되어야 한다.</li><li>개별 계약자의 의사나 구체적인 사정 등을 고려해서 해석되 어야 한다.</li><li>상대방이 누구냐에 따라서 다르게 해석되어서는 안 된다.</li><li>문제된 조항이 객관적으로 불명확한 경우에는 사업자에게 불리하게 해석한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 신의성실에 따른 공정한 해석이다.</li><li><strong>선택</strong> · 틀리다. 개별적 속뜻보다 평균적 고객의 이해를 기준으로 한다.</li><li><strong>비선택</strong> · 옳다. 객관적·통일적 해석이다.</li><li><strong>비선택</strong> · 옳다. 불명확성의 위험을 작성자가 부담한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2016년 법학과 소비자법 48번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_049"><h4>기출문제 · 소비자법_기출2016_049</h4><p class="question-stem">[2016 기말고사 · 49번]<br>약관규제법은 약관조항이 공정성을 잃은 것으로 추정되는 경우를 규정한다. 이에 해당되지 않는 것은?</p><ol class="choices"><li>고객에게 부당하게 불리한 조항</li><li>고객이 계약의 거래형태 등 관련된 모든 사정에 비추어 예 상하기 어려운 조항</li><li>상당한 이유가 있는 경우에 사업자에게 손해배상을 경감시 켜주는 조항</li><li>고객이 계약의 목적을 달성할 수 없을 정도로 계약에 따르는 본질적 권리를 제한하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 추정 사유다. 부당한 불리함이다.</li><li><strong>비선택</strong> · 추정 사유다. 예상하기 어려운 조항이다.</li><li><strong>선택</strong> · 정답. 상당한 이유 있는 경감은 세 추정 사유에 당연 포함되지 않는다.</li><li><strong>비선택</strong> · 추정 사유다. 계약의 핵심 목적을 막는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 49번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_050"><h4>기출문제 · 소비자법_기출2016_050</h4><p class="question-stem">[2016 기말고사 · 50번]<br>약관의 계약 해제․해지 관련 불공정 조항에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법정해제권․해지권, 약정해제권․해지권 모두 해당된다.</li><li>법률의 규정에 의한 고객의 해제권․해지권을 배제하거나 행사를 제한하는 약관조항은 무효이다.</li><li>고객의 경미한 의무위반에 대하여 사업자가 최고절차 없이 일 방적으로 해제․해지할 수 있도록 하는 약관조항은 무효이다.</li><li>계약의 해제․해지로 인한 사업자의 원상회복의무를 부당하 게 경감하는 약관조항은 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 해당 법정 권리 보호 조항에 약정 권리까지 그대로 넣었다.</li><li><strong>비선택</strong> · 옳다. 법률이 준 권리를 약관으로 빼앗지 못한다.</li><li><strong>비선택</strong> · 옳다. 경미한 위반과 무최고 해지를 부당하게 연결한다.</li><li><strong>비선택</strong> · 옳다. 사업자의 반환 의무를 일방 감경하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2016년 법학과 소비자법 50번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_051"><h4>기출문제 · 소비자법_기출2016_051</h4><p class="question-stem">[2016 기말고사 · 51번]<br>사업자의 약관 내용 설명의무가 면제될 수 있는 경우로서 옳지 않은 것은?</p><ol class="choices"><li>고객이 충분히 예상할 수 있는 약관의 내용</li><li>법령에 정하여진 것을 반복하거나 부연하는 약관의 내용</li><li>고객이 약관의 내용을 잘 알고 있는 경우</li><li>계약의 성질상 설명하는 것이 다소 곤란한 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 예외가 될 수 있다. 일반적·공통되어 충분히 예상 가능한 경우다.</li><li><strong>비선택</strong> · 예외가 될 수 있다. 단순 반복·부연에 한정한다.</li><li><strong>비선택</strong> · 예외가 될 수 있다. 사업자가 이미 잘 안다는 사실을 증명한다.</li><li><strong>선택</strong> · 정답. 다소가 아니라 현저하게 곤란해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2016년 법학과 소비자법 51번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_046"><h4>기출문제 · 소비자법_기출2017_046</h4><p class="question-stem">[2017 기말고사 · 46번]<br>약관규제법의 당사자와 적용범위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자의 사업 내용이 무엇인가는 특별히 문제되지 않는다.</li><li>고객은 반드시 소비자일 것을 요구하지 않는다.</li><li>약관이 상법의 회사에 관한 규정에 속하는 계약에 관한 것일 경우에는 약관규제법이 적용되지 않는다.</li><li>약관이 근로기준법에 속하는 계약에 관한 것일 경우에는 약관규제법이 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 약관을 제안하는 당사자 역할이 중심이다.</li><li><strong>비선택</strong> · 옳다. 고객은 일반 소비자보다 넓다.</li><li><strong>비선택</strong> · 옳다. 법 30조의 적용 제외 범위다.</li><li><strong>선택</strong> · 틀리다. 근로기준법 분야 계약도 적용 제외를 살핀다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 46번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_047"><h4>기출문제 · 소비자법_기출2017_047</h4><p class="question-stem">[2017 기말고사 · 47번]<br>약관에 대한 사업자의 설명의무가 면제되지 않는 것은?</p><ol class="choices"><li>고객이 충분히 예상할 수 있는 내용</li><li>소비자의 이해관계에 중요한 영향을 미치는 내용</li><li>계약의 성질상 설명하는 것이 현저하게 곤란한 경우</li><li>법령에 정하여진 것을 반복하거나 부연하는 내용</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반적·공통되어 충분히 예상 가능한 내용은 예외다.</li><li><strong>선택</strong> · 정답. 특별한 예외가 없다면 중요한 이해관계 사항은 설명 대상이다.</li><li><strong>비선택</strong> · 법정 예외다. 현저한 곤란을 요구한다.</li><li><strong>비선택</strong> · 단순 법령 반복·부연 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2017년 법학과 소비자법 47번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_048"><h4>기출문제 · 소비자법_기출2017_048</h4><p class="question-stem">[2017 기말고사 · 48번]<br>약관의 계약 해제·해지 관련 불공정 조항에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>민법이 고객에게 부여하고 있는 해제권·해지권을 배제하는 조항은 무효이다.</li><li>법률의 규정에 의한 고객의 해제권을 배제하는 조항은 무효인데, 이때의 해제권은 법정해제권과 약정해제권 모두에 적용된다.</li><li>계약의 해제로 인한 사업자의 원상회복의무를 부당하게 경감하는 조항은 무효이다.</li><li>계약의 해제로 인한 고객의 원상회복의무를 상당한 이유 없이 과중하게 부담시키는 조항은 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 법정 권리를 배제하지 못한다.</li><li><strong>선택</strong> · 틀리다. 법 9조 1호의 직접 적용 범위를 확장했다.</li><li><strong>비선택</strong> · 옳다. 사업자의 원상회복 의무를 부당하게 줄이지 못한다.</li><li><strong>비선택</strong> · 옳다. 고객의 반환 의무도 상당한 이유 없이 무겁게 만들지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2017년 법학과 소비자법 48번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_041"><h4>기출문제 · 소비자법_기출2018_041</h4><p class="question-stem">[2018 기말고사 · 41번]<br>약관의 개념에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>반드시 ‘약관’이라는 명칭을 사용해야 하는 것은 아니다.</li><li>사업자가 사전에 미리 준비한 것이어야 한다.</li><li>사업자가 일방적으로 작성하여 제시하는 것이어야 한다.</li><li>특정한 개별 상대방을 대상으로 한 것이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 실질이 중요하다.</li><li><strong>비선택</strong> · 옳다. 사전 준비가 특성이다.</li><li><strong>비선택</strong> · 옳다. 일방이 마련해 제시한 여러 고객용 조건이다.</li><li><strong>선택</strong> · 틀리다. 특정 상대방과의 개별 교섭용 내용과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 41번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_042"><h4>기출문제 · 소비자법_기출2018_042</h4><p class="question-stem">[2018 기말고사 · 42번]<br>약관에 대한 사업자의 설명의무가 면제될 수 있는 경우에 해당하는 것은?</p><ol class="choices"><li>고객이 충분히 예상할 수 없는 내용</li><li>소비자의 이해관계에 중요한 영향을 미치는 내용</li><li>계약의 성질상 설명하는 것이 현저하게 곤란하지 않은 경우</li><li>법령에 정하여진 것을 반복하거나 부연하는 내용</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 예상할 수 없는 중요 내용은 설명 필요성이 있다.</li><li><strong>비선택</strong> · 중요한 내용은 설명 대상이 원칙이다.</li><li><strong>비선택</strong> · 현저하게 곤란하지 않으면 그 예외에 해당하지 않는다.</li><li><strong>선택</strong> · 정답. 법령의 단순 반복·부연은 예외가 될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 42번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_043"><h4>기출문제 · 소비자법_기출2018_043</h4><p class="question-stem">[2018 기말고사 · 43번]<br>약관규제법은 “약관은 ( )의 원칙에 따라 공정하게 해석되어야 한다.”고 규정하고 있다(제6조 제1항). ( )에 들어갈 내용에 해당하는 것은?</p><ol class="choices"><li>신의성실</li><li>합리성</li><li>공평</li><li>예견가능성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 다만 원문 인용 조문번호는 6조가 아니라 해석에 관한 5조 1항으로 보완한다.</li><li><strong>비선택</strong> · 관련 가치일 수 있지만 빈칸의 법정 문구가 아니다.</li><li><strong>비선택</strong> · 공정한 해석의 방향이지만 빈칸의 원칙 명칭은 신의성실이다.</li><li><strong>비선택</strong> · 관련 고려 요소이나 빈칸에 해당하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 43번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_044"><h4>기출문제 · 소비자법_기출2018_044</h4><p class="question-stem">[2018 기말고사 · 44번]<br>약관의 해석통제에 적용되는 원칙들에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>개별 계약자의 의사나 구체적인 사정 등을 고려해서 사안마다 달리 해석되어야 한다.</li><li>문제된 조항이 객관적으로 불명확한 경우에는 사업자에게 불리하게 해석한다.</li><li>상대방이 누구냐에 따라서 다르게 해석되어서는 안 된다.</li><li>신의성실의 원칙에 따라 공정하게 해석되어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 평균적 고객 기준의 객관적·통일적 해석이다.</li><li><strong>비선택</strong> · 옳다. 객관적 모호성이 전제다.</li><li><strong>비선택</strong> · 옳다. 고객별로 임의 변경하지 않는다.</li><li><strong>비선택</strong> · 옳다. 공정한 해석의 출발점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 44번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_045"><h4>기출문제 · 소비자법_기출2018_045</h4><p class="question-stem">[2018 기말고사 · 45번]<br>약관규제법은 약관조항이 공정성을 잃은 것으로 추정되는 경우를 규정한다. 이에 해당되지 않는 것은?</p><ol class="choices"><li>고객에게 부당하게 불리한 조항</li><li>상당한 이유가 있는 경우에 사업자에게 손해배상을 경감시켜 주는 조항</li><li>고객이 계약의 목적을 달성할 수 없을 정도로 계약에 따르는 본질적 권리를 제한하는 조항</li><li>고객이 계약의 거래형태 등 관련된 모든 사정에 비추어 예상하기 어려운 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 추정 사유다. 부당하게 불리한 조항이다.</li><li><strong>선택</strong> · 정답. 상당한 이유 있는 배상 경감 자체가 추정 사유는 아니다.</li><li><strong>비선택</strong> · 추정 사유다. 본질적 권리를 박탈한다.</li><li><strong>비선택</strong> · 추정 사유다. 기습적 내용이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2018년 법학과 소비자법 45번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_044"><h4>기출문제 · 소비자법_기출2019_044</h4><p class="question-stem">[2019 기말고사 · 44번]<br>약관의 설명의무에 관한 내용으로 옳지 않은 것은?</p><ol class="choices"><li>사업자는 약관에 정하여져 있는 중요한 내용을 고객이 이해할 수 있도록 설명할 의무가 있다.</li><li>설명의무의 대상이 되는 중요한 내용은 사회통념에 비추어 고객이 계약체결의 여부나 대가를 결정하는 데에 직접적인 영향을 미칠 수 있는 사항을 말한다.</li><li>약관조항 중에서 무엇이 중요한 내용에 해당되는지에 대하여는 일률적으로 판단하여야 한다.</li><li>약관조항 중에서 무엇이 중요한 내용에 해당되는지에 대하여는 구체적인 사건에서 개별적 사정을 고려하여 판단하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 중요 내용을 이해시키는 의무다.</li><li><strong>비선택</strong> · 옳다. 계약 여부·대가에 직접 영향을 주는지 본다.</li><li><strong>선택</strong> · 틀리다. 중요성은 구체적 계약의 사정을 고려한다.</li><li><strong>비선택</strong> · 옳다. 중요성 판단과 약관의 객관적 해석 원칙을 혼동하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 44번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_045"><h4>기출문제 · 소비자법_기출2019_045</h4><p class="question-stem">[2019 기말고사 · 45번]<br>약관의 해석통제에 적용되는 원칙으로 옳지 않은 것은?</p><ol class="choices"><li>신의성실의 원칙</li><li>객관적이고 통일적인 해석의 원칙</li><li>작성자 이익의 원칙</li><li>작성자 불이익의 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해석 원칙이다.</li><li><strong>비선택</strong> · 해석 원칙이다.</li><li><strong>선택</strong> · 정답. 반대로 모호할 때 작성자에게 불이익을 준다.</li><li><strong>비선택</strong> · 해석 원칙이다. 객관적 불명확성이 전제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2019년 법학과 소비자법 45번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_046"><h4>기출문제 · 소비자법_기출2019_046</h4><p class="question-stem">[2019 기말고사 · 46번]<br>약관규제법은 공정성을 잃은 것으로 추정되는 경우를 규정하고 있다. 이에 해당되는 것으로 옳지 않은 것은?</p><ol class="choices"><li>고객이 계약의 거래형태에 비추어 어느 정도 예상할 수 있는 조항</li><li>고객에게 부당하게 불리한 조항</li><li>고객이 계약의 거래형태 등 관련된 모든 사정에 비추어 예상하기 어려운 조항</li><li>계약의 목적을 달성할 수 없을 정도로 계약에 따르는 본질적 권리를 제한하는 조항</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 예상 가능하다는 이유만으로 기습 조항의 추정 사유가 되지 않는다. 다른 무효 사유는 별개다.</li><li><strong>비선택</strong> · 불공정 추정 사유다.</li><li><strong>비선택</strong> · 불공정 추정 사유다.</li><li><strong>비선택</strong> · 불공정 추정 사유다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 46번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_047"><h4>기출문제 · 소비자법_기출2019_047</h4><p class="question-stem">[2019 기말고사 · 47번]<br>고객의 권익을 불공정하게 침해하는 약관조항은 무효이다. 이에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>법률의 규정에 의한 고객의 항변권, 상계권 등의 권리를 상당한 이유 없이 배제 또는 제한하는 조항은 무효이다.</li><li>사업자가 고객과의 거래관계에서 적당한 범위 내에서 기간, 구역, 업종 등을 한정하여 고객이 제3자와 계약을 체결하는 것을 제한하는 조항은 무효이다.</li><li>고객에게 주어진 기한의 이익을 상당한 이유 없이 박탈하는 조항은 무효이다.</li><li>사업자가 업무상 알게 된 고객의 비밀을 정당한 이유 없이 누설하는 것을 허용하는 조항은 무효이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 옳다. 법정 방어권의 부당한 제한이다.</li><li><strong>선택</strong> · 틀리다. 적당한 범위의 제한을 언제나 무효라고 단정할 수 없다.</li><li><strong>비선택</strong> · 옳다. 상당한 이유 없는 조기 변제 강요를 금지한다.</li><li><strong>비선택</strong> · 옳다. 비밀의 정당한 이유 없는 누설을 허용하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2019년 법학과 소비자법 47번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 06' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 06|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

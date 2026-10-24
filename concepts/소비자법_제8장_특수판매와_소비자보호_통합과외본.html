@@ -1,0 +1,1453 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제8장 특수판매와 소비자보호 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 08</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제8장 특수판매와 소비자보호 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>갑자기 찾아오거나 전화해서 산 물건, 사람을 소개하며 파는 물건, 오래 이용하기로 한 서비스는 ‘그냥 변심했으니 끝’이 아니라 거래 방식에 맞는 탈출구를 확인한다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나</td>
+<td>방문·전화권유·다단계·후원방문판매, 계속거래·사업권유거래의 보호</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>갑작스러운 권유, 친분 압박, 수익 약속, 장기 계약이 자유로운 판단을 흔들기 때문</td>
+</tr>
+<tr>
+<td>전체의 위치</td>
+<td>6장 계약 내용, 7장 지급 방식에 이어 8장은 판매 방식과 계약의 지속성을 규율</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>할부로 샀어도 방문판매 보호가 겹칠 수 있음. 9장은 통신판매·온라인 거래로 연결</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>소비자 14일과 판매원 3개월, 철회와 중도해지, 합법 다단계와 사행적 조직을 혼동</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 276–320쪽 전체와 JSON의 제9장 주제 <strong>29문제·116개 보기</strong>. 중요도는 제공 문제의 반복과 체계상 비중을 기준으로 한 학습 우선순위다. 실제 오답률 자료는 없다. 법령 확인일 2026.10.25.</p>
+<p><strong>교재를 고쳐 읽을 세 곳:</strong> 다단계 개별 가격은 교재의 ‘160만 원 미만’이 아니라 현행 <strong>부가세 포함 200만 원 초과 금지</strong>다. 다단계 <strong>판매원</strong>의 철회는 서면이 필요하다. 표시·광고와 다른 이행의 <strong>3개월·30일</strong>은 한쪽만 골라 무한히 늘리는 기간이 아니다. 문제 원문·정답은 보존하고 다른 법 기준이나 불완전한 조건은 별도로 설명한다.</p>
+<p><mark class="yellow">노랑: 정의·기간·결론</mark> / <mark class="green">초록: 보호 이유</mark> / <mark class="pink">분홍: 함정·예외</mark> / <mark class="blue">파랑: 앞뒤 연결</mark>.</p>
+<h1>1. 특수판매라는 이름이 붙은 이유</h1>
+<h2 id="consumer-08-01" data-concept-id="consumer-08-01">1-1. 편리한 거래일수록 판단할 틈이 부족할 수 있다 ★★★★☆</h2>
+<p><strong>교재 276–278쪽 / 문단의 목적:</strong> 가게를 찾아가 충분히 비교한 거래와, 갑자기 권유를 받아 결정한 거래를 구별한다. 방문판매·전화권유판매·우편판매·다단계판매·TV홈쇼핑·인터넷 판매 등은 전통적 점포 거래와 다른 방식을 사용한다. 사업자는 점포·광고 비용을 줄이고 소비자에게 적극적으로 접근할 수 있다. 소비자는 집에서도 거래하고 다양한 상품을 알게 된다. 장점이 있다고 분쟁이 없어지는 것은 아니다.</p>
+<p>지연이는 집에서 쉬다가 “오늘만 할인”이라는 권유를 받는다. 가게에서라면 다른 물건을 보고 나왔겠지만, 집 안의 판매원을 내보내기 미안해서 서명한다. 다단계에서는 친구와의 관계, 사업권유거래에서는 “돈을 벌 수 있다”는 기대가 판단에 끼어든다. 법은 이런 차이를 보고 정보 제공, 숙려 기회, 철회·해지, 금지행위 규제를 더한다.</p>
+<p><strong>시험 포인트:</strong> 특수판매는 별도 보호가 필요한 거래 방식의 묶음이지, 모두 불법이라는 뜻도 모두 같은 법을 적용한다는 뜻도 아니다. 인터넷·통신판매는 다음 장의 전자상거래법과 연결한다. <strong>한 줄:</strong> <mark class="green">구매 과정의 압박과 정보 부족을 줄이려고 특별한 보호를 붙였다.</mark></p>
+<h2 id="consumer-08-02" data-concept-id="consumer-08-02">1-2. 적용 제외라고 소비자의 모든 권리가 사라지는 것은 아니다 ★★★★☆</h2>
+<p><strong>교재 278–279쪽 / 문단의 목적:</strong> 방문판매법을 적용할 거래의 경계를 정한다. 상행위를 위해 사업자가 구입하면 원칙적으로 제외한다. 다만 <strong>사실상 소비자와 같은 지위에서 다른 소비자와 같은 거래조건</strong>으로 산 경우에는 적용한다. ‘사업자’라는 명함 하나만 보고 보호를 지우지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>적용을 따질 거래</th>
+<th>핵심 조건과 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사업용 거래</td>
+<td>원칙 제외, 소비자 동일 지위·조건이면 예외</td>
+</tr>
+<tr>
+<td>금융상품 계약</td>
+<td>법정 금융상품 판매 거래는 별도 규율. 보험만이 아니라 예금·대출·투자·보장 등 범위를 확인</td>
+</tr>
+<tr>
+<td>독립적 개인 판매</td>
+<td>판매원을 두지 않고 법정 산물 또는 자신이 생산한 재화 등을 독립적으로 공급하는 경우 등 법정 요건</td>
+</tr>
+<tr>
+<td>수박 농부의 트럭 판매</td>
+<td>직접 재배한 수박을 본인이 싣고 다니며 판매하는 교재 사례는 제외</td>
+</tr>
+</tbody></table>
+<p>형성 040의 ‘개인이 독립된 자격으로 공급’은 요건을 줄여 쓴 표현이다. 모든 개인의 판매를 무조건 제외하는 문장으로 외우지 않는다. 금융상품의 별도 규율도 ‘아무 보호가 없다’가 아니라 12장 금융소비자보호법으로 이어진다.</p>
+<p>다른 법과 겹치면 방문판매법을 우선하되 <strong>다른 법이 소비자에게 유리하면 그 법</strong>을 적용한다. 계약서 발급 방법·계속거래에 관한 다른 법의 특별 규정 등은 별도 관계 규정을 확인한다. 선불식 할부에는 방문판매법 8·9·17·18·37조를 적용하지 않는 특칙이 있어, 상조 철회기간을 방문판매 규정과 임의로 섞지 않는다. <strong>한 줄:</strong> <mark class="blue">거래 목적 → 제외·예외 → 다른 특별법 순서로 적용 법을 고른다.</mark></p>
+<h1>2. 방문판매와 전화권유판매</h1>
+<h2 id="consumer-08-03" data-concept-id="consumer-08-03">2-1. 계약한 장소만 보지 말고 어디서 유인했는지 본다 ★★★★★</h2>
+<p><strong>교재 279–281쪽 / 문단의 목적:</strong> 방문판매를 ‘판매원이 집에 들어온 경우’로만 좁히지 않는다. 사업장 밖에서 권유하여 청약을 받거나 계약을 체결하는 것이 기본이다. 법정 방법으로 <strong>사업장 밖에서 유인한 뒤 사업장 안에서 계약</strong>한 경우도 포함한다. 거리에서 경품 행사라고 데려가 물건을 팔았다면 마지막 서명 장소만으로 방문판매를 피하지 못한다.</p>
+<p>사업장은 원칙적으로 <strong>3개월 이상 계속 운영</strong>되는 고정 장소와 필요한 판매 시설을 갖추고, 소비자가 자유롭게 출입하여 상품을 고를 수 있는 장소인지 등을 본다. 이름만 ‘매장’인 임시 공간은 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>교재·기출 사례</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>두 달만 쓰는 임시 판매장</td>
+<td>법정 사업장 요건에 미달하면 그곳의 판매도 방문판매로 판단 가능</td>
+</tr>
+<tr>
+<td>계속 영업하는 점포 앞 인도에 간이 판매대, 소속 직원 판매</td>
+<td>점포 영업의 일부인 교재 사례에서는 방문판매로 보지 않음. 모든 길거리 판매가 같은 결론은 아님</td>
+</tr>
+<tr>
+<td>소비자가 전화로 상품 문의 후 판매원이 집에서 적극 권유·계약</td>
+<td>처음 문의한 사람이 소비자여도 집에서 이루어진 판매 구조를 봄</td>
+</tr>
+<tr>
+<td>밖에서 유인하고 매장에서 계약</td>
+<td>법정 유인 요건에 해당하면 방문판매</td>
+</tr>
+</tbody></table>
+<p><strong>시험 키워드·한 줄:</strong> <mark class="yellow">집이라는 장소보다 사업장 밖의 권유·유인 구조가 중요하다.</mark> 2018-50은 ‘계약은 매장에서’라는 말에 속지 않는 문제다.</p>
+<h2 id="consumer-08-04" data-concept-id="consumer-08-04">2-2. 전화권유판매는 전화로 적극 설득했는지가 핵심이다 ★★★★★</h2>
+<p><strong>교재 281–282쪽 / 문단의 목적:</strong> 전화기라는 기계가 같아도 거래 성질이 달라짐을 설명한다. 전화로 소비자의 응답을 유도하고 대화하여 구매를 권유하는 것이 전화권유판매다. 소비자가 먼저 전화했는지만으로 결정하지 않는다. “경품에 당첨됐으니 전화하세요”라는 문자 뒤 소비자가 전화하고 판매원이 대화하며 구매를 유도했다면 해당할 수 있다.</p>
+<p>반대로 소비자가 이미 결정한 상품의 주문만 받거나, ARS·문자메시지로 정보만 제공하는 방식은 그 자체가 적극적 전화 권유는 아니다. 이런 방식으로 거래가 성립하면 통신판매 해당 여부를 본다. <strong>정보 메시지 하나를 보냈다는 사실만으로 판매계약이 저절로 생긴다는 뜻은 아니다.</strong></p>
+<p><strong>판례 2007도4697의 흐름:</strong> 판매자가 전화로 대화하며 구매 의사를 유도한다 → 실제 서명은 따로 만난 장소에서 한다 → 전화로 계약을 완결하지 않았으니 전화권유가 아니라고 주장한다 → 법원은 전화가 적극적인 유인 수단이었음을 본다 → 만난 장소에서 청약을 받았어도 해당할 수 있다. 다른 결론이면 전화로 충분히 설득한 뒤 장소만 바꾸어 법을 피하게 된다.</p>
+<p><strong>한 줄:</strong> <mark class="pink">누가 먼저 걸었나·어디서 서명했나보다 전화 대화의 권유 기능을 본다.</mark></p>
+<h2 id="consumer-08-05" data-concept-id="consumer-08-05">2-3. 누가 파는지 확인하고 휴업 중에도 철회를 처리한다 ★★★★☆</h2>
+<p><strong>교재 282–283쪽 / 문단의 목적:</strong> 추적하기 어려운 판매자에게 연락·신원 확인 장치를 둔다. 방문판매업자·전화권유판매업자는 상호·주소·전화·전자우편·대표자 및 법정 재무 사항 등을 신고하고, 변경·휴업·폐업·영업 재개도 신고한다. 판매원을 두지 않는 소규모 사업자 등 법정 예외는 구별한다. 다단계의 <strong>등록</strong>과 일반 방문판매의 <strong>신고</strong>는 같은 말이 아니다.</p>
+<p>판매원 명부를 작성·비치하고 소비자가 요청하면 신원을 확인할 수 있도록 한다. 권유 전에 <strong>판매 목적, 판매자 신원, 재화·용역의 종류와 내용</strong>을 밝힌다. “무료 건강검사인 줄 알았는데 도착하니 물건을 사야 한다”는 상황을 막는 이유다. 휴업·영업정지 중에도 철회와 환급 업무를 계속 처리한다.</p>
+<p>일반 방문·전화권유판매업자에게 다단계판매업자와 같은 피해보상보험 등 체결 의무가 일률적으로 있는 것은 아니다. <strong>시험·한 줄:</strong> 형성 041의 함정은 다단계의 보험 의무를 일반 방문판매에 옮겨 놓는 것이다.</p>
+<h2 id="consumer-08-06" data-concept-id="consumer-08-06">2-4. 말로 끝내지 말고 계약 내용과 통화를 남긴다 ★★★★☆</h2>
+<p><strong>교재 283–284쪽 / 문단의 목적:</strong> 충동적 계약에서도 가격·해약 조건을 나중에 확인하도록 한다. 사전에 설명하고 계약서를 주어야 할 정보는 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>정보 묶음</th>
+<th>빠뜨리면 안 되는 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>누가·무엇을</td>
+<td>사업자·판매원 신원과 연락처, 상품·서비스의 명칭·종류·내용</td>
+</tr>
+<tr>
+<td>얼마·언제</td>
+<td>가격·지급 방법과 시기, 공급 방법과 시기</td>
+</tr>
+<tr>
+<td>그만두기</td>
+<td>청약철회·해제의 기한·방법·효과와 서식</td>
+</tr>
+<tr>
+<td>문제 해결</td>
+<td>교환·반품·보증·환불, 디지털 재화의 기술적 사항, 불만·피해보상·분쟁 처리</td>
+</tr>
+<tr>
+<td>나머지 조건</td>
+<td>약관, 추가 부담, 공급량·기간·지역 등 제한</td>
+</tr>
+</tbody></table>
+<p>법정 항목들을 묶어 읽은 것이며, 일부만 말해 주면 충분하다는 뜻은 아니다. 소비자 동의가 있으면 팩스·전자문서 방식이 가능하고, 계약서 내용이나 도달 여부를 다투면 사업자 쪽의 입증 책임을 확인한다. 전화권유 계약은 동의를 얻어 관련 통화 내용을 <strong>3개월 이상</strong> 보존하고 소비자가 방문·전화·팩스·전자우편 등으로 확인할 수 있게 한다.</p>
+<p>미성년자와 계약할 때는 법정대리인의 동의가 없으면 미성년자나 대리인이 취소할 수 있음을 알려야 한다. 민법상 처분을 허락한 재산, 영업 허락 등 개별 예외까지 무시하고 모든 미성년자 계약이 취소된다고 단정하지 않는다. <strong>한 줄:</strong> <mark class="green">나중에 ‘그렇게 말한 적 없다’는 분쟁을 줄이기 위해 설명·계약서·통화 자료를 남긴다.</mark></p>
+<h1>3. 방문·전화권유판매에서 빠져나오는 법</h1>
+<h2 id="consumer-08-07" data-concept-id="consumer-08-07">3-1. 기본은 14일, 잘못 이행한 계약은 3개월·30일 ★★★★★</h2>
+<p><strong>교재 285–286쪽 / 문단의 목적:</strong> 법정 재고려 기간의 출발점을 정확히 잡는다. 기본은 계약서를 받은 날부터 14일이다. 물건 공급이 더 늦으면 공급받거나 공급이 시작된 날부터 계산한다. 더 긴 기간을 약정하면 그 약정을 따른다.</p>
+<table>
+<thead>
+<tr>
+<th>사정</th>
+<th>기산점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>계약서 수령보다 물건이 늦음</td>
+<td>늦은 공급일</td>
+</tr>
+<tr>
+<td>계약서를 못 받음, 주소 누락·변경 등으로 행사 곤란</td>
+<td>판매자 주소를 알거나 알 수 있었던 날</td>
+</tr>
+<tr>
+<td>철회 가능하다는 내용을 안내받지 못함</td>
+<td>그 권리를 알거나 알 수 있었던 날</td>
+</tr>
+<tr>
+<td>판매자가 철회를 방해</td>
+<td>방해가 끝난 날</td>
+</tr>
+</tbody></table>
+<p>위 특칙에서도 14일을 계산한다. 계약서·공급·귀책 훼손 등 다툼의 법정 입증 책임도 사업자에게 부여한다. 소비자는 서면이나 다른 방법으로 철회할 수 있으며, <strong>서면이면 발송일</strong>에 효력이 생긴다. 내용증명은 발송 내용·날짜의 증거를 남기는 좋은 방법이지, 법이 정한 유일한 형식은 아니다.</p>
+<p>표시·광고와 다르거나 계약과 다르게 이행한 경우에는 <strong>공급일부터 3개월 이내이면서 그 사실을 알거나 알 수 있었던 날부터 30일 이내</strong>라는 두 제한을 함께 확인한다. 예컨대 공급 20일 뒤 다른 제품임을 알았다면 그때부터 30일을 넘기지 않아야 하며, 3개월도 넘길 수 없다. 교재·2013-62·2014-63의 ‘또는’ 표현을 기간 하나를 자유롭게 선택한다는 뜻으로 외우지 않는다. 이 특별 철회가 끝났다고 민법상 하자·불이행 구제까지 전부 없어지는 것은 아니다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026853037">법 8·9조</a></p>
+<p><strong>한 줄:</strong> <mark class="yellow">14일은 상황별 시작점, 계약 불일치는 3개월·30일을 함께 확인한다.</mark></p>
+<h2 id="consumer-08-08" data-concept-id="consumer-08-08">3-2. 포장을 열었다는 한마디로 철회를 막지 못한다 ★★★★★</h2>
+<p><strong>교재 286–288쪽 / 문단의 목적:</strong> 소비자 재고려 기회와 반품된 물건의 가치 보호를 조정한다. 제한 사유는 ① 소비자 책임으로 멸실·훼손 ② 사용·소비로 가치의 현저한 감소 ③ 시간 경과로 재판매가 곤란할 정도의 현저한 감소 ④ 복제 가능한 재화의 포장 훼손 ⑤ 법정 요건의 개별 주문제작 등이다.</p>
+<p><strong>내용 확인을 위한 포장 훼손</strong>은 ①에서 제외한다. ②–④는 철회가 제한된다는 표시나 시험 사용 등 법정 조치를 하지 않은 경우 제한하지 못하는 예외가 있다. 주문제작도 명칭만으로 충분하지 않다. 철회를 허용하면 회복할 수 없는 중대한 피해가 예상되고, <strong>미리 별도로 알린 뒤 서면 동의</strong>까지 받아야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>쉬운 판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>판매원이 청소기를 직접 개봉·시연</td>
+<td>그 시연을 소비자의 임의 사용으로 몰아 무조건 철회를 막지 못함</td>
+</tr>
+<tr>
+<td>건강식품은 미개봉, 사은품 옥매트만 사용</td>
+<td>본품 철회 가능성을 따로 판단. 사은품 정산도 미리 설명한 적정 조건인지 확인</td>
+</tr>
+<tr>
+<td>판매원이 학습 CD를 설치한 뒤 CD를 가져감</td>
+<td>소비자가 임의로 복제 가능한 포장을 훼손한 사건과 다름. 실제 공급·시연 사정을 봄</td>
+</tr>
+<tr>
+<td>온라인 학습 프로그램의 복제 가능·불가능</td>
+<td>교재의 구별은 단서일 뿐. 실제 사용, 가치 감소, 제한 안내 등 법정 요건을 함께 심사</td>
+</tr>
+</tbody></table>
+<p>인터넷으로 접근했다고 전자상거래법의 ‘디지털콘텐츠 제공 개시’ 규정을 방문판매에 그대로 붙이지 않는다. 처음 계약이 어떤 방식인지 먼저 판단한다. <strong>시험·한 줄:</strong> <mark class="pink">포장 개봉과 소비자 책임의 훼손, 시연과 소비, 제한 사유와 제한 안내를 나누어 본다.</mark></p>
+<h2 id="consumer-08-09" data-concept-id="consumer-08-09">3-3. 철회하면 반환비는 사업자, 환급은 반품 뒤 3영업일 ★★★★★</h2>
+<p><strong>교재 288–290쪽 / 문단의 목적:</strong> 철회권이 있어도 돈을 돌려주지 않으면 소용없으므로 실제 정산 절차를 정한다. 소비자는 재화를 반환하고 사업자는 반환받은 날부터 <strong>3영업일 이내</strong> 환급한다. 지연하면 법정 지연배상금 <strong>연 15%</strong>를 적용한다. 소비자에게 철회 자체를 이유로 위약금·손해배상을 청구할 수 없고 반환 비용도 사업자 부담이다.</p>
+<p>다만 일부 사용한 경우 법이 허용하는 사용이익·공급 비용은 구별한다. 사용 때문에 다시 팔 수 없는 <strong>소모성 부품의 공급 비용</strong>, 여러 동일 가분물 중 이미 소비한 부분의 공급 비용 등이 대상이다. 회사가 임의로 정한 ‘재포장 벌금’이나 환불금 전액을 삼키는 공제와 다르다.</p>
+<p>카드 결제라면 사업자가 청구 정지·취소를 요청하고 이미 받은 대금은 카드사 등 결제업자에게 반환하여 소비자 환급으로 이어지게 해야 한다. 사업자 책임으로 늦어진 부분도 따진다. 반환하지 않으면 소비자는 결제업자에게 <strong>그 사업자에게 지급할 채무와 환급금을 상계</strong>하도록 요청할 수 있다. 정당한 사유 없이 이를 게을리하면 소비자는 지급을 거절할 수 있고, 이를 이유로 연체자로 취급하는 불이익을 주어서는 안 된다. 판매자·대금 수령자·계약 당사자가 다른 경우 법정 환급의 연대책임도 확인한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026853037">법 9조의 정산</a></p>
+<p><strong>한 줄:</strong> <mark class="blue">철회 통지 → 재화 반환 → 사업자·결제업자의 환급 절차를 연결한다.</mark></p>
+<h2 id="consumer-08-10" data-concept-id="consumer-08-10">3-4. 다이어트식품·미성년자 교재·유치원 도서 사례 ★★★★★</h2>
+<p><strong>교재 276–277·291–294쪽 / 문단의 목적:</strong> 비슷한 ‘돈 돌려주세요’에도 근거가 다름을 보여 준다.</p>
+<p><strong>사례 A · 다이어트식품.</strong> A가 방문판매원 B에게서 3개월분을 산다 → 일주일 먹었는데 효과가 없다 → 환불을 요구한다 → 남은 식품 반환과 이미 소비한 일주일분의 공급 비용을 나눈다. 적법한 철회가 가능한 사안이라도 이미 먹은 부분의 법정 비용 청구는 별도다.</p>
+<p>“효과 없으면 전액 환불”이라는 별도 약속이 있으면 그 <strong>약속의 실제 조건</strong>을 읽는다. 교재는 3개월 복용 뒤 효과를 판단하는 조건을 전제로 일주일만으로 소비한 부분까지 돌려달라 할 수 없다고 설명한다. 그러나 <strong>3개월분을 샀다는 사실 자체가 반드시 3개월 복용 조건을 뜻하지는 않는다.</strong> 무조건적 환불 약속이나 허위 효능 광고라면 다르게 검토한다. 2015-67의 원본 정답 ③을 유지하되, 빠진 조건을 채워 이해한다.</p>
+<p><strong>사례 B · 고등학생과 공연 입장권.</strong> 미성년자 A가 전화 권유로 학습지를 사고 사은품 공연표를 받는다 → 엄마 B가 동의한 적 없다고 취소한다 → 판매자는 “선물 받았으니 못 무른다”고 한다 → 민법상 미성년자 취소와 방문판매법 철회를 따로 본다. 민법상 취소는 단순한 14일 경과나 복제 CD 개봉만으로 없어지지 않는다. 취소 통지를 남기고 한국소비자원·소비자단체 등에 도움을 요청할 수 있다.</p>
+<p>사은품도 원상회복 문제를 따지지만, <strong>미성년자 취소는 민법 141조의 현존이익 한도</strong>를 함께 보아야 한다. 이미 표를 썼다고 무조건 정가 전액을 갚는다는 교재식 단정을 일반화하지 않는다. 보통 철회의 정산과 미성년자 취소의 반환 범위는 같지 않다. 설명 의무 위반에 대한 제재와 사기·허위행위의 책임도 각각의 요건으로 판단한다.</p>
+<p><strong>사례 C · 유치원장과 200만 원 도서.</strong> A원장이 방문판매로 책을 샀는데 설명과 다르고 유아에게 맞지 않는다 → 일주일 뒤 반환을 요구한다 → 포장을 열었다며 거절한다. 먼저 사업자 거래 제외와 <strong>소비자 동일 지위·조건 예외</strong>를 확인한다. 법 적용이 있으면 내용 확인 개봉만으로 철회를 막지 못하고 계약 불일치의 특별 철회도 검토한다. <strong>한 줄:</strong> 거래의 주체·철회·불이행·미성년자 취소를 따로 잡아야 사례 결론이 보인다.</p>
+<h2 id="consumer-08-11" data-concept-id="consumer-08-11">3-5. 위협·거짓말·수신 거부 무시 등 9가지 금지행위 ★★★★☆</h2>
+<p><strong>교재 290–293쪽 / 문단의 목적:</strong> 계약 전 유인부터 사후 환급 방해까지 통제한다.</p>
+<table>
+<thead>
+<tr>
+<th>금지 유형</th>
+<th>교재 사례와 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 위협</td>
+<td>계약 체결을 강요하거나 철회를 막음</td>
+</tr>
+<tr>
+<td>② 거짓·과장·기만</td>
+<td>가짜 당첨, 연락한 적 없는데 회신인 척, 유료임을 숨긴 문자. 실제 경품 안내와 구별</td>
+</tr>
+<tr>
+<td>③ 판매원 부담</td>
+<td>가입·자격 유지 조건 등으로 연간 <strong>2만 원 이상</strong> 부담을 지움</td>
+</tr>
+<tr>
+<td>④ 후속 판매원 모집 강요</td>
+<td>그만두려면 대체 판매원을 데려오라는 요구 등</td>
+</tr>
+<tr>
+<td>⑤ 연락 단절</td>
+<td>주소·전화 변경 등으로 철회 방해</td>
+</tr>
+<tr>
+<td>⑥ 민원 시설 방치</td>
+<td>연결 불가능 ARS, 정당한 이유 없는 회신 지연. 교재의 3영업일 기준과 연락처 오류·부재 등 사정 구별</td>
+</tr>
+<tr>
+<td>⑦ 미주문 물품 대금 청구</td>
+<td>선물이라 보내고 세금·배송비 명목 청구, 무료 후 일방 유료 전환</td>
+</tr>
+<tr>
+<td>⑧ 거절에도 강요</td>
+<td>방문·전화·팩스 등을 반복하여 계약 강요</td>
+</tr>
+<tr>
+<td>⑨ 정보 남용</td>
+<td>동의·법정 근거 없이 목적 밖 이용·제공</td>
+</tr>
+</tbody></table>
+<p>배송·설치·AS·결제·도용 방지·미성년자 동의 확인 등 법정 필요한 처리에는 예외가 있지만, 그 범위 밖의 마케팅까지 풀어 주는 것은 아니다. 학습지 판매원에게 20만 원 회원 가입을 요구한 사례는 부담 조건의 실질을 본다.</p>
+<p><strong>판례 2010도14630을 읽는 순서:</strong> 회사가 승급하면 수입이 늘어난다고 안내한다 → 판매원이 실적을 위해 스스로 구매한다 → 회사가 가입·자격 유지를 조건으로 부담을 지웠는지 다툰다 → 단순한 승급 가능성 홍보와 자발적 실적 구매만으로 그 구성요건이 언제나 충족되는 것은 아니라고 구별한다. <strong>다른 결론이면:</strong> 모든 판매 실적 구매를 바로 같은 금지행위로 처벌하게 된다. 그렇다고 별도의 기만·강요 등 다른 위법 가능성까지 사라지는 것은 아니다. <strong>한 줄:</strong> <mark class="pink">일반 방문판매 2만 원 ‘이상’과 다단계 5만 원 ‘초과’를 섞지 않는다.</mark></p>
+<h2 id="consumer-08-12" data-concept-id="consumer-08-12">3-6. 소비자 잘못으로 해제해도 손해배상에 상한이 있다 ★★★☆☆</h2>
+<p><strong>교재 290쪽 / 문단의 목적:</strong> 철회가 아닌 채무불이행 해제에서 과도한 배상 청구를 막는다. 물건이 돌아오면 <strong>통상 사용료 또는 통상 사용이익</strong>, 그리고 <strong>판매가격에서 반환 당시 가치를 뺀 금액</strong>을 비교하여 법정 큰 금액을 기준으로 한다. 물건이 돌아오지 않으면 판매가격을 기준으로 하고 법정 지연손해금이 더해질 수 있다. 일반 할부의 손해배상 항목을 그대로 베껴 계약 체결 비용까지 자동 추가하지 않는다.</p>
+<p>예를 들어 철회기간이 지난 뒤 소비자의 불이행으로 계약이 해제되어 책을 돌려주었다면, 사업자가 감정적으로 위약금을 정하는 것이 아니라 법정 한도에 맞는지 본다. <strong>시험·한 줄:</strong> 법정 철회에는 위약금 금지, 불이행 해제에는 법정 배상 한도라는 서로 다른 규칙이다.</p>
+<h1>4. 다단계판매와 후원방문판매</h1>
+<h2 id="consumer-08-13" data-concept-id="consumer-08-13">4-1. 세 단계 조직과 다른 판매원의 실적에 연결되는 수당 ★★★★★</h2>
+<p><strong>교재 294–297쪽 / 문단의 목적:</strong> 다단계를 무조건 사기와 같게 보지 말고 법정 구조를 이해한다. 유통 단계를 줄이고 소비자가 판매원이 될 수 있다는 장점이 있지만, 물건보다 인원 모집에 이익이 몰리면 피해가 커진다.</p>
+<p>다단계판매는 <strong>① 판매원이 다른 사람을 하위 판매원으로 가입시키는 방식 ② 판매원 조직이 3단계 이상 ③ 다른 판매원의 거래 실적·조직 관리·교육훈련 실적 등과 연결된 후원수당 지급 방식</strong>을 함께 본다. 겉으로 2단계라고 나누어 두었어도 실질적으로 3단계 기능을 하면 포함될 수 있고, 외주 조직을 결합해 같은 기능을 하는 경우도 실질을 본다.</p>
+<p>A가 B를, B가 C를 가입시켰다면 A–B–C의 3단계다. A가 반드시 C의 매출까지 모두 수당으로 받아야만 3단계인 것은 아니다. 조직 단계와 수당이 미치는 단계는 다른 기준이다. 일정 구매액 전에는 단순 할인 회원이고 실제 수당 권리·판매원 관계가 없다면 교재의 판매원 수 산정에서 구별하지만, 형식만 할인 회원이라고 이름 붙여 실제 판매 조직을 숨기는 것은 별개다.</p>
+<p><strong>시험·한 줄:</strong> <mark class="yellow">모집 방식·3단계 조직·후원수당을 함께 보고, 다단계라는 이유만으로 불법이라 단정하지 않는다.</mark></p>
+<h2 id="consumer-08-14" data-concept-id="consumer-08-14">4-2. 후원방문판매는 바로 위 한 사람에게 연결되는 방식 ★★★★☆</h2>
+<p><strong>교재 297–299쪽 / 문단의 목적:</strong> 방문판매와 다단계의 성격이 함께 있지만 수당 구조가 제한된 유형을 나눈다. 방문판매 및 다단계판매의 요건에 해당하면서 특정 판매원의 실적이 <strong>직근 상위 판매원 한 사람</strong>의 후원수당에만 영향을 주는 방식이 후원방문판매다. 일반 다단계 정의의 ‘3단계 조직’과 구별하여 판별한다.</p>
+<p>가령 C의 실적이 B에게만 영향을 주고 그 위 A에게는 영향을 주지 않는 구조를 생각한다. 단순히 회사 조직도가 3층이라고 일반 다단계 규율만 단정하지 말고 방문판매 여부와 수당 구조를 함께 본다. 생산업자·주된 공급업자의 사이버몰 거래를 포함하는 현행 정의·특칙도 있어 온라인 주문이라는 이유만으로 언제나 벗어나는 것은 아니다.</p>
+<p>수당 방식 판별에서는 미리 정한 시급으로 외부 교육까지 하는 일시적 강의, 모든 판매원에게 동일한 보너스·판매 목적 아닌 체험품, 조직 운영 장소의 실제 임차료·공공요금 정액 지원 등을 구별한다. <strong>직근 상위 1인 여부의 판별에서 제외하는 것과 후원수당 총액 계산에서 제외하는 것은 다른 문제</strong>다.</p>
+<p>법정 후원수당 총액 상한은 일반 다단계 <strong>35%</strong>, 후원방문판매에 준용되는 특칙은 <strong>38%</strong>다. 통상 1년 공급가격 합계 등 법정 기준을 사용하고 부가세를 포함한다. 공급 시점·수당 발생 시점, 위탁은 판매가격·중개는 수수료라는 산정 기준도 구별한다. 후원방문판매의 최종소비자 판매 비중 70% 이상 등에 따른 일부 의무 예외는 법정 산정·요건을 충족할 때만 적용하며, 사이버몰 거래 등 특칙까지 확인한다. <strong>심화:</strong> 모든 후원방문판매가 보험·가격 규제에서 자동 면제되는 것은 아니다. <a href="https://www.law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=006000000&languageType=KO&lsNm=%EB%B0%A9%EB%AC%B8%ED%8C%90%EB%A7%A4+%EB%93%B1%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0&paras=1">후원방문판매 특칙</a>, <a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000525915">수당 산정 기준</a></p>
+<p><strong>한 줄:</strong> <mark class="blue">조직의 층수와 수당의 연결 범위를 나누고, 후원방문판매의 특칙을 더한다.</mark></p>
+<h2 id="consumer-08-15" data-concept-id="consumer-08-15">4-3. 사업자 등록과 판매원 등록은 상대 기관이 다르다 ★★★★☆</h2>
+<p><strong>교재 300–302쪽 / 문단의 목적:</strong> 큰 조직을 만드는 사업자와 그 안의 개인 판매원을 각각 관리한다. 다단계판매업자는 법정 요건을 갖추어 <strong>공정거래위원회 또는 시·도</strong>에 등록한다. 법정 공개 정보는 공개하지만 영업 비밀·개인정보를 무제한 공개하는 것은 아니다. 피해보상보험·은행 지급보증·공제계약 등 법정 소비자피해보상 장치도 필요하다.</p>
+<p>판매원은 <strong>다단계판매업자에게</strong> 등록한다. 등록증에는 성명·생년월일·주소·등록일·번호·사업자 표시 등을 넣으며 법정 동의 아래 전자 형식도 가능하다. 소비자와 다른 판매원은 신원을 확인할 수 있어야 한다. 탈퇴는 언제든 가능하고 새 판매원을 데려와야 한다는 조건을 붙이지 못한다.</p>
+<table>
+<thead>
+<tr>
+<th>판매원 제한</th>
+<th>이유·주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>국가·지방공무원, 교육공무원, 사립학교 교원 등</td>
+<td>공적 신분과 판매 관계의 충돌을 방지</td>
+</tr>
+<tr>
+<td>미성년자</td>
+<td>원칙 제한. 적격 법정대리인의 동의 등 법정 예외를 확인</td>
+</tr>
+<tr>
+<td>법인, 해당 업자의 지배주주·임직원 등</td>
+<td>법이 제한하는 조직 내부 지위를 우회 등록하지 못함</td>
+</tr>
+<tr>
+<td>반복 시정조치·법 위반 형사제재 관련자</td>
+<td>법정 횟수·기간을 따짐. 교재의 최근 3년 내 시정조치 2회, 형 집행 종료 등 후 5년·집행유예 중 등 요건</td>
+</tr>
+</tbody></table>
+<p>미성년자 동의를 주는 대리인도 해당 법정 결격 사유가 없어야 한다. <strong>한 줄:</strong> 회사는 행정기관에, 판매원은 회사에 등록한다. 어느 쪽도 ‘이름만 적으면 끝’이 아니다.</p>
+<h2 id="consumer-08-16" data-concept-id="consumer-08-16">4-4. 가입 부담·개별 가격·보험·정보 제공을 함께 규제한다 ★★★★★</h2>
+<p><strong>교재 302–305쪽 / 문단의 목적:</strong> 판매원이 되려다 비싼 재고와 가입비를 떠안는 것을 막는다. 가입·자격 유지·유리한 수당 기준 적용을 조건으로 <strong>연간 5만 원 초과</strong>의 부담을 지우는 행위는 금지한다. 자기 또는 하위 판매원의 실제 판매 실적에 따른 등급 차이와 강제 구매를 구별하지만 이름만 실적이라고 해서 강요가 합법이 되지는 않는다.</p>
+<p>교재의 모뎀 구매 비용·회원 가입 부담 사례와, 값싼 건강식품 등을 묶어 IBO 회원에게 40만 원 상당 구매를 요구한 사례는 실제 물건의 필요성보다 <strong>판매원 자격과 지출을 묶었는지</strong>를 본다. 부담을 장비대·교육비·회원비로 바꾸어도 실질을 따진다.</p>
+<p><strong>현재 개별 재화·용역의 가격 한도는 부가세 포함 200만 원을 초과하지 않는 것</strong>이다. 2025.6.4.부터 적용되는 시행령 개정으로, 교재의 160만 원을 그대로 쓰면 틀린다. ‘미만’과 ‘이하’도 구별한다. 기능상 하나인 세트, 없으면 제대로 쓸 수 없는 필수 부품, 품질·안전·기술·비용상 분리할 수 없는 구성은 형식적으로 쪼개지 못한다. 할부 총액, 소유권 이전형 임대의 전체 대가, 1년·2년 서비스 전체 대가 등 실질 전체 가격을 본다. 중개업자가 받는 수수료만으로 개별 상품 가격을 낮추는 것은 수당 총액 산정의 중개 수수료 기준과 다르다. <a href="https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=003572&lsRvsGubun=all">시행령 개정과 시행일</a>, <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026853121">법의 ‘초과’ 기준</a></p>
+<p>계약 전 정보·계약서, 동의에 따른 전자 교부, 미성년자 취소 안내는 방문판매 규정을 준용한다. 비싼 사은품 반환·비용 조건은 미리 명확하게 설명·기재해야 한다. 불이행 해제의 배상 한도도 법 19조의 준용을 통해 확인한다. <strong>시험·한 줄:</strong> <mark class="pink">방문 2만 원 이상 / 다단계 5만 원 초과 / 현행 상품 200만 원 초과 금지.</mark></p>
+<h2 id="consumer-08-17" data-concept-id="consumer-08-17">4-5. 다단계의 금지행위: 판매원도 보호하면서 소비자도 지킨다 ★★★★☆</h2>
+<p><strong>교재 305–307쪽 / 문단의 목적:</strong> 조직의 상하 관계가 강요와 환불 방해로 이어지지 않게 한다. 방문판매와 비슷한 유형도 적용 주체·내용을 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>묶음</th>
+<th>금지되는 행위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>강요·속임수</td>
+<td>협박·폭행·감금, 사지 않으면 귀가를 못 하게 함, 거짓·과장·기만, 강제 견본 구매</td>
+</tr>
+<tr>
+<td>연락·환급 방해</td>
+<td>주소·전화 변경, 불만 처리 시설 방치·정당한 이유 없는 회신 지연</td>
+</tr>
+<tr>
+<td>원치 않는 거래</td>
+<td>미주문 재화 대금 청구, 거부 의사에도 강요, 자신의 하위 판매원에게 재화를 판매하는 금지 유형</td>
+</tr>
+<tr>
+<td>지위·목적 숨김</td>
+<td>취업이라고 속여 판매원 가입, 판매원 신분을 회사 임원인 것처럼 설명, 등록하지 않고 활동</td>
+</tr>
+<tr>
+<td>정보·조직 남용</td>
+<td>법정 근거 없는 목적 외 정보 이용·제공, 조직·판매원 지위 양도·양수. 상속·사업 양도·합병 등 법정 예외 구별</td>
+</tr>
+</tbody></table>
+<p>회사가 조직에 적법하게 공급하는 거래와 특정 판매원이 자기 하위에게 판매하는 금지 유형을 섞지 않는다. 개인정보의 배송·결제 등 필요한 처리 예외도 목적 범위 안에서만 인정된다. <strong>한 줄:</strong> 친분·상하관계·취업 기대를 소비자의 자유로운 선택을 막는 도구로 쓰지 못한다.</p>
+<h2 id="consumer-08-18" data-concept-id="consumer-08-18">4-6. 물건보다 사람과 돈을 돌리는 사행적 조직은 금지한다 ★★★★☆</h2>
+<p><strong>교재 307–310쪽 / 문단의 목적:</strong> 합법적인 판매 조직과 상품을 핑계로 돈을 모으는 조직을 구별한다. 누구든 법이 금지한 사행적 판매원 확장 행위를 해서는 안 된다.</p>
+<table>
+<thead>
+<tr>
+<th>금지 유형</th>
+<th>쉽게 읽기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 재화 거래를 가장한 금전 거래</td>
+<td>정상가보다 현저히 높은 가격, 정당한 이유 없는 미공급, 공급 능력·계약·실적·수당의 실질 등을 종합. 교재의 시가 10배 사례는 형식적 물건 판매의 단서</td>
+</tr>
+<tr>
+<td>② 모집 자체의 대가</td>
+<td>물건 판매와 무관하게 사람만 데려오면 돈을 주거나 허용 수당 외 금품 지급</td>
+</tr>
+<tr>
+<td>③ 과도한 수당 약속</td>
+<td>법정 공급가격 합계 기준 35%를 넘는 수당 지급 등을 약속하며 가입 유도</td>
+</tr>
+<tr>
+<td>④ 과도한 가입 부담</td>
+<td>연간 5만 원 초과 부담을 자격 등의 조건으로 지움</td>
+</tr>
+<tr>
+<td>⑤ 상품권 등 이용</td>
+<td>진짜 소비·판매보다 재매입·고율 수당을 앞세우는 방식</td>
+</tr>
+<tr>
+<td>⑥ 사회적 관계 이용</td>
+<td>친분·관계로 구매·가입 강요</td>
+</tr>
+<tr>
+<td>⑦ 강제 교육·합숙</td>
+<td>뜻에 반해 교육·합숙 강요</td>
+</tr>
+<tr>
+<td>⑧ 목적 은폐</td>
+<td>취업·부업·세미나라고 속여 실제 가입 목적을 숨김</td>
+</tr>
+</tbody></table>
+<p>수당 35%는 개별 판매원 한 명의 매출 수당률과 회사의 법정 총액 상한을 구별해야 한다. ‘10배가 아니면 모두 안전’, ‘물건을 조금 주면 금전 모집이 아님’ 같은 역추론도 금물이다. <strong>한 줄:</strong> <mark class="green">상품의 실제 수요보다 새로 들어오는 사람의 돈이 수익의 중심인지 살핀다.</mark></p>
+<h2 id="consumer-08-19" data-concept-id="consumer-08-19">4-7. 금지행위 고지·중지 요청·회사의 배상책임 ★★★★☆</h2>
+<p><strong>교재 310쪽 / 문단의 목적:</strong> 회사가 판매원 탓만 하며 책임을 피하지 못하게 한다. 회사는 금지 규정을 판매원에게 <strong>서면 또는 전자우편</strong>으로 알려야 한다. 그 의무를 게을리하고 판매원이 금지행위를 위반하여 다른 판매원·소비자에게 재산상 손해를 주었다면 회사의 배상책임을 검토한다. 위반행위와 <strong>상당인과관계</strong> 있는 손해가 기준이고 관련 매출액이 법정 한도다.</p>
+<p>등장인물은 회사·모집 판매원·피해자 세 명이다. 회사가 금지사항을 제대로 알리지 않는다 → 판매원이 위법하게 구매를 강요한다 → 피해자가 돈을 잃는다 → 법은 고지 의무 위반과 손해의 연결을 본다 → 회사는 배상 뒤 잘못한 판매원에게 <strong>구상권을 행사할 수 있다</strong>. 회사가 배상한다고 최종 부담까지 반드시 회사에게만 남는 것은 아니다. 이것이 2019-53의 함정이다.</p>
+<p>침해받았거나 침해 우려가 있는 소비자는 등록 소비자단체·한국소비자원 및 법정 비영리법인 등을 통해 다단계·후원방문판매 위법행위의 중지를 공정위에 요청하는 제도를 이용할 수 있다. 법원에 제기하는 소비자단체소송과는 절차가 다르다. 휴업·정지 중에도 철회·환급 처리는 계속해야 한다. <strong>한 줄:</strong> <mark class="blue">예방 고지 → 위법 중지 → 손해배상 → 내부 구상은 서로 다른 단계다.</mark></p>
+<h1>5. 다단계 계약의 철회와 반환</h1>
+<h2 id="consumer-08-20" data-concept-id="consumer-08-20">5-1. 소비자 14일과 판매원 계약일부터 3개월은 다르다 ★★★★★</h2>
+<p><strong>교재 311–313쪽 / 문단의 목적:</strong> 최종 소비자와 재고를 떠안은 판매원을 따로 보호한다. 소비자는 방문판매와 같은 14일 및 기산 특칙, 계약 불일치의 3개월·30일 등을 적용한다. 판매원은 자신이 다단계 방식으로 구매한 계약을 <strong>계약 체결일부터 3개월 이내 서면으로</strong> 철회할 수 있다. 전자문서도 포함한다. 상품을 늦게 받았다고 판매원의 기본 3개월 시작점이 공급일로 바뀌지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>판매원 철회가 제한될 수 있는 경우</th>
+<th>조건을 붙여 읽기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>재고를 거짓으로 알리고 과다 구매</td>
+<td>법정 부정 구매 유형인지 확인</td>
+</tr>
+<tr>
+<td>재판매 곤란할 정도로 훼손</td>
+<td>원상 회복·재판매 가능성을 봄</td>
+</tr>
+<tr>
+<td>본인 책임 멸실·훼손</td>
+<td>내용 확인 포장 훼손은 별도 예외</td>
+</tr>
+<tr>
+<td>사용·소비로 가치 현저 감소</td>
+<td>제한 안내·시험 사용 관련 조치 여부도 확인</td>
+</tr>
+<tr>
+<td>복제 가능 재화 개봉</td>
+<td>단순 확인 개봉과 규정의 대상을 구별</td>
+</tr>
+<tr>
+<td>개별 주문제작</td>
+<td>중대·회복 불가능 피해, 사전 별도 고지·서면 동의 요건</td>
+</tr>
+</tbody></table>
+<p>교재의 “소비자 또는 판매원은 서면이나 다른 방법” 문장은 <strong>판매원 3개월 철회에는 맞지 않는다.</strong> 소비자는 다른 방법도 가능하지만 판매원은 법이 서면을 요구한다. 형성 042의 ③은 도달주의라는 오류에 더해 이 형식도 바로잡아야 한다. <a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1019967725">법 17·18조</a></p>
+<p>소비자는 원칙적으로 판매한 판매원에게 먼저 철회한다. 판매원의 주소·연락처를 모르거나 환급을 기대하기 어려운 경우 등에는 회사에 요구할 수 있다. 회사가 자기 공급가격보다 많이 환급했다면 그 차액에 관한 판매원 상대 정산도 가능하다. <strong>한 줄:</strong> <mark class="yellow">최종 소비자 14일 / 판매원 계약일 3개월·서면·발송일.</mark></p>
+<h2 id="consumer-08-21" data-concept-id="consumer-08-21">5-2. 판매원 반품 공제율과 소비자 반환 비용을 섞지 않는다 ★★★★★</h2>
+<p><strong>교재 313–315쪽 / 문단의 목적:</strong> 반품을 실제 환급으로 연결하면서 판매원 재고 반품의 별도 비용을 조정한다. 반환받은 날부터 3영업일 환급, 지연배상금, 카드 청구 정지·취소·상계 등은 법정 절차에 따른다.</p>
+<p>판매원에게 공급한 상품은 <strong>공급일부터 반환 시점까지</strong>의 기간에 따라 미리 약정한 법정 비용을 공제할 수 있다. 공급 후 1개월이 지나 2개월 이내면 가격의 <strong>5% 이내</strong>, 2개월이 지나 3개월 이내면 <strong>7% 이내</strong>다. 등록 취소 등 법정 경우에는 각각 절반 한도 <strong>2.5%·3.5%</strong>를 적용한다. 언제나 최대치를 자동 공제한다는 뜻은 아니다. 판매원 철회기간은 <strong>계약일</strong>, 이 반품 비용의 기간은 <strong>공급일</strong>이라는 차이가 중요하다.</p>
+<p>소비자의 철회에 대한 반환 비용 사업자 부담·위약금 금지는 법 18조 8항이 <strong>17조 1항의 소비자</strong>를 대상으로 정한다. 이를 판매원 3개월 반품에도 아무 조건 없이 똑같이 옮기거나, 소비자의 14일 철회에 판매원 5%·7%를 공제하면 틀린다. 일부 소비한 물건의 법정 사용이익·공급 비용도 임의 위약금과 구별한다.</p>
+<p><strong>한 줄:</strong> <mark class="pink">누가 철회하는지 먼저 확인한다. 같은 회사의 상품이어도 소비자와 판매원의 정산 규칙은 다르다.</mark></p>
+<h1>6. 계속거래와 사업권유거래</h1>
+<h2 id="consumer-08-22" data-concept-id="consumer-08-22">6-1. 오래 쓰는 계약과 돈 벌 기회를 미끼로 한 구매 ★★★★★</h2>
+<p><strong>교재 315–316쪽 / 문단의 목적:</strong> 판매 장소와 무관하게 장기 구속·수입 기대 때문에 생기는 위험을 보호한다. 계속거래는 <strong>1개월 이상</strong> 계속 재화·용역을 공급하고 중도해지 시 대금 환급 제한 또는 위약금 약정이 있는 거래다. 학습지·헬스장·결혼중개 등이 대표적이다. 단순히 기간만 길다고 나머지 조건을 빼도 되는 것은 아니다.</p>
+<p>사업권유거래는 <strong>소득기회를 알선·제공한다는 방법으로 소비자를 유인하여 물건·서비스를 구입</strong>하게 하는 거래다. “타이핑 일을 주려면 교재를 먼저 사라”, “번역 일감을 받으려면 강좌를 결제하라”가 교재 사례다. 일감·수입 기회와 관계없이 교재만 권유했다면 이 정의와 다르다.</p>
+<p>교재의 음식점 운영자는 이미 복권 자판기 사업을 하다가 자신이 판단해 사진 자판기를 구입했다. 수익 기회 제공으로 구매를 유인한 구조가 아니라는 사실관계에서 사업권유거래로 보지 않는다. <strong>사업 경험이 조금이라도 있으면 언제나 제외</strong>된다는 일반 규칙으로 바꾸지 않는다. <strong>시험·한 줄:</strong> <mark class="yellow">계속거래는 1개월＋중도해지 제약, 사업권유거래는 소득기회로 구매 유인.</mark></p>
+<h2 id="consumer-08-23" data-concept-id="consumer-08-23">6-2. 계약서 의무의 금액·기간과 자동연장 안내 ★★★★☆</h2>
+<p><strong>교재 316–317쪽 / 문단의 목적:</strong> 정의에 해당하는 것과 특정 정보제공 의무의 적용 범위를 구별한다. 계속거래의 계약 전 설명·계약서 의무는 <strong>총대금 10만 원 이상이며 3개월 이상</strong>, 사업권유거래는 <strong>30만 원 이상</strong> 등 법정 기준을 확인한다. 계속거래 자체의 정의인 1개월을 이 의무의 3개월로 바꾸지 않는다.</p>
+<p>사업자 신원, 상품·서비스 내용, 가격·지급 조건, 공급 방법·시기, 해지·해제의 행사·효과와 서식, 분쟁·불만 처리, 약관, 추가 부담, 공급량·기간·지역 등 제한과 법정 사항을 설명·기재한다. 미성년자 취소 안내도 필요하다. 계약 기록은 방문·전화·인터넷 등으로 바로 확인할 수 있게 하고, 우편 요구에는 원칙적으로 3영업일 내 발송한다.</p>
+<p>서비스 계약을 자동 연장하려면 만료 전 <strong>50일부터 20일 사이</strong>에 서면·전자우편 등 법정 방법으로 알린다. 2개월 이하 계약이나 갱신 의사를 확인한 경우 등 예외도 함께 본다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026853185">법 30조</a></p>
+<p>금지행위는 ① 위협·강요 ② 거짓·과장·기만 ③ 부당하게 과다한 대금 ④ 정당한 이유 없는 환급 지연·거절 ⑤ 연락처 변경으로 방해 ⑥ 민원 시설 방치 ⑦ 미주문 재화 청구 ⑧ 거부에도 계약 강요 등이다. <strong>한 줄:</strong> 가입할 때뿐 아니라 갱신·기록 확인·탈퇴 단계에서도 정보를 준다.</p>
+<h2 id="consumer-08-24" data-concept-id="consumer-08-24">6-3. 언제든 해지할 수 있지만 언제나 전액 환불은 아니다 ★★★★★</h2>
+<p><strong>교재 318–320쪽 / 문단의 목적:</strong> 앞으로 받지 않을 서비스의 대금에 계속 묶이지 않게 한다. 계속거래·사업권유거래 소비자는 원칙적으로 <strong>계약기간 중 언제든지 해지</strong>할 수 있다. 다른 법의 특별 규정이나, 개별 제작의 회복 불가능한 중대한 피해를 사전 별도 안내하고 서면 동의를 받은 법정 예외는 따로 본다.</p>
+<p><strong>교재 사례 · 결혼중개.</strong> 60세 소비자가 200만 원을 내고 1년간 서비스를 받기로 한다 → 계약 당일 세 번 만남을 주선받는다 → 추가 설명도 제대로 없는데 그만두려 한다 → 업체는 “세 번 소개했으니 중도해지 불가”라고 한다 → 원칙적인 해지권을 약관만으로 없애지 못한다. 이미 제공한 유효한 서비스와 합리적 위약금은 따로 정산한다. 일반적인 만남 주선은 ‘주문제작품이라 돌이킬 수 없는 피해’라는 예외가 자동 성립하지 않는다.</p>
+<p><strong>교재 사례 · 헬스장.</strong> 3개월 계약 후 1개월 이용하고 개인 사정으로 그만둔다. “일절 환불 불가” 약정으로 해지 자체를 막지 못한다. 다만 이용한 1개월분과 적법한 위약금까지 모두 없어지는 것은 아니다. 위약금은 해지·해제로 생기는 손실을 <strong>현저하게 초과</strong>할 수 없다. 앞 장 선불식 규정의 문구와 혼동하지 않는다.</p>
+<p>정산은 <strong>이미 낸 돈 − 실제 공급된 부분의 대가 − 적법한 위약금</strong>으로 이해한다. 가입비·등록비라는 이름으로 미공급 대금을 전부 보유하지 못한다. 반환 가능한 물건을 돌려받으면 그 가치에 따라 환급하거나 위약금을 줄이는 등 조정하고, 반환 후 3영업일 내 법정 조치 및 지연배상 문제를 확인한다. 가치 산정에서 시장 가격·사용에 따른 감소 등을 고려하므로 구입가 전액을 늘 그대로 인정하는 것은 아니다.</p>
+<p><strong>시험·한 줄:</strong> <mark class="pink">언제든 해지 가능 ≠ 위약금 언제나 0원 ≠ 이미 받은 서비스까지 전액 환급.</mark></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>特殊販賣 특수판매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특): 특별, 殊(다를 수): 다름, 販(팔 판): 판매, 賣(팔 매): 팖. <strong>③ 합친 뜻:</strong> 특별한 방식으로 팖. <strong>④ 이름의 이유:</strong> 판매 접근 방식이 일반 점포 거래와 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 전통적 점포 거래와 다른 방문·전화·다단계·통신 등 판매 방식. <strong>⑥ 쉬운 말:</strong> 가게에 직접 찾아가 고르는 것 말고 다른 방식으로 사는 것. <strong>⑦ 사례:</strong> 집에 찾아온 판매원이 건강식품을 권한다.</p>
+<p><strong>⑧ 시험:</strong> 각 방식별 적용 법·철회기간. <strong>⑨ 비교·기억법:</strong> 특수판매가 모두 불법이라는 뜻은 아님.</p>
+<h3>訪問販賣 방문판매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 訪(찾을 방): 찾아감, 問(물을 문): 물음, 販(팔 판): 판매, 賣(팔 매): 팖. <strong>③ 합친 뜻:</strong> 찾아가 권유하여 팖. <strong>④ 이름의 이유:</strong> 소비자에게 찾아가 접근하는 성격을 나타냄.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사업장 밖 권유·법정 유인 등을 통해 계약하는 거래. <strong>⑥ 쉬운 말:</strong> 내가 가게를 고르기 전에 판매자가 나를 설득하러 오는 거래. <strong>⑦ 사례:</strong> 거리에서 유인하고 매장 안에서 서명한다.</p>
+<p><strong>⑧ 시험:</strong> 계약 장소만 보지 않기. <strong>⑨ 비교·기억법:</strong> 전화권유·통신판매와 실제 권유 방식을 구별.</p>
+<h3>勸誘 권유·誘引 유인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 勸(권할 권): 권함, 誘(꾈 유): 이끎, 引(끌 인): 끌어옴. <strong>③ 합친 뜻:</strong> 행동을 하도록 권하고 이끎. <strong>④ 이름의 이유:</strong> 소비자를 거래 쪽으로 이끌기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소비자의 계약 의사를 형성하도록 적극적으로 유도. <strong>⑥ 쉬운 말:</strong> 살 생각이 없던 사람에게 사도록 말을 거는 것. <strong>⑦ 사례:</strong> 경품 안내로 전화하게 한 뒤 상품을 설득한다.</p>
+<p><strong>⑧ 시험:</strong> 전화 대화의 적극성. <strong>⑨ 비교·기억법:</strong> 단순 정보 제공·주문 접수와 다름.</p>
+<h3>申告 신고·登錄 등록</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 申(펼 신): 알림, 告(알릴 고): 고함, 登(오를 등): 올림, 錄(기록할 록): 적음. <strong>③ 합친 뜻:</strong> 알리기와 명부에 올리기. <strong>④ 이름의 이유:</strong> 행정 관리 방식이 다르므로 이름도 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 영업 정보를 알리는 절차와 요건을 갖춰 등록하는 절차. <strong>⑥ 쉬운 말:</strong> 일반 방문판매의 신고와 다단계 회사의 등록을 나누는 것. <strong>⑦ 사례:</strong> 다단계 회사는 공정위 또는 시·도에 등록한다.</p>
+<p><strong>⑧ 시험:</strong> 회사 등록과 판매원 등록 기관. <strong>⑨ 비교·기억법:</strong> 신고·등록은 단순한 동의어가 아님.</p>
+<h3>請約撤回 청약철회</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청): 요청, 約(맺을 약): 약속, 撤(거둘 철): 거둠, 回(돌 회): 되돌림. <strong>③ 합친 뜻:</strong> 계약 의사를 거두어 되돌림. <strong>④ 이름의 이유:</strong> 급히 한 선택을 다시 생각하도록 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특별법이 일정 기간 인정하는 재고려 권리. <strong>⑥ 쉬운 말:</strong> 물건에 문제가 없어도 법이 정한 기간에는 그만 살 수 있는 권리. <strong>⑦ 사례:</strong> 방문판매 계약서 수령 뒤 14일 내 행사.</p>
+<p><strong>⑧ 시험:</strong> 기간·기산점·제한·발송 효력. <strong>⑨ 비교·기억법:</strong> 미성년자 취소와 불이행 해제는 별도 근거.</p>
+<h3>起算 기산·發送 발송·到達 도달</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 起(일어날 기): 시작, 算(셈 산): 계산, 發(필 발): 내보냄, 送(보낼 송): 보냄, 到(이를 도): 도착, 達(통달할 달): 닿음. <strong>③ 합친 뜻:</strong> 기간 계산의 시작, 보내기, 도착. <strong>④ 이름의 이유:</strong> 시계가 언제 돌고 통지가 언제 작동하는지 정하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기간을 세는 사건과 의사표시 효력 시점을 구별. <strong>⑥ 쉬운 말:</strong> 편지 보낸 날과 받은 날을 나누는 것. <strong>⑦ 사례:</strong> 마지막 날 철회 서면을 보냈다.</p>
+<p><strong>⑧ 시험:</strong> 서면 철회 발송일 효력. <strong>⑨ 비교·기억법:</strong> 판매원 3개월 계약일과 반품 공제 공급일도 다름.</p>
+<h3>現存利益 현존이익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현): 현재, 存(있을 존): 존재, 利(이로울 리): 이로움, 益(더할 익): 이익. <strong>③ 합친 뜻:</strong> 현재 남아 있는 이익. <strong>④ 이름의 이유:</strong> 받은 것 전부가 아니라 현재 남은 이익을 보기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 미성년자 취소 등에서 반환 범위를 정하는 기준. <strong>⑥ 쉬운 말:</strong> 지금도 남아 있는 물건이나 재산상 도움이 무엇인지 따지는 것. <strong>⑦ 사례:</strong> 미성년자가 받은 공연표·사용 이익의 반환을 검토한다.</p>
+<p><strong>⑧ 시험:</strong> 민법 141조와 특별법 철회 정산 구별. <strong>⑨ 비교·기억법:</strong> 무조건 정가 전액 반환 또는 무조건 반환 없음 모두 아님.</p>
+<h3>多段階 다단계·下位 하위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 多(많을 다): 여럿, 段(층계 단): 단계, 階(섬돌 계): 층, 下(아래 하): 아래, 位(자리 위): 지위. <strong>③ 합친 뜻:</strong> 여러 층의 단계와 아래쪽 자리. <strong>④ 이름의 이유:</strong> 사람이 아래로 이어지는 조직을 이루어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 판매원이 다른 판매원을 모집하여 법정 단계 조직·수당 구조를 형성. <strong>⑥ 쉬운 말:</strong> A 아래 B, B 아래 C처럼 연결되는 판매 조직. <strong>⑦ 사례:</strong> A–B–C와 후원수당 관계.</p>
+<p><strong>⑧ 시험:</strong> 3단계와 수당 영향 범위는 별도. <strong>⑨ 비교·기억법:</strong> 다단계 조직 자체와 사행적 금전 모집을 구별.</p>
+<h3>後援手當 후원수당·直近 직근</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 後(뒤 후): 뒤, 援(도울 원): 도움, 手(손 수): 손, 當(마땅 당): 해당, 直(곧을 직): 바로, 近(가까울 근): 가까움. <strong>③ 합친 뜻:</strong> 조직 활동에 따른 지급, 바로 가까운 단계. <strong>④ 이름의 이유:</strong> 조직의 판매 활동에 따른 보상이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 판매원의 거래·교육·조직 관리 등에 연결된 경제적 이익. <strong>⑥ 쉬운 말:</strong> 아래 판매원의 실적 때문에 위 판매원에게 생기는 돈. <strong>⑦ 사례:</strong> C 실적이 B 한 명에게만 영향을 준다.</p>
+<p><strong>⑧ 시험:</strong> 후원방문판매의 직근 상위 1인. <strong>⑨ 비교·기억법:</strong> 총액 상한 35·38%와 개인 수당률을 구별.</p>
+<h3>射倖 사행·假裝 가장</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 射(쏠 사): 겨냥, 倖(요행 행): 뜻밖의 행운, 假(거짓 가): 거짓, 裝(꾸밀 장): 꾸밈. <strong>③ 합친 뜻:</strong> 요행 이익을 노림과 거짓으로 꾸밈. <strong>④ 이름의 이유:</strong> 실제 상품 수요보다 새로운 사람의 돈에 기대어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 물건 판매를 핑계로 금전 거래·사행적 조직 확장을 하는 금지행위. <strong>⑥ 쉬운 말:</strong> 물건 파는 척하면서 사람 데려온 돈을 돌리는 것. <strong>⑦ 사례:</strong> 비정상 가격 상품과 가입 대가를 결합한다.</p>
+<p><strong>⑧ 시험:</strong> 모집 자체 대가·고율 약속·강제 합숙. <strong>⑨ 비교·기억법:</strong> 합법 판매 조직의 실적 보상과 구별.</p>
+<h3>相當因果關係 상당인과관계·求償 구상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 相(서로 상): 서로, 當(마땅 당): 타당, 因(인할 인): 원인, 果(열매 과): 결과, 關(관계할 관): 관계, 係(맬 계): 연결, 求(구할 구): 요구, 償(갚을 상): 갚음. <strong>③ 합친 뜻:</strong> 타당한 원인 결과 연결, 대신 낸 돈을 요구함. <strong>④ 이름의 이유:</strong> 모든 손해를 무한히 묶지 않고 최종 부담도 조정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위반과 손해의 법적 연결 및 배상자가 내부 책임자에게 상환 청구. <strong>⑥ 쉬운 말:</strong> 그 잘못 때문에 난 손해인지 보고 대신 낸 돈을 돌려달라는 것. <strong>⑦ 사례:</strong> 회사가 배상한 뒤 위법 판매원에게 구상한다.</p>
+<p><strong>⑧ 시험:</strong> 관련 매출액 한도·구상 가능. <strong>⑨ 비교·기억법:</strong> 회사 배상과 판매원의 최종 부담은 다른 문제.</p>
+<h3>繼續去來 계속거래</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 繼(이을 계): 이어 감, 續(이을 속): 계속, 去(갈 거): 감, 來(올 래): 옴. <strong>③ 합친 뜻:</strong> 계속 이어지는 거래. <strong>④ 이름의 이유:</strong> 한 번의 공급으로 끝나지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 1개월 이상 공급하고 중도해지에 환급 제한·위약금 약정이 있는 거래. <strong>⑥ 쉬운 말:</strong> 헬스장처럼 앞으로 계속 이용하는 계약. <strong>⑦ 사례:</strong> 3개월 등록 뒤 한 달 만에 그만둔다.</p>
+<p><strong>⑧ 시험:</strong> 정의 1개월, 일부 계약서 의무 3개월. <strong>⑨ 비교·기억법:</strong> 장기라는 사실만이 아니라 중도해지 제약도 확인.</p>
+<h3>事業勸誘去來 사업권유거래</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 事(일 사): 일, 業(일 업): 사업, 勸(권할 권): 권함, 誘(꾈 유): 유도, 去(갈 거): 감, 來(올 래): 옴. <strong>③ 합친 뜻:</strong> 사업·수입 기회를 권하며 거래시킴. <strong>④ 이름의 이유:</strong> 돈 벌 기회를 내세워 구매를 권하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소득기회 알선·제공으로 구매를 유인하는 거래. <strong>⑥ 쉬운 말:</strong> 일감을 주겠다며 먼저 물건이나 강의를 사라는 것. <strong>⑦ 사례:</strong> 번역 일감을 받으려면 교재를 구매하라고 한다.</p>
+<p><strong>⑧ 시험:</strong> 소득기회와 구매의 연결. <strong>⑨ 비교·기억법:</strong> 단순한 교재 판매와 구별.</p>
+<h3>解止 해지·違約金 위약금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 解(풀 해): 풀음, 止(그칠 지): 그침, 違(어길 위): 위반, 約(맺을 약): 약속, 金(쇠 금): 돈. <strong>③ 합친 뜻:</strong> 이어지는 계약을 멈춤, 약속 위반 등에 정한 금액. <strong>④ 이름의 이유:</strong> 앞으로의 구속을 멈추되 이미 제공한 부분은 남아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 계속적 계약을 장래에 종료하고 법정 범위의 비용을 정산. <strong>⑥ 쉬운 말:</strong> 앞으로 이용하지 않겠다고 그만두고 돈을 계산하는 것. <strong>⑦ 사례:</strong> 헬스장 이용분·적법 위약금을 빼고 환급한다.</p>
+<p><strong>⑧ 시험:</strong> 언제든지와 전액 환불은 다름. <strong>⑨ 비교·기억법:</strong> 철회 위약금 금지와 중도해지 정산을 구별.</p>
+<h3>相計 상계·連帶責任 연대책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 相(서로 상): 서로, 計(셀 계): 셈, 連(이을 연): 연결, 帶(띠 대): 묶음, 責(꾸짖을 책): 책임, 任(맡길 임): 맡음. <strong>③ 합친 뜻:</strong> 서로 계산하여 없앰, 함께 묶인 책임. <strong>④ 이름의 이유:</strong> 돈을 따로 주고받는 낭비와 책임 회피를 줄이려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대립하는 채권·채무를 대등액 소멸시키는 것과 여러 책임자의 전액 이행 책임. <strong>⑥ 쉬운 말:</strong> 갚을 돈끼리 계산하거나 여러 책임자에게 환급을 요구하는 것. <strong>⑦ 사례:</strong> 결제업자가 사업자에게 줄 돈과 환급금을 정산한다.</p>
+<p><strong>⑧ 시험:</strong> 누구의 채권·채무인지 확인. <strong>⑨ 비교·기억법:</strong> 연대는 각자 일부 금액만 책임진다는 뜻이 아님.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>출제자가 확인하는 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-50·2015-69</td>
+<td>계약 장소보다 방문 유인·전화 권유의 구조</td>
+</tr>
+<tr>
+<td>2013-61</td>
+<td>미성년자 취소와 철회 제한을 구별, 농부의 직접 판매 예외</td>
+</tr>
+<tr>
+<td>2016-56</td>
+<td>다단계 판매원 계약일부터 3개월·서면</td>
+</tr>
+<tr>
+<td>2015-67</td>
+<td>소비한 식품 비용과 별도 환불 약속의 조건</td>
+</tr>
+<tr>
+<td>2015-68·2016-57</td>
+<td>언제든 해지와 적법한 위약금·부분 환급의 공존</td>
+</tr>
+</tbody></table>
+<p>반복 출제되는 축은 <strong>거래 유형 구별, 14일과 3개월, 계속거래 1개월, 중도해지 정산</strong>이다. 혼동하기 쉬운 보기는 ‘매장에서 계약하면 방문판매 아님’, ‘전화는 누가 먼저 걸었는지로 판단’, ‘포장 개봉하면 미성년자 취소 불가’, ‘언제든 해지니 위약금은 무조건 금지’다. 29문제·116보기 모두 부록에서 원문과 과외 해설을 대조한다. 2012-69의 10만 원 문장처럼 숫자 기준의 부정확성과 논리상 포함관계를 구별해야 하는 원자료도 표시했다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 거리 초대 후 매장 서명.</strong> 무료 피부 측정이라며 길에서 수아를 데려가 매장에서 장기 관리권을 팔았다. 회사는 매장 안 계약이라고 한다. <strong>정답·의도:</strong> 법정 유인 방식이면 방문판매를 검토한다. 장기 서비스의 계속거래 규율도 겹칠 수 있다. 장소 하나로 모든 권리를 판단하지 않는다.</p>
+<p><strong>응용2 · 새로 알게 된 불일치.</strong> 방문판매로 받은 조명이 계약과 다르다는 사실을 공급 20일 뒤 알았다. 그 뒤 35일이 지나 철회했다. <strong>정답·의도:</strong> 공급 3개월 안이더라도 인식 후 30일 제한을 넘었다. 3개월과 30일 중 편한 것을 선택할 수 없다. 민법상 불이행 구제는 별도 검토한다.</p>
+<p><strong>응용3 · 회사에 돌려주는 두 사람.</strong> 같은 상품을 산 소비자와 판매원이 반품한다. 회사는 둘 모두에게 7%를 공제한다고 한다. <strong>정답·의도:</strong> 소비자의 적법한 철회에는 판매원 반품 공제율을 가져오지 못한다. 판매원은 계약일부터 3개월 내 서면 행사인지, 공급 후 기간과 약정 비용 한도는 어떤지 따로 확인한다.</p>
+<p><strong>응용4 · 정확히 200만 원.</strong> 회사가 부가세 포함 200만 원짜리 세트를 다단계 방식으로 판다. 가격이 한도와 같으니 위법하다는 주장이다. <strong>정답·의도:</strong> 현재는 200만 원 초과 금지이므로 가격 한도만으로 위법하지 않다. 필수 부품을 따로 계산해 실제 230만 원이면 전체 실질 가격을 다시 본다.</p>
+<p><strong>응용5 · 회비라는 이름의 미사용 대금.</strong> 6개월 취미 수업 중 한 달만 듣고 해지했는데 학원은 남은 돈이 전부 가입비라 환급이 없다고 한다. <strong>정답·의도:</strong> 명칭이 아니라 실제 공급 대가와 적법한 위약금을 정산한다. 계속거래 요건을 갖추었다면 약관으로 중도해지 자체를 금지하지 못한다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제8장</h1>
+<p><strong>TOP3:</strong> 거래의 실질 / 소비자와 판매원의 철회 / 계속거래 해지 정산.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>시험 직전 암기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>적용</td>
+<td>사업용 원칙 제외, 소비자 동일 지위·조건 예외. 독립 농부 직접 판매 제외.</td>
+</tr>
+<tr>
+<td>방문</td>
+<td>사업장 밖 권유·법정 유인. 매장 안 서명이어도 포함 가능.</td>
+</tr>
+<tr>
+<td>전화</td>
+<td>적극적 대화·권유가 핵심. ARS 정보·주문 접수와 구별.</td>
+</tr>
+<tr>
+<td>의무</td>
+<td>신고·명부·신원·정보·계약서. 휴업 중에도 철회 처리.</td>
+</tr>
+<tr>
+<td>소비자 철회</td>
+<td>기본 14일, 늦은 공급·주소·안내 누락·방해별 기산. 서면 발송 효력.</td>
+</tr>
+<tr>
+<td>불일치</td>
+<td>공급 3개월과 인식·인식 가능 30일을 함께 확인.</td>
+</tr>
+<tr>
+<td>제한</td>
+<td>귀책 훼손·사용·시간·복제·주문제작. 확인 개봉, 안내·시험 사용 예외.</td>
+</tr>
+<tr>
+<td>환급</td>
+<td>반환 후 3영업일, 연 15%. 소비자 반환비 사업자·위약금 금지.</td>
+</tr>
+<tr>
+<td>다단계</td>
+<td>모집＋3단계 조직＋후원수당. 회사 행정기관 등록, 판매원 회사 등록.</td>
+</tr>
+<tr>
+<td>후원방문</td>
+<td>직근 상위 1인 수당 영향. 총액 상한 일반 35%·후원 38%.</td>
+</tr>
+<tr>
+<td>금액</td>
+<td>방문 부담 2만 원 이상 금지, 다단계 5만 원 초과 금지. 상품 현행 200만 원 이하.</td>
+</tr>
+<tr>
+<td>판매원 철회</td>
+<td>계약일 3개월·서면. 반품 공제 기간은 공급일 기준 5%·7% 한도.</td>
+</tr>
+<tr>
+<td>계속·사업권유</td>
+<td>1개월＋환급 제약, 소득기회로 구매 유인.</td>
+</tr>
+<tr>
+<td>정보 기준</td>
+<td>계속 10만 원·3개월 이상, 사업권유 30만 원 이상.</td>
+</tr>
+<tr>
+<td>해지</td>
+<td>기간 중 언제든지 원칙. 실제 공급 대가·적법 위약금 정산, 명칭 불문.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 미성년자 취소는 철회 제한과 별개다. 언제든 해지는 언제나 무료 해지가 아니다. 판매원 반품 공제율을 소비자에게 적용하지 않는다.</p>
+<p>사례를 풀 순서: 거래 방식 → 법 적용·예외 → 누가 행사하는가 → 철회·취소·해지 → 기간·형식 → 반환·환급·배상.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 거리 유인·전화 권유·판매원 반품·헬스장 해지를 각각 다른 요건으로 설명한다. 🟡 숫자는 외웠지만 3개월의 계약일과 공급일을 섞는다. 🔴 다단계는 무조건 불법, 환불은 무조건 전액이라고 생각한다. 실제 답안을 받기 전이므로 자기점검 기준이지 이해도를 임의로 확정한 평가가 아니다.</p>
+<p><strong>반드시 복습할 TOP3:</strong> 방문·전화·통신판매 구별 / 소비자 14일과 판매원 3개월·서면 / 계속거래의 해지권과 정산.</p>
+<h1>문제 부록 · 29문항·116개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_039"><h4>형성평가 · 소비자법_039</h4><p class="question-stem">다음 중에서 특수판매에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>방문판매, 전화권유판매, 우편판매는 특수판매에 해당한다.</li><li>점포 등의 개설에 드는 비용이 절약되고 자신의 상품을 더욱 적극적으로 홍보하고 판매할 수 있다는 장점이 있다.</li><li>특수판매의 방식을 이용하는 소비자는 더욱더 성급하고 비합리적인 구매결정을 할 수 있는 요소가 매우 많다.</li><li>구매 이후에 상품의 하자나 계약내용과 다른 경우로 인한 분쟁이 거의 발생하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특수판매의 대표 방식이다. 세 유형이 모두 동일 법의 동일 규칙을 적용한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 점포·광고 비용을 절감하는 장점이다.</li><li><strong>비선택</strong> · 돌발 권유·친분 압박·정보 부족 때문에 성급한 판단 위험이 있다.</li><li><strong>선택</strong> · 틀리다. 하자·계약 불일치·환불 분쟁이 빈번하므로 보호 장치가 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 특수판매의 경우 구매 이후에도 상품의 하자나 계약내용과 다른 경우로 인한 분쟁이 빈번하게 발생하고 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_040"><h4>형성평가 · 소비자법_040</h4><p class="question-stem">다음 중에서 방문판매법의 적용에 대한 설명으로 옳지 않는 것은?</p><ol class="choices"><li>사업자가 상행위를 목적으로 재화 등을 구입하는 거래인 경우에는 방문판매법이 적용되지 않는다.</li><li>사업자가 사실상 소비자와 같은 지위에서 다른 소비자와 같은 거래조건으로 거래하는 경우에도 방문판매법은 적용되지 않는다.</li><li>금융위원회의 허가를 받아 보험업을 경영하는 보험회사와 보험계약을 체결하기 위한 거래에는 방문판매법이 적용되지 않는다.</li><li>개인이 독립된 자격으로 공급하는 재화 등의 거래에는 방문판매법이 적용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적 적용 제외다. 다음 보기의 소비자 동일 지위 예외를 함께 읽는다.</li><li><strong>선택</strong> · 틀리다. 사실상 소비자 동일 지위·조건이면 적용되는 예외다.</li><li><strong>비선택</strong> · 보험 등 법정 금융상품 계약은 별도 규율한다. 현재는 보험만이 아닌 금융상품 거래 범위를 본다.</li><li><strong>비선택</strong> · 축약된 표현이다. 판매원을 두지 않는 독립적 개인의 법정 산물·자기 생산 재화 등 요건을 갖춘 경우이지 모든 개인 판매가 제외되는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 사업자라 하더라도 사실상 소비자와 같은 지위에서 다른 소비자와 같은 거래조건으로 거래하는 경우에는 방문판매법이 적용된다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_041"><h4>형성평가 · 소비자법_041</h4><p class="question-stem">다음 중에서 방문판매업자 또는 전화권유판매업자의 의무에 해당하지 않는 것은?</p><ol class="choices"><li>방문판매원 등의 명부작성 및 비치의무</li><li>휴업기간 등에서의 청약철회 등의 업무처리 의무</li><li>소비자피해보상보험계약 등의 체결의무</li><li>계약체결 전 정보제공 및 계약서 교부의무</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 신원 확인을 위해 필요한 의무다.</li><li><strong>비선택</strong> · 휴업·정지 중에도 소비자의 기존 권리를 처리해야 한다.</li><li><strong>선택</strong> · 정답. 일반 방문·전화권유판매에 일률적 의무는 없다. 다단계 등 법정 대상과 구별한다.</li><li><strong>비선택</strong> · 계약 전 알리고 계약 내용을 확인할 수 있도록 교부한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 소비자피해보상보험계약 등의 체결의무는 다단계판매업자, 선불식 할부거래업자의 의무이다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_042"><h4>형성평가 · 소비자법_042</h4><p class="question-stem">다음 중에서 다단계판매 계약에 청약철회에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>일반적으로 다단계판매원은 다단계판매업자와 체결한 계약에 대해 그 계약의 내용을 불문하고 청약철회 등 기간 내에는 청약철회 등을 할 수 있다.</li><li>소비자는 재화 등의 제공이 계약서 교부보다 빠르거나 동일한 경우에는 계약서를 받은 날부터 14일 내에 청약철회를 할 수 있다.</li><li>소비자 또는 다단계판매원은 서면이나 그 밖의 방법으로 청약철회 등을 할 수 있는데, 서면으로 하는 경우에는 서면이 도달한 날부터 그 효력이 발생한다.</li><li>소비자가 다단계판매의 청약철회 등을 하려면 우선적으로 다단계판매원에게 청약철회 등을 해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적 재고려 권리라는 뜻이다. 허위 재고·귀책 훼손 등 법정 철회 제한까지 없다는 뜻으로 읽지 않는다.</li><li><strong>비선택</strong> · 공급이 더 늦지 않은 경우이므로 계약서 수령일부터 14일이다.</li><li><strong>선택</strong> · 틀리다. 서면은 발송일 효력이다. 또 판매원 자신의 3개월 철회는 서면이 필요하므로 소비자와 함께 아무 방법이나 된다는 표현도 고친다.</li><li><strong>비선택</strong> · 소비자는 원칙적으로 해당 판매원에게 먼저 한다. 연락 불명·환급 곤란 등에는 사업자 상대 행사의 예외가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 소비자 또는 다단계판매원은 서면이나 그 밖의 방법으로 청약철회 등을 할 수 있는데, 서면으로 하는 경우에는 서면을 발송한 날부터 그 효력이 발생한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_056"><h4>기출문제 · 소비자법_기출2012_056</h4><p class="question-stem">[2012 기말고사 · 56번 / 자체 풀이]<br>방문판매법에 따른 청약철회의 원칙에 의하면 계약서를 교부 받은 날부터 ( )일 이내, 계약서를 교부 받지 않았다면 방문판매자 등의 주소를 안 날 또는 알 수 있었던 날부터 ( )일 이내에 철회가 가능하다. ( )의 내용으로 바르게 짝지어 진 것은?</p><ol class="choices"><li>7, 7</li><li>7, 14</li><li>14, 14</li><li>14, 7</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두 숫자 모두 일반 방문판매의 14일과 다르다.</li><li><strong>비선택</strong> · 기본 기간을 보통 할부의 7일과 혼동했다.</li><li><strong>선택</strong> · 정답. 두 경우 모두 14일이지만 시작 사건이 다르다.</li><li><strong>비선택</strong> · 주소 인식 특칙도 14일이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ③<br><br>방문판매의 일반 청약철회 기간은 14일이다. 계약서를 받지 않은 경우 방문판매자의 주소를 안 날 또는 알 수 있었던 날을 기준으로 한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_057"><h4>기출문제 · 소비자법_기출2012_057</h4><p class="question-stem">[2012 기말고사 · 57번 / 자체 풀이]<br>다단계판매원이 다단계판매업자와 거래를 한 경우에는 ( )부터 ( )개월 이내에 청약철회 등을 할 수 있다. ( )의 내용으로 바르게 짝지어 진 것은?</p><ol class="choices"><li>계약을 체결한 날, 2</li><li>계약을 체결한 날, 3</li><li>계약서를 교부받은 날, 2</li><li>계약서를 교부받은 날, 3</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기산점은 맞지만 기간은 3개월이다.</li><li><strong>선택</strong> · 정답. 판매원은 계약일부터 3개월 내 서면 행사한다.</li><li><strong>비선택</strong> · 기산점과 기간이 모두 다르다.</li><li><strong>비선택</strong> · 기간만 맞고 계약서 교부일이 아니라 계약일이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>다단계판매원 자신이 업자와 체결한 계약은 계약일부터 3개월 이내 청약철회가 원칙이다. 일반 소비자의 방문판매 철회기간과 구별한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_058"><h4>기출문제 · 소비자법_기출2012_058</h4><p class="question-stem">[2012 기말고사 · 58번 / 자체 풀이]<br>사업자가 소득기회를 알선․제공하는 방법으로 소비자를 유인해서 재화 등을 구입하게 하는 거래를 무엇이라 하는가?</p><ol class="choices"><li>사업권유거래</li><li>계속거래</li><li>방문판매</li><li>통신판매</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 소득기회로 구매를 유인한다는 문구가 정의의 핵심이다.</li><li><strong>비선택</strong> · 계속거래는 1개월 이상 계속 공급과 중도해지 제약이 기준이다.</li><li><strong>비선택</strong> · 방문판매는 사업장 밖 권유·유인이라는 방식이다.</li><li><strong>비선택</strong> · 통신판매는 통신수단을 통한 정보 제공·청약 등 거래 구조를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>소득기회를 알선·제공한다는 방법으로 구매를 유인하는 거래는 사업권유거래이다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_059"><h4>기출문제 · 소비자법_기출2012_059</h4><p class="question-stem">[2012 기말고사 · 59번 / 자체 풀이]<br>계속거래란 재화 또는 용역을 ( )개월 이상 계속해서 공급하는 계약으로서 중도에 해지할 경우 대금환급이 제한되거나 위약금에 관한 약정이 있는 거래를 말한다. ( )의 내용으로 맞는 것은?</p><ol class="choices"><li>1</li><li>2</li><li>3</li><li>4</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 1개월 이상과 환급 제한 또는 위약금 약정을 함께 갖춘다.</li><li><strong>비선택</strong> · 보통 할부의 기간과 혼동하지 않는다.</li><li><strong>비선택</strong> · 계약서 의무의 일부 기간 기준 3개월을 정의에 가져오면 틀린다.</li><li><strong>비선택</strong> · 법정 정의의 기간이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>계속거래는 1개월 이상 계속 공급하고 중도해지에 환급 제한이나 위약금 약정이 있는 거래이다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_060"><h4>기출문제 · 소비자법_기출2012_060</h4><p class="question-stem">[2012 기말고사 · 60번 / 자체 풀이]<br>계속거래의 경우 원칙적으로 소비자가 계약해지권을 행사할 수 있는 기간은?</p><ol class="choices"><li>계약을 체결한 날부터 1개월 이내</li><li>계약을 체결한 날부터 2개월 이내</li><li>계약을 체결한 날부터 3개월 이내</li><li>계약기간 중에 언제든지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계약 후 한 달로 한정하지 않는다.</li><li><strong>비선택</strong> · 두 달 제한도 없다.</li><li><strong>비선택</strong> · 다단계 판매원의 철회기간과 다르다.</li><li><strong>선택</strong> · 정답. 계약기간 중 언제든지 원칙이며 법정 예외·적법한 정산은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>계속거래의 소비자는 원칙적으로 계약기간 중 언제든지 해지할 수 있다. 체결 후 일정 개월만으로 제한되지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2012_069"><h4>기출문제 · 소비자법_기출2012_069</h4><p class="question-stem">[2012 기말고사 · 69번 / 자체 풀이]<br>다단계판매에 관한 방문판매법의 규정사항을 설명한 것으로 옳은 것은?</p><ol class="choices"><li>다단계판매업자는 다단계판매원에게 등록․자격유지 또는 유리한 후원수당의 지급기준을 적용 받게 할 조건으로 과다한 재화 또는 용역의 구입 등 연간 10만원 이상의 부담을 지게 해서는 안 된다.</li><li>다단계판매업 등록을 하려는 사업자는 반드시 소비자피해보상보험 등을 체결할 의무가 있다.</li><li>다단계판매업을 하려는 사람은 일정한 요건을 갖추고 반드시 등록하여야 하는데, 이때 등록은 공정거래위원회에서만 한다.</li><li>다단계판매자가 판매하는 개별 재화 등의 가격은 100만원(부가가치세를 포함) 미만이어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 완전 기준은 연간 5만 원 초과다. 다만 10만 원 이상도 금지 범위 안이라는 논리상 포함관계 때문에 문장 자체를 반드시 거짓이라고 단정하기는 어렵다. 원본 정답을 보존하고 수치 기준의 부정확성을 표시한다.</li><li><strong>선택</strong> · 원본 정답. 보험·지급보증·공제 등 법정 피해보상 장치가 필요하다. 보험 한 방식만 강제한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 틀리다. 공정위 또는 시·도 등록이지 공정위만은 아니다.</li><li><strong>비선택</strong> · 현재 가격 한도는 부가세 포함 200만 원 초과 금지다. 교재의 160만 원 미만도 고쳐 읽는다. 출제 시기와 현행 기준을 섞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>다단계판매업 등록에는 소비자피해보상보험계약 등 법정 소비자피해보상 장치가 필요하다. 나머지 보기의 부담 한도·등록기관·가격 한도는 출제 당시 규정과 맞지 않는다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_061"><h4>기출문제 · 소비자법_기출2013_061</h4><p class="question-stem">[2013 기말고사 · 61번 / 자체 풀이]<br>다음 두 사례를 읽고 각각 그 내용이 맞으면 ○, 틀리면 ×로 표기하는데, 이를 바르게 짝지어 놓은 것은?<br>․방문판매원의 권유로 미성년자가 자기 집에서 어학교재 CD세트를 구입하여 어학교재 CD 중 몇 개를 개봉해서 들어 보았다. 그 날 저녁 부모가 이 사실을 알고 미성년자임을 이유로 다음날 계약 취소를 요구한 경우, 이것은 복제가 가능한 재화의 포장을 훼손한 경우에 해당되므로 청약철회가 제한되고 따라서 계약취소는 불가능하다. ( ) <br>․수박을 재배하는 A는 수확한 수박을 직접 자신의 트럭에 싣고 다니면서 소비자를 방문해서 판매를 한다. 이 경우 A와 소비자와의 수박거래에 대해서는 방문판매법이 적용된다. ( )</p><ol class="choices"><li>○, ○</li><li>×, ×</li><li>○, ×</li><li>×, ○</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두 판단 모두 틀렸다. 취소와 철회 제한은 별개이고 농부의 직접 판매는 법정 제외다.</li><li><strong>선택</strong> · 정답. 미성년자 취소가 가능할 수 있으며, 직접 재배한 수박을 독립적으로 판매한 사례는 제외다.</li><li><strong>비선택</strong> · 첫 판단이 틀렸다. 복제 포장 훼손만으로 민법상 취소를 막지 못한다.</li><li><strong>비선택</strong> · 둘째 판단이 틀렸다. 법정 독립 생산자 직접 판매 예외를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ②<br><br>미성년자의 법정대리인 동의 없는 계약 취소와 청약철회 제한은 별개이다. 생산자가 직접 생산한 농산물을 방문판매하는 사례는 방문판매법 적용 제외에 해당한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_062"><h4>기출문제 · 소비자법_기출2013_062</h4><p class="question-stem">[2013 기말고사 · 62번 / 자체 풀이]<br>방문판매법상 “재화 등의 내용이 표시․광고와 다르거나 계약내용과 다르게 이행된 경우에 소비자는 재화 등을 공급받은 날부터 ( )개월 이내 또는 그 사실을 알거나 알 수 있었던 날부터 ( )일 이내에 청약철회를 할 수 있다.” ( )안에 들어갈 내용이 맞게 짝지어 진 것은?</p><ol class="choices"><li>3, 30</li><li>2, 30</li><li>3, 15</li><li>2, 15</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답 숫자는 3개월·30일이다. 원문의 또는를 자유 선택으로 외우지 말고 두 법정 제한을 함께 충족해야 함을 확인한다.</li><li><strong>비선택</strong> · 공급일부터의 기간은 3개월이다.</li><li><strong>비선택</strong> · 알았거나 알 수 있었던 날부터 30일이다.</li><li><strong>비선택</strong> · 두 기간 모두 틀렸다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ①<br><br>표시·광고나 계약과 다른 이행이면 공급일부터 3개월 또는 그 사실을 안 날·알 수 있었던 날부터 30일을 기준으로 한다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2013_063"><h4>기출문제 · 소비자법_기출2013_063</h4><p class="question-stem">[2013 기말고사 · 63번 / 자체 풀이]<br>계속거래 및 사업권유거래에 있어 소비자의 계약해지권에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>원칙적으로 소비자는 자신이 체결한 계속거래 등에 대해 언제든지 계약을 해지할 수 있고, 계약기간 중에는 언제든지 해지가 가능하다.</li><li>소비자가 계속거래업자 등의 귀책사유가 없음에도 계속거래 등의 계약을 중도에 해지한 경우에는 이미 지불한 대금을 환급 받을 수 있다.</li><li>위 ②의 경우 동시에 위약금이 청구될 수 있다.</li><li>계속거래업자 등은 소비자의 계약 해지로 인해 발생하는 손실을 현저히 초과하는 금액을 위약금으로 청구할 수도 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 언제든지 해지는 원칙이다. 법정 개별 제작 예외 등은 별도다.</li><li><strong>비선택</strong> · 미공급 부분의 환급을 뜻한다. 이미 제공한 대가·적법 위약금까지 없는 전액 환불이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 사업자 잘못 없는 해지에서 적법한 위약금 정산이 가능하다.</li><li><strong>선택</strong> · 틀리다. 손실을 현저하게 초과하는 위약금은 청구할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: ④<br><br>중도해지가 가능하고 귀책사유가 소비자에게 있으면 위약금이 문제될 수 있으나, 실제 손실을 현저히 초과하는 위약금을 청구할 수는 없다.<br><br>제공된 ZIP에는 이 연도의 공식 정답표가 없습니다. 출제 당시 기준을 고려한 학습용 판단이며 공식 정답 확정이 아닙니다. 법령 개정 및 현재 강의와 차이가 있을 수 있습니다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_052"><h4>기출문제 · 소비자법_기출2014_052</h4><p class="question-stem">[2014 기말고사 · 52번]<br>계속거래의 경우 원칙적으로 소비자가 계약해지권을 행사할 수 있는 기간은?</p><ol class="choices"><li>계약을 체결한 날부터 1개월 이내</li><li>계약을 체결한 날부터 2개월 이내</li><li>계약을 체결한 날부터 3개월 이내</li><li>계약기간 중에 언제든지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해지권을 한 달로 제한하지 않는다.</li><li><strong>비선택</strong> · 두 달로 제한하지 않는다.</li><li><strong>비선택</strong> · 철회기간 3개월과 해지권을 섞지 않는다.</li><li><strong>선택</strong> · 정답. 계약기간 중 언제든지 원칙이며 정산은 따로 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2014년 법학과 소비자법 52번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_053"><h4>기출문제 · 소비자법_기출2014_053</h4><p class="question-stem">[2014 기말고사 · 53번]<br>다단계판매의 방법으로 재화 등의 구매에 관한 계약을 체결한 다단계판매원의 청약철회 행사기간은?</p><ol class="choices"><li>계약을 체결한 날부터 3개월 이내</li><li>재화 등을 공급 받은 날부터 3개월 이내</li><li>계약을 체결한 날부터 30일 이내</li><li>재화 등을 공급 받은 날부터 30일 이내</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 판매원은 계약일 3개월이며 서면으로 한다.</li><li><strong>비선택</strong> · 공급일은 반품 비용 산정에서 쓰는 기준과 혼동했다.</li><li><strong>비선택</strong> · 판매원 기본 철회는 3개월이다.</li><li><strong>비선택</strong> · 기산점과 기간 모두 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 53번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_054"><h4>기출문제 · 소비자법_기출2014_054</h4><p class="question-stem">[2014 기말고사 · 54번]<br>계속거래란 재화 또는 용역을 ( )개월 이상 계속해서 공급하는 계약으로서 중도에 해지할 경우 대금환급이 제한되거나 위약금에 관한 약정이 있는 거래를 말한다. ( )안에 들어갈 기간으로 옳은 것은?</p><ol class="choices"><li>1</li><li>2</li><li>3</li><li>4</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 계속 공급 1개월 이상이다. 환급 제한·위약금 조건도 필요하다.</li><li><strong>비선택</strong> · 정의의 기간이 아니다.</li><li><strong>비선택</strong> · 일정 계약서 의무의 3개월과 정의를 구별한다.</li><li><strong>비선택</strong> · 정의의 기간이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2014년 법학과 소비자법 54번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2014_063"><h4>기출문제 · 소비자법_기출2014_063</h4><p class="question-stem">[2014 기말고사 · 63번]<br>방문판매로 계약을 체결한 소비자는 재화 등의 내용이 표시․ 광고와 다르거나 계약내용과 다르게 이행된 경우에는 재화 등을 공급받은 날부터 ( ㉠ ) 이내 또는 그 사실을 알거나 알 수 있었던 날부터 ( ㉡ ) 이내에 청약철회를 할 수 있다. ( )안에 들어갈 내용으로 바르게 짝지어 놓은 것은?</p><ol class="choices"><li>㉠ 2개월, ㉡ 30일</li><li>㉠ 3개월, ㉡ 30일</li><li>㉠ 4개월, ㉡ 60일</li><li>㉠ 5개월, ㉡ 60일</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공급일부터는 3개월이다.</li><li><strong>선택</strong> · 정답 숫자다. 두 제한을 함께 확인하며 원문의 또는를 한쪽만 충족하면 된다는 의미로 외우지 않는다.</li><li><strong>비선택</strong> · 두 기간 모두 법정 숫자와 다르다.</li><li><strong>비선택</strong> · 두 기간 모두 법정 숫자와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2014년 법학과 소비자법 63번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_067"><h4>기출문제 · 소비자법_기출2015_067</h4><p class="question-stem">[2015 기말고사 · 67번]<br>A씨는 방문판매원 B로부터 3개월간 복용하는 다이어트 보조식품을 샀다. A씨는 일주일 동안 복용을 했는데 별 효과가 없는 것 같아서 방문판매원 B에게 환불을 요구했다. 이 사례의 법률관계에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>소비자가 청약철회 또는 계약해제를 한 경우에는 사업자에게 받은 재화를 반환해야 한다.</li><li>A씨의 경우 3개월분의 다이어트 보조식품 중 일주일에 해당하는 양을 이미 소비했으므로 방문판매자는 그 부분에 대한 비용을 청구할 수 있다.</li><li>만일 '효과가 없으면 돈을 받지 않겠다.'는 내용의 계약조항이 있었다면 A씨는 방문판매자에게 이미 복용한 부분에 대한 비용반환을 요구할 수 있다.</li><li>재화 등의 사용으로 인해 소모성 부품의 재판매가 곤란한 경우에는 해당 소모성 부품의 공급에 소요된 비용을 방문판매자가 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 적법한 철회 후 받은 재화를 반환하는 원칙이다.</li><li><strong>비선택</strong> · 동일한 가분 재화 중 소비한 부분의 법정 공급 비용 정산이 가능하다.</li><li><strong>선택</strong> · 원본 정답. 다만 이는 3개월 복용 뒤 효과를 판단하는 환불 약속을 전제로 한 교재 풀이이다. 문제에는 그 조건이 명시되지 않았으므로 무조건적 전액 환불 약속까지 반드시 배제한다고 외우지 않는다.</li><li><strong>비선택</strong> · 법정 사용 비용 유형이다. 소모성 부품의 공급 비용을 말하며 임의 위약금과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_068"><h4>기출문제 · 소비자법_기출2015_068</h4><p class="question-stem">[2015 기말고사 · 68번]<br>계속거래 및 사업권유거래에 있어 소비자의 계약해지권에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>소비자는 원칙적으로 계약기간 중 언제든지 계약을 해지할 수 있다.</li><li>계약해지에 있어 계속거래업자 등에게 책임이 없는 경우에는 소비자에게 위약금을 청구할 수 있으며, 이때 해지 또는 해제로 발생하는 손실을 현저하게 초과하는 위약금도 청구할 수 있다.</li><li>소비자가 계약을 중도에 해지한 경우에는 이미 지불한 대금을 환급 받을 수 있는데, 사업자는 가입비 등 명칭에 상관없이 실제 공급된 재화 등의 대가를 초과하여 수령한 대금도 환급해야 한다.</li><li>소비자의 주문에 의해 개별적으로 생산되는 재화 등에 대해 청약철회 등을 인정하면 사업자에게 회복할 수 없는 중대한 피해가 예상되는 경우로서 사전에 소비자에게 그 사실을 별도로 알리고 서면동의를 받은 경우에는 계약을 해지할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적 해지권을 정확히 설명한다.</li><li><strong>선택</strong> · 틀리다. 손실을 현저하게 초과하는 위약금은 금지한다.</li><li><strong>비선택</strong> · 명칭에 상관없이 미공급 대금을 정산·환급한다. 적법한 위약금 공제까지 배제한 무조건 전액 환급은 아니다.</li><li><strong>비선택</strong> · 개별 제작의 중대·회복 불가능 피해, 별도 사전 고지, 서면 동의를 갖춘 법정 예외다. 주문제작이라는 이름 하나만으로 부족하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2015년 법학과 소비자법 68번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_069"><h4>기출문제 · 소비자법_기출2015_069</h4><p class="question-stem">[2015 기말고사 · 69번]<br>전화권유판매에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>사업자가 소비자로부터 걸려오는 전화에 대한 응답을 함에 있어 고객의 주문만 접수하는 형태는 전화권유판매에 해당되지 않는다.</li><li>사업자가 ARS 또는 문자메시지 등 전화를 이용해서 재화 등의 정보만을 제공할 경우에는 전화권유판매에 해당되지 않는다.</li><li>전화를 사용하여 소비자의 응답을 유도하고 대화를 함으로써 청약을 유인하여 어떤 장소에서 만나 청약을 받거나 계약을 체결하는 경우는 전화권유판매에 해당되지 않는다.</li><li>전화권유판매에 있어 전화는 정보제공과 함께 소비자에게 접근해서 계약체결을 하는데 적극적으로 사용되는 매체가 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 단순 주문 접수에는 적극적인 전화 권유가 없다.</li><li><strong>비선택</strong> · 정보만 제공하는 ARS·문자는 적극적 대화 권유와 다르다.</li><li><strong>선택</strong> · 틀리다. 전화로 적극 유인했다면 나중에 만나 계약해도 해당할 수 있다.</li><li><strong>비선택</strong> · 전화를 적극적 설득·권유 수단으로 쓴다는 점이 핵심이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 69번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_055"><h4>기출문제 · 소비자법_기출2016_055</h4><p class="question-stem">[2016 기말고사 · 55번]<br>방문판매법상 소비자의 청약철회가 가능한 경우는?</p><ol class="choices"><li>소비자에게 책임있는 사유로 재화 등이 멸실 또는 훼손된 경우</li><li>복제가 가능한 재화의 포장을 훼손한 경우</li><li>재화의 내용을 확인하기 위해 포장을 훼손한 경우</li><li>소비자의 사용으로 재화의 가치가 현저히 낮아진 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 귀책 멸실·훼손은 원칙적 제한 유형이다. 내용 확인 포장 훼손은 예외다.</li><li><strong>비선택</strong> · 복제 가능 재화의 개봉은 원칙적 제한 유형이지만 제한 안내·시험 사용 등 법정 조치의 예외를 함께 본다.</li><li><strong>선택</strong> · 정답. 내용 확인을 위한 포장 훼손만으로 철회를 막지 못한다.</li><li><strong>비선택</strong> · 현저한 가치 감소는 원칙적 제한 유형이다. 필요한 표시·조치 여부까지 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_056"><h4>기출문제 · 소비자법_기출2016_056</h4><p class="question-stem">[2016 기말고사 · 56번]<br>다음 ( ) 안에 들어갈 내용이 옳게 짝지어진 것은? “다단계판매의 방법으로 재화 등의 구매계약을 체결한 다단계 판매원은 ( )부터 ( ) 이내에 서면으로 그 계약에 관한 청약철회를 할 수 있다.”</p><ol class="choices"><li>계약을 체결한 날, 3개월</li><li>청약을 철회할 수 있음을 안 날 또는 알 수 있었던 날, 30일</li><li>계약을 체결한 날, 30일</li><li>청약을 철회할 수 있음을 안 날 또는 알 수 있었던 날, 3개월</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 계약일·3개월·서면 세 요소를 묶어 기억한다.</li><li><strong>비선택</strong> · 일반 소비자의 안내 누락 특칙 등과 섞었다.</li><li><strong>비선택</strong> · 계약일은 맞지만 30일이 아니라 3개월이다.</li><li><strong>비선택</strong> · 판매원 기본 기산점은 권리 인식일이 아니라 계약일이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2016년 법학과 소비자법 56번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_057"><h4>기출문제 · 소비자법_기출2016_057</h4><p class="question-stem">[2016 기말고사 · 57번]<br>계속거래의 소비자계약해지권에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>소비자는 계약기간 중 언제든지 계약을 해지할 수 있다.</li><li>소비자가 계속거래계약을 중도에 해지한 경우에는 이미 지 불한 대금을 환급 받을 수 있다.</li><li>계속거래업자에게 책임이 없는 경우에도 소비자에게 위약금 을 청구할 수는 없다.</li><li>소비자가 재화 등을 반환할 때 계속거래업자는 대금 환급 또는 위약금 경감 등의 조치를 해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙이다. 특별한 법정 예외는 따로 본다.</li><li><strong>비선택</strong> · 실제 공급 대가와 적법 위약금을 정산한 뒤 환급 가능하다.</li><li><strong>선택</strong> · 틀리다. 사업자 잘못 없는 중도해지에는 적법한 위약금을 청구할 수 있다.</li><li><strong>비선택</strong> · 반환된 재화의 가치를 반영하여 환급·위약금 경감 등을 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2016년 법학과 소비자법 57번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_055"><h4>기출문제 · 소비자법_기출2017_055</h4><p class="question-stem">[2017 기말고사 · 55번]<br>계속거래 및 사업권유거래의 개념에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>계속거래란 재화 또는 용역을 2개월 이상 계속해서 공급해야 하는 계약이다.</li><li>계속거래란 중도에 해지할 경우 대금환급이 제한되거나 위약금에 약정이 있는 거래이다.</li><li>사업권유거래란 사업자가 소득기회를 알선 및 제공하는 방법으로 소비자를 유인해서 재화 등을 구입하게 하는 거래이다.</li><li>아르바이트 등의 일감을 주지 않고 단순히 교재구매를 권유하는 경우에는 사업권유거래에 해당되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 2개월이 아니라 1개월 이상이다.</li><li><strong>비선택</strong> · 계속거래 정의의 다른 요건이다.</li><li><strong>비선택</strong> · 사업권유거래의 소득기회 유인 구조다.</li><li><strong>비선택</strong> · 소득기회 제공·알선과 연결되지 않은 단순 교재 판매는 그 정의와 다르다. 다른 판매 방식의 법 적용은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2017년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_050"><h4>기출문제 · 소비자법_기출2018_050</h4><p class="question-stem">[2018 기말고사 · 50번]<br>다음은 방문판매에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 사업장 외의 장소에서 권유 등의 방법으로 소비자를 유인하여 사업장에서 계약의 청약을 받거나 계약을 체결하는 경우는 방문판매에 해당한다.<br>(b) 계속적으로 영업하는 고정된 사업장 앞의 인도에 간이 판매장소를 설치해서 그 사업장 소속의 직원이 소비자와 구매 계약을 체결하는 경우는 방문판매에 해당한다.</p><ol class="choices"><li>(a) ○, (b) ×</li><li>(a) ○, (b) ○</li><li>(a) ×, (b) ○</li><li>(a) ×, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 법정 외부 유인 뒤 내부 계약도 포함하며, 고정 점포 영업의 일부인 앞 인도 판매대 사례는 구별한다.</li><li><strong>비선택</strong> · b 판단이 틀렸다. 모든 인도 판매가 같은 것은 아니며 점포 소속 직원·기존 영업과의 관계를 본다.</li><li><strong>비선택</strong> · a 판단이 틀렸다. 서명 장소만으로 방문판매를 배제하지 않는다.</li><li><strong>비선택</strong> · 두 판단을 모두 반대로 했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2018년 법학과 소비자법 50번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_051"><h4>기출문제 · 소비자법_기출2018_051</h4><p class="question-stem">[2018 기말고사 · 51번]<br>다음은 전화권유판매와 통신판매에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 사업자가 소비자에게 전화를 먼저 걸어 재화 등에 대한 정보를 제공하고 소비자와 대화를 하는 행위에 의해 소비자의 청약을 받는 행위는 전화권유판매에 해당된다.<br>(b) ARS 또는 문자메시지 등 전화를 이용해서 재화 등의 정보만을 제공할 경우에는 전자상거래법의 ‘통신판매’에 해당된다.</p><ol class="choices"><li>(a) ×, (b) ×</li><li>(a) ×, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ○, (b) ○</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · a는 적극적 전화 대화·권유이고 b는 정보 전달 방식의 통신판매라는 출제 전제이므로 둘 다 옳다.</li><li><strong>비선택</strong> · a의 적극 권유를 잘못 부정했다.</li><li><strong>비선택</strong> · b는 적극 전화 권유와 다른 통신판매 방식이다. 실제 거래가 이루어진다는 전제를 읽는다.</li><li><strong>선택</strong> · 정답. 다만 b를 정보 제공만으로 판매계약까지 자동 성립한다는 뜻으로 확대하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2018년 법학과 소비자법 51번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_051"><h4>기출문제 · 소비자법_기출2019_051</h4><p class="question-stem">[2019 기말고사 · 51번]<br>다음 중 방문판매법이 적용되지 않는 경우는 어느 것인가?</p><ol class="choices"><li>생산자가 과일·채소 등 농산물을 트럭에 싣고 다니면서 방문판매하는 경우</li><li>전화권유판매의 경우</li><li>다단계판매의 경우</li><li>계속거래 및 사업권유거래의 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 생산자가 직접 생산한 농산물을 판매원 없이 독립적으로 공급하는 법정 제외 사례다.</li><li><strong>비선택</strong> · 전화권유판매는 법의 규율 대상이다.</li><li><strong>비선택</strong> · 다단계판매는 별도 등록·행위 규제를 받는다.</li><li><strong>비선택</strong> · 계속거래·사업권유거래도 법정 범위에서 보호한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ①<br>제공된 공식 정답표의 2019년 법학과 소비자법 51번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_052"><h4>기출문제 · 소비자법_기출2019_052</h4><p class="question-stem">[2019 기말고사 · 52번]<br>다음 ( )에 들어갈 내용으로 옳은 것은?<br><br>ARS 또는 문자메시지 등 전화를 이용해서 재화 등의 정보만을 제공할 경우에는 ( )에 해당된다.</p><ol class="choices"><li>전화권유판매</li><li>통신판매</li><li>계속거래 및 사업권유거래</li><li>후원방문판매</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 적극적인 응답 유도·대화 권유가 없다.</li><li><strong>선택</strong> · 정답. 이런 통신수단으로 거래하는 구조라는 전제다. 정보 메시지만으로 계약이 자동 성립한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 공급 기간이나 소득기회 유인 조건을 묻는 문제가 아니다.</li><li><strong>비선택</strong> · 조직·수당 구조가 제시되지 않아 후원방문판매로 볼 근거가 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2019년 법학과 소비자법 52번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2019_053"><h4>기출문제 · 소비자법_기출2019_053</h4><p class="question-stem">[2019 기말고사 · 53번]<br>다단계판매업자의 금지행위 고지의무 및 손해배상책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>다단계판매업자는 다단계판매원이 소비자권익을 침해하는 행위의 금지를 위반하지 않도록 다단계판매원에게 해당 규정의 내용을 서면이나 전자우편으로 고지할 의무가 있다.</li><li>다단계판매업자가 고지의무를 게을리하여 다단계판매원이 금지규정을 위반함으로써 다른 다단계판매원 또는 소비자에게 재산상 손해를 입힌 경우에는 다단계판매업자가 배상책임을 진다.</li><li>다단계판매업자의 배상책임 기준은 다단계판매원의 위반행위와 상당인과관계가 있는 손해액을 기준으로 하되, 위반행위의 관련 매출액을 한도로 한다.</li><li>다단계판매업자는 다단계판매원에게 구상권을 행사할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 서면·전자우편으로 금지 규정을 알리는 의무다.</li><li><strong>비선택</strong> · 고지 의무를 게을리한 점과 위반·재산상 손해의 관계를 갖추어야 한다.</li><li><strong>비선택</strong> · 상당인과관계 있는 손해와 관련 매출액 한도를 함께 본다.</li><li><strong>선택</strong> · 틀리다. 배상한 회사는 잘못한 판매원에게 구상할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2019년 법학과 소비자법 53번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 08' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 08|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

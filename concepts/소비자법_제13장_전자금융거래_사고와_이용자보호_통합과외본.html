@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소비자법 제13장 전자금융거래 사고와 이용자보호 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSUMER LAW · CHAPTER 13</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">소비자법</span>
+    <span class="brand-sub">제13장 전자금융거래 사고와 이용자보호 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./소비자법_개념.html">소비자법 개념 목록</a><a href="../index.html?subject=소비자법">문제 풀기</a></nav><h1>이 장을 먼저 한 문장으로</h1>
+<p><strong>돈이 잘못 움직였다고 모두 같은 사건은 아니다. 은행 시스템 사고, 내가 잘못 보낸 돈, 사기범에게 빼앗긴 돈을 나누어 책임과 회수 절차를 찾는다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>먼저 볼 질문</th>
+<th>이 장의 대답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나</td>
+<td>전자금융 사고 책임, 이용자 권리, 착오송금 반환, 사기 피해구제와 민사책임</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>빠른 송금은 편리하지만 한 번 빠져나간 돈의 회수가 어렵기 때문</td>
+</tr>
+<tr>
+<td>전체 과목의 위치</td>
+<td>안전·정보·거래·피해구제 원리를 금융 사고에서 종합하는 교재 마지막 장</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>12장은 계약을 어떻게 팔았는가, 13장은 거래 실행·송금·사기 사고를 누가 책임지는가</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>은행 배상과 환급의 차이, 수취인과 은행의 구별, 중과실, 계좌 명의인의 책임</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 528–551쪽 전체와 JSON 제15장 주제 <strong>10문제·40보기</strong>. 교재의 취업 사칭·원격제어·쇼핑 결제창·가짜 카드명세서 사례 및 판례 4개를 포함한다. 중요도는 제공 문제 반복과 이해상 비중이다. 실제 오답률 자료는 없다. 법령 대조일 2026.10.25.</p>
+<p><strong>먼저 바로잡기:</strong> 착오송금 지원 상한은 현재 <strong>1억 원</strong>이다. 수취인 동의가 없어도 법적 반환 청구까지 불가능한 것은 아니다. 사기 계좌 명의인이라는 이유만으로 무조건 배상책임을 지는 것도 아니다. 교재의 채권소멸절차 소액 기준 ‘3만 원’은 법률의 위임 상한이고 시행령상 기준은 <strong>1만 원 이하</strong>다. <strong>2026.10.1.부터 가상자산 피해까지 특별법 체계가 확대</strong>되었으므로 교재의 금전 중심 설명 뒤에 별도 정리한다.</p>
+<p><mark class="yellow">노랑: 결론·기간</mark> / <mark class="green">초록: 이유</mark> / <mark class="pink">분홍: 함정</mark> / <mark class="blue">파랑: 연결</mark>.</p>
+<h1>1. 전자금융 거래에서 은행이 책임지는 사고</h1>
+<h2 id="consumer-13-01" data-concept-id="consumer-13-01">1-1. 접근매체와 세 가지 사고 ★★★★★</h2>
+<p><strong>교재 528쪽 / 조문의 목적:</strong> 자동화 거래의 안전을 관리하는 회사에 법정 사고의 책임을 둔다. 접근매체는 거래 지시와 이용자·거래 내용의 진실성·정확성을 확인하는 수단·정보다. 전자식 카드·이에 준하는 정보, 전자서명 생성정보·인증서, 등록된 이용자번호, <strong>생체정보</strong>, 해당 수단을 쓰는 비밀번호 등이 포함된다.</p>
+<p>은행·전자금융업자의 법 제9조 책임은 ① 접근매체 <strong>위조·변조</strong> 사고, ② 계약 체결·거래 지시의 <strong>전자적 전송·처리 과정</strong> 사고, ③ 전자장치·정보통신망에 침입하여 부정하게 얻은 접근매체를 이용한 사고를 중심으로 한다. 손해와 법정 사고의 연결이 필요하다.</p>
+<p><strong>사례:</strong> 은행 처리 오류로 한 번 지시한 돈이 두 번 빠져나갔다면 ②를 검토한다. 반면 내가 숫자를 잘못 입력해 정상 처리된 송금은 곧바로 은행 처리 사고와 같지 않다. <strong>시험·한 줄:</strong> <mark class="yellow">생체정보도 접근매체다. 개인정보의 민감성 분류와 금융거래의 기능 분류는 함께 성립할 수 있다.</mark></p>
+<h2 id="consumer-13-02" data-concept-id="consumer-13-02">1-2. 고의·중과실·법인 예외: 회사가 늘 면책되는 것은 아니다 ★★★★★</h2>
+<p><strong>교재 529쪽·547–548쪽 / 문단의 목적:</strong> 회사 책임 원칙과 이용자의 위험한 행위를 균형 있게 조정한다. 이용자의 <strong>고의·중대한 과실＋사전에 책임 부담 약정</strong>이 있는 경우 등에 전부·일부를 이용자에게 부담시킬 수 있다. 보통의 작은 부주의만으로 같은 결론을 내리지 않는다.</p>
+<p>고의·중과실 범위도 법령이 정한 범위 안에서 약관에 기재되어야 한다. 접근매체 대여·사용 위임·양도·담보 제공, 무권한 사용을 알았거나 쉽게 알 수 있는데도 누설·노출·방치, 정당한 사유 없는 추가 보안조치 거부와 그로 인한 침입 사고, 추가 보안수단의 노출·대여 등과 관련 사고를 구별한다. 법 제18조에 따른 선불수단·전자화폐의 허용된 양도·담보 예외도 있다.</p>
+<p>이용자가 <strong>소기업을 제외한 법인</strong>이고 회사가 보안절차 수립·준수 등 합리적으로 요구되는 충분한 주의를 다한 경우의 별도 예외도 있다. 이를 개인 고객이나 소기업 법인에게 무조건 확대하면 틀리다.</p>
+<p><strong>시험·한 줄:</strong> <mark class="pink">‘사용자가 실수했다’가 아니라 구체적 중과실·약정·법정 범위·사고와의 관련성을 확인한다.</mark></p>
+<h2 id="consumer-13-03" data-concept-id="consumer-13-03">1-3. 보이스피싱에 정보를 모두 알려준 판례 ★★★★★</h2>
+<p><strong>교재 548–549쪽 / 대법원 2014.1.29. 2013다86489:</strong> A는 인터넷뱅킹을 이용한다 → 검사라고 사칭한 사람이 가짜 사이트에 금융정보를 입력하게 한다 → 계좌번호·비밀번호·주민번호·보안카드 정보 등이 넘어간다 → 사기범은 인증서를 재발급받아 대출과 이체를 한다 → A는 금융회사에 손해를 배상하라고 한다.</p>
+<p>법원은 사건 당시 수법에 대한 사회의 인식, A의 사회·거래 경험, 국제전화에 이상함을 느꼈던 사정, 인증서 발급에 필요한 정보를 모두 준 경위 등을 종합했다. 이 사건에서는 <strong>중대한 과실을 인정하여 회사 면책을 받아들인 원심</strong>을 유지했다. 피해자를 비난하는 일상적 평가가 아니라 해당 법적 요건의 판단이다. <a href="https://law.go.kr/LSW/precInfoP.do?evtNo=2013%EB%8B%A486489&mode=0">대법원 판결</a></p>
+<p><strong>문장 번역:</strong> ‘구체적인 경위’＝어떻게 속았나 → ‘수법에 대한 일반인의 인식’＝그때 사람들이 위험을 얼마나 알았나 → ‘직업·이용 경력’＝그 사람이 이해할 여건은 어땠나 → ‘제반 사정’＝한 사실만 떼어 결론 내리지 말라. 반대로 모든 사기 피해를 자동 중과실로 보면 회사의 안전 책임이 사라지고, 모든 노출을 면책 없이 보면 법정 예외를 무시한다.</p>
+<p><strong>기출 비교:</strong> 보안카드를 외부 송수신 가능한 웹메일에 스캔 보관한 사례와 단순히 코드표를 출력해 소지한 사례는 같지 않다. 제공 기출은 전자의 중과실 인정, 후자는 <strong>그 사실만으로 중과실 인정 불가</strong>를 구별한다. 구체적 노출 환경을 제거하고 ‘출력＝중과실’로 외우지 않는다.</p>
+<h2 id="consumer-13-04" data-concept-id="consumer-13-04">1-4. 분실·도난 통지와 접근매체 양도 금지 ★★★★☆</h2>
+<p><strong>교재 529–530쪽 / 조문의 목적:</strong> 회사가 위험을 알게 된 뒤에는 제3자의 부정 사용을 막도록 한다. 분실·도난 통지를 받은 때부터 제3자의 사용으로 생긴 손해에 회사 책임이 원칙이다. 선불전자지급수단·전자화폐에는 <strong>통지 전에 저장되어 있던 금액</strong>에 관한 손해를 이용자 부담으로 할 수 있다는 사전 약정의 법정 예외가 있다. 이를 단순히 ‘통지 전에 발생한 손해만 예외’라고 바꾸지 않는다. <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=262875">시행령 제9조</a></p>
+<p>금지행위는 접근매체 양도·양수, 대가를 받거나 요구·약속하면서 대여·보관·전달·유통, 범죄 목적 또는 범죄 이용을 알면서 같은 행위를 하는 것, 질권 설정, 법정 알선·중개·광고·대가 있는 권유다. 법률의 특별한 허용은 구별한다. 모든 무상 일시 사용 위임이 곧바로 같은 형사 금지 조항에 해당한다고 넓히지 않는다. 민사 책임 위험은 별도다.</p>
+<p><strong>사례:</strong> ‘통장을 빌려주면 알바비를 준다’는 말은 접근매체 대여 금지와 연결된다. USB 등에 <strong>보관했다는 사실 자체</strong>는 형성 062의 금지행위가 아니다. 안전하게 관리할 책임이 없다는 뜻은 아니다. <strong>한 줄:</strong> 대여·양도 금지와 사고 배상 예외는 관련되지만 요건이 같은 제도는 아니다.</p>
+<h2 id="consumer-13-05" data-concept-id="consumer-13-05">1-5. 약관·정보·오류 정정·분쟁처리의 기본 권리 ★★★★☆</h2>
+<p><strong>교재 530–533쪽 / 문단의 목적:</strong> 거래 조건과 실제 내역을 소비자가 확인·다툴 수 있게 한다.</p>
+<table>
+<thead>
+<tr>
+<th>권리·의무</th>
+<th>내용과 기간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>약관 명시·설명</td>
+<td>계약 때 명시, 요청 시 사본 교부와 중요내용 설명. 전자적으로 이해하기 쉽게 표시하고 인지 의사 확인 가능</td>
+</tr>
+<tr>
+<td>명시·설명 위반</td>
+<td>회사는 해당 약관 내용을 계약 내용으로 주장할 수 없음</td>
+</tr>
+<tr>
+<td>약관 변경</td>
+<td>원칙 시행 1개월 전 게시·통지. 법령 개정으로 긴급 변경 시 최소 1개월 이상 게시·통지</td>
+</tr>
+<tr>
+<td>변경에 대한 해지</td>
+<td>게시·통지 후 변경 시행일 전 영업일까지 해지 가능. 법정 절차 아래 기간 내 이의 없으면 승인 간주</td>
+</tr>
+<tr>
+<td>정보 보호</td>
+<td>인적 사항·계좌·접근매체·거래 내용과 실적의 무동의 누설·목적 외 사용 금지. 법원 명령 등 법정 예외는 최소 범위</td>
+</tr>
+<tr>
+<td>거래 내용 확인</td>
+<td>전자장치로 확인, 종이 서면 요구는 2주 내 발급. 여기서 서면은 전자문서 제외</td>
+</tr>
+<tr>
+<td>오류 정정</td>
+<td>요구 또는 스스로 인지하면 즉시 조사·처리하고 해당 기산점부터 2주 내 원인·결과 통지</td>
+</tr>
+<tr>
+<td>회사 분쟁처리</td>
+<td>본점·영업점 등에 서면·전자 방식 신청, 15일 내 조사·처리 결과 통지</td>
+</tr>
+<tr>
+<td>외부 조정</td>
+<td>금융감독원 또는 한국소비자원의 해당 조정절차 이용 가능</td>
+</tr>
+</tbody></table>
+<p><strong>기출 보충:</strong> 전자금융보조업자의 관련 고의·과실은 금융회사·전자금융업자의 고의·과실로 본다. 회사가 배상한 후 <strong>보조업자에게 구상 가능</strong>하다. 외주를 주었다는 이유로 고객을 떠넘기지 않게 하는 제도다. <strong>한 줄:</strong> <mark class="blue">6장 약관·10장 정보·12장 금융분쟁이 전자금융에서 함께 작동한다.</mark></p>
+<h1>2. 내가 잘못 보낸 돈: 착오송금</h1>
+<h2 id="consumer-13-06" data-concept-id="consumer-13-06">2-1. 수취인은 예금채권, 송금인은 반환채권 ★★★★★</h2>
+<p><strong>교재 533–537쪽·549–550쪽 / 대법원 2007.11.29. 2007다51239의 법리:</strong> 송금인 A가 계좌번호를 잘못 입력한다 → B의 은행계좌에 입금된다 → A와 B 사이에 빚이나 매매가 없어도 B는 은행에 그 금액의 예금채권을 얻는다 → 원인 없이 이익을 얻은 B에게 A가 부당이득 반환을 청구한다.</p>
+<p>은행은 예금을 돌려줄 채무도 함께 부담하므로 그 돈을 자기 이익으로 얻은 수취인이 아니다. 이 법리에서는 <strong>수취은행이 부당이득반환 상대가 되지 않는다.</strong> 별도 은행의 잘못이 있으면 다른 책임을 검토할 수 있지만 착오 입금만으로 은행 부당이득이 되지는 않는다.</p>
+<p><strong>문장 번역:</strong> ‘원인관계와 관계없이 예금계약 성립’＝송금할 이유가 없어도 계좌 입금의 예금관계는 생김 → ‘수취인에게 반환청구’＝그 이익을 가진 사람에게 돌려달라 함 → ‘은행의 이익 없음’＝은행이 그냥 챙긴 돈은 아님. 반대로 계좌 입금마다 원인 계약을 먼저 확인해야 한다면 지급결제의 안정성이 흔들린다.</p>
+<p><strong>기출 함정:</strong> 은행이 임의로 역송금하려면 수취인 동의 등이 필요하다는 것과, 수취인 동의 없이는 <strong>소송·지급명령으로도 영원히 회수할 수 없다는 말</strong>은 다르다. 또한 송금인의 반환채권이 기존 압류권자보다 당연히 우선하지 않는다. <strong>한 줄:</strong> <mark class="yellow">수취인에게 부당이득, 은행에 자동 반환 요구는 아님.</mark></p>
+<h2 id="consumer-13-07" data-concept-id="consumer-13-07">2-2. 반환지원의 신청 요건과 금액 ★★★★★</h2>
+<p><strong>교재 533–535쪽 / 제도의 목적:</strong> 소액 송금도 소송 부담 때문에 포기하지 않도록 예금보험공사가 반환을 돕는다. 먼저 금융회사 등을 통해 반환을 요청했지만 받지 못한 뒤 신청한다. 착오송금일로부터 <strong>1년 이내</strong>, 현재 건당 <strong>5만 원 이상 1억 원 이하</strong>, 지원 대상 거래·기관·사건이어야 한다. 일부 채권만 떼어 신청해 상한을 피할 수 없다.</p>
+<p>제도는 2021.7.6. 이후 발생분에서 시작했고 지원 상한은 단계적으로 확대되었다. 현재 1억 원 상한을 제도 도입 당시 모든 거래에 소급한 것으로 읽지 않는다. 이미 소송 등 법적 절차가 진행 중이거나 개인 간 계약분쟁·사기 송금이면 같은 착오송금 지원으로 처리하지 않는다. <a href="https://fins.kdic.or.kr/">예금보험공사 금융안심포털</a></p>
+<p><strong>금액 예시:</strong> 10만 원을 보내려다 100만 원을 보냈다면 원인 없는 부분은 90만 원이다. 원래 줄 의무가 있던 10만 원까지 전부 착오로 돌려달라고 하지 않는다. 금융회사에서 바로 반환되면 공사의 회수비용 공제 절차 없이 해결할 수 있다.</p>
+<p><strong>형성 063 주의:</strong> ‘5만~5천만 원 이하’는 현재의 <strong>전체 지원 범위 설명</strong>으로 틀리므로 원본 ②가 정답이다. 다만 그 구간의 개별 송금은 현재 범위 안에도 들어간다. 개별 적격 여부와 제도의 상한을 혼동하지 않는다.</p>
+<h2 id="consumer-13-08" data-concept-id="consumer-13-08">2-3. 공사의 채권 매입·자진 반환·지급명령 ★★★★☆</h2>
+<p><strong>교재 535–537쪽 / 문단의 목적:</strong> 공사가 송금인을 대신해 돈을 찾을 법적 지위를 얻는 과정을 보여 준다. 지원 대상 결정을 통지하면 부당이득반환채권 매입계약이 성립하고 양도 통지 권한을 위임받아 수취인에게 알린다. <strong>매입은 무조건 원금을 먼저 보상해 준다는 뜻이 아니라 사후정산 방식</strong>이다.</p>
+<p>양도통지 도달 뒤 <strong>2주 자진 반환 안내</strong> → 거절하거나 기간이 지나면 지급명령 신청 → 법정 채권보전·집행 절차를 검토한다. 반환액은 회수액에서 회수비용 등을 공제한 금액이다. 전액을 회수하면 부득이한 사정 없는 한 <strong>3영업일 이내</strong> 송금인에게 지급한다.</p>
+<p>매입 해제 사유는 허위·부정 신청, 착오송금이 아님이 명백, 관련 소송 진행·완료, 지원 대상 아님이 확인·발생, 공사 책임 없이 양도통지 미도달, 직접 회수 후 비용 정산, 지급명령 교부송달 실패·이의, 신청인의 법령·계약 불이행, 추가 회수의 실익 없음 등이다. 본안 소송을 끝까지 대신해 주는 무제한 대리 제도가 아니다.</p>
+<p><strong>교재의 직접 회수 질문:</strong> 공사에 맡긴 뒤 A가 B에게 직접 일부·전부를 받았다면 알리고 회수비용 납부·매입 해제를 처리한다. 일부 받은 금액 전부를 공사에 넘기는 법정 경우에는 반환지원 계속도 가능하다. <strong>한 줄:</strong> <mark class="green">공사가 회수한 돈과 직접 받은 돈을 이중으로 받지 않도록 정산한다.</mark></p>
+<h1>3. 사기 수법은 달라도 ‘믿게 만든 뒤 통제권을 빼앗는다’</h1>
+<h2 id="consumer-13-09" data-concept-id="consumer-13-09">3-1. 특별법의 대상과 2026년 가상자산 확대 ★★★★☆</h2>
+<p><strong>교재 537쪽·541–542쪽 / 조문의 목적:</strong> 통신 수단으로 속이거나 협박해 송금·이체시키거나, 정보를 탈취해 옮기거나, 교부·출금하게 하는 법정 사기를 신속 구제한다. 재화 공급·용역 제공을 가장한 행위는 해당 정의에서 제외하고 <strong>대출 제공·알선·중개를 가장한 행위는 포함</strong>한다. 인터넷 중고거래 사기가 형사상 사기가 아니란 뜻이 아니라 이 특별법 절차의 범위를 구별하는 것이다.</p>
+<p><strong>현행 보충:</strong> 2026.10.1. 개정은 법 이름을 「전기통신금융사기 피해 방지 및 <strong>피해자산</strong> 환급에 관한 특별법」으로 바꾸고 법정 가상자산사업자·계정과 가상자산 피해까지 규율을 넓혔다. 이후 10.2. 시행본도 확인했다. 과거 교재의 ‘금전·금융회사·계좌’ 표현만으로 현재 범위를 한정하지 않는다. 법정 요건과 국내 대상 사업자 등 절차 범위가 필요하므로 모든 코인 손실·투자사기가 자동 환급되는 것은 아니다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancNo=21503&ancYd=20260331&ancYnChk=0&chrClsCd=010202&efGubun=Y&efYd=20261001&lsiSeq=285053&nwJoYnInfo=N">개정 법률</a></p>
+<p>아래 4절은 <strong>교재의 금전·계좌 사례를 기준</strong>으로 흐름을 설명한다. 가상자산의 종류·수량·환산과 지급은 4-5에서 별도 비교한다. <strong>한 줄:</strong> <mark class="blue">사기의 형사상 성립과 특정 환급제도의 적용 범위는 별개다.</mark></p>
+<h2 id="consumer-13-10" data-concept-id="consumer-13-10">3-2. 피싱·스미싱·파밍·메모리해킹 ★★★★☆</h2>
+<p><strong>교재 538–541쪽 / 문단의 목적:</strong> 피해가 생기는 경로를 알면 책임과 증거를 구별하기 쉽다. 실행 방법이 아니라 피해 징후를 배우는 부분이다.</p>
+<table>
+<thead>
+<tr>
+<th>수법</th>
+<th>교재가 보여 주는 위험</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>보이스피싱</td>
+<td>수사기관 사칭, 가족 납치·사고를 빙자한 전화 요구</td>
+</tr>
+<tr>
+<td>메신저 피싱</td>
+<td>가족·친구 계정인 척 돈 요구</td>
+</tr>
+<tr>
+<td>가짜 사이트</td>
+<td>정상 기관을 닮은 화면에서 금융정보 입력 유도</td>
+</tr>
+<tr>
+<td>몸캠피싱</td>
+<td>영상·연락처를 확보하여 유포 협박</td>
+</tr>
+<tr>
+<td>스피어피싱</td>
+<td>특정 인물·회사를 골라 정보 탈취</td>
+</tr>
+<tr>
+<td>큐싱</td>
+<td>QR을 통해 악성 사이트·앱으로 유도</td>
+</tr>
+<tr>
+<td>로맨스스캠</td>
+<td>온라인 친밀감과 신뢰를 쌓은 뒤 여러 이유로 금전 요구</td>
+</tr>
+<tr>
+<td>스미싱</td>
+<td>문자에서 악성 링크·앱으로 연결. 소액결제뿐 아니라 대출·계좌 피해로 확대</td>
+</tr>
+<tr>
+<td>파밍</td>
+<td>기기가 조작되어 정상 경로로 접속하려 해도 가짜 사이트로 이동</td>
+</tr>
+<tr>
+<td>메모리해킹</td>
+<td>실행 중 정보가 조작되어 수취계좌·금액 등이 바뀌는 사고</td>
+</tr>
+</tbody></table>
+<p>교재의 피싱 어원 설명은 ‘정보를 낚는다’는 기억법으로 쓰면 된다. 파밍은 사용자가 가짜 주소를 직접 눌렀을 때만 가능한 사고가 아니다. 메모리 보호·악성코드 탐지 등 다층 조치가 필요하며 ‘값을 암호화하면 모든 사고 방지’라는 단일 해법으로 외우지 않는다. <strong>한 줄:</strong> 사칭·악성 앱·경로 변조·거래내용 변조의 차이를 기억한다.</p>
+<h2 id="consumer-13-11" data-concept-id="consumer-13-11">3-3. 취업 사칭과 가짜 업데이트 사례 ★★★★☆</h2>
+<p><strong>교재 539–540쪽 / 사례1:</strong> 구직자 지연이 광고회사 채용에 지원한다 → 합격 뒤 집에서 동영상 연수·과제를 수행하고 연수비도 받는다 → 진짜 취업이라고 믿은 뒤 신분증과 신용조회 화면을 제출하라는 요청을 받는다 → 업무용 휴대폰을 자기 명의로 개통해 보낸다 → 사기범이 비대면 대출을 실행한다.</p>
+<p><strong>왜 이 사례인가:</strong> 처음부터 돈을 달라는 사기만 있는 게 아니다. 작은 지급과 실제 같은 업무로 신뢰를 만든 뒤 인증수단을 가져간다. 책임 판단에서는 누가 어떤 기기를 통제했는지, 어떤 정보를 넘겼는지, 요구의 비정상성을 알 수 있었는지 등이 중요하다.</p>
+<p><strong>사례2:</strong> 익숙한 브라우저·앱 장터·민원 앱·백신 이름을 단 화면이 업데이트를 요구한다 → 실제로는 통화·문자·연락처·저장소·관리자 등 과도한 권한을 요구하는 악성 앱이다. 교재의 옛 서비스 이름은 당시 사례다. 이름이 익숙하다고 공식 앱인 것은 아니다. <strong>한 줄:</strong> <mark class="pink">연수비를 받았다는 사실과 유명 앱 로고는 신뢰의 증명이 아니다.</mark></p>
+<h2 id="consumer-13-12" data-concept-id="consumer-13-12">3-4. 원격제어·쇼핑 결제·이메일 명세서 사례 ★★★★☆</h2>
+<p><strong>교재 540–541쪽 / 사례3:</strong> 수사관을 사칭한 사람이 A의 계좌가 범죄에 쓰였다고 겁준다 → 기록을 확인한다며 원격제어 프로그램 설치를 유도한다 → 가짜 검찰 사이트의 사건 조회로 믿게 한다 → ‘금융 보호’ 명목으로 비밀번호·인증정보를 받는다 → 화면을 보이지 않게 한 사이 <strong>약 4천만 원</strong>을 옮긴다. 합법적인 원격제어 프로그램 자체보다 이를 누가 어떤 이유로 통제하게 했는지가 핵심이다.</p>
+<p><strong>사례4:</strong> B가 쇼핑몰에서 옷을 사고 실시간 계좌이체를 누른다 → 감염된 기기가 가짜 은행 화면으로 보낸다 → 보안카드 전체·비밀번호 등을 입력한다 → 사기범이 인증서를 재발급받아 새벽에 <strong>약 300만 원</strong>을 옮긴다. 정상 쇼핑을 시작했어도 결제 단계가 변조될 수 있다.</p>
+<p><strong>사례5:</strong> ‘이번 달 카드 거래내역’ 이메일 첨부를 열자 주민번호 입력을 요구하거나 기기가 비정상 작동한다. 명세서로 가장한 정보 탈취·악성코드 유포 사례다. 사고가 의심되면 해당 기기 거래를 멈추고, 별도의 안전한 경로로 회사에 확인하며 피해 기록을 보존한다. <strong>시험·한 줄:</strong> 각각 사칭·경로 변조·정보 노출의 경위를 남겨야 법적 책임도 판단할 수 있다.</p>
+<h1>4. 지급정지에서 피해금 환급까지</h1>
+<h2 id="consumer-13-13" data-concept-id="consumer-13-13">4-1. 피해구제 신청과 지급정지 ★★★★☆</h2>
+<p><strong>교재 541–543쪽 / 조문의 목적:</strong> 남은 돈이 다시 빠져나가기 전에 묶는다. 송금·이체형 피해자는 송금한 계좌의 금융회사 또는 사기 이용계좌 금융회사에 신청할 수 있다. 대면 교부·출금형은 수사기관의 법정 지급정지 요청 절차도 연결된다. 피해금이 옮겨 간 후속 계좌 역시 법정 사기 이용계좌가 될 수 있다.</p>
+<p>신청서와 신분증 사본 등을 제출하고 긴급하면 전화·구술로 먼저 신청한다. 이 경우 <strong>신청일부터 3일 이내</strong> 서면 신청서를 제출하는 보완을 잊지 않는다. 필요하면 피해신고 확인서 등 자료를 요구받을 수 있다. 다른 회사 계좌로 옮겨 갔으면 회사 간 필요한 정보를 전달하고 지급정지를 요청한다.</p>
+<p>피해구제·지급정지 요청, 수사기관·금감원 등의 의심 정보, 본인확인 결과, 법정 정보공유 등을 통해 사기계좌로 의심할 사정이 인정되면 금융회사는 계좌 전부에 지급정지 조치를 한다. 명의인·신청 피해자·통지된 피해자·관련 회사·금감원·해당 수사기관 등에 알리고 소재불명 명의인 등은 법정 공시로 처리한다. 공시 기간은 <strong>14일 이상</strong>이다.</p>
+<p><strong>한 줄:</strong> <mark class="yellow">지급정지는 남은 자산의 유출을 막는 조치이지, 사라진 피해 전액을 은행이 채워 넣는 조치가 아니다.</mark></p>
+<h2 id="consumer-13-14" data-concept-id="consumer-13-14">4-2. 소액 기준·별도 소송·채권소멸 공고 ★★★★☆</h2>
+<p><strong>교재 543–544쪽 / 문단의 목적:</strong> 계좌 명의인의 예금채권을 법정 절차로 소멸시키고 피해자에게 나누어 주되 다른 권리관계를 보호한다. 지급정지된 계좌채권 관련 소송·압류·가압류·가처분·체납절차·질권 설정 등에는 법정 제한이 있다. 명의인의 적법한 이의·확인 소송 등 예외와 구별한다. 모든 사람에 대한 모든 민사청구가 금지되는 것은 아니다.</p>
+<p>지급정지 전 이미 계속 중인 법정 소송, 집행된 압류·가압류·가처분, 개시된 체납절차, 설정된 질권, 지급정지 후 명의인과 피해자 사이에 계속 중인 법정 채무부존재·부당이득 소송 등의 사정에서는 채권소멸 공고 요청의 제한을 확인한다.</p>
+<p><strong>소액 함정:</strong> 법률은 ‘3만 원 이하 범위에서 대통령령으로 정하는 금액’을 두고 <strong>시행령은 1만 원 이하</strong>로 정한다. 교재 544쪽의 3만 원만 외우면 안 된다. 이 경우도 피해자가 지급정지 통지를 받은 날부터 <strong>30일 이내 별도 개시 요청</strong>을 하면 법정 예외로 절차를 진행할 수 있다. 가상자산 계정은 지급정지 당시 가격으로 종류별 환산한 합계 1만 원 기준이다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=011448&lsRvsGubun=all">현행 시행령 개정문</a></p>
+<p>금감원은 개시 공고 요청을 받으면 <strong>2개월 공고</strong>하고 명의인에게 알린다. 미리 신청하지 못한 피해자도 공고일부터 <strong>2개월 이내</strong> 추가 신청할 수 있다. 공고된 채권은 법정 중단·종료 사유 없이 최초 공고일부터 2개월이 지나면 소멸하고 관련자에게 통지·공시한다. <strong>한 줄:</strong> 공고는 명의인과 뒤늦은 피해자 모두에게 확인·참여 기회를 주는 절차다.</p>
+<h2 id="consumer-13-15" data-concept-id="consumer-13-15">4-3. 남은 금액의 비례 환급과 중복배상 금지 ★★★★☆</h2>
+<p><strong>교재 545–546쪽 / 조문의 목적:</strong> 남은 자산보다 피해가 많으면 공평하게 나눈다. 금전 사건에서 총피해가 소멸채권액보다 크면 <strong>남은 소멸채권액 × 내 피해액 ÷ 총피해액</strong>으로 정한다. 충분하면 해당 피해액을 기준으로 한다.</p>
+<p><strong>계산 사례:</strong> A가 300만 원, B가 200만 원 피해를 봤는데 남은 돈은 100만 원이다. A는 60만 원, B는 40만 원이다. 먼저 신고했다고 100만 원 전부를 가져가는 구조가 아니다.</p>
+<p>채권 소멸일부터 <strong>14일 이내</strong> 금감원이 대상·금액을 결정하여 통지한다. 회사는 <strong>지체 없이 지급</strong>, 지급 후 <strong>3일 이내 금감원에 통보</strong>한다. 피해자 지정 계좌로 지급하고 법정 수수료·면제 규정도 확인한다. 14일은 모든 사건의 신고부터 완결까지 보장하는 기간이 아니다.</p>
+<p>전액 배상받은 피해자·승계인, 관련 부당이득 취득자, 공범·불법원인 있는 사람 등 법정 제외자는 환급받을 수 없다. 환급받은 한도에서 손해배상 등 청구권은 소멸하지만 <strong>나머지 미회복 손해</strong>에 대한 다른 법적 청구는 남을 수 있다. 책임 요건과 집행 가능성을 별도로 보아야 한다. <strong>한 줄:</strong> <mark class="pink">환급은 남은 자산의 분배이지 손해 전액 보장도, 이중배상도 아니다.</mark></p>
+<h2 id="consumer-13-16" data-concept-id="consumer-13-16">4-4. 잘못 묶인 명의인의 구제 ★★★☆☆</h2>
+<p><strong>교재 546–547쪽 / 문단의 목적:</strong> 피해자 보호가 무관한 사람의 재산을 빼앗는 절차가 되지 않게 한다. 명의인은 계좌가 사기 이용계좌가 아님, 재화·용역 대가 등 정당한 권원으로 취득했음, 피해 편취에 이용된 계좌가 아님 등을 객관적인 자료로 소명하는 법정 이의 절차를 활용할 수 있다.</p>
+<p>이미 채권이 소멸한 뒤에도 해당 법정 사유와 <strong>지급정지·소멸 절차에서 이의하지 못한 정당한 이유</strong> 등 요건을 갖추면 금감원에 소멸채권 환급을 청구할 수 있다. 단순히 “내 명의 통장이다”는 말만으로 충분하지 않다. <strong>한 줄:</strong> 계좌의 외형만 아니라 실제 자금의 원인·흐름·이의 기회를 본다.</p>
+<h2 id="consumer-13-17" data-concept-id="consumer-13-17">4-5. 가상자산 환급은 원화 전액 보장이 아니다 ★★★☆☆</h2>
+<p><strong>현행 보충 / 교재 이후 변화:</strong> 가상자산이 섞이면 원래 피해자산과 지급정지된 계정에 있는 자산 종류가 다를 수 있다. 시행령은 지급정지 당시 남아 있는 자산을 기준으로 환급자산을 정하고, 피해 비율 계산에서는 금전과 가상자산의 환산가액을 합산하며, 가상자산으로 환급할 때는 <strong>종류와 수량</strong>으로 정하도록 한다. 위 4-3의 단순 원화 공식만 모든 가상자산에 그대로 쓰지 않는다.</p>
+<p>계정 지급정지·명의인 통지·피해자산 이전 등 확대된 절차를 적용하되 가격변동 위험을 정부가 모두 보전한다는 뜻은 아니다. 시행 전 범행에 대한 법률의 적용례도 있으므로 사건일만 보고 일괄 제외하지 않는다. <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=290281">2026.10.1. 시행령</a></p>
+<p><strong>한 줄:</strong> <mark class="green">재산이 코인으로 바뀌었다는 이유로 구제가 끊어지지 않게 하되, 실제 남은 자산과 법정 환급 방식을 따진다.</mark></p>
+<h1>5. 환급 외에 누구에게 무엇을 청구할까</h1>
+<h2 id="consumer-13-18" data-concept-id="consumer-13-18">5-1. 가해자·계좌 명의인·은행의 책임을 분리 ★★★★★</h2>
+<p><strong>교재 547–550쪽 / 문단의 목적:</strong> 같은 피해에도 청구 상대와 법적 근거가 여러 개다. 사기범에게는 민법 제750조의 불법행위 배상을, 원인 없이 이익을 얻은 수취인에게는 제741조 부당이득을, 법정 사고 책임 있는 회사에는 전자금융거래법상 배상을 검토한다. 모두가 똑같은 의무를 자동 부담하는 것은 아니다.</p>
+<p>계좌 명의인에게 예금채권이 생겼다는 점과 그 사람이 고의·과실로 사기를 도왔다는 점은 별개다. 부당이득은 이익의 발생·잔존과 선의·악의 등 요건을, 불법행위는 귀책사유·인과관계를 확인한다. 교재 546쪽의 ‘접근매체 양도 위반이므로 명의인도 책임’이라는 문장은 바로 뒤 550–551쪽 판례의 <strong>예견 가능성·상당인과관계</strong> 조건과 함께 읽어야 한다.</p>
+<p><strong>한 줄:</strong> <mark class="blue">배상은 잘못으로 난 손해를 메우기, 부당이득은 근거 없이 얻은 이익을 돌리기다.</mark></p>
+<h2 id="consumer-13-19" data-concept-id="consumer-13-19">5-2. 공동불법행위와 과실에 의한 방조 판례 ★★★★★</h2>
+<p><strong>교재 550쪽 / 대법원 2009.4.23. 2009다1313의 법리:</strong> 여러 행위가 객관적으로 관련되어 손해를 함께 만들었다면 모든 사람이 사전에 공모하거나 같은 의도를 가질 필요는 없다. 민사상 방조는 직접·간접으로 불법행위를 쉽게 만든 행위를 포함하며, 불법을 돕지 않을 주의의무를 어긴 <strong>과실 방조</strong>도 문제 될 수 있다.</p>
+<p><strong>이해 장면:</strong> 사기범은 피해자를 속이고, 다른 사람이 위험을 예상할 수 있는데도 필요한 거래수단을 제공해 범행을 쉽게 한다. 피해자에게는 두 행위가 합쳐 손해를 만든다. 이 장면은 법리 설명용 예시이며 해당 판결의 세부 사실을 새로 확정한 것이 아니다.</p>
+<p><strong>문장 번역:</strong> ‘공모를 필요로 하지 않는다’＝미리 함께 계획했다는 증명이 항상 필요한 것은 아님 → ‘관련 공동성’＝행위들이 손해 발생에 객관적으로 연결 → ‘과실 방조’＝주의했어야 하는데 위험을 놓쳐 불법을 쉽게 함. 형사상 방조의 고의 요건과 그대로 같다고 외우지 않는다. <strong>한 줄:</strong> 민사 방조는 가능하지만 주의의무와 인과관계가 필요하다.</p>
+<h2 id="consumer-13-20" data-concept-id="consumer-13-20">5-3. 통장을 넘겼다는 사실만으로 배상할까 ★★★★★</h2>
+<p><strong>교재 550–551쪽 / 대법원 2014.12.24. 2013다98222:</strong> A가 사기범의 말에 속아 통장 사본·현금카드·비밀번호를 건넨다 → 사기범이 그것으로 전화금융사기를 한다 → 다른 피해자가 A에게도 배상을 요구한다 → 쟁점은 A가 접근매체를 넘길 때 사기 거래를 예상할 수 있었는가다.</p>
+<p>대법원은 <strong>넘겨준 사실만으로는 부족하고, 이를 통해 불법 거래가 이루어져 범행을 쉽게 하리라는 예견 가능성</strong> 등의 사정이 필요하다고 보았다. 계좌 명의인도 속은 정황을 무시하고 자동 배상시키는 결론을 경계한다. 반대로 예견 가능성과 관련성이 인정되면 ‘나도 직접 사기는 안 했다’만으로 면책되지 않는다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=177839">대법원 판결</a></p>
+<p><strong>문장 번역:</strong> ‘상당인과관계’＝그 제공행위가 법적으로 책임질 만큼 피해와 연결되는가 → ‘그 사정만으로 부족’＝통장 제공 하나로 끝내지 말라 → ‘예견 가능’＝그때 상황에서 범죄 이용을 예상할 수 있었나. <strong>한 줄:</strong> <mark class="pink">통장 명의인＝항상 공범·항상 배상책임이라는 등식은 금지.</mark></p>
+<h2 id="consumer-13-21" data-concept-id="consumer-13-21">5-4. 형사재판의 배상명령과 전체 구제 선택 ★★★★☆</h2>
+<p><strong>교재 551쪽 / 제도의 목적:</strong> 별도 민사소송 부담을 줄이기 위해 법정 범죄의 형사 공판에서 배상도 명할 수 있게 한다. 사기·공갈 등 법정 범죄의 <strong>1심 또는 2심 공판</strong>에서 유죄를 선고할 때 직권 또는 피해자·상속인의 신청으로 직접 물적 피해·치료비·위자료 등의 배상을 명할 수 있다. 신청 시기·대상·배상책임 명확성 등 요건이 필요하여 유죄라고 모든 손해가 자동 배상명령 되는 것은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>내 사건</th>
+<th>먼저 구별할 절차</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>내가 계좌를 잘못 입력</td>
+<td>금융회사 반환 요청 → 요건 충족 시 예보 지원 → 필요한 법적 반환 절차</td>
+</tr>
+<tr>
+<td>사기범이 돈을 빼감</td>
+<td>신속한 피해구제·지급정지와 수사 신고 → 채권소멸·환급 → 남은 손해 책임 검토</td>
+</tr>
+<tr>
+<td>회사 처리·접근매체 법정 사고</td>
+<td>전자금융거래법상 회사 책임과 법정 면책 사유 검토</td>
+</tr>
+<tr>
+<td>사기범의 형사재판 진행</td>
+<td>법정 요건 충족 시 배상명령, 그 밖에는 민사 구제</td>
+</tr>
+</tbody></table>
+<p><strong>한 줄:</strong> 회수·환급·배상은 목적과 상대가 다르다. 이미 회복한 부분은 다시 받지 않는다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>接近媒體 접근매체</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 接(이을 접) 近(가까울 근) 媒(중매 매) 體(몸 체). <strong>③ 합친 뜻:</strong> 거래에 접근하게 하는 수단. <strong>④ 이름의 이유:</strong> 금융거래를 여는 열쇠 역할.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 거래 지시·본인·거래 진실성 확인 수단·정보. <strong>⑥ 쉬운 말:</strong> 카드·인증서·지문 등. <strong>⑦ 사례:</strong> 등록된 지문으로 거래 확인.</p>
+<p><strong>⑧ 시험:</strong> 생체정보도 포함. <strong>⑨ 비교·기억법:</strong> 개인정보 분류와 양립.</p>
+<h3>僞造·變造 위조·변조</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 僞(거짓 위) 造(지을 조) 變(변할 변) 造(지을 조). <strong>③ 합친 뜻:</strong> 가짜로 만들기·기존 것을 바꾸기. <strong>④ 이름의 이유:</strong> 거래 수단의 진실성을 해치기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권한 없이 매체를 만들거나 고침. <strong>⑥ 쉬운 말:</strong> 가짜 카드 또는 변형된 카드. <strong>⑦ 사례:</strong> 부정한 접근매체 거래.</p>
+<p><strong>⑧ 시험:</strong> 회사 책임 사고 유형. <strong>⑨ 비교·기억법:</strong> 정상 매체의 분실과 다른 쟁점.</p>
+<h3>重大過失 중대한 과실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 重(무거울 중) 大(큰 대) 過(허물 과) 失(잃을 실). <strong>③ 합친 뜻:</strong> 크고 중한 부주의. <strong>④ 이름의 이유:</strong> 사소한 실수와 책임을 달리하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현저한 주의 결여를 구체적으로 판단. <strong>⑥ 쉬운 말:</strong> 분명한 위험을 크게 놓친 경우. <strong>⑦ 사례:</strong> 인증 필수정보 전체 제공.</p>
+<p><strong>⑧ 시험:</strong> 경위·수법·인식·경험. <strong>⑨ 비교·기억법:</strong> 모든 사기 피해가 중과실은 아님.</p>
+<h3>質權 질권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 質(바탕 질) 權(권세 권). <strong>③ 합친 뜻:</strong> 재산을 담보로 잡는 권리. <strong>④ 이름의 이유:</strong> 돈을 못 갚을 때 우선 만족을 얻기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채무 담보를 위한 물건·권리상의 담보권. <strong>⑥ 쉬운 말:</strong> 담보로 맡겨 두기. <strong>⑦ 사례:</strong> 접근매체 담보 제공 금지.</p>
+<p><strong>⑧ 시험:</strong> 접근매체의 법정 금지행위. <strong>⑨ 비교·기억법:</strong> 단순 보관과 담보 제공 다름.</p>
+<h3>求償 구상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 求(구할 구) 償(갚을 상). <strong>③ 합친 뜻:</strong> 대신 낸 부담을 돌려달라 함. <strong>④ 이름의 이유:</strong> 이용자 보호와 내부 부담 조정.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 배상 후 최종 책임자에게 회수. <strong>⑥ 쉬운 말:</strong> 고객에게 먼저 배상하고 외주사에 청구. <strong>⑦ 사례:</strong> 보조업자 과실 후 구상.</p>
+<p><strong>⑧ 시험:</strong> 구상 불가가 오답. <strong>⑨ 비교·기억법:</strong> 고객의 손해배상과 별개.</p>
+<h3>錯誤送金 착오송금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 錯(섞일 착) 誤(그르칠 오) 送(보낼 송) 金(쇠 금). <strong>③ 합친 뜻:</strong> 잘못 알고 돈을 보냄. <strong>④ 이름의 이유:</strong> 거래 지시 자체가 잘못됨.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 수취기관·계좌·금액 등을 잘못 입력한 송금. <strong>⑥ 쉬운 말:</strong> 옆 사람 계좌로 잘못 보냄. <strong>⑦ 사례:</strong> 10만 원 대신 100만 원.</p>
+<p><strong>⑧ 시험:</strong> 지원 1년·현재 5만~1억. <strong>⑨ 비교·기억법:</strong> 사기 송금과 구별.</p>
+<h3>預金債權 예금채권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 預(미리 예) 金(쇠 금) 債(빚 채) 權(권세 권). <strong>③ 합친 뜻:</strong> 은행에 예금을 달라는 권리. <strong>④ 이름의 이유:</strong> 계좌 입금은 은행 상대 권리로 존재.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 예금자가 은행에 반환을 청구하는 권리. <strong>⑥ 쉬운 말:</strong> 통장 잔액만큼 은행에 요구. <strong>⑦ 사례:</strong> 착오 입금도 수취인 예금채권.</p>
+<p><strong>⑧ 시험:</strong> 원인관계와 예금관계 분리. <strong>⑨ 비교·기억법:</strong> 송금인의 수취인 상대 반환채권과 다름.</p>
+<h3>不當利得 부당이득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 부) 當(마땅 당) 利(이로울 리) 得(얻을 득). <strong>③ 합친 뜻:</strong> 근거 없이 얻은 이익. <strong>④ 이름의 이유:</strong> 실수로 생긴 재산 이동을 바로잡음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률상 원인 없는 재산 이득의 반환. <strong>⑥ 쉬운 말:</strong> 받을 이유 없는 돈 돌려주기. <strong>⑦ 사례:</strong> 착오송금 수취인에게 청구.</p>
+<p><strong>⑧ 시험:</strong> 은행을 자동 상대방으로 삼지 않음. <strong>⑨ 비교·기억법:</strong> 불법행위 배상과 요건 다름.</p>
+<h3>債權讓渡 채권양도</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 債(빚 채) 權(권세 권) 讓(사양할 양) 渡(건널 도). <strong>③ 합친 뜻:</strong> 받을 권리를 넘김. <strong>④ 이름의 이유:</strong> 공사가 대신 회수할 지위 확보.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 채권자가 가진 청구권의 이전. <strong>⑥ 쉬운 말:</strong> 돈 받을 사람을 바꾸기. <strong>⑦ 사례:</strong> 예보의 반환채권 매입·통지.</p>
+<p><strong>⑧ 시험:</strong> 사후정산·비용 공제. <strong>⑨ 비교·기억법:</strong> 국가의 원금 선보상 아님.</p>
+<h3>支給命令 지급명령</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 支(지탱할 지) 給(줄 급) 命(명령 명) 令(하여금 령). <strong>③ 합친 뜻:</strong> 돈 등을 지급하라는 명령. <strong>④ 이름의 이유:</strong> 간이한 채권 회수 절차.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 독촉절차의 법원 명령. <strong>⑥ 쉬운 말:</strong> 법원에 돈 지급을 명해 달라 함. <strong>⑦ 사례:</strong> 수취인이 자진 반환 거절.</p>
+<p><strong>⑧ 시험:</strong> 이의·송달 실패와 지원 해제. <strong>⑨ 비교·기억법:</strong> 확정 전 무조건 집행 가능한 것은 아님.</p>
+<h3>欺罔·恐喝 기망·공갈</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 欺(속일 기) 罔(속일 망) 恐(두려울 공) 喝(꾸짖을 갈). <strong>③ 합친 뜻:</strong> 속이기·겁주어 요구하기. <strong>④ 이름의 이유:</strong> 결정의 자유를 왜곡.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사기·협박에 의한 재산 취득 수단. <strong>⑥ 쉬운 말:</strong> 검사인 척 속이거나 가족을 해친다고 협박. <strong>⑦ 사례:</strong> 보이스피싱.</p>
+<p><strong>⑧ 시험:</strong> 특별법 적용 대상과 일반 사기 구별. <strong>⑨ 비교·기억법:</strong> 진짜 채무 독촉과 불법 위협 다름.</p>
+<h3>支給停止 지급정지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 支(지탱할 지) 給(줄 급) 停(머무를 정) 止(그칠 지). <strong>③ 합친 뜻:</strong> 돈이 나가는 것을 멈춤. <strong>④ 이름의 이유:</strong> 남은 피해자산 유출 방지.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 의심 계좌 등의 출금·이체 등을 막는 법정 조치. <strong>⑥ 쉬운 말:</strong> 계좌 문을 잠시 잠그기. <strong>⑦ 사례:</strong> 피해신고 후 사기계좌 동결.</p>
+<p><strong>⑧ 시험:</strong> 전액 피해보상과 다름. <strong>⑨ 비교·기억법:</strong> 채권소멸은 다음 별도 절차.</p>
+<h3>債權消滅 채권소멸</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 債(빚 채) 權(권세 권) 消(사라질 소) 滅(꺼질 멸). <strong>③ 합친 뜻:</strong> 받을 권리가 없어짐. <strong>④ 이름의 이유:</strong> 그 재원을 피해자에게 환급하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공고 등 법정 절차 뒤 명의인 채권 소멸. <strong>⑥ 쉬운 말:</strong> 계좌 주인의 인출권을 법에 따라 없앰. <strong>⑦ 사례:</strong> 공고 2개월 뒤 소멸.</p>
+<p><strong>⑧ 시험:</strong> 중지·종료 사유 확인. <strong>⑨ 비교·기억법:</strong> 지급정지만으로 즉시 소멸 아님.</p>
+<h3>按分 안분</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 按(누를 안) 分(나눌 분). <strong>③ 합친 뜻:</strong> 기준 비율대로 나눔. <strong>④ 이름의 이유:</strong> 피해자 간 공평.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재원이 부족할 때 피해비율 배분. <strong>⑥ 쉬운 말:</strong> 피해가 3대2면 남은 돈도 3대2. <strong>⑦ 사례:</strong> 100만 원을 60·40만 원 환급.</p>
+<p><strong>⑧ 시험:</strong> 선착순 전액 지급 아님. <strong>⑨ 비교·기억법:</strong> 개별 피해 전액 보장 아님.</p>
+<h3>權原 권원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권) 原(근원 원). <strong>③ 합친 뜻:</strong> 권리의 근거. <strong>④ 이름의 이유:</strong> 무고한 수취인의 재산 보호.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재산 취득·보유를 정당화하는 법적 근거. <strong>⑥ 쉬운 말:</strong> 이 돈을 받을 정당한 이유. <strong>⑦ 사례:</strong> 물건 판매 대금 증명.</p>
+<p><strong>⑧ 시험:</strong> 명의인의 객관 자료 소명. <strong>⑨ 비교·기억법:</strong> 단순 통장 명의와 다름.</p>
+<h3>相當因果關係 상당인과관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 相(서로 상) 當(마땅 당) 因(인할 인) 果(열매 과) 關(관계할 관) 係(맬 계). <strong>③ 합친 뜻:</strong> 법적으로 책임질 정도의 원인·결과 연결. <strong>④ 이름의 이유:</strong> 끝없이 책임이 퍼지는 것을 제한.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행위와 손해의 상당한 연결. <strong>⑥ 쉬운 말:</strong> 그 행동 때문에 책임질 만한 피해인가. <strong>⑦ 사례:</strong> 통장 제공과 사기 피해의 연결.</p>
+<p><strong>⑧ 시험:</strong> 예견 가능성·사실관계. <strong>⑨ 비교·기억법:</strong> 시간상 앞섰다는 이유만으로 충분하지 않음.</p>
+<h3>幇助 방조</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 幇(도울 방) 助(도울 조). <strong>③ 합친 뜻:</strong> 도와줌. <strong>④ 이름의 이유:</strong> 함께 손해를 만든 사람의 책임.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인의 불법행위를 쉽게 만드는 행위. <strong>⑥ 쉬운 말:</strong> 직접 속이지 않아도 수단을 제공. <strong>⑦ 사례:</strong> 예견 가능한 범죄용 계좌 제공.</p>
+<p><strong>⑧ 시험:</strong> 민사상 과실 방조 가능. <strong>⑨ 비교·기억법:</strong> 형사 방조의 고의 요건과 구별.</p>
+<h3>賠償命令 배상명령</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 賠(물어줄 배) 償(갚을 상) 命(명령 명) 令(하여금 령). <strong>③ 합친 뜻:</strong> 손해를 갚으라는 명령. <strong>④ 이름의 이유:</strong> 별도 민사소송 부담 완화.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 형사 공판에서 함께 내리는 배상 결정. <strong>⑥ 쉬운 말:</strong> 사기 재판에서 돈도 배상하라고 명함. <strong>⑦ 사례:</strong> 1·2심 사기 공판의 법정 신청.</p>
+<p><strong>⑧ 시험:</strong> 유죄면 모든 피해 자동 인정 아님. <strong>⑨ 비교·기억법:</strong> 피해환급 절차와 다름.</p>
+<h1>기출 연결과 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>우선 문제</th>
+<th>중점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>형성 061·2016-66</td>
+<td>접근매체와 회사 책임의 세 사고</td>
+</tr>
+<tr>
+<td>2015-55·2016-67</td>
+<td>웹메일 노출과 단순 출력, 구체적 중과실</td>
+</tr>
+<tr>
+<td>형성 063</td>
+<td>현재 착오송금 지원 5만 원~1억 원과 제도 범위</td>
+</tr>
+<tr>
+<td>2015-54·2017-62</td>
+<td>수취인 예금채권·은행의 부당이득 부정·압류 우선 아님</td>
+</tr>
+<tr>
+<td>2017-65·2018-66</td>
+<td>보조업자 귀책은 회사 귀책, 배상 후 구상 가능</td>
+</tr>
+</tbody></table>
+<p>제공 기출은 회사 책임·착오송금·보조업자에 집중한다. 신설 지원과 현행 가상자산 환급은 옛 기출에 없더라도 교재 이해·개정 확인 대상으로 둔다. 원본 정답은 보존하고 보기의 지나친 단정과 현재 차이는 따로 적었다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용1 · 지문이라는 이유.</strong> 회사가 “지문은 개인정보니까 접근매체가 아니다”라고 한다. <strong>정답·의도:</strong> 두 분류는 양립 가능하며 거래 확인용 생체정보도 접근매체다.</p>
+<p><strong>응용2 · 한 자리 틀린 송금.</strong> 은행이 지시한 대로 처리했는데 수취계좌 숫자가 틀렸다. <strong>정답·의도:</strong> 즉시 은행 처리 사고라고 단정하지 않고 수취인 반환과 착오송금 지원을 검토한다.</p>
+<p><strong>응용3 · 남은 돈이 절반.</strong> 두 피해자의 피해액이 600만 원·400만 원, 환급 재원이 500만 원이다. <strong>정답·의도:</strong> 각각 300만 원·200만 원. 먼저 신고한 순서로 전액 지급하지 않는다.</p>
+<p><strong>응용4 · 잔액 8천 원.</strong> 피해자가 소액이라 절차가 자동 개시되지 않는다는 통지를 받았다. <strong>정답·의도:</strong> 통지 후 30일 이내 별도 개시 요청 가능성을 확인한다. 3만 원과 1만 원을 구별한다.</p>
+<p><strong>응용5 · 외주 회사의 실수.</strong> 거래 보조업자의 과실로 손해가 생겨 금융회사가 배상했다. <strong>정답·의도:</strong> 이용자 보호상 귀책을 회사에 연결하되 회사의 보조업자 상대 구상은 가능하다.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제13장</h1>
+<p><strong>TOP3:</strong> 회사 책임·중과실 / 착오송금 반환 / 사기 환급과 별도 배상.</p>
+<table>
+<thead>
+<tr>
+<th>쟁점</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>접근매체</td>
+<td>카드·전자정보·서명/인증·등록번호·생체·해당 비밀번호.</td>
+</tr>
+<tr>
+<td>회사 3사고</td>
+<td>위조·변조 / 전송·처리 / 침입해 부정 취득한 접근매체 이용.</td>
+</tr>
+<tr>
+<td>예외</td>
+<td>고의·중과실＋사전 약정 등. 소기업 제외 법인＋충분한 주의 별도.</td>
+</tr>
+<tr>
+<td>중과실</td>
+<td>경위·수법·인식·경험 종합. 단순 출력만으로 자동 인정 아님.</td>
+</tr>
+<tr>
+<td>분실·약관</td>
+<td>통지 후 회사 책임 원칙·선불 예외 / 약관 변경 1개월 전 원칙.</td>
+</tr>
+<tr>
+<td>내역·오류</td>
+<td>서면 내역 2주, 오류 결과 2주, 회사 분쟁처리 결과 15일.</td>
+</tr>
+<tr>
+<td>보조업자</td>
+<td>보조업자 고의·과실＝회사 귀책. 회사 배상 후 구상 가능.</td>
+</tr>
+<tr>
+<td>착오송금</td>
+<td>수취인에게 부당이득, 은행 부당이득 아님. 압류보다 자동 우선 아님.</td>
+</tr>
+<tr>
+<td>예보 지원</td>
+<td>은행 선행 요청·1년 내·현재 5만~1억 원. 사기·분쟁·소송 등 제외.</td>
+</tr>
+<tr>
+<td>회수</td>
+<td>채권 매입·양도 통지 → 2주 자진 반환 → 지급명령. 비용 공제·사후정산.</td>
+</tr>
+<tr>
+<td>사기 환급</td>
+<td>긴급 신청 후 3일 보완, 지급정지 → 공고 2개월 → 소멸.</td>
+</tr>
+<tr>
+<td>소액·지급</td>
+<td>시행령 1만 원 이하·30일 별도 요청 / 소멸 후14일 결정·지체 없이 지급.</td>
+</tr>
+<tr>
+<td>환급 범위</td>
+<td>부족하면 피해비율 배분. 받은 부분만 청구권 소멸, 이중회복 금지.</td>
+</tr>
+<tr>
+<td>현재 확대</td>
+<td>2026.10.1. 가상자산 포함. 종류·수량·환산기준 별도.</td>
+</tr>
+<tr>
+<td>명의인 책임</td>
+<td>통장 제공만으로 자동 배상 아님. 예견 가능성·귀책·인과관계.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 지급정지는 전액 보상이 아니다. 수취인 동의가 없어도 법적 반환 청구는 가능하다. 명의인이라는 사실만으로 책임이 완성되지 않는다.</p>
+<p>사례를 풀 순서: 착오·사기·처리 사고 → 자산 이동·남은 재산 → 지급정지/반환지원 → 회사·사기범·수취인 책임 → 중복회복 제외.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 같은 송금 사건에서 은행·사기범·명의인의 책임을 나누고 반환지원과 환급을 구별한다. 🟡 숫자는 기억하지만 공고·소멸·결정의 기산점을 섞는다. 🔴 은행에 신고하면 무조건 피해 전액을 받거나 통장 명의인은 언제나 공범이라고 생각한다. 실제 답안이 없으므로 자기점검 기준이다.</p>
+<p><strong>복습 TOP3:</strong> 법정 사고와 중과실 / 착오송금의 수취인·은행 관계 / 비례 환급과 남은 손해 청구.</p>
+<h1>문제 부록 · 10문항·40개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-소비자법_061"><h4>형성평가 · 소비자법_061</h4><p class="question-stem">다음 중에서 전자금융거래와 관련한 이용자 보호에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>금융회사 또는 전자금융업자는 접근매체의 위조나 변조로 발생한 사고로 인해 이용자에게 손해가 발생한 경우에는 그 손해를 배상할 책임을 부담한다.</li><li>접근매체에는 전자식 카드 및 이에 준하는 전자적 정보가 있다.</li><li>이용자의 생체정보는 개인정보보호법상 민감정보로 접근매체에 포함되지 않는다.</li><li>접근매체의 위조 · 변조 등의 사고로 인한 손해배상책임과 관련하여 사고 발생에 있어서 이용자의 고의나 중대한 과실이 있는 경우로 그 책임의 전부 또는 일부를 이용자의 부담으로 할 수 있다는 취지의 약정을 미리 이용자와 체결한 경우에는 손해배상책임의 전부 또는 일부를 이용자가 부담하게 할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 사고 책임의 한 유형이다. 손해·인과관계와 면책 요건은 별도로 본다.</li><li><strong>비선택</strong> · 법정 접근매체에 포함한다.</li><li><strong>선택</strong> · 틀리다. 거래 확인에 쓰는 생체정보도 접근매체다. 민감정보 보호와 접근매체 기능은 양립할 수 있다.</li><li><strong>비선택</strong> · 고의·중과실과 사전 약정 등의 법정 요건에서 전부·일부 부담이 가능하다. 모든 사소한 과실을 뜻하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 여기에서 접근매체란 전자금융거래에 있어서 거래지시를 하거나 이용자 및 거래내용의 진실성과 정확성을 확보하기 위하여 사용되는 수단 또는 정보를 말하며, 이러한 접근매체로는 ① 전자식 카드 및 이에 준하는 전자적 정보, ② 전자서명생성정보 및 인증, ③ 금융회사 또는 전자금융업자에 등록된 이용자번호, ④ 이용자의 생체정보 등이 있다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_062"><h4>형성평가 · 소비자법_062</h4><p class="question-stem">다음 중에서 접근매체를 사용 및 관리함에 있어서 금지되는 행위가 아닌 것은?</p><ol class="choices"><li>접근매체를 이동식 저장장치에 저장하는 행위</li><li>접근매체를 양도하거나 양수하는 행위</li><li>범죄에 이용할 목적으로 또는 범죄에 이용될 것을 알면서 접근매체를 대여받거나 대여하는 행위 또는 보관 · 전달 · 유통하는 행위</li><li>접근매체를 질권의 목적으로 하는 행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 저장 자체는 열거된 금지행위가 아니다. 안전하게 보관해야 할 책임은 별개다.</li><li><strong>비선택</strong> · 법정 예외 외 양도·양수는 금지된다.</li><li><strong>비선택</strong> · 범죄 목적 또는 범죄 이용을 알면서 하는 법정 대여·보관·전달·유통은 금지된다.</li><li><strong>비선택</strong> · 질권 목적으로 제공하는 행위는 금지된다. 법률상 허용되는 선불수단 등의 특별규정은 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 접근매체를 양도하거나 양수하는 행위, ② 대가를 수수(授受) · 요구 또는 약속하면서 접근매체를 대여받거나 대여하는 행위 또는 보관 · 전달 · 유통하는 행위, ③ 범죄에 이용할 목적으로 또는 범죄에 이용될 것을 알면서 접근매체를 대여받거나 대여하는 행위 또는 보관 · 전달 · 유통하는 행위, ④ 접근매체를 질권의 목적으로 하는 행위, ⑤ 이러한 ①부터 ④까지의 행위를 알선 · 중개 · 광고하거나 대가를 수수 · 요구 또는 약속하면서 권유하는 행위가 금지되는 행위에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-소비자법_063"><h4>형성평가 · 소비자법_063</h4><p class="question-stem">다음 중에서 착오송금 반환지원을 신청할 수 있는 요건으로 옳지 않은 것은?</p><ol class="choices"><li>2021년 7월 6일부터 발생한 착오송금인 경우</li><li>착오송금액이 5만 원 이상 5천만 원 이하인 경우</li><li>이미 자금이체 금융회사 등을 통해 반환신청을 했으나 반환이 되지 않은 경우</li><li>개인간 분쟁이나 보이스피싱 등 사기에 따른 송금은 아닌 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제도 시작 이후 거래라는 요건이다. 금액 상한은 단계적으로 확대됐으므로 현재 한도를 2021년 모든 거래에 소급하지 않는다.</li><li><strong>선택</strong> · 원본 정답. 현재 전체 지원 범위는 5만 원 이상 1억 원 이하이므로 상한을 5천만 원으로 표시한 것이 틀리다. 단, 이 보기 구간의 개별 송금 자체는 현재 범위에 포함될 수 있다.</li><li><strong>비선택</strong> · 금융회사 등을 통한 선행 반환 요청이 필요하다.</li><li><strong>비선택</strong> · 사기 피해와 개인 간 거래 분쟁은 이 착오송금 지원과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 착오송금액이 5만 원 이상 1억 원 이하인 경우</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_054"><h4>기출문제 · 소비자법_기출2015_054</h4><p class="question-stem">[2015 기말고사 · 54번]<br>전자금융거래에 있어 착오송금의 법률관계에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>송금의뢰인이 착오로 자금이체를 하는 경우에도 수취인은 해당은행에 대하여 예금채권을 취득한다.</li><li>송금인은 수취인의 동의 없이는 돈을 돌려받을 수 없다.</li><li>해당 계좌가 이미 다른 권리자에 의해 압류되어 있는 경우라면 그 압류한 다른 사람의 권리보다 송금인의 권리가 더 우선한다.</li><li>수취은행은 부당이득반환청구의 상대방이 되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원인인 법률관계가 없어도 수취인의 은행 상대 예금채권은 생긴다.</li><li><strong>비선택</strong> · 원본 비선택. 은행의 임의 역송금에 관한 취지로 한정해야 한다. 수취인 동의가 없어도 소송·지급명령 등 법적 반환 청구까지 금지되는 것은 아니다.</li><li><strong>선택</strong> · 틀리다. 착오송금인의 반환채권이 기존 압류권자보다 당연히 우선하지 않는다.</li><li><strong>비선택</strong> · 은행은 예금 반환채무도 부담하므로 이 법리의 부당이득 취득자가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2015년 법학과 소비자법 54번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2015_055"><h4>기출문제 · 소비자법_기출2015_055</h4><p class="question-stem">[2015 기말고사 · 55번]<br>금융회사 또는 전자금융업자가 전자금융거래에 있어 발생한 사고로 인한 이용자의 손해에 대한 책임의 전부 또는 일부를 이용자에게 부담시킬 수 있는 경우에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>이용자가 접근매체를 양도나 담보의 목적으로 제공한 경우로써 전자금융거래에 관한 약관에 그 내용이 기재된 경우 손해에 대한 책임의 전부 또는 일부를 이용자에게 부담시킬 수 있다.</li><li>이용자가 컴퓨터를 사용해 보안카드 코드표를 만들어 출력해서 소지하였다면 이용자에게 중과실이 있다.</li><li>보안카드를 스캔하여 대외적으로 송수신이 가능한 웹메일 계정에 보관한 경우 이용자의 중과실이 인정된다.</li><li>이용자가 제3자에게 접근매체인 공인인증서 발급에 필수적인 계좌번호, 계좌비밀번호, 주민등록번호, 보안카드번호, 보안카드비밀번호를 알려주었다면 이용자에게 중과실이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법령상 범위·사전 약정·약관 기재 및 사고와의 관련성을 전제로 한다. 모든 양도·담보의 법정 예외도 구별한다.</li><li><strong>선택</strong> · 틀리다. 코드표를 출력해 소지했다는 사실만으로 중과실이라고 하지 않는다.</li><li><strong>비선택</strong> · 기출의 웹메일 외부 노출 사례다. 구체적 접근 환경·위험 인식 등을 함께 보는 취지이지 모든 전자 보관의 자동 책임은 아니다.</li><li><strong>비선택</strong> · 교재 판례에서 전체 금융정보 노출과 당시 구체적 사정을 종합해 중과실을 인정했다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2015년 법학과 소비자법 55번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_066"><h4>기출문제 · 소비자법_기출2016_066</h4><p class="question-stem">[2016 기말고사 · 66번]<br>금융회사 또는 전자금융업자의 이용자에 대한 손해배상책임에 관한 요건으로 옳지 않은 것은?</p><ol class="choices"><li>접근매체의 위조나 변조로 발생한 사고</li><li>이용자가 접근매체를 제3자에게 담보의 목적으로 제공하여 발생한 사고</li><li>거래지시의 전자적 전송이나 처리 과정에서 발생한 사고</li><li>정보통신망에 침입하여 거짓이나 그 밖의 부정한 방법으로 획득한 접근매체의 이용으로 발생한 사고</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제9조 제1항의 첫 사고 유형이다.</li><li><strong>선택</strong> · 정답. 이용자의 담보 제공은 회사 책임의 독립적인 사고 유형이 아니라 이용자 고의·중과실 등 예외 판단과 연결된다.</li><li><strong>비선택</strong> · 전자적 전송·처리 사고의 법정 유형이다.</li><li><strong>비선택</strong> · 정보통신망 등에 침입해 부정 취득한 접근매체를 쓴 사고 유형이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2016년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2016_067"><h4>기출문제 · 소비자법_기출2016_067</h4><p class="question-stem">[2016 기말고사 · 67번]<br>( ) 안에 들어갈 내용을 바르게 짝지어 놓은 것은? “보안카드를 스캔하여 대외적으로 송수신이 가능한 웹메일 계정에 보관한 경우 이용자의 ( ).” “이용자가 컴퓨터를 사용해 보안카드 코드표를 만들어 출력 해서 소지하였다면 이용자의 ( ).”</p><ol class="choices"><li>중과실이 인정된다, 중과실이 인정된다</li><li>중과실이 인정된다, 중과실이 인정되지 않는다</li><li>중과실이 인정되지 않는다, 중과실이 인정된다</li><li>중과실이 인정되지 않는다, 중과실이 인정되지 않는다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두 번째가 틀리다. 출력·소지 사실만으로 중과실은 아니다.</li><li><strong>선택</strong> · 원본 정답. 외부 송수신 가능한 웹메일 보관과 단순 출력의 위험을 구별한다. 개별 사고의 사실관계를 함께 본다.</li><li><strong>비선택</strong> · 기출이 제시한 두 사례의 결론을 뒤집었다.</li><li><strong>비선택</strong> · 웹메일 노출 사례에 대한 원본 판단과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2016년 법학과 소비자법 67번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_062"><h4>기출문제 · 소비자법_기출2017_062</h4><p class="question-stem">[2017 기말고사 · 62번]<br>전자금융거래에 있어 착오송금의 법률관계에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>착오로 자금이체를 하는 경우에 수취인은 해당은행에 대하여 예금채권을 취득한다.</li><li>수취은행은 부당이득반환청구의 상대방이 되지 않는다.</li><li>송금인은 수취인의 동의 없이는 돈을 돌려받을 수 없다.</li><li>해당 계좌가 이미 다른 권리자에 의해 압류되어 있는 경우에 그 압류한 다른 권리자보다 송금인의 권리가 더 우선한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 계좌 이체와 원인관계를 분리하는 법리다.</li><li><strong>비선택</strong> · 반환 상대는 원인 없이 예금채권을 얻은 수취인이다.</li><li><strong>비선택</strong> · 원본 비선택이지만 은행의 임의 반환에 한정해 이해한다. 수취인 동의 없이 법적 절차로 회수하는 길까지 막힌다는 문장은 아니다.</li><li><strong>선택</strong> · 틀리다. 반환채권이 기존 압류권보다 자동 우선하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ④<br>제공된 공식 정답표의 2017년 법학과 소비자법 62번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2017_065"><h4>기출문제 · 소비자법_기출2017_065</h4><p class="question-stem">[2017 기말고사 · 65번]<br>전자금융보조업자의 책임에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>전자금융거래와 관련하여 전자금융보조업자의 고의나 과실은 금융회사의 고의나 과실로 본다.</li><li>전자금융거래와 관련하여 전자금융보조업자의 고의나 과실은 전자금융업자의 고의나 과실로 본다.</li><li>금융회사가 전자금융보조업자의 고의나 과실로 인하여 발생한 손해에 대하여 이용자에게 그 손해를 배상한 경우에는 그 전자금융보조업자에게 구상할 수 없다.</li><li>전자금융업자가 전자금융보조업자의 고의나 과실로 인하여 발생한 손해에 대하여 이용자에게 그 손해를 배상한 경우에는 그 전자금융보조업자에게 구상할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 보조업자의 귀책을 회사 귀책으로 연결해 이용자를 보호한다.</li><li><strong>비선택</strong> · 전자금융업자도 같은 구조다.</li><li><strong>선택</strong> · 틀리다. 배상한 회사는 해당 보조업자에게 구상할 수 있다.</li><li><strong>비선택</strong> · 외부 배상책임과 내부 최종 부담을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ③<br>제공된 공식 정답표의 2017년 법학과 소비자법 65번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+<section class="question-card" id="question-소비자법_기출2018_066"><h4>기출문제 · 소비자법_기출2018_066</h4><p class="question-stem">[2018 기말고사 · 66번]<br>다음은 전자금융보조업자의 책임에 관한 설명이다. 각 설명이 옳으면 ○, 틀리면 ×로 표기할 경우 이를 바르게 짝지어 놓은 것은?<br><br>(a) 전자금융거래와 관련하여 전자금융보조업자의 고의나 과실은 금융회사의 고의나 과실로 본다.<br>(b) 금융회사가 전자금융보조업자의 고의나 과실로 인하여 발생한 손해에 대하여 이용자에게 그 손해를 배상한 경우에는 그 전자금융보조업자에게 구상할 수 없다.</p><ol class="choices"><li>(a) ○, (b) ○</li><li>(a) ○, (b) ×</li><li>(a) ×, (b) ○</li><li>(a) ×, (b) ×</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · (b)가 틀리다. 회사의 구상은 가능하다.</li><li><strong>선택</strong> · 정답. 회사 귀책 간주와 배상 후 구상권은 함께 성립한다.</li><li><strong>비선택</strong> · (a)도 옳고 (b)는 틀리므로 모두 뒤집었다.</li><li><strong>비선택</strong> · (a)는 옳다. 외주라고 회사 책임이 자동 사라지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 정답: ②<br>제공된 공식 정답표의 2018년 법학과 소비자법 66번과 대조했습니다. ZIP에는 별도 공식 해설이 포함되어 있지 않아 해설을 임의로 생성하지 않았습니다.<br>※ 출제 당시 정답입니다. 법령 개정 및 현재 강의 범위의 차이에 유의하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '소비자법 · CHAPTER 13' : 'PART · CONSUMER LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(소비자법 · CHAPTER 13|PART · CONSUMER LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('consumer-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
