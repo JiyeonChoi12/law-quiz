@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제14강 기본권의 포기와 보호의무 및 제한 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 14</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제14강 기본권의 포기와 보호의무 및 제한 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강을 먼저 한 문장으로</h1>
+<p>기본권은 아무 때나 버릴 수 있는 물건도, 국가가 절대로 건드리지 못하는 무제한 특권도 아니다. <strong>누가 무엇을 포기했는지, 국가가 보호를 덜 했는지, 자유를 너무 제한했는지</strong>를 구별해야 답이 나온다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나</td>
+<td>권리의 불행사·행사 포기·권리 자체 포기, 국가의 보호의무, 국민의 의무, 제한과 침해를 가르는 논증</td>
+</tr>
+<tr>
+<td>왜 생긴 개념인가</td>
+<td>동의했다는 말로 인권을 없애거나, 공익이라는 말로 모든 제한을 정당화하지 못하게 하려고</td>
+</tr>
+<tr>
+<td>전체에서의 위치</td>
+<td>13강의 기본권 구조를 실제 위헌 심사에 적용하는 기본권 총론의 중심</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>13강에서 권리 주체와 효력을 확인했다. 14강에서 침해인지 판단하고, 15강에서 구제 절차로 간다</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>동의 수사, 과소보호·과잉금지 구별, 비례심사, 헌법소원의 본안 주장</td>
+</tr>
+</tbody></table>
+<p>교재369–394쪽 전체를 설명한다. 기출308–321·360–373번,28문항·112개 보기를 연결했다. ★는 제공 문제와의 연결에 따른 학습 우선순위이며 실제 출제율이나 오답률은 아니다. 가상사례의 이름·대화는 설명용 창작이다. 법·판례 보완 기준2026.10.25.</p>
+<p><mark class="yellow">노랑:정의·암기</mark> <mark class="green">초록:왜 그런가</mark> <mark class="pink">분홍:함정·보완</mark> <mark class="blue">파랑:앞뒤 연결</mark>. 이 강의 답안 순서는 <strong>권리의 법익 → 제한 → 정당화 → 침해 결론</strong>이다.</p>
+<h1>1. 권리를 안 쓰는 것과 권리자를 그만두는 것</h1>
+<h2 id="foundations-14-01" data-concept-id="foundations-14-01">1-1. 구체적 권리의 행사 포기 ★★★★★</h2>
+<p><strong>교재370쪽 / 문단의 역할:</strong> ‘포기’라는 단어를 먼저 두 갈래로 나눈다.</p>
+<p>민지가 친구에게 받을 돈 일부를 면제해 주었다. 민지는 그 채권을 없애는 결정을 한 것이지 앞으로 재산을 소유할 자격을 잃은 것이 아니다. 기본권에서 나온 구체적 법률상 권리를 특정한 시기·조건에서 포기하는 것은 원칙적으로 가능하다. 권리를 보장하는 이유에는 주인이 스스로 선택할 수 있게 하려는 뜻도 있기 때문이다.</p>
+<p>그렇지만 ‘원칙적 가능’은 서명만 받으면 무엇이든 유효하다는 뜻이 아니다. 포기의 대상과 범위가 특정되어야 하고, 자유로운 의사에 따라 이루어져야 하며, 강행법규나 헌법의 특별한 금지를 넘을 수 없다. 사기·강요·현저하게 불공정한 계약 등의 문제도 별도로 살핀다.</p>
+<p>교재의 퇴직금 사례: 회사가 입사 때 “나중에 퇴직해도 퇴직금을 받지 않겠다”는 서명을 받아도 퇴직 전 발생하지 않은 법정 퇴직급여청구권의 사전 포기를 정당화하지 못한다. 퇴직 후 이미 발생한 채권의 처분과 구별한다. 현재의 법률 명칭은 근로자퇴직급여 보장법도 함께 확인해야 한다.</p>
+<p>교재의 다른 예: 이번 선거에서 투표하지 않는 선택과 돈을 받고 투표권을 거래하는 행위는 다르다. 전자는 불행사 문제이고 후자는 선거의 공정성을 깨뜨리는 매수 등의 문제다. 시험308·360. 키워드:구체적 권리,자유의사,강행규정. 한 줄:내 권리의 행사 방법을 정할 수 있지만 모든 포기 계약이 유효하지는 않다.</p>
+<h2 id="foundations-14-02" data-concept-id="foundations-14-02">1-2. 기본권 불행사와 법적 효과 있는 포기 ★★★★★</h2>
+<p><strong>교재370–371쪽 / 문단의 역할:</strong> 아직 선택하지 않은 상태와 권리관계가 달라진 상태를 구별한다.</p>
+<p>판결을 받은 지수가 상소기간 중 오늘까지 아무 서류도 내지 않았다. 아직 상소할 수 있다면 단순한 불행사다. 반면 적법한 상소권 포기처럼 법이 정한 효과가 생긴 행위는 단순한 침묵과 다르다. 기간이 지나 상소할 수 없게 되는 경우도 결과는 달라지지만, <strong>기간 도과에 따른 실권을 언제나 본인의 적극적 포기의사라고 단정하면 안 된다.</strong> 교재는 넓은 의미에서 이를 행사 포기의 설명에 활용한다.</p>
+<p>가상 대화: “어제 투표장에 안 갔으니 앞으로도 선거권이 없지?” “아니야. 이번에 행사하지 않은 것과 선거권자 지위를 영구히 잃는 것은 다르지.” 선거일 경과에 따른 이번 선거의 행사 불가능과 다음 선거의 지위를 나눠 보자.</p>
+<p>시험309·361의 질문은 <strong>법적 효과가 발생하는 방향으로 아직 행사하지 않은 것</strong>이다. 답은 기본권 불행사. 키워드:미행사,기간,실권,포기. 한 줄:잠시 안 쓴 것과 법적으로 더는 행사할 수 없게 된 것을 구별한다.</p>
+<h2 id="foundations-14-03" data-concept-id="foundations-14-03">1-3. 가방을 보여 준 사람과 임의수사 ★★★★★</h2>
+<p><strong>교재371–372쪽 / 사례의 역할:</strong> 동의가 정말 자유로웠는지 확인하게 한다.</p>
+<p>등장인물은 집회 근처를 지나던 시민과 경찰관이다. 경찰관이 가방을 보여 달라고 했다. 집회 근처에 있다는 사정만으로 가방 전체를 강제로 뒤질 권한이 생기지는 않는다. 시민이 거절할 수 있음을 알면서 자발적으로 열어 보였다면 임의수사에 응한 것으로 설명할 수 있다. “안 보여 주면 무조건 잡아간다”는 위협으로 얻은 동의를 같은 것으로 볼 수는 없다.</p>
+<p>교재 본문은 거부권 고지의 중요성을 강하게 주장하지만 각주4는 판례와 차이를 밝힌다. <strong>물건 임의제출의 경우 고지가 없었다는 사실 하나만으로 언제나 위법이라고 단정하는 것이 현재 판례의 일반 공식은 아니다.</strong> 제출 경위·인식·압박 등 전체 사정으로 임의성을 확인한다. 피의자신문에서 법률상 요구되는 진술거부권 고지와도 구별한다.</p>
+<p>2015도13726(2016.2.18): 바지선에서 밀입국·마약 밀수 혐의로 체포된 사람이 마약을 제출한 사건이다. 법원은 현행범 체포의 적법성과 임의제출물 압수 가능성을 판단했다. 임의제출의 의미·효과를 알린 사정, 피고인의 경험과 인식 등을 보아 제출의 임의성을 인정했다. ‘체포됐으니 어떤 제출도 자발적일 수 없다’도, ‘서명했으니 무조건 자발적이다’도 아니다. 후속2019도17142(2020.4.9) 역시 충분한 심리 없이 임의성을 부정해서는 안 된다고 했다. <a href="https://www.scourt.go.kr/sjudge/1587130685711_223805.pdf">대법원 후속 판결</a></p>
+<p>쉬운 번역:임의제출=본인이 자유롭게 내놓음 / 영장 없는 압수 허용=형사소송법218조의 요건을 충족한 그 압수는 별도 영장 없이 가능 / 임의성 심사=실제로 자유롭게 내놓았는지 사실을 살핌. 시험308③·360③. 한 줄:동의라는 글자보다 동의가 만들어진 과정을 보자.</p>
+<h2 id="foundations-14-04" data-concept-id="foundations-14-04">1-4. 동의 철회와 휴대전화의 무관한 정보 ★★★★☆</h2>
+<p><strong>교재372쪽·각주5 / 문단의 역할:</strong> 한 번 동의했다고 권리 전체가 사라지는 것은 아님을 설명한다.</p>
+<p>시민이 “가방을 더는 보이지 않겠습니다”라고 했다면 계속되는 임의 협조의 거부를 존중해야 한다. 강제수색으로 전환하려면 영장이나 법률상 예외 요건 같은 별도 근거가 필요하다. 다만 이미 적법하게 임의제출받아 압수한 물건은 ‘마음이 바뀌었다’는 말만으로 즉시 반환 의무가 생기는 것은 아니다. 계속 협조할 의무와 이미 이루어진 압수의 효력·환부 절차를 나눈다.</p>
+<p>2016도348 전원합의체(2021.11.18): 피해자가 피고인 소유·관리 휴대전화들을 제출했다. 수사기관은 다른 피해자에 대한 과거 촬영 자료까지 찾아 복제했다. 쟁점은 휴대전화가 손에 들어왔다는 이유만으로 내부 정보를 모두 수색해도 되는가였다. 대법원은 임의제출의 동기가 된 혐의와 관련된 범위, 참여권·목록 교부 등 적법 절차를 요구했다. 관련 없는 정보를 발견하면 탐색을 중단하고 별도 영장 등 적법한 절차를 밟아야 한다. 이 사건 문제 자료의 증거능력을 부정한 판단을 유지했다. <a href="https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=8055">대법원 판결 안내</a></p>
+<p>반대로 모든 저장정보를 허용하면 한 사건의 증거를 내놓는 행동이 평생의 사생활을 넘기는 행동으로 바뀐다. 키워드:동의 범위,관련성,무관정보,별도 영장. 한 줄:물건 제출은 모든 정보에 대한 무제한 동의가 아니다.</p>
+<h2 id="foundations-14-05" data-concept-id="foundations-14-05">1-5. 기본권 자체를 영구히 포기할 수 없는 이유 ★★★★★</h2>
+<p><strong>교재372–374쪽 / 문단의 역할:</strong> 헌법이 보장하는 권리자 지위는 거래로 없앨 수 없음을 논증한다.</p>
+<p>준호가 국가에 “나는 앞으로 어떤 재산도 가질 수 없는 사람으로 살겠습니다”라는 문서를 냈다. 이는 현재 가진 물건의 처분이 아니라 미래에도 권리를 가질 자격 자체를 박탈하는 약속이다. 헌법10조의 인권 보장 의무와 각 기본권 조항은 그런 문서가 제출되었다는 이유로 국가를 면제하지 않는다. 교재는 이러한 열등한 법적 신분의 창설이11조②의 특수계급 금지와도 충돌한다고 설명한다.</p>
+<p><mark class="yellow">기본권 행사의 포기와 기본권을 보유하는 지위 자체의 포기는 다르다.</mark> 표현을 한 번 하지 않는 것은 가능하지만, 국가가 앞으로 무엇을 하든 표현의 자유를 주장할 수 없는 사람으로 만들어 달라는 약속은 다르다. 전 재산을 처분해도 미래에 새 재산을 취득할 기본적 지위는 남는다.</p>
+<p>고문에 동의해도12조②의 고문금지는 없어지지 않는다. 출판사가 검열에 동의해도21조②가 금지하는 국가 검열이 정당화되지 않는다. 기출308 원해설은 이를 자체 포기 문제로,360 원해설은 행사 포기의 효력이 인정되지 않는 예외로 설명한다. 분류의 강조점은 다르지만 <strong>동의로 검열금지를 없앨 수 없다는 결론</strong>은 같다.</p>
+<p>시험310·362. 키워드:객관적 질서,인권 보장,권리 보유 지위. 한 줄:권리를 쓰지 않을 자유는 있어도 국가가 나를 권리 없는 사람으로 취급하게 할 수는 없다.</p>
+<h2 id="foundations-14-06" data-concept-id="foundations-14-06">1-6. 청구권·특권·형성권·면제권 ★★★★★</h2>
+<p><strong>교재373–374쪽 / 문단의 역할:</strong> 권리를 갖는다는 사실을 행사 의무로 오해하지 않게 한다. 이 표는 호펠드식 권리 관계 분석이며 개별 소송 이름의 분류가 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>내 법적 지위</th>
+<th>상대방의 대응 지위</th>
+<th>쉬운 예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>청구권</td>
+<td>의무</td>
+<td>나는 부당한 표현 간섭을 받지 않을 것을 요구하고 국가는 간섭하지 않을 의무를 진다</td>
+</tr>
+<tr>
+<td>특권·자유</td>
+<td>무권리</td>
+<td>나는 말하지 않을 수 있고 상대방에게 나를 반드시 말하게 할 청구권이 없다</td>
+</tr>
+<tr>
+<td>형성권</td>
+<td>법적 지위 변경을 받아들이는 지위</td>
+<td>권한 있는 의사표시로 법률관계가 달라진다</td>
+</tr>
+<tr>
+<td>면제권</td>
+<td>무권능</td>
+<td>상대방에게 내 지위를 일방적으로 바꿀 법적 힘이 없다</td>
+</tr>
+</tbody></table>
+<p>‘특권’은 귀족의 특혜가 아니라 어떤 행위를 하지 않을 의무가 없다는 분석 용어다. 형성권의 대응 지위인 liability는 여기서 손해배상책임으로 번역하면 어긋난다. 타인의 유효한 권능 행사에 따라 법적 상태가 달라질 수 있다는 뜻이다.</p>
+<p>국가에 내 말을 막지 말라고 요구할 청구권이 있다고 해서 내가 매일 연설할 의무를 지는 것은 아니다. 청구권의 대응 의무자는 원칙적으로 상대방이다. 면제권도 권리자에게 특정 행동을 강제하는 것이 아니라 타인의 법적 지배에서 지위를 보호한다. 시험311·363의 함정은 의무의 주인을 바꿔 놓는 것. 한 줄:권리가 있다는 말과 반드시 행사해야 한다는 말은 다르다.</p>
+<h2 id="foundations-14-07" data-concept-id="foundations-14-07">1-7. 투표권 거래와 연명의료 사례 ★★★★☆</h2>
+<p><strong>교재374쪽 / 사례의 역할:</strong> 기본권의 존중이 강제 행사와 같지 않음을 어려운 사례로 확인한다.</p>
+<p>가상사례:한 사람이 다른 사람의 투표권을 사서 자신은 두 표,판매자는 영 표를 갖게 하자고 한다. 계약 자유만 보면 자발적 거래처럼 보여도, 민주정치의 정당성은 시민이 자유롭고 평등한 참여자라는 지위에 기대므로 그런 거래를 허용할 수 없다. 돈을 매개로 누군가를 정치적 무자격자로 만드는 일과 이번 선거의 기권은 다르다.</p>
+<p>교재는 임종과정 환자의 연명의료 중단 결정을 ‘생명권자 지위를 버림’이 아니라 존엄한 자기결정의 행사 문제로 설명한다. 여기서 <strong>모든 치료 거부나 생명 단축 행위가 합법이라는 결론은 나오지 않는다.</strong> 현행 연명의료결정법의 임종과정 판단,환자의 의사 확인 등 요건과 절차를 충족해야 한다. 일반적으로 담당의사와 전문의1인의 판단이 요구되고,호스피스 이용 말기환자에 관한 법정 예외가 있다. 통증 완화와 영양분·물·단순 산소 공급의 중단을 허용하는 제도가 아니다. <a href="https://www.lst.go.kr/half/requirement.do">국립연명의료관리기관 요건</a>,<a href="https://www.lst.go.kr/comm/faq.do?cate=133">제도 범위 설명</a></p>
+<p>시험 포인트는 의료 판단을 대신하는 것이 아니라 ‘권리를 보유함=무조건 특정 방식으로 행사해야 함’이라는 등식을 깨는 데 있다. 한 줄:기본권은 인간의 선택과 지위를 보호하며,선택의 허용 범위는 별도 요건으로 판단한다.</p>
+<h1>2. 국가가 계약하거나 보호하지 않는 경우</h1>
+<h2 id="foundations-14-08" data-concept-id="foundations-14-08">2-1. 비권력적 국가작용의 세 모습 ★★★★★</h2>
+<p><strong>교재375쪽 / 문단의 역할:</strong> 국가가 명령하지 않고 계약할 때도 헌법 문제가 생김을 설명한다.</p>
+<p>국가가 사무용 책상을 구매하면 가구업체와 매매계약을 맺는 당사자다. 세금을 부과할 때처럼 고권적 지위에서 일방적으로 명령하는 관계와 다르다. 교재는 이런 사법적 형태의 작용을 중심으로 비권력적 국가작용을 설명한다. 여기서 사법은 私法,민법 같은 사적 관계의 법이지 司法,재판을 뜻하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>무엇을 하나</th>
+<th>교재의 예를 쉬운 말로</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>행정사법</td>
+<td>공공 임무를 사법적 방식으로 수행</td>
+<td>복지·공공서비스 목적의 계약</td>
+</tr>
+<tr>
+<td>보조적 사법작용</td>
+<td>행정에 필요한 물건·시설을 마련</td>
+<td>사무용품 구매,청사 건설 계약</td>
+</tr>
+<tr>
+<td>영리적 사법작용</td>
+<td>수익을 목적으로 거래</td>
+<td>국가의 기업 지분 참여 등</td>
+</tr>
+</tbody></table>
+<p>교재는 박물관 관람료,전기·수도 이용료,구매·공사 계약을 예로 든다. 다만 <strong>개별 요금이나 공공서비스의 법적 성격은 근거 법령과 관계 구조에 따라 다르다.</strong> 공공기관과 돈을 주고받는 모든 관계가 반드시 민사계약인 것은 아니다. 또 비권력적 행정작용이라는 넓은 개념에는 행정지도 등 다른 유형도 있으므로 기출312·364는 본문이 설정한 사법적 거래의 문맥으로 읽는다.</p>
+<p>한 줄:국가가 계약 당사자로 움직일 때와 일방적 권력자로 움직일 때는 구제 방법이 다를 수 있다.</p>
+<h2 id="foundations-14-09" data-concept-id="foundations-14-09">2-2. 사법으로 도피해도 기본권의 구속은 남는다 ★★★★★</h2>
+<p><strong>교재376쪽 / 문단의 역할:</strong> 국가가 법적 형식만 바꿔 헌법을 피할 수 없게 한다.</p>
+<p>학설은①행정사법에만 직접 구속을 인정하고 나머지는 달리 보는 견해,②사법관계이므로 모두 간접효력만 인정하자는 견해,③국가의 모든 작용에 직접 구속을 인정하는 견해로 갈린다. 교재는③을 지지한다. 헌법10조는 국가가 권력적 형식을 쓸 때에만 인권을 지키라고 하지 않았기 때문이다.</p>
+<p>가상사례:공공기관이 물품 납품업체를 모집하면서 사업 능력과 무관한 특정 종교라는 이유만으로 한 업체를 배제한다. ‘민사계약이라서 국가의 평등권 준수 의무가 전혀 없다’고 하면 형식을 바꿔 차별할 수 있게 된다. <mark class="green">국가의 활동 형식은 제한의 성격과 심사 강도를 바꿀 수 있지만 헌법에 구속된다는 출발점을 없애지는 않는다.</mark></p>
+<p>그렇다고 모든 국가계약이 행정처분이 되어 취소소송의 대상이 되는 것은 아니다. 민사상 구제·손해배상은 각각의 요건을 충족해야 하고, 기본권에 직접 구속된다는 사실과 헌법소원의 적법요건도 구별해야 한다. 시험312·364. 한 줄:헌법의 구속은 남지만 소송의 종류가 자동으로 같아지지는 않는다.</p>
+<h2 id="foundations-14-10" data-concept-id="foundations-14-10">2-3. 보호의무와 과소보호금지 ★★★★★</h2>
+<p><strong>교재377쪽 / 문단의 역할:</strong> 국가가 침해한 경우와 제3자의 침해를 막지 않은 경우를 나눈다.</p>
+<p>공장이 주민에게 유해물질을 내보낸다. 주민은 공장만이 아니라 국가에도 “위험을 방치하지 말고 보호해 달라”고 요구할 수 있다. 기본권 보호의무는 국가 아닌 제3자의 침해·위험에서 기본권 법익을 지킬 의무다. 헌법10조의 국가 인권 보장 의무가 근거가 된다.</p>
+<p>보호 방법은 허가 기준,점검,피해 구제,보험,행정제재,형사처벌 등 다양하다. 헌법재판소가 특정 수단을 하나씩 정하면 입법자·행정부의 몫을 대신할 수 있어 형성의 여지를 존중한다. 그래서 판례는 <strong>적절하고 효율적인 최소한의 보호조치를 취했는가</strong>를 과소보호금지원칙으로 심사한다. 전혀 보호하지 않거나 조치가 명백하게 전적으로 부적합·불충분하면 위반이 문제된다.</p>
+<p>직접 제한은 ‘너무 많이 막았는가’라는 과잉금지,보호의무는 ‘너무 적게 지켰는가’라는 과소보호금지로 출발한다. 다만 모든 사회권 청구를 아무 구별 없이 보호의무로 부르지는 않는다. <mark class="blue">13강의 존중·충족·보호 구별을 다시 연결하자.</mark> 시험313·365. 한 줄:국가가 범인을 대신해 책임지는 것이 아니라 국가 자신의 보호 의무 이행을 심사한다.</p>
+<h2 id="foundations-14-11" data-concept-id="foundations-14-11">2-4. 교통사고 피해자:반드시 더 처벌해야 하나 ★★★★☆</h2>
+<p><strong>교재377–379쪽 / 긴 판례 인용의 역할:</strong> 최소한의 보호와 형벌의 최후수단성을 설명한다.</p>
+<p>90헌마110등(1997.1.16)의 교통사고 피해자들은 종합보험 등에 가입한 가해자를 일정 범위에서 기소하지 않도록 한 특례가 피해자의 권리를 침해한다고 다퉜다. 갈등은 보험으로 손해를 회복하는 정책과 형사처벌을 통한 안전·피해자 보호 사이에 있었다. 당시 합헌의견4인,위헌의견5인이었으나 위헌결정에 필요한6인에 이르지 못하여 법률조항에 대한 청구는 기각되었다. 개별 불기소처분에 대한 청구는 각하되었으므로 사건 전체를 단일한 기각으로 합치지 않는다. 교재의 긴 인용은 <strong>4인 합헌의견의 보호의무 논증</strong>이다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=137458">결정문</a></p>
+<p>인용의 흐름을 차례대로 번역하면①헌재는 보통 어느 법을 만들라고 구체적으로 명령하지 않는다.②유일한 실효적 수단이 특정되어야 그 수단을 반드시 취할 의무로 좁혀진다.③생명·신체 보호 의무가 있다고 모든 위험을 형벌로 막아야 하는 것은 아니다.④과실 교통사고에서 처벌 확대가 안전 향상으로 얼마나 이어지는지 불확실하다.⑤다른 보호가 완벽하지 않다는 이유로 모든 부족분을 형벌로 메우자는 결론은 지나치다.⑥당시 합헌의견은 제도 전체를 보아 최소 보호를 명백히 위반했다고 볼 수 없다고 했다.</p>
+<p>반대 결론을 무제한 일반화하면 ‘조금이라도 도움이 되면 국가가 반드시 형벌을 신설해야 한다’가 되어 형벌의 보충성과 입법 재량을 없앤다. 반대로 이 결정으로 <strong>종합보험 가입자는 지금도 중상해를 입혀도 항상 불처벌</strong>이라고 외우면 틀린다. 2005헌마764등(2009.2.26)은 중상해까지 기소하지 못하게 한 부분을 위헌으로 판단했다. 보호의무 심사 구조와 개별 특례의 시대별 결론을 나눠야 한다. <a href="https://ccourt.go.kr/site/history/02/10201000000002020101203.jsp">헌재 사건 연혁</a></p>
+<p>한 줄:더 강한 처벌이 언제나 헌법상 의무는 아니지만 특정 불처벌 특례가 언제나 합헌인 것도 아니다.</p>
+<h1>3. 국민에게 의무가 있어도 국가는 헌법을 지켜야 한다</h1>
+<h2 id="foundations-14-12" data-concept-id="foundations-14-12">3-1. 기본의무와 기본권 제한 심사 ★★★★★</h2>
+<p><strong>교재379–380쪽 / 문단의 역할:</strong> 의무를 규정한 헌법이 무제한 강제의 근거가 아님을 밝힌다.</p>
+<p>국민의 기본의무는 국가 공동체의 존립·유지를 위해 부담하는 헌법상 법적 의무다. 교재는 납세38조,국방39조,보호하는 자녀에게 의무교육을 받게 할 의무31조②,근로32조②를 중심으로 설명한다. 재산권 행사의 공공복리 적합 의무23조②와 환경보전 의무35조①도 기본의무에 넣는 견해가 있으나,교재는 독립적 적극 의무보다 권리의 내용·제한 형성의 준거라는 관점에서 별도로 본다. 이 분류는 학설이며 헌법에 그 문구가 없다는 뜻이 아니다.</p>
+<p>교재는 헌법·법령 준수 의무를 같은 목록에 단순히 더하는 것에도 신중하다. 납세의무는 구체적인 법률로 부담 내용을 형성하는 문제이고,준법의무 논의는 어떤 규범에 정당하게 복종해야 하는가라는 층위의 문제이므로 구별해야 한다는 뜻이다.</p>
+<p>가상사례:병력이 부족하니 특정 지역 청년에게만30년 군복무를 시킨다는 법률을 만들었다. “국방은 의무니까 기본권 심사는 끝”이라고 할 수 없다. 비례원칙,평등원칙,법률주의 등을 따져야 한다. <strong>기본의무 규정은 제한의 백지수표가 아니다.</strong> 심사 강도는 구체적 공익과 침해의 성격을 논증하여 정해야 한다. 시험314·366. 한 줄:의무를 법률로 정할 때에도 헌법상 한계가 있다.</p>
+<h2 id="foundations-14-13" data-concept-id="foundations-14-13">3-2. 납세의무와 조세법률주의 ★★★★☆</h2>
+<p><strong>교재380쪽 / 조문 역할:</strong> 세금을 낼 의무와 세금을 매길 권력의 한계를 함께 제시한다.</p>
+<p>세금은 국가·지자체가 재원을 마련하려고 특정한 반대급부 없이 강제로 부과·징수하는 금전 급부다. 민지가 버스를 타고 내는 요금은 그 운송의 대가지만,소득세는 낸 돈만큼 개인 서비스를 돌려받는 계약이 아니다. 그렇다고 정부가 원하는 만큼 요구해도 되는 것은 아니다.</p>
+<p>38조는 법률이 정하는 납세의무,59조는 조세의 종목과 세율을 법률로 정하라고 요구한다. 입법 취지는 국민 대표의 결정 없이 행정부가 마음대로 재산을 가져가지 못하게 하려는 것이다. 조세법률주의는 과세요건 법정·명확성,정당한 위임의 한계와 연결된다. 세금의 종류뿐 아니라 누가 어떤 요건으로 얼마를 내는지도 통제의 핵심이다.</p>
+<p>가상사례:기관장이 법률 근거 없이 주민의 보유 재산에 임의의 ‘운영세’를 매긴다면 납세의무를 내세워 정당화할 수 없다. 시험314④·366④. 키워드:재원,반대급부 없음,종목·세율,법률. 한 줄:세금을 내야 한다는 헌법은 세금을 아무렇게나 매겨도 된다는 허가가 아니다.</p>
+<h2 id="foundations-14-14" data-concept-id="foundations-14-14">3-3. 국방의무와 군 가산점 사건 ★★★★★</h2>
+<p><strong>교재380–381쪽 / 문단·판례 역할:</strong> 국방의 범위와 불이익 금지의 의미를 구별한다.</p>
+<p>국방은 외부 침략에서 국가의 독립과 영토를 지키는 의무다. 직접 군복무를 통한 병력 형성뿐 아니라 법률이 정한 간접적 병력 형성,군사작전에 대한 복종·협조 등도 포함한다. 근로하거나 세금을 냈다는 이유만으로 별도의 국방의무를 이행한 것이 되지는 않는다.39조①은 이 의무도 법률에 따라 부과하도록 한다.</p>
+<p>39조②는 병역의무 이행으로 인한 불이익한 처우를 금지한다. 군복무가 시간·경제적 부담이라는 사실과 군복무를 했다는 이유로 법적 불이익을 주는 것을 구별한다. 교재의97헌바3등(1999.2.25)과98헌마363(1999.12.23)은 문맥과 표현을 함께 읽어야 한다. 후자는 단순한 사실상·경제상 불이익 전체를 없애거나 적극적 특혜를 줄 의무까지 이 조항에서 나오지는 않는다고 설명한다.</p>
+<p>군 가산점 사건의 등장인물은 제대군인과 군복무 기회가 없거나 제한된 여성·장애인 등 응시자다. 채용시험에서 제대군인에게 가산점을 주자 다른 응시자들이 평등권·공무담임권 침해를 주장했다. 헌재는 해당 가산점제도를 위헌으로 판단했다. 군복무의 부담을 사회가 합리적으로 보상하는 문제와 특정 경쟁시험에서 다른 사람에게 과도한 희생을 지우는 문제는 다르다.</p>
+<p>쉬운 번역:불이익 금지=복무했다는 이유로 법적으로 불리하게 하지 말 것 / 보상 의무 아님=39조②만으로 특정 가산점의 정당성이 자동 도출되지 않음. 시험315·367. 한 줄:병역 이행자 보호와 특정 가산점제도의 합헌성은 따로 판단한다.</p>
+<h2 id="foundations-14-15" data-concept-id="foundations-14-15">3-4. 교육의무의 주체와 근로의무의 한계 ★★★★★</h2>
+<p><strong>교재381–382쪽 / 문단의 역할:</strong> 의무의 주인을 찾고 법적 의무를 강제노동과 구별한다.</p>
+<p>31조②의 의무자는 <strong>보호하는 자녀가 교육받도록 해야 하는 사람</strong>이다. 학생 자신이 이 조항의 의무자라는 보기는 틀린다. 헌법은 초등교육을 직접 요구하고 법률이 정하는 교육을 더한다.90헌가27(1991.2.11)은 초등교육을 넘는 의무교육의 시기·범위가 입법에 의해 구체화됨을 설명한다. 현재 의무교육인 중학교와 무상교육이지만 의무교육은 아닌 고등학교를 구별한다. 의무교육의 무상은31조③과 연결된다.</p>
+<p>근로의무32조②에 관하여 윤리적 의무설은 도덕적 비난의 의미를 강조하고 법적 의무설은 헌법규범의 법적 의미를 인정한다. 교재는 후자를 택하되 ‘일하기 싫은 사람을 국가가 어떤 직장에 강제로 넣을 수 있다’는 적극적 해석은15조 직업의 자유와10조의 인격적 자율성에 충돌한다고 비판한다.</p>
+<p>교재의 소극적 해석은①국가의 통치권을 이용해 남을 착취·약탈하는 생활을 정당화하지 못하고,②일하려고 충분히 노력해도 일자리를 구하지 못하는 구조에서는 국가의 고용 기회 마련 역할을 고려하며,③제공된 적절한 기회를 거절한 경우 관련 급여에서 달리 취급할 수 있다는 방향이다. <strong>국가가 누구에게나 특정 일자리를 즉시 제공해야 한다는 확정 판례나 급여 박탈의 포괄적 근거가 아니라 저자의 규범적 논증</strong>으로 읽는다. 실제 급여는 해당 법률의 조건과 기본권 한계를 따진다.</p>
+<p>시험316–317·368–369. 키워드:보호자,법률상 구체화,윤리적·법적,소극적 해석. 한 줄:법적 의미를 인정하는 것과 강제노동을 허용하는 것은 다르다.</p>
+<h1>4. 제한을 발견한 뒤 침해인지 판단한다</h1>
+<h2 id="foundations-14-16" data-concept-id="foundations-14-16">4-1. 기본권 제한과 기본권 침해 ★★★★★</h2>
+<p><strong>교재382쪽 / 문단의 역할:</strong> 위헌 심사의 출발점과 결론을 나눈다.</p>
+<p>기본권 제한은 국가에 귀속되는 활동으로 보호법익이 전부 또는 일부 축소되는 것이다. 의도적 명령만이 아니라 비의도적·간접적·사실적 작용,급부의 설계나 부작위도 사안에 따라 문제된다. 경찰이 실제로 집회 현장을 봉쇄하는 행위는 법률 문장을 새로 쓰지 않아도 자유를 제한한다. 필요한 급부를 제공하지 않는 문제를 개념에서 빼 버리면 사회권 심사가 불가능해진다.</p>
+<p><mark class="yellow">제한은 출발점,침해는 헌법에 맞지 않는 제한이라는 결론이다.</mark> 야간에 지나치게 큰 소음을 내는 집회를 특정한 방식으로 제한했다고 바로 위헌이라고 할 수 없다. 법적 근거,목적,필요성,균형 등을 살펴 정당하면 합헌적 제한이고 정당하지 않으면 침해다.</p>
+<p>반대로 공익 목적이라고 한마디 붙이면 모든 제한이 합헌이 되는 것도 아니다. 관련된 헌법 원칙을 모두 지켜야 한다. 시험318·370. 키워드:국가 귀속,법익 축소,정당화. 한 줄:제한을 확인하지 않고 침해를 말할 수 없고,제한을 확인했다고 침해가 확정되는 것도 아니다.</p>
+<h2 id="foundations-14-17" data-concept-id="foundations-14-17">4-2. 보호법익은 권리의 종류마다 다르다 ★★★★★</h2>
+<p><strong>교재382–384쪽 / 문단의 역할:</strong> 무엇을 잃었는지 먼저 정확히 찾아내게 한다.</p>
+<p>‘법익’은 법이 보호하는 이익이다. 기본권의 보호법익은 국가가 아무 이유·방법으로나 없앨 수 없는 이익이다. 교재의 ‘법적 정형’은 특별한 정당화가 없다면 법적으로 기대되는 지위·급부·절차의 출발 모습을 뜻한다. 어려운 말이지만 “권리를 제대로 보장했다면 어떤 상태여야 하지?”라고 바꾸면 된다.</p>
+<table>
+<thead>
+<tr>
+<th>권리 구조</th>
+<th>보호하는 것</th>
+<th>제한을 찾는 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자유권</td>
+<td>보호영역 안의 행위 가능성</td>
+<td>할 수 있던 행동을 국가가 막았나?</td>
+</tr>
+<tr>
+<td>평등권</td>
+<td>비교 가능한 집단 사이의 평등한 법적 취급</td>
+<td>본질적으로 비교할 만한 사람을 달리 대했나?</td>
+</tr>
+<tr>
+<td>사회권</td>
+<td>인간다운 기본 생활을 위한 사실적·규범적 급부</td>
+<td>필요한 기본 생활 조건이 보장되지 않았나?</td>
+</tr>
+<tr>
+<td>재판청구권</td>
+<td>분쟁 해결·실효적 권리 보호의 절차와 지위</td>
+<td>재판의 기회나 필요한 절차를 없앴나?</td>
+</tr>
+</tbody></table>
+<p>공무원은 일을 제공하므로 국가로부터 급여를 받는다. 국가에 고용되지 않은 사람이 급여를 받지 못한다는 사실만으로 같은 노동의 대가를 다르게 지급했다고 볼 수 없다. 다만 비교 가능성은 <strong>무엇을 기준으로 비교하는 문제인가</strong>에 따라 판단하므로 공무원·비공무원은 모든 사안에서 비교 불가능하다는 말은 아니다.</p>
+<p>사회권 급부가 부족하다는 확인과 특정 금액을 당장 받을 권리의 인정도 별개다. 재정·입법 형성의 범위와 최소 보장 등의 심사로 나아가야 한다. 시험319·371. 한 줄:자유의 축소,차별,급부 부족,절차 결함을 한 가지 모양으로만 찾지 말자.</p>
+<h2 id="foundations-14-18" data-concept-id="foundations-14-18">4-3. 집회·재외선거·교육으로 법익을 찾아 보기 ★★★★☆</h2>
+<p><strong>교재384–385쪽 / 세 사례의 역할:</strong> 법문·권리의 기능·기본권 체계를 함께 읽는다.</p>
+<p>집회의 자유는 공동 목적을 가진 다수인의 평화적 회합을 보호한다. 법문의 뜻,언론·결사의 자유와 구별되는 기능,다른 사람도 자유롭고 평등하게 살아갈 수 있어야 한다는 체계를 함께 살핀다. 주장이 인기 없다는 이유나 사람이 적다는 이유로 그 자유를 아예 없애서는 안 된다. 다만 ‘참가 인원은 전혀 상관없다’는 말로1인 행동을 집회와 똑같이 분류하지는 않는다.1인 시위도 표현의 자유 등으로 보호될 수 있다.</p>
+<p>재외국민 선거권 사건2004헌마644등(2007.6.28): 해외에 사는 국민이 국내 주민등록을 할 수 없다는 이유로 선거권 행사를 전면 배제당했다. 국민이라는 기본적 지위는 있는데 행정상 등록 조건이 참여를 가로막은 것이다. 헌재는 막연한 위험이나 극복 가능한 기술적 어려움만으로 이를 정당화할 수 없다고 보아 관련 조항을 헌법불합치로 판단했다. 오늘의 구체적 선거 종류·등록 요건은 현행 선거법에 따라 구별한다.</p>
+<p>교육권2007헌마1456(2008.4.24)에서 인용된 구조:공권력이 배우는 자유를 부당하게 방해하지 않을 측면과 능력에 맞는 교육 기회를 적극적으로 마련할 측면이 함께 있다. 교재는 전자를 자유권적,후자를 사회권적 성격으로 설명한다. 부모의 재력 때문에 교육 기회가 막히는 사례와 국가가 교육 활동을 직접 금지하는 사례는 같은31조에서도 법익 식별 방식이 다르다. 여기서는 이 결정의 <strong>권리 구조 설명을 인용한 것이며 모든 교육비 지원 청구가 인용되었다는 뜻이 아니다.</strong></p>
+<p>한 줄:조문 하나에 하나의 권리 구조만 들어 있는 것은 아니다.</p>
+<h2 id="foundations-14-19" data-concept-id="foundations-14-19">4-4. 독일의 내재적 한계와 한국의 일반적 법률유보 ★★★★★</h2>
+<p><strong>교재385쪽 / 문단의 역할:</strong> 외국 이론을 그대로 옮길 수 없는 이유를 밝힌다.</p>
+<p>독일 기본법에는 한국37조②와 같은 일반적 제한 조항이 없고 개별 권리마다 제한 근거를 두는 방식이 쓰인다. 그런데 신앙·양심·예술처럼 개별 법률유보가 없는 권리도 다른 사람의 권리나 헌법적 가치와 충돌할 수 있다. 이를 헌법 통일체와 상충하는 헌법적 법익의 관점에서 설명하는 것이 독일의 헌법 내재적 한계 논의다.</p>
+<p>한국은37조②가 국가안전보장·질서유지·공공복리를 위해 필요한 경우 법률로 제한하되 본질적 내용을 침해할 수 없다고 정한다. 따라서 교재는 한국에서의 내재적 한계를 <strong>무엇이 처음부터 권리의 보호 내용에 들어가는가</strong>의 문제로 집중하여 다룬다. ‘일반적 법률유보가 한국에도 없다’는 기출320·372②는 틀리다.</p>
+<p>다만 일반적 제한 조항이 있다는 말은 법률로 고문·검열 같은 명시적 금지까지 허용할 수 있다는 뜻이 아니다. 헌법의 특별한 보장과 절대적 금지를 함께 읽어야 한다. 한 줄:독일에서는 제한 근거의 문제,이 교재의 한국 논의에서는 보호 내용 식별의 문제를 중심으로 구별한다.</p>
+<h2 id="foundations-14-20" data-concept-id="foundations-14-20">4-5. 좁은 구성요건과 넓은 구성요건 ★★★★★</h2>
+<p><strong>교재386–387쪽 / 문단의 역할:</strong> 국가가 설명 책임을 피하는 방법을 경계한다.</p>
+<p>국가가 어떤 행동을 금지할 때 논증은 두 갈래다.①권리의 보호영역에는 들어가지만 충분한 이유가 있어 제한한다.②애초 보호영역에 들어가지 않으니 그 권리 제한을 정당화할 필요가 없다. 좁은 구성요건설은②의 범위를 넓히고,넓은 구성요건설은①에서 공개적으로 이유를 따지게 한다.</p>
+<p>가상사례:시민의 과격한 정부 비판을 보고 “좋은 말만 표현이지 이런 말은 표현도 아니다”라고 한다면, 무엇이 표현인지의 정의에 이미 금지하고 싶은 결론을 넣은 셈이다. 법원이 기본권 제한을 심사하지 않은 채 다수의 취향을 보호영역의 경계로 만들 위험이 있다.</p>
+<p>교재가 소개하는 알렉시의 비판은 이렇다. 좁은 정의를 정당화하려면 사실상 이익을 비교하는 작업이 필요하다. 그렇다면 비례심사를 몰래 정의 단계에 넣을 것이 아니라 공개된 제한 심사에서 하자는 것이다. Faigman의 논의도 국가의 목적을 권리의 정의에 섞으면 원래 국가가 설명해야 할 제한의 정당화 부담을 권리자에게 넘기게 된다고 비판한다. 이는 교재의 이론적 입장이지 모든 판례가 같은 용어를 쓰는 것은 아니다.</p>
+<p>시험320④·372④. 키워드:자의적 축소,결론 선취,논증 책임. 한 줄:마음에 안 드는 행동이라는 이유만으로 권리의 문턱 밖으로 밀어내지 말자.</p>
+<h2 id="foundations-14-21" data-concept-id="foundations-14-21">4-6. 간통죄와 국기 소각:보호와 정당화의 구별 ★★★★☆</h2>
+<p><strong>교재387–388쪽·각주15 / 사례의 역할:</strong> 시대에 따라 심사 결론이 달라져도 권리 구조를 잃지 않게 한다.</p>
+<p>간통죄 사건89헌마82(1990.9.10)는 성적 자기결정권 제한을 인정하면서도 당시 형사처벌을 합헌으로 보았다. 교재는 그 결정의 ‘내재적 한계’라는 표현이 보호영역 식별과 제한 정당화를 뒤섞었다고 비판한다.2015.2.26.2009헌바17등은7인 위헌,2인 합헌으로 해당 형벌 조항을 위헌으로 판단했다. 위헌의견들의 구체적 논거에는 차이가 있으므로 모든 재판관이 같은 하나의 이유를 댔다고 합치지 않는다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941693&cbIdx=1106">헌재 결정 안내</a></p>
+<p>이 사례의 드라마는 ‘사생활을 보호해야 한다’는 주장과 ‘혼인·성풍속을 지켜야 한다’는 주장의 충돌이다. 법원이 고민한 것은 마음에 드는 행위인가가 아니라 형벌로 개입하는 방법이 헌법상 허용되는가였다. 위헌결정은 부정행위가 도덕적으로 아무 문제 없거나 민사상 책임도 없다는 선언이 아니다. 처음부터 보호영역 밖이라고 처리했다면 이런 제한의 비례성 논의를 시작할 수 없었을 것이다.</p>
+<p>미국 사례:Street v. New York(1969)의 국기 소각 사건에서 Black 대법관의 반대의견은 태우는 행위를 말의 발화와 구별했다. 교재는 그런 정의만으로 표현의 문제를 밀어내는 것을 비판한다. 사건의 다수의견을 ‘모든 국기 소각의 합헌성을 최종 결정했다’고 단순화하지 않는다. 이어 Texas v. Johnson(1989)은 정치적 표현인 국기 소각에 대한 해당 처벌을 수정헌법1조에 반한다고 판단했다. 이 역시 다른 사람의 물건을 훼손하거나 모든 위험한 불 사용을 허용했다는 뜻은 아니다.</p>
+<p>한 줄:기본권 보호영역에 들어간다는 말은 도덕적 칭찬이나 모든 법적 책임의 면제가 아니다.</p>
+<h2 id="foundations-14-22" data-concept-id="foundations-14-22">4-7. 두 가지 형식 검사와 세 단계의 자유 ★★★★☆</h2>
+<p><strong>교재388–389쪽 / 문단·도해 역할:</strong> 제한의 결론을 앞당기지 않으면서 최소한의 경계를 잡는다.</p>
+<p>교재는 보호영역의 내재적 한계를 최소한의 형식 검사로 파악하자고 한다.①같은 기본권을 다른 사람에게도 동등하고 양립 가능하게 보장할 수 있는가? 남이 말하지 못하게 물리적으로 막는 자유를 내 표현의 자유에 넣으면 모두의 표현을 함께 보장할 수 없다.②다른 기본권 행사의 핵심 전제를 무너뜨리는가? 남을 다치게 하는 것을 무제한 행동 자유의 내용으로 넣으면 상대방의 신체·생명 보장의 전제가 사라진다. 이는 저자가 제시하는 이론적 구성이다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>무엇을 가리키나</th>
+<th>다음 단계의 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1차 자유</td>
+<td>현실에서 할 수 있는 행동을 기술한 개념</td>
+<td>동등한 양립·다른 권리의 핵심 전제와 양립하는가?</td>
+</tr>
+<tr>
+<td>2차 자유</td>
+<td>기본권의 보호영역에 들어가는 행동 가능성</td>
+<td>국가가 제한할 정당한 헌법적 이유가 있는가?</td>
+</tr>
+<tr>
+<td>3차 자유</td>
+<td>해당 사건에서 제한이 정당화되지 않아 끝까지 보장되는 영역</td>
+<td>여기에 대한 부당한 제한은 침해인가?</td>
+</tr>
+</tbody></table>
+<p>“고문할 자유는 자유가 아니다”의 앞쪽 자유는 단순 행동 가능성,뒤쪽 자유는 헌법이 보호하는 자유다. 같은 단어를 썼다고 같은 층위는 아니다. “그 자유 제한이 정당하니 자유 침해가 아니다”도 제한 심사의 대상과 최종 보장 결론을 나눠 읽는다.</p>
+<p>키워드:1차 기술,2차 보호,3차 최종 보장. 한 줄:처음부터 결론을 정의에 넣지 말고 단계 사이를 이유로 연결한다.</p>
+<h1>5. 사례형 답안을 실제로 세워 보기</h1>
+<h2 id="foundations-14-23" data-concept-id="foundations-14-23">5-1. 영업 인원 상한 법률 L의 직업의 자유 심사 ★★★★★</h2>
+<p><strong>교재390–391쪽 / 가상 법률의 역할:</strong> 추상적 원칙을 답안 순서로 바꾼다. 아래 법률 L은 실제 현행법이 아니다.</p>
+<p>장관이 특정 업종의 사업자 수를 고시로 정한다. 그 수를 넘으면 신규 진입을 못 하고,이미 영업하던 사람도 최근 개업한 순서로 문을 닫아야 한다. 어기면 불법 영업으로 처벌한다. 새로 가게를 연 은서는 “허가를 받고 시작했는데 갑자기 접으라니요?”라고 묻는다.</p>
+<p>먼저 심판대상을 법률 L의 어떤 규정인지 특정한다. 직업을 선택·유지할 가능성이 줄었으므로 직업의 자유 제한을 확인한다. 다음으로 직업 수행 방법의 제한인지,개인의 능력·자격에 따른 주관적 선택 제한인지,수요·정원처럼 본인이 통제하기 어려운 객관적 사유의 선택 제한인지 구별한다. L은 객관적 사유에 의한 제한으로 엄격한 정당화가 필요하다.</p>
+<table>
+<thead>
+<tr>
+<th>과잉금지 단계</th>
+<th>사례에서 따질 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적의 정당성</td>
+<td>기존 사업자의 수입을 경쟁에서 보호한다는 목적만으로 자유경쟁 질서를 배제할 수 있는가?</td>
+</tr>
+<tr>
+<td>수단의 적합성</td>
+<td>정원 제한·강제 폐업이 주장하는 공익의 달성에 실제로 기여하는가?</td>
+</tr>
+<tr>
+<td>침해의 최소성</td>
+<td>정보 제공,창업 상담,안전·품질 규제,사회보장 등 덜 제한하는 효과적 대안은 없는가?</td>
+</tr>
+<tr>
+<td>법익의 균형성</td>
+<td>얻는 공익과 직업을 잃는 사람·소비자의 불이익 사이에 균형이 있는가?</td>
+</tr>
+</tbody></table>
+<p>교재는 부당한 경쟁 제한에 비판적인 예시 논증을 제시한다. 실제 사건에서는 규제의 구체적 목적과 증거를 검토해야 하며 ‘영업 정원은 전부 위헌’이라고 외우지 않는다. 적합성은 최선의 수단인가가 아니라 목적에 기여하는가,최소성은 단순히 다른 대안이 하나라도 존재하는가가 아니라 덜 제한하면서 목적을 비교 가능하게 달성할 수 있는가의 문제다.</p>
+<p>한 줄:보호영역과 제한을 먼저 확인하고 제한 유형에 맞는 엄격도로 비례심사를 한다.</p>
+<h2 id="foundations-14-24" data-concept-id="foundations-14-24">5-2. 소급·신뢰·위임·재산권·평등권까지 확인하기 ★★★★★</h2>
+<p><strong>교재391–392쪽 / 문단의 역할:</strong> 과잉금지만 통과하면 끝이라는 오해를 막는다.</p>
+<p>소급입법:이미 끝난 합법 영업을 나중에 범죄로 취급한다면 형벌불소급 등의 문제가 심각하다. 기존 사업자에게 앞으로의 규칙을 바꾸어 적용하는 경우는 그것만으로 진정소급이라고 할 수 없다. 그렇더라도 투자·영업에 관한 정당한 신뢰,경과조치,변화의 예측 가능성을 따지는 신뢰보호 문제가 남는다.</p>
+<p>위임:중대한 진입 제한을 장관 고시에 맡기면서 기준·범위를 법률이 정하지 않았다면 법률유보·포괄위임금지 문제가 생긴다. 숫자를 행정부가 정한다는 형식만으로 무조건 위헌이라기보다 의회가 본질적 사항과 예측 가능한 기준을 정했는지를 본다.</p>
+<p>재산권:교재는 영업을 완전히 불가능하게 하는 경우23조③의 공용제한으로 논증할 가능성을 제시한다. <strong>실제 법리에서 강한 규제라고 언제나 공용침해가 되는 것은 아니다.</strong> 재산권의 내용·한계 형성인지 공공필요에 의한 개별적 수용·사용·제한인지,특별한 희생과 보상 구조가 어떤지 구체적으로 판단한다. 장래의 수익 기대와 이미 형성된 재산적 지위도 구별한다.</p>
+<p>소비자의 선택 가능성에는 일반적 행동의 자유 등 행복추구권 관련 논의가 가능하다. 재산권·직업의 자유의 특별한 보장이 있는데 일반적 권리만 반복하는 것은13강 경합 처리와 맞지 않는다. 필요하면 독자적 법익을 분리해 논한다.</p>
+<p>평등권:먼저 같은 업종의 기존·신규 사업자,규제 업종·다른 업종이 해당 목적에서 본질적으로 비교 가능한지 따진다. 비교 가능하고 차별이 있다면 심사 기준을 정한다. 중대한 기본권 제한과 관련된 차별이라면 비례심사가 요구될 수 있다. 자의금지와 엄격한 비례심사를 구별하고 차별 목적·수단·필요·균형을 검토한다. 한 줄:하나의 법률은 여러 기본권과 여러 제한 원칙을 동시에 위반할 수 있다.</p>
+<h2 id="foundations-14-25" data-concept-id="foundations-14-25">5-3. 위헌 주장과 합헌 반박의 논증 부담 ★★★★★</h2>
+<p><strong>교재390·393–394쪽 / 마무리의 역할:</strong> 답안의 출발점과 결론이 연결되는지 점검한다.</p>
+<p>침해를 주장하는 사람은①공권력 행사·불행사 또는 법률을 특정하고,②자기에게 어떤 법익 제한이 생기는지 설명하며,③경합하는 권리의 관계를 정리한 뒤,④관련 헌법 원칙 위반을 논증한다. 원칙 중 하나라도 실제 위반이 성립하면 그 쟁점에서 위헌 결론을 뒷받침할 수 있다.</p>
+<p>합헌을 주장하는 쪽은 선결 쟁점에서 제한 자체가 없음을 논증하거나,제한이 있다면 제기된 위반 쟁점들에 성공적으로 답해야 한다. 예컨대 이익이 헌법상 보호법익이 아니라 단순한 반사적 기대라면 해당 권리에 대한 제한이 없는 것이다. 평등권에서는 비교집단 성립이 부정되는 경우가 이에 해당한다. 다만 다른 기본권 쟁점까지 저절로 없어지는 것은 아니다.</p>
+<p><mark class="pink">‘공익이 있으니 합헌’도,‘손해를 봤으니 위헌’도 논증이 아니다.</mark> 제한이 없다고 확정한 바로 그 권리에 대해 곧바로 과잉금지 위반을 단정할 수 없다. 보호영역이 쟁점인 사건에서 예비적으로 제한이 있다고 가정해 정당화까지 검토하는 답안과도 구별한다. 시험321·373은 제한이 없음을 확인한 경우의 논리 구조를 묻는다.</p>
+<p>한 줄:무엇을 국가가 어떻게 줄였고 어느 헌법 원칙을 왜 어겼는지 끝까지 이어 말한다.</p>
+<h1>용어를 뜻부터 이해하기</h1>
+<h3>基本權不行使 기본권 불행사</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기),本(근본 본),權(권세 권),不(아니 불),行(다닐 행),使(부릴 사). <strong>③ 합친 뜻:</strong> 기본권을 아직 쓰지 않음. <strong>④ 이름의 이유:</strong> 안 쓴 것과 없앤 것을 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구체적 권리를 법적 효과가 생기는 방향으로 아직 행사하지 않은 상태. <strong>⑥ 쉬운 말:</strong> 아직 상소할 수 있지만 오늘은 안 했다. <strong>⑦ 사례:</strong> 상소기간 내 미상소.</p>
+<p><strong>⑧ 시험:</strong> 309·361. <strong>⑨ 비교·기억법:</strong> 기간 경과의 실권·명시적 포기와 구별.</p>
+<h3>行使抛棄 행사 포기</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행),使(부릴 사),抛(던질 포),棄(버릴 기). <strong>③ 합친 뜻:</strong> 권리를 쓰는 것을 내려놓음. <strong>④ 이름의 이유:</strong> 권리자 지위와 개별 선택을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 시기·조건의 구체적 법적 권리를 포기함. <strong>⑥ 쉬운 말:</strong> 이번에 받을 돈을 면제해 준다. <strong>⑦ 사례:</strong> 채무 면제.</p>
+<p><strong>⑧ 시험:</strong> 308·360. <strong>⑨ 비교·기억법:</strong> 강행법규·고문·검열 등 예외를 확인.</p>
+<h3>基本權自體抛棄 기본권 자체 포기</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기),本(근본 본),權(권세 권),自(스스로 자),體(몸 체),抛(던질 포),棄(버릴 기). <strong>③ 합친 뜻:</strong> 기본적 권리 지위 자체를 버림. <strong>④ 이름의 이유:</strong> 개별 재산 처분과 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 앞으로 해당 권리를 보유하지 못하는 신분으로 들어가려는 것. <strong>⑥ 쉬운 말:</strong> 앞으로 어떤 물건도 소유 못하는 사람이 되겠다는 약속. <strong>⑦ 사례:</strong> 영구적 재산권자 지위 포기.</p>
+<p><strong>⑧ 시험:</strong> 310·362. <strong>⑨ 비교·기억법:</strong> 전 재산을 파는 것과 미래 소유 자격 상실은 다름.</p>
+<h3>強行法規 강행법규</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 強(강할 강),行(다닐 행),法(법 법),規(법 규). <strong>③ 합친 뜻:</strong> 당사자 뜻으로 배제할 수 없는 법규. <strong>④ 이름의 이유:</strong> 약한 당사자·공공질서를 보호하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 합의로 적용을 없앨 수 없는 규범. <strong>⑥ 쉬운 말:</strong> 서명했어도 법이 허용하지 않는 약속은 효력이 없다. <strong>⑦ 사례:</strong> 퇴직 전 법정 퇴직금 사전 포기.</p>
+<p><strong>⑧ 시험:</strong> 포기 예외. <strong>⑨ 비교·기억법:</strong> 임의규정은 당사자 합의로 달리 정할 수 있음.</p>
+<h3>失權 실권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 失(잃을 실),權(권세 권). <strong>③ 합친 뜻:</strong> 권리 행사 가능성을 잃음. <strong>④ 이름의 이유:</strong> 법률관계를 확정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기간 도과 등 법정 사유로 더는 권리를 행사할 수 없게 됨. <strong>⑥ 쉬운 말:</strong> 기한이 지나 이번 절차를 할 수 없게 됐다. <strong>⑦ 사례:</strong> 상소기간 도과.</p>
+<p><strong>⑧ 시험:</strong> 309·361 보완. <strong>⑨ 비교·기억법:</strong> 적극적인 포기의사가 언제나 있는 것은 아님.</p>
+<h3>任意搜査 임의수사</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 任(맡길 임),意(뜻 의),搜(찾을 수),査(조사할 사). <strong>③ 합친 뜻:</strong> 자발적 협조를 바탕으로 조사함. <strong>④ 이름의 이유:</strong> 강제수사와 절차를 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 강제처분 아닌 방법으로 이루어지는 수사. <strong>⑥ 쉬운 말:</strong> 거절할 수 있음을 알고 가방을 보여 준다. <strong>⑦ 사례:</strong> 자발적 가방 공개.</p>
+<p><strong>⑧ 시험:</strong> 308③·360③. <strong>⑨ 비교·기억법:</strong> 말로 동의했어도 실제 강요면 임의성 문제.</p>
+<h3>任意提出·押收 임의제출·압수</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 任(맡길 임),意(뜻 의),提(끌 제),出(날 출),押(누를 압),收(거둘 수). <strong>③ 합친 뜻:</strong> 자발적으로 내놓음·물건을 확보함. <strong>④ 이름의 이유:</strong> 증거 확보와 개인의 자유를 함께 보장하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형사소송법218조 요건에 따른 영장 없는 임의제출물 압수. <strong>⑥ 쉬운 말:</strong> 스스로 내놓은 물건을 수사기관이 증거로 확보한다. <strong>⑦ 사례:</strong> 2015도13726.</p>
+<p><strong>⑧ 시험:</strong> 동의·영장 구별. <strong>⑨ 비교·기억법:</strong> 휴대전화 제출은 모든 무관정보 탐색 동의가 아님.</p>
+<h3>撤回·還付 철회·환부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 撤(거둘 철),回(돌 회),還(돌아올 환),付(줄 부). <strong>③ 합친 뜻:</strong> 뜻을 거둠·물건을 돌려줌. <strong>④ 이름의 이유:</strong> 계속 협조와 이미 된 압수의 효력을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 동의 철회와 압수물 반환의 각각의 법적 절차. <strong>⑥ 쉬운 말:</strong> 더는 협조하지 않겠다는 말과 물건 돌려받기는 별도 문제. <strong>⑦ 사례:</strong> 진행 중 임의협조 거부.</p>
+<p><strong>⑧ 시험:</strong> 372쪽. <strong>⑨ 비교·기억법:</strong> 철회만으로 적법한 압수물이 자동 반환되는 것은 아님.</p>
+<h3>檢閱 검열</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 檢(검사할 검),閱(볼 열). <strong>③ 합친 뜻:</strong> 발표 전에 내용을 검사함. <strong>④ 이름의 이유:</strong> 표현이 나오기 전에 국가가 거르는 것을 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법21조②가 금지하는 국가의 사전적 허가·심사 구조에 해당하는 통제. <strong>⑥ 쉬운 말:</strong> 발표해도 되는지 국가에게 먼저 허락받게 한다. <strong>⑦ 사례:</strong> 출판사의 검열 동의.</p>
+<p><strong>⑧ 시험:</strong> 308④·360④. <strong>⑨ 비교·기억법:</strong> 모든 사후 책임·모든 민간 검토가 헌법상 검열은 아님.</p>
+<h3>請求權 청구권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청),求(구할 구),權(권세 권). <strong>③ 합친 뜻:</strong> 상대에게 요구할 권리. <strong>④ 이름의 이유:</strong> 권리와 대응 의무의 관계를 나타내려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대방에게 일정한 작위·부작위를 요구하는 지위. <strong>⑥ 쉬운 말:</strong> 나는 요구하고 상대방이 의무를 진다. <strong>⑦ 사례:</strong> 부당한 표현 간섭 금지 요구.</p>
+<p><strong>⑧ 시험:</strong> 311·363. <strong>⑨ 비교·기억법:</strong> 권리자 본인이 반드시 행사할 의무를 진다는 뜻 아님.</p>
+<h3>特權·無權利 특권·무권리</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특),權(권세 권),無(없을 무),利(이로울 리). <strong>③ 합친 뜻:</strong> 자유로운 지위·그 반대를 요구할 권리가 없음. <strong>④ 이름의 이유:</strong> 일상적 특혜와 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 호펠드 분석에서 특정 행동을 하지 않을 의무가 없는 지위와 대응 관계. <strong>⑥ 쉬운 말:</strong> 나는 침묵할 수 있고 상대는 발언을 강요할 권리가 없다. <strong>⑦ 사례:</strong> 발언하지 않는 선택.</p>
+<p><strong>⑧ 시험:</strong> 311①. <strong>⑨ 비교·기억법:</strong> 신분 특혜나 귀족 계급을 말하는 것이 아님.</p>
+<h3>形成權 형성권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 形(모양 형),成(이룰 성),權(권세 권). <strong>③ 합친 뜻:</strong> 법률관계를 만들어 바꾸는 힘. <strong>④ 이름의 이유:</strong> 단순 행동 자유와 법적 변경 능력을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유효한 권능 행사로 법적 지위를 변경할 수 있는 지위. <strong>⑥ 쉬운 말:</strong> 권한 있는 의사표시로 관계가 달라진다. <strong>⑦ 사례:</strong> 법이 허용한 계약 해제.</p>
+<p><strong>⑧ 시험:</strong> 311③·363③. <strong>⑨ 비교·기억법:</strong> 형성권 보유가 특정 방향의 행사 의무는 아님.</p>
+<h3>免除權·無權能 면제권·무권능</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 免(면할 면),除(덜 제),權(권세 권),無(없을 무),能(능할 능). <strong>③ 합친 뜻:</strong> 상대 권능의 영향에서 벗어남·바꿀 힘이 없음. <strong>④ 이름의 이유:</strong> 누가 누구의 지위를 바꿀 수 있는지 보려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인의 법적 권능에 의해 지위를 바꿀 수 없는 보호와 그 대응 관계. <strong>⑥ 쉬운 말:</strong> 남이 마음대로 내 권리를 지우지 못한다. <strong>⑦ 사례:</strong> 기본권자 지위 보장.</p>
+<p><strong>⑧ 시험:</strong> 311④·363④. <strong>⑨ 비교·기억법:</strong> 형사처벌의 면책을 뜻하지 않음.</p>
+<h3>非權力的國家作用 비권력적 국가작용</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 非(아닐 비),權(권세 권),力(힘 력),的(과녁 적),國(나라 국),家(집 가),作(지을 작),用(쓸 용). <strong>③ 합친 뜻:</strong> 권력을 명령으로 행사하지 않는 국가의 활동. <strong>④ 이름의 이유:</strong> 공권력 명령과 계약 형식을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재에서는 국가가 사법적 거래 당사자로 하는 작용을 중심으로 설명. <strong>⑥ 쉬운 말:</strong> 국가도 책상을 살 때 계약한다. <strong>⑦ 사례:</strong> 청사 건설 계약.</p>
+<p><strong>⑧ 시험:</strong> 312·364. <strong>⑨ 비교·기억법:</strong> 넓은 비권력 행정에는 다른 유형도 있어 처분성은 개별 검토.</p>
+<h3>高權·私法 고권·사법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 高(높을 고),權(권세 권),私(사사로울 사),法(법 법). <strong>③ 합친 뜻:</strong> 우월한 국가 권한·사적 관계의 법. <strong>④ 이름의 이유:</strong> 국가의 역할에 따라 법률관계를 판단하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공권력 지위와 대등한 사법상 거래의 구별. <strong>⑥ 쉬운 말:</strong> 세금 부과와 책상 구매는 형식이 다르다. <strong>⑦ 사례:</strong> 부과 처분·매매계약.</p>
+<p><strong>⑧ 시험:</strong> 312①②. <strong>⑨ 비교·기억법:</strong> 私法은 司法 재판과 다른 말.</p>
+<h3>行政私法·補助·營利 행정사법·보조·영리</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행),政(정사 정),私(사사로울 사),法(법 법),補(기울 보),助(도울 조),營(경영할 영),利(이로울 리). <strong>③ 합친 뜻:</strong> 행정 목적의 사법·업무 지원·수익 활동. <strong>④ 이름의 이유:</strong> 사법적 국가작용의 목적을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공공임무 수행,수단 조달,영리 거래의 유형. <strong>⑥ 쉬운 말:</strong> 서비스 계약,사무용품 구매,기업 참여를 구별한다. <strong>⑦ 사례:</strong> 공공서비스·구매·주식 참여.</p>
+<p><strong>⑧ 시험:</strong> 375쪽. <strong>⑨ 비교·기억법:</strong> 유형이 달라도 국가의 헌법 구속은 남음.</p>
+<h3>基本權保護義務 기본권 보호의무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기),本(근본 본),權(권세 권),保(지킬 보),護(보호할 호),義(옳을 의),務(힘쓸 무). <strong>③ 합친 뜻:</strong> 기본적 권리를 지킬 의무. <strong>④ 이름의 이유:</strong> 국가의 직접 침해 금지만으로 부족해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제3자의 침해·위험에서 국민의 기본권 법익을 보호할 국가 의무. <strong>⑥ 쉬운 말:</strong> 국가도 위험을 방치하면 안 된다. <strong>⑦ 사례:</strong> 유해물질 피해 예방.</p>
+<p><strong>⑧ 시험:</strong> 313·365. <strong>⑨ 비교·기억법:</strong> 국가 직접 제한과 심사 구조 구별.</p>
+<h3>過少保護禁止 과소보호금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과),少(적을 소),保(지킬 보),護(보호할 호),禁(금할 금),止(그칠 지). <strong>③ 합친 뜻:</strong> 너무 적게 보호하지 말 것. <strong>④ 이름의 이유:</strong> 보호의무와 입법 형성의 여지를 조화하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적절하고 효율적인 최소한의 보호를 했는지 심사. <strong>⑥ 쉬운 말:</strong> 아무것도 안 하거나 전혀 쓸모없는 보호만 하면 안 된다. <strong>⑦ 사례:</strong> 교통사고 보호 체계.</p>
+<p><strong>⑧ 시험:</strong> 313③·365③. <strong>⑨ 비교·기억법:</strong> 과잉금지는 국가가 너무 많이 제한했는지 심사.</p>
+<h3>補充性·最終手段 보충성·최종수단</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보),充(채울 충),性(성품 성),最(가장 최),終(마칠 종),手(손 수),段(층계 단). <strong>③ 합친 뜻:</strong> 다른 수단을 보충함·마지막 방법. <strong>④ 이름의 이유:</strong> 형벌의 강한 침해를 경계하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형벌은 사회 문제 해결의 최후 수단이라는 성격. <strong>⑥ 쉬운 말:</strong> 조금 도움 된다고 모든 문제를 감옥으로 해결할 수 없다. <strong>⑦ 사례:</strong> 교통 과실범 처벌 확대 요구.</p>
+<p><strong>⑧ 시험:</strong> 378–379쪽. <strong>⑨ 비교·기억법:</strong> 특정 형벌 의무는 일반 보호의무에서 자동 도출 안 됨.</p>
+<h3>基本義務 기본의무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기),本(근본 본),義(옳을 의),務(힘쓸 무). <strong>③ 합친 뜻:</strong> 공동체의 기본적인 법적 의무. <strong>④ 이름의 이유:</strong> 자유를 가능하게 하는 조건을 함께 마련하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법이 국민에게 부과하는 공동체 유지의 의무. <strong>⑥ 쉬운 말:</strong> 세금·국방·자녀 교육·근로를 헌법이 정한다. <strong>⑦ 사례:</strong> 납세의무.</p>
+<p><strong>⑧ 시험:</strong> 314·366. <strong>⑨ 비교·기억법:</strong> 의무 구체화 법률도 비례·평등 등 심사 대상.</p>
+<h3>租稅法律主義 조세법률주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 租(구실 조),稅(세금 세),法(법 법),律(법 률),主(주인 주),義(옳을 의). <strong>③ 합친 뜻:</strong> 세금을 법률에 따라 정함. <strong>④ 이름의 이유:</strong> 국가의 자의적 재산 침해를 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 조세 종목·세율 등 과세요건을 법률로 통제하는 원칙. <strong>⑥ 쉬운 말:</strong> 기관장이 마음대로 세금을 만들 수 없다. <strong>⑦ 사례:</strong> 헌법38·59조.</p>
+<p><strong>⑧ 시험:</strong> 314④·366④. <strong>⑨ 비교·기억법:</strong> 사용료 등 대가 있는 급부와 세금 구별.</p>
+<h3>國防·不利益處遇 국방·불이익 처우</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국),防(막을 방),不(아니 불),利(이로울 리),益(더할 익),處(곳 처),遇(만날 우). <strong>③ 합친 뜻:</strong> 나라를 지킴·불리한 대우. <strong>④ 이름의 이유:</strong> 의무 부과와 권리 보호를 함께 규정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국방의무와 병역 이행 때문에 법적으로 불리하게 대하지 않을 원칙. <strong>⑥ 쉬운 말:</strong> 군복무했다고 법적 불이익을 주면 안 된다. <strong>⑦ 사례:</strong> 98헌마363 군 가산점.</p>
+<p><strong>⑧ 시험:</strong> 315·367. <strong>⑨ 비교·기억법:</strong> 불이익 금지≠모든 사실상 손해 보상·특정 특혜 의무.</p>
+<h3>義務敎育 의무교육</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 義(옳을 의),務(힘쓸 무),敎(가르칠 교),育(기를 육). <strong>③ 합친 뜻:</strong> 반드시 받게 해야 하는 교육. <strong>④ 이름의 이유:</strong> 아이의 학습 기회를 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 보호자가 자녀에게 초등교육과 법률상 교육을 받게 할 의무. <strong>⑥ 쉬운 말:</strong> 보호자는 자녀가 학교 교육을 받게 해야 한다. <strong>⑦ 사례:</strong> 초등학교·중학교.</p>
+<p><strong>⑧ 시험:</strong> 316·368. <strong>⑨ 비교·기억법:</strong> 고교 무상교육과 의무교육은 같지 않음.</p>
+<h3>勤勞義務·消極的 근로의무·소극적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 勤(부지런할 근),勞(일할 로),義(옳을 의),務(힘쓸 무),消(사라질 소),極(다할 극),的(과녁 적). <strong>③ 합친 뜻:</strong> 일할 의무·강제 명령을 좁히는 해석. <strong>④ 이름의 이유:</strong> 법적 의미와 직업 자유를 함께 살리려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재는 법적 의미를 인정하되 자율성에 반하는 강제노동으로 해석하지 않음. <strong>⑥ 쉬운 말:</strong> 의무라고 해서 국가가 아무 직장에나 억지로 넣을 수 없다. <strong>⑦ 사례:</strong> 최후 고용 기회에 관한 교재 논증.</p>
+<p><strong>⑧ 시험:</strong> 317·369. <strong>⑨ 비교·기억법:</strong> 윤리적 의무설·법적 의무설 및 저자 견해 구별.</p>
+<h3>保護法益·保護領域 보호법익·보호영역</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 保(지킬 보),護(보호할 호),法(법 법),益(더할 익),領(거느릴 령),域(지경 역). <strong>③ 합친 뜻:</strong> 법이 지키는 이익·보호되는 범위. <strong>④ 이름의 이유:</strong> 무엇이 줄었는지 먼저 특정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권상 이익과 자유권에서 보호되는 행위 가능성. <strong>⑥ 쉬운 말:</strong> 배울 기회·발언·평등 대우 중 무엇을 빼앗겼나. <strong>⑦ 사례:</strong> 집회 봉쇄·교육 급부 부족.</p>
+<p><strong>⑧ 시험:</strong> 318–319·370–371. <strong>⑨ 비교·기억법:</strong> 모든 이익이 그 기본권의 법익은 아님.</p>
+<h3>法律的定型 법적 정형</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법),律(법 률),的(과녁 적),定(정할 정),型(거푸집 형). <strong>③ 합친 뜻:</strong> 법이 기대하는 기본 모습. <strong>④ 이름의 이유:</strong> 행동 자유로만 설명할 수 없는 권리를 분석하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특별한 정당화가 없다면 보장되어야 할 지위·급부·절차의 출발 형태. <strong>⑥ 쉬운 말:</strong> 권리가 제대로 보장됐다면 갖춰져 있어야 할 상태. <strong>⑦ 사례:</strong> 실효적 재판 절차.</p>
+<p><strong>⑧ 시험:</strong> 383쪽. <strong>⑨ 비교·기억법:</strong> 저자의 분석 용어이며 고정된 단일 제도라는 뜻 아님.</p>
+<h3>制限·侵害 제한·침해</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 制(절제할 제),限(한정할 한),侵(침노할 침),害(해할 해). <strong>③ 합친 뜻:</strong> 범위를 줄임·권리를 부당하게 해침. <strong>④ 이름의 이유:</strong> 심사의 출발점과 결론을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 보호법익 축소와 헌법상 정당화되지 않는 제한. <strong>⑥ 쉬운 말:</strong> 막았는지 본 뒤 정당하게 막았는지 본다. <strong>⑦ 사례:</strong> 집회 소음 제한.</p>
+<p><strong>⑧ 시험:</strong> 318·321·370·373. <strong>⑨ 비교·기억법:</strong> 합헌적인 제한도 있으므로 같은 말 아님.</p>
+<h3>內在的限界·法律留保 내재적 한계·법률유보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 內(안 내),在(있을 재),的(과녁 적),限(한정할 한),界(지경 계),法(법 법),律(법 률),留(머무를 류),保(지킬 보). <strong>③ 합친 뜻:</strong> 안쪽 경계·법률에 의한 근거 요구. <strong>④ 이름의 이유:</strong> 독일과 한국의 헌법 구조를 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재는 한국의 내재적 한계를 보호 내용 식별 문제로 설명. <strong>⑥ 쉬운 말:</strong> 처음 보호되는 것인지와 법률로 제한 가능한지 나눈다. <strong>⑦ 사례:</strong> 한국37조② 일반유보.</p>
+<p><strong>⑧ 시험:</strong> 320·372. <strong>⑨ 비교·기억법:</strong> 일반유보가 있다고 고문·검열까지 허용되는 것은 아님.</p>
+<h3>構成要件·論證 구성요건·논증</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 構(얽을 구),成(이룰 성),要(요긴할 요),件(물건 건),論(논할 론),證(증거 증). <strong>③ 합친 뜻:</strong> 해당하기 위한 조건·이유로 결론을 뒷받침함. <strong>④ 이름의 이유:</strong> 직관이나 선호로 권리를 지우지 않으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 여기서는 보호영역에 들어가기 위한 요건과 그 판단의 이유. <strong>⑥ 쉬운 말:</strong> 싫은 말도 표현인지부터 공정하게 따진다. <strong>⑦ 사례:</strong> 좁은·넓은 구성요건설.</p>
+<p><strong>⑧ 시험:</strong> 320④·372④. <strong>⑨ 비교·기억법:</strong> 형법의 범죄 구성요건으로만 이해하지 않기.</p>
+<h3>過剩禁止·比例 과잉금지·비례</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과),剩(남을 잉),禁(금할 금),止(그칠 지),比(견줄 비),例(법식 례). <strong>③ 합친 뜻:</strong> 지나친 제한 금지·목적과 수단의 비례. <strong>④ 이름의 이유:</strong> 공익을 위해 자유를 필요 이상 희생하지 않게 하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목적 정당성·수단 적합성·침해 최소성·법익 균형성 심사. <strong>⑥ 쉬운 말:</strong> 목적이 좋아도 방법이 과하면 안 된다. <strong>⑦ 사례:</strong> 영업 정원 규제.</p>
+<p><strong>⑧ 시험:</strong> 321·373. <strong>⑨ 비교·기억법:</strong> 하나라도 실제 위반이면 위헌 논거.보호의무 심사와 구별.</p>
+<h3>遡及立法·信賴保護 소급입법·신뢰보호</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遡(거슬러 올라갈 소),及(미칠 급),立(설 립),法(법 법),信(믿을 신),賴(의지할 뢰),保(지킬 보),護(보호할 호). <strong>③ 합친 뜻:</strong> 과거에 법을 미침·정당한 믿음을 보호함. <strong>④ 이름의 이유:</strong> 법 변화의 충격과 예측 가능성을 통제하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 완료 사실의 법적 평가 변경과 기존 법에 대한 정당한 신뢰의 보호. <strong>⑥ 쉬운 말:</strong> 어제 합법이던 행위를 오늘 범죄라 할 수 있나. <strong>⑦ 사례:</strong> 법률 L의 폐업 의무.</p>
+<p><strong>⑧ 시험:</strong> 391쪽. <strong>⑨ 비교·기억법:</strong> 장래 적용이 진정소급 아니어도 신뢰보호 문제는 남음.</p>
+<h3>包括委任·公用侵害 포괄위임·공용침해</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 包(쌀 포),括(묶을 괄),委(맡길 위),任(맡길 임),公(공평할 공),用(쓸 용),侵(침노할 침),害(해할 해). <strong>③ 합친 뜻:</strong> 기준 없는 넓은 위임·공공필요를 위한 재산권 침해. <strong>④ 이름의 이유:</strong> 국가의 권한 행사에 근거·절차·보상을 요구하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 입법의 본질사항 위임 한계와23조③의 수용·사용·제한. <strong>⑥ 쉬운 말:</strong> 숫자를 장관에게 전부 맡기거나 특별히 재산을 희생시키는 문제. <strong>⑦ 사례:</strong> 영업 제한과 재산권 심사.</p>
+<p><strong>⑧ 시험:</strong> 391–392쪽. <strong>⑨ 비교·기억법:</strong> 강한 규제는 모두 공용침해라는 자동 공식은 아님.</p>
+<h1>기출 연결과 TOP5</h1>
+<p>제공 자료는 워크북과 형성평가28문항이다. 유사 문항이 두 묶음에서 반복되므로 독립된 실제 국가시험28회 출제를 뜻하지 않는다. 실제 오답률이 없으므로 아래는 문장 구조에서 예상되는 함정이다.</p>
+<table>
+<thead>
+<tr>
+<th>순위</th>
+<th>문항</th>
+<th>출제 의도와 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>308·310·360·362</td>
+<td>구체적 행사 포기와 권리자 지위 포기 구분.동의하면 검열도 가능하다는 함정</td>
+</tr>
+<tr>
+<td>2</td>
+<td>313·365</td>
+<td>과잉금지와 과소보호금지 교체,형벌 보호의 필수성 과장</td>
+</tr>
+<tr>
+<td>3</td>
+<td>314·366</td>
+<td>기본의무라고 비례심사를 면제하는 오류</td>
+</tr>
+<tr>
+<td>4</td>
+<td>319–320·371–372</td>
+<td>권리별 법익 식별,한국과 독일의 법률유보 구조 혼동</td>
+</tr>
+<tr>
+<td>5</td>
+<td>321·373</td>
+<td>제한 확인 없이 침해심사로 뛰어드는 오류</td>
+</tr>
+</tbody></table>
+<p>추가 암기:311·363은 청구권자의 권리를 상대방의 의무와 바꿔 놓고,312·364는 국가의 거래를 고권적 행위라고 바꾼다.316·368은 교육의무의 주체를 학생으로 바꾼다.317·369는 윤리적 의무설을 강제노동 근거로 뒤집는다. 모든 보기의 개별 이유는 뒤의 문제 부록에서 확인한다.</p>
+<h1>처음 보는 사례로 응용하기</h1>
+<p class="practice-title"><strong>응용1 · 공공도서관 이용 동의서</strong></p>
+<p>도서관은 가입 때 ‘앞으로 국가가 독서 내용을 사전 심사해도 어떤 기본권도 주장하지 않는다’는 서명을 요구한다. 서명했으므로 유효한가?</p>
+<p>해설:구체적인 자료 제공에 대한 제한적 동의와 앞으로 기본권자 지위를 포괄적으로 포기하는 것을 나눠야 한다. 국가의 헌법적 의무는 서명만으로 사라지지 않는다. 어떤 사전 심사가 헌법상 검열에 해당하는지는 표현물·주체·허가 구조 등 요건을 따로 판단하되,동의만으로 위헌적 제도를 면책할 수는 없다. 출제 의도:포기의 범위와 특별한 금지 구별.</p>
+<p class="practice-title"><strong>응용2 · 유해물질과 처벌 신설</strong></p>
+<p>주민은 새 물질의 위험이 걱정되니 정부가 제조자를 반드시 징역형으로 처벌해야 한다고 주장한다. 자동으로 인정되는가?</p>
+<p>해설:국가의 보호의무는 문제되지만 특정 형벌이 곧 헌법상 유일한 수단은 아니다. 검사·판매 제한·정보 제공 등 보호 체계의 적절성과 효율성,다른 수단의 가능성을 보아 최소 보호를 명백히 위반했는지 살핀다. 위험이 중대하고 특정 조치만 실효적이라면 재량이 좁혀질 수 있다. 출제 의도:무대응과 형벌 부재를 구별.</p>
+<p class="practice-title"><strong>응용3 · 국가의 축제 물품 계약</strong></p>
+<p>지자체가 계약으로 행사 물품을 사면서 대표자가 특정 종교라는 이유만으로 업체를 배제했다. 민사계약이라 헌법은 관계없는가?</p>
+<p>해설:국가가 사법적 형식을 썼다고 평등권의 구속에서 벗어나지 않는다. 다만 처분 취소소송이 가능한지,민사 구제가 필요한지는 행위의 법적 성격과 구제 요건을 따로 본다. 출제 의도:기본권 구속과 소송 형식 분리.</p>
+<p class="practice-title"><strong>응용4 · 새 자격증과 기존 영업자</strong></p>
+<p>안전사고를 줄이려는 법이 앞으로의 영업에 자격증을 요구한다. 기존 영업자는 모두 진정소급입법이므로 당연 위헌이라고 한다. 맞는가?</p>
+<p>해설:장래 영업에 새 요건을 적용하는 것과 과거 완료 행위를 불법으로 만드는 것은 다르다. 진정소급이 아니어도 신뢰보호,준비기간,대체수단,제한 유형과 비례성은 심사해야 한다. 출제 의도:진정소급 부정과 합헌 확정을 혼동하지 않기.</p>
+<p class="practice-title"><strong>응용5 · 시민의 불편한 구호</strong></p>
+<p>정부는 ‘다수가 싫어하는 말은 표현이 아니다’라며 집회 구호를 금지했다. 어떤 순서로 반박할까?</p>
+<p>해설:표현의 보호영역을 다수의 취향으로 축소하는 정의부터 문제 삼는다. 보호되는 표현과 제한을 확인한 뒤 목적·근거·비례성 등을 판단한다. 폭력·협박 등 별도 법익 문제는 구체적으로 검토하며,인기 없다는 사실만으로 문턱 밖에 내보내서는 안 된다. 출제 의도:보호영역과 정당화의 순서,결론 선취 방지.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제14강</h2><p><b>TOP3</b> ①불행사·행사 포기·자체 포기 ②과잉금지·과소보호금지 ③법익→제한→정당화→침해</p><table><thead><tr><th>쟁점</th><th>핵심 암기</th></tr></thead><tbody><tr><td>불행사</td><td>아직 법적 효과 있는 방향으로 행사하지 않음.기간 내 미상소</td></tr><tr><td>행사 포기</td><td>구체적 권리의 포기.자유의사·범위·강행법규 확인</td></tr><tr><td>자체 포기</td><td>권리자 지위 영구 박탈은 불가.전 재산 처분과 미래 소유 자격 포기 구별</td></tr><tr><td>고문·검열</td><td>동의로 헌법의 금지를 없앨 수 없음</td></tr><tr><td>임의수사</td><td>실질적 임의성·동의 범위.휴대전화 무관정보 무제한 탐색 불가</td></tr><tr><td>권리 관계</td><td>청구권↔상대방 의무 / 자유↔무권리 / 형성권↔지위 변경 수인 / 면제권↔무권능</td></tr><tr><td>비권력 작용</td><td>행정사법·보조·영리.사법 형식도 헌법 구속.소송 종류는 별개</td></tr><tr><td>보호의무</td><td>제3자 침해에서 보호.10조.과소보호금지:적절·효율적인 최소 보호</td></tr><tr><td>형벌</td><td>보충적·최후수단.보호의무가 모든 위험의 처벌 의무를 뜻하지 않음</td></tr><tr><td>기본의무</td><td>납세·국방·자녀 교육·근로.법률로 구체화해도 기본권 심사 면제 아님</td></tr><tr><td>국방</td><td>납세·근로와 별개.불이익 금지≠특정 가산점 보장 의무</td></tr><tr><td>교육·근로</td><td>교육의무자는 보호자.근로의 법적 의미≠강제노동 허용</td></tr><tr><td>제한·침해</td><td>보호법익 축소 / 정당화되지 않는 제한.의도적 명령만 제한은 아님</td></tr><tr><td>법익</td><td>자유:행위 / 평등:비교·대우 / 사회:기본 급부 / 재판:실효적 절차</td></tr><tr><td>내재 한계</td><td>한국37② 일반유보 있음.보호영역에 금지 결론을 몰래 넣지 않기</td></tr><tr><td>비례 4단계</td><td>목적 정당→수단 적합→침해 최소→법익 균형.소급·신뢰·위임도 별도</td></tr></tbody></table><p><b>반드시 외울 문장</b> 기본권을 안 쓸 수 있다는 것과 권리 없는 사람이 될 수 있다는 것은 다르다.기본의무도 무제한 강제의 근거가 아니다.제한이 없으면 그 권리의 침해심사로 바로 나아가지 않는다.</p><p><b>사례를 풀 순서</b> 국가행위 특정→권리·법익→경합 정리→제한→심사 기준→원칙별 정당화→결론.</p></section>
+
+<h1>학습 상태 진단</h1>
+<p>아직 학습자의 답변을 받지 않았으므로 이해 완료라고 임의 평가하지 않는다. 🟢 위 가상사례를 보고 권리·제한·심사 기준을 이유와 함께 설명할 수 있음 / 🟡 용어는 알지만 포기·불행사 또는 과잉·과소를 섞음 / 🔴 동의나 공익이라는 말만으로 결론을 냄. 응용문제를 먼저 풀고 본인의 현재 상태를 표시하자.</p>
+<p>복습 TOP3는 <strong>포기의 세 층위 / 보호의무와 과소보호금지 / 법익 식별과 제한 정당화</strong>다. 15강에서는 이 판단을 어디에,누가,언제,어떤 절차로 주장할 수 있는지를 연결한다.</p>
+<h1>문제 부록 · 28문항·112개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_308"><h4>워크북 · 헌법_308</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>기본권 행사의 포기란 기본권에서 도출되는, 행사의 시기와 조건이 정해진 법률상 구체적 권리의 포기이다.</li><li>기본권 행사의 포기에는 원칙적으로 법적 효력이 인정되나 인정되지 아니하는 예외적인 경우도 있다.</li><li>경찰관이 가방 안의 내용물을 보여달라고 했을 때 이를 거부할 수 있음을 알면서도 임의로 보여준다면, 그 행위는 임의수사에 응하는 행위이다.</li><li>출판사의 경영자가 향후부터 국가의 검열을 받아들이겠다고 동의한다면, 적어도 그 경영자가 출판에 있어서 검열을 받지 않을 권리는 소멸한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특정 시기·조건의 구체적 권리 포기라는 정의다.기본권자 지위를 영구히 없애는 것과 구별한다.</li><li><strong>비선택</strong> · 원칙적 효력은 강행법규와 헌법상 금지를 넘지 못한다.자유로운 의사와 포기 범위도 확인한다.</li><li><strong>비선택</strong> · 거부할 수 있음을 알고 자발적으로 보여 준다는 조건에서 임의수사에 응한 것이다.강요·위협 상황을 같은 것으로 보면 안 된다.</li><li><strong>선택</strong> · 검열금지는 국가를 구속하므로 출판사의 동의만으로 소멸하지 않는다.308 원해설은 자체 포기를,360 원해설은 포기의 한계를 강조하지만 결론은 같다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법규범은 객관적 법질서로서의 성질을 가지고 국가는 그 규범에 직접 구속된다. 검열에 대한 동의의 의사표시를 통해 향후의 국가 검열에 이의를 제기할 수 없는 지위에 진입하는 것은, 특수계급의 창설 금지 규정과 기본적 인권 보장 규정 등에 의하여 그 효력이 인정될 수 없는 기본권 자체의 포기에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_309"><h4>워크북 · 헌법_309</h4><p class="question-stem">다음 중 기본권에서 도출되는 구체적 법적 권리를 법적 효력이 발생하는 방식으로는 아직 어느 방향으로도 행사하지 아니한 것을 무엇이라고 하는가?</p><ol class="choices"><li>기본권의 포기</li><li>기본권 행사의 포기</li><li>기본권 불행사</li><li>기본권 자체의 포기</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 포기라는 효과를 나타내는 말이어서 아직 어느 방향으로도 행사하지 않은 상태의 정확한 이름이 아니다.</li><li><strong>비선택</strong> · 구체적 권리를 법적 효과 있게 포기한 경우이므로 단순 미행사와 다르다.</li><li><strong>선택</strong> · 아직 행사하지 않았을 뿐 권리 행사 가능성이 남은 불행사다.상소기간 내 미상소가 대표 예다.</li><li><strong>비선택</strong> · 권리자 지위 자체를 포기한다는 의사이므로 단순히 쓰지 않은 상태보다 훨씬 강하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상소제기기간 내에 단순히 상소를 하지 않는 것과 같은 것이 기본권 불행사이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_310"><h4>워크북 · 헌법_310</h4><p class="question-stem">어떤 사람이 '나는 앞으로 재산권을 그 어떠한 경우에도 보유하지 않는 사람이 되겠다'고 국가에 문서로써 의사를 표명하였다. 이 가상적 상황과 관려된 진술로 틀린 것은?</p><ol class="choices"><li>그 사람의 의사표시의 내용은 기본권 행사의 포기가 아니라 기본권 자체의 포기이다.</li><li>기본권 자체의 포기에 법적 효력을 부여할 경우 국가가 지는 헌법 제10조상의 기본적 인권 보장 의무에 어긋난다.</li><li>특정한 기본권 자체를 포기하는 의사의 표명에 의해 더 이상 그 기본권을 보유하는 지위를 갖지 못하는 법적 지위를 인정하면 헌법 제11조 제2항의 사회적 특수계급 제도를 창설하는 셈이다.</li><li>개별 기본권 조항은 국민이 해당 기본권 자체를 포기한 경우에는 적용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 현재 물건 처분이 아니라 앞으로 모든 재산권의 보유 자격을 없애려는 것이므로 자체 포기다.</li><li><strong>비선택</strong> · 10조의 국가 인권 보장 의무는 본인의 문서 제출만으로 없어지지 않는다.</li><li><strong>비선택</strong> · 교재는 권리자 지위를 영구히 박탈하는 열등한 신분의 창설을11조② 특수계급 금지와 연결한다.</li><li><strong>선택</strong> · 각 기본권의 보장 대상에서 자발적 포기자라고 일괄 제외하지 않는다.국가의 기본권 구속은 남는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기본권 규범은 객관적 질서규범이며, '모든 국민은 ~'과 같은 형태로 된 개별 기본권 조항은 그 기본권적 지위에서 물러나겠다는 의사를 표명한 국민을 보장 대상에서 제외하고 있지 않다.</p></details></section>
+
+<section class="question-card" id="question-헌법_311"><h4>워크북 · 헌법_311</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>기본권은 근본적 권리 형태인 청구권, 특권, 형성권, 면제권의 하나 이상의 복합체로 분석할 수 있다.</li><li>청구권을 보유하는 주체는 필연적으로 그 청구권의 내용에 상응하는 사태가 성립하도록 할 의무를 지는 주체이므로, 기본권 자체를 포기하지 못한다는 것은 의무적인 측면이 있다.</li><li>형성권적 요소를 내포하는 기본권을 보유한다고 해서, 그 형성권을 특정한 방향으로 행사해야 할 의무를 지는 것은 아니다.</li><li>면제권을 갖는다는 것은 타인의 처분에 법적 지위가 좌우되지 않는 상태에 있다는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 청구권·특권·형성권·면제권은 호펠드식 기본적 법적 지위의 분석 틀이다.하나의 기본권에 여러 요소가 섞일 수 있다.</li><li><strong>선택</strong> · 청구권에 대응하는 의무는 상대방의 의무다.내가 발언의 자유를 갖는다고 반드시 발언할 의무를 지는 것은 아니다.</li><li><strong>비선택</strong> · 관계를 바꿀 권능을 가졌다는 것과 특정 방향으로 반드시 행사해야 한다는 것은 다르다.</li><li><strong>비선택</strong> · 여기서 면제는 타인의 법적 권능에 의해 지위가 좌우되지 않는 관계다.범죄를 저질러도 처벌을 안 받는다는 뜻이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 청구권에 상응하는 의무를 지는 것은, 그 청구권의 상대방이다. 따라서 청구권적 요소를 갖고 있는 기본권을 보유한다고 해서 그 청구권의 내용을 성립하게 할 의무를 그 기본권 주체가 지는 것이 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_312"><h4>워크북 · 헌법_312</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>비권력적 국가작용이란 국가작용이란 국가가 어떤 행위를 함에 있어 고권적 지위에서 하는 작용을 말한다.</li><li>사법(私法)을 적용하는 방식으로 진행되는 행정작용이 비권력적 국가작용의 대표적인 예이다.</li><li>행정처분이 아니기 때문에 항고소송의 대상이 되지 아니한다.</li><li>행정목적을 위해 형식만 사법을 빌려 기본권 규정이 유명무실해질 수 있는 결과를 피하려면 비권력적 국가작용도 기본권 규범에 구속된다고 보아야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 교재가 설명한 비권력적 거래는 고권적 지위가 아니라 민사상 한쪽 당사자의 지위에서 한다.원문312의 중복 표현은 보존했다.</li><li><strong>비선택</strong> · 사법적 계약으로 공적 목적을 수행하는 행정사법 등이 대표 예다.私法과司法를 혼동하지 않는다.</li><li><strong>비선택</strong> · 이 문항의 사법적 거래는 행정처분이 아니어서 통상 민사 구제 문제다.모든 비권력적 행정작용이나 공공요금 관계의 처분성을 이 문장 하나로 부정해서는 안 된다.</li><li><strong>비선택</strong> · 국가가 계약 형식을 택했다는 이유로 헌법 구속을 피하면 사법으로의 도피가 된다.구체적 구제 절차는 별도로 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국가가 사인들이 서로 간에 있게 되는 민사상 지위의 한쪽에 서서 하는 작용을 의미한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_313"><h4>워크북 · 헌법_313</h4><p class="question-stem">다음 중 틀린 진술은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>국가의 기본권보호의무란 헌법상 기본권적 법익을 국가 아닌 제3자가 침해하거나 침해할 위험으로부터 보호할 국가의 의무이다.</li><li>기본권보호의무의 헌법상 근거는 헌법 제10조이다.</li><li>기본권보호의무 위반의 심사기준은 과잉금지원칙이다.</li><li>국가가 국민의 법익을 보호하기 위하여 전혀 아무런 보호조치를 취하지 않은 경우 기본권보호의무를 위반한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가 아닌 제3자의 위험·침해에서 보호한다는 관계 구조가 핵심이다.국가 자신의 직접 제한과 구별한다.</li><li><strong>비선택</strong> · 국가의 기본적 인권 확인·보장 의무를 규정한10조에서 근거를 찾는다.</li><li><strong>선택</strong> · 과잉금지가 아니라 과소보호금지다.적절하고 효율적인 최소한의 보호를 취했는지가 기준이다.</li><li><strong>비선택</strong> · 보호의무가 발생한 법익에 대해 아무 조치도 하지 않았다면 위반 문제가 된다.매번 특정 형벌을 신설할 의무라는 뜻은 아니다.365 원해설의 효율적 형벌이라는 표현은 본문의 유일한 적절한 수단 여부 등 엄격한 조건과 함께 읽는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 심사기준은 과소보호금지원칙으로서 국가가 국민의 법익보호를 위하여 적어도 적절하고 효율적인 최소한의 보호를 취했는가이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_314"><h4>워크북 · 헌법_314</h4><p class="question-stem">국민의 기본의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국민이 국가의 구성원으로서 부담하는ㅎ 헌법상 의무이다.</li><li>현법상 기본의무는 그 자체가 국민의 기본권을 제한하는 것이므로, 병역의무에 관한 입법과 같이 기본의무를 구체화하는 입법작용은 과잉금지원칙의 적용을 받지 아니한다.</li><li>납세의무(제38조), 국방의무(제39조), 의무교육을 받게 할 의무(제31조 제2항), 근로의무(제32조 제2항)가 헌법상 기본의무이다.</li><li>납세의무에 관해서는 조세법률주의 원칙도 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가 공동체의 구성원으로서 부담하는 헌법상 법적 의무라는 정의다.314 원문의 오자는 뜻을 보완해 읽는다.</li><li><strong>선택</strong> · 기본의무를 구체화하는 법도 비례·평등·법률주의 등의 한계를 지켜야 한다.국방이라고 심사를 면제하면 무제한 장기 복무도 정당화되는 부당한 결과가 난다.</li><li><strong>비선택</strong> · 교재가 중심적으로 설명하는 네 의무다.환경보전·재산권 공공복리 적합 의무를 포함하는 다른 학설도 있으므로 헌법에 이것만 쓰여 있다는 뜻은 아니다.</li><li><strong>비선택</strong> · 38조의 납세의무와59조의 종목·세율 법률주의를 함께 적용한다.의무와 권력 통제는 병존한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기본의무의 부과내용을 구체적으로 형성하는 법률이 기본권 제한의 실질을 가질 때에는 기본권 제한입법의 한계를 준수하여야 한다. 즉 기본의무 사항이라는 것만으로는 기본권 제한 심사기준이 완화되지 않거니와 과잉금지원칙 적용이 배제된다는 것은 있을 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_315"><h4>워크북 · 헌법_315</h4><p class="question-stem">다음 중 국방의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국방의무란 외부 적대세력의 직접적ㆍ간접적인 침략행위로부터 국가의 독립을 유지하고 영토를 보전하기 위해 부담하는 의무이다.</li><li>근로하고 납세하는 것만으로 국방의무를 이행한 것이다.</li><li>헌법 제39조 제2항이 금지하는 병역의무의 이행으로 인한 불이익한 처우에는 병역의무를 이행해야 하는 부담은 포함되지 않는다.</li><li>국방의무 법률주의(헌법 제39조 제1항)가 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가의 독립과 영토를 외부 적대세력의 침략에서 지키는 것이 국방의무의 목적이다.</li><li><strong>선택</strong> · 근로·납세와 국방은 별개의 의무다.경제적으로 도움을 주었다는 사실만으로 법률상 병역 등 의무를 이행한 것이 되지 않는다.</li><li><strong>비선택</strong> · 복무 자체의 부담과 복무했다는 이유의 법적 불이익을 나눈다.39조②는 모든 사실상·경제상 손실을 제거하는 보상 규정은 아니다.</li><li><strong>비선택</strong> · 39조①은 법률이 정하는 바에 따른 국방의무다.행정부가 근거 없이 범위를 무한 확대할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 근로의무와 납세의무는 그 내용이 별개인 기본의무이다. 국방의 의무란 직접적인 병력형성의무와 간접적인 병력형성의무를 내용으로 하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_316"><h4>워크북 · 헌법_316</h4><p class="question-stem">의무교육을 받게 할 의무(제31조 제2항)에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>이 의무를 지는 주체는 교육을 받을 사람 본인이다.</li><li>초등교육은 헌법상 직접 이 의무의 대상으로 규정되었다.</li><li>중등교육이라 할지라도 법률이 의무교육으로 정한다면 그 교육을 받을 권리도 헌법상 권리로 구체화되는 것이다.</li><li>의무교육으로 정한 교육은 무상으로 해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 31조②의 의무 주체는 보호하는 자녀에게 교육받게 해야 하는 사람이다.학생의 교육받을 권리와 보호자의 의무를 바꾼 보기다.</li><li><strong>비선택</strong> · 초등교육은 헌법이 직접 포함한 최소 내용이다.법률이 다른 교육을 추가할 수 있다.</li><li><strong>비선택</strong> · 법률로 의무교육이 구체화되면 그 권리가 헌법상 보장과 연결된다.중학교가 현재 해당하고 고교 무상과 구별한다.</li><li><strong>비선택</strong> · 31조③의 의무교육 무상 원칙이다.구체적 비용의 범위는 관련 법률·판례에 따라 따진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이 의무는 보호하는 자녀가 초등교육과 법률이 정하는 교육을 받게 할 의무이다. 헌법 제31조 제2항은 &quot;모든 국민은 그 보호하는 자녀에게 적어도 초등교육과 법률이 정하는 교육을 받게 할 의무를 진다&quot;고 규정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_317"><h4>워크북 · 헌법_317</h4><p class="question-stem">헌법상 근로의 의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>사전적 의미는 인간생활에 필요한 것을 산출하는 활동을 할 의무로 풀이되지만, 그 명확한 성격 및 내용에 대한 광범위한 합의는 없다.</li><li>윤리적 의무설은 근로의무를 근로의사가 없는 사람에게 근로의 법적 의무를 합헌적으로 부과할 수 있는 근거로 이해한다.</li><li>법적 의무설을 취하면서 그 의무를 적극적으로 해석하는 입장은 헌법 제15조가 보장하는 직업의 자유와 모순될 수 있다.</li><li>법적 의무설을 취하면서 그 의무를 소극적으로 해석한다면. 근로의 의사와 합치하여 자기결정권과 모순되지 아니하는 규범내용만을 내포한다고 이해하게 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 근로의무의 성격·구체적 내용에는 학설 차이가 있다.사전적 의미만으로 강제노동 권한을 도출할 수 없다.</li><li><strong>선택</strong> · 윤리적 의무설은 도덕적 의미를 강조하며 법적 강제의 근거로 보는 견해가 아니다.교재의 법적 의무설도 강제노동을 정당화하는 적극적 해석을 비판한다.</li><li><strong>비선택</strong> · 자기 의사와 무관한 근로를 적극적으로 강제하는 해석은 직업의 자유와 인격적 자율성에 충돌한다.369의 단정 표현은 이 교재의 비판 논지로 읽는다.</li><li><strong>비선택</strong> · 교재는 자율성을 해치지 않는 소극적 내용의 법적 의무로 해석한다.국가의 고용 역할 등은 저자의 논증이며 구체적 급여 박탈은 법정 요건을 따진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 윤리적 의무설은 근로능력이 있음에도 불구하고 근로하지 않는 자에 대해 윤리적ㆍ도덕적 비난이 가해져야 한다는 의미로 이해하여 법적 의미가 없다고 본다.</p></details></section>
+
+<section class="question-card" id="question-헌법_318"><h4>워크북 · 헌법_318</h4><p class="question-stem">다음 중 틀린 진술은?</p><ol class="choices"><li>기본권의 제한이란 기본권의 보호법익을 전부 또는 일부 축소하는 국가의 모든 활동 중에서 의도적이고 법적이며 직접적이며 명령적인 것만을 의미한다.</li><li>기본권의 보호법익이란 기본권 규범에 의해 법적으로 보호되는 이익을 말한다.</li><li>기본권에 의해 법적으로 보호되는 이익에는 일정한 요건을 갖추지 못한 이유와 방법에 의해서는 일부 또는 전부 상실되지 않도록 하는 법적 제약이 결부되어 있다.</li><li>어떤 생활영역에서의 행위가능성의 축소는 자유권적 기본권을 제한하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제한을 의도적·법적·직접적·명령적 작용에만 가두는 것이 오류다.사실적 봉쇄나 국가에 귀속되는 부작위·급부 문제도 포함될 수 있다.</li><li><strong>비선택</strong> · 법적으로 보호되는 이익이라는 정의다.단순히 개인에게 이득이라는 이유만으로 특정 기본권의 보호법익이 되는 것은 아니다.</li><li><strong>비선택</strong> · 권리를 줄이려면 법적 정당화 요건을 충족해야 한다는 뜻이다.어떤 경우에도 절대 줄일 수 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 자유권의 보호영역에 속하는 행위 가능성을 축소한다는 뜻으로 읽어야 한다.아무 생활영역의 아무 행동이나 전부 해당하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 의도적인 것과 비의도적인 것, 직접적인 것과 간접적인 것, 법적인 것과 사실적인 것, 명령ㆍ강제와 급부 및 급부를 하지 않는 것 모두 포함한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_319"><h4>워크북 · 헌법_319</h4><p class="question-stem">다음 중 틀린 진술은?</p><ol class="choices"><li>자유권의 제한이란 보호영역에 속하는 행위를 일부 또는 전부 불가능하게 하는 것이다.</li><li>평등권의 제한에는 전혀 비교대상이 될 수 없는 집단에 속하는 사람들을 달리 대우하는 것도 포함된다.</li><li>사회권의 제한이란 인간존엄성에 적합한 경제적ㆍ사회적ㆍ문화적으로 기본적인 생활수준을 유지하는 데 필요한 물질이 제공되고 있지 못하는 것이다.</li><li>재판청구권의 제한의 대표적인 예가 실효성 있는 권리보호를 제공하기 위하여 그에 필요한 절차적 요건을 일부 또는 전부 준수하지 않는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자유권의 보호영역 안에서 할 수 있는 행동을 국가가 줄이는 것이 제한이다.이후 정당화 여부를 심사한다.</li><li><strong>선택</strong> · 본질적으로 비교할 수 있는 집단의 차별이어야 그 기준에서 평등권 제한이 성립한다.단,비교 가능성은 제도의 목적과 구체적 쟁점에 따라 판단한다.</li><li><strong>비선택</strong> · 교재는 인간다운 기본 생활을 위한 사실적·규범적 급부의 부족을 사회권 제한으로 분석한다.바로 특정 급부 청구권이 확정되는 것은 아니다.</li><li><strong>비선택</strong> · 실효적 재판 기회와 그에 필요한 절차도 보호법익이다.모든 사소한 절차 흠결이 곧 헌법상 침해라는 말은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 평등권 제한이 있다고 하려면 비교집단으로 성립할 수 있는 집단에 속하는 국민 사이에 상이한 대우(차별)가 있어야 한다. 비교집단으로 성립하지 아니하는 집단을 달리 대우하는 것은 평등권 제한조차 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_320"><h4>워크북 · 헌법_320</h4><p class="question-stem">기본권의 내재적 한계에 관할 진술로 틀린 것은?</p><ol class="choices"><li>독일에서의 기분권의 내재적 한계 문제란, 독일 기본법상 법률유보조항이 없는 기본권(신앙의 자유, 예술의 자유, 양심의 자유)어 대한 제한이 어떻게 정당화되는가의 문제이다.</li><li>대한민국 현법도 일반적 법률유보조항이 없으므로 기본권의 내재적 한계 논의는 독일 헌법에서와 정확히 같은 의의와 내용을 갖는다.</li><li>기본권의 내재적 한계는 보호영역을 갖는 기본권의 법익 식별과 관련 된다.</li><li>기본권의 보호영역을 파악할 때 좁은 구성요건설을 취하면 기본권 보호영역을 근거 없이 자의적으로 축소할 위험에 빠지거나, 제한 정당화 논증을 기본권 내용 식별 논증으로 위치만 바꾸어 전개해야 하는 결함에 빠진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 독일에서 개별 법률유보가 없는 권리를 다른 헌법적 법익 때문에 어떻게 제한하는지가 문제된다.</li><li><strong>선택</strong> · 한국에는37조② 일반적 법률유보가 있다.독일과 조문 구조가 같다는 전제를 바꿔 놓은 보기다.</li><li><strong>비선택</strong> · 교재의 한국 내재적 한계 논의는 무엇이 처음부터 보호영역에 들어가는가의 식별 문제로 설명된다.</li><li><strong>비선택</strong> · 좁은 구성요건으로 다수의 선호를 미리 집어넣으면 자의적 축소 위험이 있다.제한 정당화를 정의 단계에서 몰래 할 것이 아니라 공개적으로 논증하자는 취지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대한민국 헌법에는 헌법 제37조 제2항의 일반적 법률유보조항이 있기 때문에 기본권의 내재적 한계 문제는 기본권 보호영역의 식별 문제로서의 의의만을 가질 뿐이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_321"><h4>워크북 · 헌법_321</h4><p class="question-stem">기본권 제한 사안의 헌법적 논증에 대한 진술로 틀린 것은?</p><ol class="choices"><li>기본권 침해 여부가 문제 되는 국가 공권력의 행사 또는 불행사를 특정해야 한다.</li><li>기본권 제한이 없다는 것이 확인되어도 과잉금지원칙을 적용하여 그 위반 여부를 살피는 논의를 할 수 있다.</li><li>기본권 경합 문제를 처리하여, 어느 기본권을 중심으로 침해 여부를 살필 것인지 판단해야 한다.</li><li>기본권 제한 시 준수해야 하는 원칙 중 하나라도 위반하면 문제된 공권력 행사나 불행사, 법률은 헌법에 합치되지 아니한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어떤 처분·법률·부작위를 다투는지 특정해야 제한과 구제의 대상을 알 수 있다.</li><li><strong>선택</strong> · 그 권리의 제한이 없다고 확정하면 그 제한의 비례성을 따질 실익이 없다.제한이 있다고 가정한 예비적 심사와 혼동하지 않는다.</li><li><strong>비선택</strong> · 한 사람의 여러 기본권이 문제될 때 특별·일반 관계와 독자적 법익을 정리해 심사 중심을 정한다.</li><li><strong>비선택</strong> · 관련 제한 원칙 중 하나라도 실제 위반이 성립하면 위헌 논거가 된다.단순히 위반이라고 주장했다는 것만으로 결론이 나는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기본권 제한이 없다면 기본권 침해에 관한 원칙의 준수 여부를 살피는 논증은 의미 있게 이루어질 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_360"><h4>형성평가 · 헌법_360</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>기본권 행사의 포기란 기본권에서 도출되는, 행사의 시기와 조건이 정해진 법률상 구체적 권리의 포기이다.</li><li>기본권 행사의 포기에는 원칙적으로 법적 효력이 인정되나, 인정되지 아니하는 예외적인 경우도 있다.</li><li>경찰관이 가방 안의 내용물을 보여 달라고 했을 때 이를 거부할 수 있음을 알면서도 임의로 보여준다면, 그 행위는 임의수사에 응하는 행위이다.</li><li>출판사의 경영자가 향후부터 국가의 검열을 받아들이겠다고 동의한다면, 적어도 그 경영자가 출판에 있어서 검열을 받지 않을 권리는 소멸한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특정 시기·조건의 구체적 권리 포기라는 정의다.기본권자 지위를 영구히 없애는 것과 구별한다.</li><li><strong>비선택</strong> · 원칙적 효력은 강행법규와 헌법상 금지를 넘지 못한다.자유로운 의사와 포기 범위도 확인한다.</li><li><strong>비선택</strong> · 거부할 수 있음을 알고 자발적으로 보여 준다는 조건에서 임의수사에 응한 것이다.강요·위협 상황을 같은 것으로 보면 안 된다.</li><li><strong>선택</strong> · 검열금지는 국가를 구속하므로 출판사의 동의만으로 소멸하지 않는다.308 원해설은 자체 포기를,360 원해설은 포기의 한계를 강조하지만 결론은 같다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] ④는 기본권 행사 포기에 그 법적 효력이 인정되지 않는 예외적인 경우이다. 헌법규범은 검열을 허용하지 않음으로써 표현의 자유의 기본권을 그러한 방식으로 행사 포기하는 것을 금지하고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_361"><h4>형성평가 · 헌법_361</h4><p class="question-stem">다음 중 기본권에서 도출되는 구체적 법적 권리를 법적 효력이 발생하는 방식으로는 아직 어느 방향으로도 행사하지 아니한 것을 무엇이라고 하는가?</p><ol class="choices"><li>기본권의 포기</li><li>기본권 행사의 포기</li><li>기본권 불행사</li><li>기본권 자체의 포기</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 포기라는 효과를 나타내는 말이어서 아직 어느 방향으로도 행사하지 않은 상태의 정확한 이름이 아니다.</li><li><strong>비선택</strong> · 구체적 권리를 법적 효과 있게 포기한 경우이므로 단순 미행사와 다르다.</li><li><strong>선택</strong> · 아직 행사하지 않았을 뿐 권리 행사 가능성이 남은 불행사다.상소기간 내 미상소가 대표 예다.</li><li><strong>비선택</strong> · 권리자 지위 자체를 포기한다는 의사이므로 단순히 쓰지 않은 상태보다 훨씬 강하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 상소제기기간 내에 단순히 상소를 하지 않는 것과 같은 것이 기본권 불행사이다. 나머지 ①, ②, ④는 포기라는 행위가 있다는 뜻이 내포되어 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_362"><h4>형성평가 · 헌법_362</h4><p class="question-stem">어떤 사람이 ‘나는 앞으로 재산권을 그 어떠한 경우에도 보유하지 않는 사람이 되겠다’고 국가에 문서로써 의사를 표명하였다. 이 가상적 상황과 관련된 진술로 틀린 것은?</p><ol class="choices"><li>그 사람이 한 행위는 단순히 기본권 행사의 포기가 아니라 기본권 자체의 포기이다.</li><li>기본권 자체의 포기에 법적 효력을 부여할 경우 국가가 지는 헌법 제10조상의 기본적 인권 보장 의무에 어긋난다.</li><li>특정한 기본권 자체를 포기하는 의사의 표명에 의해 더 이상 그 기본권을 보유하는 지위를 갖지 못하는 법적 지위를 인정하면 헌법 제11조 제2항의 사회적 특수계급 제도를 창설하는 셈이다.</li><li>개별 기본권 조항은 국민이 해당 기본권 자체를 포기한 경우에는 적용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 현재 물건 처분이 아니라 앞으로 모든 재산권의 보유 자격을 없애려는 것이므로 자체 포기다.</li><li><strong>비선택</strong> · 10조의 국가 인권 보장 의무는 본인의 문서 제출만으로 없어지지 않는다.</li><li><strong>비선택</strong> · 교재는 권리자 지위를 영구히 박탈하는 열등한 신분의 창설을11조② 특수계급 금지와 연결한다.</li><li><strong>선택</strong> · 각 기본권의 보장 대상에서 자발적 포기자라고 일괄 제외하지 않는다.국가의 기본권 구속은 남는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 기본권 규범은 객관적 질서규범이며, ‘모든 국민은 ~’과 같은 형태로 된 개별 기본권 조항은 그 기본권적 지위에서 물러나겠다고 표명한 국민을 보장 대상에서 제외하고 있지 않다.</p></details></section>
+
+<section class="question-card" id="question-헌법_363"><h4>형성평가 · 헌법_363</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>기본권은 근본적 권리 형태인 청구권, 특권, 형성권, 면제권의 하나 이상의 복합체로 분석할 수 있다.</li><li>청구권을 보유하는 주체는 필연적으로 그 청구권의 내용을 성립하게 할 의무를 지는 주체이므로, 기본권 자체를 포기하지 못한다는 것은 의무적인 측면이 있다.</li><li>형성권적 요소를 내포하는 기본권을 보유한다고 해서, 그 형성권을 특정한 방향을 행사해야 할 의무를 지는 것은 아니다.</li><li>면제권을 갖는다는 것은 타인의 처분에 법적 지위가 좌우되지 않는 상태에 있다는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 청구권·특권·형성권·면제권은 호펠드식 기본적 법적 지위의 분석 틀이다.하나의 기본권에 여러 요소가 섞일 수 있다.</li><li><strong>선택</strong> · 청구권에 대응하는 의무는 상대방의 의무다.내가 발언의 자유를 갖는다고 반드시 발언할 의무를 지는 것은 아니다.</li><li><strong>비선택</strong> · 관계를 바꿀 권능을 가졌다는 것과 특정 방향으로 반드시 행사해야 한다는 것은 다르다.</li><li><strong>비선택</strong> · 여기서 면제는 타인의 법적 권능에 의해 지위가 좌우되지 않는 관계다.범죄를 저질러도 처벌을 안 받는다는 뜻이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 청구권에 상응하는 의무를 지는 것은, 그 청구권의 상대방이다. 예를 들어 소유권자의 방해배제청구권에 상응하는 방해하지 않을 의무를 지는 것은 소유권자가 아니다. 따라서 청구권적 요소를 갖고 있는 기본권을 보유한다고 해서 그 청구권의 내용을 성립하게 할 의무를 그 기본권 주체가 지는 것이 아니다. 예를 들어 개인이 표현의 자유를 보유하는 경우 국가가 그 개인의 표현에 간섭하지 아니할 의무를 지는 것이지, 그 개인이 특정 표현을 하거나 하지 않을 의무를 지는 것이 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_364"><h4>형성평가 · 헌법_364</h4><p class="question-stem">다음 진술 중 틀린 것은?</p><ol class="choices"><li>비권력적 국가작용이란 국가가 어떤 행위를 함에 있어 고권적 지위에서 하는 작용을 말한다.</li><li>사법(私法)을 적용하는 방식으로 진행되는 행정작용이 비권력적 국가작용의 대표적인 예이다.</li><li>행정처분이 아니기 때문에 항고소송의 대상이 되지 아니한다.</li><li>행정목적을 위해 형식만 사법을 빌려 기본권 규정이 유명무실해질 수 있는 결과를 피하려면 비권력적 국가작용도 기본권 규범에 구속된다고 보아야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 교재가 설명한 비권력적 거래는 고권적 지위가 아니라 민사상 한쪽 당사자의 지위에서 한다.원문312의 중복 표현은 보존했다.</li><li><strong>비선택</strong> · 사법적 계약으로 공적 목적을 수행하는 행정사법 등이 대표 예다.私法과司法를 혼동하지 않는다.</li><li><strong>비선택</strong> · 이 문항의 사법적 거래는 행정처분이 아니어서 통상 민사 구제 문제다.모든 비권력적 행정작용이나 공공요금 관계의 처분성을 이 문장 하나로 부정해서는 안 된다.</li><li><strong>비선택</strong> · 국가가 계약 형식을 택했다는 이유로 헌법 구속을 피하면 사법으로의 도피가 된다.구체적 구제 절차는 별도로 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 국가가 사인들이 서로 간에 있게 되는 민사상 한쪽의 지위에 서서 하는 작용을 의미한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_365"><h4>형성평가 · 헌법_365</h4><p class="question-stem">다음 중 틀린 진술은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>국가의 기본권보호의무란 헌법상 기본권적 법익을 국가 아닌 제3자가 침해하거나 침해할 위험으로부터 보호할 국가의 의무이다.</li><li>헌법재판소는 기본권보호의무의 헌법상 근거는 헌법 제10조라고 본다.</li><li>기본권보호의무 위반의 심사기준은 과잉금지원칙이다.</li><li>국가가 국민의 법익을 보호하기 위하여 전혀 아무런 보호조치를 취하지 않은 경우 기본권보호의무를 위반한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가 아닌 제3자의 위험·침해에서 보호한다는 관계 구조가 핵심이다.국가 자신의 직접 제한과 구별한다.</li><li><strong>비선택</strong> · 국가의 기본적 인권 확인·보장 의무를 규정한10조에서 근거를 찾는다.</li><li><strong>선택</strong> · 과잉금지가 아니라 과소보호금지다.적절하고 효율적인 최소한의 보호를 취했는지가 기준이다.</li><li><strong>비선택</strong> · 보호의무가 발생한 법익에 대해 아무 조치도 하지 않았다면 위반 문제가 된다.매번 특정 형벌을 신설할 의무라는 뜻은 아니다.365 원해설의 효율적 형벌이라는 표현은 본문의 유일한 적절한 수단 여부 등 엄격한 조건과 함께 읽는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 심사기준은 과소보호금지원칙으로서 국가가 국민의 법익보호를 위하여 적어도 적절하고 효율적인 최소한의 보호를 취했는가이다. 국가의 적극적 보호의무는 궁극적으로 입법자의 입법행위를 통하여 비로소 실현되므로 권력분립원리 존중 위해 과잉금지원칙을 적용할 수 없는 것이다. 그리하여 국가가 국민의 법익을 보호하기 위하여 전혀 아무런 보호조치를 취하지 않은 경우 또는 취한 조치가 법익을 보호하기에 명백하게 전적으로 부적합하거나 불충분한 경우에 한하여 국가의 보호의무 위반 확인한다. 또한 국가 형벌권은 보충적, 최후적 수단이므로, 형벌이 법익보호를 위한 효율적이고 적절한 수단일 때에만 형벌권을 행사해야 할 의무가 있을 뿐, 형벌로 규율하지 아니할 경우보다 문제되는 법익을 더 보호할 수 있다고 해서 형벌로써 규율하여야 할 헌법상 의무가 국가에게 생기는 것은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_366"><h4>형성평가 · 헌법_366</h4><p class="question-stem">국민의 기본의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국민이 국가의 구성원으로서 부담하는 헌법상 의무이다.</li><li>헌법상 기본의무는 그 자체가 국민의 기본권을 제한하는 것이므로, 병역의무에 관한 입법과 같이 기본의무를 구체화하는 입법작용은 과잉금지원칙의 적용을 받지 아니한다.</li><li>납세의무(제38조), 국방의무(제39조), 의무교육을 받게 할 의무(제31조 제2항), 근로의무(제32조 제2항)가 헌법상 기본의무이다.</li><li>납세의무에 관해서는 조세법률주의 원칙도 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가 공동체의 구성원으로서 부담하는 헌법상 법적 의무라는 정의다.314 원문의 오자는 뜻을 보완해 읽는다.</li><li><strong>선택</strong> · 기본의무를 구체화하는 법도 비례·평등·법률주의 등의 한계를 지켜야 한다.국방이라고 심사를 면제하면 무제한 장기 복무도 정당화되는 부당한 결과가 난다.</li><li><strong>비선택</strong> · 교재가 중심적으로 설명하는 네 의무다.환경보전·재산권 공공복리 적합 의무를 포함하는 다른 학설도 있으므로 헌법에 이것만 쓰여 있다는 뜻은 아니다.</li><li><strong>비선택</strong> · 38조의 납세의무와59조의 종목·세율 법률주의를 함께 적용한다.의무와 권력 통제는 병존한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 기본의무의 부과내용을 구체적으로 형성하는 법률이 기본권 제한의 실질을 가질 때에는 기본권 제한입법의 한계를 준수하여야 한다. 이는 법률에 의한 기본의무 형성에도 헌법의 일반원칙 및 기본권 보장에 따른 한계가 존재하기 때문이다. 즉 기본의무 사항이라는 것만으로는 기본권 제한 심사기준 완화되지 않거니와 과잉금지원칙 적용이 배제된다는 것은 있을 수 없다. 예를 들어 출산율의 저하로 인해 병력자원의 부족이 발생하여 의무복무기간을 30년으로 하는 법률개정을 할 경우, 이것이 과잉금지원칙의 적용을 받지 않는다는 것은 터무니없다. 또한 특정 지역의 국민에게는 병역의무를 지우고 나머지 지역의 국민에게는 병역의무를 면제하는 입법을 했는데도 평등권 침해의 검토를 받지 아니한다는 것은 터무니없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_367"><h4>형성평가 · 헌법_367</h4><p class="question-stem">다음 중 국방의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국방의무란 외부 적대세력의 직접적‧간접적인 침략행위로부터 국가의 독립을 유지하고 영토를 보전하기 위해 부담하는 의무이다.</li><li>근로하고 납세하는 것만으로 국방의무를 이행한 것이다.</li><li>헌법 제39조 제2항이 금지하는 병역의무의 이행으로 인한 불이익한 처우에는 병역의무를 이행해야 하는 부담은 포함되지 않는다.</li><li>국방의무 법률주의(헌법 제39조 제1항)가 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가의 독립과 영토를 외부 적대세력의 침략에서 지키는 것이 국방의무의 목적이다.</li><li><strong>선택</strong> · 근로·납세와 국방은 별개의 의무다.경제적으로 도움을 주었다는 사실만으로 법률상 병역 등 의무를 이행한 것이 되지 않는다.</li><li><strong>비선택</strong> · 복무 자체의 부담과 복무했다는 이유의 법적 불이익을 나눈다.39조②는 모든 사실상·경제상 손실을 제거하는 보상 규정은 아니다.</li><li><strong>비선택</strong> · 39조①은 법률이 정하는 바에 따른 국방의무다.행정부가 근거 없이 범위를 무한 확대할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 근로의무와 납세의무는 그 내용이 별개인 기본의무이다. 국방의 의무란 직접적인 병력형성의무와 간접적인 병력형성의무를 내용으로 하는 것이다. 여기에는 병역의무, 군사지휘에 따를 의무, 그리고 군수작용 등과 관련하여 협조할 의무 등이 포함된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_368"><h4>형성평가 · 헌법_368</h4><p class="question-stem">의무교육을 받게 할 의무(제31조 제2항)에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>이 의무를 지는 주체는 교육을 받을 사람 본인이다.</li><li>초등교육은 헌법상 직접 이 의무의 내용으로 포함된 교육과정이다.</li><li>중등교육이라 할지라도 법률이 의무교육으로 정한다면 그 교육을 받을 권리도 헌법상 권리로 구체화되는 것이다.</li><li>의무교육으로 정한 교육은 무상으로 해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 31조②의 의무 주체는 보호하는 자녀에게 교육받게 해야 하는 사람이다.학생의 교육받을 권리와 보호자의 의무를 바꾼 보기다.</li><li><strong>비선택</strong> · 초등교육은 헌법이 직접 포함한 최소 내용이다.법률이 다른 교육을 추가할 수 있다.</li><li><strong>비선택</strong> · 법률로 의무교육이 구체화되면 그 권리가 헌법상 보장과 연결된다.중학교가 현재 해당하고 고교 무상과 구별한다.</li><li><strong>비선택</strong> · 31조③의 의무교육 무상 원칙이다.구체적 비용의 범위는 관련 법률·판례에 따라 따진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 이 의무는 보호하는 자녀가 초등교육과 법률이 정하는 교육을 받게 할 의무(제31조 제2항)이다. 헌법 제31조 제2항은 “모든 국민은 그 보호하는 자녀에게 적어도 초등교육과 법률이 정하는 교육을 받게 할 의무를 진다”고 규정하고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_369"><h4>형성평가 · 헌법_369</h4><p class="question-stem">헌법상 근로의 의무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>사전적 의미는 인간생활에 필요한 것을 산출하는 활동을 할 의무로 풀이되지만, 그 명확한 성격 및 내용에 대한 광범위한 합의는 없다.</li><li>윤리적 의무설은 근로의무를 근로의사가 없는 사람에게 근로의 법적 의무를 합헌적으로 부과할 수 있는 근거로 이해한다.</li><li>법적 의무설을 취하면서 그 의무를 적극적으로 해석하는 입장은 헌법 제15조가 보장하는 직업의 자유과 모순된다.</li><li>법적 의무설을 취하면서 그 의무를 소극적으로 해석한다면, 근로의 의사와 합치하여 자기결정권과 모순되지 아니하는 규범내용만을 내포한다고 이해하게 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 근로의무의 성격·구체적 내용에는 학설 차이가 있다.사전적 의미만으로 강제노동 권한을 도출할 수 없다.</li><li><strong>선택</strong> · 윤리적 의무설은 도덕적 의미를 강조하며 법적 강제의 근거로 보는 견해가 아니다.교재의 법적 의무설도 강제노동을 정당화하는 적극적 해석을 비판한다.</li><li><strong>비선택</strong> · 자기 의사와 무관한 근로를 적극적으로 강제하는 해석은 직업의 자유와 인격적 자율성에 충돌한다.369의 단정 표현은 이 교재의 비판 논지로 읽는다.</li><li><strong>비선택</strong> · 교재는 자율성을 해치지 않는 소극적 내용의 법적 의무로 해석한다.국가의 고용 역할 등은 저자의 논증이며 구체적 급여 박탈은 법정 요건을 따진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 윤리적 의무설은 근로능력이 있음에도 불구하고 근로하지 않는 자에 대해 윤리적·도덕적 비난이 가해져야 한다는 의미로 이해하여 법적 의미가 없다고 본다.</p></details></section>
+
+<section class="question-card" id="question-헌법_370"><h4>형성평가 · 헌법_370</h4><p class="question-stem">다음 중 틀린 진술은?</p><ol class="choices"><li>기본권의 제한이란 기본권의 보호법익을 전부 또는 일부 축소하는 국가의 모든 활동 중에서 의도적이고 법적이며 직접적이며 명령적인 것만을 의미한다.</li><li>기본권의 보호법익이란 기본권 규범에 의해 법적으로 보호되는 이익을 말한다.</li><li>기본권에 의해 법적으로 보호되는 이익에는 일정한 요건을 갖추지 못한 이유와 방법에 의해서는 일부 또는 전부 상실되지 않도록 하는 법적 제약이 결부되어 있다</li><li>일정한 생활영역에서의 행위가능성의 축소는 자유권적 기본권을 제한하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제한을 의도적·법적·직접적·명령적 작용에만 가두는 것이 오류다.사실적 봉쇄나 국가에 귀속되는 부작위·급부 문제도 포함될 수 있다.</li><li><strong>비선택</strong> · 법적으로 보호되는 이익이라는 정의다.단순히 개인에게 이득이라는 이유만으로 특정 기본권의 보호법익이 되는 것은 아니다.</li><li><strong>비선택</strong> · 권리를 줄이려면 법적 정당화 요건을 충족해야 한다는 뜻이다.어떤 경우에도 절대 줄일 수 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 자유권의 보호영역에 속하는 행위 가능성을 축소한다는 뜻으로 읽어야 한다.아무 생활영역의 아무 행동이나 전부 해당하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 의도적인 것과 비의도적인 것, 직접적인 것과 간접적인 것, 법적인 것과 사실적인 것, 명령‧강제와 급부 및 급부를 하지 않는 것 모두 포함한다. 만일 의도적인 것만 포함한다면 국가가 과실로 기본권적 법익을 제한하였다고 하더라도 아무런 기본권 제한이 아니라는 것이 되어 부당하다. 또한 법적인 것만 포함한다면 국가가 집회 중인 국민을 총으로 쏘는 것과 같은 권력적 사실행위는 기본권 제한이 아닌 것이 된다. 명령적인 것만 포함한다면 사회권의 제한이란 개념적으로 불가능하게 될 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_371"><h4>형성평가 · 헌법_371</h4><p class="question-stem">다음 중 틀린 진술은?</p><ol class="choices"><li>자유권의 제한이란 보호영역에 속하는 행위를 일부 또는 전부 불가능하게 하는 것이다.</li><li>평등권의 제한에는 전혀 비교대상이 될 수 없는 집단에 속하는 사람들을 달리 대우하는 것도 포함된다.</li><li>사회권의 제한이란 기본적인 생활수준 유지에 필요한 물질이 제공되고 있지 못하는 것이다.</li><li>재판청구권의 제한의 대표적인 예가 실효성 있는 권리보호를 제공하기 위하여 그에 필요한 절차적 요건을 일부 또는 전부 준수하지 않는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자유권의 보호영역 안에서 할 수 있는 행동을 국가가 줄이는 것이 제한이다.이후 정당화 여부를 심사한다.</li><li><strong>선택</strong> · 본질적으로 비교할 수 있는 집단의 차별이어야 그 기준에서 평등권 제한이 성립한다.단,비교 가능성은 제도의 목적과 구체적 쟁점에 따라 판단한다.</li><li><strong>비선택</strong> · 교재는 인간다운 기본 생활을 위한 사실적·규범적 급부의 부족을 사회권 제한으로 분석한다.바로 특정 급부 청구권이 확정되는 것은 아니다.</li><li><strong>비선택</strong> · 실효적 재판 기회와 그에 필요한 절차도 보호법익이다.모든 사소한 절차 흠결이 곧 헌법상 침해라는 말은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 평등권 제한이 있다고 하려면 비교집단으로 성립할 수 있는 집단에 속하는 국민 사이에 상이한 대우(차별)이 있어야 한다. 이를테면 공무원은 국가로부터 급여를 받고 공무원이 아닌 사람은 국가로부터 급여를 받지 못하는데, 이를 두고 평등권 제한이 있다고 할 수 없다. 전자는 국가에 임용되어 근로를 제공하는 반면에 후자는 국가에 근로를 제공하고 있지 않기 때문에 비교집단으로 성립할 수 없기 때문이다. 평등권 제한이 확인되지 못하면 평등권 침해를 검토하는 논의로 나아갈 필요가 없게 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_372"><h4>형성평가 · 헌법_372</h4><p class="question-stem">기본권의 내재적 한계에 관한 진술로 틀린 것은?</p><ol class="choices"><li>독일에서의 기본권의 내재적 한계 문제란, 독일 기본법상 법률유보조항이 없는 기본권(신앙의 자유, 예술의 자유, 양심의 자유)에 대한 제한이 어떻게 정당화되는가의 문제이다.</li><li>대한민국 헌법도 일반적 법률유보조항이 없으므로 기본권의 내재적 한계 논의는 독일 헌법에서와 정확히 같다.</li><li>기본권 내재적 한계는 보호영역을 갖는 기본권의 법익 식별과 관련된다.</li><li>기본권의 보호영역을 파악할 때 좁은 구성요건설을 취하면 기본권 보호영역을 근거 없이 자의적으로 축소할 위험이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 독일에서 개별 법률유보가 없는 권리를 다른 헌법적 법익 때문에 어떻게 제한하는지가 문제된다.</li><li><strong>선택</strong> · 한국에는37조② 일반적 법률유보가 있다.독일과 조문 구조가 같다는 전제를 바꿔 놓은 보기다.</li><li><strong>비선택</strong> · 교재의 한국 내재적 한계 논의는 무엇이 처음부터 보호영역에 들어가는가의 식별 문제로 설명된다.</li><li><strong>비선택</strong> · 좁은 구성요건으로 다수의 선호를 미리 집어넣으면 자의적 축소 위험이 있다.제한 정당화를 정의 단계에서 몰래 할 것이 아니라 공개적으로 논증하자는 취지다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 대한민국 헌법에는 헌법 제37조 제2항의 일반적 법률유보조항이 있기 때문에 기본권의 내재적 한계 문제는 기본권 보호영역의 식별 문제로서의 의의만을 가질 뿐이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_373"><h4>형성평가 · 헌법_373</h4><p class="question-stem">기본권 제한 사안의 헌법적 논증에 대한 진술로 틀린 것은?</p><ol class="choices"><li>헌법소원심판에서 문제되는 국가의 공권력 행사‧불행사나 위헌법률심판에서 문제되는 법률 또는 그와 대등한 효력을 갖는 규범을 특정해야 한다.</li><li>식별할 수 있는 기본권 제한이 없다는 것이 확인되어도 과잉금지원칙을 적용하여 그 위반 여부를 살피는 논의를 할 수 있다.</li><li>기본권 경합 문제를 처리하여, 어느 기본권을 중심으로 침해 여부를 살필 것인지 판단해야 한다.</li><li>기본권 제한시 준수해야 하는 원칙 중 하나라도 위반하면 문제된 공권력 행사나 불행사, 법률은 헌법에 합치되지 아니한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어떤 처분·법률·부작위를 다투는지 특정해야 제한과 구제의 대상을 알 수 있다.</li><li><strong>선택</strong> · 그 권리의 제한이 없다고 확정하면 그 제한의 비례성을 따질 실익이 없다.제한이 있다고 가정한 예비적 심사와 혼동하지 않는다.</li><li><strong>비선택</strong> · 한 사람의 여러 기본권이 문제될 때 특별·일반 관계와 독자적 법익을 정리해 심사 중심을 정한다.</li><li><strong>비선택</strong> · 관련 제한 원칙 중 하나라도 실제 위반이 성립하면 위헌 논거가 된다.단순히 위반이라고 주장했다는 것만으로 결론이 나는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> [해설] 기본권 제한이 없다면 기본권 침해에 관한 원칙의 준수 여부를 살피는 논증은 의미 있게 이루어질 수 없다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 14' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 14|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

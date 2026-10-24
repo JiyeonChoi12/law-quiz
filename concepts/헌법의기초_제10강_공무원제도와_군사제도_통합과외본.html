@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제10강 공무원제도와 군사제도 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 10</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제10강 공무원제도와 군사제도 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강을 먼저 한 문장으로</h1>
+<p>공무원과 군인은 국민을 위해 권한을 행사하지만, 그 직업을 가졌다는 이유만으로 개인의 자유를 모두 잃지는 않는다. 정치권력이 이들을 사적으로 부리지 못하게 보호하면서, 이들 역시 권력을 사적으로 쓰지 못하게 통제하는 것이 이 강의 중심이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하나</td>
+<td>국민 전체의 봉사자, 직업공무원제, 군의 사명·문민통제, 공무원·군인의 기본권</td>
+</tr>
+<tr>
+<td>왜 생겼나</td>
+<td>정권의 사병 같은 행정조직과 국민 위에 군림하는 군대를 막기 위해</td>
+</tr>
+<tr>
+<td>헌법에서의 자리</td>
+<td>국민주권·법치주의를 실제 공권력 담당자의 지위와 책임으로 바꾸는 제도</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>9강에서 대표를 선출했다면,10강은 국가의 계속적 운영을 맡을 조직을 다룬다.11강은 교육·가족제도와 개인의 자유를 연결한다</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>신분보장과 무책임의 차이, 정치적 중립과 사생활의 차이, 국방과 정권보호의 차이</td>
+</tr>
+</tbody></table>
+<p>범위:교재261–292쪽. 관련 기출226–246번21문항·84개 보기를 모두 연결한다. 중요도는 제공 문제와 개념의 연결성을 기준으로 한 학습 우선순위이며 실제 출제율·오답률 통계가 아니다. 법령 보완 기준2026.10.25. 가상 대화·인물은 이해를 위한 창작이며 판결문 인용이 아니다.</p>
+<p>색상: <mark class="yellow">정의·암기</mark> / <mark class="green">이유·논리</mark> / <mark class="pink">함정·현재 기준</mark> / <mark class="blue">앞뒤 연결</mark>.</p>
+<p>먼저 구별할 것: <strong>판례의 결론 / 반대의견 / 교재 저자의 비판</strong>은 다르다. 특히 군 불온도서 사건에서 세 입장을 섞으면236번을 거꾸로 풀게 된다. 구 「군인복무규율」은2016년 폐지되었으므로 과거 사건의 심판대상과 현행 법률도 나눈다.</p>
+<h1>1. 공직은 공적이지만 공무원의 인생 전부가 공적인 것은 아니다</h1>
+<h2 id="foundations-10-01" data-concept-id="foundations-10-01">1-1. 공무원이라는 사람과 공직이라는 자리 ★★★★★</h2>
+<p><strong>교재262쪽 / 문단의 역할:</strong> 사람이 가진 모든 생활과 국가기관으로서 하는 일을 분리한다.</p>
+<p>공무원은 국민에 의해 직접·간접으로 선출되거나 임용되어 국가·공공단체와 공법상 근무관계를 맺고 공적 업무를 맡는 사람이다. 공직은 국가가 기본권 보장과 공익 실현을 위해 나누어 맡긴 권한·의무가 있는 자리다. 헌법7①의 공무원은 아주 넓어 정무직뿐 아니라 공무를 위탁받아 수행하는 사인도 포함한다. <strong>직업공무원제를 적용받는 사람만을 뜻하지 않는다.</strong> 교재 인용90헌바27(1992.4.28.)의 공무원 개념을 출발점으로 삼는다.</p>
+<p>교재 사례를 풀면 이렇다. 대통령 갑이 퇴임하고 을이 취임해도 ‘대통령’이라는 국가기관은 이어진다. 갑의 인격 자체가 국가기관은 아니다. 또 공무원 아빠가 자기 아이에게 장난감을 사 주었다고 전국 모든 아이에게 같은 장난감을 줄 의무가 생기지 않는다. 공적 급여를 지급할 때의 평등원칙과 개인의 선물은 다른 문제다.</p>
+<p><mark class="yellow">공직의 공공성은 공무원 개인의 모든 자유행사를 국가행위로 만드는 근거가 아니다.</mark> 공무와 사생활을 나누는 까닭은 권한 남용도 막고 개인의 권리도 지키려는 것이다. 시험226·237. 키워드:사람/자리·최광의·공무수탁사인. 한 줄: 공직을 맡아도 인생 전체가 공무가 되는 것은 아니다.</p>
+<h2 id="foundations-10-02" data-concept-id="foundations-10-02">1-2. 국민 전체의 봉사자와 책임:누구에게 충성하는가 ★★★★★</h2>
+<p><strong>교재262–264쪽 / 문단의 역할:</strong> 헌법7①의 봉사와 책임을 권한 행사의 방향으로 이해시킨다.</p>
+<p>공무원은 대통령 개인·특정 정당·부유한 민원인의 봉사자가 아니라 국민 전체의 봉사자다. ‘전체’는 국민 모두가 매번 같은 정책을 원한다는 뜻이 아니다. 법에 따라 공정하게 직무를 수행하고 기본권과 공익을 위해 일해야 한다는 뜻이다. 상사가 특정 지지자에게만 혜택을 주라고 하더라도 공적 기준을 버릴 수 없다.</p>
+<p>국민에 대한 책임이라는 헌법상 원칙은 민사·형사·징계 등 개별 법률의 책임요건을 대신하지 않는다. 정치적 책임을 주로 지는 정무직과 법률에 따라 계속 직무를 수행하는 경력직의 책임 모습도 같지 않다. <strong>교재의 ‘고의·중과실’ 설명은 책임 종류를 구별해서 읽어야 한다.</strong> 국가배상에서 공무원 개인의 민사책임과 국가의 구상 문제를 설명할 때 중요한 기준이지, 공무원에게 경과실만 있으면 모든 형사·징계책임이 사라진다는 뜻은 아니다.</p>
+<p>가상사례:담당자의 실수로 시민에게 손해가 생겼다. 국가의 배상책임, 담당자 개인에게 다시 돈을 청구할 수 있는지, 징계할 수 있는지는 각각 요건을 확인한다. ‘봉사자니까 무조건 개인이 전액 배상’도 ‘중과실 아니면 모든 책임 없음’도 틀리다. 시험237·238. 한 줄: 국민을 위한 직무 수행 의무와 구체적인 법적 책임요건은 구별한다.</p>
+<h2 id="foundations-10-03" data-concept-id="foundations-10-03">1-3. 특수한 직무가 기본권 제한을 설명하지만 백지수표는 아니다 ★★★★☆</h2>
+<p><strong>교재263–264쪽 / 문단의 역할:</strong> 공무원의 권리 제한 근거와 일반 근로자와의 차이를 제시한다.</p>
+<p>공무원의 업무는 공적 성격을 띠며 국가와의 관계도 공법상 근무관계다. 그래서 정치활동이나 노동3권 등에 특별한 제한이 있을 수 있다. 헌법33②는 공무원 중 법률이 정하는 사람에게 노동3권을 인정한다. 다만 ‘공무원이라서’라는 말만으로 어떤 제한이든 정당해지는 것은 아니다. 직무와 관련된 목적, 법률 근거, 과잉금지원칙을 따져야 한다.</p>
+<p><strong>수당 사건2016헌마404(2017.8.31.)</strong> 등장인물은 초과근무를 한 경찰공무원이다. 일반 근로자보다 불리한 수당 산정이 문제되었다. 갈등은 “나도 일했는데 왜 같은 근로기준을 쓰지 않나?” 대 “공무의 계속성과 보수체계는 다르다”였다. 헌재는 근로기준법의 가산수당 제도가 초과근로 억제라는 목적을 갖는 반면 공무원 수당은 공무의 특수성·예산·보수체계와 연결된다는 점을 고려해 <strong>청구를 기각</strong>했다.</p>
+<p>판단을 쉬운 말로 나누면:①일한 사람이라는 공통점은 있다→②그러나 비교할 법적 관계와 보수 목적이 다르다→③차이가 있다는 사실만으로 금지되는 차별이 되지는 않는다. 반대 결론을 자동 적용하면 공무의 특수한 보수체계를 전부 일반 근로체계와 일치시켜야 한다. 그렇다고 모든 공무원 임금 차별을 허용한 결정도 아니다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=1002266&cbIdx=1195">헌재 결정 안내</a></p>
+<p>시험227. 키워드:비교집단·직무 특수성·기각. 한 줄: 특별한 제한은 가능하지만 그 직무에 맞는 헌법적 이유가 필요하다.</p>
+<h2 id="foundations-10-04" data-concept-id="foundations-10-04">1-4. ‘봉사’는 사생활에서 더 희생하라는 뜻이 아니다 ★★★★★</h2>
+<p><strong>교재264–265쪽 / 문단의 역할:</strong> 봉사자라는 말을 도덕적 자기희생 요구로 오해하지 않도록 한다.</p>
+<p>교재는 여러 반례를 든다. 같은 소득인데 공무원에게만 세금을 더 물리기, 직무와 무관한 같은 범죄에 공무원이라는 이유만으로 무조건 두 배 형벌을 부과하기, 일반 시민에게 요구하지 않는 신체적 희생을 단지 공무원이라는 이유로 강제하기. 모두 ‘국민을 위해 봉사해야 하니까’ 한마디로 정당화할 수 없다. 직무의 공정성을 지키려는 제한인지, 개인의 삶을 과도하게 희생시키는지 물어야 한다.</p>
+<p><strong>연금 사건2005헌바33(2007.3.29.)</strong> 공무원이 교통범죄로 금고 이상의 형을 받고 퇴직급여까지 제한받았다. 범죄에 대한 처벌과 별개로, 직무와 무관한 과실범까지 연금을 일률적으로 줄이는 것이 공직범죄 예방에 맞는 수단인지가 쟁점이다. 헌재는 <strong>헌법불합치</strong>라고 판단했다. 교통범죄가 가벼워서가 아니라, 형벌과 추가 재산상 제재 각각에 정당한 범위가 필요해서다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941446&cbIdx=1106">결정 안내</a></p>
+<p><strong>사립학교 교원 사건2008헌가15(2010.7.29.)</strong>에서도 신분·직무 관련성과 고의·과실을 구별하지 않는 당연퇴직·급여 제한의 문제가 다루어져 헌법불합치가 선고되었다. 다만 이후 <strong>2010헌가89(2013.9.26.)</strong>는 직무와 무관한 과실범 등을 제외하도록 고친 규정을 합헌으로 보았다. 따라서238③의 과거 논지를 ‘사생활에서 저지른 고의범죄는 어떤 경우에도 급여 제한 불가’로 넓히지 않는다. <a href="https://www.law.go.kr/detcInfoP.do?detcSeq=29093">후속 결정과 종전 결정의 관계</a></p>
+<p>판례 문장의 번역:‘방법의 적정성 부인’→공직의 성실성을 지킨다는 목적과 제재 대상이 제대로 맞물리지 않는다. ‘가중된 비난 가능성’→그 직업이라는 이유만으로 같은 실수에 언제나 더 큰 잘못을 물을 수는 없다. 시험238. 한 줄: 봉사는 공적 권한의 사용방향이지 사생활의 무제한 희생 의무가 아니다.</p>
+<h1>2. 직업공무원제:정권이 바뀌어도 행정은 이어져야 한다</h1>
+<h2 id="foundations-10-05" data-concept-id="foundations-10-05">2-1. 국가·지방, 경력·특수경력의 분류 ★★★★☆</h2>
+<p><strong>교재265–266쪽 / 문단의 역할:</strong> 고용주에 따른 분류와 임용·신분 성격에 따른 분류를 분리한다.</p>
+<p>국가공무원과 지방공무원은 국가에 소속되는지 지방자치단체에 소속되는지의 구별이다. 경력직과 특수경력직은 다른 축이다. 경력직은 실적·자격에 따라 임용되고 신분이 보장되며 장기간 또는 법정 임기 동안 근무할 것이 예정된 사람이다. 일반직에는 기술·연구·행정 분야 등이, 특정직에는 법관·검사·외무·경찰·소방·교육·군인·군무원 등 법정 직종이 들어간다.</p>
+<p>특수경력직은 경력직 이외의 공무원이다. 정무직은 선거·국회 동의에 따른 취임이나 고도의 정책결정 등을 담당하는 자리다. 별정직은 비서관·비서 등 법이 정한 별도 임용 직위다. <mark class="pink">‘특정직’은 경력직의 한 종류이고 ‘특수경력직’과 다르다.</mark> 별정직과 정무직도 동일한 말이 아니다.</p>
+<p>교재의 직업공무원제 적용 범위 설명은 일반적 신분보장과 개별 헌법·법률의 특별 보장을 함께 읽는다. 국가공무원법68조 단서는1급 및 그에 대응하는 고위공무원단 직위 등에 일반 신분보장의 예외를 두지만, 곧 모든 헌법적 보호가 사라진다는 뜻은 아니다. 법관·헌법재판관·감사위원 등에는 각자의 특별 신분보장 규정이 있다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1010050785">국가공무원법68조</a></p>
+<p>시험239·237. 한 줄: 어느 기관 소속인지, 어떤 임용·신분 유형인지, 별도 보호 규정이 있는지를 차례로 본다.</p>
+<h2 id="foundations-10-06" data-concept-id="foundations-10-06">2-2. 엽관제에서 실적제로:충성 경쟁을 능력 경쟁으로 ★★★★★</h2>
+<p><strong>교재266–268쪽 / 문단의 역할:</strong> 제도의 역사적 이유와 장단점을 설명한다.</p>
+<p>엽관제는 집권당의 당파적 관계에 따라 임명·해임·승진을 결정하는 방식이다. 처음에는 군주와 특권층의 자리를 시민에게 개방하고 선출된 정치세력이 책임 있게 정책을 집행하게 한다는 이유가 있었다. 그러나 “국민에게 필요한가”보다 “누가 나를 임명했나”가 중요해지면 공직이 선거 승리의 보상품이 된다. 정권 교체마다 실무자를 갈아치우면 경험·전문성·행정의 계속성도 약해진다.</p>
+<p>실적제 또는 성적제는 자격·능력·실증된 성과를 중심으로 임용하고 승진시키는 방식이다. 시험점수 하나만을 뜻하지 않는다. 직무 능력·경력·성과 등을 합리적으로 살피는 제도다. <mark class="green">정치권력의 교체와 일상 행정의 계속성을 분리해야 법대로 일할 수 있다.</mark></p>
+<p>그렇다고 모든 자리를 정치와 완전히 분리하지는 않는다. 선거로 선택받은 정책을 책임지는 정무직은 정권의 방향과 연결된다. 우리 제도는 원칙적으로 경력직에 성적제, 정무직에 엽관제적 요소를 둔다. 장애인·저소득층·성별 균형·과학기술 인재 등을 위한 합리적 적극적 인사정책도 능력주의와 언제나 모순되는 것은 아니다.</p>
+<p>가상사례:새 시장이 복지정책을 맡을 정무 보좌자를 바꾸는 것과, 세금 부과 담당자 전원을 자기 지지자로 바꾸는 것은 다르다. 시험228·239. 키워드:정실/능력·정책책임/계속행정. 한 줄: 정책 책임자는 바뀔 수 있지만 실무행정 전체를 정권의 전리품으로 삼아서는 안 된다.</p>
+<h2 id="foundations-10-07" data-concept-id="foundations-10-07">2-3. 신분보장과 정치적 중립:법률로 정하라는 말의 뜻 ★★★★★</h2>
+<p><strong>교재268–270쪽 / 문단의 역할:</strong> 헌법7②가 입법자에게 맡긴 일과 금지한 일을 밝힌다.</p>
+<p>직업공무원제는 능력 중심 임용과 안정된 신분·정치적 중립을 연결한다. 능력으로 들어와도 정당에 줄을 서지 않았다는 이유로 해고되면 실적주의가 작동할 수 없다. 신분보장은 국민을 위해 법대로 일할 조건이지, 공무원 개인에게 특혜를 주는 것만이 목적이 아니다.</p>
+<p>‘법률이 정하는 바’는 국회가 아무 내용이나 정할 자유를 뜻하지 않는다. 합리적인 직업분류, 인사 운영, 능력 중심 실적주의, 정치적 중립, 독립적인 인사행정 등으로 제도의 본질을 구현할 책임이다. 모든 경력공무원의 임기를 대통령 임기와 같게 하고 정권이 바뀌면 일괄 퇴직시키는 법은 그 본질을 무너뜨린다.</p>
+<p>반대로 신분보장은 평생 어떤 상황에서도 같은 직위를 보장한다는 뜻이 아니다. 귀책사유, 적법하고 합리적인 조직 개편·예산 감소로 인한 폐직·과원, 자격 상실 등은 법정 요건과 절차 아래 불이익의 사유가 될 수 있다. <mark class="yellow">신분보장=정당한 사유 없는 불이익 금지이지, 변화의 전면 금지가 아니다.</mark> 시험229·240. 한 줄: 법률은 제도를 구체화해야지 껍데기만 남기고 없애서는 안 된다.</p>
+<h2 id="foundations-10-08" data-concept-id="foundations-10-08">2-4. 법만 새로 만들고 사람을 일괄 내보낸 사건 ★★★★☆</h2>
+<p><strong>교재270–271쪽 / 문단의 역할:</strong> 실질 없는 조직 개편을 이용한 신분박탈을 보여 준다.</p>
+<p><strong>89헌마32(1989.12.18.)</strong> 교재의 사건에서는 새 규정에 따라 후임자가 임명되면 종전 직원은 자동으로 퇴직한 것으로 처리되었다. 등장인물은 계속 일할 것으로 기대하던 직원과 새 임명권자다. 갈등은 “기존 직원에게 잘못도 없는데 왜 자동으로 나가야 하나?”였다. 실질적 조직 변경이나 개별적 책임, 합리적인 선별 기준 없이 임명권자의 선택으로 신분을 없애는 것이 핵심 문제였다.</p>
+<p>헌재는 직업공무원제의 신분보장과 신뢰보호에 어긋난다고 판단했다. ‘후임자 임명’이라는 형식을 붙여도 실질은 정당한 근거 없는 일괄 제거였다. 반대 결론이면 법을 새로 쓰는 방식만으로 모든 신분보장을 우회할 수 있다. <a href="https://www.moleg.go.kr/mpbleg/mpblegInfo.mo?mid=a10402020000&mpb_leg_pst_seq=129344&pageIndex=96&searchCondition=CTS&searchKeyword=%EC%8B%A0%EA%B3%A0">법제처의 결정 해설</a></p>
+<p>문장 번역:‘자의적인 신분박탈’→합리적 기준 없이 임명권자 마음대로 내보냄. ‘신뢰보호’→법에 따라 계속 일할 수 있다고 믿은 사람의 정당한 기대도 고려함. 시험240①③의 반대사례. 한 줄: 조직 개편이라는 이름보다 실제 변화와 해임 기준을 본다.</p>
+<h2 id="foundations-10-09" data-concept-id="foundations-10-09">2-5. 다른 지방자치단체로 보내려면:전출 동의와 공정력 ★★★★☆</h2>
+<p><strong>교재271–273쪽 / 문단의 역할:</strong> 신분보장이 임용권자의 변경에도 작용함을 보여 준다.</p>
+<p><strong>98헌바101(2002.11.28.)</strong> 지방공무원을 다른 지방자치단체로 옮기면 고용·인사관계의 상대방이 바뀐다. 단체장들끼리 합의했다고 본인 동의 없이 옮겨도 되는가? 다수의견은 신분보장을 고려해 <strong>본인의 동의가 필요한 것으로 해석하여 합헌</strong>이라고 보았다. 다른 의견들은 이런 의미를 법문에서 충분히 읽어 낼 수 있는지 등을 문제 삼았다. 따라서 ‘합헌’이라는 결과가 ‘강제 전출도 허용’이라는 뜻은 아니다.</p>
+<p><strong>99두1823(2001.12.11.)</strong>에서는 동의 없는 전출에 따르지 않았다는 사정으로 징계한 문제가 이어진다. 위법한 전출은 취소되기 전까지 효력이 인정되는 문제와 별도로, 그 위법한 명령 불이행을 이유로 한 징계가 재량권의 한계를 넘는지 살펴야 한다. 교재는 위법한 전출명령에 따른 징계를 그대로 정당화할 수 없다는 점을 설명한다.</p>
+<p>가상 대화:“아직 취소 판결이 없으니 어떤 징계든 정당하다.”→아니다. 행정행위의 잠정적 효력인 공정력과 징계의 적법성은 별개의 판단이다. “그럼 위법한 처분은 모두 자동 무효?”→그것도 아니다. 위법과 당연무효는 구별한다. <strong>같은 자치단체 안의 모든 일상적 전보에 언제나 개인 동의가 필요하다는 판례도 아니다.</strong> 시험240④. 한 줄: 고용주가 달라지는 전출과 내부 보직 이동을 구별하고, 효력과 적법성을 나눈다.</p>
+<h2 id="foundations-10-10" data-concept-id="foundations-10-10">2-6. 계급정년·직권면직:보호와 제도개선의 조화 ★★★★☆</h2>
+<p><strong>교재273–275쪽 / 문단의 역할:</strong> 합리적인 인사제도 변경은 가능하다는 반대편 한계를 제시한다.</p>
+<p><strong>91헌바15(1994.4.28.)</strong> 안기부 직원에게 계급정년제를 도입하면서 기존 직원에게 적용한 사건이다. 직원은 종전 제도가 계속될 것을 기대했지만, 헌재는 조직의 인사순환 등 공익과 신뢰를 비교하여 허용된다고 보았다. 나이를 기준으로 한 정년과 일정 계급에 머무른 기간을 기준으로 한 정년은 다르다. 이미 근무 중인 사람에게 새 제도가 적용되었다는 사실만으로 소급입법 금지 위반이라고 단정할 수 없다.</p>
+<p><strong>2002헌바8(2004.11.25.)</strong> 지방공무원의 폐직·과원에 따른 직권면직 규정도 합헌으로 판단되었다. 실제 조직·예산의 변화와 함께 임용 형태, 업무실적, 능력, 징계 등 합리적 기준을 살피고 인사위원회의 심의 등 통제절차를 거치는 제도라는 점이 중요하다. <a href="https://law.go.kr/LSW/detcStmdInfoP.do?detcSeq=137659">결정요지</a></p>
+<p>두 사건을2-4와 비교하자. 실제 조직 필요+합리적 기준+절차는 허용 가능성이 있지만, 이름만 개편하고 마음에 안 드는 직원을 제거하는 것은 다르다. 판례 문장의 번역:‘절대적 신분보장이 아니다’→정당한 이유가 있는 제도개선까지 막는 권리는 아니다. ‘합리성 있는 직권면직’→법정 사유와 공정한 기준·절차를 지킨 해임이어야 한다. 시험240. 한 줄: 신분보장은 조직의 영구 동결이 아니라 자의적인 인사권 행사를 막는 장치다.</p>
+<h1>3. 정치적 중립과 시민의 자유 사이</h1>
+<h2 id="foundations-10-11" data-concept-id="foundations-10-11">3-1. 정치활동·집단행위 제한의 범위를 좁혀 읽기 ★★★★★</h2>
+<p><strong>교재275–277쪽 / 문단의 역할:</strong> 구체적인 금지 행위와 제한의 목적을 확인한다.</p>
+<p>국가공무원법65조와 지방공무원법57조는 정당 등 정치단체의 결성·가입과 특정 정당·후보를 위한 정치운동을 제한한다. 관련 서명운동, 투표 권유, 문서·도화의 게시, 공공시설·공금을 이용한 정치활동, 타인에게 가입을 권하거나 보상·불이익으로 강요하는 행위 등을 직무 공정성과 연결해 읽는다. 단순히 사회정책에 관한 학술서를 썼다는 사정만으로 이 모든 금지행위에 해당하지는 않는다.</p>
+<p>집단행위 금지 역시 두 명 이상 모이는 모든 행동을 뜻하지 않는다. 판례는 공익에 반하는 목적을 위해 직무전념 의무를 해태하는 등의 집단적 행위라는 제한된 의미로 읽는다. 노동관계 법률에 따라 허용되는 공무원·교원 노동조합 활동 등도 별도 예외와 요건을 확인해야 한다. ‘사실상 노무 종사자 외에는 어떠한 단체행동도 전부 불가능’이라고 외우지 않는다.</p>
+<p>교재의 <strong>2004헌바47(2008.4.24.)</strong>은 공무원의 선거운동·집단행위 등에 대한 제한을, <strong>2011헌바32(2014.8.28.)</strong>는 좁게 해석된 집단행위 금지를 받아들인 사례다. <strong>2010헌마97(2012.3.29.)</strong>는 특히 엄격한 중립성이 요구되는 선거관리위원회 직원의 정당 관련 단체 가입·활동 제한을 정당화했다. 이 결과를 공무원의 모든 사적 의견 표명 금지로 확대하지 않는다.</p>
+<p><strong>2018헌마551(2020.4.23.)</strong>에서는 초·중등 교원의 정치단체 가입 제한 중 ‘그 밖의 정치단체’라는 불명확한 범위가 위헌으로 판단되었다. 정당 가입 금지까지 전부 사라진 것은 아니다. <a href="https://kids.ccourt.go.kr/common/files/Download.do?cfGroup=LITE&cfIdx=CF00020454&cfRename=20201013154151_siuwwoxmeyhdbqk.pdf">헌재 결정 자료</a></p>
+<p>시험227②③·230. 키워드:구체적 행위·좁은 해석·노조법상 예외. 한 줄: 중립성은 중요하지만 ‘정치와 관련된 모든 생각·모임 금지’라는 말로 바꾸면 안 된다.</p>
+<h2 id="foundations-10-12" data-concept-id="foundations-10-12">3-2. 교원의 정당 가입 사건:다수의견과 반대의견 ★★★★☆</h2>
+<p><strong>교재277–278쪽 / 문단의 역할:</strong> 같은 중립성 목적에도 자유와의 균형을 다르게 평가할 수 있음을 보여 준다.</p>
+<p><strong>2011헌바42(2014.3.27.)</strong> 공무원·초중등 교원의 정당 가입 금지에 관한 결정이다. 교원 등은 사적인 정치 참여까지 막는다고 문제 삼았다. 다수5인은 공정한 직무와 교육의 정치적 중립, 학생에게 미칠 영향 등을 고려해 합헌이라고 보았다. 대학 교원과의 차이도 업무·교육 환경의 차이로 설명했다. 투표나 일정한 사적 의견 교환의 여지가 남아 있다는 점도 들었다.</p>
+<p>반대4인은 정당 가입 그 자체가 직무의 편향으로 이어진다고 단정하기 어렵고, 직무상 정치적 편향 행위에 대한 제한으로 목적을 달성할 수 있으며, 광범위한 사적 활동 금지의 부담이 크다고 보았다. 대학 교원과 초중등 교원의 영향력 차이에 관한 전제도 비판했다. <strong>시험에서 ‘헌재는’이라고 하면 법정의견을, ‘반대의견은’이라고 하면 제한의 필요성과 과도성을 따진 논리를 구별한다.</strong></p>
+<p>교재 저자는 더 근본적으로 공직의 중립과 공무원 개인의 정치적 자유를 분리해야 한다고 비판한다. 그 비판은 중요한 학습 대상이지만 판례의 결론이 바뀌었다는 뜻은 아니다. 한 줄: 중립성을 지킬 필요가 있다는 데 동의해도 사적 정당 가입까지 막을지는 별도로 다툴 수 있다.</p>
+<h2 id="foundations-10-13" data-concept-id="foundations-10-13">3-3. 특별권력관계가 아니라 기본권을 가진 시민 ★★★☆☆</h2>
+<p><strong>교재278쪽 / 문단의 역할:</strong> 뒤의 군인 기본권 논의로 넘어가는 관점을 정리한다.</p>
+<p>과거 특별권력관계론은 공무원·군인처럼 국가 내부에 들어온 사람의 권리를 쉽게 제한하는 설명으로 쓰였다. 오늘날 ‘특수한 신분’이라는 말이 법률유보·과잉금지·권리구제를 없애는 독립 근거가 될 수는 없다. 공적 권한을 행사할 때의 의무와 개인으로서의 사상·양심·표현을 구분하여 필요한 범위만 제한해야 한다.</p>
+<p>가상사례:공무원이 민원 심사를 지지 정당에 따라 다르게 하면 중립성 문제다. 퇴근 후 사회정책을 공부하고 학술적 의견을 쓰는 것은 곧바로 같은 문제가 아니다. 실제 행위의 내용과 법정 제한을 확인해야 한다. <mark class="blue">14강의 기본권 제한 심사로 연결된다:직무의 특수성은 심사의 자료이지 심사를 생략하는 이유가 아니다.</mark> 한 줄: 공무원도 시민이고, 제한에는 이유와 한계가 필요하다.</p>
+<h1>4. 군사제도의 다섯 원칙</h1>
+<h2 id="foundations-10-14" data-concept-id="foundations-10-14">4-1. 군대의 과제:국가안전보장과 국토방위 ★★★★★</h2>
+<p><strong>교재279쪽 / 문단의 역할:</strong> 군대가 할 수 있는 일의 헌법적 목적을 한정한다.</p>
+<p>헌법5②의 국군 사명은 국가안전보장과 국토방위다. 국가의 존립·독립, 영토, 헌법의 기본질서와 법질서의 기능을 지키는 문제다. <strong>현재 집권자의 자리나 모든 법률 조항의 내용이 영원히 바뀌지 않도록 지키는 것은 아니다.</strong> 민주적 절차에 따른 정권 교체·법 개정은 국가안전보장을 해치는 행위가 아니다.</p>
+<p>교재89헌가104(1992.2.25.)의 취지를 풀면 ‘국가의 존립과 기본질서 유지’는 국가가 국민의 권리를 보장하는 공동체로 작동할 토대를 지킨다는 뜻이다. 경제성장은 국가의 과제가 될 수 있지만, 그 이유만으로 군사력을 써서 이웃 나라를 점령하거나 국내의 정당한 반대를 억누를 수는 없다.</p>
+<p>시험241. 키워드:국가/정권·기본질서/세부 현상유지. 한 줄: 군은 헌법질서를 지키는 조직이지 현 집권자의 지배를 영구화하는 조직이 아니다.</p>
+<h2 id="foundations-10-15" data-concept-id="foundations-10-15">4-2. 평화지향:안보라는 이름으로 침략할 수는 없다 ★★★★★</h2>
+<p><strong>교재279–282쪽 / 문단의 역할:</strong> 군의 사명을 평화주의와 함께 해석하고 해외파병 판례의 한계를 논한다.</p>
+<p>헌법전문의 세계평화 지향과5①의 국제평화 노력·침략전쟁 부인은5②의 안전보장·국토방위 해석을 제한한다. 교재의 이웃 나라 사례에서 “국제정세가 우리에게 불리해졌다”는 이유만으로 먼저 무력 점령하는 것은 방어가 아니다. 안보 목적이라는 명칭만 붙이면 되는 것이 아니다.</p>
+<p>교재는 임박하고 확실한 침략에 대응하는 방어나 집단적 자위의 문제도 논한다. 이를 막연한 미래 위협만으로 예방전쟁을 허용한다는 뜻으로 읽으면 안 된다. 임박성·필요성·비례성, 국제법상 무력사용 금지와 자위의 범위를 엄격하게 검토해야 한다. <mark class="blue">7강 국제평화주의와 같은 문제를 군사권한의 한계라는 방향에서 다시 보는 것이다.</mark></p>
+<p><strong>이라크 파병2003헌마814(2004.4.29.)</strong> 등장인물은 파병을 결정한 대통령·동의한 국회와 이를 다툰 청구인들이다. 쟁점은 파병의 위헌성을 헌재가 사법적으로 판단할 것인가였다. 헌재는 고도의 정치적 결단, 대통령과 국회의 정보·판단·책임, 헌법상 절차를 고려해 사법적 자제를 말하며 <strong>각하</strong>했다. <strong>침략전쟁이 합법이라고 본 실체 판단이나 ‘모든 파병은 무조건 합헌’이라는 선언이 아니다.</strong></p>
+<p>교재 저자는 정치적 판단이라는 이유만으로 헌법의 평화원칙 심사를 피할 수 있는지 비판한다. 전후 재건을 위한 제한된 활동인지 침략전쟁 지원인지도 구별해야 한다. 판례 문장의 번역:‘고도의 정치적 결단’→안보·외교 정보를 종합하는 정책판단의 성격이 크다. ‘사법심사 자제’→그 사건에서 법원이 실체 판단에 나서지 않았다는 뜻이지 헌법상 제한 자체가 없어졌다는 뜻은 아니다. 시험231. 한 줄: 안보도 평화원칙 안에서 추구해야 하고, 각하와 합헌은 다르다.</p>
+<h2 id="foundations-10-16" data-concept-id="foundations-10-16">4-3. 국민개병주의와 국방의 의무의 범위 ★★★★★</h2>
+<p><strong>교재282–283쪽 / 문단의 역할:</strong> 국방을 전투병의 의무로만 좁히지 않도록 한다.</p>
+<p>헌법39①은 모든 국민의 국방의 의무를 규정한다. 국민개병주의는 공동체 구성원이 국방의 부담을 진다는 원칙이다. 국방의 의무에는 직접·간접의 병력형성 의무가 포함된다. 병역법상 군복무, 예비군 복무, 민방위의 방공·방재 등 다양한 법정 부담을 살핀다. 법률에 따른 군수공장·군 병원 등의 동원처럼 간접적으로 국방을 뒷받침하는 경우도 있다.</p>
+<p><strong>91헌마80(1995.12.28.)</strong>의 설명은 국방의 의무가 전쟁터에서 싸우는 일만이 아니라 관련 법률에 따라 부과되는 광범위한 부담을 포함한다는 것이다. 그러나 일반 회사에서 일하거나 세금을 냈다는 이유만으로 곧 국방의 의무를 이행한 것은 아니다. 근로의 의무·납세의 의무와 국방의 의무는 구별되는 기본의무다.</p>
+<p>남성 병역의무에 관한 <strong>2006헌마328(2010.11.25.)</strong>에서 헌재는 병력 형성에 관한 입법자의 판단과 집단적 신체 조건 등을 고려해 기각했다. 이것은 모든 남성이 모든 여성보다 강하다는 판단도, 헌법39조 자체에 남성만이라고 적혀 있다는 뜻도 아니다. 현행 병역법상 남성의 병역의무와 여성의 지원 복무라는 구체적 법제를 나누어 본다. 독일의 명문 규정과 한국의 헌법 문구도 그대로 동일시하지 않는다.</p>
+<p>시험232·242. 키워드:모든 국민·법정 국방부담·직접/간접·다른 의무와 구별. 한 줄: 국방의 의무는 군복무보다 넓지만 모든 사회활동을 국방의 의무라고 부르지는 않는다.</p>
+<h2 id="foundations-10-17" data-concept-id="foundations-10-17">4-4. 병역 이행으로 인한 불이익 금지와 당연한 부담 ★★★★★</h2>
+<p><strong>교재283쪽 / 문단의 역할:</strong> 헌법39②가 막는 불이익과 병역 자체의 부담을 나눈다.</p>
+<p>군복무 동안 자유로운 시간 사용이나 취업 시기가 제한될 수 있다. 판례는 국민개병주의에 내재하거나 당연히 수반되는 부담을39②가 금지하는 별도의 불이익 처우와 구별한다. 교재의 <strong>2005헌마821(2006.7.27.)</strong>은 예비군 의무에 관한 형벌 등 의무 이행에 붙는 법정 부담을 논한다.</p>
+<p>교재 사례:복무기간만큼 취업이 늦어지는 것은 병역 이행 자체에 따르는 부담이다. 반면 “군대에 다녀왔으니 같은 소득에도 세금을 더 내라”는 별도 제재는 이행을 이유로 한 불이익이다. 복무 중 군형법이 적용된다는 사실도 곧39② 위반은 아니다. 물론 군형법의 개별 규정이나 처우는 다른 기본권 심사를 받을 수 있다.</p>
+<p><mark class="pink">39②가 병역에 따른 모든 손실을 완전히 보상하라고 명령하는 조항은 아니다.</mark> 그렇다고 불합리한 추가 차별을 허용하는 조항도 아니다. 시험243. 한 줄: 의무 그 자체의 부담과 의무를 다했다는 이유로 더 얹는 불이익을 구별한다.</p>
+<h2 id="foundations-10-18" data-concept-id="foundations-10-18">4-5. 병정통합주의:작전권과 행정권이 헌법 밖으로 달아나지 않게 ★★★★★</h2>
+<p><strong>교재284쪽 / 문단의 역할:</strong> 군령·군정의 관계를 민주적 통제와 연결한다.</p>
+<p>군령은 병력을 실제로 지휘·운용하는 작전상의 권한이다. 군정은 조직·인사·예산·장비 등 군대를 유지·관리하는 행정이다. 병정분리주의는 이를 나누어 군령의 독립성과 작전의 신속성·효율성을 강조한다. 그러나 군령이 일반 국가행정의 민주적 통제에서 벗어나면 군국주의나 군의 독자적 정치행동 위험이 생긴다.</p>
+<p>병정통합주의는 두 권한을 일반행정의 통제 안에 함께 둔다. 우리 헌법은 국민이 선출한 대통령에게 국군통수권을 부여하며 헌법상 군령·군정을 서로 독립한 최고권력으로 나누지 않는다. 실제 부처와 지휘체계의 업무분담이 있다는 사실과 헌법상 최고권한의 통합은 다르다.</p>
+<p>가상사례:국회가 예산을 통제해도 군 지휘부가 “작전은 국가의 지시를 받지 않는다”며 전쟁을 시작할 수 있다면 민주적 통제는 무너진다. 시험233에서 ‘작전의 신속성·효율성 증대’는 교재가 분리주의의 장점으로 설명한 항목이다. 한 줄: 작전과 행정을 구분하되 군령을 헌법적 통제 밖의 권력으로 만들지 않는다.</p>
+<h2 id="foundations-10-19" data-concept-id="foundations-10-19">4-6. 문민우위와 군의 정치적 중립 ★★★★★</h2>
+<p><strong>교재284–285쪽 / 문단의 역할:</strong> 통제 장치와 정치 개입 금지를 헌법 조문으로 확인한다.</p>
+<p>문민우위는 군인이 아닌 민간의 민주적 권력이 군사에 관한 최고결정을 맡는다는 원칙이다. 대통령의 국군통수권도 <strong>헌법과 법률에 따른 권한</strong>이지 어떤 명령이든 합법으로 만드는 권한은 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>통제 장치</th>
+<th>문제를 막는 방식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>74조 통수권·군 조직 법률주의</td>
+<td>군대의 최고권한과 조직을 헌법·법률 아래 둔다</td>
+</tr>
+<tr>
+<td>60조 국회 동의</td>
+<td>선전포고·국군의 외국 파견·외국군대의 국내 주류 등 중요 결정에 국회가 관여한다</td>
+</tr>
+<tr>
+<td>89조 국무회의 심의</td>
+<td>중요 군사·국방정책을 군 내부만의 결정으로 두지 않는다</td>
+</tr>
+<tr>
+<td>82조 문서·부서</td>
+<td>대통령 국법상 행위와 군사에 관한 행위의 책임 구조를 갖춘다</td>
+</tr>
+<tr>
+<td>86③·87④</td>
+<td>현역을 면하기 전에는 군인을 국무총리·국무위원으로 임명할 수 없다</td>
+</tr>
+<tr>
+<td>국회 감사·조사·예산 심의</td>
+<td>군정과 재정도 국민 대표의 통제를 받는다</td>
+</tr>
+</tbody></table>
+<p>교재284쪽의 국무회의 관련 ‘제38조’ 표기는 <strong>제89조</strong>로 바로잡아 읽는다. 군사행위라는 이유로82조의 부서가 전면 면제되는 것도 아니다.</p>
+<p>군의 정치적 중립은5②에서 ‘준수된다’고 표현한다. 1987년 헌법의 명시에는 군사정변과 군부통치의 반복을 막으려는 역사적 의미가 있다. 공무원7②·교육31④의 ‘보장된다’와 문구가 다르다. 다만 보장이라는 말을 썼다고 공무원·교육기관에는 중립 의무가 전혀 없다는 뜻은 아니다. <mark class="yellow">무력을 가진 조직이 특정 정치세력의 편에 서면 선거와 토론의 민주주의 자체가 위협받는다.</mark> 시험234·244. 한 줄: 군은 민간의 헌법적 통제를 받고 정당정치에 무력으로 개입해서는 안 된다.</p>
+<h1>5. 군사영역에서도 기본권은 사라지지 않는다</h1>
+<h2 id="foundations-10-20" data-concept-id="foundations-10-20">5-1. 일반 시민도 제한받을 수 있지만 군사목적만으로 충분하지 않다 ★★★★★</h2>
+<p><strong>교재286쪽 / 문단의 역할:</strong> 군사상 기본권 제한의 주체와 한계를 넓게 살핀다.</p>
+<p>군사목적의 제한은 군인에게만 적용되는 것이 아니다. 전시 등 법정 요건 아래 재산을 징발하거나, 군사기지·시설 보호구역의 건축·출입·어로 등을 제한할 수 있다. 주요 방위산업체 근로자의 단체행동권 제한, 군사기밀 보호에 따른 표현·정보 접근 제한도 일반 시민에게 영향을 준다.</p>
+<p>각 조치는 개별 법률의 요건과 절차, 필요한 보상, 비례성을 확인해야 한다. 헌법37②의 국가안전보장은 제한 목적이지 무제한 허가증이 아니다. 특히 방위산업체라는 말만 보고 모든 근로자의 노동3권이 전부 없어졌다고 하면 안 된다. 헌법33③은 법률이 정하는 주요 방위산업체 근로자의 <strong>단체행동권</strong>에 관한 규정이다.</p>
+<p>가상사례:군사시설 주변 주민의 건축을 제한한다면 구체적 군사 필요와 범위·법적 근거를 따진다. “민간인이니 제한 불가”도 “군부대 근처니 무엇이든 금지”도 틀리다. 시험245. 한 줄: 군사상 필요는 시민에게도 영향을 주지만 법치국가의 심사를 면제하지 않는다.</p>
+<h2 id="foundations-10-21" data-concept-id="foundations-10-21">5-2. 군사기밀:도장을 찍었다고 모두 비밀이 되는 것은 아니다 ★★★★★</h2>
+<p><strong>교재286–287쪽 / 문단의 역할:</strong> 국가안전과 국민의 토론을 함께 지키는 기준을 제시한다.</p>
+<p><strong>89헌가104(1992.2.25.)</strong>의 기준은 세 묶음으로 기억한다. 첫째, 이미 널리 알려진 공지의 사실이 아니라 비공지의 사실이어야 한다. 둘째, 적법한 절차에 따라 군사기밀로 분류·표시되거나 고지되어야 한다. 셋째, 내용 자체에 실질적 비밀가치가 있어 공개될 경우 국가안전에 명백한 위험을 일으킬 정도여야 한다.</p>
+<p>교재의 문제의식은 이렇다. 군 관련 정보라는 이유만으로 무조건 비밀로 만들면 국민은 군사정책에 대해 의견을 나누거나 민주적으로 토론할 수 없게 된다. 가상사례:이미 정부가 공개한 장비 수치를 문서에 옮기고 ‘기밀’ 도장을 찍었다고 새롭게 실질적 비밀이 되는 것은 아니다. 반대로 숨겨진 작전정보라도 적법한 지정 등 법정 요건을 확인해야 한다.</p>
+<p>판례 문장의 번역:‘실질적 비밀가치’→숨길 만한 진짜 안보상의 이유가 있다. ‘자의적 지정 금지’→담당자의 기분이나 비판 차단을 위해 비밀 딱지를 붙일 수 없다. 시험235·245④. 한 줄: <mark class="yellow">비공지+적법한 분류·표시·고지+실질적 비밀가치</mark>를 함께 본다.</p>
+<h2 id="foundations-10-22" data-concept-id="foundations-10-22">5-3. 군사재판과 국가배상:교재의 일반론에 예외를 붙이기 ★★★★★</h2>
+<p><strong>교재287쪽 / 문단의 역할:</strong> 군인에게 적용되는 추가적 헌법상 제한을 소개한다.</p>
+<p>군사법원은 헌법110조에 따른 특별법원이다. 다만 현재 군인이 저지른 모든 범죄를 군사법원에서 재판하지는 않는다. 군사법원법2②는 법정 성폭력범죄, 군인 등의 사망 원인이 되는 범죄, 신분 취득 전의 범죄 등 특정 범죄에 대한 군사법원의 재판권을 제외한다. 전시·사변 또는 이에 준하는 국가비상사태에는 별도 규칙이 있다. <strong>246②의 일반론을 예외 없는 규칙으로 외우지 않는다.</strong> <a href="https://www.law.go.kr/lsLinkCommonInfo.do?ancYnChk=&chrClsCd=010202&lsJoLnkSeq=1015946003">현행 군사법원법2조</a></p>
+<p>헌법29②와 국가배상법2① 단서는 군인·군무원·경찰 등 법정 대상자가 전투·훈련 등 직무집행과 관련해 입은 손해에 대해 다른 법령에 따른 보상을 받을 수 있을 때의 추가 배상 제한을 다룬다. <strong>보상 자체가 없다는 뜻도, 모든 군인의 모든 사적 피해에 국가배상이 금지된다는 뜻도 아니다.</strong> 보상과 불법행위에 대한 배상을 구별한다.</p>
+<p>또2025.1.7. 신설된 국가배상법2③은 전사·순직한 군인 등의 <strong>유족 자신의 정신적 고통에 대한 위자료 청구</strong>를 허용한다. 사망자에게 있던 권리를 물려받는 문제와 유족 고유의 권리는 다르다. 시행 이후 전사·순직으로 인정되는 경우와 시행 당시 계속 중인 법정 사건 등 부칙의 적용범위도 확인한다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001242&lsRvsGubun=all">개정문·부칙</a></p>
+<p>시험246. 한 줄: 군사법원의 예외 범죄와 유족 고유 위자료의 현행 보완을 교재의 일반론 옆에 둔다.</p>
+<h2 id="foundations-10-23" data-concept-id="foundations-10-23">5-4. 사회단체 가입과 정치운동:옛 규율과 현행 법률 ★★★★☆</h2>
+<p><strong>교재287–288쪽 / 문단의 역할:</strong> 군인의 결사·정치적 자유에 관한 판례와 현행 규율을 구별한다.</p>
+<p><strong>90누4839(1991.4.23.)</strong>에서 대법원은 순수한 친목단체 등의 예외 외에 국방부장관의 허가를 받도록 한 당시 사회단체 가입 제한을 군복무의 특수성과 국방목적에 비추어 받아들였다. 기본권의 본질을 침해했다고 판단한 것이 아니다. 따라서246④는 판례의 결론을 뒤집은 보기다. 다만 이는 당시 법령에 관한 판단이다.</p>
+<p>구 「군인복무규율」은2016.6.28. 폐지되었다. 현행 「군인의 지위 및 복무에 관한 기본법」31조는 집단행위와 사회단체 가입을 규정하며 순수한 학술·문화·체육·친목·종교 활동 목적의 법정 단체 등에는 허가의 예외를 둔다. 의무 위반·직무 지장이 인정되면 제한·탈퇴 명령의 문제가 생긴다.32조는 불온표현물,33조는 정당 가입과 특정 정당·후보를 위한 법정 정치운동을 다룬다. <a href="https://www.law.go.kr/lsInfoP.do?ancYnChk=0&lsId=012438">현행 법률</a></p>
+<p>교재의 옛 조문 번호를 현재 번호로 암기하지 않는다. ‘투표 외 정치활동 제한’이라는 요약도 모든 사고·독서·의견이 금지된다는 뜻으로 넓히지 말고 구체적인 법정 행위를 확인한다. 한 줄: 옛 판례의 합헌적 판단은 현재도 같은 대통령령이 살아 있다는 뜻이 아니다.</p>
+<h2 id="foundations-10-24" data-concept-id="foundations-10-24">5-5. 불온도서 사건:무엇을 각하했고 무엇을 기각했나 ★★★★★</h2>
+<p><strong>교재288–291쪽 / 문단의 역할:</strong> 군인의 정신전력과 정보·표현의 자유가 충돌하는 대표사례를 자세히 검토한다.</p>
+<p><strong>2008헌마638(2010.10.28.)</strong>의 등장인물은 국방부, 책을 읽을 군인, 헌법소원을 낸 군법무관 등이다.2008년 국방부가23종 도서의 군내 반입을 막는 지시를 하자, 청구인들은 법률의 위임 규정, 구 군인복무규율16조의2, 반입 금지 지시를 함께 다투었다. 갈등은 “군의 사명과 정신전력을 보호해야 한다”와 “어떤 책이 금지되는지도 불분명하고 정보를 지나치게 막는다”였다.</p>
+<table>
+<thead>
+<tr>
+<th>심판대상</th>
+<th>법정의견의 처리</th>
+<th>쉽게 읽기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>군인사법의 위임 조항</td>
+<td>각하</td>
+<td>후속 규율이 필요하므로 그 법률만으로 직접 침해가 생기는지의 요건 문제</td>
+</tr>
+<tr>
+<td>국방부의 반입 금지 지시</td>
+<td>각하</td>
+<td>후속 집행 등과 관련해 직접성 요건을 인정하지 않음</td>
+</tr>
+<tr>
+<td>구 군인복무규율16조의2</td>
+<td>기각</td>
+<td>기본권 침해 주장 자체를 검토했지만 받아들이지 않음</td>
+</tr>
+</tbody></table>
+<p>법정의견은 ‘불온’을 국가의 존립·안전과 자유민주주의체제를 해치거나 반국가단체를 이롭게 하여 정신전력을 심각하게 저해하는 내용으로 좁혀 읽었다. 이런 맥락에서는 예측이 가능하고, 군통수권의 특수성을 고려한 위임과 필요한 제한이라는 논리다.236①②③은 이런 입장과 연결된다. <strong>군통수권이 있으니 어떤 백지위임이든 허용된다는 일반명제는 아니다.</strong> <a href="https://law.go.kr/detcInfoP.do?detcSeq=14476">결정 원문</a></p>
+<p>반대의견에는 군인사법의 위임이 너무 넓다는 비판, 불온의 의미가 불명확하다는 비판, 지정 주체·기준·절차·이의제기 등 덜 제한적인 장치가 필요하다는 비판, 반입 금지 지시 자체의 직접성을 인정해야 한다는 주장이 있다. 별개의견도 있어 모든 소수의견을 하나로 합치면 안 된다. 교재는 특히 정보 차단을 군의 힘으로 삼는 논리의 위험을 비판한다.</p>
+<p>판단 문장을 단계별로 번역하면:‘명확성’→군인이 무엇을 하면 안 되는지 예상할 수 있는가. ‘포괄위임 금지’→국회가 중요한 기준 없이 대통령에게 전부 맡겼는가. ‘과잉금지’→국방 목적을 위해 이만큼 넓게 막아야 하는가. ‘직접성’→지금 다투는 그 조치가 직접 내 권리를 제한하는가. 다른 결론이면 독서 제한의 기준·법률 근거를 다시 갖추어야 한다는 문제이지 군의 사명이 사라지는 것이 아니다.</p>
+<p><strong>후속 구별:</strong> 대법원2013다44720(2018.10.25.)은 작가·출판사의 배상청구에서, 실제 지정 도서 중에는 좁게 해석한 불온도서에 해당하지 않는 양서도 포함되었다는 점 등을 들어 원심을 파기환송했다. 규정 자체에 대한 헌법소원 기각과 구체적인23종 지정의 위법성·배상책임 심사는 별개다. 모든 원고의 배상액이 이 판결에서 확정됐다는 뜻은 아니다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=206351">대법원 판결</a></p>
+<p>시험236. 한 줄: 규정·지시·실제 지정행위를 나누고, 각하·기각·후속 배상소송을 구별한다.</p>
+<h2 id="foundations-10-25" data-concept-id="foundations-10-25">5-6. ‘제복 입은 시민’과 정보 차단의 악순환 — 심화 ★★★☆☆</h2>
+<p><strong>교재288–292쪽 / 문단의 역할:</strong> 판례를 넘어서 군인의 시민적 판단능력과 헌법 충성을 논한다.</p>
+<p>교재의 독일 비교 논의는 군인을 국가의 도구로만 보지 않고 시민으로 보자는 문제의식이다. 다른 나라의 구체적 권리 범위를 한국에 그대로 옮기는 것이 아니라, 군의 전문성과 시민의 기본권이 반드시 반대말인지 묻는다. 충성의 대상은 상관 개인의 모든 의사가 아니라 헌법적 국가질서여야 한다.</p>
+<p>교재의 가상적 위험 상황을 풀면, 상관이 헌법에 어긋나는 전쟁·정치 개입·의회 압박을 명령했을 때 정보를 차단당한 군인은 그 명령의 문제를 판단하기 어려울 수 있다. 이 논의는 모든 명령에 개인적 취향으로 불복종해도 된다는 뜻이 아니다. 적법한 지휘체계의 필요와 위헌·위법한 명령의 한계를 구별하는 것이다.</p>
+<p>저자의 악순환 비판은 이렇다. 정보를 차단해 유지하는 정신전력을 가정한다→평범한 정보에도 크게 흔들릴 수 있다→더 많은 정보를 막아야 한다→금지 범위가 계속 늘어난다. <strong>236④는 이 비판에 해당하므로 합헌을 지지하는 논거가 아니다.</strong> 저자의 평가를 판례 다수의견으로 바꾸지 않는 것이 시험의 핵심이다.</p>
+<p>한 줄: 군의 힘은 시민적 판단을 완전히 없애는 데서 나와야 하는가를 묻는 심화 논의이며, 판례의 결론과 구별해서 이해한다.</p>
+<h1>기출 연결 · 우선 풀 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>문제</th>
+<th>출제 의도와 붙잡을 말</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>226</td>
+<td>공직의 공공성을 개인의 모든 생활에 옮기는 함정:사람/자리</td>
+</tr>
+<tr>
+<td>2</td>
+<td>229</td>
+<td>법률유보를 무제한 입법재량으로 바꾸는 함정:제도의 본질</td>
+</tr>
+<tr>
+<td>3</td>
+<td>240</td>
+<td>신분보장을 절대적 현상유지로 바꾸는 함정:정당한 사유·절차</td>
+</tr>
+<tr>
+<td>4</td>
+<td>235</td>
+<td>기밀 지정만 있으면 된다는 함정:비공지·절차·실질가치</td>
+</tr>
+<tr>
+<td>5</td>
+<td>236</td>
+<td>저자의 비판을 합헌 논거와 섞는 함정:다수/반대·비판</td>
+</tr>
+</tbody></table>
+<p>많이 반복되는 연결은 봉사자와 기본권(226·227·237·238), 실적제와 신분보장(228·229·239·240), 군의 사명·통제(231–234·241–244), 군사상 제한(235·236·245·246)이다. 실제 오답률 자료는 없어 ‘가장 많이 틀린 보기’를 통계처럼 단정하지 않는다. 특히 주의할 보기는229③,240②,241④,243③,246②③의 구법·예외 문제다. 전체21문항의84개 보기 분석은 부록에 있다.</p>
+<h1>새 사례로 연습하는 응용 문제 5개</h1>
+<p class="practice-title"><strong>응용 1 · 시장의 장학금 명령</strong></p>
+<p>새 시장은 공무원 민서에게 “내 선거운동을 도운 집 자녀에게만 장학금을 주라”고 지시했다. 민서는 이를 거부했다. 퇴근 후에는 자신의 조카에게 생일선물을 주었다. 두 행동을 같은 평등원칙 위반이라고 볼 수 있는가?</p>
+<p><strong>해설·출제 의도:</strong> 아니다. 공적 장학금은 법정 기준과 공익에 따라 지급해야 하므로 시장 개인의 지지자를 위한 지시는 문제다. 개인의 생일선물은 공적 급여 지급과 다르다. 공직과 개인을 분리하면서 봉사자의 실제 의미를 적용하는 문제다. 정답 키워드:공적 권한/사적 생활.</p>
+<p class="practice-title"><strong>응용 2 · 재난대응 조직 개편</strong></p>
+<p>재난 업무를 통합하며 실제로 중복된 부서가 없어졌다. 법률상 기준, 업무실적 평가와 인사위원회 심의를 거쳐 과원을 조정했다. 반면 다른 지역에서는 부서 이름만 바꾸고 새 단체장이 지지하지 않은 직원만 전원 내보냈다. 둘 다 ‘조직 개편’이므로 같은 결론인가?</p>
+<p><strong>해설·출제 의도:</strong> 아니다. 실제 조직 필요와 합리적 기준·절차를 확인해야 한다. 첫 경우도 개별 요건 심사는 필요하지만 신분보장만으로 모든 조정을 금지하지는 않는다. 둘째는 명목만 개편인 자의적 신분박탈의 문제다. 직업공무원제의 보호 목적과 한계를 함께 설명할 수 있는지 묻는다.</p>
+<p class="practice-title"><strong>응용 3 · 다녀온 사람에게 붙인 추가 부담금</strong></p>
+<p>군복무를 끝낸 사람에게만 지역 안전부담금을 두 배 부과하는 법이 생겼다. 입법자는 “복무 때 취업이 늦어져도 합헌이라니 이것도 괜찮다”고 주장한다. 타당한가?</p>
+<p><strong>해설·출제 의도:</strong> 타당하지 않다. 취업 시기의 지연은 복무 자체에 따르는 부담과 관련되지만, 복무를 마쳤다는 이유로 별도 금전 불이익을 주는 것은 다른 문제다. 병역 이행의 내재적 부담과 추가 불이익을 구별하도록 설계했다.</p>
+<p class="practice-title"><strong>응용 4 · 이미 공개된 숫자의 기밀 지정</strong></p>
+<p>정부가 공개한 장비 수치를 기자가 비판적으로 분석하자 담당 기관이 뒤늦게 그 수치 전체에 기밀 표시를 했다. 기자의 토론을 금지할 수 있는지 판단할 순서를 말하라.</p>
+<p><strong>해설·출제 의도:</strong> 비공지인지, 적법한 분류·표시·고지가 있는지, 내용에 실질적인 비밀가치와 명백한 안보 위험이 있는지 차례로 본다. 이미 알려진 사실을 표시 하나로 새 기밀로 만들 수는 없다. 다만 공개 자료를 결합해 별도의 비공지 기밀이 드러난 경우까지 같은 사실관계라고 단정하지 않는다. 형식과 실질을 동시에 확인하는 문제다.</p>
+<p class="practice-title"><strong>응용 5 · 규정은 살아 있지만 적용이 잘못됐다면</strong></p>
+<p>법원이 특정 도서 제한 규정 자체에 대한 위헌 주장을 받아들이지 않았다. 뒤에 담당자가 그 규정의 범위에 들지 않는 평범한 책까지 금지했다. 출판사는 “규정이 합헌이어도 이 금지는 위법하다”고 주장한다. 모순인가?</p>
+<p><strong>해설·출제 의도:</strong> 모순이 아니다. 규범 자체의 헌법적 허용 여부와 개별 행위가 그 규범의 범위를 지켰는지는 별개다. 위법한 지정으로 인한 배상도 손해·인과관계·책임요건을 따로 심사한다. 불온도서 사건과 후속 배상소송의 관계를 새로운 사례 구조로 적용하는 문제다.</p>
+<h1>한자로 이해하는 핵심 용어</h1>
+<p>아래는 본문에서 쓰인 핵심 용어를 음훈→합친 뜻→이름의 이유→법률상 의미→쉬운 설명→사례→시험→비교 순으로 풀어놓은 사전이다. 이미 배운 일반 용어는 앞 강의 뜻과 연결한다.</p>
+<h3>公務員·公職 공무원·공직</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공),務(힘쓸 무),員(인원 원),職(벼슬 직). <strong>③ 합친 뜻:</strong> 공적 일을 맡은 사람·공적 직위. <strong>④ 이름의 이유:</strong> 사람과 그 사람이 맡은 국가기능을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공법상 근무관계에서 공무를 담당하는 사람과 권한·의무가 있는 자리. <strong>⑥ 쉬운 말:</strong> 직원과 자리는 다르다. <strong>⑦ 사례:</strong> 대통령이 바뀌어도 대통령이라는 기관은 계속됨.</p>
+<p><strong>⑧ 시험:</strong> 226. <strong>⑨ 비교·기억법:</strong> 개인 인격 전체가 공권력이 되는 것은 아님.</p>
+<h3>公法·私法 공법·사법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공),私(사사 사),法(법 법). <strong>③ 합친 뜻:</strong> 공적 관계의 법·사적 관계의 법. <strong>④ 이름의 이유:</strong> 어떤 관계에 어떤 규칙을 적용할지 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가의 공권력 관계와 사인 간 생활관계 등을 규율하는 법의 구별. <strong>⑥ 쉬운 말:</strong> 세금 부과와 친구에게 돈을 빌리는 일은 다른 관계다. <strong>⑦ 사례:</strong> 국가와 공무원의 공법상 근무관계.</p>
+<p><strong>⑧ 시험:</strong> 226①·227. <strong>⑨ 비교·기억법:</strong> 국가가 당사자라고 모든 관계가 자동 공법은 아님.</p>
+<h3>公務受託私人 공무수탁사인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공),務(힘쓸 무),受(받을 수),託(부탁할 탁),私(사사 사),人(사람 인). <strong>③ 합친 뜻:</strong> 공적 일을 맡겨 받은 사인. <strong>④ 이름의 이유:</strong> 민간인도 맡겨진 공적 기능을 수행할 수 있어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법령에 따라 공무를 위탁받아 수행하는 사인. <strong>⑥ 쉬운 말:</strong> 공무원 명찰이 없어도 공적 일을 맡을 수 있다. <strong>⑦ 사례:</strong> 법에 따라 공적 검사·인증 업무를 위탁받는 경우.</p>
+<p><strong>⑧ 시험:</strong> 237①. <strong>⑨ 비교·기억법:</strong> 단순 납품업자 모두가 해당하는 것은 아님.</p>
+<h3>奉仕·公益 봉사·공익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 奉(받들 봉),仕(벼슬할 사),公(공평할 공),益(더할 익). <strong>③ 합친 뜻:</strong> 받들어 일함·공동의 이익. <strong>④ 이름의 이유:</strong> 공직이 특정인의 사익에 종속되지 않게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민의 권리 보장과 공적 목적을 위한 직무 수행. <strong>⑥ 쉬운 말:</strong> 국민을 위해 맡은 일을 공정하게 한다. <strong>⑦ 사례:</strong> 지지자만 장학금 지급하라는 지시 거부.</p>
+<p><strong>⑧ 시험:</strong> 237·238. <strong>⑨ 비교·기억법:</strong> 무보수·사생활의 무한희생이라는 뜻 아님.</p>
+<h3>故意·過失·重過失 고의·과실·중과실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 故(연고 고),意(뜻 의),過(지날 과),失(잃을 실),重(무거울 중). <strong>③ 합친 뜻:</strong> 알고 의도함·주의를 놓친 잘못·큰 부주의. <strong>④ 이름의 이유:</strong> 책임의 성질과 정도를 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법 결과에 대한 인식·의욕과 주의의무 위반,그 중 중대한 위반. <strong>⑥ 쉬운 말:</strong> 알면서 한 일과 실수,아주 큰 실수는 다르다. <strong>⑦ 사례:</strong> 국가가 공무원에게 구상하는 요건.</p>
+<p><strong>⑧ 시험:</strong> 1-2·238④. <strong>⑨ 비교·기억법:</strong> 중과실 아니면 모든 형사·징계책임 면제 X.</p>
+<h3>求償·賠償·補償 구상·배상·보상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 求(구할 구),償(갚을 상),賠(물어줄 배),補(기울 보). <strong>③ 합친 뜻:</strong> 갚음을 청구·손해를 갚음·손실을 메움. <strong>④ 이름의 이유:</strong> 누구에게 어떤 원인으로 돈을 청구하는지 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대신 부담한 돈의 반환 청구,위법 손해의 회복,법정 손실·재해 보전 등을 구별. <strong>⑥ 쉬운 말:</strong> 국가가 먼저 배상한 뒤 책임자에게 다시 묻는 것이 구상. <strong>⑦ 사례:</strong> 국가배상과 군인 재해보상.</p>
+<p><strong>⑧ 시험:</strong> 246③. <strong>⑨ 비교·기억법:</strong> 보상과 배상은 이름만 다른 같은 권리가 아님.</p>
+<h3>經歷職·特殊經歷職 경력직·특수경력직</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 經(지날 경),歷(지낼 력),職(벼슬 직),特(특별할 특),殊(다를 수). <strong>③ 합친 뜻:</strong> 경력을 쌓는 직위·별도 성격의 직위. <strong>④ 이름의 이유:</strong> 장기간 계속 업무와 정치적·특별 임용을 나누려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실적·자격에 따라 임용되고 신분이 보장되는 공무원과 그 밖의 법정 유형. <strong>⑥ 쉬운 말:</strong> 계속 전문성을 쌓는 자리와 따로 정한 성격의 자리. <strong>⑦ 사례:</strong> 일반직·특정직 대 정무직·별정직.</p>
+<p><strong>⑧ 시험:</strong> 239. <strong>⑨ 비교·기억법:</strong> 특정직은 경력직,특수경력직과 다름.</p>
+<h3>政務職·別定職 정무직·별정직</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정),務(힘쓸 무),職(벼슬 직),別(나눌 별),定(정할 정). <strong>③ 합친 뜻:</strong> 정책·정치를 맡는 직위·별도로 정한 직위. <strong>④ 이름의 이유:</strong> 역할과 책임의 성격이 다르기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 선거·국회 동의·고도의 정책결정 관련 직위와 비서 등 법정 별도 임용 직위. <strong>⑥ 쉬운 말:</strong> 정책 책임자와 별도 임용 보좌직을 구별한다. <strong>⑦ 사례:</strong> 정무 보좌자 교체.</p>
+<p><strong>⑧ 시험:</strong> 2-1·239. <strong>⑨ 비교·기억법:</strong> 모든 별정직이 정무직이라는 뜻 아님.</p>
+<h3>獵官制 엽관제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 獵(사냥할 렵),官(벼슬 관),制(법도 제). <strong>③ 합친 뜻:</strong> 관직을 사냥하는 제도. <strong>④ 이름의 이유:</strong> 선거 승리 후 관직을 차지하는 모습에서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 집권세력의 당파적 관계에 따라 공직을 임면·승진시키는 방식. <strong>⑥ 쉬운 말:</strong> 우리 편이라는 이유로 자리를 준다. <strong>⑦ 사례:</strong> 정권 교체마다 지지자로 직원 교체.</p>
+<p><strong>⑧ 시험:</strong> 228·239. <strong>⑨ 비교·기억법:</strong> 정무직의 정책책임 요소와 행정 전체의 사유화는 구별.</p>
+<h3>成績制·實績制 성적제·실적제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 成(이룰 성),績(길쌈할 적; 공적),制(법도 제),實(열매 실; 실제). <strong>③ 합친 뜻:</strong> 입증된 성과에 따른 제도. <strong>④ 이름의 이유:</strong> 충성 관계가 아닌 업무능력을 기준으로 삼아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 능력·자격·실적을 중심으로 한 인사 방식. <strong>⑥ 쉬운 말:</strong> 일할 능력을 보고 뽑고 승진시킨다. <strong>⑦ 사례:</strong> 경력·직무 성과·자격 평가.</p>
+<p><strong>⑧ 시험:</strong> 228·239. <strong>⑨ 비교·기억법:</strong> 시험점수 하나만을 뜻하지 않음.</p>
+<h3>職業公務員制 직업공무원제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 職(벼슬 직),業(업 업),公(공평할 공),務(힘쓸 무),員(인원 원),制(법도 제). <strong>③ 합친 뜻:</strong> 공무를 계속적 직업으로 맡는 제도. <strong>④ 이름의 이유:</strong> 정권이 바뀌어도 법에 따른 행정을 이어가려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 능력 중심 임용·신분보장·정치적 중립을 바탕으로 계속적 행정을 확보하는 제도. <strong>⑥ 쉬운 말:</strong> 줄 서지 않고 전문적으로 계속 일하게 한다. <strong>⑦ 사례:</strong> 정권 임기와 모든 직원 임기를 같게 하는 법의 문제.</p>
+<p><strong>⑧ 시험:</strong> 229. <strong>⑨ 비교·기억법:</strong> 공직을 개인의 영구 소유물로 만드는 제도 아님.</p>
+<h3>身分保障·政治的中立 신분보장·정치적 중립</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 身(몸 신),分(나눌 분),保(지킬 보),障(막을 장),政(정사 정),治(다스릴 치),的(과녁 적),中(가운데 중),立(설 립). <strong>③ 합친 뜻:</strong> 지위를 지킴·정치적으로 치우치지 않음. <strong>④ 이름의 이유:</strong> 권력의 부당한 인사압박을 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당한 사유 없는 신분상 불이익 방지와 공정한 직무 수행의 확보. <strong>⑥ 쉬운 말:</strong> 정당에 줄을 서지 않아도 법대로 일할 수 있다. <strong>⑦ 사례:</strong> 7② 신분·중립의 법률상 보장.</p>
+<p><strong>⑧ 시험:</strong> 229·240. <strong>⑨ 비교·기억법:</strong> 보장≠어떤 변경도 금지.</p>
+<h3>廢職·過員 폐직·과원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 廢(폐할 폐),職(벼슬 직),過(지날 과),員(인원 원). <strong>③ 합친 뜻:</strong> 직위가 없어짐·필요 인원을 넘음. <strong>④ 이름의 이유:</strong> 조직 자체의 변화와 개인 잘못을 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 조직·예산 변경으로 직제가 사라지거나 정원을 초과한 상태. <strong>⑥ 쉬운 말:</strong> 일자리가 실제로 없어지거나 정원보다 사람이 많다. <strong>⑦ 사례:</strong> 조직 통합 후 합리적 직권면직.</p>
+<p><strong>⑧ 시험:</strong> 240③. <strong>⑨ 비교·기억법:</strong> 이름만 변경한 자의적 해임과 다름.</p>
+<h3>職權免職·當然退職 직권면직·당연퇴직</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 職(벼슬 직),權(권세 권),免(면할 면),當(마땅할 당),然(그럴 연),退(물러날 퇴). <strong>③ 합친 뜻:</strong> 권한으로 직을 면함·법정 사유로 퇴직함. <strong>④ 이름의 이유:</strong> 처분이 필요한지 법에 따른 효과인지 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 임용권자의 법정 면직 처분과 법정 사유 발생에 따른 신분 소멸. <strong>⑥ 쉬운 말:</strong> 기관이 면직시키는 것과 법정 사유로 자리가 끝나는 것은 다르다. <strong>⑦ 사례:</strong> 폐직 면직과 구 교원 당연퇴직 사건.</p>
+<p><strong>⑧ 시험:</strong> 2-4·2-6. <strong>⑨ 비교·기억법:</strong> 당연이라는 말이 위헌심사를 면제하지 않음.</p>
+<h3>轉出·轉入·轉補 전출·전입·전보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 轉(구를 전),出(날 출),入(들 입),補(기울 보). <strong>③ 합친 뜻:</strong> 옮겨 나감·들어옴·보직을 바꿈. <strong>④ 이름의 이유:</strong> 고용관계 상대방이 바뀌는지 보려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 임용권자 소속으로 이동하는 것과 내부 보직변경 등을 구별. <strong>⑥ 쉬운 말:</strong> 다른 시로 소속을 옮기는 일과 같은 시의 부서 이동은 다르다. <strong>⑦ 사례:</strong> 98헌바101 본인 동의.</p>
+<p><strong>⑧ 시험:</strong> 240④. <strong>⑨ 비교·기억법:</strong> 전출 동의 판례를 모든 전보로 확대 X.</p>
+<h3>公定力 공정력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공),定(정할 정),力(힘 력). <strong>③ 합친 뜻:</strong> 공적으로 정해진 효력. <strong>④ 이름의 이유:</strong> 법적 상태가 언제 어떻게 바뀌는지 안정시키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당연무효가 아닌 행정행위가 취소 전까지 유효하게 취급되는 효력. <strong>⑥ 쉬운 말:</strong> 잘못이 있어도 정해진 절차로 취소하기 전에는 효력이 남을 수 있다. <strong>⑦ 사례:</strong> 위법 전출과 후속 징계.</p>
+<p><strong>⑧ 시험:</strong> 2-5. <strong>⑨ 비교·기억법:</strong> 효력이 있다는 것≠적법하다는 것.</p>
+<h3>階級停年 계급정년</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 階(섬돌 계),級(등급 급),停(머무를 정),年(해 년). <strong>③ 합친 뜻:</strong> 계급에 머무는 기간에 따른 정년. <strong>④ 이름의 이유:</strong> 인사순환과 조직 운영을 위해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일정 계급에서의 근무기간을 기준으로 정한 퇴직 제도. <strong>⑥ 쉬운 말:</strong> 나이뿐 아니라 같은 계급에 얼마나 있었는지를 본다. <strong>⑦ 사례:</strong> 안기부91헌바15.</p>
+<p><strong>⑧ 시험:</strong> 2-6. <strong>⑨ 비교·기억법:</strong> 연령정년과 기준이 다름.</p>
+<h3>集團行爲 집단행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 集(모을 집),團(둥글 단),行(다닐 행),爲(할 위). <strong>③ 합친 뜻:</strong> 여럿이 모여 하는 행위. <strong>④ 이름의 이유:</strong> 공무 전념과 조직 기강을 보호하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공무원·군인법에서 특별한 목적·내용 아래 제한하는 집단적 행동. <strong>⑥ 쉬운 말:</strong> 여럿이 했다는 숫자만 아니라 목적과 내용도 본다. <strong>⑦ 사례:</strong> 합법 노조 활동과 금지행위 구별.</p>
+<p><strong>⑧ 시험:</strong> 230③. <strong>⑨ 비교·기억법:</strong> 모든 사적 모임을 금지하는 말 아님.</p>
+<h3>特別權力關係 특별권력관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특),別(나눌 별),權(권세 권),力(힘 력),關(빗장 관),係(맬 계). <strong>③ 합친 뜻:</strong> 특별히 긴밀한 국가와의 관계. <strong>④ 이름의 이유:</strong> 공무원·군인 등의 조직 내부 규율을 설명하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가 내부의 특수한 신분관계를 강조하던 이론. <strong>⑥ 쉬운 말:</strong> 국가 조직 안에 들어간 사람의 특별한 관계라는 옛 설명. <strong>⑦ 사례:</strong> 군인 권리의 법률유보 문제.</p>
+<p><strong>⑧ 시험:</strong> 3-3. <strong>⑨ 비교·기억법:</strong> 기본권 심사를 없애는 근거로 쓸 수 없음.</p>
+<h3>國家安全保障·國土防衛 국가안전보장·국토방위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국),家(집 가),安(편안할 안),全(온전할 전),保(지킬 보),障(막을 장),土(흙 토),防(막을 방),衛(지킬 위). <strong>③ 합친 뜻:</strong> 국가의 안전을 지킴·국토를 방어함. <strong>④ 이름의 이유:</strong> 군사력의 헌법적 목적을 정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가 존립·독립·기본질서와 영토를 보호하는 과제. <strong>⑥ 쉬운 말:</strong> 나라와 헌법질서를 지키지 집권자의 자리를 지키는 것은 아니다. <strong>⑦ 사례:</strong> 현행법의 모든 내용 영구유지 주장.</p>
+<p><strong>⑧ 시험:</strong> 241. <strong>⑨ 비교·기억법:</strong> 국가안전≠정권안전.</p>
+<h3>侵略·自衛 침략·자위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 侵(침노할 침),略(간략할 략; 빼앗다),自(스스로 자),衛(지킬 위). <strong>③ 합친 뜻:</strong> 쳐들어가 침해함·스스로 지킴. <strong>④ 이름의 이유:</strong> 안보 명분으로 타국 침략을 정당화하지 못하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국제법상 금지되는 무력침해와 엄격한 요건 아래의 방어를 구별. <strong>⑥ 쉬운 말:</strong> 불리한 상황이라는 이유만으로 먼저 점령할 수 없다. <strong>⑦ 사례:</strong> 이웃 나라 무력 점령 사례.</p>
+<p><strong>⑧ 시험:</strong> 231. <strong>⑨ 비교·기억법:</strong> 막연한 미래 위험과 임박한 공격 대응은 다름.</p>
+<h3>派兵·司法自制 파병·사법자제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 派(물갈래 파),兵(군사 병),司(맡을 사),法(법 법),自(스스로 자),制(법도 제; 억제하다). <strong>③ 합친 뜻:</strong> 군대를 보냄·재판 판단을 스스로 절제함. <strong>④ 이름의 이유:</strong> 기관별 판단능력·책임과 권한을 고려해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국군의 외국 파견과 정치적 판단 영역에 대한 사법적 신중함. <strong>⑥ 쉬운 말:</strong> 정치적 판단 성격을 이유로 법원이 판단을 삼가는 문제. <strong>⑦ 사례:</strong> 2003헌마814각하.</p>
+<p><strong>⑧ 시험:</strong> 231④. <strong>⑨ 비교·기억법:</strong> 자제≠모든 파병 합헌·침략 허용.</p>
+<h3>國民皆兵主義 국민개병주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국),民(백성 민),皆(다 개),兵(군사 병),主(주인 주),義(옳을 의). <strong>③ 합친 뜻:</strong> 국민 모두가 국방 부담을 짐. <strong>④ 이름의 이유:</strong> 방위를 특정 계층만의 일로 두지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동체 구성원이 국방의 의무를 부담하는 원칙. <strong>⑥ 쉬운 말:</strong> 나라를 지키는 부담은 공동체의 일이다. <strong>⑦ 사례:</strong> 헌법39①.</p>
+<p><strong>⑧ 시험:</strong> 242. <strong>⑨ 비교·기억법:</strong> 모든 사람이 동일한 방식으로 현역 복무한다는 뜻 아님.</p>
+<h3>兵力形成·動員 병력형성·동원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 兵(군사 병),力(힘 력),形(모양 형),成(이룰 성),動(움직일 동),員(인원 원). <strong>③ 합친 뜻:</strong> 방위 인력을 이루고 필요한 자원을 모음. <strong>④ 이름의 이유:</strong> 전투 외에도 국방을 가능하게 하는 활동이 필요해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 직접·간접 국방부담과 법정 인력·물자의 동원. <strong>⑥ 쉬운 말:</strong> 병사뿐 아니라 법정 지원 부담도 있다. <strong>⑦ 사례:</strong> 법률에 따른 군 병원·군수 활동.</p>
+<p><strong>⑧ 시험:</strong> 232. <strong>⑨ 비교·기억법:</strong> 일반 근로·납세가 곧 병력형성 의무는 아님.</p>
+<h3>軍令·軍政 군령·군정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 軍(군사 군),令(하여금 령),政(정사 정). <strong>③ 합친 뜻:</strong> 군의 명령·군의 행정. <strong>④ 이름의 이유:</strong> 작전과 행정의 권한 관계를 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 작전 지휘·병력 운용과 조직·인사·예산 등 관리. <strong>⑥ 쉬운 말:</strong> 어떻게 움직일지와 조직을 어떻게 운영할지의 차이. <strong>⑦ 사례:</strong> 대통령 아래 군령·군정 통합.</p>
+<p><strong>⑧ 시험:</strong> 233. <strong>⑨ 비교·기억법:</strong> 업무분담과 헌법상 독립된 최고권력 분리는 다름.</p>
+<h3>兵政統合·兵政分離 병정통합·병정분리</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 兵(군사 병),政(정사 정),統(거느릴 통),合(합할 합),分(나눌 분),離(떠날 리). <strong>③ 합친 뜻:</strong> 군령과 군정을 합침·나눔. <strong>④ 이름의 이유:</strong> 군사적 효율과 민주적 통제의 관계를 다루어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 군령·군정을 일반행정의 통제 안에 함께 두는 방식과 분리하는 방식. <strong>⑥ 쉬운 말:</strong> 작전권이 국가의 통제를 벗어나지 않게 한다. <strong>⑦ 사례:</strong> 우리 헌법의 통합주의.</p>
+<p><strong>⑧ 시험:</strong> 233②. <strong>⑨ 비교·기억법:</strong> 교재의 신속·효율 장점은 분리주의 항목.</p>
+<h3>文民優位 문민우위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 文(글월 문),民(백성 민),優(넉넉할 우),位(자리 위). <strong>③ 합친 뜻:</strong> 민간의 권력이 군보다 위에 있음. <strong>④ 이름의 이유:</strong> 무력 조직이 스스로 정치권력을 독점하지 못하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 군사에 관한 최고결정을 민간의 민주적 권력이 통제하는 원칙. <strong>⑥ 쉬운 말:</strong> 총을 가진 조직도 국민이 정한 헌법 아래 있다. <strong>⑦ 사례:</strong> 현역 총리·국무위원 임명 불가.</p>
+<p><strong>⑧ 시험:</strong> 244. <strong>⑨ 비교·기억법:</strong> 민간 지도자면 어떤 위헌명령도 가능 X.</p>
+<h3>副署 부서</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 副(버금 부),署(관청 서; 서명하다). <strong>③ 합친 뜻:</strong> 옆에 함께 서명함. <strong>④ 이름의 이유:</strong> 책임과 절차를 분명히 하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대통령 국법상 행위의 문서에 국무총리·관계 국무위원이 함께 서명하는 제도. <strong>⑥ 쉬운 말:</strong> 대통령 문서에 관련 책임자가 함께 이름을 남긴다. <strong>⑦ 사례:</strong> 헌법82 군사행위에도 적용.</p>
+<p><strong>⑧ 시험:</strong> 4-6. <strong>⑨ 비교·기억법:</strong> 부서라는 조직 단위 部署와 글자가 다름.</p>
+<h3>徵發·團體行動權 징발·단체행동권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 徵(부를 징),發(필 발),團(둥글 단),體(몸 체),行(다닐 행),動(움직일 동),權(권세 권). <strong>③ 합친 뜻:</strong> 필요한 자원을 징수·공동 행동할 권리. <strong>④ 이름의 이유:</strong> 군사목적이 민간의 재산·노동권에 영향을 주어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 군사상 법정 물자 등 확보와 근로자의 쟁의행위 등에 관한 권리. <strong>⑥ 쉬운 말:</strong> 군인이 아닌 사람도 제한의 대상이 될 수 있다. <strong>⑦ 사례:</strong> 주요 방위산업체 단체행동권 제한.</p>
+<p><strong>⑧ 시험:</strong> 245②. <strong>⑨ 비교·기억법:</strong> 단체행동권 제한≠노동3권 전부 소멸.</p>
+<h3>軍事機密·非公知 군사기밀·비공지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 軍(군사 군),事(일 사),機(틀 기),密(빽빽할 밀),非(아닐 비),公(공평할 공),知(알 지). <strong>③ 합친 뜻:</strong> 군사상 숨겨야 할 사항·널리 알려지지 않음. <strong>④ 이름의 이유:</strong> 국가안전과 민주적 정보교환을 함께 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적법한 지정 등과 실질적 비밀가치를 갖춘 비공지 군사정보. <strong>⑥ 쉬운 말:</strong> 진짜 숨길 이유가 있고 아직 공개되지 않은 정보여야 한다. <strong>⑦ 사례:</strong> 공개 수치에 기밀 도장 찍기.</p>
+<p><strong>⑧ 시험:</strong> 235·245④. <strong>⑨ 비교·기억법:</strong> 공지 사실 X,표시만으로 충분 X.</p>
+<h3>戰死·殉職·公傷 전사·순직·공상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 戰(싸움 전),死(죽을 사),殉(따라 죽을 순),職(벼슬 직),公(공평할 공),傷(상처 상). <strong>③ 합친 뜻:</strong> 전투 중 사망·직무 중 사망·공무상 부상. <strong>④ 이름의 이유:</strong> 보상·배상 관계의 적용 대상을 정하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 각 법률의 요건에 따른 군인 등의 사망·부상 구분. <strong>⑥ 쉬운 말:</strong> 어떤 직무와 관련해 사망·부상했는지 확인한다. <strong>⑦ 사례:</strong> 국가배상법2와 유족 고유 위자료.</p>
+<p><strong>⑧ 시험:</strong> 246③. <strong>⑨ 비교·기억법:</strong> 사적 손해 모두가 이에 해당하는 것은 아님.</p>
+<h3>慰藉料·固有權 위자료·고유권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 慰(위로할 위),藉(깔개 자),料(헤아릴 료),固(굳을 고),有(있을 유),權(권세 권). <strong>③ 합친 뜻:</strong> 마음의 고통에 대한 돈·자신에게 본래 속하는 권리. <strong>④ 이름의 이유:</strong> 상속받는 권리와 자기 손해의 청구를 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정신적 손해의 배상과 유족 자신의 권리. <strong>⑥ 쉬운 말:</strong> 가족을 잃은 자신의 고통에 대한 청구다. <strong>⑦ 사례:</strong> 2025국가배상법2③.</p>
+<p><strong>⑧ 시험:</strong> 5-3. <strong>⑨ 비교·기억법:</strong> 사망자의 배상청구권 상속과 같지 않음.</p>
+<h3>不穩表現物·精神戰力 불온표현물·정신전력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불),穩(편안할 온),表(겉 표),現(나타날 현),物(물건 물),精(정할 정),神(귀신 신),戰(싸움 전),力(힘 력). <strong>③ 합친 뜻:</strong> 질서를 위협한다고 보는 표현물·정신적 전투 역량. <strong>④ 이름의 이유:</strong> 도서 제한의 목적과 범위를 다투기 위해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 군의 사명·국가존립 등을 해치는 표현물의 제한과 정신적 임무수행 능력에 관한 개념. <strong>⑥ 쉬운 말:</strong> 어떤 책을 왜 막을 수 있는지가 문제다. <strong>⑦ 사례:</strong> 2008헌마638.</p>
+<p><strong>⑧ 시험:</strong> 236. <strong>⑨ 비교·기억법:</strong> 정부 비판 책 모두를 뜻하지 않음.</p>
+<h3>明確性·包括委任 명확성·포괄위임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 明(밝을 명),確(굳을 확),性(성품 성),包(쌀 포),括(묶을 괄),委(맡길 위),任(맡길 임). <strong>③ 합친 뜻:</strong> 내용이 분명함·넓게 맡김. <strong>④ 이름의 이유:</strong> 국민이 규칙을 알고 권력을 통제할 수 있게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 금지의 예측 가능성과 입법자가 기준 없이 하위법령에 맡기는 문제. <strong>⑥ 쉬운 말:</strong> 무엇이 금지인지,누가 핵심 기준을 정하는지 본다. <strong>⑦ 사례:</strong> 불온 개념과 군인사법 위임.</p>
+<p><strong>⑧ 시험:</strong> 236①–③. <strong>⑨ 비교·기억법:</strong> 군통수권이 모든 백지위임을 허용하는 것은 아님.</p>
+<h3>却下·棄却·破棄還送 각하·기각·파기환송</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 却(물리칠 각),下(아래 하),棄(버릴 기),破(깨뜨릴 파),還(돌아올 환),送(보낼 송). <strong>③ 합친 뜻:</strong> 요건상 물리침·주장을 배척·원판결을 깨고 돌려보냄. <strong>④ 이름의 이유:</strong> 재판 결과의 이유와 다음 절차가 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적법요건 부족,본안 주장 불인정,상급심의 재심리 명령을 구별. <strong>⑥ 쉬운 말:</strong> 못 들어간 것·검토했지만 안 받아준 것·다시 판단하라는 것은 다르다. <strong>⑦ 사례:</strong> 이라크·불온도서·후속 배상 사건.</p>
+<p><strong>⑧ 시험:</strong> 231·236. <strong>⑨ 비교·기억법:</strong> 각하=합헌 아님,파기환송=배상액 확정 아님.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제10강</h2><p><strong>TOP3:</strong> ①공직과 개인의 분리 ②신분보장≠현상유지 ③군도 헌법·기본권 심사 안에 있다.</p><table><thead><tr><th>쟁점</th><th>외울 문장</th><th>함정</th></tr></thead><tbody><tr><td>헌법7①</td><td>국민 전체의 봉사자·국민에 대한 책임</td><td>직업공무원만 X, 사생활 전부 공무 X</td></tr><tr><td>인사제도</td><td>경력직 성적제·정무직 엽관제적 요소</td><td>성적제=시험점수만 X</td></tr><tr><td>신분보장</td><td>정당한 사유 없는 불이익 금지</td><td>실제 조직개편의 합리적 면직까지 금지 X</td></tr><tr><td>전출</td><td>다른 자치단체로 옮기면 본인 동의</td><td>모든 내부전보와 동일 X; 공정력≠적법성</td></tr><tr><td>군의 사명</td><td>안전보장·국토방위+평화지향</td><td>정권 유지·불리한 정세를 이유로 침략 X</td></tr><tr><td>국방의 의무</td><td>직접·간접 병력형성, 근로·납세와 구별</td><td>내재적 부담≠이행을 이유로 추가 불이익</td></tr><tr><td>민주적 통제</td><td>군령·군정 통합, 문민우위, 정치적 중립</td><td>현역 총리·국무위원 임명 X</td></tr><tr><td>군사기밀</td><td>비공지+적법 절차+실질 비밀가치</td><td>도장만 찍으면 기밀 X</td></tr><tr><td>불온도서</td><td>2008헌마638:규율 기각, 위임법률·지시 각하</td><td>236④는 비판 논거; 실제 지정 위법성 별도</td></tr><tr><td>현행 보완</td><td>군사법원 예외 범죄,2025유족 고유 위자료</td><td>모든 군인 사건 군사재판·유족 청구 전부 금지 X</td></tr></tbody></table><p><strong>조문 묶음:</strong> 5군의 사명·중립/7공무원/29배상/33노동3권/37제한/39국방/60국회 동의/74통수/82부서/86·87현역 제한/89국무회의/110군사법원.</p><p><strong>반드시 외울 문장:</strong> 공적 권한에는 공적 의무가 따르지만 공무원과 군인도 기본권의 주체다. 특별한 신분은 법률유보와 비례성 심사를 생략할 이유가 아니다.</p><p><strong>사례를 풀 순서:</strong> 공적 직무인가 사생활인가→목적·법률 근거→구체적 제한과 예외→판례의 결론과 비판 구별→현재 법 확인.</p></section>
+
+<h1>학습 상태 점검</h1>
+<p>아직 답변을 받지 않았으므로 이해 수준을 임의로 확정하지 않는다. 스스로 다음 네 문장을 설명해 보자.①공무원 부모가 자기 아이에게 선물해도 되는 이유 ②신분보장 아래 직권면직이 가능한 조건 ③군사기밀 도장만으로 부족한 이유 ④236④가 합헌 논거가 아닌 이유.</p>
+<p>🟢 네 가지를 사례와 이유까지 설명하면 이해 완료. 🟡 결론은 알지만 이유가 막히면 복습 필요. 🔴 공직과 개인, 각하와 기각, 판례와 저자 비판을 섞으면 해당 부분을 다시 읽는다. <strong>복습 TOP3:1-1·1-4의 사람과 공직 / 2-3–2-6의 신분보장 / 5-2·5-5의 군사상 기본권 제한.</strong></p>
+<h1>교재·기출 대조와 현재 기준 메모</h1>
+<p>교재의 문단 역할과 사례를 쪽수 순서에 맞춰 재구성했다. 문장을 베껴 나열하지 않고 사례의 인물·갈등·법적 질문을 풀었다. 본문에 나온 판례의 결론과 저자의 비판은 분리했다. 원본 문제·정답은 바꾸지 않았다.</p>
+<table>
+<thead>
+<tr>
+<th>대조 지점</th>
+<th>학습할 때의 보완</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>263쪽 책임</td>
+<td>고의·중과실 기준을 모든 형사·징계책임에 일반화하지 않음</td>
+</tr>
+<tr>
+<td>238③</td>
+<td>과거 연금 결정의 논지;직무 무관 고의범죄까지 언제나 급여 제한 불가라는 뜻 아님</td>
+</tr>
+<tr>
+<td>230③</td>
+<td>집단행위의 제한적 해석과 공무원·교원 노조 관련 법정 예외</td>
+</tr>
+<tr>
+<td>284쪽 조문</td>
+<td>국무회의 심의는89조로 확인</td>
+</tr>
+<tr>
+<td>236·246④</td>
+<td>폐지된 군인복무규율에 관한 역사적 판례;현행 기본법과 구별</td>
+</tr>
+<tr>
+<td>246②</td>
+<td>군사법원법2②의 성폭력·사망 원인·신분 취득 전 범죄 등 예외</td>
+</tr>
+<tr>
+<td>246③</td>
+<td>다른 법령상 보상 요건 및2025국가배상법2③ 유족 고유 위자료</td>
+</tr>
+<tr>
+<td>불온도서 후속</td>
+<td>2018파기환송은 구체적 지정의 위법성과 배상책임 심사를 요구한 것</td>
+</tr>
+</tbody></table>
+<p>헌법 및 각 법령은 국가법령정보센터에서 조문·시행일을 확인한다. 웹에 표시되는2026.12.10. 시행 군인복무기본법의 새 조문을2026.10.25. 현재 이미 시행 중인 규정으로 혼동하지 않는다. 위 본문 링크는 현재 규정 보완과 주요 판례를 직접 확인할 수 있는 공식 자료다.</p>
+<h1>문제 부록 · 21문항·84개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_226"><h4>형성평가 · 헌법_226</h4><p class="question-stem">공무원과 공직에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>공무원이란 직접 또는 간접적으로 국민에 의하여 선출 또는 임용되어 국가나 공공단체와 공법상의 근무관계를 맺고 공공적 업무를 담당하고 있는 사람이다.</li><li>공직(公職)이란 국가가 기본권을 보장하고 공익을 추구하기 위하여 그 통치권을 분할하여 맡긴 기능을 행사할 수 있는 자리이다.</li><li>공무원이 임용되거나 선출되는 권한과 의무가 있는 자리가 공직이다.</li><li>공직을 맡은 개인과 공직은 구별되지 않으며, 공직을 맡은 사람은 그 모든 자유 행사에 있어서 공공성을 실현하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 정의다. 국민에 의한 직접·간접 선출·임용과 공법상 근무관계,공공업무라는 요소를 잡는다. 함정은 공무원을 시험 합격자만으로 좁히는 것.</li><li><strong>비선택</strong> · 공직이라는 자리를 설명한다. 국가가 권한을 나누어 맡긴 목적은 기본권 보장과 공익이다. 담당 개인의 사적 목적을 위한 소유물이 아니다.</li><li><strong>비선택</strong> · 권한·의무가 붙은 자리와 그 자리를 맡는 사람을 나눈 설명이다. 키워드는 사람/직위.</li><li><strong>선택</strong> · 틀린 보기이므로 선택. 공직을 맡은 사람과 공직은 구별된다. 공무원 부모가 자기 아이에게 선물했다고 모든 아이에게 선물할 의무가 생기지 않는다. 공직의 공공성을 모든 사생활에 옮긴 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공직을 맡은 개인과 공직은 구별되며, 공직의 공공성이 공무원의 인격에 결부되는 것이 아니다. 공무원이 자신의 아이에게 장난감을 선물할 때, 국가행위가 준수하는 평등원칙에 따라 다른 가정의 모든 아이에게 장난감을 선물해야 한다고 보는 것은 터무니없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_227"><h4>형성평가 · 헌법_227</h4><p class="question-stem">공무원의 기본권 제한에 관한 서술로 틀린 것은?</p><ol class="choices"><li>공무원의 기본권 제한의 특수한 근거 중 하나로 공무원이 담당하는 직무의 성질이 공적인 성격을 갖는다는 것이 거론된다.</li><li>공무원은 현행법상 정당가입 및 정치활동을 제한받고 있다.</li><li>공무원은 법률이 정하는 자에 한하여 노동3권(근로3권)이 인정된다.</li><li>헌법재판소는 공무원 역시 근로자로서의 성격을 가지므로, 공무원에 대한 수당 지급이 근로기준법보다 불리한 경우 이는 헌법상 금지되는 차별에 해당한다고 결정한 바 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 직무의 공적 성격은 특별한 제한을 설명하는 근거가 된다. 다만 그 말만으로 법률 근거·비례성 심사가 면제되지는 않는다.</li><li><strong>비선택</strong> · 일반적인 정치활동 제한을 설명한다. 구체적인 공무원 유형·행위·법정 예외를 확인해야 하며 모든 사적 생각을 금지한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 헌법33②의 구조다. 공무원 중 법률이 정하는 사람에게 노동3권이 인정된다. 별도 공무원·교원 노조법 등의 조건을 함께 확인한다.</li><li><strong>선택</strong> · 틀려서 선택.2016헌마404는 공무원 보수체계와 공무의 특수성 등을 고려해 기각했다. 일반 근로기준보다 불리하다는 사실 하나로 위헌차별이 된다는 주장은 판례와 반대다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌재 2017. 8. 31. 2016헌마404는 이를 합헌이라고 본 바 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_228"><h4>형성평가 · 헌법_228</h4><p class="question-stem">다음 중 집권당의 당파적 정실에 따라 공무원을 임면하고 승진시키는 공무원제도를 무엇이라고 하는가?</p><ol class="choices"><li>직업공무원제</li><li>엽관제</li><li>실적제</li><li>성적제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 비선택. 직업공무원제는 능력 중심 임용과 신분보장·중립을 바탕으로 계속적 행정을 확보하는 제도다. 정실 인사와 방향이 다르다.</li><li><strong>선택</strong> · 선택. 엽관제는 집권당의 당파적 정실에 따른 임면·승진 방식이다. 獵官은 관직을 사냥한다는 기억법으로 연결한다.</li><li><strong>비선택</strong> · 비선택. 실적제는 자격·능력·실증된 성과 중심의 인사다. 충성관계 중심인 문제의 설명과 반대다.</li><li><strong>비선택</strong> · 비선택. 성적제는 이 문맥에서 실적제와 같은 능력 중심 인사 원리다. 학교 시험점수만의 제도라는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_229"><h4>형성평가 · 헌법_229</h4><p class="question-stem">헌법 제7조 제2항의 &quot;공무원의 신분과 정치적 중립성은 법률이 정하는 바에 의하여 보장된다&quot;는 규정에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>법률에 의한 공무원의 신분과 정치적 중립성은 성적제와 함께 직업공무원제도 두 축을 이룬다.</li><li>'법률이 정하는 바'는 의회가 무제한적 형성재량을 가진다는 것이 아니라 직업공무원제의 본질을 의회가 법률로 구현할 책임이 있다는 의미이다.</li><li>그 임면과 승진을 원칙적으로 성적제에 의하지 아니하는 것, 공무원 임기를 행정부 수반의 임기와 일치하도록 만드는 법률 제정은 입법자의 재량 내에 있다.</li><li>법률로써 정하여야 할 공무원제도 내용으로는 과학적 직업분류제의 확립, 인사의 합리적 운영, 정치적 중립성의 보장과 능력 본위의 실적주의 확립, 독립된 인사행정기구의 설치 등이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 능력 중심 인사와 신분·중립의 보장이 함께 있어야 공무원이 정권에 줄 서지 않고 일할 수 있다. 서로 분리된 무관한 제도가 아니다.</li><li><strong>비선택</strong> · 맞다. 법률로 제도의 본질을 구현할 책임이지 의회가 내용을 마음대로 없애도 된다는 위임이 아니다. 법률유보≠무제한 재량.</li><li><strong>선택</strong> · 틀려서 선택. 경력공무원제의 원칙을 무너뜨려 정실 인사로 돌리거나 모든 임기를 행정부 수반과 일치시키는 것은 제도 본질의 침해다. 정무직 교체와 혼동하지 않는다.</li><li><strong>비선택</strong> · 제도의 합리적 구체화에 필요한 사항이다. 분류·인사·중립·능력·독립적 인사행정이 결합되어야 한다. 개별 모델 하나가 모두 헌법에 고정되어 있다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_230"><h4>형성평가 · 헌법_230</h4><p class="question-stem">다음 중 일반적으로 공무원에게 금지되어 있는 행위가 아닌 것은?</p><ol class="choices"><li>정당에 가입하는 것</li><li>선거에서 특정 정당 또는 특정인을 지지 또는 반대하기 위한 서명운동</li><li>사실상 노무에 종사하는 공무원 이외의 공무원으로서 공무 외의 일을 위한 집단 행위</li><li>사회정책에 관한 학술적 연구와 견해를 담은 책을 출간하는 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 공무원에 대한 법정 제한에 해당한다. 정무직·대학 교원 등 유형별 예외가 있으므로 공무원 전원이라는 절대명제로 확장하지 않는다.</li><li><strong>비선택</strong> · 특정 정당·후보를 위한 서명운동은 법정 정치운동 금지와 연결된다. 학술적 정책 연구와 구별하는 목적·행위 키워드다.</li><li><strong>비선택</strong> · 원본은 일반적인 집단행위 금지 규정에 해당한다고 본다. 다만 공익에 반하는 목적·직무전념 해태 등의 제한적 해석과 공무원·교원 노조법상 예외를 함께 읽어야 한다. 두 명 이상 모이면 모두 금지라는 뜻은 아니다.</li><li><strong>선택</strong> · 일반적으로 금지되는 행위가 아니므로 선택. 사회정책의 학술적 연구·견해를 출판했다는 사실만으로 정당 가입이나 특정 후보 지지운동이 되는 것은 아니다. 직무상 비밀 등 별도 문제는 사실관계에 따라 판단한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_231"><h4>형성평가 · 헌법_231</h4><p class="question-stem">헌법상 평화지향의 원칙에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법전문은 &quot;밖으로는 항구적인 세계평화(…)에 이바지함으로써&quot;라고 하여 이 원칙을 담고 있다.</li><li>국가의 안전보장과 국토방위 개념은 &quot;국제평화의 유지에 노력하고 침략적 전쟁을 부인한다&quot;(제5조 제1항)는 원칙에 부합하는 범위 내에서만 인정된다.</li><li>지리적인 국제정세의 변화가 자국에게 불리하게 전개되고 있다는 이유로 무력으로 인접국을 점령하는 행위는 국가의 안전보장을 위한 것이므로 평화지향의 원칙에 어긋나지 않는다.</li><li>헌법재판소는 외국에의 국군 파견은 고도의 정치적 결단을 요하는 문제로서, 헌법과 법률이 정한 절차를 지켜 이루어진 것임이 명백하므로, 대통령과 국회의 판단은 존중되어야 하고 헌법재판소가 사법적 기준만으로 이를 심판하는 것은 자제되어야 한다고 설시한 바 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 전문의 항구적 세계평화 지향은 평화원칙의 근거다. 장식적 문구만으로 취급하지 않는다.</li><li><strong>비선택</strong> · 안전보장·국토방위도5①의 평화원칙과 함께 해석한다.5②를 근거로 침략전쟁 금지를 무력화할 수 없다.</li><li><strong>선택</strong> · 틀려서 선택. 국제정세가 불리하다는 것만으로 타국 무력점령이 자위가 되지 않는다. 국가안전이라는 명칭으로 침략을 정당화한 함정이다.</li><li><strong>비선택</strong> · 2003헌마814의 사법적 자제 논지다. 그 사건은 각하였으며 모든 파병의 합헌성이나 침략전쟁의 적법성을 실체적으로 인정한 것은 아니다. 교재 저자의 비판과 판례를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_232"><h4>형성평가 · 헌법_232</h4><p class="question-stem">다음 중 틀린 서술은?</p><ol class="choices"><li>국방의 의무란 외국의 침략행위로부터 국가의 안전과 국토를 방위하기 위하여 부담하는 기본의무이다.</li><li>국방의 의무는 직ㆍ간접의 병력형성의무를 의미한다.</li><li>직접적인 병력형성의무에는 병역법에 따른 군복무의무, 예비군법에 의한 예비군복무의무, 민방위기본법에 의한 방공‧방재 등의 의무가 해당된다.</li><li>일반적인 사기업에서 근로를 하고 납세를 하는 사람은 그로써 간접적인 병력형성의무를 이행하는 것이므로 국방의 의무를 현실적으로 부담하고 있는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국방의 의무의 목적을 설명한 문장이다. 국가안전·국토방위를 위한 기본의무이며 평화원칙 안에서 이해한다.</li><li><strong>비선택</strong> · 군복무 외 법정 지원 부담을 포함하는 직접·간접 병력형성의 의미다. 전쟁터 전투만으로 한정하지 않는다.</li><li><strong>비선택</strong> · 교재가 분류한 병역·예비군·민방위의 법정 의무다. 평시에 부담하는 관련 의무도 국방의 범위에 포함될 수 있다.</li><li><strong>선택</strong> · 틀려서 선택. 일반 근로·납세는 별개의 기본의무다. 군수 활동 등 법률상 국방 동원과 일반 회사 근로를 섞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 근로의 의무와 납세의 의무는 국방의 의무와는 별개의 내용을 갖는 기본의무이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_233"><h4>형성평가 · 헌법_233</h4><p class="question-stem">병정통합주의에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>군령과 군정을 다 같이 일반행정기관이 관장하는 것을 말한다.</li><li>군작전‧용병에 있어 신속성과 효율성이 증대된다는 장점을 갖는다.</li><li>민주군정원칙에 충실하며 문민우위를 실현할 수 있는 방식이다.</li><li>우리 헌법은 국민에 의해 선출된 대통령에게 국군통수권을 부여하고 군령권과 군정권을 헌법상 분리하지 아니하여 병정통합주의를 채택하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통합주의의 핵심이다. 군령과 군정을 모두 일반행정의 민주적 통제 안에 둔다.</li><li><strong>선택</strong> · 틀려서 선택. 교재가 작전의 신속성·효율성이라는 장점으로 제시한 것은 군령의 독립성을 강조하는 분리주의다. 통합주의의 민주적 통제와 대비한다.</li><li><strong>비선택</strong> · 군령을 통제 밖에 두지 않으므로 민주군정·문민우위에 연결된다. 군 지휘부가 독립 정치권력이 되어서는 안 된다.</li><li><strong>비선택</strong> · 우리 헌법은 대통령에게 국군통수권을 부여하며 군령·군정을 헌법상 독립된 최고권력으로 나누지 않는다. 실무적 업무분담과 다른 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②는 병정분리주의(군령‧군정이원주의)에 대한 설명이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_234"><h4>형성평가 · 헌법_234</h4><p class="question-stem">군이 정치적 편향성을 띠는 경우 민주주의는 그 근저에서부터 흔들린다는 점을 고려하여 두 차례의 군사정변 및 군부독재를 반복하지 않도록 특별히 둔 조항은 무엇인가?</p><ol class="choices"><li>&quot;국군은 (…) 그 정치적 중립성은 준수된다.&quot;(헌법 제5조 제2항)</li><li>&quot;국제평화의 유지에 노력하고 침략적 전쟁을 부인한다.&quot;(헌법 제5조 제1항)</li><li>&quot;공무원의 신분과 정치적 중립성은 (…) 보장된다.&quot;(헌법 제7조 제2항)</li><li>&quot;교육의 자주성‧전문성‧정치적 중립성 및 대학의 자율성은 (…) 보장된다.&quot;(헌법 제31조 제4항)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 선택.5② 군의 정치적 중립성 준수 조항이다. 군사정변·군부통치를 되풀이하지 않으려는 역사적 취지와 직접 연결된다.</li><li><strong>비선택</strong> · 비선택.5①의 국제평화·침략전쟁 부인이다. 평화원칙과 군의 정치적 중립은 함께 중요하지만 조문과 직접 목적이 다르다.</li><li><strong>비선택</strong> · 비선택.7②의 공무원 신분·중립 보장이다. 군에 특별히 둔5②를 묻는 문제에서는 구별한다.</li><li><strong>비선택</strong> · 비선택.31④의 교육 자주성·전문성·중립·대학 자율성이다. 다음 강 교육제도와 연결하며 군의 중립 조항으로 바꾸지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_235"><h4>형성평가 · 헌법_235</h4><p class="question-stem">그에 관한 국민의 의견과 사상의 교환, 민주적 토론이 제한될 수 있는 군사기밀이 되려면 갖추어야 하는 요건에 해당하지 않는 것은?</p><ol class="choices"><li>공지의 사실이어야 한다.</li><li>관계기관에 의하여 적법절차에 따라 군사기밀로 분류 표시 또는 고지된 군사 관련 사항이어야 한다.</li><li>누설될 경우 국가의 안전보장에 명백한 위험이 초래된다고 할 수 있을 정도여야 한다.</li><li>그 내용 자체가 실질적인 비밀가치를 가져야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 요건이 아니므로 선택. 공지가 아니라 비공지여야 한다. 이미 알려진 사실을 기밀 딱지로 자유롭게 토론할 수 없는 정보로 바꿀 수 없다.</li><li><strong>비선택</strong> · 적법한 분류·표시 또는 고지의 절차적 요건이다. 다만 이것만으로 충분하지 않고 내용의 실질적 비밀가치도 필요하다.</li><li><strong>비선택</strong> · 실질적 비밀가치의 안보상 기준과 연결된다. 누설 시 명백한 위험이 있을 정도여야 하며 막연한 불편이나 비판 회피는 다르다.</li><li><strong>비선택</strong> · 형식적 지정만 아니라 내용 자체에 비밀로 보호할 가치가 있어야 한다. 절차+내용을 함께 보는 것이 출제 의도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 비공지의 사실이어야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_236"><h4>형성평가 · 헌법_236</h4><p class="question-stem">다음 군인복무규율 제16조의 2가 합헌이라고 보는 입장과 어울리지 않는 진술은?<br><br>▪군인복무규율(1998. 12. 31. 대통령령 제15954호로 개정된 것) 제16조의2(불온표현물 소지‧전파등의 금지) 군인은 불온유인물‧도서‧도화 기타 표현물을 제작‧복사‧소지‧운반‧전파 또는 취득하여서는 아니 되며, 이를 취득한 때에는 즉시 신고하여야 한다.<br>▪군인사법(1966. 10. 4. 법률 제1837호로 개정된 것) 제47조의2(복무규율) 군인의 복무에 관하여는 이 법에 규정한 것을 제외하고는 따로 대통령령이 정하는 바에 의한다.</p><ol class="choices"><li>군인복무규율 조항은 국군의 이념 및 사명을 해할 우려가 있는 도서로 인하여 군인들의 정신전력이 저해되는 것을 방지하기 위한 조항이고, 규범의 의미내용으로부터 무엇이 금지되고 무엇이 허용되는 행위인지를 예측할 수 있다.</li><li>군인사법 조항이 헌법이 대통령에게 부여한 군통수권을 실질적으로 존중한다는 차원에서 군인의 복무에 관한 사항을 규율할 권한을 대통령령에 위임한 것이라 할 수 있다.</li><li>군통수권 존중과 관련된 사항은 대통령령으로 규정될 내용 및 범위에 관한 기본적인 사항을 다소 광범위하게 위임하였다 하더라도 포괄위임입법금지원칙에 위배되지 않는다.</li><li>군인의 정신전력이 일반 국민들은 모두 자유롭게 읽을 수 있는 것을 군인들에 대해서만은 제한하여 정치에 관하여 정보를 박탈하고 무지한 상태로 두어 달성될 수 있는 것으로 상정되는 경우, 통상적인 정보에 대하여도 민감하게 반응하게 되므로 그 정신전력 상태를 유지하기 위한 제한대상이 더 많아지는 악순환이 발생한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합헌적 입장과 어울리므로 비선택. 군의 사명·정신전력을 보호할 목적과 금지행위의 예측 가능성을 인정하는 논리다. 불온의 범위를 좁혀 해석했다는 점을 함께 읽는다.</li><li><strong>비선택</strong> · 비선택. 군통수권을 실질적으로 존중하며 복무 사항을 대통령령에 맡겼다는 정당화 논리다. 국회가 핵심 기준을 전혀 정할 필요가 없다는 일반명제로 확장하지 않는다.</li><li><strong>비선택</strong> · 비선택. 그 사건의 군통수권·복무규율 문맥에서 위임의 폭을 허용하는 논리다. 모든 군사 관련 백지위임이 합헌이라는 뜻은 아니다.</li><li><strong>선택</strong> · 합헌 논거와 어울리지 않으므로 선택. 정보를 차단할수록 더 차단해야 한다는 악순환과 금지범위의 불확실성을 지적하는 교재의 비판이다. 판례 법정의견과 저자의 평가를 섞는 함정을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그와 같은 악순환이 발생하면 정신전력을 저해하는 도서의 범위는 계속 커지게 되므로 금지되고 허용되는 행위를 예측하는 것이 불가능하게 된다. 따라서 ④는 합헌 결정에 반대되는 논거이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_237"><h4>워크북 · 헌법_237</h4><p class="question-stem">헌법 제7조 제1항의 &quot;공무원은 국민 전체에 대한 봉사자이며, 국민에 대하여 책임을 진다&quot;는 규정에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>여기서 공무원은 직업공무원제의 적용을 받는 공무원만을 가리킨다.</li><li>국민 전체에 대한 봉사자란 공직의 수행에 있어서 국민의 자유와 권리의 보장 및 공익 이외의 목적을 추구하지 않는다는 의미를 내포한다.</li><li>여기서의 책임은 구체적ㆍ일률적인 법적ㆍ정치적 책임이 아니라 법적ㆍ정치적 책임을 도출시킬 수 있는 근본적 책임을 의미하다.</li><li>국민에 대하여 책임을 진다는 것은 공공의 목적에 따라 맡은 바의 공적 기능을 충실하게 이행하여야 할 지위에 있다는 의미이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 선택.7①은 최광의의 공무원을 가리켜 정무직과 공무수탁사인도 포함한다. 직업공무원제의 적용 범위와 같은 것으로 좁힌 함정이다.</li><li><strong>비선택</strong> · 공적 권한의 수행 목적을 설명한다. 국민의 자유·권리와 공익을 위해 일해야 하며 특정 정치인·집단의 사익을 위한 봉사자가 아니다.</li><li><strong>비선택</strong> · 헌법상 근본 책임과 개별 법률의 구체적 책임요건을 구별한다. 헌법 문장만으로 모든 사람에게 동일한 민사·형사·정치 책임이 자동 발생하지 않는다.</li><li><strong>비선택</strong> · 맡은 공적 기능을 공공 목적에 맞게 충실히 수행할 지위라는 뜻이다. 사생활까지 전부 국가행위가 된다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 여기서 공무원은 최광의의 공무원으로서, 직업공무원제의 적용을 받지 않는 정무직 공무원은 물론, 공무수탁사인까지 포함한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_238"><h4>워크북 · 헌법_238</h4><p class="question-stem">공직과 공무원 개인이 구별된다는 입장에서 '국민 전체에 대한 봉사자' 개념과 기본권 제한의 관계를 서술하는 것과 가장 어울리지 않는 진술은?</p><ol class="choices"><li>'봉사자'는 대가 없이 희생하는 사람을 말하므로, 공무원에게 같은 범죄에 대하여 일반 국민보다 더 가중된 형벌을 부과하는 것은 합리적인 차별이다.</li><li>공정한 직무집행 자체를 위하여 그 공무와 실질적으로 관련성을 갖는 부분에 한하여 기본권을 제한할 수 있다.</li><li>공무원의 신분이나 직무상 의무와 관련이 없는 재직 중 범죄의 경우에도 퇴직급여 등을 제한하는 것은 방법의 적정성이 부인된다.</li><li>과실범에 있어서 공무원이기 때문에 더 강한 주의의무 내지 결과발생에 대한 가중된 비난 가능성이 있다고 보기 어렵다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 가장 어울리지 않으므로 선택. 봉사를 무대가 희생과 동일시한 뒤 같은 범죄에 일률적 가중형벌을 정당화한다. 공직과 실제 관련성을 따져야 한다.</li><li><strong>비선택</strong> · 공정한 직무집행과 실질적 관련성이 있는 제한을 요구하는 입장이다. 공무원이라는 신분만으로 무제한 제한을 허용하지 않는다.</li><li><strong>비선택</strong> · 교재가 소개한 종전 연금 결정의 취지다. 다만 후속2010헌가89는 직무 무관 과실범 등을 제외한 개정 규정을 합헌으로 보았다. 모든 직무 무관 고의범죄의 급여 제한까지 항상 불가라고 외우면 안 된다.</li><li><strong>비선택</strong> · 일반적인 사생활의 과실범에서 공무원이라는 이유만으로 언제나 더 큰 비난 가능성을 전제할 수 없다는 논리다. 실제 직무상 특별 주의의무가 있는 경우와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_239"><h4>워크북 · 헌법_239</h4><p class="question-stem">대한민국은 원칙적으로는 경력직 공무원에서는 ( ), 정무직 공무원에서는 ( )를 택하고 있다고 볼 수 있다. 괄호 안에 들어갈 알맞은 말은?</p><ol class="choices"><li>성적제, 엽관제</li><li>엽관제. 성적제</li><li>성적제, 실적제</li><li>실적제, 성적제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 선택. 경력직은 성적제·실적제,정무직은 엽관제적 요소가 기본 구도다. 계속 행정과 정책적 책임의 차이를 떠올린다.</li><li><strong>비선택</strong> · 비선택. 두 범주를 뒤집었다. 경력직까지 정권의 전리품으로 삼는 것은 직업공무원제와 충돌한다.</li><li><strong>비선택</strong> · 비선택. 성적제와 실적제는 여기서 같은 능력주의 계열이다. 정무직의 정치적 정책책임이라는 차이를 설명하지 못한다.</li><li><strong>비선택</strong> · 비선택. 역시 두 표현을 바꾸어 놓았을 뿐 엽관제적 요소가 빠져 있다. 단어의 겉모양이 아닌 기준의 차이를 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_240"><h4>워크북 · 헌법_240</h4><p class="question-stem">법률에 의한 공무원의 신분보장(헌법 제7조 제2항)에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>공무원 본인의 귀책사유나 조직의 개편과 같은 정당한 사유 없이는 신분상 불이익을 받지 아니한다는 것이다.</li><li>법률에 의한 신분보장은 여건이 어떻게 변하더라도 기대했던 바 그대로의 공무원 신분을 유지해주어야 할 헌법상 의무를 의미한다.</li><li>정부조직의 실질적 개폐나 예산의 감소 등에 의하여 폐직(廢職) 또는 과원(過員)이 되었을 때 합리성 있는 직권면직은 가능하다.</li><li>지방공무원의 의사에 반하여 지방자치단체장들 간의 동의만으로 지방공무원을 전입ㆍ전출시키는 것은 공무원의 신분보장에 어긋난다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정당한 사유 없이 불이익을 주지 않는다는 원칙이다. 귀책사유나 실제 조직 개편이 있더라도 합리적 요건·기준·절차를 지켜야 한다.</li><li><strong>선택</strong> · 틀려서 선택. 신분보장은 모든 여건 변화에도 기대한 지위를 그대로 유지하는 절대적 보장이 아니다. 제도개선과 신뢰보호의 조화를 본다.</li><li><strong>비선택</strong> · 실제 폐직·과원과 합리적 기준·절차 아래 직권면직은 가능하다. 이름만 바꾼 조직 개편을 구실로 한 자의적 해임과 구별한다.</li><li><strong>비선택</strong> · 다른 자치단체로 옮기는 것은 임용권자·근무관계 상대방의 변경이므로 본인 동의가 필요하다는 판례와 연결된다. 내부 전보 전체에 같은 결론을 적용하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_241"><h4>워크북 · 헌법_241</h4><p class="question-stem">다음 중 헌법 제5조 제2항의 &quot;국군은 국가의 안전보장과 국토방위의 신성한 의무를 수행함을 사명으로 하며&quot;에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국가의 안전보장과 국토방위의 사명이 국군의 과제이다.</li><li>국가는 경제성장을 위한 과제를 수행할 수 있지만 국군은 경제성장을 위해 군사력을 사용할 수 없다.</li><li>국가의 안전보장은 헌법상 중요한 국가적 법익의 하나로서 국가의 존립, 헌법의 기본질서의 유지 등을 포함하는 개념이다.</li><li>헌법과 법률의 세부적 내용의 현상유지는 국가의 안전보장에 속한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 5②의 직접 사명이다. 군의 권한은 국가안전·국토방위를 위해 행사되어야 한다.</li><li><strong>비선택</strong> · 국가 일반의 경제성장 과제를 군사력 사용의 독자적 근거로 바꿀 수 없다는 뜻이다. 안보를 빙자한 경제적 침략 등을 정당화하지 못한다.</li><li><strong>비선택</strong> · 국가의 존립·기본질서 유지라는 법익을 말한다. 민주적 정권 교체나 적법한 헌법·법률 개정까지 저지하는 것은 아니다.</li><li><strong>선택</strong> · 틀려서 선택. 헌법·법률의 모든 세부 내용을 현상 유지하는 것은 국가안전보장의 의미가 아니다. 기본질서·법기능 보호와 현 집권질서의 영구화를 섞은 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_242"><h4>워크북 · 헌법_242</h4><p class="question-stem">모든 구성원이 국방의 의무를 지는 원칙을 무엇이라고 하는가?</p><ol class="choices"><li>국민개병주의</li><li>병정통합주의</li><li>병력형성주의</li><li>국토방위주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 선택. 모든 구성원이 국방 부담을 진다는 국민개병주의다. 皆는 다 개로 기억한다.</li><li><strong>비선택</strong> · 비선택. 군령·군정의 통합과 민주적 통제에 관한 제도다. 누가 국방 부담을 지는지의 문제와 다르다.</li><li><strong>비선택</strong> · 비선택. 병력형성은 국방의무의 내용 설명에 쓰이지만 문제에서 묻는 원칙의 명칭은 국민개병주의다.</li><li><strong>비선택</strong> · 비선택. 국토방위는 군의 사명이다. 모든 구성원이 의무를 부담하는 원칙의 명칭과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_243"><h4>워크북 · 헌법_243</h4><p class="question-stem">다음 중 &quot;누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다&quot;(헌법 제39조 제2항)는 규정에 관한 서술로 틀린 것은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>불이익한 처우' 개념에서 국민개병주의에 내재하였거나 이에 당연히 수반되는 국민의 부담은 제외된다.</li><li>병역의무를 이행하는 동안 군형법을 적용받는 것은 불이익한 처우에 해당하지 않는다.</li><li>병역의무를 지는 사람이 병역을 이행하느라 병역기간 동안만큼 취업이 늦어지는 것은 불이익한 처우에 해당한다.</li><li>병역의무를 이행했다는 이유로 더 고율의 세금을 납부해야 할 법적 의무를 지는 것은 불이익한 처우에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 판례의 구별이다. 의무 자체에 내재하거나 당연히 따르는 부담을 별도의 불이익 처우와 동일시하지 않는다.</li><li><strong>비선택</strong> · 복무 중 군형법의 적용 자체를39②가 금지하는 별도 불이익으로 보지 않는다. 개별 처벌규정의 다른 헌법적 문제까지 모두 면제되는 것은 아니다.</li><li><strong>선택</strong> · 틀려서 선택. 복무로 인한 취업 시기의 지연은 의무 이행에 내재한 부담이라는 판례 논리다.39②가 모든 기회비용의 완전 보상을 명한다는 뜻으로 바꾸지 않는다.</li><li><strong>비선택</strong> · 복무를 이행했다는 이유로 세율을 더 높이는 것은 의무 이행 뒤 별도로 얹는 불이익이다. 내재적 부담과 추가 차별의 비교사례다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_244"><h4>워크북 · 헌법_244</h4><p class="question-stem">문민우위의 원칙에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>군인이 아닌 민간인이 군사에 관한 최고결정권자여야 한다는 것이다.</li><li>헌법상 대통령이 헌법과 법률이 정하는 바에 의하여 국군을 통수한다는 것은 문민우위의 원칙의 구현이다.</li><li>군정작용에 대한 국회의 국정감사ㆍ조사권, 국방예산에 대한 심의ㆍ확정권은 문민우위 원칙의 구현이다.</li><li>헌법은 현역 군인이 국무총리ㆍ국무위원을 겸할 수 있다고 규정하고 있어 문민우위 원칙의 예외를 두고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문민우위의 핵심 정의다. 군사에 대한 최고결정은 민간의 민주적 권력이 맡는다.</li><li><strong>비선택</strong> · 대통령의 통수권은 헌법·법률 아래의 권한으로 문민통제에 연결된다. 대통령 개인의 무제한 명령권으로 읽지 않는다.</li><li><strong>비선택</strong> · 국회의 감사·조사·예산 통제를 통해 군정도 국민 대표의 통제에 놓인다. 국방이라는 말로 재정통제를 배제할 수 없다.</li><li><strong>선택</strong> · 틀려서 선택.86③·87④는 현역을 면한 후가 아니면 국무총리·국무위원으로 임명할 수 없다고 규정한다. 현역 겸직 허용으로 뒤집은 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 군인은 현역을 면한 후가 아니면 국무총리ㆍ국무위원으로 임명될 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_245"><h4>워크북 · 헌법_245</h4><p class="question-stem">다음 중 군사영역에 있어서 기본권 제한에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법 제37조 제2항은 개인의 자유와 권리를 제한할 수 있는 사유로 국가안전보장을 들고 있다.</li><li>군인이 아닌 일반 국민은 군사목적을 위하여 법률로써 자유와 권리가 제한되는 경우가 없다.</li><li>군사목적을 위한 기본권 제한에서도 과잉금지원칙을 비롯한 모든 법치국가원칙을 준수해야 한다.</li><li>공지의 사실이나 실질적인 비밀가치를 지니지 않은 사실을 만연히 자의적으로 군사기밀로 지정하여 군사사항에 관한 국민의 의견과 사상의 교환, 민주적 토론을 금지하는 것은 헌법상 허용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 37②는 국가안전보장을 제한 목적의 하나로 든다. 법률 근거·필요성·본질적 내용 보장 등의 한계도 함께 있다.</li><li><strong>선택</strong> · 틀려서 선택. 징발·군사시설 보호·주요 방위산업체 단체행동권·기밀 보호처럼 일반 시민도 군사목적의 법정 제한을 받을 수 있다.</li><li><strong>비선택</strong> · 군사목적도 과잉금지·법률유보 등 법치원칙 안에서 추구해야 한다. 군사라는 이유로 기본권 심사를 생략할 수 없다.</li><li><strong>비선택</strong> · 실질적 비밀가치 없는 정보나 공지 사실을 자의적으로 비밀화하여 토론을 막을 수 없다.235의 세 가지 기준과 연결한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 예를 들어 징발법(徵發法), 군사기지 및 군사시설 보호법, 방위산업체 근로자 단체행동권 제한, 군사기밀보호에 관한 법률 등이 일반 국민의 자유와 권리를 군사목적을 위해 제한하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_246"><h4>워크북 · 헌법_246</h4><p class="question-stem">군인의 기본권 제한에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>군인은 공무원으로서의 기본권 제한에 더하여 군인으로서 추가적인 제한을 받을 수 있다.</li><li>군인은 특별법원인 군사법원에 의해 형사재판을 받는다</li><li>군인과 군무원은 전투ㆍ훈련 등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상 외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.</li><li>대법원은 군무에 영향을 주지 아니하는 순수한 친목단체에의 가입이나 친목활동을 제외한 일체의 사회단체에 국방부장관이 허가하는 경우를 제외하고는 가입할 수 없도록 한 법령이 기본권의 본질적인 내용을 침해한다고 판결한 바 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 군인은 공무원으로서의 제한 외에 군사 직무의 특수성에 따른 추가 제한을 받을 수 있다. 그 추가 제한도 헌법적 근거·한계를 지켜야 한다.</li><li><strong>비선택</strong> · 원본은 군사법원이라는 특별법원에 관한 일반론으로 맞는 보기 취급이다. 현행은 성폭력범죄·군인 사망 원인 범죄·신분 취득 전 범죄 등 군사법원법2②의 예외가 있으므로 모든 군인 사건이 군사재판이라는 절대명제로는 부정확하다. 원본 정답은 보존한다.</li><li><strong>비선택</strong> · 29②의 일반적인 추가 배상 제한을 설명한다. 법정 대상·직무 관련성·다른 법령상 보상 가능성 등의 요건을 확인한다.2025신설 국가배상법2③은 전사·순직 군인 등의 유족 자신의 정신적 손해에 대한 위자료 청구를 허용하므로 유족의 모든 청구 금지로 확대하지 않는다.</li><li><strong>선택</strong> · 원본 정답.90누4839는 당시의 사회단체 가입 제한을 기본권 본질 침해라고 판결하지 않았다. 결론을 반대로 쓴 보기다. 구 군인복무규율은2016폐지되었으므로 현재 기본법31조와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 특수한 신분관계에 있는 군인에 대하여 국방목적 수행상 필요한 군복무에 관한 규을로서 그 규제가 합리성을 결여하지 않아 가본권의 본질적인 내용을 침해하지 않는다고 하였다(대판 1991. 4 23 90누4839)</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 10' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 10|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

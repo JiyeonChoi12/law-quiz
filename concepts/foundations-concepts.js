@@ -1,0 +1,1585 @@
+window.FOUNDATIONS_CONCEPTS={
+  "pages": {
+    "헌법": "./concepts/헌법의기초_개념.html"
+  },
+  "routes": [
+    {
+      "prefix": "foundations-01-",
+      "page": "./concepts/헌법의기초_제1강_헌법의_개념과_해석_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-02-",
+      "page": "./concepts/헌법의기초_제2강_헌법의_제정과_개정_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-03-",
+      "page": "./concepts/헌법의기초_제3강_헌법수호와_헌법전문_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-04-",
+      "page": "./concepts/헌법의기초_제4강_국민주권과_자유민주적_기본질서_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-05-",
+      "page": "./concepts/헌법의기초_제5강_법치주의_원리_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-06-",
+      "page": "./concepts/헌법의기초_제6강_사회국가원리_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-07-",
+      "page": "./concepts/헌법의기초_제7강_국제평화주의와_문화국가원리_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-08-",
+      "page": "./concepts/헌법의기초_제8강_정당제도_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-09-",
+      "page": "./concepts/헌법의기초_제9강_선거제도_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-10-",
+      "page": "./concepts/헌법의기초_제10강_공무원제도와_군사제도_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-11-",
+      "page": "./concepts/헌법의기초_제11강_교육제도와_가족제도_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-12-",
+      "page": "./concepts/헌법의기초_제12강_지방자치제도_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-13-",
+      "page": "./concepts/헌법의기초_제13강_기본권의_개념과_효력_및_구조_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-14-",
+      "page": "./concepts/헌법의기초_제14강_기본권의_포기와_보호의무_및_제한_통합과외본.html"
+    },
+    {
+      "prefix": "foundations-15-",
+      "page": "./concepts/헌법의기초_제15강_기본권_침해에_대한_구제_통합과외본.html"
+    }
+  ],
+  "titles": {
+    "foundations-01-01": "정치공동체·주권·통치권",
+    "foundations-01-02": "법치·정당성·효력·근본적 규범설계",
+    "foundations-01-03": "성문·불문, 연성·경성",
+    "foundations-01-04": "형식적 헌법과 실질적 헌법",
+    "foundations-01-05": "서울 수도 사건: 법정의견·별개의견·반대의견",
+    "foundations-01-06": "심화: 관습의 정당화와 저자의 여섯 조건",
+    "foundations-01-07": "기본권 규정과 헌법위임 규정",
+    "foundations-01-08": "조례를 안 만들고, 해고 보호에서 빼 버리면",
+    "foundations-01-09": "국가목표와 조직·권한·절차 규정",
+    "foundations-01-10": "근대시민국가헌법의 출발",
+    "foundations-01-11": "현대 사회복지국가헌법은 왜 필요한가",
+    "foundations-01-12": "사실적 특질은 정치성·이념성·역사성",
+    "foundations-01-13": "규범적 특질과 최고규범성",
+    "foundations-01-14": "해석·자유연상·자연주의의 오류",
+    "foundations-01-15": "네 가지 해석카논과 교재의 사례",
+    "foundations-01-16": "조세법률주의: 해석방법의 기계적인 순위는 없다",
+    "foundations-01-17": "해석의 두 제약과 대통령 40세 사례",
+    "foundations-01-18": "법정의견과 다른 의견, 5대4의 함정",
+    "foundations-01-19": "선례 존중과 법의 통합성",
+    "foundations-01-20": "양심적 병역거부: 2004년과 2018년",
+    "foundations-01-21": "합헌적 법률해석과 미결수용자의 접견",
+    "foundations-01-22": "문언·입법목적·헌법수용의 한계",
+    "foundations-01-23": "심화: 모내기 그림과 구제의 빈틈",
+    "foundations-02-01": "헌법제정과 헌법제정권력",
+    "foundations-02-02": "닭과 달걀: 힘이 먼저인가, 정당한 규범이 먼저인가",
+    "foundations-02-03": "개인도덕·정치도덕·구조적 정치도덕",
+    "foundations-02-04": "개정의 뜻·필요성·위험",
+    "foundations-02-05": "현행 개헌 절차와 외국 예시 보완",
+    "foundations-02-06": "파괴·폐제·침해·정지·변천 비교",
+    "foundations-02-07": "개정의 한계 긍정설·부정설",
+    "foundations-02-08": "현직 대통령의 임기 연장: 두 단계로 하면 괜찮을까",
+    "foundations-02-09": "마버리 사건과 미국 대통령선거",
+    "foundations-02-10": "지방의회 공백과 총리서리 사건",
+    "foundations-02-11": "제헌 이전의 흐름과 1948년 헌법",
+    "foundations-02-12": "1952년 발췌·1954년 사사오입",
+    "foundations-02-13": "1960년 두 개헌: 의원내각제와 소급법",
+    "foundations-02-14": "1962년 복귀·1969년 3선·1972년 유신",
+    "foundations-02-15": "1980년 7년 간선·1987년 5년 직선",
+    "foundations-02-16": "헌법 번호·개정 차수·교재 정정표",
+    "foundations-02-17": "긴급조치 피해: 옛 헌법이 현재의 구제를 막는가",
+    "foundations-02-18": "성공한 내란·공소시효·보통의 민사관계",
+    "foundations-03-01": "헌법수호의 지도",
+    "foundations-03-02": "사전예방: 권력이 어기기 어렵게 설계한다",
+    "foundations-03-03": "사후교정: 위반을 멈추고 책임을 묻는다",
+    "foundations-03-04": "국가비상사태와 헌법기관의 장애",
+    "foundations-03-05": "세 가지 국가긴급권 비교",
+    "foundations-03-06": "저항권의 엄격한 조건과 97헌가4",
+    "foundations-03-07": "저항권과 다른 전제·롤즈의 세 조건",
+    "foundations-03-08": "교재 사례: 버스 좌석 차별과 방역 비판",
+    "foundations-03-09": "낙선운동 판결: 이름보다 실제 방식",
+    "foundations-03-10": "전문의 뜻·규범력·네 묶음",
+    "foundations-03-11": "독립유공자 예우 사건: 일반 의무와 개별 청구는 다르다",
+    "foundations-03-12": "역사·전통: 동성동본 금혼과 법질서의 연속성",
+    "foundations-03-13": "대한국민·3·1운동·임시정부 법통",
+    "foundations-03-14": "4·19민주이념: 부정선거와 독재에 대한 저항",
+    "foundations-03-15": "폐습·불의: 국가의 간섭금지와 보호의무",
+    "foundations-03-16": "자유민주적 기본질서: 무제한 다수결이 아니다",
+    "foundations-03-17": "기회균등·사회국가·자기책임",
+    "foundations-03-18": "세계평화·인류공영·세대 간 정의·행복",
+    "foundations-04-01": "국가형태와 정부형태",
+    "foundations-04-02": "민주: 표를 세기 전에 말할 자유가 있어야 한다",
+    "foundations-04-03": "공화: 이긴 편만의 나라가 아니다",
+    "foundations-04-04": "민주와 공화가 겹쳐도 괜찮은 이유",
+    "foundations-04-05": "인적 적용범위와 국적·영주권",
+    "foundations-04-06": "법률로 국민을 정한다고 마음대로 배제할 수 있을까",
+    "foundations-04-07": "국적 취득의 지도: 출생과 그 이후",
+    "foundations-04-08": "국적 상실: 원인마다 시점과 구제 방식이 다르다",
+    "foundations-04-09": "병역과 복수국적: 원칙과 예외를 두 칸에",
+    "foundations-04-10": "두 국적이탈 판례를 시간 순서로",
+    "foundations-04-11": "재외국민 보호: 국가의 의무도 국경에서 끝나지 않는다",
+    "foundations-04-12": "재외국민과 외국국적동포를 구별하자",
+    "foundations-04-13": "북한주민의 국적과 평화통일의 요구",
+    "foundations-04-14": "북한 관련 네 사건: 같은 국적, 다른 법의 목적",
+    "foundations-04-15": "주권자·최고기관·기본권 주체·피치자",
+    "foundations-04-16": "영역과 영토: 땅·바다·하늘을 나누기",
+    "foundations-04-17": "영해·기선·배타적 경제수역",
+    "foundations-04-18": "영공과 NLL: 서로 다른 종류의 경계",
+    "foundations-04-19": "영토조항과 평화통일조항을 함께 지키는 법",
+    "foundations-04-20": "주권의 의미와 역사",
+    "foundations-04-21": "주권은 하나, 통치권은 나누어 행사한다",
+    "foundations-04-22": "심화: 정치신학적 사고를 경계하는 이유",
+    "foundations-04-23": "일반의사와 합리적 의사소통",
+    "foundations-04-24": "대표제·자유위임·국민투표가 연결되는 방식",
+    "foundations-04-25": "자유민주적 기본질서: 선거만으로 충분하지 않다",
+    "foundations-04-26": "정당해산의 민주적 기본질서는 좁게 읽는다",
+    "foundations-05-01": "형식적 법치주의에서 실질적 법치주의로",
+    "foundations-05-02": "법치주의의 두 구현 방식",
+    "foundations-05-03": "법률우위와 법률유보",
+    "foundations-05-04": "수신료 사건과 교사 가산점 사건",
+    "foundations-05-05": "포괄위임입법금지: 무엇을 맡겼는지 법에서 보여야 한다",
+    "foundations-05-06": "적법절차·영장·연좌제 금지·무죄추정",
+    "foundations-05-07": "명확성: 금지된 행동을 미리 알 수 있어야 한다",
+    "foundations-05-08": "진정·부진정·시혜적 소급입법",
+    "foundations-05-09": "신뢰보호와 자기책임",
+    "foundations-05-10": "과잉금지의 네 단계",
+    "foundations-05-11": "과소보호금지와 국가의 보호의무",
+    "foundations-05-12": "본질적 내용: 권리를 이름만 남겨서는 안 된다",
+    "foundations-05-13": "심화: 절대설·상대설·절충설과 저자의 견해",
+    "foundations-05-14": "평등원칙과 두 심사 기준",
+    "foundations-05-15": "체계정당성: 법끼리 모순되면 바로 위헌일까",
+    "foundations-05-16": "행정법치와 행정에 대한 사법심사",
+    "foundations-05-17": "구체적·추상적 규범통제와 헌법소원",
+    "foundations-05-18": "사법절차적 권리와 배상·보상",
+    "foundations-05-19": "성문·경성헌법과 견제·균형",
+    "foundations-05-20": "국가긴급권과 다섯 한계",
+    "foundations-05-21": "특수신분: 군인·학생·수용자도 권리의 주체다",
+    "foundations-05-22": "통치행위: 정치적 판단 존중과 심사 포기는 다르다",
+    "foundations-06-01": "사회국가의 뜻과 사회적 위험",
+    "foundations-06-02": "두 실현 경로와 헌법적 근거",
+    "foundations-06-03": "재량·재정의 한계와 최소보장의 책임",
+    "foundations-06-04": "저상버스와 장애인가구 사례: 의무와 청구권을 구별하기",
+    "foundations-06-05": "119조1항과2항을 같이 읽기",
+    "foundations-06-06": "공익이라는 이름, 실제 효과, 기본권 한계",
+    "foundations-06-07": "국토·자원·농지:120–122조",
+    "foundations-06-08": "농어민·지역·중소기업과 자조조직",
+    "foundations-06-09": "자도소주 의무구입: 지역보호가 왜 위헌이 되었나",
+    "foundations-06-10": "사기업 국공유화와 택시 수입금 전액관리",
+    "foundations-06-11": "소비자·무역·과학기술:124·125·127조",
+    "foundations-06-12": "시장은 법 없는 자연상태가 아니다",
+    "foundations-06-13": "경제적 복리·효율·혁신과 계획의 정보 문제",
+    "foundations-06-14": "기본권을 쓰는 데도 자원이 필요하다",
+    "foundations-06-15": "민주주의의 구성적 통로와 관용",
+    "foundations-06-16": "분업·협동과 보상을 고려하는 자유",
+    "foundations-06-17": "계획과 시장의 비율보다 기능을 보라",
+    "foundations-06-18": "독특한 아이스크림과 지역의 수도·전기",
+    "foundations-06-19": "거래의 틀을 고치는 개입: 정보·공해·사적 지배",
+    "foundations-06-20": "거시경제·공공재·긍정적 외부성",
+    "foundations-06-21": "필요와 지불능력의 틈,법치적 보호와 사회적 지원",
+    "foundations-06-22": "이익집단 포획과 지대추구",
+    "foundations-06-23": "기술 고착·위험 전가·가격규제의 역효과",
+    "foundations-06-24": "적극적 실패와 소극적 실패를 함께 심사하기",
+    "foundations-07-01": "소극적 평화와 적극적 평화",
+    "foundations-07-02": "침략전쟁 부인과 자위·군대의 존립",
+    "foundations-07-03": "조약의 실질과 이름 — SOFA 사례",
+    "foundations-07-04": "공동성명은 언제 조약이 아닌가",
+    "foundations-07-05": "대통령·국무회의·국회의 역할",
+    "foundations-07-06": "국내 효력·서열·직접 적용을 따로 묻기",
+    "foundations-07-07": "헌법우위와 같은 서열의 충돌",
+    "foundations-07-08": "마라케쉬협정과 형사처벌",
+    "foundations-07-09": "자기집행성과 IMF 재판권 면제",
+    "foundations-07-10": "조약의 사법심사와 국제적 책임",
+    "foundations-07-11": "학교급식 조례와 GATT",
+    "foundations-07-12": "일반적으로 승인된 국제법규",
+    "foundations-07-13": "ILO 협약 — 과거 판례와 현재 효력을 구별",
+    "foundations-07-14": "외국인 보호와 상호주의의 한계",
+    "foundations-07-15": "문화국가가 생겨난 이유와 네 모델",
+    "foundations-07-16": "민주주의·법치·사회국가와의 연결",
+    "foundations-07-17": "헌법상 근거와 문화의 자율영역",
+    "foundations-07-18": "과외금지 판례를 이야기로 읽기",
+    "foundations-07-19": "학교 주변 극장금지 판례",
+    "foundations-07-20": "국가의 세 과제와 불편부당",
+    "foundations-07-21": "전통문화의 재해석과 호주제",
+    "foundations-08-01": "헌법8조의 네 칸과 제도의 역사",
+    "foundations-08-02": "정치적 의사를 모으고 정책으로 바꾸는 역할",
+    "foundations-08-03": "정당국가 현상과 국가의 태도 변화",
+    "foundations-08-04": "설립만 자유로운 것이 아니다",
+    "foundations-08-05": "법률상 정당의 표지와 가입 요건",
+    "foundations-08-06": "전국적 조직 요건과 지역정당 문제",
+    "foundations-08-07": "당내 민주주의는 무엇을 요구하나",
+    "foundations-08-08": "이중적 지위와 정당 간 기회균등",
+    "foundations-08-09": "자유위임과 정당의 사실상 규율 — 사보임 사건",
+    "foundations-08-10": "법인격 없는 사단과 등록취소 뒤의 권리주체",
+    "foundations-08-11": "자금의 필요·정치적 표현·투명성",
+    "foundations-08-12": "당비·후원금·기탁금·보조금의 구별",
+    "foundations-08-13": "후원회와 소액 후원,해산 후 남은 돈",
+    "foundations-08-14": "기탁금은 지정 후원이 아니다",
+    "foundations-08-15": "국고보조금의 배분과 그 합헌성",
+    "foundations-08-16": "기부·지출·회계의 세 단계 통제",
+    "foundations-08-17": "후보추천과 당적,경선의 자율성",
+    "foundations-08-18": "공천헌금과 비례후보 대리투표 사례",
+    "foundations-08-19": "등록은 사상의 허가가 아니다",
+    "foundations-08-20": "선거에서 적게 득표했다고 없앨 수 있나",
+    "foundations-08-21": "스스로 해산하는 경우의 절차와 재산",
+    "foundations-08-22": "방어적 민주주의와 정당특권이라는 두 얼굴",
+    "foundations-08-23": "누구의 목적·활동을 정당에 귀속시키나",
+    "foundations-08-24": "민주적 기본질서는 모든 현행 제도가 아니다",
+    "foundations-08-25": "구체적 위험과 비례원칙 — 왜 최후수단인가",
+    "foundations-08-26": "통합진보당 사건 — 기준과 적용을 나누어 읽기",
+    "foundations-08-27": "정부의 청구·헌재의 결정·선관위의 집행",
+    "foundations-08-28": "해산결정의 효력과 의원직 상실",
+    "foundations-09-01": "선거는 권력을 주고 책임을 묻는 과정",
+    "foundations-09-02": "선거권:국가의 구성원과 지역의 구성원",
+    "foundations-09-03": "선거권 제한과 금치산자 조항의 변화",
+    "foundations-09-04": "피선거권:내가 후보가 되는 권리",
+    "foundations-09-05": "기탁금:진지한 출마의 확인인가,돈의 장벽인가",
+    "foundations-09-06": "보통선거:누가 투표할 수 있는가",
+    "foundations-09-07": "평등선거:표의 수와 결과에 기여하는 힘",
+    "foundations-09-08": "게리맨더링:선을 그어 승패를 조작하면",
+    "foundations-09-09": "직접선거:중간 결정자가 끼어드는가",
+    "foundations-09-10": "비밀선거:내 표를 누구에게도 설명할 의무가 없다",
+    "foundations-09-11": "자유선거:투표소 안의 자유만으로는 부족하다",
+    "foundations-09-12": "대표결정 방식과 선거구 크기는 다른 축이다",
+    "foundations-09-13": "소선거구·다수대표와 중대선거구·소수대표",
+    "foundations-09-14": "비례대표와 봉쇄조항:2026년 위헌 결정까지",
+    "foundations-09-15": "대통령선거:1등,동점,단독후보를 나눈다",
+    "foundations-09-16": "국회의원선거:헌법의 최소 정수와 법률의 실제 정수",
+    "foundations-09-17": "지방선거:지역구·비례와 의원·단체장을 구별한다",
+    "foundations-09-18": "선거관리위원회의 독립성과 구성",
+    "foundations-09-19": "선거공영제·비용 제한·비용 보전은 서로 다른 질문",
+    "foundations-09-20": "선거운동의 자유와 공정성은 적이 아니다",
+    "foundations-09-21": "선거운동의 정의와 기간·예비후보자",
+    "foundations-09-22": "주체·방법 제한:같은 말도 지위와 수단을 본다",
+    "foundations-09-23": "토론회 초청의 기회균등은 기계적 동일 대우가 아니다",
+    "foundations-09-24": "여론조사:왜곡 금지와 막판 공표 금지",
+    "foundations-09-25": "선거범죄의 처벌과 당선무효",
+    "foundations-09-26": "선거쟁송의 첫 질문:선거 전체인가,당선 결정인가",
+    "foundations-09-27": "지방선거 소청:법원에 가기 전 선관위의 판단",
+    "foundations-09-28": "선거소송과 당선소송:30일과10일의 지도",
+    "foundations-10-01": "공무원이라는 사람과 공직이라는 자리",
+    "foundations-10-02": "국민 전체의 봉사자와 책임:누구에게 충성하는가",
+    "foundations-10-03": "특수한 직무가 기본권 제한을 설명하지만 백지수표는 아니다",
+    "foundations-10-04": "‘봉사’는 사생활에서 더 희생하라는 뜻이 아니다",
+    "foundations-10-05": "국가·지방, 경력·특수경력의 분류",
+    "foundations-10-06": "엽관제에서 실적제로:충성 경쟁을 능력 경쟁으로",
+    "foundations-10-07": "신분보장과 정치적 중립:법률로 정하라는 말의 뜻",
+    "foundations-10-08": "법만 새로 만들고 사람을 일괄 내보낸 사건",
+    "foundations-10-09": "다른 지방자치단체로 보내려면:전출 동의와 공정력",
+    "foundations-10-10": "계급정년·직권면직:보호와 제도개선의 조화",
+    "foundations-10-11": "정치활동·집단행위 제한의 범위를 좁혀 읽기",
+    "foundations-10-12": "교원의 정당 가입 사건:다수의견과 반대의견",
+    "foundations-10-13": "특별권력관계가 아니라 기본권을 가진 시민",
+    "foundations-10-14": "군대의 과제:국가안전보장과 국토방위",
+    "foundations-10-15": "평화지향:안보라는 이름으로 침략할 수는 없다",
+    "foundations-10-16": "국민개병주의와 국방의 의무의 범위",
+    "foundations-10-17": "병역 이행으로 인한 불이익 금지와 당연한 부담",
+    "foundations-10-18": "병정통합주의:작전권과 행정권이 헌법 밖으로 달아나지 않게",
+    "foundations-10-19": "문민우위와 군의 정치적 중립",
+    "foundations-10-20": "일반 시민도 제한받을 수 있지만 군사목적만으로 충분하지 않다",
+    "foundations-10-21": "군사기밀:도장을 찍었다고 모두 비밀이 되는 것은 아니다",
+    "foundations-10-22": "군사재판과 국가배상:교재의 일반론에 예외를 붙이기",
+    "foundations-10-23": "사회단체 가입과 정치운동:옛 규율과 현행 법률",
+    "foundations-10-24": "불온도서 사건:무엇을 각하했고 무엇을 기각했나",
+    "foundations-10-25": "‘제복 입은 시민’과 정보 차단의 악순환 — 심화",
+    "foundations-11-01": "교육은 취업 준비만이 아니다",
+    "foundations-11-02": "교육의 자유와 수학권:방해하지 말라,배울 길을 마련하라",
+    "foundations-11-03": "능력에 따라 ‘균등하게’:선발이라는 이름의 불필요한 배제",
+    "foundations-11-04": "의무교육과 무상교육은 구별해서 외운다",
+    "foundations-11-05": "자주성·전문성·중립성:누구를 위한 자율인가",
+    "foundations-11-06": "수업 중 정당 선전과 주말의 개인 생활은 다르다",
+    "foundations-11-07": "교육제도 법률주의와 교원 지위의 최소 보호",
+    "foundations-11-08": "이유도 불복 기회도 없는 재임용 거부",
+    "foundations-11-09": "대학 자율성은 총장 혼자의 자유가 아니다",
+    "foundations-11-10": "평생교육:졸업하면 배울 권리가 끝나는가",
+    "foundations-11-11": "교원도 근로자:자격 제한 판결과 법외노조 통보 판결",
+    "foundations-11-12": "대학 교원 단결권과2026년 정치활동 결정",
+    "foundations-11-13": "가족은 사적 관계인데 왜 헌법이 등장할까",
+    "foundations-11-14": "혼인의 자유와 합리적 제한,그리고 해소의 문제",
+    "foundations-11-15": "동성동본 금혼과 호주제:전통이라는 말로 충분하지 않았다",
+    "foundations-11-16": "결혼하면 퇴직·퇴학:사인 사이에도 헌법의 의미가 이어진다",
+    "foundations-11-17": "부부 합산과세:가족이라는 이유로 더 불리하게 할 때",
+    "foundations-11-18": "부모의 교육권은 자녀를 위한 권리",
+    "foundations-11-19": "친생부인의 기회:몰랐는데 기간부터 끝난다면",
+    "foundations-11-20": "이혼 후300일에 태어난 아이:추정 자체와 탈출 절차는 다르다",
+    "foundations-11-21": "친양자 입양과 친생부모 동의:양쪽의 가족생활을 함께 본다",
+    "foundations-12-01": "주민·복리·재산·자치라는 네 단어",
+    "foundations-12-02": "지방자치의 중단과 회복:선거를 미루면 어떤 일이 생기나",
+    "foundations-12-03": "주민자치와 단체자치,제도보장의 핵심",
+    "foundations-12-04": "주민·지역·자치권·고유사무",
+    "foundations-12-05": "종류·법인격·정부 직할을 읽는 법",
+    "foundations-12-06": "조언·시정·재의 요구는 서로 다르다",
+    "foundations-12-07": "자치사무:우리 지역의 일은 우리 책임으로",
+    "foundations-12-08": "감사원과 중앙부처 감사:누가 검사하나가 중요하다",
+    "foundations-12-09": "지방선거를 국가 선관위가 관리하면 국가사무인가",
+    "foundations-12-10": "단체위임과 기관위임:단체에 맡겼나,장에게 맡겼나",
+    "foundations-12-11": "주택·묘지·학교 사례로 조례 권한 찾기",
+    "foundations-12-12": "기관위임사무를 자기 자치권이라며 소송할 수 있나",
+    "foundations-12-13": "지방의회:헌법이 보장한 주민 대표기관",
+    "foundations-12-14": "조례와 법률유보,포괄적 위임",
+    "foundations-12-15": "단체장 선거권·임기·무죄추정",
+    "foundations-12-16": "단체장의 집행·규칙·재의·선결처분",
+    "foundations-12-17": "교육감:교육자치의 집행기관",
+    "foundations-12-18": "선거권·피선거권과 주민투표권",
+    "foundations-12-19": "국가정책 주민투표는 왜 불복 방식이 다른가",
+    "foundations-12-20": "주민조례청구:주민이 안건을 올리고 의회가 의결한다",
+    "foundations-12-21": "주민감사청구와 주민소송:세금 사용을 감시한다",
+    "foundations-12-22": "주민소환:위법뿐 아니라 정치적 책임도 묻는다",
+    "foundations-12-23": "입법·행정·사법 통제의 세 갈래",
+    "foundations-12-24": "수당 기준과 행정규칙:법령이라는 말의 범위",
+    "foundations-13-01": "인권·기본적 인권·기본권",
+    "foundations-13-02": "주관적 공권의 네 가지 권리성",
+    "foundations-13-03": "객관적 법질서와 기본권의 이중적 성격",
+    "foundations-13-04": "국민·미성년자·재외국민:주체성과 행사능력",
+    "foundations-13-05": "외국인과 외국 국적 동포",
+    "foundations-13-06": "태아와 사자:교재 문장과 판례를 반드시 구분",
+    "foundations-13-07": "법인과 법인 아닌 단체의 기본권",
+    "foundations-13-08": "공법인은 원칙적으로 지킬 사람,예외적으로 누릴 주체",
+    "foundations-13-09": "대국가적 효력과 공무수탁사인",
+    "foundations-13-10": "사인 사이 효력에 관한 네 이론",
+    "foundations-13-11": "간접효력설:민법의 문을 통해 기본권이 들어온다",
+    "foundations-13-12": "미국의 Shelley 사건:차별 계약을 법원이 강제할 수 있나",
+    "foundations-13-13": "공원의 두 판결:운영자만 바꾸면 공공성이 사라지나",
+    "foundations-13-14": "미국 사례 각주까지:지원받는다고 모두 국가기관인가",
+    "foundations-13-15": "독일 Lüth 사건:영화 불매 호소를 금지할 수 있나",
+    "foundations-13-16": "기본권 경합:한 사람이 여러 권리를 내세운다",
+    "foundations-13-17": "충돌과 유사충돌:반대편에도 진짜 권리가 있나",
+    "foundations-13-18": "실제적 조화:둘 중 하나를 처음부터 지우지 않는다",
+    "foundations-13-19": "기본권은 헌법 제2장에만 있지 않다",
+    "foundations-13-20": "인간존엄:다수의 만족을 위해 소수를 도구로 쓰지 않는다",
+    "foundations-13-21": "평등권과 자유권은 질문의 모양이 다르다",
+    "foundations-13-22": "사회권:국가가 아무것도 안 해도 되는가",
+    "foundations-13-23": "환경권 사례:소음을 낸 사람과 보호하지 않은 국가",
+    "foundations-13-24": "재산권의 형성과 제한:처음 정한다고 마음대로 해도 될까",
+    "foundations-13-25": "재판청구권과 선거권에도 형성·제한 구별이 필요하다",
+    "foundations-13-26": "존중·충족·보호:국가 의무의 세 방향",
+    "foundations-14-01": "구체적 권리의 행사 포기",
+    "foundations-14-02": "기본권 불행사와 법적 효과 있는 포기",
+    "foundations-14-03": "가방을 보여 준 사람과 임의수사",
+    "foundations-14-04": "동의 철회와 휴대전화의 무관한 정보",
+    "foundations-14-05": "기본권 자체를 영구히 포기할 수 없는 이유",
+    "foundations-14-06": "청구권·특권·형성권·면제권",
+    "foundations-14-07": "투표권 거래와 연명의료 사례",
+    "foundations-14-08": "비권력적 국가작용의 세 모습",
+    "foundations-14-09": "사법으로 도피해도 기본권의 구속은 남는다",
+    "foundations-14-10": "보호의무와 과소보호금지",
+    "foundations-14-11": "교통사고 피해자:반드시 더 처벌해야 하나",
+    "foundations-14-12": "기본의무와 기본권 제한 심사",
+    "foundations-14-13": "납세의무와 조세법률주의",
+    "foundations-14-14": "국방의무와 군 가산점 사건",
+    "foundations-14-15": "교육의무의 주체와 근로의무의 한계",
+    "foundations-14-16": "기본권 제한과 기본권 침해",
+    "foundations-14-17": "보호법익은 권리의 종류마다 다르다",
+    "foundations-14-18": "집회·재외선거·교육으로 법익을 찾아 보기",
+    "foundations-14-19": "독일의 내재적 한계와 한국의 일반적 법률유보",
+    "foundations-14-20": "좁은 구성요건과 넓은 구성요건",
+    "foundations-14-21": "간통죄와 국기 소각:보호와 정당화의 구별",
+    "foundations-14-22": "두 가지 형식 검사와 세 단계의 자유",
+    "foundations-14-23": "영업 인원 상한 법률 L의 직업의 자유 심사",
+    "foundations-14-24": "소급·신뢰·위임·재산권·평등권까지 확인하기",
+    "foundations-14-25": "위헌 주장과 합헌 반박의 논증 부담",
+    "foundations-15-01": "기본권 구제가 필요한 이유와 전체 지도",
+    "foundations-15-02": "청원권과 재판청구권",
+    "foundations-15-03": "국가배상과 형사보상은 무엇이 다른가",
+    "foundations-15-04": "형사보상 청구기간1년 사건",
+    "foundations-15-05": "행정심판:행정의 잘못을 먼저 고치게 하기",
+    "foundations-15-06": "행정소송의 종류와 전치주의 함정",
+    "foundations-15-07": "누가 무엇을 기준으로 심사하나",
+    "foundations-15-08": "재판의 전제성과 심사 범위",
+    "foundations-15-09": "법무사 시험을 열지 않는 규칙 사건",
+    "foundations-15-10": "전원합의체와 위헌·위법 판단의 효과",
+    "foundations-15-11": "제청·제청신청·68조②의 세 관계",
+    "foundations-15-12": "제청의 대상과 재판의 전제성",
+    "foundations-15-13": "법원이 제청하면 재판은 멈추는가",
+    "foundations-15-14": "진정·부진정 입법부작위",
+    "foundations-15-15": "심사 기준·범위와 결정의 여러 모양",
+    "foundations-15-16": "위헌결정의 장래효와 소급효",
+    "foundations-15-17": "권리구제형 헌법소원의 성격과 여덟 문턱",
+    "foundations-15-18": "68조①과②, 그리고 2026년 재판소원",
+    "foundations-15-19": "대상:법령·조약·행정규칙과 공권력의 방치",
+    "foundations-15-20": "자기관련성:내 권리가 직접 문제인가",
+    "foundations-15-21": "직접성:법 자체인가,다음 처분인가",
+    "foundations-15-22": "현재성:지금의 침해와 확실한 장래 침해",
+    "foundations-15-23": "보충성:다른 구제절차를 먼저 이용한다",
+    "foundations-15-24": "권리보호이익과 국군포로 예우 입법부작위",
+    "foundations-15-25": "변호사 대리·서면·청구기간",
+    "foundations-15-26": "지정재판부·가처분·각하와 기각",
+    "foundations-15-27": "인용결정은 누구에게 어떤 효과가 있는가"
+  },
+  "questionConceptIds": {
+    "헌법_001": [
+      "foundations-01-02"
+    ],
+    "헌법_002": [
+      "foundations-01-01"
+    ],
+    "헌법_003": [
+      "foundations-01-03"
+    ],
+    "헌법_004": [
+      "foundations-01-03"
+    ],
+    "헌법_005": [
+      "foundations-01-05"
+    ],
+    "헌법_006": [
+      "foundations-01-10"
+    ],
+    "헌법_007": [
+      "foundations-01-15"
+    ],
+    "헌법_008": [
+      "foundations-01-22"
+    ],
+    "헌법_009": [
+      "foundations-01-02"
+    ],
+    "헌법_010": [
+      "foundations-01-03"
+    ],
+    "헌법_011": [
+      "foundations-01-03"
+    ],
+    "헌법_012": [
+      "foundations-01-04"
+    ],
+    "헌법_013": [
+      "foundations-01-07"
+    ],
+    "헌법_014": [
+      "foundations-01-12"
+    ],
+    "헌법_015": [
+      "foundations-01-15"
+    ],
+    "헌법_016": [
+      "foundations-01-18"
+    ],
+    "헌법_017": [
+      "foundations-01-05"
+    ],
+    "헌법_018": [
+      "foundations-01-07"
+    ],
+    "헌법_019": [
+      "foundations-02-01"
+    ],
+    "헌법_020": [
+      "foundations-02-02"
+    ],
+    "헌법_021": [
+      "foundations-02-06"
+    ],
+    "헌법_022": [
+      "foundations-02-07"
+    ],
+    "헌법_023": [
+      "foundations-02-07"
+    ],
+    "헌법_024": [
+      "foundations-02-06"
+    ],
+    "헌법_025": [
+      "foundations-02-14"
+    ],
+    "헌법_026": [
+      "foundations-02-17"
+    ],
+    "헌법_027": [
+      "foundations-02-01"
+    ],
+    "헌법_028": [
+      "foundations-02-01"
+    ],
+    "헌법_029": [
+      "foundations-02-04"
+    ],
+    "헌법_030": [
+      "foundations-02-07"
+    ],
+    "헌법_031": [
+      "foundations-02-09"
+    ],
+    "헌법_032": [
+      "foundations-02-10"
+    ],
+    "헌법_033": [
+      "foundations-02-11"
+    ],
+    "헌법_034": [
+      "foundations-02-02"
+    ],
+    "헌법_035": [
+      "foundations-02-03"
+    ],
+    "헌법_036": [
+      "foundations-02-13"
+    ],
+    "헌법_037": [
+      "foundations-03-01"
+    ],
+    "헌법_038": [
+      "foundations-03-02"
+    ],
+    "헌법_039": [
+      "foundations-03-01"
+    ],
+    "헌법_040": [
+      "foundations-03-05"
+    ],
+    "헌법_041": [
+      "foundations-03-05"
+    ],
+    "헌법_042": [
+      "foundations-03-07"
+    ],
+    "헌법_043": [
+      "foundations-03-10"
+    ],
+    "헌법_044": [
+      "foundations-03-13"
+    ],
+    "헌법_045": [
+      "foundations-03-14"
+    ],
+    "헌법_046": [
+      "foundations-03-16"
+    ],
+    "헌법_047": [
+      "foundations-03-18"
+    ],
+    "헌법_048": [
+      "foundations-03-10"
+    ],
+    "헌법_049": [
+      "foundations-03-01"
+    ],
+    "헌법_050": [
+      "foundations-03-03"
+    ],
+    "헌법_051": [
+      "foundations-03-04"
+    ],
+    "헌법_052": [
+      "foundations-03-05"
+    ],
+    "헌법_053": [
+      "foundations-03-06"
+    ],
+    "헌법_054": [
+      "foundations-03-10"
+    ],
+    "헌법_055": [
+      "foundations-03-12"
+    ],
+    "헌법_056": [
+      "foundations-03-13"
+    ],
+    "헌법_057": [
+      "foundations-03-15"
+    ],
+    "헌법_058": [
+      "foundations-03-17"
+    ],
+    "헌법_059": [
+      "foundations-03-18"
+    ],
+    "헌법_060": [
+      "foundations-04-01"
+    ],
+    "헌법_061": [
+      "foundations-04-03"
+    ],
+    "헌법_062": [
+      "foundations-04-04"
+    ],
+    "헌법_063": [
+      "foundations-04-05"
+    ],
+    "헌법_064": [
+      "foundations-04-07"
+    ],
+    "헌법_065": [
+      "foundations-04-07"
+    ],
+    "헌법_066": [
+      "foundations-04-10"
+    ],
+    "헌법_067": [
+      "foundations-04-12"
+    ],
+    "헌법_068": [
+      "foundations-04-15"
+    ],
+    "헌법_069": [
+      "foundations-04-17"
+    ],
+    "헌법_070": [
+      "foundations-04-19"
+    ],
+    "헌법_071": [
+      "foundations-04-20"
+    ],
+    "헌법_072": [
+      "foundations-04-21"
+    ],
+    "헌법_073": [
+      "foundations-04-23"
+    ],
+    "헌법_074": [
+      "foundations-04-25"
+    ],
+    "헌법_075": [
+      "foundations-04-02"
+    ],
+    "헌법_076": [
+      "foundations-04-03"
+    ],
+    "헌법_077": [
+      "foundations-04-05"
+    ],
+    "헌법_078": [
+      "foundations-04-06"
+    ],
+    "헌법_079": [
+      "foundations-04-08"
+    ],
+    "헌법_080": [
+      "foundations-04-09"
+    ],
+    "헌법_081": [
+      "foundations-04-11"
+    ],
+    "헌법_082": [
+      "foundations-04-13"
+    ],
+    "헌법_083": [
+      "foundations-04-16"
+    ],
+    "헌법_084": [
+      "foundations-04-18"
+    ],
+    "헌법_085": [
+      "foundations-04-19"
+    ],
+    "헌법_086": [
+      "foundations-04-21"
+    ],
+    "헌법_087": [
+      "foundations-04-23"
+    ],
+    "헌법_088": [
+      "foundations-04-23"
+    ],
+    "헌법_089": [
+      "foundations-04-24"
+    ],
+    "헌법_090": [
+      "foundations-04-26"
+    ],
+    "헌법_091": [
+      "foundations-05-01"
+    ],
+    "헌법_092": [
+      "foundations-05-01"
+    ],
+    "헌법_093": [
+      "foundations-05-03"
+    ],
+    "헌법_094": [
+      "foundations-05-04"
+    ],
+    "헌법_095": [
+      "foundations-05-05"
+    ],
+    "헌법_096": [
+      "foundations-05-06"
+    ],
+    "헌법_097": [
+      "foundations-05-06"
+    ],
+    "헌법_098": [
+      "foundations-05-07"
+    ],
+    "헌법_099": [
+      "foundations-05-08"
+    ],
+    "헌법_100": [
+      "foundations-05-09"
+    ],
+    "헌법_101": [
+      "foundations-05-09"
+    ],
+    "헌법_102": [
+      "foundations-05-11"
+    ],
+    "헌법_103": [
+      "foundations-05-13"
+    ],
+    "헌법_104": [
+      "foundations-05-14"
+    ],
+    "헌법_105": [
+      "foundations-05-17"
+    ],
+    "헌법_106": [
+      "foundations-05-20"
+    ],
+    "헌법_107": [
+      "foundations-05-22"
+    ],
+    "헌법_108": [
+      "foundations-05-01"
+    ],
+    "헌법_109": [
+      "foundations-05-02"
+    ],
+    "헌법_110": [
+      "foundations-05-03"
+    ],
+    "헌법_111": [
+      "foundations-05-04"
+    ],
+    "헌법_112": [
+      "foundations-05-05"
+    ],
+    "헌법_113": [
+      "foundations-05-06"
+    ],
+    "헌법_114": [
+      "foundations-05-07"
+    ],
+    "헌법_115": [
+      "foundations-05-08"
+    ],
+    "헌법_116": [
+      "foundations-05-08"
+    ],
+    "헌법_117": [
+      "foundations-05-09"
+    ],
+    "헌법_118": [
+      "foundations-05-10"
+    ],
+    "헌법_119": [
+      "foundations-05-13"
+    ],
+    "헌법_120": [
+      "foundations-05-14"
+    ],
+    "헌법_121": [
+      "foundations-05-15"
+    ],
+    "헌법_122": [
+      "foundations-05-20"
+    ],
+    "헌법_123": [
+      "foundations-05-21"
+    ],
+    "헌법_124": [
+      "foundations-06-01"
+    ],
+    "헌법_125": [
+      "foundations-06-03"
+    ],
+    "헌법_126": [
+      "foundations-06-07"
+    ],
+    "헌법_127": [
+      "foundations-06-10"
+    ],
+    "헌법_128": [
+      "foundations-06-13"
+    ],
+    "헌법_129": [
+      "foundations-06-16"
+    ],
+    "헌법_130": [
+      "foundations-06-19"
+    ],
+    "헌법_131": [
+      "foundations-06-02"
+    ],
+    "헌법_132": [
+      "foundations-06-06"
+    ],
+    "헌법_133": [
+      "foundations-06-08"
+    ],
+    "헌법_134": [
+      "foundations-06-09"
+    ],
+    "헌법_135": [
+      "foundations-06-15"
+    ],
+    "헌법_136": [
+      "foundations-06-17"
+    ],
+    "헌법_137": [
+      "foundations-06-22"
+    ],
+    "헌법_138": [
+      "foundations-06-13"
+    ],
+    "헌법_139": [
+      "foundations-06-14"
+    ],
+    "헌법_140": [
+      "foundations-06-03"
+    ],
+    "헌법_141": [
+      "foundations-07-01"
+    ],
+    "헌법_142": [
+      "foundations-07-05"
+    ],
+    "헌법_143": [
+      "foundations-07-11"
+    ],
+    "헌법_144": [
+      "foundations-07-09"
+    ],
+    "헌법_145": [
+      "foundations-07-12"
+    ],
+    "헌법_146": [
+      "foundations-07-14"
+    ],
+    "헌법_147": [
+      "foundations-07-17"
+    ],
+    "헌법_148": [
+      "foundations-07-20"
+    ],
+    "헌법_149": [
+      "foundations-07-21"
+    ],
+    "헌법_150": [
+      "foundations-07-03"
+    ],
+    "헌법_151": [
+      "foundations-07-07"
+    ],
+    "헌법_152": [
+      "foundations-07-09"
+    ],
+    "헌법_153": [
+      "foundations-07-08"
+    ],
+    "헌법_154": [
+      "foundations-07-13"
+    ],
+    "헌법_155": [
+      "foundations-07-16"
+    ],
+    "헌법_156": [
+      "foundations-07-20"
+    ],
+    "헌법_157": [
+      "foundations-07-20"
+    ],
+    "헌법_158": [
+      "foundations-07-21"
+    ],
+    "헌법_159": [
+      "foundations-07-15"
+    ],
+    "헌법_160": [
+      "foundations-08-01"
+    ],
+    "헌법_161": [
+      "foundations-08-02"
+    ],
+    "헌법_162": [
+      "foundations-08-04"
+    ],
+    "헌법_163": [
+      "foundations-08-05"
+    ],
+    "헌법_164": [
+      "foundations-08-08"
+    ],
+    "헌법_165": [
+      "foundations-08-10"
+    ],
+    "헌법_166": [
+      "foundations-08-12"
+    ],
+    "헌법_167": [
+      "foundations-08-14"
+    ],
+    "헌법_168": [
+      "foundations-08-15"
+    ],
+    "헌법_169": [
+      "foundations-08-16"
+    ],
+    "헌법_170": [
+      "foundations-08-19"
+    ],
+    "헌법_171": [
+      "foundations-08-21"
+    ],
+    "헌법_172": [
+      "foundations-08-22"
+    ],
+    "헌법_173": [
+      "foundations-08-22"
+    ],
+    "헌법_174": [
+      "foundations-08-24"
+    ],
+    "헌법_175": [
+      "foundations-08-24"
+    ],
+    "헌법_176": [
+      "foundations-08-25"
+    ],
+    "헌법_177": [
+      "foundations-08-28"
+    ],
+    "헌법_178": [
+      "foundations-08-02"
+    ],
+    "헌법_179": [
+      "foundations-08-04"
+    ],
+    "헌법_180": [
+      "foundations-08-05"
+    ],
+    "헌법_181": [
+      "foundations-08-07"
+    ],
+    "헌법_182": [
+      "foundations-08-11"
+    ],
+    "헌법_183": [
+      "foundations-08-13"
+    ],
+    "헌법_184": [
+      "foundations-08-12"
+    ],
+    "헌법_185": [
+      "foundations-08-16"
+    ],
+    "헌법_186": [
+      "foundations-08-17"
+    ],
+    "헌법_187": [
+      "foundations-08-20"
+    ],
+    "헌법_188": [
+      "foundations-08-21"
+    ],
+    "헌법_189": [
+      "foundations-08-22"
+    ],
+    "헌법_190": [
+      "foundations-08-23"
+    ],
+    "헌법_191": [
+      "foundations-08-24"
+    ],
+    "헌법_192": [
+      "foundations-08-25"
+    ],
+    "헌법_193": [
+      "foundations-08-27"
+    ],
+    "헌법_194": [
+      "foundations-09-01"
+    ],
+    "헌법_195": [
+      "foundations-09-04"
+    ],
+    "헌법_196": [
+      "foundations-09-07"
+    ],
+    "헌법_197": [
+      "foundations-09-10"
+    ],
+    "헌법_198": [
+      "foundations-09-13"
+    ],
+    "헌법_199": [
+      "foundations-09-20"
+    ],
+    "헌법_200": [
+      "foundations-09-23"
+    ],
+    "헌법_201": [
+      "foundations-09-28"
+    ],
+    "헌법_202": [
+      "foundations-09-28"
+    ],
+    "헌법_203": [
+      "foundations-09-02"
+    ],
+    "헌법_204": [
+      "foundations-09-02"
+    ],
+    "헌법_205": [
+      "foundations-09-04"
+    ],
+    "헌법_206": [
+      "foundations-09-03"
+    ],
+    "헌법_207": [
+      "foundations-09-05"
+    ],
+    "헌법_208": [
+      "foundations-09-06"
+    ],
+    "헌법_209": [
+      "foundations-09-07"
+    ],
+    "헌법_210": [
+      "foundations-09-08"
+    ],
+    "헌법_211": [
+      "foundations-09-09"
+    ],
+    "헌법_212": [
+      "foundations-09-11"
+    ],
+    "헌법_213": [
+      "foundations-09-12"
+    ],
+    "헌법_214": [
+      "foundations-09-12"
+    ],
+    "헌법_215": [
+      "foundations-09-14"
+    ],
+    "헌법_216": [
+      "foundations-09-16"
+    ],
+    "헌법_217": [
+      "foundations-09-16"
+    ],
+    "헌법_218": [
+      "foundations-09-18"
+    ],
+    "헌법_219": [
+      "foundations-09-18"
+    ],
+    "헌법_220": [
+      "foundations-09-19"
+    ],
+    "헌법_221": [
+      "foundations-09-21"
+    ],
+    "헌법_222": [
+      "foundations-09-21"
+    ],
+    "헌법_223": [
+      "foundations-09-24"
+    ],
+    "헌법_224": [
+      "foundations-09-12"
+    ],
+    "헌법_225": [
+      "foundations-09-25"
+    ],
+    "헌법_226": [
+      "foundations-10-01"
+    ],
+    "헌법_227": [
+      "foundations-10-03"
+    ],
+    "헌법_228": [
+      "foundations-10-06"
+    ],
+    "헌법_229": [
+      "foundations-10-07"
+    ],
+    "헌법_230": [
+      "foundations-10-11"
+    ],
+    "헌법_231": [
+      "foundations-10-15"
+    ],
+    "헌법_232": [
+      "foundations-10-16"
+    ],
+    "헌법_233": [
+      "foundations-10-18"
+    ],
+    "헌법_234": [
+      "foundations-10-19"
+    ],
+    "헌법_235": [
+      "foundations-10-21"
+    ],
+    "헌법_236": [
+      "foundations-10-24"
+    ],
+    "헌법_237": [
+      "foundations-10-01"
+    ],
+    "헌법_238": [
+      "foundations-10-04"
+    ],
+    "헌법_239": [
+      "foundations-10-06"
+    ],
+    "헌법_240": [
+      "foundations-10-07"
+    ],
+    "헌법_241": [
+      "foundations-10-14"
+    ],
+    "헌법_242": [
+      "foundations-10-16"
+    ],
+    "헌법_243": [
+      "foundations-10-17"
+    ],
+    "헌법_244": [
+      "foundations-10-19"
+    ],
+    "헌법_245": [
+      "foundations-10-20"
+    ],
+    "헌법_246": [
+      "foundations-10-22"
+    ],
+    "헌법_247": [
+      "foundations-11-01"
+    ],
+    "헌법_248": [
+      "foundations-11-04"
+    ],
+    "헌법_249": [
+      "foundations-11-06"
+    ],
+    "헌법_250": [
+      "foundations-11-08"
+    ],
+    "헌법_251": [
+      "foundations-11-10"
+    ],
+    "헌법_252": [
+      "foundations-11-12"
+    ],
+    "헌법_253": [
+      "foundations-11-16"
+    ],
+    "헌법_254": [
+      "foundations-11-18"
+    ],
+    "헌법_255": [
+      "foundations-11-02"
+    ],
+    "헌법_256": [
+      "foundations-11-05"
+    ],
+    "헌법_257": [
+      "foundations-11-07"
+    ],
+    "헌법_258": [
+      "foundations-11-09"
+    ],
+    "헌법_259": [
+      "foundations-11-11"
+    ],
+    "헌법_260": [
+      "foundations-11-14"
+    ],
+    "헌법_261": [
+      "foundations-11-17"
+    ],
+    "헌법_262": [
+      "foundations-11-21"
+    ],
+    "헌법_263": [
+      "foundations-11-13"
+    ],
+    "헌법_264": [
+      "foundations-11-20"
+    ],
+    "헌법_265": [
+      "foundations-12-01"
+    ],
+    "헌법_266": [
+      "foundations-12-01"
+    ],
+    "헌법_267": [
+      "foundations-12-01"
+    ],
+    "헌법_268": [
+      "foundations-12-01"
+    ],
+    "헌법_269": [
+      "foundations-12-03"
+    ],
+    "헌법_270": [
+      "foundations-12-03"
+    ],
+    "헌법_271": [
+      "foundations-12-03"
+    ],
+    "헌법_272": [
+      "foundations-12-03"
+    ],
+    "헌법_273": [
+      "foundations-12-04"
+    ],
+    "헌법_274": [
+      "foundations-12-04"
+    ],
+    "헌법_275": [
+      "foundations-12-04"
+    ],
+    "헌법_276": [
+      "foundations-12-05"
+    ],
+    "헌법_277": [
+      "foundations-12-06"
+    ],
+    "헌법_278": [
+      "foundations-12-06"
+    ],
+    "헌법_279": [
+      "foundations-12-07"
+    ],
+    "헌법_280": [
+      "foundations-12-07"
+    ],
+    "헌법_281": [
+      "foundations-12-08"
+    ],
+    "헌법_282": [
+      "foundations-12-10"
+    ],
+    "헌법_283": [
+      "foundations-12-12"
+    ],
+    "헌법_284": [
+      "foundations-12-13"
+    ],
+    "헌법_285": [
+      "foundations-12-13"
+    ],
+    "헌법_286": [
+      "foundations-12-15"
+    ],
+    "헌법_287": [
+      "foundations-12-16"
+    ],
+    "헌법_288": [
+      "foundations-12-17"
+    ],
+    "헌법_289": [
+      "foundations-12-17"
+    ],
+    "헌법_290": [
+      "foundations-12-20"
+    ],
+    "헌법_291": [
+      "foundations-12-21"
+    ],
+    "헌법_292": [
+      "foundations-12-22"
+    ],
+    "헌법_335": [
+      "foundations-12-01"
+    ],
+    "헌법_336": [
+      "foundations-12-01"
+    ],
+    "헌법_337": [
+      "foundations-12-03"
+    ],
+    "헌법_338": [
+      "foundations-12-04"
+    ],
+    "헌법_339": [
+      "foundations-12-06"
+    ],
+    "헌법_340": [
+      "foundations-12-08"
+    ],
+    "헌법_341": [
+      "foundations-12-10"
+    ],
+    "헌법_342": [
+      "foundations-12-13"
+    ],
+    "헌법_343": [
+      "foundations-12-14"
+    ],
+    "헌법_344": [
+      "foundations-12-16"
+    ],
+    "헌법_345": [
+      "foundations-12-16"
+    ],
+    "헌법_346": [
+      "foundations-12-19"
+    ],
+    "헌법_347": [
+      "foundations-12-21"
+    ],
+    "헌법_348": [
+      "foundations-12-23"
+    ],
+    "헌법_293": [
+      "foundations-13-03"
+    ],
+    "헌법_294": [
+      "foundations-13-03"
+    ],
+    "헌법_295": [
+      "foundations-13-04"
+    ],
+    "헌법_296": [
+      "foundations-13-07"
+    ],
+    "헌법_297": [
+      "foundations-13-04"
+    ],
+    "헌법_298": [
+      "foundations-13-10"
+    ],
+    "헌법_299": [
+      "foundations-13-12"
+    ],
+    "헌법_300": [
+      "foundations-13-16"
+    ],
+    "헌법_301": [
+      "foundations-13-17"
+    ],
+    "헌법_302": [
+      "foundations-13-18"
+    ],
+    "헌법_303": [
+      "foundations-13-20"
+    ],
+    "헌법_304": [
+      "foundations-13-21"
+    ],
+    "헌법_305": [
+      "foundations-13-22"
+    ],
+    "헌법_306": [
+      "foundations-13-24"
+    ],
+    "헌법_307": [
+      "foundations-13-26"
+    ],
+    "헌법_349": [
+      "foundations-13-01"
+    ],
+    "헌법_350": [
+      "foundations-13-03"
+    ],
+    "헌법_351": [
+      "foundations-13-05"
+    ],
+    "헌법_352": [
+      "foundations-13-04"
+    ],
+    "헌법_353": [
+      "foundations-13-11"
+    ],
+    "헌법_354": [
+      "foundations-13-16"
+    ],
+    "헌법_355": [
+      "foundations-13-17"
+    ],
+    "헌법_356": [
+      "foundations-13-20"
+    ],
+    "헌법_357": [
+      "foundations-13-21"
+    ],
+    "헌법_358": [
+      "foundations-13-24"
+    ],
+    "헌법_359": [
+      "foundations-13-26"
+    ],
+    "헌법_308": [
+      "foundations-14-01"
+    ],
+    "헌법_309": [
+      "foundations-14-02"
+    ],
+    "헌법_310": [
+      "foundations-14-05"
+    ],
+    "헌법_311": [
+      "foundations-14-06"
+    ],
+    "헌법_312": [
+      "foundations-14-08"
+    ],
+    "헌법_313": [
+      "foundations-14-10"
+    ],
+    "헌법_314": [
+      "foundations-14-12"
+    ],
+    "헌법_315": [
+      "foundations-14-14"
+    ],
+    "헌법_316": [
+      "foundations-14-15"
+    ],
+    "헌법_317": [
+      "foundations-14-15"
+    ],
+    "헌법_318": [
+      "foundations-14-16"
+    ],
+    "헌법_319": [
+      "foundations-14-17"
+    ],
+    "헌법_320": [
+      "foundations-14-19"
+    ],
+    "헌법_321": [
+      "foundations-14-25"
+    ],
+    "헌법_360": [
+      "foundations-14-01"
+    ],
+    "헌법_361": [
+      "foundations-14-02"
+    ],
+    "헌법_362": [
+      "foundations-14-05"
+    ],
+    "헌법_363": [
+      "foundations-14-06"
+    ],
+    "헌법_364": [
+      "foundations-14-08"
+    ],
+    "헌법_365": [
+      "foundations-14-10"
+    ],
+    "헌법_366": [
+      "foundations-14-12"
+    ],
+    "헌법_367": [
+      "foundations-14-14"
+    ],
+    "헌법_368": [
+      "foundations-14-15"
+    ],
+    "헌법_369": [
+      "foundations-14-15"
+    ],
+    "헌법_370": [
+      "foundations-14-16"
+    ],
+    "헌법_371": [
+      "foundations-14-17"
+    ],
+    "헌법_372": [
+      "foundations-14-19"
+    ],
+    "헌법_373": [
+      "foundations-14-25"
+    ],
+    "헌법_322": [
+      "foundations-15-02"
+    ],
+    "헌법_323": [
+      "foundations-15-04"
+    ],
+    "헌법_324": [
+      "foundations-15-05"
+    ],
+    "헌법_325": [
+      "foundations-15-11"
+    ],
+    "헌법_326": [
+      "foundations-15-16"
+    ],
+    "헌법_327": [
+      "foundations-15-17"
+    ],
+    "헌법_328": [
+      "foundations-15-17"
+    ],
+    "헌법_329": [
+      "foundations-15-14"
+    ],
+    "헌법_330": [
+      "foundations-15-19"
+    ],
+    "헌법_331": [
+      "foundations-15-21"
+    ],
+    "헌법_332": [
+      "foundations-15-23"
+    ],
+    "헌법_333": [
+      "foundations-15-23"
+    ],
+    "헌법_334": [
+      "foundations-15-25"
+    ],
+    "헌법_374": [
+      "foundations-15-01"
+    ],
+    "헌법_375": [
+      "foundations-15-03"
+    ],
+    "헌법_376": [
+      "foundations-15-05"
+    ],
+    "헌법_377": [
+      "foundations-15-10"
+    ],
+    "헌법_378": [
+      "foundations-15-12"
+    ],
+    "헌법_379": [
+      "foundations-15-13"
+    ],
+    "헌법_380": [
+      "foundations-15-16"
+    ],
+    "헌법_381": [
+      "foundations-15-18"
+    ],
+    "헌법_382": [
+      "foundations-15-19"
+    ],
+    "헌법_383": [
+      "foundations-15-20"
+    ],
+    "헌법_384": [
+      "foundations-15-22"
+    ],
+    "헌법_385": [
+      "foundations-15-24"
+    ],
+    "헌법_386": [
+      "foundations-15-27"
+    ]
+  }
+};

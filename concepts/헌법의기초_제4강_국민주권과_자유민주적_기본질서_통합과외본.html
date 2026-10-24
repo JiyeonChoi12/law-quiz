@@ -1,0 +1,1396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제4강 국민주권과 자유민주적 기본질서 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 04</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제4강 국민주권과 자유민주적 기본질서 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>“나라의 주인은 국민이다.” 그런데 여론조사에서 60%가 원하면 나머지 사람의 권리를 없애도 될까? 외국에 사는 한국인은 국민이 아닐까? 북한주민이 우리 국민이라면 남북 대표단을 무조건 붙잡아 두어야 할까? 이 강은 <strong>국가의 사람·공간·권력의 범위와, 그 권력을 정당하게 행사하는 방법</strong>을 함께 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 배우나?</td>
+<td>민주공화국, 국민·국적, 국가영역, 국민주권, 자유민주적 기본질서</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>누가 나라의 구성원이고 어디에 권력이 미치며 그 권력이 누구를 위해 어떻게 작동해야 하는지 정하기 위해</td>
+</tr>
+<tr>
+<td>과목에서의 위치</td>
+<td>헌법전문의 가치가 헌법 1-5조의 국가 기본원리로 구체화되는 출발점</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>3강의 헌법수호·전문 → 국민주권과 국가의 범위 → 5강 법치주의로 권력 통제</td>
+</tr>
+<tr>
+<td>모르면 생기는 오해</td>
+<td>다수의 뜻=무제한 명령, 국적=영주권, 북한=보통 외국, 영해=EEZ라고 착각</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 101-142쪽(PDF 119-160쪽), 헌법_060-090, 31문항·124개 보기. 별점은 제공 문제와 핵심 논점을 바탕으로 정한 학습 우선순위이며 실제 출제·오답률 통계는 없다. 교재 사례와 실제 판례, 이해용 가정을 구별한다. 대화는 이해를 위한 재구성이다.</p>
+<p><strong>색상:</strong> <mark class="yellow">정의·결론·암기</mark> / <mark class="green">이유</mark> / <mark class="pink">함정·정정</mark> / <mark class="blue">앞뒤 연결</mark>. 국적법은 2026.10.24. 현재 시행법을 기준으로 보충한다. 2026.12.3. 시행 예정 개정은 별도로 표시한다.</p>
+<h1>1. 민주공화국은 어떤 나라일까</h1>
+<h2 id="foundations-04-01" data-concept-id="foundations-04-01">1-1. 국가형태와 정부형태 ★★★★★</h2>
+<p><strong>교재 102쪽 / 문단의 역할:</strong> 나라 전체의 조직원리와 그 안의 통치기구 배열을 구별한다.</p>
+<p>국가형태는 사람들이 이루는 사회공동체가 어떤 정치적 통일체로 조직되는지를 말한다. 입헌군주국·민주공화국·군사독재국가·파시즘국가처럼 나라 전체의 성격을 묻는다. 정부형태는 그 안에서 대통령·의회·내각 등이 어떻게 구성되고 연결되는지를 묻는다. 대통령제·의원내각제·혼합정부제가 여기 속한다.</p>
+<p>민주공화국인 두 나라가 각각 대통령제와 의원내각제를 채택할 수 있다. 따라서 <mark class="yellow">정부형태는 국가형태의 하위개념</mark>이다. 대통령이 있다는 사실만으로 민주적인 나라인지는 알 수 없다. 선거·권리·권력통제까지 살펴야 한다.</p>
+<p><strong>시험:</strong> 060. <strong>키워드:</strong> 국가 전체/통치기구. <strong>한 줄:</strong> 나라의 기본 성격과 기관의 배치는 서로 다른 질문이다.</p>
+<h2 id="foundations-04-02" data-concept-id="foundations-04-02">1-2. 민주: 표를 세기 전에 말할 자유가 있어야 한다 ★★★★★</h2>
+<p><strong>교재 102-103쪽 / 문단의 역할:</strong> 민주주의의 최소 조건을 설명한다.</p>
+<p>민주란 국민이 국가의 의사결정에 근본적인 통제력을 갖는다는 뜻이다. 국민이 자유롭고 평등하게 참여하고 이유를 주고받는 제도적 통로가 있어야 한다. 정당한 절차로 결정되었다면 반대했던 사람에게도 그 결정을 존중할 이유가 생긴다. 이것이 교재의 긴 문장에 나오는 ‘수범의무를 낳는 정당성’이다. 물론 결정이 기본권을 침해하면 다시 다툴 수 있다.</p>
+<p>필수 조건을 장면으로 바꾸자. 투표일에는 누구나 한 표씩 행사하지만 정부 비판자는 감옥에 가고, 권력자는 패배해도 퇴진하지 않는 나라가 있다. 형식적 투표만으로 민주주의가 완성되지 않는다. <strong>자유롭고 평등한 참여, 토론의 자유와 기회, 평화적인 권력교체</strong>가 함께 필요하다. 성별·신분을 이유로 시민을 배제해서도 안 된다. 교재의 의사결정 능력 언급을 장애인 전체의 참정권을 부정하는 말로 읽지 않는다.</p>
+<p><strong>시험:</strong> 075. <strong>키워드:</strong> 참여·토론·교체·정당성. <strong>한 줄:</strong> 민주주의는 투표함 하나가 아니라 자유롭게 판단하고 권력을 바꿀 수 있는 체계다.</p>
+<h2 id="foundations-04-03" data-concept-id="foundations-04-03">1-3. 공화: 이긴 편만의 나라가 아니다 ★★★★★</h2>
+<p><strong>교재 103-106쪽 / 문단의 역할:</strong> 비군주국이라는 형식과 공동생활을 위한 실질을 구별한다.</p>
+<p>공화국의 <strong>형식적 의미</strong>는 군주가 없는 나라다. 입헌군주국도 군주는 있으므로 이 의미의 공화국이 아니다. <strong>실질적 의미</strong>는 모든 국민의 자유·권리와 공익을 보장하기에 적합한 권력행사·의사결정의 틀을 갖춘 나라다. 대표제, 권력의 분산·견제, 소수의 권리, 법치, 충분한 숙고가 필요하다. 군사독재나 파시즘을 거부하는 의미도 담긴다.</p>
+<p><mark class="green">왜 다수결에 제한을 둘까? 오늘 이긴 사람이 내일 지는 사람이 될 수 있고, 누구도 다른 사람을 단순한 희생물로 만들 권리는 없기 때문이다.</mark> 소수에게 회의장 입장만 허용하고 결론에서는 권리를 아무렇게나 박탈한다면 충분하지 않다. 사람의 기분과 자의에 따르는 인치가 아니라 법에 의한 지배를 요구한다.</p>
+<p>교재·워크북의 ‘다수/소수’는 여기서 단순 인구수가 아니다. 해당 사안에서 국가권력을 행사하는 쪽과 그 결정에 반대하면서 불이익을 받는 쪽이라는 <strong>형식적 관계</strong>다. 차별받는 집단이 전체 인구의 60%라도 그 사안의 권리보호 논의에서는 ‘소수’의 위치에 있을 수 있다. 워크북은 세전 5천만 원 소득자가 세전 4천만 원 소득자보다 세후소득이 적어지는 세제 사례를 든다. 이 사례의 초점은 구체 세율의 당연한 위헌성 선언이 아니라 불이익을 받는 당사자의 지위를 인구수와 구별하는 데 있다.</p>
+<p><strong>시험:</strong> 061·076. <strong>키워드:</strong> 비군주·공익·법치·소수 보호. <strong>한 줄:</strong> 공화국은 권력을 특정 편의 사유물로 만들지 않도록 설계한 나라다.</p>
+<h2 id="foundations-04-04" data-concept-id="foundations-04-04">1-4. 민주와 공화가 겹쳐도 괜찮은 이유 ★★★★☆</h2>
+<p><strong>교재 102-106쪽 / 문단의 역할:</strong> 두 단어의 관계와 ‘해석적 개념’을 설명한다.</p>
+<p>호랑이·금처럼 자연의 종류를 가리키는 개념, 미혼자나 일정 연령처럼 정해진 기준으로 분류하는 개념과 달리, 민주·정의·자유·평등은 <strong>어떤 제도가 그 가치를 가장 잘 실현하는지 해석해야 하는 개념</strong>이다. 민주와 공화의 내용이 일부 겹친다는 이유만으로 하나가 불필요해지는 것은 아니다. Waldron이 소개하는 논점도 ① 핵심 의미가 논쟁 대상이고 ② 그러한 논쟁이 개념의 성격과 연결되며 ③ 논쟁이 이해를 깊게 할 수 있다는 데 있다. 아무 뜻이나 붙여도 된다는 의미는 아니다.</p>
+<p>교재의 비교 사례를 보자. 역사적 베네치아의 귀족 공화정은 군주는 없어도 국민 전체의 민주적 통제와 거리가 있었다. 영국은 민주적 제도를 갖추면서도 형식적으로 공화국이 아닌 입헌군주국이다. 또 투표는 하지만 충동·무지에 따른 결정을 제어할 토론·권리구제 장치가 없는 국가는 민주 개념의 주변부에 겨우 걸칠 수 있어도 실질적 공화국이라 하기 어렵다.</p>
+<p>헌법 1①의 민주공화국은 정치적 구호만이 아니다. 입법·법 해석·정책을 구속한다. 88헌가6이 말하는 헌법의 최고이념과 연결된다. 교재가 취한 개헌한계론에서는 이런 핵심 정체성을 개정권으로 없앨 수도 없다고 본다. <mark class="blue">2강의 개헌 한계 → 4강의 민주공화국 정체성</mark>을 연결한다.</p>
+<p><strong>시험:</strong> 062. <strong>키워드:</strong> 해석적 개념·겹침·핵심/주변. <strong>한 줄:</strong> 민주적 통제와 공화적 권리보호가 함께 있어야 민주공화국이 된다.</p>
+<h1>2. 누가 대한민국 국민인가</h1>
+<h2 id="foundations-04-05" data-concept-id="foundations-04-05">2-1. 인적 적용범위와 국적·영주권 ★★★★★</h2>
+<p><strong>교재 106-109쪽 / 문단의 역할:</strong> 헌법이 적용되는 사람과 영구적 구성원을 구별한다.</p>
+<p>국민은 국가의 항구적 소속원이고, 국적은 그 신분 또는 자격이다. 외국에 산다고 국민이 사라지는 것은 아니다. 국내의 외국인·무국적자도 국내 법질서의 적용을 받고, 인간으로서 보장되는 기본권의 주체가 될 수 있다. <strong>헌법의 인적 적용범위=한국 국적자만</strong>이라는 등식은 틀리다. 국외 국민에게 한국법상 의무가 미칠 수 있어도 거주국 법을 마음대로 어겨도 된다는 뜻은 아니다. 속인적 연결과 거주국의 관할권이 함께 문제 된다.</p>
+<p>영주권은 외국 정부가 주는 장기·영구 체류 자격이지 곧 그 나라의 국적이 아니다. 예컨대 한국 국적자가 외국 영주권을 얻었다고 그 사실만으로 한국 국적을 잃지 않는다. 시민권이라는 번역어는 나라에 따라 국적·시민의 정치적 지위 등 서로 다른 맥락에 쓰인다. 교재의 국적/시민권 비교를 전 세계 공통의 단일한 제도 구별이나 ‘대통령 자격만 다르다’는 명제로 일반화하지 않는다.</p>
+<p><strong>시험:</strong> 063·077. <strong>키워드:</strong> 항구적 소속·국적≠체류 자격. <strong>한 줄:</strong> 어디에 사는지와 어느 나라의 국민인지는 다른 문제다.</p>
+<h2 id="foundations-04-06" data-concept-id="foundations-04-06">2-2. 법률로 국민을 정한다고 마음대로 배제할 수 있을까 ★★★★★</h2>
+<p><strong>교재 107-108쪽 / 문단의 역할:</strong> 국적법정주의도 헌법의 한계를 지킨다는 것을 보여 준다.</p>
+<p>헌법 2①은 국민이 되는 요건을 법률로 정하도록 한다. 가족·권리·의무에 중대한 영향을 주는 신분을 행정기관의 즉흥 판단에 맡기지 않으려는 것이다. 그러나 국회가 특정 성별·집단을 마음대로 배제할 권한까지 받은 것은 아니다. 국가 구성원이라는 관계가 법률 한 줄의 자의적 창작물인 것은 아니므로, 국적법도 존엄·평등과 국민주권의 요구에 맞아야 한다.</p>
+<p><strong>판례 드라마: 97헌가12(2000.8.31.).</strong> 옛 법은 출생 때 아버지가 한국인인지를 원칙적 기준으로 삼았다. 한국인 어머니와 외국인 아버지의 자녀는 같은 연결을 인정받지 못했다. 법이 부모양계로 바뀌었지만 모계 특례는 시행 전 10년 동안 태어난 사람에게만 열렸다. 그러면 단지 더 먼저 태어났다는 이유로 배제된 사람에게 합리적 이유가 있을까?</p>
+<p>헌재는 성별에 따른 차별의 위헌성과 특례 연령 제한의 문제를 설명했다. 다만 <mark class="pink">주문을 정확히 나누면 구법 조항에 대한 제청은 법 개정으로 재판전제성이 없어 각하, 신법 부칙의 ‘10년 동안에’ 부분은 헌법불합치·잠정적용</mark>이었다. 기존 수혜자의 길까지 당장 없애는 공백을 피하면서 입법 개선을 요구했다. 단순히 ‘부계혈통 조항을 그날 즉시 무효로 했다’고 외우면 절차 결론을 놓친다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941330&cbIdx=1106">공식 사건 정보</a>.</p>
+<p>문장 번역: ‘입법형성의 한계’ → 국회도 헌법 안에서 정해야 한다. ‘평등원칙에 위반’ → 어머니와 아버지의 연결을 다르게 취급할 정당한 이유가 없다. ‘잠정적용’ → 위헌적 문제를 고치되 현재 혜택까지 없애는 혼란을 피한다. 국적법 때문에 외국인으로 분류되었다는 이유만으로 바로 그 차별을 다툴 길을 막아서는 안 된다는 점도 중요하다.</p>
+<p><strong>시험:</strong> 078. <strong>키워드:</strong> 국적법정주의·양계혈통·헌법불합치/각하. <strong>한 줄:</strong> 국회가 정하는 국민의 범위도 평등이라는 헌법 기준을 통과해야 한다.</p>
+<h2 id="foundations-04-07" data-concept-id="foundations-04-07">2-3. 국적 취득의 지도: 출생과 그 이후 ★★★★★</h2>
+<p><strong>교재 109-110쪽 / 문단의 역할:</strong> 국적 취득의 원인과 기본원칙을 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>뜻과 예</th>
+<th>왜 별도 절차가 필요한가?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선천적 취득</td>
+<td>출생을 원인으로 취득. 한국은 원칙적으로 부모 중 한 사람의 국적에 연결</td>
+<td>출생 당시 요건 충족으로 신분이 생김</td>
+</tr>
+<tr>
+<td>인지(3조)</td>
+<td>한국인 부·모가 혼인 외 출생자와 법적 친자관계를 인정하고 법정 요건에 따라 신고</td>
+<td>단순 친분이 아니라 법적 부모·자녀 연결 확인</td>
+</tr>
+<tr>
+<td>귀화(4-7조)</td>
+<td>한국 국적을 취득한 적 없는 외국인에게 법무부장관이 요건을 심사하여 허가</td>
+<td>공동체 구성원으로 받아들일 요건 심사</td>
+</tr>
+<tr>
+<td>수반취득(8조)</td>
+<td>외국인인 미성년 자녀가 귀화·국적회복을 신청한 부모와 함께 신청</td>
+<td>가족의 생활공동체와 자녀의 지위 고려</td>
+</tr>
+<tr>
+<td>국적회복(9조)</td>
+<td>과거 한국 국민이었던 사람이 허가를 받아 돌아옴</td>
+<td>신규 귀화와 달리 이전 연결이 있음</td>
+</tr>
+<tr>
+<td>재취득(11조)</td>
+<td>10③으로 상실한 뒤 1년 내 외국 국적을 포기하고 법정 신고</td>
+<td>외국 국적 포기의무 불이행 문제를 해소할 길</td>
+</tr>
+</tbody></table>
+<p>후천적 취득은 법이 요구하는 신고·허가 등의 별도 행위가 필요하다. 귀화·회복은 허가만의 문제로 끝난다고 단순화하지 말자. 현행법은 원칙적으로 국민선서와 증서 수여를 거쳐 취득하는 절차도 둔다. 신고형 취득과 허가형 취득을 구별하는 것이 이 강의 중심이다.</p>
+<p>국적법 2조의 순서를 풀면 ① 출생 당시 부 또는 모가 한국 국민, ② 출생 전 사망한 부가 사망 당시 한국 국민, ③ 부모가 모두 분명하지 않거나 무국적인 경우 한국 출생이다. 한국에서 발견된 기아는 한국에서 출생한 것으로 <strong>추정</strong>한다. 원칙은 부모양계혈통주의(속인주의), 예외적으로 출생지 기준(속지주의)을 보완한다. 외국인 부모 사이에서 한국에서 태어났다는 사정만으로 언제나 한국 국적을 얻는 것은 아니다.</p>
+<p>단일국적주의가 기본 출발점이라고 해도 제한적 복수국적을 인정하는 예외가 있다. <mark class="pink">‘복수국적은 단 한 명도 인정하지 않는다’는 설명은 틀린다.</mark> 속인/속지는 여기서는 <strong>국적 취득 기준</strong>이고, 다른 문맥에서는 <strong>법 적용의 관할 기준</strong>이라는 뜻도 있으므로 문맥을 확인한다.</p>
+<p><strong>시행 예정 보충:</strong> 2026.12.3. 시행 개정은 일정한 독립유공자 직계존비속의 배우자에 대한 간이귀화 요건을 추가한다. 현재 시행 중인 규정과 섞지 않는다. 이 강의 기본 취득 분류가 바뀌는 것은 아니다. <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=286415&viewCls=lsRvsDocInfoR">공식 개정문</a>.</p>
+<p><strong>시험:</strong> 064·065. <strong>키워드:</strong> 출생/후천·부모양계·예외적 속지. <strong>한 줄:</strong> 태어날 때 얻는 길과 이후 절차로 얻는 길을 먼저 나눈다.</p>
+<h2 id="foundations-04-08" data-concept-id="foundations-04-08">2-4. 국적 상실: 원인마다 시점과 구제 방식이 다르다 ★★★★★</h2>
+<p><strong>교재 109-111쪽 / 문단의 역할:</strong> 여러 상실 원인을 하나의 ‘포기’로 뭉뚱그리지 않게 한다.</p>
+<table>
+<thead>
+<tr>
+<th>원인</th>
+<th>핵심 조건·시점</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>한국 국적 취득 후 외국 국적 처리의무 불이행(10③)</td>
+<td>원칙적 1년 내 포기, 해당하는 경우 불행사서약 등의 의무를 이행하지 않으면 기간 경과 시 상실</td>
+<td>모든 귀화자가 외국 국적을 그 즉시 자동 상실하는 것은 아님</td>
+</tr>
+<tr>
+<td>국적이탈(14②)</td>
+<td>적법한 이탈신고를 법무부장관이 수리한 때</td>
+<td>편지를 보냈다고 바로 상실한 것은 아님</td>
+</tr>
+<tr>
+<td>국적선택명령 불이행(14-3④)</td>
+<td>명령에 따른 기간이 지나면 상실</td>
+<td>일반 선택기간 경과와 명령 후 불이행을 구별</td>
+</tr>
+<tr>
+<td>국적상실결정(14-4)</td>
+<td>일정한 국익·사회질서 침해 사유가 있는 복수국적자에게 청문 후 결정</td>
+<td>출생으로 한국 국적을 취득한 사람은 대상에서 제외</td>
+</tr>
+<tr>
+<td>자진하여 외국 국적 취득(15①)</td>
+<td>외국 국적 취득 시 한국 국적 상실</td>
+<td>영주권 취득과 다름</td>
+</tr>
+<tr>
+<td>혼인·입양·인지·가족의 수반적 외국 국적 취득(15②)</td>
+<td>법정 유형에서 6개월 내 한국 국적보유신고를 안 하면 외국 국적 취득 시로 소급하여 상실</td>
+<td>불행사서약과 국적보유신고를 혼동하지 말 것</td>
+</tr>
+</tbody></table>
+<p>이해용 사례: 지우는 홀로 자진하여 캐나다 국적을 얻었다. 민서는 외국인 배우자와 혼인하면서 그 나라 법에 따라 배우자 국적을 취득했다. 두 사람 모두 외국 국적이 생겼지만, 첫째는 원칙적 즉시 상실, 둘째는 15②의 국적보유신고를 검토한다. <strong>헌법_079의 원본 해설은 ② 설명에서 불행사서약을 들지만, 이 유형의 직접적인 규정은 6개월 내 국적보유신고</strong>다. 원문은 부록에 남기고 이 보충을 함께 읽는다. <a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1017195197">15조 공식 조문</a>.</p>
+<p>국적선택은 원칙적으로 20세 전에 복수국적자가 되었으면 22세 전까지, 20세 후에 되었으면 그때부터 2년 내에 한다. 한국 국적을 선택할 때 외국 국적 포기 또는 법이 허용하는 불행사서약을 검토한다. 이미 선택명령을 받은 사람이 한국 국적을 선택하려면 외국 국적을 포기해야 하는 점도 구별한다. 불행사서약을 현저히 어긴 경우의 선택명령도 따로 있다.</p>
+<p><strong>시험:</strong> 079. <strong>키워드:</strong> 자진 취득·6개월 보유신고·수리·선택명령. <strong>한 줄:</strong> 국적을 잃었다는 결론 앞에 원인과 시점을 반드시 붙인다.</p>
+<h2 id="foundations-04-09" data-concept-id="foundations-04-09">2-5. 병역과 복수국적: 원칙과 예외를 두 칸에 ★★★★★</h2>
+<p><strong>교재 111-114쪽 / 문단의 역할:</strong> 국적 선택의 자유와 병역부담의 공평을 조화시킨다.</p>
+<p>외국에 주소를 둔 선천적 복수국적 남성이 병역의무 해소 전에 통상적인 국적이탈신고를 하려면 원칙적으로 <strong>18세가 되는 해 3월 31일까지</strong>라는 시기를 확인한다. 병역법상 그해 1월 1일 병역준비역 편입부터 3개월이다. 생일이 늦다고 기한도 늦어지는 것이 아니다. 원문의 ‘3월 31일 전’은 31일을 배제하는 식으로 외우지 않는다.</p>
+<p>직계존속이 영주 목적 없이 외국에 체류하던 중 태어난 사람은 병역의무가 해소되기 전 이탈이 제한된다. 국적법이 정한 복무 완료·전시근로역 편입·병역면제 등의 사유를 확인해야 한다. 단순히 여권이나 외국 출생지만 보는 것이 아니라 부모의 생활기반과 체류 연속성도 중요하다. 시행령·시행규칙은 부모의 영주권·시민권 취득 또는 신청, 장기간 계속 거주 등의 자료를 통해 실질적 정착 여부를 살핀다. ‘17년’은 관련 요건 중 하나이지 누구나 17년만 지나면 자동 허가라는 뜻이 아니다. <a href="https://overseas.mofa.go.kr/us-ko/brd/m_4482/view.do?page=1&seq=1254960">공관 안내</a>.</p>
+<p>복무를 마친 뒤 법정 기한에 맞춰 외국 국적 불행사서약을 하는 등 합법적 복수국적 유지 방안이 있다. 반대로 한국 국적을 <strong>유효하게 상실한 외국인</strong>에게 한국 거주만을 이유로 한국 국민의 병역의무가 그대로 남는다고 할 수 없다. 입국·체류와 관련한 별도 제한 문제와 병역의무 존속 문제는 다르다.</p>
+<p><mark class="yellow">2022.10.1.부터는 국적법 14-2조의 예외적 국적이탈 허가제도 존재한다.</mark> 계속 외국에 생활기반을 둔 일정한 외국 출생자 또는 6세 미만에 이주한 사람 등 법정 대상이고, 신고 기한을 지키지 못한 정당한 사유가 있어야 한다. 직업상 불이익·생활기반·국민으로 누린 권리·병역 공평 등을 고려한 개별 심사다. <strong>해외 거주만으로 자동 허가가 아니다.</strong> <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1018325875">공식 특례 조문</a>.</p>
+<p><strong>시험:</strong> 066·080. <strong>키워드:</strong> 18세 되는 해 3월 말·병역 공평·예외 허가. <strong>한 줄:</strong> 원칙적 제한을 지우지 않으면서 부당한 일률 제한에는 예외 심사의 길을 둔다.</p>
+<h2 id="foundations-04-10" data-concept-id="foundations-04-10">2-6. 두 국적이탈 판례를 시간 순서로 ★★★★★</h2>
+<p><strong>교재 112-114쪽 / 판례의 역할:</strong> 제한의 정당성 인정과 예외 없는 제한의 위헌성이 양립함을 보여 준다.</p>
+<p><strong>2005헌마739(2006.11.30.).</strong> 복수국적 남성의 국적이탈을 병역과 연결하여 제한하는 것이 문제 되었다. 헌재는 한국에서 권리를 누리다가 외국 국적을 이용해 병역만 피하면 부담의 공평이 깨진다는 점을 중시했다. 병역 이행 확보라는 공익 때문에 국적이탈을 제한할 원칙적 이유가 있다고 보았다. 교재가 옛 제도 설명에서 쓰는 ‘36세’를 모든 사람에게 적용되는 현재의 자동 이탈 연령으로 암기하지 않는다.</p>
+<p><strong>2016헌마889(2020.9.24.).</strong> 외국에서 태어나 계속 살던 사람이 자신도 한국 국적자인 줄 몰라 신고 시기를 놓칠 수 있다. 외국의 직업·공직 진출에서 복수국적 때문에 중대한 불이익을 받을 수도 있다. 이 사람에게 “늦었으니 사정은 듣지 않겠다”고 하는 것이 꼭 필요한가? 헌재는 생활기반·인지 가능성·기한을 지키지 못한 사유를 살피는 덜 침해적인 방법을 마련할 수 있다고 보았다.</p>
+<p>문장 번역: ‘입법목적 정당’ → 병역 공평은 지킬 가치다. ‘구체적 사정 불문’ → 한국에서 산 적이 거의 없는 사람도 똑같이 막는 문제다. ‘예외적 허가’ → 책임 묻기 어려운 지연이고 공평을 해치지 않는지 개별 심사할 수 있다. 법률조항에 <strong>헌법불합치·2022.9.30.까지 잠정적용</strong> 결정을 했고, 사건의 시행규칙 관련 청구는 별도 기각이었다. 법률상 제한을 전면 없앤 결정이 아니다. 이후 앞 절의 특례가 시행되었다. <a href="https://law.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=500146&cbIdx=1097">공식 결정 설명</a>.</p>
+<p><strong>시험:</strong> 066. <strong>키워드:</strong> 공평의 원칙 유지·과도한 일률성 교정. <strong>한 줄:</strong> ‘제한할 이유가 있다’와 ‘예외가 전혀 없어도 된다’는 다른 말이다.</p>
+<h1>3. 국경 밖의 국민, 동포, 북한주민</h1>
+<h2 id="foundations-04-11" data-concept-id="foundations-04-11">3-1. 재외국민 보호: 국가의 의무도 국경에서 끝나지 않는다 ★★★★★</h2>
+<p><strong>교재 115-116쪽 / 문단의 역할:</strong> 헌법 2②의 세 가지 기능을 설명한다.</p>
+<p>국가는 법률에 따라 재외국민을 보호할 의무가 있다. ① 해외에 산다는 이유만으로 국민의 권리를 자의적으로 빼앗지 말아야 하고 ② 전쟁·재난 등 국외의 특별한 위험으로부터 보호할 제도를 갖추며 ③ 거주국에서 정당한 대우를 받도록 외교적·법적 지원을 해야 한다. 해외 재판에서 적법한 절차를 받을 수 있도록 돕는 일도 이해용 사례다. 외국 법원의 결론을 한국 정부가 마음대로 뒤집을 권한이라는 뜻은 아니다.</p>
+<p>교재는 재외동포법의 적용대상인 재외국민을 설명하면서 영주권 취득자·영주 목적 거주자라는 범위를 든다. <mark class="pink">이를 헌법과 모든 영사보호의 대상이 영주권자뿐이라는 뜻으로 넓혀 읽으면 안 된다.</mark> 여행·유학 등으로 외국에 체류하는 국민의 보호 문제도 존재한다. 어느 법률의 정의인지 확인하는 습관이 중요하다.</p>
+<p><strong>사건 2004헌마644등(2007.6.28.).</strong> 일본·미국·캐나다 등에 사는 한국 국민들이 주민등록 요건과 국내거주자 중심의 부재자투표 제도 때문에 참정권을 행사하지 못했다. “나는 여전히 국민인데 해외에 산다는 이유로 투표 길을 전부 닫아도 될까?” 헌재는 해당 조항들에 헌법불합치 결정을 하면서 입법 개선을 요구했다. 행정 편의만으로 보통선거·평등·참정권을 과도하게 제한할 수 없다는 것이다. 결정 이후 마련된 구체적 선거 절차와 당시 위헌적 제도를 혼동하지 않는다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941449&cbIdx=1106">공식 사건 설명</a>.</p>
+<p>교재가 인용하는 <strong>89헌마189(1993.12.23.)</strong>의 보호의무 설명은 외교적 보호와 법률·문화·교육적 지원을 포함한다. 그 문장을 풀면 “국가가 일부러 해치지만 않으면 끝”이 아니라 “거주국에서 정당한 대우를 받을 수 있도록 적극적으로 도울 책임도 있다”는 뜻이다. 워크북 081은 2001헌바25도 인용하므로 사건번호가 다르다고 보호의무의 취지가 달라지는 것은 아니다.</p>
+<p><strong>시험:</strong> 081. <strong>키워드:</strong> 권리 보장·특별위험·적극적 보호. <strong>한 줄:</strong> 해외 거주 국민도 나라가 보호해야 할 구성원이다.</p>
+<h2 id="foundations-04-12" data-concept-id="foundations-04-12">3-2. 재외국민과 외국국적동포를 구별하자 ★★★★☆</h2>
+<p><strong>교재 116-117쪽 / 문단의 역할:</strong> 민족적 연결과 법적 국적을 구별하고 동포 간 차별을 검토한다.</p>
+<p>재외동포법의 <strong>재외동포는 재외국민과 외국국적동포를 포함하는 말</strong>이다. 외국국적동포는 한국 국적을 보유했던 사람(정부수립 전 해외 이주 동포 포함) 또는 그 직계비속으로 외국 국적을 취득한 사람 중 법령이 정한 범위다. 교재의 ‘재외동포는 외국인’이라는 대목은 문맥상 <strong>외국국적동포</strong>라고 좁혀 읽어야 정확하다. 한국 국적을 유지한 재외국민까지 외국인이 되지는 않는다.</p>
+<p>법은 외국국적동포에게 일반 외국인보다 유리한 체류·연장과 일정한 경제활동 등의 특례를 둔다. 취업, 부동산·금융·건강보험 등도 각각 법정 요건과 제한을 확인해야 한다. 모든 직업에 제한 없이 취업하거나 내국인의 모든 급여를 자동으로 받는 제도가 아니다.</p>
+<p><strong>판례 드라마: 99헌마494(2001.11.29.).</strong> 법이 정부수립 후 이주 동포에게는 혜택을 주면서 그 이전에 이주한 동포와 후손을 사실상 배제했다. 중국·구소련 지역의 동포들은 “이주 시기가 이르다는 이유만으로 왜 우리를 빼는가?”라고 다투었다. 헌재는 합리적 이유 없는 차별로 보고 헌법불합치 결정을 했다. 여기서 평등권은 인간의 권리로서 외국인에게도 문제 될 수 있다. 서로 다른 외국국적동포 사이의 차별이므로 단순히 상대국이 한국인에게 같은 혜택을 주는지라는 상호주의만으로 해결할 사안도 아니다.</p>
+<p>문장 번역: ‘수혜적 법률’ → 혜택을 주는 법이다. ‘기본권 침해 가능’ → 혜택을 주는 법이라도 일부를 부당하게 빼면 다툴 수 있다. ‘정부수립 이전/이후’ → 출신과 사정을 충분히 보지 않고 시기 하나로 구분한 것이다. <strong>067의 99헌마94는 99헌마494로 보충</strong>한다. <a href="https://history.ccourt.go.kr/site/history/02/10201000000002020101203.jsp">공식 연혁의 해당 결정</a>.</p>
+<p><strong>시험:</strong> 067. <strong>키워드:</strong> 재외동포=두 범주·외국국적동포 간 평등. <strong>한 줄:</strong> 같은 동포라는 연결과 현재 한국 국민이라는 신분을 나누어 보자.</p>
+<h2 id="foundations-04-13" data-concept-id="foundations-04-13">3-3. 북한주민의 국적과 평화통일의 요구 ★★★★★</h2>
+<p><strong>교재 117-119쪽 / 문단의 역할:</strong> 영토조항을 현실의 남북관계와 조화시킨다.</p>
+<p>헌법 3조의 영토조항과 판례에 따르면 북한주민은 원칙적으로 대한민국 국민이다. 남한 정착을 원하는 북한주민에게 보통 외국인의 신규 귀화 절차를 당연히 요구하는 식으로 접근하지 않는다. 다만 개별인의 외국 국적 취득·한국 국적 상실 등 별도 사정까지 무시하고 모든 개인이 영원히 같은 신분이라고 단정하는 것은 피한다.</p>
+<p>교재의 <strong>남북 대표단 사례</strong>: 스포츠·교류 문제를 논의하러 온 북한 당국자에게 “당신도 국민이니 돌아갈 수 없다”고 모두 억류해야 할까? 아니다. 헌법 4조의 평화통일 의무를 함께 읽어야 한다. 그런 억류는 평화적 교류를 불가능하게 만들 수 있다. 반대 방향으로 북한이 “탈북자를 모두 강제송환하지 않으면 교류를 끊겠다”고 해도, 교류 유지를 이유로 당사자의 신체·거주이전의 자유와 보호 필요성을 지울 수 없다.</p>
+<p><mark class="green">왜 두 결론이 함께 가능한가? 헌법은 영토와 국민의 원칙을 세우면서도 사람의 자유를 존중하는 평화적 통일을 명령하기 때문이다.</mark> 북한 정권의 법적 정당성을 승인하지 않으면서 대화·협력할 수 있다. 개별 법률이 북한 지역·주민을 외국이나 외국인에 준하여 취급하는 특례를 둘 수도 있다. 그것이 곧 일반적인 외국 국가승인이나 국적 부정은 아니다.</p>
+<p><strong>시험:</strong> 082. <strong>키워드:</strong> 원칙적 국민·평화교류·강제송환 금지의 권리 논점·특례. <strong>한 줄:</strong> 국적 원칙을 인정하는 것과 모든 상황을 남한 내부와 똑같이 처리하는 것은 다르다.</p>
+<h2 id="foundations-04-14" data-concept-id="foundations-04-14">3-4. 북한 관련 네 사건: 같은 국적, 다른 법의 목적 ★★★★☆</h2>
+<p><strong>교재 118-121쪽 / 판례의 역할:</strong> 국적 판단과 개별 법률의 기능적 분류를 나누어 본다.</p>
+<p><strong>① 강제동원 위로금: 대법원 2011두24675(2016.1.28.).</strong> 북한주민과 관련한 강제동원 피해 위로금을 두고 행정청이 ‘대한민국 국적이 없는 사람’이라는 제외사유를 들었다. 법원은 북한주민이 원칙적으로 한국 국민이고, 법이 북한주민을 따로 제외하지도 않았다고 보았다. 이 위로금은 인도적 지원이지 모든 손해의 배상·보상 자체가 아니며, 지급대상이 한일청구권협정 적용대상과 반드시 일치해야 하는 것도 아니다. 행정청의 상고는 기각되었다. “입법자가 지원범위를 정할 재량” → 법을 만들 선택의 여지, “자의적 축소해석 불가” → 행정청이 없는 제외사유를 덧붙일 수 없다는 뜻이다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=187761">공식 판결</a>.</p>
+<p><strong>② 외환 규율: 대법원 2004도4044(2004.11.12.).</strong> 북한 관련 거래에 외국환거래법 규율을 적용할 수 있는지가 문제였다. 북한을 헌법상 보통 외국으로 볼 수는 없지만, 남북교류 관련 법의 구조에 따라 외국에 준하는 지역으로 취급하는 것은 가능하다. 외환 흐름을 관리할 필요가 있기 때문이다. “준한다” → 국적·영토를 바꾸지 않고 특정 규율을 비슷하게 적용한다는 뜻이다. 반대로 국적 원칙만으로 모든 신고·관리 규율을 없애면 거래 관리의 공백이 생긴다.</p>
+<p><strong>③ 북한산 상황버섯 추출액: 대구지법 2007노3631(2008.4.1.).</strong> 북한에서 만든 제품에 ‘국내산: 북한’이라고 표시한 사건이다. 법원은 당시 원산지 표시 제도와 남북 거래의 특수성을 고려하여 허위·오인 표시 문제를 인정했다. 소비자에게 원산지 정보를 제공한다는 법의 기능이 중요했다. <strong>대법원 판결이 아니라 지방법원 항소심이며, 당시 표시 규정에 대한 사건</strong>이라는 한계를 함께 기억한다. 이 사건 하나를 현재 모든 북한산 물품 표시의 상세 지침으로 사용하지 않는다.</p>
+<p><strong>④ 신고 없는 지급과 비거주자: 헌재 2003헌바114(2005.6.30.).</strong> 북한의 아시아태평양평화위원회와 관련된 외환 지급 규율에서 ‘거주자/비거주자’라는 구분이 문제 되었다. 헌재는 이 구분이 국적만이 아니라 주소·거소·경제활동 중심지 등의 법정 기준이라는 점을 강조하고 해당 심판대상에 합헌 결정을 했다. 외국인도 거주자일 수 있고 한국 국민도 비거주자일 수 있다. “그 위원회가 비거주자인가” → 개별 법률 해석의 문제, “북한을 외국으로 인정했나” → 별개의 헌법상 질문이다. 교재 속 당시 형량을 현행 처벌수위로 그대로 외우지 않는다.</p>
+<p><strong>시험:</strong> 082 및 사례 응용. <strong>키워드:</strong> 국적/법률 목적·인도적 지원·외국에 준함·거주성. <strong>한 줄:</strong> 사람의 국민 여부를 먼저 보고, 그다음 적용 법률이 무엇을 관리하려는지 본다.</p>
+<h1>4. 국민의 네 가지 지위</h1>
+<h2 id="foundations-04-15" data-concept-id="foundations-04-15">4-1. 주권자·최고기관·기본권 주체·피치자 ★★★★★</h2>
+<p><strong>교재 121-123쪽 / 문단의 역할:</strong> 같은 국민을 네 관점에서 설명하여 개념 혼동을 막는다.</p>
+<table>
+<thead>
+<tr>
+<th>지위</th>
+<th>누구·무엇을 뜻하나?</th>
+<th>사례와 주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주권자</td>
+<td>국가권력의 정당성의 근원인 전체 국민</td>
+<td>국민 한 명이나 특정 시점 여론 다수가 곧 전체 주권자는 아님</td>
+</tr>
+<tr>
+<td>최고국가기관</td>
+<td>헌법상 선거·국민투표 권한을 행사하는 유권자 집단</td>
+<td>국회의원·대통령 선거, 72조·130조 국민투표. 모든 통치권을 직접 행사하는 것은 아님</td>
+</tr>
+<tr>
+<td>기본권 주체</td>
+<td>자유와 권리를 보장받는 개별 국민</td>
+<td>소수자라도 권리구제를 요구할 수 있음</td>
+</tr>
+<tr>
+<td>피치자</td>
+<td>헌법·법률에 따라 국가권력의 규율을 받는 사람</td>
+<td>법에 따라 세금·의무를 부담. 주권자와 모순 아님</td>
+</tr>
+</tbody></table>
+<p>전체 국민이라는 말은 모든 사안에서 실제로 100% 찬성해야 한다는 뜻이 아니다. 사람들을 동등한 구성원으로 존중하고 자유로운 의사소통·권리보호·공정한 결정 절차를 마련해야 한다는 의미다. 모든 개인이 각자 최종 명령권자라면 서로 반대되는 명령이 동시에 최고명령이 되고 만다. 다수만 주권자라고 하면 다수의 권리침해를 막는 위헌법률심판이 언제나 반주권적이라는 잘못된 결론도 나온다.</p>
+<p>헌법 전문, 1②, 공무원의 국민 전체 봉사(7①), 정당의 민주적 조직·활동(8②)은 국민주권과 연결된다. 주권은 권력의 원천이고, 실제 기관의 권한은 헌법이 나누어 준다는 다음 절의 설명으로 이어진다.</p>
+<p><strong>시험:</strong> 068·086. <strong>키워드:</strong> 전체 국민/유권자/개인/규율 대상. <strong>한 줄:</strong> 국민은 나라의 주인이면서 법의 보호와 규율을 함께 받는 사람이다.</p>
+<h1>5. 국가는 어디까지인가</h1>
+<h2 id="foundations-04-16" data-concept-id="foundations-04-16">5-1. 영역과 영토: 땅·바다·하늘을 나누기 ★★★★★</h2>
+<p><strong>교재 123-124쪽 / 문단의 역할:</strong> 국가의 공간적 범위와 그 안의 권한을 설명한다.</p>
+<p>영역은 국가가 존립의 기초로 삼는 일정한 공간 전체로 <strong>영토·영해·영공</strong>을 포괄한다. 영토는 그중 육지다. 영역은 법적 지배의 범위이며 사실적 지배 가능성과 연결되지만, 일시적으로 침략당했다고 그곳이 즉시 영토에서 빠지는 것은 아니다. 국가의 전반적 지배권을 영역권 또는 영토고권이라고 부른다. 국제법상 외교특권 등 제한도 있으므로 모든 상황에서 타국과의 관계를 무시하는 힘은 아니다.</p>
+<p>헌법 3조는 한반도와 부속도서를 영토로 정한다. 그 범위를 조약으로 바꾸려면 해당 헌법조항의 개정 문제가 생기므로 정부가 조약만으로 헌법을 우회할 수 없다. 영토 범위가 바뀌는 것과 국가의 동일성이 반드시 사라지는 것은 또 다른 문제다. 침략전쟁으로 영역을 넓히는 것은 헌법 5①의 국제평화 원리와 맞지 않는다.</p>
+<p><strong>시험:</strong> 069·083. <strong>키워드:</strong> 영역이 상위·영토고권·3조·5①. <strong>한 줄:</strong> 영토는 영역의 한 부분이며 헌법이 그 범위를 규율한다.</p>
+<h2 id="foundations-04-17" data-concept-id="foundations-04-17">5-2. 영해·기선·배타적 경제수역 ★★★★★</h2>
+<p><strong>교재 124-125쪽 / 문단의 역할:</strong> 바다의 서로 다른 법적 공간을 구별한다.</p>
+<p>영해는 영토에 접속한 일정 수역이다. 한국의 원칙은 <strong>기선에서 바깥쪽 12해리</strong>, 1해리는 1,852m이므로 12해리는 22.224km다. 기선은 폭을 재는 출발선이며, 통상기선은 공식 해도에 표시된 해안의 저조선이다. 법정 요건에 따른 직선기선도 있다. 일정 수역은 대통령령으로 12해리 이내에서 따로 정하므로 ‘모든 곳이 일률적으로 12해리’는 틀리다. 교재는 대한해협의 3해리 특례를 든다. 실제 경계는 시행령의 좌표·선을 확인해야 한다.</p>
+<p>배타적 경제수역(EEZ)은 영해 바깥에서 기선으로부터 최대 200해리 범위까지 설정할 수 있는 특별한 수역이다. 자원 탐사·개발·보존·관리 등 경제적 목적의 주권적 권리와 일정한 관할권을 가진다. <mark class="pink">EEZ 전체가 영해가 되는 것은 아니다. 200해리는 영해 끝에서 다시 200해리를 더하는 수치도 아니다.</mark> 인접국과 겹치는 곳의 경계 획정은 별도 문제다.</p>
+<p>영해에는 다른 나라 선박의 <strong>무해통항(무해항행)</strong>이 인정된다. 연안국의 평화·질서·안전을 해치지 않는 통항이어야 한다. “외국 선박이면 무조건 출입금지”도, “선박이면 무슨 활동이나 자유”도 틀리다. 교재의 해협 폭에 관한 단순 수치 설명을 특례의 법적 근거 그 자체로 외우지 않는다.</p>
+<p><strong>시험:</strong> 069. <strong>키워드:</strong> 기선·12해리 원칙·예외·EEZ≠영해·무해통항. <strong>한 줄:</strong> 바다에서는 거리뿐 아니라 어떤 권한이 인정되는 수역인지도 물어야 한다.</p>
+<h2 id="foundations-04-18" data-concept-id="foundations-04-18">5-3. 영공과 NLL: 서로 다른 종류의 경계 ★★★★☆</h2>
+<p><strong>교재 125-127쪽 / 문단의 역할:</strong> 영공의 주권과 군사적 해상 경계선을 영해와 구별한다.</p>
+<p>영공은 영토·영해 위의 공간이다. 우주와의 상한을 국제법상 완전히 확정된 하나의 높이로 단정하지 않는다. 영해의 선박과 같은 일반적 무해통항권이 항공기에 인정되는 것은 아니다. 다만 <strong>모든 민간항공기가 반드시 매번 개별 허가를 받아야 한다</strong>는 교재식 단순화도 보완해야 한다. 시카고협약 5조는 조건 아래 비정기 민간항공기의 통과·비운송 목적 착륙을 사전허가 없이 인정하는 등 조약상 규율을 둔다. 정기항공·국가항공기 등과 구별한다. <a href="https://www.icao.int/sites/default/files/2024-12/7300_9ed.pdf">ICAO 협약 원문 3·5·6조</a>.</p>
+<p>서해 북방한계선(NLL)은 남북의 군사적 충돌 방지와 실제 관할 문제에서 중요한 선이다. <strong>대한민국 헌법상 영해 범위를 정하는 선은 아니다.</strong> 1953.7.27. 정전협정은 육상의 군사분계선을 정했지만 해상에서는 같은 방식의 구체적 분계선을 정하지 않았다. 유엔군사령부가 같은 해 8월 해·공군 활동의 북방 한계선을 설정했다는 역사와 연결된다. 서해 5도는 백령·대청·소청·연평·우도다. 동해 쪽 명칭 변천도 교재가 별도로 소개한다.</p>
+<p>1991년 남북기본합의서 11조의 군사분계선과 종전 관할구역에 관한 규정은 실제 해상 경계의 논의와 연결된다. 그러나 NLL의 설정 경위에 관한 모든 역사적 평가·통지·묵인 주장이 다툼없이 확정되었다거나, 이것만으로 남북이 최종적 해상 국경조약을 체결했다고 단정하지 않는다. 워크북 084의 핵심은 <strong>헌법상 영해 경계와 군사적·실질적 경계의 구별</strong>이다.</p>
+<p><strong>시험:</strong> 069·084. <strong>키워드:</strong> 영공의 별도 규율·NLL≠헌법상 영해선. <strong>한 줄:</strong> 지도 위의 선이라도 정한 목적과 법적 성격은 다르다.</p>
+<h2 id="foundations-04-19" data-concept-id="foundations-04-19">5-4. 영토조항과 평화통일조항을 함께 지키는 법 ★★★★★</h2>
+<p><strong>교재 127-130쪽 / 문단의 역할:</strong> 두 헌법조항 중 하나를 지워 버리지 않고 조화롭게 해석한다.</p>
+<p>극단 ① “3조만 법이고 4조는 희망이니 무력통일도 된다.” 극단 ② “4조만 법이고 3조는 희망이니 영토는 남한뿐이다.” 교재는 둘 다 경계한다. 문제는 조항 자체가 언제나 논리적으로 충돌한다기보다 <strong>특정 해석들이 충돌한다는 것</strong>이다. 정당성을 승인하지 않는 조직과도 전쟁 피해를 막고 평화를 위해 협력할 수 있다.</p>
+<p>교재의 <strong>길 잃은 아이와 점심 약속 사례</strong>: 친구와 정오에 만나기로 했는데 길에서 보호가 필요한 아이를 만났다. 아이를 도와 늦었다고 해서 약속 전체가 무의미한 희망사항으로 바뀌지는 않는다. 약속을 지킬 이유와 사람을 도울 이유를 함께 해석해야 한다. 마찬가지로 인간의 존엄·전쟁의 참혹함·평화통일이라는 헌법 전체의 이유를 함께 읽는다.</p>
+<p>남북한특수관계론은 통일을 지향하는 과정의 잠정적 특수관계로 이해한다. 북한은 관련 판례에서 반국가단체의 성격과 평화통일의 대화·협력 상대라는 지위를 함께 가진다고 설명된다. <strong>남북 동시 유엔 가입이 남북 상호 간의 당연한 국가승인을 뜻하지는 않는다.</strong> 국제기구의 회원 지위와 양자 간 법적 관계는 같은 질문이 아니다.</p>
+<p><strong>92헌바48(1993.7.29.).</strong> 국가보안법상 잠입·탈출 사건과 남북교류협력법 적용의 관계가 문제 되었다. 교류협력을 목적으로 한 왕래와 해당 범죄행위의 차이를 검토했고, 문제된 교류협력법 조항은 재판의 전제가 되지 않아 <strong>각하</strong>했다. 특수관계 설명이 들어 있다고 모든 법조항에 본안 합헌을 선고한 것으로 읽으면 안 된다.</p>
+<p><strong>92헌바6등(1997.1.16.).</strong> 북한의 반국가단체성을 전제로 국가보안법을 적용하는 것이 곧바로 평화통일조항에 어긋나지는 않는다고 보았다. 유엔 가입과 남북기본합의서만으로 국가보안법이 자동 폐지되는 것도 아니라고 설명했다. 당시 합의서의 법적 성격을 설명한 문장을 오늘의 모든 남북합의에 일괄 적용하는 것도 피한다. “평화의 상대이기도 함” → 안보 문제를 없앤다는 말 아님, “안보상 위협이기도 함” → 협력을 모두 금지한다는 말 아님이다.</p>
+<p><strong>시험:</strong> 070·085. <strong>키워드:</strong> 조화적 해석·특수관계·이중적 지위·각하 구별. <strong>한 줄:</strong> 북한을 둘러싼 헌법 문제는 영토와 평화를 함께 실현할 해석을 찾는 일이다.</p>
+<h1>6. 국민주권은 다수의 무제한 명령권일까</h1>
+<h2 id="foundations-04-20" data-concept-id="foundations-04-20">6-1. 주권의 의미와 역사 ★★★★★</h2>
+<p><strong>교재 131-133쪽 / 문단의 역할:</strong> 주권 개념의 기능과 군주주권에서 국민주권으로의 전개를 설명한다.</p>
+<p>주권은 <strong>대내적으로 국가의사를 전반적·최종적으로 결정하는 최고의 권력이고, 대외적으로 독립적인 권력</strong>이다. 사람들이 평화롭게 함께 살기 위한 공통의 결정을 누가 최종적으로 내리는가라는 문제에서 출발한다. 실질적 내용은 영역에 대한 영토고권, 사람에 대한 대인고권, 국가의 권한·조직을 스스로 구성하는 자주조직권(권한고권)이다. 기능으로 나누면 입법·행정·사법이 된다.</p>
+<p>역사적 장면 ① <strong>보댕의 군주주권론</strong>: 교황·제국·봉건영주 등으로 나뉜 권력을 넘어 통일적 국가권력을 세우려는 근대적 과제와 연결된다. 당시 중앙집권의 논리를 이해하는 것과 오늘날 절대군주제를 옹호하는 것은 다르다. ② <strong>시에예스와 제3신분</strong>: 성직자·귀족은 특권을 누리고 평민은 사회를 떠받치면서도 정치적으로 배제되던 상황에서, 나라의 주체가 누구인지 묻는다. 프랑스혁명을 통해 전체 국민의 단일·불가분·불가양의 주권이 뚜렷해졌다. 중세에 국민주권이 가장 만개했다는 말은 시대를 뒤집은 것이다.</p>
+<p>③ <strong>영국의 의회주권</strong>은 역사적으로 왕권을 제한하고 대표기관을 중심으로 권력을 정당화한 전개다. 교재가 설명하는 유럽연합 가입에 따른 변화는 역사적 맥락이며 영국은 2020년에 EU를 탈퇴했다. 영국의 의회주권을 ‘어떠한 법원 심사도 존재하지 않는다’는 뜻으로 단순화하지 않는다. 이 강의 중심은 주권을 정당화하는 관념이 역사적으로 달라졌다는 점이다.</p>
+<p><strong>시험:</strong> 071. <strong>키워드:</strong> 대내 최고·대외 독립·보댕/시에예스·세 고권. <strong>한 줄:</strong> 최종 권력의 주체는 근대의 군주에서 전체 국민으로 재구성되었다.</p>
+<h2 id="foundations-04-21" data-concept-id="foundations-04-21">6-2. 주권은 하나, 통치권은 나누어 행사한다 ★★★★★</h2>
+<p><strong>교재 133-134쪽 / 문단의 역할:</strong> 주권과 기관의 권한을 구별한다.</p>
+<p>헌법 1②의 앞부분 ‘주권은 국민에게’는 권력의 궁극적 정당성의 주체를 말한다. 뒷부분 ‘모든 권력은 국민으로부터’는 실제 국가권력이 그 근원에서 나와 헌법에 따라 구성됨을 뜻한다. 주권은 전체 국민에게 단일·불가분·불가양으로 속하지만, <strong>통치권은 헌법이 정한 기관·절차·한도에 따라 분할되어 행사되고 담당자도 교체된다.</strong></p>
+<p>대통령이 퇴임하여 다음 대통령이 취임했다고 국민주권 자체를 두 사람 사이에서 거래한 것이 아니다. 선거에서 뽑힌 대표가 국가권력을 행사한다고 대표 개인이 주권의 소유자가 되는 것도 아니다. 국민이 국민투표를 할 때에도 헌법상 정해진 권한을 행사하는 것이지, 그 자리에서 모든 재판을 취소하는 무제한 기관이 되는 것은 아니다.</p>
+<p>교재가 비판하는 오해: “국민 한 명은 주권의 1/n 조각을 가진다.” “여론조사 다수가 반대하면 법원이 반드시 그 뜻대로 판결해야 한다.” 둘 다 주권과 통치권의 제도적 연결을 지워 버린다. 여론은 중요한 정치적 검토 자료지만 곧바로 모든 기관을 구속하는 법적 명령은 아니다. <mark class="pink">여론과 판결이 다르다는 사실만으로 국민주권 침해가 되는 것은 아니다.</mark></p>
+<p><strong>시험:</strong> 072·086. <strong>키워드:</strong> 주권의 귀속/통치권의 행사·1/n 아님. <strong>한 줄:</strong> 국민이 권력의 주인이라는 말은 모든 사람이 모든 권한을 직접 갖는다는 말이 아니다.</p>
+<h2 id="foundations-04-22" data-concept-id="foundations-04-22">6-3. 심화: 정치신학적 사고를 경계하는 이유 ★★★☆☆</h2>
+<p><strong>교재 134-138쪽 / 문단의 역할:</strong> 권력의 정당성을 주체의 속성·의사만으로 설명하는 오류를 비판한다.</p>
+<p>정치신학적 사고란 이 문맥에서 왕의 특별한 속성이나 의지가 명령을 정당하게 만든다는 생각을 세속 정치에도 옮기는 방식을 말한다. ‘왕이므로 언제나 옳다’의 왕을 ‘다수 국민’으로 바꾸어 ‘다수가 원하면 언제나 옳다’고 해도 같은 문제가 남는다. 민주적 정당성을 설명하려면 <strong>어떤 내용·절차·권리보장 조건을 갖추었는지</strong>까지 보아야 한다.</p>
+<p>홉스는 사람들이 생존과 평화를 위해 공통 권력을 세우는 이유를 세속적으로 설명했다는 의미가 있다. 교재의 저자는 여기서 더 나아가 개인의 이익과 권력 성립의 한 가지 이유만으로, 그 권력이 앞으로 하는 모든 일에 복종할 의무까지 설명할 수 없다고 비판한다. 이는 교재의 이론적 평가이며 법원 판결 그 자체가 아니다.</p>
+<p>교재의 작은 사례들을 따로 보자. <strong>토끼라는 분류</strong>를 안다고 모든 규범적 결론이 나오는 것은 아니다. <strong>여럿이 무거운 자동차를 미는 경우</strong>는 실제 힘이 합쳐지는 장면이지만 정당한 권한이 근력처럼 합산된다는 증거는 아니다. <strong>평소 덕이 많은 사람</strong>도 타인의 권리를 침해할 수 있다. <strong>명령에 복종시키는 물리적 힘</strong>이 있어도 죄 없는 사람을 자의적으로 처형할 권리가 생기지는 않는다. ‘실제로 복종시켰다’는 사실과 ‘복종할 정당한 의무가 있다’는 규범을 나누라는 뜻이다.</p>
+<p><strong>시험:</strong> 073·086-088에서 논증 구조가 직접 출제된다. <strong>키워드:</strong> 사실/정당성·주체의 속성≠무제한 권한. <strong>한 줄:</strong> 좋은 이름을 가진 권력도 나쁜 결정을 할 수 있으므로 내용과 절차를 심사해야 한다.</p>
+<h2 id="foundations-04-23" data-concept-id="foundations-04-23">6-4. 일반의사와 합리적 의사소통 ★★★★★</h2>
+<p><strong>교재 136-139쪽 / 문단의 역할:</strong> 국민주권의 정당한 행사 조건을 적극적으로 설명한다.</p>
+<p>일반의사는 모든 사람의 자유롭고 평등한 지위, 평화로운 공존, 공동의 번영과 공정한 협동이라는 관점에서 정당화할 수 있는 의사다. 특정 편의 이익을 관철하려는 특수의사와 다르다. 모든 사람이 실제 같은 생각을 한다는 뜻도, 여론조사의 가장 높은 수치라는 뜻도 아니다. 보편적 권리와 공동이익에 관한 판단을 적정한 절차로 찾아가는 것이 중요하다.</p>
+<p>교재의 <strong>공공재 무임승차 사례</strong>: 모두 함께 비용을 내면 안전과 편의를 누릴 수 있는데, 같은 부담 능력이 있는 사람들이 “나는 혜택만 받고 돈은 안 내겠다”고 한다. 그런 사람이 다수가 되었다고 다른 사람에게 비용을 떠넘기는 일이 자동으로 공정해지지 않는다. 사적인 선호의 합계와 공정한 협동을 위한 일반의사를 구별해야 한다.</p>
+<p>교재가 드워킨의 설명을 통해 드는 관계 조건은 세 가지다. <strong>각자가 공동결정에서 역할을 가질 것 / 모든 사람의 이익을 동등하게 고려할 것 / 각자를 독립적인 도덕적 판단의 주체로 존중할 것.</strong> 국가가 ‘네가 행복해지려면 이것만 생각하라’고 강요하는 것이 아니라 각자가 자유롭게 판단하면서 타인도 동등한 사람으로 대하게 해야 한다.</p>
+<p><strong>시험:</strong> 073·087·088. <strong>키워드:</strong> 보편적 권리·공동이익·적정 절차·동등한 관심. <strong>한 줄:</strong> 일반의사는 숫자 자체가 아니라 모두에게 정당화할 수 있는 공동결정의 방향이다.</p>
+<h2 id="foundations-04-24" data-concept-id="foundations-04-24">6-5. 대표제·자유위임·국민투표가 연결되는 방식 ★★★★★</h2>
+<p><strong>교재 138-139쪽 / 문단의 역할:</strong> 추상적 국민주권을 실제 제도에 연결한다.</p>
+<p>국민주권은 선거 때 한 번 권력을 넘겨주고 끝나는 일이 아니다. 표현·언론·집회·청원, 공무담임, 정당 활동, 자유로운 선거, 독립적인 법원과 권리구제 등 여러 제도가 계속 작동해야 한다. 어느 기관 하나가 ‘내가 곧 국민’이라며 다른 통로를 닫을 수 없다.</p>
+<p>대의제의 대표는 <strong>자유위임(무기속위임)</strong>을 받는다. 선거구 유권자의 매 사안별 지시를 그대로 따라야 하는 명령적 위임이 아니다. 전체 국민의 이익과 헌법에 비추어 판단하며, 정치적 비판과 다음 선거의 책임을 진다. 자유위임이란 뇌물을 받거나 선거공약을 무책임하게 무시해도 좋다는 면허가 아니다. 법적 명령 구속과 정치적 책임을 구별한다.</p>
+<p>한국 헌법은 대의제를 기본으로 하고 72조 중요정책 국민투표, 130조 개헌 국민투표 같은 직접민주적 요소를 둔다. <strong>전국 차원의 일반적 국민발안·국민소환 제도를 현행 헌법이 포괄적으로 마련하고 있는 것은 아니다.</strong> 지방자치의 주민발안·주민소환과 혼동하지 않는다. 독립법원도 국민주권의 적이 아니라 법에 따른 공정한 의사결정 체계의 일부다.</p>
+<p><strong>시험:</strong> 086·089. <strong>키워드:</strong> 자유위임·분산된 참여 통로·대의제+일부 직접제. <strong>한 줄:</strong> 국민주권을 실현하려면 한 번의 다수결뿐 아니라 계속 작동하는 자유와 절차가 필요하다.</p>
+<h1>7. 자유민주적 기본질서의 최소선</h1>
+<h2 id="foundations-04-25" data-concept-id="foundations-04-25">7-1. 자유민주적 기본질서: 선거만으로 충분하지 않다 ★★★★★</h2>
+<p><strong>교재 139-140쪽 / 문단의 역할:</strong> 민주적 권력도 지켜야 할 자유·평등·법치의 질서를 밝힌다.</p>
+<p>헌법 전문과 4조는 자유민주적 기본질서를 언급한다. 인간의 존엄과 가치, 자유와 평등, 기본권 보장, 민주적 의사결정, 권력분립, 법치주의를 바탕으로 구성·운영되는 질서다. 교재가 인용하는 89헌가113의 설명은 폭력적·자의적 지배를 배제하고 다수의 의사와 소수의 자유·평등을 함께 존중하는 통치질서라는 취지다.</p>
+<p>‘자유민주’라는 표현을 특정 정당의 이름이나 오늘의 진영 구분과 동일시하지 않는다. 독일의 freiheitliche demokratische Grundordnung과 연결되는 법적 개념이다. 사회정책이나 민주적 경제개혁을 주장한다는 이유만으로 그 질서에 반한다고 판단해서는 안 된다. 반대로 선거에 이겼으니 비판자를 탄압하거나 긴급조치의 기본권 침해를 법원·헌재가 전혀 심사하지 못하게 해도 좋다는 주장은 자유와 법치를 지운다.</p>
+<p><strong>시험:</strong> 074. <strong>키워드:</strong> 존엄·자유·평등·권력통제·자의적 지배 배제. <strong>한 줄:</strong> 선거로 얻은 권력도 사람의 기본권과 법의 통제를 벗어나지 못한다.</p>
+<h2 id="foundations-04-26" data-concept-id="foundations-04-26">7-2. 정당해산의 민주적 기본질서는 좁게 읽는다 ★★★★★</h2>
+<p><strong>교재 140-142쪽 / 문단의 역할:</strong> 민주주의를 지키는 제도가 반대 정당을 없애는 수단이 되지 않도록 한계를 정한다.</p>
+<p>헌법 8④는 정당해산과 관련하여 ‘민주적 기본질서’라는 표현을 쓴다. 헌재 2013헌다1(2014.12.19.)이 설명한 출발점은 사람의 자율적 이성을 신뢰하고 다양한 정치적 견해에 상대적 진리성과 합리성을 인정하는 <strong>다원주의</strong>다. 자기 편의 주장만 진리라고 정하고 반대편을 모두 없애는 질서가 아니다.</p>
+<p>정당해산은 정치적 자유에 극히 큰 영향을 주므로 그 기준을 엄격하고 좁게 해석해야 한다. 민주적 의사결정에 필수적인 요소와 그 운영·보호의 최소선이 핵심이다. 현행 헌법의 모든 세부 제도·정책이 동일한 강도로 영원히 고정되는 것은 아니다. 정당은 정부형태나 경제정책의 변경, 개헌 등을 주장할 수 있다. 현행 조항과 다른 주장을 한다는 사정만으로 곧바로 해산되는 것은 아니다.</p>
+<p>교재의 급진적 이념 사례도 이 틀에서 읽는다. 특정 이념을 말한다는 이유만으로 자동 해산하는 것이 아니라, 정당의 목적·활동이 민주적 기본질서의 최소선을 침해하는지 구체적으로 심사해야 한다. <strong>주장의 자유가 넓다</strong>는 것과 <strong>그 주장을 법률로 만들면 언제나 합헌</strong>이라는 것은 다르다. 2013헌다1은 실제로 통합진보당 해산을 결정한 사건이지만, 여기서는 그 사건이 정리한 엄격한 기준을 배우고 실제 적용·찬반 논거는 8강에서 자세히 다룬다.</p>
+<p>문장 번역: ‘다원적 세계관’ → 나와 다른 생각에도 들을 이유가 있다. ‘폭력적·자의적 지배 배제’ → 힘이나 변덕으로 반대자를 누르지 않는다. ‘최소한의 요소’ → 현행 제도의 모든 세부사항까지 해산 기준으로 삼지 않는다. <mark class="blue">3강 방어적 민주주의 → 4강 기본질서의 뜻 → 8강 정당해산의 요건</mark>으로 연결한다.</p>
+<p><strong>시험:</strong> 090. <strong>키워드:</strong> 다원주의·최소선·엄격·협소·개헌 주장 가능. <strong>한 줄:</strong> 민주주의를 지키려면 민주적 비판과 경쟁의 공간도 지켜야 한다.</p>
+<h1>법률용어를 한자로 풀어 보기</h1>
+<h3>國家形態·政府形態 국가형태·정부형태</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 家(집 가), 形(모양 형), 態(모습 태), 政(정사 정), 府(마을 부; 관청). <strong>③ 합친 뜻:</strong> 나라의 조직 모습과 통치기구의 모습. <strong>④ 이름의 이유:</strong> 큰 조직원리와 세부 권력배열을 구별하는 이름.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정치적 통일체의 성격과 그 안의 기관 구성 방식. <strong>⑥ 쉬운 말:</strong> 어떤 나라인가와 대통령·의회가 어떻게 일하는가. <strong>⑦ 사례:</strong> 민주공화국이 대통령제를 채택.</p>
+<p><strong>⑧ 시험:</strong> 정부형태가 하위개념. <strong>⑨ 비교·기억법:</strong> 국가형태는 큰 범주, 정부형태는 그 안.</p>
+<h3>民主 민주</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 民(백성 민), 主(주인 주). <strong>③ 합친 뜻:</strong> 국민이 주인. <strong>④ 이름의 이유:</strong> 권력의 주체를 국민에게 두어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민이 국가 의사결정을 근본적으로 통제하는 원리. <strong>⑥ 쉬운 말:</strong> 사람들이 자유롭게 말하고 참여하며 권력을 바꾼다. <strong>⑦ 사례:</strong> 투표뿐 아니라 비판 토론과 평화적 교체 보장.</p>
+<p><strong>⑧ 시험:</strong> 표만 평등하면 충분하다는 보기 경계. <strong>⑨ 비교·기억법:</strong> 단순 다수의 강제와 구별.</p>
+<h3>共和國 공화국</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 共(함께 공), 和(화할 화), 國(나라 국). <strong>③ 합친 뜻:</strong> 함께 공적인 나라를 운영함. <strong>④ 이름의 이유:</strong> 공적 권력을 한 사람이나 특정 편의 사유물로 보지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형식적으로 비군주국, 실질적으로 권리와 공익에 적합한 정치체제. <strong>⑥ 쉬운 말:</strong> 이긴 편만 잘사는 나라가 아니다. <strong>⑦ 사례:</strong> 회의에 진 사람의 권리도 지킴.</p>
+<p><strong>⑧ 시험:</strong> 형식/실질과 민주와의 관계. <strong>⑨ 비교·기억법:</strong> 입헌군주국은 민주적이어도 형식적 공화국 아님.</p>
+<h3>法治·人治 법치·인치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 治(다스릴 치), 人(사람 인). <strong>③ 합친 뜻:</strong> 법에 따른 통치와 사람에 따른 통치. <strong>④ 이름의 이유:</strong> 무엇이 권력을 통제하는지를 이름으로 표시.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당한 법·절차로 권력을 제한하는 것과 개인의 자의에 맡기는 것. <strong>⑥ 쉬운 말:</strong> 권력자 기분이 아니라 공개된 기준으로 판단. <strong>⑦ 사례:</strong> 대통령의 지시도 법원 심사를 받음.</p>
+<p><strong>⑧ 시험:</strong> 공화국은 인치 배척. <strong>⑨ 비교·기억법:</strong> 법치도 법이라는 이름만 있으면 충분하지 않음;5강.</p>
+<h3>熟考·多元主義 숙고·다원주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 熟(익을 숙), 考(생각할 고), 多(많을 다), 元(으뜸 원), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 깊이 생각함·여러 관점의 공존. <strong>④ 이름의 이유:</strong> 충동적 결정과 단일한 진리 독점을 경계해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이유를 충분히 검토하고 다양한 정치적 견해를 존중하는 태도. <strong>⑥ 쉬운 말:</strong> 반대 의견도 듣고 결정한다. <strong>⑦ 사례:</strong> 정당이 다른 경제정책을 주장.</p>
+<p><strong>⑧ 시험:</strong> 정당해산은 인기 없음으로 정당화 안 됨. <strong>⑨ 비교·기억법:</strong> 다원주의는 폭력적 지배까지 무조건 허용한다는 말 아님.</p>
+<h3>解釋的 槪念 해석적 개념</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 解(풀 해), 釋(풀 석), 的(과녁 적; 성질), 槪(대개 개), 念(생각 념). <strong>③ 합친 뜻:</strong> 의미를 풀어 이해하는 개념. <strong>④ 이름의 이유:</strong> 한 가지 기계적 분류기준으로 끝나지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 가치를 어떻게 가장 잘 실현하는지 논증을 통해 내용을 밝히는 개념. <strong>⑥ 쉬운 말:</strong> 정의로운 제도가 무엇인지 이유를 따져야 한다. <strong>⑦ 사례:</strong> 민주와 공화의 내용이 겹침.</p>
+<p><strong>⑧ 시험:</strong> 중첩이 곧 모순이나 중복 오류는 아님. <strong>⑨ 비교·기억법:</strong> 자연종·기준적 분류와 비교.</p>
+<h3>多數·少數 다수·소수</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 多(많을 다), 數(셈 수), 少(적을 소). <strong>③ 합친 뜻:</strong> 많고 적은 쪽. <strong>④ 이름의 이유:</strong> 단순 인구 통계와 권리보호 위치를 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 단원에서는 공권력을 행사하는 쪽과 그에 반대하며 영향을 받는 쪽이라는 관계도 뜻함. <strong>⑥ 쉬운 말:</strong> 사람 수가 많아도 차별받는 위치일 수 있다. <strong>⑦ 사례:</strong> 통계상 과반 집단이 차별의 피해자.</p>
+<p><strong>⑧ 시험:</strong> 형식적 개념이라는 문맥 확인. <strong>⑨ 비교·기억법:</strong> 항상 50%를 기준으로 나누는 것이 아님.</p>
+<h3>國民·國籍 국민·국적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 民(백성 민), 籍(문서 적; 소속 명부). <strong>③ 합친 뜻:</strong> 나라의 구성원·그 소속 신분. <strong>④ 이름의 이유:</strong> 어떤 정치공동체의 구성원인지 표시.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가의 항구적 소속원과 그 자격. <strong>⑥ 쉬운 말:</strong> 외국에 살아도 한국 국민일 수 있다. <strong>⑦ 사례:</strong> 한국 국적자가 외국에서 유학.</p>
+<p><strong>⑧ 시험:</strong> 헌법 적용은 국민만으로 제한되지 않음. <strong>⑨ 비교·기억법:</strong> 거주지·민족적 동포 관계와 구별.</p>
+<h3>永住權·査證 영주권·사증</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 永(길 영), 住(살 주), 權(권세 권), 査(조사할 사), 證(증거 증). <strong>③ 합친 뜻:</strong> 오래 살 자격·심사 증명. <strong>④ 이름의 이유:</strong> 거주 자격과 입국 심사를 나타내어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 외국의 장기 체류 자격과 입국·체류 관련 사증. <strong>⑥ 쉬운 말:</strong> 살 수 있다는 허락이지 곧 그 나라 국민이라는 뜻은 아니다. <strong>⑦ 사례:</strong> 영주권 취득만으로 한국 국적을 잃지 않음.</p>
+<p><strong>⑧ 시험:</strong> 국적·체류권·사증면제 구별. <strong>⑨ 비교·기억법:</strong> 사증이 있다고 입국이 무조건 보장되는 것도 아님.</p>
+<h3>國籍法定主義 국적법정주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 籍(문서 적), 法(법 법), 定(정할 정), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 국적 요건을 법률로 정함. <strong>④ 이름의 이유:</strong> 중요한 신분을 자의적 처분에 맡기지 않아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법2①에 따라 국민 요건을 법률로 구체화하는 원칙. <strong>⑥ 쉬운 말:</strong> 국회가 규칙을 정하되 헌법을 지켜야 한다. <strong>⑦ 사례:</strong> 부계만 인정하는 차별의 심사.</p>
+<p><strong>⑧ 시험:</strong> 법률유보≠무제한 입법재량. <strong>⑨ 비교·기억법:</strong> 국적이 법률가의 임의 창작물이라는 뜻 아님.</p>
+<h3>父母兩系血統主義 부모양계혈통주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 父(아버지 부), 母(어머니 모), 兩(두 량), 系(이을 계), 血(피 혈), 統(거느릴 통), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 부모 양쪽 계통의 연결을 따름. <strong>④ 이름의 이유:</strong> 부계·모계 연결을 함께 인정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 출생 당시 부 또는 모의 국적을 기준으로 국적을 부여하는 원칙. <strong>⑥ 쉬운 말:</strong> 엄마나 아빠 중 한 사람의 국적으로 연결된다. <strong>⑦ 사례:</strong> 한국인 어머니와 외국인 아버지의 자녀.</p>
+<p><strong>⑧ 시험:</strong> 부계혈통만 인정하는 제도와 차이. <strong>⑨ 비교·기억법:</strong> 부모 두 사람 모두 한국인이어야 한다는 뜻 아님.</p>
+<h3>屬人主義·屬地主義 속인주의·속지주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 屬(무리 속; 속함), 人(사람 인), 地(땅 지), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 사람의 연결과 장소의 연결을 따름. <strong>④ 이름의 이유:</strong> 어디에 연결하여 판단하는지 나타냄.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국적 취득에서는 부모의 국적 기준과 출생지 기준, 관할에서는 사람과 장소에 따른 법 적용. <strong>⑥ 쉬운 말:</strong> 누구의 자녀인가 또는 어디에서 태어났는가. <strong>⑦ 사례:</strong> 부모가 모두 무국적인 한국 출생 아동의 예외.</p>
+<p><strong>⑧ 시험:</strong> 한국은 원칙 속인·보충 속지. <strong>⑨ 비교·기억법:</strong> 국적취득 문맥과 법 적용 관할 문맥 구별.</p>
+<h3>先天的·後天的 取得 선천적·후천적 취득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선), 後(뒤 후), 天(하늘 천), 的(과녁 적), 取(취할 취), 得(얻을 득). <strong>③ 합친 뜻:</strong> 출생 때 얻음·그 후 얻음. <strong>④ 이름의 이유:</strong> 취득 원인과 시점이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 출생을 원인으로 한 국적 취득과 이후 별도 요건·절차에 따른 취득. <strong>⑥ 쉬운 말:</strong> 태어나면서 국민이 되는 길과 나중에 되는 길. <strong>⑦ 사례:</strong> 인지·귀화는 후천적 취득.</p>
+<p><strong>⑧ 시험:</strong> 인지·수반을 선천적이라 한 보기 주의. <strong>⑨ 비교·기억법:</strong> 선천적 복수국적이 생길 수 있음.</p>
+<h3>認知 인지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 認(알 인; 인정), 知(알 지). <strong>③ 합친 뜻:</strong> 알고 인정함. <strong>④ 이름의 이유:</strong> 사실을 아는 것에서 나아가 법적 관계를 인정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 혼인 외 출생자와 부모 사이의 법적 친자관계를 인정하는 행위. <strong>⑥ 쉬운 말:</strong> 법적으로 내 자녀임을 인정한다. <strong>⑦ 사례:</strong> 한국인 부의 인지 뒤 국적법 요건에 따른 신고.</p>
+<p><strong>⑧ 시험:</strong> 국적 취득에는 추가 법정 요건 필요. <strong>⑨ 비교·기억법:</strong> 일상적으로 무엇을 인식한다는 인지와 구별.</p>
+<h3>歸化·隨伴取得 귀화·수반취득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 歸(돌아갈 귀), 化(될 화), 隨(따를 수), 伴(짝 반), 取(취할 취), 得(얻을 득). <strong>③ 합친 뜻:</strong> 공동체에 들어옴·함께 따라 얻음. <strong>④ 이름의 이유:</strong> 새 구성원 편입과 가족의 연결을 나타내어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 귀화는 국적 취득 전력이 없는 외국인의 허가에 의한 취득, 수반은 미성년 자녀의 동반 취득. <strong>⑥ 쉬운 말:</strong> 부모가 국민이 되는 과정에 자녀도 법정 절차로 함께 참여. <strong>⑦ 사례:</strong> 부모 귀화 신청과 자녀 수반 신청.</p>
+<p><strong>⑧ 시험:</strong> 둘 다 후천적;자녀가 항상 자동 취득하는 것은 아님. <strong>⑨ 비교·기억법:</strong> 국적회복은 과거 한국 국민이었던 사람.</p>
+<h3>國籍回復·再取得 국적회복·재취득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 籍(문서 적), 回(돌 회), 復(돌아올 복), 再(다시 재), 取(취할 취), 得(얻을 득). <strong>③ 합친 뜻:</strong> 잃은 국적을 되찾음·다시 얻음. <strong>④ 이름의 이유:</strong> 이전 소속이 있거나 특정 의무 불이행을 해결하는 길이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회복허가와 국적법11조의 특정 상실 원인에 따른 재취득 제도. <strong>⑥ 쉬운 말:</strong> 과거 한국 국민이었던 사람이 정해진 절차로 돌아온다. <strong>⑦ 사례:</strong> 10③ 상실 뒤 외국 국적 포기와 신고.</p>
+<p><strong>⑧ 시험:</strong> 귀화와 회복,회복과11조 재취득 구별. <strong>⑨ 비교·기억법:</strong> 이름이 비슷해도 근거조문·요건 다름.</p>
+<h3>複數國籍·無國籍 복수국적·무국적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 複(겹칠 복), 數(셈 수), 國(나라 국), 籍(문서 적), 無(없을 무). <strong>③ 합친 뜻:</strong> 둘 이상 국적·국적 없음. <strong>④ 이름의 이유:</strong> 소속의 수와 유무를 나타냄.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 복수 국가의 국민 신분을 보유하거나 어떤 국가의 국민으로도 인정되지 않는 상태. <strong>⑥ 쉬운 말:</strong> 국민 신분이 겹치거나 없는 경우. <strong>⑦ 사례:</strong> 부모 국적과 출생지 국적이 함께 생김.</p>
+<p><strong>⑧ 시험:</strong> 한국은 제한적으로 복수국적 허용. <strong>⑨ 비교·기억법:</strong> 여권 두 개 보유와 법적 국적 보유를 단순 동일시하지 않음.</p>
+<h3>國籍離脫·國籍喪失 국적이탈·국적상실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 籍(문서 적), 離(떠날 리), 脫(벗을 탈), 喪(잃을 상), 失(잃을 실). <strong>③ 합친 뜻:</strong> 소속을 떠남·소속을 잃음. <strong>④ 이름의 이유:</strong> 절차와 넓은 신분 상실 결과를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이탈은 복수국적자가 외국 국적을 선택하여 한국 국적에서 벗어나는 절차, 상실은 그 밖의 법정 원인을 포함한 결과. <strong>⑥ 쉬운 말:</strong> 스스로 적법한 이탈 절차를 밟는 것과 법 때문에 잃는 경우. <strong>⑦ 사례:</strong> 자진 외국 귀화에 따른15① 상실.</p>
+<p><strong>⑧ 시험:</strong> 이탈신고 수리 시점과 외국 국적 취득 시점 구별. <strong>⑨ 비교·기억법:</strong> 국적선택기간 경과만으로 모든 경우 즉시 상실하는 것은 아님.</p>
+<h3>國籍保有申告·不行使誓約 국적보유신고·불행사서약</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 籍(문서 적), 保(지킬 보), 有(있을 유), 申(펼 신; 아룀), 告(알릴 고), 不(아니 불), 行(다닐 행), 使(부릴 사), 誓(맹세할 서), 約(맺을 약). <strong>③ 합친 뜻:</strong> 소속을 유지하겠다는 신고·행사하지 않겠다는 약속. <strong>④ 이름의 이유:</strong> 각기 다른 복수국적 문제를 처리해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 15②의 보유 의사 신고와 국내에서 외국 국적을 행사하지 않겠다는 법정 서약. <strong>⑥ 쉬운 말:</strong> 한국 국적을 남기겠다는 신고와 한국 안에서 외국 국민 대우를 주장하지 않겠다는 약속. <strong>⑦ 사례:</strong> 혼인으로 외국 국적 취득 때6개월 보유신고.</p>
+<p><strong>⑧ 시험:</strong> 079의 원본 해설은 둘을 혼동하므로 보충 필요. <strong>⑨ 비교·기억법:</strong> 서로 대체 가능한 같은 문서가 아님.</p>
+<h3>受理·許可·聽聞 수리·허가·청문</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 受(받을 수), 理(다스릴 리; 처리), 許(허락할 허), 可(옳을 가), 聽(들을 청), 聞(들을 문). <strong>③ 합친 뜻:</strong> 받아 처리·허용·의견을 들음. <strong>④ 이름의 이유:</strong> 접수·심사·권리보호의 서로 다른 단계를 표시.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 신고의 수리,법정 요건 심사를 거친 허가,불이익 처분 전 의견 청취 절차. <strong>⑥ 쉬운 말:</strong> 서류를 낸 것과 법적으로 받아들여진 것은 다르다. <strong>⑦ 사례:</strong> 이탈신고 수리 시 상실;상실결정 전 청문.</p>
+<p><strong>⑧ 시험:</strong> 신고했다고 즉시 모든 효과 발생한다고 단정 금지. <strong>⑨ 비교·기억법:</strong> 단순 접수와 수리 구별.</p>
+<h3>兵役準備役 병역준비역</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 兵(군사 병), 役(부릴 역), 準(준할 준), 備(갖출 비). <strong>③ 합친 뜻:</strong> 병역을 준비하는 신분. <strong>④ 이름의 이유:</strong> 장래 병역 이행과 연결되는 단계여서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 병역법상18세 되는 해 편입되는 병역의 종류. <strong>⑥ 쉬운 말:</strong> 생일에 상관없이 그해 시작부터 계산하는 기준. <strong>⑦ 사례:</strong> 3개월 이내 이탈신고 기한.</p>
+<p><strong>⑧ 시험:</strong> 18세 생일부터3개월이 아님. <strong>⑨ 비교·기억법:</strong> 병역면제·전시근로역·복무 완료와 구별.</p>
+<h3>再外가 아니라 在外國民·在外同胞 재외국민·재외동포</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 在(있을 재), 外(바깥 외), 國(나라 국), 民(백성 민), 同(같을 동), 胞(태보 포). <strong>③ 합친 뜻:</strong> 국외에 있는 국민·국외의 동포. <strong>④ 이름의 이유:</strong> 국외라는 위치와 민족적 연결을 함께 나타냄.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률별 요건에 따른 재외국민과 이를 포함하는 재외동포 범주. <strong>⑥ 쉬운 말:</strong> 해외 한국 국민과 외국 국적을 가진 동포를 나눈다. <strong>⑦ 사례:</strong> 재외동포법상 재외국민+외국국적동포.</p>
+<p><strong>⑧ 시험:</strong> 재외동포가 모두 외국인은 아님. <strong>⑨ 비교·기억법:</strong> 재외국민의 영사보호를 영주권자만의 권리로 한정하지 않음.</p>
+<h3>直系卑屬·相互主義 직계비속·상호주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 直(곧을 직), 系(이을 계), 卑(낮을 비), 屬(무리 속), 相(서로 상), 互(서로 호), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 직접 이어진 아래 세대·서로 대응하는 원칙. <strong>④ 이름의 이유:</strong> 가계의 방향과 국가 사이 대우의 관계를 표시.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자녀·손자녀 등 직접 아래 계통과 국가 간 상응 대우의 원리. <strong>⑥ 쉬운 말:</strong> 자녀와 손자녀;상대국도 같은 대우를 하는지. <strong>⑦ 사례:</strong> 정부수립 전 이주 동포의 후손.</p>
+<p><strong>⑧ 시험:</strong> 동포 간 차별은 상호주의만으로 정당화 안 됨. <strong>⑨ 비교·기억법:</strong> 형제자매는 직계비속 아님.</p>
+<h3>慰勞金·賠償·補償 위로금·배상·보상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 慰(위로할 위), 勞(수고로울 로), 金(쇠 금; 돈), 賠(물어줄 배), 償(갚을 상), 補(기울 보). <strong>③ 합친 뜻:</strong> 고통을 위로하는 돈·손해를 물어주거나 메움. <strong>④ 이름의 이유:</strong> 금전 지급도 목적과 법적 성격이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 지원법의 위로금과 위법행위 손해배상·적법한 특별희생 손실보상의 구별. <strong>⑥ 쉬운 말:</strong> 모두 돈을 받는다고 같은 권리는 아니다. <strong>⑦ 사례:</strong> 강제동원 피해 인도적 위로금.</p>
+<p><strong>⑧ 시험:</strong> 2011두24675는 지원목적과 명문 제외사유 확인. <strong>⑨ 비교·기억법:</strong> 위로금을 전체 피해의 완전한 배상으로 동일시하지 않음.</p>
+<h3>居住者·非居住者 거주자·비거주자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 居(살 거), 住(살 주), 者(사람 자), 非(아닐 비). <strong>③ 합친 뜻:</strong> 거주 기준에 속하는 자·그 밖의 자. <strong>④ 이름의 이유:</strong> 경제생활의 연결을 규율하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 외환법상 주소·거소·경제활동 중심 등으로 분류하는 범주. <strong>⑥ 쉬운 말:</strong> 국적보다 어디에 생활·활동 중심이 있는지 본다. <strong>⑦ 사례:</strong> 외국인도 거주자일 수 있음.</p>
+<p><strong>⑧ 시험:</strong> 2003헌바114;국적과 동일시 금지. <strong>⑨ 비교·기억법:</strong> 국민/외국인과 거주자/비거주자는 다른 축.</p>
+<h3>主權者·被治者 주권자·피치자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 主(주인 주), 權(권세 권), 者(사람 자), 被(입을 피), 治(다스릴 치). <strong>③ 합친 뜻:</strong> 최고권력의 주체·통치를 받는 자. <strong>④ 이름의 이유:</strong> 같은 국민을 다른 관계에서 보기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 전체 국민의 주권적 지위와 법질서의 규율을 받는 지위. <strong>⑥ 쉬운 말:</strong> 나라의 주인이면서 법을 지킨다. <strong>⑦ 사례:</strong> 세금 의무를 이행하는 국민.</p>
+<p><strong>⑧ 시험:</strong> 네 지위에 통치권 전권의 직접 보유는 없음. <strong>⑨ 비교·기억법:</strong> 최고국가기관인 유권자 지위와도 구별.</p>
+<h3>領域·領土·領海·領空 영역·영토·영해·영공</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 領(거느릴 령), 域(지경 역), 土(흙 토), 海(바다 해), 空(빌 공; 하늘). <strong>③ 합친 뜻:</strong> 지배의 공간·육지·바다·하늘. <strong>④ 이름의 이유:</strong> 공간 종류에 따라 법적 규율이 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가 공간 전체와 그 세 구성부분. <strong>⑥ 쉬운 말:</strong> 영역은 큰 묶음이고 영토는 땅 부분. <strong>⑦ 사례:</strong> 한반도와 부속도서,인접 영해,그 상공.</p>
+<p><strong>⑧ 시험:</strong> 083상위개념은 영역. <strong>⑨ 비교·기억법:</strong> EEZ는 그 전체가 영해가 아님.</p>
+<h3>基線·海里·低潮線 기선·해리·저조선</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기), 線(줄 선), 海(바다 해), 里(마을 리; 거리), 低(낮을 저), 潮(조수 조). <strong>③ 합친 뜻:</strong> 기준선·바다 거리 단위·물이 낮을 때 해안선. <strong>④ 이름의 이유:</strong> 거리의 시작점과 단위를 분명히 하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영해 폭 측정 기준,1해리1852m,통상기선의 기초. <strong>⑥ 쉬운 말:</strong> 어디에서부터 얼마를 재는지. <strong>⑦ 사례:</strong> 12해리는22.224km.</p>
+<p><strong>⑧ 시험:</strong> 기선에서12해리 원칙;예외 수역 존재. <strong>⑨ 비교·기억법:</strong> 직선기선 제도와 구별.</p>
+<h3>排他的 經濟水域 배타적 경제수역</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 排(밀칠 배), 他(다를 타), 的(과녁 적), 經(다스릴 경), 濟(건널 제), 水(물 수), 域(지경 역). <strong>③ 합친 뜻:</strong> 특정 경제적 권리를 우선 행사하는 수역. <strong>④ 이름의 이유:</strong> 경제적 기능에 대한 특별한 권리이므로.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영해 밖 최대200해리 범위의 자원 등에 관한 주권적 권리·관할권이 있는 수역. <strong>⑥ 쉬운 말:</strong> 물고기와 자원에 관한 권한이 있다고 전부 영토 같은 것은 아니다. <strong>⑦ 사례:</strong> EEZ의 자원 탐사·개발.</p>
+<p><strong>⑧ 시험:</strong> 200해리를 영해 끝에서 추가 계산하지 않음. <strong>⑨ 비교·기억법:</strong> 영해의 주권과EEZ의 기능적 권리 구별.</p>
+<h3>無害通航·北方限界線 무해통항·북방한계선</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 無(없을 무), 害(해칠 해), 通(통할 통), 航(배 항), 北(북녘 북), 方(방향 방), 限(한할 한), 界(지경 계), 線(줄 선). <strong>③ 합친 뜻:</strong> 해치지 않는 통항·북쪽 활동 한계선. <strong>④ 이름의 이유:</strong> 통항 성질과 활동 제한선을 각각 이름 붙임.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영해를 해치지 않고 지나는 선박의 통항과NLL의 군사적·실질적 경계. <strong>⑥ 쉬운 말:</strong> 배가 지나갈 권리와 남북의 군사 경계는 다른 문제. <strong>⑦ 사례:</strong> NLL을 헌법상 영해 경계라고 할 수 없음.</p>
+<p><strong>⑧ 시험:</strong> 영공에 영해와 같은 일반 무해통항권 없음. <strong>⑨ 비교·기억법:</strong> 항공기의 조약상 통과 규율은 별도.</p>
+<h3>特殊關係·國家承認 특수관계·국가승인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특), 殊(다를 수), 關(관계할 관), 係(맬 계), 國(나라 국), 家(집 가), 承(받들 승), 認(알 인). <strong>③ 합친 뜻:</strong> 특별한 관계·국가로 인정함. <strong>④ 이름의 이유:</strong> 보통 외국관계와 남북관계를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 통일 지향 과정의 남북관계와 국제법상 국가 인정의 문제. <strong>⑥ 쉬운 말:</strong> 대화한다고 법적 관계가 모두 보통 외국처럼 바뀌지는 않는다. <strong>⑦ 사례:</strong> 남북 동시UN가입과 상호승인 구별.</p>
+<p><strong>⑧ 시험:</strong> 3조·4조 조화적 해석. <strong>⑨ 비교·기억법:</strong> 북한의 반국가단체성·평화통일 동반자성 함께 고려.</p>
+<h3>主權·統治權 주권·통치권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 主(주인 주), 權(권세 권), 統(거느릴 통), 治(다스릴 치). <strong>③ 합친 뜻:</strong> 최고권력·통치를 수행하는 권한. <strong>④ 이름의 이유:</strong> 궁극적 귀속과 실제 행사를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주권은 대내 최고·대외 독립,통치권은 헌법에 따른 구체 국가권력. <strong>⑥ 쉬운 말:</strong> 주인은 국민이지만 기관마다 맡은 일이 다르다. <strong>⑦ 사례:</strong> 대통령 퇴임과 권한 승계.</p>
+<p><strong>⑧ 시험:</strong> 단일불가분·불가양은 주권;통치권은 분할·이전. <strong>⑨ 비교·기억법:</strong> 대표 개인이 주권을 소유하는 것 아님.</p>
+<h3>領土高權·對人高權·自主組織權 영토고권·대인고권·자주조직권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 領(거느릴 령), 土(흙 토), 高(높을 고), 權(권세 권), 對(대할 대), 人(사람 인), 自(스스로 자), 主(주인 주), 組(짤 조), 織(짤 직). <strong>③ 합친 뜻:</strong> 공간·사람에 대한 최고권한과 스스로 조직할 권한. <strong>④ 이름의 이유:</strong> 권력이 무엇을 대상으로 무엇을 정하는지 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주권의 실질적 내용을 나눈 세 측면. <strong>⑥ 쉬운 말:</strong> 우리 공간과 구성원을 규율하고 국가조직을 정한다. <strong>⑦ 사례:</strong> 기관 권한 배분을 헌법으로 구성.</p>
+<p><strong>⑧ 시험:</strong> 주권의 실질적 내용;기능상 입법·행정·사법과 구별. <strong>⑨ 비교·기억법:</strong> 고권은 모든 국제법적 제한을 무시하는 뜻 아님.</p>
+<h3>單一不可分·不可讓 단일불가분·불가양</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 單(홑 단), 一(한 일), 不(아니 불), 可(옳을 가), 分(나눌 분), 讓(사양할 양; 넘김). <strong>③ 합친 뜻:</strong> 하나로 나눌 수 없고 양도할 수 없음. <strong>④ 이름의 이유:</strong> 주권 주체를 전체로 이해해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 전체 국민의 궁극적 주권이 조각 소유·매매되지 않는 성질. <strong>⑥ 쉬운 말:</strong> 개인의 표를 주권 조각의 거래로 보지 않는다. <strong>⑦ 사례:</strong> 국민 한 명당1/n의 주권을 보유한다는 오해.</p>
+<p><strong>⑧ 시험:</strong> 통치권의 기능분담과 모순 아님. <strong>⑨ 비교·기억법:</strong> 권력분립은 주권 자체의 매각이 아님.</p>
+<h3>政治神學·規範的 資格 정치신학·규범적 자격</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정), 治(다스릴 치), 神(귀신 신), 學(배울 학), 規(법 규), 範(법 범), 的(과녁 적), 資(바탕 자), 格(격식 격). <strong>③ 합친 뜻:</strong> 신학적 사고의 정치적 적용·정당하게 권한을 가질 조건. <strong>④ 이름의 이유:</strong> 실제 힘과 정당한 권한을 나누기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주체의 특별한 속성·의사를 권한의 무제한 근거로 삼는 방식에 대한 비판. <strong>⑥ 쉬운 말:</strong> 많은 사람이 원한다고 남을 해칠 권리가 생기지 않는다. <strong>⑦ 사례:</strong> 자동차를 미는 힘의 합과 권한의 합은 다름.</p>
+<p><strong>⑧ 시험:</strong> 여론 다수의 의사만으로 최고 규범력 생긴다는 보기 오류. <strong>⑨ 비교·기억법:</strong> 교재 저자의 이론적 논증과 법원의 주문 구별.</p>
+<h3>一般意思·特殊意思 일반의사·특수의사</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 一(한 일), 般(가지 반), 意(뜻 의), 思(생각 사), 特(특별할 특), 殊(다를 수). <strong>③ 합친 뜻:</strong> 공동에 정당화할 의사·특정 이익의 의사. <strong>④ 이름의 이유:</strong> 단순 선호의 합과 정당한 공동결정을 나누어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 보편적 권리와 공동이익을 적정 절차로 추구하는 의사와 편파적 사익의 구별. <strong>⑥ 쉬운 말:</strong> 모두를 동등하게 생각하고 함께 지킬 결정을 찾는다. <strong>⑦ 사례:</strong> 다수의 공공재 무임승차도 자동 정당화 안 됨.</p>
+<p><strong>⑧ 시험:</strong> 일반의사≠여론조사 최다 응답. <strong>⑨ 비교·기억법:</strong> 실제 전원일치가 필수라는 뜻도 아님.</p>
+<h3>代議制·自由委任·命令的委任 대의제·자유위임·명령적 위임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대), 議(의논할 의), 制(마를 제), 自(스스로 자), 由(말미암을 유), 委(맡길 위), 任(맡길 임), 命(명령 명), 令(명령 령), 的(과녁 적). <strong>③ 합친 뜻:</strong> 대표의 논의·자유로운 위임·명령에 묶인 위임. <strong>④ 이름의 이유:</strong> 대표의 판단과 책임 방식을 나타내어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대표가 전체 이익을 판단하는 자유위임과 선출자의 구체 지시에 법적으로 묶이는 위임의 구별. <strong>⑥ 쉬운 말:</strong> 의원은 지역구의 매번 지시를 그대로 따르는 심부름꾼만은 아니다. <strong>⑦ 사례:</strong> 유권자 다수와 다른 표결도 곧 주권 침해 아님.</p>
+<p><strong>⑧ 시험:</strong> 자유위임과 정치적 책임은 양립. <strong>⑨ 비교·기억법:</strong> 자유위임≠헌법·법률을 무시할 자유.</p>
+<h3>國民發案·國民召還 국민발안·국민소환</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 民(백성 민), 發(필 발; 제기), 案(책상 안; 안건), 召(부를 소), 還(돌아올 환). <strong>③ 합친 뜻:</strong> 국민이 안건을 제기·선출직을 임기 중 불러들임. <strong>④ 이름의 이유:</strong> 대표를 통한 것 외의 직접 통제 수단이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 직접민주제의 안건 발의·공직자 해임 제도. <strong>⑥ 쉬운 말:</strong> 직접 제안을 올리거나 임기 전 물러나게 한다. <strong>⑦ 사례:</strong> 한국은 전국적 일반 국민발안·소환과 지방 제도를 구별.</p>
+<p><strong>⑧ 시험:</strong> 72조·130조 국민투표와 동일 제도 아님. <strong>⑨ 비교·기억법:</strong> 주민발안·주민소환이 있다고 전국 제도가 같은 것은 아님.</p>
+<h3>自由民主的 基本秩序 자유민주적 기본질서</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 由(말미암을 유), 民(백성 민), 主(주인 주), 的(과녁 적), 基(터 기), 本(근본 본), 秩(차례 질), 序(차례 서). <strong>③ 합친 뜻:</strong> 자유와 민주를 바탕으로 한 근본 질서. <strong>④ 이름의 이유:</strong> 선거뿐 아니라 권리와 절차의 토대를 포함해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 존엄·자유·평등·기본권·민주적 결정·법치·권력통제의 질서. <strong>⑥ 쉬운 말:</strong> 선거에서 이겨도 마음대로 사람을 억압하지 못한다. <strong>⑦ 사례:</strong> 긴급조치의 기본권 심사를 차단하는 문제.</p>
+<p><strong>⑧ 시험:</strong> 전문·4조;8④ 정당해산 기준은 엄격·협소. <strong>⑨ 비교·기억법:</strong> 특정 정당이나 진영의 이름과 동일시 금지.</p>
+<h3>違憲政黨解散 위헌정당해산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어길 위), 憲(법 헌), 政(정사 정), 黨(무리 당), 解(풀 해), 散(흩을 산). <strong>③ 합친 뜻:</strong> 헌법질서를 위반한 정당을 해체함. <strong>④ 이름의 이유:</strong> 민주주의의 존립을 지키되 정치적 자유 제한이 커서 엄격히 다룸.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목적·활동이 민주적 기본질서에 위배되는 정당에 대한 헌법상 해산 절차. <strong>⑥ 쉬운 말:</strong> 반대 정당이 싫다는 이유로 없애는 제도가 아니다. <strong>⑦ 사례:</strong> 현행 정부형태 변경 주장을 이유로 곧 해산 불가.</p>
+<p><strong>⑧ 시험:</strong> 최소선·다원주의·엄격한 심사. <strong>⑨ 비교·기억법:</strong> 정책 비판·개헌 주장과 폭력적 질서 파괴 구별.</p>
+<h1>기출 TOP5와 함정 지도</h1>
+<p><strong>TOP5:</strong> ① 066 국적이탈 예외 ② 079 국적상실 원인 ③ 082 북한주민 ④ 086 주권·자유위임 ⑤ 090 정당해산과 민주적 기본질서. 출제빈도 실측 순위가 아니라, 핵심 논점을 연결하는 학습용 선정이다. 민주·공화 061-062·075-076, 주권 071-073·086-089처럼 비슷한 개념이 반복되므로 하나의 문장만 외우지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>함정 표현</th>
+<th>반응해야 할 키워드</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>법률로 정하므로 무제한 재량</td>
+<td>법률도 평등·존엄을 지킴</td>
+</tr>
+<tr>
+<td>복수국적 전면 금지 / 예외적 이탈 불가</td>
+<td>제한적 허용·14-2 특례</td>
+</tr>
+<tr>
+<td>혼인으로 외국 국적 취득하면 무조건 상실</td>
+<td>15②·6개월 국적보유신고</td>
+</tr>
+<tr>
+<td>재외동포는 모두 외국인</td>
+<td>재외국민+외국국적동포</td>
+</tr>
+<tr>
+<td>북한주민은 국민이므로 대표단 억류</td>
+<td>3조+4조 조화·평화교류</td>
+</tr>
+<tr>
+<td>NLL이 곧 헌법상 영해 경계</td>
+<td>군사적·실질적 경계와 구별</td>
+</tr>
+<tr>
+<td>다수가 원하면 언제나 최고명령</td>
+<td>일반의사·기본권·정당한 절차</td>
+</tr>
+<tr>
+<td>개헌을 주장하는 정당은 위헌정당</td>
+<td>민주적 기본질서의 최소선</td>
+</tr>
+</tbody></table>
+<h1>새로운 응용문제 5개</h1>
+<h3>응용 1. 조용한 전자투표 국가</h3>
+<p>온 국민에게 같은 표를 주는 나라가 정부 비판 토론을 금지하고, 패배한 대통령에게 선거결과 거부권을 주었다. 투표의 평등만으로 민주국가의 최소 조건을 갖추었다고 할 수 있는가?</p>
+<p><strong>답:</strong> 아니다. 자유로운 토론·판단의 통로와 평화적 권력교체가 없기 때문이다. <strong>출제 의도:</strong> 민주를 표 계산으로만 이해하는 오류를 가린다. <strong>판단 순서:</strong> 참여의 평등 → 의사 형성의 자유 → 결과에 따른 교체 가능성.</p>
+<h3>응용 2. 뒤늦게 알게 된 한국 국적</h3>
+<p>해외에서 출생하여 계속 거주한 현우가 성인이 된 뒤 부모를 통해 한국 국적도 있다는 사실을 알았다. 원정출산에 해당하지 않으며 그동안 신고의무를 알기 어려웠던 구체적 사유가 있고 외국 공직 진출에 상당한 제한을 받는다. 18세 되는 해 3월을 넘겼으므로 어떠한 심사도 신청할 수 없는가?</p>
+<p><strong>답:</strong> 그렇게 단정할 수 없다. 국적법 14-2의 대상·정당한 사유·불이익과 병역 공평 등을 검토하여 예외적 허가를 신청할 수 있는지 살핀다. 신청 가능과 허가 보장은 다르다. <strong>출제 의도:</strong> 제한의 원칙과 예외심사를 함께 적용하게 한다.</p>
+<h3>응용 3. 북한산 제품과 유족 지원</h3>
+<p>한 공무원이 “북한산 제품에 남북교류 관련 통관 규율을 적용하니, 북한주민 유족도 외국인으로 보아 지원법에서 무조건 제외해야 한다”고 말했다. 논증의 어느 단계가 잘못되었는가?</p>
+<p><strong>답:</strong> 특정 거래의 기능적 규율에서 사람의 국적 부정으로 뛰어넘었다. 국적의 원칙, 지원법의 목적·명문 제외사유, 거래 특례를 각각 살펴야 한다. <strong>출제 의도:</strong> 같은 북한 관련 사안이라도 법률 목적에 따라 분류가 달라질 수 있음을 이해하는지 본다.</p>
+<h3>응용 4. 여론조사와 재판</h3>
+<p>설문 응답자 80%가 피고인을 유죄로 판단했다. 법원은 적법한 증거가 부족하다며 무죄를 선고했다. 한 의원은 “주권자의 명령을 어겼으니 판결은 효력이 없다”고 주장했다. 옳은가?</p>
+<p><strong>답:</strong> 아니다. 여론조사 다수는 모든 기관을 직접 구속하는 주권적 법적 명령이 아니다. 법원은 헌법·법률과 적법한 증거에 따라 독립적으로 판단한다. 정당한 비판은 가능하지만 그 자체로 판결의 효력이 사라지지는 않는다. <strong>출제 의도:</strong> 국민주권과 재판독립이 함께 작동함을 묻는다.</p>
+<h3>응용 5. 제도를 바꾸자는 작은 정당</h3>
+<p>소수 정당이 평화적 토론과 선거를 통해 대통령제를 의원내각제로 바꾸는 개헌을 주장했다. 정부는 “현행 제도와 다르니 민주적 기본질서에 위배된다”고 해산을 요구한다. 제시된 사실만으로 충분한가?</p>
+<p><strong>답:</strong> 부족하다. 민주적 최소질서를 수용하면서 세부 정부형태를 바꾸자는 주장은 정치적 자유의 범위에서 논의할 수 있다. 정당의 목적·활동과 해산의 엄격한 요건을 별도로 검토해야 한다. <strong>출제 의도:</strong> 현행 헌법의 모든 내용과 정당해산의 최소 기준을 동일시하는 함정을 가린다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 제4강</h2>
+<p><strong>TOP3:</strong> ① 민주·공화와 국민주권 ② 국적 취득·상실·이탈 예외 ③ 북한·영역·평화통일의 조화.</p>
+<table><thead><tr><th>항목</th><th>외울 핵심</th></tr></thead><tbody>
+<tr><td>국가/정부형태</td><td>국가형태가 상위. 민주공화국 안에서도 대통령제·내각제 가능.</td></tr>
+<tr><td>민주/공화</td><td>민주=국민의 근본 통제·자유평등 참여·토론·교체. 공화=비군주+모두의 권리·공익·법치·숙고.</td></tr>
+<tr><td>국적</td><td>항구적 구성원 신분≠영주권. 국적법정주의도 존엄·평등의 제한. 양계혈통 원칙+속지 예외.</td></tr>
+<tr><td>취득/상실</td><td>출생/인지·귀화·수반·회복·재취득. 자진 외국 국적 취득은 원칙적 즉시 상실.15② 법정 유형은 6개월 보유신고.</td></tr>
+<tr><td>병역·이탈</td><td>원칙적으로 18세 되는 해 3월31일까지 신고. 무정착 출생 제한·병역 해소 확인.14-2 예외적 허가 심사≠자동 허가.</td></tr>
+<tr><td>재외동포</td><td>재외국민+외국국적동포. 보호는 소극적 불침해뿐 아니라 적극적 지원도 포함.</td></tr>
+<tr><td>북한주민</td><td>원칙적 국민. 평화교류·권리도 존중. 특정 법률의 외국에 준한 취급≠일반적 외국 인정.</td></tr>
+<tr><td>국민 4지위</td><td>전체 주권자/헌법상 권한을 행사하는 최고기관/기본권 주체/피치자.</td></tr>
+<tr><td>영역</td><td>영토+영해+영공.영해12해리 원칙·일정 예외.EEZ 최대200해리≠영해.NLL≠헌법상 영해선.</td></tr>
+<tr><td>3조와4조</td><td>영토·평화통일 함께 해석.특수관계.북한의 이중적 지위.유엔 동시가입≠당연한 상호승인.</td></tr>
+<tr><td>주권/통치권</td><td>주권=대내 최고·대외 독립,전체 국민에게 불가분·불가양.통치권=헌법에 따라 분할·이전.</td></tr>
+<tr><td>일반의사·대표</td><td>보편적 권리·공동이익·적정 절차.여론다수≠최고명령.자유위임≠정치적 무책임.</td></tr>
+<tr><td>기본질서</td><td>존엄·자유·평등·권력통제.8④ 정당해산 기준은 엄격·협소.개헌 주장만으로 해산 불가.</td></tr>
+</tbody></table>
+<p><strong>판례:</strong>97헌가12 구법 각하/부칙 헌불합치.2016헌마889 일률적 이탈 제한 헌불합치→특례.99헌마494 정부수립 전 동포 배제 헌불합치.2011두24675 북한주민을 무국적 제외대상처럼 취급 불가.</p>
+<p><strong>반드시 외울 문장:</strong> 다수가 원한다는 사실만으로 타인의 권리를 침해할 정당한 권한이 생기지는 않는다.</p>
+<p><strong>사례를 풀 순서:</strong> 사람의 지위 → 공간·적용 법률 → 권력의 근거 → 기본권·절차 → 원칙과 예외 → 판례의 이유와 주문 구별.</p>
+</section>
+
+<h1>학습 상태 진단</h1>
+<p><strong>🟢 이해 완료:</strong> ‘주권은 국민에게’가 왜 여론 다수의 무제한 명령을 뜻하지 않는지, 북한주민의 원칙적 국적과 거래 특례가 왜 양립하는지 설명할 수 있다.</p>
+<p><strong>🟡 복습 필요:</strong> 국적이탈·국적상실·국적보유신고·불행사서약을 구분하지만 사례의 시점과 조건에서 망설인다.</p>
+<p><strong>🔴 이해 부족:</strong> 민주=다수결, 국적=거주지, 북한=보통 외국이라는 등식으로 문제를 푼다.</p>
+<p>지금은 답변을 받지 않았으므로 실제 이해도를 단정하지 않는다. <strong>복습 TOP3:</strong> ① 주권과 통치권·자유위임 ② 15①/15②와 병역·이탈 특례 ③ 3조/4조 및 북한 관련 개별 법률의 목적. 응용문제의 결론뿐 아니라 이유를 소리 내어 설명하고 색을 스스로 고른다.</p>
+<h1>교재·문제의 표현을 보완한 부분</h1>
+<p>국적법정주의는 무제한 입법재량이 아니다. 97헌가12의 위헌 논리와 실제 주문을 나누었다. 2022년 국적이탈 특례를 반영하고 2026.12.3. 시행 예정 귀화 규정은 현행법과 구별했다. 재외동포 전체를 외국인이라 부르는 표현, 영공의 사전허가를 예외 없이 설명하는 표현, 영국의 EU 가입을 현재 상황으로 읽는 부분도 보완했다. 067 사건번호,079의 국적보유신고 설명,080 기한 표현 및 단순 오탈자는 원본을 바꾸지 않고 보기별 해설에 표시했다. 원본 정답 자체의 변경은 하지 않았다. 이 자료는 시험 학습용이며 실제 국적·병역·체류 신청은 개인별 사실과 신청 당시 규정을 별도로 확인해야 한다.</p>
+<h1>문제 부록 · 31문항·124개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_060"><h4>형성평가 · 헌법_060</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>국가형태란 사회공동체가 정치적 통일체인 국가로 조직되는 형태이다.</li><li>입헌군주국, 민주공화국, 군사독재국가, 파시즘국가가 국가형태의 예이다.</li><li>정부형태는 국가형태의 상위개념이다.</li><li>정부형태란 통치기구가 조직되는 형태로, 대통령중심제, 의원내각제, 혼합정부제가 그 예이다.(정부형태는 국가형태의 하위개념이다.)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 사회공동체가 국가로 조직되는 전체 형태를 묻는다.</li><li><strong>비선택</strong> · 교재가 드는 국가형태의 예다. 명칭이 민주라고 실제 민주적인지는 제도도 확인해야 한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 정부형태는 국가형태의 하위개념이다. 큰 국가원리와 그 안의 기관 배치를 나눈다.</li><li><strong>비선택</strong> · 맞다. 대통령·의회·내각 등의 조직 관계에 관한 분류다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정부형태는 국가형태의 하위개념이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_061"><h4>형성평가 · 헌법_061</h4><p class="question-stem">국가형태로서 민주공화국의 개념소인 '공화국'에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>공화국의 실질적 의미는 모든 국민의 자유와 권리 보장과 공익의 추구에 적합한 권력행사와 의사결정의 틀을 갖추고 있는 정치체제를 말한다.</li><li>비정상적 국가형태, 즉 군사독재나 파시즘을 거부한다는 의미가 내포되어 있다.</li><li>민주공화국의 형식적 의미는 비군주국(非君主國)이라는 것이다.</li><li>소수가 토론과 결정에 참여하기만 하면 되고, 다수가 수의 우세를 활용하여 소수의 이익을 무시하는 것에 대한 제약은 없어도 무방하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실질적 공화국의 설명이다. 공적인 권력은 전체 구성원의 권리와 공동이익을 지켜야 한다.</li><li><strong>비선택</strong> · 맞다. 권력을 특정 군부나 독재자의 사유물로 삼는 형태를 거부하는 의미다.</li><li><strong>비선택</strong> · 비군주국이라는 형식적 의미를 가리킨다. 실질적으로는 권리보호와 공익 등 추가 내용이 있다.</li><li><strong>선택</strong> · 틀려서 선택한다. 발언 기회만 주고 소수의 권리를 마음대로 침해하면 충분하지 않다. 숙고·절차·권리의 제한선을 갖추어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 모든 구성원의 공동 번영에 적합한 숙고를 형성하는 적절한 절차와 제약이 없다면 실질적 의미에서 공화국이라고 할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_062"><h4>형성평가 · 헌법_062</h4><p class="question-stem">'민주'와 '공화'에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>공화는 사람에 의한 지배〔인치(人治)〕를 배척하고 법에 의한 지배〔법치法治)〕를 요구한다.</li><li>충동과 무지에 의한 의사결정이 다수결절차에 의해 이루어지는 것을 제어할 기제가 없는 국가는 '민주' 개념의 핵심부에 속하면서 동시에 실질적 '공화' 개념의 주변부에는 속한다.</li><li>'민주'와 '공화'가 해석적 개념이므로 그 내용은 중첩될 수 있다.</li><li>민주공화국의 실질적 의미는, 국민이 국가의 의사결정에 대하여 근본적인 통제력을 갖고 있으면서도 모든 국민의 자유와 권리 보장과 공익의 추구에 적합한 권력행사와 의사결정의 틀을 갖추고 있는 국가형태를 말한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 법이 아니라 권력자 개인의 자의에 맡기는 인치를 배척한다. 괄호 표기 오류는 의미에 영향이 없다.</li><li><strong>선택</strong> · 틀려서 선택한다. 민주 개념의 주변부에 겨우 속할 수 있을 뿐 핵심부라 할 수 없고, 실질적 공화 개념에는 속하기 어렵다는 것이 교재의 설명이다.</li><li><strong>비선택</strong> · 맞다. 가치를 해석하는 두 개념의 내용은 겹칠 수 있다. 겹침이 곧 논리 오류는 아니다.</li><li><strong>비선택</strong> · 두 요소를 합친 설명이다. 국민의 근본적 통제와 모두의 권리·공익을 위한 체계가 함께 있어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> '민주' 개념의 주변부에 겨우 속할 수도 있을 뿐이며, '공화' 개념에는 속할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_063"><h4>형성평가 · 헌법_063</h4><p class="question-stem">다음 중 국민으로서의 신분 또는 국민이 되는 자격을 가리키는 말은?</p><ol class="choices"><li>국적</li><li>영주권</li><li>사증에 의한 체류권</li><li>사증면제자격</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 국가의 항구적 소속원이라는 신분·자격을 국적이라 한다.</li><li><strong>비선택</strong> · 영주권은 외국의 장기·영구 체류 자격이다. 그 나라 국적과 동일하지 않다.</li><li><strong>비선택</strong> · 사증에 따른 체류 문제는 입국·체류 자격에 관한 것이다. 국민 신분을 곧 뜻하지 않는다.</li><li><strong>비선택</strong> · 사증면제도 특정 입국 절차의 면제일 뿐 국적 부여가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 영주권(永住權)이란 외국 정부로부터 그 나라에 영주(무기한 체류 또는 장기체류)할 수 있도록 부여 받은 권리 또는 자격을 말한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_064"><h4>형성평가 · 헌법_064</h4><p class="question-stem">다음 중 국적의 취득에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>출생사실에 기초하여 국적을 취득하는 것을 국적의 선천적 취득이라고 한다</li><li>한국의 국적법은 원칙적으로 출생시 부모의 국적을 따라 국적이 결정되도록 하는 속인주의를 취하고 있다.</li><li>인지, 귀화, 수반취득은 국적의 선천적 취득에 속한다.</li><li>한국의 국적법은 국적의 후천적 취득의 요건을 규정하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 출생이 법적 취득 원인인 경우를 선천적 취득이라 한다.</li><li><strong>비선택</strong> · 맞다. 부 또는 모의 국적에 연결되는 양계혈통주의가 원칙이다. 부모 모두 한국인이어야 한다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀려서 선택한다. 인지·귀화·수반취득은 법정 요건과 별도 절차를 요구하는 후천적 취득이다.</li><li><strong>비선택</strong> · 맞다. 후천적 취득도 국적법이 원인별 요건·절차를 정한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 후천적 취득에 속한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_065"><h4>형성평가 · 헌법_065</h4><p class="question-stem">대한민국 국적원칙에 속하지 아니하는 것은?</p><ol class="choices"><li>국적법정주의</li><li>선천적 취득에 있어서 원칙적 속지주의</li><li>부모양계혈통주의</li><li>단일국적주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당한다. 헌법2①은 국민 요건을 법률로 정하게 한다. 무제한 재량은 아니다.</li><li><strong>선택</strong> · 해당하지 않아 선택한다. 원칙은 속인주의이고 부모 불명·무국적 등의 경우 예외적으로 출생지 기준을 보완한다.</li><li><strong>비선택</strong> · 해당한다. 부계만이 아니라 부 또는 모의 국적에 연결한다.</li><li><strong>비선택</strong> · 교재가 기본 출발점을 설명하는 표현이다. 현행법이 제한적 복수국적까지 전면 금지한다는 뜻으로 읽으면 틀린다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 선천적 취득에 있어서 원칙적 속인주의이며 예외적으로 속지주의가 가미되어 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_066"><h4>형성평가 · 헌법_066</h4><p class="question-stem">다음 중 병역의무를 지는 복수국적자의 국적이탈 제한을 규정한 국적법 조항에 대한 현재 헌법재판소의 입장이 아닌 것은?</p><ol class="choices"><li>병역의무를 지는 복수국적자의 국적이탈 제한은 원칙적으로 병역의무 이행의 공평을 확보하기 위해 정당하다.</li><li>기간 내에 국적이탈신고를 하지 아니하면 구체적 사정에 불문하고 일률적으로 국적이탈을 할 수 없다고 하여 예외적으로 국적이탈을 허가하는 방안을 마련하지 아니한 것도 병역의무의 공평을 위해 정당하다.</li><li>복수국적자의 주된 생활근거지나 대한민국에서의 체류 또는 거주 경험 등 구체적 사정으로 국적법 조항이 정하는 기간 내에 국적이탈신고를 할 것으로 기대하기 어려운 사유는 예외적으로 고려해야 할 정당한 사유에 해당한다.</li><li>정당한 사유가 있고 병역의무 이행의 공평성 확보라는 입법목적을 훼손하지 않음이 객관적으로 인정되는 경우 예외적으로 국적이탈을 허가하는 방안을 마련해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 판례의 원칙적 정당화 이유다. 병역부담의 공평을 위한 제한 자체가 전부 사라진 것은 아니다.</li><li><strong>선택</strong> · 현재 입장이 아니므로 선택한다.2016헌마889는 모든 구체적 사정을 배제한 일률 제한을 문제 삼았다.2022년에는14-2 특례가 시행되었다.</li><li><strong>비선택</strong> · 맞다. 주된 생활기반·체류 경험·신고 기대 가능성 등을 살펴야 한다.</li><li><strong>비선택</strong> · 맞다. 정당한 사유와 병역 공평을 함께 고려하는 예외적 심사 길이 필요하다. 예외는 자동 허가를 뜻하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_067"><h4>형성평가 · 헌법_067</h4><p class="question-stem">외국국적동포에 대한 서술로 틀린 것은?</p><ol class="choices"><li>대한민국의 국적을 보유하였던 자의 직계비속에 해당하는 외국국적을 가진 사람이다.</li><li>체류허가 요건 및 절차, 체류기간, 체류기간 연장에 있어서 출입국관리법의 일반조항을 적용받는 일반 외국인보다 유리하다.</li><li>대한민국 정부 수립 이전의 동포와 이후의 동포를 구분하여 혜택 유무를 달리 정한 입법은 합리적 이유가 있어 평등원칙에 위배되지 않는다.</li><li>허가된 체류기간 중 취업이나 그 밖의 경제활동이 사회질서 또는 경제안정을 해치지 아니하는 범위에서 자유롭다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 범위에 속하는 한 외국국적동포에 해당하는 유형이다. 직계비속뿐 아니라 종전에 한국 국적을 보유했던 본인도 포함된다는 점을 함께 기억한다.</li><li><strong>비선택</strong> · 맞다. 외국국적동포에게 법정 체류 관련 특례가 있다. 일반 외국인과 모든 조건이 같지는 않다.</li><li><strong>선택</strong> · 틀려서 선택한다.99헌마494는 정부수립 전 이주 동포 등의 배제에 헌법불합치를 선고했다. 원본 해설의99헌마94는 번호가 빠진 표기다.</li><li><strong>비선택</strong> · 법정 범위와 제한을 전제로 맞다. 모든 직업·경제활동이 무조건 허용된다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 평등원칙에 위배된다(헌재2001. 11. 29. 99헌마94).</p></details></section>
+
+<section class="question-card" id="question-헌법_068"><h4>형성평가 · 헌법_068</h4><p class="question-stem">다음 중 민주국가에서 국민의 헌법상 지위에 해당하지 않는 것은?</p><ol class="choices"><li>주권자</li><li>기본권 주체</li><li>입법ㆍ행정ㆍ사법의 통치권의 전권을 직접 갖는 자</li><li>피치자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당한다. 전체 국민은 주권의 궁극적 주체다.</li><li><strong>비선택</strong> · 해당한다. 국민 개개인은 기본권의 보호를 요구한다.</li><li><strong>선택</strong> · 해당하지 않아 선택한다. 유권자의 최고기관 지위가 입법·행정·사법 전권을 각자 직접 갖는다는 뜻은 아니다.</li><li><strong>비선택</strong> · 해당한다. 국민도 정당한 법질서의 규율과 의무를 받는다. 주권자 지위와 양립한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민이 민주국가의 최고국가기관이라는 말이 국민이 곧 통치권의 전권을 갖는 자라는 말은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_069"><h4>형성평가 · 헌법_069</h4><p class="question-stem">다음 중 영토, 영해, 영공에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>영토(領土)란 국가영역의 기초가 되는 일정한 범위의 육지를 말하며, 조약에 의한 영토 변경은 헌법 제3조의 개정을 통해서만 가능하다.</li><li>영해(領海)는 영토에 접속한 일정한 범위의 수역(水域)을 말하는데, 대한민국의 영해는 모든 기선으로부터 12해리 이내로 일률적으로 그 범위가 정해져 있다.</li><li>영해에서는 무해항행권(無害航行權; right on innocent passage)이 인정된다.</li><li>영공에서는 민간항공기와 정부항공기를 불문하고 무해통항권(無害通航權)이 인정되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 영토조항 설명에 맞는다. 정부가 조약만으로 헌법3조를 우회할 수 없다.</li><li><strong>선택</strong> · 틀려서 선택한다.12해리는 원칙이고 법과 시행령이 정하는 일정 수역에는 다른 범위가 가능하다. 일률적으로가 함정이다.</li><li><strong>비선택</strong> · 맞다. 연안국의 평화·질서·안전을 해치지 않는 선박의 통항을 인정한다. 아무 활동이나 허용하는 것은 아니다.</li><li><strong>비선택</strong> · 영해의 선박과 같은 일반 무해통항권이 영공에 인정되지 않는다는 취지다. 다만 비정기 민간항공기 등의 조약상 통과 규율까지 전부 부정하는 말로 읽어서는 안 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 영해 및 접속수역법 제1조 &quot;대한민국의 영해는 기선으로부터 측정하여 그 바깥쪽 12해리의 선까지에 이르는 수역으로 한다. 다만, 대통령령으로 정하는 바에 따라 일정 수역의 경우에는 12해리 이내에서 영해의 범위를 따로 정할 수 있다.&quot;</p></details></section>
+
+<section class="question-card" id="question-헌법_070"><h4>형성평가 · 헌법_070</h4><p class="question-stem">영토조항과 평화통일조항의 충돌 문제를 해결하는 해석론으로서, 남북한특수관계론의 근거로 적합한 것은?</p><ol class="choices"><li>헌법 제3조가 통제규범이고 제4조는 미완성의 목표와 방향 규정에 불과하므로, 무력 흡수통일이 가능하다.</li><li>헌법 제3조는 미완성의 목표와 방향 규정이고 제4조는 통제규범이므로, 대한민국 영토는 남한에 한정된다고 보아야 한다.</li><li>영토조항과 평화통일조항은 그 자체가 직접 충돌하는 것으로서, 그 중 어느 한 조항의 규범력을 실질적으로 부인하여 해석해야 한다.</li><li>어떤 지역을 실효적으로 지배하고 있는 정치적 조직체의 합법성이나 정당성을 인정하지 않으면서도 그 정치적 조직체와의 평화를 도모하는 것은 모순적인 행위가 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다.4조의 규범력을 지우고 무력통일을 일반 허용하는 해석은 조화적 해석이 아니다.</li><li><strong>비선택</strong> · 틀리다.3조를 단순 희망으로만 처리하여 영토를 남한으로 축소하는 것도 한쪽 규범력을 지운다.</li><li><strong>비선택</strong> · 틀리다. 특정 해석이 충돌하는 것을 조문 자체의 필연적 충돌로 단정할 수 없다.</li><li><strong>선택</strong> · 정답이다. 법적 정당성 승인과 평화를 위한 협력은 같은 질문이 아니므로 양립할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_071"><h4>형성평가 · 헌법_071</h4><p class="question-stem">국민주권원리에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법 제1조 제2항 &quot;대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.&quot;가 이를 규정하고 있다.</li><li>주권(主權; sovereignty)이란 대내적으로 국가의사를 전반적‧최종적으로 결정하는 최고의 권력이자 대외적으로 독립의 권력을 말한다.</li><li>그 실질적 내용에는 영토고권, 대인고권, 자주조직권이 있다.</li><li>국민주권론은 중세의 정치현실에 상응하여 가장 만개했던 사상이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법1②가 국민주권을 명시한다.</li><li><strong>비선택</strong> · 맞다. 대내적 최고성과 대외적 독립성을 함께 기억한다.</li><li><strong>비선택</strong> · 맞다. 주권의 실질적 내용에 관한 분류다. 입법·행정·사법은 기능상 분류다.</li><li><strong>선택</strong> · 틀려서 선택한다. 국민주권론은 근대 특히 프랑스혁명을 통해 뚜렷이 대두했다. 중세에 가장 만개했다는 시대 배열이 잘못이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민주권론은 전체로서의 국민이 단일‧불가분‧불가양의 주권을 가진다는 이론의 형태로, 프랑스 혁명을 통해 뚜렷하게 대두하였다.</p></details></section>
+
+<section class="question-card" id="question-헌법_072"><h4>형성평가 · 헌법_072</h4><p class="question-stem">주권과 통치권에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>주권이란 국가의사를 전반적‧최종적으로 결정하는 최고의 권력이다.</li><li>현대 민주국가의 법질서에서 주권의 주체는 통치권의 행사자와 일치하지 않는다.</li><li>통치권은 헌법에 근거를 갖는 국가의사의 힘이다.</li><li>통치권은 단일불가분‧불가양이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주권의 대내적 측면이다. 대외적으로는 독립의 권력이다.</li><li><strong>비선택</strong> · 맞다. 전체 국민에게 귀속하는 주권과 국가기관의 통치권 행사는 구별된다.</li><li><strong>비선택</strong> · 맞다. 기관은 헌법상 근거·절차·범위에 따라 통치권을 행사한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 단일불가분·불가양은 주권의 성격이다. 통치권은 기능별로 나누고 담당자도 교체한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 통치권은 헌법에 규정된 절차와 한도 내에서 분할된 형태로 행사되고 또 직의 퇴임 등에 따라 이전되기도 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_073"><h4>형성평가 · 헌법_073</h4><p class="question-stem">다음 중 최고의 권력으로서 규범적 자격은 권력의 형성이나 행사에 있어서나 규범적 요건을 갖추어야만 성립한다고 보는 견해와 어울리지 않는 것은?</p><ol class="choices"><li>최고권력의 범위는 보편적 권리보장과 공동의 이익 추구에 관련된 것이어야 한다.</li><li>최고권력의 행사 방식은 적정한 절차에 의하여 이루어져야 한다.</li><li>국가권력의 행사는 일반의사를 발견하는 과정을 거쳐 이루어져야 한다.</li><li>여론조사에서 다수의 의사로 판정된 의사가 그 내용과 무관하게 최고의 규범적 힘을 가진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어울린다. 최고권력도 보편적 권리와 공동이익이라는 정당화 조건이 필요하다.</li><li><strong>비선택</strong> · 어울린다. 적정한 형성·행사 절차는 권한의 규범적 자격과 연결된다.</li><li><strong>비선택</strong> · 어울린다. 일반의사는 단순 사익의 합계와 다르다.</li><li><strong>선택</strong> · 어울리지 않아 선택한다. 다수라는 수치만으로 내용·절차·권리보장 조건을 모두 대체할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_074"><h4>형성평가 · 헌법_074</h4><p class="question-stem">자유민주적 기본질서에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>정치권력이 인간의 존엄과 가치를 최고의 근본규범으로 하여 민주적 의사결정을 통해 그리고 자유‧평등을 기본원리로 하여 구성되고 운영되며 기본적 인권을 보장하는 법치주의적인 통치질서를 말한다.</li><li>헌법 전문과 헌법 제4조가 자유민주적 기본질서를 언급하고 있다.</li><li>독일기본법에서 'freiheitliche demokratische Grundordnung'로 표현된 것과 같은 것이다.</li><li>대통령이 선거에 의해 선출된 경우라면 대통령의 긴급조치가 기본권을 침해하였는지 심사할 수 없도록 하는 것도 자유민주적 기본질서에 어긋나는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 존엄·자유·평등·기본권·법치와 민주적 결정이 함께 요구된다.</li><li><strong>비선택</strong> · 맞다. 정당해산의8④는 민주적 기본질서라는 표현을 쓴다는 점도 비교한다.</li><li><strong>비선택</strong> · 교재가 제시한 독일 법개념과의 연결이다. 특정 정당의 진영 명칭으로 좁혀 이해하지 않는다.</li><li><strong>선택</strong> · 틀려서 선택한다. 선거로 선출되었다는 사실만으로 기본권 침해에 대한 사법적 통제를 전부 차단할 수 없다. 자의적 지배를 막아야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자유민주적 기본질서가 배척하는 '자의적 지배'에 어긋난다.</p></details></section>
+
+<section class="question-card" id="question-헌법_075"><h4>워크북 · 헌법_075</h4><p class="question-stem">국가형태로서 민주공화국의 개념소(槪念素)인 '민주'에 대한 설명으로 명백히 틀린 것은?</p><ol class="choices"><li>민주(民主)는 국민이 국가의 의사결정에 대하여 근본적인 통제력을 갖고 있다는 것이다.</li><li>민주의 최소중심개념은 구성원들이 최종적 통제의 역할에 있어서 자유롭고 평등한 지위에서 참여하여 결정된 것에 대한 진지한 수범의무를 지도록 만드는 정당성을 낳는 합리적 의사소통의 제도적 통로를 가지고 있는 체계이다.</li><li>통치자가 평화적으로 교체가능해야 한다.</li><li>평등한 투표권의 행사만 있다면 토론의 자유와 기회는 보장되지 않아도 좋다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 국민의 근본적인 통제력이라는 민주 개념의 출발점이다.</li><li><strong>비선택</strong> · 맞다. 길지만 자유·평등한 참여→합리적 소통→결정의 정당성 순서로 풀면 된다.</li><li><strong>비선택</strong> · 맞다. 선거에서 패배한 권력자를 평화롭게 교체할 수 있어야 한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 자유로운 토론과 의사형성의 기회 없는 투표만으로는 충분하지 않다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 토론의 자유와 기회의 보장은 민주의 최소개념에 속하기 위해 꼭 갖추어야 하는 요소이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_076"><h4>워크북 · 헌법_076</h4><p class="question-stem">'공화국이 다수결을 의사결정기제로 채택하더라도 소수의 권리를 보장한다'고 할 때의 '다수'와 '소수'를 형식적 개념으로 보는 이해와 일치하지 않는 것은?</p><ol class="choices"><li>'다수'란 해당 사안에서 공권력을 행사하거나 행사하지 않기로 결정한 일부 국민을 말한다.</li><li>'소수'란 해당 사안에서 동의하지 아니한 내용의 공권력 행사를 받거나 국가의 필요한 보호나 급부를 받지 아니한 일부 국민을 말한다.</li><li>세전소득이 5천만 원인 사람이 세전소득이 4천만 원인 사람보다 과세 후 가처분소득이 더 적어지는 결과를 낳는 세법 개정이 이루어지는 경우, 세전소득이 5천만 원인 사람이 기본권 제한 문제에 있어서 소수에 해당한다.</li><li>어떤 범주에 의한 차별로 불이익을 받는 사람들이 인구분포에서 통계적으로 과반수를 차지한다면 이들은 '다수'이지 '소수'가 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 해당 사안에서의 공권력 행사 관계를 기준으로 하므로 교재의 형식적 이해와 맞는다.</li><li><strong>비선택</strong> · 맞다. 동의하지 않는 결정의 영향을 받는 쪽이라는 관계를 설명한다.</li><li><strong>비선택</strong> · 교재·워크북의 예시다. 부당한 불이익 여부를 다투는 위치를 인구수와 구별한다. 이 문장만으로 모든 구체적 세법의 위헌 결론까지 단정하는 것은 아니다.</li><li><strong>선택</strong> · 일치하지 않아 선택한다. 통계상 과반수라는 이유만으로 해당 사안에서 소수의 권리보호 문제가 사라지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 '다수'와 '소수'를 실질적 개념으로 이해한 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_077"><h4>워크북 · 헌법_077</h4><p class="question-stem">다음 중 틀린 서술은?</p><ol class="choices"><li>법의 인적 적용범위란 그 법의 수범자들의 집합을 말한다.</li><li>대한민국 헌법의 인적 적용범위는 대한민국 국적을 가지고 있는 대한민국 국민이 전부이다.</li><li>국민은 항구적 소속원이므로 어느 곳에 있든지 그가 속하는 국가의 통치권에 복종할 의무를 부담하고, 국외에 있을 때에는 예외적으로 거주국의 통치권에 복종하여야 한다.</li><li>대한민국의 항구적 소속원은 대한민국 국적을 가진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 인적 적용범위는 어떤 사람들이 규율 대상인지에 관한 질문이다.</li><li><strong>선택</strong> · 틀려서 선택한다. 국내 외국인·무국적자도 법질서의 적용을 받고 성질에 맞는 기본권을 누릴 수 있다.</li><li><strong>비선택</strong> · 교재 인용의 취지는 국민의 항구적 소속이다. 국외에서 거주국 법을 지키는 일이 일반적으로 불필요하다는 뜻으로 읽지 않는다. 국적국과 거주국 관할은 함께 작용할 수 있다.</li><li><strong>비선택</strong> · 맞다. 항구적 구성원 신분을 표시하는 것이 국적이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원칙적으로 대한민국 국적을 가지고 있는 대한민국 국민이지만 한국의 영토 내에 있는 외국인ㆍ무국적인도 적용범위에 속한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_078"><h4>워크북 · 헌법_078</h4><p class="question-stem">헌법 제2조 제1항은 &quot;대한민국의 국민이 되는 요건은 법률로 정한다&quot;고 규정하고 있다. 이에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>입법자에게 무제한적 입법형성권을 부여한 것이다.</li><li>&quot;법률로 정한다&quot;고 헌법이 규정한 사항은 입법자의 전적인 자유재량에 속하는 사항이다.</li><li>국적은 국적법과 같은 성문의 법령을 통해서가 아니라 국가의 생성과 더불어 존재하는 것이므로, 법령은 국민주권주의를 비롯하여 헌법규법에 내포된 원칙과 제한을 존중하여 국민의 범위를 구체화ㆍ현실화할 수 있을 뿐이다.</li><li>국적법에서 부계혈통주의를 규정하더라도, 기본권의 침해에 대한 헌법소원심판은 국민만이 청구할 수 있으므로, 해당 국적법에 의해 외국인으로 분류된 사람은 평등권을 주장하며 헌법소원심판을 청구할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 국적의 요건을 정하는 법률도 존엄·평등 등 헌법적 제한을 지킨다.</li><li><strong>비선택</strong> · 틀리다. 법률로 정한다는 문구는 헌법 위반의 면허가 아니다.</li><li><strong>선택</strong> · 정답이다. 법률은 헌법적 원칙을 존중하여 국민의 범위를 구체화한다는 취지다. 헌법규법은 헌법규범으로 읽는다.</li><li><strong>비선택</strong> · 틀리다. 바로 그 배제의 차별성을 다투는 길을 외국인이라는 이유만으로 막을 수 없다. 인간의 권리인 평등 등의 주체성도 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 일반적으로 '법률로 정한다'는 문언이 있는 사항도 입법자에게 무제한적 입법위임을 한 규정으로 해석되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-헌법_079"><h4>워크북 · 헌법_079</h4><p class="question-stem">국적의 상실에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>대한민국 국적자가 오로지 홀로 캐나다의 국적을 자진해서 취득하여도 원칙적으로 대한민국 국적을 유지할 수 있다.</li><li>외국인과의 혼인으로 그 배우자의 국적을 취득하게 된 자는 무조건 대한민국 국적을 상실한다.</li><li>복수국적자는 법에 규정된 기간 내에 법무부장관에게 대한민국에서 외국 국적을 행사하지 아니하겠다는 뜻을 서약한 경우를 제외하면 국적을 선택해야 하며. 국적 선택 명령을 받고도 기간 내에 선택하지 아니하면 국적을 상실한다.</li><li>대한민국 국민과 혼인한 상태로 대한민국에 2년 이상 계속하여 주소가 있는 사람이 귀하허가를 받은 때에는 외국 국적을 무조건 상실한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다.15①에 따라 자진 외국 국적 취득 시 원칙적으로 한국 국적을 상실한다. 영주권 취득과는 다르다.</li><li><strong>비선택</strong> · 틀리다.15②의 법정 유형이면6개월 내 한국 국적보유신고를 검토한다. 원본 해설이 불행사서약으로 설명한 부분은 이 직접적 근거와 혼동했으므로 보완한다.</li><li><strong>선택</strong> · 원본 정답이다. 복수국적 선택과 불행사서약의 법정 예외를 전제로, 국적선택명령 불이행은 기간 경과 시 상실을 낳는다. 일반 선택기한 경과와 명령 후 불이행을 구별한다.</li><li><strong>비선택</strong> · 틀리다. 귀화허가가 외국의 국적을 무조건 자동 소멸시키지 않는다. 해당 유형의 외국 국적 포기 또는 불행사서약 등 한국법상 의무도 확인한다. 귀하는 귀화의 오탈자다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 원칙적으로 상실한다. ② 법무부장관이 정하는 바에 따라 대한민국에서 외국 국적을 행사하지 아니 하겠다는 뜻을 법무부장관에게 서약하여 외국 국적을 계속 보유할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_080"><h4>워크북 · 헌법_080</h4><p class="question-stem">다음 중 병역의무와 국적에 관한 서술로 틀린 것은?</p><ol class="choices"><li>영주할 목적 없이 부모가 체류 중에 그 나라에서 출생하여 복수국적자가 된 남성의 경우 병역이 면제되거나 이행완료되어야 국적이탈신고를 할 수 있다.</li><li>영주할 목적이 있는 체류 상태에서 출생하여 복수국적자가 된 남성의 경우. 만 18세 되는 해에 3월 31일 전까지 국적이탈신고를 함으로써 한국 국적을 포기할 수 있다.</li><li>한국 국적을 법적으로 유효하게 포기한 사람도 대한민국에 체류하는 한 여전히 병역의무를 진다.</li><li>부모가 영주할 목적이 있는 체류 상태에서 출생하여 복수국적자가 된 남성은 입대하여 군 제대 또는 사회복무요원 소집해제를 하고 나면, 합법적으로 복수국적을 유지할 수 있는 방안이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재가 설명하는 원칙이다. 원정출산 등 무정착 출생에 대해서는 병역 해소 관련 제한을 둔다. 법정 병역 해소 사유의 구체 범위를 확인한다.</li><li><strong>비선택</strong> · 원칙적 신고기한의 취지는 맞다. 다만3월31일 전까지를31일을 제외한다는 뜻으로 읽지 말고18세 되는 해3월31일까지로 보충한다. 신고와 수리도 구별한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 유효하게 한국 국적을 상실한 외국인에게 단순 국내 체류만으로 한국 국민의 병역의무가 남는 것은 아니다.</li><li><strong>비선택</strong> · 맞다. 법정 기한·요건에 맞춘 외국 국적 불행사서약 등 복수국적 유지 방안이 있다. 제대만으로 언제나 아무 절차도 필요 없다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 한국 국적을 법적으로 유효하게 포기하였다는 말은, 더 이상 그 사람이 대한민국의 항구적 소속원으로서 국방의 의무를 부담할 법적 의무를 지지 않는다는 것을 의미한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_081"><h4>워크북 · 헌법_081</h4><p class="question-stem">헌법 제2조 제2항 &quot;국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다&quot;에 대한 설명 및 이와 관련된 헌법적 쟁점에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>기본권 보장의무가 국외거주국민에 미침을 확인한 조항이다.</li><li>주민등록이 되어 있는지 여부에 따라 선거권 행사 여부를 결정하여 국외거주자에 대해서는 부재자투표를 인정하지 않는 법률은 위현이다.</li><li>국외거주 국민에게 생길 수 있는 특별한 위험으로부터 보호할 의무를 규정한 것이다.</li><li>해당 의무는 국가의 소극적 의무를 규정한 것일 뿐 국외거주 국민이 거류국에 있는 동안 모든 분야에서 거류국으로부터 정당한 대우를 받을 수 있도록 할 적극적 의무까지 규정한 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 해외 거주가 국민의 기본권 보장을 전부 소멸시키지 않는다.</li><li><strong>비선택</strong> · 맞는 취지다.2004헌마644등은 재외국민 등의 참정권을 과도하게 제한한 해당 조항들에 헌법불합치를 선고했다. 위현은 위헌의 오탈자다.</li><li><strong>비선택</strong> · 맞다. 전쟁·재난 등 국외의 특별한 위험에 대한 보호 책임도 있다.</li><li><strong>선택</strong> · 틀려서 선택한다. 외교적·법적·문화교육적 지원 등 적극적 보호의무도 포함된다. 단순히 국가가 해치지 않으면 끝나는 의무가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 적극적 의무를 규정한 것이다(헌재 2001. 12. 20. 2001헌바25).</p></details></section>
+
+<section class="question-card" id="question-헌법_082"><h4>워크북 · 헌법_082</h4><p class="question-stem">북한주민에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>원칙적으로 대한민국 국민이다.</li><li>북한주민이 대한민국 국민이므로 남북교류에 관한 문제를 논의하러 남한 지역에 온 북한 정부 당국자를 남한 내에 억류해야만 헌법을 위반하지 않게 된다.</li><li>북한이 탈북자를 모두 강제송환해줄 것을 요구하고 이를 거절하면 모든 남북한 간의 교류를 중단한다고 위협하는 경우에도, 강제송환은 대한민국 국민의 신체의 자유 및 거주의 자유를 부당하게 침해하는 행위이다.</li><li>개별 법률의 적용 내지 준용에 있어서는 남북한의 특수관계적 성격을 고려하여 북한 지역을 외국에 준하는 지역으로, 북한주민 등을 외국인에 준하는 지위에 있는 자로 규정할 수 있다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙적으로 맞다. 개별인의 국적 취득·상실에 관한 별도 사정은 따로 확인한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 영토조항만으로 대표단을 모두 억류하라는 결론은 나오지 않는다. 평화적 교류·통일 의무를 함께 읽는다.</li><li><strong>비선택</strong> · 맞는 취지다. 교류 중단의 위협이 당사자의 기본권과 보호 필요성을 모두 무시한 일괄 강제송환의 근거가 되지는 않는다.</li><li><strong>비선택</strong> · 맞다. 개별 법률의 목적에 따른 외국에 준하는 규율은 일반적인 외국 국가승인이나 국적 부정과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제4조(평화적 통일정책을 수립ㆍ추진) 의무 규정이 있기 때문에 남한 지역에 온 북한 정부 당국자를 억류함으로써 남북한 간의 평화적 교류ㆍ협력을 불가능하게 하거나 현저히 곤란하게 하는 것이 오히려 헌법에 위반된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_083"><h4>워크북 · 헌법_083</h4><p class="question-stem">다음 중 국가가 존립의 기초로 삼는 일정 범위의 공간을 총칭하는 개념으로 가장 정확한 것은?</p><ol class="choices"><li>영역</li><li>영토</li><li>영해</li><li>영공</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 영토·영해·영공을 포괄하는 상위개념이다.</li><li><strong>비선택</strong> · 영토는 영역 중 육지 부분이므로 전체를 묻는 질문에 부족하다.</li><li><strong>비선택</strong> · 영해는 일정한 인접 수역이므로 공간 전체의 총칭이 아니다.</li><li><strong>비선택</strong> · 영공도 영역의 구성부분이므로 총칭으로는 부족하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 영토, 영해, 영공은 영역의 구성부분이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_084"><h4>워크북 · 헌법_084</h4><p class="question-stem">서해 북방한계선(NLL Northern Limit Line)에 관한 설명으로 명백히 틀린 것은?</p><ol class="choices"><li>대한민국 헌법상 영해의 범위를 정하는 경계선이다</li><li>정천협정에서는 군사분계선을 육지에만 설치하였고 해상에서의 군사분계선은 구체적으로 정한 바 없이, 단지 해상에서는 '쌍방의 인접해면(영해)'을 존중하고 항구에 대한 어떠한 봉쇄도 허용되지 않는다고 정해졌다.</li><li>남북이 각각 기선으로부터 12해리의 수역을 영해로 주장한다면 서해 5도(백령도ㆍ대청도ㆍ소청도ㆍ연평도ㆍ우도)가 남북이 주장하는 영해 안으로 동시에 포함되어 무력충돌 가능성이 있었던 것이 서해 북방한계선을 설정하게 된 이유였다.</li><li>1991년 남북기본합의서 제11조는 &quot;남과 북의 불가침 경계선과 구역은 1953년 7월 27일자 군사정전에 관한 협정에 규정된 군사분계선과 지금까지 쌍방이 관할해온 구역으로 한다&quot;고 규정하고 있는바. 실질적인 해상경계선 역할을 하고 있는 서해 북방한계선에 의의를 부여한 것으 로이해할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 명백히 틀려서 선택한다. NLL은 군사적·실질적 경계 문제이고 헌법상 영해 범위를 정한 선과 동일하지 않다.</li><li><strong>비선택</strong> · 교재의 정전협정 설명에 맞는다. 정천은 정전의 오탈자다. 육상 군사분계선과 해상 규율을 나눈다.</li><li><strong>비선택</strong> · 원본은 충돌 방지라는 설정 배경을 설명한다.1953년 당시 양측의12해리 영해가 현대적 의미에서 이미 일률 확정되었다는 사실 명제로 확대하지 않는다.</li><li><strong>비선택</strong> · 교재의 의의 설명이다. 종전 관할구역에 관한 합의가 실질 경계 논의와 연결되지만, 최종적 해상 국경조약과 동일시할 수는 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_085"><h4>워크북 · 헌법_085</h4><p class="question-stem">남북한특수관계론(헌재 1993. 7. 29. 92헌바48; 1997. 1. 16. 92헌바6등에서 설시된 입장)의 내용이 아닌 것은?</p><ol class="choices"><li>영토조항의 규범력도 인정하되, 대한민국이 실효적으로 지배하고 있지 않는 영토의 정치적 조직체 및 그 주민들과의 관계에서 평화적 통일의 방식만을 현법이 용인한다고 본다.</li><li>북한은 반국가단체이자 동시에 평화통일의 동반자라고 본다.</li><li>남북관계는 나라와 나라 사이의 관계가 아닌 통일을 지향하는 과정에서 잠정적으로 형성되는 특수관계로 본다.</li><li>국가가 유엔에 가맹국으로 가입하면 &quot;유엔&quot;(UN)이라는 국제기구에 의하여 국가로 승인받는 효과가 발생하므로 남ㆍ북한 유엔(UN) 동시가입에 의해 남북한 간에도 당연히 상호 간에 국가승인이 있었던 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 영토조항을 지우지 않으면서 평화적 통일 방식의 헌법적 요구를 함께 읽는다. 현법은 헌법의 오탈자다.</li><li><strong>비선택</strong> · 관련 판례의 이중적 지위 설명이다. 한쪽만 떼어 모든 사안에 적용하지 않는다.</li><li><strong>비선택</strong> · 맞다. 통일을 지향하는 과정의 잠정적 특수관계라는 설명이다.</li><li><strong>선택</strong> · 틀려서 선택한다. 유엔 동시 가입에서 남북 상호 간의 당연한 국가승인이 도출되지는 않는다. 국제기구의 회원 지위와 양자 관계를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국제기구에 의해 국가로 승인받는 효과가 발생한 것에 불과하므로, 가맹국인 남북한 간에도 당연히 상호 간에 국가승인이 있었던 것은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_086"><h4>워크북 · 헌법_086</h4><p class="question-stem">국민주권론에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>개별 국민은 각자가 주권자로서 1/n(n=국민의 수) 크기만큼의 주권을 직접 보유한다.</li><li>위헌법률심사제와 같은, 다수결로 인해 나타날 수 있는 권리 침해를 제약하는 제도는 민주주의에 필연적으로 어긋난다.</li><li>주권자는 헌법에 근거하여 조직된 통치권을 경유하지 않고서 여론조사의 다수로 드러난 것과 같은 단순 의사 표시를 통해 직접 행사할 수 있고 국내의 모든 권력은 이 의사표시에 복종해야 한다.</li><li>국민주권론에서 대표는 무기속위임(자유위임)을 받으며 따라서 자신을 선출한 국민의 구체적인 지시나 명령에 구속되지는 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 주권은 전체 국민에게 귀속하며 개인별로1/n의 최고명령권 조각을 소유하는 것이 아니다.</li><li><strong>비선택</strong> · 틀리다. 기본권 침해를 통제하는 위헌법률심사는 민주공화국의 권리보호와 양립한다.</li><li><strong>비선택</strong> · 틀리다. 여론조사 결과만으로 헌법상 기관·절차를 생략한 무제한 최고명령이 생기지 않는다.</li><li><strong>선택</strong> · 정답이다. 대표는 구체적 지시에 법적으로 묶이는 명령적 위임이 아니라 자유위임을 받는다. 정치적 책임까지 없다는 말은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①, ②, ③은 모두 국민주권을 일종의 정치신학적으로 이해하는 데서 나오는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_087"><h4>워크북 · 헌법_087</h4><p class="question-stem">다음 중 최고의 권력으로서 규범적 자격은 권력의 형성이나 행사에 있어서나 규범적 요건을 갖추어야만 성립한다고 보는 견해와 어울리지 않는 것은?</p><ol class="choices"><li>최고권력의 범위는 보편적 권리보장과 공동의 이익 추구에 관련된 것 이어야 한다.</li><li>최고권력의 행사 방식의 적정한 절차에 의하여 이루어져야 한다.</li><li>최고권력의 행사는 일반의사를 발견하는 과정을 거쳐 이루어져야 한다.</li><li>여론조사에 의해 다수의 의사로 판정된 의사가 그 내용과 무관하게 최고의 규범적 힘을 가진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어울린다. 보편적 권리와 공동이익은 권력 정당화의 내용상 조건이다.</li><li><strong>비선택</strong> · 어울린다. 행사 방식의 적정한 절차도 필요하다. 원문의 조사 오류는 뜻을 바꾸지 않는다.</li><li><strong>비선택</strong> · 어울린다. 사적 선호를 넘어 모두에게 정당화할 일반의사를 찾아야 한다.</li><li><strong>선택</strong> · 어울리지 않아 선택한다. 내용과 절차를 묻지 않고 다수의 선호만 최고 규범으로 만드는 견해를 비판한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_088"><h4>워크북 · 헌법_088</h4><p class="question-stem">다음 중 주권의 의미를 주체의 속성과 그 주체의 의사작용으로 전적으로 환원하지 않고, 권력의 보유와 행사는 그에 걸맞은 규범적 자격 요건을 필요로 한다는 견해와 가장 잘 어울리는 주권에 대한 이해를 진술한 것은?</p><ol class="choices"><li>국민이 주권을 가진다는 것은, 다수결에 의해 제정된 법률이라면 어떤 내용이든 정당한 규범적 효력을 가진다는 것을 의미한다.</li><li>국민이 주권을 가진다는 것은 평화로운 공존 및 공동의 번영과 공정한 협동에 관련된 일반의사를 발견하여 국가의 권력행사를 결정하는 제도적 장을 계속 유지하면서 그에 참여할 자유롭고 평등한 기본적 지위를 가진다는 것을 의미한다.</li><li>대통령의 지시를 받아 국회의사당을 둘러싼 경찰에 의해 외포된 상태에서 국회의원이 기명투표로 헌법개정안을 가결하여도. 이는 국민의 대표가 실제로 결정한 것이므로 법적인 효력을 갖는다.</li><li>여론조사를 통해 어떤 정책 P를 반대하는 의사가 다수로 드러난다면 'P를 철회하라는 것이 주권자의 명령이다'라고 진술하는 것은 헌법학적 견지에서 정확한 진술이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 다수결이라는 형식만으로 어떤 내용이나 정당해지는 것은 아니다.</li><li><strong>선택</strong> · 정답이다. 평화로운 공존·공정한 협동을 위한 제도적 통로와 자유롭고 평등한 참여 지위를 연결한다.</li><li><strong>비선택</strong> · 틀리다. 무력·위협 아래 이루어진 의결은 실제 표결이 있었다는 사실만으로 정당한 절차가 되지 않는다. 외포는 두려움에 위축된 상태라는 뜻이다.</li><li><strong>비선택</strong> · 틀리다. 정치적 수사로 쓰일 수 있어도 단순 여론 다수를 곧 법적으로 구속력 있는 주권자의 명령이라고 설명하는 것은 부정확하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_089"><h4>워크북 · 헌법_089</h4><p class="question-stem">국민이 합리적 의사소통의 제도적 장에 평등하고 자유로운 지위에서 참여하는 것을 주권의 행사라고 보는 견해와 가장 어울리지 않는 것은?</p><ol class="choices"><li>구체적인 법률안과 관련하여 어떤 선거구의 국회의원이 자신을 선출한 유권자 다수의 견해와 다르게 표결한다면 이는 주권자의 명령을 어긴 것이다.</li><li>다원주의에 입각한 복수정당제도는 주권에 따른 통치권의 구성과 조직에 있어 필요하다.</li><li>정치적 참여에 관한 권리는 기본권으로 보장되어야 한다.</li><li>어떤 구체적 사안에 대하여 사법부는 법률을 타당하게 해석ㆍ적용하여 재판하여야 하지, 그 사안의 최종적인 처리로 여론의 다수가 원하는 것을 좇아 재판해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 어울리지 않아 선택한다. 자유위임에서는 선거구 다수와 다른 표결이 곧 법적 명령 위반이 되지 않는다. 유권자의 비판과 정치적 책임은 별도로 남는다.</li><li><strong>비선택</strong> · 어울린다. 복수정당은 다양한 견해와 선택의 통로를 유지한다.</li><li><strong>비선택</strong> · 어울린다. 참여권은 국민주권이 실제 작동하기 위한 기본권이다.</li><li><strong>비선택</strong> · 어울린다. 법원은 여론조사에 따라 결론을 바꾸는 기관이 아니라 법을 타당하게 해석·적용하는 독립기관이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 현재 국민주권주의는 명령적 위임을 금지하는 대의제가, 일반의사를 발견하는 합리적인 의사소통의 제도적 장으로서 적합하다는 전제 위에서 운용되고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_090"><h4>워크북 · 헌법_090</h4><p class="question-stem">민주적 기본질서에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법 제8조 제4항이 위헌정당해산제도와 관련하여 사용하고 있는 개념이다.</li><li>단지 인기 없는 정당을 해산하는 데 사용되는 등의 남용을 억제하기 위해 최대한 엄격하고 협소한 의미로 이해해야 한다.</li><li>'민주적 기본질서'는 개인의 자율적 이성을 신뢰하고 모든 정치적 견해들이 각각 상대적 진리성과 합리성을 지닌다고 전제하는 다원적 세계관에 입각한 것으로서, 모든 폭력적ㆍ자의적 지배를 배제하고, 다수를 존중하면서도 소수를 배려하는 민주적 의사결정과 자유ㆍ평등을 기본원리로 하여 구성되고 운영되는 정치적 질서를 말한다.</li><li>현행 헌법이 규정한 민주주의제도의 세부적 내용을 달리 주장하며 헌법개정을 주장하는 정당은 위헌정당이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다.8④는 정당해산의 기준으로 민주적 기본질서를 규정한다.</li><li><strong>비선택</strong> · 맞다. 해산제도가 반대편 제거 수단이 되지 않도록 엄격하고 좁은 기준을 적용한다.</li><li><strong>비선택</strong> · 2013헌다1의 기본 개념 설명에 맞는다. 다수 존중과 소수 배려,자유·평등·다원주의를 함께 본다.</li><li><strong>선택</strong> · 틀려서 선택한다. 최소한의 민주적 질서를 수용하면서 세부 제도를 바꾸자는 개헌 주장은 가능하다. 현행 조항과 다른 주장이 모두 해산사유가 되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 민주적 의사결정을 위해서 필요한 불가결한 요소들과 이를 운영하고 보호하는 데 필요한 최소한의 요소들을 수용한다면. 현행 헌법이 규정한 민주주의 제도의 세부적 내용에 관해서는 얼마든지 그와 상이한 주장을 개진할 수 있는 것이며(헌재 2014. 12. 19. 2013헌다1).</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 04' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 04|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

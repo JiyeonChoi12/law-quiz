@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제8강 정당제도 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 08</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제8강 정당제도 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강을 먼저 한 문장으로</h1>
+<p>정당은 국민의 여러 생각을 정책과 국가권력으로 연결하는 자발적 모임이다. 그래서 자유를 두텁게 보호하지만, 내부 운영과 돈의 흐름은 민주적·투명해야 하고, 민주주의 자체를 파괴할 구체적 위험에는 헌법이 정한 마지막 통제가 작동한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하나</td>
+<td>정당의 개념·자유·민주적 운영·재정·후보추천·등록취소·해산</td>
+</tr>
+<tr>
+<td>왜 이런 제도가 생겼나</td>
+<td>흩어진 국민의 뜻을 정책으로 만들면서도 권력의 야당 탄압과 정당의 민주주의 파괴를 함께 막으려고</td>
+</tr>
+<tr>
+<td>헌법 전체에서의 자리</td>
+<td>기본원리를 실제 정치로 연결하는 제도;헌법8조가 중심</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>4강의 국민주권·다원주의를 실제 조직으로 구현하고,9강에서 정당과 유권자를 잇는 선거를 배운다</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나</td>
+<td>공천·정치자금·정당해산을 모두 같은 국가권력 문제로 오해하게 된다</td>
+</tr>
+</tbody></table>
+<p>범위:교재211–238쪽. 제공 기출160–193번34문항·136개 보기를 모두 연결했다. ★는 제공 문제와 개념의 연결성에 따른 학습 우선순위이지 실제 출제율·오답률 통계가 아니다. 현행법 보완 기준:2026.10.25. 가상사례·대화는 실제 판결문 인용이 아니다.</p>
+<p>색상: <mark class="yellow">시험·암기</mark> / <mark class="green">취지·논리</mark> / <mark class="pink">함정·비교</mark> / <mark class="blue">앞뒤 연결</mark>.</p>
+<h1>1. 정당은 무엇을 하는 모임인가</h1>
+<h2 id="foundations-08-01" data-concept-id="foundations-08-01">1-1. 헌법8조의 네 칸과 제도의 역사 ★★★★★</h2>
+<p><strong>교재212쪽 / 문단의 역할:</strong> 정당제도의 전체 지도를 먼저 보여 준다.</p>
+<p>8①은 설립의 자유와 복수정당제,②는 목적·조직·활동의 민주성과 국민의 정치적 의사형성에 필요한 조직,③은 법률에 따른 보호·운영자금 보조,④는 민주적 기본질서에 위배되는 정당의 헌재 해산을 정한다. ‘자유→민주성→지원→예외적 해산’으로 기억한다. 정부나 국회가 마음대로 해산시키는 구조가 아니다.</p>
+<p>제헌헌법에는 정당을 직접 보호하는 독립 조항이 없었다.1960년 제3차 개헌 때 결사의 자유 조항에 정당 보호와 헌재 해산제도를 넣었고,1962년 제5차 개헌 때 독립 조문과 복수정당제를 두었다. 당시 해산심판기관은 대법원이었다. 대통령·국회의원 후보자의 정당추천,국회의원의 당적 이탈·변경 및 정당해산과 의원직 상실을 강하게 연결하던 시기도 있었다.1972년 제7차 개헌에서는 무소속 출마를 허용하는 한편 통일주체국민회의 대의원의 정당가입을 금지했다.1980년 제8차 개헌에서 정당운영자금 보조의 근거가 들어왔고,현행헌법은 자유·보호·민주성·해산의 틀을 이어받았다.</p>
+<p>역사를 넣은 이유는 현재의 정당제도가 처음부터 완성된 것이 아니라 권력의 탄압과 정당정치의 변화를 겪으며 만들어졌기 때문이다. 시험:160. 한 줄: <strong>8조는 정당을 보호하면서 정당도 민주적으로 움직이도록 한다.</strong></p>
+<h2 id="foundations-08-02" data-concept-id="foundations-08-02">1-2. 정치적 의사를 모으고 정책으로 바꾸는 역할 ★★★★★</h2>
+<p><strong>교재212–213·217쪽 / 문단의 역할:</strong> 정당이 다른 친목모임과 다른 이유를 설명한다.</p>
+<p>국민 한 사람은 주거비를,다른 사람은 환경을,또 다른 사람은 일자리를 걱정한다. 정당은 이 요구를 단순 전달하는 데서 멈추지 않고,충돌하는 요구를 조정하여 책임질 정책 묶음을 제시하고 후보자를 내며 국가의 결정으로 연결한다. 여당은 국정 운영에,야당은 비판·대안 제시에 참여한다. 정치지도자를 발굴하고 국민의 판단자료를 만드는 기능도 있다.</p>
+<p>91헌마21(1991.3.11.)에서 교재가 가져온 문장은 ‘자발적 조직’이지만 중요한 ‘공적 기능’을 한다는 설명이다. 문장을 풀면 ①흩어진 의견을 모으고 ②실행할 방향을 제안하고 ③국정을 책임지는 권력으로 잇는다는 뜻이다. 이 인용만으로 정당이 국가기관이 되었다고 읽으면 안 된다. 여기서는 교재가 인용한 정당의 기능에 집중하며,그 사건의 다른 쟁점과 주문을 이 설명의 결론으로 대신하지 않는다.</p>
+<p>헌법상 정당의 핵심은 국민의 정치적 의사형성에 참여하는 조직이다. 현재 헌법의 모든 세부 제도에 찬성하는 모임만 정당이라고 정의하면,정부형태를 바꾸자는 야당도 처음부터 보호 밖으로 밀어낼 위험이 있다. <mark class="pink">보호되는 정당인가와,엄격한 해산요건에 해당하는가는 다른 질문이다.</mark></p>
+<p>시험:161·178. 키워드:결집·조정·정책·매개·자발성과 공공성. 한 줄: 정당은 국민의 생각과 국가결정을 잇는 정치적 결사다.</p>
+<h2 id="foundations-08-03" data-concept-id="foundations-08-03">1-3. 정당국가 현상과 국가의 태도 변화 ★★★☆☆</h2>
+<p><strong>교재217–218쪽 / 문단의 역할:</strong> 왜 현대헌법이 정당을 제도적으로 인정하는지 설명한다.</p>
+<p>국가의 태도는 정당을 적대시하는 단계,법적으로 중요하지 않은 것으로 보는 단계,법률이 인정하는 단계,헌법이 지위를 보장하는 단계로 설명할 수 있다. 현대 대의정치는 정당을 통해 정책·후보·의회활동이 조직되는 ‘정당국가’의 모습을 띤다. 그렇다고 정당이 국가를 소유하거나 국민대표를 사적으로 지배한다는 뜻은 아니다.</p>
+<p>국민의 생각이 변하면 정당도 토론하고 새로운 사람을 받아들일 수 있어야 한다. 지도부가 당원의 의사를 막고 자기 지위를 영구히 보장하면 정당의 매개기능이 굳어 버린다. 그래서 개방적·유연한 조직과 당내 민주주의가 필요하다. <mark class="blue">국민주권→정당의 의사형성→선거→의회라는 연결을 기억하자.</mark></p>
+<p>시험:181의 배경. 한 줄: 정당의 영향력이 커질수록 내부 민주성이 중요하다. 역사 단계의 세부 분류는 심화다.</p>
+<h1>2. 정당의 자유와 민주적 내부질서</h1>
+<h2 id="foundations-08-04" data-concept-id="foundations-08-04">2-1. 설립만 자유로운 것이 아니다 ★★★★★</h2>
+<p><strong>교재213–214쪽 / 문단의 역할:</strong> 정당의 자유를 단체와 개인 양쪽에서 넓게 파악한다.</p>
+<p>21조 결사의 자유는 일반적 보호이고,8조는 공적 기능을 고려한 특별한 보호다. 정당을 만드는 자유에는 조직형태·법형식을 정하고 활동하고 존속하는 자유가 포함된다. 개인에게는 가입·불가입·탈퇴의 자유가,단체에는 해산·분당·합당의 자유도 있다. 설립만 허용하고 곧바로 활동을 금지한다면 설립의 자유는 껍데기가 된다.</p>
+<p>2004헌마246(2006.3.30.)은 이 자유를 제한하는 법률에 엄격한 비례성심사가 필요하다고 설명했다.99헌마135(1999.12.23.)는 퇴직 경찰청장의 정당설립·가입을 퇴직 후2년간 금지한 조항을 위헌으로 보았다. 정치적 중립이라는 목적만으로 퇴직 뒤의 정치적 자유를 광범위하게 막을 수는 없었던 것이다. <a href="https://law.go.kr/detcInfoP.do?detcSeq=134749">2004헌마246</a>,<a href="https://www.law.go.kr/detcInfoP.do?detcSeq=137330">99헌마135</a></p>
+<p>번역: ‘중대한 정당화 사유’→자유를 막을 만큼 무거운 이유가 필요하다. ‘엄격한 비례성’→정당한 목적이라는 말로 끝내지 말고 수단·대안·손해까지 따진다. 민주적 기본질서를 부정하는 정당조차 헌재가 위헌성을 확인하기 전에는 정치적 경쟁에서 자의적으로 배제할 수 없다. 이를 모든 정당활동이 언제나 무제한이라는 뜻으로 확대하지 않는다.</p>
+<p>시험:162·179. 한 줄: 정당의 자유는 <strong>개인+단체,설립+존속+활동</strong>의 자유다.</p>
+<h2 id="foundations-08-05" data-concept-id="foundations-08-05">2-2. 법률상 정당의 표지와 가입 요건 ★★★★★</h2>
+<p><strong>교재215–216쪽 / 문단의 역할:</strong> 헌법상 보호를 실제 등록·가입 제도와 연결한다.</p>
+<p>정당법2조는 국민의 이익을 위하여 책임 있는 정치적 주장·정책을 추진하고 공직선거 후보자를 추천·지지함으로써 정치적 의사형성에 참여하는 국민의 자발적 조직으로 설명한다. 일회적 시위만을 위한 모임과 달리 계속 활동할 조직이 필요하다. 교재가 소개한 판례의 표지는 국민의 결사,자발성,정치적 목적·정책,선거 참여,계속적 조직 등이다. 다만 ‘헌법질서 긍정’이라는 표현을 모든 현행 제도의 무조건적 찬성으로 읽어서는 안 된다.</p>
+<p>현행법상 당원은16세 이상 국민이어야 하고 외국인은 가입할 수 없다. <strong>18세 미만은 입당신청 때 법정대리인의 동의서가 필요하다.</strong> 공무원·교원 제한에는 대통령·국회의원 등 법정 예외와 고등교육법상 교원 등의 예외가 있으므로 ‘모든 공무원·모든 교원이 금지’라고 외우면 틀린다. 구체적인 해당 여부는22조의 열거를 확인한다. 가입·탈당을 본인의 승낙 없이 강요할 수 없지만 적법한 제명은 별개다. <a href="https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1022658149">정당법22조</a>,<a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0023&lsiSeq=285683&urlMode=lsScJoRltInfoR">23조</a></p>
+<p>시험:163·180. 한 줄: 자발적·계속적 정치조직이며,현재 가입 기준은16세와18세 미만 동의 요건을 나누어 기억한다.</p>
+<h2 id="foundations-08-06" data-concept-id="foundations-08-06">2-3. 전국적 조직 요건과 지역정당 문제 ★★★★☆</h2>
+<p><strong>교재216쪽 / 문단의 역할:</strong> 조직 요건의 취지와 작은 정당에 대한 부담을 함께 본다.</p>
+<p>등록하려면5개 이상의 시·도당,각 시·도당마다 그 관할구역에 주소를 둔1천명 이상의 당원이 필요하다. 가상사례로 서울에만3만 명이 모여도 다른 시·도당 요건이 없으면 숫자만으로 충족하지 못한다. 전국적 정치적 의사형성에 참여할 기반을 확보하려는 취지지만,지역적 목표를 가진 정당이나 신생정당에는 높은 진입장벽이 될 수 있다.</p>
+<p>2004헌마246에서 정당 측은 이러한 요건을 다투었다. 헌재는 당시 심판대상인 시·도당 수와 당원 수 요건에 관한 청구를 기각했다. 국가는 정당의 기능에 필요한 최소한의 조직적 기반을 요구할 수 있고 해당 요건이 비례원칙을 위반하지 않는다고 판단한 것이다. 교재의 비판적 문제제기와 판례의 결론을 섞지 않는다. <a href="https://law.go.kr/detcInfoP.do?detcSeq=134749">결정 원문</a></p>
+<p>2004헌마456(2004.12.16.)의 지구당 폐지 사례도 조직의 자유와 정치개혁 목적의 규제를 함께 다룬다. 다만 <strong>2026.7.29. 시행 정당법37③은 국회의원 지역구마다 당원협의회 사무를 위한 사무소1개를 둘 수 있도록 한다.</strong> 과거의 지구당 폐지 설명을 현재 모든 지역사무소가 금지된다는 문장으로 옮기지 않는다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=137691">당시 결정</a>,<a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1034181869">현행37조</a></p>
+<p>시험:163④·187①②. 키워드:5×1천·주소·기능과 부담·과거/현재. 한 줄: 조직 요건의 합헌성 문제와 현재 허용되는 사무소 범위는 구별한다.</p>
+<h2 id="foundations-08-07" data-concept-id="foundations-08-07">2-4. 당내 민주주의는 무엇을 요구하나 ★★★★★</h2>
+<p><strong>교재218·227–228쪽 / 문단의 역할:</strong> 국가가 정당의 내부 운영을 전혀 방치할 수 없는 이유를 설명한다.</p>
+<p>정당은 당원의 총의를 반영할 대의기관·집행기관과 의원총회 등을 두고,지도부는 당원의 의사를 바탕으로 구성되어 정기적으로 신임을 확인받아야 한다. 당헌에는 민주적 내부질서에 관한 사항을 정하고 강령·당헌을 공개한다. ‘우리 모임이니 지도자 마음대로 해도 된다’는 설명은 국민의 의사형성을 매개한다는 공적 기능을 놓친다.</p>
+<p>그렇다고 국가가 원하는 지도자와 모든 운영방식을 정해 줄 수는 없다. <mark class="green">당원의 참여를 보장하는 필요한 규율과 국가의 과도한 내부간섭을 구별해야 한다.</mark> 후보추천도 민주적 절차를 따라야 하지만 반드시 당원만 투표하는 경선을 해야 한다는 뜻은 아니다. 경선 실시 여부와 참여 범위에는 법률·당헌당규가 정한 자율의 영역이 있다.</p>
+<p>시험:181·186④. 키워드:당원 총의·주기적 신임·공개·최소한의 규율. 한 줄: 민주적 절차는 필요하지만 단 하나의 경선 방식만 강제되는 것은 아니다.</p>
+<h1>3. 자유로운 결사이면서 공적 기능을 하는 조직</h1>
+<h2 id="foundations-08-08" data-concept-id="foundations-08-08">3-1. 이중적 지위와 정당 간 기회균등 ★★★★★</h2>
+<p><strong>교재218–220쪽 / 문단의 역할:</strong> 정당을 완전한 사적 친목모임이나 국가기관 어느 한쪽으로 오해하지 않도록 한다.</p>
+<p>정당은 국가기관과 사적 결사 사이에서 자유로운 지위와 공공의 지위를 함께 갖는다. 대외적으로 국가간섭에서 자유로워야 하고,대내적으로는 당원의 자유·참여를 존중해야 한다. 국가의 보호를 받는다고 국가기관이 되는 것은 아니다. 국가가 지원 여부로 특정 정당의 이념을 선별하는 것도 경계해야 한다.</p>
+<p>2007헌마1128(2007.10.30.)과 이를 인용한 후속 결정의 요지는 정당의 공직후보자 선출이 헌법소원의 대상인 공권력 행사가 아니라는 것이다. 후보자가 당내 선출방식에 불만이 있어도 그것만으로 국가작용을 대상으로 하는 헌법소원 요건이 충족되지는 않는다. 이것이 모든 사법적 구제까지 부정한다는 말은 아니다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=41674&mode=0">후속 결정의 해당 법리</a></p>
+<p>정당 간에는 법적인 기회균등을 보장해야 하지만 실제 지지율·당원 수·선거결과까지 같게 만들 의무는 아니다. 자금지원에서 차등이 있으면 그 목적과 기준의 합리성을 심사할 문제이지 모든 차등을 곧바로 금지하는 것은 아니다.</p>
+<p>시험:164. 한 줄: <strong>공적 기능≠국가기관·공권력 행사,기회균등≠동일한 결과.</strong></p>
+<h2 id="foundations-08-09" data-concept-id="foundations-08-09">3-2. 자유위임과 정당의 사실상 규율 — 사보임 사건 ★★★★★</h2>
+<p><strong>교재220–221쪽 / 문단의 역할:</strong> 국회의원의 독립성과 정당정치의 현실을 조화시킨다.</p>
+<p>등장인물은 김홍신 국회의원,소속 교섭단체,국회의장이다. 의원의 의사와 달리 교섭단체 요청에 따라 보건복지위원회에서 환경노동위원회로 옮겨지자 위원회 심의·표결권 등이 침해되었다며 다투었다.2002헌라1(2003.10.30.)에서 헌재는 청구를 기각했다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=58378">결정 원문</a></p>
+<p>국회의원은 국민 전체의 대표이므로 정당의 지시에 법적으로 묶여 표결하는 사람이 아니다. 그러나 정당이 정책을 정하고 의원에게 정치적 책임을 묻는 사실상의 규율까지 모두 금지되는 것은 아니다. 헌재는 당시 사건에서 교섭단체의 의사에 따른 위원회 변경을 자유위임에 반하는 것으로 보지 않았다. 다만 <strong>이 판례가 모든 사보임을 언제나 적법하게 만드는 것은 아니다.</strong> 구체적 국회법 규정·시점·특별한 사정을 따로 확인해야 한다.</p>
+<p>가상대화: “당의 입장과 달리 표결했으니 의원직을 빼앗겠다.” “정치적 비판·제명과 국민대표 지위의 법적 박탈은 다르다.” 뒤에서 배우는 헌재의 위헌정당해산에 따른 의원직 상실은 별도 문제다.</p>
+<p>시험:164의 이중적 지위와177④ 비교. 키워드:자유위임·사실상 기속·위원회 변경. 한 줄: 정당의 정치적 영향력과 의원의 법적 명령복종 의무는 다르다.</p>
+<h2 id="foundations-08-10" data-concept-id="foundations-08-10">3-3. 법인격 없는 사단과 등록취소 뒤의 권리주체 ★★★★★</h2>
+<p><strong>교재221–222쪽 / 문단의 역할:</strong> 정당이 재산을 가지거나 재판을 청구하는 법적 형태를 설명한다.</p>
+<p>92헌마262(1993.7.29.)에서 교재가 인용한 법리는 정당이 적어도 재산귀속 관계에서는 민법상 법인격 없는 사단이라는 점이다. 회사처럼 별도 법인등록을 하지 않았다고 단체의 실체까지 없는 것은 아니다. 조직·대표·의사결정 구조를 갖춘 모임은 구성원 개인과 구별하여 법적 관계를 다룰 수 있다. 당시 지구당에 관한 설명은 그 당시 조직을 전제로 하므로 현재 제도와 구별한다.</p>
+<p>학습용 가상사례: 당원들이 함께 마련한 사무실 물품을 대표 개인의 물건이라고 처분할 수 있을까? 정당 단체의 재산귀속과 의사결정 규칙을 확인해야 한다. 이 예시는92헌마262의 실제 사건을 재현한 것이 아니라 인용 법리를 이해하기 위한 것이다.</p>
+<p>2004헌마246은 등록이 취소되어도 등록정당에 준하는 비법인사단의 실체가 남아 있으면 헌법소원 청구인능력을 인정할 수 있다고 했다. 능력의 근거는 등록증만이 아니라 단체의 법적 실체에 있다. 당원만 청구할 수 있고 정당은 독립적인 기본권주체가 아니라고 하면 틀린다.</p>
+<p>시험:165. 한 줄: <strong>정당등록과 단체의 실체·기본권주체성은 같은 질문이 아니다.</strong></p>
+<h1>4. 정당의 돈은 왜 특별히 통제하는가</h1>
+<h2 id="foundations-08-11" data-concept-id="foundations-08-11">4-1. 자금의 필요·정치적 표현·투명성 ★★★★★</h2>
+<p><strong>교재222–223·226쪽 / 문단의 역할:</strong> 돈이 필요한 이유와 돈에 지배되면 안 되는 이유를 함께 설명한다.</p>
+<p>정책을 연구하고 사람을 만나고 선거를 치르려면 비용이 든다. 지지자가 적법하게 재정적으로 돕는 것도 정치적 의사표현이다. 그러나 큰돈을 낸 사람이 정책을 사실상 사들이면,한 사람 한 표라는 정치적 평등이 흔들린다. 유권자는 누가 정당에 영향력을 행사하는지 알아야 정책과 자금의 관계를 판단할 수 있다.</p>
+<p>95헌마154(1999.11.25.)는 당시 노동조합의 정치자금 기부 금지를 위헌으로 보았다. 교재는 이 사건에서 정치자금의 공개가 유권자의 판단에 중요하다는 논리를 가져온다. <strong>현재도 노동조합 자금의 기부가 허용된다는 뜻은 아니다.</strong> 당시 규율과 달리 현행법은 법인·단체 및 그 관련 자금의 기부를 제한한다. 판결의 시점·대상을 확인해야 한다. <a href="https://law.go.kr/detcInfoP.do?detcSeq=137629&mode=1">당시 결정</a></p>
+<p>당비 중심의 자발적 재정이 이상적이지만 현실적으로 부족할 수 있다. 국고보조는 금권정치 의존을 줄이고 경쟁 기회를 보완한다. 반대로 국가 의존과 기성정당 고착의 위험도 있어 모든 비용을 국가가 전부 부담하는 방식은 정당의 사회적 기반을 약하게 만들 수 있다.</p>
+<p>시험:166·182. 한 줄: 돈을 모을 자유,돈이 정책을 사지 못하게 할 규제,유권자가 알 권리를 함께 본다.</p>
+<h2 id="foundations-08-12" data-concept-id="foundations-08-12">4-2. 당비·후원금·기탁금·보조금의 구별 ★★★★★</h2>
+<p><strong>교재223–225쪽 / 문단의 역할:</strong> 자금의 출처와 통로에 따라 다른 법적 규율을 적용한다.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>누가 어떤 통로로 주는가</th>
+<th>헷갈리기 쉬운 지점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>당비</td>
+<td>당원이 당헌·당규 등에 따라 부담</td>
+<td>이름이 특별회비라도 실질이 당비일 수 있음</td>
+</tr>
+<tr>
+<td>후원금</td>
+<td>후원인이 등록된 후원회에 기부</td>
+<td>아무 단체나 후원회가 되는 것은 아님</td>
+</tr>
+<tr>
+<td>기탁금</td>
+<td>개인이 선관위에 맡기고 법정 비율로 정당에 배분</td>
+<td>특정 정당을 지정하는 후원과 다름;선거후보 등록 기탁금과도 용례 구별</td>
+</tr>
+<tr>
+<td>보조금</td>
+<td>국가가 정당의 보호·육성 등을 위해 지급</td>
+<td>사용 용도·보고·반환에 통제가 있음</td>
+</tr>
+</tbody></table>
+<p>금전뿐 아니라 유가증권·그 밖의 물건도 해당할 수 있다. 정치자금에는 법에서 정한 부대수입 등도 포함되므로 ‘당비만 정치자금’이라는 설명은 틀리다. 타인명의·가명 당비 등의 처리,영수증·장부는 돈의 실제 출처를 추적하기 위한 장치다.</p>
+<p>시험:166③④·167①·183①·184. 기억법: <strong>당원은 당비,후원회는 후원금,선관위에 맡기면 기탁금,국가가 주면 보조금.</strong></p>
+<h2 id="foundations-08-13" data-concept-id="foundations-08-13">4-3. 후원회와 소액 후원,해산 후 남은 돈 ★★★★★</h2>
+<p><strong>교재224쪽 / 문단의 역할:</strong> 합법적 지원 통로를 열되 출처·한도·잔액을 관리한다.</p>
+<p>후원회는 정치자금법에 따라 지정되고 관할 선관위에 등록된 단체다. 현행6조는 중앙당·중앙당창당준비위원회,국회의원·지방의회의원,법정 선거 후보자·예비후보자·경선후보자 등 지정권자를 정한다. 누구나 임의로 정치자금용 후원회를 만들 수 있는 것은 아니다. 기부자별·후원회별 연간한도,회원명부·영수증,위법한 돈의 반환·국고귀속,집회 방식 모금 제한 등이 투명성을 뒷받침한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1027103587">현행6조</a></p>
+<p>2013헌바168(2015.12.23.)에서는 정당후원회를 전면 금지한 법이 문제 됐다. 돈의 부정한 영향은 막아야 하지만,적은 돈을 내는 다수 국민의 참여까지 닫으면 특히 작은 정당이 당비 외의 자금을 얻기 어렵다. 헌재는 해당 제한을 헌법불합치로 판단하고 개선입법 때까지 잠정 적용하도록 했다. 현재 중앙당 후원회는 허용된다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=1002223&cbIdx=1195">헌재 설명</a></p>
+<p>번역: ‘전면금지’→문제 있는 큰돈만이 아니라 정상적 참여도 막는다. ‘덜 제한적인 방법’→한도·공개·회계 등으로 통제할 수 있는지 본다. ‘헌불’→금권정치가 괜찮다는 말이 아니라 제한방식이 과도했다는 말이다. 법정 소액 익명후원 예외도 있으므로 모든 후원금을 예외 없이 실명공개한다고 쓰지 않는다.</p>
+<p>후원회가 해산되면 남은 돈의 처리도 유형별로 다르다. 정당·당원 관련 경우 소속 정당 인계,비당원·정당 소멸 등의 경우 공익법인·사회복지시설 인계,예비후보자 등의 자격상실에는 법정 예외를 제외한 국고귀속 등이 있다. 특히 <strong>당내경선에 참여하여 당선·낙선한 경우는21③의 일률적 국고귀속에서 제외</strong>된다. 해산 후 들어온 후원금은 반환을 원칙으로 한다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0021&lsiSeq=285595&urlMode=lsScJoRltInfoR">현행21조</a></p>
+<p>시험:183·185. 한 줄: 전면금지보다 적법한 통로와 투명한 통제,잔액은 원인별로 처리한다.</p>
+<h2 id="foundations-08-14" data-concept-id="foundations-08-14">4-4. 기탁금은 지정 후원이 아니다 ★★★★★</h2>
+<p><strong>교재225쪽 / 문단의 역할:</strong> 선관위를 거치는 정치자금의 특징을 설명한다.</p>
+<p>개인이 정당 지원을 위해 선관위에 맡기는 기탁금에는 연간한도가 있다. 특정 정당에만 전부 주라고 지정하는 제도는1997년 폐지되었다. 중앙선관위는 관련 경비를 공제하고 법정 기준에 따라 정당에 배분한다. 따라서 “내가 맡겼으니 내가 선택한 정당만 받는다”는 후원금식 이해는 틀리다.</p>
+<p>초과한도·타인명의 등 법정 사유에 해당하는 돈은 국고귀속의 대상이다. 기탁자 공개도 아무 예외 없이 모든 정보가 항상 공개되는 구조가 아니라 법정 금액·비공개 조건을 함께 보아야 한다. 현행23조는1회300만원 초과 기탁자 등의 공개와22③의 조건부 예외를 연결한다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0023&lsiSeq=285595&urlMode=lsScJoRltInfoR">현행23조</a></p>
+<p>시험:167. 키워드:개인·선관위·비지정·법정배분·한도. 한 줄: 선관위에 맡기는 정치자금 기탁과 특정 후원회에 하는 후원을 구별한다.</p>
+<h2 id="foundations-08-15" data-concept-id="foundations-08-15">4-5. 국고보조금의 배분과 그 합헌성 ★★★★★</h2>
+<p><strong>교재225–226쪽 / 문단의 역할:</strong> 지원의 필요와 배분 방식에 대한 논란을 구분한다.</p>
+<p>보조금에는 정기적 경상보조금,선거가 있는 해의 선거보조금,여성·장애인·청년 후보추천 관련 보조금 등이 있다. 경상·선거보조금은 동일정당 소속 의원으로 교섭단체를 구성한 정당들에 총액의50%를 먼저 균등 배분한다. 나머지는 법정 의석·득표 기준 등에 따라 배분한다.28조는 사용 용도를,29조 등은 위반에 따른 감액·반환 등 통제를 정한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032921285">현행27조</a></p>
+<p>2004헌마655(2006.7.27.)의 등장인물은 보조금 배분을 다툰 정당들이다. 쟁점은 교섭단체에 유리한 배분이 작은 정당의 기회균등을 침해하는가였다. 헌재는 공적 기능·의회활동 등을 고려한 차등을 부당한 것으로 보지 않았다. <strong>주문은 민주노동당 청구 각하,민주당 청구 기각</strong>이다. 헌법불합치 결정이 아니다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=137720">결정 원문</a></p>
+<p>법원이 고민한 것은 ‘경쟁의 기회를 보장하라’와 ‘모든 정당에 똑같은 액수를 줘라’가 같은 요구인가였다. 차등의 문제점을 비판할 수 있다는 것과 이 사건에서 위헌결정이 있었다는 것은 다르다. 시험:168·182·184. 한 줄: <strong>보조금50% 우선 균등배분과 판례의 실제 주문을 묶어 기억한다.</strong></p>
+<h2 id="foundations-08-16" data-concept-id="foundations-08-16">4-6. 기부·지출·회계의 세 단계 통제 ★★★★★</h2>
+<p><strong>교재226–227쪽 / 문단의 역할:</strong> 돈의 입구부터 사용·공개까지 연결한다.</p>
+<p>입구에서는 정치자금법상 방식만 허용하고 외국인·법인·단체의 기부,법인·단체 관련 자금을 이용한 기부,특정 이익과 거래되는 돈,고용관계를 이용한 강요 등을 막는다. 일정액을 넘는 수입·지출에는 실명이 확인되는 지급방법과 현금한도 규제가 적용된다. ‘실명 원칙’은 법이 인정한 소액 익명후원까지 없다는 뜻은 아니다.</p>
+<p>사용 단계에서는 정치활동 경비로만 써야 한다. 가족 생활비·개인 채무변제·사적 여행에 돌리면 정치자금의 목적을 벗어난다. 회계책임자를 선임·신고하고,책임자를 통한 수입·지출,장부와 증빙,정기적 회계보고를 갖추어야 한다. 정당 내부의 예산·결산 심의와 감사 자료도 민주적 통제 수단이다. 유권자가 돈의 흐름을 알아야 정당을 평가할 수 있으므로 ‘회계는 비공개’가 원칙이라는 보기와 반대다.</p>
+<p>가상사례: 기업이 직원에게 돈을 나누어 준 뒤 각자 후원한 것처럼 보내면 개인 이름만으로 적법해지지 않는다. 실제 자금 출처·기부 경위가 중요하다. 시험:169·185. 한 줄: <strong>누가 주나→무엇에 쓰나→누가 기록·공개하나.</strong></p>
+<h1>5. 공천은 정당의 자유이면서 민주적 절차다</h1>
+<h2 id="foundations-08-17" data-concept-id="foundations-08-17">5-1. 후보추천과 당적,경선의 자율성 ★★★★★</h2>
+<p><strong>교재227–228쪽 / 문단의 역할:</strong> 정당의 후보추천권과 선거의 공정성을 조정한다.</p>
+<p>정당은 선거구의 정수 범위에서 소속 당원을 후보자로 추천하며 민주적 절차를 따라야 한다. 당원이 무소속 후보로 등록하거나,후보자등록기간에 당적을 이탈·변경하거나 둘 이상의 당적을 가진 채 등록하는 것은 허용되지 않는다는 규율도 함께 배운다. 후보자등록 뒤에는 추천의 취소·변경과 비례명부의 추가·순위 변경을 임의로 할 수 없다. 유권자가 어떤 선택지를 보고 투표하는지를 안정시키기 위해서다.</p>
+<p>경선은 실시할 수 있는 제도이지 언제나 의무는 아니다. 실시한다면 법률·당헌당규에 따른 절차가 필요하고 비당원 참여도 가능하다. 다만 ‘비당원도 가능’과 ‘법상 당원이 될 수 없는 사람도 모두 가능’은 다르다.57의2③은 당원이 될 수 없는 사람의 경선 선거인 자격을 제한한다. 법이 정한 여론조사 방식도 경선과 연결되며,경선 패배자의 같은 선거구 출마 제한에는 선출된 후보자의 자격상실 등 예외가 있다. <a href="https://law.go.kr/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000236838">현행57조의2</a></p>
+<p>시험:181④·186. 키워드:민주적 절차·경선 선택·당적·등록 뒤 변경 제한. 한 줄: 공천의 자율성은 절차를 무시할 자유가 아니다.</p>
+<h2 id="foundations-08-18" data-concept-id="foundations-08-18">5-2. 공천헌금과 비례후보 대리투표 사례 ★★★★☆</h2>
+<p><strong>교재227–228쪽 각주 / 문단의 역할:</strong> 후보추천의 자유가 돈과 대리투표로 왜곡되는 것을 막는다.</p>
+<p>2008헌바146(2009.10.29.)은 비례대표 후보추천과 관련된 금품 수수 금지·처벌이 문제 된 사건이다. 돈을 주는 능력이 공천을 좌우하면 당원·유권자의 정치적 판단과 평등을 훼손한다. 헌재는 공천 관련 금품 제공·수수 제한을 합헌으로 보았다. ‘정당에 자금이 필요하다’는 사실만으로 후보추천의 대가를 정당화할 수 없다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=139513">결정 원문</a></p>
+<p>2013도5117(2013.11.28.)에서는 정당 비례대표 후보 경선에서 다른 사람의 인증정보 등을 이용한 대리투표가 문제 됐다. 대법원은 민주적 후보선출의 직접·평등·비밀 원칙을 고려하여 대리투표 관련 유죄 판단을 유지했다. 가상대화로 바꾸면 “그 사람도 동의했으니 대신 눌러도 되지?”라는 말이,자기 판단으로 직접 참여하고 투표의 비밀을 보장할 절차를 대체할 수 없다는 것이다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=171817">판결 원문</a></p>
+<p>교재의 일반론은 당내 선출이 국가선거와 모든 면에서 완전히 같지는 않다는 설명이다. 이것을 해당 비례후보 경선의 직접·평등·비밀 원칙이 아예 적용되지 않는다는 결론으로 바꾸면 판례와 충돌한다. 시험:181과 연결. 한 줄: 공천 자율성은 공천을 사고팔거나 남의 표를 대신 행사할 권리가 아니다.</p>
+<h1>6. 등록취소·자진해산·강제해산을 나누자</h1>
+<h2 id="foundations-08-19" data-concept-id="foundations-08-19">6-1. 등록은 사상의 허가가 아니다 ★★★★★</h2>
+<p><strong>교재229–230쪽 / 문단의 역할:</strong> 형식적 조직 요건의 심사와 정당의 내용 심사를 구별한다.</p>
+<p>등록은 정당의 기능을 할 조직적·절차적 조건을 확인하는 제도다. 국가가 ‘너희 이념이 마음에 드니 정당을 만들라’고 허가하는 제도가 아니다. 등록취소 역시 법정 형식 사유에 따른 등록 말소이지 정부가 사상 때문에 정당을 강제로 해체하는 일반적 수단이 아니다.</p>
+<p>법정 시·도당 수·당원 수를 갖추지 못한 경우와 최근4년 동안 법이 정한 임기만료 선거에 참여하지 않은 경우가 등록취소 사유다. 조직 요건을 잃은 경우에는 법정 보완기간도 고려한다. 대통령선거를 포함한 아무 선거나 하나 참여하면 언제나 충분하다는 식으로 목록을 바꾸지 않는다. <a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0044&lsiSeq=285683&urlMode=lsScJoRltInfoR">현행 정당법44조</a></p>
+<p>시험:163①·170·186②·187. 한 줄: <strong>등록요건 심사≠이념허가,등록취소≠헌재의 강제해산.</strong></p>
+<h2 id="foundations-08-20" data-concept-id="foundations-08-20">6-2. 선거에서 적게 득표했다고 없앨 수 있나 ★★★★★</h2>
+<p><strong>교재230쪽 / 문단의 역할:</strong> 경쟁에서의 실패를 정당의 존립 박탈로 연결할 때의 위험을 보여 준다.</p>
+<p>진보신당·녹색당·청년당은2012년 국회의원선거에서 의석을 얻지 못하고 유효투표의2%에도 미치지 못하여 등록이 취소됐다. 같은 이름의 정당을 다시 만드는 것에도 제한이 붙었다. 당사자들은 작은 정당이 성장할 기회까지 끊는다고 다퉜다.</p>
+<p>2012헌마431등(2014.1.28.)에서 헌재는 해당 등록취소 조항과 그에 연결된 명칭사용금지 부분을 위헌으로 판단했다. 선거에 참여하여 실제로 정치활동을 했는데 한번의 낮은 성적만으로 조직의 존속을 막는 것은 과도하다. 유권자의 다양한 선택지를 지키려면 신생·소수정당이 다시 지지를 얻을 기회도 필요하다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941661&cbIdx=1106">헌재 사건 설명</a></p>
+<p>번역: ‘의석 없음+2% 미만’→당시 취소 사유의 두 조건. ‘정당설립의 자유 침해’→만들 자유는 계속 존재하며 활동할 자유까지 포함한다. ‘명칭사용금지’→취소 뒤 재출발을 막는 제한도 따로 심사한다. 시험:187④. 한 줄: 적은 지지와 정치참여 의사·능력의 부재는 같지 않다.</p>
+<h2 id="foundations-08-21" data-concept-id="foundations-08-21">6-3. 스스로 해산하는 경우의 절차와 재산 ★★★★★</h2>
+<p><strong>교재231쪽 / 문단의 역할:</strong> 정당의 자유에는 스스로 활동을 끝낼 자유도 포함됨을 설명한다.</p>
+<p>정당은 당헌에 따른 절차와 대의기관의 결의 등으로 자진해산할 수 있다. 대표자는 관할 선관위에 신고하고 선관위는 등록을 말소·공고한다. 일반 잔여재산은 당헌에 따라 처리하되 그렇게 처분하지 않은 잔여재산은 국고에 귀속된다.</p>
+<p>그러나 <strong>사용하고 남은 국고보조금은 당헌대로 나눌 수 있는 일반 재산이 아니다.</strong> 지출내역을 보고하고 법에 따라 잔액을 반환해야 한다. 국가가 정당활동을 위해 준 돈을 해산을 이유로 당원에게 나누면 목적에 묶인 공적 자금이 사유화된다. 후원회 잔액에 적용되는 정치자금법21조와 정당 자체의 잔여재산 규율도 구별한다.</p>
+<p>시험:171·188. 한 줄: 자진해산의 일반 재산처리와 보조금 반환은 별개다.</p>
+<h1>7. 위헌정당해산은 민주주의의 마지막 안전장치다</h1>
+<h2 id="foundations-08-22" data-concept-id="foundations-08-22">7-1. 방어적 민주주의와 정당특권이라는 두 얼굴 ★★★★★</h2>
+<p><strong>교재231–233쪽 / 문단의 역할:</strong> 해산제도를 단순한 정당 탄압 도구로 보지 않게 한다.</p>
+<p>민주주의의 자유를 이용해 집권한 뒤 반대자를 억압하고 민주적 경쟁 자체를 없애려는 정당을 어떻게 할 것인가? 민주주의가 자신을 파괴하는 공격으로부터 스스로를 지키려는 생각이 방어적 민주주의다. 그러나 정부가 반대 정당을 쉽게 해산시킬 수 있다면 바로 그 제도가 민주주의를 파괴한다.</p>
+<p>우리 제도의 역사에는1958년 진보당 등록취소와 그 뒤1960년 개헌을 통한 정당 보호가 있다. 헌법이 해산의 요건과 절차를 직접 정하고 독립된 헌재의 판단을 요구하는 것은 정부를 비판하는 야당을 지키는 의미도 갖는다. 일반 결사와 달리 특별한 보호를 받는다는 뜻에서 ‘정당특권’이라고 한다.</p>
+<p><mark class="yellow">해산제도는 민주주의 방어와 정당 보호를 함께 목적으로 한다.</mark> 원칙은 공개적인 비판·토론·선거를 통한 경쟁이다. 위헌성이 의심된다는 이유만으로 예방적·적극적으로 해산시키는 방식은 허용되지 않는다. 시험:172·173·189. 한 줄: 민주주의를 지키는 제도가 민주주의를 해치지 않도록 마지막 수단으로만 쓴다.</p>
+<h2 id="foundations-08-23" data-concept-id="foundations-08-23">7-2. 누구의 목적·활동을 정당에 귀속시키나 ★★★★★</h2>
+<p><strong>교재233–234쪽 / 문단의 역할:</strong> 일부 사람의 잘못과 정당 전체의 책임을 구분한다.</p>
+<p>정당해산심판은 원칙적으로 등록정당을 대상으로 한다. 장차 정당이 될 가능성이 있다는 이유만으로 모든 정치적 모임을 대상으로 삼는 것은 아니다. 등록 중인 실질적 정당의 취급 등은 별도의 논의가 필요한 심화 쟁점이다.</p>
+<p>목적은 공식 강령만 보고 끝내지 않는다. 지도자의 발언·간행물·교육자료·주요 활동 등도 맥락 속에서 종합하여 실제 추구하는 방향을 판단할 수 있다. 활동은 정당기관·주요 당직자·당원의 행동 중 정당에 책임을 돌릴 수 있는 것을 말한다. 한 당원의 우발적인 개인행동이 자동으로 정당 전체의 활동이 되지는 않는다. 국회의원도 국민대표로서의 활동과 정당의 조직적 활동을 구별한다.</p>
+<p>헌재는 목적 <strong>또는</strong> 활동 어느 한쪽이 요건을 충족해도 해산 사유가 될 수 있다고 본다. 교재에 소개된 더 엄격한 학설의 비판은 판례의 실제 기준과 구별한다. 시험:190. 한 줄: <strong>강령만/당원 한 명만</strong> 보고 결론내리지 말고 정당 전체에 귀속되는지 확인한다.</p>
+<h2 id="foundations-08-24" data-concept-id="foundations-08-24">7-3. 민주적 기본질서는 모든 현행 제도가 아니다 ★★★★★</h2>
+<p><strong>교재234–235쪽 / 문단의 역할:</strong> 해산 기준을 민주주의의 핵심으로 좁힌다.</p>
+<p>여기서 민주적 기본질서는 입헌민주주의가 유지되기 위해 없어서는 안 될 핵심이다. 국민주권,기본적 인권,권력분립,복수정당제 등이다. 다원적 세계관에 기초하여 다른 정치적 견해도 상대적 진리성과 합리성을 가질 수 있음을 인정하고,폭력·자의적 지배를 배제하면서 다수와 소수를 함께 고려한다.</p>
+<p>따라서 대통령제를 의원내각제로 바꾸자거나 사회적 평등을 확대하자는 주장만으로 해산요건이 되지 않는다. 현재 헌법의 모든 세부를 기준에 집어넣으면 합법적인 헌법개정 주장도 정당해산의 표적이 된다. <mark class="pink">기본질서를 넓고 느슨하게 읽을수록 정당을 보호하는 것이 아니라 탄압의 범위를 넓힐 수 있다.</mark></p>
+<p>교재 각주의 진보당 재심2008재도11(2011.1.20.)도 연결된다. 대법원은 평화적 통일과 사회민주주의적 정책을 주장했다는 사정만으로 국가변란 목적의 결사라고 볼 수 없다고 판단했다. 간첩 혐의에 대해서는 무죄가 선고되었고,무기 불법소지 부분은 선고유예였으므로 모든 부분이 무죄라고 단순화하지 않는다. 조봉암의 국가보안법·간첩 사건을 재심한 형사판결과 정당해산심판의 요건은 서로 구별한다. <a href="https://law.go.kr/precInfoP.do?precSeq=166330">재심 판결</a></p>
+<p>시험:161④·174·175·191. 한 줄: <strong>핵심을 지키는 것이지 현재의 모든 제도를 동결하는 것이 아니다.</strong></p>
+<h2 id="foundations-08-25" data-concept-id="foundations-08-25">7-4. 구체적 위험과 비례원칙 — 왜 최후수단인가 ★★★★★</h2>
+<p><strong>교재235–236쪽 / 문단의 역할:</strong> 반대 의견이나 추상적 의심과 해산 사유를 구별한다.</p>
+<p>‘위배’는 단순한 위반이나 저촉,막연한 의심을 넘어 민주적 기본질서에 실질적인 해악을 끼칠 구체적 위험을 말한다. 정당에 불편한 주장이나 위법한 개인행위가 있다는 사실만으로 그 위험이 자동 증명되지는 않는다.</p>
+<p>그 위험을 확인해도 곧바로 해산하는 것이 아니다. 다른 수단으로 문제를 해결할 수 없는지,해산으로 얻을 이익이 정당과 민주적 경쟁에 가해지는 손해보다 큰지 따져야 한다. 위험한 개인을 형사처벌하거나 정치적 공론장에서 비판하는 방법이 충분하다면 정당 전체를 없애는 필요성은 별도로 설명되어야 한다. ‘해산이 더 빠르다’는 것만으로 최소침해성이 충족되지 않는다.</p>
+<p>시험:173③·176·192. 키워드:실질적 해악·구체적 위험·대안·법익균형. 한 줄: <strong>의심→즉시 해산이 아니라,위험 입증→대안 검토→이익과 손해 비교다.</strong></p>
+<h2 id="foundations-08-26" data-concept-id="foundations-08-26">7-5. 통합진보당 사건 — 기준과 적용을 나누어 읽기 ★★★★★</h2>
+<p><strong>교재232–237쪽의2013헌다1 인용 통합 / 문단의 역할:</strong> 추상적 해산요건이 실제 사건에서 어떻게 다투어졌는지 보여 준다.</p>
+<p>정부는 통합진보당의 목적과 활동이 민주적 기본질서에 위배된다며 해산을 청구했다. 당은 일부 인물의 행동을 전체 정당에 돌릴 수 없고,정치적 견해를 이유로 경쟁에서 배제해서는 안 된다고 다퉜다. 헌재의 고민은 당의 실제 목적과 활동을 어떻게 확인하고,문제가 되는 행위를 정당 전체에 귀속시키며,전체 해산밖에 대안이 없는지였다.</p>
+<p>2013헌다1(2014.12.19.)의 다수의견은 당 주도세력의 목적과 내란 관련 회합 등을 종합하여 민주적 기본질서에 대한 구체적 위험을 인정하고 해산이 필요하다고 판단했다.8대1로 정당 해산과 소속 국회의원5명의 의원직 상실을 결정했다. 김이수 재판관의 반대의견은 은폐된 목적의 인정,일부 활동의 정당 전체 귀속,해산의 필요성 판단 등에 반대했다. 즉 기준의 엄격성뿐 아니라 <strong>그 기준이 이 사건의 증거와 사실에서 충족되었는지</strong>가 핵심 쟁점이었다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941691&cbIdx=1106">헌재 사건 설명</a></p>
+<p>쉬운 문장으로 번역하면 ①목적·활동→이 정당이 실제로 무엇을 하려 하고 무엇을 했나 ②귀속→그 행동을 정당 전체의 책임이라고 할 수 있나 ③위험→민주주의 핵심을 실제로 해칠 구체적 위험인가 ④비례→정당을 없애지 않고 해결할 방법은 없나이다.</p>
+<p>반대로 해산요건을 쉽게 인정하면 야당의 존립과 유권자의 선택지가 위축되고,구체적 위험을 충분히 인정하면서도 아무 대응을 하지 않으면 민주주의의 자기보호가 작동하지 않을 수 있다. 판례를 학습할 때 다수의 결론과 반대의 논거를 구별해 적는다. 시험:173–177·189–193의 중심 사건. 한 줄: 해산의 추상적 기준을 아는 것과 특정 사건에 적용하는 것은 별도의 판단이다.</p>
+<h2 id="foundations-08-27" data-concept-id="foundations-08-27">7-6. 정부의 청구·헌재의 결정·선관위의 집행 ★★★★★</h2>
+<p><strong>교재236쪽 / 문단의 역할:</strong> 권한을 한 기관에 몰아주지 않는 절차적 통제를 설명한다.</p>
+<p>청구는 국회가 아니라 <strong>정부</strong>가 한다. 국무회의 심의를 거치며,정부는 요건이 의심되면 반드시 청구해야 하는 것이 아니라 청구 여부를 판단할 재량이 있다. 심판기관은 헌재이고 해산결정에는 재판관6명 이상의 찬성이 필요하다. 심판 중에는 법에 따라 정당활동 정지 등 가처분을 할 수 있다.</p>
+<p>결정문은 관계기관에 송달되고 해산결정의 집행은 중앙선관위가 담당한다. 가상대화: “정부가 해산을 청구했으니 오늘부터 자동 해산이지?” “청구와 결정은 다르고,결정 뒤 집행기관도 따로 있다.” 국무회의 심의89조,헌재의 특별정족수113①,헌재법55조 이하를 연결한다.</p>
+<p>시험:193. 기억법: <strong>정부 청구→헌재6명 결정→중앙선관위 집행.</strong></p>
+<h2 id="foundations-08-28" data-concept-id="foundations-08-28">7-7. 해산결정의 효력과 의원직 상실 ★★★★★</h2>
+<p><strong>교재236–237쪽 / 문단의 역할:</strong> 해산 뒤 무엇이 달라지는지 자진해산과 비교한다.</p>
+<p>해산결정은 결정 당시부터 정당을 해산시키는 창설적 효력이 있다. 창당 때부터 없었던 정당으로 소급시키는 확인적 효력이 아니다. 등록 말소·공고,잔여재산의 국고귀속,동일·유사한 기본정책을 가진 대체정당의 금지 등 효과가 따른다. 해산된 정당의 목적을 달성하기 위한 집회·시위 제한도 법에 규정되어 있다. 이를 과거 당원 모든 사람의 정치적 발언이 자동으로 범죄가 된다는 뜻으로 확대하지 않는다.</p>
+<p>2013헌다1은 명문의 의원직 상실 규정이 없더라도 위헌정당해산 제도의 본질에서 소속 국회의원의 의원직 상실을 도출했다. 지역구·비례대표를 가리지 않고 해당 의원들이 의원직을 상실했다. 교재는 독일의1952년 사회주의제국당 해산 사례와 이후 입법도 비교한다. 이는 해산의 실효성을 중시하는 논리와 국민대표성을 어떻게 조정할지의 문제다. 정당의 단순 제명이나 통상적인 당론 위반 제재와 같은 것으로 취급해서는 안 된다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>누가 결정하나</th>
+<th>핵심 사유·효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>등록취소</td>
+<td>선관위의 법정 사유 심사</td>
+<td>조직·참여 요건 등;단체의 실체가 남을 수 있음</td>
+</tr>
+<tr>
+<td>자진해산</td>
+<td>정당 내부의 적법한 결정</td>
+<td>당헌상 잔여재산 처분,보조금 잔액은 반환</td>
+</tr>
+<tr>
+<td>위헌정당해산</td>
+<td>정부 청구에 대한 헌재 결정</td>
+<td>엄격한 위험·비례 요건;결정 때부터 해산,잔여재산 국고귀속,판례상 의원직 상실</td>
+</tr>
+</tbody></table>
+<p>시험:177·188·189. 한 줄: <strong>자진해산의 당헌 처분을 강제해산에 옮기지 말고,강제해산의 의원직 상실을 일반 제명에 옮기지 않는다.</strong></p>
+<h1>법률용어를 한자로 풀어 보기</h1>
+<h3>政黨 정당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정),黨(무리 당). <strong>③ 합친 뜻:</strong> 정치를 위해 모인 조직. <strong>④ 이름의 이유:</strong> 흩어진 정치적 요구를 정책·권력으로 연결해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민의 정치적 의사형성에 참여하는 자발적 정치적 결사. <strong>⑥ 쉬운 말:</strong> 여러 생각을 모아 정책과 후보를 제시하는 모임. <strong>⑦ 사례:</strong> 주거·환경 요구를 정책으로 조정.</p>
+<p><strong>⑧ 시험:</strong> 8조·161·178. <strong>⑨ 비교·기억법:</strong> 친목모임·국가기관과 다름.</p>
+<h3>複數政黨制 복수정당제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 複(겹칠 복),數(셀 수),政(정사 정),黨(무리 당),制(법도 제). <strong>③ 합친 뜻:</strong> 여러 정당이 존재할 제도. <strong>④ 이름의 이유:</strong> 한 정당의 독점 지배를 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 복수의 정당이 설립·활동할 수 있는 헌법적 보장. <strong>⑥ 쉬운 말:</strong> 다른 의견의 정당이 경쟁할 수 있다. <strong>⑦ 사례:</strong> 헌법8①.</p>
+<p><strong>⑧ 시험:</strong> 160·175. <strong>⑨ 비교·기억법:</strong> 실제 모든 정당의 의석·지지율을 같게 만드는 제도 아님.</p>
+<h3>政治的意思形成 정치적 의사형성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정),治(다스릴 치),的(과녁 적),意(뜻 의),思(생각 사),形(모양 형),成(이룰 성). <strong>③ 합친 뜻:</strong> 정치에 관한 생각과 결정을 만들어 감. <strong>④ 이름의 이유:</strong> 개별 의견을 공동의 정책으로 연결해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민의 요구·토론·선택이 정치적 방향으로 조직되는 과정. <strong>⑥ 쉬운 말:</strong> 우리 사회를 어떻게 운영할지 생각을 모은다. <strong>⑦ 사례:</strong> 국민의 요구를 정책·후보로 제시.</p>
+<p><strong>⑧ 시험:</strong> 160·161. <strong>⑨ 비교·기억법:</strong> 단순 여론조사나 권력획득만을 뜻하지 않음.</p>
+<h3>結社·自發性 결사·자발성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 結(맺을 결),社(모일 사),自(스스로 자),發(필 발),性(성품 성). <strong>③ 합친 뜻:</strong> 스스로 뜻을 모아 단체를 이룸. <strong>④ 이름의 이유:</strong> 국가의 명령이 아니라 구성원의 의사에 기초해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동 목적을 위한 자발적 단체 형성. <strong>⑥ 쉬운 말:</strong> 원하는 사람들이 함께 모인다. <strong>⑦ 사례:</strong> 정당가입·불가입.</p>
+<p><strong>⑧ 시험:</strong> 21조 일반보장/8조 특별보장. <strong>⑨ 비교·기억법:</strong> 강제가입·국가조직과 구별.</p>
+<h3>設立·存續·活動 설립·존속·활동</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 設(베풀 설),立(설 립),存(있을 존),續(이을 속),活(살 활),動(움직일 동). <strong>③ 합친 뜻:</strong> 만듦·계속 있음·움직임. <strong>④ 이름의 이유:</strong> 만들기만 허용하면 자유가 무의미해져서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 자유가 포괄하는 여러 단계. <strong>⑥ 쉬운 말:</strong> 만들고 계속 존재하며 활동할 수 있다. <strong>⑦ 사례:</strong> 설립 뒤 활동금지의 문제.</p>
+<p><strong>⑧ 시험:</strong> 162·179. <strong>⑨ 비교·기억법:</strong> 설립행위 한 번만 보호하는 것 아님.</p>
+<h3>分黨·合黨·脫黨·除名 분당·합당·탈당·제명</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 分(나눌 분),合(합할 합),脫(벗을 탈),黨(무리 당),除(덜 제),名(이름 명). <strong>③ 합친 뜻:</strong> 나눔·합침·떠남·명부에서 제외. <strong>④ 이름의 이유:</strong> 누가 어떤 의사로 관계를 끝내는지 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 조직변화와 당원 지위의 종료 방식. <strong>⑥ 쉬운 말:</strong> 당을 나누거나 합치고,나가거나 징계로 제외된다. <strong>⑦ 사례:</strong> 자발적 탈당과 적법한 제명.</p>
+<p><strong>⑧ 시험:</strong> 163③·179④. <strong>⑨ 비교·기억법:</strong> 제명은 본인 의사에 따른 탈당과 다름;의원직 상실은 별도.</p>
+<h3>比例性審査 비례성심사</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 比(견줄 비),例(법식 례),性(성품 성),審(살필 심),査(조사할 사). <strong>③ 합친 뜻:</strong> 목적과 수단의 균형을 살핌. <strong>④ 이름의 이유:</strong> 좋은 목적을 내세운 과도한 제한을 막아서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목적·수단·최소침해·법익균형을 심사하는 틀. <strong>⑥ 쉬운 말:</strong> 필요한 만큼만 제한했는지 본다. <strong>⑦ 사례:</strong> 퇴직 경찰청장 정당가입금지.</p>
+<p><strong>⑧ 시험:</strong> 162·176. <strong>⑨ 비교·기억법:</strong> 목적이 정당하면 모든 수단 허용이라는 뜻 아님.</p>
+<h3>法定代理人 법정대리인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법),定(정할 정),代(대신할 대),理(다스릴 리),人(사람 인). <strong>③ 합친 뜻:</strong> 법에 따라 대신하는 사람. <strong>④ 이름의 이유:</strong> 미성년자 등의 법률행위를 보호하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률 규정 등에 의해 대리권을 갖는 사람. <strong>⑥ 쉬운 말:</strong> 부모 등 법이 정한 대리인이 필요한 동의를 한다. <strong>⑦ 사례:</strong> 18세 미만 입당 동의서.</p>
+<p><strong>⑧ 시험:</strong> 16세 가입 가능과18세 미만 동의 분리. <strong>⑨ 비교·기억법:</strong> 가입연령과 동의요건은 다른 기준.</p>
+<h3>總意·代議機關 총의·대의기관</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 總(거느릴 총),意(뜻 의),代(대신할 대),議(의논할 의),機(틀 기),關(빗장 관). <strong>③ 합친 뜻:</strong> 전체의 뜻·대표하여 의논하는 기관. <strong>④ 이름의 이유:</strong> 지도부가 당원의 뜻을 독점하지 못하도록.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당원의 의사를 반영하는 대표기관과 의사결정. <strong>⑥ 쉬운 말:</strong> 당원들의 생각이 결정에 들어가게 한다. <strong>⑦ 사례:</strong> 당대회·대의기관.</p>
+<p><strong>⑧ 시험:</strong> 181. <strong>⑨ 비교·기억법:</strong> 모든 사안마다 전원 직접투표가 필수라는 뜻 아님.</p>
+<h3>黨憲·黨規·綱領 당헌·당규·강령</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 黨(무리 당),憲(법 헌),規(법 규),綱(벼리 강),領(거느릴 령). <strong>③ 합친 뜻:</strong> 정당의 기본규칙·세부규칙·큰 방향. <strong>④ 이름의 이유:</strong> 내부 운영과 정책방향을 공개·예측 가능하게 하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 조직운영 규칙과 정치적 목표. <strong>⑥ 쉬운 말:</strong> 당을 운영하는 규칙과 하려는 일의 큰 줄기. <strong>⑦ 사례:</strong> 민주적 내부질서·후보선정.</p>
+<p><strong>⑧ 시험:</strong> 181·190. <strong>⑨ 비교·기억법:</strong> 공식 강령만으로 실제 목적 판단이 끝나지 않음.</p>
+<h3>二重的地位 이중적 지위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 二(두 이),重(거듭 중),的(과녁 적),地(땅 지),位(자리 위). <strong>③ 합친 뜻:</strong> 두 성격을 함께 가진 자리. <strong>④ 이름의 이유:</strong> 국가와 사회를 연결하는 조직이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 자유로운 결사 지위와 공적 기능. <strong>⑥ 쉬운 말:</strong> 자유로운 모임이지만 민주정치에서 중요한 일을 한다. <strong>⑦ 사례:</strong> 공천은 공적 중요성이 있으나 공권력 행사는 아님.</p>
+<p><strong>⑧ 시험:</strong> 164. <strong>⑨ 비교·기억법:</strong> 국가기관이라는 뜻 아님.</p>
+<h3>機會均等 기회균등</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 機(틀 기),會(모일 회),均(고를 균),等(무리 등). <strong>③ 합친 뜻:</strong> 기회가 고르게 주어짐. <strong>④ 이름의 이유:</strong> 국가가 특정 정당을 부당하게 배제하지 못하도록.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 법적 경쟁기회 보장. <strong>⑥ 쉬운 말:</strong> 정치에 참여할 공정한 기회를 보장한다. <strong>⑦ 사례:</strong> 보조금 배분 심사.</p>
+<p><strong>⑧ 시험:</strong> 164④·168. <strong>⑨ 비교·기억법:</strong> 사실상 지지율·재정의 완전한 동일화 아님.</p>
+<h3>自由委任·事實上羈束 자유위임·사실상 기속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자),由(말미암을 유),委(맡길 위),任(맡길 임),事(일 사),實(열매 실),上(윗 상),羈(굴레 기),束(묶을 속). <strong>③ 합친 뜻:</strong> 자유롭게 맡김·현실적으로 묶임. <strong>④ 이름의 이유:</strong> 의원 독립과 정당정치의 현실을 조화하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민대표의 법적 독립과 정당의 정치적 규율의 구별. <strong>⑥ 쉬운 말:</strong> 법적 복종 의무와 정치적 책임은 다르다. <strong>⑦ 사례:</strong> 당론에 반대한 의원의 사보임.</p>
+<p><strong>⑧ 시험:</strong> 2002헌라1. <strong>⑨ 비교·기억법:</strong> 사실상 영향력이 있다고 법적 강제위임이 되는 것은 아님.</p>
+<h3>辭補任 사보임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 辭(말씀 사; 물러남),補(기울 보),任(맡길 임). <strong>③ 합친 뜻:</strong> 물러나게 하고 빈자리를 채움. <strong>④ 이름의 이유:</strong> 위원회 구성의 변경을 나타내서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위원회의 위원을 교체하는 것. <strong>⑥ 쉬운 말:</strong> 위원을 바꾸거나 다른 위원회로 옮긴다. <strong>⑦ 사례:</strong> 김홍신 의원 위원회 변경.</p>
+<p><strong>⑧ 시험:</strong> 2002헌라1기각;구체적 법규정 별도. <strong>⑨ 비교·기억법:</strong> 국회의원직 박탈과 다름.</p>
+<h3>法人格없는社團 법인격 없는 사단</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법),人(사람 인),格(격식 격),社(모일 사),團(둥글 단). <strong>③ 합친 뜻:</strong> 법인 자격은 없지만 조직된 사람의 단체. <strong>④ 이름의 이유:</strong> 등록 형식과 실제 단체의 존재를 구분해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 조직·대표·의사결정 구조를 가진 비법인 단체. <strong>⑥ 쉬운 말:</strong> 회사 같은 법인등록이 없어도 모임의 실체가 있다. <strong>⑦ 사례:</strong> 정당 재산·헌법소원 능력.</p>
+<p><strong>⑧ 시험:</strong> 165. <strong>⑨ 비교·기억법:</strong> 법인격 없는 재단은 재산 중심이라는 차이.</p>
+<h3>請求人能力 청구인능력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 請(청할 청),求(구할 구),人(사람 인),能(능할 능),力(힘 력). <strong>③ 합친 뜻:</strong> 청구하는 당사자가 될 능력. <strong>④ 이름의 이유:</strong> 누가 독립해서 권리구제를 구할지 정해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법소원 등의 당사자가 될 자격. <strong>⑥ 쉬운 말:</strong> 그 단체 이름으로 재판을 요구할 수 있나. <strong>⑦ 사례:</strong> 등록취소 후에도 비법인사단 실체 유지.</p>
+<p><strong>⑧ 시험:</strong> 165②④. <strong>⑨ 비교·기억법:</strong> 능력이 있어도 모든 청구가 적법·인용되는 것은 아님.</p>
+<h3>政治資金·金權政治 정치자금·금권정치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정),治(다스릴 치),資(재물 자),金(쇠 금),權(권세 권). <strong>③ 합친 뜻:</strong> 정치에 쓰는 돈·돈이 지배하는 정치. <strong>④ 이름의 이유:</strong> 정상적 활동비와 부정한 영향력을 구별하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정치활동 경비와 경제력이 정치적 결정을 좌우하는 현상. <strong>⑥ 쉬운 말:</strong> 활동비는 필요하지만 돈으로 정책을 사면 안 된다. <strong>⑦ 사례:</strong> 후원금 공개·한도.</p>
+<p><strong>⑧ 시험:</strong> 166·182. <strong>⑨ 비교·기억법:</strong> 정치자금을 주는 행위가 모두 부패라는 뜻 아님.</p>
+<h3>黨費·後援金 당비·후원금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 黨(무리 당),費(쓸 비),後(뒤 후),援(도울 원),金(쇠 금). <strong>③ 합친 뜻:</strong> 당원이 부담하는 돈·돕기 위해 주는 돈. <strong>④ 이름의 이유:</strong> 주는 사람과 법정 통로가 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 당헌당규상 당원 부담과 후원회에 대한 기부. <strong>⑥ 쉬운 말:</strong> 당원 회비와 등록된 후원회에 내는 지원금을 나눈다. <strong>⑦ 사례:</strong> 같은 돈도 성격에 따라 규정이 다름.</p>
+<p><strong>⑧ 시험:</strong> 166④·183①. <strong>⑨ 비교·기억법:</strong> 후원금은 당비만을 뜻하지 않음.</p>
+<h3>寄託金 기탁금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 寄(부칠 기),託(부탁할 탁),金(쇠 금). <strong>③ 합친 뜻:</strong> 맡겨 놓는 돈. <strong>④ 이름의 이유:</strong> 선관위가 법정 기준으로 배분하도록 맡겨서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정치자금 지원을 위해 개인이 선관위에 맡기는 자금. <strong>⑥ 쉬운 말:</strong> 원하는 한 정당만이 아니라 법의 비율에 따라 나눌 돈. <strong>⑦ 사례:</strong> 비지정 기탁.</p>
+<p><strong>⑧ 시험:</strong> 167. <strong>⑨ 비교·기억법:</strong> 후보자 등록 때 내는 선거기탁금은 다른 맥락.</p>
+<h3>國庫補助金 국고보조금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국),庫(곳집 고),補(기울 보),助(도울 조),金(쇠 금). <strong>③ 합친 뜻:</strong> 국가 재정에서 보태 주는 돈. <strong>④ 이름의 이유:</strong> 민주정치의 기능과 경쟁조건을 지원해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당 보호·육성 등에 국가가 지급하는 자금. <strong>⑥ 쉬운 말:</strong> 정당활동을 위해 국가가 일정 돈을 지원한다. <strong>⑦ 사례:</strong> 경상·선거·후보추천 관련 보조.</p>
+<p><strong>⑧ 시험:</strong> 168·184. <strong>⑨ 비교·기억법:</strong> 모든 비용 국가부담이나 사적 분배 가능 자금 아님.</p>
+<h3>交涉團體 교섭단체</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 交(사귈 교),涉(건널 섭),團(둥글 단),體(몸 체). <strong>③ 합친 뜻:</strong> 의회에서 협의하는 단체. <strong>④ 이름의 이유:</strong> 의회 의사 조정을 조직화해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국회 운영상 협의 등을 담당하는 의원 집단. <strong>⑥ 쉬운 말:</strong> 국회 일을 협의하기 위해 의원들이 구성하는 단체. <strong>⑦ 사례:</strong> 동일정당 교섭단체에50% 우선 균등배분.</p>
+<p><strong>⑧ 시험:</strong> 168. <strong>⑨ 비교·기억법:</strong> 정당 자체와 개념 동일하지 않음.</p>
+<h3>實名·匿名 실명·익명</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 實(열매 실; 실제),名(이름 명),匿(숨길 닉). <strong>③ 합친 뜻:</strong> 실제 이름·이름을 숨김. <strong>④ 이름의 이유:</strong> 투명성과 소액 참여의 규율을 구분해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정치자금 출처 확인 원칙과 법정 소액 예외. <strong>⑥ 쉬운 말:</strong> 누가 냈는지 확인하되 법의 예외도 본다. <strong>⑦ 사례:</strong> 185②보완.</p>
+<p><strong>⑧ 시험:</strong> 모든 익명은 언제나 불법이라는 단정 주의. <strong>⑨ 비교·기억법:</strong> 타인명의 위장기부와 적법한 익명 예외는 다름.</p>
+<h3>會計責任者·證憑 회계책임자·증빙</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 會(모일 회),計(셀 계),責(꾸짖을 책),任(맡길 임),者(놈 자),證(증거 증),憑(기댈 빙). <strong>③ 합친 뜻:</strong> 돈 계산의 담당자·사실을 뒷받침하는 자료. <strong>④ 이름의 이유:</strong> 돈이 어디로 갔는지 확인하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 수입·지출을 관리하는 책임자와 영수증 등 근거. <strong>⑥ 쉬운 말:</strong> 누가 기록하고 어떤 자료로 확인할지 정한다. <strong>⑦ 사례:</strong> 장부·영수증·회계보고.</p>
+<p><strong>⑧ 시험:</strong> 169. <strong>⑨ 비교·기억법:</strong> 장부를 적었다고 위법한 지출이 적법해지는 것은 아님.</p>
+<h3>公薦·競選 공천·경선</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공),薦(천거할 천),競(다툴 경),選(가릴 선). <strong>③ 합친 뜻:</strong> 공적으로 추천·경쟁하여 선출. <strong>④ 이름의 이유:</strong> 정당을 대표할 후보를 정하는 과정이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당의 공직후보 추천과 후보를 고르는 내부 경쟁. <strong>⑥ 쉬운 말:</strong> 누구를 선거 후보로 내보낼지 정한다. <strong>⑦ 사례:</strong> 경선 없이도 민주적 절차로 추천 가능.</p>
+<p><strong>⑧ 시험:</strong> 181·186. <strong>⑨ 비교·기억법:</strong> 민주성 의무≠모든 경우 경선 의무.</p>
+<h3>登錄·許可 등록·허가</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 登(오를 등),錄(기록할 록),許(허락할 허),可(옳을 가). <strong>③ 합친 뜻:</strong> 명부에 올림·허락함. <strong>④ 이름의 이유:</strong> 정당설립의 자유를 국가 취향에 맡기지 않으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 형식요건 확인과 내용적 허용 판단의 구별. <strong>⑥ 쉬운 말:</strong> 조건을 확인하는 것과 정부 마음에 들어야 허락하는 것은 다르다. <strong>⑦ 사례:</strong> 조직요건과 정부 정책 찬성서약.</p>
+<p><strong>⑧ 시험:</strong> 170. <strong>⑨ 비교·기억법:</strong> 당 내부의 입당 심사와 국가의 설립허가는 다른 문제.</p>
+<h3>登錄取消·解散 등록취소·해산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 登(오를 등),錄(기록할 록),取(취할 취),消(사라질 소),解(풀 해),散(흩어질 산). <strong>③ 합친 뜻:</strong> 등록을 지움·조직을 풀어 없앰. <strong>④ 이름의 이유:</strong> 등록상 지위와 단체의 존립을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 등록의 말소와 정당의 해체. <strong>⑥ 쉬운 말:</strong> 명부에서 빠지는 것과 모임이 끝나는 것은 다르다. <strong>⑦ 사례:</strong> 등록취소 후 사단 실체.</p>
+<p><strong>⑧ 시험:</strong> 170·171·187. <strong>⑨ 비교·기억법:</strong> 등록취소를 이념적 강제해산 수단으로 쓸 수 없음.</p>
+<h3>殘餘財産·國庫歸屬 잔여재산·국고귀속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 殘(남을 잔),餘(남을 여),財(재물 재),産(낳을 산),國(나라 국),庫(곳집 고),歸(돌아갈 귀),屬(무리 속; 속하다). <strong>③ 합친 뜻:</strong> 남은 재산·국가 재정에 돌아감. <strong>④ 이름의 이유:</strong> 돈을 사적으로 임의 처분하지 못하게 해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해산·위법자금 등 사유별 잔액 처리. <strong>⑥ 쉬운 말:</strong> 일이 끝난 뒤 남은 돈을 누가 받는지 정한다. <strong>⑦ 사례:</strong> 자진해산 일반재산과 보조금 잔액.</p>
+<p><strong>⑧ 시험:</strong> 177·188. <strong>⑨ 비교·기억법:</strong> 후원회 잔액·보조금·정당 일반재산 규율을 혼합하지 않음.</p>
+<h3>防禦的民主主義 방어적 민주주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 防(막을 방),禦(막을 어),的(과녁 적),民(백성 민),主(주인 주),義(옳을 의). <strong>③ 합친 뜻:</strong> 민주주의가 자신을 방어함. <strong>④ 이름의 이유:</strong> 자유를 이용해 자유를 없애는 일을 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 민주주의를 파괴하는 공격으로부터 핵심질서를 보호하는 관념. <strong>⑥ 쉬운 말:</strong> 민주적 경쟁 자체를 없애려는 위험에 대비한다. <strong>⑦ 사례:</strong> 정당해산심판.</p>
+<p><strong>⑧ 시험:</strong> 172. <strong>⑨ 비교·기억법:</strong> 정부비판을 공격으로 간주하는 이념 아님.</p>
+<h3>政黨特權 정당특권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정),黨(무리 당),特(특별할 특),權(권세 권). <strong>③ 합친 뜻:</strong> 정당의 특별한 헌법적 보호. <strong>④ 이름의 이유:</strong> 정권의 야당 탄압을 막으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법상 엄격한 절차·요건 없이는 정치영역에서 배제되지 않는 지위. <strong>⑥ 쉬운 말:</strong> 정부 마음대로 정당을 없애지 못한다. <strong>⑦ 사례:</strong> 헌재의 해산판단 필요.</p>
+<p><strong>⑧ 시험:</strong> 173·189. <strong>⑨ 비교·기억법:</strong> 범죄나 모든 법적 책임의 면제라는 뜻 아님.</p>
+<h3>歸屬 귀속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 歸(돌아갈 귀),屬(무리 속; 속하다). <strong>③ 합친 뜻:</strong> 책임·효과가 특정 주체에 속함. <strong>④ 이름의 이유:</strong> 개인의 우발적 행위와 조직행동을 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 어떤 행위를 정당 전체의 활동으로 평가할 수 있는지의 문제. <strong>⑥ 쉬운 말:</strong> 한 사람의 행동을 당 전체의 일이라고 볼 수 있나. <strong>⑦ 사례:</strong> 주요 당직자·당원의 행위 맥락.</p>
+<p><strong>⑧ 시험:</strong> 190. <strong>⑨ 비교·기억법:</strong> 당원이라는 이유만으로 모든 행동 자동 귀속 아님.</p>
+<h3>多元的世界觀 다원적 세계관</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 多(많을 다),元(으뜸 원),的(과녁 적),世(인간 세),界(지경 계),觀(볼 관). <strong>③ 합친 뜻:</strong> 여러 관점의 공존을 인정하는 생각. <strong>④ 이름의 이유:</strong> 한 세력의 독점적 진리 주장을 경계해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다양한 정치적 견해의 상대적 합리성·진리성을 인정하는 토대. <strong>⑥ 쉬운 말:</strong> 내 생각과 달라도 토론하고 경쟁할 수 있다. <strong>⑦ 사례:</strong> 민주적 기본질서의 기반.</p>
+<p><strong>⑧ 시험:</strong> 191. <strong>⑨ 비교·기억법:</strong> 민주주의 파괴의 폭력까지 무조건 허용하는 것 아님.</p>
+<h3>具體的危險·實質的害惡 구체적 위험·실질적 해악</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 具(갖출 구),體(몸 체),的(과녁 적),危(위태할 위),險(험할 험),實(열매 실),質(바탕 질),害(해칠 해),惡(악할 악). <strong>③ 합친 뜻:</strong> 현실적 근거 있는 위험·실제 중요한 해로움. <strong>④ 이름의 이유:</strong> 막연한 의심만으로 정당을 없애지 않으려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 민주적 기본질서에 실질적 해악을 줄 구체적 위험이라는 해산 기준. <strong>⑥ 쉬운 말:</strong> 정말 민주주의 핵심을 해칠 구체적 위험인지 확인한다. <strong>⑦ 사례:</strong> 192의 기준.</p>
+<p><strong>⑧ 시험:</strong> 의심·단순저촉·추상위험과 구별. <strong>⑨ 비교·기억법:</strong> 이미 모든 피해가 현실화되어야만 한다는 뜻도 아님.</p>
+<h3>最終手段·補充性 최종수단·보충성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 最(가장 최),終(마칠 종),手(손 수),段(층계 단),補(기울 보),充(채울 충),性(성품 성). <strong>③ 합친 뜻:</strong> 마지막 방법·다른 수단을 보완하는 성격. <strong>④ 이름의 이유:</strong> 정당 존립과 민주적 경쟁을 최대한 지키려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 덜 제한적인 대안이 없는 경우에 해산하는 원칙. <strong>⑥ 쉬운 말:</strong> 다른 방법으로 해결 못할 때 마지막으로 쓴다. <strong>⑦ 사례:</strong> 개인 처벌·공론의 대안 검토.</p>
+<p><strong>⑧ 시험:</strong> 176·189. <strong>⑨ 비교·기억법:</strong> 가장 빠른 방법이면 된다는 뜻 아님.</p>
+<h3>假處分·創設的效力 가처분·창설적 효력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 假(거짓 가; 임시),處(곳 처; 처리),分(나눌 분),創(비롯할 창),設(베풀 설),的(과녁 적),效(본받을 효),力(힘 력). <strong>③ 합친 뜻:</strong> 임시 조치·새 법적 상태를 만드는 힘. <strong>④ 이름의 이유:</strong> 심판 중 위험과 최종 결정의 효과를 구별해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 심판 중 임시조치와 결정 당시 발생하는 해산 효과. <strong>⑥ 쉬운 말:</strong> 잠시 멈추는 것과 최종적으로 없애는 것은 다르다. <strong>⑦ 사례:</strong> 정당활동정지·해산.</p>
+<p><strong>⑧ 시험:</strong> 193③·177①. <strong>⑨ 비교·기억법:</strong> 창당 때로 소급해 존재가 없었다고 확인하는 효력 아님.</p>
+<h3>代替政黨 대체정당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 代(대신할 대),替(바꿀 체),政(정사 정),黨(무리 당). <strong>③ 합친 뜻:</strong> 해산된 정당을 대신하는 정당. <strong>④ 이름의 이유:</strong> 이름만 바꿔 해산결정 효력을 회피하지 못하도록.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법이 금지하는 동일·유사한 기본정책의 대체 조직. <strong>⑥ 쉬운 말:</strong> 간판만 바꿔 같은 정당을 다시 만드는 문제. <strong>⑦ 사례:</strong> 정당법40조.</p>
+<p><strong>⑧ 시험:</strong> 177②. <strong>⑨ 비교·기억법:</strong> 과거 당원 모든 사람의 정치적 자유를 전부 박탈한다는 뜻 아님.</p>
+<h1>기출 TOP5와 함정 지도</h1>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>핵심 연결</th>
+<th>고르는 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>162</td>
+<td>정당의 자유와 국가 제한</td>
+<td>엄격한 비례성,다른 공익만으로 쉽게 설립금지 불가</td>
+</tr>
+<tr>
+<td>168</td>
+<td>재정지원과 기회균등</td>
+<td>50% 우선배분,실제 주문은 각하·기각</td>
+</tr>
+<tr>
+<td>181</td>
+<td>내부 민주성과 공천</td>
+<td>민주적 절차≠당원만의 경선 의무</td>
+</tr>
+<tr>
+<td>187</td>
+<td>등록취소와 소수정당 보호</td>
+<td>의석 없음+2% 미만 조항 위헌</td>
+</tr>
+<tr>
+<td>190</td>
+<td>정당해산의 실체적 요건</td>
+<td>목적 또는 활동,정당에의 귀속,핵심질서·구체적 위험</td>
+</tr>
+</tbody></table>
+<p>반복 개념:자유·지위160–165·178–181,재정166–169·182–185,공천186,종료·해산170–177·187–193. 실제 오답률 자료는 없으므로 ‘많이 틀린다’는 수치 대신 논리상 위험한 표현을 표시했다. <strong>전부·오로지·언제나·의심만으로·반드시</strong>가 나오면 예외와 절차를 확인한다.</p>
+<h1>새로운 응용문제5개</h1>
+<p>모두 학습용 새 가상사례다.</p>
+<p class="practice-title"><strong>응용1. 지역모임의 등록</strong></p>
+<p>한 시에만 당원2만 명이 있는 정당이 등록을 신청했다. 선관위는 다른 시·도당이 없음을 이유로 보완을 요구했고,담당자는 추가로 ‘우리 정부 정책에 찬성한다는 서약’도 요구했다. 둘을 같은 이유로 평가할 수 있는가?</p>
+<p>답: 아니다. 법정 조직 요건의 확인과 이념·정책에 대한 허가는 다르다. 현행5개 시·도당·각1천명 요건은 적용하되 정부 정책 찬성을 등록조건으로 덧붙여서는 안 된다. 출제 의도:형식적 등록과 사상허가를 분리한다.</p>
+<p class="practice-title"><strong>응용2. 경선 없이 후보를 정했다면</strong></p>
+<p>정당이 사전에 공개한 당헌에 따라 당원 의견을 수렴하고 민주적으로 구성된 심사기구가 후보를 추천했다. 경선투표를 하지 않았다는 이유만으로 곧바로 위법한가?</p>
+<p>답: 그렇지 않다. 경선이 항상 의무는 아니다. 다만 실제 절차가 민주적이었는지,법률·당헌당규를 지켰는지는 심사할 수 있다. 출제 의도:방법 하나의 부재와 민주성 위반을 혼동하지 않는다.</p>
+<p class="practice-title"><strong>응용3. 이름을 빌린 작은 후원금</strong></p>
+<p>회사가 직원들에게 자금을 나누어 주며 각자 이름으로 특정 후원회에 보내라고 지시했다. 금액이 작고 송금자 이름이 모두 다르면 적법한가?</p>
+<p>답: 아니다. 실제 자금이 법인·단체 관련 자금인지,강요가 있었는지를 보아야 한다. 소액·여러 사람 명의가 금지된 출처를 적법하게 만들지 않는다. 출제 의도:외형보다 출처·경위·자발성을 확인한다.</p>
+<p class="practice-title"><strong>응용4. 폭력적 당원 한 명</strong></p>
+<p>어느 정당의 평당원이 혼자 폭력적 주장을 했다. 정당 지도부는 즉시 반대하고 징계했다. 정부가 그 발언만으로 정당 전체를 해산해 달라고 한다면 무엇을 따져야 하나?</p>
+<p>답: 그 행위를 정당 전체에 귀속시킬 수 있는지부터 본다. 민주적 기본질서의 핵심에 대한 구체적 위험과 해산 외 대안,법익균형도 필요하다. 개인행위 하나가 자동으로 모든 요건을 채우지 않는다. 출제 의도:귀속·위험·비례의 판단 순서를 확인한다.</p>
+<p class="practice-title"><strong>응용5. 해산 후 남은 통장</strong></p>
+<p>정당이 자진해산하며 일반 잔여재산과 사용하지 않은 국고보조금을 모두 당원에게 나누기로 했다. 당헌에 그렇게 적혀 있으면 충분한가?</p>
+<p>답: 아니다. 일반 잔여재산의 당헌상 처리와 보조금 잔액의 법정 반환은 구별해야 한다. 강제해산이라면 잔여재산 국고귀속이라는 별도 규율이 적용된다. 출제 의도:돈의 성격과 종료 원인에 따라 적용 규정을 나눈다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제8강</h2><p><strong>TOP3:</strong>①정당의 자유·공공성 ②정치자금의 통로·통제 ③위헌정당해산의 요건·효력.</p><table><thead><tr><th>주제</th><th>암기 문장</th></tr></thead><tbody><tr><td>8조</td><td>자유·복수정당 / 민주성·의사형성 / 보호·자금보조 / 정부 청구·헌재 해산.</td></tr><tr><td>자유</td><td>개인+단체.설립·존속·활동·가입·불가입·탈퇴·해산·분당·합당.엄격한 비례심사.</td></tr><tr><td>요건</td><td>16세 이상 국민,18세 미만 법정대리인 동의.외국인 불가.공무원·교원 제한은 법정 예외 주의.5시도×각1천명.</td></tr><tr><td>지위</td><td>자유로운 결사+공적 기능,국가기관 아님.공천은 공권력 아님.법인격 없는 사단·독립적 청구인능력.</td></tr><tr><td>내부·공천</td><td>당원 총의·민주적 절차.경선은 선택,비당원 참여 가능.자유위임과 사실상 당규율 구별.</td></tr><tr><td>자금4종</td><td>당원 당비 / 후원회 후원금 / 선관위 비지정 기탁금 / 국가 보조금.</td></tr><tr><td>통제</td><td>출처·한도→정치활동 용도→책임자·장부·증빙·공개.소액 익명 예외.법인·단체 관련 자금 금지.</td></tr><tr><td>보조금</td><td>교섭단체 정당에50% 우선 균등배분.2004헌마655 민노 각하·민주 기각.정당후원 전면금지2013헌바168 헌불.</td></tr><tr><td>등록취소</td><td>조직요건 상실·법정 임기만료 선거4년 미참여.의석 없음+2% 미만 취소는2012헌마431 위헌.</td></tr><tr><td>해산요건</td><td>목적 또는 활동→정당 귀속→민주주의 핵심→실질적 해악의 구체적 위험→최후수단·비례.</td></tr><tr><td>절차</td><td>정부 국무회의 심의 후 청구(재량)→헌재6명 찬성→중앙선관위 집행.가처분 가능.</td></tr><tr><td>효력</td><td>결정 때 창설적 해산,대체정당 금지,잔여재산 국고귀속,판례상 지역구·비례 의원직 상실.</td></tr></tbody></table><p><strong>비교:</strong>자진해산은 일반 재산을 당헌대로 처리하되 보조금 잔액 반환.등록취소 뒤에도 단체 실체는 남을 수 있음.일반 제명≠헌재 해산.</p><p><strong>반드시 외울 문장:</strong>민주적 기본질서는 대통령제 등 모든 현행 제도가 아니다.해산제도는 방어적 민주주의와 정당 보호라는 두 목적을 가진다.</p><p><strong>사례를 풀 순서:</strong>정당·개인의 행위 구별→자유·민주성·자금 규율 확인→종료의 종류 구별→위험·비례·절차·효력 확인.</p></section>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 이해 완료:공적 기능과 공권력 행사를 구별하고,세 종료 방식과 정치자금 네 통로를 사례에 적용할 수 있다.</p>
+<p>🟡 복습 필요:결론은 알지만 등록취소와 해산,공천 민주성과 경선 의무,보조금과 후원금 판례를 섞는다.</p>
+<p>🔴 이해 부족:정부가 싫어하는 정당을 허가하지 않을 수 있다거나 당원 한 명의 위법행위로 정당을 자동 해산할 수 있다고 생각한다.</p>
+<p>실제 답안을 받지 않았으므로 이해도를 단정하지 않는다. 복습 TOP3는정당의 이중적 지위,정치자금의 통로·한도·공개,해산의 귀속·위험·비례·효력이다.</p>
+<h1>원자료와 현행법을 구별한 보완</h1>
+<p>178번의 ‘현재·91천마21·들어길·방항’은 문맥상 ‘헌재·91헌마21·들어갈·방향’이다.187번 ‘국회의워’,193번 ‘위현’도 오타다. 원본 문제·정답은 보존했다.185②의 실명 원칙은 법정 금액·소액 익명 예외를 함께 읽도록 보완했다. 교재의 가입 제한은16세·18세 미만 동의 및 직종별 예외를,지구당 설명은2026년 당원협의회 사무소 허용을,후원회 잔액은21조의 유형·예외를 구분했다. 과거 노동조합 기부금 판례와 현행 법인·단체 기부 금지는 시점을 나누었다.</p>
+<h1>문제 부록 · 34문항·136개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_160"><h4>형성평가 · 헌법_160</h4><p class="question-stem">다음은 헌법 제8조이다. 괄호 안에 들어갈 알맞은 말을 순서대로 나열한 것은?<br><br>제8조 ① 정당의 설립은 자유이며, ( )는 보장된다.<br>② 정당은 그 목적ㆍ조직과 활동이 민주적이어야 하며, 국민의 ( )에 참여하는데 필요한 조직을 가져야 한다.<br>③ 정당은 법률이 정하는 바에 의하여 국가의 보호를 받으며, 국가는 법률이 정하는 바에 의하여 정당운영에 필요한 ( )을 보조할 수 있다.<br>④ 정당의 목적이나 활동이 민주적 기본질서에 위배될 때에는 정부는 헌법재판소에 그 해산을 제소할 수 있고, 정당은 ( )의 심판에 의하여 해산된다.</p><ol class="choices"><li>복수정당제, 정치적 의사형성, 자금, 헌법재판소</li><li>원내교섭단체, 여론조사, 조직, 법원</li><li>민주적 기본질서, 투표, 법률, 정부</li><li>정당의 사실상 평등, 권력쟁취, 후원단체운영, 국회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답①.8①복수정당제,②정치적 의사형성,③자금,④헌법재판소를 순서대로 넣는다. 자유·민주성·지원·해산의 네 칸이다.</li><li><strong>비선택</strong> · 틀림. 교섭단체는 국회 운영상 단체이고,정당해산은 일반 법원의 권한이 아니다.</li><li><strong>비선택</strong> · 틀림. 정부는 해산을 청구하는 기관이지 최종 심판기관이 아니다.</li><li><strong>비선택</strong> · 틀림. 사실상의 동일한 결과를 보장하는 조문이 아니며 국회가 정당을 해산하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_161"><h4>형성평가 · 헌법_161</h4><p class="question-stem">다음 중 헌법상 보호되는 지위를 갖는 정당에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법에 있는 정당의 개념 표지는 &quot;국민의 정치적 의사형성에 참여하는 조직&quot;이다.</li><li>정당은 국민의 정치적 의사를 결집하고 이에 기초하여 책임 있는 정치적 주장과 정책을 제시ㆍ추진하면서 이것을 국가권력으로 매개하는 정치적 결사이다.</li><li>정당의 이념적 다양성과 정당설립의 자유는 민주주의의 토대이다.</li><li>정당이 현재의 헌법질서의 모든 세부적 요소를 긍정하지 않으면 정당해산심판에 의해 해산될 대상이 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음.8②의 조직과 정치적 의사형성이 핵심이다.</li><li><strong>비선택</strong> · 맞음. 흩어진 생각을 책임 있는 정책과 국가결정으로 연결하는 매개기능이다.</li><li><strong>비선택</strong> · 맞음. 이념적 다양성과 자유로운 경쟁이 민주주의의 토대다.</li><li><strong>선택</strong> · 틀림·정답④. 모든 현행 제도의 찬성을 요구하지 않는다. 민주주의 핵심에 대한 구체적 위험 등 엄격한 해산요건을 따진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당은 정치적 의사형성의 목표와 방향을 자유롭게 설정할 수 있다고 보아야 한다. 현재의 헌법질서에 대한 긍정, 공익지향성을 본질적 요소로 설정하면 남용 위험이 있다. 특히 헌법의 세부사항에 관하여 견해를 달리하는 정당을 보호의 범위에서 제외한다면, 헌법개정에 대한 주장을 정당이 할 수 없게 될 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_162"><h4>형성평가 · 헌법_162</h4><p class="question-stem">다음 중 정당설립의 자유에 대한 헌법재판소의 설시로 볼 수 없는 것은?</p><ol class="choices"><li>정당설립ㆍ존속ㆍ활동의 자유를 제한하는 법률의 합헌성 심사는 헌법 제37조 제2항에 따라 엄격한 비례성심사를 해야 한다.</li><li>자유민주적 기본질서를 부정하고 이를 적극적으로 제거하려는 정당도, 오로지 헌법재판소가 그 위헌성을 확인한 경우에만 정치생활의 영역으로부터 축출될 수 있다.</li><li>정당의 설립 및 가입을 금지하는 법률조항은 이를 정당화하는 사유의 중대성에 있어서 적어도 '민주적 기본질서에 대한 위반'에 버금가는 것이어야 한다.</li><li>입법자가 '민주적 기본질서에 대한 위반' 외의 공익적 고려에 의하여 정당설립금지조항을 도입하는 것은 원칙적으로 헌법에 의해 허용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 설립뿐 아니라 존속·활동까지 엄격한 비례심사를 받는다.</li><li><strong>비선택</strong> · 맞음. 정당특권의 설명이다. 정부가 먼저 정치생활에서 자의적으로 축출할 수 없다.</li><li><strong>비선택</strong> · 맞음. 자유의 중대성 때문에 설립·가입 금지에는 매우 무거운 정당화 사유가 필요하다.</li><li><strong>선택</strong> · 틀림·정답④. 다른 공익을 이유로 설립금지를 쉽게 허용한다는 추정은 정당의 특별한 보호와 반대다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원칙적으로 헌법에 위반된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_163"><h4>형성평가 · 헌법_163</h4><p class="question-stem">다음 중 정당법상 정당에 관한 규율 내용에 어긋나는 것은?</p><ol class="choices"><li>최근 4년간 임기만료에 의한 국회의원 선거 또는 임기만료에 의한 지방자치단체장 선거나 시‧도의회의원 선거에 참여하지 않은 정당의 등록은 취소한다.</li><li>외국인도 정당의 당원이 될 수 있다.</li><li>개인의 승낙 없이 정당에의 가입이나 탈당을 강요받지 않으나, 당원의 제명처리는 예외이다.</li><li>5개 이상의 시‧도당을 가져야 하고 시‧도당은 그 관할구역 안에 주소를 둔 1천명 이상의 당원을 가져야 정당등록이 가능하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 최근4년간 법에 열거된 임기만료 선거 미참여가 사유다. 대통령선거 등 목록을 임의로 바꾸지 않는다.</li><li><strong>선택</strong> · 틀림·정답②. 외국인은 당원이 될 수 없다. 현행법은16세 이상 국민을 기본으로 한다.</li><li><strong>비선택</strong> · 맞음. 자발적인 가입·탈당과 정당의 적법한 제명은 구별한다.</li><li><strong>비선택</strong> · 맞음.5개 이상 시·도당마다 관할구역에 주소를 둔1천명 이상이 필요하다. 전국 총수만 채우면 된다는 뜻이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 외국인은 정당의 당원이 될 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_164"><h4>형성평가 · 헌법_164</h4><p class="question-stem">정당의 헌법상 지위에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당은 국가기관과 사적 결사 사이에 있는 중간형태의 조직체의 이중적 지위를 갖는다.</li><li>정당은 자유로운 지위와 공공의 지위를 함께 갖는다.</li><li>정당은 공적 기능을 수행하므로 공권력행사의 주체이고, 정당의 공직선거후보자선출은 헌법소원심판의 대상이 되는 공권력 행사에 해당한다.</li><li>정당은 기회 균등을 보장받아야 하지만, 이것이 사실상의 기회 균등을 의미하는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 국가기관과 사적 결사 사이에서 특별한 헌법적 지위를 갖는다.</li><li><strong>비선택</strong> · 맞음. 자유로운 결사와 공적 기능이 함께 존재한다.</li><li><strong>선택</strong> · 틀림·정답③. 공적 기능이 곧 공권력 행사는 아니다. 정당의 후보자 선출은 헌법소원의 공권력 행사 대상이 아니다.</li><li><strong>비선택</strong> · 맞음. 법적 기회균등이지 실제 지지율·재정·선거결과를 같게 만들 의무는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당의 공직선거후보자선출은 자발적 조직 내부의 의사결정에 불과하므로 헌법소원심판의 대상이 되는 공권력 행사에 해당하지 않는다(2007헌마1128). 정당의 공적 기능은 어디까지나 정당이 자발적인 정치적 결사라는 것을 전제로 이해되는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_165"><h4>형성평가 · 헌법_165</h4><p class="question-stem">정당의 법적 존재 형식에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당은 적어도 그 소유재산 귀속관계에 있어서 민법상의 '법인격 없는 사단'이다.</li><li>정당의 구성원만이 헌법소원심판을 청구할 수 있을 뿐이고, 정당 자체는 그 구성원과는 독립된 기본권주체로서 헌법소원 청구인능력이 없다.</li><li>정당등록이 취소되었더라도 등록정당에 준하는 '법인격 없는 사단'으로서의 실질을 유지할 수 있다.</li><li>정당의 헌법소원심판 청구인능력은 정당법상의 등록요건을 구비함으로써 생기는 것이 아니라 그 법적 성격이 '법인격 없는 사단'이라는 점에서 인정되는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 교재가 인용한92헌마262의 재산귀속에 관한 법적 성격이다.</li><li><strong>선택</strong> · 틀림·정답②. 정당은 구성원과 독립한 기본권주체로 헌법소원 청구인능력을 가질 수 있다.</li><li><strong>비선택</strong> · 맞음. 등록취소가 단체의 조직적 실체까지 반드시 소멸시키지는 않는다.</li><li><strong>비선택</strong> · 맞음. 등록증이 아니라 비법인사단으로서의 법적 실체가 능력의 근거다. 다만 개별 청구의 적법요건은 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당은 그 구성원과 독립된 기본권주체로서 헌법소원 청구인능력이 있다. 선지 ②는 선지 ④와 모순되기도 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_166"><h4>형성평가 · 헌법_166</h4><p class="question-stem">다음 서술 중 틀린 것은?</p><ol class="choices"><li>유권자는 정당의 정책을 결정하는 세력에 관하여 알아야 한다.</li><li>유권자는 정치자금의 제공을 통해 정당에 영향력을 행사하려는 사회적 세력의 실체가 정당의 정책이나 방향과 일치하는지 여부를 스스로 판단할 기회를 가질 수 있어야한다.</li><li>정치자금은 당비를 말하며, 후원금, 기탁금, 보조금, 정당의 당헌ㆍ당규 등에서 정한 부대수입은 정치자금이 아니다.</li><li>당비란 명목 여하를 불문하고 정당의 당헌ㆍ당규 등에 의해 정당의 당원이 부담하는 금전, 유가증권, 그 밖의 물건이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 정책에 영향을 주는 세력을 알아야 유권자가 판단할 수 있다.</li><li><strong>비선택</strong> · 맞음. 자금 제공과 정책 방향의 관계를 평가할 정보가 필요하다.</li><li><strong>선택</strong> · 틀림·정답③. 당비 외 후원금·기탁금·보조금·법정 부대수입 등도 정치자금에 해당한다.</li><li><strong>비선택</strong> · 맞음. 이름이 아니라 당헌·당규 등에 따라 당원이 부담하는 실질로 판단한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정치자금은 당비, 후원금, 기탁금, 보조금, 정당 등 정치활동을 하는 사람에게 제공되는 금전, 유가증권, 그 밖의 물건, 기타 정치활동에 소요되는 비용 등을 가리킨다.</p></details></section>
+
+<section class="question-card" id="question-헌법_167"><h4>형성평가 · 헌법_167</h4><p class="question-stem">기탁금에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>기탁금이란 정치자금을 정당에 기부하고자 하는 개인이 정치자금법에 따라 선거관리위원회에 기탁하는 금전, 유가증권, 그 밖의 물건이다.</li><li>기탁자가 자신이 기탁한 금원을 자신이 지정하는 정당에만 전부 지급하도록 할 수 있다.</li><li>연간기탁한도가 있다.</li><li>연간한도초과기탁금은 국고에 귀속된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 여기의 기탁금은 정치자금 지원을 위해 선관위에 맡기는 자금이다. 후보등록 기탁금과 용례를 구별한다.</li><li><strong>선택</strong> · 틀림·정답②. 특정 정당 지정기탁제는 폐지되었다. 선관위가 법정 기준에 따라 배분한다.</li><li><strong>비선택</strong> · 맞음. 기탁도 무제한이 아니라 연간한도가 있다.</li><li><strong>비선택</strong> · 맞음. 법정 한도를 넘는 기탁금의 국고귀속을 규정한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기탁금은 중앙선거관리위원회가 기탁금 모금에 직접 소요된 경비를 공제하고 국고보조금 배분율에 따라 배분하여 지급하며, 지정기탁금제도는 1997년 폐지되었다.</p></details></section>
+
+<section class="question-card" id="question-헌법_168"><h4>형성평가 · 헌법_168</h4><p class="question-stem">다음 중 정당에 대한 국고보조금에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>의석수와 득표율을 기준으로 배분하되 동일정당 소속의 국회의원으로 교섭단체를 구성한 정당에 대해서는 경상보조금과 선거보조금의 50%를 정당별로 균등하게 우선 배분하도록 법률에 규정되어 있다.</li><li>현행 국고보조금 법규정은 기성정당과 교섭단체를 구성한 정당에 상대적으로 유리하다.</li><li>현행 국고보조금 법규정은 교섭단체를 구성하는데 미치지 못한 신생정당과 소수정당에 상대적으로 불리하다.</li><li>현행 국고보조금 규정은 정당의 공적 기능에 비추어 정당의 기회 균등에 위반된다는 이유로 헌법불합치 결정을 받았다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 동일정당 소속 의원으로 교섭단체를 구성한 정당들에50%를 우선 균등배분하는 기준이다.</li><li><strong>비선택</strong> · 맞음. 교섭단체와 기존 의석·득표를 고려하므로 기성정당에 상대적으로 유리한 구조다.</li><li><strong>비선택</strong> · 맞음. 신생·소수정당에는 불리할 수 있다는 효과와 헌법적 평가를 구별한다.</li><li><strong>선택</strong> · 틀림·정답④.2004헌마655는 민주노동당 청구 각하·민주당 청구 기각이다. 정당후원 전면금지의 헌불결정과 섞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 교섭단체를 구성할 정도의 다수정당과 그에 미치지 못하는 소수정당 사이에 나타나는 차등지급의 정도는 정당 간의 경쟁 상태를 현저하게 변경시킬 정도로 합리성을 결여한 차별이라고 보기 어렵다(헌재 2006. 7. 27. 2004헌마655).</p></details></section>
+
+<section class="question-card" id="question-헌법_169"><h4>형성평가 · 헌법_169</h4><p class="question-stem">정당의 정치자금에 관한 서술로 틀린 것은?</p><ol class="choices"><li>정당의 금품수수에 대한 일정한 규제는 대의제 민주주의의 필연적 귀결이다.</li><li>정치자금은 정치활동을 위해 소요되는 경비로만 지출되어야 한다.</li><li>회계는 비공개이다.</li><li>정당, 후원회 대표자, 후원회를 둔 국회의원, 공직선거후보자 등은 회계책임자를 선임해 신고해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 돈이 국민대표의 판단을 사적으로 지배하지 못하게 할 통제가 필요하다.</li><li><strong>비선택</strong> · 맞음. 개인 생활비·채무 등 사적 용도로 사용하는 돈이 아니다.</li><li><strong>선택</strong> · 틀림·정답③. 장부·증빙·회계보고·공개를 통해 투명성을 확보한다. 비공개가 원칙이라는 설명은 반대다.</li><li><strong>비선택</strong> · 맞음. 법정 주체는 회계책임자를 선임·신고해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 투명성과 공개성을 위해 회계는 공개된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_170"><h4>형성평가 · 헌법_170</h4><p class="question-stem">정당등록취소에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당의 등록취소란 일정한 형식적 사유를 이유로 선거관리위원회에 되어 있던 등록을 사후적으로 말소하는 것이다.</li><li>입법자는 헌법이 정당에 부여한 기능을 수행하는 데 필요한 절차적ㆍ형식적 요건을 규정함으로써 정당의 자유를 구체적으로 형성하는 동시에 제한할 수 있다.</li><li>국가는 자유민주적 기본질서를 보호하기 위하여 일정한 내용적 요건을 구비하여야만 정당을 설립할 수 있다는 '허가제'를 운영할 수 있다.</li><li>정당등록취소제도의 목적은 국민의 정치적 의사형성에 참여할 의사나 능력이 실질적으로 없는 정당을 배제하여 정당제 민주주의를 발전시키기 위한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 법정 형식적 사유에 따른 등록 말소다.</li><li><strong>비선택</strong> · 맞음. 정당의 기능을 위한 필요한 절차·조직 요건을 법률로 정할 수 있지만 비례원칙을 지켜야 한다.</li><li><strong>선택</strong> · 틀림·정답③. 정치적 내용이 마음에 들어야 설립을 허가하는 제도를 운영할 수 없다. 등록과 허가를 구분한다.</li><li><strong>비선택</strong> · 맞음. 정치적 의사형성에 참여할 실질적 기반을 확보하려는 제도다. 정부에 대한 비판을 배제하는 목적이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 허가제는 헌법상 금지된다(99헌마135).</p></details></section>
+
+<section class="question-card" id="question-헌법_171"><h4>형성평가 · 헌법_171</h4><p class="question-stem">다음 중 정당이 해체하여 없어지는 것을 무엇이라고 하는가?</p><ol class="choices"><li>정당등록</li><li>정당설립</li><li>정당등록취소</li><li>정당해산</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 등록은 법정 요건을 확인해 명부에 올리는 것이다.</li><li><strong>비선택</strong> · 틀림. 설립은 정당을 만드는 것이다.</li><li><strong>비선택</strong> · 틀림. 등록의 말소와 단체가 해체되는 것은 같은 개념이 아니다.</li><li><strong>선택</strong> · 정답④. 해산은 정당이 해체되어 없어지는 것이다. 자진·강제 해산의 요건과 효과는 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_172"><h4>형성평가 · 헌법_172</h4><p class="question-stem">다음 중 민주주의를 부정하거나 공격하는 정당으로부터 헌법이 스스로를 보호하는 제도를 갖춰야 한다는 이념을 무엇이라고 하는가? (가장 정확한 개념을 고르시오)</p><ol class="choices"><li>공격적 민주주의</li><li>평화적 민주주의</li><li>방어적 민주주의</li><li>입헌민주주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 교재의 개념명은 공격적 민주주의가 아니다.</li><li><strong>비선택</strong> · 틀림. 평화 지향만을 뜻하는 개념이 아니다.</li><li><strong>선택</strong> · 정답③. 민주주의 파괴의 공격으로부터 민주적 질서를 지키려는 방어적 민주주의다.</li><li><strong>비선택</strong> · 틀림. 입헌민주주의는 더 넓은 체제 개념이며 여기서 묻는 특정 이념의 가장 정확한 이름이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_173"><h4>형성평가 · 헌법_173</h4><p class="question-stem">다음 중 정당해산심판제도에 대한 헌법재판소의 설시 내용으로 볼 수 없는 것은?</p><ol class="choices"><li>발생사적 측면에서 정당 보호 수단으로서의 성격이 부각되며, 특히 정부를 비판하는 야당을 보호하는 의미를 갖는다.</li><li>그 자체가 민주주의에 대한 제약이자 위협이 될 수 있음을 또한 깊이 주의해야 한다.</li><li>정당의 목적ㆍ활동에 위헌적인 성격 있다는 의심이 제기된다면 정당해산심판에 의해 적극적ㆍ‧예방적으로 해산결정을 내려야 한다.</li><li>민주적이고 자율적인 정치적 과정 자체를 거부하여 폭력적이거나 억압적 혹은 자의적인 지배를 통해 전체주의적인 통치를 추구할 경우 민주주의 체제를 유명무실해지도록 만드는 것을 사전에 방지할 제도적 장치이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음.1958년 진보당 등록취소의 경험과1960년 개헌은 야당 보호의 의미를 보여 준다.</li><li><strong>비선택</strong> · 맞음. 다수 권력에 의한 남용은 민주주의 자체를 위협할 수 있다.</li><li><strong>선택</strong> · 틀림·정답③. 의심만으로 적극적 예방해산을 해서는 안 된다. 구체적 위험과 엄격한 비례성이 필요하다.</li><li><strong>비선택</strong> · 맞음. 민주적 경쟁 자체를 없애려는 폭력적·전체주의적 지배의 위험에 대응하는 제도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당의 목적ㆍ활동에 위헌적인 성격 있다는 의심이 제기된다 하더라도, 국민들의 민주적 정치과정을 통해 위헌적인 측면이 진지하게 논박되고 그 결과로 그 정당이 자연스럽게 정치영역에서 고립되거나 배제되는 과정을 거치도록 함이 원칙적으로 타당하다(2013헌다1 참조).</p></details></section>
+
+<section class="question-card" id="question-헌법_174"><h4>형성평가 · 헌법_174</h4><p class="question-stem">위헌정당해산결정의 요건으로서 '민주적 기본질서 위배'에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법 제8조 제4항의 &quot;민주적 기본질서&quot; 개념을 최대한 느슨하고 광범위하게 이해해야 정당의 중요 기능을 보호할 수 있다.</li><li>민주적 기본질서는 오늘날의 입헌민주주의 체제를 구성하고 운영하는 데 필요한 가장 핵심적인 내용‧요소에 한정된다.</li><li>민주적 기본질서가 현행 헌법이 채택한 민주주의의 구체적 모습을 의미하는 것은 아니다.</li><li>보장되지 않으면 입헌민주주의 체제가 유지될 수 없다고 평가되는 내용이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답①. 느슨하고 넓게 잡으면 합법적 개혁 주장까지 해산 대상으로 삼을 수 있다. 핵심 요소로 제한해야 한다.</li><li><strong>비선택</strong> · 맞음. 입헌민주주의 유지에 필수적인 핵심 내용이다.</li><li><strong>비선택</strong> · 맞음. 대통령제 등 현재 민주주의의 모든 구체적 형태를 고정하는 뜻이 아니다.</li><li><strong>비선택</strong> · 맞음. 보장되지 않으면 체제가 유지될 수 없는 핵심이라는 기준이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당이 강제해산되기 위한 요건이 '민주적 기본질서 위배'이므로 '민주적 기본질서' 개념을 최대한 엄격하고 협소하게 이해하여야 남용을 억제하고 정당의 중요한 기능을 보호할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_175"><h4>형성평가 · 헌법_175</h4><p class="question-stem">다음 중 정당의 강제해산의 요건 중 하나인 민주적 기본질서 위배에서 말하는 '민주적 기본질서'의 주요 요소로 헌법재판소가 거론한 것이 아닌 것은?</p><ol class="choices"><li>국민주권의 원리</li><li>기본적 인권의 존중</li><li>복수정당제도</li><li>대통령제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 핵심 요소에 해당한다. 권력이 국민에게서 나온다는 국민주권이다.</li><li><strong>비선택</strong> · 핵심 요소에 해당한다. 인간의 기본적 권리를 존중해야 한다.</li><li><strong>비선택</strong> · 핵심 요소에 해당한다. 다양한 정당의 민주적 경쟁을 보장한다.</li><li><strong>선택</strong> · 정답④. 대통령제는 구체적인 정부형태다. 그 변경을 주장했다는 사실만으로 해산 사유가 되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대통령제는 국민주권원리를 구현하는 정부형태 중 하나이다. 의원내각제로의 개헌은 어느 정당이라도 주장할 수 있는 것이다. 현행 헌법의 세부사항을 모두 긍정하는 것은 헌법상 활동이 허용되는 정당의 요건이 아님을 유의해야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_176"><h4>형성평가 · 헌법_176</h4><p class="question-stem">다음 정당해산결정을 내리기 위한 비례성 요건에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당의 위헌적 문제성을 해결할 다른 대안적 수단이 있더라도 강제해산으로써 대안적 수단보다 더 신속하게 문제를 해결할 수 있다면 정당해산결정을 내려야 한다.</li><li>정당해산결정으로 얻는 사회적 이익이 정당존립의 제한이라는 불이익보다 커야 한다.</li><li>침익적 국가권력 행사에 부과되는 법치국가적 한계이다.</li><li>정당해산결정이 정당활동의 자유에 대한 근본적 제한이라는 점을 고려하여 요건으로 준수되어야 하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답①. 더 빠르다는 이유만으로 대안을 버릴 수 없다. 최후수단성과 최소침해성을 따져야 한다.</li><li><strong>비선택</strong> · 맞음. 정당의 자유와 민주적 경쟁에 생기는 손해까지 포함해 법익균형을 심사한다.</li><li><strong>비선택</strong> · 맞음. 침익적 권력행사에는 법치국가적 한계가 있다.</li><li><strong>비선택</strong> · 맞음. 해산은 정치적 자유의 근본적 제한이므로 엄격한 비례심사가 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그 정당의 위헌적 문제성을 해결할 다른 대안적 수단이 없어야 한다. 즉 필요성 원칙을 준수해야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_177"><h4>형성평가 · 헌법_177</h4><p class="question-stem">정당해산결정의 효과에 관한 설명으로 옳은 것은? (법령 및 헌법재판소 판례에 따름)</p><ol class="choices"><li>정당해산결정은 확인적 효력을 가지므로 정당이 설립된 때로 소급하여 그 정당은 해산된 것으로 간주된다.</li><li>해산된 정당 자체의 존속만 금지되는 것일 뿐 그 정당의 강령, 기본정책과 동일하거나 유사한 대체정당을 창당하는 것은 가능하다.</li><li>해산결정을 받은 정당의 재산은 당헌이 정한 바에 따라 분배된다.</li><li>해산된 정당 소속 국회의원은 의원직을 상실한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 해산결정 당시부터 발생하는 창설적 효력이지 창당 때로 소급하는 확인적 효력이 아니다.</li><li><strong>비선택</strong> · 틀림. 법은 동일·유사한 기본정책을 가진 대체정당도 금지한다. 이름만 바꾸어 회피할 수 없다.</li><li><strong>비선택</strong> · 틀림. 강제해산의 잔여재산은 국고에 귀속한다. 자진해산의 일반 재산처리와 혼동했다.</li><li><strong>선택</strong> · 정답④.2013헌다1은 위헌정당해산에 따라 소속 국회의원의 의원직 상실을 인정했다. 일반 제명과 다른 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 창설적 효력을 가지므로 해산을 명하는 결정을 선고한 때 그 정당은 해산된다. ② 대체정당 창당이 금지된다. ③ 정당의 재산은 국고에 귀속된다. ④ 소속 국회의원 의원직 상실에 관하여 대한민국 헌법은 명문 규정이 없긴 하지만, 헌법재판소는 의원직 상실이 정당해산심판제도의 본질로부터 인정되는 기본적 효력이라고 하였다(헌재 2014. 12. 19. 2013헌다1).</p></details></section>
+
+<section class="question-card" id="question-헌법_178"><h4>워크북 · 헌법_178</h4><p class="question-stem">다음은 현재 1991. 3. 11. 91천마21 결정문의 일부이다. 괄호 안에 들어길 알맞은 말을 순서대로 나열한 것은?<br><br>정당은 ( )이기는 하지만 다른 집단과는 달리 그 자유로운 지도력을 통하여 무정형적이고 무질서적인 개개인의 정치적 의사를 집약하여 정리하고 구체적인 진로와 방항을 제시하며 국정을 책임지는 공권력으로까지 매개하는 중요한 ( )을 수행하기 때문에 헌법도 정당의 기능에 상응하는 지위와 권한을 보장함과 동시에 그 헌법질서를 존중해 줄 것을 요구하고 있는 것이다.</p><ol class="choices"><li>국가조직, 사적 기능</li><li>자발적 조직, 공적 기능</li><li>비법인 재단, 지방자치적 역할</li><li>영조물, 문화적 기능</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 정당은 국가조직이 아니며 단순한 사적 기능만 수행하는 것도 아니다.</li><li><strong>선택</strong> · 정답②. 자발적 조직이 중요한 공적 기능을 한다는 이중성을 묻는다. 원문 사건번호의 천은 헌의 오타다.</li><li><strong>비선택</strong> · 틀림. 정당은 재산 중심 재단이 아니라 사람의 결사이며 지방자치 역할만을 말하지 않는다.</li><li><strong>비선택</strong> · 틀림. 국가의 시설·사업조직인 영조물로 분류하는 문맥이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_179"><h4>워크북 · 헌법_179</h4><p class="question-stem">다음 중 정당의 자유에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당은 자발적 결사체이므로 헌법 제21조의 결사의 자유 조항에 의해 정치적 결사로서 일반적 보장을 받는다.</li><li>헌법 제8조 제1항에 의한 정당설립의 자유와 복수정당제의 보장은 정당의 공적 기능을 고려한 특별한 보장이다.</li><li>헌법 제8조 제1항의 정당의 자유는 단체로서의 정당이 가지는 기본권일 뿐, 개인이 정당 활동에 있어서 가지는 기본권은 아니다.</li><li>정당설립의 자유의 내용으로는 정당 설립행위 자체, 정당의 조직형태 내지 법형식의 선택, 정당활동, 정당가입ㆍ불가입ㆍ탈퇴, 정당의 존속ㆍ해산ㆍ분당ㆍ합당의 자유가 모두 포함된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음.21조 결사의 자유에 의한 일반적 보장을 받는다.</li><li><strong>비선택</strong> · 맞음.8조는 정당의 공적 기능을 고려한 특별한 보호다.</li><li><strong>선택</strong> · 틀림·정답③. 단체뿐 아니라 개인의 설립·가입·불가입·탈퇴 등 자유도 포함한다.</li><li><strong>비선택</strong> · 맞음. 정당의 자유는 설립 한순간에 한정되지 않고 조직·활동·존속·변경·종료까지 포괄한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법 제8조 제1항의 정당의 자유는 개인이 가지는 기본권이자 단체로서의 정당이 가지는 기본권이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_180"><h4>워크북 · 헌법_180</h4><p class="question-stem">정당법상 정당의 요건에 해당하지 않는 것은?</p><ol class="choices"><li>'공직선거에 후보자를 추천 또는 지지함'으로써 국민의 정치적 의사형성에 참여해야 한다.</li><li>'국민의' 조직이어야 한다.</li><li>국민이 '자발적으로' 구성한 정치적 결사여야 한다.</li><li>'일회적ㆍ단발적으로' 국민의 정치적 의사형성에 참여하는 데 '필요한 조직'만을 갖추면 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 요건에 해당. 공직후보 추천·지지를 통한 정치적 의사형성 참여다.</li><li><strong>비선택</strong> · 요건에 해당. 정당법상 국민의 조직이며 외국인의 당원가입은 허용되지 않는다.</li><li><strong>비선택</strong> · 요건에 해당. 자발적 정치적 결사여야 한다.</li><li><strong>선택</strong> · 요건 아님·정답④. 계속적 정치활동을 위한 조직이 필요하다. 일회적·단발적 모임만으로 충분하다는 설명은 틀리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민의 정치적 의사형성에 참여하는 데 '필요한 조직'으로서 그 정치적 의도의 진지성을 보증할 수 있는 지속성ㆍ계속성을 요한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_181"><h4>워크북 · 헌법_181</h4><p class="question-stem">다음 중 헌법 제8조 제2항 &quot;정당은 그 목적ㆍ조직과 활동이 민주적이어야 하며&quot;라는 부분을 구체화하는 관련 법률(정당법, 공직선거법)에 의한 규율사항이 아닌 것은?</p><ol class="choices"><li>당원의 총의를 반영할 수 있는 대의기관 및 집행기관과 의원총회를 두어야 한다.</li><li>지도부와 기관 역시 당원의 의사에 따라 구성되고 정기적인 선거를 통해 당원의 신임을 갱신받아야 한다.</li><li>정당의 민주적인 내부질서에 관한 사항은 당헌에 규정되어야 한다.</li><li>공직선거후보자 공천은 오로지 당원만으로 구성된 선거인의 내부경선으로 이루어져야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 규율. 당원의 총의를 반영하는 의사결정 구조가 필요하다.</li><li><strong>비선택</strong> · 맞는 설명. 지도부가 당원의 의사와 무관하게 영구 지위를 독점하는 구조와 반대다.</li><li><strong>비선택</strong> · 맞는 규율. 민주적 내부질서가 당헌에 반영되어야 한다.</li><li><strong>선택</strong> · 해당하지 않음·정답④. 경선은 항상 의무가 아니고 비당원 참여도 가능하다. 민주적 절차와 특정 방법의 강제를 섞었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 내부경선을 실시할 수도 있고, 전략 공천을 할 수도 있으며, 경선 또한 당원이 아닌 국민을 참여시킬 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_182"><h4>워크북 · 헌법_182</h4><p class="question-stem">정당 재정에 관한 서술로 틀린 것은?</p><ol class="choices"><li>유권자가 자신이 지지하는 정당에 재정적으로 기여할 자유는 정당의 대외적 자유의 한 내용이다.</li><li>정당 재정에 대한 국고보조는 정당 간 기회 균등을 도모하기 위한 것이다.</li><li>정당의 재정에 대한 국고보조는 정당이 금권정치로부터 벗어나는 데 기여한다.</li><li>정당의 재정은 원칙적으로 모두 국고보조로 충당되어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 적법한 재정지원은 정치적 표현과 정당의 대외적 자유에 연결된다.</li><li><strong>비선택</strong> · 맞음. 지원은 정치적 경쟁의 기회를 보완하는 목적이 있다.</li><li><strong>비선택</strong> · 맞음. 국가 지원은 부유한 사적 자금에 대한 의존을 줄일 수 있다.</li><li><strong>선택</strong> · 틀림·정답④. 모든 재정을 국가가 충당하면 사회적 기반 약화·국가 의존 등의 위험이 생긴다. 부분 지원과 전면 국영화를 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당 재정에 대한 국고보조는 정당 간 기회 균등을 도모하기 위한 것이긴 하지만, 그렇다고 해서 정당이 재정을 스스로 충당할 자기책임을 훼손하는 정도에 이르러서는 안 될 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_183"><h4>워크북 · 헌법_183</h4><p class="question-stem">다음 중 틀린 서술은? (관련 법령과 헌법재판소 판례에 따름)</p><ol class="choices"><li>후원금이란 정치자금법에 의해 후원회에 기부하는 금전, 유가증권, 그 밖의 물건을 말한다.</li><li>후원인 1인이 연간 기부할 수 있는 금액의 한도가 정해져 있다.</li><li>금권정치의 척결을 위해 정당에 대한 후원은 이를 전면적으로 금지하는 것이 바람직하다.</li><li>타인명의기부금은 국고에 귀속된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 법정 후원회 통로로 기부하는 재산이며 현금만 뜻하지 않는다.</li><li><strong>비선택</strong> · 맞음. 한도 규제는 거액 기부자의 과도한 영향력을 막는 수단이다.</li><li><strong>선택</strong> · 틀림·정답③. 전면금지는 소액 다수의 정상적 정치참여까지 차단한다.2013헌바168 헌불결정의 핵심이다.</li><li><strong>비선택</strong> · 맞음. 타인명의를 이용한 후원금은 법정 국고귀속 대상이다. 허용된 소액 익명후원과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당에 대한 후원은 이를 전면적으로 금지할 것이 아니라 오히려 일반 국민들의 정당에 대한 소액 다수의 기부를 장려ㆍ권장함으로써 국민과 정당 간의 연대를 강화하고, 정당을 통한 국민의 정치참여 기회를 확대하며. 정당 간의 건전한 경쟁을 유도할 필요가 있다(헌재 2015. 12. 23. 2013헌바168).</p></details></section>
+
+<section class="question-card" id="question-헌법_184"><h4>워크북 · 헌법_184</h4><p class="question-stem">정당 보호와 육성을 위해 국가가 정당에 지급하는 금전이나 유가증권을 무엇이라고 하는가?</p><ol class="choices"><li>국고보조금</li><li>당비</li><li>후원금</li><li>기탁금</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답①. 국가가 정당을 보호·육성하기 위해 지급하는 국고보조금이다.</li><li><strong>비선택</strong> · 틀림. 당비는 당원이 당헌당규 등에 따라 부담한다.</li><li><strong>비선택</strong> · 틀림. 후원금은 후원회에 기부하는 자금이다.</li><li><strong>비선택</strong> · 틀림. 기탁금은 개인이 선관위에 맡기는 자금이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_185"><h4>워크북 · 헌법_185</h4><p class="question-stem">정치자금 규제에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>관련 법률은 정치자금법에 의하지 않은 방식의 정치자금의 기부, 수수도 허용하고 있다</li><li>실명(자기명의)이 확인되는 방법을 이용해야 하며 현금기부는 제한된다.</li><li>법인ㆍ단체의 정치자금 기부는 금지된다.</li><li>법인ㆍ단체와 관련된 자금을 이용한 정치자금 기부는 금지된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀림·정답①. 정치자금법이 정한 방식에 따라 기부·수수해야 한다.</li><li><strong>비선택</strong> · 출제취지상 맞음. 다만 일정 금액 이상의 실명확인 지급방법과 현금제한,소액 익명후원 예외를 구별해야 한다. 모든 후원을 무조건 실명공개한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 맞음. 현행법상 법인·단체의 기부 금지다. 과거 노동조합 판례와 시점 차이에 주의한다.</li><li><strong>비선택</strong> · 맞음. 개인 명의라도 실제 법인·단체 관련 자금을 이용했다면 금지에 걸릴 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정치자금법에 의하지 않은 정치자금의 기부, 수수를 일체 금지하고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_186"><h4>워크북 · 헌법_186</h4><p class="question-stem">정당의 공직선거후보자 추천에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>정당의 당원인 자는 무소속후보자로 등록할 수 없다.</li><li>현행법상 정당은 8년의 기간 내에서는 그 어떤 공직선거에도 참여하지 않더라도 정당등록이 취소되지 않는다.</li><li>후보자등록기간 중 당적을 이탈ㆍ변경하거나 둘 이상의 당적을 가지고 있는 때에는 해당 선거에 후보자로 등록할 수 없다.</li><li>정당은 공직선거후보자를 추천하는 데 있어서 경선을 실시하지 아니 할 수도 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 당적을 가진 사람이 무소속으로 등록할 수 없다는 당적 규율이다.</li><li><strong>선택</strong> · 틀림·정답②. 기준은 법에 열거된 임기만료 선거에 최근4년간 미참여이지8년간 아무 선거에도 불참해도 된다는 것이 아니다.</li><li><strong>비선택</strong> · 맞음. 후보등록기간의 당적 이탈·변경 및 이중당적 제한이다.</li><li><strong>비선택</strong> · 맞음. 민주적 추천 절차는 필요하지만 경선을 반드시 실시해야 하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공직선거후보자 추천 및 선거참여는 정당의 권리이자 존속요건으로서, 최근 4년간 임기만료에 의한 국회의원선거 또는 임기만료에 의한 지방자치단체장 선거나 시ㆍ도의회의원선거에 참여하지 않은 정당의 등록을 취소한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_187"><h4>워크북 · 헌법_187</h4><p class="question-stem">다음 중 헌법재판소에 의해 위헌결정을 받은 정당법 조항에서 규정되었던 등록취소사유는?</p><ol class="choices"><li>정당등록요건인 '법정 시ㆍ도당 수' 요건을 구비하지 못하게 된 때</li><li>정당등록요건인 '시ㆍ도당의 법정 당원 수' 요건을 구비하지 못하게 된 때</li><li>최근 4년간 임기만료에 의한 국회의워선거 또는 임기만료에 의한 지방 자치단체장선거나 시ㆍ도의회의원선거에 참여하지 않은 때</li><li>임기만료에 의한 국회의원선거에 참여해 의석을 얻지 못하고 유효투표 총수의 2/100 이상을 득표하지 못한 때</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 선택 아님. 법정 시·도당 수 미충족은 현행 등록취소 사유이며 보완기간도 확인한다.</li><li><strong>비선택</strong> · 선택 아님. 시·도당의 법정 당원 수 미충족도 법정 조직요건 문제다.</li><li><strong>비선택</strong> · 선택 아님. 법정 임기만료 선거4년 미참여는 등록취소 사유다.</li><li><strong>선택</strong> · 정답④. 선거에 참여했으나 의석이 없고2% 미만이라는 사유는2012헌마431등에서 위헌으로 판단됐다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민의 정치적 의사형성에 참여할 진지한 의사나 능력을 갖추지 못한 정당을 배제시키면서도 정당으로 하여금 국민의 지지와 신뢰를 획득할 수 있는 정책 개발에 더욱 매진하도록 할 방법이 있음에도 불구하고, 정당등록취소조항이 단 한 번의 국회의원선거에서 의석을 얻지 못하고 일정 수준의 득표를 하지 못하였다는 이유로 정당등록을 취소하는 것은 입법목적 달성을 위해 필요한 최소한의 수단이라고볼 수 없다(헌재 2014. 1. 28. 2012헌마431등).</p></details></section>
+
+<section class="question-card" id="question-헌법_188"><h4>워크북 · 헌법_188</h4><p class="question-stem">다음 중 정당의 자진해산에 관한 서술로 틀린 것은?</p><ol class="choices"><li>자진해산한 때에는 그 대표자가 지체 없이 그 뜻을 관할 선거관리위원회에 신고한다.</li><li>선거관리위원회는 그 정당의 등록을 말소하고 지체 없이 그 뜻을 공고 한다.</li><li>잔여재산은 당헌이 정하는 바에 따라 처분하고, 이러한 방식으로 처분되지 않은 잔여재산은 국고에 귀속된다.</li><li>국고보조금은 지출내역을 중앙선관위에 보고하고 그 잔액을 당헌이 정한 바에 따라 처분할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞음. 자진해산 사실을 대표자가 지체 없이 관할 선관위에 신고한다.</li><li><strong>비선택</strong> · 맞음. 선관위가 등록을 말소하고 공고한다.</li><li><strong>비선택</strong> · 맞음. 자진해산의 일반 잔여재산 규율이다. 보조금 등 특별한 목적자금은 별도로 본다.</li><li><strong>선택</strong> · 틀림·정답④. 보조금 잔액은 법에 따라 반환해야 한다. 당헌만으로 당원에게 나눌 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국고보조금중 지출되지 아니한 잔액은 반환한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_189"><h4>워크북 · 헌법_189</h4><p class="question-stem">다음 중 정당의 강제해산에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>정당은 행정부의 통상적인 처분에 의해 해산한다.</li><li>정당해산심판제도는 민주주의를 부정하거나 공격하는 정당으로부터 헌법이 스스로를 보호하기 위한 제도라는 의미만을 갖는다.</li><li>정당해산심판제도는 강제해산에 대하여 헌법이 직접 요건과 절차를 엄격히 규정함으로써 다른 결사와는 차별화되는 헌법적 보호를 부여한다는 의미만을 갖는다.</li><li>정당해산심판제도는 다수파에 의한 남용 위험이 크므로 엄격하고 제한적으로 최후수단으로만 운용되어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 행정부의 통상적인 처분으로 강제해산할 수 없다. 헌재 심판이 필요하다.</li><li><strong>비선택</strong> · 틀림. 방어적 민주주의뿐 아니라 정당 보호의 의미도 있다. “만”이 함정이다.</li><li><strong>비선택</strong> · 틀림. 정당 보호뿐 아니라 민주주의 방어의 의미도 있다.</li><li><strong>선택</strong> · 정답④. 다수 권력의 남용 위험 때문에 엄격하고 제한적인 최후수단으로 운용해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 정당은 오직 헌법재판소가 그 정당의 위헌성을 확인하고 해산의 필요성을 인정한 경우에만 정당정치의 영역에서 배제된다(헌재 1999. 12. 23. 99헌마135). ②와 ③의 이중적 의미를 동시에 갖는다.</p></details></section>
+
+<section class="question-card" id="question-헌법_190"><h4>워크북 · 헌법_190</h4><p class="question-stem">다음 중 정당해산심판의 실체적 요건에 관한 설명으로 옳은 것은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>정당뿐만 아니라 정당이 될 잠재성이 있는 모든 정치적 결사가 정당해산심판의 대상이 된다.</li><li>정당의 공식적인 강령에 위헌성이 없다면 정당의 주요 당직자의 활동이 민주적 기본질서에 위배되는 것으로서 정당의 활동으로 귀속될 수 있다 하더라도 해산결정을 내려서는 안 된다.</li><li>당원들의 우발적이고 개별적인 행위도 정당의 활동으로 귀속된다.</li><li>정당의 목적이나 정당의 활동 중 어느 하나라도 민주적 기본질서에 위배된다면 정당해산 사유가 될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 정당이 될 가능성만으로 모든 정치적 결사가 해산심판 대상이 되는 것은 아니다.</li><li><strong>비선택</strong> · 틀림. 공식 강령만 보지 않는다. 정당에 귀속되는 활동이 요건을 충족하는지 별도로 심사한다.</li><li><strong>비선택</strong> · 틀림. 우발적인 개별행위를 자동으로 정당 전체에 귀속시킬 수 없다.</li><li><strong>선택</strong> · 정답④. 헌재는 목적 또는 활동 어느 한쪽도 해산 사유가 될 수 있다고 본다. 구체적 위험·비례 등의 다른 요건도 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 대상이 되는 것은 헌법상 정당의 개념 표지를 모두 갖춘 단체여야 한다. ② 공식적 강령과 다르게 실제 정당 활동으로 귀속될 수 있는 것이 민주적 기본질서에 위배된다면 해산결정을 내릴 수 있다. ③ 정당의 활동이란 정당기관의 행위나 주요 정당관계자, 당원 등의 행위로서 그 정당에게 귀속시킬 수 있는 활동 일반으로서, 구성원의 해당 정당과 밀접하게 관련되고 개별ㆍ우발적인 것이 아닌 것을 말한다(현재 2014. 12 19.2013한다 1).</p></details></section>
+
+<section class="question-card" id="question-헌법_191"><h4>워크북 · 헌법_191</h4><p class="question-stem">다음은 민주적 기본질서의 의미에 대한 헌법재판소의 설시 내용이다. 문맥상 괄호 안에 들어갈 말로 알맞은 것은?<br><br>개인의 자율적 이성을 신뢰하고 모든 정치적 견해가 각각 상대적 진리성과 합리성을 지닌다고 전제하는 ( )에 입각한 것으로서, 모든 폭력적ㆍ자의적 지배를 배제하고 다수를 존중하면서도 소수를 배려하는 민주적 의사결정과 자유ㆍ평등을 기본원리로 하여 구성되고 운영되는 정치적 질서이다.</p><ol class="choices"><li>다수결</li><li>대의제</li><li>직접민주제</li><li>다원적 세계관</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 다수결은 의사결정 방법이며 여러 견해의 상대적 합리성을 인정하는 세계관 자체를 뜻하지 않는다.</li><li><strong>비선택</strong> · 틀림. 대의제는 대표를 통한 권력행사의 방식이다.</li><li><strong>비선택</strong> · 틀림. 직접민주제는 국민의 직접 결정방식이다.</li><li><strong>선택</strong> · 정답④. 다원적 세계관이 타인의 정치적 견해도 토론·경쟁의 대상으로 인정하는 기반이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> &quot;모든 정치적 견해가 각각 상대적 진리성과 합리성을 지닌다고 전제하는&quot;이라는 수식어가 등장하는 문맥상 '다원적 세계관'이 적합한 개념이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_192"><h4>워크북 · 헌법_192</h4><p class="question-stem">다음 중 정당해산결정의 요건으로서 민주적 기본질서 '위배'의 의미에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>위배의 의심을 말한다.</li><li>단순한 위반이나 저촉으로 족하다.</li><li>장래의 해악을 끼칠 추상적 위험을 초래한 경우이다.</li><li>실질적인 해악을 끼칠 구체적 위험을 초래한 경우이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 의심만으로 정당 존립을 없앨 수 없다.</li><li><strong>비선택</strong> · 틀림. 단순한 위반·저촉을 넘는 기준이 필요하다.</li><li><strong>비선택</strong> · 틀림. 추상적 위험만으로 충분하지 않다.</li><li><strong>선택</strong> · 정답④. 민주적 기본질서에 실질적 해악을 끼칠 구체적 위험을 말한다. 이미 피해가 완전히 발생해야만 한다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌재 2014. 12. 19. 2013헌다1 참조.</p></details></section>
+
+<section class="question-card" id="question-헌법_193"><h4>워크북 · 헌법_193</h4><p class="question-stem">정당해산심판의 절차적 요건에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>국회가 그 의결로써 위헌정당 해산을 헌법재판소에 청구한다.</li><li>위헌정당이라는 의심이 있으면 반드시 위현정당해산을 청구하는 것이 정당해산심판 청구자격을 가진 기관의 의무이다.</li><li>헌법재판소는 다른 심판사건과는 달리 정당해산심판에 있어서는 가처분 결정을 내릴 수 없다.</li><li>정당해산결정을 하려면 재판관 중 6인 이상이 해산결정에 찬성해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀림. 청구기관은 국회가 아니라 정부다. 국무회의 심의를 거친다.</li><li><strong>비선택</strong> · 틀림. 정부의 청구에는 재량이 있다. 의심이 있으면 반드시 청구해야 하는 것은 아니다.</li><li><strong>비선택</strong> · 틀림. 정당해산심판에서도 법정 가처분이 가능하다.</li><li><strong>선택</strong> · 정답④. 해산에는 재판관6명 이상 찬성이 필요하다. 정부의 청구만으로 해산되지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 정부가 국무회의 심의를 거쳐 위헌정당의 해산을 헌법재판소에 청구한다. ② 정당해산심판 청구 여부는 정부의 재량이다. ③ 헌법재판소는 정당활동정지 가처분 결정을 할 수 있다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 08' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 08|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

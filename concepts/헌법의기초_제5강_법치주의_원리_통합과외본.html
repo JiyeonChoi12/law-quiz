@@ -1,0 +1,1461 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제5강 법치주의 원리 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 05</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제5강 법치주의 원리 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>“법대로 했습니다.” 그 법이 사람을 함부로 가두거나 재산을 빼앗게 한다면 이 말만으로 충분할까? <strong>법치주의는 권력에 법적 근거를 요구하면서, 그 법 자체도 기본권과 정당한 절차를 지키도록 하는 원리</strong>다. 국가가 무엇을 할 때마다 던질 점검 질문을 배우는 강이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나?</td>
+<td>법치주의의 뜻, 기본권 제한의 13원칙, 권력통제 제도, 비상상황·특수신분·통치행위</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>권력자의 변덕뿐 아니라 ‘법률이라는 모양을 갖춘 부당한 권력’도 막기 위해</td>
+</tr>
+<tr>
+<td>과목에서의 위치</td>
+<td>4강 국민주권이 정당하게 작동하기 위한 방법과 한계</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>국민주권·권력통제 → 법치주의 → 6강 사회국가의 적극적 역할과 그 한계</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>거의 모든 기본권 사건에서 왜 합헌·위헌인지 설명할 판단 기준</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 143-168쪽(PDF 161-186쪽), 헌법_091-123, 33문항·132개 보기. 제공 문제 전체는 부록에 보존하며 모든 보기에 해설을 붙인다. 별점은 학습 우선순위이고 실제 오답률 자료는 없다. 판례가 제시한 법리, 교재 저자의 비판, 새 가정 사례를 구별한다.</p>
+<p><strong>색상:</strong> <mark class="yellow">암기·정의·결론</mark> / <mark class="green">이유</mark> / <mark class="pink">함정·정정</mark> / <mark class="blue">연결</mark>. 2026년 재판소원 관련 법 개정, 독일 기본법의 조문·신청인 수 변경은 교재의 옛 설명과 별도 표시한다.</p>
+<h1>1. 법의 모양과 법의 내용</h1>
+<h2 id="foundations-05-01" data-concept-id="foundations-05-01">1-1. 형식적 법치주의에서 실질적 법치주의로 ★★★★★</h2>
+<p><strong>교재 144-146쪽 / 문단의 역할:</strong> 법치주의의 정의와 역사적 반성의 이유를 설명한다.</p>
+<p>법치주의는 국민의 권리·의무에 관한 사항을 법률로 정하고, 법이 최소한의 일반적 형식을 지키며, <strong>목적·내용도 기본권 보장의 헌법 이념에 맞아야 한다</strong>는 원리다. 법치국가원리·법의 지배라는 표현과 연결된다. 반대는 사람의 자의에 따른 인치다. 자비로운 통치자라도 기분에 따라 권리를 주고 빼앗으면 인치의 문제가 사라지지 않는다.</p>
+<p>형식적 법치주의에만 머무르면 “국회가 만든 법에 근거가 있나, 행정·재판이 그 법을 지켰나?”까지만 묻는다. 실질적 법치주의는 여기에 “그 법 자체가 존엄·자유·평등·정당한 절차를 지키나?”를 더한다. <mark class="pink">내용이 정의롭다는 이유로 법률의 근거와 절차를 무시해도 된다는 뜻은 아니다. 형식적 조건을 포함하면서 내용을 심사한다.</mark></p>
+<p><strong>교재의 가상 국가 X 사례:</strong> 헌법은 의회에 법을 만들 권한을 주었다. 의회가 ‘특정 인종을 수용하여 학살하라’, ‘피고인이 스스로 무죄를 입증하지 못하면 처벌하라’, ‘총통의 명령은 모든 법보다 우선한다’는 법을 만들었다. 행정부와 법원은 그 법을 그대로 집행했다. 겉으로는 헌법→법률→집행의 수권 사슬이 이어져도, 이 명령들은 사람에게 정당한 준수의무를 발생시키는 법질서의 조건을 무너뜨린다. <strong>법이라는 이름이 불법의 내용을 씻어 주지 않는다.</strong></p>
+<p>제2차 세계대전 뒤 독일 기본법은 기본권이 입법·집행·사법을 직접 구속하고, 입법도 헌법질서에 구속되도록 하며 헌법재판을 강화했다(기본법 1③·20③·100①). 법률을 만드는 의회도 헌법 위에 있지 않다는 뜻이다. 교재가 인용하는 <strong>90헌가69등(1992.2.25.)</strong>은 법률의 목적·내용까지 기본권에 맞아야 함을, <strong>2002헌가5(2002.11.28.)</strong>는 죄형법정·소급금지 같은 형식적 보장에 더하여 행위의 무거움과 책임에 비례하는 형벌·가혹한 형벌의 배제까지 필요함을 설명한다. 여기서는 교재가 발췌한 법리의 의미를 배우며, 그 인용만으로 두 사건의 모든 사실·주문을 추정하지 않는다.</p>
+<p><strong>시험:</strong> 091·092·108. <strong>키워드:</strong> 근거+절차+내용·수권 사슬만으로 부족. <strong>한 줄:</strong> 법을 지키는 권력뿐 아니라 헌법을 지키는 법이 필요하다.</p>
+<h2 id="foundations-05-02" data-concept-id="foundations-05-02">1-2. 법치주의의 두 구현 방식 ★★★★☆</h2>
+<p><strong>교재 146·168쪽 / 문단의 역할:</strong> 이어질 긴 목록을 하나의 지도에 놓는다.</p>
+<p>한쪽은 <strong>기본권을 제한할 때 지킬 판단 기준</strong>이고, 다른 쪽은 <strong>그 기준을 실제로 지키게 하는 기관·절차</strong>다. 전자에는 법률우위·법률유보·포괄위임금지·적법절차·명확성·소급입법금지·신뢰보호·자기책임·과잉금지·과소보호금지·본질적 내용 침해금지·평등·체계정당성이라는 13원칙이 있다. 후자에는 행정에 대한 법원의 심사, 헌법재판, 사법절차적 권리, 성문·경성헌법, 권력분립이 있다.</p>
+<p>이해용 장면: 국가가 영업을 금지하면 법적 근거·목적·필요성을 먼저 묻는다. 위법한 금지라면 법원에 다툴 통로도 있어야 한다. 좋은 원칙만 있고 심판할 기관이 없으면 실제 권력통제가 어렵다. ‘권력적 사실행위라서 법치주의 적용을 면제한다’는 별도 일반원칙은 없다.</p>
+<p><strong>시험:</strong> 109·105. <strong>키워드:</strong> 판단 기준/통제 장치. <strong>한 줄:</strong> 법치주의는 지켜야 할 기준과 어겼을 때 바로잡을 제도를 함께 갖춘다.</p>
+<h1>2. 누가 어떤 근거로 정할 것인가</h1>
+<h2 id="foundations-05-03" data-concept-id="foundations-05-03">2-1. 법률우위와 법률유보 ★★★★★</h2>
+<p><strong>교재 146-148쪽 / 문단의 역할:</strong> 가장 비슷하게 보이는 두 원칙을 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>원칙</th>
+<th>질문</th>
+<th>이해용 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>법률우위</td>
+<td>법률과 충돌하지 않는가?</td>
+<td>법률이 허용한 영업을 시행령이 근거 없이 전부 금지</td>
+</tr>
+<tr>
+<td>법률유보</td>
+<td>필요한 법률상 근거가 있는가?</td>
+<td>국민의 중요한 권리를 기관 내부 지침만으로 제한</td>
+</tr>
+<tr>
+<td>의회유보</td>
+<td>본질적인 결정은 국회가 직접 했는가?</td>
+<td>법은 아무 기준 없이 ‘장관이 정한다’고만 규정</td>
+</tr>
+</tbody></table>
+<p>법률우위는 헌법에 합치하는 형식적 법률이 집행 등 다른 국가의사에 우선한다는 원칙이다. 하위 규정은 법률이 정한 규율대상·목적의 범위 안에 있어야 한다(교재 인용 2011헌마474등). 위헌법률까지 헌법보다 높다는 뜻이 아니다.</p>
+<p>법률유보는 법적 근거를 요구한다. 오늘날에는 기본권 실현에 중요하고 본질적인 사항을 입법자가 스스로 정해야 한다는 <strong>의회유보·본질성 이론</strong>도 포함한다. 본질적 판단을 다른 기관에 넘긴 뒤 ‘근거 한 줄은 있다’고 끝낼 수 없다. 독일 판례의 심사 순서도 먼저 본질적 사항을 의회가 정했는지, 다음으로 재량을 준 범위가 충분히 명확한지를 묻는다.</p>
+<p>처음에는 군주의 자의적 자유·재산 침해를 막는 침해유보가 중심이었다. 지금은 지원금·교육·복지 같은 <strong>급부행정도 기본권적으로 중요하면 법률유보를 지켜야 한다.</strong> 급부는 세금으로 마련되고, 누구를 지원대상에서 빼는지에 따라 다른 사람의 권리에 큰 영향을 줄 수 있다. 기본권적 중요성과 공개적 토론·이익조정 필요성이 클수록 국회가 정해야 할 규율의 밀도도 높아진다. 행정의 모든 세부사항을 법률에 빠짐없이 써야 한다는 전부유보와는 구별한다.</p>
+<p><strong>시험:</strong> 093·110·111. <strong>키워드:</strong> 위우/근유/본의회. <strong>한 줄:</strong> 법에 어긋나지 않을 것, 법적 근거가 있을 것, 핵심은 국회가 정할 것을 나누어 묻자.</p>
+<h2 id="foundations-05-04" data-concept-id="foundations-05-04">2-2. 수신료 사건과 교사 가산점 사건 ★★★★★</h2>
+<p><strong>교재 148-149쪽 / 판례의 역할:</strong> 무엇이 의회가 정해야 할 본질적 사항인지 보여 준다.</p>
+<p><strong>수신료 98헌바70(1999.5.27.).</strong> 국민에게 수신료를 내게 하는데 금액은 한국방송공사가 정하고 장관이 승인했다. 국회는 결정에 관여하지 않았다. 헌재의 고민은 “국민의 재산권과 공영방송의 자유에 중요한 돈의 기준을 누가 정해야 하는가?”였다. 납부의무자의 범위·금액은 본질적 사항이므로 국회의 결정 또는 관여를 배제할 수 없다고 보았다. 금액 결정 조항은 <strong>헌법불합치·잠정적용</strong> 대상이었다. 수신료 자체가 언제나 위헌이라는 결론이 아니다. <a href="https://www.law.go.kr/LSW/detcStmdInfoP.do?detcSeq=135525">공식 사건 정보</a>.</p>
+<p>문장 번역: ‘기본권 실현 관련 영역’ → 돈을 내는 사람과 방송하는 기관 모두에게 중요한 문제다. ‘본질적 사항’ → 누가 얼마를 내느냐 같은 핵심이다. ‘국회의 결정·관여’ → 기관 내부 결정과 장관 승인만으로 끝낼 수 없다. 이후 방송법은 국회의 승인 절차를 두는 방향으로 제도를 정비했다. 교재의 과거 기관 명칭과 금액 결정 문제를 오늘의 수신료 징수 방식 논쟁과 그대로 섞지 않는다.</p>
+<p><strong>교사 임용 가산점 2001헌마882(2004.3.25.).</strong> 대전의 공립 중등교사 임용시험에서 사범대·복수전공·부전공 가산점 때문에 경쟁자들의 공직 진입이 영향을 받았다. 응시자 입장에서는 몇 점이 합격·탈락을 가른다. 법은 공개전형에 필요한 사항을 대통령령에 맡긴다는 정도였고 핵심 가산점 기준은 명시하지 않았다. 헌재는 적용대상·배점 등 기본사항을 법률에 정해야 하는데 그러지 않아 청구인의 공무담임권을 침해한다고 판단했다.</p>
+<p>왜 국회가 맡아야 할까? 서로 경쟁하는 집단의 이해가 충돌하므로 대표기관의 공개 토론과 야당·국민의 비판·참여를 거쳐 조정할 필요가 크기 때문이다. ‘전문가가 정했으니 더 좋다’만으로 이 과정을 대체할 수 없다. 반대로 모든 기술적 세부내용까지 법률로만 정하라는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 094·111. <strong>키워드:</strong> 금액·대상·배점·공개 토론·본질성. <strong>한 줄:</strong> 권리를 좌우하는 핵심 선택을 행정기관에 백지로 넘겨서는 안 된다.</p>
+<h2 id="foundations-05-05" data-concept-id="foundations-05-05">2-3. 포괄위임입법금지: 무엇을 맡겼는지 법에서 보여야 한다 ★★★★★</h2>
+<p><strong>교재 149쪽 / 문단의 역할:</strong> 행정부에 세부 규정을 맡길 때의 한계를 설명한다.</p>
+<p>헌법 75조는 법률이 <strong>구체적으로 범위를 정하여</strong> 위임한 사항에 관하여 대통령령을 정하도록 한다. 법률을 읽으면 대통령령에 들어갈 내용의 대강을 예측할 수 있어야 한다. 아무 대상·기준도 없이 ‘필요한 모든 것은 대통령령으로 정한다’고 맡기는 것은 문제다.</p>
+<p>다만 한 조문에 모든 내용이 한꺼번에 적혀 있어야 하는 것은 아니다. <strong>관련 조문 전체를 유기적·체계적으로 읽어 예측할 수 있는지</strong> 살핀다(94헌바22,1997.5.29.). 처벌하지 않을 행위가 무엇인지조차 법률에서 전혀 예측할 수 없어 금지·허용의 경계를 알 수 없다면 포괄위임 문제가 생긴다(2001헌바5,2002.5.30.). 두 인용은 교재가 제시한 판단 기준이다.</p>
+<p>이해용 비교: “위험물의 종류·위험 기준을 법에 정하고 구체 검사방법을 맡긴다”와 “금지할 물건과 처벌 예외를 장관이 마음대로 정한다”는 다르다. 의회유보가 <strong>누가 핵심을 결정하나</strong>를 묻는다면 포괄위임금지는 <strong>남에게 맡긴 범위가 법률에서 예측 가능한가</strong>를 묻는다.</p>
+<p><strong>시험:</strong> 095·112. <strong>키워드:</strong> 75조·구체 범위·대강 예측·전체 체계. <strong>한 줄:</strong> 세부사항을 맡겨도 방향과 경계는 법률에서 읽을 수 있어야 한다.</p>
+<h1>3. 어떻게 정하고 집행할 것인가</h1>
+<h2 id="foundations-05-06" data-concept-id="foundations-05-06">3-1. 적법절차·영장·연좌제 금지·무죄추정 ★★★★★</h2>
+<p><strong>교재 150쪽 / 문단의 역할:</strong> 절차의 법정성과 실질적 공정성을 함께 요구한다.</p>
+<p>적법절차는 법에 적힌 순서를 밟는다는 것만이 아니다. 그 법과 절차의 내용도 합리적이고 정당해야 한다. 형사소송에만 한정되지 않고 입법·행정 등 모든 국가작용에 적용된다(97헌바22,92헌가8,90헌바35,96헌바4에서 인용한 법리). 자기책임 등 다른 법치 원칙을 위반하면서 전체적으로 적법절차는 지켰다고 말할 수 없다.</p>
+<p>고유한 절차적 질문도 있다. 헌법·법률이 정한 절차를 실제 거쳤는가? 징계·직위해제·업무정지·형사처벌처럼 개인의 사실관계를 조사하여 불리한 지위를 만드는 과정에서, 기본권 침해 위험을 줄이는 통지·의견진술·증거검토·방어 기회 등을 마련했는가? 결과가 비슷할 것 같다는 이유로 필요한 절차를 생략해서는 안 된다.</p>
+<table>
+<thead>
+<tr>
+<th>구체 원칙</th>
+<th>쉬운 뜻</th>
+<th>시험의 경계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>영장주의(12③·16조)</td>
+<td>체포·구속·압수·수색 등 강제처분은 원칙적으로 적법한 법관의 영장에 근거</td>
+<td>현행범·긴급 상황의 법정 예외를 포함한 정확한 요건 확인;모든 조사에 영장이 필요한 것은 아님</td>
+</tr>
+<tr>
+<td>연좌제 금지(13③)</td>
+<td>친족이 한 일 때문에 본인에게 불이익을 주지 않음</td>
+<td>본인의 행위·책임과 친족의 행위를 구별</td>
+</tr>
+<tr>
+<td>무죄추정(27④)</td>
+<td>유죄 확정 전에는 유죄의 응보적 불이익을 부과하지 않음</td>
+<td>모든 절차적 조치가 금지되는 것은 아님.도주·증거인멸 위험에 따른 적법한 구속은 별도</td>
+</tr>
+</tbody></table>
+<p><strong>중범죄 구속 사례(제공 문제):</strong> 대중이 “끔찍한 혐의니 반드시 구속하라”고 해도 혐의에 대한 비난을 미리 형벌처럼 가할 수 없다. 구속의 법정 요건과 필요성을 따져야 한다. 법원이 증거조사 없이 심증만으로 유죄를 선고하는 것도 허용되지 않는다. 2004헌바12(2006.5.25.)의 ‘불이익’ 설명은 <strong>유죄 인정의 효과로서 사회적 비난·응보적 차별</strong>을 가한다는 의미다. 신체의 자유를 제한하는 모든 조치가 곧 무죄추정 위반이라는 말은 아니다.</p>
+<p><strong>시험:</strong> 096·097·113. <strong>키워드:</strong> 절차+내용·모든 국가작용·응보와 절차 필요 구별. <strong>한 줄:</strong> 국가가 사람을 제재할 때는 법적 근거뿐 아니라 공정하게 방어할 과정도 지켜야 한다.</p>
+<h2 id="foundations-05-07" data-concept-id="foundations-05-07">3-2. 명확성: 금지된 행동을 미리 알 수 있어야 한다 ★★★★★</h2>
+<p><strong>교재 150-152쪽 / 문단의 역할:</strong> 국민의 예측 가능성과 집행자의 자의 방지를 설명한다.</p>
+<p>명확성은 무엇이 허용·금지·의무인지, 어떤 권한과 효과가 생기는지, 예외·조각사유가 무엇인지 합리적으로 알 수 있도록 법을 정하라는 원칙이다. 국민에게는 장래 행동 지침을, 집행자에게는 객관적 판단 기준을 준다. 90헌바27등의 이유를 풀면 <strong>공정한 고지 → 예측 가능성 → 신뢰·법적 안정성</strong>, 그리고 <strong>자의적 집행의 예방</strong>이다.</p>
+<p>법문의 단어만 떼어 보지 않고 목적·취지·연혁·체계를 종합해 합리적 해석 기준을 얻을 수 있는지 본다(2002헌바83). 모든 법에 같은 정도의 명확성을 요구하지는 않는다. 형벌법규처럼 자유에 강한 영향을 주는 규정은 더 엄격하다(99헌바34). 가치 판단이 필요한 단어를 하나도 쓰지 않는 것은 불가능하므로, 법관의 합리적 보충 해석이 가능하고 개인 취향에 좌우되지 않는다면 곧바로 위반이 아니다.</p>
+<p><strong>판례 드라마: ‘저속한 간행물’ 95헌가16(1998.4.30.).</strong> 출판자는 내용을 표현하고 싶고 행정청은 ‘저속하다’며 등록을 취소할 수 있었다. 어느 정도 성적·폭력적·잔인한 표현부터 해당하는지 하한이 열려 있었다. 출판자는 “어디까지 쓰면 취소되는지 알 수 없다”고 한다. 헌재는 해당 ‘저속한 간행물’ 부분이 불명확하고 규율범위도 지나치게 넓어 표현의 자유를 위축시킨다고 판단했다. “일반적 가치 개념도 가능” → 모든 추상어가 위헌은 아님, “하한이 열려 있음” → 국민이 합리적으로 경계를 알 수 없음, “위축” → 처벌·취소가 무서워 보호받을 표현까지 포기하게 됨이다.</p>
+<p><mark class="pink">헌법 10조에 ‘법률은 명확해야 한다’는 문장이 그대로 적혀 있는 것은 아니다.</mark> 법치국가원리·기본권 보장·37② 등에서 도출하는 원리다.</p>
+<p><strong>시험:</strong> 098·114. <strong>키워드:</strong> 합리적 해석·형벌은 엄격·공정 고지·자의 방지. <strong>한 줄:</strong> 국민이 미리 경계를 알고 집행자가 제멋대로 바꾸지 못할 정도로 분명해야 한다.</p>
+<h1>4. 시간이 바뀌어도 지켜야 할 것</h1>
+<h2 id="foundations-05-08" data-concept-id="foundations-05-08">4-1. 진정·부진정·시혜적 소급입법 ★★★★★</h2>
+<p><strong>교재 152-154쪽 / 문단의 역할:</strong> 법 개정이 과거와 현재에 미치는 효과를 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>관계의 상태</th>
+<th>원칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>진정소급</td>
+<td>이미 끝난 사실·법률관계에 새 법의 불리한 효과를 붙임</td>
+<td>원칙적 금지,비형벌 영역에서 매우 제한적 예외 검토</td>
+</tr>
+<tr>
+<td>부진정소급</td>
+<td>과거 시작되어 아직 진행 중인 관계에 새 법 적용</td>
+<td>원칙적 허용,신뢰보호로 제한</td>
+</tr>
+<tr>
+<td>시혜적 소급</td>
+<td>적용 대상에게 유리한 새 효과를 과거로 확대</td>
+<td>가능하나 입법재량·평등·합리성의 한계 있음</td>
+</tr>
+</tbody></table>
+<p>헌법 13①은 행위 당시 범죄가 아니었던 일을 뒤늦게 처벌하지 못하게 하고,13②는 소급입법에 의한 참정권 제한·재산권 박탈을 금지한다. 법치주의상 소급금지의 문제는 이 세 영역에만 한정되지 않는다. 국민의 법적 지위를 불리하게 바꾸는 여러 법령에서도 검토한다. <strong>형벌불소급의 엄격한 보장을 일반 비형벌 소급입법의 예외와 섞지 않는다.</strong></p>
+<p>제공 문제의 <strong>추가 과세 사례</strong>: 이미 과세요건이 완성되고 납부도 끝난 소득에 새 법으로 세금을 더 붙인다면 진정소급이 문제다. <strong>기존 음식점 금연시설 사례</strong>: 과거 영업 자체를 새 위법행위로 처벌하는 것이 아니라 계속되는 영업에 앞으로 지킬 의무를 부과한다면 부진정소급이다. ‘과거에 시작했다’는 이유만으로 모두 진정소급이 아니다.</p>
+<p>97헌바76등(1999.7.22.)의 일반적 예외 설명은 소급을 예상할 수 있었거나, 법적 상태가 불확실하여 보호할 신뢰가 작거나, 손실이 없거나 매우 작거나, 신뢰보다 우선할 심히 중대한 공익이 있는 경우 등을 든다. 예외 목록이 모든 소급처벌의 허가장이 되는 것은 아니다. 부진정소급도 공익과 신뢰를 교량해야 한다(2001헌마194,2003.9.25.).</p>
+<p><strong>군인연금 경력 통산 사건 2000헌바69(2002.2.28.).</strong> 개정법은 다른 근무경력을 재직기간에 합산할 수 있게 했지만 일정 시점 이전 퇴역자에게는 적용하지 않았다. 과거 퇴역자 입장에서는 “나에게도 새 혜택을 달라”고 주장할 수 있다. 그러나 새 혜택을 얼마나 소급할지는 일차적으로 입법자가 목적·사회실정·개정 경위를 고려하여 결정한다. 헌재는 그 사안의 배제가 현저히 불합리·불공정한 재량 일탈이라고 보지 않았다. <strong>유리한 소급이 가능하다는 것과 반드시 모든 과거 사람에게 확대해야 한다는 것은 다르다.</strong></p>
+<p><strong>시험:</strong> 099·115·116. <strong>키워드:</strong> 종료/진행·불리/유리·신뢰보호. <strong>한 줄:</strong> 먼저 관계가 끝났는지, 다음으로 새 효과가 유리한지 불리한지 묻자.</p>
+<h2 id="foundations-05-09" data-concept-id="foundations-05-09">4-2. 신뢰보호와 자기책임 ★★★★★</h2>
+<p><strong>교재 154-155쪽 / 문단의 역할:</strong> 국가의 제도 변경과 개인의 결정에 따르는 책임의 한계를 설명한다.</p>
+<p>신뢰보호는 과거의 법·제도를 합리적으로 믿고 생활을 형성한 사람의 지위를 법 개정 때 고려하라는 원칙이다. 법이 영원히 바뀌면 안 된다는 뜻은 아니다. 입법·개정은 민주국가의 정상적 운영이다. 교재의 네 요건은 <strong>기존 법적 상태 → 계속될 것이라는 합리적 신뢰 → 그에 적응한 법적 지위 형성 → 새 법의 불리한 영향</strong>이다.</p>
+<p>이해용 가정: 국가가 일정한 교육과정을 이수하면 자격시험을 볼 수 있다고 하여 학생이 오랫동안 준비했다. 제도를 바꾸면서 이미 준비한 사람에게 유예·경과조치를 줄 수 있는데도 전혀 고려하지 않았다면 신뢰보호가 문제 될 수 있다. 보호할 신뢰가 있는지, 덜 해치는 대안이 있는지, 잃는 이익과 얻는 공익이 어떤지 순서로 검토한다.97헌마38(1997.7.16.)의 법리도 불필요하게 큰 손상과 불균형을 경계한다. ‘나는 계속 이익을 볼 줄 알았다’는 주관적 기대만으로 충분하지 않다.</p>
+<p>자기책임은 자기의 자유로운 결정·선택에 관련된 이익과 부담을 지되, 결정하지 않았거나 결정할 수 없는 일까지 무제한 책임지지 않는다는 원칙이다(2015헌바198·2019헌바139의 인용 법리). 민법·형법만의 기술적 규칙이 아니라 자유·유책성·존엄에 연결된다. 다른 사람의 행동 때문에 자동 제재하는 법은 본인의 행위·통제 가능성과 책임의 관련성을 살펴야 한다. 이 원칙이 사회적 지원을 모두 금지하거나 우연한 불행을 모두 개인 탓으로 돌리는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 100·101·117. <strong>키워드:</strong> 합리적 신뢰·형성된 지위·경과조치·자유와 책임의 관련성. <strong>한 줄:</strong> 국가는 믿고 형성한 삶을 함부로 뒤집지 말고, 개인에게는 자신의 책임 범위만 물어야 한다.</p>
+<h1>5. 제한은 지나치지 않게, 보호는 부족하지 않게</h1>
+<h2 id="foundations-05-10" data-concept-id="foundations-05-10">5-1. 과잉금지의 네 단계 ★★★★★</h2>
+<p><strong>교재 155-156쪽 / 문단의 역할:</strong> 기본권을 제한하는 국가행위의 비례성을 점검한다.</p>
+<p>헌법 37②의 ‘법률로써’는 법률유보, ‘국가안전보장·질서유지·공공복리를 위하여 필요한 경우에 한하여’는 과잉금지와 연결된다. 목적이 좋아도 아무 수단이나 허용되지 않는다.89헌가95(1990.9.3.)·92헌가8(1992.12.24.)이 설명한 네 단계를 <strong>모두</strong> 갖추어야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>질문</th>
+<th>새 이해용 사례: 야간 소음 대책</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적의 정당성</td>
+<td>헌법적으로 추구해도 되는 목적인가?</td>
+<td>주민의 수면·건강 보호라는 목적</td>
+</tr>
+<tr>
+<td>수단의 적합성(방법의 적정성)</td>
+<td>그 방법이 목적에 도움이 되는가?</td>
+<td>큰 소음의 발생 시간·수준을 제한하면 도움이 되는가</td>
+</tr>
+<tr>
+<td>침해의 최소성(피해의 최소성)</td>
+<td>비슷한 효과를 내면서 덜 제한하는 방법이 있는가?</td>
+<td>모든 영업 금지 대신 시간·소음 기준·방음 조치 가능성</td>
+</tr>
+<tr>
+<td>법익의 균형성</td>
+<td>얻는 공익과 잃는 기본권 사이에 비례가 맞는가?</td>
+<td>미미한 소음 감소를 위해 모든 주민의 활동을 극심하게 제한하는가</td>
+</tr>
+</tbody></table>
+<p>적합성은 ‘세상에서 가장 좋은 방법인가’라는 최적성 심사가 아니다. 최소성은 목적 달성에 필요한 효과를 무시하고 무조건 약한 수단을 택하라는 말도 아니다. 균형성은 단순히 돈으로 모든 가치를 합산하는 계산이 아니라 기본권의 중요성과 제한 강도를 함께 판단하는 단계다.</p>
+<p><strong>시험:</strong> 118. <strong>키워드:</strong> 목적→적합→최소→균형. <strong>한 줄:</strong> 좋은 목적, 도움이 되는 수단, 덜 침해하는 대안, 남는 부담을 차례로 확인한다.</p>
+<h2 id="foundations-05-11" data-concept-id="foundations-05-11">5-2. 과소보호금지와 국가의 보호의무 ★★★★★</h2>
+<p><strong>교재 156-157쪽 / 문단의 역할:</strong> 국가가 손을 놓아 발생하는 기본권 침해도 살핀다.</p>
+<p>국가는 간섭을 줄여야 할 때도 있지만 타인의 위법한 공격으로부터 사람을 보호해야 할 때도 있다. 방어권 영역의 과잉금지는 <strong>너무 많이 제한했나</strong>, 보호의무의 과소보호금지는 <strong>필요한 보호를 너무 적게 했나</strong>를 묻는다. 교재는 물건·서비스를 제공하는 사실적 급부와 제도·권한·금지규범을 마련하는 규범적 급부를 함께 설명한다. 모든 급부권 사건에 하나의 동일한 심사 방식만 적용된다는 뜻은 아니다.</p>
+<p><strong>미국산 쇠고기 수입위생조건 사건 2008헌마419등(2008.12.26.).</strong> 수입조건 완화에 대해 소비자들이 생명·신체의 안전을 충분히 보호하지 못한다고 다투었다. 헌재는 보호의무가 있음을 전제로, 적절하고 효율적인 최소한의 보호조치를 했는지 심사했다. 전혀 조치하지 않았거나 조치가 전적으로 부적합·명백히 매우 불충분한 경우라야 보호의무 위반을 확인한다는 기준이다. 해당 고시가 그 정도로 부족하다고 단정하지 않아 청구를 기각했다. 위험이 전혀 없다는 과학적 선언이나 정부가 언제나 최선의 정책을 골랐다는 뜻은 아니다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941501&cbIdx=1106">공식 사건 설명</a>.</p>
+<p>문장 번역: ‘최소한의 보호’ → 적어도 작동하는 보호는 해야 한다. ‘명백히 불충분’ → 정책 선택의 여지를 인정해도 헌법상 최소선을 넘게 부족한 경우다. ‘기각’ → 이 사건 조치에서 그 위반을 인정하지 않은 것이다. 국가가 직접 제한하는 경우의 과잉금지 네 단계를 기계적으로 그대로 복사하지 않는다.</p>
+<p><strong>교재의 가난한 채권자·채무자 사례:</strong> 보호가 필요하다고 법원이 양쪽 재산을 비교한 뒤 더 가난한 사람에게 무조건 유리하도록 계약을 바꿔서는 안 된다. 구체적 권리와 계약·법적 구제 제도를 무시한 즉흥적 재분배는 법치주의가 아니다. 부당한 계약을 통제할 법적 근거와 요건, 복지·지원 정책을 통한 보호를 구별해야 한다. <mark class="blue">6강 사회국가도 법치주의 밖의 권력이 아니다.</mark></p>
+<p><strong>시험:</strong> 102. <strong>키워드:</strong> 보호의무·최소 보호·명백한 부족·법적 권리 존중. <strong>한 줄:</strong> 국가는 해치지 않는 것에 더해 필요한 보호도 하되 법과 권리를 존중해야 한다.</p>
+<h2 id="foundations-05-12" data-concept-id="foundations-05-12">5-3. 본질적 내용: 권리를 이름만 남겨서는 안 된다 ★★★★★</h2>
+<p><strong>교재 157-158쪽 / 문단의 역할:</strong> 기본권을 제한해도 지워 버릴 수 없는 핵심을 설명한다.</p>
+<p>헌법 37② 후단은 자유와 권리의 본질적 내용을 침해할 수 없다고 한다.93헌바5등(1996.1.25.)의 설명은 이를 제한하면 그 기본권 자체가 무의미해지는 본질적 요소라고 표현한다. 개별 기본권마다 무엇이 핵심인지 따로 살펴야 한다.</p>
+<p><strong>재판받을 권리: 92헌가11등(1995.9.28.).</strong> 교재가 발췌한 판례의 논증은 법관이 사실을 확정하고 법을 해석·적용하는 판단에 접근할 기회를 보장해야 한다는 것이다. 법원이라는 간판만 있고 사실·법률에 관한 판단의 기회를 사실상 막는 장벽을 세우면 재판청구권의 핵심이 사라진다. “사실 확정” → 무엇이 있었는지 판단, “해석·적용” → 어떤 법이 어떻게 작동하는지 판단, “접근 보장” → 그 판단을 실제 받을 길이다.</p>
+<p><strong>토지재산권: 88헌가13(1989.12.22.).</strong> 본질적 내용 침해란 단순히 재산의 이용이 일부 제한된 모든 경우를 말하지 않는다. 사유재산권이 이름만 남고 제도 자체가 껍데기가 되어 보장 목적을 이룰 수 없게 되는 지경을 뜻한다. 이 인용을 ‘토지 이용 제한은 항상 금지’라는 결론으로 읽지 않는다.</p>
+<p>국가가 적극적으로 자유를 막는 경우만이 아니다. 보호권·사회권·참정권처럼 제도와 급부를 필요로 하는 권리에서 <strong>핵심 보장을 아예 마련하지 않는 경우</strong>도 본질적 내용 문제가 될 수 있다. 투표권이 있다고 선언하면서 행사할 제도를 전혀 만들지 않는 이해용 가정을 떠올리면 된다.</p>
+<p><strong>시험:</strong> 119. <strong>키워드:</strong> 무의미화·형해화·적극적 권리의 핵심도 보호. <strong>한 줄:</strong> 제한 후에도 그 권리가 실제 권리로 남아 있어야 한다.</p>
+<h2 id="foundations-05-13" data-concept-id="foundations-05-13">5-4. 심화: 절대설·상대설·절충설과 저자의 견해 ★★★☆☆</h2>
+<p><strong>교재 158쪽 / 문단의 역할:</strong> ‘핵심’의 뜻에 관한 이론적 어려움을 드러낸다.</p>
+<table>
+<thead>
+<tr>
+<th>견해</th>
+<th>주장</th>
+<th>교재가 제기하는 비판</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>절대설</td>
+<td>어느 경우에도 침범할 수 없는 고정적 핵심영역</td>
+<td>정당방위·방어전쟁처럼 생명 등 핵심 이익의 침해가 정당화되는 상황을 어떻게 설명할까</td>
+</tr>
+<tr>
+<td>상대설</td>
+<td>구체적 형량으로 내용이 정해지고 비례원칙과 연결</td>
+<td>개인의 권리를 전체 이익의 합산 요소로만 낮출 위험</td>
+</tr>
+<tr>
+<td>절충설</td>
+<td>원칙적 절대 보호,공동체 존립 등 극히 중대한 공익에는 예외</td>
+<td>무엇이 그 예외인지 일관된 문턱 설정이 어렵고 존엄 원리 침해 위험</td>
+</tr>
+<tr>
+<td>교재 저자의 의무론적 이해</td>
+<td>존엄을 가진 자유롭고 평등한 구성원의 근본적 지위 관계를 훼손하지 못함</td>
+<td>이는 저자의 정당화 논증이며 모든 판례의 확정된 단일 공식과 구별</td>
+</tr>
+</tbody></table>
+<p>교재는 헌재가 대체로 절대설에 가까운 표현을 쓰지만 상대설로 설명되는 판례도 있다고 평가한다. 따라서 <strong>모든 사건에서 일관되게 절대설만 적용</strong>한다는 보기는 틀리다. 정당방위 사례도 아무 위험에나 생명을 박탈해도 좋다는 말이 아니라, 상황과 상대방 행위·필요성에 따라 권리의 정당한 범위를 설명해야 한다는 문제 제기다.</p>
+<p><strong>시험:</strong> 103·119. <strong>키워드:</strong> 세 학설·각 비판·저자 견해 구별. <strong>한 줄:</strong> 핵심 보장을 설명하는 방법에는 논쟁이 있으며 하나의 표어로 모든 사례를 해결할 수 없다.</p>
+<h1>6. 다르게 대우할 이유가 있는가</h1>
+<h2 id="foundations-05-14" data-concept-id="foundations-05-14">6-1. 평등원칙과 두 심사 기준 ★★★★★</h2>
+<p><strong>교재 158-160쪽 / 문단의 역할:</strong> 평등의 의미와 판례의 심사 강도를 구별한다.</p>
+<p>헌법 전문과11①은 평등의 주요 근거다. 국가는 합리적 이유 없이 국민을 다르게 대우해서는 안 된다. 법 앞의 평등은 모든 사람의 재산·취향·결과가 사실상 똑같아야 한다는 명령이 아니다. 합리적인 차이를 고려할 수 있는 <strong>상대적 평등</strong>이며 일체의 구별을 없애는 절대적 평등과 다르다(89헌가37등). 성별·종교·사회적 신분은 <strong>예시</strong>이므로 그 밖의 부당한 기준도 평등 문제를 낳는다.</p>
+<table>
+<thead>
+<tr>
+<th>판례의 기준</th>
+<th>검사 방법</th>
+<th>적용을 생각할 때</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자의금지 심사</td>
+<td>본질적으로 같은 것을 다르게 대우했는가? 합리적 이유 없이 자의적인가?</td>
+<td>일반적인 기준,입법재량이 넓은 영역 등</td>
+</tr>
+<tr>
+<td>비례원칙에 따른 엄격 심사</td>
+<td>차별의 목적과 수단 사이에 엄격한 비례가 있는가?</td>
+<td>헌법이 특별히 평등을 요구하거나 관련 기본권에 중대한 제한이 생기는 경우</td>
+</tr>
+</tbody></table>
+<p>98헌마363등(1999.12.23.)은 특별한 평등 요구와 기본권에 대한 중대한 제한을 엄격 심사의 근거로 설명한다. 단순히 ‘사회적 규제 영역이니 무조건 위헌’이라고 하지 않는다. 먼저 비교대상·차별·적용 기준을 특정해야 한다. 법 앞의 평등이 사실상 모든 결과의 동일성을 뜻하지 않는다고 해서 불리한 현실을 개선할 정책까지 모두 금지되는 것은 아니다.</p>
+<p><strong>심화·저자의 비판:</strong> 교재 각주는 자의성도 결국 정당한 비례의 이유를 따져야 하므로 두 기준을 이분하는 논리가 불충분할 수 있다고 비판한다. 저자는 이를 예측·평가에 대한 통제 강도의 차이로 이해하자고 한다. 시험에서 ‘헌재 판례에 따르면’이라고 물으면 먼저 위의 판례상 구별을 답하고, 비판 견해와 섞지 않는다.</p>
+<p><strong>시험:</strong> 104·120. <strong>키워드:</strong> 상대적 평등·예시·자의/엄격·사실상 동일 결과와 구별. <strong>한 줄:</strong> 다름 자체가 아니라 정당화할 수 없는 차별이 문제다.</p>
+<h2 id="foundations-05-15" data-concept-id="foundations-05-15">6-2. 체계정당성: 법끼리 모순되면 바로 위헌일까 ★★★★☆</h2>
+<p><strong>교재 160-161쪽 / 문단의 역할:</strong> 법규범 사이의 균형과 독립된 위헌 기준의 차이를 설명한다.</p>
+<p>체계정당성은 같은 법 안이나 다른 법 사이에서 구조·내용·기초 원리가 모순되지 않도록 입법하라는 요청이다. 수평적·수직적 관계 모두 문제 된다. 교재 사례로는 비난 가능성이 작은 행위에 더 무거운 형벌을 두거나, 서로 준용하는 법들이 고의·과실을 전혀 다른 뜻으로 쓰는 경우가 있다. 국민은 법을 예측하고 신뢰하기 어려워지고 집행자의 자의가 커진다.</p>
+<p>그러나 <mark class="yellow">헌재는 체계정당성 위반 그 자체가 곧바로 위헌을 뜻하지 않고, 비례·평등 등 구체적 헌법원칙 위반으로 이어지는지 보아야 한다고 설명한다.</mark> 체계의 차이를 정당화할 공익적 이유와 입법재량도 고려한다.</p>
+<p><strong>명의신탁 증여세 사건 2004헌바40등(2005.6.30.).</strong> 재산을 다른 사람 이름으로 두어 증여세 외의 세금을 회피할 목적이 있었는데 증여로 취급하여 증여세를 물리는 법이 문제 되었다. “증여세를 피한 것도 아닌데 왜 증여세인가?”라는 체계상 의문이 생긴다. 헌재는 조세회피 방지라는 목적, 수단의 적합성, 대체 수단·불이익과 공익을 검토하여 합리적 입법선택이라고 보았다. 명의신탁이면 어떤 경우든 모든 세금이 정당하다는 말은 아니다.</p>
+<p>문장 번역: ‘위헌의 징후’ → 이상한 불균형이 있으니 더 살펴보라는 신호다. ‘결과적으로 원칙 위반’ → 실제 평등·비례 등을 어겼는지 확정해야 한다. ‘입법재량’ → 여러 합리적 방법 중 선택할 여지를 인정한다. 교재 인용의 ‘추정’과 ‘의제’는 실제 법정 효과에 따라 구별하고, 이 논점의 핵심은 조세회피 방지를 위한 입법의 정당화다.</p>
+<p><strong>시험:</strong> 121. <strong>키워드:</strong> 균형·징후≠즉시 위헌·입법재량. <strong>한 줄:</strong> 법체계가 어긋나 보이면 이유를 따지되 그것만으로 위헌 결론을 건너뛰지 않는다.</p>
+<h1>7. 원칙을 실제로 지키게 하는 제도</h1>
+<h2 id="foundations-05-16" data-concept-id="foundations-05-16">7-1. 행정법치와 행정에 대한 사법심사 ★★★★☆</h2>
+<p><strong>교재 162쪽 / 문단의 역할:</strong> 행정부의 행위를 독립기관이 통제하는 구조를 설명한다.</p>
+<p>헌법107②는 명령·규칙·처분의 위헌·위법 여부가 재판의 전제가 된 경우 대법원이 최종 심사권을 갖도록 한다. 행정부가 만든 규정이나 내린 처분을 독립적인 법원이 심사할 수 있게 하는 장치다. 명령·규칙에 대한 모든 종류의 헌법재판 가능성이 이 문장 하나로 배제되는 것은 아니며, 여기서는 재판전제형 심사의 최종권한을 말한다.</p>
+<p>행정심판은 행정 내부의 권리구제 절차지만 헌법107③에 따라 법률로 정하고 사법절차를 준용해야 한다. 법원과 완전히 동일한 기관이라는 뜻은 아니다. 행정각부·감사원·선거관리 등 조직과 직무 범위도 법률로 정하도록 하는 헌법 규정이 있고(96·100·114⑥⑦), 행정절차법 등은 행정의 통지·이유제시·참여를 구체화한다. <mark class="green">정부가 스스로 권한을 끝없이 늘리지 못하도록 조직·절차·심사라는 여러 문을 둔 것이다.</mark></p>
+<p><strong>시험:</strong> 105. <strong>키워드:</strong> 107②·명령규칙처분·행정심판의 사법절차 준용. <strong>한 줄:</strong> 행정기관이 한 일이 법에 맞는지 독립된 심사를 받을 수 있어야 한다.</p>
+<h2 id="foundations-05-17" data-concept-id="foundations-05-17">7-2. 구체적·추상적 규범통제와 헌법소원 ★★★★★</h2>
+<p><strong>교재 162-163쪽 / 문단의 역할:</strong> 법률 자체도 헌법 아래에 있음을 제도화한다.</p>
+<p>구체적 규범통제는 실제 재판에서 적용될 법률의 위헌 여부가 그 재판의 전제가 되어 심사하는 제도다. 한국 헌법107①·헌법재판소법41①은 법원이 헌재에 제청하는 구조를 둔다. 법원이 의심나는 법률을 언제나 스스로 최종 무효로 선언하는 방식이 아니다.</p>
+<p>추상적 규범통제는 특정 소송의 전제와 관계없이 정해진 국가기관 등의 신청으로 법률 그 자체의 위헌성을 심사한다. 독일이 대표적 비교 대상이다. <strong>교재의 독일 기본법93①2호·연방의원3분의1은 현재 규정과 다르다. 현재94①2호는 연방정부·주정부 또는 연방의회 의원4분의1의 신청을 규정한다.</strong> 한국이 이런 일반적 추상적 규범통제를 채택한 것은 아니다. 그렇다고 기본권을 직접 침해하는 법률에 대한 법령헌법소원 등 모든 별도 심판을 부정하는 것은 아니다. <a href="https://www.gesetze-im-internet.de/englisch_gg/englisch_gg.html">독일 공식 기본법</a>.</p>
+<p>헌법소원은 공권력 행사 또는 불행사로 기본권을 침해받은 사람이 헌재에 구제를 청구하는 절차다(헌법111①5호). 다른 법률의 구제절차가 있으면 원칙적으로 먼저 거쳐야 하는 보충성도 중요하다. 법률 위헌제청신청이 기각된 뒤의68② 소원 등 구체적 구조는15강에서 다시 구별한다.</p>
+<p><strong>2026년 현행법 보충:</strong> 교재의 ‘법원의 재판은 제외’라는68① 설명을 그대로 현행법으로 외우지 않는다.2026.3.12. 개정은 그 일률적 제외 문구를 삭제하고68③에 <strong>확정된 재판</strong>에 대한 헌법소원 사유를 규정했다. 헌재 결정에 반하는 재판, 헌법·법률상 적법절차를 거치지 않은 재판, 헌법·법률을 명백히 위반하여 기본권을 침해한 재판이라는 법정 사유를 검토해야 한다. <strong>패소하면 무엇이든 다시 다투는 보통 상소가 하나 늘어난 것은 아니다.</strong> 청구기간·심사요건·효과는15강의 현행법 설명으로 이어진다. <a href="https://law.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4264754&cbIdx=1148">헌재 공식 법령</a>.</p>
+<p><strong>시험:</strong> 105. <strong>키워드:</strong> 재판전제성·제청·추상통제와 구별·재판소원 개정. <strong>한 줄:</strong> 법률도 심사 대상이며, 어떤 통로로 다투는지에 따라 요건이 다르다.</p>
+<h2 id="foundations-05-18" data-concept-id="foundations-05-18">7-3. 사법절차적 권리와 배상·보상 ★★★★☆</h2>
+<p><strong>교재 163쪽 / 문단의 역할:</strong> 법치주의를 국민이 사용할 구체적인 권리로 연결한다.</p>
+<table>
+<thead>
+<tr>
+<th>헌법 조항</th>
+<th>장치</th>
+<th>해결하려는 문제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>12조</td>
+<td>변호인 조력·구속적부심사 등</td>
+<td>몸이 구속된 사람이 제대로 방어하고 적법성을 다투기 어려운 문제</td>
+</tr>
+<tr>
+<td>16조</td>
+<td>주거의 압수·수색 등에 관한 영장 보장</td>
+<td>생활공간에 대한 자의적 강제력</td>
+</tr>
+<tr>
+<td>27조</td>
+<td>재판청구권</td>
+<td>권리 침해를 독립된 판단으로 다툴 길</td>
+</tr>
+<tr>
+<td>101·103조</td>
+<td>사법제도·법관 독립</td>
+<td>권력자의 뜻대로 결론이 바뀌는 위험</td>
+</tr>
+<tr>
+<td>29조</td>
+<td>국가배상</td>
+<td>공무원의 직무상 위법행위로 생긴 손해</td>
+</tr>
+<tr>
+<td>23③</td>
+<td>손실보상</td>
+<td>공공필요에 의한 재산권 수용·사용·제한의 정당한 보상</td>
+</tr>
+<tr>
+<td>28조</td>
+<td>형사보상</td>
+<td>형사절차상 억울한 구금 등의 법정 보상 문제</td>
+</tr>
+</tbody></table>
+<p>배상은 위법행위의 손해를, 손실보상은 적법한 공권력 행사로 생긴 특별한 희생을 다루는 기본 구별이다. 형사보상은 별도 헌법·법률상 요건에 따른 제도다. 국가배상·형사보상이 항상 동시에 자동 발생하는 것은 아니다.</p>
+<p><strong>시험:</strong> 조직상 보장과 기본권 연결. <strong>키워드:</strong> 방어·독립재판·위법손해/특별희생. <strong>한 줄:</strong> 법치주의는 선언에 그치지 않고 다툴 권리와 회복할 절차를 준다.</p>
+<h2 id="foundations-05-19" data-concept-id="foundations-05-19">7-4. 성문·경성헌법과 견제·균형 ★★★★☆</h2>
+<p><strong>교재 163-164쪽 / 문단의 역할:</strong> 헌법의 우위와 권력분립이 함께 작동하는 구조를 설명한다.</p>
+<p>헌법을 문서로 정하고 보통 법률보다 어렵게 개정하도록 하는 성문·경성헌법은 헌법의 우위를 형식적으로 뒷받침한다. 국회의 가중정족수와 국민투표를 요구하므로 잠시 권력을 얻은 다수가 쉽게 기본법을 바꾸지 못한다. 성문이라는 형식만으로 기본권 보호가 완성되는 것은 아니다.</p>
+<p>권력분립은 효율적인 국가 기능 수행과 권력남용 방지를 위해 독립 기관에 역할을 나누고 견제·균형을 두는 것이다. 국회가 법을 의결하면 대통령은 헌법에 따른 재의를 요구할 수 있고, 공포된 법의 집행은 행정부, 구체 사건의 해석·적용은 법원, 위헌법률심판은 헌재가 담당한다. 독립은 아무 상호작용도 없다는 뜻이 아니다.</p>
+<p>교재 각주의 임명·책임 연결도 놓치지 말자. 대법원장은 국회 동의를 얻어 대통령이 임명하고, 대법관은 대법원장 제청과 국회 동의를 거친다. 헌재 재판관9명은 대통령이 임명하되3명은 국회 선출,3명은 대법원장 지명 몫이며, 헌재소장은 재판관 중 국회 동의를 얻어 대통령이 임명한다. 국회는 법정 대상자의 위헌·위법에 탄핵소추를 할 수 있고, 국회의원도 주기적 선거로 국민의 통제를 받는다. 교재의 ‘헌법재판소 의장’은 <strong>헌법재판소장</strong>으로 읽는다.</p>
+<p><strong>시험:</strong> 105. <strong>키워드:</strong> 성문·경성·기능분담·상호통제. <strong>한 줄:</strong> 어느 기관도 헌법 위에서 다른 기관의 모든 역할을 독점하지 못한다.</p>
+<h1>8. 비상상황에도 법치주의 밖은 없다</h1>
+<h2 id="foundations-05-20" data-concept-id="foundations-05-20">8-1. 국가긴급권과 다섯 한계 ★★★★★</h2>
+<p><strong>교재 164-165쪽 / 문단의 역할:</strong> 평상시 방식의 예외와 법치주의 자체의 예외를 구별한다.</p>
+<p>국가긴급권은 전쟁·내란·경제위기·대규모 재난 등 정상적인 통치 방식으로 대처하기 어려운 위기를 극복하기 위한 예외적 권한이다. 헌법76① 긴급재정경제명령·처분은 국회 집회를 <strong>기다릴 여유가 없을 때</strong>,76② 긴급명령은 중대한 교전상태에서 국회 집회가 <strong>불가능할 때</strong>라는 구별을 둔다.77조 계엄은 법정 국가비상사태에 병력을 사용할 필요가 있을 때의 제도다. 모든 경제정책 문제를 긴급명령으로 처리할 수는 없다.</p>
+<table>
+<thead>
+<tr>
+<th>한계</th>
+<th>쉬운 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적적</td>
+<td>국가의 존립·안전과 질서의 회복이라는 소극적 위기극복 목적인가?</td>
+</tr>
+<tr>
+<td>시기적·기한적</td>
+<td>위기가 끝나면 지체 없이 철회하는가?</td>
+</tr>
+<tr>
+<td>상황적</td>
+<td>객관적 비상사태이고 정상적 방법으로는 극복할 수 없는가?</td>
+</tr>
+<tr>
+<td>내용적</td>
+<td>위기극복에 맞으며 기본권 침해가 필요한 최소한인가?</td>
+</tr>
+<tr>
+<td>절차적</td>
+<td>헌법·법률의 절차와 방법을 지켰는가?</td>
+</tr>
+</tbody></table>
+<p>통상적인 입법·행정 방식이 일시적으로 달라질 수 있어도 헌법적 요건과 통제가 없어지는 것은 아니다. 국무회의 심의, 국회 통고·승인, 국회의 계엄해제 요구 등 개별 권한별 절차를 지켜야 한다. 3강의 긴급권 비교표를 함께 보자. <strong>위험을 핑계로 권력을 영구화하거나 정책상 편의를 얻는 것이 제도의 목적은 아니다.</strong></p>
+<p><strong>시험:</strong> 106·122. <strong>키워드:</strong> 목적·시기·상황·내용·절차. <strong>한 줄:</strong> 긴급권은 법치주의를 버리는 권력이 아니라 비상시에 법치주의가 허용한 제한적 권한이다.</p>
+<h2 id="foundations-05-21" data-concept-id="foundations-05-21">8-2. 특수신분: 군인·학생·수용자도 권리의 주체다 ★★★★★</h2>
+<p><strong>교재 165-166쪽 / 문단의 역할:</strong> 특수한 관계에서는 법치주의가 빠진다는 옛 관념을 교정한다.</p>
+<p>공무원·국공립학교 학생·군인·수용자에게도 법치주의는 <strong>전면적으로</strong> 적용된다. 특수한 직무·질서·안전의 공익 때문에 일반인보다 강한 제한이 정당화될 수 있을 뿐이다.2008헌마638(2010.10.28.)의 군인 관련 인용도 군 조직의 존립 목적을 위해 불가피한 제한이 가능하다는 뜻이지 군인의 모든 기본권을 지운다는 뜻이 아니다.</p>
+<p><strong>종교행사 불허 2009헌마527(2011.12.29.).</strong> 구치소에서 다른 수용자와 달리 미결수용자는 종교행사에 일률적으로 참석하지 못했다. 아직 유죄 확정 전인 사람들의 종교의 자유를 왜 더 강하게 막아야 할까? 헌재는 그렇게 얻는 공익이 제한의 불이익보다 크다고 단정하기 어렵다고 보아 과잉금지원칙 위반을 인정했다. “미결”이라는 신분만으로 일괄 차단할 수 없다는 것이다. 구체적 위험에 맞춘 조치의 검토와 전면 금지는 다르다.</p>
+<p><strong>독거실 CCTV 2010헌마413(2011.9.29.).</strong> 수용자는24시간 관찰이 사생활을 침해한다고 다투었다. 헌재는 이 사건에서 자살·자해 방지와 교정시설 안전, 교도관의 직접 관찰에 생기는 시간·공간적 공백, 피해를 줄이는 운영조치 등을 함께 보았다. 필요한 보호와 대안의 한계를 고려해 기본권 침해를 인정하지 않고 기각했다. <a href="https://ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=941598&cbIdx=1106">공식 사건 설명</a>.</p>
+<p>문장 번역: ‘목적 적합’ → 관찰이 사고 예방에 도움이 된다. ‘다른 효과적 방법의 어려움’ → 인력만으로 공백을 메우기 어렵다. ‘균형’ → 사생활 제한과 생명·안전 보호를 함께 따진다. <strong>모든 수용자를 모든 상황에서 무제한 촬영해도 된다는 일반 허가가 아니다.</strong> 같은 원칙을 적용해도 구체적 사실과 대안에 따라 결론이 달라지는 좋은 비교 사례다.</p>
+<p><strong>시험:</strong> 123. <strong>키워드:</strong> 전면 적용·특수 공익·종교 불허/특정 CCTV 비교. <strong>한 줄:</strong> 신분 때문에 심사를 빼는 것이 아니라 그 신분의 공익까지 넣어 심사한다.</p>
+<h2 id="foundations-05-22" data-concept-id="foundations-05-22">8-3. 통치행위: 정치적 판단 존중과 심사 포기는 다르다 ★★★★★</h2>
+<p><strong>교재 167-168쪽 / 문단의 역할:</strong> 고도의 정치적 판단도 기본권과 법의 지배를 벗어나지 못함을 설명한다.</p>
+<p>통치행위는 고도의 정치적 결단을 존중할 필요가 있는 국가행위를 말한다. 하지만 ‘정치적’이라는 말만 붙이면 헌재가 절대로 심판할 수 없다는 것은 틀리다. <strong>기본권 침해와 직접 관련되면 헌법재판의 대상이 될 수 있다.</strong> 판단을 존중하여 심사 강도를 조절하는 것과 사법적 통제를 원천 차단하는 것은 다르다.</p>
+<p><strong>금융실명제 긴급재정경제명령 사건93헌마186(1996.2.29.).</strong> 대통령이1993년 금융실명제를 긴급재정경제명령으로 시행하자 청구인은 발동요건·기본권 침해와 국회가 탄핵소추를 하지 않은 점을 다투었다. 정부는 고도의 정치적 행위이므로 심판할 수 없다고도 주장했다. 헌재는 기본권 관련 심판 가능성을 인정한 뒤 본안에서는 명령에 대한 청구를 <strong>기각</strong>했다. 탄핵소추 부작위 부분은 청구인이 국회의 소추를 요구할 헌법상 권리와 구체적 작위의무를 인정하기 어려워 <strong>각하</strong>했다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=135215">공식 결정문</a>.</p>
+<p>문장 번역: ‘결단 존중’ → 복잡한 정책 판단에 여지를 둔다. ‘기본권의 수단이라는 한계’ → 국민을 위해 행사하는 권력이라는 목적을 잃을 수 없다. ‘심판 대상’ → 법원이 결론을 살필 수 있다는 말이지 곧 위헌이라는 말은 아니다. <strong>107 해설의93헌마86은93헌마186으로 보충</strong>한다.</p>
+<p><strong>견해 구별:</strong> 교재는 법치주의 밖의 통치행위 범주를 부정하는 방향으로 강하게 설명한다. 이를 ‘한국 법원 판례가 통치행위론을 전면 폐기했다’고 단정하지 않는다. 대법원은 통치행위 개념과 자제를 인정하면서도 사법심사의 과도한 포기를 극히 신중히 해야 한다고 설명해 왔다. 핵심은 정치적 행위라는 이유만으로 기본권 심사를 무조건 면제할 수 없다는 것이다. <a href="https://www.scourt.go.kr/sjudge/1661849935333_175855.pdf">대법원 판결의 통치행위·긴급조치 설명</a>.</p>
+<p><strong>시험:</strong> 107. <strong>키워드:</strong> 존중≠면제·직접적 기본권 관련·대상성과 결론. <strong>한 줄:</strong> 정치적으로 중요한 일일수록 법치주의를 지울 것이 아니라 적절한 방식으로 통제해야 한다.</p>
+<h1>법률용어를 한자로 풀어 보기</h1>
+<h3>法治主義 법치주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 治(다스릴 치), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 법에 따른 통치. <strong>④ 이름의 이유:</strong> 사람의 자의가 아니라 법이 지배한다는 뜻.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가권력을 정당한 법과 절차에 구속시켜 기본권을 보장하는 원리. <strong>⑥ 쉬운 말:</strong> 권력자도 마음대로 하지 못한다. <strong>⑦ 사례:</strong> 대통령의 명령도 헌법과 법률에 맞는지 심사.</p>
+<p><strong>⑧ 시험:</strong> 형식과 실질을 함께 갖추어야 함. <strong>⑨ 비교·기억법:</strong> 자비로운 인치도 개인의 호의에 의존하므로 법치와 다름.</p>
+<h3>形式的·實質的 형식적·실질적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 形(모양 형), 式(법 식), 的(과녁 적), 實(열매 실), 質(바탕 질). <strong>③ 합친 뜻:</strong> 겉의 방식·속의 내용. <strong>④ 이름의 이유:</strong> 형식만 갖춘 악법의 위험 때문에 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법적 근거·절차를 갖추는 것과 법의 목적·내용도 기본권에 맞는 것. <strong>⑥ 쉬운 말:</strong> 규칙대로 만들었는지와 그 규칙 자체가 정당한지. <strong>⑦ 사례:</strong> 인종을 차별하는 법도 법률이라는 이유만으로 정당하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 실질적 법치는 형식적 법치를 포함. <strong>⑨ 비교·기억법:</strong> 실질적 정의를 명분으로 법적 근거를 무시하는 것은 아님.</p>
+<h3>法律優位 법률우위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 律(법 률), 優(넉넉할 우; 뛰어남), 位(자리 위). <strong>③ 합친 뜻:</strong> 법률이 앞선 지위. <strong>④ 이름의 이유:</strong> 법률과 하위 국가작용의 우열을 나타냄.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행정 등 다른 국가작용이 법률에 어긋나지 않아야 한다는 원칙. <strong>⑥ 쉬운 말:</strong> 이미 있는 법을 거슬러서는 안 된다. <strong>⑦ 사례:</strong> 시행령이 법률의 허용 범위를 넘어 금지.</p>
+<p><strong>⑧ 시험:</strong> 법률에 위반하지 말라. <strong>⑨ 비교·기억법:</strong> 법률유보는 근거가 필요한지를 묻는 별도 원칙.</p>
+<h3>法律留保·議會留保 법률유보·의회유보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 律(법 률), 留(머무를 류; 남겨둠), 保(지킬 보), 議(의논할 의), 會(모일 회). <strong>③ 합친 뜻:</strong> 법률·의회에 결정 몫을 남겨 둠. <strong>④ 이름의 이유:</strong> 중요한 결정을 행정부에 전부 넘기지 않기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가작용의 법적 근거 요구와 본질적으로 중요한 사항의 의회 직접 결정 요구. <strong>⑥ 쉬운 말:</strong> 어디에 권한이 있는지 확인하고 핵심은 국회가 정한다. <strong>⑦ 사례:</strong> 수신료 금액을 방송공사와 장관에게만 맡김.</p>
+<p><strong>⑧ 시험:</strong> 근거만 있으면 항상 충분하다는 보기 오류. <strong>⑨ 비교·기억법:</strong> 의회유보는 모든 기술적 세부사항까지 법률에 쓰라는 말 아님.</p>
+<h3>侵害留保·給付行政 침해유보·급부행정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 侵(침노할 침), 害(해칠 해), 留(머무를 류), 保(지킬 보), 給(줄 급), 付(줄 부), 行(다닐 행), 政(정사 정). <strong>③ 합친 뜻:</strong> 침해에 법률 근거를 남김·혜택을 주는 행정. <strong>④ 이름의 이유:</strong> 빼앗는 작용과 주는 작용을 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리 침해 영역에 법률유보를 한정하는 역사적 견해와 지원·서비스를 제공하는 행정. <strong>⑥ 쉬운 말:</strong> 지원금도 누구에게 주는지에 따라 차별 문제가 생긴다. <strong>⑦ 사례:</strong> 장학금 대상과 제외 대상을 정함.</p>
+<p><strong>⑧ 시험:</strong> 급부행정은 법률유보의 전면적 예외가 아님. <strong>⑨ 비교·기억법:</strong> 혜택이라는 이름만으로 재정·평등 문제를 생략하지 않음.</p>
+<h3>本質性·規律密度 본질성·규율밀도</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 本(근본 본), 質(바탕 질), 性(성품 성), 規(법 규), 律(법 률), 密(빽빽할 밀), 度(법도 도). <strong>③ 합친 뜻:</strong> 핵심 성질·규정의 촘촘함. <strong>④ 이름의 이유:</strong> 중요할수록 민주적 토론과 직접 결정이 더 필요해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 의회가 직접 결정해야 할 중요성과 법률이 구체적으로 정해야 할 정도. <strong>⑥ 쉬운 말:</strong> 핵심인지를 먼저 보고 얼마나 자세히 정할지 판단한다. <strong>⑦ 사례:</strong> 임용시험 가산점 대상·배점이 합격을 좌우.</p>
+<p><strong>⑧ 시험:</strong> 모든 영역에 동일한 밀도는 아님. <strong>⑨ 비교·기억법:</strong> 본질성은 결정 주체, 명확성은 의미를 알 수 있는지도 따짐.</p>
+<h3>授權·委任立法 수권·위임입법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 授(줄 수), 權(권세 권), 委(맡길 위), 任(맡길 임), 立(설 립), 法(법 법). <strong>③ 합친 뜻:</strong> 권한을 줌·규정 만들기를 맡김. <strong>④ 이름의 이유:</strong> 전문적·기술적 구체화를 맡길 필요가 있어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률이 하위기관에 일정 범위의 규율 권한을 부여하는 것. <strong>⑥ 쉬운 말:</strong> 국회가 큰 기준을 정하고 세부를 맡긴다. <strong>⑦ 사례:</strong> 법률이 위생기준의 범위를 정하고 시행령에 구체화 위임.</p>
+<p><strong>⑧ 시험:</strong> 75조는 구체적으로 범위를 정한 위임. <strong>⑨ 비교·기억법:</strong> 권한을 모두 백지로 넘기는 것과 다름.</p>
+<h3>包括委任禁止 포괄위임금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 包(쌀 포), 括(묶을 괄), 委(맡길 위), 任(맡길 임), 禁(금할 금), 止(그칠 지). <strong>③ 합친 뜻:</strong> 범위를 가리지 않은 통째 위임을 금지. <strong>④ 이름의 이유:</strong> 국회 책임과 국민 예측 가능성을 지키기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률에서 하위법령 내용의 대강을 예측할 수 있어야 한다는 원칙. <strong>⑥ 쉬운 말:</strong> 나머지는 마음대로 정하라는 백지수표는 안 된다. <strong>⑦ 사례:</strong> 처벌에서 제외되는 행위를 법률로 전혀 예상할 수 없음.</p>
+<p><strong>⑧ 시험:</strong> 한 조문만이 아니라 관련 법 전체를 종합. <strong>⑨ 비교·기억법:</strong> 위임입법 자체를 전면 금지하는 것은 아님.</p>
+<h3>適法節次 적법절차</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 適(맞을 적), 法(법 법), 節(마디 절), 次(버금 차; 순서). <strong>③ 합친 뜻:</strong> 법에 맞는 절차. <strong>④ 이름의 이유:</strong> 절차의 껍데기만으로 권리를 침해하지 못하게 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 절차와 실체적 내용의 합리성·정당성을 요구하는 원칙. <strong>⑥ 쉬운 말:</strong> 제대로 듣고 정당한 규칙으로 판단한다. <strong>⑦ 사례:</strong> 자격박탈에 필요한 절차와 합리적 사유 검토.</p>
+<p><strong>⑧ 시험:</strong> 형사절차만이 아니라 모든 국가작용. <strong>⑨ 비교·기억법:</strong> 절차 조문만 형식적으로 지키면 충분하다는 뜻 아님.</p>
+<h3>令狀主義 영장주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 令(명령 령), 狀(문서 장), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 법관의 명령 문서를 요구. <strong>④ 이름의 이유:</strong> 수사기관의 독단적 강제를 통제.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 신체·주거 등에 대한 강제처분을 원칙적으로 법관의 적법한 영장에 의하게 하는 원칙. <strong>⑥ 쉬운 말:</strong> 잡거나 수색하기 전에 법관의 심사를 받는다. <strong>⑦ 사례:</strong> 압수·수색영장에 대상과 범위 특정.</p>
+<p><strong>⑧ 시험:</strong> 12③·16과 헌법상 예외를 함께 확인. <strong>⑨ 비교·기억법:</strong> 모든 행정상 조사에 똑같이 기계적 적용한다고 단정 금지.</p>
+<h3>連坐制禁止·無罪推定 연좌제금지·무죄추정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 連(이을 련), 坐(앉을 좌; 죄에 걸림), 制(마를 제), 禁(금할 금), 止(그칠 지), 無(없을 무), 罪(허물 죄), 推(밀 추), 定(정할 정). <strong>③ 합친 뜻:</strong> 관계자의 죄에 함께 엮지 않음·유죄 확정 전 무죄로 대우. <strong>④ 이름의 이유:</strong> 남의 죄와 아직 확정되지 않은 죄를 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 친족 행위로 불이익을 주지 않고 유죄판결 확정 전 응보적 불이익을 금지. <strong>⑥ 쉬운 말:</strong> 아버지의 죄로 자녀를 벌하지 않고 기소만으로 범인 취급하지 않는다. <strong>⑦ 사례:</strong> 중범죄 기소만으로 일률적 구속 원칙 설정 불가.</p>
+<p><strong>⑧ 시험:</strong> 13③·27④;적법한 필요적 구속까지 전면 금지 아님. <strong>⑨ 비교·기억법:</strong> 연좌제는 자기책임, 무죄추정은 유죄 확정 전 대우와 연결.</p>
+<h3>明確性 명확성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 明(밝을 명), 確(굳을 확), 性(성품 성). <strong>③ 합친 뜻:</strong> 뜻을 분명히 알 수 있는 성질. <strong>④ 이름의 이유:</strong> 법을 알 수 있어야 지킬 수 있어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민이 행동기준을 예측하고 집행자의 자의를 통제할 수 있는 정도의 명료성. <strong>⑥ 쉬운 말:</strong> 무엇을 하면 안 되는지 미리 알아야 한다. <strong>⑦ 사례:</strong> 저속한 간행물이라는 불명확한 기준으로 등록 취소.</p>
+<p><strong>⑧ 시험:</strong> 문언·목적·연혁·체계 종합;형벌은 엄격. <strong>⑨ 비교·기억법:</strong> 가치개념을 조금이라도 사용하면 위헌이라는 뜻 아님.</p>
+<h3>眞正·不眞正 遡及立法 진정·부진정 소급입법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 眞(참 진), 正(바를 정), 不(아니 불), 遡(거슬러 올라갈 소), 及(미칠 급), 立(설 립), 法(법 법). <strong>③ 합친 뜻:</strong> 이미 끝난 때 또는 진행 중 관계로 새 법의 효과가 미침. <strong>④ 이름의 이유:</strong> 법적 관계가 끝났는지를 기준으로 이름을 나눔.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 완성된 과거 관계에 적용하는 진정소급과 진행 중 관계에 적용하는 부진정소급. <strong>⑥ 쉬운 말:</strong> 끝난 일을 새 규칙으로 바꾸는지 아직 하는 일의 규칙을 바꾸는지. <strong>⑦ 사례:</strong> 완납된 과거 세금의 추가 부과와 계속 영업 중 시설의 새 의무.</p>
+<p><strong>⑧ 시험:</strong> 진정 원칙 금지·부진정 원칙 허용;모두 신뢰 고려. <strong>⑨ 비교·기억법:</strong> 옛날부터 시작했다는 이유만으로 진정소급은 아님.</p>
+<h3>施惠的 시혜적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 施(베풀 시), 惠(은혜 혜), 的(과녁 적). <strong>③ 합친 뜻:</strong> 혜택을 베푸는 성질. <strong>④ 이름의 이유:</strong> 부담이 아니라 이익의 소급이어서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적용 대상에게 유리한 이익을 주는 법의 성질. <strong>⑥ 쉬운 말:</strong> 지난 일에도 새 지원을 받을 수 있게 해 준다. <strong>⑦ 사례:</strong> 과거 퇴직자 일부에게 연금 혜택 확대.</p>
+<p><strong>⑧ 시험:</strong> 원칙 허용이나 현저히 불합리·불공정한 차별은 안 됨. <strong>⑨ 비교·기억법:</strong> 유리하다고 법치와 평등의 적용이 사라지지 않음.</p>
+<h3>信賴保護·法的安定性 신뢰보호·법적 안정성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 信(믿을 신), 賴(의지할 뢰), 保(지킬 보), 護(보호할 호), 法(법 법), 的(과녁 적), 安(편안할 안), 定(정할 정), 性(성품 성). <strong>③ 합친 뜻:</strong> 믿고 적응한 이익 보호·법질서의 안정. <strong>④ 이름의 이유:</strong> 국가의 규칙을 믿고 생활을 설계하기 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 합리적으로 기존 제도를 믿고 형성한 지위를 새 제도와 조정하는 원칙. <strong>⑥ 쉬운 말:</strong> 갑작스러운 변경으로 믿고 준비한 사람을 함부로 희생시키지 않는다. <strong>⑦ 사례:</strong> 설비 투자 뒤 즉시 기준을 바꾸면서 경과기간도 주지 않음.</p>
+<p><strong>⑧ 시험:</strong> 합리적 신뢰·적응·불리한 변경·공익과 형량. <strong>⑨ 비교·기억법:</strong> 법이 영원히 변하지 않을 권리는 아님.</p>
+<h3>自己責任 자기책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 己(몸 기), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 스스로 한 결정에 관한 책임. <strong>④ 이름의 이유:</strong> 자율적 결정과 책임의 대응을 요구.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자신의 결정·통제와 관련된 결과 범위에서 부담을 지우는 원칙. <strong>⑥ 쉬운 말:</strong> 내가 선택한 일의 책임이지 남의 행동까지 무조건 떠안는 것은 아니다. <strong>⑦ 사례:</strong> 가족의 잘못을 이유로 본인의 자격 박탈.</p>
+<p><strong>⑧ 시험:</strong> 자기 결정과 책임범위의 상관관계. <strong>⑨ 비교·기억법:</strong> 모든 사회적 지원·공동부담을 금지하는 원칙으로 확대 금지.</p>
+<h3>過剩禁止·比例 과잉금지·비례</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과), 剩(남을 잉), 禁(금할 금), 止(그칠 지), 比(견줄 비), 例(법식 례). <strong>③ 합친 뜻:</strong> 지나친 제한 금지·알맞은 비율. <strong>④ 이름의 이유:</strong> 좋은 목적도 과한 수단을 정당화하지 못해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권 제한이 정당한 목적·적합한 수단·최소침해·균형을 갖추어야 한다는 원칙. <strong>⑥ 쉬운 말:</strong> 목표가 좋아도 사람을 필요 이상으로 힘들게 하면 안 된다. <strong>⑦ 사례:</strong> 야간 소음을 막으려고 모든 낮 공연까지 금지.</p>
+<p><strong>⑧ 시험:</strong> 목적→수단→최소→균형 순서. <strong>⑨ 비교·기억법:</strong> 과소보호는 국가가 너무 적게 보호하는 문제.</p>
+<h3>法益衡量·侵害最小性 법익형량·침해최소성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 益(더할 익), 衡(저울대 형), 量(헤아릴 량), 侵(침노할 침), 害(해칠 해), 最(가장 최), 小(작을 소), 性(성품 성). <strong>③ 합친 뜻:</strong> 법적 이익을 저울질·피해를 가장 작게. <strong>④ 이름의 이유:</strong> 필요한 수단과 최종 균형을 따로 묻기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공익과 사익의 균형 판단 및 비슷하게 효과적인 덜 제한적 대안 검토. <strong>⑥ 쉬운 말:</strong> 덜 힘든 방법이 있는지,얻는 것보다 잃는 것이 큰지. <strong>⑦ 사례:</strong> 시간제한 대안과 전면금지의 피해 비교.</p>
+<p><strong>⑧ 시험:</strong> 최소성 문제와 균형성 문제를 구분. <strong>⑨ 비교·기억법:</strong> 아무 효과 없는 약한 수단을 반드시 고르라는 말 아님.</p>
+<h3>過少保護禁止 과소보호금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과), 少(적을 소), 保(지킬 보), 護(보호할 호), 禁(금할 금), 止(그칠 지). <strong>③ 합친 뜻:</strong> 지나치게 적은 보호 금지. <strong>④ 이름의 이유:</strong> 사인의 위협도 방치하면 권리가 무의미해져서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가가 기본권 보호에 필요한 최소한의 적절한 조치를 해야 한다는 원칙. <strong>⑥ 쉬운 말:</strong> 국가가 너무 많이 간섭하는 것뿐 아니라 손 놓는 것도 문제. <strong>⑦ 사례:</strong> 생명·건강 위험에 아무 보호조치도 하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 전적으로 부적합·매우 불충분함이 명백한지. <strong>⑨ 비교·기억법:</strong> 최선의 한 가지 정책을 법원이 대신 고르라는 원칙 아님.</p>
+<h3>本質的內容·形骸化 본질적 내용·형해화</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 本(근본 본), 質(바탕 질), 的(과녁 적), 內(안 내), 容(얼굴 용; 담음), 形(모양 형), 骸(뼈 해), 化(될 화). <strong>③ 합친 뜻:</strong> 핵심 내용·껍데기만 남음. <strong>④ 이름의 이유:</strong> 권리라는 이름만 남기는 것을 막기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제한하면 그 기본권 자체가 무의미해지는 근본요소. <strong>⑥ 쉬운 말:</strong> 재판권이 있다면서 사실을 따질 기회를 전부 없애면 빈껍데기다. <strong>⑦ 사례:</strong> 법관의 사실확정과 법 적용을 봉쇄.</p>
+<p><strong>⑧ 시험:</strong> 37②후단;형식적 제도 존속만으로 충분하지 않음. <strong>⑨ 비교·기억법:</strong> 모든 제한이 곧 본질적 침해는 아님.</p>
+<h3>絶對說·相對說·折衷說 절대설·상대설·절충설</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 絶(끊을 절), 對(대할 대), 說(말씀 설), 相(서로 상), 折(꺾을 절), 衷(속마음 충). <strong>③ 합친 뜻:</strong> 고정 핵심·상황에 따른 핵심·두 입장의 조합. <strong>④ 이름의 이유:</strong> 핵심을 어떻게 찾는지 견해가 갈라져서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본질적 내용의 독자적 절대성 및 비례심사와의 관계를 설명하는 견해. <strong>⑥ 쉬운 말:</strong> 어떤 상황에도 못 건드릴 부분인지 상황을 따져 정하는지. <strong>⑦ 사례:</strong> 정당방위로 생명을 박탈하는 경우의 설명 문제.</p>
+<p><strong>⑧ 시험:</strong> 판례를 모든 사건의 절대설로 단정 금지. <strong>⑨ 비교·기억법:</strong> 교재 저자의 의무론적 비판과 법원 주문을 구별.</p>
+<h3>平等·恣意禁止 평등·자의금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 平(평평할 평), 等(무리 등; 같음), 恣(마음대로 자), 意(뜻 의), 禁(금할 금), 止(그칠 지). <strong>③ 합친 뜻:</strong> 동등한 대우·멋대로 구별 금지. <strong>④ 이름의 이유:</strong> 차별에 정당한 이유를 요구해서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본질적으로 같은 것을 합리적 이유 없이 달리 취급하지 않는 원칙. <strong>⑥ 쉬운 말:</strong> 상황이 같으면 같게,차이가 중요하면 다르게 대한다. <strong>⑦ 사례:</strong> 자격이 같은 지원자를 출신지역만으로 배제.</p>
+<p><strong>⑧ 시험:</strong> 헌법11①의 사유는 예시;상대적 평등. <strong>⑨ 비교·기억법:</strong> 모든 사람의 소득·성적 등 사실적 결과를 똑같게 만들라는 뜻 아님.</p>
+<h3>嚴格審査·立法裁量 엄격심사·입법재량</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 嚴(엄할 엄), 格(격식 격), 審(살필 심), 査(조사할 사), 立(설 립), 法(법 법), 裁(마를 재), 量(헤아릴 량). <strong>③ 합친 뜻:</strong> 더 엄한 심사·법을 만들 때의 선택 여지. <strong>④ 이름의 이유:</strong> 사안의 헌법적 무게가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법이 특별히 평등을 요구하거나 중대한 기본권 제한인 차별의 비례심사와 입법자 형성권. <strong>⑥ 쉬운 말:</strong> 더 중요한 차별일수록 이유를 더 엄격히 묻는다. <strong>⑦ 사례:</strong> 공무담임권에 중대한 영향을 주는 가산점.</p>
+<p><strong>⑧ 시험:</strong> 넓은 사회경제 입법재량은 보통 완화심사 쪽. <strong>⑨ 비교·기억법:</strong> 재량은 아무 이유 없이 차별할 권한이 아님.</p>
+<h3>體系正當性 체계정당성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 體(몸 체), 系(이을 계), 正(바를 정), 當(마땅할 당), 性(성품 성). <strong>③ 합친 뜻:</strong> 법체계의 일관되고 균형 잡힌 성질. <strong>④ 이름의 이유:</strong> 법들의 이유가 서로 뒤집히지 않게 하기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 관련 규범의 구조·내용이 모순되지 않게 입법할 원리. <strong>⑥ 쉬운 말:</strong> 비슷한 잘못은 균형 있게 다룬다. <strong>⑦ 사례:</strong> 가벼운 잘못에 더 무거운 형벌을 두는 모순.</p>
+<p><strong>⑧ 시험:</strong> 어긋남은 위헌 징표이지 자동 위헌 결론 아님. <strong>⑨ 비교·기억법:</strong> 합리적 특례의 이유와 다른 헌법원칙을 함께 판단.</p>
+<h3>名義信託·贈與擬制 명의신탁·증여의제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 名(이름 명), 義(옳을 의; 명분), 信(믿을 신), 託(부탁할 탁), 贈(줄 증), 與(줄 여), 擬(본뜰 의), 制(마를 제). <strong>③ 합친 뜻:</strong> 이름을 맡김·증여한 것으로 법이 취급. <strong>④ 이름의 이유:</strong> 조세회피 방지 등 입법 목적을 실현하려고.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 소유와 명의를 달리 두는 관계 및 법정 요건 아래 이를 증여로 간주하는 세법 규율. <strong>⑥ 쉬운 말:</strong> 내 재산을 남의 이름으로 두는 경우를 법이 특정 목적으로 다룬다. <strong>⑦ 사례:</strong> 2004헌바40에서 조세회피 방지 목적의 합리성 검토.</p>
+<p><strong>⑧ 시험:</strong> 실제 증여가 아니라는 말만으로 곧 위헌은 아님. <strong>⑨ 비교·기억법:</strong> 의제는 반증으로 깨는 추정과 다름;구체 요건 확인.</p>
+<h3>行政立法·行政處分 행정입법·행정처분</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행), 政(정사 정), 立(설 립), 法(법 법), 處(곳 처; 처리), 分(나눌 분). <strong>③ 합친 뜻:</strong> 행정의 규범 제정·구체적 법적 결정. <strong>④ 이름의 이유:</strong> 일반 규칙과 개별 결정을 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행정기관의 일반적 규정과 구체적 사실에 대한 공권력 행사 등. <strong>⑥ 쉬운 말:</strong> 많은 사람에게 적용할 규칙과 한 사람의 허가 취소. <strong>⑦ 사례:</strong> 법률을 넘은 시행령·위법한 영업허가 취소.</p>
+<p><strong>⑧ 시험:</strong> 107②명령·규칙·처분의 심사. <strong>⑨ 비교·기억법:</strong> 행정기관이 만들었다는 이유로 심사에서 빠지지 않음.</p>
+<h3>具體的·抽象的 規範統制 구체적·추상적 규범통제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 具(갖출 구), 體(몸 체), 抽(뽑을 추), 象(코끼리 상; 모습), 的(과녁 적), 規(법 규), 範(법 범), 統(거느릴 통), 制(마를 제). <strong>③ 합친 뜻:</strong> 구체 사건에 연결한 심사·그 없이 하는 규범 심사. <strong>④ 이름의 이유:</strong> 법률을 헌법에 비춰 심사하는 경로가 달라서.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재판의 전제가 된 법률 심사와 특정 소송 없이 법률 자체를 심사하는 제도. <strong>⑥ 쉬운 말:</strong> 진행 중 재판의 법 문제인지 별도 기관이 법 자체를 묻는지. <strong>⑦ 사례:</strong> 법원이 위헌법률심판 제청.</p>
+<p><strong>⑧ 시험:</strong> 한국은 독일식 일반 추상적 규범통제를 채택하지 않음. <strong>⑨ 비교·기억법:</strong> 법률에 대한 직접 헌법소원까지 전면 부정하면 틀림.</p>
+<h3>憲法訴願·裁判訴願 헌법소원·재판소원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 憲(법 헌), 法(법 법), 訴(하소연할 소), 願(원할 원), 裁(마를 재), 判(판가름할 판). <strong>③ 합친 뜻:</strong> 헌법상 권리 구제의 호소·재판에 대한 헌법적 구제. <strong>④ 이름의 이유:</strong> 헌법적 권리 침해를 바로잡기 위해.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공권력으로 기본권을 침해받은 경우 법정 요건 아래 헌재에 구제를 청구하는 제도. <strong>⑥ 쉬운 말:</strong> 억울하다는 말만이 아니라 헌법상 잘못을 법정 절차로 다툰다. <strong>⑦ 사례:</strong> 2026.3.12개정68③의 확정재판 청구사유.</p>
+<p><strong>⑧ 시험:</strong> 교재의 재판 제외 설명과 현행 개정 구분. <strong>⑨ 비교·기억법:</strong> 모든 패소를 다시 판단하는 일반 제4심은 아님.</p>
+<h3>司法獨立·權力分立 사법독립·권력분립</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 司(맡을 사), 法(법 법), 獨(홀로 독), 立(설 립), 權(권세 권), 力(힘 력), 分(나눌 분). <strong>③ 합친 뜻:</strong> 재판의 독립·권력의 분담. <strong>④ 이름의 이유:</strong> 판단자를 압박하거나 한 기관이 권력을 독점하지 못하게 함.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법관의 독립적 판단과 기관 간 기능분담·견제. <strong>⑥ 쉬운 말:</strong> 재판에 정치권이 결론을 지시하지 못한다. <strong>⑦ 사례:</strong> 재판관 구성에 여러 기관이 관여.</p>
+<p><strong>⑧ 시험:</strong> 법관은 헌법·법률·양심에 따라 독립. <strong>⑨ 비교·기억법:</strong> 독립은 법을 무시하거나 책임을 전혀 지지 않는다는 뜻 아님.</p>
+<h3>國家賠償·損失補償·刑事補償 국가배상·손실보상·형사보상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 家(집 가), 賠(물어줄 배), 償(갚을 상), 損(덜 손), 失(잃을 실), 補(기울 보), 刑(형벌 형), 事(일 사). <strong>③ 합친 뜻:</strong> 국가가 손해를 갚음·특별희생을 메움·형사절차 피해를 보상. <strong>④ 이름의 이유:</strong> 피해 원인과 권리 근거가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법한 공무수행의 손해,적법한 공용침해의 손실,무죄판결 등 법정 형사보상의 구별. <strong>⑥ 쉬운 말:</strong> 국가 잘못의 배상과 적법한 수용의 보상은 다르다. <strong>⑦ 사례:</strong> 위법 체포·도로용 토지 수용·무죄 확정 구금.</p>
+<p><strong>⑧ 시험:</strong> 29조·23③·28조 구별. <strong>⑨ 비교·기억법:</strong> 무죄라고 모든 수사기관 행위가 곧 위법한 것은 아님.</p>
+<h3>硬性憲法 경성헌법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 硬(굳을 경), 性(성품 성), 憲(법 헌), 法(법 법). <strong>③ 합친 뜻:</strong> 쉽게 바꾸지 못하는 헌법. <strong>④ 이름의 이유:</strong> 최고규범을 일시적 다수가 쉽게 무너뜨리지 못하도록.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반 법률보다 어려운 절차로 개정하는 헌법. <strong>⑥ 쉬운 말:</strong> 보통 법을 바꾸듯 헌법을 바꾸지는 못한다. <strong>⑦ 사례:</strong> 국회3분의2 찬성과 국민투표.</p>
+<p><strong>⑧ 시험:</strong> 헌법 우위의 제도적 보장. <strong>⑨ 비교·기억법:</strong> 성문 여부와 개정 난도는 분류 기준이 다름.</p>
+<h3>國家緊急權 국가긴급권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 家(집 가), 緊(긴할 긴), 急(급할 급), 權(권세 권). <strong>③ 합친 뜻:</strong> 국가 비상상황의 예외 권한. <strong>④ 이름의 이유:</strong> 질서를 회복하기 위한 예외이므로.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 통상적 기관으로 대응하기 어려운 비상사태에서 헌법이 허용하는 한시적 권한. <strong>⑥ 쉬운 말:</strong> 큰 위기 때의 비상권한도 헌법 안에서 쓴다. <strong>⑦ 사례:</strong> 76조 긴급명령·긴급재정경제명령처분,77조 계엄.</p>
+<p><strong>⑧ 시험:</strong> 목적·시기·상황·내용·절차5한계. <strong>⑨ 비교·기억법:</strong> 긴급하다는 선언만으로 요건과 통제가 없어지지 않음.</p>
+<h3>特殊身分關係·戒護 특수신분관계·계호</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특), 殊(다를 수), 身(몸 신), 分(나눌 분), 關(관계할 관), 係(맬 계), 戒(경계할 계), 護(보호할 호). <strong>③ 합친 뜻:</strong> 특별한 신분의 관계·경계하여 보호함. <strong>④ 이름의 이유:</strong> 특수 목적은 고려하되 기본권을 없애지는 않음.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 군인·수용자 등 특별한 공적 관계 및 수용자의 안전·질서 유지 조치. <strong>⑥ 쉬운 말:</strong> 군인이나 수용자도 권리가 있다. <strong>⑦ 사례:</strong> 미결수용자의 종교행사 전면 금지와 자살위험 대응 CCTV 비교.</p>
+<p><strong>⑧ 시험:</strong> 법치 전면 적용;사안별 목적·필요성 심사. <strong>⑨ 비교·기억법:</strong> 특수관계를 기본권 없는 구역으로 보지 않음.</p>
+<h3>統治行爲 통치행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 統(거느릴 통), 治(다스릴 치), 行(다닐 행), 爲(할 위). <strong>③ 합친 뜻:</strong> 고도의 정치적 통치작용. <strong>④ 이름의 이유:</strong> 권한분담과 권리구제의 조정 문제 때문에.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정치적 결단의 특수성으로 사법심사의 범위가 논의되는 국가행위. <strong>⑥ 쉬운 말:</strong> 정치적으로 중요하다고 헌법 밖으로 나가는 것은 아니다. <strong>⑦ 사례:</strong> 금융실명 긴급명령과 기본권 관련 심사.</p>
+<p><strong>⑧ 시험:</strong> 93헌마186;기본권 직접 관련이면 헌재 심판 가능. <strong>⑨ 비교·기억법:</strong> 교재의 강한 비판을 모든 법원이 이론 자체를 폐기했다는 뜻으로 읽지 않음.</p>
+<h1>기출 TOP5와 함정 지도</h1>
+<p><strong>TOP5:</strong> ①094 수신료·의회유보 ②099 소급입법 구별 ③102 과소보호금지 ④118 최소침해 ⑤123 특수신분과 사례 비교. 평등104·120,통치행위107,체계정당성121도 결론을 거꾸로 만드는 표현을 확인한다. 실제 오답률 순위가 아니라 학습 우선순위다.</p>
+<table>
+<thead>
+<tr>
+<th>헷갈리는 쌍</th>
+<th>구별 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>우위/유보</td>
+<td>법에 어긋나지 않는가/법적 근거가 있는가</td>
+</tr>
+<tr>
+<td>의회유보/포괄위임금지</td>
+<td>핵심을 누가 결정했나/맡긴 범위가 예측 가능한가</td>
+</tr>
+<tr>
+<td>진정/부진정소급</td>
+<td>이미 끝난 관계/아직 진행 중인 관계</td>
+</tr>
+<tr>
+<td>과잉/과소</td>
+<td>지나친 국가의 제한/명백히 부족한 국가의 보호</td>
+</tr>
+<tr>
+<td>적합/최소</td>
+<td>도움이 되는가/덜 침해하는 효과적 대안이 있는가</td>
+</tr>
+<tr>
+<td>체계정당성/위헌</td>
+<td>위헌의 징후/구체적 헌법원칙 위반 확인</td>
+</tr>
+<tr>
+<td>특별한 신분/법치주의 면제</td>
+<td>공익을 더 고려/원칙 자체를 빼는 것은 아님</td>
+</tr>
+</tbody></table>
+<h1>새로운 응용문제 5개</h1>
+<h3>응용 1. 이름만 있는 지원법</h3>
+<p>법률은 ‘청년을 지원한다’고만 하고, 장관이 지원대상·제외사유·지원액·환수사유를 아무 기준 없이 정하게 했다. 혜택을 주는 법이므로 법률유보를 따질 필요가 없는가?</p>
+<p><strong>답:</strong> 아니다. 국민의 중요한 생활·재산상 지위를 좌우하는 핵심과 차별 기준은 국회가 정할 필요가 있다. 구체적 기본권적 중요성·이익조정 필요성을 확인한다. 위임 내용이 법에서 예측 가능한지도 별도로 본다. <strong>출제 의도:</strong> 급부행정과 의회유보·포괄위임금지를 연결한다.</p>
+<h3>응용 2. 뒤늦은 세금과 앞으로의 소음 기준</h3>
+<p>새 법 A는3년 전 완결된 거래에 없던 세금을 부과한다. 새 법 B는 현재 영업 중인 노래연습장에6개월 뒤부터 방음 기준을 지키게 한다. 같은 소급입법인가?</p>
+<p><strong>답:</strong> A는 진정소급 문제가, B는 계속되는 관계에 적용하는 부진정소급과 신뢰보호 문제가 중심이다. B도 유예기간·대안·공익과 부담을 따져야 한다. <strong>출제 의도:</strong> ‘과거부터 존재한 대상’과 ‘이미 끝난 관계’를 구별한다.</p>
+<h3>응용 3. 안전을 위한 모든 외출 금지</h3>
+<p>낙석 위험이 한 산책로에서만 확인되었는데 군청이 모든 주민의 모든 야외활동을 한 달 금지했다. 안전 목적은 정당하므로 과잉금지 심사는 끝나는가?</p>
+<p><strong>답:</strong> 아니다. 법적 근거도 확인하고, 특정 구역 통제·보수·경고 등 효과적 대안과 제한의 범위를 검토해야 한다. 목적이 정당하다고 적합성·최소성·균형성이 자동 충족되지는 않는다. <strong>출제 의도:</strong> 네 단계를 독립적으로 설명하게 한다.</p>
+<h3>응용 4. 위험을 알았지만 아무 보호도 없다</h3>
+<p>반복적인 중대 폭력 위험을 알면서 국가가 이용 가능한 법적 보호절차를 전혀 마련하지 않고 집행도 하지 않았다. 피해자는 국가가 직접 때리지 않았으므로 헌법 문제를 제기할 수 없는가?</p>
+<p><strong>답:</strong> 그렇게 단정할 수 없다. 구체적 보호의무가 있는지, 적절하고 효율적인 최소 보호조치를 했는지 살펴 과소보호금지 위반을 검토한다. 특정 피해가 생겼다는 사실만으로 언제나 위반인 것도 아니므로 위험·가능한 조치·실제 대응을 확인한다. <strong>출제 의도:</strong> 사인의 침해와 국가 보호의무를 연결한다.</p>
+<h3>응용 5. 중요한 결정이므로 이유도 심사도 없다</h3>
+<p>정부가 외교적으로 민감한 조치로 특정인의 재산권을 직접 제한하면서 ‘통치행위라 아무 재판도 불가능하다’고 주장했다. 국가안보상 비밀과 기본권 심사는 양립할 수 없는가?</p>
+<p><strong>답:</strong> 정치적 판단을 존중할 여지는 있어도 직접적 기본권 침해에 대한 심사를 일률적으로 배제할 수는 없다. 법적 근거·요건·적절한 심사 범위와 비밀보호 방식을 함께 검토한다. 심사 가능성이 곧바로 위헌 결론을 뜻하지도 않는다. <strong>출제 의도:</strong> 존중·대상성·본안 결론의 세 단계를 나눈다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제5강</h2>
+<p><strong>TOP3:</strong> ①우위·유보·의회유보 ②소급·신뢰보호 ③과잉/과소와 기본권 심사.</p>
+<table><thead><tr><th>항목</th><th>암기 문장</th></tr></thead><tbody>
+<tr><td>법치주의</td><td>법률 근거·정당한 절차·기본권에 맞는 내용.실질은 형식을 버리는 것이 아님.</td></tr>
+<tr><td>우위·유보·위임</td><td>우위=법에 어긋나지 말 것.유보=법적 근거.의회유보=핵심은 국회.75조 위임=대강 예측.</td></tr>
+<tr><td>적법절차</td><td>형사만 아님.절차+내용의 정당성.영장·연좌제 금지·무죄추정.구속을 미리 주는 벌로 사용 금지.</td></tr>
+<tr><td>명확성</td><td>공정 고지·예측·자의 방지.전체 체계로 해석.형벌은 더 엄격.모든 추상어 금지 아님.</td></tr>
+<tr><td>소급</td><td>진정=종료,원칙금지.부진정=진행,원칙허용+신뢰보호.시혜=유리,입법재량과 합리성.형벌불소급 별도 엄격.</td></tr>
+<tr><td>신뢰·책임</td><td>기존 법→합리적 신뢰→지위 형성→불리한 변경.경과조치·공익 형량.자기 결정과 책임 관련성.</td></tr>
+<tr><td>과잉금지</td><td>목적 정당→수단 적합→침해 최소→법익 균형.하나라도 실패하면 문제.</td></tr>
+<tr><td>과소보호</td><td>최소한 적절·효율적 보호.무조치·전적 부적합·명백한 현저 부족.최선 정책 요구와 다름.</td></tr>
+<tr><td>본질·평등</td><td>권리 무의미화 금지.절대·상대·절충 구별.평등=합리적 차별 가능.자의심사/특별 평등·중대한 제한은 엄격심사.</td></tr>
+<tr><td>체계정당성</td><td>모순·불균형은 위헌의 징후.그 자체 자동 위헌 아님.평등·비례 등 확인.</td></tr>
+<tr><td>통제 제도</td><td>107② 명령규칙처분 법원심사.107① 구체적 법률위헌 제청.헌법소원·독립재판·배상보상·경성헌법·분립.</td></tr>
+<tr><td>긴급·특수·정치</td><td>긴급권:목적·시기·상황·내용·절차.특수신분에도 전면 적용.통치행위도 기본권 직접 관련이면 심사 가능.</td></tr>
+</tbody></table>
+<p><strong>사례 연결:</strong> 수신료·교사 가산점=의회유보.저속한 간행물=명확성.쇠고기 고시=과소보호.종교행사 일괄 불허=침해.특정 CCTV=제한 정당화.금융실명명령=심사 가능하나 기각.</p>
+<p><strong>현행법 표시:</strong>2026.3.12. 재판소원 법정 사유 신설.교재의 재판 일률 제외 설명 그대로 암기 금지.독일 추상통제는 현행94①2호·의원1/4.</p>
+<p><strong>사례를 풀 순서:</strong> 근거·결정 주체 → 명확성·절차 → 시간·책임 → 제한/보호 → 비례·평등·핵심 → 심판 통로.</p>
+</section>
+
+<h1>학습 상태 진단</h1>
+<p><strong>🟢 이해 완료:</strong> 법률우위와 유보,진정과 부진정소급,과잉과 과소를 각각 새로운 사례로 구별할 수 있다.</p>
+<p><strong>🟡 복습 필요:</strong> 이름은 알지만 어느 단계의 위반인지 설명할 때 최소성·균형성 또는 신뢰보호를 혼동한다.</p>
+<p><strong>🔴 이해 부족:</strong> ‘법이 있으니 합헌’,‘국가가 안 했으니 기본권 문제 없음’,‘군인이니 법치주의 제외’라고 판단한다.</p>
+<p>아직 답변을 받지 않았으므로 실제 이해도를 단정하지 않는다. <strong>복습 TOP3:</strong> ①우위·유보·의회유보의 질문 ②소급의 시간축과 신뢰보호 ③과잉 네 단계와 과소보호의 차이. 응용문제에서 결론과 이유를 모두 말해 보고 색을 고른다.</p>
+<h1>원본을 읽을 때의 보완 사항</h1>
+<p>법률의 개정·판례의 이유·실제 결론을 구별했다. 독일의 추상적 규범통제 조문과 의원 수,2026년 한국 재판소원 개정을 반영했다. 통치행위에 대한 교재의 강한 비판을 모든 법원의 확정된 전면 폐기 선언으로 바꾸지 않았다. 원본107 사건번호는93헌마186으로,109 해설의 ‘소급입법원칙’은 문맥상 소급입법금지원칙으로 보충한다.122의 한계 목록에는 절차적 한계도 있다.123의CCTV 보기는 해당 사건의 구체적 사실·운영조치를 전제로 읽는다. 원본 문제·정답·해설은 별도 수정하지 않았다.</p>
+<h1>문제 부록 · 33문항·132개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_091"><h4>형성평가 · 헌법_091</h4><p class="question-stem">국민의 권리ㆍ의무에 관한 사항을 법률로써 정하여야 하고 그러한 법률은 법의 최소한의 일반적 형식을 준수하여야 하며, 그 법률의 목적과 내용 또한 기본권 보장의 헌법이념에 부합되어야 한다는 이념을 나타내는 말이 아닌 것은?</p><ol class="choices"><li>법치주의원리</li><li>자비로운 인치(人治)</li><li>법의 지배</li><li>법치국가원리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법의 형식과 기본권에 맞는 내용을 함께 요구하는 실질적 법치주의다.</li><li><strong>선택</strong> · 정답이다. 친절한 권력자여도 법적 통제 대신 개인의 호의에 의존하면 인치다. 자비롭다는 수식어가 함정이다.</li><li><strong>비선택</strong> · 이 문맥에서는 법치주의 이념을 나타내는 표현이다. 법률이라는 이름의 자의적 지배와 다르다.</li><li><strong>비선택</strong> · 같은 이념을 국가의 기본원리로 표현한 말이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_092"><h4>형성평가 · 헌법_092</h4><p class="question-stem">다음 중 실질적 법치주의에 대한 설명이 아닌 것은?</p><ol class="choices"><li>국민의 권리ㆍ의무에 관한 사항을 정하는 법률의 목적과 내용도 기본권 보장의 헌법이념에 부합되어야 한다는 이념이다.</li><li>헌법이 법규범 중 최고규범의 지위를 갖는 것은 실질적 법치주의를 구현하기 위한 것이다.</li><li>위헌법률심판제도는 실질적 법치주의를 실현하기 위해 도입되었다.</li><li>인간의 존엄성을 존중하고 실질적 평등과 같은 정의의 실현을 위한 것이라면 법률에 근거를 두지 않거나 그것과 합치하지 아니하여도 무방하다는 것을 내용으로 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실질적 법치의 핵심이다. 근거뿐 아니라 그 법률 자체의 내용도 심사한다.</li><li><strong>비선택</strong> · 맞다. 법률보다 위에 헌법을 두어 입법자도 기본권에 구속한다.</li><li><strong>비선택</strong> · 맞다. 국회가 만든 법을 헌법에 비추어 통제하는 제도다.</li><li><strong>선택</strong> · 틀려서 선택한다. 실질적 법치는 형식적 법치를 포함한다. 정의를 내세워 근거와 법률 준수를 생략할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 실질적 법치주의는 형식적 법치주의의 요소를 모두 포함하고 그에 더하여 법률의 내용과 목적까지 정의에 합치해야 한다는 이념이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_093"><h4>형성평가 · 헌법_093</h4><p class="question-stem">입법부의 일반의사인 형식적 법률이 집행 등 다른 국가의사에 우선한다는 원칙을 무엇이라고 하는가? (가장 정확한 개념을 고르시오.)</p><ol class="choices"><li>법률유보원칙</li><li>법률우위원칙</li><li>명확성원칙</li><li>과소보호금지원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가작용에 법률상 근거를 요구한다는 뜻이다. 우선한다는 질문과 구별한다.</li><li><strong>선택</strong> · 정답이다. 우위의 위는 자리 위다. 법률을 거슬러 행정할 수 없다.</li><li><strong>비선택</strong> · 법의 의미를 합리적으로 알 수 있어야 한다는 원칙이다.</li><li><strong>비선택</strong> · 국가가 기본권을 필요한 만큼 보호하지 않는 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_094"><h4>형성평가 · 헌법_094</h4><p class="question-stem">다음 중 국회의 결정이나 관여를 배제한 채 한국방송공사로 하여금 수신료금액을 결정해서 문화관광부장관의 승인을 얻도록 한 법률조항에 대한 헌법재판에서 헌법재판소가 설시한 바에 어긋나는 것은?</p><ol class="choices"><li>오늘날 법률유보원칙은 단순히 행정작용이 법률에 근거를 두기만 하면 충분한 것이 되었다.</li><li>텔레비전방송수신료는 대다수 국민의 재산권 보장의 측면이나 한국방송공사에게 보장된 방송자유의 측면에서 국민의 기본권실현에 관련된 영역에 속한다.</li><li>수신료금액의 결정은 납부의무자의 범위등과 함께 수신료에 관한 본질적인 중요한 사항이다.</li><li>텔레비전방송 수신료금액의 결정국회가 스스로 행하여야 하는 사항에 속하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 판례와 어긋나므로 선택한다. 법률상 근거만 두고 중요한 결정을 통째로 넘겨서는 안 된다.</li><li><strong>비선택</strong> · 맞다. 국민의 부담과 방송의 자유 모두 중요한 기본권 문제다.</li><li><strong>비선택</strong> · 맞다. 누가 얼마를 내는지는 수신료 제도의 핵심이다.</li><li><strong>비선택</strong> · 의회유보의 취지다. 원문 결정국회가는 결정을 국회가로 읽는다. 모든 기술적 집행까지 국회가 직접 한다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률에 근거를 두기만 하면 충분한 것이 아니라, 국가공동체와 그 구성원에게 기본적이고도 중요한 영역, 특히 국민의 기본권실현과 관련된 영역에 있어서는 국민의 대표자인 입법자가 그 본질적 사항에 대해서 스스로 결정하여야 한다는 요구까지 내포하고 있다.(의회유보원칙)</p></details></section>
+
+<section class="question-card" id="question-헌법_095"><h4>형성평가 · 헌법_095</h4><p class="question-stem">포괄위임입법금지원칙이란 의회가 행정부에 입법권을 위임할 때에는 이미 대통령령 등으로 규정될 내용 및 범위의 기본사항이 법률에 구체적으로 규정되어 있어서 누구라도 당해 법률로부터 대통령령에 규정될 내용의 대강을 ( )할 수 있어야 하고, 그렇지 아니한 일반적이고 포괄적인 위임은 금지된다는 원칙이다. 괄호 안에 들어갈 알맞은 말은?</p><ol class="choices"><li>한정</li><li>고지</li><li>확장</li><li>예측</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법률이 범위를 정해야 한다는 관련 개념이지만 수범자가 내용의 대강을 할 수 있다는 빈칸에는 맞지 않는다.</li><li><strong>비선택</strong> · 고지는 알리는 행위다. 국민이 법률에서 미리 알아내는 능력을 묻는 문장이므로 답이 아니다.</li><li><strong>비선택</strong> · 위임 범위를 늘리는 것은 이 원칙의 목적과 반대다.</li><li><strong>선택</strong> · 정답이다. 법률을 읽고 하위법령에 어떤 내용이 나올지 대강 예측할 수 있어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 수범자의 입장에서 해당 법률을 보고 인식할 수 있는 바와 관련된 단어가 들어가야 하므로 '예측'이 답이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_096"><h4>형성평가 · 헌법_096</h4><p class="question-stem">적법절차원칙에 대한 서술로 틀린 것은?</p><ol class="choices"><li>절차가 법률로 정하여져야 할 뿐만 아니라 적용되는 법률의 내용에 있어서도 합리성과 정당성을 갖춘 적정한 것이어야 한다는 원칙이다.</li><li>신체의 자유의 절차적 보장과 관련한 법치주의원칙의 구체화(영장주의, 연좌제금지원칙, 무죄추정원칙)로서 그 적용범위는 형사소송절차에 국한된다.</li><li>복합적인 원칙이기 떄문에 자기책임원칙과 같은 다른 개별 법치주의 원칙을 위반하는 국가작용이 적법절차원칙을 준수했다고 할 수는 없다.</li><li>헌법과 법률에서 문제된 공권력 행사가 거쳐야 한다고 규정된 절차를 거쳐야 한다는 내용을 갖는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 정해진 순서만 지키는 문제가 아니라 내용의 정당성도 요구한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 형사절차에 국한되지 않고 입법·행정 등 모든 국가작용에 적용된다.</li><li><strong>비선택</strong> · 맞다. 적법절차의 실질적 내용을 다른 법치 원칙과 분리해 면죄부로 삼을 수 없다.</li><li><strong>비선택</strong> · 맞다. 헌법과 법률이 정한 절차 준수는 기본적인 요구다. 그것만으로 언제나 충분하다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 형사절차에 국한되지 아니하고 모든 국가작용에 대하여 문제 된 법률의 실체적 내용이 합리성과 정당성을 갖추고 있는지 여부를 판단하는 기준으로 적용된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_097"><h4>형성평가 · 헌법_097</h4><p class="question-stem">다음 중 무죄추정원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>유죄의 판결이 확정되기전에 죄 있는 자에 준하여 취급함으로써 법률적, 사실적 측면에서 유형, 무형의 불이익을 주어서는 안 된다는 원칙이다.</li><li>적절한 증거조사 없이 심증에 의해 유죄로 판결하는 것은 무죄추정원칙에 어긋난다.</li><li>공소제기된 범죄가 중범죄인 경우에는 구속재판을 원칙으로 하더라도 무죄추정원칙에 어긋나지 않는다.</li><li>무죄추정원칙에서 금지하는 불이익이란 유죄를 근거로 그에 대하여 사회적 비난 내지 기타 응보적 의미의 차별 취급을 가하는 유죄 인정의 효과로서의 불이익을 의미한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원칙의 설명이다. 다만 모든 확정 전 제한이 아니라 유죄 인정에 따른 응보적 불이익인지 구별해야 한다.</li><li><strong>비선택</strong> · 맞다. 적절한 증거조사 없이 막연한 심증으로 유죄를 인정할 수 없다.</li><li><strong>선택</strong> · 틀려서 선택한다. 중범죄라는 이유만으로 구속재판을 원칙으로 할 수 없다. 도주·증거인멸 우려 등 법정 요건과 필요성을 심사한다.</li><li><strong>비선택</strong> · 맞다. 유죄로 취급하여 비난·응보를 가하는 효과를 말한다. 적법하고 필요한 절차보전 조치와 나눈다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 무죄추정원칙에 의하면 형사재판에서 구속재판은 증거인멸이나 도주우려와 같이 형사절차의 적절한 진행을 위해 꼭 필요한 경우만 예외적으로 실시되어야 하며, 따라서 단순히 중범죄라서 대중의 비난이 가해지고 있다는 이유로 구속재판을 하는 것은 죄 있는 자에 준하여 취급하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_098"><h4>형성평가 · 헌법_098</h4><p class="question-stem">명확성 원칙에 대한 설명으로 틀린 것은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>명확성의 원칙에서 명확성의 정도는 모든 법률에 있어서 동일한 정도로 요구된다.</li><li>법규범이 명확성 원칙에 위반되는지 여부는, 법규범의 의미내용은 그 문언뿐만 아니라 입법목적이나 입법취지, 입법연혁, 그리고 법규범의 체계적 구조 등을 종합적으로 고려하는 해석방법에 의하여 그 의미내용을 합리적으로 파악할 수 있는 해석기준을 얻을 수 있는지 여부에 달려 있다.</li><li>모든 법규범의 문언을 순수하게 기술적 개념만으로 구성하는 것은 입법기술적으로 불가능하고 또 바람직하지도 않기 때문에 어느 정도 가치개념을 포함한 일반적, 규범적 개념을 사용하지 않을 수 없다.</li><li>죄형법정주의가 지배되는 형사관련 법률에서는 명확성의 정도가 강화되어 더 엄격한 기준이 적용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 선택한다. 형벌·표현의 자유 등 규율의 성격과 중요성에 따라 명확성의 요구 정도가 달라진다.</li><li><strong>비선택</strong> · 맞다. 조문 한 문장만 떼지 않고 목적·연혁·체계를 함께 읽어 합리적 기준을 얻을 수 있는지 본다.</li><li><strong>비선택</strong> · 맞다. 모든 가치판단적 개념을 없애는 것은 불가능하고 바람직하지도 않다.</li><li><strong>비선택</strong> · 맞다. 무엇이 범죄인지 예측할 수 있어야 하므로 죄형법정주의 영역에서는 엄격하게 요구한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명확성의 원칙에서 명확성의 정도는 모든 법률에 있어서 동일한 정도로 요구되는 것은 아니고 개개의 법률이나 법조항의 성격에 따라 요구되는 정도에 차이가 있을 수 있으며 각각의 구성요건의 특수성과 그러한 법률이 제정되게 된 배경이나 상황에 따라 달라질 수 있다(헌재 2001. 6. 28. 99헌바34).</p></details></section>
+
+<section class="question-card" id="question-헌법_099"><h4>형성평가 · 헌법_099</h4><p class="question-stem">다음 중 소급입법에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>현재 진행 중인 사실관계 또는 법률관계에 작용하게 하는 소급입법은 원칙적으로 허용된다.</li><li>새로운 입법으로 이미 종료된 사실관계 또는 법률관계에 작용하게 하는 소급입법은 원칙적으로 금지된다.</li><li>이미 영업을 하고 있는 대중접객시설에 금연시설 설치의무를 새로이 부과하는 것은 진정소급입법에 해당한다.</li><li>부진정소급입법에 해당하는 경우에도 신뢰보호원칙을 위반해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 부진정소급이다. 원칙적으로 허용하지만 신뢰보호 심사를 생략하지 않는다.</li><li><strong>비선택</strong> · 진정소급이다. 원칙적으로 금지한다. 형사처벌의 소급금지와 일반 영역의 엄격한 예외 논의도 구별한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 영업이 계속되는 관계에 새 의무를 부과하므로 부진정소급이다. 시작한 날짜가 과거라는 것만으로 진정소급이 아니다.</li><li><strong>비선택</strong> · 맞다. 부진정이라는 이름은 무조건 합헌이라는 표지가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이와 같은 경우는 부진정소급입법에 해당한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_100"><h4>형성평가 · 헌법_100</h4><p class="question-stem">신뢰보호원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>국민이 종전의 법률관계나 제도가 장래에도 지속될 것이라는 신뢰가 있기만 한다면 그것이 불합리한 신뢰인 경우에도 적용된다.</li><li>국가는 법적 안정성을 위하여 권리‧의무에 관련된 법규‧제도의 개폐에 있어서 국민의 기대와 신뢰를 최대한 보호하여야 한다는 원칙이다.</li><li>법의 변화 자체는 국가운영의 정상적인 일부이므로 법률의 재정이나 개정, 그밖에 국가작용의 변화만으로 신뢰보호원칙에서 보호하는 신뢰를 훼손하였다고 판정되는 것은 아니다.</li><li>새로운 입법에 의해 진행 중인 법률관계나 사실관계에 대하여 새로운 요건과 효과, 조각사유 등이 적용됨으로써 기존의 법질서에서 형성된 지위와 관련된 법익에 불리하게 작용할 것이 적용 요건 중 하나이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 선택한다. 합리적으로 믿고 적응하여 형성한 법적 지위가 문제다. 부당하거나 불합리한 기대까지 모두 보장하지 않는다.</li><li><strong>비선택</strong> · 맞다. 법적 안정성은 국민이 제도를 믿고 계획할 수 있게 한다. 다만 제도 불변을 보장하지는 않는다.</li><li><strong>비선택</strong> · 맞다. 변화 자체만으로 위반은 아니다. 재정은 문맥상 제정의 오탈자다. 보호가치와 변경의 공익 등을 비교한다.</li><li><strong>비선택</strong> · 맞다. 종전 질서에 맞춰 형성한 지위에 새 규율이 불리하게 작용하는지를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민이 종전의 법률관계나 제도가 장래에도 지속될 것이라는 합리적인 신뢰를 바탕으로 이에 적응하여 일정한 법적 지위를 형성한 경우에 적용된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_101"><h4>형성평가 · 헌법_101</h4><p class="question-stem">다음 중 자기 운명에 대한 결정‧선택으로 인해 생기는 이득과 부담은 자기가 받고, 자기가 결정하지 않은 것이나 결정할 수 없는 것에 대하여는 책임을 지지 않고 책임부담의 범위도 스스로 결정한 결과 내지 그와 상관관계가 있는 부분에 국한하는 원칙을 무엇이라고 하는가?</p><ol class="choices"><li>과잉금지원칙</li><li>자기책임원리</li><li>명확성원칙</li><li>포괄위임입법금지원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 너무 큰 기본권 제한을 막는 원칙이다. 이 문장의 직접적인 이름은 아니다.</li><li><strong>선택</strong> · 정답이다. 스스로 선택한 결과와 책임부담의 관련성을 요구한다. 자기와 무관한 잘못을 무조건 떠안지 않는다.</li><li><strong>비선택</strong> · 내용을 미리 합리적으로 알 수 있어야 한다는 원칙이다.</li><li><strong>비선택</strong> · 입법의 백지위임을 막는 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_102"><h4>형성평가 · 헌법_102</h4><p class="question-stem">다음 중 &quot;국민의 생명ㆍ신체의 안전을 보호하기 위한 조치가 필요한 상황인데도 국가가 아무런 보호조치를 취하지 않았든지 아니면 취한 조치가 법익을 보호하기에 전적으로 부적합하거나 매우 불충분한 것임이 명백한 경우에 한하여 국가의 보호의무의 위반을 확인&quot;(헌재 2008. 12. 26. 2008헌마419등)할 때 헌법재판소가 적용하는 원칙은? (가장 정확한 것을 고르시오.)</p><ol class="choices"><li>과잉금지원칙</li><li>과소보호금지원칙</li><li>사회국가원리</li><li>문화국가원리</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가의 지나친 개입을 심사하는 기준이다. 질문은 보호 부족을 묻는다.</li><li><strong>선택</strong> · 정답이다. 생명·신체 보호조치가 전무하거나 전적으로 부적합·매우 불충분한지 심사한다.</li><li><strong>비선택</strong> · 국가의 사회적 책임이라는 넓은 원리지만 인용 판례의 직접적인 심사기준은 아니다.</li><li><strong>비선택</strong> · 문화의 자유와 발전 등에 관한 원리로 이 인용문의 기준이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_103"><h4>형성평가 · 헌법_103</h4><p class="question-stem">이 학설은 본질적 내용침해금지원칙에서 말하는 기본권의 '본질적 내용'이란 기본권의 핵심영역으로서 그 부분까지 제한된다면 기본권이 형해화되고 유명무실해지므로 절대적으로 보호되어야 하는 것이라고 설명한다. 이 학설에 대한 비판으로는 국가가 정당방위로 가해자의 생명을 박탈하는 경우와 같이 그 핵심영역을 침범하는 것이 정당화되는 경우를 설명하지 못한다는 비판을 받는다. 이 학설은 무엇인가?</p><ol class="choices"><li>절대설</li><li>상대설</li><li>절충설</li><li>의무론적 제약설</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 공익과의 비교에도 침범할 수 없는 고정적 핵심을 상정한다.</li><li><strong>비선택</strong> · 상대설은 본질적 내용과 비례심사의 관계를 달리 이해한다. 문제의 절대적 핵심 설명과 다르다.</li><li><strong>비선택</strong> · 두 입장을 조합하는 견해다. 질문은 순수한 절대적 핵심과 그 비판을 제시한다.</li><li><strong>비선택</strong> · 교재가 논의하는 정당화 구조와 연결되지만 이 문항이 묻는 전통적 학설 명칭은 절대설이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_104"><h4>형성평가 · 헌법_104</h4><p class="question-stem">다음 중 헌법재판소가 엄격한 심사기준에 의하여 평등원칙 위반을 심사하는 경우가 아닌 것은?</p><ol class="choices"><li>헌법이 차별금지 근거로 삼아서는 아니 되는 기준으로 제시한 것에 의한 차별</li><li>헌법이 특히 금지하고 있는 영역에서의 차별</li><li>관련 기본권에 대한 중대한 제한을 초래하는 차별</li><li>사회적 규제와 조정에 관한 입법재량이 헌법상 크게 인정되는 영역의 차별</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법이 특별히 평등을 요구하는 차별인지 검토하는 엄격심사 범주다.</li><li><strong>비선택</strong> · 특정 영역에 특별한 평등보장을 둔 경우도 엄격한 심사의 근거가 된다.</li><li><strong>비선택</strong> · 차별이 관련 기본권을 중대하게 제한하면 비례심사가 요구된다.</li><li><strong>선택</strong> · 해당하지 않아 선택한다. 넓은 사회경제적 형성재량이 인정되는 영역은 일반적으로 완화된 자의금지 심사 쪽이다. 재량도 무제한은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 입법재량이 헌법상 크게 인정되는 경우란 곧 엄격한 심사기준이 적합하지 않은 경우를 의미한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_105"><h4>형성평가 · 헌법_105</h4><p class="question-stem">다음 중 통치권의 조직 또는 행사에 있어서 법치주의의 구현에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>대한민국은 법원에 의한 행정입법과 행정처분의 합헌성과 합법률성 심사를 채택하고 있다.</li><li>대한민국은 구체적 소송사건과는 관계없이 법률 그 자체의 위헌 여부를 추상적으로 심사하고 위헌으로 판단되면 법률의 효력을 상실하게 하는 추상적 규범통제를 채택하고 있다.</li><li>대한민국은 성문ㆍ경성헌법을 통한 헌법의 우위를 확보하고 있다.</li><li>대한민국은 입법ㆍ행정ㆍ사법으로 나뉘어 서로 견제와 균형을 유지하도록 하여, 법치주의에 어긋나는 국가권력 행사에 대한 다층적 통제가 이루어지도록 하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다.107②에 따라 재판의 전제가 된 명령·규칙·처분을 심사한다. 행정작용이 헌법 위에 있지 않다.</li><li><strong>선택</strong> · 틀려서 선택한다. 한국은 독일식 일반 추상적 규범통제를 채택하지 않는다. 다만 요건을 갖춘 법률 직접 헌법소원까지 없다는 뜻은 아니다.</li><li><strong>비선택</strong> · 맞다. 헌법을 성문화하고 법률보다 엄격한 개정절차를 둔다.</li><li><strong>비선택</strong> · 맞다. 권한을 분담하고 견제하게 하여 하나의 기관이 법질서를 독점하지 못하도록 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 구체적 규범통제제도를 채택하고 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법_106"><h4>형성평가 · 헌법_106</h4><p class="question-stem">&quot;국가긴급권의 행사가 비상사태의 극복이라는 목적에 걸맞으면서도 국민의 기본권에 대하여 최소한의 침해를 야기하는 것이어야 한다.&quot;는 것은 국가긴급의 한계 중 무엇에 대한 설명인가?</p><ol class="choices"><li>목적적 한계</li><li>시기적(기한적)한계</li><li>내용적 한계</li><li>절차적 한계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 무엇을 위해 긴급권을 사용하는지를 묻는다. 이 문장은 수단과 침해 정도까지 제시하므로 가장 정확한 답은 아니다.</li><li><strong>비선택</strong> · 긴급상황이 지속되는 동안이라는 시간적 한계를 가리킨다.</li><li><strong>선택</strong> · 정답이다. 긴급권의 구체적 조치가 목적에 맞고 기본권 침해도 최소한이어야 한다는 내용 통제다.</li><li><strong>비선택</strong> · 국무회의·국회통제 등 헌법상 요구 절차에 관한 한계다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_107"><h4>형성평가 · 헌법_107</h4><p class="question-stem">다음 중 통치행위에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>고도의 정치적 결단에 의한 국가행위로서 그 결단을 존중하여야 할 필요성이 있는 행위이다.</li><li>통치행위를 포함하여 모든 국가작용은 국민의 기본권적 가치를 실현하기 위한 수단이라는 한계를 반드시 지켜야 한다.</li><li>통치행위는 특수성 때문에 헌법재판소의 심판대상에서는 제외된다.</li><li>법치주의원칙에서 면제되는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통치행위론에서 사용하는 개념 설명이다. 정치성이 곧 법치 면제는 아니다.</li><li><strong>비선택</strong> · 맞다. 국가작용은 기본권적 가치 실현의 수단이라는 한계 안에 있다.</li><li><strong>선택</strong> · 틀려서 선택한다. 기본권 침해와 직접 관련되면 고도의 정치성만으로 헌재 심판을 배제할 수 없다.</li><li><strong>비선택</strong> · 맞다. 사법심사의 방식·범위에 관한 논의와 법치주의 자체의 면제는 다르다. 원본 해설의93헌마86은93헌마186으로 보충한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 비록 고도의 정치적 결단에 의하여 행해지는 국가작용이라고 할지라도 그것이 국민의 기본권 침해와 직접 관련되는 경우에는 당연히 헌법재판소의 심판대상이 될 수 있다(헌재1996. 2. 29. 93헌마86).</p></details></section>
+
+<section class="question-card" id="question-헌법_108"><h4>워크북 · 헌법_108</h4><p class="question-stem">다음 중 형식적 법치주의에 그치는 국가원리에 관한 설명이 아닌 것은?</p><ol class="choices"><li>국가권력이 단지 법률의 구속을 받아야 한다는 이념이다.</li><li>수권법률(授權法律)에 근거를 두고 그것에 합치하는 국가권력 행사는 합법이라고 본다.</li><li>법률의 목적과 내용도 기본권 보장의 헌법이념에 부합해야 한다는 것을 내용으로 한다.</li><li>법률의 우위, 법률에 의한 행정, 법률에 의한 재판으로 법치국가의 핵심이 축소된 국가로 귀결된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법률에 구속된다는 형식적 측면을 설명한다.</li><li><strong>비선택</strong> · 권한을 주는 법률에 근거하고 그 범위 안이라는 형식적 합법성을 말한다.</li><li><strong>선택</strong> · 정답이다. 내용과 목적까지 기본권에 맞아야 한다는 것은 실질적 법치의 추가 요소다.</li><li><strong>비선택</strong> · 법률의 내용에 관한 헌법적 통제를 빼고 법률 준수로 축소한 형식적 이해를 비판적으로 묘사한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_109"><h4>워크북 · 헌법_109</h4><p class="question-stem">다음 중 기본권 제한원칙으로 구현된 법치주의 원리가 아닌 것은?</p><ol class="choices"><li>권력적 사실행위 예외원칙</li><li>법률유보원칙</li><li>신뢰보호원칙</li><li>평등원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 해당하지 않아 선택한다. 강제적인 사실행위라고 법치의 적용을 예외로 하는 원칙은 없다.</li><li><strong>비선택</strong> · 법적 근거와 중요한 사항의 의회 결정으로 법치를 구현한다.</li><li><strong>비선택</strong> · 법질서를 합리적으로 믿고 적응한 지위를 보호한다.</li><li><strong>비선택</strong> · 합리적 이유 없는 차별을 막는다. 원본 해설의 소급입법원칙은 소급입법금지원칙으로 읽어야 뜻이 분명하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률우위원칙, 법률유보원칙, 포괄위임입법금지원칙, 적법절차원칙, 명확성원칙, 소급입법원칙, 신뢰보호원칙, 자기책임원칙, 과잉금지원칙, 과소보호금지원칙, 본질적 내용침해금지원칙, 평등원칙, 체계정당성의 원리가 법치주의원리를 구현하는 기본권 제한원칙이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_110"><h4>워크북 · 헌법_110</h4><p class="question-stem">법률유보원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>이에 따르면 법률이 위임한 사항을 의회 이외의 국가기관이 입법하는 경우에도 수권한 규율대상과 목적의 법위 안에서 정해야 한다.</li><li>국가작용은 법률에 근거를 두고 있어야 한다는 원칙이다.</li><li>국가공동체와 그 구성원에게 기본적이고도 중요한 영역, 특히 국민의 기본권 실현과 관련된 영역에 있어서는 국민의 대표자인 입법자가 그 본질적 사하에 대해서 스스로 결정하여야 한다는 요구를 내포한다.</li><li>침해유보에만 한정되므로, 급부행정은 법률유보원칙을 준수하지 아니 하여도 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 위임을 받은 규율도 수권 범위·목적을 지킨다. 특히 법률우위와 연결되는 설명이며 법률유보 취지와도 양립한다. 법위는 범위의 오탈자다.</li><li><strong>비선택</strong> · 원칙의 기본 의미다. 어떤 사항에 어느 정도의 법적 근거가 필요한지는 중요성과 성질을 함께 본다.</li><li><strong>비선택</strong> · 의회유보의 설명이다. 본질적 사하는 본질적 사항으로 읽는다.</li><li><strong>선택</strong> · 틀려서 선택한다. 지원·복지 등 급부행정도 이익조정·평등·기본권 문제를 일으키므로 법률유보에서 일률적으로 제외되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 오늘날 적극국가, 행정국가 시대에서 급부행정 역시 상충하는 이익 간 조정을 할 필요성이 크고 차별 효과는 다른 기본권에도 상당한 충격을 줄 수 있으므로 법률유보원칙을 준수하여야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_111"><h4>워크북 · 헌법_111</h4><p class="question-stem">헌법 제75조에 대한 설명으로 틀린 것은?(헌법재판소 판례에 따름)</p><ol class="choices"><li>헌법 제75조는 입법의 위임이 구체적으로 범위를 정하여 이루어져야 한다는 한계를 규정하고 있다</li><li>국회의 입법절차는 전문관료들만에 의하여 이루어지는 행정입법절차와는 달리 공익의 발견과 상충하는 이익 간의 정당한 조정에 보다 적합한 민주적 과정이라 할 수 있디</li><li>입법의 위임은 구체적으로 범위를 정하여 해야 한다는 한계에 따라 도출되는 규율밀도는 모든 규율대상에서 일정하게 유지되어야 한다.</li><li>법률이 교원의 &quot;공개전형 실시에 관하여 필요한 사항은 대통령령으로 정한다&quot;고만 할 뿐 가산점 항목에 관하여 명시적으로 언급하지 않고 있는데 대통령령으로 사범대 가산점과 복수ㆍ부전공 가산점의 적용대상이나 배점을 정한다면 이는 법률유보원칙을 위배하여 공무담임권을 침해하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다.75조는 구체적 범위를 정한 위임을 요구한다.</li><li><strong>비선택</strong> · 맞다. 공개적 토론과 이해관계 조정이라는 의회 결정의 민주적 의미다.</li><li><strong>선택</strong> · 틀려서 선택한다. 기본권상 중요성과 공개적 조정 필요성이 클수록 법률의 규율밀도도 높아진다.</li><li><strong>비선택</strong> · 핵심 취지는 맞다. 가산점의 본질적 사항에 법률상 근거가 필요하다. 교재의2001헌마882 실제 심판대상은 교육감의 가산점 제도이므로 이 보기를 사건 기록 그대로의 기술로 외우지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 규율대상이 기본권적 중요성을 가질수록 그리고 그에 관한 공개적 토론의 필요성 내지 이익 간 조정의 필요성이 클수록, 그것이 국회의 법률에 의해 직접 규율될 필요성 및 그 규율밀도의 요구 정도는 그만큼 더 증대되는 것으로 보아야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_112"><h4>워크북 · 헌법_112</h4><p class="question-stem">다음 중 포괄위임입법금지원칙과 관련하여 틀린 서술은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>&quot;대통령은 법률에서 구체적으로 범위를 정하여 위임받은 사항(..)에 관하여 대통령령을 발할 수 있다&quot;고 규정하고 있는 헌법 제75조가 이 원칙을 명시하고 있다.</li><li>관련된 법조항 전체를 유기적ㆍ체계적으로 종합 판단하여 그 위임내용을 예측할 수 있는 데 그친다면 명백히 포괄위임입법금지원칙을 위반한 것이다.</li><li>포팔위임입법금지원칙은 법률유보원칙의 한 내용이라고 할 수 있다.</li><li>처벌의 대상에서 제외되는 대상행위가 어떤 것일지는 법률에서 도저히 예측할 수 없어 국민들로서는 어떠한 행위가 금지되고 어떠한 행위가 허용되는지를 알 수 없는 경우에는 포괄위임입법금지원칙을 위반한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다.75조의 구체적으로 범위를 정하여라는 문구가 핵심이다.</li><li><strong>선택</strong> · 틀려서 선택한다. 관련 조문 전체를 유기적으로 읽어 대강을 예측할 수 있다면 준수할 수 있다. 한 조문만으로 모든 것을 알라는 원칙이 아니다.</li><li><strong>비선택</strong> · 맞다. 위임의 한계를 지켜 법률의 결정 책임을 확보한다. 포팔은 포괄의 오탈자다.</li><li><strong>비선택</strong> · 맞다. 처벌과 제외 범위를 법률로 도저히 예상할 수 없다면 백지위임의 문제가 생긴다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 위임내용이 관련된 법조항 전체를 유기적ㆍ체계적으로 종합 판단하여 그 위임내용을 예측할 수 있는 경우에는 포괄위임입법금지원칙을 준수했다고 평가될 수 있다(헌재 1997. 5. 29. 94헌바22).</p></details></section>
+
+<section class="question-card" id="question-헌법_113"><h4>워크북 · 헌법_113</h4><p class="question-stem">다음 중 국민의 인신과 재산에 물리적인 강제력을 행사하는 수사와 증거수집은 적법한 영장에 의거하여야 한다는 원칙은 무엇인가?</p><ol class="choices"><li>영장주의</li><li>연좌제금지원칙</li><li>무죄추정원칙</li><li>명확성 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답이다. 강제수사·증거수집에 원칙적으로 법관의 적법한 영장을 요구한다. 헌법상 예외는 별도로 확인한다.</li><li><strong>비선택</strong> · 친족의 행위로 본인에게 불이익을 주지 말라는 원칙이다.</li><li><strong>비선택</strong> · 유죄 확정 전 유죄의 응보적 효과를 부과하지 않는 원칙이다.</li><li><strong>비선택</strong> · 금지·의무 등의 의미를 합리적으로 알 수 있게 하라는 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_114"><h4>워크북 · 헌법_114</h4><p class="question-stem">명확성 원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>법령은 그 문언으로부터 허용, 금지, 의무. 수권과 그 효과와 조각사유 등에 관한 법규범의 내용을 다른 내용으로 혼동하지 않고 합리적 방법에 의하여 알 수 있도록 입법되어야 한다는 원칙이다.</li><li>적용대상자에게 그 규제내용을 미리 알 수 있도록 공정한 고지를 하여 장래의 행동 지침을 제공할 수 있어야 명학성 원칙을 준수할 수 있다.</li><li>법집행자에게 객관적 판단지침을 주어 차별적이거나 자의적인 법해석을 예방할 수 있어야 명확성 원칙을 준수할 수 있다.</li><li>헌법 제10조는 &quot;법률은 국민의 기본적 권리와 자유에 관한 사항에 있어서 명확해야 한다&quot;고 하여 명확성 원칙을 명시적으로 규정하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 허용되는 행동과 금지되는 행동,효과와 예외를 합리적으로 알 수 있어야 한다.</li><li><strong>비선택</strong> · 맞다. 국민의 예측과 행동 계획을 보호한다. 명학성은 명확성의 오탈자다.</li><li><strong>비선택</strong> · 맞다. 집행자의 마음대로 해석과 차별적 적용도 막는다.</li><li><strong>선택</strong> · 틀려서 선택한다.10조에 그런 문장은 없다. 명확성은 법치주의 등에서 도출되는 원칙이지 제시된 문구가 명시된 것이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명확성 원칙을 명시적으로 언급한 조문은 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_115"><h4>워크북 · 헌법_115</h4><p class="question-stem">소급입법금지원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>이미 과거에 완성된 사실관계 또는 법률관계를 규율대상으로 하여 국민에게 불리하게 사후에 그 전과 다른 법적 효과를 생기게 하는 입법은 허용되지 않는다는 원칙이다.</li><li>헌법 제13조 제2항, 헌법 제13조 제1항의 명문 규정상, 소급입법이 금지되는 영역은 참정권 제한, 재산권 박탈, 처벌의 영역에만 적용된다.</li><li>이 원칙에 의해 금지되는 것은 진정소급입법이다.</li><li>이미 결정된 과세금액대로 세금을 납부한 과세요건에 해당하는 소득에 대한 추가 과세는 이 원칙에 위반된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 진정소급금지의 원칙적 설명이다. 일반 영역의 매우 엄격한 예외 논의와 형사소급처벌 금지를 구별해 읽는다.</li><li><strong>선택</strong> · 틀려서 선택한다. 명문으로 든 처벌·참정권·재산권만이 아니라 불리한 법적 지위 변경 전반에 법치와 신뢰의 요청이 적용된다.</li><li><strong>비선택</strong> · 원칙적으로 금지되는 유형은 진정소급이다. 부진정소급에도 신뢰보호는 적용된다.</li><li><strong>비선택</strong> · 과거에 완성된 과세요건에 추가 부담을 지우는 진정소급의 예다. 원칙 금지라는 문맥이며 모든 비형사 영역의 예외 가능성을 지우는 문장으로 일반화하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국민의 권리를 제한하거나 의무를 부과하는 등 국민의 법적 지위를 불리하게 제한하는 모든 법령에 대하여 적용된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_116"><h4>워크북 · 헌법_116</h4><p class="question-stem">시혜적 소급입법에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>그 적용대상이 되는 국민에게 불리하고 의무를 부과하는 소급입법이다.</li><li>원칙적으로 금지된다.</li><li>국민에게 유리하므로 법치주의원칙의 적용을 받지 않는다.</li><li>원칙적으로 허용되나 합리적 재량의 범위를 벗어나 현저하게 불합리하고 불공정한 것이라면 헌법에 위반된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 시혜는 혜택을 준다는 뜻이므로 대상에게 유리한 입법이다.</li><li><strong>비선택</strong> · 틀리다. 시혜적 소급입법은 원칙적으로 허용된다.</li><li><strong>비선택</strong> · 틀리다. 유리한 혜택도 불합리한 배제·차별을 만들 수 있어 법치와 평등의 심사를 받는다.</li><li><strong>선택</strong> · 정답이다. 넓은 형성재량을 인정하되 현저히 불합리하거나 불공정한 범위를 넘을 수는 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그 적용대상이 되는 국민에게 유리하고 이익을 주는 소급입법이다. 원칙적으로 허용된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_117"><h4>워크북 · 헌법_117</h4><p class="question-stem">다음 중 신뢰보호원칙을 위반하였다고 볼 수 있는 경우는?</p><ol class="choices"><li>새로운 법률관계를 적용함에 있어서 신뢰이익에 손상이 덜한 방법이 없었다.</li><li>새로운 법률관계가 적용됨으로써 손상되는 이익이 달성하고자 하는 공익보다 크다</li><li>국민이 종전의 법률관계나 제도가 장래에 폐지될 것임을 미리 고지받았다.</li><li>신뢰이익의 제한은 필요한 경우로 한정되었다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 손상이 덜한 대안이 없다는 점은 정당화에 유리하다. 다만 이것 하나만으로 최종 합헌이 자동 확정되는 것은 아니다.</li><li><strong>선택</strong> · 정답이다. 손상되는 보호가치 있는 신뢰이익이 공익보다 크면 균형을 잃는다.</li><li><strong>비선택</strong> · 미리 예고했다면 계속될 것이라는 신뢰의 보호가치가 낮아질 수 있다. 구체적 경과조치와 예고기간까지 보아야 하므로 모든 신뢰가 사라지는 것은 아니다.</li><li><strong>비선택</strong> · 필요한 범위로 제한했다는 것은 정당화에 유리하다. 역시 공익과 신뢰이익의 전체 비교가 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_118"><h4>워크북 · 헌법_118</h4><p class="question-stem">과잉금지원칙의 부분원칙 중 입법권자가 선택한 기본권 제한의 조치가 입법 목적 달성을 위하여 설사 적절하다 할지라도 보다 완화된 형태나 방법을 모색 함으로써 기본권의 제한은 필요한 최소한도에 그치도록 하여야 한다는 원칙을 무엇이라고 하는가?</p><ol class="choices"><li>목적의 정당성</li><li>방법의 적정성</li><li>피해의 최소성</li><li>법익의 균형성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 목표 자체가 헌법적으로 정당한지를 묻는 첫 단계다.</li><li><strong>비선택</strong> · 선택한 방법이 목적 달성에 기여하는지 묻는 단계다.</li><li><strong>선택</strong> · 정답이다. 비슷하게 효과적이면서 덜 침해하는 대안을 찾아 필요한 최소한에 그쳐야 한다.</li><li><strong>비선택</strong> · 얻는 공익과 잃는 기본권 이익 사이의 최종 균형을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_119"><h4>워크북 · 헌법_119</h4><p class="question-stem">다음 중 본질적 내용침해금지원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>기본권의 근본요소 내지 핵심은 어떠한 이유로도 침해할 수 없다는 원칙이다.</li><li>헌법 제37조 제2항이 이를 규정하고 있다.</li><li>헌법재판소는 기본권의 본질적 내용은 만약 이를 제한하는 경우에는 기본권 그 자체가 무의미해지는 경우에 그 본질적 요소를 말하는 것이라고 설시한 바 있다.</li><li>헌법재판소는 모든 사건에서 절대설의 입장을 일관되게 취하고 있다고 평가된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법상 보호해야 할 핵심을 침해해서는 안 된다는 원칙의 설명이다. 어떤 부분이 그 핵심인지는 학설과 구체적 심사가 갈린다.</li><li><strong>비선택</strong> · 맞다.37②후단이 자유와 권리의 본질적인 내용을 침해할 수 없다고 정한다.</li><li><strong>비선택</strong> · 맞다. 권리가 이름만 남고 의미를 잃게 되는 요소를 가리킨다.</li><li><strong>선택</strong> · 틀려서 선택한다. 판례를 모든 사건에서 일관된 절대설로 묶을 수 없다. 사형제 등에서의 설명을 포함하여 구체적 논증을 읽어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원칙적으로 절대설에 가까우나 상대설에 의한 판례(대표적으로 사형제 합헌 판례)도 있다고 평가된다.</p></details></section>
+
+<section class="question-card" id="question-헌법_120"><h4>워크북 · 헌법_120</h4><p class="question-stem">평등원칙에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>국가는 합리적 이유가 없는 한 국민을 평등하게 대우하여아 한다는 원칙이다.</li><li>헌법 전문과 제11조 제1항이 평등원칙을 규정하고 있는 대표적인 문언이다.</li><li>법 앞의 평등과 함께 사실상의 평등도 명령한다.</li><li>헌법 제11조에 거론된 차별금지 사유는 예시적인 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 합리적 이유 없는 차별을 금지하는 상대적 평등이다.</li><li><strong>비선택</strong> · 맞다. 전문의 균등한 기회와11①의 평등보장을 연결한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 모든 사실적 상태·결과를 동일하게 하라는 명령은 아니다. 그렇다고 실질적 불평등을 완화하는 정책이 전부 금지된다는 뜻도 아니다.</li><li><strong>비선택</strong> · 맞다. 성별·종교·사회적 신분만 금지되고 그 밖의 자의적 차별은 허용된다는 뜻이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 사태의 존립으로서 같음을 의미하는 사실상의 평등이 명령되는 것은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_121"><h4>워크북 · 헌법_121</h4><p class="question-stem">체계정당성의 원리에 관한 설명으로 틀린 것은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>규범 상호 간의 구조와 내용 등이 서로 모순되지 않고 균형을 유지하도록 입법해야 한다는 입법자를 구속하는 헌법적 원리이다.</li><li>비난 가능성이 작은 행위에 대해 높은 형벌을 부과하고 비난 가능성이 큰 행위에 대해 낮은 형벌을 부과하는 것은 체계정당성의 원리 위반이다.</li><li>어떤 법률에 체계정당성 위반의 요소가 있다면 그 법률은 곧바로 위헌인 법률로 판정된다.</li><li>명의신탁을 증여로 의제하여 증여세를 부과하도록 한 입법의 선택에는 합리적인 이유가 존재하고 여기에 입법재량의 한계를 현저히 일탈한 잘못이 있다고 볼 수 없다면 체계정당성에 어긋나더라도 헌법에 위반되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞다. 관련 규범끼리 구조·내용의 모순과 불균형을 피할 것을 요구한다.</li><li><strong>비선택</strong> · 합리적 구별 이유 없이 비난 가능성과 형벌의 크기가 뒤집히면 체계정당성 문제를 일으킨다.</li><li><strong>선택</strong> · 틀려서 선택한다. 체계의 어긋남은 위헌의 징표다. 합리적 이유와 다른 헌법원칙을 함께 심사해야 한다.</li><li><strong>비선택</strong> · 맞다. 조세회피 방지 등 합리적 이유와 입법재량의 범위를 함께 본2004헌바40의 취지다. 실제 증여와 다르다는 이유만으로 자동 위헌은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_122"><h4>워크북 · 헌법_122</h4><p class="question-stem">다음 중 국가긴급권에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>국가긴급권은 법치주의원리 그 자체를 넘어선다.</li><li>평상시의 입헌주의적 통치기구로서는 대처할 수 없는 긴급사태에 있어서 긴급조치를 취할 수 있는 비상의 예외적인 권한을 부여하여 국가의 존립을 보전하기 위한 헌법상 제도를 말한다.</li><li>대한민국 헌법상 긴급권에는 대통령의 긴급명령권, 긴급재정경제명령ㆍ처분권, 계엄권이 있다.</li><li>국가긴급권은 목적적, 시기적, 상황적, 내용적 한계를 적용받는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 선택한다. 평소와 다른 구현형태를 일시적으로 허용할 뿐 법치주의 자체의 바깥으로 나가는 것이 아니다.</li><li><strong>비선택</strong> · 맞다. 헌법상 요건을 갖춘 비상시의 예외적 제도다. 위기라는 명칭만으로 성립하지 않는다.</li><li><strong>비선택</strong> · 맞다.76조와77조의 제도를 구별한다. 긴급재정경제는 국회 집회를 기다릴 여유,긴급명령은 집회 불가능 등의 요건 차이가 중요하다.</li><li><strong>비선택</strong> · 맞다. 나열한 네 가지가 적용된다. 교재의 전체 목록에는 절차적 한계까지 다섯 가지이므로 이 보기를 네 가지만 존재한다는 뜻으로 읽지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국가긴급권은 국가가 비상사태에 처한 경우에 한하여 헌법에 따라 일시적으로 법치주의원리의 통상적 구현형태의 적용을 받지 않는 것일 뿐 법치주의원리 그 자체를 넘어서는 것이 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법_123"><h4>워크북 · 헌법_123</h4><p class="question-stem">다음 서술 중 틀린 것은? (헌법재판소 판례에 따름)</p><ol class="choices"><li>공무원ㆍ국공립학교학생ㆍ수용자ㆍ군인과 같은 특수신분관계에 있어서 기본권 제한의 경우에는 오늘날 법치주의가 부분적으로만 적용된다.</li><li>군인의 기본권 제한에 있어서는 군인은 국가의 존립과 안전을 보장함을 직접적인 존재의 목적으로 하는 군 조직의 구성원이므로, 그 존립 목적을 위하여 불가피한 경우에는 일반인 또는 일반 공무원에 비하여 상대적으로 기본권 제한이 가중될 수 있는 것이다.</li><li>미결수용자에 대하여 일률적으로 종교행사에 참석을 불허하는 것은 과잉금지원칙을 위반하여 종교의 자유 침해이다.</li><li>구치소장이 수용자의 거실에 CCTV를 설치하여 계호한 행위는 공백없이 생명ㆍ신체를 보호하고 교정시설 내 안전ㆍ질서를 보호하는 것으로 사생활의 비밀 및 자유를 침해하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀려서 선택한다. 법치주의는 전면적으로 적용된다. 특수한 지위의 목적과 공익을 구체적 심사에서 고려하는 것이다.</li><li><strong>비선택</strong> · 맞다. 군의 존립 목적 때문에 불가피한 제한의 정도가 달라질 수 있다. 그래도 법률·비례 등 심사를 통과해야 한다.</li><li><strong>비선택</strong> · 맞다. 미결수용자의 종교행사 참석을 일률적으로 막은2009헌마527에서는 종교의 자유 침해를 인정했다.</li><li><strong>비선택</strong> · 2010헌마413의 구체적인 위험·안전조치와 관찰 방식 아래 판단이다. 모든 수용자에 대한 무제한 상시감시가 언제나 합헌이라는 일반명제로 넓히지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법치주의가 전면적으로 적용되고, 기본권 제한 심사에 있어서 그 공익의 중대성이 고려될 뿐이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 05' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 05|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법의기초 제2강 헌법의 제정과 개정 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL FOUNDATIONS · LECTURE 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법의기초</span>
+    <span class="brand-sub">제2강 헌법의 제정과 개정 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법의기초_개념.html">헌법의기초 개념 목록</a><a href="../index.html?subject=헌법">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>나라의 기본 약속을 바꿀 수 없다면 사회가 달라져도 낡은 규칙에 묶인다. 반대로 권력자가 마음대로 바꿀 수 있다면 “대통령은 오늘부터 평생 대통령”이라는 규칙도 생긴다. <strong>변화할 길은 열어 두되, 권력을 제한하는 헌법의 뿌리는 지키자.</strong> 제2강은 이 두 요구 사이의 균형을 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 던질 질문</th>
+<th>이 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하는가?</td>
+<td>헌법을 처음 만드는 힘, 고치는 힘, 그 힘의 한계와 한국 개헌의 역사를 설명한다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>힘을 잡았다는 사실만으로 사람을 지배할 정당한 권한까지 생기는 것은 아니기 때문이다.</td>
+</tr>
+<tr>
+<td>전체 위치는?</td>
+<td>1강의 헌법 효력과 해석을 ‘헌법의 탄생·변화’에 적용하는 부분이다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>1강의 정당성 → 2강의 제정·개정 한계 → 3강의 헌법수호·저항권으로 이어진다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>국민투표만 하면 무엇이든 합헌이라는 오해, 반복된 위헌이 관습이라는 오해, 과거 독재의 법이 피해구제를 막는다는 오해가 생긴다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 47-82쪽(PDF 65-100쪽), 헌법_019-036, 18문항·72개 보기. 교재 순서와 사례를 따라 재구성한 과외본이다. 저자의 철학적 주장, 판례의 공식 결론, 특정 재판관의 의견, 현행 조문을 구분한다. 별점은 학습 우선순위이며 실제 출제율·오답률 통계가 아니다.</p>
+<p><strong>색의 약속:</strong> <mark class="yellow">정의·결론</mark> / <mark class="green">이유</mark> / <mark class="pink">함정</mark> / <mark class="blue">연결</mark>. 아래 대화는 이해를 돕는 재구성이지 실제 발언 인용이 아니다.</p>
+<h1>1. 헌법을 만든다는 말의 두 층위</h1>
+<h2 id="foundations-02-01" data-concept-id="foundations-02-01">1-1. 헌법제정과 헌법제정권력 ★★★★★</h2>
+<p><strong>교재 48-49쪽 / 문단의 역할:</strong> 헌법을 처음 세우는 일과 이미 있는 헌법 아래에서 일하는 것을 구별한다.</p>
+<p>실질적 의미의 제정은 정치공동체를 규율하는 <strong>최고의 근본규범을 정립</strong>하는 일이다. 형식적 의미의 제정은 <strong>헌법전이라는 문서를 편찬</strong>하는 일이다. 문서를 만들었다는 사실만으로 그 내용이 모두 정당한 최고의 규범이 되는지는 별도로 따져야 한다.</p>
+<p>헌법제정권력은 그 기본법을 시원적으로 창설하는 힘이다. 통설적 설명에서 국민주권국가의 주체는 국민이다. 헌법개정권력·입법권·행정권·사법권은 이미 성립한 헌법이 만들어 준 권한이다. 국회의원이 법률을 만들 수 있는 것은 자신이 힘이 세서가 아니라 헌법이 입법권을 부여했기 때문이다.</p>
+<table>
+<thead>
+<tr>
+<th>제정권력의 특성</th>
+<th>쉬운 뜻</th>
+<th>헷갈림 방지</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>창조성</td>
+<td>기본법을 새로 세운다</td>
+<td>기존 법률의 집행이 아니다</td>
+</tr>
+<tr>
+<td>시원성</td>
+<td>이전 국내 권력의 수권을 받아 출발하지 않는다</td>
+<td>‘아무 인권이나 없애도 된다’는 결론과는 다르다</td>
+</tr>
+<tr>
+<td>자율성</td>
+<td>스스로 기본질서를 정한다</td>
+<td>개정권력은 기존 절차를 따라야 한다</td>
+</tr>
+<tr>
+<td>통일성·불가분성</td>
+<td>궁극적 제정권력을 기관별로 쪼개 양도하지 않는다</td>
+<td>입법·행정·사법의 기능 분담과 구별한다</td>
+</tr>
+<tr>
+<td>항구성</td>
+<td>제정 후에도 주권자에게 남는다</td>
+<td>한 번 행사하면 소멸하는 권력이 아니다</td>
+</tr>
+<tr>
+<td>불가양성</td>
+<td>국민의 궁극적 지위를 남에게 넘길 수 없다</td>
+<td>대표를 선출하는 것은 주권을 팔아 버리는 일이 아니다</td>
+</tr>
+</tbody></table>
+<p><strong>시험:</strong> 019·027·028. <strong>키워드:</strong> 근본규범/헌법전·시원적/형성된 권력. <strong>한 줄:</strong> 헌법을 세우는 힘과 헌법이 맡겨 준 일을 하는 힘은 다르다.</p>
+<h2 id="foundations-02-02" data-concept-id="foundations-02-02">1-2. 닭과 달걀: 힘이 먼저인가, 정당한 규범이 먼저인가 ★★★★★</h2>
+<p><strong>교재 49-53쪽 / 문단의 역할:</strong> ‘시원적 권력’이라는 이름만으로 법적 효력의 이유를 설명할 수 있는지 묻는다. 철학적 논의지만 제공 문제에서 반복되므로 중요하다.</p>
+<p>닭 명제는 “권한 있는 사람이 규범을 만들었으니 그 규범이 존재한다”에, 달걀 명제는 “그 사람에게 권한을 주는 정당한 규범이 있어야 규범을 만들 권한도 있다”에 초점을 둔다. 둘을 끝없이 거슬러 올라가면 처음의 권한을 무엇이 정당화하는지 문제가 된다. 최초의 원인을 ‘움직이지 않는 원동자’라고 이름 붙이는 것만으로 모든 설명이 끝나지 않는다는 교재의 비유도 같은 뜻이다.</p>
+<p><strong>교재 사례 네 장면.</strong> ① 영희가 철수에게 “이유 없이 너를 괴롭히겠다고 약속할게”라고 말한다. 약속이라는 말이 나왔다고 철수에게 이익도 없는 괴롭힘의 의무가 생기지는 않는다. ② 철수와 영희가 몽룡을 해치기로 약속한다. 둘이 동의해도 제3자의 권리를 침해할 의무는 생기지 않는다. ③ 약속 자체가 없었는데 철수에게 “왜 안 왔어?”라며 제재할 수는 없다. ④ 오후 2시에 만나기로 진지하게 약속했어도, 가는 길에 물에 빠진 아이를 구하느라 늦었다면 약속만 기계적으로 앞세울 수 없다.</p>
+<p>네 사례를 함께 읽어야 한다. <strong>실제로 약속했다는 사건도 필요하고, 그 약속이 의무를 만들 자격을 갖췄는지도 필요하다.</strong> 사건을 무시한 추상적 도덕도, 내용이 무엇이든 약속이면 무조건이라는 태도도 답이 아니다. 저자는 헌법도 마찬가지라고 본다. <mark class="green">헌법을 채택했다는 제도적 사건과, 그 규범을 공동체의 기본법으로 받아들일 정당성이 함께 필요하다.</mark></p>
+<p><strong>시험:</strong> 020·034·035. <strong>키워드:</strong> 사실과 규범·수용 표지+정당성. <strong>한 줄:</strong> ‘만들었다’는 사실에서 ‘무조건 복종해야 한다’는 의무가 자동으로 나오지는 않는다.</p>
+<h2 id="foundations-02-03" data-concept-id="foundations-02-03">1-3. 개인도덕·정치도덕·구조적 정치도덕 ★★★★☆</h2>
+<p><strong>교재 51-56쪽 / 문단의 역할:</strong> 헌법의 정당성을 개인의 취향과 구별한다.</p>
+<p>개인도덕은 개인 사이에서 어떻게 행동해야 하는지를 묻는다. 정치도덕은 서로 다른 생각을 가진 사람들에게도 공통 제도를 통해 요구할 수 있는 정당한 기준을 묻는다. 구조적 정치도덕은 그 사람들이 계속 공정하게 논의하고 결정할 수 있는 <strong>틀 자체</strong>를 보호한다. 내가 어떤 주장을 도덕적으로 싫어한다고 해서 국가가 그 주장을 모두 금지할 수 있는 것은 아니다. 반대 의견도 말할 수 있는 제도를 지켜야 하기 때문이다.</p>
+<p>저자는 헌법의 효력이 <strong>개인적 도덕명제에서 곧바로 나오지 않고</strong>, 공동체에서 최고의 제도적 효력을 가진 것으로 받아들일 표지와 정당성에 근거한다고 설명한다. 국민 전체가 모든 문장에 직접 동의했다는 실제 사건으로만 환원되지 않는다. 투표가 있었다고 해도 어떤 정족수와 절차를 정당한 것으로 볼지의 문제가 먼저 남는다.</p>
+<p><strong>교재의 세 나라 사례.</strong> 대한민국 제헌헌법은 국회가 제정했고 별도의 제정 국민투표는 없었다. 독일 기본법은 패전 후 점령이라는 제약 속에서 서방 점령지역을 중심으로 의회평의회가 논의하고 주들의 승인 등을 거쳐 1949년 공포되었다. 바이에른의 반대까지 있었으므로 ‘모든 구성원의 직접적 만장일치’로 설명할 수 없다. 일본의 전후 헌법도 연합군총사령부의 영향과 초안, 일본 정부·의회의 심의를 거쳐 1946년 공포되었다. <strong>국민투표 부재나 외부 영향이라는 한 사실만으로 효력 전체를 즉시 부정할 수 없다는 것이 저자의 논점</strong>이다. 외부 강제가 언제나 정당하다는 뜻은 아니다.</p>
+<p>제정권력 무한계론은 시에예스·슈미트 등의 논의와 연결하여 기존 실정법의 제약을 받지 않는 성격을 강조한다. 저자는 여기서 더 나아가 인간존엄·기본권·민주적 공존을 무너뜨리는 내용까지 정당화할 수는 없다고 비판한다. 소수집단을 이등시민으로 만들거나 학살을 명령하는 조항은 ‘헌법’이라는 표지만으로 정당한 법이 되지 않는다는 것이다. <mark class="pink">이 논의를 헌법재판소가 모든 과거 헌법을 일괄 무효로 선언했다는 판례로 외우면 안 된다.</mark></p>
+<p><strong>시험:</strong> 020·035. <strong>키워드:</strong> 세 층위·수용 표지·정당성·제정의 한계. <strong>한 줄:</strong> 개인이 싫어하는 것과 국가가 금지할 수 있는 것은 다르고, 다수가 원한 것과 정당한 헌법도 같지 않다.</p>
+<h1>2. 헌법을 고치는 길과 넘지 못할 선</h1>
+<h2 id="foundations-02-04" data-concept-id="foundations-02-04">2-1. 개정의 뜻·필요성·위험 ★★★★★</h2>
+<p><strong>교재 56-58쪽 / 문단의 역할:</strong> 변화가 필요하다는 이유와 급격한 개편의 위험을 함께 설명한다.</p>
+<p>헌법개정은 기존 헌법이 정한 절차에 따라 기본적 동일성을 유지하면서 문언을 의식적으로 바꾸는 일이다. 현실과 너무 멀어진 헌법을 조정하고, 개선할 규정을 고치고, 갈등을 제도 안에서 해결하며, 파괴·폐제 같은 헌법 밖의 변화를 예방하려는 것이다.</p>
+<p>그러나 개헌은 개선의 보증수표가 아니다. 인기 있는 조항에 집권세력의 이익을 위한 조항을 묶어 투표시키거나, 낯선 권한·절차를 충분한 검토 없이 도입하면 갈등이 커질 수 있다. <strong>새롭고 급격할수록 정치가 발전한다는 보기는 틀린다.</strong> 사람들이 앞으로 어떤 권리와 의무를 가질지 예측할 수 있어야 한다.</p>
+<p>형식으로 보면 미국의 수정조항 추가, 독일의 기존 조항 수정·삭제·삽입, 한국 헌정사의 새 헌법번호 부여와 체계 정리 방식 등을 비교한다. 한국의 한 조항 개정을 설명할 때도 ‘헌법의 기본적 동일성 유지’와 ‘문서의 편집 형식’을 섞지 않는다.</p>
+<p><strong>시험:</strong> 029. <strong>키워드:</strong> 현실 적응·제도 내 해결·예측 가능성. <strong>한 줄:</strong> 개헌은 더 나은 공통 규칙을 위한 수단이지 급변 자체를 위한 수단이 아니다.</p>
+<h2 id="foundations-02-05" data-concept-id="foundations-02-05">2-2. 현행 개헌 절차와 외국 예시 보완 ★★★★☆</h2>
+<p><strong>교재 58쪽과 제128-130조 연결 / 문단의 역할:</strong> 누가 어느 단계에서 동의해야 하는지 확인한다.</p>
+<p><mark class="yellow">제안 → 20일 이상 공고 → 공고일부터 60일 이내 국회 의결 → 의결 후 30일 이내 국민투표 → 확정·즉시 공포.</mark> 제안자는 국회 재적의원 과반수 또는 대통령이다. 국회 의결은 재적의원 3분의 2 이상 찬성이다. 국민투표는 국회의원 선거권자 과반수의 투표와 투표자 과반수의 찬성이다. 공고는 국민이 검토할 시간을, 가중 정족수는 넓은 합의를, 국민투표는 주권자의 최종 결정을 확보한다. 국민의 직접 발안은 현행 조문이 정한 방식이 아니다.</p>
+<p>예를 들어 재적의원이 300명이면 발의에 151명, 의결에 200명이 필요하다. 선거권자 100명 중 50명만 투표했다면 투표자 전원이 찬성해도 ‘과반수 투표’가 아니다. <strong>과반수는 절반을 넘는 수이고, 3분의 2 이상은 그 비율 이상이다.</strong></p>
+<p>교재의 외국 분류는 유형을 이해하는 데 쓰되 국가별 예시는 보완해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>국가·유형</th>
+<th>정확히 기억할 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>독일·제헌 당시 한국</td>
+<td>특별한 의회 절차를 중심으로 하는 예. 한국의 현행 절차와 구별</td>
+</tr>
+<tr>
+<td>호주</td>
+<td>의회만으로 끝나지 않는다. 국민투표에서 전국 다수와 주의 다수라는 이중 다수가 필요</td>
+</tr>
+<tr>
+<td>일본·현행 한국</td>
+<td>의회 절차 뒤 국민투표가 필요</td>
+</tr>
+<tr>
+<td>오스트리아</td>
+<td>전면 개정은 국민투표 필수. 부분 개정은 의회 구성원 일정 수의 요구에 따른 국민투표를 구분</td>
+</tr>
+<tr>
+<td>스위스</td>
+<td>헌법 개정은 국민과 주의 다수 승인을 요구. 단순히 특별회의 승인만이라고 외우지 않음</td>
+</tr>
+<tr>
+<td>벨기에·노르웨이</td>
+<td>교재가 말하는 특별한 개정 의회의 취지는 선거를 거친 의회의 별도 개정권 행사와 연결하여 이해. 독립된 상설 ‘헌법회의’가 항상 존재한다는 뜻은 아님</td>
+</tr>
+<tr>
+<td>미국</td>
+<td>연방 단계의 제안과 주 단계의 비준을 구분. 주 의회 또는 주 헌법회의의 4분의 3 비준 등 헌법 제5조 절차</td>
+</tr>
+</tbody></table>
+<p>호주·오스트리아·스위스의 보완은 <a href="https://www.aec.gov.au/elections/referendums/">호주 선거관리위원회</a>, <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=bundesnormen&Gesetzesnummer=10000138">오스트리아 헌법 제44조</a>, <a href="https://www.parlament.ch/en/%C3%BCber-das-parlament/Pages/bundesverfassung.aspx">스위스 의회</a>를 기준으로 한다. 벨기에의 역사적 개정 구조는 <a href="https://www.lachambre.be/kvvcr/pdf_sections/publications/constitution/constitution_sjd_fr_20240704_webversie_drukversie.pdf">2024년 의회 헌법집 제195조</a>, 노르웨이는 <a href="https://www.stortinget.no/globalassets/pdf/brosjyrer---plakater/hovedbrosjyre-div-spraak---arkiv/2024/the-storting-and-democracy_2024_english_uu.pdf">의회의 개정절차 설명</a>을 참조했다. 외국의 최신 세부 절차 전체를 외우기보다 교재의 단순 분류에 예외가 있음을 알아 두자.</p>
+<p><strong>시험:</strong> 정족수의 분모·기간의 출발점을 바꾸는 보기. <strong>키워드:</strong> 20·60·30 / 재적 2/3 / 투표의 두 과반수. <strong>한 줄:</strong> 제안과 의결과 국민투표는 서로 다른 관문이다.</p>
+<h2 id="foundations-02-06" data-concept-id="foundations-02-06">2-3. 파괴·폐제·침해·정지·변천 비교 ★★★★★</h2>
+<p><strong>교재 58쪽 / 문단의 역할:</strong> 헌법이 달라지는 여러 상황을 같은 말로 부르지 않게 한다.</p>
+<table>
+<thead>
+<tr>
+<th>개념</th>
+<th>판별 질문</th>
+<th>교재 사례·이해용 장면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>파괴</td>
+<td>제정권력의 주체까지 달라졌나?</td>
+<td>프랑스혁명에서 국왕에서 국민으로 전환</td>
+</tr>
+<tr>
+<td>폐제</td>
+<td>주체는 같다고 하면서 기존 헌법 형식을 폐지했나?</td>
+<td>쿠데타 세력이 기존 개정절차 밖에서 헌법을 바꿈</td>
+</tr>
+<tr>
+<td>침해</td>
+<td>위헌인 줄 알면서 특정 조항을 위반했나?</td>
+<td>긴급명령 요건이 없음을 알면서 대통령이 발령</td>
+</tr>
+<tr>
+<td>정지</td>
+<td>특정 조항의 효력을 일시 중단했나?</td>
+<td>일정 기간 헌법 적용을 멈추겠다는 조치</td>
+</tr>
+<tr>
+<td>변천</td>
+<td>문구는 그대로인데 정당한 해석·운용의 의미가 달라졌나?</td>
+<td>미국의 사법심사 발전이 대표 예로 거론됨</td>
+</tr>
+<tr>
+<td>개정</td>
+<td>정해진 개정절차로 문언을 의식적으로 고쳤나?</td>
+<td>임기 조항을 절차에 따라 수정</td>
+</tr>
+</tbody></table>
+<p>이는 <strong>교재의 개념 분류</strong>다. 쿠데타를 ‘폐제’라고 분류한다고 쿠데타가 합법이 되는 것이 아니며, ‘정지’라는 이름을 붙였다고 임의 정지가 허용되는 것도 아니다. 주체 변경·문언 변경·위반 인식·효력 중단을 차례로 확인한다.</p>
+<p><strong>시험:</strong> 021·024·031·032. <strong>키워드:</strong> 주체/형식/위반/중단/의미. <strong>한 줄:</strong> 무엇이 어떻게 달라졌는지를 먼저 봐야 이름을 고를 수 있다.</p>
+<h2 id="foundations-02-07" data-concept-id="foundations-02-07">2-4. 개정의 한계 긍정설·부정설 ★★★★★</h2>
+<p><strong>교재 59-63쪽 / 문단의 역할:</strong> 절차만 지키면 어떤 내용도 바꿀 수 있는지 묻는다.</p>
+<p>부정설은 현실 적응에 미리 선을 긋기 어렵고, 제정권력과 개정권력 모두 주권의 표현이며, 헌법조항들은 같은 효력을 가진다는 규범등가론을 든다. 긍정설은 제정권력과 그 헌법이 만든 개정권력을 구분한다. 집을 수리하라고 맡긴 권한이 집의 목적을 없애고 거주자를 쫓아낼 권한까지 포함하지 않는다는 이해용 비유로 기억하자.</p>
+<p>긍정설의 자연법적 한계는 인간존엄·본질적 인권 등 실정법 이전의 정당성 기준이다. 헌법내재적 한계는 해당 헌법의 기본적 동일성·정체성에 따른 한계다. 실정법적 한계는 명문으로 적힌 개정금지·효력제한이다. 세 이름은 근거를 구분하는 것이다. 하나의 사안이 여러 근거와 연결될 수 있다.</p>
+<p>저자는 국민주권·자유민주적 기본질서·기본권·평화 등 근본적 가치를 파괴하는 개정을 허용할 수 없다고 본다. 복수정당·재산권·경제질서 같은 제도도 그 기본질서와 연결한다. <strong>모든 경제정책이나 제도의 세부형태가 영원히 고정된다는 뜻은 아니다.</strong> 한계의 범위에는 학설상 논쟁이 있다.</p>
+<p>시기·방법의 한계 논의도 있다. 전쟁이나 강압으로 자유로운 결단이 막힌 상황에서 형식적 투표만으로 정당성을 주장할 수 있는가, 개정이라는 이름으로 새 헌법을 만드는 수준의 근본적 교체를 할 수 있는가, 절차 조항을 바꾸어 한계를 우회할 수 있는가를 묻는다. <mark class="pink">외국군이 존재하면 언제나 자동 무효라는 일률적 현행 조문이 있다는 뜻으로 읽지 않는다.</mark></p>
+<p>한계를 넘은 개정은 무효라는 것이 긍정설의 결론이다. 그러나 그 논리와 법원이 어떤 심판에서 실제로 무엇을 심사·선고했는지는 따로 확인해야 한다. 유신헌법 전체의 효력을 일괄 부정한 판결이라고 적으면 부정확하다.</p>
+<p><strong>시험:</strong> 022·023·030. <strong>키워드:</strong> 시원적/형성적·자연법/내재/명문. <strong>한 줄:</strong> 헌법을 고칠 권한과 헌법의 존재 이유를 없앨 권한은 같은 것이 아니라는 견해가 한계긍정설이다.</p>
+<h2 id="foundations-02-08" data-concept-id="foundations-02-08">2-5. 현직 대통령의 임기 연장: 두 단계로 하면 괜찮을까 ★★★★★</h2>
+<p><strong>교재 60-62쪽 / 조문의 역할:</strong> 개헌권을 자기 집권 연장에 이용하지 못하게 한다.</p>
+<p>제70조는 현행 대통령 임기를 5년으로 하고 중임을 금지한다. 제128조 제2항은 임기 연장 또는 중임 변경 개헌이 <strong>개정 제안 당시 대통령에게는 효력이 없다</strong>고 정한다. 미래의 제도 개선 논의와 현직자의 자기 이익을 분리하는 장치다.</p>
+<p>이해용 사례: 대통령 갑의 임기 중 국회가 4년 중임제로 바꾸자고 제안했다. 적법하게 개헌이 확정되어도 갑에게 중임 기회를 주는 방식으로 적용할 수 없다. ‘국민이 찬성했으니 갑도 가능’이라는 주장이 함정이다. 제안 시점의 대통령인지가 기준이다.</p>
+<p>그렇다면 먼저 제128조 제2항을 지운 뒤 제70조를 바꾸면 될까? 저자는 한계긍정설에 따라 이런 단계적 우회도 허용할 수 없다고 설명한다. <mark class="pink">이는 우회 개헌에 관한 이론적 판단이다. 실제 판례가 이 가상의 두 단계 개헌을 이미 심판했다고 쓰지 않는다.</mark></p>
+<p><strong>시험:</strong> 명문 한계와 우회금지 논증의 구별. <strong>키워드:</strong> 제안 당시·현직 적용 배제·탈법적 우회. <strong>한 줄:</strong> 제도를 바꾸는 것과 지금 권력자의 재임을 늘리는 것은 분리한다.</p>
+<h1>3. 헌법변천은 위반의 면허가 아니다</h1>
+<h2 id="foundations-02-09" data-concept-id="foundations-02-09">3-1. 마버리 사건과 미국 대통령선거 ★★★★☆</h2>
+<p><strong>교재 63-65쪽 / 문단의 역할:</strong> 조문을 바꾸지 않아도 제도의 의미·현실이 발전할 수 있음을 보여 준다.</p>
+<p><strong>등장인물:</strong> 퇴임하는 애덤스, 새 대통령 제퍼슨, 새 국무장관 매디슨, 임명장을 받지 못한 마버리, 연방대법원. <strong>사건:</strong> 정권교체 무렵 임명 절차가 진행되었지만 임명장이 전달되지 않았다. <strong>갈등:</strong> 마버리는 법원에 “매디슨이 임명장을 주게 해 달라”고 요구했다. <strong>법원의 고민:</strong> 권리 침해가 문제라고 해서 연방대법원이 아무 사건이나 처음부터 맡을 수 있는가? <strong>판결:</strong> 1803년 연방대법원은 문제 된 법률상의 관할권 부여가 헌법이 정한 관할권을 넘는다고 보아 명령을 내리지 않았다. 그 과정에서 헌법에 어긋나는 법률의 적용을 거부하는 사법심사 원리를 분명히 했다.</p>
+<p>판례 논리의 쉬운 번역: ① 헌법은 상위법이다 → 일반 법률로 헌법의 관할권 제한을 지울 수 없다. ② 법원은 사건에 적용할 법을 판단한다 → 충돌하면 헌법을 우선한다. ③ 그래서 이 신청을 원하는 방식으로 받아들일 수 없다 → 마버리가 실제 임명장을 받게 된 판결이라고 외우면 틀린다. 반대로 법률로 관할권을 무제한 늘릴 수 있다면 헌법의 권력배분이 무너진다.</p>
+<p>미국 대통령선거도 교재에서 변천의 예로 든다. 유권자 투표가 선거인단 선택 및 후보 지지와 긴밀하게 연결되어 사실상 직접선거와 같은 정치적 의미가 커졌다는 설명이다. <mark class="pink">법적으로 선거인단 제도가 폐지되어 직접선거가 되었다는 뜻은 아니다.</mark></p>
+<p><strong>시험:</strong> 031. <strong>키워드:</strong> 조문 불변·사법심사·사실상/법적으로. <strong>한 줄:</strong> 문구를 고치지 않은 제도의 발전을 관찰하여 변천이라고 부르지만, 헌법을 무시하라는 명령은 아니다.</p>
+<h2 id="foundations-02-10" data-concept-id="foundations-02-10">3-2. 지방의회 공백과 총리서리 사건 ★★★★★</h2>
+<p><strong>교재 64-66쪽 / 문단의 역할:</strong> 위헌이 오래 반복되었다고 합헌이 되지는 않는다는 경계를 세운다.</p>
+<p>지방의회는 1950년대에 선거로 구성되었지만 1961년 쿠데타로 해산되었다. 지방의회 구성은 1991년에 재개되었다. 1987년 헌법 제118조 제1항이 지방의회를 두도록 명시했는데도 구성하지 않은 기간이 있었다고 해서 ‘지방의회가 없어도 되는 헌법으로 변천했다’고 할 수 없다. 명시적 의무를 이행하지 않은 것과 정당한 해석의 변화는 다르다.</p>
+<p><strong>총리서리 사건(98헌라1, 1998.7.14.).</strong> 대통령이 국회 동의를 얻기 전에 총리서리를 임명하자 국회의원들이 동의·심의·표결 권한 침해를 주장했다. 쟁점은 국회의 동의를 요구하는 제86조와 공백을 피할 필요를 어떻게 다룰지였다. 결과는 <strong>각하 의견 5명, 권한침해 인정 의견 3명, 기각 의견 1명</strong>으로 나뉘었다. 각하 쪽의 이유도 같지 않았다. 각하는 소송요건 등의 문제로 본안 판단에 들어가지 않는 결론이다.</p>
+<p>따라서 “헌재가 총리서리 제도를 합헌이라고 확정했다”는 요약은 틀린다. 교재는 특히 기각 의견의 긴급성 논리를 비판하며, 적법한 권한대행 등 제도 안의 해법을 찾아야 한다고 본다. 이 비판은 저자의 평가이고, 재판소의 공식 결론과 동일하지 않다. <strong>서리라는 이름으로 사전 동의를 우회하는 것과 법률상 권한대행을 구별</strong>한다.</p>
+<p>논증의 쉬운 번역: “관행이 있다” → 있었던 사실을 말할 뿐이다. “헌법변천이다” → 정당한 해석으로 뒷받침되어야 한다. “명문 위반을 반복했다” → 반복 자체가 정당성의 근거가 될 수 없다. 반대 결론이라면 권력이 헌법을 자주 어길수록 더 큰 권한을 얻는 이상한 결과가 된다.</p>
+<p><strong>시험:</strong> 031·032. <strong>키워드:</strong> 관찰 개념·헌법적 타당성·각하/기각. <strong>한 줄:</strong> 자주 어긴 규칙은 없어지는 규칙이 아니다.</p>
+<h1>4. 대한민국 헌정사: 사건과 제도를 연결하기</h1>
+<h2 id="foundations-02-11" data-concept-id="foundations-02-11">4-1. 제헌 이전의 흐름과 1948년 헌법 ★★★★★</h2>
+<p><strong>교재 66-69쪽 / 문단의 역할:</strong> 헌법이 추상적 문서가 아니라 해방·분단·국가 수립 과정의 결과임을 보여 준다.</p>
+<p>카이로선언(1943)과 포츠담선언(1945), 1945년 해방 뒤 군정, 모스크바 3국 외상회의의 신탁통치 구상과 찬반 갈등, 좌우 대립과 분단 심화가 배경이다. 1946년 이승만의 정읍 발언은 남한 단독정부 논의와 연결된다. 1948년 제주4·3은 단독선거 반대와 국가폭력·민간인 희생이 얽힌 역사다. 이 역사적 고통을 단순히 ‘헌법 제정 준비행사’처럼 처리하면 안 된다. 교재에 나오는 희생 규모는 추정치이므로 확정된 한 숫자로 암기시키지 않는다.</p>
+<p>1948년 5월 10일 선거로 국회가 구성되었고, 이 국회가 제헌의회 역할도 했다. 별도의 제헌의회를 또 선출하거나 제정 국민투표를 한 것은 아니다. 6월 초 기초위원회를 구성해 초안을 마련하고, 조문별 심사와 전체 취지 토론 등을 거쳐 <strong>7월 12일 의결·7월 17일 공포</strong>했다. 교재의 선거인 등록률·투표율 수치는 당시 선거의 참여를 설명하는 자료이지 정당성 문제를 숫자 하나로 끝내는 기준이 아니다.</p>
+<p>‘기초’는 基礎(토대)가 아니라 문안을 起草(초안을 일으킴)한다는 말이다. 축조심의는 조항을 하나씩 검토하는 일, 대체토론은 전체 취지에 관한 토론이다. ‘대체’는 代替가 아니라 大體다. 독회는 법안 심의단계를 가리키는 역사적 방식이며 현행 국회 절차를 무조건 1·2·3독회로 외우지 않는다.</p>
+<p>제헌헌법은 민주공화국, 단원제 국회, 국회가 선출하는 대통령·부통령, 대통령제에 의원내각제적 요소를 섞은 형태였다. 국회의원 임기는 원칙 4년이나 제헌국회는 2년이었다. 근로자의 이익분배균점권 같은 사회경제 규정도 두었다. <strong>대통령 직선제·양원제·전면적 의원내각제를 제헌의 특징으로 고르면 틀린다.</strong></p>
+<p><strong>시험:</strong> 033. <strong>키워드:</strong> 5·10 → 7·12 → 7·17 / 국회 제정·국민투표 없음. <strong>한 줄:</strong> 제헌국회가 국가의 기본틀을 세웠고, 그때의 제도는 현행 제도와 같지 않았다.</p>
+<h2 id="foundations-02-12" data-concept-id="foundations-02-12">4-2. 1952년 발췌·1954년 사사오입 ★★★★★</h2>
+<p><strong>교재 69-70쪽 / 문단의 역할:</strong> 개헌을 권력 연장에 이용하면 절차가 어떻게 훼손되는지 보여 준다.</p>
+<p>1952년 제1차 발췌개헌은 전쟁 중 부산 정치파동과 연결된다. 대통령 직선제를 원하는 쪽과 의원내각제적 통제를 원하는 쪽의 안에서 일부를 뽑아 결합했다. 대통령·부통령 직선제, 양원제, 국무원 불신임 관련 요소가 핵심이다. 강압 아래의 표결과 공고 절차의 문제가 있었다. <strong>양원제 조항을 두었다고 당시 참의원이 실제 구성된 것은 아니다.</strong></p>
+<p>1954년 제2차 개헌은 초대 대통령에게 중임 제한을 적용하지 않아 이승만의 장기집권을 가능하게 했다. 장면을 숫자로 보자. 재적의원 203명, 개헌 정족수 3분의 2 이상이다. 203×2÷3=135.333…이므로 사람 수로 요건을 만족시키는 최소치는 <strong>136명</strong>이다. 찬성 135명이어서 부결로 선포했는데, 뒤에 0.333…을 버려 135명이면 된다고 뒤집었다. <mark class="pink">찬성표를 반올림한 사건이 아니라 정족수 자체를 잘못 반올림한 사건</mark>이다.</p>
+<p>그 밖에 주권 제약·국가 안위의 중대한 사항에 관한 국민투표, 국무위원 개인에 대한 불신임, 대통령 궐위 시 부통령 승계, 국무총리제 폐지, 자유시장경제 방향, 국민의 개헌 발안 등이 포함되었다. 모두 현재에도 같은 모습으로 존재한다고 생각하면 안 된다.</p>
+<p><strong>시험:</strong> 025의 연도 대비, 정족수 계산. <strong>키워드:</strong> 1952 직선·발췌 / 1954 초대 대통령·136. <strong>한 줄:</strong> 헌법을 바꾸는 절차 자체를 권력자에게 맞춰 바꾸면 개헌의 정당성이 무너진다.</p>
+<h2 id="foundations-02-13" data-concept-id="foundations-02-13">4-3. 1960년 두 개헌: 의원내각제와 소급법 ★★★★★</h2>
+<p><strong>교재 70-72쪽 / 문단의 역할:</strong> 독재 저항의 제도적 결실과 과거 책임 추궁의 어려움을 함께 다룬다.</p>
+<p>3·15 부정선거에 대한 항의, 김주열의 죽음이 확인되며 커진 분노, 4·19혁명, 이승만의 하야로 이어졌다. <strong>6월 15일 제3차 개헌</strong>은 의원내각제를 채택했다. 대통령은 양원 합동회의에서 선출되는 의례적 국가원수이고, 행정권은 국무원에 속한다. 민의원의 내각 불신임과 내각의 민의원 해산이 서로 맞물렸다.</p>
+<p>총리 선출은 정확히 읽자. 당시 제69조의 원칙은 <strong>대통령 지명 → 민의원 동의</strong>였다. 재지명 지연 또는 두 차례 동의 실패 등 단서의 경우 민의원이 선거했다. 교재와 036번의 “민의원에서 선출하고 대통령이 임명”만 외우면 원칙과 예외가 뒤섞인다. <a href="https://www.nara.go.kr/upload/namo/files/000003/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%ED%97%8C%EB%B2%95%28%ED%97%8C%EB%B2%95%EC%A0%9C4%ED%98%B8%29.pdf">당시 헌법 제69조 원문</a>을 기준으로 보완한다. 문제의 연도 정답은 여전히 1960년 6월이다.</p>
+<p>기본권의 본질적 내용 침해금지, 언론·출판·집회·결사의 허가·검열 금지 등 보장을 강화했다. 대법원장·대법관을 선거인단이 선출하는 제도, 헌법재판소 설치 규정, 중앙선거관리위원회와 경찰 중립성도 중요하다. <strong>헌재 설치 규정과 실제 개소는 다르다.</strong> 쿠데타 이전에 그 제도가 제대로 가동되지는 못했다.</p>
+<p>11월 29일 제4차 개헌은 3·15 부정선거 관련자, 항의 국민을 살상한 관련자, 현저한 반민주행위자와 부정축재자 등을 다루는 특별법의 근거를 부칙에 두었다. 뒤의 법으로 과거 행위를 처벌하거나 공민권을 제한하는 소급 문제다.</p>
+<p>교재의 심층 검토는 “나쁜 사람이라면 언제나 소급처벌 가능”이 아니다. 저자는 극단적 인권침해를 정당화하던 법질서의 청산과, 이미 범죄였던 행위의 형을 뒤늦게 더 무겁게 하는 경우, 중대한 인권침해에도 이르지 않는 행위를 나중에 범죄로 만드는 경우를 구별한다. 후자의 진정소급처벌은 개정의 한계를 넘는다고 비판한다. 이는 저자의 자연법적 논증이며 현행 죄형법정주의의 예외를 무제한 선언한 것이 아니다.</p>
+<p><strong>시험:</strong> 036. <strong>키워드:</strong> 6월 내각제 / 11월 소급법·부칙. <strong>한 줄:</strong> 1960년에는 권력구조를 바꾼 개헌과 과거 책임을 묻기 위한 개헌이 따로 있었다.</p>
+<h2 id="foundations-02-14" data-concept-id="foundations-02-14">4-4. 1962년 복귀·1969년 3선·1972년 유신 ★★★★★</h2>
+<p><strong>교재 72-74쪽 / 문단의 역할:</strong> 쿠데타 이후 권력이 다시 대통령에게 집중되는 흐름을 설명한다.</p>
+<p>1961년 5·16쿠데타 뒤 국회와 지방의회가 해산되고 정치활동이 금지되었다. 국가재건비상조치법을 토대로 기존 헌법의 개정절차와 다른 과정이 진행되었다. 1962년 12월 17일 국민투표, 12월 26일 공포된 제5차 개헌은 대통령제·단원제로 돌아가고 복수정당제를 명시하며 대법원에 위헌법률심사권을 맡겼다. 국민투표가 있었다는 사실만으로 그 이전의 절차 위반 문제가 사라지는 것은 아니다.</p>
+<p>1969년 제6차 3선개헌은 이미 두 번 당선된 박정희에게 다시 출마할 길을 열었다. 국회 의결은 <strong>9월 14일</strong>, 국민투표는 10월 17일이었다. 교재의 9월 13일 표기는 <a href="https://theme.archives.go.kr/next/rediscovery/index6.do">국가기록원에 수록된 의결 통지</a>와 대조하여 바로잡는다. 1954년의 초대 대통령 예외와 다른 사건이다.</p>
+<p>1972년 10월 비상계엄·국회해산·헌법정지, 11월 21일 국민투표를 거쳐 <strong>12월 27일 공포된 제7차 유신헌법</strong>은 대통령에게 권력을 집중했다. 통일주체국민회의가 대통령과 국회의원 정수 3분의 1을 선출했다. 대통령 임기는 6년, 중임·연임 제한이 없었다. 대통령은 긴급조치권·국회해산권·광범위한 법관 임명권을 가졌다. 긴급조치는 기본권 정지와 사법심사 배제를 허용하는 규정을 두었다.</p>
+<p>기본권 제한 사유에 국가안전보장을 추가하고 본질적 내용 침해금지 조항을 삭제했다. 헌법위원회에 위헌법률·정당해산·탄핵 심판을 맡겼으나 대법원을 거치는 구조 등으로 실제 통제 기능이 작동하지 못했다. 헌법위원회라는 이름이 존재했다는 사실과 실효적 권력통제가 있었다는 평가는 다르다.</p>
+<p>교재의 유엔 위원단 관련 설명은 당시 상황을 평가하는 대목이다. 그 표현만으로 국민투표의 자유·공정성이나 국제적 정당성이 보증되었다고 읽지 않는다. 압도적 찬성률도 강압적 헌정 변화의 정당성을 자동 입증하지 않는다. 1979년 10·26으로 박정희 통치가 끝났다. 김재규 사건 80도306에서 저항권의 재판규범성을 부정한 법정의견과 인정 가능성을 논한 소수의견이 대립했으며, 이는 다음 강에서 이어 본다.</p>
+<p><strong>시험:</strong> 025. <strong>키워드:</strong> 1962 대통령제 / 1969 3선 / 1972 6년·무제한·통일주체국민회의. <strong>한 줄:</strong> 유신의 핵심은 대통령을 견제할 장치를 약화시키고 장기집권을 제도화한 것이다.</p>
+<h2 id="foundations-02-15" data-concept-id="foundations-02-15">4-5. 1980년 7년 간선·1987년 5년 직선 ★★★★★</h2>
+<p><strong>교재 74-76쪽 / 문단의 역할:</strong> 현행 헌법의 조항들이 어떤 경험에 대한 반성인지 연결한다.</p>
+<p>1979년 12·12군사반란, 1980년 5·17쿠데타와 5·18민주화운동에 대한 무력 진압, 국가보위비상대책위원회를 거쳐 제8차 개헌이 이루어졌다. 1980년 헌법은 <strong>7년 단임·대통령선거인단 간선</strong>이었다. 임기 연장·중임 변경을 제안 당시 대통령에게 적용하지 않는 규정이 이때 도입되었다. 유신의 6년 무제한과 구별한다.</p>
+<p>행복추구권·환경권·평생교육·재외국민 보호·혼인과 가족의 양성평등·중소기업 보호육성·소비자보호운동 보장을 두고 본질적 내용 침해금지를 부활시켰다. 권리 조항이 늘었다는 사실과 정권 성립·운영의 민주적 정당성은 별개의 평가다. 국가원로자문회의 구상도 퇴임 권력의 영향력 유지 문제와 연결되지만, 조항이 있다고 기대대로 작동하는 것은 아니다.</p>
+<p>1987년 4·13호헌조치에 맞선 직선제 요구, 6월민주항쟁, 6·29선언과 여야 협상을 거쳐 제9차 개헌이 이루어졌다. <strong>9월 18일 제안 → 10월 12일 국회 의결 → 10월 27일 국민투표 → 10월 29일 공포 → 1988년 2월 25일 시행</strong>이다.</p>
+<p>현행 헌법은 대통령 <strong>5년 단임·직선</strong>, 군의 정치적 중립, 대통령의 국회해산권 폐지와 긴급권 통제, 국정감사 부활, 헌법재판소·헌법소원 도입을 핵심으로 한다. 국회 정기회·임시회 합계 150일 제한도 없어졌다. 기본권에서는 적법절차, 체포·구속 이유 고지와 가족 등 통지, 피해자 진술, 범죄피해자 구조, 대학 자율성, 최저임금, 재해 예방, 모성 보호 등 보장을 강화했다. 선거권 연령을 헌법 숫자로 고정하지 않고 법률로 정하는 방식과도 연결된다.</p>
+<p><strong>시험:</strong> 세 대통령제의 숫자 대비. <strong>키워드:</strong> 유신 6·간선·무제한 / 1980 7·간선·단임 / 현행 5·직선·단임. <strong>한 줄:</strong> 현행의 통제 장치는 과거 권력집중을 되풀이하지 않기 위한 장치다.</p>
+<h2 id="foundations-02-16" data-concept-id="foundations-02-16">4-6. 헌법 번호·개정 차수·교재 정정표 ★★★★☆</h2>
+<p><strong>교재 66-76쪽 종합 / 문단의 역할:</strong> 연표를 암기용 지도로 바꾸되 잘못된 문구는 따로 표시한다.</p>
+<table>
+<thead>
+<tr>
+<th>헌법 번호</th>
+<th>제정·개정</th>
+<th>대표 단서</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제1호</td>
+<td>1948 제정</td>
+<td>국회 제정·단원·대통령 간선</td>
+</tr>
+<tr>
+<td>제2호</td>
+<td>1952 1차</td>
+<td>발췌·대통령 직선</td>
+</tr>
+<tr>
+<td>제3호</td>
+<td>1954 2차</td>
+<td>사사오입·초대 대통령 예외</td>
+</tr>
+<tr>
+<td>제4호</td>
+<td>1960.6 3차</td>
+<td>의원내각제·양원</td>
+</tr>
+<tr>
+<td>제5호</td>
+<td>1960.11 4차</td>
+<td>소급 특별법 근거</td>
+</tr>
+<tr>
+<td>제6호</td>
+<td>1962 5차</td>
+<td>대통령제 복귀·대법원 심사</td>
+</tr>
+<tr>
+<td>제7호</td>
+<td>1969 6차</td>
+<td>3선</td>
+</tr>
+<tr>
+<td>제8호</td>
+<td>1972 7차</td>
+<td>유신·통일주체국민회의</td>
+</tr>
+<tr>
+<td>제9호</td>
+<td>1980 8차</td>
+<td>7년 단임·선거인단</td>
+</tr>
+<tr>
+<td>제10호</td>
+<td>1987 9차</td>
+<td>5년 직선 단임·헌재</td>
+</tr>
+</tbody></table>
+<p><strong>정정·보완 메모.</strong> 교재 70쪽의 이승만 정부 앞 ‘3선개헌’은 1954년 사사오입개헌과 연결해 읽는다. 통상 3선개헌은 1969년 박정희 때를 가리킨다. 같은 쪽의 ‘6월 11일’은 공식 헌법 제4호 날짜인 <strong>1960년 6월 15일</strong>로 바로잡는다. ‘9개월’은 제2공화국 정부 출범 뒤의 짧은 운영기간을 가리키는 취지이지 6월 개헌부터 5월 쿠데타까지의 정확한 월수 계산이 아니다. 국무총리 지명·선출의 원칙과 예외는 앞 절에서 보완했다. 74쪽의 ‘1980년 9월 선출’은 <strong>8월 27일 선출</strong>로 보완한다. <a href="https://www.ehistory.go.kr/view/movie?mediadtl=21518&mediaid=10251&mediasrcgbn=KV">국가기록 영상의 선출일 기록</a>과 대조한 것으로, 당시 홍보영상의 정치적 평가까지 받아들이는 것은 아니다.</p>
+<p><strong>시험:</strong> 제10호=10차가 아니라 9차 개정. <strong>키워드:</strong> 제정 1회+개정 9회. <strong>한 줄:</strong> 번호와 차수를 한 칸 차이로 기억한다.</p>
+<h1>5. 불법적 개헌 뒤에 남은 법률관계</h1>
+<h2 id="foundations-02-17" data-concept-id="foundations-02-17">5-1. 긴급조치 피해: 옛 헌법이 현재의 구제를 막는가 ★★★★★</h2>
+<p><strong>교재 76-78쪽 / 문단의 역할:</strong> 불법적 권력집중 아래의 기본권 침해를 오늘 어떻게 평가할지 설명한다.</p>
+<p><strong>등장인물:</strong> 긴급조치로 처벌받은 시민, 국가, 현재의 법원·헌법재판소. <strong>갈등:</strong> 국가는 “그때 헌법은 긴급조치를 허용했고 사법심사도 금지했다”고 주장할 수 있다. 피해자는 “그 규칙 때문에 당한 침해를 지금도 구제하지 않는 것이 옳으냐”고 묻는다. <strong>법원의 고민:</strong> 현재 기본권을 보장하는 헌법 아래에서 폐기된 과거 헌법을 심사기준으로 붙잡을 것인가?</p>
+<p>헌재 2013.3.21. <strong>2010헌바132 등</strong>은 긴급조치 제1·2·9호를 현행 헌법을 기준으로 심사했다. 과거의 사법심사 배제 규정도 현재의 심판을 막지 못한다고 보았다. 교재가 소개하는 대법원 2011초기689 결정도 긴급조치 제9호의 위헌·무효 문제를 다룬다. <mark class="pink">JSON 026 해설의 ‘2010헌바32’는 ‘2010헌바132 등’으로 보완하여 읽는다.</mark></p>
+<p>논리의 쉬운 번역: ① 폐기된 유신헌법을 준거로 삼지 않는다 → 과거 침해를 반성하여 바뀐 헌법의 뜻을 살린다. ② 구체적 규범통제는 원칙적으로 심판 당시 헌법에 따른다 → 지금의 최고규범으로 판단한다. ③ 고도의 정치적 결정이어도 기본권 침해와 직접 관련되면 심사할 수 있다 → ‘정치’라는 말은 재판 회피의 만능표가 아니다. ④ 옛 심사금지 조항을 승계하지 않았다 → 피해자는 현재 헌법 아래에서 다툴 수 있다.</p>
+<p>반대 결론이라면 인권을 심하게 침해한 정권일수록 ‘심사하지 말라’는 규칙까지 써 두어 영구적 면책을 얻는다. 다만 이 결정의 대상·주문과 저자의 ‘개정 한계 위반’ 논증은 구별한다. 모든 옛 헌법 조항을 직접 위헌 선고한 결정이라는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 026. <strong>키워드:</strong> 현행 헌법·과거 피해구제·심사배제 불승계. <strong>한 줄:</strong> 옛 권력이 만든 면책의 외관을 오늘의 기본권 구제를 거절할 이유로 삼을 수는 없다.</p>
+<h2 id="foundations-02-18" data-concept-id="foundations-02-18">5-2. 성공한 내란·공소시효·보통의 민사관계 ★★★★☆</h2>
+<p><strong>교재 78-80쪽 / 문단의 역할:</strong> 불법적 정권의 모든 행위를 한꺼번에 유효 또는 무효로 처리하지 않는다.</p>
+<p>교재의 가상 사례에서 내란 세력이 고문을 정당화하는 법률을 만들었다. 그런 문구가 있었다는 이유로 고문이 정당해지는가? 저자는 기본적 인권을 없애는 규칙은 정당한 권한의 산물이 아니므로 면책의 근거가 될 수 없다고 본다. 불법 세력이 권력을 장악한 동안 사실상 처벌할 수 없었던 것과 법적으로 처벌해서는 안 되는 것은 다르다.</p>
+<p><strong>헌재 95헌마221 등의 재판관 3인 반대의견</strong>은 정당한 국가기관이 기능을 회복하면 그동안 불가능했던 처벌을 할 수 있다고 설명한다. <strong>96헌가2 등의 재판관 3인 의견</strong>은 권력 장악 때문에 소추가 불가능했던 기간의 시효 정지를 확인하는 입법이라면 금지된 소급입법이 아니라고 본다. 교재가 인용한 이 논거를 재판관 전원의 일치된 이유로 바꾸지 않는다. 96헌가2는 특별법에 대한 합헌결정이지만 세부 이유는 구분해야 한다.</p>
+<p>여기서 형벌을 뒤늦게 새로 만들거나 무겁게 하는 문제와, 이미 범죄였던 행위의 <strong>소추 가능 기간</strong>을 어떻게 보는지는 다른 쟁점이다. 소급·시효 논의는 5강 법치주의에서도 다시 연결한다.</p>
+<p>반대로 그 시절 만들어진 보통의 민사 규정에 따라 시민들이 매매·상속 등 생활관계를 형성했다면 어떨까? 그 내용이 명백히 부정의하지 않고 기본권 침해와 무관하다면, 민주적 질서 회복 후 그 효과를 소급하여 승인한 것으로 볼 수 있다는 것이 교재의 설명이다. 모든 계약과 재산관계를 하루아침에 무효로 하면 선량한 시민들의 정당한 기대가 무너지고 혼란이 커지기 때문이다.</p>
+<p><strong>시험:</strong> 과거 인권침해·내란 책임·일반 민사관계의 3갈래. <strong>키워드:</strong> 사실상 불처벌≠규범적 면책 / 정당한 기대. <strong>한 줄:</strong> 피해자를 구제하고 책임자를 심판하되, 평범한 시민의 정당한 생활관계까지 함께 무너뜨리지는 않는다.</p>
+<h1>법률용어를 한자로 풀어 보기</h1>
+<h3>憲法制定 헌법제정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 憲(법 헌), 法(법 법), 制(마를 제; 제도), 定(정할 정). <strong>③ 합친 뜻:</strong> 헌법을 만들어 정함. <strong>④ 이름의 이유:</strong> 새 기본법의 출발을 가리킨다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 최고 근본규범의 시원적 정립 또는 헌법전 편찬. <strong>⑥ 쉬운 말:</strong> 나라의 기본 약속을 처음 세운다. <strong>⑦ 사례:</strong> 1948년 국회가 헌법을 제정.</p>
+<p><strong>⑧ 시험:</strong> 실질=규범, 형식=문서. <strong>⑨ 비교·기억법:</strong> 개정은 기존 헌법의 절차에 따른 변경.</p>
+<h3>憲法制定權力 헌법제정권력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 憲(법 헌), 法(법 법), 制(마를 제), 定(정할 정), 權(권세 권), 力(힘 력). <strong>③ 합친 뜻:</strong> 헌법을 정립하는 힘. <strong>④ 이름의 이유:</strong> 다른 권한의 토대가 되는 권력이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가의 기본법을 시원적으로 창설하는 권력. <strong>⑥ 쉬운 말:</strong> 국가의 큰 규칙을 세울 궁극적 힘. <strong>⑦ 사례:</strong> 국민주권국가에서 국민을 주체로 설명.</p>
+<p><strong>⑧ 시험:</strong> 입법·개정·통치권은 형성된 권력. <strong>⑨ 비교·기억법:</strong> 주권 위임과 권한의 기능적 배분을 구별.</p>
+<h3>創造性·始原性 창조성·시원성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 創(비롯할 창), 造(지을 조), 性(성품 성), 始(비로소 시), 原(근원 원). <strong>③ 합친 뜻:</strong> 새로 만듦·처음의 근원이 됨. <strong>④ 이름의 이유:</strong> 창설의 기능과 출발점을 각각 이름 붙인다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본법 창설과 이전 권력의 수권에 의존하지 않는 성격. <strong>⑥ 쉬운 말:</strong> 새로 세운다는 말과 처음 근원이라는 말. <strong>⑦ 사례:</strong> 제정권력의 성격.</p>
+<p><strong>⑧ 시험:</strong> 이전 권력의 수권 없음=시원성. <strong>⑨ 비교·기억법:</strong> 시원성을 내용상 무제한과 곧바로 등치하지 않는다.</p>
+<h3>自律性 자율성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 律(법 률), 性(성품 성). <strong>③ 합친 뜻:</strong> 스스로 규율하는 성질. <strong>④ 이름의 이유:</strong> 외부의 이미 정해진 국내 권한만 집행하는 것이 아니다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제정권력이 스스로 기본질서를 정하는 성격. <strong>⑥ 쉬운 말:</strong> 기본규칙을 스스로 정한다. <strong>⑦ 사례:</strong> 새 헌법의 구성 결정.</p>
+<p><strong>⑧ 시험:</strong> 개정권력의 기존 절차 준수와 비교. <strong>⑨ 비교·기억법:</strong> 자율=자의적 인권침해 허용이 아님.</p>
+<h3>統一·不可分性 통일·불가분성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 統(거느릴 통), 一(한 일), 不(아니 불), 可(옳을 가; 가능), 分(나눌 분), 性(성품 성). <strong>③ 합친 뜻:</strong> 하나이며 나눌 수 없음. <strong>④ 이름의 이유:</strong> 기능의 분담과 주권의 궁극성을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 궁극적 제정권력이 하나이고 기관별로 쪼개 양도되지 않는 성격. <strong>⑥ 쉬운 말:</strong> 국가기관이 국민 위의 독립 주인이 되는 것은 아니다. <strong>⑦ 사례:</strong> 입법·행정·사법을 나누어도 국민주권은 분열되지 않음.</p>
+<p><strong>⑧ 시험:</strong> 권력분립이 제정권력의 소멸이라는 함정. <strong>⑨ 비교·기억법:</strong> 통일은 이 문맥에서 남북통일이 아니다.</p>
+<h3>恒久性·不可讓性 항구성·불가양성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 恒(항상 항), 久(오랠 구), 性(성품 성), 不(아니 불), 可(옳을 가), 讓(사양할 양; 넘김). <strong>③ 합친 뜻:</strong> 계속 남음·넘길 수 없음. <strong>④ 이름의 이유:</strong> 기간과 귀속을 각각 설명한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제정 뒤에도 국민에게 남고 양도할 수 없는 성격. <strong>⑥ 쉬운 말:</strong> 한 번 헌법을 만들었다고 국민의 지위가 사라지지 않는다. <strong>⑦ 사례:</strong> 대표 선출 뒤에도 국민주권 유지.</p>
+<p><strong>⑧ 시험:</strong> 제정 뒤 소멸·대표에게 완전 양도라는 오답. <strong>⑨ 비교·기억법:</strong> 항구=시간, 불가양=이전 불가.</p>
+<h3>授權·形成的權力 수권·형성적 권력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 授(줄 수), 權(권세 권), 形(모양 형), 成(이룰 성), 的(과녁 적), 力(힘 력). <strong>③ 합친 뜻:</strong> 권한을 줌·만들어진 권력. <strong>④ 이름의 이유:</strong> 권한의 근거와 한계를 보여 준다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법이 기관에 부여하여 성립한 권한. <strong>⑥ 쉬운 말:</strong> 국가가 맡긴 일의 범위 안에서 일한다. <strong>⑦ 사례:</strong> 국회의 입법권·개정권력.</p>
+<p><strong>⑧ 시험:</strong> 시원적 권력과 구별은 한계긍정설 논거. <strong>⑨ 비교·기억법:</strong> 권한이 있다는 것과 무엇이든 할 수 있다는 것은 다름.</p>
+<h3>規範·正當性 규범·정당성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 規(법 규), 範(법 범), 正(바를 정), 當(마땅할 당), 性(성품 성). <strong>③ 합친 뜻:</strong> 따를 기준·마땅히 받아들일 자격. <strong>④ 이름의 이유:</strong> 사실상 힘과 정당한 권위를 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행위의 기준과 그 기준을 구속력 있는 것으로 인정할 근거. <strong>⑥ 쉬운 말:</strong> 시키는 힘과 시켜도 될 이유는 다르다. <strong>⑦ 사례:</strong> 학살을 헌법에 쓴다고 정당한 명령이 되지 않음.</p>
+<p><strong>⑧ 시험:</strong> 만들었다는 사건만으로 무조건 유효라는 함정. <strong>⑨ 비교·기억법:</strong> 실효성은 실제 작동 여부, 정당성은 정당화 이유.</p>
+<h3>政治道德·構造的政治道德 정치도덕·구조적 정치도덕</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정), 治(다스릴 치), 道(길 도), 德(덕 덕), 構(얽을 구), 造(지을 조), 的(과녁 적). <strong>③ 합친 뜻:</strong> 정치공동체의 마땅한 기준·그 틀의 기준. <strong>④ 이름의 이유:</strong> 개인 관계의 도덕과 국가 제도의 기준을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공적 제도의 정당성과 공정한 논의·결정구조의 정당성에 관한 규범. <strong>⑥ 쉬운 말:</strong> 싫은 의견도 말할 수 있는 틀을 지킨다. <strong>⑦ 사례:</strong> 개인적으로 반대하는 발언의 자유 보장.</p>
+<p><strong>⑧ 시험:</strong> 개인도덕에서 헌법 효력 직접 도출이라는 함정. <strong>⑨ 비교·기억법:</strong> 구조는 제도를 계속 공정하게 운영할 틀.</p>
+<h3>受容標識 수용 표지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 受(받을 수), 容(얼굴 용; 받아들임), 標(표할 표), 識(알 식). <strong>③ 합친 뜻:</strong> 받아들임을 알아보는 표. <strong>④ 이름의 이유:</strong> 마음속 동의와 공유 가능한 제도적 사실을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공동체에서 최고 제도적 효력을 가진 규범으로 수용할 사건·징표. <strong>⑥ 쉬운 말:</strong> 이것을 기본법으로 삼는다고 알아볼 사건. <strong>⑦ 사례:</strong> 국회의 헌법 의결·공포.</p>
+<p><strong>⑧ 시험:</strong> 반드시 국민 전원의 직접투표만 뜻하지 않음. <strong>⑨ 비교·기억법:</strong> 표지가 있어도 내용의 정당성을 따져야 함.</p>
+<h3>憲法改正 헌법개정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 憲(법 헌), 法(법 법), 改(고칠 개), 正(바를 정). <strong>③ 합친 뜻:</strong> 헌법을 고쳐 정함. <strong>④ 이름의 이유:</strong> 기존 질서 안에서 변화하는 길이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정해진 절차로 동일성을 유지하며 문언을 의식적으로 변경. <strong>⑥ 쉬운 말:</strong> 정해진 방법으로 나라의 큰 규칙을 고친다. <strong>⑦ 사례:</strong> 임기제도 변경 개헌.</p>
+<p><strong>⑧ 시험:</strong> 급격한 변경 자체가 발전이라는 보기 주의. <strong>⑨ 비교·기억법:</strong> 개정은 문구 변경, 변천은 문구 불변.</p>
+<h3>破壞·廢除 파괴·폐제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 破(깨뜨릴 파), 壞(무너질 괴), 廢(폐할 폐), 除(덜 제). <strong>③ 합친 뜻:</strong> 깨뜨림·폐하여 없앰. <strong>④ 이름의 이유:</strong> 무엇이 바뀌는지를 이름으로 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제정권력 주체 변경을 수반하는 변화와 주체 변경 없이 기존 헌법형식을 폐지하는 변화. <strong>⑥ 쉬운 말:</strong> 주인까지 바뀌나, 기존 틀을 없애나. <strong>⑦ 사례:</strong> 프랑스혁명·쿠데타에 의한 헌법 교체의 분류.</p>
+<p><strong>⑧ 시험:</strong> 둘 다 단순 개정과 다름. <strong>⑨ 비교·기억법:</strong> 분류명이 행위의 정당성을 보증하지 않음.</p>
+<h3>侵害·停止 침해·정지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 侵(침노할 침), 害(해칠 해), 停(머무를 정), 止(그칠 지). <strong>③ 합친 뜻:</strong> 침범하여 해침·멈춤. <strong>④ 이름의 이유:</strong> 규범을 어김과 효력을 멈춘다는 주장 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 문맥에서는 의식적 헌법 위반과 특정 조항 효력의 일시 중단. <strong>⑥ 쉬운 말:</strong> 규칙을 알면서 어기기와 적용을 중단하기. <strong>⑦ 사례:</strong> 요건 없는 긴급명령·헌법효력 중단 선언.</p>
+<p><strong>⑧ 시험:</strong> 위헌 인식 있는 발령=침해. <strong>⑨ 비교·기억법:</strong> 정지라는 명칭만으로 적법하지 않음.</p>
+<h3>變遷 변천</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 變(변할 변), 遷(옮길 천). <strong>③ 합친 뜻:</strong> 달라져 옮겨 감. <strong>④ 이름의 이유:</strong> 외형보다 실제 의미의 이동을 강조한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 문언 변화 없이 해석·적용상 의미·내용이 실질적으로 변화. <strong>⑥ 쉬운 말:</strong> 글은 같은데 정당한 해석과 제도 의미가 발전한다. <strong>⑦ 사례:</strong> 미국 사법심사 원리 발전.</p>
+<p><strong>⑧ 시험:</strong> 명문 위반의 반복은 변천 아님. <strong>⑨ 비교·기억법:</strong> 헌법을 바꾸자는 결론을 정당화하는 만능 근거가 아님.</p>
+<h3>限界肯定說·否定說 한계긍정설·부정설</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 限(한할 한), 界(지경 계), 肯(즐길 긍; 수긍), 定(정할 정), 說(말씀 설), 否(아닐 부). <strong>③ 합친 뜻:</strong> 경계가 있음을 인정·부인하는 견해. <strong>④ 이름의 이유:</strong> 권한의 범위를 논쟁한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 개정으로도 넘지 못할 내용상 한계가 있는지에 관한 학설. <strong>⑥ 쉬운 말:</strong> 고칠 수 있어도 뿌리까지 없앨 수 있나. <strong>⑦ 사례:</strong> 존엄을 부정하는 개헌 논의.</p>
+<p><strong>⑧ 시험:</strong> 시원적/형성적 구별=긍정설. <strong>⑨ 비교·기억법:</strong> 현행 조문의 명문 제한과 학설의 범위를 구분.</p>
+<h3>自然法·實定法·內在 자연법·실정법·내재</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 然(그럴 연), 法(법 법), 實(열매 실; 실제), 定(정할 정), 內(안 내), 在(있을 재). <strong>③ 합친 뜻:</strong> 보편적 정당성 법·실제로 정한 법·안에 있음. <strong>④ 이름의 이유:</strong> 개정 한계가 어디서 나오는지 구분한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자연법적 기준, 제정된 규범, 헌법 자체의 정체성에서 얻는 기준. <strong>⑥ 쉬운 말:</strong> 사람의 존엄에서, 명문에서, 헌법의 뿌리에서 찾는다. <strong>⑦ 사례:</strong> 제128조 제2항은 명문 효력제한.</p>
+<p><strong>⑧ 시험:</strong> 특정 조항 개정금지 명문=실정법적 한계. <strong>⑨ 비교·기억법:</strong> 내재는 반드시 문장 하나로 적혀 있어야 한다는 뜻 아님.</p>
+<h3>規範等價論 규범등가론</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 規(법 규), 範(법 범), 等(무리 등; 같음), 價(값 가), 論(논할 논). <strong>③ 합친 뜻:</strong> 규범의 가치·효력이 같다는 논의. <strong>④ 이름의 이유:</strong> 개정 불가 상위조항을 별도로 설정하는 데 반대한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법조항 사이 상하를 나누지 않는다는 한계부정설 논거. <strong>⑥ 쉬운 말:</strong> 헌법 안 조항들은 같은 법적 지위라는 주장. <strong>⑦ 사례:</strong> 개정 불가능한 상위규범 구별 반대.</p>
+<p><strong>⑧ 시험:</strong> 부정설의 논거로 분류. <strong>⑨ 비교·기억법:</strong> 모든 법률과 헌법이 동급이라는 뜻 아님.</p>
+<h3>重任·連任·單任 중임·연임·단임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 重(거듭 중), 任(맡길 임), 連(이을 연), 單(홑 단). <strong>③ 합친 뜻:</strong> 거듭 맡음·이어 맡음·한 번 맡음. <strong>④ 이름의 이유:</strong> 횟수와 연속성을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다시 재임, 연속 재임, 한 차례만 재임하는 구조. <strong>⑥ 쉬운 말:</strong> 다시 할 수 있나, 곧바로 이어 하나. <strong>⑦ 사례:</strong> 현행 대통령 5년 단임.</p>
+<p><strong>⑧ 시험:</strong> 유신6년 무제한/1980 7년 단임 대비. <strong>⑨ 비교·기억법:</strong> 연임은 중임 중 연속하는 경우.</p>
+<h3>發議·公告·公布 발의·공고·공포</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발), 議(의논할 의), 公(공평할 공), 告(알릴 고), 布(베 포; 펼침). <strong>③ 합친 뜻:</strong> 안을 냄·공개해 알림·공식 법규로 널리 알림. <strong>④ 이름의 이유:</strong> 시간순서와 법적 기능이 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 안의 제안, 검토를 위한 공지, 확정 규범의 공식 공표. <strong>⑥ 쉬운 말:</strong> 안을 내고 살펴보게 한 뒤 확정하여 알린다. <strong>⑦ 사례:</strong> 개헌안 공고20일 이상.</p>
+<p><strong>⑧ 시험:</strong> 공포일과 시행일이 항상 같지 않음. <strong>⑨ 비교·기억법:</strong> 현행 헌법 1987공포/1988시행.</p>
+<h3>定足數·過半數 정족수·과반수</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 定(정할 정), 足(발 족; 충분함), 數(셀 수), 過(지날 과), 半(반 반). <strong>③ 합친 뜻:</strong> 충분하다고 정한 수·절반을 넘는 수. <strong>④ 이름의 이유:</strong> 문턱을 정확한 수로 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회의·의결 요건의 인원수와 절반 초과 수. <strong>⑥ 쉬운 말:</strong> 절반이면 과반수가 아니다. <strong>⑦ 사례:</strong> 203명의 2/3 이상은136명.</p>
+<p><strong>⑧ 시험:</strong> 재적/출석/선거권자/투표자 분모 구별. <strong>⑨ 비교·기억법:</strong> 반올림이 아니라 요건을 만족하는 최소 정수.</p>
+<h3>閣下가 아닌 却下 각하·棄却 기각</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 却(물리칠 각), 下(아래 하), 棄(버릴 기), 却(물리칠 각). <strong>③ 합친 뜻:</strong> 본안에 못 들어가 물리침·청구를 배척함. <strong>④ 이름의 이유:</strong> 판단 단계가 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 소송요건 흠 등으로 본안판단 없이 종료하거나 본안상 이유 없어 청구 배척. <strong>⑥ 쉬운 말:</strong> 입구에서 끝났나, 내용까지 보고 거절했나. <strong>⑦ 사례:</strong> 총리서리 권한쟁의 각하.</p>
+<p><strong>⑧ 시험:</strong> 각하=합헌 판단이라는 함정. <strong>⑨ 비교·기억법:</strong> 閣下는 높임말 각하로 다른 한자.</p>
+<h3>署理·權限代行 서리·권한대행</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 署(관청 서; 임시 직무 맡김), 理(다스릴 리), 權(권세 권), 限(한할 한), 代(대신할 대), 行(다닐 행). <strong>③ 합친 뜻:</strong> 임시로 맡아 처리·권한을 대신 행사. <strong>④ 이름의 이유:</strong> 일시 담당이라는 외관만으로 법적 근거를 생략하지 않는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정식 임명 전 임시 담당과 법정 요건·순서에 따른 대행을 구분. <strong>⑥ 쉬운 말:</strong> 이름이 임시라고 동의 절차를 건너뛸 수는 없다. <strong>⑦ 사례:</strong> 국회 동의 전 총리서리 임명 논란.</p>
+<p><strong>⑧ 시험:</strong> 총리서리와 적법 권한대행 혼동 주의. <strong>⑨ 비교·기억법:</strong> 대행도 법정 근거와 요건을 확인.</p>
+<h3>起草·逐條審議·大體討論 기초·축조심의·대체토론</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 起(일어날 기), 草(풀 초), 逐(쫓을 축), 條(가지 조), 審(살필 심), 議(의논할 의), 大(큰 대), 體(몸 체), 討(칠 토; 논의), 論(논할 논). <strong>③ 합친 뜻:</strong> 초안을 만듦·조항별 살핌·큰 틀 토론. <strong>④ 이름의 이유:</strong> 입법 검토의 층위를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 문안 작성과 조문별 심사 및 전체 취지 논의. <strong>⑥ 쉬운 말:</strong> 초안 쓰기, 하나씩 보기, 전체 방향 보기. <strong>⑦ 사례:</strong> 1948년 헌법안 심의.</p>
+<p><strong>⑧ 시험:</strong> 기초는基礎, 대체는代替와 구별. <strong>⑨ 비교·기억법:</strong> 세부와 전체를 모두 검토한다.</p>
+<h3>讀會 독회</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 讀(읽을 독), 會(모일 회). <strong>③ 합친 뜻:</strong> 읽고 심의하는 회의 단계. <strong>④ 이름의 이유:</strong> 역사적 심의 절차의 이름이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법안 심의과정을 단계별로 구분하는 제도. <strong>⑥ 쉬운 말:</strong> 초안과 세부를 단계로 나누어 다룬다. <strong>⑦ 사례:</strong> 제헌 과정의 독회.</p>
+<p><strong>⑧ 시험:</strong> 현행 국회에 그대로 옮겨 외우지 않음. <strong>⑨ 비교·기억법:</strong> 역사적 설명과 현행 절차를 분리.</p>
+<h3>拔萃·四捨五入 발췌·사사오입</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 拔(뽑을 발), 萃(모일 췌), 四(넉 사), 捨(버릴 사), 五(다섯 오), 入(들 입). <strong>③ 합친 뜻:</strong> 뽑아 모음·넷 이하는 버리고 다섯 이상 올림. <strong>④ 이름의 이유:</strong> 두 개헌의 특징을 기억하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 개헌안 일부 결합과 정족수를 부당하게 반올림한 역사적 명칭. <strong>⑥ 쉬운 말:</strong> 여러 안에서 뽑음, 필요한 표를 억지로 낮춤. <strong>⑦ 사례:</strong> 1952 발췌·1954 사사오입.</p>
+<p><strong>⑧ 시험:</strong> 사사오입은 찬성표가 아니라 정족수 계산 문제. <strong>⑨ 비교·기억법:</strong> 135.333이상이려면136.</p>
+<h3>議院內閣制·不信任·解散 의원내각제·불신임·해산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의), 院(집 원), 內(안 내), 閣(문설주 각; 내각), 制(마를 제), 不(아니 불), 信(믿을 신), 任(맡길 임), 解(풀 해), 散(흩을 산). <strong>③ 합친 뜻:</strong> 의회와 내각 연결·신뢰 철회·구성 종료. <strong>④ 이름의 이유:</strong> 정치적 책임과 새 선거로 갈등을 풀게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 내각의 의회 책임과 불신임·의회해산이 연결된 정부형태. <strong>⑥ 쉬운 말:</strong> 의회가 내각을 못 믿으면 책임을 묻고 새 선거로 해결한다. <strong>⑦ 사례:</strong> 1960년 민의원과 국무원의 관계.</p>
+<p><strong>⑧ 시험:</strong> 대통령이 실질 행정수반이라는 함정. <strong>⑨ 비교·기억법:</strong> 현행 대통령에게 국회해산권 없음.</p>
+<h3>遡及立法 소급입법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遡(거스를 소), 及(미칠 급), 立(설 립), 法(법 법). <strong>③ 합친 뜻:</strong> 거슬러 올라가 영향을 미치는 법 만들기. <strong>④ 이름의 이유:</strong> 시간의 방향을 거슬러 적용한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 새 법이 과거 사실·관계에 법적 효과를 미치도록 하는 입법. <strong>⑥ 쉬운 말:</strong> 어제 한 일을 오늘 만든 기준으로 다룬다. <strong>⑦ 사례:</strong> 1960년11월 특별법 근거 개헌.</p>
+<p><strong>⑧ 시험:</strong> 정의 실현을 내세워 모든 소급처벌을 허용하면 안 됨. <strong>⑨ 비교·기억법:</strong> 진정/부진정 소급과 형벌/시효 쟁점은 따로.</p>
+<h3>公民權 공민권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 民(백성 민), 權(권세 권). <strong>③ 합친 뜻:</strong> 공동체 시민의 공적 권리. <strong>④ 이름의 이유:</strong> 시민의 정치적 지위를 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가의 공적 의사형성·공직 참여 등에 관련된 권리. <strong>⑥ 쉬운 말:</strong> 투표하고 공직에 참여할 자격의 문제. <strong>⑦ 사례:</strong> 1960년 반민주행위자의 공민권 제한.</p>
+<p><strong>⑧ 시험:</strong> 재산몰수와 공민권 제한은 다른 효과. <strong>⑨ 비교·기억법:</strong> 일반적인 모든 인권과 동일한 범위 아님.</p>
+<h3>緊急措置·司法審査 긴급조치·사법심사</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 緊(긴할 긴), 急(급할 급), 措(둘 조), 置(둘 치), 司(맡을 사), 法(법 법), 審(살필 심), 査(조사할 사). <strong>③ 합친 뜻:</strong> 급박한 조치·사법기관의 심사. <strong>④ 이름의 이유:</strong> 긴급하다는 이유로 통제를 벗어나는지 묻는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유신헌법상의 긴급권 행위와 법적 통제. <strong>⑥ 쉬운 말:</strong> 국가가 급하다고 한 일도 권리침해라면 따져야 한다. <strong>⑦ 사례:</strong> 긴급조치1·2·9호 위헌심사.</p>
+<p><strong>⑧ 시험:</strong> 유신의 심사배제 조항이 현재도 적용된다는 함정. <strong>⑨ 비교·기억법:</strong> 현행 긴급명령과 유신 긴급조치는 같은 제도 아님.</p>
+<h3>公訴時效·訴追 공소시효·소추</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 訴(하소연할 소), 時(때 시), 效(본받을 효; 효력), 追(쫓을 추). <strong>③ 합친 뜻:</strong> 공소 제기의 시간상 한계·소를 제기해 책임 추궁. <strong>④ 이름의 이유:</strong> 시간 경과와 처벌 절차의 관계를 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 범죄에 대한 공소 제기 가능기간과 국가의 형사책임 추궁. <strong>⑥ 쉬운 말:</strong> 범죄를 재판에 넘길 수 있는 기간. <strong>⑦ 사례:</strong> 내란 세력의 권력 장악 기간 중 시효 논의.</p>
+<p><strong>⑧ 시험:</strong> 범죄 신설·형벌 가중과 시효 정지의 쟁점 구별. <strong>⑨ 비교·기억법:</strong> 사실상 처벌 불가가 법적 면책은 아님.</p>
+<h3>違法性阻却事由 위법성조각사유</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 違(어긋날 위), 法(법 법), 性(성품 성), 阻(막힐 조), 却(물리칠 각), 事(일 사), 由(말미암을 유). <strong>③ 합친 뜻:</strong> 위법함을 물리치는 이유. <strong>④ 이름의 이유:</strong> 법이 정당하다고 인정하는 사유를 가리킨다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형식적 구성요건 해당 행위의 위법성을 배제하는 사유. <strong>⑥ 쉬운 말:</strong> 겉으로 남을 해쳤어도 정당방위처럼 정당한 경우를 따진다. <strong>⑦ 사례:</strong> 교재의 고문 정당화 법률이라는 가상사례.</p>
+<p><strong>⑧ 시험:</strong> 법에 적기만 하면 고문도 정당방위처럼 된다는 함정. <strong>⑨ 비교·기억법:</strong> 불법 정권의 면책 외관과 정당한 사유를 구별.</p>
+<h3>規範的期待·遡及的承認 규범적 기대·소급적 승인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 規(법 규), 範(법 범), 的(과녁 적), 期(기약할 기), 待(기다릴 대), 遡(거스를 소), 及(미칠 급), 承(받들 승), 認(알 인). <strong>③ 합친 뜻:</strong> 규범에 근거한 기대·과거에 미쳐 인정함. <strong>④ 이름의 이유:</strong> 과거 청산 중에도 시민 생활을 보호한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당한 법적 예측과 과거 법률관계의 효과를 사후 인정하는 설명. <strong>⑥ 쉬운 말:</strong> 평범한 매매까지 모두 없었던 일로 만들지 않는다. <strong>⑦ 사례:</strong> 독재 시절의 정당한 민사관계.</p>
+<p><strong>⑧ 시험:</strong> 불법 정권의 모든 행위를 무조건 무효라는 함정. <strong>⑨ 비교·기억법:</strong> 인권침해 면책과 시민의 정당한 기대는 다름.</p>
+<h1>기출을 한 덩어리로 연결하기</h1>
+<p><strong>TOP5:</strong> 020(사실과 정당성), 021(변화 개념 구별), 022(개정 한계 학설), 025(유신의 제도), 026(과거 침해의 현재 구제). 027·028은 제정권력의 특성, 031·032는 변천의 한계, 033·036은 헌정사, 034·035는 저자의 효력 이론을 보완한다. 실제 응답 통계가 없으므로 ‘가장 많이 틀린 보기’라는 통계 대신 <strong>틀리기 쉬운 함정</strong>을 제시한다.</p>
+<table>
+<thead>
+<tr>
+<th>함정</th>
+<th>정답을 떠올릴 단서</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>시원적이니 내용에도 아무 제한이 없다</td>
+<td>시원성이라는 형식적 성격과 정당성 한계를 구분</td>
+</tr>
+<tr>
+<td>제정권력과 개정권력은 다르다=한계부정설</td>
+<td>그 구별은 긍정설의 논거</td>
+</tr>
+<tr>
+<td>반복된 위헌=헌법변천</td>
+<td>정당한 해석이라는 조건 필요</td>
+</tr>
+<tr>
+<td>유신은 7년 단임</td>
+<td>유신 6년 무제한, 1980 7년 단임</td>
+</tr>
+<tr>
+<td>옛 헌법에 근거했으니 구제 불가</td>
+<td>현재 심판의 기준과 기본권 보장 확인</td>
+</tr>
+<tr>
+<td>1960년 총리는 언제나 민의원이 선거</td>
+<td>대통령 지명·민의원 동의가 원칙, 선거는 단서</td>
+</tr>
+</tbody></table>
+<h1>새 사례로 확인하는 응용문제 5개</h1>
+<h2>응용 1. 모두가 서명한 배제 조항</h2>
+<p>작은 나라의 주민 전원이 새 헌법에 서명했다. 그러나 거기에는 앞으로 태어날 특정 혈통의 아이들은 학교에 다닐 수 없다고 적혔다. 저자의 관점에서 서명만으로 정당한 헌법규범이 되는가?</p>
+<p><strong>답:</strong> 아니다. 수용 표지라는 사실이 있어도 구성원의 평등한 지위와 기본권을 부정하는 내용의 정당성을 따져야 한다. 아직 태어나지 않은 사람의 기본 지위를 현재 사람들의 합의로 없앨 수 있다는 결론도 정당화되지 않는다. <strong>출제 의도:</strong> 실제 동의와 정당한 권한을 구별한다.</p>
+<h2>응용 2. 301명 국회와 ‘200명이면 충분’</h2>
+<p>재적의원 301명인 국회에서 개헌안에 200명이 찬성했다. 의장은 “301의 3분의 2는 200.666…이니 소수점은 버리자”고 한다. 유효한 의결인가?</p>
+<p><strong>답:</strong> 아니다. 최소 201명이 필요하다. 정족수는 의결을 허용하는 문턱이지 반올림으로 낮추는 근삿값이 아니다. 국민투표 절차가 뒤에 있다는 이유로 국회 단계의 흠이 사라지지 않는다. <strong>출제 의도:</strong> 사사오입의 논리를 새로운 수에 적용한다.</p>
+<h2>응용 3. 매번 생략한 동의</h2>
+<p>정부가 헌법상 필요한 의회 동의를 20년간 받지 않았다. 법원에 “너무 오래 지속됐으니 이제 동의 없는 제도로 변천했다”고 주장했다. 먼저 확인할 것은?</p>
+<p><strong>답:</strong> 관행의 길이가 아니라 헌법에 맞는 해석으로 정당화되는지다. 명시적 동의 요건을 반복적으로 위반한 사실만으로 그 요건이 없어지지 않는다. <strong>출제 의도:</strong> 변천을 위헌의 세탁 수단으로 쓰는 함정을 찾는다.</p>
+<h2>응용 4. 두 피해자, 서로 다른 과거의 법</h2>
+<p>갑은 독재 시절 고문을 허용한다는 규칙 때문에 피해를 입었다. 을은 같은 시절 일반 민사 규정에 따라 정당하게 집을 샀다. 민주화 후 두 법적 효과를 모두 똑같이 없애야 하는가?</p>
+<p><strong>답:</strong> 아니다. 고문 면책의 외관은 피해구제를 막는 근거가 될 수 없다. 반면 기본권 침해와 무관한 을의 정당한 재산관계를 일괄 무효로 만들면 새 불공정이 생긴다. 내용과 정당한 기대를 구별한다. <strong>출제 의도:</strong> 과거 국가행위의 일괄 처리 오류를 막는다.</p>
+<h2>응용 5. 재임의 보너스를 넣은 개헌</h2>
+<p>현직 대통령 때 제안된 개헌안이 다음 대통령부터 중임을 허용한다고 하면서, 부칙으로 현직 대통령도 한 번 더 출마할 수 있다고 정했다. 적법한 투표만 마치면 부칙도 적용되는가?</p>
+<p><strong>답:</strong> 제128조 제2항의 현직 적용 배제에 반한다. 본문의 미래 제도 설계와 부칙의 현직 특혜를 따로 판단해야 한다. 국민투표라는 절차와 내용의 제한은 다른 문제다. <strong>출제 의도:</strong> 본문·부칙으로 쪼갠 우회와 제안 당시 기준을 잡는다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet">
+<h2>한 장으로 마지막 확인 · 제2강</h2>
+<p><strong>TOP3:</strong> ① 제정권력/개정권력 ② 개정·침해·변천 ③ 10개 헌법과 9차 개정.</p>
+<table><thead><tr><th>주제</th><th>외울 문장</th></tr></thead><tbody>
+<tr><td>제정</td><td>실질=최고 근본규범 정립 / 형식=헌법전 편찬. 제정권력은 창조·시원·자율·통일불가분·항구·불가양.</td></tr>
+<tr><td>효력의 이유</td><td>제정했다는 사건만으로 충분하지 않다. 수용 표지+정당성. 개인도덕≠정치도덕≠구조적 정치도덕.</td></tr>
+<tr><td>개정 절차</td><td>재적 과반수 의원 또는 대통령 제안 →20일 이상 공고→60일 이내 재적 2/3 이상 의결→30일 이내 국민투표. 선거권자 과반수 투표+투표자 과반수 찬성.</td></tr>
+<tr><td>개정 한계</td><td>긍정설: 시원적/형성적 권력 구별. 자연법·헌법내재·실정법 한계. 128②: 임기·중임 변경은 제안 당시 대통령에게 효력 없음.</td></tr>
+<tr><td>변화 구별</td><td>파괴=주체 / 폐제=형식 폐지 / 침해=인식한 위반 / 정지=일시 중단 / 변천=문구 그대로 의미 변화 / 개정=절차 따라 문구 변경.</td></tr>
+<tr><td>변천의 경계</td><td>명문 위반의 반복은 변천이 아니다. 정당한 해석 필요. 총리서리 사건 각하를 합헌 승인으로 바꾸지 말 것.</td></tr>
+<tr><td>헌정사 앞부분</td><td>1948 제정 →1952 발췌→1954 사사오입→1960.6 내각제→1960.11 소급법→1962 대통령제 복귀→1969 3선.</td></tr>
+<tr><td>헌정사 뒷부분</td><td>1972 유신:6년·간선·무제한 / 1980:7년·간선·단임 / 1987:5년·직선·단임. 제10호=9차 개정.</td></tr>
+<tr><td>과거 청산</td><td>긴급조치:현재 심판은 현행 헌법 기준. 사실상 불처벌≠규범적 면책. 정당한 일반 민사관계는 따로 보호.</td></tr>
+</tbody></table>
+<p><strong>숫자 함정:</strong> 203명의 2/3 이상=136명. 제헌 7·12 의결/7·17 공포. 1960.6.15 내각제. 현행 1987.10.29 공포/1988.2.25 시행.</p>
+<p><strong>사례를 풀 순서:</strong> 누가 어떤 권한으로 →문언·주체·효력 중 무엇이 달라졌나 →절차 충족 →내용의 한계 →현재 구제와 생활관계 구분.</p>
+</section>
+
+<h1>이해 상태를 스스로 진단하기</h1>
+<p>🟢 <strong>이해 완료:</strong> 203명에서 왜 136명이 필요한지 계산하고, ‘약속했다’는 사실만으로 의무가 생기지 않는 사례와 변천·침해의 차이를 자기 말로 설명할 수 있다.</p>
+<p>🟡 <strong>복습 필요:</strong> 연도는 외웠지만 왜 제도가 바뀌었는지, 학설과 판례의 결론이 어떻게 다른지 설명하기 어렵다.</p>
+<p>🔴 <strong>이해 부족:</strong> 국민투표를 거치면 무조건 정당하고, 위헌을 오래 반복하면 합헌이 된다고 생각한다. 1-2·2-4·3-2로 돌아가자.</p>
+<p><strong>복습 TOP3:</strong> 제정권력과 정당성 / 개정 한계와 변천의 경계 / 1960·1972·1980·1987의 제도 비교. 답을 아직 확인하지 않았으므로 당신의 이해도를 임의로 판정하지 않는다.</p>
+<h1>자료 대조 메모</h1>
+<p>교재 본문과 사례, 제공 JSON 18문항을 중심으로 재구성했다. 역사 순서는 <a href="https://db.history.go.kr/item/cons/main.do">국사편찬위원회 헌정사 자료</a>, 1960년 제도는 당시 헌법 제4호, 1969년 의결일은 국가기록원 자료로 보완했다. <a href="https://www.ccourt.go.kr/site/history/02/10201000000002020101203.jsp">헌법재판소 연혁</a>은 96헌가2의 합헌결정을 확인하는 자료다. 마버리 사건은 <a href="https://www.fjc.gov/history/timeline/marbury-v-madison">미국 연방사법센터의 사건 설명</a>과 대조했다. 외국 개헌 유형의 정정은 해당 절의 공식 자료를 참조한다. 원본 문제·정답은 수정하지 않고 아래 보기별 해설에 오류·범위의 주의를 별도로 적는다.</p>
+<h1>문제 부록 · 18문항·72개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법_019"><h4>형성평가 · 헌법_019</h4><p class="question-stem">정치공동체의 법적 규율을 위한 특정 원리를 지향하는 근본적 규범설계로서 실정법 중 최고의 지위를 가지는 법을 정립하는 것을 가리키는 개념으로 적합한 것은?</p><ol class="choices"><li>헌법개정</li><li>실질적 의미의 헌법 제정</li><li>형식적 의미의 헌법 제정</li><li>헌법 폐제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 개정은 이미 성립한 헌법을 그 절차에 따라 고치는 일이다. 질문은 기본규범을 정립하는 제정이다.</li><li><strong>선택</strong> · 맞다. 문서라는 외형이 아니라 정치공동체의 최고 근본규범을 정립하는 실질을 묻는다.</li><li><strong>비선택</strong> · 형식적 제정은 헌법전 편찬이다. 질문의 초점은 문서가 아니라 규범의 위상과 내용이다.</li><li><strong>비선택</strong> · 폐제는 제정권력 주체의 변경 없이 기존 헌법형식을 폐지하는 변화다. 기본규범 정립의 정의와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_020"><h4>형성평가 · 헌법_020</h4><p class="question-stem">다음 두 명제 중 법규범의 효력의 근원에 관하여 달걀 명제가 옳다고 보면서, 그 '이미 존재하는 규범'이 (구조적) 정치도덕 규범이라고 보는 견해와 어울리지 않는 진술은?<br><br>달걀: 어떤 사람은 이미 존재하는 규범이 그 권한을 부여하는 경우에만 법규범을 창설할 권한을 갖는다.<br>닭: 법규범을 창설할 권한을 부여하는 규범은 그런 권한을 지닌 사람이 그 규범을 창설한 경우에만 존재한다.</p><ol class="choices"><li>'나는 너에게 …를 약속한다'고 진지하게 말한 사건이 있었다고 하더라도 …를 실제로 해야 할 의무는 그 내용이 일정한 규범적 조건을 갖출 때에만 생긴다.</li><li>헌법제정권력은 시원적이므로 소수민족을 이등국민으로 규정하는 헌법조항을 제정해도 그 헌법은 법으로서 효력이 있다.</li><li>헌법은 정치공동체에서 공유되는 최고의 제도적 효력을 갖는 것으로 수용할 표지를 갖추어야 한다</li><li>헌법의 효력은 개인적 도덕에 관한 명제에서 곧바로 도출되는 것이 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어울린다. 약속했다는 실제 사건과 그 내용이 의무를 낳을 정당한 조건은 함께 필요하다.</li><li><strong>선택</strong> · 어울리지 않아 선택한다. 시원적 권력이라는 이유로 이등시민 조항도 유효하다고 하는 것은 저자가 강조하는 정치도덕적 한계를 지운다.</li><li><strong>비선택</strong> · 어울린다. 정당성만 추상적으로 말하는 것이 아니라 공동체가 최고규범으로 수용할 제도적 표지도 필요하다.</li><li><strong>비선택</strong> · 어울린다. 개인 사이의 도덕명제를 국가의 제도적 규범력으로 곧바로 바꾸지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②는 닭 명제가 맞다고 보는 사람에게 어울리는 견해이다. 어떤 시원적 권력 보유자로서의 속성을 갖춘 사람이 제정하여 그 법적 효력을 인정받을 수 있는 내용에는 한계가 없다고 보기 때문이다. 반면에 달걀 명제가 옳다고 보는 사람은, 위계상 가장 높은 실정법을 최초로 제정하는 행위를 통해 성문화된 헌법조항도, 구성원 중 일부를 이등국민으로 규정한다면 법규범으로서 효력이 없다고 본다. 왜냐하면 그렇게 구성원 중 일부를 이등국민으로 규정하는 헌법조항을 제정할 규범적 권한을 부여하는 타당한 규범이 있어야 하는데, 구성원의 근본적 자격과 지위에 관한 정치도덕 규범은 다른 이를 이등시민으로 규정할 권한을 누구에게도 부여하지 않기 때문이다. 이는 정치도덕 규범 중에 정치체계는, 그 정치체계의 정당성의 기반을 스스로 무너뜨리는 기본적 법규범을 제정할 수 없다는 원칙이 포함되어 있기 때문이다. 만일 이 원칙이 포함되어 있지 않다고 본다면, 의무가 아닌 것이 의무가 되는 모순이 산출되게 된다. 따라서 이 원칙은 정치도덕 규범에 포함되어 있다. 이러한 관점에서는 헌법제정의 효력은 정치도덕 규범이 효력 있는 권한의 조건으로 제시한 것을 준수해야 발생하므로, ②와 같이 그 조건을 어긴 조항은 법규범으로서 효력이 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_021"><h4>형성평가 · 헌법_021</h4><p class="question-stem">다음 중 긴급명령의 요건에 해당하지 아니함을 알면서도 대통령이 긴급명령을 발령하는 경우를 지칭하는 개념으로 가장 정확한 것은?</p><ol class="choices"><li>헌법 파괴(破壞)</li><li>헌법 폐제(廢除)</li><li>헌법 침해(侵害)</li><li>헌법 변천(變遷)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 파괴는 제정권력의 주체까지 변경되는 경우다. 지문에는 그런 내용이 없다.</li><li><strong>비선택</strong> · 폐제는 기존 헌법의 존재형식을 폐지하는 경우다. 지문은 특정 요건을 알고도 위반한 발령이다.</li><li><strong>선택</strong> · 맞다. 요건이 없고 위헌임을 알면서 공권력을 행사했다는 인식적·의식적 위반이 핵심이다.</li><li><strong>비선택</strong> · 변천은 문언 변화 없이 정당한 해석·적용의 의미가 달라지는 현상이다. 의식적 위반을 합법화하는 말이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법 파괴(破壞)란 헌법제정권력의 주체가 변경되는 협의의 혁명을 말한다. 헌법 파괴에는 기존 헌법의 존재형식에 대한 변경이 수반된다. 국왕에서 국민으로 헌법제정권력의 주체가 변경된 프랑스 혁명이 그 예이다.<br>헌법 폐제(廢除)란 헌법제정권력의 변동 없이 기존 헌법(헌법의 존재형식)을 폐지하는 것을 말한다. 쿠데타 등으로 정권담당자가 교체되고 헌법개정절차에 의하지 아니하고 헌법이 바뀌는등의 경우가 이에 해당한다.<br>헌법의 침해(侵害)란 위헌임을 인식하면서도 의식적으로 특정한 헌법조항에 위반되는 명령의 발포나 공권력을 행사하는 것을 말한다.<br>헌법의 정지(停止)란 특정한 헌법조항의 효력을 일시적으로 중단시키는 것을 말한다.<br>헌법의 변천(變遷)이란 헌법조문의 외형적 변화 없이 단지 헌법규정의 해석ㆍ적용에 있어서 그 의미와 내용이 시대의 변천에 따라 실질적으로 변화하는 경우를 말한다.</p></details></section>
+
+<section class="question-card" id="question-헌법_022"><h4>형성평가 · 헌법_022</h4><p class="question-stem">다음 중 헌법개정 한계부정설과 어울리지 않는 진술은?</p><ol class="choices"><li>헌법규범이 현실에 적응하기 위해 요구되는 내용의 변화에는 미리 한계를 그을 수 없다.</li><li>헌법제정권력과 헌법개정권력은 모두 주권자로서 구별될 수 없다.</li><li>시원적 권력과 형성적 권력은 구별되며, 형성적 권력은 시원적 권력에서 부여한 권력만을 행사할 수 있을 뿐이다.</li><li>헌법규정은 모두 같은 효력을 가지므로 개정할 수 없는 상위규범과 개정할 수 있는 하위규범으로 나눌 수 없다.(규범등가론)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한계부정설의 논거다. 현실 적응에 필요한 변화를 사전에 제한하기 어렵다고 본다.</li><li><strong>비선택</strong> · 한계부정설의 논거다. 제정과 개정이 모두 주권의 행사라는 데 초점을 둔다.</li><li><strong>선택</strong> · 한계긍정설의 논거이므로 선택한다. 헌법이 만들어 준 권한은 그것을 만든 기본질서를 파괴할 수 없다는 논리다.</li><li><strong>비선택</strong> · 한계부정설의 규범등가론이다. 헌법조항 사이에 개정 불가의 상위규범을 설정하는 데 반대한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 한계긍정설에 어울리는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_023"><h4>형성평가 · 헌법_023</h4><p class="question-stem">헌법개정의 한계 중 '헌법이 명문의 규정으로써 특정 조항이나 특정 사항의 개정을 금지하고 있다면 이를 개정할 수 없다는 것'을 무엇이라고 하는가?</p><ol class="choices"><li>자연법적 한계</li><li>헌법내재적 한계</li><li>실정법적 한계</li><li>헌법제정권력상 한계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자연법적 한계는 인간존엄 등 실정법 이전의 정당성 기준에서 찾는다. 명문이라는 단서와 구별한다.</li><li><strong>비선택</strong> · 헌법내재적 한계는 헌법의 정체성·기본적 동일성에서 도출한다. 문언에 직접 금지한 유형의 정확한 이름은 아니다.</li><li><strong>선택</strong> · 맞다. 명문으로 정한 개정금지·효력제한이라는 실정법상의 근거가 단서다.</li><li><strong>비선택</strong> · 질문은 세 한계 분류 중 명문의 금지를 묻는다. 제정권력이라는 말만 보고 고르지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_024"><h4>형성평가 · 헌법_024</h4><p class="question-stem">어떤 헌법조항의 조문이 그대로 존속하면서 의미내용만 실질적으로 변화하는 것을 무엇이라고 하는가?</p><ol class="choices"><li>헌법제정</li><li>헌법개정</li><li>헌법침해</li><li>헌법변천</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제정은 근본규범을 새로 정립하는 일이다. 같은 조문이 존속한다는 지문과 다르다.</li><li><strong>비선택</strong> · 개정은 정해진 절차로 문언을 의식적으로 바꾼다. 문구가 그대로라는 단서와 반대다.</li><li><strong>비선택</strong> · 침해는 위헌임을 알면서 헌법을 어기는 공권력 행사다. 의미 변화 일반을 뜻하지 않는다.</li><li><strong>선택</strong> · 맞다. 문구는 그대로인데 해석·적용상의 의미가 실질적으로 변화하는 것이 변천이다. 정당한 해석이라는 경계도 함께 기억한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_025"><h4>형성평가 · 헌법_025</h4><p class="question-stem">위 내용은 어느 개헌의 주요 내용에 관한 설명인가?<br><br>① 통일주체국민회의의 대의원을 국민이 선출; 통일주체국민회의가 대통령, 국회의원 정수의 3분의 1을 선출하는 간선제를 도입.<br>② 대통령 임기 6년, 중임ㆍ연임 제한규정 없음.<br>③ 대통령은 긴급조치권, 국회해산권, 법관 임명권을 갖게 됨. 이 중 긴급조치는 국민의 기본권을 정지할 수 있고 사법심사의 대상이 되지 않음.<br>④ 기본권 제한 사유로 국가안전 보장 추가.<br>⑤ 기본권의 본질적 내용에 대한 침해금지 조항 삭제.<br>⑥ 헌법위원회에 위헌법률심사권, 위헌정당해산권, 탄핵심판권을 부여.</p><ol class="choices"><li>1952년 발췌 개헌(제2호, 1차 개정)</li><li>1954년 사사오입 개헌(제3호, 2차 개정)</li><li>1962년 쿠데타 이후 국민투표에 의한 개헌(제6호, 5차 개정)</li><li>1972년 유신 개헌(제8호, 7차 개정)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 1952 발췌개헌은 대통령 직선제와 연결된다. 통일주체국민회의·6년 무제한이 아니다.</li><li><strong>비선택</strong> · 1954 사사오입은 초대 대통령 중임 제한 예외와 잘못된 정족수 계산이 핵심이다.</li><li><strong>비선택</strong> · 1962는 대통령제 복귀·단원제·대법원의 위헌심사 등이 핵심이다. 유신의 긴급조치권 구조와 다르다.</li><li><strong>선택</strong> · 맞다. 통일주체국민회의·6년 무제한·국회의원3분의1·긴급조치가 유신의 묶음이다. 사법심사 배제는 당시 규정의 내용이지 현재까지 심사할 수 없다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_026"><h4>형성평가 · 헌법_026</h4><p class="question-stem">헌법개정의 한계를 위반하여 개정된 헌법조항(A) 자체가 국민의 기본적 인권을 침해하는 것이었는데 그러한 국민의 기본적 인권 침해에 대한 구제가 현재 문제가 되는 경우에 관한 진술로 틀린 것은?</p><ol class="choices"><li>불법적으로 개정된 헌법조항(A)이 규범적으로 유효하다는 전제에서 판단하지 않아야 한다.</li><li>국가행위의 적법성은 그 행위 당시의 법을 근거로 판단하므로 기본적 인권 침해의 불법성 판단은 당시의 헌법조항(A)을 기준으로 이루어져야 한다.</li><li>과거 기본적 인권 침해 구제에 대한 헌법적 판단은 현행 헌법 기준으로 이루어져야 한다.</li><li>과거의 기본적 인권 침해가 당시의 법률에 근거를 두고 있었다 하더라도 그 침해에 대한 구제를 현재 거절해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 개정 한계 논증에 맞는 설명이다. 다만 헌재가 유신헌법 전체를 일괄 위헌 선고했다는 뜻으로 확대하지 않는다.</li><li><strong>선택</strong> · 틀린 보기라 선택한다. 긴급조치에 대한 현재 위헌심사의 준거는 현행 헌법이다. 옛 침해 조항을 기준으로 구제를 막을 수 없다.</li><li><strong>비선택</strong> · 해당 긴급조치 결정의 원칙에 맞는다. 현재의 규범통제는 원칙적으로 심판 당시 헌법을 기준으로 한다.</li><li><strong>비선택</strong> · 과거 법률의 외관만으로 오늘의 구제를 거절할 수 없다는 교재 논지다. 개별 구제의 절차·요건까지 모두 자동 충족한다는 뜻은 아니다. 원자료 사건번호2010헌바32는2010헌바132 등으로 보완한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌재 2013. 3. 21. 2010헌바32등 참조.</p></details></section>
+
+<section class="question-card" id="question-헌법_027"><h4>워크북 · 헌법_027</h4><p class="question-stem">헌법을 시원적으로 창조하는 힘, 즉 국가의 기본적 법규범을 시원적으로 정립하는 권력을 무엇이라고 하는가?</p><ol class="choices"><li>헌법제정권력</li><li>헌법개정권력</li><li>통치권</li><li>입법권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞다. 기본법을 시원적으로 창설하는 힘을 묻는다.</li><li><strong>비선택</strong> · 개정권력은 기존 헌법이 정한 절차와 범위에서 행사되는 형성된 권력이다.</li><li><strong>비선택</strong> · 통치권은 헌법질서에 근거한 실제 국가권한이다. 시원적 창설력의 이름과 다르다.</li><li><strong>비선택</strong> · 입법권은 법률을 만드는 통치권의 한 부분이다. 헌법 자체를 최초로 세우는 힘과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②, ③, ④는 모두 헌법제정권력에 의해 형성된 권력이다. 입법권은 통치권의 하나이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_028"><h4>워크북 · 헌법_028</h4><p class="question-stem">헌법 제정 권력의 특성 중 그 이전의 어떤 권력의 법적 수권도 받지 않고 스스로가 최초의 법적 권한의 원천이 되는 성격을 가리키는 개념으로 가장 정확한 것은?</p><ol class="choices"><li>불가양성</li><li>시원성</li><li>항구성</li><li>통일성ㆍ불가분성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 불가양성은 주권자의 궁극적 권력을 타인에게 넘길 수 없다는 성격이다. 이전 수권의 부재라는 뜻은 아니다.</li><li><strong>선택</strong> · 맞다. 이전 권력에서 수권받지 않은 최초의 근원이라는 말이 시원성이다.</li><li><strong>비선택</strong> · 항구성은 헌법 제정 후에도 권력이 주권자에게 계속 남는다는 성격이다.</li><li><strong>비선택</strong> · 통일·불가분성은 궁극적 권력이 하나이며 나뉘어 양도되지 않는다는 성격이다. 권력분립의 기능 분담과 모순되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_029"><h4>워크북 · 헌법_029</h4><p class="question-stem">다음 중 헌법개정의 필요성에 대한 일반적 서술로 부정확한 것은?</p><ol class="choices"><li>헌법은 현실에 적응하고 실효성을 유지할 필요가 있다.</li><li>헌법 외적 수단(헌법 파괴나 폐제)에 의한 헌법 변화를 미리 방지할 필요가 있다.</li><li>기존 헌법에 그 자체로 바람직하지 못하거나 개선되어야 할 규정이 있을 수 있다.</li><li>새로운 조직ㆍ권한ㆍ절차를 도입함으로써 정치 공동체의 갈등ㆍ대립 해소 방안을 급격히 변경해야 정치가 발전한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정확하다. 규범과 현실 사이의 간극을 줄여 실효성을 유지하는 것은 개정의 필요성이다.</li><li><strong>비선택</strong> · 정확하다. 제도 안의 변화 경로를 열어 헌법 밖의 파괴적 변화를 예방하려는 목적이 있다.</li><li><strong>비선택</strong> · 정확하다. 애초에 부족하거나 변화가 필요한 규정을 개선할 수 있다.</li><li><strong>선택</strong> · 부정확하여 선택한다. 급격한 변경 자체가 발전을 보장하지 않는다. 공정한 절차·예측 가능성·충분한 검토가 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 헌법개정에서 주의해야 할 바를 주의하지 않는 주장이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_030"><h4>워크북 · 헌법_030</h4><p class="question-stem">다음 중 헌법개정 한계 부정설과 어울리지 않는 진술은?</p><ol class="choices"><li>헌법 규범이 현실에 적응하기 위해 요구되는 내용의 변화에는 미리 한계를 그을 수 없다.</li><li>헌법 제정 권력과 헌법개정 권력을 모두 주권이므로 구별될 수 없다.</li><li>시원적 권력과 형성적 권력은 구별되며, 형성적 권력은 시원적 권력에서 부여한 권력만을 행사할 수 있을 뿐이다.</li><li>헌법규정은 모두 같은 효력을 가짐으로 개정할 수 없는 상위 규범과 개정할 수 있는 하위 규범으로 나눌 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 부정설과 맞는다. 현실 적응의 가능성을 미리 막지 않으려는 논거다.</li><li><strong>비선택</strong> · 부정설과 맞는다. 두 권력이 모두 주권이라는 점을 강조한다.</li><li><strong>선택</strong> · 긍정설의 설명이므로 선택한다. 시원적 권력과 그에 의해 만들어진 권한의 차이에 근거하여 한계를 인정한다.</li><li><strong>비선택</strong> · 부정설의 규범등가론이다. 헌법규정 내의 개정 가능한 하위규범과 불가능한 상위규범의 분리를 부인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 한계긍정설에 어울리는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_031"><h4>워크북 · 헌법_031</h4><p class="question-stem">다음 주 헌법변천에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법개정절차에 따라 헌법의 문언이 의식적으로 수정ㆍ변동되는 것은 헌법변천이 아니다.</li><li>미국 연방 대법원이 1803년 Marbury v Madison 판결 이래 위헌법률 심사권을 행사한 것이 한 예로 거론된다.</li><li>미국에서 간접 선거인 연방대통령선거가 사실상 직접 선거로 운영되는 것이 한 예로 거론된다.</li><li>헌법재판에서 어떤 결론을 주장하는 사람이 '이 헌법 조문에 관해서 헌법 변천을 실시하여야 한다'는 주장을 펼치는 경우는 매우 흔하며, 또 주장자에게 유리하기도 하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 문언을 의식적으로 수정하는 것은 개정이지 변천이 아니다.</li><li><strong>비선택</strong> · 교재가 드는 대표 예다. 마버리는 임명장을 받으라는 명령을 얻은 사건이 아니라 관할권 판단을 통해 사법심사 원리를 분명히 한 사건이다.</li><li><strong>비선택</strong> · 교재의 사실상 운영에 관한 설명이다. 법적으로 선거인단에 의한 간접선거가 폐지되었다는 뜻으로 읽으면 틀린다.</li><li><strong>선택</strong> · 틀린 설명이므로 선택한다. 변천은 정당한 해석의 변화를 관찰해 부르는 말이지 정책적으로 헌법을 벗어나자는 논증의 지름길이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 현재 벌어지고 있는 해석적 논증대화에서 그와 같은 주장을 펼치는 경우는 사실상 없다. 이는 사실 '헌법변천을 실시하여야 한다'는 식의 주장이 주장자에게 불리한 것이기도 하기 때문이다. 그것은 헌법에 대한 일반적인 해석에 의해 얻어낸 규범내용을 주장하는 것이 아니라, 해석에 의해 확정되는 규범 내용은 따로 있지만, 거기서 단지 정책적 이유로 이탈하여 새로운 내용을 집어넣고자 하는 것처럼 들릴 가능성이 높기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법_032"><h4>워크북 · 헌법_032</h4><p class="question-stem">헌법변천에 관한 다음 진술 중 틀린 것은?</p><ol class="choices"><li>새로운 헌법 해석으로 인하여 달라진 헌법 현실이 두드러지는 경우를 관찰하여 칭하는 개념이다.</li><li>명시적 헌법 규정 위반이 헌법 변천이 될 수는 없다.</li><li>새로운 헌법 해석이 헌법적 타당성을 가져야 한다.</li><li>헌법 침해가 계속 반복된다면 헌법 변찬으로 평가된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 설명에 맞는다. 의미·현실의 변화를 관찰하여 부르는 개념이다.</li><li><strong>비선택</strong> · 교재가 정한 경계다. 명시적 조항을 단순히 어긴 것을 변천으로 정당화할 수 없다.</li><li><strong>비선택</strong> · 맞다. 새로운 해석은 헌법적 타당성으로 뒷받침되어야 한다.</li><li><strong>선택</strong> · 틀려서 선택한다. 위헌의 반복은 그 자체로 합헌적 변천이 되지 않는다. 원문의 변찬은 변천으로 읽는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_033"><h4>워크북 · 헌법_033</h4><p class="question-stem">1948년 헌법 제1호의 제정에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>1948년 5월 10일 총선거 실시로 구성된 국회와는 별도로 헌법 제정의 헌법 제정의회를 선출 구성하였다.</li><li>헌법 제정 국민투표가 있었다.</li><li>국가 형태를 민주공화국으로 규정하였다.</li><li>국회는 양원제로 하고 의원내각제를 전면적으로 도입하였다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다.5·10선거로 구성된 국회가 제헌의회를 겸했다. 별도 의회를 다시 선출하지 않았다. 원문에 중복된 헌법 제정의는 문장 오류다.</li><li><strong>비선택</strong> · 틀리다. 제헌헌법은 국회의 의결로 제정되었고 제정 국민투표는 없었다.</li><li><strong>선택</strong> · 맞다. 국가형태를 민주공화국으로 규정했다.</li><li><strong>비선택</strong> · 틀리다. 단원제·대통령제에 의원내각제적 요소를 가미했다. 양원·전면적 내각제는1960년과 비교한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 총선거로 구성된 국회가 헌법제정의회를 겸하였다. 헌법제정 국민투표는 없었다. 단원제였으며, 대통령 중심제에 의원내각제적 요소를 가미한 정부형태를 취하였다.</p></details></section>
+
+<section class="question-card" id="question-헌법_034"><h4>워크북 · 헌법_034</h4><p class="question-stem">다음 중 약속을 지킬 책무에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>약속한다는 실정적 사건에 의해서 비로소 발생한다.</li><li>약속했다는 바로 그 사실만으로 약속한 것을 지켜야 하는 책무가 당연히 나온다.</li><li>약속에서 해야 할 행위로 상정된 것이 다른 사람의 권리를 침해하는 것이라면 그 약속은 책무를 낳는 약속이 될 수 없다.</li><li>약속을 하지 않았음에도 불구하고 마치 약속을 한 것처럼 다루어 책무 위반이 있다고 주장하며 제재를 가하는 것은 정당하지 않다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 논지에 맞는다. 실제 약속이라는 사건 없이 약속 위반의 의무를 임의로 만들 수 없다. 다만 그 사건만으로 충분하다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀려서 선택한다. 약속했다는 사실 외에 의무를 낳을 정당한 내용과 조건이 필요하다.</li><li><strong>비선택</strong> · 맞다. 다른 사람의 권리를 침해하겠다는 합의는 그 침해를 해야 할 정당한 의무를 만들지 않는다.</li><li><strong>비선택</strong> · 맞다. 존재하지 않은 약속을 있었다고 꾸며 제재하는 것은 정당하지 않다. 사실도 무시할 수 없다는 점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법_035"><h4>워크북 · 헌법_035</h4><p class="question-stem">다음 중 '헌법이 법규범으로서 효력을 갖는 근본적 이유는 정치공동체에서 공유되는 최고의 제도적 효력을 갖는 것으로 수용할 표지와 정당성을 갖추었기 때문'이라는 견해와 어울리지 않는 것은?</p><ol class="choices"><li>직접 국민투표가 없었다는 이유만으로 주권자가 시원적인 헌법제정권력을 행사하지 않았다고 볼 수는 없다.</li><li>헌법 제정 권력의 행사란 그 정치공동체에서 제도적 효과를 갖는 정당한 규범으로서 공유하기로 한다는 뚜렷한 표지로 받아들일 만한 사건이 있음을 의미한다.</li><li>'헌법'이라는 명목으로 주장되고 있는 것이 헌법으로서 효력을 가지는지의 문제는 정치공동체 구성원의 총체적이고 구체적인 직접적 의사 작용이 있었는가의 문제로 환원된다.</li><li>어떤 것이 '헌법'이라는 명목으로 불리고 있다고 하더라도 구성원의 일부를 무조건 학살하라는 내용을 담고 있다면 그것은 법규범으로서 효력을 갖지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어울린다. 제정 국민투표는 유일한 수용 표지가 아니다. 대한민국 제헌 과정도 비교한다.</li><li><strong>비선택</strong> · 어울린다. 공동체에서 제도적 효력을 가진 정당한 규범으로 공유할 사건·표지를 요구한다.</li><li><strong>선택</strong> · 어울리지 않아 선택한다. 실제 직접 의사만으로 환원할 수 없다. 의사의 해석·정족수·내용의 정당성도 문제다.</li><li><strong>비선택</strong> · 어울린다. 헌법이라는 명칭과 수용 사건만으로 학살을 명령할 정당한 권한을 만들 수 없다는 저자의 관점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 '수용 표지와 정당성'을 요건으로 헌법의 효력을 판정해야 한다는 견해와 어울리지 않는다. 대한민국 제정헌법도 직접적인 국민투표는 없었다.또한 직접적인 국면 투표가 있었다고 하더라도 그러한 국민투표에서 드러난 의사를 어떤 방향의 의사로 해석하려면 어떤 의결 정족수를 기준으로 삼아야 하는데, 이 의결 정족수를 직접적인 의사 자격으로 근원적으로 적립하는 방안이란 존재할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법_036"><h4>워크북 · 헌법_036</h4><p class="question-stem">다음은 어떤 개헌에 대한 설명인가?<br><br>Ÿ 대통령을 국회 양원 합동회의에서 선출하도록 하였다.<br>Ÿ 대통령의 지위를 의례적ㆍ형식적 지위에 한정하도록 하였다.<br>Ÿ 내각 수반인 국무총리는 민의원에서 선출하고 대통령이 임명하도록 하였다.<br>Ÿ 행정권은 국무원(내각)에 속하도록 하였다.<br>Ÿ 국회는 내각 불신임권을 갖고, 내각은 민의원 해사권을 갖도록 하였다.</p><ol class="choices"><li>1952년 발췌개헌(제2호, 1차 개정)</li><li>1954년 사사오입 개헌(제3호, 2차 개정)</li><li>1960년 6월 의원내각제 개헌(제4호, 3차 개정)</li><li>1960년 11월 소급법 개헌(제5호, 4차 개정)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 1952에는 대통령 직선제와 양원제 등이 도입되었다. 대통령이 의례적 지위로 바뀐 전면적 내각제가 아니다.</li><li><strong>비선택</strong> · 1954는 초대 대통령 중임 제한 예외·총리제 폐지 등이 핵심이다.</li><li><strong>선택</strong> · 원본 정답이다.1960년6월 내각제 개헌을 가리킨다. 다만 총리는 대통령 지명·민의원 동의가 원칙이고 일정한 실패 경우 민의원 선거가 예외였다. 원문의 해사권은 해산권으로 읽는다.</li><li><strong>비선택</strong> · 1960년11월은 소급 특별법 근거를 마련한 개헌이다.6월의 권력구조 개편과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 설명은 의원내각제로의 개헌에 관한 것이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법의기초 · LECTURE 02' : 'PART · CONSTITUTIONAL FOUNDATIONS';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법의기초 · LECTURE 02|PART · CONSTITUTIONAL FOUNDATIONS)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('foundations-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
