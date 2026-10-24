@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>통치의기본구조 제2강 정부형태 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">GOVERNMENT & CONSTITUTION · LECTURE 02</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">통치의기본구조</span>
+    <span class="brand-sub">제2강 정부형태 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./통치의기본구조_개념.html">통치의기본구조 개념 목록</a><a href="../index.html?subject=통치의 기본구조">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>대통령과 국무총리가 모두 있으면 대통령제일까, 이원정부제일까? 이름이나 사람 수만 세면 틀린다. <strong>누가 뽑는지, 누구의 신임을 받아야 계속 일할 수 있는지, 누가 실질적인 최종 결정권을 갖는지</strong>를 보면 답이 나온다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이번 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하는가?</td>
+<td>권력분립을 실제 기관 관계로 만든 여러 정부형태와 대한민국의 위치다.</td>
+</tr>
+<tr>
+<td>왜 이런 개념이 생겼는가?</td>
+<td>행정부를 안정적으로 운영하면서도 대표기관의 견제와 정치적 책임을 확보하려는 방식이 나라마다 다르기 때문이다.</td>
+</tr>
+<tr>
+<td>전체에서 어디인가?</td>
+<td>제1강의 공통 원리와 제3강 이후 구체적 기관의 중간 다리다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결은?</td>
+<td>권력분립→정부형태→국회·대통령·정부의 구체적 권한으로 이어진다.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히는가?</td>
+<td>탄핵과 불신임, 해임건의와 해임, 총리 존재와 이원정부제를 혼동한다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 본교재 29–38쪽(PDF 42–51쪽), 제공 형성평가 7문항·워크북 7문항, 14문항·56개 보기. 외국 제도는 교재가 설명하는 전형과 역사적 예로 다룬다. 각국의 세부 요건이 모두 같다는 뜻이 아니다. 별점은 학습 우선순위이며 실제 출제율·오답률 자료는 제공되지 않았다.</p>
+<p><strong>색상:</strong> <mark class="yellow">노랑: 정의·결론</mark> / <mark class="green">초록: 이유</mark> / <mark class="pink">분홍: 예외·함정</mark> / <mark class="blue">파랑: 연결</mark>.</p>
+<h1>1. 정부형태를 구별하는 질문</h1>
+<h2 id="governance-02-01" data-concept-id="governance-02-01">1-1. 정부형태는 권력분립의 실제 설계다 ★★★★☆</h2>
+<p><strong>교재 30쪽 / 문단의 역할:</strong> 분류 기준부터 고정한다.</p>
+<p><mark class="yellow">정부형태란 권력분립 원리의 조직적·구조적 실현 형태다.</mark> 입법·행정·사법을 어떻게 구성하고 권한을 배분하는지를 본다. 입헌민주주의에서 사법부는 정치적 독립을 유지하며 구체적 분쟁을 판단해야 하므로, 특히 입법부와 행정부가 어떻게 연결되는지가 정부형태의 차이를 드러낸다.</p>
+<p>‘정부’라는 단어가 일상에서는 행정부만 가리키기도 하지만 여기서는 통치기관의 관계를 본다. 국가형태가 단일국가·연방국가 같은 국가 구성 문제를 다룬다면, 정부형태는 주로 의회와 행정부의 조직·관계를 묻는다.</p>
+<p>이후 네 질문을 반복하자. ① 행정부 수반을 누가 뽑는가? ② 의회가 신임을 잃었다고 하면 물러나야 하는가? ③ 행정부는 의회를 해산할 수 있는가? ④ 국가원수와 실질적 행정 책임자가 같은가? 명칭보다 이 질문들이 정확하다.</p>
+<p><strong>시험:</strong> 형성 011. <strong>키워드:</strong> 권력분립의 실현·구성·존속·견제. <strong>한 줄:</strong> 대통령이라는 직함만 보지 말고 그 권력이 누구에게 의존하는지 본다.</p>
+<h1>2. 의원내각제</h1>
+<h2 id="governance-02-02" data-concept-id="governance-02-02">2-1. 내각의 성립과 존속이 의회에 의존한다 ★★★★★</h2>
+<p><strong>교재 30–31쪽 / 문단의 역할:</strong> 의원내각제의 구조를 네 가지로 풀어낸다.</p>
+<p>첫째, 행정부가 국가원수와 내각으로 나뉜다. 국가원수는 군주일 수도 대통령일 수도 있다. 대체로 상징·형식적 기능 또는 제한된 유사시 권한을 맡고, 실질적 집행은 내각이 맡는다. 군주의 권한이 의회와의 역사적 관계에서 제한된 것이 이 구조의 배경이다.</p>
+<p>교재는 영국의 국왕처럼 일상 정치에서 재량이 제한되는 경우와, 독일의 연방대통령처럼 총리 선출이나 신임 문제에서 헌법이 정한 조건 아래 의회 해산 판단에 관여하는 경우를 비교한다. <strong>국가원수가 상징적이라는 말은 모든 나라에서 어떤 권한도 전혀 없다는 말이 아니다.</strong> ‘수상이 누구를 제청해 국왕이 임명하는가’라는 표현은 내각 구성원의 임명 절차와 총리 자신을 정하는 절차를 구분해서 읽는다.</p>
+<p>둘째, 내각의 성립과 존속이 의회에 의존한다. 총리·수상은 의회 신임에 기초해 내각을 구성하고, 각료를 골라 행정을 수행한다. 교재의 ‘의회에 의해 선출’은 이런 의회 신임 기반의 성립을 설명하는 전형이다. 모든 국가에서 총리 선출의 형식적 절차가 동일한 표결이라는 뜻은 아니다.</p>
+<p>셋째, 의회는 내각불신임, 행정부 쪽은 의회해산이라는 수단으로 서로 견제한다. 불신임은 “정책을 더 맡길 수 없다”, 해산은 “의회를 새로 구성해 국민의 판단을 받자”는 취지다. <mark class="pink">불신임에 법 위반의 입증이 반드시 필요한 것은 아니며, 탄핵과 같은 제도가 아니다.</mark></p>
+<p>넷째, 의회와 내각은 밀접하게 협조한다. 의원과 각료의 겸직, 정부의 법률안 제출, 각료의 의회 출석·발언 등이 가능하다. 원칙적 구조를 설명하는 것이므로 모든 나라 모든 장관이 반드시 의원이라는 보편명제로 바꾸지는 않는다.</p>
+<p><strong>설명용 사건:</strong> 의회의 다수 지지를 받은 수진이 총리가 되어 내각을 꾸렸다. 중요한 정책에 대한 지지가 무너지자 의회가 불신임을 결의했다. 수진은 “국민에게 따로 5년 임기를 받았으니 의회 신임은 필요 없다”고 할 수 없다. 반대로 해산과 선거가 가능한 헌법적 조건에서는 국민에게 새 의회 구성을 요청하는 길이 열릴 수 있다. 어떤 선택이 가능한지는 해당 국가의 구체적 규칙을 확인한다.</p>
+<p><strong>시험:</strong> 형성 012, 워크북 027. <strong>키워드:</strong> 이원적 행정부·의회 신임·불신임/해산·협조. <strong>한 줄:</strong> 내각은 의회의 지지 위에서 태어나고 계속 일한다.</p>
+<h2 id="governance-02-03" data-concept-id="governance-02-03">2-2. 장단점은 같은 구조에서 갈라지는 가능성이다 ★★★★☆</h2>
+<p><strong>교재 31–32쪽 / 문단의 역할:</strong> 제도 이름만으로 좋고 나쁨을 단정하지 못하게 한다.</p>
+<p>장점은 네 가지다. ① 내각의 진퇴가 대표기관의 판단에 민감하므로 민주적 요구에 반응하기 쉽다. ② 의회에 책임지므로 책임정치의 구현 기회가 많다. ③ 대립할 때 불신임·해산과 새 정치적 구성으로 출구를 만들 수 있다. ④ 신임을 유지하려고 유능한 인재를 등용하고 무능한 인재를 교체할 유인이 생긴다.</p>
+<p>단점은 세 가지다. ① 군소정당이 많고 타협 문화가 약하면 연립정부를 꾸리기 어렵거나 자주 무너진다. ② 숙의되지 않은 여론에 민감하면 장기적으로 필요한 정책과 원칙을 지키기 어렵다. ③ 결속 강한 다수당이 의회와 내각을 함께 지배하면 상호 견제가 약해져 다수의 독주가 생긴다.</p>
+<p>같은 ‘민감성’이 한쪽에서는 책임성, 다른 쪽에서는 인기 따라 흔들림이 된다. 같은 ‘협조’가 좋은 정책의 신속한 실행일 수도, 다수파의 독주일 수도 있다. <mark class="green">장단점은 논리적으로 반드시 생기는 결과가 아니라 정치 문화와 사회 조건에 따라 드러나는 구조적 경향이다.</mark></p>
+<p>설명용 장면이다. 작은 정당 셋이 연립정부를 만들었다. 교육 정책에서 협상이 잘되면 다양한 의견을 반영한다. 그러나 작은 갈등 때마다 연합을 깨면 정책을 시작하기도 전에 내각이 교체될 수 있다. ‘연립정부=무조건 불안정’도, ‘다수당 정부=무조건 효율적 민주주의’도 틀린다.</p>
+<p><strong>시험:</strong> 워크북 028. <strong>키워드:</strong> 경향성·책임성/불안정·협조/독주. <strong>한 줄:</strong> 제도의 장점이 실제로 나타나는지는 그 제도를 쓰는 정치 환경에 달려 있다.</p>
+<h2 id="governance-02-04" data-concept-id="governance-02-04">2-3. 의원내각제의 성공 조건 ★★★☆☆</h2>
+<p><strong>교재 32쪽 / 문단의 역할:</strong> 장점을 살릴 사회적 조건을 붙인다.</p>
+<p>① 복수의 정당이 안정적으로 경쟁하되 어느 한쪽이 압도하지 않고 지나치게 난립하지 않아야 한다. ② 이해관계와 이념 갈등이 너무 잘게 파편화되거나 영구적 다수·소수로 고정되지 않아야 한다. ③ 의회와 내각을 강한 다수가 함께 장악해도 표현·정치적 자유가 버텨야 한다.</p>
+<p>이것은 반드시 양당제여야 한다거나 모든 국민이 같은 생각을 해야 한다는 말이 아니다. 타협할 수 있는 다양성과 권력을 교체할 가능성이 중요하다. 소수 의견을 없애 안정성을 얻으려 하면 민주주의의 목적을 잃는다.</p>
+<p><strong>시험:</strong> 성공 조건을 다수당 독점이나 이견 금지로 바꾸는 보기. <strong>키워드:</strong> 경쟁·타협·자유. <strong>한 줄:</strong> 안정성과 다양성이 함께 있어야 책임정치도 오래 간다.</p>
+<h1>3. 대통령제</h1>
+<h2 id="governance-02-05" data-concept-id="governance-02-05">3-1. 따로 뽑고 임기를 보장하되 견제한다 ★★★★★</h2>
+<p><strong>교재 32–33쪽 / 문단의 역할:</strong> 의원내각제와 반대되는 성립·존속 구조를 설명한다.</p>
+<p>대통령제는 미국의 독립 이후 형성된 정부형태로, 권력 담당자들의 상호 독립을 핵심으로 삼는다. ① 대통령이 국가원수와 행정부 수반을 겸해 행정부가 일원화된다. ② 대통령은 의회가 아닌 국민에 기초한 별도의 선출 절차로 정한다. ③ 탄핵 등 예외를 제외하면 임기를 보장한다. ④ 의회는 정책 불신임으로 대통령을 물러나게 할 수 없고 대통령도 의회를 해산하지 못한다.</p>
+<p><mark class="yellow">여기서 ‘의회에 정치적 책임을 지지 않는다’는 의회의 불신임만으로 재직을 끝내는 책임 구조가 아니라는 뜻이다.</mark> 국민의 비판이나 선거 평가를 받지 않는다는 말이 아니다. 범법 행위의 책임이 없다는 뜻도 아니다.</p>
+<p>엄격한 전형에서는 의원과 각료 겸직, 정부의 법률안 제출, 각료의 일반적인 의회 출석·발언권을 인정하지 않는다. 현실의 대통령제 국가가 의원내각제적 요소를 수용하면 완화될 수 있다. 미국 대통령의 헌법상 의회 메시지 같은 구체적 제도를 이 일반론만으로 부정하지 않는다.</p>
+<p>의회와 정부가 독립한다고 서로 손댈 수 없는 것은 아니다. 대통령은 법률안 재의요구 등으로, 의회는 법률 제·개정, 고위공직자 임명 동의, 국정 통제, 탄핵소추 등으로 견제한다. 교재의 비교 설명이므로 특정 국가에 한국의 국정감사 제도가 똑같이 존재한다고 확대하지 않는다.</p>
+<p><strong>설명용 사건:</strong> 대통령이 추진하는 사업의 기준을 시행령에 맡긴 법률이 있었다. 국회가 그 기준을 법률에 더 구체적으로 정하도록 개정했다. 대통령은 “권력분립이므로 국회가 행정 근거를 바꾸면 안 된다”고 주장할 수 없다. 법률을 통한 견제는 분립과 양립한다. 다만 국회도 헌법상 한계를 지켜야 한다.</p>
+<p><strong>시험:</strong> 형성 013, 워크북 029. <strong>키워드:</strong> 일원·별도 선출·임기·불신임/해산 없음. <strong>한 줄:</strong> 서로 따로 서 있지만 서로를 통제할 권한은 있다.</p>
+<h2 id="governance-02-06" data-concept-id="governance-02-06">3-2. 안정성·교착·권력 집중과 여섯 성공 조건 ★★★★☆</h2>
+<p><strong>교재 33–34쪽 / 문단의 역할:</strong> 임기 보장의 양면과 독립을 지킬 조건을 보여 준다.</p>
+<p>장점은 ① 국민이 행정부 수반 선택에 직접 참여할 기회 ② 군소정당 난립 속에서도 행정부 구성의 안정 ③ 일시적 인기와 무관하게 장기 정책·원칙을 지킬 가능성 ④ 의회 다수의 위헌적·분파적 법률안을 재의요구로 견제할 가능성이다.</p>
+<p>단점은 ① 잘못된 정책이나 권위주의적 통치도 의회 신임과 무관하게 지속될 위험 ② 의회와 대립할 때 입법·예산이 막혀 교착이 길어질 위험 ③ 대통령과 의회 다수가 같은 정당을 통해 결합할 때 견제가 약해질 위험 ④ 임명 동의가 필요 없는 각료는 능력보다 충성심으로 채워질 위험이다. 특히 비상권한을 이용한 권력 연장·자유 억압을 경계한다.</p>
+<p>교재 각주는 여러 대통령제 국가의 역사적 권위주의 경험을 들어 이 위험을 강조한다. 특정 국가 몇 곳만 민주주의가 공고하다는 교재의 평가를 오늘의 확정된 세계 순위처럼 외우지는 않는다. 제도와 정치 발전의 관계를 보는 심화 설명이다.</p>
+<p>성공 조건 여섯 가지를 서로 묶어 기억하자. <strong>정치 문화:</strong> ① 토론·타협·조정의 통로 ④ 순간 욕구와 숙고한 판단을 구분하는 학문·이성적 토론. <strong>제도적 울타리:</strong> ② 촘촘한 공정선거 장치 ③ 강한 사법부 독립 ⑤ 신체·재산 침해에서 적법절차 준수. <strong>비상시 시민성:</strong> ⑥ 헌법 요건을 벗어난 국가긴급권 남용을 용인하지 않는 민주적 의식. 교재가 말하는 저항은 위헌적 권력 남용에 대한 헌법 수호의 문제이지 일상적 정책 불만을 이유로 어떤 수단도 허용한다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 형성 014, 워크북 030. “분리되어 있으니 견제는 언제나 작동” 또는 “비상권한이면 무조건 복종”이 함정이다. <strong>키워드:</strong> 안정/잘못의 지속·분리/정당 결합. <strong>한 줄:</strong> 임기는 안정성을 주지만 잘못된 권력을 멈추는 제도와 문화도 필요하다.</p>
+<h1>4. 두 가지 제3유형</h1>
+<h2 id="governance-02-07" data-concept-id="governance-02-07">4-1. 이원정부제는 두 쪽 모두 실질 권한을 가진다 ★★★★★</h2>
+<p><strong>교재 35쪽 / 문단의 역할:</strong> 대통령제와 의원내각제를 섞었다는 막연한 말 대신 판단 기준을 준다.</p>
+<p>이원정부제는 대통령과 내각이 실질적인 집행권을 나누는 구조다. 이원집행부제·반대통령제(半大統領制)라고도 한다. ‘반’은 반대한다는 反이 아니라 절반 半이다. 행정부가 둘로 나뉜다는 점은 의원내각제와 같지만, <strong>대통령이 국민에 의해 선출되고 명목적 국가원수에 그치지 않는다는 점</strong>이 다르다.</p>
+<p>대통령은 별도 선출·임기에 기초해 의회 불신임에 종속되지 않는다. 내각은 의회에 책임을 지며 불신임 대상이 된다. 교재의 전형은 불신임 시 대통령의 의회 해산, 비상시 대통령의 독자적 행정권 행사를 함께 설명한다. 다만 해산의 조건과 비상권, 부서가 필요한 행위의 범위는 각국 헌법마다 다르다. 이 모든 세부 장치가 어떤 나라에서나 동일하게 존재해야 한다는 정의로 바꾸지 않는다.</p>
+<p>평상시 법률안 발의·거부, 국민투표 부의, 위헌법률 제청, 외교, 헌법재판관 임명 등을 대통령이 단독 또는 공동으로 행사하는지도 국가별로 다르다. 교재가 이를 나열한 이유는 혼합형의 설계가 다양하다는 점을 보여 주기 위해서다. 대통령이 국방, 총리가 내정을 반드시 독점한다는 획일적인 공식은 피한다.</p>
+<p>설명용 사례다. A국은 국민이 대통령을 뽑고, 의회 신임에 기반한 총리가 내각을 운영하며, 양쪽 모두 헌법상 실질 권한을 갖는다. B국은 대통령 밑의 총리가 대통령의 명을 받아 보좌한다. 총리가 있다는 점은 같아도 A와 B의 정부형태가 같다고 할 수 없다.</p>
+<p><strong>시험:</strong> 형성 015, 워크북 031. <strong>키워드:</strong> 국민 선출 대통령·실질 권한 분담·내각의 의회 책임. <strong>한 줄:</strong> 두 직함이 아니라 두 권력 중심이 있는지를 본다.</p>
+<h2 id="governance-02-08" data-concept-id="governance-02-08">4-2. 의회정부제는 의회 우위가 절대적이다 ★★★★☆</h2>
+<p><strong>교재 36쪽 / 문단의 역할:</strong> 의원내각제와 이름이 비슷하지만 견제 구조가 다른 제도를 분리한다.</p>
+<p>의회정부제에서 행정부는 의회에 종속된다. 의회가 행정부를 구성하고 존속도 결정한다. 의회가 불신임할 수 있지만 행정부는 의회를 해산할 수 없다. 의회의 해산에 행정부의 퇴진이 연동되는 등, 교재의 전형에서는 의회가 위임자, 행정부가 수임자의 관계가 된다. 권력 체계가 의회 중심으로 일원화된다.</p>
+<p>의원내각제는 불신임과 해산으로 상호 균형을 도모한다. 의회정부제는 이 대항수단이 없고 의회가 정점에 있다는 차이다. ‘의회가 중요하다’는 공통점만으로 같은 제도라 판단하지 않는다.</p>
+<p><strong>심화 역사:</strong> 영국 장기의회 통치, 프랑스혁명 시기 국민공회가 교재의 역사적 예다. 중국·북한 헌법의 인민회의제를 이 유형에 포함시키는 분류도 소개한다. 헌법상 기관 형식에 대한 유형화이지 그 국가가 실제로 자유민주적 권력분립을 실현한다는 평가가 아니다. 제도 명칭과 현실의 정당 지배를 구분한다.</p>
+<p><strong>시험:</strong> 형성 016. <strong>키워드:</strong> 절대적 의회 우위·해산 대항수단 없음. <strong>한 줄:</strong> 의회정부제는 의회와 행정부의 균형보다 의회에의 종속이 특징이다.</p>
+<h1>5. 대한민국은 어디에 놓일까</h1>
+<h2 id="governance-02-09" data-concept-id="governance-02-09">5-1. 대통령제가 뼈대, 의원내각제 요소는 보완 ★★★★★</h2>
+<p><strong>교재 36–37쪽 / 문단의 역할:</strong> 전형과 우리 제도의 차이를 분류한다.</p>
+<p>대한민국은 1960년 제3차 개정 헌법의 의원내각제 시기를 제외하면 대통령제를 기본으로 의원내각제적 요소를 가미해 왔다. 현행 헌법도 대통령제가 기본이다. 대통령은 국가원수이자 행정부 수반이며 국민의 직접선거로 선출되고 5년 단임이다. 국회의 불신임으로 대통령의 임기를 끝낼 수 없고 대통령의 국회해산권도 없다.</p>
+<table>
+<thead>
+<tr>
+<th>대통령제의 기본 구조·견제</th>
+<th>엄격한 분립을 완화하는 의원내각제적 요소</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대통령의 국가원수·행정부 수반 겸임</td>
+<td>국무총리제도, 국무회의의 중요정책 심의</td>
+</tr>
+<tr>
+<td>국민의 대통령 직접선출, 고정 임기</td>
+<td>대통령의 국법상 문서에 총리·관계 국무위원의 부서</td>
+</tr>
+<tr>
+<td>대통령 불신임·국회해산 제도 없음</td>
+<td>국회의 총리·국무위원 해임건의</td>
+</tr>
+<tr>
+<td>법률안 재의요구, 탄핵소추 등 상호 견제</td>
+<td>정부의 법률안 제출, 의원의 총리·국무위원 겸직 허용</td>
+</tr>
+<tr>
+<td>고위공직자 임명에 대한 국회 동의</td>
+<td>국무총리 등의 국회 출석·발언, 출석·답변 요구</td>
+</tr>
+</tbody></table>
+<p>국무총리 임명 동의는 고위공직자 임명에 대한 대통령제적 견제이면서, 총리라는 제도가 가진 의원내각제적 성격을 설명할 때도 언급될 수 있다. 분류표의 한 칸만 외워 서로 배타적이라고 단정하지 않는다. 시험에서는 보기의 맥락과 비교 대상을 본다.</p>
+<p>국무회의는 중요한 정책을 <strong>심의</strong>한다. 대통령은 의장이다. 대통령이 국무회의 다수결에 언제나 법적으로 종속되는 의원내각제의 내각과 같다고 생각하면 안 된다. 총리는 대통령을 보좌하며 대통령의 명을 받아 행정각부를 통할한다. 국무위원 임명 제청·해임건의 등의 권한이 있지만 대통령과 동등한 독립 권력 중심이라는 뜻은 아니다.</p>
+<p><strong>조문을 따로 읽을 곳:</strong> 제62조의 출석·답변은 국무총리·국무위원·정부위원에 관한 것이다. 대통령은 제81조에 따라 국회에서 발언하거나 서한으로 의견을 표시할 수 있다. <mark class="pink">교재 37쪽의 묶음 표현을 보고 대통령도 제62조 제2항의 출석·답변 의무 대상이라고 외우지 않는다.</mark> 원문 이미지까지 대조한 뒤 조문 차이를 보완했다. 제82조의 부서는 국법상 문서에 함께 서명해 책임과 통제를 드러내는 장치다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=985340&cbIdx=1147">헌법 제62조·제81조·제82조</a>.</p>
+<p><strong>시험:</strong> 형성 017, 워크북 032. <strong>키워드:</strong> 혼합된 대통령제·심의≠최종 결정·건의≠강제 해임. <strong>한 줄:</strong> 의원내각제 요소가 있다고 대통령제의 뼈대가 사라지는 것은 아니다.</p>
+<h2 id="governance-02-10" data-concept-id="governance-02-10">5-2. 89헌마221 판례를 정부형태의 언어로 읽기 ★★★★★</h2>
+<p><strong>교재 37쪽 / 문단의 역할:</strong> 대한민국의 조직 구조에 관한 헌재의 판단을 확인한다.</p>
+<p><strong>등장인물과 사건:</strong> 옛 국가안전기획부의 조사·수사와 관련된 청구인들이 그 조직과 권한의 법률상 근거를 다투었다. 국가안전기획부가 국무총리 통할 아래의 행정각부가 아니라 대통령 소속으로 설치된 것이 헌법의 정부조직 구조에 맞는지도 쟁점이었다.</p>
+<p><strong>갈등과 법원의 고민:</strong> 헌법은 총리에게 행정각부 통할을 맡기는데, 모든 행정기관이 반드시 총리를 거쳐야 할까? 대통령이 최종적인 행정권을 행사하는 대통령제 구조는 어떻게 읽어야 할까? 헌재는 1994.4.28. 결정에서 관련 설치·조직 규정의 위헌성을 부정했다. 총리는 대통령의 보좌기관이고, 대통령의 명에 따라 통할하는 지위라는 해석이 중요했다. 사건에는 별도 청구요건과 대상 조항 문제가 있으므로 모든 청구가 동일한 본안 판단을 받았다는 식으로 단순화하지 않는다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=134900">89헌마221 결정문</a>.</p>
+<p>교재가 인용한 문장을 순서대로 풀면 다음과 같다. ① 자유민주적 기본질서를 지키기 위해 입법·행정·사법을 나눈다. ② 행정권은 대통령을 수반으로 하는 정부에 속한다. ③ 대통령은 대외적으로 국가를 대표하고 독립·영토·국가의 계속성과 헌법을 지킬 책무가 있다. ④ 이런 조직을 대통령 중심의 통치기구라고 설명한다.</p>
+<p>왜 이 해석이 필요한가? 총리가 있다는 이유만으로 독립된 두 집행권 중심을 만들거나, 대통령을 명목적 국가원수로 바꾸면 현행 헌법의 조직을 다르게 읽게 되기 때문이다. 반대로 대통령제라고 모든 직속기관 설치나 모든 정보기관 활동이 무제한 허용되는 것도 아니다. 법률 근거·기본권·다른 헌법 요건은 별도로 지켜야 한다. <strong>당시 기관 이름을 현재 조직명으로 취급하지 않는다.</strong></p>
+<p><strong>시험:</strong> 워크북 033. <strong>키워드:</strong> 대통령 중심·총리의 보좌·행정각부와 모든 행정기관의 구별. <strong>한 줄:</strong> 총리는 존재하지만 대통령과 동등한 별도 행정권의 주인은 아니다.</p>
+<h1>네 정부형태, 같은 질문으로 비교</h1>
+<table>
+<thead>
+<tr>
+<th>기준</th>
+<th>의원내각제</th>
+<th>대통령제</th>
+<th>이원정부제</th>
+<th>의회정부제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>국가원수와 집행 책임</td>
+<td>구별, 내각이 실질 집행</td>
+<td>대통령이 함께 담당</td>
+<td>대통령·내각이 실질 권한 분담</td>
+<td>의회가 정점, 행정부 종속</td>
+</tr>
+<tr>
+<td>행정부 성립 기반</td>
+<td>의회 신임</td>
+<td>국민에 의한 별도 선출</td>
+<td>대통령 별도 선출+내각 의회 신임</td>
+<td>의회에 전적으로 의존</td>
+</tr>
+<tr>
+<td>의회의 불신임</td>
+<td>내각에 가능</td>
+<td>대통령에 불가</td>
+<td>내각에 가능, 대통령과 구별</td>
+<td>행정부에 가능</td>
+</tr>
+<tr>
+<td>해산 대항수단</td>
+<td>헌법·법률상 조건 아래 인정</td>
+<td>대통령에게 없음</td>
+<td>각국 헌법의 조건에 따름</td>
+<td>행정부에 없음</td>
+</tr>
+<tr>
+<td>대표 위험</td>
+<td>불안정·다수당 독주</td>
+<td>교착·권력 남용·다수 결합</td>
+<td>두 집행 중심의 충돌 등 설계별 차이</td>
+<td>의회로의 권력 집중</td>
+</tr>
+</tbody></table>
+<p>이 표는 교재의 전형을 비교한 것이다. 모든 나라의 구체적인 예외·선출 방식·해산 요건을 표 한 줄로 확정하지 않는다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>政府形態 정부형태</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 政(정사 정), 府(마을 부; 관청), 形(모양 형), 態(모양 태). <strong>③ 합친 뜻:</strong> 국가의 통치기관을 짜는 모양. <strong>④ 이름의 이유:</strong> 같은 권력분립도 기관 관계로 구현하는 방식은 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권력분립 원리의 조직적·구조적 실현 형태. <strong>⑥ 쉬운 말:</strong> 국회와 정부가 어떻게 뽑히고 서로 영향을 주는지. <strong>⑦ 사례:</strong> 내각은 의회 신임에 기반하고 대통령제 행정부는 별도로 선출된다.</p>
+<p><strong>⑧ 시험:</strong> 국가형태와 섞어 묻는다. <strong>⑨ 비교·기억법:</strong> 정부형태는 기관 관계, 국가형태는 단일·연방 등 국가 구성.</p>
+<h3>議院內閣制 의원내각제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의), 院(집 원), 內(안 내), 閣(누각 각), 制(법도 제). <strong>③ 합친 뜻:</strong> 의회에 기반한 내각의 제도. <strong>④ 이름의 이유:</strong> 내각이 의회 다수의 지지에 연결된다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 내각의 성립·존속이 의회 신임에 의존하고 불신임·해산 등으로 견제하는 정부형태. <strong>⑥ 쉬운 말:</strong> 의회가 계속 맡길 수 있다고 지지해야 내각이 일한다. <strong>⑦ 사례:</strong> 다수 지지를 잃은 총리가 불신임 문제에 직면한다.</p>
+<p><strong>⑧ 시험:</strong> 내각을 국민이 직접 뽑는다는 보기. <strong>⑨ 비교·기억법:</strong> 의회정부제와 달리 행정부 쪽의 해산 대항수단이 있다.</p>
+<h3>內閣·閣僚 내각·각료</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 內(안 내), 閣(누각 각), 僚(동료 료). <strong>③ 합친 뜻:</strong> 행정의 중심 회의체와 그 구성원. <strong>④ 이름의 이유:</strong> 국가 행정의 중요 결정을 함께 담당하는 사람들이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 총리·수상과 장관 등으로 이루어진 행정부의 핵심 조직 및 구성원. <strong>⑥ 쉬운 말:</strong> 총리와 장관들이 함께 국정 운영을 맡는 팀. <strong>⑦ 사례:</strong> 의회 신임에 기초해 총리가 장관들을 구성한다.</p>
+<p><strong>⑧ 시험:</strong> 내각과 국가원수의 역할을 바꾸는 보기. <strong>⑨ 비교·기억법:</strong> 한국 국무회의가 의원내각제의 내각과 법적 지위까지 동일한 것은 아님.</p>
+<h3>國家元首 국가원수</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 家(집 가), 元(으뜸 원), 首(머리 수). <strong>③ 합친 뜻:</strong> 국가를 대표하는 으뜸 지위. <strong>④ 이름의 이유:</strong> 국가의 대표자라는 성격을 드러낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대외적 국가 대표 등 헌법상 원수 기능을 담당하는 지위. <strong>⑥ 쉬운 말:</strong> 나라를 대표하는 자리와 일상 행정 책임자가 같을 수도 다를 수도 있다. <strong>⑦ 사례:</strong> 한국 대통령은 국가원수와 행정부 수반을 겸한다.</p>
+<p><strong>⑧ 시험:</strong> 대통령이 있으면 언제나 대통령제라는 함정. <strong>⑨ 비교·기억법:</strong> 의원내각제 대통령은 상징적일 수 있고 이원정부제 대통령은 실질 권한을 가진다.</p>
+<h3>不信任 불신임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 信(믿을 신), 任(맡길 임). <strong>③ 합친 뜻:</strong> 믿고 더 맡기지 않음. <strong>④ 이름의 이유:</strong> 정책과 통치의 신임이 유지되지 않는다는 뜻.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 의회가 내각에 대한 정치적 신임을 철회하는 제도. <strong>⑥ 쉬운 말:</strong> 당신 내각에 더는 일을 맡길 수 없다는 결정. <strong>⑦ 사례:</strong> 법 위반은 없어도 정책 지지를 잃은 내각이 불신임 대상이 된다.</p>
+<p><strong>⑧ 시험:</strong> 탄핵처럼 법 위반이 반드시 필요하다고 바꾸는 보기. <strong>⑨ 비교·기억법:</strong> 탄핵은 헌법·법률 위반에 대한 법적 절차.</p>
+<h3>議會解散 의회해산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의), 會(모일 회), 解(풀 해), 散(흩을 산). <strong>③ 합친 뜻:</strong> 구성된 의회를 풀어 새로 구성하게 함. <strong>④ 이름의 이유:</strong> 의회와 내각의 대립을 국민의 새 판단에 맡긴다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 임기 만료 전 의회 구성을 종료하고 새로운 선거로 연결하는 헌법적 제도. <strong>⑥ 쉬운 말:</strong> 지금 의회 대신 새 대표를 뽑아 보자는 절차. <strong>⑦ 사례:</strong> 해산권이 있는 체제에서 법정 요건 아래 조기 선거로 이어진다.</p>
+<p><strong>⑧ 시험:</strong> 한국 대통령도 국회를 해산할 수 있다는 함정. <strong>⑨ 비교·기억법:</strong> 해산은 의회 구성을 끝내는 것, 폐회는 특정 회기를 닫는 것.</p>
+<h3>大統領制 대통령제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 大(큰 대), 統(거느릴 통), 領(거느릴 령), 制(법도 제). <strong>③ 합친 뜻:</strong> 대통령을 중심으로 행정을 조직하는 제도. <strong>④ 이름의 이유:</strong> 의회와 행정부의 성립·존속을 분리한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 별도로 선출된 대통령이 국가원수·행정부 수반을 겸하고 임기를 보장받는 정부형태. <strong>⑥ 쉬운 말:</strong> 서로 따로 뽑아 맡긴 기간 동안 일하게 하되 견제한다. <strong>⑦ 사례:</strong> 국회가 정책에 반대해도 단순 불신임으로 대통령을 물러나게 할 수 없다.</p>
+<p><strong>⑧ 시험:</strong> 의회에 정치적 책임이 없으니 탄핵도 없다는 함정. <strong>⑨ 비교·기억법:</strong> 정치적 불신임과 법 위반 책임은 다르다.</p>
+<h3>二元政府制 이원정부제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 二(두 이), 元(으뜸 원), 政(정사 정), 府(관청 부), 制(법도 제). <strong>③ 합친 뜻:</strong> 두 실질 중심이 있는 행정부의 제도. <strong>④ 이름의 이유:</strong> 두 중심이 각각 실질적인 역할을 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국민에게서 선출 정당성을 받는 대통령과 의회에 책임지는 내각이 실질 집행권을 나누는 형태. <strong>⑥ 쉬운 말:</strong> 대통령도 총리 내각도 실제 권한을 가진다. <strong>⑦ 사례:</strong> 대통령은 별도 임기, 내각은 의회 신임에 기반한다.</p>
+<p><strong>⑧ 시험:</strong> 대통령을 의회가 뽑는다거나 한국 총리가 있으니 이원제라는 보기. <strong>⑨ 비교·기억법:</strong> 의원내각제는 국가원수가 주로 상징적이라는 차이.</p>
+<h3>半大統領制 반대통령제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 半(반 반), 大(큰 대), 統(거느릴 통), 領(거느릴 령), 制(법도 제). <strong>③ 합친 뜻:</strong> 대통령제의 일부 요소를 결합한 형태. <strong>④ 이름의 이유:</strong> 대통령제와 의원내각제 요소가 함께 있기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이원정부제를 가리키는 명칭 중 하나. <strong>⑥ 쉬운 말:</strong> 대통령제를 반대한다는 뜻이 아니라 혼합형이라는 이름. <strong>⑦ 사례:</strong> 별도 선출 대통령과 의회 책임 내각이 함께 존재한다.</p>
+<p><strong>⑧ 시험:</strong> 半과 反을 혼동하지 않는다. <strong>⑨ 비교·기억법:</strong> 어떤 요소든 하나 섞이면 반드시 이원정부제라는 뜻은 아님.</p>
+<h3>議會政府制 의회정부제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 議(의논할 의), 會(모일 회), 政(정사 정), 府(관청 부), 制(법도 제). <strong>③ 합친 뜻:</strong> 의회가 정점인 정부형태. <strong>④ 이름의 이유:</strong> 의회의 절대적 우위가 특징이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행정부의 성립·존속이 의회에 전적으로 의존하고 해산 대항수단이 없는 형태. <strong>⑥ 쉬운 말:</strong> 의회가 시키고 행정부가 종속되어 일한다. <strong>⑦ 사례:</strong> 의회는 불신임할 수 있는데 행정부는 의회를 해산하지 못한다.</p>
+<p><strong>⑧ 시험:</strong> 의원내각제와 이름이 비슷한 것이 함정. <strong>⑨ 비교·기억법:</strong> 내각제의 상호 견제와 달리 일방적 종속.</p>
+<h3>副署 부서</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 副(버금 부), 署(관청 서; 서명하다). <strong>③ 합친 뜻:</strong> 주된 서명에 덧붙여 함께 서명함. <strong>④ 이름의 이유:</strong> 권한 행사에 책임과 통제의 연결을 드러낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대통령의 국법상 문서에 국무총리와 관계 국무위원이 함께 서명하는 제도. <strong>⑥ 쉬운 말:</strong> 대통령의 공식 문서에 총리와 관련 장관도 서명한다. <strong>⑦ 사례:</strong> 헌법 제82조는 군사에 관한 것도 포함한다.</p>
+<p><strong>⑧ 시험:</strong> 부서를 국회 동의나 총리의 독립 행정권으로 오해한다. <strong>⑨ 비교·기억법:</strong> 부서(副署)는 서명, 부서(部署)는 조직 단위라는 다른 말.</p>
+<h3>審議·議決 심의·의결</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 審(살필 심), 議(의논할 의), 決(결단할 결). <strong>③ 합친 뜻:</strong> 살펴 의논함과 의논해 결정을 내림. <strong>④ 이름의 이유:</strong> 검토하는 단계와 법적 결정을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 심의는 논의·검토, 의결은 기관의 정해진 방식에 따른 결정. <strong>⑥ 쉬운 말:</strong> 상의하는 것과 최종 결론을 정하는 것은 다르다. <strong>⑦ 사례:</strong> 한국 국무회의는 중요정책 심의기관이다.</p>
+<p><strong>⑧ 시험:</strong> 대통령이 언제나 국무회의 다수결에 종속된다는 함정. <strong>⑨ 비교·기억법:</strong> 헌법·법률에 따른 각 기관 결정의 효과를 별도로 확인.</p>
+<h3>提請·建議 제청·건의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 提(끌 제), 請(청할 청), 建(세울 건), 議(의논할 의). <strong>③ 합친 뜻:</strong> 안을 올려 청함과 의견을 제시함. <strong>④ 이름의 이유:</strong> 다른 사람이 가진 최종 권한에 일정한 방식으로 관여한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제청은 임명 등의 권한 행사를 요청하는 법정 절차, 건의는 해임 등 의견의 제시. <strong>⑥ 쉬운 말:</strong> 후보를 올리는 것과 물러나게 해 달라고 의견을 내는 것. <strong>⑦ 사례:</strong> 총리는 국무위원 임명을 제청하고 국회는 총리·국무위원 해임을 건의한다.</p>
+<p><strong>⑧ 시험:</strong> 건의를 곧바로 강제 해임으로 바꾸는 보기. <strong>⑨ 비교·기억법:</strong> 동의·임명·불신임과 각각 효과가 다르다.</p>
+<h1>문제 연결과 TOP5</h1>
+<p>형성 011은 개념, 012와 워크북 027–028은 의원내각제, 형성 013–014와 워크북 029–030은 대통령제, 형성 015·워크북 031은 이원정부제, 형성 016은 의회정부제, 형성 017·워크북 032–033은 대한민국이다.</p>
+<p><strong>TOP5:</strong> 형성 012(불신임·해산), 형성 013(의회에 대한 정치적 책임), 형성 014(같은 정당의 결합), 형성 017(탄핵은 대통령제에서도 존재), 워크북 032(정부 제출권). 실제 오답률은 없다. 위험한 말은 “정치적 책임 없음=아무 책임 없음”, “총리 있음=이원정부제”, “권력분립=상호 견제 불가능”이다. 뒤의 부록은 14문항과 56개 보기를 모두 보존하고 각각 풀이한다.</p>
+<h1>새로운 사례로 확인하기 · 5문제</h1>
+<p><strong>문제 1.</strong> A국의 대통령은 의회가 뽑지만 실질 정치는 총리가 이끄는 내각이 맡고 내각은 의회 신임을 잃으면 존속할 수 없다. 대통령이라는 직함이 있으니 대통령제라는 주장은 옳은가?</p>
+<p><strong>답·출제 의도:</strong> 아니다. 직함보다 실질 권한과 성립·존속의 의존성을 본다. 의원내각제 구조와 부합한다.</p>
+<p><strong>문제 2.</strong> B국에서 국민이 뽑은 대통령과 의회가 서로 다른 정책을 주장한다. 의회는 단순 정책 불신임만으로 대통령을 해임하고 대통령은 그 보복으로 의회를 해산하려 한다. 엄격한 대통령제라면 가능한가?</p>
+<p><strong>답·출제 의도:</strong> 둘 다 그런 일반적 권한은 없다. 법 위반에 대한 탄핵은 별도다. 정책 불신임과 법적 책임을 분리하는 문제다.</p>
+<p><strong>문제 3.</strong> C국은 국민이 대통령을 뽑고 총리도 두지만, 총리는 대통령의 명을 받아 보좌할 뿐 독립된 실질 집행권 중심이 아니다. 사람 둘이라는 이유로 이원정부제라 할 수 있는가?</p>
+<p><strong>답·출제 의도:</strong> 없다. 두 명의 존재와 실질적 권한 분담은 다르다. 대한민국 총리제도를 이해하는 핵심이다.</p>
+<p><strong>문제 4.</strong> D국은 의회가 행정부를 구성하고 언제든 불신임하지만 행정부는 의회를 해산할 수 없으며 의회에 전적으로 종속된다. 의원내각제의 불신임·해산 균형과 어떤 점이 다른가?</p>
+<p><strong>답·출제 의도:</strong> 의회정부제의 전형이다. 의회 우위에 대응하는 해산 수단이 없고 상호 균형보다 종속이 중심이다.</p>
+<p><strong>문제 5.</strong> 대통령제 E국에서 대통령 소속 정당이 의회도 압도적으로 지배한다. 시민이 “기관이 따로 있으니 기본권 침해를 자동으로 막는다”고 말했다. 필요한 보완은?</p>
+<p><strong>답·출제 의도:</strong> 정당 결합으로 견제가 약해질 수 있다. 사법 독립·자유로운 비판·공정선거·적법절차와 긴급권 통제가 실제로 작동해야 한다. 조직 분리와 통제의 실효성을 구별한다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제2강</h2>
+<table><thead><tr><th>개념</th><th>판별 공식</th></tr></thead><tbody>
+<tr><td>정부형태</td><td>권력분립의 조직적·구조적 실현 형태</td></tr>
+<tr><td>판단 순서</td><td>누가 뽑나 → 누구 신임이 필요한가 → 불신임·해산 → 실질 권한</td></tr>
+<tr><td>의원내각제</td><td>행정부 이원적, 내각의 성립·존속은 의회 의존</td></tr>
+<tr><td>내각제 견제</td><td>의회 불신임 ↔ 해산이라는 대항수단. 구체적 요건은 국가별</td></tr>
+<tr><td>내각제 양면</td><td>민감성·책임성 ↔ 불안정·여론 추종·다수당 독주</td></tr>
+<tr><td>대통령제</td><td>국가원수+행정부 수반, 별도 선출·임기, 불신임·해산 없음</td></tr>
+<tr><td>대통령제 견제</td><td>재의요구·입법·임명 동의·탄핵 등은 독립과 양립</td></tr>
+<tr><td>대통령제 양면</td><td>안정·장기 정책 ↔ 교착·잘못의 지속·권력 남용</td></tr>
+<tr><td>이원정부제</td><td>국민 선출 대통령과 내각이 실질 권한 분담, 내각은 의회 책임</td></tr>
+<tr><td>의회정부제</td><td>행정부는 의회에 종속, 해산 대항수단 없음</td></tr>
+<tr><td>대한민국</td><td>의원내각제 요소를 가미한 대통령제, 총리는 보좌기관</td></tr>
+<tr><td>한국의 구별</td><td>국무회의 심의, 해임건의, 정부 제출권, 부서 / 탄핵은 대통령제 견제</td></tr>
+</tbody></table>
+<p><strong>TOP3:</strong> 성립·존속의 의존성 / 불신임과 탄핵 / 한국 총리의 지위.</p>
+<p><strong>반드시 외울 문장:</strong> 의회에 정치적 책임을 지지 않는다는 것은 모든 책임이 없다는 뜻이 아니다.</p>
+<p><strong>함정:</strong> 두 직함≠두 실질 권력 중심. 심의≠최종 의결. 62조 출석의무 대상에 대통령을 넣지 않는다.</p>
+<p><strong>사례를 풀 순서:</strong> 직함을 가림 → 선출 기반 확인 → 임기·신임 확인 → 견제 수단 확인.</p></section>
+
+<h1>학습 상태 진단</h1>
+<p>네 정부형태를 이름 없이 구조만 보고 분류하고, 한국의 총리가 왜 이원정부제를 뜻하지 않는지 설명하면 🟢 이해 완료다. 불신임·해산은 알지만 한국의 보완 요소를 혼동하면 🟡 복습 필요, 직함과 기관 수만 보고 분류하면 🔴 이해 부족이다. <strong>사용자의 풀이를 아직 받지 않아 현재 상태를 단정하지 않는다.</strong> 복습 TOP3는 성립·존속의 관계, 탄핵/불신임 구별, 총리/국무회의의 보좌·심의 성격이다.</p>
+<p><mark class="blue">다음 강 연결: 대통령제의 한쪽 축인 국회를 구성하고 운영하는 규칙을 제3강에서 배운다.</mark></p>
+<h1>문제 부록 · 14문항·56개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-통치의기본구조_011"><h4>형성평가 · 통치의기본구조_011</h4><p class="question-stem">권력분립원리의 조직적‧구조적 실현형태로서, 입법부‧행정부‧사법부를 어떻게 구성하고, 이들에게 국가권력을 어떻게 배분하느냐에 따라 달라지는 것을 무엇이라고 하는가?</p><ol class="choices"><li>정부형태</li><li>국가형태</li><li>법령형태</li><li>국가질서</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞다. 권력분립의 조직적·구조적 실현 형태가 정부형태다. 특히 입법부와 행정부 관계를 본다.</li><li><strong>비선택</strong> · 국가형태는 단일국가·연방국가 등 국가 자체의 구성 문제다. 기관 관계와 구별한다.</li><li><strong>비선택</strong> · 법령의 형식이나 종류를 묻는 지문이 아니다.</li><li><strong>비선택</strong> · 국가질서는 지나치게 넓은 표현이다. 가장 정확한 교재 용어는 정부형태다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정부형태</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_012"><h4>형성평가 · 통치의기본구조_012</h4><p class="question-stem">의원내각제에 대한 서술로 옳은 것은?</p><ol class="choices"><li>입법부와 행정부가 엄격히 분리되어 있다.</li><li>내각의 성립과 존속이 의회에 독립적이다.</li><li>입법부와 행정부가 각각 내각불신임권과 의회해산권을 통하여 권력적 균형을 유지한다.</li><li>원칙적으로 각료와 의원의 겸직이 금지된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 엄격한 독립보다 의회 신임에 기초한 밀접한 협조 관계가 특징이다.</li><li><strong>비선택</strong> · 틀리다. 성립뿐 아니라 존속도 의회 신임에 의존한다. 독립적이라는 단어가 대통령제와 뒤바뀌었다.</li><li><strong>선택</strong> · 맞다. 불신임과 의회해산이라는 대항수단으로 균형을 도모한다. 구체적 요건은 나라별로 다르다.</li><li><strong>비선택</strong> · 틀리다. 의원과 각료 겸직을 허용하는 것이 전형이다. 모든 국가의 모든 각료가 의원이어야 한다는 별도 단정은 피한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 입법부와 행정부가 긴밀한 협조‧공화 관계에 있다. 내각의 성립과 존속이 의회에 의존한다. 각료가 의원으로 구성되므로 원칙적으로 겸직이 전제된다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_013"><h4>형성평가 · 통치의기본구조_013</h4><p class="question-stem">원칙적 형태의 대통령제에 대한 서술로 틀린 것은?</p><ol class="choices"><li>행정부가 일원적 구조를 이루고 있다.</li><li>입법부와 행정부가 엄격한 분리‧독립 관계에 있다.</li><li>행정부수반은 국민이 선출하고 임기제를 적용받는다.</li><li>대통령과 각료가 의회에 대해 정치적 책임을 진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 대통령이 국가원수와 행정부 수반을 함께 맡는다.</li><li><strong>비선택</strong> · 맞는 설명이다. 성립·존속의 독립이 원칙이다. 상호 견제까지 금지된다는 말은 아니다.</li><li><strong>비선택</strong> · 맞는 설명이다. 의회와 별도의 국민적 선출 정당성과 임기에 기반한다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 의회 불신임에 따라 진퇴하는 정치적 책임 구조가 아니다. 법적 책임과 국민에 대한 책임까지 없어지는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 행정부의 성립과 존속이 의회에 독립적이므로 대통령과 각료는 의회에 대하여 정치적 책임을 지지 않는다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_014"><h4>형성평가 · 통치의기본구조_014</h4><p class="question-stem">대통령제의 정치적 장‧단점에 대한 설명으로 가장 설득력이 없는 것은?</p><ol class="choices"><li>국민의 직접적 선택을 통해 행정부수반을 선출하는 것이 가능하다.</li><li>행정부를 안정적으로 구성할 수 있다.</li><li>대통령이 의회의 다수당과 긴밀하게 제휴할 경우에도, 행정부와 의회의 분리 덕분에 다수 지배의 견제가 언제나 작동하게 된다.</li><li>의회가 헌법에 위배되거나 분파적‧근시안적 정책을 법률로 제정할 때 대통령이 법률안거부권으로 견제할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 가능한 장점이다. 국민이 행정부 수반 선택에 별도로 참여한다. 모든 대통령제 국가의 선거 절차가 같은 직접선거라는 뜻은 아니다.</li><li><strong>비선택</strong> · 가능한 장점이다. 의회 신임의 반복적 변동과 무관하게 임기를 바탕으로 구성의 안정을 얻는다.</li><li><strong>선택</strong> · 설득력 없는 설명으로 선택한다. 같은 정당의 결합으로 기관 분리가 실효적 견제로 이어지지 않을 수 있다. 언제나가 함정이다.</li><li><strong>비선택</strong> · 가능한 장점이다. 재의요구권이 의회 다수의 부당한 입법을 견제할 수 있다. 모든 재의요구가 실제로 정당하다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대통령이 의회의 다수당과 긴밀하게 제휴할 경우 다수 지배 견제가 어렵다. 오늘날 정당민주주의 하에서는 의회를 구성하는 사람들과 행정부의 각료를 구성하는 사람들이 현저히 다른 사회적 배경이나 정치적 동인을 가지고 있다고 하기 어렵기 때문에 이 문제는 더욱 심각해졌다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_015"><h4>형성평가 · 통치의기본구조_015</h4><p class="question-stem">다음 중 이원정부제(dual executive system)에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>이원집행부제, 반대통령제(半大統領制)라고도 부른다.</li><li>행정부가 이원적 구성되어 있다.</li><li>의원내각제의 장점과 행정부의 정치부의 정치적 안정성을 함께 도모하고자 한다.</li><li>대통령이 의회에 의해 선출된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 이원집행부제·반대통령제라고도 하며 半은 절반 반이다.</li><li><strong>비선택</strong> · 맞는 설명이다. 대통령과 내각이 각각 실질 집행권을 나누는 이원적 구성이다.</li><li><strong>비선택</strong> · 원본에 중복 오자가 있지만 취지는 내각제 장점과 행정부 안정성을 함께 추구한다는 설명이다. 제도가 반드시 성공한다는 보장은 아니다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 전형적인 이원정부제의 대통령은 국민에 의해 선출된다. 내각의 의회 신임과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이원정부제에서 대통령은 국민이 선출한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_016"><h4>형성평가 · 통치의기본구조_016</h4><p class="question-stem">의회가 행정부에 대하여 절대적 우위를 가짐으로써 행정부가 의회에 종속되는 정부형태를 무엇이라고 하는가?</p><ol class="choices"><li>의원내각제</li><li>의회정부제</li><li>이원정부제</li><li>대통령제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 의원내각제는 의회와 내각이 불신임·해산 수단으로 상호 견제하는 전형이다. 절대적 종속과 다르다.</li><li><strong>선택</strong> · 맞다. 의회가 정점이고 행정부가 의회에 종속되는 의회정부제다.</li><li><strong>비선택</strong> · 이원정부제는 실질 집행권을 가진 대통령과 내각이 병존한다. 의회 절대 우위와 다르다.</li><li><strong>비선택</strong> · 대통령제는 행정부가 의회와 독립해 성립·존속한다. 지문과 반대다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 의회정부제</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_017"><h4>형성평가 · 통치의기본구조_017</h4><p class="question-stem">대한민국의 정부형태상 의원내각제의 요소가 가미된 것이 아니라 대통령제의 원칙적 형태의 한 요소에 속하는 것은 무엇인가?</p><ol class="choices"><li>국무회의가 행정부의 권한에 속하는 중요정책을 심의한다.</li><li>대통령, 국무총리‧국무위원‧정부위원이 국회에 출석하고 발언할 수 있다.</li><li>대통령의 국법상 행위에는 국무총리와 관계국무위원의 부서가 요구된다.</li><li>국회가 대통령 및 국무총리‧국무위원에 대하여 탄핵소추를 할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국무회의의 중요정책 심의는 내각적 보완 요소다. 대통령이 최종 결정권을 잃는다는 뜻은 아니다.</li><li><strong>비선택</strong> · 일반적 출석·발언은 엄격한 분립을 완화하는 요소로 분류한다. 대통령의 제81조와 총리 등의 제62조는 구별하고, 대통령을 제62조 출석의무 대상에 넣지 않는다.</li><li><strong>비선택</strong> · 부서는 대통령 단독 행사를 완화하는 내각적 요소다. 함께 서명한다는 뜻이다.</li><li><strong>선택</strong> · 맞다. 탄핵소추는 원칙적 대통령제에서도 인정되는 상호 견제다. 정책 불신임과 구별해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 탄핵소추권은 상호 견제와 균형 권한인 원칙적 형태의 한 요소에 속한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_027"><h4>워크북 · 통치의기본구조_워크북_027</h4><p class="question-stem">의원내각제에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>행정부가 이원화되어 있다.</li><li>국가원수가 상징적·형식적 권한을 가지는 경우가 있다</li><li>내각은 실질적 집행권을 갖는다.</li><li>내각이 국민에 의해 직접 선출된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 국가원수와 실질 집행을 맡는 내각으로 나뉜다.</li><li><strong>비선택</strong> · 맞는 설명이다. 국가원수는 상징·형식적 기능 또는 제한된 유사시 권한을 가질 수 있다.</li><li><strong>비선택</strong> · 맞는 설명이다. 일상적·실질적 행정 운영의 중심은 내각이다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 내각 성립은 의회 신임에 기반한다. 국민이 의회와 따로 내각을 직접 선출하는 전형이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 내각은 의회에 의해 선출된다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_028"><h4>워크북 · 통치의기본구조_워크북_028</h4><p class="question-stem">의원내각제의 장·단점에 관한 서술로 가장 설득력이 없는 것은?</p><ol class="choices"><li>내각의 존속과 진퇴가 민주적 요청에 보다 민감하다</li><li>의회와 내각이 대립할 때 정국 대치가 장기화될 수밖에 없다.</li><li>거대 양당이 없고 타협적 정치 문화가 없을 때 정국이 불안정하게 된다.</li><li>의회의 신임을 유지하기 위해 유능한 인재를 등용하고 무능한 인재를 도태시킬 유인이 높아진다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 가능한 장점이다. 내각 진퇴가 국민 대표기관의 신임에 연결되므로 요구에 민감할 수 있다.</li><li><strong>선택</strong> · 설득력 없는 설명으로 선택한다. 불신임·해산 등을 통해 대립을 새 정치 구성으로 풀 출구가 있다. 언제나 장기화할 수밖에 있다는 단정은 틀리다.</li><li><strong>비선택</strong> · 가능한 단점이다. 다당제 자체보다 난립과 타협 부재의 결합이 내각 구성·존속을 불안하게 할 수 있다.</li><li><strong>비선택</strong> · 가능한 장점이다. 의회 신임을 유지하려고 유능한 각료를 고를 유인이 생긴다. 무조건 유능한 사람만 뽑힌다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 내각 불신임 결의와 의회 해산을 통해 의회 및 내각을 구성할 수 있는 선거를 다시 치르게 되므로 정치적 대립을 신속히 해결한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_029"><h4>워크북 · 통치의기본구조_워크북_029</h4><p class="question-stem">대통령제의 기본 원리에 대한 서술로 틀린 것은?</p><ol class="choices"><li>행정부와 입법부 간 엄격한 분립 관계를 통해 권력 집중을 방지하고 행정부의 안정을 꾀하려는 목적을 갖고 있다.</li><li>대통령이 국가원수이고 또한 행정부 수반이다.</li><li>의회가 법률의 제·개정을 통해 행정의 근거를 변경·박탈함으로써 행정부를 견제하는 것도 불가능하다</li><li>대통령이 법률안거부권을 갖는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 분립으로 집중을 막고 독립된 임기로 행정부 안정을 추구한다.</li><li><strong>비선택</strong> · 맞는 설명이다. 국가원수와 행정부 수반을 대통령이 겸한다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 법률 제·개정으로 행정의 법적 근거와 범위를 바꾸는 것은 중요한 견제 수단이다. 독립을 불간섭으로 오해하지 않는다.</li><li><strong>비선택</strong> · 맞는 설명이다. 법률안 재의요구 등 거부권이 의회 입법에 대한 견제 수단이다. 구체적 효과·요건은 헌법별로 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 의회는 법률의 제·개정을 통해 행정의 근거를 변경·박탈하는 방식으로 행정부를 견제할 수 있다. 예를 들어 기존의 법률에서는 시행령에 위임했던 사항을 개정 법을 통해 이후에는 의회가 직접 규정한 기준에 의해 처리하도록 만들 수 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_030"><h4>워크북 · 통치의기본구조_워크북_030</h4><p class="question-stem">대통령제의 성공 조건으로 보기 어려운 것은?</p><ol class="choices"><li>국민 사이에 이념과 이익의 갈등이 있다고 하더라도 토론과 타협하는 문화의 통로가 안정화되어 있어야 한다</li><li>부정 선거를 방지하는 공정 선거의 촘촘한 장치가 제도화되고 시행되어야 한다.</li><li>국가긴급권이 행사되었을 때 이를 절대적으로 수용하는 시민 의식이 있어야 한다.</li><li>적법절차 원칙이 엄격히 준수되어야 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 성공 조건이다. 갈등이 없을 것을 요구하는 것이 아니라 갈등을 토론·타협으로 다룰 통로가 중요하다.</li><li><strong>비선택</strong> · 성공 조건이다. 별도 선출 정당성을 가진 대통령도 공정한 선거가 전제되어야 한다.</li><li><strong>선택</strong> · 성공 조건이 아니므로 선택한다. 비상권한도 헌법상 요건과 한계 안에 있어야 한다. 절대적 수용은 권위주의 위험을 키운다.</li><li><strong>비선택</strong> · 성공 조건이다. 신체·재산 등 기본권에 대한 적법절차가 권력 남용을 막아야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대통령제는 의원내각제에 비해 권위주의나 독재로 붕괴되기 쉬운 취약성이 현저히 두드러진다. 국가긴급권이 그저 행사되었다는 이유로 이를 절대적으로 수용하는 것은 그러한 취약성을 극대화하는 것이다. 국민은 헌법을 수호해야하는 비상 상황이 아님에도 불구하고 국가긴급권을 행사하거나 그러한 계기를 이용해 정권을 부당하게 연장하려는 국가긴급권 남용 시도를 정확하게 분별하고 그 남용에 저항하는 강력한 민주 의식을 가져야한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_031"><h4>워크북 · 통치의기본구조_워크북_031</h4><p class="question-stem">이원정부제에 관한 서술로 틀린 것은?</p><ol class="choices"><li>대통령과 내각이 행정에 관한 실질적 권한을 나누어 가진다</li><li>전시, 기타 비상시에 대통령은 수상과 국무위원의 부서 없이 행정권을 직접 행사할 수 있다.</li><li>대통령은 의회에 대하여 정치적 책임을 진다</li><li>의회가 내각에 대하여 불신임 결의를 한 경우에 대통령은 의회를 해산할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 대통령과 내각 양쪽에 실질 집행권이 있다는 점이 핵심이다.</li><li><strong>비선택</strong> · 교재가 제시한 전형의 설명이다. 실제 각국에서 비상권한과 부서 예외가 모두 같다고 확대하지 않는다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 대통령은 별도 선출·임기에 기초해 의회 불신임에 따른 정치적 진퇴 책임을 지지 않는다. 내각과 구별한다.</li><li><strong>비선택</strong> · 교재가 제시한 전형의 설명이다. 각국의 해산 가능 사유와 절차는 별도 헌법 규정으로 확인해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대통령은 임기제에 의해 의회에 대하여 정치적 책임을 지지 않는다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_032"><h4>워크북 · 통치의기본구조_워크북_032</h4><p class="question-stem">다음 중 대한민국의 정부형태에서 의원내각제의 요소로 볼 수 있는 것(즉 엄격한 대통령제적 성격을 완화한 것)은 무엇인가?</p><ol class="choices"><li>행정부가 일원적 구조로 되어 있다.</li><li>대통령은 의회 해산권을 갖지 않는다.</li><li>대통령이 법률안거부권을 갖는다</li><li>정부가 법률안제출권을 갖는다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 대통령제의 기본 모습이다. 대통령이 국가원수와 행정부 수반을 겸한다.</li><li><strong>비선택</strong> · 대통령제의 상호 독립 원리다. 대통령에게 국회해산권이 없는 것이 엄격한 분립을 완화한 요소는 아니다.</li><li><strong>비선택</strong> · 대통령제 자체의 상호 견제 장치다. 의원내각제의 불신임권과 혼동하지 않는다.</li><li><strong>선택</strong> · 맞다. 정부의 법률안 제출권은 엄격한 대통령제의 분립을 완화하는 내각적 요소로 분류한다. 헌법 제52조의 주체는 국회의원과 정부다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 엄격한 대통령제에서는 정부는 행정만을 담당하므로 법률안제출권을 갖지 못한다. 따라서 정부가 법률안을 제출할 수 있는 것은 의원내각제적 요소에 의해 엄격한 대통령제적 성격이 완화된 것이다. 법률안거부권은 대통령제의 원칙적 모습에 속하는 제도이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_033"><h4>워크북 · 통치의기본구조_워크북_033</h4><p class="question-stem">다음은 헌재 1994.4.28.89헌마221 결정의 설시 내용이다. 빈칸에 들어갈 알맞은 말은? 우리 헌법은 자유민주적 기본질서의 보호를 그 최고의 가치로 하여, 이를 구현할 통치 기구로서 입법권은 국회(헌법 제40조)에, 행정권은 대통령을 수반으로 하는 정부(헌법 제66조 제4항)에, 사법권은 법관으로 구성된 법원(헌법 제101조 제1항)에 각각 속하게하는 권력분립의 원칙을 취하는 한편 대통령은 국가의 원수로서 외국에 대하여 국가를 대표하며(헌법 제66조 제1항), 그에게 국가의 독립·영토의 보전, 국가의 계속성과 헌법을 수호할 책무를 부여하고(같은 조 제2항), 조국의 평화적 통일을 위한 성실한 의무를 지우고 있는(같은 조 제3항) 등 이른바(    )를 채택하고 있다.</p><ol class="choices"><li>이원정부제의 통치 기구</li><li>대통령중심제의 통치 기구</li><li>의원 내각 중심제의 통치 기구</li><li>의회정부제의 통치 기구</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 한국 총리는 대통령과 별도의 동등한 실질 집행권 중심이 아니다.</li><li><strong>선택</strong> · 맞다. 권력분립과 대통령의 원수·행정부 수반 지위를 함께 가진 대통령 중심 통치기구다.</li><li><strong>비선택</strong> · 틀리다. 국무회의 심의와 총리 보좌 기능이 있다고 내각이 최종 행정권 중심이 되지 않는다.</li><li><strong>비선택</strong> · 틀리다. 의회에 행정부가 전적으로 종속되는 구조가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '통치의기본구조 · LECTURE 02' : 'PART · GOVERNMENT & CONSTITUTION';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(통치의기본구조 · LECTURE 02|PART · GOVERNMENT & CONSTITUTION)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('governance-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

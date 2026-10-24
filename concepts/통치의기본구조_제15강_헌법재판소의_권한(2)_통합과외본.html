@@ -1,0 +1,1400 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>통치의기본구조 제15강 헌법재판소의 권한(2) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">GOVERNMENT & CONSTITUTION · LECTURE 15</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">통치의기본구조</span>
+    <span class="brand-sub">제15강 헌법재판소의 권한(2) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./통치의기본구조_개념.html">통치의기본구조 개념 목록</a><a href="../index.html?subject=통치의 기본구조">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>국회와 대통령이 “이 일은 내 권한”이라고 다투면 <strong>권한쟁의</strong>, 국민이 “국가 때문에 내 기본권이 침해됐다”고 하면 <strong>헌법소원</strong>이다. 같은 헌재에 가더라도 누가 무엇을 지키려는지에 따라 입구가 달라진다. 마지막 강에서는 이 입구를 정확히 고르는 법을 배운다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이번 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇인가?</td>
+<td>기관의 권한 분쟁과 개인의 기본권 침해를 헌재에서 해결하는 방법이다.</td>
+</tr>
+<tr>
+<td>왜 생겼나?</td>
+<td>기관끼리 힘으로 싸우지 않고, 국민의 기본권도 선언에 그치지 않도록 한다.</td>
+</tr>
+<tr>
+<td>전체의 위치</td>
+<td>국가조직·권한을 모두 배운 뒤 그 경계와 기본권을 지키는 마지막 구제수단을 완성한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>제13강 공통 절차·제14강 규범통제 → 권한쟁의·68②소원·68①소원 → 전 과목 통합 복습.</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>권한과 기본권, 청구능력과 적격, 직접성과 보충성,30·60·90일을 혼동한다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재265–302쪽(PDF278–315쪽). 워크북302–346 <strong>45문항·180개 보기</strong> 전부를 연결한다. 별점은 학습 우선순위이며 실제 오답률은 제공되지 않았다. 기준일2026.10.24.</p>
+<p><strong>색상:</strong> <mark class="yellow">정의·결론</mark> / <mark class="green">이유</mark> / <mark class="pink">함정·현행 보완</mark> / <mark class="blue">앞뒤 연결</mark>.</p>
+<p><strong>먼저 붙이는 현행 메모:</strong> 교재는 재판소원 도입 전이다.2026.3.12 개정으로68①의 재판 제외 문구가 삭제되고68③의 제한적 재판소원,69①의 확정일부터30일,71의2의 소원 가처분,75④의 재판 취소·다시 재판 의무가 신설되었다. <strong>옛 문제의 원문 정답과 현재 법을 구분</strong>한다. <a href="https://law.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4264754&cbIdx=1148">헌법재판소법 공식 전문</a></p>
+<h1>1. 권한쟁의: 누구에게 맡겨진 일인가</h1>
+<h2 id="governance-15-01" data-concept-id="governance-15-01">1-1. 권한은 개인의 이익이 아니라 국가가 일을 할 법적 능력이다 ★★★★★</h2>
+<p><strong>교재266쪽 / 문단의 역할:</strong> 권한쟁의의 목적과 권한의 뜻을 정한다.</p>
+<p>권한쟁의는 국가기관 상호 간, 국가기관과 지자체 간, 지자체 상호 간에 헌법·법률상 권한의 유무·범위를 다투는 헌법소송이다. 국가 기능의 원활한 수행과 견제·균형, 헌법이 정한 권능 질서를 지킨다. 여기서 권한은 사인의 주관적 권리·이익이 아니라 <strong>기관이 법적으로 유효한 행위를 할 수 있는 능력과 범위</strong>다(2009헌라2).</p>
+<p>학습용 대화: “의원이 기분 나쁘면 권한쟁의를 하나요?” “아니야. 법률안 심의·표결처럼 헌법이나 법률이 준 자기 권한이 침해되어야 해.” 개인의 명예·재산권을 지키는 소송과 국가기관으로서 맡은 일을 지키는 소송을 나눈다. <strong>시험:</strong> 워크북313. <strong>키워드:</strong> 기관·권한 유무범위·견제균형. <strong>한 줄:</strong> 누가 무엇을 할 수 있는지 법적으로 경계를 정한다.</p>
+<h2 id="governance-15-02" data-concept-id="governance-15-02">1-2. 국가기관 목록은 예시이지만 모든 공공기관이 들어오는 것은 아니다 ★★★★★</h2>
+<p><strong>교재266–268쪽 / 문단의 역할:</strong> 국가기관의 범위에 관한 판례변경과 판단 기준을 설명한다.</p>
+<p>헌재법62①1은 국회·정부·법원·중앙선관위를 적지만 한정 목록이 아니라 <strong>예시</strong>다. 헌법이 국가기관의 범위를 법률에 마음대로 맡기지 않았으므로, 입법자가 법률로 권한쟁의의 문을 임의로 좁힐 수 없다는 것이96헌라2의 논리다. 과거90헌라1의 좁은 해석을 변경했다.</p>
+<p>판단 기준은 ① 헌법에 의해 설치되었는가, ② 헌법·법률이 독자적 권한을 주었는가, ③ 기관 간 다툼을 해결할 적절한 다른 기관·방법이 있는가다. 국회의원·국회의장, 대통령·총리·행정각부 장 등도 해당 권한에 관하여 당사자가 될 수 있다. 국회의원의 심의·표결권은 일신전속적이어서 심판 중 의원직을 잃으면 후임자에게 상속·승계되지 않고 절차가 종료한다(2015헌라5).</p>
+<p>정당은 사적·정치적 결사이지 국가기관이 아니다. 교섭단체도 헌법상 설치기관이 아니며 개별 의원의 권한 침해를 통한 구제 가능성이 있어 당사자능력이 부정된다(2019헌라6등). 법률만으로 설치된 국가인권위·국가경찰위도 부정했다(2009헌라6·2022헌라5). <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=1002501&cbIdx=1195">교섭단체 관련 헌재 설명</a></p>
+<p><strong>교재 표현 보완:</strong>267쪽 중간에 원내교섭단체·지자체장 등을 넓게 나열한 문장은 곧이어 나오는 판례·지자체 설명과 충돌한다. 이 목록을 통째로 암기하지 말고 위 기준과 각 유형의 판례를 따른다. <strong>시험:</strong> 워크북302–305. <strong>키워드:</strong> 예시·헌법설치·독자권한·대체구제. <strong>한 줄:</strong> 예시는 열린 목록이라는 뜻이지 무제한 목록이라는 뜻이 아니다.</p>
+<h2 id="governance-15-03" data-concept-id="governance-15-03">1-3. 지방자치단체는 종류가 법률에 정해져 있고, 기관위임사무는 자기 일이 아니다 ★★★★★</h2>
+<p><strong>교재268–269·271쪽 / 문단의 역할:</strong> 국가기관과 지자체의 당사자 범위를 다르게 정하는 이유를 밝힌다.</p>
+<p>지자체의 종류는 헌법117②가 법률에 정하도록 위임했다. 특별시·광역시·특별자치시·<strong>도</strong>·특별자치도와 시·군·자치구가 해당한다. 그러므로62①3을 국가기관처럼 예시로 넓혀 부분기관에 당사자능력을 주지 않는다(2014헌라1). 교재와 워크북306①의 목록에는 ‘도’가 빠져 있어 보완한다.</p>
+<p>지자체 자신의 자치사무 권한이 침해되면 당사자는 <strong>지자체 자체</strong>다. 단체장은 그 기관이지 자동으로 별도 당사자가 아니다. 국가가 단체장에게 맡긴 기관위임사무는 국가사무이므로 지자체 자신의 권한이라고 주장할 수 없다(2009헌라3). 단체장이 국가 일을 수행한다는 것만으로 곧 권한쟁의의 적격한 헌법상 국가기관이 되는 것도 아니다.</p>
+<p>단, <strong>교육·학예에 관한 지자체 사무</strong>의 권한쟁의에서는62②가 교육감을 당사자로 정하는 특별규정을 둔다. 일반 원칙과 명문 예외를 구별한다. <strong>시험:</strong> 워크북306·308①④. <strong>키워드:</strong> 지자체 열거·부분기관 제외·기관위임=국가사무·교육감 특례. <strong>한 줄:</strong> ‘우리 단체의 일’과 ‘국가가 단체장에게 맡긴 일’을 먼저 나눈다.</p>
+<h2 id="governance-15-04" data-concept-id="governance-15-04">1-4. 내 이름으로 국회의 권한까지 대신 주장할 수는 없다 ★★★★★</h2>
+<p><strong>교재269–270쪽 / 문단의 역할:</strong> 당사자능력과 구체적 청구인적격을 구별한다.</p>
+<p><strong>2005헌라8의 갈등:</strong> 대통령이 국회의 동의가 필요한 조약을 동의 없이 체결·비준했다고 의원들이 주장한다. 의원은 권한쟁의 당사자가 될 수 있으니 국회의 조약 동의권도 자신의 이름으로 지킬 수 있을까?</p>
+<p>그 권한의 주체는 의원 개인이 아니라 <strong>국회</strong>다. 타인의 권한을 자신의 이름으로 주장하는 ‘제3자 소송담당’은 명문 근거가 필요한 예외인데 현행 제도에 그 규정이 없으므로 의원의 이 청구는 부적법하다. 의원 자신의 심의·표결권 침해를 주장하는 경우와 다르다.</p>
+<p>교재는 학설의 찬성 이유도 소개한다. 정부와 국회 다수당이 함께 움직여 국회의 권한 침해를 묵인할 때 소수 의원이 견제할 필요가 있다는 것이다. 반면 판례는 다수결로 정한 기관 의사를 소수의 소송으로 우회하고 정치적 토론을 모두 재판으로 돌릴 위험을 든다. <strong>필요성 논의와 현행 판례 결론을 구분</strong>한다.</p>
+<p><strong>문장 번역:</strong> ‘제3자 소송담당’ → 내 권한은 아니지만 내 이름으로 남의 권한을 지키는 소송. ‘당사자능력 있음’ → 이런 소송의 당사자가 될 자격. ‘적격 없음’ → 지금 주장한 권한의 주인이 내가 아님. <strong>시험:</strong> 워크북307. <strong>키워드:</strong> 국회 동의권·의원 고유권한·명문 없음. <strong>한 줄:</strong> 당사자가 될 수 있어도 모든 기관의 권한을 대신 주장할 수는 없다.</p>
+<h2 id="governance-15-05" data-concept-id="governance-15-05">1-5. 자치규정은 법령 안에서, 기관소송은 권한쟁의 밖에서 ★★★★☆</h2>
+<p><strong>교재271–272쪽 / 문단의 역할:</strong> 자치권의 한계와 법원·헌재의 기관분쟁 관할을 연결한다.</p>
+<p>헌법117①은 지자체가 법령의 범위에서 자치규정을 만들 수 있게 한다. 법령에는 법률·대통령령·총리령·부령뿐 아니라 <strong>직접 위임을 받아 상위법과 결합하여 법규명령 기능을 하는 행정규칙</strong>도 포함된다. 모든 내부 지침이 자치권을 묶는다는 뜻은 아니다.</p>
+<p>2001헌라1은 지방공무원 시간외근무수당 기준에서 이 점을 설명했다. 장관이 정하는 범위는 단순 내부 지침이 아니라 법규명령 기능을 하는 기준으로 해석하고, 지방의 구체적 결정 여지를 모두 없애지 않는 한 자치권의 본질적 침해로 보지 않았다. “장관 이름이 나오면 자치권 침해”라는 식으로 판단하지 않는다.</p>
+<p>기관 간 다툼 전체를 기관쟁송이라 하면 우리 제도는 헌재의 <strong>권한쟁의</strong>와 법원의 <strong>기관소송</strong>으로 나뉜다. 기관소송은 ① 헌재 관할 권한쟁의에 속하지 않고 ② 개별 법률이 사건과 제소권자를 정한 경우에만 가능하다. 아무 기관분쟁이나 법원·헌재 중 마음대로 고르는 것은 아니다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsId=001218">행정소송법3·45조</a> <strong>시험:</strong> 워크북308②③. <strong>키워드:</strong> 법령보충규칙·관할·법정소송. <strong>한 줄:</strong> 자치권도 법령 안에서 행사하고 분쟁 해결도 정해진 관할로 간다.</p>
+<h2 id="governance-15-06" data-concept-id="governance-15-06">1-6. 청구기간은60·180일, 계속되는 부작위와 확실한 장래처분은 따로 본다 ★★★★★</h2>
+<p><strong>교재272–274쪽 / 문단의 역할:</strong> 청구·심리·기간·취하를 시간 순서로 정리한다.</p>
+<p>피청구인은 권한을 침해한 국가기관·지자체이며 언제나 ‘대한민국’으로 적는 것이 아니다. 청구서에 청구인·수행자, 피청구인, 처분·부작위, 이유 등을 특정한다. 전원재판부에서 <strong>구두변론</strong>으로 심리한다. 헌재가 스스로 위반을 적발하여 시작하지 않는다.</p>
+<p>사유를 안 날부터60일, 사유가 있은 날부터180일을 모두 지켜야 한다(63). ‘안 날’은 침해 사실을 특정할 정도로 현실적으로 인식하여 청구할 수 있게 된 때이지, 상대가 결정을 절대 변경할 수 없게 된 때가 아니다(2006헌라7). 부작위가 계속되면 기간 제한 없이 그 계속 상태를 다툴 수 있다(2004헌라2).</p>
+<p>장래 처분은 원칙적으로 실제 처분을 기다려 다툰다. 다만 처분이 확실히 예정되어 있고 권한 침해 위험과 사전 보호 필요가 매우 큰 예외는 가능하다(2000헌라2). 막연히 “그럴지도 모른다”는 걱정은 부족하다. 공익적 소송이라고 취하를 전부 금지하지도 않는다. 민사소송법상 취하 규정을 준용한다(2000헌라1). 준용되는 절차 조건까지 무시하고 언제나 아무 조건 없이 철회한다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 워크북309–311. <strong>키워드:</strong> 전원·구두·60/180·계속부작위·취하 가능. <strong>한 줄:</strong> 이미 발생한 침해를 제때 다투되 끝나지 않은 불이행은 따로 본다.</p>
+<h2 id="governance-15-07" data-concept-id="governance-15-07">1-7. 처분은 넓지만 준비행위까지 모두 포함하지 않는다 ★★★★★</h2>
+<p><strong>교재274–275쪽 / 문단의 역할:</strong> 대상 행위와 부작위의 의무를 특정한다.</p>
+<p>권한쟁의의 처분은 좁은 행정처분에 한정되지 않는다. 법률 제정행위, 행정입법과 다른 행정작용, 법원의 재판·사법행정 등 넓은 공권력 행위를 포함한다. 다만 법률을 다툴 때는 <strong>법률 자체의 추상적 위헌성보다 법률 제정행위가 기관의 권한을 침해했는지</strong>가 대상이다(2005헌라4).</p>
+<p>법적 지위에 구체적으로 영향을 줄 가능성이 없는 행위는 대상이 아니다. 정부의 법률안 제출은 입법을 위한 사전 준비행위로 보아 독자적 대상성을 부정한 사례가 있다(2004헌라3). 아직 법률이 된 것도 아닌데 제정의 효과를 미리 가정해서는 안 된다.</p>
+<p>부작위는 상대 기관에게 헌법·법률에서 나오는 <strong>작위의무</strong>가 있어야 한다.98헌라3의 표결 사례에서 정상적으로 끝난 표결이면 의장이 개표·결과 선포를 할 의무가 있지만, 적법한 종결 여부가 불명확하고 자율적 해결도 실패한 사정에서 당연한 선포의무를 인정하지 않았다. “행동하지 않았다”와 “할 법적 의무를 어겼다”를 나누는 사례다. <strong>시험:</strong> 워크북312. <strong>키워드:</strong> 넓은 처분·법적 중요성·제정행위·작위의무. <strong>한 줄:</strong> 국가의 모든 말과 침묵이 자동으로 심판대상은 아니다.</p>
+<h2 id="governance-15-08" data-concept-id="governance-15-08">1-8. 법률상 권한도 보호하지만 그 법을 영원히 못 바꾸게 하지는 않는다 ★★★★★</h2>
+<p><strong>교재275쪽 / 문단의 역할:</strong> 권한의 근거와 침해 주장의 상대를 연결한다.</p>
+<p>권한은 헌법상 권한뿐 아니라 법률상 권한도 포함한다. 이미 발생했거나 계속되는 침해뿐 아니라 조만간 침해가 거의 확실하고 내용·시간이 충분히 구체화된 <strong>현저한 위험</strong>도 다툴 수 있다(2016헌라3).</p>
+<p>하지만 법률로 만든 권한을 바로 그 법률을 개정하는 국회에 대한 영구적 방어권으로 쓸 수는 없다. <strong>2022헌라4의 검사 수사권·소추권 사례:</strong> 법률 개정으로 수사·소추권 범위가 줄었다며 검사들이 다투었다. 헌재는 헌법상 영장신청권 제한과 법률로 형성된 수사·소추권 변경을 구분했다. 전자를 제한하지 않은 이 입법행위에 대해 후자의 기존 범위를 유지해 달라는 권한 침해 가능성을 인정하지 않았다.</p>
+<p><strong>문장 번역:</strong> ‘입법행위에 의해 형성’ → 국회가 법률로 범위를 만들어 준 권한. ‘입법행위를 구속하는 기준 아님’ → 그 권한이 존재했다는 이유만으로 국회의 개정을 금지할 수 없음. 이를 “법률상 권한은 권한쟁의에서 전혀 보호 안 됨”으로 바꾸면 반대로 틀린다. <strong>시험:</strong> 워크북313·314. <strong>키워드:</strong> 법률상도 포함·헌법권한/법률권한·입법형성. <strong>한 줄:</strong> 법률이 준 권한과 그 법률을 개정할 권한을 함께 본다.</p>
+<h2 id="governance-15-09" data-concept-id="governance-15-09">1-9. 침해가 끝나도 반복될 문제라면 판단할 필요가 남을 수 있다 ★★★★☆</h2>
+<p><strong>교재276–277쪽 / 문단의 역할:</strong> 심판이익과 가처분의 필요를 설명한다.</p>
+<p>권리보호이익은 재판으로 회복할 법적 이익이다. 목적이 이미 이루어지거나 침해가 끝나면 원칙적으로 사라진다. 그러나 반복 위험과 중요한 헌법적 해명 필요가 있으면 예외적으로 심판할 수 있다.</p>
+<p><strong>94헌마60의 사보임 장면:</strong> 의원은 의사에 반해 보건복지위원회에서 다른 위원회로 옮겨졌다. 다투는 중 원래 위원회로 돌아왔다. 당장 자리 회복은 끝났지만 이런 사보임은 다시 일어날 수 있어 헌법적 경계를 밝힐 필요가 남았다. “원래 자리로 복귀했으니 어떤 경우에도 판단 불가”는 틀리다. 사건번호가 헌마여도 교재가 설명하는 권한쟁의 법리를 번호만 보고 지우지 않는다.</p>
+<p>결정 전에 회복하기 어려운 손해가 예상되면65조에 따라 직권·신청으로 처분 효력을 잠시 멈추는 가처분을 할 수 있다. 긴급성, 회복곤란 손해 또는 중대한 공공복리, 본안이 명백히 부적법·이유 없음이 아닌지, 잘못 인용했을 손해와 잘못 기각했을 손해를 비교한다(98헌사98). <strong>시험:</strong> 워크북315·316. <strong>키워드:</strong> 회복 필요·반복/해명·임시 정지·비교형량. <strong>한 줄:</strong> 이미 끝났는지와 지금 잠시 멈춰야 하는지를 각각 판단한다.</p>
+<h2 id="governance-15-10" data-concept-id="governance-15-10">1-10. 권한 침해 확인과 처분 무효는 두 개의 판단이다 ★★★★★</h2>
+<p><strong>교재277–279쪽 / 문단의 역할:</strong> 정족수·결정 종류·효력을 나눈다.</p>
+<p>법문상 심리7명 이상, 결정은 종국심리에 관여한 재판관 <strong>과반수</strong>다. 헌소 인용처럼 항상6명이 필요한 것이 아니다. 다만 <strong>종전 헌법·법률 해석적용 의견의 변경은 권한쟁의에서도23②2의6명 특별정족수</strong>를 따진다. 교재 각주의 ‘권한쟁의는 판례변경 규정에도 해당하지 않는다’는 식의 일반화는 바로잡는다. 공석 관련2024가처분은 제13강에서 법문과 구분해 설명했다.</p>
+<p>일신전속 권한자의 직 상실·수계 불가능한 사망·취하 등은 절차종료, 부적법은 각하, 본안 이유 부족은 기각, 이유가 있으면 인용한다. 권한 유무·범위를 확인하고 원인 처분을 취소하거나 무효 확인할 수 있다. 부작위 인용이면 상대 기관은 <strong>결정 취지에 따른 처분</strong>을 해야 한다(66). 아무 행동이나 하면 되는 것이 아니다.</p>
+<p><strong>96헌라2·2009헌라7의 핵심:</strong> 의원들에게 본회의 일시를 알리지 않아 심의·표결 기회를 잃게 한 것은 권한 침해다. 그러나 그 확인만으로 법률안 가결선포가 자동 무효가 되는 것은 아니다. 법률의 소급적 무효가 법질서 안정에 미치는 영향과 다수결·공개 등 헌법상 절차의 명백한 위반 여부를 별도로 보았다. 교재 사례에서는 권한 침해를 확인하면서 무효는 인정하지 않았다.</p>
+<p><strong>문장 번역:</strong> ‘권한침해 확인’ → 의원이 참여할 권한을 빼앗긴 것은 잘못. ‘효력 부인 별도’ → 그 잘못 때문에 이미 성립한 행위까지 없앨지는 다음 질문. <strong>시험:</strong> 워크북317·318. <strong>키워드:</strong> 과반·변경6·확인/무효 분리. <strong>한 줄:</strong> 침해를 인정했다는 이유만으로 결과물 전체가 자동 소멸하지 않는다.</p>
+<h2 id="governance-15-11" data-concept-id="governance-15-11">1-11. 결정은 국가를 묶지만 분쟁 밖 제3자의 기존 효과는 보호한다 ★★★★★</h2>
+<p><strong>교재278–279쪽 / 문단의 역할:</strong> 기속력의 최소 내용과 쟁점, 제3자 보호를 설명한다.</p>
+<p>권한쟁의 결정은 모든 국가기관·지자체를 기속한다(67①). 권한침해 확인만 했어도 장래 동일 사정에서 동일 행위를 반복해서는 안 된다. 다만 그 확인만으로 적극적 재처분·결과제거 의무까지 언제나 발생하는지는 논쟁이 있다.</p>
+<p><strong>2009헌라12:</strong> 국회의장의 가결선포에 절차상 권한침해가 있다고 결정했는데, 의장이 후속 시정조치를 하지 않았다는 다툼이다.4명은 확인의 기속력에 적극적 결과제거 의무가 없다는 각하의견,1명은 위법 제거 의무를 인정하되 방식이 국회 자율이라는 기각의견,나머지4명은 위법상태를 제거할 법적 의무가 있다는 의견이었다. 결론은 기각이었다. 따라서 적극적 의무의 범위에 단일한 확고한 법정의견이 있었다고 외우지 않는다. <strong>부작위 인용 시66②의 명문 이행의무</strong>와 이 논쟁을 섞지 않는다.</p>
+<p>처분 취소결정은 그 처분의 상대방에게 이미 생긴 효력에 영향을 주지 않는다(67②). 기관끼리 권한을 다투다가 선의의 외부 제3자의 법적 지위가 흔들리는 것을 막는다. 반면 상대방이 청구인인 기관 자체라면 이 제3자 보호규정이 적용되지 않는다. <strong>시험:</strong> 워크북319·320. <strong>키워드:</strong> 모든 기관 기속·반복금지·적극의무 논쟁·제3자 보호. <strong>한 줄:</strong> 기관의 경계를 바로잡되 그 다툼 밖 사람의 기존 지위는 배려한다.</p>
+<h1>2. 헌법소원 두 길: 내 기본권인가, 내 재판의 법률인가</h1>
+<h2 id="governance-15-12" data-concept-id="governance-15-12">2-1. 권리구제와 헌법질서 보호의 두 얼굴 ★★★★★</h2>
+<p><strong>교재279–283쪽 / 문단의 역할:</strong> 소원의 성격과 유형을 연결한다.</p>
+<p>헌법소원은 공권력 때문에 침해된 기본권을 구제하는 제도다. 개인의 권리를 지키는 <strong>주관소송</strong>이면서 위헌 공권력을 바로잡는 <strong>객관소송</strong> 성격도 있다. 그래서 개인 침해가 끝나도 반복 위험·헌법적 해명 필요가 남을 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>길</th>
+<th>출발점</th>
+<th>핵심 문턱</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>68① 권리구제형</td>
+<td>공권력 행사·불행사로 내 기본권 침해</td>
+<td>주체성·자기/직접/현재·보충성·이익·기간</td>
+</tr>
+<tr>
+<td>68② 위헌심사형</td>
+<td>내 재판에 적용될 법률의 제청신청 기각</td>
+<td>신청한 당사자·법률급 규범·재판 전제·통지30일</td>
+</tr>
+<tr>
+<td>2026재판소원</td>
+<td>68① 중 확정된 법원 재판에 의한 침해</td>
+<td>추가로68③의3사유 중 하나·확정일부터30일</td>
+</tr>
+</tbody></table>
+<p>재판소원은68③에 별도로 적힌 조건을 갖춘 <strong>68① 소원의 특수한 형태</strong>이지68②와 같은 법률심사를 뜻하지 않는다. <strong>시험:</strong> 워크북321·325. <strong>키워드:</strong> 주관+객관·68①/②·재판소원. <strong>한 줄:</strong> 헌법소원이라는 이름만 보고 모두 같은 요건을 적용하지 않는다.</p>
+<h2 id="governance-15-13" data-concept-id="governance-15-13">2-2. 68②는 기본권 주체가 아닌 행정청도 소송당사자이면 가능하다 ★★★★★</h2>
+<p><strong>교재281쪽 / 문단의 역할:</strong> 법률심사형의 당사자와 기본권 침해 요건을 구별한다.</p>
+<p>68②의 실질은 구체적 규범통제이므로 <strong>자기 기본권 침해를 요건으로 하지 않는다</strong>. 행정청도 자기 처분을 둘러싼 소송의 당사자로서 근거 법률의 제청신청을 하고 기각되면 소원할 수 있다(2004헌바44). 국가가 국민처럼 기본권을 갖기 때문이 아니라 합헌 법률에 따른 재판이라는 목적 때문이다.</p>
+<p>반대로 형사사건의 고소인은 관심이 매우 크더라도 그 형사재판의 당사자가 아니다.2010헌바102에서 타인의 위증사건 고소인이 한 청구가 부적법한 이유다. 피해자·고소인과 피고인·검사의 소송상 지위를 섞지 않는다.</p>
+<p><strong>시험:</strong> 워크북322. <strong>키워드:</strong> 기본권 침해 불요·소송당사자·고소인 제외. <strong>한 줄:</strong>68②에서는 누가 피해를 느끼는가보다 누가 그 재판의 당사자인가가 먼저다.</p>
+<h2 id="governance-15-14" data-concept-id="governance-15-14">2-3. 기각의 실질을 보며, 소원 청구만으로 재판은 멈추지 않는다 ★★★★★</h2>
+<p><strong>교재281–283쪽 / 문단의 역할:</strong>68② 고유의 절차와 후속 구제를 정리한다.</p>
+<p>제청신청이 합헌 판단으로 기각된 경우뿐 아니라 전제성 흠결을 이유로 기각된 경우도 청구 통로는 열린다(90헌바35). 물론 헌재가 스스로 전제성을 심사하여 없으면 각하할 수 있다. 법원이 실질적 위헌 판단을 하면서 형식은 ‘각하’로 적은 경우에도 포함한다(89헌마32등).</p>
+<p>신청·기각이 없는 조문을 새로 추가하는 것은 원칙적으로 부적법하다. 다만 법원이 실질적으로 판단했거나 신청 조문과 필연적으로 연결되어 묵시적 신청·기각을 인정할 수 있으면 예외다(2009헌바2). 기각 통지일부터30일 안에 변호사를 통한 서면 청구를 하고, 본인에게 변호사 자격이 있으면 대리인 예외다. 제청서 기재사항을 준용하되 법원 표시 대신 청구인·대리인을 적는다.</p>
+<p>청구해도 법원 재판이 자동 정지되지 않는다. 소원이 나중에 인용될 때 관련 소송이 이미 확정되었다면 <strong>현행75⑧</strong>에 따라 재심을 청구할 수 있다. 교재의75⑦은 개정 전 번호다. 위헌결정 효력 준용은 현행75⑦이다. 당해 사건 동일사유 재신청 금지는 상소심과 파기환송 전후를 포함하되 다른 사건의 청구까지 영구 금지하는 것은 아니다. <strong>시험:</strong> 워크북323·324. <strong>키워드:</strong> 실질 기각·30일·자동정지 없음·확정 뒤 재심. <strong>한 줄:</strong> 법원의 제청 대신 당사자가 심사 통로를 여는 만큼 원래 재판과 소원은 별도로 진행된다.</p>
+<h1>3. 권리구제형의 첫 문턱: 누가 어떤 공권력을 다투나</h1>
+<h2 id="governance-15-15" data-concept-id="governance-15-15">3-1. 외국인·단체도 가능하고 공법인은 원칙과 예외를 나눈다 ★★★★★</h2>
+<p><strong>교재283–284쪽 / 문단의 역할:</strong> 기본권 주체성과 청구능력의 관계를 설명한다.</p>
+<p>68① 청구인은 침해를 주장하는 <strong>그 기본권의 주체</strong>여야 한다. 국민인 자연인은 원칙적으로 기본권 주체이며, 외국인·법인·독립된 조직과 대표자를 가진 단체도 성질상 누릴 수 있는 기본권에 관해서 가능하다. 단체 자체와 단체 내부기관을 구별한다(2009헌마149). 기본권의 구체적 행사에는 나이·자격 등 개별 요건이 있을 수 있다.</p>
+<p>국가·국가기관·공법인은 원칙적으로 기본권을 지켜야 할 <strong>수범자</strong>이지 국민처럼 국가에 맞서 기본권을 주장하는 주체가 아니다. 국회 노동위원회에 주체성을 부정한93헌마120이 예다.</p>
+<p>예외적으로 국립대학의 학문의 자유·대학 자율성(92헌마68등), 한국방송공사의 방송의 자유(98헌바70)처럼 공법인의 <strong>기능·과제와 관련된 기본권</strong>, 독립된 법주체로서 국가와 대립하여 이를 행사할 필요가 있으면 인정할 수 있다. “공공기관이니까 모든 기본권 있음”도 “공법인이니까 절대 없음”도 틀리다. <strong>시험:</strong> 워크북326·327. <strong>키워드:</strong> 해당 권리의 주체·수범자·기능과 과제·대립. <strong>한 줄:</strong> 어떤 조직인지와 어떤 기본권을 주장하는지를 함께 본다.</p>
+<h2 id="governance-15-16" data-concept-id="governance-15-16">3-2. 사인 간 잘못과 공권력 침해, 단순 미행동과 의무 불이행은 다르다 ★★★★★</h2>
+<p><strong>교재285쪽 / 문단의 역할:</strong> 소원의 공권력 대상성을 정한다.</p>
+<p>입법·행정·사법기관뿐 아니라 공법인·국립대학 등도 법적 지위를 불리하게 바꾸는 고권적 작용을 하면 대상이 될 수 있다. 사인이 사적 지위에서 범죄·계약 위반을 한 것은 그 자체로 공권력 행사가 아니며 통상의 민형사 구제와 구별한다. 공적 권한을 법적으로 위탁받아 행사하는 경우는 그 성격을 따로 확인한다.</p>
+<p>불행사를 다투려면 헌법에서 유래하는 작위의무가 특별히 구체화되어 있고, 국민이 그 행사를 요구할 수 있는데도 국가가 이행하지 않아야 한다(2003헌마916). “국가가 더 도와주면 좋겠다”는 바람만으로 의무가 생기지 않는다.</p>
+<p>교재의2010헌마439·2014헌마368은 임의적 통신자료 취득·사실조회 행위의 공권력성을 구별하는 사례다. 이를 모든 강제수사·모든 개인정보 처리에 일반화하지 않는다.2011헌가13의 방송통신심의 관련 <strong>시정요구</strong>와2016헌마46의 <strong>의견제시</strong>도 법적 효과와 실질을 달리 본다. 명칭이 안내·권고여도 실제 강제성과 불이익을 확인해야 한다. <strong>시험:</strong> 워크북328. <strong>키워드:</strong> 고권적 작용·법적 효과·구체적 작위의무. <strong>한 줄:</strong> 누가 무엇을 어떻게 강제하거나 이행하지 않았는지 특정한다.</p>
+<h2 id="governance-15-17" data-concept-id="governance-15-17">3-3. 법령·행정규칙·조약은 대외적 효과와 직접성을 따진다 ★★★★★</h2>
+<p><strong>교재285–286쪽 / 문단의 역할:</strong> 법규범의 형식보다 국민에게 미치는 효과를 본다.</p>
+<p>법률·대통령령·총리령·부령·대법원규칙·조례 등 대외적 효력이 있는 입법 산물은 공권력이다. 시행 전이라도 장래 침해가 확실한 법률이나 폐지 뒤 침해 상태가 계속되는 법률도 별도 요건을 갖추면 소원 대상이 될 수 있다. 제14강 위헌법률심판의 ‘재판에 적용되는가’와 질문이 다르다.</p>
+<p>행정규칙은 내부 지침이므로 원칙적으로 대상이 아니다. 다만 법령 위임으로 내용을 보충하거나, 재량준칙이 반복 시행되어 평등·신뢰보호에 따른 <strong>자기구속</strong>이 생겨 대외적 구속력을 가지면 예외적으로 가능하다(99헌마413). 모든 지침을 곧 법률처럼 보는 것은 아니다.</p>
+<p>국내에서 바로 적용되는 <strong>자기집행조약</strong>은 대상이 될 수 있다. 국내 입법으로 구체화해야 하는 <strong>비자기집행조약</strong>은 그 자체보다 시행을 위한 국내법령을 다툰다. <strong>시험:</strong> 워크북329. <strong>키워드:</strong> 대외효·법령보충·자기구속·자기집행. <strong>한 줄:</strong> 규범이 내 법적 지위에 직접 작동하는지 본다.</p>
+<h2 id="governance-15-18" data-concept-id="governance-15-18">3-4. 입법을 전혀 안 한 것과 법을 불완전하게 만든 것은 다투는 대상이 다르다 ★★★★★</h2>
+<p><strong>교재286–287쪽 / 문단의 역할:</strong> 진정·부진정 입법부작위와 행정입법 지연을 사례로 구별한다.</p>
+<p>진정부작위는 헌법상 의무에도 <strong>아무 입법을 안 한 상태</strong>, 부진정부작위는 입법은 했지만 범위·내용·절차가 부족하거나 불공정한 상태다. 진정부작위 소원은 헌법의 명시적 입법위임 또는 헌법해석상 구체적 기본권을 위한 명백한 입법의무가 있는데도 전혀 입법하지 않았을 때 인정한다.</p>
+<p><strong>89헌마2:</strong> 재산을 수용해 놓고 보상 절차를 정할 법이 없어 보상을 받을 길이 막혔다. 헌재는 헌법이 보상을 법률로 정하도록 명시적으로 요구했는데 이행하지 않아 재산권을 침해했다고 보았다. “법이 없으니 국가가 할 일도 없다”는 결론이면 보상 보장 자체가 무의미해진다. <strong>문장 번역:</strong> ‘입법의무’ → 보상을 실제 받을 수 있게 절차를 만들어야 함. ‘진정’ → 기존 법의 일부 오류가 아니라 필요한 법 자체가 없음.</p>
+<p>행정입법도 상위법을 실행하기 위한 하위규정을 만들 의무가 있고 상당한 기간이 지났는데 정당한 이유 없이 지연하면 대상이 된다(96헌마246).2016헌마626은 국군포로 가족 예우를 위한 대통령령 지연과 명예권을 다루었다. 다만 합리적 준비기간의 지체만으로 곧 위헌은 아니며,2001헌마718은 위임입법 자체의 명백한 위헌성 등 매우 엄격한 정당화 사정을 논의했다.</p>
+<p>부진정부작위는 <strong>불완전한 법규 자체</strong>를 대상으로 적극적 소원을 해야 한다(2002헌마358등). 기간 제한을 피하려고 모든 불완전한 법을 ‘계속되는 부작위’라고 부를 수 없다. <strong>시험:</strong> 워크북330–332·329②. <strong>키워드:</strong> 전혀 없음/불완전·명시위임/헌법해석·상당기간. <strong>한 줄:</strong> 빈 법의 자리를 다투는지 이미 있는 법의 결함을 다투는지 나눈다.</p>
+<h2 id="governance-15-19" data-concept-id="governance-15-19">3-5. 행정처분은 통상 구제부터, 행정부작위도 종류를 나누어야 한다 ★★★★★</h2>
+<p><strong>교재287–288쪽 / 문단의 역할:</strong> 행정쟁송과 헌법소원의 관계를 설명한다.</p>
+<p>행정처분에 행정소송 등 구제절차가 있으면 먼저 그 절차를 거쳐야 한다. 교재는 재판소원 제한을 전제로 법원 재판을 거친 원행정처분을 다시 소원하는 것도 원칙적으로 허용하지 않고, 예외적 재판 취소와 연결된 경우를 설명한다(97헌마301등).2026년에는 재판소원의 법정 통로가 생겼지만 <strong>법원에서 졌다는 이유만으로 원처분을 헌재에 그대로 재심사해 달라고 할 수 있다는 뜻은 아니다.</strong> 확정재판과68③ 사유, 기간·효력의 구조를 따로 검토한다.</p>
+<p>교재288쪽의 “행정부작위는 행정소송 대상에서 제외”라는 문장은 전부에 일반화하면 틀리다. 행정소송법은 일정한 처분 신청에 응답할 의무를 이행하지 않는 경우의 <strong>부작위위법확인소송</strong>을 명문으로 둔다. 행정입법부작위 등 그 소송으로 구제하기 어려운 유형과 구별한다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsId=001218">행정소송법2·4·36조</a></p>
+<p>학습용 장면: 민수가 법정 허가를 신청했는데 관청이 계속 침묵한다. 법정 부작위소송이 가능한지 먼저 확인해야지, 모든 침묵은 헌재로 바로 간다고 해서는 안 된다. 헌법소원에서도 구체적 작위의무를 요구한다(88헌마22·2002헌마52). <strong>시험:</strong> 워크북329④·339·340. <strong>키워드:</strong> 통상 구제·원처분/재판·부작위 종류. <strong>한 줄:</strong> 행정이라는 큰 이름보다 실제 이용 가능한 구제절차를 확인한다.</p>
+<h2 id="governance-15-20" data-concept-id="governance-15-20">3-6. 불기소·기소유예·기소중지는 누가 다투는지가 중요하다 ★★★★★</h2>
+<p><strong>교재288–289쪽 / 문단의 역할:</strong> 같은 검찰처분도 신청인의 지위에 따라 통로가 달라짐을 보여 준다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>교재가 제시하는 구제 원리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>고소인이 불기소에 불복</td>
+<td>재정신청 등 법정 절차가 있으면 보충성상 그 절차부터</td>
+</tr>
+<tr>
+<td>피의자가 기소유예에 불복</td>
+<td>혐의를 인정한 채 기소를 유예한 불이익을 다툴 통상 수단이 없어 소원 가능</td>
+</tr>
+<tr>
+<td>피의자가 자의적 기소중지에 불복</td>
+<td>수사가 재개·종결되지 않으면 혐의자의 법적 불이익이 계속되어 소원 가능</td>
+</tr>
+<tr>
+<td>고소하지 않은 피해자가 불기소에 불복</td>
+<td>새 고소라는 불필요한 우회를 강요할 수 없는 예외를 인정한2008헌마716</td>
+</tr>
+</tbody></table>
+<p>기소유예는 무죄판결도 혐의없음 처분도 아니다. 그래서 피의자가 “처벌 안 받으니 아무 불이익 없다”는 설명에 반박할 이익이 있다(2020헌마130·2021헌마1400등). 기소중지 뒤 사유가 없어졌다고 재기를 신청했는데 불요 결정을 하면 실질적 새 기소중지로 볼 수 있다(2008헌마210). 내사종결도 구체적 법적 효과에 따라 대상성을 인정한 사례가 있다(2012헌마175).</p>
+<p>재정신청 재판을 거친 뒤 원불기소를 다투는 교재의2008헌마313·2013헌마183은 <strong>개정 전 재판소원 제한 아래의 판례</strong>다. 현행은 재판소원 요건을 별도로 확인한다. 원문333의 정답②는 보존하되①의 재판 제외 설명을 현재의 절대 원칙으로 암기하지 않는다. <strong>시험:</strong> 워크북333. <strong>키워드:</strong> 고소인/피의자·재정신청·유예/중지·법적 불이익. <strong>한 줄:</strong> 기소하지 않았다는 결과만 보지 말고 누가 왜 불복하는지 본다.</p>
+<h2 id="governance-15-21" data-concept-id="governance-15-21">3-7. 이미 끝난 강제행위도 헌법적 판단이 필요할 수 있다 ★★★★☆</h2>
+<p><strong>교재289쪽 / 문단의 역할:</strong> 권력적 사실행위를 문서처분과 구별한다.</p>
+<p>정보 제공·단순 권고 같은 비권력적 사실행위와, 국가가 우월적 지위에서 강제하는 권력적 사실행위를 나눈다. 강제철거·강제격리·강제입원·조사실 계구 사용·미결수용자 서신검열 등이 교재 사례다. 이는 각 조치가 언제나 합헌·적법하다는 뜻이 아니라 <strong>헌법심사의 대상이 될 수 있다는 분류</strong>다.</p>
+<p>항고소송 대상인지 불명확하거나 단시간에 끝나 소송이익이 사라질 수 있어 헌법소원 대상성을 인정한 사례들이 있다(2001헌마163등). 행정주체와 상대방 관계, 동의·참여 정도, 목적·경위, 법적 명령·강제수단 등을 종합한다(2011헌마429). 이름이 ‘협조’라도 사실상 거부할 수 없는 강제가 있었는지 본다. <strong>시험:</strong> 워크북333④. <strong>키워드:</strong> 권력적/비권력적·실질·단시간 침해. <strong>한 줄:</strong> 종이 처분서가 없어도 강제로 기본권을 제한하면 심사의 문제가 된다.</p>
+<h2 id="governance-15-22" data-concept-id="governance-15-22">3-8. 현행 재판소원은 확정재판·세 사유·30일을 함께 기억한다 ★★★★★</h2>
+<p><strong>교재289쪽의 현행 보완 / 문단의 역할:</strong> 옛 재판 제외 원칙과2026개정의 차이를 분명히 한다.</p>
+<p>교재는 법원 재판을 원칙적으로 제외하고 헌재의 위헌결정에 반하는 재판 등을 예외로 다룬다(96헌마172등).2026.3.12 개정 뒤에는68①에서 제외 문구가 삭제되었고,68③이 <strong>확정된 재판</strong>에 대해 다음 하나의 사유가 있을 때만 청구할 수 있도록 정한다.</p>
+<ol>
+<li>헌재 결정에 반하는 취지로 재판하여 기본권을 침해했다.</li>
+<li>헌법·법률이 정한 적법한 절차를 거치지 않아 기본권을 침해했다.</li>
+<li>헌법·법률을 위반하여 기본권을 침해한 것이 명백하다.</li>
+</ol>
+<p><mark class="pink">기한은 ‘알게 된 날90일’이 아니라 재판의 <strong>확정일부터30일</strong>이다.</mark> 재판서와 확정증명원을 첨부한다. 사유에 명백히 해당하지 않으면 지정재판부 사전심사 각하 대상이다. 인용하면 헌재가 재판을 취소하고 법원은 헌재 결정 취지에 따라 <strong>다시 재판</strong>한다(75④).</p>
+<p>학습용 대화: “최종심에서 졌으니 헌재가 증거부터 다시 전부 봐 주는4심인가요?” “불만 자체가 요건은 아니야. 확정재판과 법정 기본권 침해 사유를 구체적으로 제시해야 해.” 개정 전 확정재판의 적용·기간 등 개별 사건은 부칙·판례를 확인해야 하며 이 설명만으로 실제 사건의 청구 가능성을 단정하지 않는다. <strong>시험:</strong> 기존333①은 구법 표시; 새 사례에서는 세 사유를 적용한다. <strong>키워드:</strong> 확정·68③3사유·30·취소 후 다시 재판. <strong>한 줄:</strong> 재판도 심사 통로가 생겼지만 모든 패소를 다시 다투는 일반 상소는 아니다.</p>
+<h1>4. 권리구제형의 나머지 문턱: 내 권리가 직접·현재 침해되었나</h1>
+<h2 id="governance-15-23" data-concept-id="governance-15-23">4-1. 불이익 호소를 구체적인 기본권 침해 주장으로 바꾼다 ★★★★★</h2>
+<p><strong>교재290쪽 / 문단의 역할:</strong> 막연한 불만과 심사 가능한 주장을 구별한다.</p>
+<p>어떤 공권력 행사·불행사가, 어떤 기본권을, 어떤 헌법규범에 어긋나게 제한했는지 특정해야 한다. 단지 다른 정책을 했으면 내가 이익을 더 얻었을 것이라는 주장으로는 부족하다. 그 공권력에 의해 주장한 기본권이 침해될 여지도 있어야 한다.</p>
+<p>96헌마207은 국회의 의장단 선출 지연 등의 사정만으로 국민의 행복추구권이 침해될 여지가 있다고 보지 않았다. 정치적으로 비판할 사안과 개인 기본권 침해를 재판으로 구제할 사안을 구별한 것이다. <strong>시험:</strong> 워크북334. <strong>키워드:</strong> 공권력 특정·기본권 특정·침해 가능성. <strong>한 줄:</strong> “마음에 안 든다”를 넘어 헌법상 무엇이 어떻게 침해되었는지 말해야 한다.</p>
+<h2 id="governance-15-24" data-concept-id="governance-15-24">4-2. 자기관련성: 남의 권리가 아니라 내 법적 지위인가 ★★★★★</h2>
+<p><strong>교재290–291쪽 / 문단의 역할:</strong> 직접 상대방과 제3자의 구제 범위를 나눈다.</p>
+<p>공권력의 직접 상대방은 원칙적으로 자기관련성이 있다. 간접적·사실적·경제적 이해만 있는 제3자는 부족하다(90헌마20). 단체가 회원 개인의 기본권을 대신 주장하는 것도 원칙적으로 안 된다(90헌마56·93헌마33).</p>
+<p><strong>2000헌마149:</strong> 부평구 공무원 정원이 적으면 주민 서비스가 나빠지고 공무원 시험 합격 가능성도 줄 수 있다. 하지만 정원 규정의 직접 수범자는 지자체이며 주민·수험생의 불편은 간접·사실적 영향이어서 자기관련성을 인정하지 않았다. “손해를 느끼는 사람은 모두 청구인”이라는 생각을 고치는 사례다.</p>
+<p>반면 제3자라도 자신의 기본권이 <strong>직접적·법적으로</strong> 침해되면 가능하다(2003헌마841). 입법 목적·실제 규율 대상·영향의 진지성·직접 상대방의 소원 기대 가능성 등을 종합한다(96헌마133). 수혜법령에서 부당하게 제외된 사람은 평등 침해를 다툴 수 있고, 비교집단의 혜택 제거로 상대적 법적 지위가 개선될 여지가 있는 경우도 자기관련성을 인정할 수 있다(2009헌마340). <strong>시험:</strong> 워크북335·336. <strong>키워드:</strong> 내 권리·사실/법적 영향·배제된 수혜자. <strong>한 줄:</strong> 서류의 상대방이 아니라도 내 법적 권리가 직접 침해되면 다시 따진다.</p>
+<h2 id="governance-15-25" data-concept-id="governance-15-25">4-3. 직접성: 다른 처분을 거쳐야 침해가 생기는가 ★★★★★</h2>
+<p><strong>교재291–292쪽 / 문단의 역할:</strong> 법령 자체와 집행행위 중 무엇을 다툴지 정한다.</p>
+<p>공권력 그 자체가 기본권을 침해해야 한다. 법률을 다투려면 별도 집행행위 없이 자유 제한·의무 부과·지위 박탈이 생기는 것이 원칙이다(2015헌마134). 행정청의 재량적 판단을 거쳐야 침해가 현실화되면 법률 자체의 직접성이 부정된다(2003헌마3). 하위규범이 구체화해야 하는 법률도 원칙적으로 같다(94헌마213).</p>
+<p>다만 법률과 시행령이 불가분적으로 하나의 규율을 만들면 함께 직접성을 인정할 수 있다(99헌마480·2007헌마949). 집행이 있어도 법문이 일의적·명백하여 재량 없이 정해진 집행을 해야 하는 경우, 구제절차가 없거나 권리구제 기대가 없어 불필요한 우회만 강요하는 경우에는 예외를 인정한다(2005헌마173·90헌마82).</p>
+<p>학습용 사례: 법률이 시행 즉시 특정 자격을 박탈하면 그 법을 직접 다툴 수 있다. 반면 허가 취소 여부를 관청이 여러 사정에 따라 결정해야 하면 구체 처분과 구제절차를 먼저 본다. <strong>시험:</strong> 워크북337. <strong>키워드:</strong> 매개 집행·재량·일의명백·우회 불필요. <strong>한 줄:</strong> 침해를 실제로 만드는 마지막 법적 작용이 무엇인지 찾는다.</p>
+<h2 id="governance-15-26" data-concept-id="governance-15-26">4-4. 현재성: 막연한 미래는 안 되지만 확실히 닥칠 침해는 기다릴 필요가 없다 ★★★★★</h2>
+<p><strong>교재292–293쪽 / 문단의 역할:</strong> 끝난 침해·반복 위험·확실한 장래를 구별한다.</p>
+<p>기본권 침해는 원칙적으로 현재 발생해야 한다. 과거에 끝났거나 장래에 그럴지도 모른다는 사정만으로는 부족하다(89헌마12). 다만 폐지법의 불이익 상태가 계속되거나, 끝난 침해에 중요한 헌법적 해명이 필요하거나, 반복 위험이 있거나, 장래 침해가 확실히 예측되면 예외를 인정한다. 마지막 경우를 <strong>상황성숙성</strong>으로 이해한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>왜 현재 판단할 필요가 있나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>대학입시요강92헌마68등·가산점98헌마363</td>
+<td>확실히 실시될 제도가 준비·진로에 이미 영향을 줌</td>
+</tr>
+<tr>
+<td>시행 전 법률94헌마201·장래 선거91헌마21</td>
+<td>시행·선거가 확실해 침해 발생을 예측할 수 있음</td>
+</tr>
+<tr>
+<td>피의자신문 변호인 참여2000헌마138</td>
+<td>신문은 끝났어도 조력권 범위를 밝힐 중요성이 남음</td>
+</tr>
+<tr>
+<td>부재자투표2008헌마438</td>
+<td>주기적 선거에서 반복되고 기다리면 절차가 끝나 버림</td>
+</tr>
+<tr>
+<td>안마사 자격2003헌마715·2006헌마1098</td>
+<td>자격 신청 등 준비로 침해가 확실하며 교육기회 자체의 배제도 원인 법령과 연결</td>
+</tr>
+</tbody></table>
+<p>안마사 사례에서 이미 반려된 신청자와 아직 처리 전인 신청자의 상황은 달라도, 준비와 적용이 구체화되면 장래 침해를 확실히 예측할 수 있다. 단순히 언젠가 그 직업을 가질지도 모른다는 생각과 다르다. <strong>시험:</strong> 워크북338. <strong>키워드:</strong> 현재·계속결과·반복·해명·성숙성. <strong>한 줄:</strong> 구제할 때를 놓치게 할 만큼 기다리라고 요구하지 않는다.</p>
+<h2 id="governance-15-27" data-concept-id="governance-15-27">4-5. 보충성은 실효적인 선행구제를 먼저 쓰라는 뜻이다 ★★★★★</h2>
+<p><strong>교재294쪽 / 문단의 역할:</strong> 다른 구제절차의 범위와 예외를 설명한다.</p>
+<p>68① 단서는 다른 법률에 구제절차가 있으면 모두 거치도록 한다. 여기서 절차는 문제 공권력을 <strong>직접 대상으로 그 효력을 다툴 수 있는 적법한 구제</strong>다. 사후 손해배상·손실보상까지 모두 먼저 하라는 뜻은 아니다(92헌마297).</p>
+<p>청구인 탓으로 돌릴 수 없는 정당한 착오, 구제 가능성이 거의 없거나 허용 여부가 객관적으로 불확실하여 선행 절차 이행을 기대하기 어려운 경우에는 예외가 있다(88헌마22). 단지 “아마 질 것 같다”는 개인 예상만으로 생략하지 않는다. 종전 대법원 판례를 믿어 헌소를 진행하다 판례변경으로 소송기간이 지나 버린2003헌마723, 권력적 사실행위2009헌마527, 피의자의 기소유예 불복 등이 교재 사례다.</p>
+<p>행정입법부작위처럼 통상 소송의 문이 없는 유형도 실제 가능한 구제절차를 확인한다. <strong>직접성</strong>은 무엇이 침해를 만들었나, <strong>보충성</strong>은 다른 적법한 구제절차를 먼저 거쳤나라는 서로 다른 질문이다. <strong>시험:</strong> 워크북339·340. <strong>키워드:</strong> 직접 구제·배상 제외·객관적 불확실·정당한 착오. <strong>한 줄:</strong> 쓸 수 있는 실효적 길은 먼저 쓰되 형식적인 우회를 강요하지 않는다.</p>
+<h2 id="governance-15-28" data-concept-id="governance-15-28">4-6. 권리보호이익은 청구 때만 아니라 결정 때도 필요하다 ★★★★☆</h2>
+<p><strong>교재295쪽 / 문단의 역할:</strong> 지금 재판해서 얻을 법적 이익을 묻는다.</p>
+<p>승소하면 기본권상 이익이 회복·증진될 필요가 있어야 한다. 국가도 아무 효과 없는 헌법소송을 계속할 필요는 없기 때문이다. 원칙적으로 청구 때와 결정 때 모두 존재해야 하며, 진행 중 사실·법률관계 변화로 침해가 끝나면 소원이 부적법해질 수 있다.</p>
+<p>그러나 소원의 객관적 헌법질서 보장 기능 때문에 헌법적 해명이 중요하거나 같은 침해가 반복될 위험이 있으면 예외가 있다(2011헌마782등). 사건이 매우 개별적·특수하여 일반적으로 반복될 위험이 없으면 그 이유만으로 예외를 인정하지 않는다(99헌마592등). 앞의 현재성과 겹치는 설명이 있지만, 여기서는 <strong>결정으로 무엇을 보호할 실익이 남았는가</strong>에 초점을 둔다. <strong>시험:</strong> 워크북341. <strong>키워드:</strong> 청구+결정 시·실익·객관적 보호 예외. <strong>한 줄:</strong> 과거에 잘못이 있었다는 것과 지금 이 심판이 필요한지는 다르다.</p>
+<h1>5. 접수부터 결정까지, 마지막 숫자를 정리하기</h1>
+<h2 id="governance-15-29" data-concept-id="governance-15-29">5-1. 변호사·기간·국선대리인과 날짜 계산 ★★★★★</h2>
+<p><strong>교재295–297쪽 / 문단의 역할:</strong> 실체가 있어도 놓칠 수 있는 절차 문턱을 정리한다.</p>
+<p>사인은 변호사를 대리인으로 선임하여 서면 청구한다. 본인이 변호사 자격이 있으면 예외다. 자력이 없으면 국선대리인을 신청할 수 있고, 현행70조는 공익상 필요에 의한 선정도 규정한다. 국선 신청일을 기준으로 청구기간을 판단하고, 불선정 시 신청부터 통지까지 기간을 산입하지 않는 규정 등도 있다. 단순 상담 예약이 법정 청구나 국선 신청을 대신하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>절차</th>
+<th>기간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>권한쟁의</td>
+<td>안 날60일·사유 있는 날180일</td>
+</tr>
+<tr>
+<td>일반68①소원</td>
+<td>안 날90일·사유 있는 날1년</td>
+</tr>
+<tr>
+<td>법정 구제절차를 거친68①소원</td>
+<td>최종결정 통지일부터30일</td>
+</tr>
+<tr>
+<td>68②소원</td>
+<td>제청신청 기각 통지일부터30일</td>
+</tr>
+<tr>
+<td>2026재판소원</td>
+<td>재판 확정일부터30일</td>
+</tr>
+</tbody></table>
+<p>법령은 시행 즉시 침해되면 시행을 기준으로 하되, 나중에 처음 그 규율을 구체적·현실적으로 적용받으면 <strong>그 사유 발생일</strong>을 기준으로 한다(2004헌마655). 법이 오래전에 만들어졌다는 이유만으로 새로 규율받는 사람의 기간이 이미 지났다고 단정하지 않는다.</p>
+<p>기간 계산은 민법 원칙을 따른다. 일·주·월·연은 초일 불산입이 원칙이나 오전0시부터 시작하면 산입한다. 말일 종료 때 만료하고, 주·월·연은 달력으로 계산한다. 기산일에 대응하는 날의 전일, 대응일이 없는 달의 말일 규칙을 적용하며, 말일이 토요일·공휴일이면 다음 날로 넘긴다. 연속 공휴일도 확인한다. 법령 시행일의0시 시작과 낮에 받은 통지를 같은 식으로 세지 않는다. <strong>시험:</strong> 워크북342. <strong>키워드:</strong>90/1년·30의 출발점·최초 적용·초일/말일. <strong>한 줄:</strong> 숫자를 외우기 전에 어떤 사건의 어느 날부터인지 쓴다.</p>
+<h2 id="governance-15-30" data-concept-id="governance-15-30">5-2. 사전심사를 통과했다고 적법·승소가 확정되는 것은 아니다 ★★★★☆</h2>
+<p><strong>교재297쪽 / 문단의 역할:</strong> 청구서·서면심리·지정재판부의 역할을 설명한다.</p>
+<p>청구서에는 청구인·대리인, 침해된 권리, 원인 공권력, 청구 이유 등을 적는다. 헌법소원은 <strong>서면심리</strong>가 원칙이지만 필요하면 변론을 열 수 있다.68②는 제청서 형식을 준용하고 재판소원은 재판서·확정증명원을 추가한다.</p>
+<p>3명 지정재판부가 법정 사전심사 각하사유를 <strong>전원일치</strong>로 판단한다. 보충성 위반·기간 경과·대리인 미선임·보정 불가 부적법, 현행 재판소원 사유에 명백히 해당하지 않는 경우 등이다. 교재의72② 인용은 현행 <strong>72③</strong>으로 정리한다. 고칠 수 있는 흠에는 보정 문제를 먼저 확인한다.</p>
+<p>각하에 일치하지 않으면 전원재판부로 회부하고, 청구 후30일 안에 각하가 없으면 회부결정이 있는 것으로 본다. 전원재판부가 다시 적법요건을 살펴 각하할 수 있다. <strong>시험:</strong> 워크북343. <strong>키워드:</strong> 서면·3명일치·30회부·다시 적법심사. <strong>한 줄:</strong> 입구의 사전심사를 통과한 것과 본안 승소는 다르다.</p>
+<h2 id="governance-15-31" data-concept-id="governance-15-31">5-3. 헌법소원 가처분은 이제 명문 규정이 있다 ★★★★★</h2>
+<p><strong>교재298쪽 / 문단의 역할:</strong> 최종 승소를 기다리는 동안의 손해를 막는다.</p>
+<p>교재는 명문이 없어도 가처분을 인정한 판례를 설명한다. 현행은2026신설 <strong>71의2</strong>에 따라 직권 또는 신청으로 종국결정까지 대상 공권력의 효력을 정지할 수 있다. 소원 청구만으로 자동 정지되거나 가처분 인용이 본안 승소를 뜻하는 것은 아니다.</p>
+<p><strong>2000헌사471:</strong> 당시 사법시험1차 응시횟수 제한 때문에 신청인들은 다가오는 시험에 응시하지 못할 상황이었다. 본안 결정이 늦으면 한 번의 합격 기회가 사라지고 나중에 돌이킬 수 없다. 헌재는 회복곤란 손해·긴급성을 보고, 잠시 응시 기회를 허용할 때의 손실과 허용하지 않았다가 승소할 때의 손실을 비교하여 효력정지를 인정했다. 지금 시행 중인 사법시험 제도 설명이 아니라 <strong>과거 가처분 법리 사례</strong>다.</p>
+<p><strong>문장 번역:</strong> ‘회복하기 어려운 손해’ → 나중에 이겨도 놓친 시험 기회를 그대로 되돌리기 어려움. ‘긴급성’ → 시험일 전에 판단해야 함. ‘비교형량’ → 임시 허용이 틀렸을 위험과 임시 거절이 틀렸을 위험을 비교. <strong>키워드:</strong>71의2·긴급·회복곤란·형량. <strong>한 줄:</strong> 너무 늦은 승소를 막기 위해 잠시 보호하는 절차다.</p>
+<h2 id="governance-15-32" data-concept-id="governance-15-32">5-4. 헌소 인용은6명, 국가가 따를 의무와 구체적 구제를 남긴다 ★★★★★</h2>
+<p><strong>교재298–299쪽 / 문단의 역할:</strong> 결정 유형·주문·효력을 연결한다.</p>
+<p>청구인 사망 뒤 수계할 사람이 없거나 취하하면 심판절차종료, 부적법이면 각하, 이유 없으면 기각, 이유 있으면 인용이다. 각하 후 보정 가능한 흠을 바로잡아 재청구할 수 있는 경우라도 기간 등 나머지 요건을 다시 확인한다. 인용에는 <strong>6명 이상 찬성</strong>이 필요하다.</p>
+<p>인용 주문에는 침해된 기본권과 원인 공권력을 특정한다. 남아 있는 공권력 행사를 취소하거나, 불행사·이미 끝난 침해의 위헌성을 확인할 수 있다. 원인 법률이 위헌이면 그 법률의 위헌도 선고할 수 있고 현행75⑥⑦ 및45·47을 따른다.</p>
+<p>인용결정은 모든 국가기관·지자체를 기속한다. 불행사 인용이면 결정 취지에 따른 새로운 처분을 해야 한다(현행75⑤). 재판소원 인용이면 재판 취소와 법원의 다시 재판 의무(75④),68② 인용과 관련 확정소송은 재심(75⑧⑨)이다. 교재의75조 항번호는2026개정으로 밀렸으므로 <strong>내용과 현재 번호를 함께</strong> 정리한다. <strong>시험:</strong> 워크북344·345. <strong>키워드:</strong> 종료/각하/기각/인용·6·주문 특정·기속. <strong>한 줄:</strong> 승소는 선언으로 끝나지 않고 국가가 결정대로 행동할 의무를 만든다.</p>
+<h2 id="governance-15-33" data-concept-id="governance-15-33">5-5. 헌재 규칙도 법률을 넘어설 수 없다 ★★★☆☆</h2>
+<p><strong>교재299–300쪽 / 문단의 역할:</strong> 헌재의 자율적 운영에도 법률의 한계가 있음을 마무리한다.</p>
+<p>헌법113②·헌재법10에 따라 법률에 저촉되지 않는 범위에서 <strong>심판절차·내부규율·사무처리</strong> 규칙을 만들고 관보에 공포한다. 제정·개정은 재판관회의 의결 사항이다. 재판관 전원의⅔를 초과하는 출석과 출석 과반수 찬성이다. 재판관회의의 행정 의결을 전원재판부의 본안 결정이나 지정재판부의 사전심사와 혼동하지 않는다.</p>
+<p>전체 과목을 연결하면 국회·대통령·대법원·헌재의 권한은 근거와 범위가 다르고, 자율성이 있어도 헌법·법률에 따른 한계를 갖는다. <strong>시험:</strong> 워크북346. <strong>키워드:</strong> 법률 저촉금지·3분야·관보·재판관회의. <strong>한 줄:</strong> 헌법을 지키는 기관도 자기 규칙으로 법률을 넘어서지는 못한다.</p>
+<h1>용어를 한자부터 이해하기</h1>
+<h3>權限爭議 권한쟁의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 限(한정할 한), 爭(다툴 쟁), 議(의논할 의). <strong>③ 합친 뜻:</strong> 권한의 경계를 다툼. <strong>④ 이름의 이유:</strong> 누가 국가의 일을 할지 법적으로 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가기관·지자체 간 헌법·법률상 권한의 유무·범위 분쟁. <strong>⑥ 쉬운 말:</strong> 이 일은 누구에게 맡겨졌는가. <strong>⑦ 사례:</strong> 의원의 심의표결권 침해.</p>
+<p><strong>⑧ 시험:</strong> 개인적 불만을 기관 권한으로 혼동. <strong>⑨ 비교·기억법:</strong> 권한은 공적 능력·기본권은 국가에 대한 권리.</p>
+<h3>有權的判斷 유권적 판단</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 有(있을 유), 權(권세 권), 的(과녁 적), 判(판단할 판), 斷(끊을 단). <strong>③ 합친 뜻:</strong> 권한 있는 기관의 판단. <strong>④ 이름의 이유:</strong> 사적 의견과 공적 결론을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법적으로 그 문제를 결정할 권한을 가진 기관의 판단. <strong>⑥ 쉬운 말:</strong> 법이 맡긴 기관이 공식으로 결정함. <strong>⑦ 사례:</strong> 헌재의 권한 범위 판단.</p>
+<p><strong>⑧ 시험:</strong> 힘이 센 사람이 정한다는 함정. <strong>⑨ 비교·기억법:</strong> 유권은 임의적·정치적 결정이라는 뜻이 아니다.</p>
+<h3>例示·列擧 예시·열거</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 例(법식 례), 示(보일 시), 列(벌일 렬), 擧(들 거). <strong>③ 합친 뜻:</strong> 예를 보임·대상을 늘어놓음. <strong>④ 이름의 이유:</strong> 법문 목록의 범위를 해석한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목록 밖 포함 가능성이 있는 예시와 제한적으로 정한 목록. <strong>⑥ 쉬운 말:</strong> 몇 가지 예인가, 여기 적힌 것만인가. <strong>⑦ 사례:</strong> 국가기관 예시·지자체 법정 종류.</p>
+<p><strong>⑧ 시험:</strong> 예시이면 모든 단체 가능. <strong>⑨ 비교·기억법:</strong> 헌법설치·독자권한 등 기준은 남는다.</p>
+<h3>當事者能力·適格 당사자능력·적격</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 當(마땅할 당), 事(일 사), 者(놈 자), 能(능할 능), 力(힘 력), 適(맞을 적), 格(격식 격). <strong>③ 합친 뜻:</strong> 당사자가 될 능력·이 사건에 맞는 자격. <strong>④ 이름의 이유:</strong> 남의 권한을 아무나 주장하지 못하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반적 소송주체 자격과 구체 권한·권리의 주체라는 자격. <strong>⑥ 쉬운 말:</strong> 소송에 들어올 수 있나, 지금 내 사건이 맞나. <strong>⑦ 사례:</strong> 의원이 국회 동의권을 대신 주장.</p>
+<p><strong>⑧ 시험:</strong> 의원이 당사자 가능하니 모든 국회권한 주장 가능. <strong>⑨ 비교·기억법:</strong> 능력과 자기권한의 적격을 순서대로.</p>
+<h3>一身專屬 일신전속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 一(한 일), 身(몸 신), 專(오로지 전), 屬(무리 속). <strong>③ 합친 뜻:</strong> 그 사람에게만 속함. <strong>④ 이름의 이유:</strong> 개인의 지위와 결합된 성격을 표시한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 성질상 다른 사람에게 승계·상속할 수 없는 권한·권리. <strong>⑥ 쉬운 말:</strong> 남에게 넘겨줄 수 없는 그 직의 권한. <strong>⑦ 사례:</strong> 의원직 상실 뒤 개인 심의표결권 사건 종료.</p>
+<p><strong>⑧ 시험:</strong> 후임 의원이 자동 승계. <strong>⑨ 비교·기억법:</strong> 기관 자체의 권한과 의원 개인 권한 구별.</p>
+<h3>機關委任事務 기관위임사무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 機(틀 기), 關(관계할 관), 委(맡길 위), 任(맡길 임), 事(일 사), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 기관에 맡긴 사무. <strong>④ 이름의 이유:</strong> 처리자와 권한 귀속을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가 등이 지자체장 등에게 맡겨 처리하게 하는 국가사무 등. <strong>⑥ 쉬운 말:</strong> 도지사가 해도 국가가 맡긴 일일 수 있음. <strong>⑦ 사례:</strong> 국가사무를 도지사가 집행.</p>
+<p><strong>⑧ 시험:</strong> 지자체장 수행이면 모두 자치사무. <strong>⑨ 비교·기억법:</strong> 자치사무와 기관위임사무는 보호할 주체가 다르다.</p>
+<h3>第三者訴訟擔當 제3자 소송담당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 第(차례 제), 三(석 삼), 者(놈 자), 訴(호소할 소), 訟(송사할 송), 擔(멜 담), 當(마땅할 당). <strong>③ 합친 뜻:</strong> 제3자가 소송을 맡음. <strong>④ 이름의 이유:</strong> 자기권리 소송의 예외를 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권리 주체 아닌 자가 자기 이름으로 타인의 권리를 위해 소송 수행. <strong>⑥ 쉬운 말:</strong> 내 이름으로 남의 권한을 지키는 소송. <strong>⑦ 사례:</strong> 의원이 국회의 조약 동의권 주장.</p>
+<p><strong>⑧ 시험:</strong> 소수 보호 필요성만으로 현행법상 인정. <strong>⑨ 비교·기억법:</strong> 대리인은 남의 이름으로 수행한다는 점도 다름.</p>
+<h3>機關訴訟·機關爭訟 기관소송·기관쟁송</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 機(틀 기), 關(관계할 관), 訴(호소할 소), 訟(송사할 송), 爭(다툴 쟁). <strong>③ 합친 뜻:</strong> 기관끼리 하는 소송·기관 간 분쟁재판. <strong>④ 이름의 이유:</strong> 헌재와 법원의 관할을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기관분쟁 전체와 그중 행정소송법상 법정 기관소송. <strong>⑥ 쉬운 말:</strong> 기관 다툼도 정해진 재판 길이 다름. <strong>⑦ 사례:</strong> 헌재 권한쟁의 밖 법정 기관소송.</p>
+<p><strong>⑧ 시험:</strong> 마음대로 법원과 헌재 선택. <strong>⑨ 비교·기억법:</strong> 권한쟁의 제외+개별법 근거 필요.</p>
+<h3>法令補充規則·自己拘束 법령보충규칙·자기구속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법), 令(명령할 령), 補(기울 보), 充(채울 충), 規(법 규), 則(법칙 칙), 自(스스로 자), 己(몸 기), 拘(잡을 구), 束(묶을 속). <strong>③ 합친 뜻:</strong> 법령 내용을 채움·스스로 묶임. <strong>④ 이름의 이유:</strong> 내부 지침이 대외적 효력을 갖는 이유를 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위임으로 대외적 효력을 갖는 규칙과 평등·신뢰보호상 행정관행 준수. <strong>⑥ 쉬운 말:</strong> 위임받아 정한 기준 또는 계속 적용해 지켜야 하는 기준. <strong>⑦ 사례:</strong> 지방 수당 기준·반복 재량준칙.</p>
+<p><strong>⑧ 시험:</strong> 모든 내부 지침이 곧 법규. <strong>⑨ 비교·기억법:</strong> 법령 위임과 행정 자기구속은 다른 근거.</p>
+<h3>不變期間·起算點 불변기간·기산점</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 變(변할 변), 期(기약할 기), 間(사이 간), 起(일어날 기), 算(셈 산), 點(점 점). <strong>③ 합친 뜻:</strong> 임의 변경하지 않는 기간·계산 시작점. <strong>④ 이름의 이유:</strong> 언제까지 다툴지 안정성을 준다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법이 정한 엄격한 절차기간과 그 계산 출발점. <strong>⑥ 쉬운 말:</strong> 며칠 안인지와 어느 날부터인지. <strong>⑦ 사례:</strong> 권한쟁의60·180.</p>
+<p><strong>⑧ 시험:</strong> 처분이 영원히 확정된 때부터60일. <strong>⑨ 비교·기억법:</strong> 침해 현실 인식일과 발생일 두 시계.</p>
+<h3>作爲·不作爲 작위·부작위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 作(지을 작), 爲(할 위), 不(아닐 불). <strong>③ 합친 뜻:</strong> 행동함·해야 할 행동을 안 함. <strong>④ 이름의 이유:</strong> 단순 침묵과 위법한 불이행을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적극적 행위와 법적 작위의무의 불이행. <strong>⑥ 쉬운 말:</strong> 할 의무가 있는데 하지 않음. <strong>⑦ 사례:</strong> 의무 있는 개표·선포 불이행.</p>
+<p><strong>⑧ 시험:</strong> 아무 행동 안 하면 모두 위헌. <strong>⑨ 비교·기억법:</strong> 먼저 구체적 법적 의무를 확인.</p>
+<h3>顯著한 危險 현저한 위험</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 顯(나타날 현), 著(나타날 저), 危(위태할 위), 險(험할 험). <strong>③ 합친 뜻:</strong> 뚜렷하게 드러난 위험. <strong>④ 이름의 이유:</strong> 추상적 걱정과 보호할 위험을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 조만간 권한 침해가 거의 확실하고 내용·시간이 구체화된 상태. <strong>⑥ 쉬운 말:</strong> 그냥 걱정이 아니라 실제로 곧 침해될 상황. <strong>⑦ 사례:</strong> 확실히 예정된 장래처분.</p>
+<p><strong>⑧ 시험:</strong> 아주 먼 가능성만으로 청구. <strong>⑨ 비교·기억법:</strong> 구체화와 사전 보호 필요를 함께 본다.</p>
+<h3>取下·訴訟承繼 취하·소송승계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 取(가질 취), 下(아래 하), 訴(호소할 소), 訟(송사할 송), 承(이을 승), 繼(이을 계). <strong>③ 합친 뜻:</strong> 청구를 거둠·소송을 이어받음. <strong>④ 이름의 이유:</strong> 절차가 끝나는지 이어지는지 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적법한 청구 철회와 지위 변동 시 소송상 지위의 이전. <strong>⑥ 쉬운 말:</strong> 내가 낸 청구를 거두거나 후임이 이어 감. <strong>⑦ 사례:</strong> 일신전속 권한은 승계 불가.</p>
+<p><strong>⑧ 시험:</strong> 공익소송은 모든 취하 불가. <strong>⑨ 비교·기억법:</strong> 취하 규정 준용과 절차 조건 확인.</p>
+<h3>確認·取消·無效 확인·취소·무효</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 確(굳을 확), 認(알 인), 取(가질 취), 消(사라질 소), 無(없을 무), 效(본받을 효). <strong>③ 합친 뜻:</strong> 상태를 밝힘·효력을 제거·효력 없음. <strong>④ 이름의 이유:</strong> 위법 판단과 효과 판단을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 권한 침해 확인과 원인 처분의 효력 제거 또는 부인의 구별. <strong>⑥ 쉬운 말:</strong> 잘못이라고 밝히는 것과 결과를 없애는 것은 다름. <strong>⑦ 사례:</strong> 심의표결권 침해 인정·가결 무효 불인정.</p>
+<p><strong>⑧ 시험:</strong> 침해 확인이면 법률 자동 무효. <strong>⑨ 비교·기억법:</strong> 각 주문이 하는 일을 따로 읽는다.</p>
+<h3>羈束力·結果除去義務 기속력·결과제거의무</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 羈(굴레 기), 束(묶을 속), 力(힘 력), 結(맺을 결), 果(열매 과), 除(덜 제), 去(갈 거), 義(옳을 의), 務(힘쓸 무). <strong>③ 합친 뜻:</strong> 결정에 묶임·결과를 없앨 의무. <strong>④ 이름의 이유:</strong> 반복금지와 적극적 후속조치를 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결정 준수와 위법상태를 적극적으로 제거할 의무의 범위. <strong>⑥ 쉬운 말:</strong> 같은 잘못을 안 하는 것과 이미 생긴 결과를 고치는 것. <strong>⑦ 사례:</strong> 2009헌라12의 의견 대립.</p>
+<p><strong>⑧ 시험:</strong> 확인결정의 적극의무 범위가 모두 확정됐다는 함정. <strong>⑨ 비교·기억법:</strong> 부작위 인용의 명문 이행의무는 별도.</p>
+<h3>憲法訴願 헌법소원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 憲(법 헌), 法(법 법), 訴(호소할 소), 願(원할 원). <strong>③ 합친 뜻:</strong> 헌법에 기대어 구제를 호소. <strong>④ 이름의 이유:</strong> 헌법의 권리를 재판으로 실현한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공권력에 의한 기본권 구제 및68②법률심사를 구하는 심판. <strong>⑥ 쉬운 말:</strong> 국가가 침해한 권리를 헌재에 지켜 달라고 함. <strong>⑦ 사례:</strong> 위헌 처분·기소유예·법률심사.</p>
+<p><strong>⑧ 시험:</strong> 모든 사적 억울함을 직접 소원. <strong>⑨ 비교·기억법:</strong> 68①와②의 요건부터 구별.</p>
+<h3>主觀訴訟·客觀訴訟 주관소송·객관소송</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 主(주인 주), 觀(볼 관), 訴(호소할 소), 訟(송사할 송), 客(손 객). <strong>③ 합친 뜻:</strong> 개인 권리 중심·법질서 중심 소송. <strong>④ 이름의 이유:</strong> 개인 침해 종료 후 심판 필요의 예외를 설명한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주관적 권리구제와 객관적 헌법질서 보호의 성격. <strong>⑥ 쉬운 말:</strong> 내 권리를 지키면서 국가의 반복 잘못도 고침. <strong>⑦ 사례:</strong> 소원의 이중적 성격.</p>
+<p><strong>⑧ 시험:</strong> 주관소송이면 객관적 기능 전혀 없음. <strong>⑨ 비교·기억법:</strong> 감정적·객관적이라는 일상 표현과 다름.</p>
+<h3>權利救濟型·違憲審査型 권리구제형·위헌심사형</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 利(이로울 리), 救(구원할 구), 濟(건널 제), 型(거푸집 형), 違(어길 위), 憲(법 헌), 審(살필 심), 査(조사할 사). <strong>③ 합친 뜻:</strong> 권리를 구하는 유형·위헌을 심사하는 유형. <strong>④ 이름의 이유:</strong> 유형에 맞는 요건을 적용한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 68①기본권 구제와68②법원 기각 뒤 법률심사. <strong>⑥ 쉬운 말:</strong> 내 권리 침해와 내 재판의 법률 문제를 나눔. <strong>⑦ 사례:</strong> 행정청도68②가능.</p>
+<p><strong>⑧ 시험:</strong> 68②에 기본권 주체성 요구. <strong>⑨ 비교·기억법:</strong> 법원 제청과68②의 실질은 같은 규범통제.</p>
+<h3>基本權主體·受範者 기본권주체·수범자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기), 本(근본 본), 權(권세 권), 主(주인 주), 體(몸 체), 受(받을 수), 範(법 범), 者(놈 자). <strong>③ 합친 뜻:</strong> 권리를 누릴 주체·규범을 따라야 할 자. <strong>④ 이름의 이유:</strong> 권리를 요구하는 쪽과 지켜야 할 쪽을 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권 보유자와 기본권을 존중·보호할 국가 등의 지위. <strong>⑥ 쉬운 말:</strong> 국민은 권리를 갖고 국가는 지킬 의무를 짐. <strong>⑦ 사례:</strong> 국립대학 학문자유 예외.</p>
+<p><strong>⑧ 시험:</strong> 공법인 모두 주체 또는 모두 불가. <strong>⑨ 비교·기억법:</strong> 기능·과제·국가와 대립 가능한 독립성.</p>
+<h3>自然人·法人·公法人 자연인·법인·공법인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 然(그럴 연), 人(사람 인), 法(법 법), 公(공평할 공). <strong>③ 합친 뜻:</strong> 사람·법이 주체로 인정한 단체·공법상 법인. <strong>④ 이름의 이유:</strong> 조직도 성질에 맞는 기본권을 가질 수 있다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자연인과 조직체의 권리주체 형태. <strong>⑥ 쉬운 말:</strong> 사람뿐 아니라 단체도 권리가 있음. <strong>⑦ 사례:</strong> 법인의 재산권·방송공사의 방송자유.</p>
+<p><strong>⑧ 시험:</strong> 단체는 무조건 청구능력 없음. <strong>⑨ 비교·기억법:</strong> 단체 자체와 내부기관은 구별.</p>
+<h3>公權力·高權的作用 공권력·고권적 작용</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공), 權(권세 권), 力(힘 력), 高(높을 고), 的(과녁 적), 作(지을 작), 用(쓸 용). <strong>③ 합친 뜻:</strong> 공적 권력·우월한 공적 권한 작용. <strong>④ 이름의 이유:</strong> 사적 분쟁과 헌법적 통제를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가 등의 공적 권한 행사로 법적 지위에 영향을 주는 작용. <strong>⑥ 쉬운 말:</strong> 국가가 권한으로 나에게 강제하거나 결정함. <strong>⑦ 사례:</strong> 국립대학 공적 처분.</p>
+<p><strong>⑧ 시험:</strong> 사인의 범죄가 곧 공권력 행사. <strong>⑨ 비교·기억법:</strong> 공적 권한 위탁 여부와 행위 실질 확인.</p>
+<h3>自己執行條約 자기집행조약</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 己(몸 기), 執(잡을 집), 行(다닐 행), 條(가지 조), 約(맺을 약). <strong>③ 합친 뜻:</strong> 자체로 집행되는 조약. <strong>④ 이름의 이유:</strong> 어떤 규범이 직접 침해를 만드는지 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 추가 국내입법 없이 직접 적용되는 조약. <strong>⑥ 쉬운 말:</strong> 별도 법을 만들지 않아도 바로 적용되는 국제 약속. <strong>⑦ 사례:</strong> 국내 직접효 있는 조약의 소원.</p>
+<p><strong>⑧ 시험:</strong> 모든 조약이 직접 소원 대상. <strong>⑨ 비교·기억법:</strong> 비자기집행은 국내 구체화 법령을 본다.</p>
+<h3>眞正·不眞正立法不作爲 진정·부진정 입법부작위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 眞(참 진), 正(바를 정), 不(아닐 불), 立(설 립), 法(법 법), 作(지을 작), 爲(할 위). <strong>③ 합친 뜻:</strong> 입법 전무·기존 입법 불완전. <strong>④ 이름의 이유:</strong> 심판대상과 청구기간을 정확히 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법상 의무인데 법이 전혀 없는 경우와 기존 법의 결함. <strong>⑥ 쉬운 말:</strong> 아예 안 만들었나, 잘못 만들었나. <strong>⑦ 사례:</strong> 수용보상 절차 법률 부재.</p>
+<p><strong>⑧ 시험:</strong> 부진정을 계속부작위로 포장해 기간 회피. <strong>⑨ 비교·기억법:</strong> 진정은부작위·부진정은기존법규 대상.</p>
+<h3>行政立法不作爲 행정입법부작위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행), 政(정사 정), 立(설 립), 法(법 법), 不(아닐 불), 作(지을 작), 爲(할 위). <strong>③ 합친 뜻:</strong> 행정부가 필요한 규범을 만들지 않음. <strong>④ 이름의 이유:</strong> 행정부가 상위법 시행을 무력화하지 못하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법적 제정·개정 의무와 상당기간 경과에도 정당한 이유 없는 지연. <strong>⑥ 쉬운 말:</strong> 법은 만들어졌는데 시행할 규칙을 계속 안 만듦. <strong>⑦ 사례:</strong> 국군포로 가족 예우 시행령 지연.</p>
+<p><strong>⑧ 시험:</strong> 법 시행 다음 날 바로 모든 지연 위헌. <strong>⑨ 비교·기억법:</strong> 법적 의무·상당기간·정당사유를 함께 판단.</p>
+<h3>不作爲違法確認訴訟 부작위위법확인소송</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 作(지을 작), 爲(할 위), 違(어길 위), 法(법 법), 確(굳을 확), 認(알 인), 訴(호소할 소), 訟(송사할 송). <strong>③ 합친 뜻:</strong> 행정의 불이행이 위법함을 확인하는 소송. <strong>④ 이름의 이유:</strong> 행정청의 무응답을 통제한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 처분 신청에 대한 법정 응답의무를 상당기간 이행하지 않는 것을 다투는 항고소송. <strong>⑥ 쉬운 말:</strong> 허가 신청에 답도 안 하는 잘못을 법원에서 다툼. <strong>⑦ 사례:</strong> 법정 허가 신청 뒤 침묵.</p>
+<p><strong>⑧ 시험:</strong> 모든 행정부작위는 행정소송 대상 아님. <strong>⑨ 비교·기억법:</strong> 행정입법부작위와 구별.</p>
+<h3>不起訴·起訴猶豫·起訴中止 불기소·기소유예·기소중지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 起(일어날 기), 訴(호소할 소), 猶(오히려 유), 豫(미리 예), 中(가운데 중), 止(그칠 지). <strong>③ 합친 뜻:</strong> 기소하지 않음·기소를 유예·수사 처분을 중지. <strong>④ 이름의 이유:</strong> 처벌하지 않았어도 법적 불이익이 다를 수 있다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 검사의 미기소 처분과 그 사유·성격에 따른 유형. <strong>⑥ 쉬운 말:</strong> 혐의 없음과 혐의 인정 후 봐줌은 다름. <strong>⑦ 사례:</strong> 피의자의 기소유예 소원.</p>
+<p><strong>⑧ 시험:</strong> 기소유예=무죄판결. <strong>⑨ 비교·기억법:</strong> 고소인·피의자별 구제절차도 다름.</p>
+<h3>裁定申請 재정신청</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 裁(마를 재), 定(정할 정), 申(펼 신), 請(청할 청). <strong>③ 합친 뜻:</strong> 법원의 결정을 신청. <strong>④ 이름의 이유:</strong> 검사의 미기소를 사법적으로 통제한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 자격자가 검사의 불기소에 불복하여 법원 판단을 구하는 절차. <strong>⑥ 쉬운 말:</strong> 검사가 재판에 안 넘긴 판단을 법원에 다시 묻음. <strong>⑦ 사례:</strong> 고소인의 불기소 불복.</p>
+<p><strong>⑧ 시험:</strong> 피의자의 기소유예에도 같은 절차 가능. <strong>⑨ 비교·기억법:</strong> 재정 財政과 한자가 다르다.</p>
+<h3>權力的事實行爲 권력적 사실행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 力(힘 력), 的(과녁 적), 事(일 사), 實(열매 실), 行(다닐 행), 爲(할 위). <strong>③ 합친 뜻:</strong> 권력을 이용한 실제 행동. <strong>④ 이름의 이유:</strong> 문서 처분 외 신체·생활의 침해도 통제한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가가 우월한 지위에서 강제로 행하는 사실상의 조치. <strong>⑥ 쉬운 말:</strong> 서류 없이 몸이나 재산에 강제로 행함. <strong>⑦ 사례:</strong> 강제철거·격리·계구 사용.</p>
+<p><strong>⑧ 시험:</strong> 문서가 없으면 공권력 아님. <strong>⑨ 비교·기억법:</strong> 비권력적 안내·권고와 실질 구별.</p>
+<h3>裁判訴願·確定 재판소원·확정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 裁(마를 재), 判(판단할 판), 訴(호소할 소), 願(원할 원), 確(굳을 확), 定(정할 정). <strong>③ 합친 뜻:</strong> 재판에 대한 헌법소원·재판이 확정됨. <strong>④ 이름의 이유:</strong> 사법작용에 의한 기본권 침해의 제한적 구제를 둔다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 68③법정 사유를 갖춘 확정재판에 대한68①소원. <strong>⑥ 쉬운 말:</strong> 최종 재판도 정해진 기본권 침해 사유로 다툼. <strong>⑦ 사례:</strong> 헌재 결정에 반하는 취지의 확정재판.</p>
+<p><strong>⑧ 시험:</strong> 패소하면 자동4심·90일. <strong>⑨ 비교·기억법:</strong> 확정재판·3사유·확정30일.</p>
+<h3>自己關聯性 자기관련성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자), 己(몸 기), 關(관계할 관), 聯(잇닿을 련), 性(성품 성). <strong>③ 합친 뜻:</strong> 자신에게 관련됨. <strong>④ 이름의 이유:</strong> 남의 권리나 간접 손해만으로 청구하지 못하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자기 기본권이 법적으로 침해되는 관계. <strong>⑥ 쉬운 말:</strong> 정말 내 권리가 침해됐나. <strong>⑦ 사례:</strong> 수혜에서 부당하게 제외된 사람.</p>
+<p><strong>⑧ 시험:</strong> 단체가 회원 권리를 당연 대리. <strong>⑨ 비교·기억법:</strong> 제3자라도 직접 법적 침해이면 가능.</p>
+<h3>直接性 직접성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 直(곧을 직), 接(이을 접), 性(성품 성). <strong>③ 합친 뜻:</strong> 바로 이어지는 성질. <strong>④ 이름의 이유:</strong> 법령과 집행행위 중 적절한 대상을 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 공권력 집행을 매개하지 않고 대상 행위 자체가 침해를 발생. <strong>⑥ 쉬운 말:</strong> 이 규정만으로 바로 내 지위가 바뀌나. <strong>⑦ 사례:</strong> 시행 즉시 자격 박탈.</p>
+<p><strong>⑧ 시험:</strong> 재량처분이 필요한 법률도 자동 직접성. <strong>⑨ 비교·기억법:</strong> 일의명백·구제 불가 등 예외.</p>
+<h3>現在性·狀況成熟性 현재성·상황성숙성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현), 在(있을 재), 性(성품 성), 狀(형상 상), 況(하물며 황), 成(이룰 성), 熟(익을 숙). <strong>③ 합친 뜻:</strong> 지금 존재·판단할 만큼 상황이 익음. <strong>④ 이름의 이유:</strong> 너무 이르거나 너무 늦은 구제를 조절한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현재 침해와 장래 침해가 확실하게 구체화된 상황. <strong>⑥ 쉬운 말:</strong> 이미 침해됐거나 확실히 닥칠 상황인가. <strong>⑦ 사례:</strong> 확정된 입시요강·시험 배제.</p>
+<p><strong>⑧ 시험:</strong> 막연한 미래 가능성도 충분. <strong>⑨ 비교·기억법:</strong> 직접성은 원인·현재성은 시점.</p>
+<h3>補充性 보충성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 補(기울 보), 充(채울 충), 性(성품 성). <strong>③ 합친 뜻:</strong> 부족한 것을 채우는 성질. <strong>④ 이름의 이유:</strong> 일반 구제제도와 헌재의 역할을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 법정 직접 구제절차를 먼저 거쳐야 하는 요건. <strong>⑥ 쉬운 말:</strong> 먼저 쓸 법정 구제길을 사용했나. <strong>⑦ 사례:</strong> 재정신청 가능 고소인.</p>
+<p><strong>⑧ 시험:</strong> 손해배상도 모두 먼저 해야 함. <strong>⑨ 비교·기억법:</strong> 직접성은 대상·보충성은 선행절차.</p>
+<h3>權利保護利益 권리보호이익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 利(이로울 리), 保(지킬 보), 護(보호할 호), 益(더할 익). <strong>③ 합친 뜻:</strong> 권리를 지켜 얻을 법적 이익. <strong>④ 이름의 이유:</strong> 효과 없는 소송을 제한하고 필요한 해명을 남긴다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 심판으로 회복·증진할 기본권상 법익과 법적 필요. <strong>⑥ 쉬운 말:</strong> 지금 이겨서 보호할 것이 남아 있나. <strong>⑦ 사례:</strong> 종료 침해의 반복·해명 예외.</p>
+<p><strong>⑧ 시험:</strong> 청구할 때만 있으면 충분. <strong>⑨ 비교·기억법:</strong> 결정 당시까지 원칙적으로 필요.</p>
+<h3>國選代理人·資力 국선대리인·자력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 選(가릴 선), 代(대신할 대), 理(다스릴 리), 人(사람 인), 資(재물 자), 力(힘 력). <strong>③ 합친 뜻:</strong> 국가가 선정한 대리인·경제 능력. <strong>④ 이름의 이유:</strong> 비용 때문에 재판 접근이 막히지 않게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자력 부족 또는 공익 필요 등에 따른 법정 변호사 지원. <strong>⑥ 쉬운 말:</strong> 변호사 비용을 감당하기 어려울 때 법정 도움. <strong>⑦ 사례:</strong> 국선 신청일 기준 기간 규정.</p>
+<p><strong>⑧ 시험:</strong> 상담 예약만 하면 청구기간 정지. <strong>⑨ 비교·기억법:</strong> 정식 신청·선정·불선정 절차 구별.</p>
+<h3>初日不算入·末日 초일불산입·말일</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 初(처음 초), 日(날 일), 不(아닐 불), 算(셈 산), 入(들 입), 末(끝 말). <strong>③ 합친 뜻:</strong> 첫날을 계산하지 않음·마지막 날. <strong>④ 이름의 이유:</strong> 하루 차이로 권리구제가 막히지 않게 정확히 계산한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기간 계산 첫날 제외 원칙과 만료일. <strong>⑥ 쉬운 말:</strong> 통지받은 첫날을 보통 빼고 셈. <strong>⑦ 사례:</strong> 0시 시작은 초일 산입.</p>
+<p><strong>⑧ 시험:</strong> 시행0시와 낮 통지를 똑같이 계산. <strong>⑨ 비교·기억법:</strong> 토요일·공휴일 말일 연장도 확인.</p>
+<h3>指定裁判部·回附 지정재판부·회부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 指(가리킬 지), 定(정할 정), 裁(마를 재), 判(판단할 판), 部(떼 부), 回(돌 회), 附(붙을 부). <strong>③ 합친 뜻:</strong> 정해진 소규모 재판부·심판에 넘김. <strong>④ 이름의 이유:</strong> 부적법 사건을 걸러 본안 심리를 준비한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 3명 사전심사 재판부와 전원재판부 심판으로 넘기는 결정. <strong>⑥ 쉬운 말:</strong> 입구를 살핀 뒤 전체 재판부로 보냄. <strong>⑦ 사례:</strong> 3명 일치 각하·30일 회부.</p>
+<p><strong>⑧ 시험:</strong> 회부=적법 확정·승소. <strong>⑨ 비교·기억법:</strong> 전원재판부도 다시 각하 가능.</p>
+<h3>假處分·比較衡量 가처분·비교형량</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 假(거짓 가), 處(곳 처), 分(나눌 분), 比(견줄 비), 較(견줄 교), 衡(저울대 형), 量(헤아릴 량). <strong>③ 합친 뜻:</strong> 임시 조치·서로 저울질. <strong>④ 이름의 이유:</strong> 늦은 승소가 무의미해지는 것을 막는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 종국결정 전 잠정 구제와 인용·기각 위험 비교. <strong>⑥ 쉬운 말:</strong> 시험 전에 잠시 응시를 허용할지 판단. <strong>⑦ 사례:</strong> 2000헌사471·현행71의2.</p>
+<p><strong>⑧ 시험:</strong> 명문 없음·소원 내면 자동정지. <strong>⑨ 비교·기억법:</strong> 가처분 인용과 본안 승소는 다르다.</p>
+<h3>再審·再裁判 재심·재재판</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 再(다시 재), 審(살필 심), 裁(마를 재), 判(판단할 판). <strong>③ 합친 뜻:</strong> 다시 심리·다시 재판. <strong>④ 이름의 이유:</strong> 각 구제절차의 후속 효과를 구별한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 확정재판의 법정 재심과 재판소원 취소 뒤 법원의 재판. <strong>⑥ 쉬운 말:</strong> 법률심사 승소 뒤 재심과 재판 취소 뒤 다시 재판. <strong>⑦ 사례:</strong> 75⑧과75④.</p>
+<p><strong>⑧ 시험:</strong> 68②인용과 재판소원인용 효과를 동일시. <strong>⑨ 비교·기억법:</strong> 절차·대상·현재 조문번호 함께 확인.</p>
+<h3>規則制定權 규칙제정권</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 規(법 규), 則(법칙 칙), 制(절제할 제), 定(정할 정), 權(권세 권). <strong>③ 합친 뜻:</strong> 규칙을 만들 권한. <strong>④ 이름의 이유:</strong> 기관의 자율적 운영을 보장한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌재가 법률에 저촉되지 않는 범위에서 절차·내부규율·사무 규칙을 제정. <strong>⑥ 쉬운 말:</strong> 자기 운영 규칙을 법률 안에서 정함. <strong>⑦ 사례:</strong> 재판관회의 의결·관보 공포.</p>
+<p><strong>⑧ 시험:</strong> 전원재판부 본안 판결로 제정. <strong>⑨ 비교·기억법:</strong> 심판권과 행정 의결권 구별.</p>
+<h1>기출 연결 · 먼저 풀 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>우선 확인할 것</th>
+<th>출제 의도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>워크북307</td>
+<td>의원 자기권한과 국회권한</td>
+<td>능력과 적격, 제3자 소송담당을 구별하는가</td>
+</tr>
+<tr>
+<td>워크북318</td>
+<td>권한 침해와 가결선포 무효</td>
+<td>한 결론을 다른 결론으로 자동 확대하는가</td>
+</tr>
+<tr>
+<td>워크북324</td>
+<td>68②소원과 재판 정지</td>
+<td>제청과 소원의 효과를 구별하는가</td>
+</tr>
+<tr>
+<td>워크북337</td>
+<td>직접성 예외</td>
+<td>집행행위 존재만으로 기계적으로 각하하는가</td>
+</tr>
+<tr>
+<td>워크북342</td>
+<td>청구기간</td>
+<td>사건유형과 기산점을 정확히 맞추는가</td>
+</tr>
+</tbody></table>
+<p>45문항 중 권한쟁의19문항(302–320), 헌법소원25문항(321–345), 규칙제정1문항(346)이다. 실제 시험 전체 출제율·오답률은 아니다. <strong>306③기관위임,314④법률상 권한,333①구법 재판 제외,335④단체 대리청구,340①배상 선행,345②과반 인용</strong>을 함정으로 점검한다. 원문은 보존하고 수정 필요사항은 보기 해설에 따로 적었다.</p>
+<h1>새로운 사례로 확인하기</h1>
+<h3>응용1 · 같은 의원, 다른 권한</h3>
+<p>의원 가는 본회의 일시를 통보받지 못했다. 의원 나는 대통령이 국회 동의 없이 조약을 체결했다며 국회의 동의권을 자기 이름으로 주장했다. 둘은 같은 이유로 적법한가?</p>
+<p><strong>해설:</strong> 아니다. 가는 자신의 심의·표결권을 주장하지만 나는 국회의 권한을 대신 주장한다. 후자는 제3자 소송담당의 명문 근거가 없어 판례상 부적법하다. <strong>출제 의도:</strong> 당사자능력과 구체적 권한 주체를 분리한다.</p>
+<h3>응용2 · 도지사가 국가 일을 맡았다</h3>
+<p>국가가 도지사에게 위임한 국가사무의 집행을 두고 도가 ‘우리 자치권 침해’라며 청구했다. 도지사가 집행했으니 도의 권한이라는 주장이 맞는가?</p>
+<p><strong>해설:</strong> 기관위임사무는 국가사무다. 집행자가 도지사라는 외형만으로 도 자체의 권한이 되지 않으며 도지사의 당사자능력도 자동 발생하지 않는다. <strong>출제 의도:</strong> 수행자와 권한의 귀속 주체를 구별한다.</p>
+<h3>응용3 · 확정재판을 다투려는 수진</h3>
+<p>수진은 확정재판이 헌재 결정에 반하는 취지로 자신의 기본권을 침해했다고 주장한다. 확정50일 뒤 “안 날90일 안이니까 괜찮다”며 재판소원을 냈다. 핵심 문제는?</p>
+<p><strong>해설:</strong> 현행 재판소원은 확정일부터30일이다. 법정 사유 주장과 기간 준수는 별도 요건이므로 일반90일을 적용할 수 없다. <strong>출제 의도:</strong>2026개정의 대상·사유·기간을 묶되 각각 심사한다.</p>
+<h3>응용4 · 법률이 아니라 관청의 선택</h3>
+<p>법률은 여러 사정을 보아 영업허가를 취소할 수 있게 했다. 민수는 아직 취소처분을 받지 않았지만 앞으로 불리할 수 있다며 법률 자체를 소원했다. 어떤 문턱을 살펴야 하나?</p>
+<p><strong>해설:</strong> 관청 재량처분을 거쳐야 침해가 생기는지의 직접성과, 구체적 현재 침해 또는 확실한 장래 침해인지의 현재성을 따로 본다. 추상적 걱정만으로는 부족하다. <strong>출제 의도:</strong> 직접성과 현재성을 섞지 않는다.</p>
+<h3>응용5 · 시험 전과 시험 후</h3>
+<p>시험 응시를 막는 규정 때문에 지수는 다음 주 시험을 못 본다. 본안은 수개월 걸린다. 시험이 끝나면 무조건 사건이 끝나는가?</p>
+<p><strong>해설:</strong> 먼저71의2 가처분의 긴급성·회복곤란 손해·형량을 검토한다. 시험 뒤 개인 구제이익이 사라져도 반복 위험이나 중요한 헌법적 해명 필요가 있는지 별도로 본다. 임시구제와 본안 심판이익은 다른 질문이다. <strong>출제 의도:</strong> 시간에 따른 구제수단과 요건의 변화를 연결한다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제15강</h2><table><thead><tr><th>주제</th><th>마지막 기준</th></tr></thead><tbody><tr><td>권한쟁의 주체</td><td>국가기관 예시·헌법설치/독자권한 / 지자체 열거·교육감 특례</td></tr><tr><td>자기 권한</td><td>의원 심의표결 가능·국회 동의권 대리 불가 / 기관위임은 국가사무</td></tr><tr><td>권한쟁의 절차</td><td>전원·구두·안 날60/발생180·계속부작위 예외·취하 가능</td></tr><tr><td>권한쟁의 결정</td><td>관여 과반·판례변경6 / 침해확인≠자동무효 / 제3자 기존효과 보호</td></tr><tr><td>68②소원</td><td>당사자·기각·전제성·통지30 / 기본권침해 불요·자동정지 없음</td></tr><tr><td>68①주체·대상</td><td>해당 기본권 주체 / 공권력·구체 작위의무 / 사적 침해와 구별</td></tr><tr><td>입법부작위</td><td>진정=법 전무·명백한 의무 / 부진정=기존 불완전 법규 대상</td></tr><tr><td>자기·직접·현재</td><td>내 법적 권리 / 매개집행 여부 / 현재·확실한 장래·반복/해명 예외</td></tr><tr><td>보충성·이익</td><td>직접 구제절차 먼저·배상 제외 / 원칙 결정 때까지 이익</td></tr><tr><td>기간</td><td>일반90일/1년·구제절차 최종통지30·68②기각통지30</td></tr><tr><td>2026재판소원</td><td>확정·68③3사유·확정30 / 취소 후 법원 다시 재판·가처분71의2</td></tr><tr><td>헌소 절차·효력</td><td>서면·지정3일치·30회부·인용6·기속 / 규칙은 재판관회의</td></tr></tbody></table><p><b>TOP3:</b> 기관의 자기 권한 /68①와②·재판소원 / 자기·직접·현재·보충성.</p><p><b>반드시 외울 문장:</b> 누가, 무엇을, 어느 절차로, 언제까지 다투는지 먼저 정한다.</p><p><b>함정:</b> 권한≠기본권, 능력≠적격, 확인≠무효, 회부≠인용, 패소≠재판소원 적법.</p><p><b>사례를 풀 순서:</b> 주체·자기 권리 → 대상 → 침해·이익 → 선행구제·기간 → 정족수·효과.</p></section>
+
+<h1>이해 상태를 스스로 점검하기</h1>
+<p>의원 개인은 언제 국회의 권한을 대신 주장할 수 없는가? 행정청이68②를 낼 수 있는 이유는? 직접성과 보충성은 어떻게 다른가? 현재 재판소원은 어떤 재판을 언제까지 다투는가?</p>
+<p><strong>🟢 이해 완료:</strong> 네 질문에 이유와 예외를 붙여 답한다. <strong>🟡 복습 필요:</strong> 유형은 알지만 기간·주체·효과가 섞인다. <strong>🔴 이해 부족:</strong> 모든 억울함은 헌소, 모든 기관은 권한쟁의, 모든 패소는 재판소원이라고 생각한다. 답변 전 상태를 확정하지 않는다. 복습 TOP3는 <strong>1-4자기권한 / 2-3법률심사형·3-8재판소원 / 4-2~4-5적격과 보충성</strong>이다.</p>
+<p><strong>전 과목 마지막 연결:</strong> 국민주권·법치·권력분립 → 국회·대통령·정부·독립기관·법원의 조직과 권한 → 헌재의 통제 → 국민의 기본권 구제. 기관 이름을 외우는 것보다 <strong>권한의 근거·한계·책임·구제</strong>를 한 줄로 이어 설명할 수 있으면 전체 구조가 잡힌다.</p>
+<p><strong>출처:</strong> 제공 교재265–302쪽·워크북302–346. 현행 보완은 본문 공식 법령·판례 링크를 대조했다. 교재 판례의 설명용 단순화와 ‘학습용·응용’으로 표시한 가상 사례를 구별한다. 실제 사건의 기간·적법 여부는 개별 기록과 적용법에 따라 달라진다.</p>
+<h1>문제 부록 · 45문항·180개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-통치의기본구조_워크북_302"><h4>워크북 · 통치의기본구조_워크북_302</h4><p class="question-stem">권한쟁의심판의 당사자에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>권한쟁의심판의 당사자가 될 수 있는 기관은 국가기관 또는 지방자치단체이다.</li><li>권한쟁의심판의 당사자가 될 수 있는 국가기관에 관한 헌법재판소의&quot;국회, 정부, 법원 및 중앙선거관리위원회를 말한다&quot;는 규정은 한정적, 열거적인 조항으로 해석되어야 한다.</li><li>청구권자인 국회의원이 권한쟁의심판 절차 계속 중 국회의원 직을 상실하는 경우에는 그와 동시에 심판 절차가 종료한다.</li><li>대통령은 권한쟁의심판에서 당사자 지위를 가질 수 있다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법111①4의 기관 간 분쟁 유형이다.</li><li><strong>선택</strong> · 틀렸다.62①1은 예시이며 헌법해석으로 범위를 정한다.</li><li><strong>비선택</strong> · 의원 개인의 심의표결권은 일신전속적이어서 직 상실 시 절차가 종료한다.</li><li><strong>비선택</strong> · 헌법상 설치·독자 권한을 가진 대통령도 당사자가 될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 과거 헌법재판소는 국가기관의 구성 부분은 권한쟁의심판의 당사자가 되지 못한다는 입장이었으나, 이후 판례를 변경하여 헌법재판소법 제62조 제1항 제1호 규정은 한정적, 열거적인 조항이 아니라 예시적인 조항으로 해석하는 것이 헌법에 합치된다고 보게 되었다(헌재1997.7.16.96헌라2; 2003.10.30.2002헌라1).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_303"><h4>워크북 · 통치의기본구조_워크북_303</h4><p class="question-stem">권한쟁의심판의'국가기관'에 해당하는지 여부를 판단하는 기준에 속하지 않는 것은?</p><ol class="choices"><li>그 국가기관이 헌법에 의하여 설치되었는지 여부</li><li>헌법과 법률에 의하여 독자적인 권한을 부여 받고 있는지 여부</li><li>헌법에 의하여 설치된 국가기관 상호 간의 권한쟁의를 해결할 수 있는 적당한 기관이나 방법이 있는지 여부</li><li>그 권한이 성질상 일신전속적인 것으로 승계되거나 상속될 수 있는 것인지 여부</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법상 설치 여부는 주요 기준이다.</li><li><strong>비선택</strong> · 독자 권한의 부여 여부도 기준이다.</li><li><strong>비선택</strong> · 다른 적절한 해결 방법이 있는지 고려한다.</li><li><strong>선택</strong> · 일신전속성은 직 상실·사망 때 절차 승계·종료 문제이며 당사자능력의 이 세 기준과는 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④ 는 권한쟁의심판의 당사자가 될 수 있는지와 관련된 기준은 아니다. ④ 의 여부는 그 권한을 지니는 사람이 그 직을 잃게 되거나 사망하였을 경우 심판 절차가 종료되는지 아니면 그 직의 후임자에게 승계되어 심판 절차가 계속되는지 여부에 영향을 미치는 요소이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_304"><h4>워크북 · 통치의기본구조_워크북_304</h4><p class="question-stem">다음 중 권한쟁의심판의 당사자가 될 수 없는 자는?</p><ol class="choices"><li>국무총리</li><li>행정각부의 장</li><li>국회의 위원회</li><li>정당</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법상 정부 구성기관의 권한에 관하여 당사자가 될 수 있다.</li><li><strong>비선택</strong> · 헌법상 설치·독자 권한 등 기준을 충족하는 범위에서 가능하다.</li><li><strong>비선택</strong> · 국회의 부분기관도 기준에 따라 당사자가 될 수 있다. 모든 부분조직에 자동 인정하는 뜻은 아니다.</li><li><strong>선택</strong> · 정당은 사적 정치결사이지 국가기관이 아니다. 교섭단체도 판례상 능력이 부정된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 정당은 국민의 자발적 조직으로, 그 법적 성격은 일반적으로 사적·정치적 결사 내지는 법인격 없는 사단이므로 공권력의 행사 주체로서 국가기관의 지위를 갖는다고 볼 수 없다. 또 헌법은 권한쟁의심판청구의 당사자로서 국회의원들의 모임인 교섭단체에 대해서 규정하고 있지 않고, 교섭단체의 권한 침해는 교섭단체에 속한 국회의원 개개인의 심의·표결권 등 권한 침해로 이어질 가능성이 높아 그 분쟁을 해결할 적당한 기관이나 방법이 없다고 할 수 없다(헌재 2020.5.27.2019헌라6등).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_305"><h4>워크북 · 통치의기본구조_워크북_305</h4><p class="question-stem">권한쟁의심판의 당사자에 관한 서술로 틀린 것은?(헌법 조항 및 헌법재판소 판례에 따름)</p><ol class="choices"><li>헌법 제111조 제1항 제4호에서 말하는 국가기관의 의미와 권한쟁의심판의 당사자가 될 수 있는 국가기관의 범위는 입법자의 입법 형성의 자유 영역이며, 따라서 헌법재판소법을 개정함으로써 국회가 얼마든지 변경할 수 있는 사항이다.</li><li>헌법 제111조 제1항 제4호는 권한쟁의심판의 당사자가 될 수 있는 국가기관의 종류나 범위에 관하여는 아무런 규정을 두고 있지 않다</li><li>헌법 제111조 제1항 제4호는 권한쟁의심판의 당사자가 될 수 있는 국가기관의 종류나 범위에 관하여 특별히 법률로 정하도록 위임하고 있지 않다.</li><li>국가기관 상호 간의 권한쟁의심판을&quot;국회, 정부, 법원 및 중앙선거관리위원회 상호 간의 권한쟁의심판&quot;이라고 하고 있는 헌법재판소법 제62조 제1항 제1호는 한정적, 열거적인 조항이 아니라 예시적인 조항으로 해석하는 것이 헌법에 합치된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀렸다. 국회가 법률로 당사자 범위를 마음대로 제한할 입법형성의 자유가 있다는 설명을 부정했다.</li><li><strong>비선택</strong> · 헌법은 국가기관의 종류를 구체적 한정 목록으로 적지 않았다.</li><li><strong>비선택</strong> · 특별히 법률에 그 범위 확정을 위임하지 않았다는 점이 해석의 근거다.</li><li><strong>비선택</strong> · 그래서62①1을 예시로 해석한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 입법 형성의 자유가 없다고 하였다(헌재1997.7.16.96헌라2).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_306"><h4>워크북 · 통치의기본구조_워크북_306</h4><p class="question-stem">권한쟁의심판의 당사자로서 지방자치단체에 관한 서술로 틀린 것은?(헌법재판소법 및 헌법재판소 판례에 따름)</p><ol class="choices"><li>권한쟁의심판의 당사자로서 지방자치단체는 특별시, 광역시, 특별자치시, 특별자치도, 시, 군, 자치구이다</li><li>헌법 또는 법률에 의하여 부여 받은 지방자치단체의 권한인 지방자치단체의 사무에 관한 권한이 침해되거나 침해될 우려가 있는 때에 한하여 권한쟁의심판을 청구할 수 있다</li><li>지방자치단체의 사무 중 국가가 지방자치단체의 장 등에게 위임한 기관위임사무는 국가의 사무이므로, 이에 관한 권한쟁의심판청구의 적법한 당사자는 지방자치단체의 장이다.</li><li>지방자치단체의 부분 기관에 대하여 당사자능력을 인정하지 아니한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원문 목록에 도가 빠져 있다. 현행62①3에는 도도 포함된다. 원본 정답③을 보존하되 완전한 목록으로 암기하지 않는다.</li><li><strong>비선택</strong> · 자기 지자체 사무의 권한 침해 또는 현저한 위험을 주장해야 한다.</li><li><strong>선택</strong> · 원본의 틀린 보기다. 기관위임사무는 국가사무이며 지자체의 자기권한이 아니다. 단체장의 집행 지위만으로 적격 당사자가 되지도 않는다.</li><li><strong>비선택</strong> · 지자체 종류는 헌법의 위임을 받은 법률이 정하므로 부분기관에 일반적으로 확대하지 않는다.62②교육감 특례는 별도다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 헌법재판소법 제62조 제1항 제3호 ② 헌법재판소법 제61조 제2항. ③ 기관위임사무의 집행 권한과 관련된 범위에서는 지방자치단체의 장은 국가기관의 지위에 서게 될 뿐이므로, 기관위임사무의 집행 권한의 존부 및 범위에 관하여 지방자치단체가 청구한 권한쟁의심판청구는 지방자치단체의 권한에 속하지 아니하는 사무에 관한 심판청구로서 그 청구가 부적법하다(헌재 2011.9.29.2009헌라3). 즉 기관위임사무의 침해에 관해서는 지방자치단체의 장도 지방자치단체도 적법한 당사자가 될 수 없다. ④ 지방자치단체의 경우에는 헌법재판소법 제62조 제1항 제3호를 열거적으로 해석하여 그 부분 기관에 대하여 당사자능력을 인정하지 아니한다(헌재 2016.6.30.2014헌라1). 이는 헌법은 국가기관과는 달리 지방자치단체의 경우에는 그 종류를 법률로 정하도록 규정하고 있으며(헌법 제117조 제2항), 지방자치법은 헌법의 위임을 받아 지방자치단체의 종류를 규정하고 있으므로 헌법재판소가 헌법 해석을 통하여 권한쟁의심판의 당사자가 될 지방자치단체의 범위를 새로이 확정하여야할 필요가 없기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_307"><h4>워크북 · 통치의기본구조_워크북_307</h4><p class="question-stem">권한쟁의심판에서 제3자 소송 담당에 관한 서술로 틀린 것은?(헌법재판소 판례에 따름)</p><ol class="choices"><li>제3자 소송 담당이란 권리 주체가 아닌 제3자가 자신의 이름으로 권리 주체를 위하여 소송을 수행할 수 있는 권능이다</li><li>제3자 소송 담당은 예외적으로 법률의 규정이 있는 경우에만 인정된다</li><li>헌법 제60조 제1항은&quot;국회는(…)국가나 국민에게 중대한 재정적 부담을 지우는 조약 또는 입법 사항에 관한 조약의 체결·비준에 대한 동의권을 가진다&quot;라고 규정하고 있으므로, 조약의 체결·비준에 대한 동의권은 국회에 속한다.</li><li>국회의 의사가 다수결에 의하여 결정된 경우 그 다수결의 결과에 반대하는 소수의 국회의원에게 권한쟁의심판을 청구할 수 있게하는 것이 토론과 타협이라는 의회주의의 본질에 부합한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제3자가 자신의 이름으로 타인의 권리를 위해 수행한다는 정의다.</li><li><strong>비선택</strong> · 자기권리 소송의 예외이므로 법률 근거를 요구한다.</li><li><strong>비선택</strong> · 동의권 주체는 국회 전체다. 의원 개인의 심의표결권과 다르다.</li><li><strong>선택</strong> · 틀렸다. 판례는 다수결과 의회 내 토론을 우회하고 모든 문제를 사법화할 위험을 들어 현행 명문 없는 제3자 소송담당을 부정한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그럴 경우 권한쟁의심판을 청구할 수 있게하는 것은 다수결의 원리와 의회주의의 본질에 어긋날 뿐만 아니라, 국가기관이 기관 내부에서 민주적인 방법으로 토론과 대화에 의하여 기관의 의사를 결정하려는 노력 대신 모든 문제를 사법적 수단에 의해 해결하려는 방향으로 남용될 우려도 있다. 따라서 권한쟁의심판에 있어 '제3자 소송 담당'을 허용하는 법률의 규정이 없는 현행 법 체계 하에서 국회의 구성원인 청구인들은 국회의 조약에 대한 체결·비준 동의권의 침해를 주장하는 권한쟁의심판을 청구할 수 없다 할 것이므로, 청구인[국회의원]들의 이 부분 심판청구는 청구인적격이 없어 부적법하다(헌재 2007.7.26.2005헌라8). 헌법에 규정된 절차를 거치지 아니한 채 체결·비준하는 경우에는 국회의 조약에 대한 체결·비준 동의권이 침해되는 것이므로, 이를 다투는 권한쟁의심판의 당사자는 국회가 되어야할 것이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_308"><h4>워크북 · 통치의기본구조_워크북_308</h4><p class="question-stem">지방자치단체와 관련된 권한쟁의심판에 관한 서술로 틀린 것은?</p><ol class="choices"><li>지방자치단체가 자신의 권한 침해를 이유로 권한쟁의심판을 제기하는 경우 당사자는 지방자치단체이지 지방자치단체의 장이 아니다</li><li>지방자치단체는 법령의 범위 안에서 자치에 관한 규정을 제정할 수 있는 권한이 침해되면 권한쟁의심판을 제기할 수 있는 데 여기서 법령에는 법규명령으로서 기능하는 행정규칙은 포함되지 않는다.</li><li>지방자치단체는 법령의 범위 안에서 자치에 관한 규정을 제정할 수 있는 권한이 침해되면 권한쟁의심판을 제기할 수 있는데, 여기서'법령'에는 법률은 물론'대통령령','총리령'및'부령'과 같은 법규명령도 포함된다.</li><li>권한쟁의 가 지방 자치 교육에 관한 법률 제2조의 규정에 의한 교육·학예에 관한 지방자치단체의 사무에 관한 것인 때(헌법재판소법 제62조 제2항)에는 교육감이 당사자가 되므로 이 경우에는 교육감이 권한쟁의심판의 당사자가 될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자기 자치권을 가진 지자체가 당사자이고 단체장은 기관이다.</li><li><strong>선택</strong> · 틀렸다. 직접 위임 아래 상위법과 결합해 법규명령 기능을 하는 행정규칙도 포함한다. 단순 내부 지침 전부라는 뜻은 아니다.</li><li><strong>비선택</strong> · 헌법117①의 법령에는 법률과 법규명령이 포함된다.</li><li><strong>비선택</strong> · 62②가 교육·학예 사무에 교육감 당사자 특례를 명시한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법재판소는 법규명령으로서 기능하는 행정규칙이 포함된다고 본 바 있다.&quot;법령의 직접적인 위임에 따라 수임 행정 기관이 그 법령을 시행하는 데 필요한 구체적 사항을 정한 것이면, 그 제정 형식은 비록 법규명령이 아닌 고시, 훈령, 예규 등과 같은 행정규칙이더라도 그것이 상위법령의 위임 한계를 벗어나지 아니하는 한, 상위법령과 결합하여 대외적인 구속력을 갖는 법규명령으로서 기능하게 된다고 보아야&quot;(헌재 2002.10.31.2001헌라1)한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_309"><h4>워크북 · 통치의기본구조_워크북_309</h4><p class="question-stem">권한쟁의심판 절차에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>헌법재판소가 통치 질서의 균형과 견제를 위반할 수 있는 국가기관 등의 행위를 적발하여 직접 심판을 개시한다</li><li>피청구인은 대한민국이다</li><li>권한쟁의심판은 재판관 3 인으로 이루어진 지정재판부에서 모든 심리가 이루어진다.</li><li>구두 변론에 의한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 청구를 기다리는 절차이지 헌재가 스스로 사건을 적발·개시하는 것이 아니다.</li><li><strong>비선택</strong> · 침해한 해당 국가기관·지자체를 피청구인으로 특정한다.</li><li><strong>비선택</strong> · 전원재판부에서 심리한다. 지정3명은 헌소 사전심사다.</li><li><strong>선택</strong> · 권한쟁의는 구두변론이 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 피청구인의 처분 또는 부작위가 헌법 또는 법률에 의하여 부여 받은 청구인의 권한을 침해하였거나 침해할 현저한 위험이 있는 때에 권한쟁의심판을 청구할 수 있다. ② 피청구인은 청구인의 권한을 침해하였거나 침해할 현저한 위험을 야기한 국가기관 내지 지방자치단체이다. ③ 권한쟁의심판청구서가 제출되면 재판은 전원재판부에서 심리한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_310"><h4>워크북 · 통치의기본구조_워크북_310</h4><p class="question-stem">권한쟁의의 심판은 그 사유가 있음을 안 날부터 60일 이내에, 그 사유가 있은 날부터 180일 이내에 청구하여야 한다. 여기서'그 사유가 있음을 안 날'에 관한 서술로 옳은 것은?</p><ol class="choices"><li>다른 국가기관 등의 처분에 의하여 자신의 권한이 침해되었다는 사실을 특정할 수 있을 정도로 현실적으로 인식하고 이에 대하여 권한쟁의심판청구를 할 수 있게 된 때를 말한다.</li><li>다른 국가기관 등의 처분의 내용이 확정적으로 변경될 수 없게 된 날을 의미한다.</li><li>부작위를 대상으로 하는 권한쟁의심판의 경우에는 부작위가 있은 날부터 180일 이내에 청구하여야 한다</li><li>피청구인의 장래 처분에 대한 심판청구가 원칙적으로 허용된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 침해 사실을 특정할 정도로 현실적으로 인식하여 청구할 수 있는 때다.</li><li><strong>비선택</strong> · 처분이 더 이상 변경될 수 없을 때까지 기다리는 기준이 아니다.</li><li><strong>비선택</strong> · 계속되는 부작위는 그 상태가 계속되는 동안 기간 제한 없이 다툴 수 있다.</li><li><strong>비선택</strong> · 장래처분은 원칙 불가, 확실한 예정·침해위험·큰 사전보호 필요라는 예외를 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ② 그 처분의 내용이 확정적으로 변경될 수 없게 된 것까지를 요구하지는 아니한다(헌재2007.3.29.2006헌라7). ③ 부작위를 대상으로 하는 권한쟁의심판의 경우에는 부작위 상태가 계속되는 한 기간의 제한 없이 권한쟁의심판을 청구할 수 있다(헌재 2006.8.31.2004헌라2).④ 피청구인의 장래 처분에 의해서 청구인의 권한 침해가 예상되는 경우에 청구인은 원칙적으로 이러한 장래 처분이 행사되기를 기다린 이후에 이에 대한 권한쟁의심판청구를 통해서 침해된 권한의 구제를 받을 수 있으므로, 피청구인의 장래 처분을 대상으로 하는 심판청구는 원칙적으로 허용되지 아니한다. 그러나 피청구인의 장래 처분이 확실하게 예정되어 있고, 피청구인의 장래 처분에 의해서 청구인의 권한이 침해될 위험성이 있어서 청구인의 권한을 사전에 보호해 주어야할 필요성이 매우 큰 예외적인 경우에는 피청구인의 장래 처분에 대해서도 헌법재판소법 제61조 제2항에 의거하여 권한쟁의심판을 청구할 수 있다(헌재 2004.9.23.2000헌라2).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_311"><h4>워크북 · 통치의기본구조_워크북_311</h4><p class="question-stem">권한쟁의심판에 대한 서술로 틀린 것은?(헌법재판소 판례에 따름)</p><ol class="choices"><li>권한쟁의심판은 객관적 소송의 성격을 갖고 있다.</li><li>권한쟁의심판을 청구할 것인지 여부는 국가기관의 판단에 맡겨져 있다.</li><li>권한쟁의심판은 공익적 성격을 갖고 있으므로 이미 제기한 심판청구를 당사자인 국가기관의 의사에 의하여 자유롭게 철회할 수 있는 심판청구의 취하는 배제된다.</li><li>소의 취하에 관한 민사소송법 규정이 준용된다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법상 권능 질서를 지키는 객관소송 성격이 있다.</li><li><strong>비선택</strong> · 청구할지 여부는 해당 기관의 판단에 맡긴다.</li><li><strong>선택</strong> · 틀렸다. 공익성만으로 취하를 전면 금지하지 않는다.</li><li><strong>비선택</strong> · 민사소송법상 취하 규정을 성질에 맞게 준용한다. 절차 조건까지 모두 없다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법재판소는 권한쟁의심판이 객관적 소송의 성격을 갖고 있긴하나, 당사자의 심판청구의 자유가 인정되고 있는 만큼, 권한쟁의심판의 공익적 성격만을 이유로 이미 제기한 심판청구를 스스로의 의사에 기하여 자유롭게 철회할 수 있는 심판청구의 취하를 배제하는 것은 타당하지 않다고 보아, 소의 취하에 관한 민사소송법 규정의 준용에 따라 당사자는 스스로의 의사에 의하여 자유롭게 심판청구를 취하할 수 있다는 입장이다(헌재2001.5.8.2000헌라1).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_312"><h4>워크북 · 통치의기본구조_워크북_312</h4><p class="question-stem">권한쟁의심판청구의 대상이 되는 피청구인의 처분 또는 부작위(不作爲)에 대한 설명으로 틀린 것은?(헌법재판소 판례에 따름)</p><ol class="choices"><li>여기서의 처분은 넓은 의미의 공권력 처분을 의미한다.</li><li>행정입법 행위도 처분에 속한다.</li><li>법률에 관한 권한쟁의심판은'법률 제정 행위'가 아니라'법률 그 자체'를 대상으로 삼아야한다</li><li>청구인의 법적 지위에 구체적으로 영향을 미칠 가능성이 없는 행위는'처분'이라 할 수 없어 이를 대상으로 하는 권한쟁의심판청구는 허용되지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 좁은 행정처분보다 넓은 공권력 작용이다.</li><li><strong>비선택</strong> · 행정입법도 기관 권한을 침해하는 처분이 될 수 있다.</li><li><strong>선택</strong> · 틀렸다. 법률 제정행위를 대상으로 권한 침해를 다툰다. 법률 자체의 추상적 심사와 구별한다.</li><li><strong>비선택</strong> · 법적 중요성·구체적 지위 영향이 없는 준비행위는 독자적 대상이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률에 대한 권한쟁의심판도 허용된다고 봄이 일반적이나 다만,'법률 그 자체'가 아니라‘법률 제정 행위'를 그 심판대상으로 하여야 한다(헌재 2006.5.25.2005헌라4).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_313"><h4>워크북 · 통치의기본구조_워크북_313</h4><p class="question-stem">권한쟁의심판 사유로서'권한의 침해'에 관한 서술로 틀린 것은?</p><ol class="choices"><li>권한쟁의심판에서의 권한은 헌법상 권한만 포함하고 법률상 권한은 포함하지 않는다.</li><li>권한쟁의심판에서의 권한은 주관적 권리 의무가 아니다.</li><li>권한쟁의심판에서의 권한은 국가나 지방자치단체 등 공법인 또는 그 기관이 헌법 또는 법률에 의하여 부여되어 법적으로 유효한 행위를 할 수 있는 능력 또는 그 범위를 말한다</li><li>헌법재판소법 제61조 제2항의'권한을 침해하였거나'란 문언은 피청구인의 처분 또는 부작위로 인한 청구인의 권한 침해가 과거에 발생하였거나 현재까지 지속되는 경우를 의미한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀렸다. 법률상 권한도 포함한다. 헌법상 설치기관이라는 당사자 기준과 혼동하지 않는다.</li><li><strong>비선택</strong> · 사인의 주관적 권리·의무와 다른 기관의 공적 권한이다.</li><li><strong>비선택</strong> · 법적으로 유효한 행위를 할 공적 능력·범위를 말한다.</li><li><strong>비선택</strong> · 이미 발생한 침해 또는 계속되는 침해를 포함한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 침해를 주장할 수 있는 권한에는 법률상 권한이 포함된다. 권한쟁의심판의 당사자인'국가기관'에 해당하기 위해서는 헌법에 의하여 설치된 기관이라는 요건을 갖추어야한다는 것과 혼동하지 않도록 유의할 필요가 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_314"><h4>워크북 · 통치의기본구조_워크북_314</h4><p class="question-stem">권한쟁의심판의 사유로서'권한을 침해할 현저한 위험'에 관한 서술로 틀린 것은?</p><ol class="choices"><li>조만간 권한 침해에 이르게 될 개연성이 상당히 높은 상황을 말한다.</li><li>현재와 같은 상황의 발전이 중단되지 아니한다면 조만간에 권한 침해의 발생이 거의 확실하게 예상되며, 이미 구체적인 법적 분쟁의 존재를 인정할 수 있을 정도로 권한 침해가 그 내용에 있어서나 시간적으로 충분히 구체화된 경우를 말한다</li><li>법률상 권한도 권한쟁의심판에서 말하는'권한'이다.</li><li>문제된 침해의 원인이'국회의 입법 행위'인 경우에도'법률상 권한'을 침해의 대상으로 삼는 심판청구에서 권한 침해 가능성을 인정할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 조만간 침해될 개연성이 상당히 높아야 한다.</li><li><strong>비선택</strong> · 내용·시간상 구체화되어 법적 분쟁을 인정할 정도여야 한다.</li><li><strong>비선택</strong> · 법률상 권한도 일반적 보호 범위에는 포함된다.</li><li><strong>선택</strong> · 틀렸다. 국회가 법률로 형성한 권한 자체를 그 법률의 개정을 금지하는 기준으로 삼을 수 없다.2022헌라4의 맥락이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률상 권한도 권한쟁의심판에서 말하는 '권한'이기는하지만, 국가기관의'법률상 권한'은 국회의 입법 행위에 의해 비로소 형성·부여된 권한일 뿐 국회의 입법 행위를 구속하는 기준이 될 수 없으므로, 문제된 침해의 원인이 '국회의 입법 행위'인 경우에는'법률상 권한'을 침해의 대상으로 삼는 심판청구는 권한 침해 가능성을 인정할 수 없다. 그리하여 형사소송법을 개정하는 국회의 입법 행위가 검사의'헌법상 권한'인 영장 신청권을 제한하지 아니하였다면 국회의 입법 행위로 그 내용과 범위가 형성된 검사의'법률상 권한'인 수사권·소추권은 법률 개정 행위로 침해될 가능성이 없으므로, 청구인 검사들의 권한 침해 가능성이 인정되지 아니한다(헌재 2023.3.23.2022헌라4).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_315"><h4>워크북 · 통치의기본구조_워크북_315</h4><p class="question-stem">권한쟁의심판의 권리보호이익 및 심판이익에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>권리보호이익이란 재판에 의해 분쟁을 해결할 권리 보호의 필요성을 말한다.</li><li>권한쟁의심판에 있어서 권리보호이익이란 권한쟁의심판에 의해 분쟁을 해결함으로써 그 보호가 달성되는 헌법 또는 법률에 의하여 부여 받은 청구인의 권한상 법익을 의미한다.</li><li>권한쟁의심판청구에 의해 달성하고자하는 목적이 이미 이루어졌다면 원칙적으로 권리보호이익은 소멸한다.</li><li>국회의장인 피청구인이 국회의원인 청구인을 그 의사에 반하여 국회 보건 복지 위원회에서 사임시키고 환경 노동 위원회로 보임한 행위를 대상으로 청구인이 권한쟁의심판청구를 하였는데, 청구인이 다시 보건 복지 위원회에 배정되어 현재까지 활동하고 있다면 심판이익은 결코 인정될 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 재판으로 보호할 법적 필요를 뜻한다.</li><li><strong>비선택</strong> · 권한쟁의에서 보호할 청구인의 공적 권한상 이익이다.</li><li><strong>비선택</strong> · 목적 달성이면 원칙적으로 이익이 소멸한다.</li><li><strong>선택</strong> · 틀렸다. 반복 위험과 중요한 헌법적 해명 필요가 있으면 예외적 심판이익을 인정할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 같은 유형의 침해 행위가 앞으로도 반복될 위험이 있고, 헌법 질서의 수호·유지를 위하여 그에 대한 헌법적 해명이 긴요한 사항에 대하여는 심판청구의 이익을 인정할 수 있다(헌재 1997.11.27.94헌마60).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_316"><h4>워크북 · 통치의기본구조_워크북_316</h4><p class="question-stem">권한쟁의심판의 가처분 결정에 관한 서술로 틀린 것은?</p><ol class="choices"><li>헌법재판소가 권한쟁의심판의 청구를 받았을 때에는 직권 또는 청구인의 신청에 의하여 종국결정의 선고 시까지 심판대상이 된 피청구인의 처분의 효력을 정지하는 결정을 할 수 있다.</li><li>가처분 결정은 피청구 기관의 처분 등이나 그 집행 또는 절차의 속 행으로 인하여 생길 회복하기 어려운 손해를 예방할 필요가 있거나 기타 공공복리상의 중대한 사유가 있어야 한다</li><li>처분의 효력을 정지시켜야할 긴급한 필요는 요건이 아니다.</li><li>본안 사건이 부적법하거나 이유 없음이 명백하지 않아야한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 65조의 직권·신청에 의한 처분 효력정지다.</li><li><strong>비선택</strong> · 회복곤란 손해 예방이나 중대한 공공복리 사유를 검토한다.</li><li><strong>선택</strong> · 틀렸다. 긴급한 정지 필요도 요건이다.</li><li><strong>비선택</strong> · 명백한 본안 부적법·이유 없음이면 잠정 구제를 인정하기 어렵다. 손해 비교형량도 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그 처분의 효력을 정지시켜야할 긴급한 필요가 있을 것은 가처분 요건 중 하나이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_317"><h4>워크북 · 통치의기본구조_워크북_317</h4><p class="question-stem">권한쟁의심판의 결정에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>결정의 유형에는 심판절차종료선언결정, 각하결정, 인용결정, 기각결정이 있다.</li><li>헌법재판소는 심판의 대상이 된 국가기관 또는 지방자치단체의 권한의 유무 또는 범위에 관하여 판단한다.</li><li>헌법재판소는 권한 침해의 원인이 된 피청구인의 처분을 취소하거나 그 무효를 확인할 수 있다.</li><li>헌법재판소가 부작위에 대한 심판청구를 인용하는 결정을 한 때에는 피청구인은 독자적인 판단에 따라 작위인 처분을 하기만하면 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상태와 요건·본안에 따라 네 유형을 구별한다.</li><li><strong>비선택</strong> · 66①의 기본 판단 내용이다.</li><li><strong>비선택</strong> · 66②에 따른 취소·무효확인이 가능하다. 침해 확인이면 언제나 자동 무효라는 뜻은 아니다.</li><li><strong>선택</strong> · 틀렸다. 임의 행동이 아니라 헌재 결정 취지에 맞는 처분을 해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 부작위에 대한 심판청구를 인용하는 결정을 한 때에는 피청구인은 결정 취지에 따른 처분을 하여야 한다(헌법재판소법 제66조 제2항).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_318"><h4>워크북 · 통치의기본구조_워크북_318</h4><p class="question-stem">국회의원인 청구인들에게 본회의 개의 일시를 통지하지 않음으로써 청구인들이 본회의에 출석할 기회를 잃게 되었고 그 결과 법률안의 심의·표결 과정에도 참여하지 못하게 된 경우 국회의원의 권한이 침해되었음을 사유로 법률안 가결 선포 행위에 대하여 청구한 권한쟁의심판에 관한 헌법재판소의 태도가 아닌 것은?</p><ol class="choices"><li>국회의원은 국회의 부분 기관으로서 권한쟁의심판의 당사자가 될 수 없어 각하결정을 내려야한다.</li><li>청구인들이 헌법에 의하여 부여 받은 권한인 법률안의 심의·표결권이 침해되었음이 분명하다.</li><li>법률안의 가결 선포 행위의 효력 유무는 결국 그 절차상에 다수결의 원칙(헌법 제49조)과 회의 공개의 원칙(헌법 제50조)과 같은 입법 절차에 관한 헌법 규정을 명백히 위반한 흠이 있는지 여부에 의해 가려져야한다.</li><li>법률안 가결 선포 행위는 국회법 위반의 하자는 있을지언정 입법 절차에 관한 헌법의 규정을 명백히 위반한 흠이 있다고 볼 수 없어 무효라고 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀렸다. 의원도 자신의 심의표결권에 관하여 당사자가 될 수 있다.</li><li><strong>비선택</strong> · 회의 참여 기회 박탈에 따른 권한 침해를 인정한 사례다.</li><li><strong>비선택</strong> · 침해 확인과 별개로 가결선포 효력을 판단할 헌법상 절차 기준을 제시했다.</li><li><strong>비선택</strong> · 교재 사례는 국회법상 하자가 있어도 헌법상 명백한 절차 위반이 없어 무효를 부정했다. 모든 절차 위반이 언제나 유효라는 일반화는 금물이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌재1997.7.16.96헌라2;2011.8.30.2009헌라7 참조. 국회의원이 권한쟁의심판의 당사자가 될 수 있고 청구인인 국회의원들의 법률안 심의·표결권이 침해되었지만, 법률안 가결 선포 행위는 다수결의 원칙과 회의 공개의 원칙과 같은 헌법 규정을 명백히 위반한 흠이 없어 무효라고 할 수 없다고 한 것이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_319"><h4>워크북 · 통치의기본구조_워크북_319</h4><p class="question-stem">헌법재판소의 권한쟁의심판의 결정의 효력에 관한 설명으로 틀린 것은?(헌법재판소법 및 헌법재판소 판례를 따름)</p><ol class="choices"><li>헌법재판소의 권한쟁의심판의 결정은 모든 국가기관과 지방자치단체를 기속한다.</li><li>권한 침해의 확인 결정에도 기속력이 인정된다.</li><li>권한쟁의심판 결정의 기속력에 따라 피청구인은 장래에 동일한 사정 하에서 동일한 내용의 행위를 해서는 아니 된다</li><li>권한쟁의심판 결정의 기속력에 적극적인 재처분 의무나 결과 제거 의무가 포함된다는 것이 헌법재판소법정 의견의 확고한 입장이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 67①의 기속력이다.</li><li><strong>비선택</strong> · 침해 확인 주문도 준수해야 한다.</li><li><strong>비선택</strong> · 동일 사정에서 동일한 침해행위를 반복해서는 안 된다.</li><li><strong>선택</strong> · 틀렸다.2009헌라12는 적극적 시정·결과제거 의무의 범위에 의견이 갈렸다. 부작위 인용에 대한66②명문 의무와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 포함되는지에 관하여는 다툼이 있으며 법정 의견으로 확고한 의견이 제시된 바 없다(헌재2010.11.25.2009헌라12 참조).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_320"><h4>워크북 · 통치의기본구조_워크북_320</h4><p class="question-stem">헌법재판소의 권한쟁의심판의 결정의 효력에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>국가기관 또는 지방자치단체의 처분을 취소하는 결정은 그 처분의 상대방(청구인 이외의 제3자)에 대하여 이미 생긴 효력에 영향을 미친다</li><li>국가기관 또는 지방자치단체의 처분을 취소하는 결정은 그 처분의 상대방이 청구인인 경우에 이미 생긴 효력에 영향을 미치지 아니한다.</li><li>국가기관 또는 지방자치단체의 처분을 취소하는 결정은 그 처분의 상대방(청구인 이외의 제3자)에 대하여 이미 생긴 효력에 영향을 미치지 아니한다.</li><li>국가기관 또는 지방자치단체의 처분을 취소하는 결정은 기속력이 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 67②는 분쟁 밖 상대방에게 이미 생긴 효력을 보호한다.</li><li><strong>비선택</strong> · 상대방이 청구인 자체이면 그 제3자 보호규정이 적용되지 않는다.</li><li><strong>선택</strong> · 옳다. 기관 간 분쟁 때문에 외부 제3자의 기존 지위를 해치지 않으려는 규정이다.</li><li><strong>비선택</strong> · 결정에 기속력이 있다. 제3자 기존효과 보호와 모순되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 미치지 아니한다(헌법재판소법 제67조 제2항). ② 당해 처분의 상대방이 청구인인 경우 법 제67조 제2항은 적용되지 아니한다(소급효). ③ 옳은 서술이다. 이는 청구인과 피청구인 간의 권한 분쟁으로 인하여 선의의 제3자가 피해를 받지 아니하도록 장래효로써 배려를 한다는 규정이다. 종합하자면, 처분의 상대방이 청구인인 국가기관·지방자치단체라면 처분을 취소하는 결정에 소급효가 인정되고 처분의 상대방이 청구인 이외의 제3자라면 그 제3자에게 이미 생긴 효력에 영향을 미치지 아니한다. ④ 기속력이 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_321"><h4>워크북 · 통치의기본구조_워크북_321</h4><p class="question-stem">헌법소원심판에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>주관 소송으로서의 성질을 가진다</li><li>객관 소송으로서의 성질을 가지지 않는다</li><li>주관적인 권리보호이익이 존재하지 아니하는 경우에도 일정한 경우 심판의 이익을 인정하여 본안판단하는 경우가 있다</li><li>헌법재판소법 제68조 제1항에 따른 권리구제형 헌법소원심판, 제68조 제2항에 따른 위헌심사형 헌법소원심판으로 나뉜다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 개인 기본권 구제의 주관소송 성격이다.</li><li><strong>선택</strong> · 틀렸다. 위헌 공권력 통제의 객관소송 성격도 있다.</li><li><strong>비선택</strong> · 이중적 성격 때문에 반복 위험·해명 필요의 예외를 인정한다.</li><li><strong>비선택</strong> · 68①·②의 기본 구분이다. 현행68①중 확정재판에 대한 소원에는68③의 별도 제한 요건이 추가되었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주관 소송과 객관 소송의 이중적 성격을 가진다. 그 때문에 ③ 과 같은 경우가 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_322"><h4>워크북 · 통치의기본구조_워크북_322</h4><p class="question-stem">헌법재판소법 제68조 제2항에 의한(위헌심사형)헌법소원심판에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>구체적 규범통제의 헌법소원으로서, 기본권의 침해가 있을 것을 그 요건으로 하고 있지 않다</li><li>행정 처분의 주체인 행정 청도 근거 법률의 위헌여부에 대한 심판의 제청을 신청하여 그 신청이 기각된 경우 헌법재판소법 제68조 제2항의 헌법소원을 제기할 수 있다</li><li>형사 재판에서 고소인은 피고인을 무죄로 판결할 수 있는 근거가 되는 법 조항에 대하여 위헌제청신청을 하고 그 신청이 기각되면 헌법재판소법 제68조 제2항의 헌법소원을 제기할 수 있다</li><li>인용결정의 효력은 위헌법률심판에서의 위헌결정의 효력을 준용한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실질이 법률심사라 자기 기본권 침해를 별도 요건으로 하지 않는다.</li><li><strong>비선택</strong> · 소송당사자인 행정청도 합헌 법률에 따른 재판을 위해 가능하다.</li><li><strong>선택</strong> · 틀렸다. 고소인은 그 형사재판의 당사자가 아니므로 신청·소원의 자격이 없다.</li><li><strong>비선택</strong> · 효력 준용은 현재75⑦이다. 기존 해설의75⑥은 개정 전 번호다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 형사 재판의 당사자라고 볼 수 없으므로, 위헌제청신청을 할 수 있는 자에 해당하지 않는다. 따라서 타인의 위증 사건에서 단순히 고소인의 지위에 있는 자가 청구한 헌법소원심판청구는 헌법재판소법 제68조 제2항의 요건을 갖추지 못하여 부적법하다(헌재 2010.3.30.2010헌바102). ④ 에 관하여는 헌법재판소법 제75조 제6항 참조.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_323"><h4>워크북 · 통치의기본구조_워크북_323</h4><p class="question-stem">위헌법률심판의 경우와 구별되는, 위헌심사형 헌법소원심판에 특유한 절차적 요건 및 그 부수적 효력에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>법률의 위헌여부 심판의 제청신청이 법원의 합헌 판단에 의하여 기각되었을 때 심판청구할 수 있다.</li><li>법률의 위 현 여부 심판의 제청신청에 대하여 재판의 전제성 흠결을 이유로 한 기각결정이 있는 경우에는 심판청구가 부적법하다.</li><li>법률의 위헌여부 심판의 제청신청에 대하여 법원이 실질적으로 위 현 여부에 대하여 판단하여 각하결정이라는 재판 형식으로 배척한 경우에도 심판청구가 허용된다.</li><li>제청신청에 대한 법원의 기각결정이 없었던 법률 조항에 대한 헌법소원은 원칙적으로 부적법하다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합헌 판단에 의한 신청 기각은 통상적인68②청구 출발점이다.</li><li><strong>선택</strong> · 틀렸다. 전제성 흠결을 이유로 법원이 기각해도 소원 통로가 열린다. 헌재가 전제성을 독자 심사하는 것은 별도다.</li><li><strong>비선택</strong> · 명칭보다 실질적 위헌 판단과 배척 여부를 본다.</li><li><strong>비선택</strong> · 원칙적으로 신청·기각을 거친 조문이어야 한다. 실질 판단·필연적 관련에 따른 예외가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 이 경우에도 심판청구가 허용된다(헌재1993.7.29.90헌바35).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_324"><h4>워크북 · 통치의기본구조_워크북_324</h4><p class="question-stem">위헌심사형 헌법소원심판에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>제청신청에 대한 법원의 명시적으로 기각결정은 없었던 법률 조항이지만 법원이 당해 법률 조항의 위헌여부를 실질적으로 판단하였다면, 그 법률 조항에 대한 심판청구도 적법하다.</li><li>위헌여부 심판의 제청신청을 기각하는 결정을 통지 받은 날부터 30일 이내에 청구하여야 한다</li><li>헌법재판소법 제68조 제2항의 위헌심사형 헌법소원심판청구를 적법하게 하면 법원 재판이 정지된다.</li><li>청구인 본인이 변호사인 경우를 제외하면 변호사를 선임해야하며 서면으로 심판을 청구하여야 한다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 실질적 판단이 있었다면 명시적 기각 문구 부재만으로 배제하지 않는다.</li><li><strong>비선택</strong> · 기각결정 통지일부터30일이다.</li><li><strong>선택</strong> · 틀렸다. 당사자 소원 청구는 법원 재판을 자동 정지시키지 않는다. 관련 확정소송 재심은 현재75⑧이다.</li><li><strong>비선택</strong> · 본인 변호사 자격 예외와 서면·변호사 조력 원칙이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법재판소법 제68조 제2항의 위헌심사형 헌법소원심판청구를 하더라도 재판은 정지되지 아니하는데, 제68조 제2항의 헌법소원이 인용된 경우에 해당 헌법소원과 관련된 소송 사건이 이미 확정된 때에는 당사자는 재심을 청구할 수 있다(헌법재판소법 제75조 제7항).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_325"><h4>워크북 · 통치의기본구조_워크북_325</h4><p class="question-stem">다음 중 헌법재판소법 제68조 제1항의 (권리구제형) 헌법소원심판의 청구 요건에 속하지 않는 것은?</p><ol class="choices"><li>위헌법률심판제청신청의 기각</li><li>기본권침해의 자기관련성</li><li>청구인 본인이 변호사이거나 변호사를 대리인으로 선임할 것</li><li>청구인 능력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 68②의 요건이지68①의 일반 요건이 아니다.</li><li><strong>비선택</strong> · 내 기본권 침해라는 자기관련성이 필요하다.</li><li><strong>비선택</strong> · 사인의 변호사강제주의와 본인 자격 예외다.</li><li><strong>비선택</strong> · 해당 기본권의 주체로서 청구능력을 갖추어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 은 헌법재판소법 제68조 제2항의(위헌심사형) 헌법소원심판의 청구 요건이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_326"><h4>워크북 · 통치의기본구조_워크북_326</h4><p class="question-stem">헌법재판소법 제68조 제1항의(권리구제형)헌법소원심판의 청구 요건 중 청구권자(청구인 능력)에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>침해를 주장하는 해당 기본권에 대하여 기본권 주체성을 가져야한다.</li><li>자연인만이 청구인 능력이 있고 단체는 청구인 능력을 가질 수 없다</li><li>국가나 국가기관 또는 국가 조직의 일부나 공법인은 원칙적으로 헌법소원심판을 청구할 수 없다.</li><li>외국인은 성질상 적용될 수 있는 기본권에 대하여 청구인 능력을 가질 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주장하는 바로 그 기본권에 관하여 주체성이 있어야 한다.</li><li><strong>선택</strong> · 틀렸다. 단체도 성질상 누릴 수 있는 기본권의 주체가 될 수 있다.</li><li><strong>비선택</strong> · 원칙적으로 기본권 보호 의무를 지는 수범자다. 국립대학 학문자유 등 예외가 있다.</li><li><strong>비선택</strong> · 외국인도 성질상 적용 가능한 기본권에 관하여 청구할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 단체(법인뿐만 아니라 대표자의 정함이 있고 독립된 사회적 조직체로서 활동하는 단체로서 민사소송법상 당사자능력이 있는 자)는 성질상 적용될 수 있는 기본권에 대하여 청구권자가 될 수 있다. 단체 자체가 아닌 단체의 내부 기관은 청구권자가 될 수 없다(헌재 2010.7.29.2009헌마149).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_327"><h4>워크북 · 통치의기본구조_워크북_327</h4><p class="question-stem">빈칸에 들어갈 말을 알맞게 순서대로 열거한 것은? 공법인이 어떤 기본권에 대하여 기본권 주체성을 지님으로써 헌법소원심판의 청구인 능력을 갖기 위해서는 공법인에게 배정된(    )가 해당 기본권과 관련되어 있어야하고 이에 더해 그 공법인 이 법적으로 독립성을 지닌 법주체로서 해당 기본권적 행위를 통해 국가와(    )할 수 있어야 한다.</p><ol class="choices"><li>수범자로서의 의무, 합치</li><li>단체로서의 실체, 합치</li><li>기능과 과제, 대립</li><li>형식적 구조, 정합</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 수범자의 의무만으로 기본권 주체성이 생기지 않고 국가와 합치할 조건도 아니다.</li><li><strong>비선택</strong> · 조직의 실체만으로 예외적 기본권 주체성을 설명하지 못한다.</li><li><strong>선택</strong> · 기능·과제가 해당 기본권과 관련되고 독립하여 국가와 대립할 수 있어야 한다.</li><li><strong>비선택</strong> · 형식적 구조와 정합이 판례의 판단 기준이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_328"><h4>워크북 · 통치의기본구조_워크북_328</h4><p class="question-stem">다음 중 헌법재판소법 제68조 제1항의 헌법소원심판의 대상으로서‘공권력의 행사 또는 불행사'에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>사인이나 사단체가 범죄 등으로 국민의 기본권적 법익을 침해하는 행위도 이에 해당한다.</li><li>헌법소원의 대상이 되는 공권력은 입법·행정·사법 등의 모든 기관뿐만 아니라, 간접적인 국가 행정, 예를 들어 공법상의 사단, 재단 등의 공법인, 국립 대학교와 같은 영조물 등의 작용도 포함된다</li><li>공권력의 불행사에 대한 헌법소원은 공권력의 주체에게 헌법에서 유래하는 작위 의무가 특별히 구체적으로 규정되어 있어 이에 의거하여 기본권의 주체가 공권력의 행사를 청구할 수 있음에도 공권력의 주체가 그 의무를 해태하는 경우에 허용된다.</li><li>작위 의무가 없는 공권력의 불행사에 대한 헌법소원은 부적법하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀렸다. 사적 지위에서 한 사인·사단체의 범죄는 공권력 행사 자체가 아니다. 공권력 위탁 행사 여부는 별도로 본다.</li><li><strong>비선택</strong> · 국가기관뿐 아니라 공법인·영조물의 고권적 작용도 포함할 수 있다.</li><li><strong>비선택</strong> · 헌법에서 유래하는 특별·구체적 의무와 청구 가능성이 필요하다.</li><li><strong>비선택</strong> · 의무가 없다면 단순 미행동을 부작위 침해로 다툴 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 고권적 작용으로서 그 행사 또는 불행사로서 국민의 권리와 의무에 대하여 직접적인 법률 효과가 발생하여 청구인의 법률 관계 내지 법적 지위를 불리하게 변화시키는 것(헌재 2012.8.23.2010헌마439)을 말한다. 사인이나 사단체는 공권력행사의 주체가 아니다. ② 에 관해서는, 대통령 선거 방송 위원회는 공직선거법 규정에 의해 설립되고 동 법에 따른 법적 업무를 수행하는 공권력의 주체이므로, 이 사건 결정 및 공표 행위는 헌법소원의 대상이 되는 공권력의 행사라고 본 헌재 1998.8.27.97헌마372등 참조.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_329"><h4>워크북 · 통치의기본구조_워크북_329</h4><p class="question-stem">다음 중 원칙적으로 헌법소원심판의 대상이 될 수 있는 것은?</p><ol class="choices"><li>비자기 집행 조약</li><li>부진정입법부작위의 경우 입법부작위 그 자체</li><li>법령의 규정에 의하여 행정 관청에 법령의 구체적 내용을 보충할 권한을 행사하여 입법된 행정규칙</li><li>행정소송의 대상이 되는 행정 처분</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국내 입법으로 구체화해야 하므로 그 시행 법령을 대상으로 삼는다.</li><li><strong>비선택</strong> · 기존 불완전 법규 자체를 다투어야 한다.</li><li><strong>선택</strong> · 법령 위임으로 대외적 효력을 갖는 보충규칙은 소원 대상이 될 수 있다. 직접성 등 나머지 요건도 본다.</li><li><strong>비선택</strong> · 행정소송 등 법정 구제절차를 먼저 이용해야 한다. 현행 재판소원도 무조건 원처분 재심사를 허용하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 조약의 시행을 위해 국내 법률로 구체화할 것이 필요한 비자기 집행 조약은 헌법소원심판의 대상이 될 수는 없으며 시행을 위한 국내 법령이 헌법소원심판의 대상이 될 수 있다. ② 부진정입법부작위는 그 불완전한 법규 자체를 대상으로 하여 그것이 헌법 위반이라는 적극적인 헌법소원을 청구할 수 있다. 그러나 입법부작위로서 헌법소원의 대상으로 삼을 수는 없다(헌재 2003.1.30.2002헌마358등). ③ 헌재 2001.5.31.99헌마413 참조. ④ 행정 처분의 경우 헌법 제107조 제2항에 따라 행정소송의 대상이 되므로 헌법소원은 원칙적으로 인정되지 아니한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_330"><h4>워크북 · 통치의기본구조_워크북_330</h4><p class="question-stem">입법자가 헌법상 입법 의무가 있는 사항에 관하여 전혀 입법을 하지 아니하는 것을 무엇이라고 하는가?</p><ol class="choices"><li>자기 집행 조약</li><li>비자기 집행 조약</li><li>부진정입법부작위</li><li>진정입법부작위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국내 추가 입법 없이 적용되는 조약이다.</li><li><strong>비선택</strong> · 국내 입법으로 구체화해야 하는 조약이다.</li><li><strong>비선택</strong> · 입법은 했으나 불완전한 경우다.</li><li><strong>선택</strong> · 헌법상 의무에도 전혀 입법하지 않은 진정부작위다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_331"><h4>워크북 · 통치의기본구조_워크북_331</h4><p class="question-stem">입법자가 헌법상 입법 의무가 있는 어떤 사항에 관하여 입법은 하였으나 그 입법의 내용·범위·절차 등을 불완전·불충분 또는 불공정하게 규율함으로써 입법 행위에 결함이 있는 것을 무엇이라고 하는가?</p><ol class="choices"><li>부진정입법부작위</li><li>진정입법부작위</li><li>자기 집행 조약</li><li>비자기 집행 조약</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이미 입법했지만 내용·범위·절차가 부족한 부진정부작위다.</li><li><strong>비선택</strong> · 진정은 필요한 입법이 전혀 없는 상태다.</li><li><strong>비선택</strong> · 조약의 직접 적용 여부라는 다른 분류다.</li><li><strong>비선택</strong> · 조약 시행을 위한 국내 입법 필요 여부라는 다른 분류다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_332"><h4>워크북 · 통치의기본구조_워크북_332</h4><p class="question-stem">다음(    )에 들어갈 알맞은 말을 순서대로 열거한 것은? 진정입법부작위에 대한 헌법소원은 헌법에서 기본권 보장을 위해 명시적으로(    )을 하였거나(    )특정인에게 구체적인 기본권이 생겨 이를 보장하기 위한 국가의 입법 의무가 발생하였음이 명백함에도 불구하고 입법자가 전혀 아무런 입법 조치를 취하지 않고 있는 경우 인정된다.</p><ol class="choices"><li>입법, 법률 해석상</li><li>입법 위임, 헌법 해석상</li><li>입법 보충, 헌법 해석상</li><li>입법 흠결, 법률 해석상</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 명시적인 입법 자체가 아니라 입법을 하라는 위임을 말한다.</li><li><strong>선택</strong> · 명시적 입법위임 또는 헌법해석상 명백한 구체적 입법의무다.</li><li><strong>비선택</strong> · 입법보충이라는 말이 이 요건의 정확한 표현은 아니다.</li><li><strong>비선택</strong> · 법률의 빈틈이라는 사정만으로 헌법상 명백한 입법의무가 생기지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_333"><h4>워크북 · 통치의기본구조_워크북_333</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 대상에 관한 서술 중 틀린 것은?</p><ol class="choices"><li>법원의 재판은 원칙적으로 헌법소원심판의 대상이 되지 아니한다.</li><li>고소인은 검사의 불기소 처분에 대해 원칙적으로 헌법소원심판을 청구할 수 있다.</li><li>피의자는 검사의 기소유예 처분에 대해 원칙적으로 헌법소원심판을 청구할 수 있다.</li><li>무허가 건물의 강제 철거, 전염병 환자의 강제 격리, 정신병 환자의 강제 입원, 검사 조사실에서의 계구 사용 행위, 교도소장의 미결 수용자의 서신 검열 등의 권력적 사실 행위는 헌법소원심판의 대상이 될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재 당시의 재판 제외 원칙이다.2026개정으로68①제외문구가 삭제되어 확정재판·68③3사유·30일의 재판소원이 가능하므로 현행 절대명제로 암기하지 않는다.</li><li><strong>선택</strong> · 원본의 틀린 보기다. 재정신청 등 구제절차를 먼저 거쳐야 한다. 개정 후 재판 자체의 소원 가능성은 별도다.</li><li><strong>비선택</strong> · 피의자에게 통상 불복 수단이 없는 기소유예는 소원 대상이 될 수 있다.</li><li><strong>비선택</strong> · 강제적 사실행위의 대상성이다. 각 조치가 항상 적법하다는 뜻이 아니라 헌법심사할 수 있다는 뜻이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 고소인의 경우에는 검사의 불기소 처분에 대해 재정신청을 할 수 있으므로 보충성의 원칙상 헌법소원심판청구를 할 수 없다. 검사의 불기소 처분에 불복하여 재정신청 절차를 거침으로써 그 불기소 처분에 대해 이미 법원의 재판을 받은 경우에는 그 법원의 재판이 위헌으로 결정된 법령을 적용한 것이어서 예외적으로 헌법소원심판의 대상이 되어 그 재판 자체가 취소되는 경우에 한하여 그 불기소 처분이 헌법소원심판의 대상이 될 수 있을 뿐이며, 그 재판이 취소되지 않는 이상 그 불기소 처분 자체는 헌법소원심판의 대상이 되지 아니한다(헌재 2008.4.29.2008헌마313;2013.4.16.2013헌마183). 참고로 여기서 말하는‘법원의 재판'이란,(검사의 불기소 처분이 부당하다고 보아)공소를 제기할지 (검사의 불기소 처분이 타당하다고 보아)재정신청을 기각할지 여부를 결정한 재판을 말한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_334"><h4>워크북 · 통치의기본구조_워크북_334</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 청구인적격에 관한 원칙적인 설명으로 부정확한 것은?</p><ol class="choices"><li>주장되는 기본권침해는 자기의 기본권에 관련된 것이어야한다.</li><li>주장되는 기본권침해는 해당 공권력의 행사 또는 불행사로 인한 직접적인 것이어야한다.</li><li>기본권이 침해되었다는 주장은, 공권력이 달리 행사되었을 경우와 비교하여 자신의 이익이 작다는 점을 본질적인 내용으로 한다</li><li>주장되는 기본권침해는 현재성을 갖추어야한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자기관련성 요건이다.</li><li><strong>비선택</strong> · 직접성 요건이다. 예외는 별도 검토한다.</li><li><strong>선택</strong> · 부정확하다. 단순 이익 감소가 아니라 특정 공권력·특정 기본권·위헌적 침해 주장이 필요하다.</li><li><strong>비선택</strong> · 현재성 요건이다. 확실한 장래·반복·해명 등 예외가 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공권력의 행사로 인해 (또는 공권력을 달리 행사했을 경우와 비교하여) 자신의 이익이 작다는 주장을 하는 것은 기본권침해 주장에 해당하지 못한다. 문제되는 공권력의 행사 또는 불행사를 특정하고 제한되는 기본권과 그 기본권 제한에 있어서 위반된 헌법 규범을 거론할 수 있어야 한다. 또한 거론된 기본권은 해당 공권력의 행사 또는 불행사에 의해 침해될 여지가 있는 것이어야한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_335"><h4>워크북 · 통치의기본구조_워크북_335</h4><p class="question-stem">헌법재판소법 제68조 제1항의(권리구제형)헌법소원심판의 청구인적격에 관한 서술로 틀린 것은?</p><ol class="choices"><li>자기관련성은 원칙적으로 공권력의 행사 또는 불행사의 상대방에 대해서 인정된다.</li><li>공권력행사 또는 불행사와 단순히 간접적이고 사실적인 경제적 이해관계에 있을 뿐인 제3자라면 자기관련성이 인정되지 않는다.</li><li>지방자치단체의 공무원 정원이 줄어들어 공무원 임용 시험을 준비하는 자들이 공무원 시험에 합격할 가능성이 줄어든다고 하여도 이는 단순히 간접적이고 사실적인 불이익이다.</li><li>단체의 구성원이 기본권을 침해당한 경우 원칙적으로 단체는 구성원의 권리구제를 위하여 그를 대신하여 헌법소원심판을 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 직접 상대방에게 원칙적으로 자기관련성을 인정한다.</li><li><strong>비선택</strong> · 간접적 사실상 경제적 영향만으로는 부족하다.</li><li><strong>비선택</strong> · 2000헌마149는 정원 규정과 수험생·주민의 영향을 간접·사실적 관계로 보았다.</li><li><strong>선택</strong> · 틀렸다. 단체가 회원 개인의 권리를 당연히 대신 청구할 수는 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 단체의 구성원이 기본권을 침해당한 경우 단체가 구성원의 권리구제를 위하여 그를 대신하여 헌법소원심판을 청구하는 것은 원칙적으로 허용될 수 없다(헌재1991.6.3.90헌마56;1994.2.24.93헌마33).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_336"><h4>워크북 · 통치의기본구조_워크북_336</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 청구인적격에 관한 서술로 옳은 것은?</p><ol class="choices"><li>공권력의 행사 또는 불행사의 상대방이 아닌 제3자가 청구인적격을 가지는 경우는 없다</li><li>공권력의 행사 또는 불행사로 인하여 제3자의 기본권이 직접적이고 법적으로 침해 받고 있는 경우에는 자기관련성이 인정된다.</li><li>수혜적 법령에 대하여 법령의 직접 상대방이 아니라 단지 수혜 범위에서 배제된 자는, 하향 평준화를 주장할 수 없으므로, 자기관련성을 가질 수 없다.</li><li>공권력의 작용이 제3자에게 미치는 효과나 진지성의 정도 및 규범의 실질적인 수규자에 의한 헌법소원심판청구의 기대 가능성 등은 제3자의 청구인적격과는 관련 없는 사정이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제3자라도 직접 법적 침해를 받는 경우가 있다.</li><li><strong>선택</strong> · 옳다. 형식적 상대방이 아니어도 자기 기본권의 직접적 법적 침해이면 인정할 수 있다.</li><li><strong>비선택</strong> · 부당하게 수혜에서 제외된 사람이나 비교집단 혜택 제거로 법적 지위가 개선될 여지가 있는 경우도 가능하다.</li><li><strong>비선택</strong> · 그 효과·진지성·직접 수규자의 소원 기대 가능성은 중요한 판단 요소다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①, ④ 공권력의 작용이 제3자에게 미치는 효과나 진지성의 정도 및 규범의 실질적인 수규자에 의한 헌법소원심판청구의 기대 가능성 등을 판단하여 예외적으로 제3자의 자기관련성을 인정하기도한다. 어떠한 경우에 제3자의 자기관련성을 인정할 수 있는가의 문제는 입법의 목적, 실질적인 규율 대상, 법 규정에서의 제한이나 금지가 제3자에게 미치는 효과나 진지성의 정도 및 규범의 직접적인 수규자에 의한 헌법소원 제기의 기대 가능성 등을 종합적으로 고려하여 판단해야 한다(헌재 1997.9.25.96헌마133). ② 헌재 2005.6.30.2003헌마841 참조. ③ 관련 법령이 수혜적인 법령인 경우에는 당해 법령의 직접 상대방은 아니더라도 수혜 범위에서 배제된 자가 평등 원칙에 위반하여 수혜 대상에서 제외되었다는 주장을 하거나 비교 집단에게 혜택을 부여하는 당해 법령이 위헌으로 선고되어 그러한 혜택이 제거된다면 비교 집단과의 관계에서 자신의 법적 지위가 향상된다고 볼 여지가 있을 경우에는 자기관련성을 인정할 수 있다(헌재 2010.4.29.2009헌마340). 특정 성별·종교의 국민에게만 세금을 재원으로 하는 현금을 지급하는 법률을 생각해 보면 쉽게 이해된다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_337"><h4>워크북 · 통치의기본구조_워크북_337</h4><p class="question-stem">법률 규정에 대하여 헌법재판소법 제68조 제1항의 (권리구제형) 헌법소원심판을 청구할 때, 청구인적격 중 하나인 기본권침해의 직접성 요건의 예외와 관련 없는 요소는?</p><ol class="choices"><li>법령이 일의적이고 명백하여 집행 기관이 재량의 여지 없이 일정한 집행 행위를 하여야하는 경우이다</li><li>집행 행위가 존재하는 경우라도 그 집행 행위를 대상으로 하는 구제 절차가 없다.</li><li>집행 행위가 존재하는 경우이며 그 집행 행위를 대상으로 하는 구제 절차가 있다고 하더라도 권리구제의 기대 가능성이 없다.</li><li>기본권이 장래에 침해될 추상적 가능성이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 집행이 일의적·명백하고 재량이 없을 때 직접성 예외를 인정하는 요소다.</li><li><strong>비선택</strong> · 실제 구제절차가 없으면 불필요한 우회를 요구하지 않을 수 있다.</li><li><strong>비선택</strong> · 형식적 절차만 있고 실효적 구제가 기대되지 않는지도 본다.</li><li><strong>선택</strong> · 직접성과 관련 없는 추상적 미래 가능성이다. 현재성 예외도 확실한 예측을 요구하므로 이 정도로는 부족하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_338"><h4>워크북 · 통치의기본구조_워크북_338</h4><p class="question-stem">헌법재판소법 제68조 제1항의(권리구제형)헌법소원심판을 청구할 때, 청구인적격 중 하나인 기본권침해의 현재성 요건의 예외에 해당하지 않는 것은?</p><ol class="choices"><li>폐지된 법률에 의한 권리 침해의 결과로 발생한 법익 침해와 그로 인한 법률상태가 재판 시까지 계속되고 있는 경우</li><li>헌법 질서의 수호·유지를 위해 이미 종료된 기본권침해 행위에 대해 헌법적 해명이 중요한 의미를 지닌 경우</li><li>기본권침해 행위가 앞으로 반복될 위험이 없는 경우</li><li>아직 기본권침해가 발생하지 않았으나 장차 기본권의 침해가 발생할 것이 확실히 예측되는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 폐지되어도 법적 불이익이 계속되면 심사의 현재 필요가 있다.</li><li><strong>비선택</strong> · 종료 후에도 중대한 헌법적 해명 필요를 고려한다.</li><li><strong>선택</strong> · 반복 위험이 없다는 것 자체는 예외 사유가 아니다. 다른 해명 필요 등의 사유는 별도다.</li><li><strong>비선택</strong> · 확실히 예상되는 장래 침해의 상황성숙성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주장된 기본권침해가 지금 일어난 것이어야한다는 현재성 요건의 예외는, 기본권침해 행위가 앞으로도 반복될 위험이 있는 경우에 인정된다(헌재 2010.4.29.2008헌마438).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_339"><h4>워크북 · 통치의기본구조_워크북_339</h4><p class="question-stem">헌법재판소법 제68조 제1항 단서에 의하여 헌법소원심판은 다른 법률에 있는 모든 구제 절차를 거친 후가 아니면 청구할 수 없다는 것을 무엇이라고 하는가?</p><ol class="choices"><li>기본권침해의 직접성</li><li>권리보호이익</li><li>청구인 능력</li><li>보충성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 직접성은 대상 행위가 다른 집행 없이 침해를 만드는지다.</li><li><strong>비선택</strong> · 권리보호이익은 재판으로 얻을 법적 실익이다.</li><li><strong>비선택</strong> · 능력은 해당 기본권의 주체 자격이다.</li><li><strong>선택</strong> · 다른 직접 구제절차를 먼저 거치라는 보충성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_340"><h4>워크북 · 통치의기본구조_워크북_340</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 보충성 요건에 관한 설명으로 틀린 것은?(헌법재판소 판례에 따름)</p><ol class="choices"><li>공권력의 행사 또는 불행사의 결과로 생긴 효과를 원상 복귀시키거나 사후적이고 보충적인 구제 수단인 손해 배상 청구나 손실 보상 청구를 할 수 있는 경우에는 보충성 요건을 갖추지 못한 것이다.</li><li>보충성 요건을 갖추기 위해 거쳐야하는'다른 법률에 의한 구제 절차'라 함은 공권력의 행사 또는 불행사를 직접 대상으로 하여 그 효력을 다툴 수 있는 적법한 권리구제 절차를 의미한다.</li><li>청구인의 불이익으로 돌릴 수 없는 정당한 이유가 있는 착오로 전심 절차를 거치지 않은 경우 보충성 요건의 예외를 인정한다.</li><li>전심 절차로써 권리가 구제될 가능성이 거의 없거나 권리구제 절차가 허용되는지의 여부가 객관적으로 불확실하여 전심 절차 이행의 기대 가능성이 없을 경우 보충성 원칙의 예외를 인정한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀렸다. 사후 손해배상·손실보상은 문제 공권력 효력을 직접 다투는 선행절차가 아니므로 반드시 먼저 할 필요는 없다.</li><li><strong>비선택</strong> · 보충성에서 말하는 구제절차의 범위다.</li><li><strong>비선택</strong> · 청구인 책임으로 돌릴 수 없는 정당한 착오는 예외 사유가 될 수 있다.</li><li><strong>비선택</strong> · 객관적 불확실·구제 기대 불가능 등은 예외가 될 수 있다. 단순히 질 것 같다는 주관적 예상과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 손해 배상 청구나 손실 보상 청구는, 공권력의 행사 또는 불행사를 직접 대상으로 하여 그 효력을 다툴 수 있는 적법한 권리구제 절차가 아니므로, 이를 거치지 아니하였다고 하여 보충성 요건 성립이 부정되지 아니한다(헌재1993.5.13.92헌마297).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_341"><h4>워크북 · 통치의기본구조_워크북_341</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 권리보호이익과 심판(청구)이익에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>권리보호이익이 있다는 것은 당사자 입장에서는 해당 분쟁을 헌법소원심판이라는 재판 절차에 의하여 해결함으로써 얻을 수 있는 법적 이익 내지 법적 필요성이 있다는 것이다</li><li>권리보호이익을 청구 요건으로 하는 이유는 국가의 입장에서는 무익한 헌법 소송 제도의 이용을 통제하는 원리에 위반되지 않게하기 위해서이다</li><li>권리보호이익은 원칙적으로 헌법소원 제기 당시에만 존재하면 되고 헌법재판소 결정 당시까지 존속할 것은 요구되지 않는다.</li><li>청구인에 대한 권리 상태가 종료되었더라도 위헌여부의 해명이 헌법적으로 중대하거나 기본권침해 행위의 반복 위험성이 있는 경우에는 예외적으로 심판청구의 이익이 있다고 본다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 개인에게 회복·증진할 기본권상 이익이 있어야 한다.</li><li><strong>비선택</strong> · 무익한 헌법소송을 통제하는 이유다.</li><li><strong>선택</strong> · 틀렸다. 원칙적으로 결정 당시에도 이익이 존속해야 한다.</li><li><strong>비선택</strong> · 객관적 헌법질서 보호 성격에 따른 예외다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원칙적으로 헌법재판소의 결정 당시에도 존재해야 한다. 심판 계속 중에 사실 관계 또는 법률 관계의 변동으로 기본권의 침해가 종료된 경우에도 헌법소원은 부적법한 것이 된다(헌재1999.9.16.98헌바46). 다만 ④ 와 같은 예외에 해당하면 심판청구의 이익을 인정한다(헌재 2013.9.26.2011헌마782등).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_342"><h4>워크북 · 통치의기본구조_워크북_342</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 절차적 요건에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>당사자인 사인(私人)은, 본인이 변호사의 자격이 있는 경우가 아닌 한, 변호사를 대리인으로 선임하지 아니하면 심판청구를 하거나 심판 수행을 하지 못한다.</li><li>기본권침해의 사유가 발생하였음을 안 날로부터 30일 이내에, 그리고 사유가 발생한 날로부터 3년 이내에 청구해야 한다.</li><li>청구기간의 기산점에 해당하는'법령에 해당하는 사유가 발생한 날'이란 법령의 규율을 구체적이고 현실적으로 적용받게 된 최초의 날을 의미한다</li><li>청구기간은 민법상 기간에 관한 조항에 따라 계산한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 변호사강제주의와 본인 변호사 자격 예외다.</li><li><strong>선택</strong> · 틀렸다. 일반68①는 안 날90일·사유 발생1년이다. 선행구제 최종통지30일과 재판소원 확정30일은 별도다.</li><li><strong>비선택</strong> · 나중에 법령을 처음 구체적·현실적으로 적용받으면 그 사유 발생일을 본다.</li><li><strong>비선택</strong> · 초일·말일·달력·휴일 규칙을 적용한다.0시 시작 예외도 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 사유가 발생하였음을 안 날로부터 90일 이내에, 그리고 사유가 발생한 날로부터 1년 이내에 청구해야 한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_343"><h4>워크북 · 통치의기본구조_워크북_343</h4><p class="question-stem">헌법소원심판의 청구와 심리에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법소원심판의 청구는 헌법소원심판청구 서를 헌법재판소에 제출함으로써한다.</li><li>헌법재판소법 제68조 제1항에 따른 헌법소원의 심판청구 서에는 청구인 및 대리인의 표시, 침해된 권리, 침해의 원인이 되는 공권력의 행사 또는 불행사, 청구 이유, 그 밖에 필요한 사항을 적어야한다</li><li>헌법소원심판은 구두 변론에 의한다.</li><li>재판관 3명으로 구성된 지정재판부는 실질적 요건과 형식·절차적 요건 어느 하나를 갖추지 못한 경우 지정재판부 재판관 전원의 일치된 의견에 의한 결정으로 헌법소원의 심판청구를 각하한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 청구서를 제출하여 시작한다.</li><li><strong>비선택</strong> · 71①의 기재사항이다. 재판소원은71④재판서·확정증명원을 추가한다.</li><li><strong>선택</strong> · 틀렸다. 원칙은 서면심리이며 필요할 때 변론할 수 있다.</li><li><strong>비선택</strong> · 3명 전원일치의 사전심사 각하다. 현행72③의 구체 사유와 보정 가능한 흠을 구별하고 회부 후에도 적법심사를 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법소원심판은 서면 심리에 의한다. 다만, 재판부가 필요하다고 인정하는 경우에는 변론을 열어 당사자·이해관계인, 기타 참고인의 진술을 들을 수 있다(헌법재판소법 제30조 제2항).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_344"><h4>워크북 · 통치의기본구조_워크북_344</h4><p class="question-stem">헌법재판소법 제68조 제1항의(권리구제형)헌법소원심판의 결정 중 헌법소원청구인이 사망하였으나 수계할 당사자가 없는 경우 또는 헌법소원청구인이 청구를 취하하는 경우에 내리는 것은 무엇인가?</p><ol class="choices"><li>심판절차종료선언결정</li><li>각하결정</li><li>기각결정</li><li>인용결정</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 수계할 당사자 없는 사망·취하에 따른 절차종료다.</li><li><strong>비선택</strong> · 각하는 적법요건이 없는 경우다.</li><li><strong>비선택</strong> · 기각은 본안 이유가 없는 경우다.</li><li><strong>비선택</strong> · 인용은 청구를 받아들이는 본안 결론이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_345"><h4>워크북 · 통치의기본구조_워크북_345</h4><p class="question-stem">헌법재판소법 제68조 제1항의 (권리구제형)헌법소원심판의 인용결정과 그 효력에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법재판소법 제68조 제1항에 따른 헌법소원을 인용할 때에는 인용결정서의 주문에 침해된 기본권과 침해의 원인이 된 공권력의 행사 또는 불행사를 특정하여야 한다</li><li>헌법소원에 관한 인용결정을 할 때에는 심리에 관여한 재판관 과반수의 찬성이 있어야 한다</li><li>인용결정에는 공권력의 행사를 취소하는 취소결정, 공권력의 불행사 또는 침해가 종료된 공권력의 행사에 대하여 위헌임을 확인하는 위헌확인결정이 있다.</li><li>헌법재판소가 공권력의 불행사에 대한 헌법소원을 인용하는 결정을 한 때에는 피청구인은 결정 취지에 따라 새로운 처분을 하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 75②에 따라 침해 기본권과 원인 공권력을 주문에 특정한다.</li><li><strong>선택</strong> · 틀렸다. 헌소 인용은6명 이상 찬성이다. 권한쟁의의 일반 과반과 구별한다.</li><li><strong>비선택</strong> · 취소와 위헌확인으로 구제한다. 재판소원 인용은 현행75④의 재판취소·다시재판 구조다.</li><li><strong>비선택</strong> · 현행75⑤의 이행의무다. 교재75④는 개정 전 번호다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 재판관 6 인 이상의 찬성이 있어야 한다(헌법 제113조 제1항, 헌법재판소법 제23조 제2항 제1호).</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_346"><h4>워크북 · 통치의기본구조_워크북_346</h4><p class="question-stem">헌법재판소 규칙의 제정과 개정 등에 관한 사항은(    )의 의결을 거쳐야한다(헌법재판소법 제16조 제4항). 빈칸에 들어갈 알맞은 말은?</p><ol class="choices"><li>전원재판부</li><li>지정재판부</li><li>사무처</li><li>재판관회의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 전원재판부는 심판을 담당한다.</li><li><strong>비선택</strong> · 지정재판부는 헌소 사전심사를 담당한다.</li><li><strong>비선택</strong> · 사무처는 행정을 지원하지만 규칙 의결기관은 아니다.</li><li><strong>선택</strong> · 재판관회의가 규칙 제·개정을 의결한다. 전원⅔초과 출석·출석 과반수다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '통치의기본구조 · LECTURE 15' : 'PART · GOVERNMENT & CONSTITUTION';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(통치의기본구조 · LECTURE 15|PART · GOVERNMENT & CONSTITUTION)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('governance-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

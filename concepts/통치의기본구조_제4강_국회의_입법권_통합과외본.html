@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>통치의기본구조 제4강 국회의 입법권 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">GOVERNMENT & CONSTITUTION · LECTURE 04</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">통치의기본구조</span>
+    <span class="brand-sub">제4강 국회의 입법권 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./통치의기본구조_개념.html">통치의기본구조 개념 목록</a><a href="../index.html?subject=통치의 기본구조">문제 풀기</a></nav><h1>이 강의 큰 그림</h1>
+<p>국회가 표결했다고 내일부터 바로 지켜야 하는 법이 되는 것은 아니다. 또 국회가 만든 문서에 ‘법률’이라고 쓰였다고 그 내용이 언제나 정당한 것도 아니다. 제4강은 <strong>어떤 규칙을 어떤 절차로 만들어야 국민에게 적용할 수 있는가</strong>를 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이번 강의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇인가?</td>
+<td>입법의 의미와 한계, 헌법개정·법률제정·조약동의·국회규칙제정이다.</td>
+</tr>
+<tr>
+<td>왜 필요한가?</td>
+<td>다수파가 특정인을 마음대로 벌하거나, 공개되지 않은 규칙을 국민에게 강요하지 못하게 하려는 것이다.</td>
+</tr>
+<tr>
+<td>전체의 위치</td>
+<td>국회의 조직을 배운 뒤 실제 권한 중 입법권을 배우는 첫 단계다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>제3강의 위원회·본회의·정족수가 법률안 처리에 쓰이고, 다음 강은 돈에 관한 국회의 통제를 다룬다.</td>
+</tr>
+<tr>
+<td>모르면 막히는 것</td>
+<td>개별사건법률과 소급입법, 확정과 시행, 대통령의 거부권과 국회의 재의결을 혼동한다.</td>
+</tr>
+</tbody></table>
+<p><strong>범위:</strong> 교재 59–72쪽(PDF 72–85쪽). 형성평가 10문항·워크북 9문항, 총 19문항·76개 보기를 모두 다룬다. 별점은 학습 우선순위이며 실제 출제율·오답률은 제공되지 않았다. 법령 보완 확인일은 2026.10.24.이다. 교재의 분류·구법과 현재 법을 분리한다.</p>
+<p><strong>색상:</strong> <mark class="yellow">노랑: 핵심 결론</mark> / <mark class="green">초록: 이유</mark> / <mark class="pink">분홍: 함정</mark> / <mark class="blue">파랑: 연결</mark>.</p>
+<h1>1. 입법은 무엇을 만드는 일인가</h1>
+<h2 id="governance-04-01" data-concept-id="governance-04-01">1-1. 일반성은 사람, 추상성은 사건을 본다 ★★★★★</h2>
+<p><strong>교재 60쪽 / 문단의 역할:</strong> 입법이라는 단어의 기준을 세운다.</p>
+<p>입법은 원칙적으로 일반적·추상적인 성문의 법규범을 정립하는 국가작용이다. ‘성문’은 글로 적혔다는 뜻이고, ‘일반적·추상적’은 막연하고 어렵다는 뜻이 아니다. <strong>누가 대상이 되는지, 어떤 사건이 대상이 되는지를 특정 이름이나 한 번의 사건 대신 공통 속성으로 정한다</strong>는 뜻이다.</p>
+<p>교재의 두 예를 나란히 보자. “2019년 1월에 태어난 사람”은 이름을 안 적었어도 해당자가 이미 정해질 수 있다. 반면 “대중접객업을 하고 있는 사람”은 앞으로 새로 영업을 시작한 사람에게도 열려 있다. 첫 기준은 인적 범위가 특정될 수 있고, 두 번째는 열려 있는 기준이다. 다만 출생연도 기준을 쓰는 모든 복지정책이 위헌이라는 뜻은 아니다. 그 구별에 합리적인 이유가 있는지 따로 판단한다.</p>
+<p>사건의 추상성도 비슷하다. 같은 위험성을 가진 행위를 A·B·C 지역에서 한 경우만 이유 없이 처벌하고, D·E·F 지역에서 한 동일한 행위는 제외한다면 왜 다른 취급을 하는지 설명해야 한다. 교재가 지역과 기간을 바꿔 제시한 사례의 핵심은 지역 이름이 아니라 <strong>규율 목적과 관련 있는 공통 속성을 같은 기준으로 다루는가</strong>이다.</p>
+<p><mark class="yellow">일반성은 적용받는 사람의 범위, 추상성은 규율되는 사건의 범위를 중심으로 이해한다.</mark> 모든 법이 전 국민에게 동일하게 적용되어야 한다는 말도 아니다. 의사에게만 적용되는 규칙도 자격과 행위의 합리적 공통 기준에 따라 만들 수 있다.</p>
+<p><strong>시험:</strong> 형성 038, 워크북 068. <strong>키워드:</strong> 일반성·추상성·성문. <strong>한 줄:</strong> 사람 이름과 사건 이름을 찍는 대신 왜 같은 취급을 하는지 설명할 수 있는 기준을 만든다.</p>
+<h2 id="governance-04-02" data-concept-id="governance-04-02">1-2. 법률의 형식만 갖췄다고 법치가 완성되지 않는다 ★★★★☆</h2>
+<p><strong>교재 60–61쪽 / 문단의 역할:</strong> 일반적·추상적 규칙이 필요한 이유를 설명한다.</p>
+<p>수진에게는 금지하고 민호에게는 허용하면서 아무 이유도 말하지 않는 국가를 생각해 보자. 사람들은 규칙을 미리 알고 행동할 수 없고, 공정하게 협력할 이유도 잃는다. <mark class="green">같은 이유가 있는 사안을 같은 기준으로 다루게 하면 자의적인 특혜와 불이익을 줄이고, 국민이 행동 결과를 예측할 수 있다.</mark></p>
+<p>교재는 일반성·추상성을 법치주의의 최소한의 형식적 요청으로 설명한다. 그러나 형식만으로 모든 정당성을 보장하지는 못한다. 누구에게나 적용되는 법도 내용이 지나치게 가혹하면 기본권을 침해할 수 있고, 특정 사안에 관한 법도 그 사안을 별도로 다룰 충분한 이유가 있으면 허용될 수 있다. 기준의 명칭과 위헌 결론 사이에는 이유를 검토하는 단계가 있다.</p>
+<p><strong>시험:</strong> 개별적 규율이라는 이유만으로 무조건 위헌이라는 보기를 경계한다. <strong>키워드:</strong> 예측가능성·평등·자의금지. <strong>한 줄:</strong> 법이라는 이름보다 같은 취급과 다른 취급의 이유가 중요하다.</p>
+<h1>2. 특정 사건을 위한 법률의 한계</h1>
+<h2 id="governance-04-03" data-concept-id="governance-04-03">2-1. 교재의 넓은 의미·좁은 의미 처분적 법률 ★★★★★</h2>
+<p><strong>교재 61–62쪽 / 문단의 역할:</strong> 구체적 사건에 대한 규율과 재판을 대신해 버리는 규율을 구별한다.</p>
+<p>교재는 ‘처분적 법률’을 두 층으로 설명한다. <strong>넓은 의미</strong>에서는 특정 사건·상황을 별도로 규율하지만, 실제 대상자의 사실관계를 조사하고 행정처분 등을 거쳐 적용할 여지가 있다. 새로운 화학물질이 갑자기 위험을 일으켜 일정 기간 사용을 제한하는 법이 예다. 행정청은 누가 실제로 그 물질을 사용했는지 확인한 뒤 제재한다.</p>
+<p>새 화학물질이나 전염병은 아직 위험의 공통 속성을 충분히 알지 못할 수 있다. 이때 잠정적으로 특정한 위험을 다룰 필요가 있다. 이것을 언제나 금지하면 국민 보호가 늦어질 수 있다. 반대로 위험의 공통 속성을 이미 알면서 같은 위험의 다른 사례를 이유 없이 제외한다면 평등 문제가 커진다. <strong>개별 규율의 필요성과 차별의 이유를 묻는 것</strong>이다.</p>
+<p>교재의 <strong>좁은 의미</strong>는 사실관계를 조사·심리할 기회 없이 구체적 권리·의무의 결과 자체를 확정하는 경우를 가리킨다. 예를 들어 손해를 일으켰는지 따질 기회도 주지 않고 특정인에게 배상의무를 확정하거나, 고소만 있으면 법원의 판단 없이 바로 구금하도록 하는 식이다. 이런 예는 재판청구권·권력분립뿐 아니라 경우에 따라 영장주의 등에도 문제를 일으킨다.</p>
+<p><mark class="pink">여기서는 ‘사실을 다툴 기회까지 없애는’ 교재의 좁은 정의가 전제된다. 직접 효력이 생기는 법률이나 판례에서 처분적 법률이라고 부르는 모든 법률이 그 명칭만으로 위헌이라는 일반명제로 넓히지 않는다.</mark> 형성 037은 ‘모든 국민에게 똑같이 재판 기회를 빼앗아도 평등하기만 하면 괜찮다’는 주장을 틀리게 만든다. 평등 위반 외에도 독립된 기본권 침해가 있다.</p>
+<p><strong>시험:</strong> 형성 037의 정답은 평등 위반 때에만 위헌이라는 보기다. <strong>키워드:</strong> 사실심리·재판청구권·권력분립. <strong>한 줄:</strong> 누구에게나 공평하게 재판 기회를 빼앗는다고 정당해지지는 않는다.</p>
+<h2 id="governance-04-04" data-concept-id="governance-04-04">2-2. 개별사건법률은 이름이 아니라 적용받는 사람을 본다 ★★★★☆</h2>
+<p><strong>교재 62–63쪽 / 문단의 역할:</strong> 일반성이 부족한 법률을 식별한다.</p>
+<p>“홍길동에게만 적용한다”는 이름 지정뿐 아니라 “특정 날짜 특정 회의에 참석한 사람”처럼 설명으로 대상자가 확정되는 경우도 있다. 뒤의 방법을 한정기술이라고 한다. 법을 만들 당시 적용받을 인적 범위가 확정되거나 확정될 수 있으면 개별사건법률의 문제가 생긴다.</p>
+<p>그렇다고 바로 위헌 결론은 아니다. 국가는 왜 특정인들을 별도로 다루는지 설명해야 한다. 그들의 책임 있는 행위와 관련 있는 구별인지, 평등원칙에 비추어 합리적인 이유와 공익이 있는지 살핀다. 단순히 어느 달에 태어났다는 이유만으로 책임 없는 불이익을 주는 것과, 특별한 피해집단을 합리적 기준으로 지원하는 것은 같지 않다.</p>
+<p><strong>심화 ★★☆☆☆:</strong> ‘외연’은 실제로 그 개념에 들어가는 대상들의 범위이고, ‘내포’는 그 개념을 이루는 성질이다. 인명 대신 문장으로 적어도 결국 같은 몇 명만 찍는다면 외연은 같을 수 있다. 용어 자체보다 이름을 숨긴 특정인 법률도 있다는 점을 이해하면 된다.</p>
+<p><strong>시험:</strong> 워크북 068. <strong>키워드:</strong> 고유명·한정기술·인적 범위 확정. <strong>한 줄:</strong> 이름을 안 썼다고 자동으로 일반적인 법은 아니다.</p>
+<h2 id="governance-04-05" data-concept-id="governance-04-05">2-3. 5·18 특별법 사건의 질문은 왜 따로 다루느냐였다 ★★★★★</h2>
+<p><strong>교재 63–64쪽 / 문단의 역할:</strong> 개별사건법률의 합헌 가능성을 판례로 확인한다.</p>
+<p><strong>등장인물→사건:</strong> 12·12 및 5·18 사건의 관련 피의자들과 소추기관이 있다. 특별법은 헌정질서파괴범죄에 대해 국가의 소추권 행사에 장애가 있던 기간의 공소시효 진행을 정지된 것으로 보도록 했다. <strong>갈등→재판:</strong> 적용받을 사람들이 이미 특정될 수 있는 법을 만들어 별도로 다루는 것이 평등에 반하지 않느냐는 문제가 헌법재판소에 왔다.</p>
+<p><strong>법원의 고민→판단:</strong> 특별한 법으로 특정인을 불리하게 하면 자의적 차별이 의심된다. 그러나 이 사건에서는 집권과정의 불법성과 헌정질서 회복을 위한 과거청산의 공익 등을 검토했다. <strong>개별사건법률이라는 이유만으로 곧바로 위헌이 되지는 않는다</strong>고 판단했다. 다르게 취급할 합리적 이유를 심사해야 한다는 뜻이다. <a href="https://www.law.go.kr/detcInfoP.do?detcSeq=137467">헌재 1996.2.16. 96헌가2 등</a>.</p>
+<p><strong>다른 결론이면:</strong> 모든 개별 규율을 자동 금지하면 특수한 불법과 피해를 바로잡는 입법도 불가능해진다. 반대로 공익이라는 말만 있으면 모두 허용하면 보복 입법을 막기 어렵다. 그래서 이유를 심사한다.</p>
+<p>판례의 논리를 한 줄씩 풀면 ① 대상자가 이미 정해졌다고 볼 수 있다→개별사건법률 문제는 있다. ② 그 사실만으로 끝내지 않는다→자의적인 차별인지 더 본다. ③ 이 사건의 역사적·법적 공익을 살핀다→정당화 근거가 있다. ④ 따라서 개별적이라는 사유 자체로 위헌은 아니다.</p>
+<p><strong>심화·오해 방지:</strong> 사건 전체에는 공소시효가 이미 완성된 경우의 소급효 문제도 있었다. 그 쟁점에서는 한정위헌 의견이 5명이었지만 위헌결정에 필요한 6명에 이르지 못했고 주문은 합헌이었다. ‘모든 쟁점에서 전원일치 합헌’이라고 외우지 않는다. 이번 문제의 초점은 개별사건법률과 평등원칙이다.</p>
+<p><strong>시험:</strong> 워크북 069. <strong>키워드:</strong> 개별법률≠당연위헌·합리적 이유. <strong>한 줄:</strong> 특정인을 다루었다면 왜 그래야 하는지 심사한다.</p>
+<h1>3. 헌법과 법률이 만들어지는 절차</h1>
+<h2 id="governance-04-06" data-concept-id="governance-04-06">3-1. 헌법개정은 국민이 마지막 결정을 한다 ★★★★★</h2>
+<p><strong>교재 64–65쪽 / 문단의 역할:</strong> 국회의 개헌 권한과 국민투표를 연결한다.</p>
+<p>헌법은 일상적인 법률보다 높은 국가의 기본 규칙이다. 그래서 국회가 일반 법률처럼 과반수만 모아 바꾸지 못한다. 헌법 제128–130조는 발의, 공개, 국회 의결, 국민투표라는 단계를 둔다. 국민이 변경 내용을 충분히 알고 판단하도록 하려는 장치다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>주체·기간·정족수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>발의</td>
+<td>국회 재적의원 과반수 또는 대통령</td>
+</tr>
+<tr>
+<td>공고</td>
+<td>대통령이 20일 이상</td>
+</tr>
+<tr>
+<td>국회 의결</td>
+<td>공고일부터 60일 이내, 재적의원 3분의 2 이상 찬성</td>
+</tr>
+<tr>
+<td>국민투표</td>
+<td>국회 의결 후 30일 이내. 국회의원 선거권자 과반수 투표와 투표자 과반수 찬성</td>
+</tr>
+<tr>
+<td>확정·공포</td>
+<td>국민투표 요건을 충족하면 확정, 대통령은 즉시 공포</td>
+</tr>
+</tbody></table>
+<p><strong>교재의 혼합안 사례:</strong> A안과 B안을 각각 20일 이상 공고했다. 국회가 “좋은 부분만 섞은 C안이니 다시 공고하지 말자”고 한다. 안 된다. 국민이 사전에 본 A·B와 실제로 의결할 C는 다르다. 수정된 안을 다시 발의하고 공고 절차를 밟아야 한다. 일반 법률안의 본회의 수정과 다르다.</p>
+<p><mark class="blue">제3강에서 배운 일반 의결정족수의 예외가 개헌의 재적 3분의 2다. 대통령 임기 연장이나 중임 변경 개헌은 제안 당시 대통령에게 효력이 없다는 제128조 제2항도 자기 임기 연장을 막는 장치다.</mark> <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=985340&cbIdx=1147">대한민국헌법 제128–130조</a>.</p>
+<p><strong>시험:</strong> 형성 036. <strong>키워드:</strong> 발의 과반·공고20·의결60/3분의2·투표30. <strong>한 줄:</strong> 공개한 바로 그 안을 국회와 국민이 차례로 판단한다.</p>
+<h2 id="governance-04-07" data-concept-id="governance-04-07">3-2. 법률안은 제안하고 두 단계로 심사한다 ★★★★★</h2>
+<p><strong>교재 65–66쪽 / 문단의 역할:</strong> 법률안 제출부터 본회의 도착까지 설명한다.</p>
+<p>헌법 제52조에 따라 국회의원과 정부가 법률안을 제출할 수 있다. 의원발의는 국회법상 10명 이상의 찬성이 필요하다. 정부안은 국무회의 심의를 거친다. 제출권은 공유하지만 국회의 법률안 심의·의결권까지 정부와 공동으로 행사하는 것은 아니다.</p>
+<p>안이 접수되면 소관위원회가 내용을 전문적으로 검토한다. 제안자의 취지 설명, 전문위원의 검토보고, 전체 방향에 대한 대체토론, 조문을 하나씩 보는 축조심사, 찬반토론, 표결로 이어진다. 생략 가능한 단계와 제정법·전부개정법·소위원회 등의 예외는 제3강에서 배운 국회법 제58조와 연결한다.</p>
+<p>소관위원회를 통과한 법률안은 원칙적으로 법제사법위원회에서 <strong>체계·자구</strong>를 심사한다. 다른 법과 충돌하는지, 문장이 법률로서 맞는지 보는 것이다. 법사위가 원래 소관위의 모든 정책 판단을 무제한으로 다시 하는 단계라고 이해하지 않는다. 이후 본회의에 부의한다. 주요 안건에 대해 재적의원 4분의 1 이상 요구가 있으면 전원위원회 심사도 가능하다.</p>
+<p>위원회에서 본회의에 부의할 필요가 없다고 판단했어도 즉시 절대적으로 끝나는 것은 아니다. 보고된 날부터 폐회·휴회 기간을 제외한 7일 이내에 의원 30명 이상이 요구하면 본회의에 부의해야 한다. 그 요구가 없으면 폐기된다(국회법 제87조). <strong>위원회의 거부와 본회의의 부결을 같은 것으로 취급하지 않는 이유</strong>다.</p>
+<p><strong>시험:</strong> 형성 033·035, 워크북 070·071. <strong>키워드:</strong> 의원/정부 제출·소관위 내용·법사위 체계자구·7일/30명. <strong>한 줄:</strong> 제안자, 전문 심사자, 최종 표결자를 분리한다.</p>
+<h2 id="governance-04-08" data-concept-id="governance-04-08">3-3. 신속처리는 자동 통과가 아니라 심사 지연의 끝을 정한다 ★★★★★</h2>
+<p><strong>교재 66–67쪽 / 문단의 역할:</strong> 안건이 무한정 묶이는 것을 막는 절차를 소개한다.</p>
+<p>서로 의견이 다르다는 이유로 위원회가 법안을 계속 붙잡으면 본회의가 판단할 기회조차 사라질 수 있다. 신속처리안건 제도는 일정 시간이 지나면 다음 단계로 넘어가게 한다. <mark class="pink">신속처리 지정은 법률안 가결이 아니다. 국회법이 만든 절차이지 헌법이 반드시 그 모습 그대로 두라고 정한 제도도 아니다.</mark></p>
+<p>지정 요청은 재적의원 또는 소관위원회 재적위원 과반수의 서명을 갖춘 동의로 한다. 지정 의결은 해당 본회의 또는 위원회에서 무기명투표로 <strong>재적 5분의 3 이상</strong>의 찬성이 필요하다. 과반수 서명은 요청, 5분의 3은 지정 결정이라는 차이를 기억한다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>교재·옛 문제의 기준</th>
+<th>2026.9.8. 이후 새로 지정된 안건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>위원회 심사기간</td>
+<td>지정일부터 180일 이내</td>
+<td>60일 이내</td>
+</tr>
+<tr>
+<td>법사위 체계·자구 심사기간</td>
+<td>회부일부터 90일 이내</td>
+<td>30일 이내</td>
+</tr>
+<tr>
+<td>본회의 상정</td>
+<td>부의 간주일부터 60일 이내, 미상정이면 그 뒤 첫 본회의</td>
+<td>부의 간주일 또는 부의일이 지난 뒤 첫 본회의</td>
+</tr>
+</tbody></table>
+<p>기간 내 심사를 마치지 못하면 법에서 정한 다음 단계로 넘어간다. 법사위가 <strong>소관위원회로 심사하는 경우</strong>와 <strong>다른 위원회 안의 체계·자구를 심사하는 경우</strong>의 기간을 혼동하지 않는다. 개정법은 2026.9.8. 이후 지정하는 경우부터 적용하므로, 예전에 지정된 안건까지 새 기간으로 단순 치환하지 않는다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001416&lsRvsGubun=all">국회법 제85조의2 개정문·부칙</a>.</p>
+<p><strong>시험:</strong> 형성 032의 원본 정답 ②는 보존한다. 다만 ④의 180일·90일은 구법이므로 현재법 문제로 그대로 사용하면 복수 오류가 된다. <strong>키워드:</strong> 요청 과반·지정 5분의3·시점. <strong>한 줄:</strong> 빨리 결론을 내릴 길을 여는 것이지 찬성한 것으로 처리하지 않는다.</p>
+<h2 id="governance-04-09" data-concept-id="governance-04-09">3-4. 본회의에서는 수정과 토론을 거쳐 표결한다 ★★★★★</h2>
+<p><strong>교재 67–69쪽 / 문단의 역할:</strong> 전문 심사 뒤에도 전체 의원의 판단이 필요함을 설명한다.</p>
+<p>본회의에서는 위원장의 심사보고, 질의, 토론, 표결이 원칙이다. 위원회 심사를 거친 안은 의결로 질의·토론 중 일부 또는 모두를 생략할 수 있다. 위원회를 거치지 않은 안은 제안자가 취지를 설명한다. 소관위원회가 통과시킨 문구가 본회의를 무조건 구속하지는 않는다.</p>
+<p>법률안에 수정동의를 하려면 수정안과 이유를 갖추고 30명 이상 찬성 의원이 함께 서명하는 절차를 밟는다. 이것은 기존 안을 그대로 찬성하거나 반대하는 것 외에 고쳐 판단할 수 있게 한다. 국회의 법률안 수정과 대통령이 거부권으로 일부를 고치는 행위는 다르다. 대통령은 뒤에서 설명하듯 일부거부·수정재의요구를 할 수 없다.</p>
+<p>일반 표결은 재적의원 과반수 출석에 출석의원 과반수 찬성이다. 재적 300명 중 200명이 출석했다면 101명 찬성으로 가결될 수 있다. ‘반드시 재적 과반인 151명이 찬성’은 일반 공식이 아니다. 찬성과 반대가 같으면 부결이다.</p>
+<p><strong>시험:</strong> 형성 034, 워크북 071. <strong>키워드:</strong> 보고·질의·토론·표결·수정30. <strong>한 줄:</strong> 위원회 통과와 법률안의 최종 의결은 다르다.</p>
+<h2 id="governance-04-10" data-concept-id="governance-04-10">3-5. 무제한토론은 소수파의 말할 기회를 보장한다 ★★★★★</h2>
+<p><strong>교재 68–69쪽 / 문단의 역할:</strong> 다수결 전에 소수의 의견을 들을 절차를 둔다.</p>
+<p>다수파가 언제나 즉시 표결한다면 소수파는 반대 이유를 설명할 시간도 얻지 못한다. 무제한토론은 합법적인 의사진행 지연을 허용해 물리적 충돌 대신 토론·타협을 유도하는 제도다. 재적의원 3분의 1 이상이 서명해 요구하면 의장은 실시해야 하고, 의원 한 명은 한 차례 토론할 수 있다.</p>
+<p>무제한토론 중 본회의는 종결될 때까지 산회하지 않으며 통상의 재적 5분의 1 출석 기준에 못 미쳐도 계속한다. 그러나 ‘무제한’은 영원히 끝낼 수 없다는 뜻이 아니다. 재적 3분의 1 이상이 종결동의를 내면 <strong>제출부터 24시간이 지난 뒤</strong>, 무기명투표로 재적 5분의 3 이상 찬성이 있어야 종결시킬 수 있다. 종결동의 자체에는 토론하지 않는다.</p>
+<p>토론할 의원이 더 없거나 종결동의가 가결되면 종결을 선포하고 해당 안건을 지체 없이 표결한다. 회기가 끝나도 종결 선포가 있었던 것으로 보며, 다음 회기에 지체 없이 표결한다. 그 안건에 다시 무제한토론을 요구할 수 없다. 예산안 등은 12월 1일까지라는 별도 제한도 제5강과 연결한다.</p>
+<p><strong>현재법 보완:</strong> 2026.2.10. 이후 요구서가 제출된 경우에는 의장이 지정한 부의장·상임위원장이 진행할 수 있도록 제106조의2 제1항이 바뀌었다. 교재의 핵심 요구·종결 정족수와 구별해서 읽는다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=001416&lsRvsGubun=all">국회법 개정문</a>.</p>
+<p><strong>시험:</strong> 형성 031, 워크북 074. <strong>키워드:</strong> 요구1/3·1인1회·종결24시간/3분의5가 아닌 5분의3. <strong>한 줄:</strong> 충분히 말할 기회는 보장하지만 끝내는 절차도 정해 둔다.</p>
+<h2 id="governance-04-11" data-concept-id="governance-04-11">3-6. 확정·공포·시행은 세 개의 문이다 ★★★★★</h2>
+<p><strong>교재 69–70쪽 / 문단의 역할:</strong> 의결된 법률안이 국민에게 적용될 때까지를 설명한다.</p>
+<p>국회가 의결한 법률안은 정부에 이송한다. 대통령은 이송된 날부터 15일 안에 공포하거나, 이의서를 붙여 국회에 돌려보내 재의를 요구할 수 있다. 폐회 중에도 가능하지만 법률안 일부만 거부하거나 대통령이 고친 내용으로 재의를 요구할 수는 없다.</p>
+<p>재의요구가 있으면 국회는 다시 판단한다. 재적 과반수 출석과 <strong>출석 3분의 2 이상</strong> 찬성으로 전과 같은 의결을 하면 법률로 확정된다. 처음 의결보다 높은 찬성이 필요하다. 재적 300명·출석 200명이라면 재의결에는 최소 134명 찬성이 필요하다. ‘재적 3분의 2’인 200명과 다르다.</p>
+<p>대통령이 15일 동안 공포도 재의요구도 하지 않아도 법률은 확정된다. 확정 뒤 대통령이 계속 공포하지 않는다고 영원히 멈추지 않는다. 헌법 제53조가 정한 확정 후 또는 재의결 법률의 정부 이송 후 5일 이내에 공포하지 않으면 국회의장이 공포한다. 따라서 원칙적 공포자는 대통령이고 국회의장 공포는 예외적 보완이다.</p>
+<table>
+<thead>
+<tr>
+<th>문</th>
+<th>쉬운 뜻</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>확정</td>
+<td>법률의 내용을 더 이상 그 절차에서 다투지 않는 상태</td>
+<td>확정 즉시 국민에게 적용되는 것은 아님</td>
+</tr>
+<tr>
+<td>공포</td>
+<td>정해진 법률을 공적으로 알림</td>
+<td>아직 알리지 않은 법으로 국민을 구속할 수 없음</td>
+</tr>
+<tr>
+<td>시행</td>
+<td>효력이 발생해 적용되는 시점</td>
+<td>특별한 규정이 없으면 공포 후 20일 경과</td>
+</tr>
+</tbody></table>
+<p>법률마다 시행일을 따로 정할 수 있다. 11월에 공포하고 다음 해 3월부터 시행하도록 할 수도 있다. 공포 뒤 시행 전이라고 법률 자체가 존재하지 않는 것은 아니며, 헌법재판의 요건이 갖춰지면 심판 문제가 생길 수 있다. 그렇다고 누구나 모든 미시행 법률을 바로 헌법소원으로 다툴 수 있다는 뜻은 아니다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=985340&cbIdx=1147">헌법 제53조</a>.</p>
+<p><strong>시험:</strong> 워크북 072·073. <strong>키워드:</strong> 15일·재의 출석2/3·의장5일·기본시행20일. <strong>한 줄:</strong> 정하고, 알리고, 적용하는 때를 구별한다.</p>
+<h1>4. 조약과 국회규칙</h1>
+<h2 id="governance-04-12" data-concept-id="governance-04-12">4-1. 조약은 제목보다 내용으로 판단한다 ★★★★★</h2>
+<p><strong>교재 70–71쪽 / 문단의 역할:</strong> 외교도 국민 대표기관의 통제를 받는 영역임을 설명한다.</p>
+<p>조약은 국제법주체 사이의 법적 권리·의무를 창설·변경·소멸시키기 위해 문서로 맺는 합의다. 협약·헌장·협정·선언이라는 이름만으로 조약 여부를 판단하지 않는다. 명칭이 선언이어도 실질에 따라 판단하고, 선언이라는 이름의 모든 문서가 자동으로 법적 조약이 되는 것도 아니다.</p>
+<p>대통령이 체결·비준하지만 헌법 제60조 제1항의 중요한 조약에는 국회 동의가 필요하다. ① 상호원조·안전보장 ② 중요한 국제조직 ③ 우호통상항해 ④ 주권 제약 ⑤ 강화 ⑥ 국가·국민의 중대한 재정 부담 ⑦ 입법사항에 관한 조약이다. ‘행정규칙 사항’이라고 해서 그 이유만으로 일곱 번째 범주가 되는 것은 아니다.</p>
+<p>국회는 동의할지 심의·의결한다. 국내 법률안처럼 상대국과 합의한 조약 문구를 국회가 일방적으로 고쳐 국제합의 자체를 완성할 수는 없다. 반대하면 정부가 다시 협상할 필요가 생길 수 있다. 국내적 동의 절차와 국제적 합의 절차를 분리한다.</p>
+<p><mark class="pink">동의가 필요한데 받지 않은 경우 ‘국내 절차 위반이니 국제적으로도 무조건 무효’라고 단정하지 않는다.</mark> 교재·기출은 국내법상 효력의 문제와 국제적 책임을 구별한다. <strong>심화:</strong> 조약법협약 제46조는 조약체결 권한에 관한 근본적으로 중요한 국내법 규칙의 명백한 위반이라는 예외를 둔다. 따라서 ‘국제적으로 언제나 유효’도 엄밀한 일반명제로 쓰지 않는다. <a href="https://legal.un.org/ilc/texts/instruments/english/conventions/1_1_1969.pdf">조약법에 관한 비엔나협약 제46조</a>.</p>
+<p><strong>시험:</strong> 형성 030, 워크북 075. <strong>키워드:</strong> 실질·대통령 체결비준·국회 동의·국내/국제 구별. <strong>한 줄:</strong> 나라 밖 약속도 중요 내용이면 국회의 판단을 거친다.</p>
+<h2 id="governance-04-13" data-concept-id="governance-04-13">4-2. 미군 시설 협정이 국민의 땅을 자동으로 빼앗는가 ★★★★★</h2>
+<p><strong>교재 71–72쪽·각주 / 문단의 역할:</strong> 조약의 성격과 사유재산에 대한 효력을 구별한다.</p>
+<p><strong>등장인물→사건:</strong> 미군이 사용하던 토지의 소유자들과 대한민국 정부가 있다. 주한미군지위협정은 발효 당시 사용 중인 시설·구역을 양국이 공여에 합의한 것으로 간주했다. <strong>갈등:</strong> 토지소유자들은 이것이 자신들의 재산을 대가 없이 제공하게 하는 규정이 아니냐고 다퉜다. 민사소송에서 법원이 위헌심판을 제청했다.</p>
+<p><strong>법원의 고민→결론:</strong> 먼저 ‘협정’이라는 제목에도 외국군대의 지위, 재정 부담, 입법사항을 포함하므로 국회 동의가 필요한 조약이라고 보았다. 실제 동의·비준·공포도 거쳤다. 이어 양국 사이의 공여합의 간주가 국민과 국가 사이의 소유권·사용권을 바로 바꾸는 것은 아니라고 해석했다. 심판대상 조항은 합헌이었다. <a href="https://www.law.go.kr/detcInfoP.do?detcSeq=135443">헌재 1999.4.29. 97헌가14</a>.</p>
+<p>쉽게 풀면 ① 두 정부가 “이 땅을 제공하기로 합의했다”는 것과 ② 국가가 땅 주인에게서 “적법하게 소유권·사용권을 얻었다”는 것은 별개다. 국가가 아직 권리를 취득하지 않았다면 매수·수용·사용 등 적법한 절차를 별도로 밟아야 한다. 절차 없이 사실상 제공했다면 그 집행행위를 다툴 문제이지, 조약 조항 자체가 자동으로 재산을 빼앗는다는 결론이 아니다.</p>
+<p><strong>다른 결론이면:</strong> 국가 간 약속만 있으면 국민의 재산권 절차가 사라지게 된다. 판례는 그렇게 읽지 않았다. ‘조약 이행 중의 재산권 침해는 구제받을 수 없다’는 보기는 판례와 반대다.</p>
+<p><strong>시험:</strong> 워크북 076. <strong>키워드:</strong> 국가 간 합의≠사인 권리변동·조항/집행 구별. <strong>한 줄:</strong> 남에게 제공하기로 약속했다고 주인의 권리를 얻은 것은 아니다.</p>
+<h2 id="governance-04-14" data-concept-id="governance-04-14">4-3. 국회규칙도 법률을 넘어설 수 없다 ★★★★☆</h2>
+<p><strong>교재 72쪽 / 문단의 역할:</strong> 의회의 독립과 법질서의 한계를 함께 설명한다.</p>
+<p>국회가 내부 의사절차와 규율을 정할 때마다 행정부의 허락을 받아야 한다면 독립적으로 견제하기 어렵다. 헌법 제64조 제1항은 국회가 법률에 저촉되지 않는 범위에서 의사와 내부규율에 관한 규칙을 만들도록 한다. 국회의원뿐 아니라 국회에 들어와 내부 질서를 따라야 하는 사람에게 관련 규칙이 적용될 수 있지만, 본질은 내부 영역이다.</p>
+<p><mark class="yellow">국회가 법률을 만드는 기관이라고 국회규칙까지 법률과 같은 힘을 가지는 것은 아니다.</mark> 형식적 효력은 명령·규칙의 수준이며 법률 아래다. 내부 자치가 국민 일반에게 새로운 의무를 무제한으로 부과하는 권한으로 바뀌지 않는다.</p>
+<p><strong>시험:</strong> 형성 029. <strong>키워드:</strong> 자주성·독립성·내부영역·법률에 저촉 금지. <strong>한 줄:</strong> 자기 집 규칙을 정하되 상위 법을 어길 수는 없다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>立法 입법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 立(설 립), 法(법 법). <strong>③ 합친 뜻:</strong> 법을 세움. <strong>④ 이름의 이유:</strong> 공통 규칙을 만들어 세우는 작용이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반적·추상적인 성문 법규범을 정립하는 국가작용. <strong>⑥ 쉬운 말:</strong> 앞으로 어떤 경우에 어떻게 해야 하는지 규칙을 정한다. <strong>⑦ 사례:</strong> 위험한 행위를 금지하는 법률을 만든다.</p>
+<p><strong>⑧ 시험:</strong> 재정·국정통제와 구별. <strong>⑨ 비교·기억법:</strong> 법을 집행하는 행정, 분쟁에 적용하는 사법과 비교.</p>
+<h3>一般性·抽象性 일반성·추상성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 一(한 일), 般(가지 반), 性(성품 성), 抽(뽑을 추), 象(모양 상). <strong>③ 합친 뜻:</strong> 널리 공통됨·공통 성질을 뽑음. <strong>④ 이름의 이유:</strong> 이름과 일회적 사건을 넘어 공통 기준을 뽑는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법 적용의 인적 범위와 사건 범위를 공통 속성으로 정하는 성질. <strong>⑥ 쉬운 말:</strong> 누구와 어떤 일이 같은 규칙을 적용받는지 정한다. <strong>⑦ 사례:</strong> 미래에 영업을 시작할 사람도 영업 규칙의 대상이 된다.</p>
+<p><strong>⑧ 시험:</strong> 일반성은 사람, 추상성은 사건을 본다. <strong>⑨ 비교·기억법:</strong> 모든 국민에게 똑같은 규칙만 허용된다는 뜻은 아님.</p>
+<h3>成文法 성문법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 成(이룰 성), 文(글월 문), 法(법 법). <strong>③ 합친 뜻:</strong> 글로 이루어진 법. <strong>④ 이름의 이유:</strong> 글로 표현된 형태에 주목한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 문서 형식으로 정립된 법규범. <strong>⑥ 쉬운 말:</strong> 눈으로 읽을 수 있도록 적어 둔 법. <strong>⑦ 사례:</strong> 헌법·법률의 조문.</p>
+<p><strong>⑧ 시험:</strong> 성문이라는 형식만으로 합헌이 되는가. <strong>⑨ 비교·기억법:</strong> 관습법 같은 불문법과 비교.</p>
+<h3>處分的法律 처분적 법률</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 處(곳 처; 처리함), 分(나눌 분), 的(과녁 적), 法(법 법), 律(법 률). <strong>③ 합친 뜻:</strong> 구체적으로 처리하는 성격의 법률. <strong>④ 이름의 이유:</strong> 행정처분·재판처럼 구체적 결과에 가까운 규율이기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재는 개별 사안 규율과 사실심리 없이 결과를 확정하는 좁은 유형을 구별. <strong>⑥ 쉬운 말:</strong> 특정 일을 바로 정리하는 법인데 무엇을 생략했는지 봐야 한다. <strong>⑦ 사례:</strong> 손해를 냈는지 다툴 기회 없이 배상을 확정하는 교재 사례.</p>
+<p><strong>⑧ 시험:</strong> 좁은 정의의 재판청구권 침해는 평등과 별개. <strong>⑨ 비교·기억법:</strong> 명칭만으로 모든 처분적 법률이 위헌이라는 뜻은 아님.</p>
+<h3>個別事件法律 개별사건법률</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 個(낱 개), 別(나눌 별), 事(일 사), 件(사건 건), 法(법 법), 律(법 률). <strong>③ 합친 뜻:</strong> 개개의 특정 사건을 위한 법률. <strong>④ 이름의 이유:</strong> 특정인이나 이미 정해진 집단을 따로 규율한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 적용의 인적 범위가 제정 당시 확정되거나 확정 가능한 법률. <strong>⑥ 쉬운 말:</strong> 이름을 쓰거나 설명으로 특정 사람들을 찍은 법. <strong>⑦ 사례:</strong> 5·18 특별법의 공소시효 규정.</p>
+<p><strong>⑧ 시험:</strong> 개별법률이면 곧바로 위헌이라는 함정. <strong>⑨ 비교·기억법:</strong> 소급입법은 적용 시간의 문제, 개별법률은 인적 범위의 문제.</p>
+<h3>限定記述 한정기술</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 限(한정할 한), 定(정할 정), 記(기록할 기), 述(펼 술). <strong>③ 합친 뜻:</strong> 범위를 정해 설명함. <strong>④ 이름의 이유:</strong> 설명 문장이 대상을 한정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이름 대신 특정 대상이 확정되는 설명을 사용하는 것. <strong>⑥ 쉬운 말:</strong> 이름을 안 써도 누군지 알 수 있게 묘사한다. <strong>⑦ 사례:</strong> 특정 날짜 특정 행사 참석자라는 조건.</p>
+<p><strong>⑧ 시험:</strong> 고유명을 쓰지 않아도 특정되는가. <strong>⑨ 비교·기억법:</strong> 기술은 技術이 아니라 記述이라는 점을 기억.</p>
+<h3>遡及立法 소급입법</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遡(거슬러 올라갈 소), 及(미칠 급), 立(설 립), 法(법 법). <strong>③ 합친 뜻:</strong> 거슬러 미치는 입법. <strong>④ 이름의 이유:</strong> 효과가 시간상 뒤로 올라간다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 새 규율을 과거의 사실·법률관계에 미치게 하는 입법. <strong>⑥ 쉬운 말:</strong> 새 법을 예전 일에 적용하는 문제. <strong>⑦ 사례:</strong> 이미 완성된 시효와 진행 중 시효를 다르게 검토한다.</p>
+<p><strong>⑧ 시험:</strong> 진정·부진정소급을 구별. <strong>⑨ 비교·기억법:</strong> 개별사건법률과 판단 축이 다르다.</p>
+<h3>發議·公告 발의·공고</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발), 議(의논할 의), 公(공평할 공; 공개), 告(알릴 고). <strong>③ 합친 뜻:</strong> 논의를 시작함·공개해 알림. <strong>④ 이름의 이유:</strong> 결정을 시작하기 전 제안과 공개가 필요하다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 안을 공식 제시하고 국민이 내용을 알도록 알리는 절차. <strong>⑥ 쉬운 말:</strong> 이대로 바꾸자고 내놓고 미리 보여 준다. <strong>⑦ 사례:</strong> 개헌안을 발의한 뒤 대통령이 20일 이상 공고.</p>
+<p><strong>⑧ 시험:</strong> 개헌안을 섞으면 재공고가 필요한가. <strong>⑨ 비교·기억법:</strong> 공고는 개헌안 공개, 공포는 확정된 법의 공식 알림.</p>
+<h3>審議·議決 심의·의결</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 審(살필 심), 議(의논할 의), 決(결단할 결). <strong>③ 합친 뜻:</strong> 살펴 의논함·의논해 결정함. <strong>④ 이름의 이유:</strong> 검토와 최종 결론의 단계를 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 안건을 검토하는 과정과 기관의 의사를 확정하는 결정. <strong>⑥ 쉬운 말:</strong> 내용을 따져 보는 것과 통과시킬지 정하는 것. <strong>⑦ 사례:</strong> 국회가 법률안을 토론한 뒤 표결한다.</p>
+<p><strong>⑧ 시험:</strong> 정부 제출권이 국회 의결권과 같은가. <strong>⑨ 비교·기억법:</strong> 제출·심의·의결·공포는 서로 다르다.</p>
+<h3>體系·字句 체계·자구</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 體(몸 체), 系(이을 계), 字(글자 자), 句(글귀 구). <strong>③ 합친 뜻:</strong> 전체 연결 구조·글자와 문구. <strong>④ 이름의 이유:</strong> 법 전체의 연결과 표현을 확인한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률안의 다른 규범과의 정합성 및 문언을 심사하는 기준. <strong>⑥ 쉬운 말:</strong> 다른 법과 맞는지, 문장이 정확한지 본다. <strong>⑦ 사례:</strong> 법사위의 체계·자구 심사.</p>
+<p><strong>⑧ 시험:</strong> 모든 정책을 무제한 재심사하는 권한으로 확대하지 않기. <strong>⑨ 비교·기억법:</strong> 소관위의 내용 심사와 구별.</p>
+<h3>附議·上程 부의·상정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 附(붙을 부), 議(의논할 의), 上(위 상), 程(한도 정; 절차). <strong>③ 합친 뜻:</strong> 회의에 붙임·안건으로 올림. <strong>④ 이름의 이유:</strong> 회의로 보내는 것과 그날 다루는 것을 나눈다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 회의가 심의할 안건으로 넘김과 실제 회의 의제로 올림. <strong>⑥ 쉬운 말:</strong> 회의에 가져다 놓는 단계와 지금 논의하자고 올리는 단계. <strong>⑦ 사례:</strong> 신속처리안건 부의 뒤 본회의 상정.</p>
+<p><strong>⑧ 시험:</strong> 자동 부의를 자동 가결로 바꾸는 함정. <strong>⑨ 비교·기억법:</strong> 의결은 그 뒤 판단 단계.</p>
+<h3>迅速處理 신속처리</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 迅(빠를 신), 速(빠를 속), 處(처리할 처), 理(다스릴 리). <strong>③ 합친 뜻:</strong> 빠르게 처리함. <strong>④ 이름의 이유:</strong> 지연에 시간적 한계를 둔다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 심사 지연을 막고 정해진 기간 뒤 다음 단계로 이행시키는 국회법상 제도. <strong>⑥ 쉬운 말:</strong> 언제까지 붙잡고 있을 수 있는지 정한다. <strong>⑦ 사례:</strong> 2026년 새 지정안의 소관위 심사기간은 60일.</p>
+<p><strong>⑧ 시험:</strong> 지정 정족수와 기간·적용례. <strong>⑨ 비교·기억법:</strong> 신속한 심의 경로이지 통과 보장은 아님.</p>
+<h3>無制限討論 무제한토론</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 無(없을 무), 制(제한할 제), 限(한정할 한), 討(칠 토; 따져 의논), 論(논할 론). <strong>③ 합친 뜻:</strong> 시간 제한 없는 토론. <strong>④ 이름의 이유:</strong> 일반적인 발언시간 제한을 적용하지 않는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국회 소수파의 의사진행 지연·의견 개진을 위한 법정 토론. <strong>⑥ 쉬운 말:</strong> 다수파가 바로 표결하기 전에 충분히 반대 이유를 말한다. <strong>⑦ 사례:</strong> 재적 3분의 1 이상이 요구.</p>
+<p><strong>⑧ 시험:</strong> 종결 사유가 하나뿐이라는 함정. <strong>⑨ 비교·기억법:</strong> 신속처리는 지연 해소, 무제한토론은 소수 의견 보호.</p>
+<h3>修正動議 수정동의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 修(닦을 수; 고침), 正(바를 정), 動(움직일 동), 議(의논할 의). <strong>③ 합친 뜻:</strong> 고치자고 제안함. <strong>④ 이름의 이유:</strong> 원안을 일부 고쳐 판단하도록 움직인다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 심의 중인 안을 일정한 방식으로 수정하려는 의사 제안. <strong>⑥ 쉬운 말:</strong> 그대로 말고 이 부분을 바꾸자는 제안. <strong>⑦ 사례:</strong> 법률안 본회의 수정은 30명 이상 찬성 의원 연서.</p>
+<p><strong>⑧ 시험:</strong> 위원회 통과 뒤에도 수정 가능한가. <strong>⑨ 비교·기억법:</strong> 대통령의 수정 재의요구는 허용되지 않음.</p>
+<h3>再議·還付 재의·환부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 再(다시 재), 議(의논할 의), 還(돌아올 환), 付(줄 부). <strong>③ 합친 뜻:</strong> 다시 의논함·돌려보냄. <strong>④ 이름의 이유:</strong> 국회가 전의 결정을 다시 판단하게 한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대통령이 이의를 붙여 법률안을 국회에 돌려보내 재판단을 요구하는 절차. <strong>⑥ 쉬운 말:</strong> 다시 생각해 달라고 돌려보낸다. <strong>⑦ 사례:</strong> 15일 이내 재의요구, 국회 출석 3분의 2 재의결.</p>
+<p><strong>⑧ 시험:</strong> 일부거부·수정요구·폐회 중 불가라는 함정. <strong>⑨ 비교·기억법:</strong> 재의는 국회 입법절차, 재심은 재판을 다시 다투는 절차.</p>
+<h3>確定·公布·施行 확정·공포·시행</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 確(굳을 확), 定(정할 정), 公(공평할 공; 공개), 布(펼 포), 施(베풀 시), 行(행할 행). <strong>③ 합친 뜻:</strong> 내용을 굳힘·공개함·실행함. <strong>④ 이름의 이유:</strong> 내용·알림·효력이 서로 다른 문제이기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률 내용의 확정, 공적 고지, 효력 발생이라는 구별되는 단계. <strong>⑥ 쉬운 말:</strong> 결정하고 알린 다음 정해진 날부터 적용한다. <strong>⑦ 사례:</strong> 15일 무조치로 확정되어도 공포 전 국민에게 적용 불가.</p>
+<p><strong>⑧ 시험:</strong> 확정 즉시 효력이라는 함정. <strong>⑨ 비교·기억법:</strong> 특별한 규정이 없으면 공포 후 20일 경과 시행.</p>
+<h3>條約·批准 조약·비준</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 條(가지 조; 조항), 約(맺을 약), 批(비평할 비; 결재), 准(허가할 준). <strong>③ 합친 뜻:</strong> 조항으로 맺은 약속·최종 확인. <strong>④ 이름의 이유:</strong> 국가 간 약속을 정식으로 받아들이는 절차다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국제법상 법적 합의와 국가가 조약에 구속될 의사를 최종적으로 확인하는 행위. <strong>⑥ 쉬운 말:</strong> 나라 사이의 법적 약속과 최종 확인. <strong>⑦ 사례:</strong> 대통령이 체결·비준하고 중요 조약은 국회 동의를 받는다.</p>
+<p><strong>⑧ 시험:</strong> 협정이라는 명칭만으로 동의 불요라는 함정. <strong>⑨ 비교·기억법:</strong> 국회 동의와 대통령 비준을 같은 행위로 보지 않는다.</p>
+<h3>供與·看做 공여·간주</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 供(이바지할 공), 與(줄 여), 看(볼 간), 做(지을 주). <strong>③ 합친 뜻:</strong> 제공함·그렇다고 봄. <strong>④ 이름의 이유:</strong> 직접 제공 또는 법적 취급의 방식을 나타낸다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 재산 등의 제공과 법이 일정 사실·효과를 있다고 취급하는 것. <strong>⑥ 쉬운 말:</strong> 내어 주는 것, 법에서 그런 것으로 정해 두는 것. <strong>⑦ 사례:</strong> SOFA의 양국 간 공여합의 간주.</p>
+<p><strong>⑧ 시험:</strong> 공여합의가 사유재산 소유권까지 바꾸는가. <strong>⑨ 비교·기억법:</strong> 국가 간 합의와 개인의 권리 취득을 분리.</p>
+<h3>國會規則 국회규칙</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 國(나라 국), 會(모일 회), 規(법 규), 則(법칙 칙). <strong>③ 합친 뜻:</strong> 국회 내부의 규칙. <strong>④ 이름의 이유:</strong> 국회 자율성·독립성을 위해 내부 규칙을 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률에 저촉되지 않는 범위의 의사·내부규율에 관한 규칙. <strong>⑥ 쉬운 말:</strong> 국회가 스스로 정하는 회의와 내부 질서의 규칙. <strong>⑦ 사례:</strong> 내부 회의절차에 관한 국회규칙.</p>
+<p><strong>⑧ 시험:</strong> 국회가 정했으므로 법률보다 우선한다는 함정. <strong>⑨ 비교·기억법:</strong> 법률제정권과 국회규칙제정권의 효력은 다르다.</p>
+<h1>문제 연결과 TOP5</h1>
+<p>형성평가 029–038과 워크북 068–076을 빠짐없이 연결했다. 자료의 기존 단원 태그가 제3강 또는 입법·재정 통합으로 되어 있어도 내용에 맞춰 이 강에 연결했으며 원본 태그와 정답은 바꾸지 않았다.</p>
+<p><strong>TOP5:</strong> 워크북 069(개별사건법률), 형성 032(신속처리·개정 주의), 형성 036(개헌 혼합안), 워크북 072(재의와 공포의 순서), 워크북 076(조약과 재산권). 출제 의도는 각각 명칭만 보고 위헌 결론 내리지 않기, 법률상 절차와 헌법상 보장 구별, 공고의 목적, 확정과 시행 구별, 국가 간 합의와 개인 권리 구별이다.</p>
+<p><strong>헷갈리기 쉬운 보기:</strong> ‘평등 위반일 때만’, ‘무제한토론은 발언자가 없어야만 끝난다’, ‘위원회 부결이면 어떤 경우에도 폐기’, ‘확정 즉시 적용’, ‘조약이면 재산권 구제 불가’. 실제 오답률 순위가 아니라 조건·예외를 놓치기 쉬운 문장들이다. 19문항의 76개 보기는 뒤의 문제 부록에서 각각 이유를 설명한다.</p>
+<h1>새로운 사례로 확인하기 · 5문제</h1>
+<p><strong>문제 1.</strong> 감염병 원인을 아직 파악하지 못해 위험이 확인된 특정 물질만 한시적으로 제한했다. 적용 전 사용 사실을 조사하고 처분을 다툴 수 있다. 특정 물질만 규율했다는 이유로 곧바로 위헌인가?</p>
+<p><strong>정답·의도:</strong> 아니다. 잠정적 개별 규율의 합리적 필요와 차별 이유를 심사한다. 사실심리와 구제 기회까지 없앤 경우와 구별하는 문제다.</p>
+<p><strong>문제 2.</strong> 재적 300명인 국회에서 160명 출석·100명 찬성으로 법률안을 의결했다. 대통령이 재의요구했고 같은 수로 다시 의결했다. 법률로 확정되었는가?</p>
+<p><strong>정답·의도:</strong> 처음은 통과하지만 재의결은 실패한다. 출석 160명의 3분의 2 이상은 107명이다. 일반 의결과 재의결의 분모·비율을 구별한다.</p>
+<p><strong>문제 3.</strong> 대통령이 이송받은 법률안에 15일 동안 아무 조치도 하지 않았다. 공포 전인데 담당 공무원이 “이미 확정되었다”며 국민에게 새 의무를 집행했다. 정당한가?</p>
+<p><strong>정답·의도:</strong> 아니다. 확정과 공포·시행은 다르다. 국민에게 공개되지 않은 법률을 확정만으로 적용할 수 없다.</p>
+<p><strong>문제 4.</strong> 신속처리안건 A는 2026년 8월, B는 같은 해 10월 지정되었다. 담당자가 두 안의 소관위 심사기간을 모두 새 기준 60일로 바꿨다. 맞는가?</p>
+<p><strong>정답·의도:</strong> 아니다. 2026.9.8. 이후 지정하는 경우부터 새 규정이 적용된다. 현재 조문만 보고 적용례를 생략하는 함정을 묻는다.</p>
+<p><strong>문제 5.</strong> 정부가 외국과 체결한 ‘공동선언’에 중대한 국가 재정 부담이 들어 있고 법적 의무를 만들려는 합의도 있다. 제목이 선언이므로 국회 동의가 필요 없다고 한다. 맞는가?</p>
+<p><strong>정답·의도:</strong> 아니다. 이름 대신 실질과 헌법 제60조의 동의 대상인지 판단한다. 같은 이유로 모든 선언이 자동으로 조약인 것도 아니다.</p>
+<h1>시험 직전 · A4 한 장 암기노트</h1>
+<section class="memory-sheet"><h2>한 장으로 마지막 확인 · 제4강</h2>
+<table><thead><tr><th>주제</th><th>마지막 기준</th></tr></thead><tbody>
+<tr><td>입법</td><td>일반적·추상적 성문 규범. 일반성=사람, 추상성=사건</td></tr>
+<tr><td>개별사건법률</td><td>인적 범위 확정 가능. 곧바로 위헌 아님, 합리적 이유 심사</td></tr>
+<tr><td>좁은 처분적 법률</td><td>교재: 사실심리 없이 결과 확정→재판청구권·분립 문제</td></tr>
+<tr><td>개헌</td><td>발의 과반/대통령→공고20→의결60·재적2/3→투표30</td></tr>
+<tr><td>국민투표</td><td>선거권자 과반 투표+투표자 과반 찬성. 확정 뒤 즉시 공포</td></tr>
+<tr><td>제출·심사</td><td>의원10/정부→소관위→법사위 체계자구→본회의</td></tr>
+<tr><td>위원회 미부의</td><td>보고 후 7일(폐·휴회 제외), 30명 요구면 본회의</td></tr>
+<tr><td>신속처리</td><td>지정 재적3/5. 새 지정 60·30일, 옛 지정 180·90일 구별</td></tr>
+<tr><td>무제한토론</td><td>요구1/3, 종결동의1/3→24시간 뒤 재적3/5. 회기 말 종료</td></tr>
+<tr><td>의결·재의</td><td>일반 출석과반 / 재의 출석2/3. 양쪽 재적과반 출석</td></tr>
+<tr><td>확정·공포·시행</td><td>15일 / 확정 후 의장 공포5일 요건 / 기본시행 공포후20일</td></tr>
+<tr><td>조약·규칙</td><td>조약 실질·국회동의7유형 / 국회규칙은 법률 아래 내부규율</td></tr>
+</tbody></table>
+<p><strong>TOP3:</strong> 일반·개별 규율 / 개헌·입법 절차 / 확정·공포·시행.</p>
+<p><strong>반드시 외울 문장:</strong> 개별사건법률은 당연위헌이 아니고, 신속처리 지정은 가결이 아니다.</p>
+<p><strong>함정:</strong> 개헌안 혼합도 재공고. 대통령 일부거부 불가. 조약 합의≠개인 재산권 취득.</p>
+<p><strong>사례를 풀 순서:</strong> 규범 종류 → 단계 → 주체 → 분모·기간 → 적용 시점 → 권리침해 판단.</p>
+</section>
+
+<h1>학습 상태 진단</h1>
+<p>아직 답안을 받지 않았으므로 이해 완료라고 판정하지 않는다. 스스로 ‘개별사건법률이 왜 무조건 위헌은 아닌가’, ‘재의결 2/3의 분모는 무엇인가’, ‘확정했는데 왜 바로 적용하지 못하는가’를 설명해 보자. 세 질문을 새 사례까지 풀면 🟢 이해 완료, 결론만 맞히고 이유가 흔들리면 🟡 복습 필요, 개념·분모를 바꾸면 🔴 이해 부족으로 자가평가한다.</p>
+<p><strong>복습 TOP3:</strong> 개별사건법률과 좁은 처분적 법률 / 일반 의결과 재의결 / 확정·공포·시행. <mark class="blue">다음 강에서는 국회가 세금과 예산을 어떻게 통제하는지 배운다.</mark></p>
+<h1>문제 부록 · 19문항·76개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-통치의기본구조_029"><h4>형성평가 · 통치의기본구조_029</h4><p class="question-stem">국회규칙의 제정권에 관한 서술로 틀린 것은?</p><ol class="choices"><li>헌법 제64조 제1항이 국회가 국회규칙제정권을 보장한 것은 국회의 자주성 및 독립성, 조직에 관한 자치를 보장하기 위한 것이다.</li><li>규율대상과 효력범위는 국회 내부영역에 한한다.</li><li>법률제정권을 가진 국회이므로 제정된 규칙의 내용이 법률에 저촉되지 아니하여야 한다는 제약을 받지 않는다.</li><li>그 형식적 효력은 명령 또는 규칙과 동일하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 행정부에 의존하지 않고 내부 절차를 정하는 자치·독립 보장이다.</li><li><strong>비선택</strong> · 맞는 설명이다. 국회 내부의 의사와 규율이 범위다. 국회에 출입하는 외부인의 내부 질서까지 전혀 규율할 수 없다는 뜻은 아니다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 제64조 제1항이 법률에 저촉되지 않는 범위를 명시한다. 같은 국회가 만들었다는 기관의 동일성과 법형식의 효력을 혼동했다.</li><li><strong>비선택</strong> · 맞는 설명이다. 국회규칙은 형식적 효력이 명령·규칙 수준이며 법률 아래다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법 제64조 제1항은 법률에 저촉되지 아니하는 범위라고 명시하고 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_030"><h4>형성평가 · 통치의기본구조_030</h4><p class="question-stem">다음 중 국회의 동의가 필요한 조약에 해당하지 않는 것은?</p><ol class="choices"><li>상호원조 또는 안전보장에 관한 조약</li><li>중요한 국제조직에 관한 조약</li><li>행정규칙 사항에 관한 조약</li><li>우호통상항해조약</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법 제60조 제1항에 명시된 동의 대상이다. 안전보장이라는 단어를 찾는다.</li><li><strong>비선택</strong> · 중요한 국제조직에 관한 조약은 동의 대상이다. 중요한이라는 요건도 놓치지 않는다.</li><li><strong>선택</strong> · 선택한다. 열거된 것은 입법사항에 관한 조약이다. 행정규칙 사항이라는 이유만으로 별도 동의 유형이 되지는 않는다. 다른 동의 요건에 해당하는지는 별개다.</li><li><strong>비선택</strong> · 헌법에 명시된 동의 대상이다. 우호·통상·항해에 관한 중요한 대외관계를 대표기관이 통제한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국회의 동의가 필요한 조약은 입법사항에 관한 조약이다. 그 외 주권의 제약에 관한 조약, 강화조약, 국가나 국민에게 중대한 재정적 부담을 지우는 조약이 국회의 동의를 필요로 한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_031"><h4>형성평가 · 통치의기본구조_031</h4><p class="question-stem">다음 중 무제한토론 제도에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>재적의원 3분의 1 이상이 서명한 무제한토론 요구서를 의장에게 제출하면 의장은 해당 안건에 대하여 무제한토론을 실시하여야 한다.</li><li>의원 1명당 한 차례만 토론할 수 있다.</li><li>무제한토론을 실시하는 본회의는 회의 중 재적의원 5분의 1 이상(통상의 개회요건) 출석하지 아니하였을 때에도 회의를 계속한다.</li><li>무제한토론을 할 의원이 더 이상 없는 경우에만 종결된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 재적 3분의 1 이상 서명의 요구서를 내면 의장은 실시해야 한다. 현재는 의장 지정 부의장·상임위원장도 진행 가능하다.</li><li><strong>비선택</strong> · 맞는 설명이다. 한 의원이 해당 무제한토론에 여러 번 나서는 구조가 아니다.</li><li><strong>비선택</strong> · 맞는 설명이다. 무제한토론 중의 본회의에는 통상 재적 5분의 1 출석 기준의 예외가 있다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 발언자 소진 외에도 종결동의 가결, 회기 종료가 있다. 오직이라는 제한이 함정이다. 예산안 등에는 연말 특례도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 무제한토론이 종결되는 경우는 세 가지이다. (i) 무제한토론을 할 의원이 더 이상 없는 경우 (ii) 회기가 끝나는 경우 (iii) 무제한토론 종결동의에 대하여 재적의원 5분의 3 이상의 찬성으로 의결이 이루어지는 경우</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_032"><h4>형성평가 · 통치의기본구조_032</h4><p class="question-stem">안건의 신속처리 제도에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정당 간에 이견이 있어 쟁점이 되는 안건이 위원회 단계부터 심의되지 못한 채 장기간 계류되는 문제점을 해소하기 위하여 둔 제도이다.</li><li>헌법상 반드시 정해두어야 하는 제도보장사항이다.</li><li>재적의원 5분의 3 이상 또는 안건의 소관위원회 재적위원 5분의 3 이상의 찬성으로 의결되면 신속처리대상안건으로 지정된다.</li><li>위원회는 신속처리대상안건에 대한 심사를 그 지정일부터 180일 이내(법제사법위원회는 90일 이내)에 마쳐야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 심사 자체가 무기한 지연되는 것을 막으려는 제도다. 자동 통과 제도가 아니다.</li><li><strong>선택</strong> · 원본 정답으로 선택한다. 국회법상의 제도이지 헌법이 이 절차를 반드시 그대로 보장하는 것은 아니다.</li><li><strong>비선택</strong> · 맞는 설명이다. 지정 의결은 재적의원 또는 소관위 재적위원 5분의 3 이상이다. 지정 동의의 요청 서명 과반수와 구별한다.</li><li><strong>비선택</strong> · 교재·원문 출제 당시에는 맞는 설명이다. 그러나 2026.9.8. 이후 지정하는 안건은 일반 심사 60일, 체계·자구 30일로 개정됐다. 현재법 문항으로 재사용하면 이 보기도 틀리므로 원본 정답과 개정 주의를 함께 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 안건의 신속처리 제도는 국회법상 제도이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_033"><h4>형성평가 · 통치의기본구조_033</h4><p class="question-stem">위원회의 심사를 거치거나 위원회가 제안한 의안 중 정부조직에 관한 법률안, 조세 또는 국민에게 부담을 주는 법률안 등 주요 의안의 본회의 상정 전이나 본회의 상정 후에 재적의원 4분의 1 이상이 요구할 때에 그 심사를 위하여 의원 전원으로 구성되는 위원회를 무엇이라고 하는가?</p><ol class="choices"><li>상임위원회</li><li>소위원회</li><li>전원위원회</li><li>특별위원회</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상임위는 소관 분야별 상설 위원회다. 의원 전원이라는 조건과 다르다.</li><li><strong>비선택</strong> · 소위는 위원회 안에서 일부 위원이 더 세부 심사를 하는 단위다. 전원 구성의 반대다.</li><li><strong>선택</strong> · 맞다. 주요 의안에 대해 재적 4분의 1 이상 요구로 의원 전원이 심사하는 전원위원회다.</li><li><strong>비선택</strong> · 특위는 특정한 안건·과제를 위해 설치하는 위원회다. 의원 전원 구성이라는 정의가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 전원위원회</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_034"><h4>형성평가 · 통치의기본구조_034</h4><p class="question-stem">법률제정절차에 관한 진술로 옳은 것은?</p><ol class="choices"><li>재적의원 과반수의 찬성으로 의결한다.</li><li>가부동수인 때에는 가결된 것으로 본다.</li><li>법률안이 본회의에서 의결되면 의장이 이를 공포한다.</li><li>대통령이 법률안에 대하여 이의가 없는 경우 정부에 이송된 날로부터 15일 이내에 공포해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 틀리다. 일반 법률안은 재적 과반수 출석과 출석 과반수 찬성이다. 찬성의 분모를 재적으로 바꿨다.</li><li><strong>비선택</strong> · 틀리다. 과반수 찬성에 이르지 못한 가부동수는 부결이다.</li><li><strong>비선택</strong> · 틀리다. 국회의장은 먼저 정부에 이송한다. 대통령이 원칙적 공포자이고 의장 공포는 제53조의 별도 요건이 있다.</li><li><strong>선택</strong> · 맞다. 대통령은 정부 이송일부터 15일 안에 공포하거나 이의를 붙여 재의를 요구한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ① 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 의결한다. ② 가부동수인 때에는 부결된 것으로 본다. (※ 가부동수(可否同數): 표결에서 찬성과 반대의 숫자가 같은 것/ 부결(否決): 회의에 제출된 의안을 통과시키지 않기로 결정하는 것) ③ 법률안이 본회의에서 의결되면 의장은 이를 정부에 이송해야 한다. ④ 대통령이 법률안에 대하여 이의가 없는 경우 정부에 이송된 날로부터 15일 이내에 공포해야</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_035"><h4>형성평가 · 통치의기본구조_035</h4><p class="question-stem">다음 중 국회(또는 국회의원)의 권한에 속하면서 또한 정부도 가지는 법률제정에 관한 권한은?</p><ol class="choices"><li>법률안 제출권</li><li>법률안 심의권</li><li>법률안 의결권</li><li>법률안 거부권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞다. 헌법 제52조가 국회의원과 정부에게 법률안 제출권을 인정한다. 의원발의는 10명 이상 찬성 요건을 확인한다.</li><li><strong>비선택</strong> · 국회 내부 법률안 심의권을 정부와 공유하는 것은 아니다. 정부가 자기 제출안을 준비·심의하는 절차와 구별한다.</li><li><strong>비선택</strong> · 법률안에 대한 국회의 의결권이다. 정부가 국회 대신 가결할 수 없다.</li><li><strong>비선택</strong> · 대통령의 재의요구권이다. 국회가 안을 부결하는 것과 같은 권한 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법률안 거부권은 대통령만 갖는다. 법률안 심의권과 의결권은 국회의 고유한 권한이다. 국회의원 10명 이상 또는 정부는 법률안을 제출할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_036"><h4>형성평가 · 통치의기본구조_036</h4><p class="question-stem">국회의 헌법개정에 관한 권한에 대한 서술로 틀린 것은?</p><ol class="choices"><li>국회는 헌법개정안을 발의할 수 있다.</li><li>국회는 헌법개정안의 심의‧의결권을 가진다.</li><li>심의대상인 두 개의 헌법개정안이 각각 대통령에 의한 20일 이상의 공고기간을 거쳤다면, 그 두 안의 내용을 혼합하여 작성한 헌법개정안은 따로 공고기간을 거치지 아니하여도 의결할 수 있다.</li><li>헌법개정안에 대한 국회의 의결정족수는 재적의원 3분의 2 이상의 찬성이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 국회 재적의원 과반수 또는 대통령이 발의할 수 있다.</li><li><strong>비선택</strong> · 맞는 설명이다. 국회는 공고일부터 60일 이내에 개정안을 의결해야 한다. 국민투표 단계가 뒤따른다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 혼합한 새 안은 그 내용 그대로 공고된 적이 없다. 새 발의·공고 절차를 거쳐야 한다.</li><li><strong>비선택</strong> · 맞는 설명이다. 찬성의 분모는 출석이 아니라 재적이며 3분의 2 이상이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법개정안은 20일의 공고 기간을 거친 것이어야한다. 공고된 안을 수정하여 의결할 수 없으며, 그 수정의 내용이 공고된 두 안의 내용을 혼합하여 나온 것이라고 하여도 마찬가지이다. 공고되지 않은 안을 의결한 것임에는 변함이 없기 때문이다. 이와 같은 방식으로든 또는 그 어떠한 방식으로든 공고된 안을 수정한 안을 의결하고 싶다면 수정된 안으로 다시 발의하여 공고 기간을 거쳐야 한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_037"><h4>형성평가 · 통치의기본구조_037</h4><p class="question-stem">법률 A는 법적 규율을 정당화하는 추상적 속성을 마찬가지로 가진 다른 사건과는 구별되게 규율대상이 되는 사건들을 특정하면서 사실관계를 조사‧심리할 여지없이 구체적인 권리‧의무 변동의 결과 자체를 확정하는 법률이다. 법률 A에 대하여 틀린 진술은?</p><ol class="choices"><li>그 법률 A를 적용받는 국민의 재판청구권을 침해한다.</li><li>권력분립원칙을 위반한다.</li><li>평등원칙을 위반하는 경우에만 위헌이다.</li><li>좁은 의미의 처분적 법률이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 정의상 맞는 설명이다. 사실관계를 조사·심리할 여지 없이 개별 결과를 확정해 재판 기회를 침해하는 상황이다.</li><li><strong>비선택</strong> · 맞는 설명이다. 입법으로 법원이 할 구체적 사실판단·권리구제까지 대체하는 문제가 있다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 평등하게 모든 사람의 재판 기회를 빼앗아도 재판청구권 침해와 권력분립 위반 문제가 독립적으로 남는다.</li><li><strong>비선택</strong> · 교재가 말하는 좁은 의미에 해당한다. 판례 등에서 쓰는 더 넓은 처분적 법률 개념 전부에 자동 위헌 결론을 적용하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그 법률을 적용받는 인적범위가 미리 확정되어 있지 아니하고 잠재적으로 모든 국민이 적용대상이 되는 경우라고 하여도, 좁은 의미의 처분적 법률로써 재판청구권을 (평등하게) 침해하는 경우 위헌이 된다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_038"><h4>형성평가 · 통치의기본구조_038</h4><p class="question-stem">국회의 권한 중 일반적이고 추상적인 성문의 법규범을 정립하는 국가작용에 관한 권한을 무엇이라고 하는가?</p><ol class="choices"><li>입법에 관한 권한</li><li>재정에 관한 권한</li><li>헌법기관구성에 관한 권한</li><li>국정통제에 관한 권한</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 맞다. 일반적·추상적 성문 법규범 정립은 입법의 정의다.</li><li><strong>비선택</strong> · 국가 수입·지출·예산 등 돈의 관리와 통제에 관한 권한이다.</li><li><strong>비선택</strong> · 특정 헌법기관 구성원의 선출·임명 동의 등에 관한 권한이다.</li><li><strong>비선택</strong> · 국정감사·조사·탄핵 등 국정 운영을 견제하는 권한이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 입법에 관한 권한</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_068"><h4>워크북 · 통치의기본구조_워크북_068</h4><p class="question-stem">법을 적용받는 사람들을 고유 명 또는 한정기술로 특정하여 법 적용의 인적 범위가 법 제정 당시 이미 구체적으로 확정되거나 확정될 수 있는 내용을 가진 법을 무엇이라고 하는가?(가장 정확한 개념을 고르시오.)</p><ol class="choices"><li>진정소급입법</li><li>부진정소급입법</li><li>개별사건법률</li><li>공포된 법률</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 진정소급입법은 이미 완성된 과거 사실·관계에 미치는 새 규율이라는 시간의 분류다. 인적 범위와 구별한다.</li><li><strong>비선택</strong> · 부진정소급입법도 진행 중인 법률관계에 미치는 시간상 효과의 분류다.</li><li><strong>선택</strong> · 맞다. 이름이나 설명으로 적용 대상자가 이미 확정될 수 있는 개별사건법률이다. 이름을 직접 써야만 하는 것은 아니다.</li><li><strong>비선택</strong> · 공포는 법률을 공적으로 알렸는지의 절차 문제다. 누구에게 적용되는지의 정의가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_069"><h4>워크북 · 통치의기본구조_워크북_069</h4><p class="question-stem">[5·18 민주화 운동 등에 관한 특별법]제2조 제1항은&quot;1979년 12월 12일과 1980년 5월 18일을 전후하여 발생한(…)헌정 질서 파괴 행위에 대하여(…)공소시효의 진행이 정지된 것으로 본다&quot;라고 규정하였다. 이 법 조항에 대한 헌법재판소 결정에 관한 서술로 틀린 것은?</p><ol class="choices"><li>특별법 제정 당시 이미 적용의 인적 범위가 확정되거나 확정될 수 있는 내용의 것이므로 개별사건법률임을 부인할 수는 없다.</li><li>개별사건법률은 개별 사건에만 적용되는 것이므로 원칙적으로 평등 원칙에 위배되는 자의적인 규정이라는 강한 의심을 불러일으킨다.</li><li>특정 규범이 개별사건법률에 해당한다 하면 곧바로 위헌이다</li><li>해당 법 조항의 경우에 개별적 사건 법률이라고 하더라도 입법을 정당화할 수 있는 공익이 인정될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 특별법 제정 당시 관련자들의 범위를 확정할 수 있어 개별사건법률의 성격이 있다.</li><li><strong>비선택</strong> · 맞는 설명이다. 특정인만 따로 다루면 자의적 차별을 의심하고 합리적 이유를 심사한다. 의심과 최종 위헌은 다르다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 개별사건법률이라는 명칭만으로 위헌이 되지는 않는다. 정당화 가능한 공익·평등의 실질을 따진다.</li><li><strong>비선택</strong> · 맞는 설명이다. 결정은 헌정질서 회복·과거청산 등 공익을 인정했다. 사건 전체의 소급효 쟁점에서 의견이 갈렸다는 점과 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> &quot;특정 규범이 개별사건법률에 해당한다 하여 곧바로 위헌을 뜻하는 것은 아니다.(…)평등의 원칙이 추구하는 실질적 내용이 정당한지 아닌지를 따져야 비로소 가려진다.(…)이른바 12·12 및 5·18 사건의 경우 그 이전에 있었던 다른 헌정 질서 파괴 범과 비교해 보면, 공소시효의 완성 여부에 관한 논의가 아직 진행 중이고, 집권 과정에서의 불법적 요소나 올바른 헌정사의 정립을 위한 과거 청산의 요청에 미루어 볼 때 비록 특별법이 개별적 사건 법률이라고 하더라도 입법을 정당화할 수 있는 공익이 인정될 수 있다&quot;고 하였다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_070"><h4>워크북 · 통치의기본구조_워크북_070</h4><p class="question-stem">국회의 법률 제정에 관한 권한이 아닌 것은?</p><ol class="choices"><li>법률안제출권</li><li>법률안 심의권</li><li>법률안 의결권</li><li>긴급재정경제명령권</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국회의원에게 인정된다. 정부도 제출권을 가진다는 점을 함께 기억한다.</li><li><strong>비선택</strong> · 국회가 법률안을 검토하는 권한이다.</li><li><strong>비선택</strong> · 국회가 법률안의 가부를 결정하는 권한이다.</li><li><strong>선택</strong> · 국회 권한이 아니므로 선택한다. 헌법 제76조에 따른 대통령의 권한이며 국회 승인 등 통제를 받는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 대통령의 권한이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_071"><h4>워크북 · 통치의기본구조_워크북_071</h4><p class="question-stem">법률 제정 절차에 관한 서술로 틀린 것은?</p><ol class="choices"><li>법률안은 소관 상임위원회에서 가결되면 본회의에 부의된다.</li><li>법률안이 소관 상임위원회에서 부결되면 원칙적으로 폐기된다.</li><li>법률안은 법제사법위원회의 체계와 자구 심사를 거쳐야한다</li><li>본회의에서는 수정 동의를 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 통상 절차의 설명이다. 소관위 가결 뒤 체계·자구 심사 등 본회의로 넘어가는 절차가 있다. 이 문장을 법사위 심사 생략으로 읽지 않는다.</li><li><strong>비선택</strong> · 원칙 설명이다. 다만 위원회 미부의 보고 뒤 폐·휴회를 뺀 7일 안에 30명 이상 요구가 있으면 본회의에 부의한다. 무조건 즉시 폐기라는 뜻은 아니다.</li><li><strong>비선택</strong> · 일반적인 법률안 처리에서 체계·자구 심사를 거친다는 설명이다. 신속처리의 심사 완료 간주 등 법정 절차도 함께 본다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 위원회 의결이 본회의를 구속하지 않는다. 법률안 수정안과 이유를 갖추고 30명 이상 찬성 의원 연서로 수정동의를 할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상임위원회의 의결은 본회의를 구속하지 않으므로, 본회의에서 수정 동의를 할 수 있다. 수정 동의란 의안에 원칙적으로 찬성하면서 일부만 수정하는 것을 의미하며, 국회법상 그 안을 갖추고 이유를 붙여 30명 이상의 찬성 의원과 연서하여할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_072"><h4>워크북 · 통치의기본구조_워크북_072</h4><p class="question-stem">어떤 법률안에 대하여 대통령이 재의 요구를 했지만 재의 후 전과 같이 의결되었다. 대통령은 재의에서 가결된 법률안도 공포하기를 거부하였다. 그러나 그 법률안은 결국 법률로 성립하였다. 이 사안에서 일어난 다음 열거된 단계 중 순서상 세 번째에 오는 것은?<br><br>㉠ 국회의장의 공포<br>㉡ 본회의 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 법률안 의결<br>㉢ 국회의 재의에서 재적의원 과반수 출석과 출석의원 3분의 2 이상의 찬성으로 전과 같은 의결<br>㉣ 대통령이 이의서를 붙여서 국회에 환부하고 재의 요구</p><ol class="choices"><li>㉠</li><li>㉡</li><li>㉢</li><li>㉣</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 제시된 단계 중 네 번째다. 재의결 뒤 대통령이 정해진 기간에 공포하지 않으면 의장이 공포한다.</li><li><strong>비선택</strong> · 첫 번째다. 일반 의결의 출석 과반수 찬성으로 출발한다.</li><li><strong>선택</strong> · 맞다. 세 번째다. 대통령의 재의요구 뒤 출석 3분의 2 이상으로 같은 의결을 하여 확정한다.</li><li><strong>비선택</strong> · 두 번째다. 일반 의결된 법률안에 대통령이 이의를 붙여 다시 판단하라고 돌려보낸다. 전체 순서는 ㉡→㉣→㉢→㉠이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 제시된 문제의 설명에 따르면,<br>㉡ 본회의 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 법률안 의결<br>㉣ 대통령이 이의서를 붙여서 국회에 환부하고 재의 요구<br>㉢ 국회의 재의에서 재적의원 과반수 출석과 출석의원 3분의 2 이상의 찬성으로 전과 같은 의결<br>㉠ 국회의장의 공포<br>의 순서로 절차가 전개되었을 것이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_073"><h4>워크북 · 통치의기본구조_워크북_073</h4><p class="question-stem">법률의 확정 및 공포에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>정부에 이송된 날로부터 15일 이내에 대통령이 공포나 재의의 요구를 하지 아니한 때에도 그 법률안은 법률로서 확정된다.</li><li>대통령의 재의 요구가 있을 때에는 국회는 재의에 붙이고, 재적의원 과반수의 출석과 출석의원 3분의 2 이상의 찬성으로 전과 같은 의결을 하면 그 법률안은 법률로서 확정된다</li><li>법률은 확정 시점부터 국민에게 적용된다.</li><li>확정되었지만 공포되지 아니한 법률을 정부는 집행할 수 없고 법원은 재판에 해석·적용할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 맞는 설명이다. 이송 뒤 15일 무조치도 확정 사유다. 대통령의 침묵으로 영구 정지시킬 수 없게 한다.</li><li><strong>비선택</strong> · 맞는 설명이다. 출석 요건은 재적 과반수, 찬성 요건은 출석 3분의 2 이상이다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 확정·공포·시행이 다르다. 국민에 대한 적용은 공포와 시행 요건을 거쳐야 한다.</li><li><strong>비선택</strong> · 맞는 설명이다. 공적으로 알리지 않은 법률을 국민에게 적용하면 예측가능성과 공개 원칙을 해친다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공포는 의회가 정립한 일반적·추상적 법 규범으로서 국가 공동체 내에서 법률로서 존재하기 위한 요건이다. 공포되지 아니하고 단지 확정된 법률은 국민에게 적용될 수 없다. 그렇게 보지 아니하면 국민은 공적으로 고지되지도 아니한 규범을 법 규범으로서 적용받는 부조리한 상황에 처할 것이다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_074"><h4>워크북 · 통치의기본구조_워크북_074</h4><p class="question-stem">안건을 심의함에 있어 소수파에게 합법적인 의사 진행 방해(filibuster)의 수단을 제공함으로써 물리적 충돌을 방지하고 안건이 대화와 타협을 통해 심의되도록하기 위한 제도를 무엇이라고 하는가?(가장 정확한 개념을 고르시오.)</p><ol class="choices"><li>안건의 신속 처리 제도</li><li>위원회 제도</li><li>무제한 토론 제도</li><li>법률안 재의 요구 제도</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 신속처리는 안건이 장기간 묶이는 것을 해소하는 제도다. 소수파의 토론 지연권과 구별한다.</li><li><strong>비선택</strong> · 위원회는 전문적·분담적 심사를 위한 조직이다. 지문의 특징에 가장 정확하지 않다.</li><li><strong>선택</strong> · 맞다. 소수파가 합법적으로 토론을 이어가도록 해 타협과 의견 개진을 보장한다.</li><li><strong>비선택</strong> · 재의요구는 대통령이 국회의 법률안 의결에 이의를 제기하는 권한이다. 의원 소수파의 토론 제도가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 원문에 해설이 없습니다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_075"><h4>워크북 · 통치의기본구조_워크북_075</h4><p class="question-stem">조약에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>조약이란 국제법주체가 상호 간의 법적 권리와 의무를 창설·변경·소멸시키기 위해 문서로 체결한 합의이다.</li><li>협약, 헌장, 협정, 선언 등 조약의 명칭과 상관없이 그 실질에 의해 판단한다.</li><li>대통령이 체결·비준한다</li><li>체결·비준에 국회의 동의가 필요한 조약이 국회의 동의를 받지 못하면 국제법상 무효이다</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재의 조약 정의에 맞다. 국제법상 법적 권리·의무를 만들려는 합의인지가 중요하다.</li><li><strong>비선택</strong> · 맞는 설명이다. 협정이나 선언이라는 제목만으로 판단하지 않는다. 모든 선언이 조약이라는 의미도 아니다.</li><li><strong>비선택</strong> · 맞는 설명이다. 대통령의 체결·비준과 일정한 조약에 대한 국회 동의를 구별한다.</li><li><strong>선택</strong> · 틀린 설명으로 선택한다. 국내 절차의 하자가 국제적으로 자동 무효를 뜻하지는 않는다. 다만 원문 해설의 국제법상 언제나 유효라는 단정은 비엔나협약 제46조의 근본적 국내법 규칙의 명백한 위반 예외를 함께 보아야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 국내법상 무효이고, 국제법상은 유효하여 국가 책임을 부담한다.</p></details></section>
+
+<section class="question-card" id="question-통치의기본구조_워크북_076"><h4>워크북 · 통치의기본구조_워크북_076</h4><p class="question-stem">조약 발효 당시 미군이 사용 중인 시설과 구역에 대하여는 조약에 의하여 사용 공여의 합의가 있는 것으로 간주됨으로써 그 시설과 구역 소유자가 재산권을 대가 없이 공여하게 되는 결과가 발생되었다는 이유로 위헌법률 제청신청이 된 사건에서 헌법재판소가 설시한 내용에 맞지 않는 것은?(헌재 1999.4.29.97헌가14 결정에 따름 해당 사건에서 심판대상이 된 조약은'대한민국과 아메리카 합중국 간의 상호 방위 조약 제4조에 의한 시설과 구역 및 대한민국에서의 합중국 군대의 지위에 관한 협정 제2조 제1의 (나)항')</p><ol class="choices"><li>그 명칭이“협정&quot;으로 되어 있으나 우리나라의 입장에서 볼 때에는 외국 군대의 지위에 관한 것이고, 국가에게 재정적 부담을 지우는 내용과 입법 사항을 포함하고 있으므로 국회의 동의를 요하는 조약으로 취급되어야 한다.</li><li>이 조항을 당해 재산의 소유자에 대한 관계에서 공용 수용·사용 또는 제한을 한 경우와 같이 권리의 변동을 초래하는 것으로 해석할 수는 없다.</li><li>국가가 미리 적법한 소유권 또는 사용권 취득을 마치지 않은 사인의 특정 재산을 사실상 공여된 시설과 구역으로 취급해도 조항 자체에 내재된 위헌성에서 비롯된 결과는 아니다.</li><li>조약을 이행하기 위해 이루어진 국가의 재산권 침해에 대해서는 기본권 구제를 받을 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 판례 취지에 맞다. 명칭보다 외국군대의 지위·재정 부담·입법사항이라는 실질 때문에 국회 동의 대상이다.</li><li><strong>비선택</strong> · 판례 취지에 맞다. 양국 간 공여합의 간주가 개인의 소유권·사용권을 직접 변경하지 않는다.</li><li><strong>비선택</strong> · 판례 취지에 맞다. 적법한 권리 취득 없이 사실상 제공한 문제라면 집행행위의 하자를 검토할 것이며 조항 자체의 필연적 위헌 결과로 볼 수 없다.</li><li><strong>선택</strong> · 판례와 반대여서 선택한다. 조약을 이행한다는 이유로 모든 재산권 침해가 정당화되거나 구제 길이 막히는 것은 아니다. 조항의 효력과 위법한 집행을 분리한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 판례는&quot;이 사건 조항에 의한 사용 공여의 합의 간주가 당해 재산의 소유자에 대한 관계에서 공용 수용·사용 또는 제한을 한 경우와 같이 권리의 변동을 초래하는 것으로 해석할 수는 없으므로, 이 사건 조항에 의한 법률 효과로서 사인의 재산권에 법률적 제약이 가해짐으로 인한 침해가 발생할 여지는 없다(사용 공여 합의 간주의 대상이 되는 시설과 구역 중 국가가 아직 사용권, 소유권을 취득하지 못한 것은, 국가가 이 사건 조항에 따라 미 합중국에 대하여 부담하는 의무의 이행을 위하여 그 소유자로부터 이를 협의 매수하거나 공용 수용·사용 또는 제한 등의 방법으로 소유권 또는 사용권을 취득하려고 할 가능성이 생겼다고 할 것이나, 이 단계에서는 아직 그 소유자 또는 그 재산에 대하여 소유권 외의 권리를 가지고 있는 자의 재산권에 대한 제약이 현실화되지 아니하였을 뿐 아니라 장래의 제약 여부도 유동적인 상태에 있어서 재산권 침해 여부를 논할 수 없다)&quot;고 하였다. 즉 이 사건 조항을 이행하기 위하여 국가가 정당하게 사인의 재산권을 취득하는 방식을 사용하지 않은 채 공여한 행위를 대상으로 기본권 구제를 받을 수 있는 것이다. 어쨌거나 조약을 이행하기 위한 재산권 침해는 모두 정당화된다거나 구제 받을 수 없다는 설시를 하지는 않았다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '통치의기본구조 · LECTURE 04' : 'PART · GOVERNMENT & CONSTITUTION';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(통치의기본구조 · LECTURE 04|PART · GOVERNMENT & CONSTITUTION)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('governance-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
