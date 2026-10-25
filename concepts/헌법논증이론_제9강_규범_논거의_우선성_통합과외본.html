@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제9강 규범 논거의 우선성 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 09</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제9강 규범 논거의 우선성 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>모두에게 좋다는 말보다 먼저 물어야 할 것</h1>
+<p>친구 셋 중 두 명이 “우리 모임에 이익이 되니 네 결혼은 우리가 결정할게”라고 말한다. 정말 모임 전체에 도움이 된다고 해도, 두 친구에게 그런 결정권이 있는지는 별개다. 제9강은 <strong>좋은 결과를 이야기하기 전에 누가 누구에게 무엇을 요구할 수 있는지부터 정당화하라</strong>는 단원이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나</td>
+<td>당위의 전체 구조와 규범 논거가 가치 논거에 우선하는 이유.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>한 가지 이익만으로 결론을 내리거나 다수의 취향으로 타인의 지위를 덮지 않기 위해서다.</td>
+</tr>
+<tr>
+<td>과목 속 위치</td>
+<td>제8강의 가치·규범 구별을 기본권 논증의 순서로 발전시킨다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>앞 강의 가치 판단의 한계를 이어받고, 다음 강의 사실·가치·규범의 격위를 준비한다.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>합헌=반드시 실시, 공익 증가=권리 제한 정당, 다수 선호=공적 근거라고 착각한다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 207–246쪽. 형성평가 7개·워크북 11개, 총 18문항. 별표는 학습 우선순위이며 실제 오답률 자료는 없다. 철학적 주장과 현실 제도의 설명을 구별한다. 아래는 원문 복제가 아니라 교재 문단의 논증과 사례를 차례로 풀어 쓴 과외본이다.</p>
+<h1>1. 이유 하나로 행동의 결론이 나오지는 않는다</h1>
+<h2 id="argument-09-01" data-concept-id="argument-09-01">1-1. 갈증 난 선수: 잠정적 당위문과 확정적 당위문 ★★★★★</h2>
+<p><strong>교재 208–210쪽 / 문단의 목적:</strong> ‘물을 마실 이유가 있다’와 ‘지금 마셔야 한다’를 나눈다. 갈증은 물을 마실 이유다. 그러나 교재의 선수는 10분 뒤 계체를 앞두고 있고, 지금 마시면 목표한 경기 출전이 무산된다고 설정되어 있다. 이 짧은 지연에 건강상 위험이 없고 다른 사정도 없다는 가정 아래에서는 계체 후 마시는 결론이 나올 수 있다. <strong>실제 운동선수에게 수분을 제한하라는 건강 조언이 아니라 이유의 구조를 보여 주는 가정 사례</strong>다.</p>
+<p>아마추어라면 자신의 합리적 계획과 관련된 이유가 중심일 수 있다. 프로라면 감독·매니저 등과의 약속이나 계약상 관계도 관련된다. 같은 ‘지금은 미루자’라는 문장이 나와도 자기 이익만의 이유인지 다른 사람에게 진 의무인지 살펴야 한다.</p>
+<p><strong>잠정적 당위문</strong>은 관련 이유 일부를 드러내는 문장, <strong>확정적 당위문</strong>은 그 상황에서 관련된 이유와 조건을 종합한 최종 판단이다. 당위라는 세계가 임시 당위·최종 당위의 두 덩어리로 나뉜다는 말이 아니다. 당위는 전체로서 망을 이루지만 사람은 정보와 인식의 한계 때문에 한 번에 다 말할 수 없다. <mark class="yellow">구분되는 것은 당위문이지, 당위 자체의 두 종류가 아니다.</mark> <strong>시험:</strong> 069번. <strong>키워드:</strong> 언어·인식의 한계, 전체의 망. <strong>한 줄:</strong> 한 가지 이유는 전체 결론의 출발점이지 자동 종착점이 아니다.</p>
+<h2 id="argument-09-02" data-concept-id="argument-09-02">1-2. ‘약속을 지켜라’는 언제나 예외 없는 명령일까 ★★★★★</h2>
+<p><strong>교재 210–213쪽 / 문단의 목적:</strong> 간단한 문장의 생략을 복원한다. 닫힌 형식은 ‘약속했으면 지켜야 한다’, 열린 형식은 ‘약속을 어길 정당화 사유가 없는 한 지켜야 한다’다. 닫힌 문장도 유용하다. 모든 예외를 매번 말할 수 없기 때문이다. 문제는 짧게 쓴 문장을 언제나 최종 행동을 직접 지정하는 절대명령으로 읽는 데 있다.</p>
+<p><strong>교재의 배송과 아이 사례:</strong> A는 오늘 물건 X를 B에게 전달하기로 했다. 늦으면 B에게 100만 원 손해가 난다. 가는 길에 위험에 빠진 어린아이를 발견했고, 지금 도울 수 있는 사람은 A뿐이다. 경찰이 올 때까지 보호하면 배송은 늦는다. A는 “약속도 지켜야 하고 아이도 구해야 하니 규범은 모순이야”라고 단정할 필요가 없다. 아이 구조의 필요가 약속 불이행을 정당화하는 사유인지 따져 두 이유를 함께 해석한다.</p>
+<p>그렇다고 약속 상대의 손해가 없었던 일이 되지는 않는다. 교재는 구조가 우선인 상황에서도 손해 처리라는 후속 문제가 남을 수 있다고 설명한다. <strong>이 사례만으로 한국 민법상 A가 언제나 100만 원을 전액 배상한다고 결론 내리지는 않는다.</strong> 실제 책임에는 계약 내용, 귀책사유, 위법성, 인과관계 등 별도 요건이 필요하다. <strong>시험:</strong> 235번. <strong>한 줄:</strong> 예외가 인정된 이유와 후속 책임이 남는 이유를 함께 설명하자.</p>
+<h2 id="argument-09-03" data-concept-id="argument-09-03">1-3. 폭풍 속 배와 부두: 긴급한 사용 뒤 손해는 누가 부담하나 ★★★★☆</h2>
+<p><strong>교재 213–216쪽 / 문단의 목적:</strong> 하나의 이유가 우선한다고 다른 관계가 완전히 사라지는 것은 아님을 보인다. 미국 미네소타주 대법원의 <strong>Vincent v. Lake Erie Transportation Co.(1910)</strong>를 교재가 소개한다. 등장인물은 부두 소유자와 선박 회사다. 폭풍이 심해져 배를 떼어 놓으면 큰 위험에 빠진다. 선원들은 밧줄을 보강하며 배를 부두에 붙잡아 두었고, 배가 부두에 부딪혀 부두가 손상된다.</p>
+<p>갈등은 “폭풍인데 배를 지킨 것이 잘못인가”와 “그러면 부두 주인이 손해를 혼자 부담해야 하나”다. 교재가 소개한 다수의견은 긴급한 사정에서 선박 보호를 위한 사용을 인정하면서도 타인의 재산을 이용해 생긴 손해를 배상하는 결론을 취한다. 반대의견은 적법한 정박 중 피할 수 없던 사고의 위험을 강조했다. 민사사건이므로 당사자는 형사절차의 ‘피고인’이 아니라 <strong>피고</strong>다. 사건·일자는 <a href="https://opencasebook.org/casebooks/2566-torts/resources/6.3.2-vincent-v-lake-erie-transportation-company-the-boat-slamming-against-the-dock-case/">판결 수록 정보</a>, 반대의견 원문은 <a href="https://openjurist.org/109/minn/456/vincent-v-lake-erie-transportation-co">판결문 수록본</a>으로 대조했다.</p>
+<p><strong>판례 논리를 쉬운 말로:</strong> ① 급한 위험 때문에 배를 보호할 이유가 있었다. ② 그렇다고 다른 사람의 부두가 공짜 자원이 되지는 않는다. ③ 긴급한 이용의 허용과 손해의 최종 부담은 다른 질문이다. 반대로 사용도 못 하게 하면 피할 수 있던 큰 피해가 생기고, 손해도 전혀 묻지 않으면 특정 소유자에게 비용이 몰릴 수 있다.</p>
+<p>교재의 다른 사례도 같은 질문이다. 굶주려 생존을 위해 남의 식량을 사용한 뒤 형편이 나아지면 대가를 부담할 이유, 아이를 구하려 남의 비싼 밧줄을 사용해 훼손했을 때 손해를 어떻게 처리할지의 문제, 공적 필요로 재산을 사용하는 경우의 보상 문제가 있다. 구조자 대신 부모나 국가가 비용을 부담해야 한다는 주장도 별도 규범을 논증해야 한다. <strong>미국 사례와 철학적 예시를 한국법의 무조건적 책임 공식으로 옮기지 않는다.</strong></p>
+<p>아이를 도울 이유 역시 모든 사람에게 목숨을 버리라고 요구하는 무제한 명령은 아니다. 위험·부담·다른 사람에게 생길 피해 등을 살펴야 한다. 교재는 이를 심리적 힘겨루기나 숫자 합산보다 이유들 사이의 정당한 관계를 밝히는 작업으로 본다. 무차별곡선으로 기존 판단을 표현할 수 있다는 사실만으로 그 판단의 정당화가 끝나지는 않는다. <strong>한 줄:</strong> 긴급한 사용을 인정하는 이유와 비용을 배분하는 이유는 함께 남을 수 있다.</p>
+<h1>2. 헌법재판에서 허용되었다고 가장 좋은 정책은 아니다</h1>
+<h2 id="argument-09-04" data-concept-id="argument-09-04">2-1. 재판규범과 행위규범: 하나는 더 넓다 ★★★★★</h2>
+<p><strong>교재 216–220쪽 / 문단의 목적:</strong> 헌법재판의 통제 기준과 공직자의 행동 기준을 구별한다. 공익을 늘린다는 이유 하나로 기본권 제한이 정당해지지 않는다. 적용되는 법률유보·평등·명확성·과잉금지 등 각 원칙을 따져야 한다. 필요한 법률상 근거가 없는데 비례적이라는 이유만으로 그 흠이 사라지지 않는다. 모든 행정행위에 매번 새 법률이 필요하다는 뜻은 아니다.</p>
+<p><mark class="yellow">관련된 재판규범을 하나라도 위반하면 위헌이며, 위헌인 정책은 실시해서는 안 된다.</mark> 합헌은 그 통제 기준에 의해 금지되지 않는다는 뜻이지 그 정책을 꼭 실시하라는 명령이 아니다. A안이 위헌이라고 B안이 자동 의무가 되는 것도 아니다. 허용된 여러 대안이나 불행사를 별도로 검토해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>구별</th>
+<th>무엇을 묻나</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>재판규범·통제규범</td>
+<td>재판으로 위헌이라고 통제할 수 있는가</td>
+<td>행위규범의 일부다.</td>
+</tr>
+<tr>
+<td>행위규범</td>
+<td>공권력을 행사할 때 어떤 규범을 고려해야 하는가</td>
+<td>재판으로 통제되지 않는 영역까지 포함한다.</td>
+</tr>
+<tr>
+<td>입법재량</td>
+<td>위헌의 선을 넘지 않는 여러 선택 중 무엇을 택할 수 있는가</td>
+<td>현명·공정·효율적 선택의 책임은 남는다.</td>
+</tr>
+</tbody></table>
+<p>입법자가 재정을 어리석게 낭비하지만 통제규범 위반까지는 아닌 경우를 생각하자. 법원이 무효로 만들지 못한다고 모든 헌법적 비난에서 면제되지는 않는다. 반대로 모든 나쁜 정책을 곧 재판상 위헌으로 표현하면 입법부의 선택 영역과 사법 통제의 차이가 사라진다. <strong>교재가 말하는 ‘정부’는 문맥상 입법·행정·사법 등 국가기관을 넓게 포함한다.</strong></p>
+<p><strong>시점 주의:</strong> 교재 218쪽 각주의 법원 재판에 대한 헌법소원 설명과 1997년 96헌마172 결정은 당시 제도를 다룬다. 현재 헌법재판소 안내는 확정재판에 대해 결정 위반, 적법절차 위반, 명백한 헌법·법률 위반으로 기본권이 침해된 경우 등 법정 사유를 정하여 재판소원을 안내한다. 출간 당시의 제한을 현행 제도 전체로 외우지 않는다. <a href="https://www.ccourt.go.kr/site/kor/03/10302010000002020100508.jsp">헌법재판소 현재 안내</a>, 확인 2026.10.25. 이 제도 변화와 별개로 이 강의의 재판규범·행위규범 구별은 유지된다.</p>
+<p><strong>시험:</strong> 068·070·071·236·237번. <strong>키워드:</strong> 재판규범 ⊂ 행위규범, 허용 ≠ 의무. <strong>한 줄:</strong> 위헌이 아니라고 잘한 일도, 반드시 할 일도 되는 것은 아니다.</p>
+<h2 id="argument-09-05" data-concept-id="argument-09-05">2-2. 6시 5초의 손님과 두 기부처: 당위가 곧 청구권은 아니다 ★★★★☆</h2>
+<p><strong>교재 220–222쪽 / 문단의 목적:</strong> 바람직한 행위 전체를 상대방이 강제할 수 있는 의무로 바꾸지 않는다. 6시에 닫는 가게에 급히 필요한 물건이 있는 손님 A가 6시 5초에 왔다. 직원 B가 사정을 알면서도 차갑게 거절하는 사례다. 교재는 친절하게 배려할 이유가 있다고 보면서, 손님에게 곧바로 직원의 근무시간을 연장시킬 권리가 생기는 것은 아니라고 한다.</p>
+<p>‘누군가 더 필요하다’는 이유마다 다른 사람에게 청구권이 생기면, 우리는 타인의 필요가 나타날 때마다 자신의 계획을 중단해야 한다. 자율적인 인생 계획과 동의의 의미가 약해진다. <strong>이 사례는 무급 초과근무를 일반적으로 요구하는 원리가 아니다.</strong> 교재가 별도 사정을 배제한 상황에서 냉정함의 평가와 청구 가능한 의무를 구분한 것이다.</p>
+<p>학생이 시험 직전 공부 대신 영상만 본다면 자기 계획상 어리석다는 평가가 중심일 수 있다. 입법자가 전문가의 경고를 무시하며 국민을 위한 판단을 방치한다면 타인을 대표하는 지위의 의무 문제까지 생긴다. 누가 어떤 지위에서 판단하는지가 중요하다.</p>
+<p>P단체에 소득의 5%를 기부하던 사람이 더 효율적인 Q단체를 알게 된 사례도 보자. 다른 약정이나 특별한 사정을 배제하면 Q로 바꾸는 것이 더 좋은 선택일 수 있어도, P에 계속 기부한다고 특정인의 권리를 침해한 것은 아니다. <strong>해야 할 이유가 있는 일의 범위는 청구권·의무 관계보다 넓다.</strong> 시험 238번은 이 구별을 묻는다. <strong>한 줄:</strong> 배려할 이유가 있다는 말과 상대가 강제할 권리가 있다는 말은 다르다.</p>
+<h1>3. 가치는 누구에게 좋은가, 규범은 누구와 어떤 관계인가</h1>
+<h2 id="argument-09-06" data-concept-id="argument-09-06">3-1. 이유가 힘을 갖는 조건: 취향의 공유와 지위의 정당화 ★★★★★</h2>
+<p><strong>교재 222–223쪽 / 문단의 목적:</strong> 가치와 규범을 단어가 아니라 이유의 작용 조건으로 나눈다. 가치는 그것이 누릴 만한 좋음이라고 인정할 토대를 가진 사람들에게 행위 이유가 된다. 특정 음악의 즐거움처럼 성향에 따를 수도 있고 건강처럼 넓은 사람에게 소용될 수도 있다. 모든 가치가 제멋대로의 기분이라는 뜻은 아니다.</p>
+<p>규범은 그 질서의 성원들이 맺는 근본적인 관계가 정당화되는 한 그 구성원에게 이유가 된다. 군부대 근처 민간인이 군 지휘관의 모든 명령에 복종해야 하는 것은 아니다. 반면 정당한 관할과 권한을 가진 공적 기관의 규율은 관련 구성원에게 구속력을 가질 수 있다. 누가 누구에게 어떤 권한을 갖는지부터 따진다. 법을 어기는 명령이 모두 정당한 규범이 되는 것도 아니다. 다만 현실의 행정처분에서는 취소·무효, 효력과 다툼의 절차도 구별해야 하므로 ‘불법이면 모든 명령을 마음대로 무시’라는 생활 지침으로 바꾸지 않는다.</p>
+<p>종교 A를 믿는 사람, 종교 B를 믿는 사람, 종교를 믿지 않는 사람은 신앙의 진리에 동의하지 않아도 서로의 종교의 자유를 존중해야 한다. 이때 공통 근거는 종교 내용의 승인보다 동료 시민의 동등한 지위다. <strong>시험:</strong> 239번. <strong>한 줄:</strong> 같은 것을 좋아하지 않아도 서로의 권리를 존중할 이유는 있다.</p>
+<h2 id="argument-09-07" data-concept-id="argument-09-07">3-2. 키 비교와 채권 관계: 외적 관계·내적 관계 ★★★★★</h2>
+<p><strong>교재 223–225쪽 / 문단의 목적:</strong> ‘관계’라는 말의 서로 다른 용법을 구분한다. A가 170cm, B가 180cm라면 비교 개념만 알아도 B가 A보다 크다고 말할 수 있다. 각자의 속성으로부터 도출되는 <strong>외적 관계</strong>의 예다. <strong>224쪽 인쇄본은 A가 B보다 크다는 문장을 도출한다고 적었지만 방향이 뒤집혔다. 원본 화면까지 확인한 오기이며 올바른 결론은 B가 더 크다.</strong></p>
+<p>반면 A가 100만 원의 채권자이고 B가 100만 원의 채무자라는 정보만으로 A가 B에게 받을 권리가 있다고 할 수 없다. A의 상대방은 C, B의 상대방은 D일 수 있다. 채권자라는 말에는 이미 ‘누구에 대한’ 관계가 들어 있고 그 상대방을 확정해야 한다. 이것이 교재의 <strong>내적 관계</strong> 설명이다. 단순한 독립 속성을 나열한 뒤 키 비교처럼 자동으로 이어 붙일 수 없다.</p>
+<p>덩치 큰 A가 B의 발을 밟아도 B는 물리적으로 A를 밀어낼 힘이 없을 수 있다. 그러나 발을 치우라고 요구할 권리가 없다는 결론은 아니다. 실제로 지배할 힘과 정당하게 요구할 지위는 다르다. 돈이 사회적으로 교환된다는 사실이나 돈을 더 원한다는 성향만으로도 규범적 권한을 전부 설명할 수 없다. <strong>시험:</strong> 072·240번. <strong>키워드:</strong> 비교와 권리 관계, 사실상 힘과 정당한 지위. <strong>한 줄:</strong> 키 두 개로 큰 사람은 알 수 있지만 채권자·채무자 이름 둘만으로 서로의 빚 관계는 알 수 없다.</p>
+<h2 id="argument-09-08" data-concept-id="argument-09-08">3-3. 일인칭의 좋음과 복수 주체의 권한 ★★★★☆</h2>
+<p><strong>교재 223–227쪽 / 문단의 목적:</strong> 가치 논의와 규범 논의의 출발점을 구별한다. 혼자 섬에 있는 사람에게도 건강·먹거리·낚시 도구는 가치 있다. 누가 나에게 빚을 졌는지를 말하지 않아도 내 삶에 도움이 된다고 설명할 수 있다. 나의 연구와 등산 중 무엇이 좋은가도 우선 내 삶의 문제다. 반면 사기 피해자의 권리, 양심의 자유, 타인의 강제에 대한 거부는 복수 주체의 관계를 전제한다.</p>
+<p>‘나는 정의를 세 개 더 보유했다’고 말하기는 어색하다. 사회가 더 정의로워졌다는 것은 누가 누구에게 무엇을 요구하고 부담하는 관계가 달라졌다는 뜻이다. 가치의 주체를 ‘우리’로 확장해 말할 수는 있지만 그 우리 안의 이해관계와 권한 배분이 저절로 정당해지는 것은 아니다.</p>
+<p>약속은 상대방에 대한 의무를 생기게 할 수 있고, 권한 있는 법원의 판결은 당사자의 법적 지위를 확정한다. 교재가 넓은 뜻의 <strong>형성권·규범적 권능</strong>을 다루는 이유다. 그런 행위가 효력을 갖는 이유도 해당 지위에 권한을 부여하는 근본 규범에서 찾는다. 민법의 좁은 의미의 취소권·해제권 등 형성권과 정확히 같은 범주라고 외우지 않는다. <strong>한 줄:</strong> 자신의 좋음을 고르는 일과 남의 지위를 바꾸는 일에는 다른 정당화가 필요하다.</p>
+<h1>4. 좋음의 합계만으로 권리를 정할 수 없는 이유</h1>
+<h2 id="argument-09-09" data-concept-id="argument-09-09">4-1. 구명조끼 두 사례: ‘A+B’라는 사람이 정말 있나 ★★★★★</h2>
+<p><strong>교재 227–231쪽 / 문단의 목적:</strong> 가치에서 규범으로 가는 숨은 전제를 드러낸다. 교재의 가치론은 좋고 나쁨을 영향을 받는 주체와 관련하여 이해한다. 아무 감각 주체도 관계되지 않는 무인 행성의 충돌을 떠올리는 이유도 누구에게 좋은지 묻기 위해서다. 이것으로 환경의 가치에 관한 모든 철학적 논쟁이 끝난다는 뜻은 아니다.</p>
+<p><strong>두 사람의 조끼:</strong> 난파한 배에서 B는 조끼를 입은 채 의식을 잃었고 A는 조끼가 없다. 둘 중 조끼 없는 사람은 구조가 늦어 죽는다고 가정한다. A가 아무도 모르게 빼앗으면 A에게는 이익이고 B에게는 치명적 손해다. 비밀이라는 설정은 평판·처벌 같은 부수 효과를 빼고 권리 문제를 보려는 장치다. 빼앗는 방법을 제안하는 사례가 아니다.</p>
+<p>‘A+B의 총이익’을 말한다고 A와 B의 경험을 한 몸으로 느끼는 실재 주체가 생기지 않는다. 두 사람의 손익을 어떤 기준으로 합산하고 희생을 요구할 수 있는지 규범이 필요하다. 제3자가 양쪽을 걱정하는 것도 그 사람이 각자의 이해관계를 고려하는 일이지 실제 합체 인간이 되는 것은 아니다. 앞으로 태어날 강아지는 실제 감각 주체가 될 수 있지만 ‘A+B’라는 합계는 그런 존재가 아니다. 샴쌍둥이도 서로 다른 성향과 관심을 가질 수 있다.</p>
+<p><strong>세 사람의 조끼:</strong> 몸집 큰 A의 조끼를 B와 C가 활용하면 둘이 살고 A는 죽는 상황을 가정한다. ‘2가 1보다 크다’는 산술만으로 A에게 희생 의무가 생기지는 않는다. 모두의 생존 수단을 통합 배분할 권한이 누구에게 있는지, 희생을 어떤 관계에서 요구하는지의 규범이 빠졌다. 교재는 수의 고려를 무조건 금지하기보다 <strong>숫자만으로 권한·의무를 도출하는 추론</strong>을 문제 삼는다.</p>
+<p>관심이 완전히 일치하는 하나의 주체라는 가정과 실제 다양한 사람들은 다르다. 다소 공통 관심이 있다고 해서 나머지 차이도 지울 수 없다. 종교의 자유도 참된 신앙을 강제하려는 이익이나 거짓 신앙을 없애려는 이익을 그대로 합산하는 것이 아니라, 어떤 이익을 정당하게 고려할지 규범으로 정한다. <strong>시험:</strong> 242번. <strong>한 줄:</strong> 두 사람의 이익을 더하는 계산보다 그 계산에 희생을 맡길 권한의 근거가 먼저다.</p>
+<h2 id="argument-09-10" data-concept-id="argument-09-10">4-2. 우선성의 뜻: 가치를 버리는 것이 아니라 문턱을 세운다 ★★★★★</h2>
+<p><strong>교재 231–232쪽 / 문단의 목적:</strong> 이 강의의 중심 결론을 정확히 한정한다. 사실을 많이 모아도 무엇이 가치 있는지는 가치 전제가 필요하다. 마찬가지로 가치를 늘어놓아도 무엇이 정당한 권리·의무인지는 규범 전제가 필요하다. <mark class="yellow">가치 논증은 규범을 위반하지 않고, 규범이 고려를 허용하며, 합리적 가치 논증의 한계 안에 있을 때 결론에 기여한다.</mark></p>
+<p>따라서 규범과 가치를 같은 저울에 올려 더 큰 수가 무조건 이긴다고 하면 안 된다. 반대로 가치는 헌법 논증에서 전혀 쓸모없다고 해도 틀린다. 규범이 허용하는 선택 안에서 가치는 중요한 구체화 자료다. 이것은 교재가 전개하는 이론의 주장이다. 실제 법원이 사용하는 모든 법익형량 표현을 금지하는 현행법 설명과 혼동하지 않는다. <strong>시험:</strong> 241번. <strong>한 줄:</strong> 규범은 고려할 가치와 고려 방식을 정하고 가치는 그 안에서 판단을 돕는다.</p>
+<h1>5. 규범이 먼저인 다섯 이유</h1>
+<h2 id="argument-09-11" data-concept-id="argument-09-11">5-1. 첫째 보편적 구속, 둘째 공동체의 결정권 ★★★★★</h2>
+<p><strong>교재 232–236쪽 / 문단의 목적:</strong> 왜 특정 집단의 좋음으로 기본권을 정할 수 없는지 논증한다. <strong>첫째, 구속력의 보편성에 상응하는 정당화 논거의 보편성</strong>이다. 모두에게 법을 지키라고 요구한다면 어떤 신조를 가진 사람에게만 통하는 이유로 끝낼 수 없다. 모든 시민이 실제로 같은 취향을 가져야 한다는 뜻은 아니다. 자유롭고 평등한 사람에게 제시할 수 있는 공적 근거를 갖추라는 뜻이다.</p>
+<p><strong>둘째, 복수의 사람을 하나의 공동체 관점으로 묶는 전제의 정당화</strong>다. 교우 집단 X의 A가 결혼하려는데 B와 C는 결혼 상대가 자신들과 맞지 않아 모임이 약해질 것이라고 한다. “X 전체를 위해 결혼하지 마”라는 말은 X가 한 사람처럼 욕구를 갖고, B와 C에게 A의 혼인을 통제할 권한이 있다는 전제를 감춘다.</p>
+<p>정확히 다시 말하면 “B와 C가 더 이익이라고 판단한 방향으로 A의 결혼을 통제할 수 있다”다. A는 “친구 관계가 왜 너희에게 내 결혼 결정권을 주지?”라고 반문한다. 이 반문은 이익 점수를 조금 더 달라는 요구가 아니라 <strong>서로의 지위 관계 자체에 대한 이의</strong>다. 대등한 입장에서 합당하게 거부할 수 없는 관계인지 논증하지 않고 모임의 이익만 반복하면 핵심을 비껴간다.</p>
+<p>국가도 같다. 국가가 하나의 커다란 사람인 것처럼 국민의 권리를 소유한 물건·할당 재화로 다루어서는 안 된다. 권리는 무엇을 할 수 있고 무엇을 강제당하지 않는지 정하는 관계이기도 하다. <strong>시험:</strong> 243번. <strong>한 줄:</strong> ‘우리 전체’라는 말에 누가 누구를 지배할 권한이 숨었는지 찾자.</p>
+<h2 id="argument-09-12" data-concept-id="argument-09-12">5-2. 셋째 공적 완결성: 의견이 달라도 공정하게 살 수 있어야 한다 ★★★★★</h2>
+<p><strong>교재 236–238쪽 / 문단의 목적:</strong> 좋은 삶에 대한 합의가 끝날 때까지 기본권을 미룰 수 없음을 보인다. 충분한 판단 능력이 있고 협동하려는 사람들도 서로 다른 인생 경험 때문에 가치의 비중을 다르게 본다. 롤즈의 <strong>판단의 부담</strong>과 <strong>합당한 의견 불일치</strong>다. 무지·악의가 전혀 없으면 모든 인생관이 같아진다는 생각은 현실과 논증의 한계를 놓친다.</p>
+<p>모험적인 삶과 안정적인 삶 중 하나만 정답이라고 정하기 어렵다. 종교적 이유로 수혈을 거절하는 가치 판단도, 의사소통 주체의 동등한 지위를 인정했는지만 검사해서 개인의 모든 가치 판단을 판정할 수 있는 것은 아니다. 이는 철학적 구분이며 실제 의료행위의 적법성과 안전은 별도의 법적·의학적 요건을 따른다.</p>
+<p>반면 규범 논의에서는 누군가를 처음부터 열등한 지위로 두었는지, 그런 훼손 없이 가능한 대안이 있는지 따져 잘못을 교정할 수 있다는 것이 교재의 논증이다. 형식 화용론은 이런 주장을 주고받는 행위 자체가 성립하려면 필요한 조건을 다룬다. 실제 말이 어떤 맥락에서 통하는지 관찰하는 경험 화용론과 구별한다.</p>
+<p>공적 완결성이란 기본권을 정당화할 때 끝부분을 특정 종교·인생관의 진리에 몰래 맡기지 않고 공적 이유로 논증을 마칠 수 있어야 한다는 요청이다. 모든 가능한 사건의 답을 미리 적어 둔다는 뜻은 아니다. 표현의 자유는 서로 표현의 가치를 다르게 평가해도 함께 살 조건을 정한다. 그런데 재판관이 “내가 가치 있다고 보는 표현만 자유”라고 하면 보호해야 할 불일치를 자기 취향으로 먼저 제거하는 문제가 생긴다. <strong>시험:</strong> 073·243번. <strong>한 줄:</strong> 좋은 삶의 답이 달라도 기본권의 정당화는 공적인 이유로 끝나야 한다.</p>
+<h2 id="argument-09-13" data-concept-id="argument-09-13">5-3. 넷째 안정된 공존: 종교를 싫어해도 종교의 자유는 존중한다 ★★★★★</h2>
+<p><strong>교재 238–241쪽 / 문단의 목적:</strong> 기본권 존중과 행사 내용의 찬성을 구별한다. 교재가 비판하는 샌델의 논증은 종교 활동이 훌륭한 인격과 시민적 미덕을 길러 준다는 가치 평가를 특별한 자유 보장의 바탕에 둔다. 저자는 그 논리를 일관되게 따르면 종교를 믿지 않을 자유까지 보장하는 이유가 충분히 설명되지 않는다고 비판한다. <strong>샌델의 모든 저작이 무종교인의 권리를 부정한다고 단정하는 설명은 아니다. 이 교재가 검토하는 논거의 함의를 배우는 것이다.</strong></p>
+<p>종교가 두려움·독단·억압을 낳는다고 비판하는 무종교 시민도 타인의 신앙을 법으로 금지하지는 않을 수 있다. 러셀과 밀의 비판을 인용한 이유도 ‘종교의 가치 불승인’과 ‘신앙인의 권리 존중’이 양립함을 보이기 위해서다. 반대로 신앙인은 자신의 종교가 가장 중요한 진리라고 믿고 적극적으로 포교하면서도 국가의 강제 개종을 반대할 수 있다. 다른 시민의 판단 지위를 인정하기 때문이다.</p>
+<p>참된 신앙이라는 본유적 가치와 좋은 시민을 만드는 수단이라는 도구적 가치는 신앙인에게 같은 비중이 아닐 수 있다. 그런데 개인의 가장 중요한 가치를 공권력의 강제 이유로 그대로 옮기면, 누구나 권력을 잡을 때 자기 신조를 다른 사람에게 관철하려 하게 된다. 공정한 협동과 안정된 공존이 무너진다. 롤즈의 <strong>정의감의 능력과 선관의 능력</strong>은 자신의 좋음을 추구하면서도 공정한 관계를 인정할 수 있는 시민상을 함께 보여 준다. <strong>한 줄:</strong> 내가 틀렸다고 여기는 삶도 동등한 시민이 선택할 지위는 존중할 수 있다.</p>
+<h2 id="argument-09-14" data-concept-id="argument-09-14">5-4. 다섯째 불편부당성: 네 이익도 내가 정해 줄게? ★★★★☆</h2>
+<p><strong>교재 241–242쪽 / 문단의 목적:</strong> ‘모두를 위한 것’이라는 표현의 일방성을 검사한다. 계약 당사자 둘이 서로 이익을 얻기로 했는데 무엇이 이익인지, 계약 위반인지는 한쪽만 정한다면 공정한 호혜 관계라 보기 어렵다. 특정 종교를 믿는 것이 모두에게 이익이라고 그 신자들만 판단한 뒤 강제하는 경우도 같은 문제가 있다.</p>
+<p>불편부당성은 아무 판단도 하지 않거나 양쪽 주장을 기계적으로 절반씩 수용하는 태도가 아니다. 한쪽의 심원한 가치관을 다른 쪽의 이익을 규정할 특권으로 만들지 않는 것이다. 어떤 가치관의 입장에서만 좋은 것을 모두에게 좋은 것이라며 강요하면 타인의 판단 지위를 부인한다. <mark class="green">공적 논거는 상대방도 대등하게 이유를 제시하고 거부할 수 있는 관계와 양립해야 한다.</mark> <strong>한 줄:</strong> 모두에게 이익이라는 말 속에 이익을 독점적으로 정의할 권한을 숨기지 말자.</p>
+<h1>6. 그럼 가치는 언제 헌법 논증에 도움이 되나</h1>
+<h2 id="argument-09-15" data-concept-id="argument-09-15">6-1. 사회적 기본 가치와 비선택적 이유 ★★★★★</h2>
+<p><strong>교재 242–244쪽 / 문단의 목적:</strong> 규범의 우선성을 가치의 전면 배제로 오해하지 않게 한다. 헤비메탈 감상의 즐거움은 해당 취향·미적 믿음을 갖는 사람에게 특별한 이유다. 건강은 특수한 신조와 무관하게 다양한 인생 계획을 돕는 비선택적 이유가 될 수 있다. 비선택적이라는 말도 건강이 언제나 다른 모든 이유를 이긴다는 뜻은 아니다.</p>
+<p>종교 공동체를 꾸리든 자연 친화적 삶을 살든 자원은 필요하다. 재산과 소득의 가치를 고려하는 사람을 모두 물질주의자로 볼 수 없다. 자신의 목적에 드는 비용을 책임지고, 필요한 자원에 대한 타인의 부당한 간섭을 막는 기반이 모두에게 소용될 수 있다. 워크북은 자유·자존감의 사회적 기반·자연자원·쾌적한 환경·다목적 재화도 예로 든다.</p>
+<p>여기서 <strong>사회적 기본 가치</strong>는 실제로 다수가 좋아한다는 통계가 아니라 합리적인 인생 계획이 무엇이든 소용될 일반적 이유임을 논증할 수 있는 가치다. ‘국민 대부분이 이 음악을 좋아하니 싫어하는 소수에게도 강제’는 다른 주장이다. 다수의 취향을 공유 가치라고 부르면 사라지는 소수의 지위를 다시 보아야 한다.</p>
+<p>규범상 허용되는 두 해석이 다른 면에서는 같고 한 해석이 이런 공통 기반을 명백히 더 증진한다면 해석을 구체화할 이유가 된다. 가치 논증으로 기본권 제한을 비판할 때 교재는 <strong>① 비선택적 사회적 기본 가치임을 논증 → ② 입법자의 선택이 명백히 비합리적임을 논증 → ③ 규범을 뒤집는 한계 유월이 없는지 확인</strong>의 세 단계를 제시한다. <strong>시험:</strong> 244번. <strong>한 줄:</strong> 다수가 이미 좋아하는 것과 누구의 합리적 삶에도 소용됨을 논증한 것은 다르다.</p>
+<h2 id="argument-09-16" data-concept-id="argument-09-16">6-2. 동성동본 금혼: 전통이라는 이름으로 결혼을 막을 수 있나 ★★★★★</h2>
+<p><strong>교재 244–245쪽 / 문단의 목적:</strong> 특정 전통의 가치가 존엄·평등의 규범을 대신할 수 없음을 실제 결정으로 보인다. 등장인물은 같은 성과 본관을 가진 혼인 희망자들, 혼인을 금지하던 구 민법 규정, 그 위헌성을 심사한 헌법재판소다. 친척 사이의 유전적 위험을 구체적으로 따지는 문제와 매우 넓은 동성동본 집단을 일괄 금지하는 문제를 섞지 않는다.</p>
+<p>갈등은 “오래된 혼인 전통을 보존하자”와 “자유롭고 평등한 개인의 결혼을 왜 막나”다. 재판소는 법이 생긴 농경·가부장적 질서와 변화한 자유·평등의 사회를 구분했다. 혼인의 중심도 집안과 집안의 결합에서 당사자의 인격적 결합으로 변화했고, 교육·산업화·도시화 및 거대한 동성동본 집단의 형성으로 일률 금지의 사회적 타당성이 약해졌다는 사정을 살폈다.</p>
+<p><strong>결론:</strong> 헌재 1997.7.16. 95헌가6등의 최종 주문은 <strong>헌법불합치</strong>다. 교재가 인용한 위헌 논리와 주문 형식을 구별하자. 단순위헌 의견 5명, 헌법불합치 의견 2명의 위헌 판단이 있었고 제도 정비의 문제까지 고려해 헌법불합치 주문으로 정리되었다. <a href="https://www.easylaw.go.kr/CSP/CnpClsMainBtr.laf?ccfNo=1&cciNo=1&cnpClsNo=1&csmSeq=1112&menuType=detc">법제처 결정요지</a>, <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4255763&cbIdx=1097">헌법재판소 결정 안내</a>.</p>
+<p><strong>판례 문장별 쉬운 번역:</strong> ① 현대 사회의 자유와 평등을 전제로 보아야 한다 → 과거 신분질서의 전통을 그대로 기준 삼을 수 없다. ② 존엄·행복추구와 혼인생활의 개인 존엄·양성평등에 배치된다 → 두 사람을 가문의 질서 유지 수단으로만 볼 수 없다. ③ 남계혈족만 기준 삼는 금지에 합리적 이유가 없다 → 부계만 중심으로 차별할 정당화가 부족하다. ④ 그 목적은 이제 기본권을 제한할 사회질서·공공복리가 아니다 → 전통이라는 이름만으로 제한 목적의 정당성이 확보되지 않는다.</p>
+<p><strong>조문을 왜 함께 읽나:</strong> 헌법 제9조의 전통문화 계승·발전은 전통이면 무엇이든 강제하라는 백지 권한이 아니다. 제10조는 개인의 존엄과 행복추구, 제11조는 평등, 제36조 제1항은 개인의 존엄과 양성평등에 기초한 혼인·가족생활을 보호한다. 제37조 제2항의 기본권 제한도 이런 규범의 문턱을 넘어야 한다. ‘전통을 좋아하는 사람의 이익’과 ‘원치 않는 사람의 지위’를 따로 본다.</p>
+<p>반대로 전통이라는 말만으로 금지를 인정하면 존엄과 평등을 어기는 관습도 보존 가치만으로 유지할 수 있게 된다. 다만 이 결정이 모든 전통이나 모든 근친혼 제한을 무효로 만들었다는 뜻은 아니다. 심판 대상과 논거의 범위를 지킨다. <mark class="pink">067·245번: 전통의 가치가 먼저라서 합헌, 목적은 정당하지만 방법만 문제라는 문구에 주의.</mark> <mark class="blue">제10강은 이처럼 사실·가치·규범 사이의 추론 단계가 다른 까닭을 더 명확히 한다.</mark> <strong>한 줄:</strong> 전통문화의 가치도 개인의 존엄과 평등을 거꾸로 지배할 수 없다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>당위·당위문</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 當(마땅할 당) 爲(할 위), 文(글월 문). <strong>③ 합친 뜻:</strong> 마땅히 함과 그것을 표현한 문장. <strong>④ 이름의 이유:</strong> 현실의 있음이 아니라 해야 함을 말하기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행동해야 할 이유와 그 언어적 진술을 구별한다. <strong>⑥ 쉬운 말:</strong> 해야 할 일 전체와 그중 말로 적은 문장은 다르다. <strong>⑦ 사례:</strong> 선수의 갈증만 적은 문장과 모든 사정을 검토한 결론.</p>
+<p><strong>⑧ 시험:</strong> 069번의 당위 자체 이분을 부정. <strong>⑨ 비교·기억법:</strong> 당위는 망, 당위문은 그 망을 설명하는 문장.</p>
+<h3>잠정적·확정적 당위문</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 暫(잠깐 잠) 定(정할 정), 確(굳을 확) 定(정할 정). <strong>③ 합친 뜻:</strong> 일단의 판단과 최종적으로 정한 판단. <strong>④ 이름의 이유:</strong> 검토가 어느 범위까지 이루어졌는지 표시한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 관련 이유 일부를 제시한 문장과 상황의 유관한 이유를 종합한 문장. <strong>⑥ 쉬운 말:</strong> 이 이유도 있어와 결국 이렇게 해야 해의 차이다. <strong>⑦ 사례:</strong> 갈증은 마실 이유지만 출전 조건과 안전 가정까지 고려하면 시점을 늦출 수 있다.</p>
+<p><strong>⑧ 시험:</strong> 당위 자체가 임시·최종의 두 존재라는 보기가 함정. <strong>⑨ 비교·기억법:</strong> 잠정은 무가치한 이유가 아니라 부분적으로 드러난 이유.</p>
+<h3>재판규범·통제규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 裁(마를 재) 判(판단할 판), 統(거느릴 통) 制(억제할 제), 規(법 규) 範(법 범). <strong>③ 합친 뜻:</strong> 재판의 판단·통제를 위한 기준. <strong>④ 이름의 이유:</strong> 재판에 의한 통제 근거가 되기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공권력 행위의 위헌성을 재판으로 가리는 기준. <strong>⑥ 쉬운 말:</strong> 재판으로 넘지 말라고 그을 수 있는 선이다. <strong>⑦ 사례:</strong> 관련 기본권 제한 원칙을 어긴 법률.</p>
+<p><strong>⑧ 시험:</strong> 068·070·236번, 하나만 위반해도 위헌. <strong>⑨ 비교·기억법:</strong> 행위규범 전체보다 좁다.</p>
+<h3>행위규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(갈 행) 爲(할 위) 規(법 규) 範(법 범). <strong>③ 합친 뜻:</strong> 행동할 때 따를 기준. <strong>④ 이름의 이유:</strong> 재판의 결론뿐 아니라 행동의 지침을 다룬다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공권력 행사에서 고려해야 할 규범 전반. <strong>⑥ 쉬운 말:</strong> 벌점을 받을 선만 아니라 잘 행동할 기준도 있다. <strong>⑦ 사례:</strong> 합헌 범위에서도 재정을 현명하게 써야 한다.</p>
+<p><strong>⑧ 시험:</strong> 071번의 포함관계 역전 주의. <strong>⑨ 비교·기억법:</strong> 재판규범은 행위규범이지만 역은 아니다.</p>
+<h3>입법재량</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 立(설 입) 法(법 법) 裁(마를 재) 量(헤아릴 량). <strong>③ 합친 뜻:</strong> 법을 만들 때 판단하고 헤아릴 여지. <strong>④ 이름의 이유:</strong> 옷감을 재단하듯 여러 가능한 선택을 구체화한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 헌법상 통제의 한계 안에서 입법자가 제도를 형성·선택하는 영역. <strong>⑥ 쉬운 말:</strong> 허용 범위에서 정책을 고르되 성실하게 골라야 한다. <strong>⑦ 사례:</strong> 같이 합헌인 여러 복지 설계를 비교한다.</p>
+<p><strong>⑧ 시험:</strong> 237번, 아무 규범도 없다는 설명은 틀림. <strong>⑨ 비교·기억법:</strong> 재량과 자의·면책을 구별한다.</p>
+<h3>내적 관계·외적 관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 內(안 내) 外(바깥 외) 的(과녁 적) 關(빗장 관) 係(맬 계). <strong>③ 합친 뜻:</strong> 안에서 성립하는 관계와 외부 비교 관계. <strong>④ 이름의 이유:</strong> 속성 진술에 상대방 관계가 들어 있는지가 핵심이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재는 관계가 내포된 지위 진술과 독립 속성을 비교해 도출하는 관계를 구별한다. <strong>⑥ 쉬운 말:</strong> 빚은 누구에게인지 알아야 하고 키는 숫자를 비교한다. <strong>⑦ 사례:</strong> A채권자·B채무자만으로 서로에게 빚졌다고 할 수 없다.</p>
+<p><strong>⑧ 시험:</strong> 072·240번;224쪽 키 비교 방향 오기 주의. <strong>⑨ 비교·기억법:</strong> 내적이라고 마음속의 관계라는 뜻은 아니다.</p>
+<h3>규범적 권능</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 規(법 규) 範(법 범) 的(과녁 적) 權(권세 권) 能(능할 능). <strong>③ 합친 뜻:</strong> 규범에 따른 지위 변경의 능력. <strong>④ 이름의 이유:</strong> 물리력이 아니라 규범이 인정한 효력이 작용한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정당한 권한에 기초하여 권리·의무 관계에 변화를 일으키는 능력. <strong>⑥ 쉬운 말:</strong> 힘이 세서가 아니라 그 결정을 할 자격이 있어서 효력이 생긴다. <strong>⑦ 사례:</strong> 약속이나 권한 있는 판결이 관계를 형성한다.</p>
+<p><strong>⑧ 시험:</strong> 물리적 지배력과 법적 권한을 구별. <strong>⑨ 비교·기억법:</strong> 교재의 넓은 형성권 논의와 민법의 좁은 형성권을 혼동하지 않는다.</p>
+<h3>우선성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 優(넉넉할 우) 先(먼저 선) 性(성품 성). <strong>③ 합친 뜻:</strong> 앞서 고려되는 성질. <strong>④ 이름의 이유:</strong> 같은 수준에서 단순 합산하지 않고 문턱을 먼저 정한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권 논증에서 규범이 가치 고려의 허용 범위와 방식을 정하는 지위. <strong>⑥ 쉬운 말:</strong> 좋은 결과라는 이유를 쓰기 전에 권리의 선을 본다. <strong>⑦ 사례:</strong> 전통의 가치로 존엄·평등을 뒤집지 못한다.</p>
+<p><strong>⑧ 시험:</strong> 241번;우선=가치 완전 배제는 틀림. <strong>⑨ 비교·기억법:</strong> 먼저 규범, 그 안에서 가치.</p>
+<h3>보편성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 普(넓을 보) 遍(두루 편) 性(성품 성). <strong>③ 합친 뜻:</strong> 두루 미치는 성질. <strong>④ 이름의 이유:</strong> 일부의 취향에만 기대어 나머지를 강제하지 않기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 모두를 구속하는 질서에 상응하는 정당화 이유의 공공적 범위. <strong>⑥ 쉬운 말:</strong> 모두 지키라면 모두에게 제시할 이유가 있어야 한다. <strong>⑦ 사례:</strong> 종교가 달라도 종교의 자유를 보장한다.</p>
+<p><strong>⑧ 시험:</strong> 243번 첫째 근거. <strong>⑨ 비교·기억법:</strong> 실제 만장일치의 찬성과 논증 가능한 보편성을 구별.</p>
+<h3>공적 완결성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공평할 공) 的(과녁 적) 完(완전할 완) 結(맺을 결) 性(성품 성). <strong>③ 합친 뜻:</strong> 공적인 근거로 끝까지 마침. <strong>④ 이름의 이유:</strong> 마지막 단계에 한 집단만 승인하는 전제를 숨기지 않는다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권의 정당화를 특정 포괄적 신조에 떠넘기지 않고 공적 이유로 도출할 수 있어야 한다는 요청. <strong>⑥ 쉬운 말:</strong> 끝에 우리 종교가 정답이니까를 몰래 붙이지 않는다. <strong>⑦ 사례:</strong> 표현 가치가 달라도 표현의 자유의 근거를 구성한다.</p>
+<p><strong>⑧ 시험:</strong> 073번 빈칸;불확정성·가치 만장일치와 구별. <strong>⑨ 비교·기억법:</strong> 모든 사건의 답을 미리 나열했다는 뜻은 아니다.</p>
+<h3>합당한 의견 불일치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 合(합할 합) 當(마땅할 당), 意(뜻 의) 見(볼 견), 不(아니 불) 一(한 일) 致(이를 치). <strong>③ 합친 뜻:</strong> 합리적인 사람들 사이에도 생각이 같아지지 않음. <strong>④ 이름의 이유:</strong> 경험과 판단 조건이 달라 성실히 생각해도 일치하지 않을 수 있다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 협동 의사와 판단 능력을 가진 시민들 사이에도 남는 가치관 등의 차이. <strong>⑥ 쉬운 말:</strong> 다른 생각이라고 꼭 무식하거나 나쁜 사람이 아니다. <strong>⑦ 사례:</strong> 안정적인 삶과 모험적인 삶 중 무엇을 중시할지의 차이.</p>
+<p><strong>⑧ 시험:</strong> 판단의 부담·공적 완결성과 연결. <strong>⑨ 비교·기억법:</strong> 합당한 불일치는 모든 주장 무조건 정당화와 다르다.</p>
+<h3>판단의 부담</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 判(판단할 판) 斷(끊을 단), 負(질 부) 擔(멜 담). <strong>③ 합친 뜻:</strong> 판단에 따르는 어려움. <strong>④ 이름의 이유:</strong> 판단이 자동적·기계적으로 일치하지 않는 부담을 표시한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 합당한 사람들이 경험·증거 평가 등의 차이로 불일치하는 원인을 설명하는 개념. <strong>⑥ 쉬운 말:</strong> 같은 이야기를 진지하게 듣고도 중요하게 보는 점이 다를 수 있다. <strong>⑦ 사례:</strong> 각자의 인생 경험에 따라 가치의 비중이 달라진다.</p>
+<p><strong>⑧ 시험:</strong> 가치관 만장일치를 기본권의 조건으로 삼지 않음. <strong>⑨ 비교·기억법:</strong> 입증책임처럼 소송상 불이익을 배분하는 개념과 다르다.</p>
+<h3>불편부당성·호혜성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아니 불) 偏(치우칠 편) 不(아니 부) 黨(무리 당), 互(서로 호) 惠(은혜 혜). <strong>③ 합친 뜻:</strong> 어느 편에도 치우치지 않음과 서로에게 혜택을 주는 관계. <strong>④ 이름의 이유:</strong> 한쪽만 무엇이 이익인지 정하면 서로의 대등함이 무너지기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 집단의 이익 정의를 일방 관철하지 않는 공정한 정당화의 요구. <strong>⑥ 쉬운 말:</strong> 네게 좋다는 이유도 너를 대등하게 대하며 설명해야 한다. <strong>⑦ 사례:</strong> 계약 이익과 위반 판단을 한쪽만 독점한다면 문제.</p>
+<p><strong>⑧ 시험:</strong> 243번 다섯째 근거와 일방적 종교 강제 비판. <strong>⑨ 비교·기억법:</strong> 기계적 중간값이나 의견 포기가 아니다.</p>
+<h3>선택적·비선택적 이유</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 選(가릴 선) 擇(가릴 택), 非(아닐 비). <strong>③ 합친 뜻:</strong> 특정 선택에 달린 이유와 그렇지 않은 이유. <strong>④ 이름의 이유:</strong> 채택한 취향의 조건에 의존하는지를 표시한다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 신조·성향을 채택해야 힘을 갖는 이유와 그것 없이도 일응 작용하는 이유. <strong>⑥ 쉬운 말:</strong> 헤비메탈 취향과 다양한 삶을 돕는 건강의 차이다. <strong>⑦ 사례:</strong> 건강은 중요한 이유지만 언제나 모든 사정을 이기지는 않는다.</p>
+<p><strong>⑧ 시험:</strong> 244번;비선택적=항상 결정적이라는 오해 주의. <strong>⑨ 비교·기억법:</strong> 선택성이 없다는 말은 개인의 결정권을 없애자는 뜻이 아니다.</p>
+<h3>사회적 기본 가치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 社(모일 사) 會(모일 회) 的(과녁 적) 基(터 기) 本(근본 본) 價(값 가) 値(값 치). <strong>③ 합친 뜻:</strong> 사회에서 다양한 삶의 기반이 되는 좋음. <strong>④ 이름의 이유:</strong> 각자의 목적을 추구할 공통 기반이 되기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 합리적 인생 계획이 무엇이든 소용됨을 논증할 수 있는 일반적 가치. <strong>⑥ 쉬운 말:</strong> 목적지는 달라도 사용할 이유가 있는 자원이다. <strong>⑦ 사례:</strong> 자유·자원·자존감의 사회적 기반·쾌적한 환경.</p>
+<p><strong>⑧ 시험:</strong> 다수의 사실적 선호와 구별하고 규범 안에서 활용. <strong>⑨ 비교·기억법:</strong> 많이 좋아함이 아니라 두루 소용됨의 논증.</p>
+<h3>동성동본 금혼·헌법불합치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 同(같을 동) 姓(성 성) 同(같을 동) 本(근본 본) 禁(금할 금) 婚(혼인할 혼), 憲(법 헌) 法(법 법) 不(아니 불) 合(합할 합) 致(이를 치). <strong>③ 합친 뜻:</strong> 같은 성·본관 사이 혼인 금지와 헌법에 맞지 않음. <strong>④ 이름의 이유:</strong> 성·본관을 기준으로 결혼을 막았고 헌법적 정비를 요구했기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구 민법의 포괄적 금혼과 이를 헌법에 맞지 않는다고 선언한 결정 형식. <strong>⑥ 쉬운 말:</strong> 오래된 관습도 개인의 존엄과 평등을 어기면 고쳐야 한다. <strong>⑦ 사례:</strong> 95헌가6등 1997.7.16. 헌법불합치.</p>
+<p><strong>⑧ 시험:</strong> 067·245번;전통 목적이 당연히 정당하다고 보지 않음. <strong>⑨ 비교·기억법:</strong> 위헌 논리와 최종 헌법불합치 주문을 함께 기억.</p>
+<h1>문제 연결 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제 번호</th>
+<th>먼저 확인할 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>069</td>
+<td>잠정·확정은 당위문의 구별이지 당위 자체의 분할이 아니다.</td>
+</tr>
+<tr>
+<td>236</td>
+<td>합헌은 실시 의무가 아니고 행위규범 위반 모두가 재판상 위헌도 아니다.</td>
+</tr>
+<tr>
+<td>240</td>
+<td>채권자·채무자 속성 두 개만으로 서로의 상대방이 되지 않는다.</td>
+</tr>
+<tr>
+<td>243</td>
+<td>다섯 근거와 종교의 미덕을 먼저 승인하라는 주장을 구별한다.</td>
+</tr>
+<tr>
+<td>244</td>
+<td>다수의 사실적 공유와 논증적으로 공통된 기본 가치를 구별한다.</td>
+</tr>
+</tbody></table>
+<p>부록에 <strong>18문항·72개 보기</strong>를 모두 수록했다. 반복되는 중심은 재판규범·행위규범, 당위문의 형식, 규범의 관계성, 규범 우선성의 근거, 가치 논증의 허용 범위다. 원자료 070번의 ‘확정적 장위’는 문맥상 ‘확정적 당위’다. 개인별 오답률 대신 잘못 고르기 쉬운 논리 방향을 표시했다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 공정한 회의, 아쉬운 결과.</strong> 지역회의가 적법한 절차로 허용 범위 안의 예산안을 정했지만 같은 비용으로 더 많은 주민을 돕는 대안을 일부러 검토하지 않았다. 합헌이면 비판할 수 없는가? <strong>답:</strong> 아니다. 재판상 통제 기준과 현명하고 성실하게 판단할 행위규범은 구별된다. 이 정보만으로 위헌이라고 단정해서도 안 된다. <strong>출제 의도:</strong> 재량과 면책의 혼동 방지.</p>
+<p><strong>응용 2 · 동아리의 장학금.</strong> 선배 다수가 특정 종교의 활동이 인격을 좋게 만든다며 모든 장학생에게 신앙서약을 요구하려 한다. 인격 향상만 입증하면 충분한가? <strong>답:</strong> 아니다. 요구할 권한, 구성원 사이의 평등한 지위, 자유에 대한 제한의 정당화를 검토해야 한다. 여기서는 구체적 사립단체에 헌법이 어떻게 적용되는지까지 자동 결정하지 않고 논거의 구조를 묻는다. <strong>출제 의도:</strong> 가치의 승인과 규범적 권한 구별.</p>
+<p><strong>응용 3 · 받은 사람과 빌린 사람.</strong> 지은은 30만 원을 받을 채권자, 현우는 30만 원을 갚을 채무자라고만 알려졌다. 지은이 현우에게 곧바로 청구할 수 있는가? <strong>답:</strong> 상대방 정보가 빠졌다. 지은의 채무자는 민수, 현우의 채권자는 수아일 수 있다. <strong>출제 의도:</strong> 내적 관계의 상대방 확정.</p>
+<p><strong>응용 4 · 미술관 안내문.</strong> 두 안내 방식은 비용·권리 보장 면에서 같지만 하나가 장애 유무와 문화적 취향에 관계없이 관람 정보에 더 잘 접근하게 한다. 가치 논증을 아예 배제해야 하나? <strong>답:</strong> 아니다. 일반적 접근 기반의 비선택적 소용을 논증하고 규범을 위반하지 않는 범위에서 더 나은 방식을 고를 수 있다. <strong>출제 의도:</strong> 규범 우선성과 가치의 보완 역할.</p>
+<p><strong>응용 5 · 회사의 기숙사.</strong> 관리자가 “입주자 대부분이 조용한 삶을 좋아하므로 퇴근 후 사적인 교제 상대도 내가 정하겠다”고 한다. 숨은 전제는? <strong>답:</strong> 관리자의 가치 판단이 입주자의 사적 관계를 통제할 권한을 준다는 전제다. 공동 주거의 정당한 생활 규칙과 타인의 삶 자체를 대신 결정하는 권한은 같지 않다. <strong>출제 의도:</strong> 공동체의 이름에 숨은 지위 관계 찾기.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제9강</h1>
+<p><strong>TOP3:</strong> 재판규범 ⊂ 행위규범 / 규범 논거 우선 / 비선택적 기본 가치.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>잠정·확정</td>
+<td>당위문은 나누지만 당위 자체는 전체의 망이다.</td>
+</tr>
+<tr>
+<td>닫힌·열린</td>
+<td>‘약속을 지켜라’ / ‘정당화 사유가 없으면 지켜라’.</td>
+</tr>
+<tr>
+<td>긴급한 행동</td>
+<td>허용 이유와 남는 손해 부담은 별도로 따진다.</td>
+</tr>
+<tr>
+<td>위헌·합헌</td>
+<td>위헌은 실시 불허. 합헌은 실시 의무가 아니다.</td>
+</tr>
+<tr>
+<td>규범의 범위</td>
+<td>재판규범은 행위규범의 일부. 재량에도 책임이 남는다.</td>
+</tr>
+<tr>
+<td>당위와 의무</td>
+<td>배려할 이유가 곧 상대의 청구권은 아니다.</td>
+</tr>
+<tr>
+<td>외적·내적</td>
+<td>키 비교 / 상대방이 특정된 채권·채무 관계.</td>
+</tr>
+<tr>
+<td>가치·규범</td>
+<td>일인칭의 좋음 / 복수 주체의 정당한 관계.</td>
+</tr>
+<tr>
+<td>다섯 근거</td>
+<td>보편성·통합 전제·공적 완결성·안정된 공존·불편부당성.</td>
+</tr>
+<tr>
+<td>공동체 합계</td>
+<td>‘A+B’는 실재하는 단일 감각 주체가 아니다.</td>
+</tr>
+<tr>
+<td>기본 가치</td>
+<td>다수 취향 아닌, 합리적 계획에 두루 소용됨의 논증.</td>
+</tr>
+<tr>
+<td>가치의 사용</td>
+<td>규범 비위반 + 고려 허용 + 합리적 논증의 한계.</td>
+</tr>
+<tr>
+<td>가치 비판 3단계</td>
+<td>비선택적 가치 → 명백한 비합리성 → 규범 한계 준수.</td>
+</tr>
+<tr>
+<td>동성동본</td>
+<td>95헌가6등, 헌법불합치. 전통 가치보다 존엄·평등.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 모두에게 좋은 결과라는 주장보다 먼저, 누가 누구의 삶을 결정할 권한을 갖는지 정당화해야 한다.</p>
+<p><strong>사례를 풀 순서:</strong> 관련 이유 전부 → 누구의 좋음인가 → 누구에게 어떤 지위인가 → 규범의 문턱 → 허용된 가치 고려.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 배송·부두·기부·구명조끼·혼인 사례를 통해 같은 말 ‘좋다’에 숨은 서로 다른 이유를 설명한다. 🟡 <strong>복습 필요:</strong> 정의는 알지만 합헌과 의무, 다수 가치와 공통 기본 가치를 섞는다. 🔴 <strong>이해 부족:</strong> 다수에게 이익이면 개인의 권리를 곧바로 제한해도 된다고 본다. 실제 답변을 받기 전의 자기 점검 기준이다. <strong>복습 TOP3:</strong> 재판규범·행위규범, 우선성의 다섯 이유, 가치 논증의 세 한계.</p>
+<h1>문제 부록 · 18문항·72개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_067"><h4>형성평가 · 헌법논증이론_067</h4><p class="question-stem">다음과 같은 주장에 대한 평가로 틀린 것은?<br><br>동성동본끼리 결혼하지 않는다는 풍습은 대단히 소중하고 가치 있는 전통문화의 일부이다. 이 전통문화를 계승하는 것은 헌법 제9조 규정에 의해 국가의 의무로 되어 있다. 따라서 동성동본인 사람들 사이의 법적으로 혼인의 자유가 인정되지 않는다 하더라도 그렇게 제한된 혼인의 자유는 전통문화에 반(反)하는 좋지 못한 가치를 갖는 것에 불과하다. 따라서 동성동본금혼제는 합헌이다.</p><ol class="choices"><li>위 주장은 규범 논거가 가치 논거에 우선한다고 보는 입장을 택하고 있다.</li><li>동성동본금혼이 전통문화로서 갖는 가치에 대해서는 합당한 의견불일치가 있을 수 있다.</li><li>위 주장은 동성동본금혼의 풍습이 ‘대단히 소중하고 가치 있다’고 생각하는 국민과 그렇게 생각하지 않는 국민의 지위 관계 문제를 보이지 않게 만든다.</li><li>위 주장이 기본권 제한의 근거로 든 가치는, 합리적 인생계획이라면 그 내용이 무엇이건 간에 소용이 되는 가치는 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 전통의 가치를 앞세워 혼인의 자유 제한을 정당화하므로 가치 논거를 우선한 주장이다. 질문은 틀린 평가를 고르므로 ①이다.</li><li><strong>비선택</strong> · 합리적으로 협동하려는 사람들 사이에서도 해당 전통의 가치를 다르게 평가할 수 있다.</li><li><strong>비선택</strong> · 전통을 승인하는 다수에게 거부하는 사람의 혼인을 통제할 권한이 있는지라는 지위 관계가 숨겨진다.</li><li><strong>비선택</strong> · 동성동본 금혼의 관습은 모든 합리적 인생 계획에 두루 소용되는 비선택적 기본 가치로 논증된 것이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_068"><h4>형성평가 · 헌법논증이론_068</h4><p class="question-stem">재판규범과 행위규범에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>입법재량의 한계를 벗어나지 않는다면 입법자가 어떻게 권한을 행사하건 여하한 형태의 헌법적 비난에서도 면제된다.</li><li>위헌인 정책과 합헌인 정책을 가려주는 헌법규범을 보통 행위규범이라고 한다.</li><li>재판규범은 헌법재판소가 재판을 통해 정부의 행위를 통제할 근거가 되는 규범이다.</li><li>재판규범을 여럿을 동시에 위반할 때에만 위헌이고 하나만 위반할 때에는 합헌이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 재판상 재량의 한계 안에서도 현명·공정하게 판단할 행위규범의 비판은 남는다. 여하한 비난에서도 면제라는 말이 지나치다.</li><li><strong>비선택</strong> · 위헌과 합헌을 가르는 통제 기준은 재판규범 또는 통제규범이다. 행위규범은 더 넓다.</li><li><strong>선택</strong> · 재판으로 공권력 행위를 통제하는 근거라는 정의가 맞다. 정부는 여기서 국가기관을 넓게 가리킨다.</li><li><strong>비선택</strong> · 관련된 통제규범 하나만 위반해도 위헌일 수 있다. 여러 위반을 쌓아야 하는 것이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_069"><h4>형성평가 · 헌법논증이론_069</h4><p class="question-stem">당위에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>~해야 한다’는 문구로 표현될 수 있다.</li><li>당위문은 잠정적 당위문과 확정적 당위문으로 나누어 볼 수 있다.</li><li>당위 자체가 잠정적인 것과 확정적인 것으로 구분되어 있다.</li><li>당위는 하나의 전체로서 망을 이루어 구성되어 있지만 언어를 통해 정보를 전달하고 수용하는 형식의 한계와 인식능력의 한계로 인하여 그것을 한 번에 전부 언급할 수 없을 뿐이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 당위는 해야 한다는 표현으로 나타낼 수 있다. 보기의 맨 앞 인용부호 누락은 의미에 영향을 주지 않는다.</li><li><strong>비선택</strong> · 문장이 관련 이유 일부를 드러내는지 최종 판단을 드러내는지에 따라 나눌 수 있다.</li><li><strong>선택</strong> · 교재는 당위 자체가 두 종류로 쪼개져 있다는 설명을 부정한다. 구별 대상은 당위문이다.</li><li><strong>비선택</strong> · 전체를 한꺼번에 말하거나 파악하지 못하는 언어·인식의 한계가 잠정적 표현의 이유다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 당위 자체가 잠정적인 것과 확정적인 것으로 구분되어 있는 것이 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_070"><h4>형성평가 · 헌법논증이론_070</h4><p class="question-stem">______에 들어갈 가장 적합한 말은?<br><br>만일 해당 공권력의 행사 또는 불행사가 기본권을 제한할 때 준수해야 하는 원칙을 하나라도 위반한다면 그것은 위헌이다. 위헌인 정책은 실시해서는 안 된다. 따라서 어떤 정책이 위헌이라는 것은 그 정책을 실시하는 것은 허용되지 않는다는 불허에 관한 확정적 장위를 함축한다. 그런 결론은 공권력의 행사 또는 불행사가 위헌이라는 재판을 내릴 근거가 되는 규범을 전제로 한다. 달리 표현하면 헌법재판소가 그런 재판을 통해 정부의 행위를 통제할 근거가 되는 규범을 전제로 한다. 이와 같이 위헌인 정책과 합헌인 정책을 가려주는 헌법규범을______________이라 한다.</p><ol class="choices"><li>통제규범</li><li>사회규범</li><li>법규범</li><li>행위규범</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 위헌·합헌을 가려 재판으로 통제하는 기준이므로 통제규범이다. 원문의 장위는 당위의 오기다.</li><li><strong>비선택</strong> · 사회규범은 넓은 일반 명칭으로 이 문단이 구별하는 재판상 통제 기능을 특정하지 않는다.</li><li><strong>비선택</strong> · 법규범이라고만 하면 여기서 필요한 재판규범과 행위규범의 범위 차이가 드러나지 않는다.</li><li><strong>비선택</strong> · 행위규범에는 재판으로 위헌 통제를 받지 않더라도 고려해야 할 규범이 포함된다. 빈칸은 좁은 통제규범이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_071"><h4>형성평가 · 헌법논증이론_071</h4><p class="question-stem">다음 행위규범에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>행위규범은 행위를 할 때 고려해야 하는 모든 규범을 의미한다.</li><li>재판규범은 당연히 행위규범이다.</li><li>행위규범은 당연히 재판규범이다.</li><li>재판규범에 속하지 않는 행위규범도 여전히 헌법규범이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공권력을 행사할 때 고려할 모든 규범이라는 넓은 의미다.</li><li><strong>비선택</strong> · 재판으로 통제할 기준도 공권력이 행동할 때 지켜야 하므로 포함된다.</li><li><strong>선택</strong> · 포함관계를 뒤집었다. 모든 행위규범 위반이 재판규범 위반인 것은 아니다.</li><li><strong>비선택</strong> · 재판상 강제되지 않는 현명·공정한 입법 판단의 기준도 이 문맥에서는 헌법적 행위규범이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 행위규범이 당연히 재판규범은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_072"><h4>형성평가 · 헌법논증이론_072</h4><p class="question-stem">규범에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>규범은 시종일관 복수(複數)의 존재를 전제로 한다.</li><li>규범은 복수(複數)의 존재 사이의 관계를 규율하는 이유이다.</li><li>규범 명제에 내포한다고 이야기되는 관계란 비교를 통해 주어지는 술어로 표현되는 외적 관계에 그치는 것을 말한다.</li><li>규범 명제에 내포한다고 이야기되는 관계에 대한 진술은 각 주체의 속성에 관한 기초 진술이 있고 관계를 나타내는 술어의 뜻이 주어져도 연역적으로 도출할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 규범은 누가 누구에게 무엇을 요구할 수 있는지 등 복수 주체의 관계를 전제한다.</li><li><strong>비선택</strong> · 관계의 정당함이 규범적 이유의 주제다.</li><li><strong>선택</strong> · 키 비교 같은 외적 관계만으로 설명하지 않는다. 교재가 지적하는 것은 내적·당위적 관계다.</li><li><strong>비선택</strong> · 채권자·채무자라는 속성과 그 뜻만 알아도 서로가 상대방이라는 정보가 자동으로 나오지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 규범 명제에 내포한다고 이야기되는 관계란 외적 관계가 아니라 내적 관계를 말한다. 그리고 ‘길동이는 –의 속성을 갖는다’와 ‘몽룡이는 –의 속성을 갖는다’라는 속성 진술로부터 길동이와 몽룡이의 규범적 지위 관계를 연역적으로 도출할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_073"><h4>형성평가 · 헌법논증이론_073</h4><p class="question-stem">밑줄 친 곳에 들어갈 말로 올바른 것은?<br><br>입헌 민주주의 사회의 기본권 규범은, 자유롭고 평등한 시민이 되기에 충분한 도덕적 능력을 보유하고 있으며 공정하게 협동하려는 의사를 가진 사람들 사이에서 공적 논거를 사용하여 ______________을 가지고서 도출될 수 있어야 한다. 그렇지 않으면 결국에는 어느 구성원들을 정당화 없이 편드는 선택에 궁극적으로 기본권 규범이 기초하게 되기 때문이다.</p><ol class="choices"><li>본질적 불확정성</li><li>완결성</li><li>궁극적 척도로의 환원성</li><li>삶의 총체적 경험에 비추어 본 만장일치의 승인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 불확정성을 기본권 정당화의 목표로 요구한 문장이 아니다.</li><li><strong>선택</strong> · 특정 포괄적 신조에 마지막 정당화를 떠넘기지 않고 공적 이유로 논증을 마칠 수 있어야 한다는 완결성이다.</li><li><strong>비선택</strong> · 모든 인생관을 하나의 가치 척도로 환원해야만 기본권을 정할 수 있다는 주장은 교재의 논지와 반대다.</li><li><strong>비선택</strong> · 인생 경험이 다르면 합당한 불일치가 남는다. 실제 만장일치의 가치 승인 없이도 공적 규범을 정당화해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 기본권 논증의 공적 완결성은, 근본적으로 포괄적인 견해가 불일치하는 다원주의 사회에서 궁극적 척도로의 환원이나 삶의 총체적 경험에 비추어 본 만장일치의 승인 없이도, 공적 규범에 관한 문제를 해결해줄 수 있기 위해 요구되는 특성이다. 따라서 그것은 본질적 불확정성을 가져서는 안 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_235"><h4>워크북 · 헌법논증이론_235</h4><p class="question-stem">닫힌 형식의 잠정적 당위문과 열린 형식의 잠정적 당위문에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>'약속했으면 그 약속을 어기는 것을 정당화할 사유가 없는 한 약속한 바를 지켜야 한다'는 열린 형식의 잠정적 당위문이다.</li><li>'약속했으면 약속한 바를 지켜야 한다'는 닫힌 형식의 잠정적 당위문이다.</li><li>닫힌 형식으로 표현된 잠정적 당위문들이 서로 양립불가능하게 보인다면 실제로 당위 그 자체가 충돌하거나 양립불가능함을 함축한다.</li><li>닫힌 형식으로 표현된 잠정적 당위문은 행위에서 고려해야 할 이유를 드러내는 것이며 구체적 사안에서 특정 행위 자체를 직접 지시하는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정당화 사유가 없다는 조건을 드러냈으므로 열린 형식이다.</li><li><strong>비선택</strong> · 예외 조건을 겉으로 쓰지 않은 닫힌 형식이다.</li><li><strong>선택</strong> · 문장의 표면적 충돌을 당위 자체의 모순으로 단정했다. 열린 형식으로 복원하여 관련 사유를 함께 검토한다.</li><li><strong>비선택</strong> · 하나의 이유를 간결하게 제시한 것이므로 그 문장만으로 해당 상황의 최종 행동이 항상 정해지지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 닫힌 형식으로 표현된 잠정적 당위문들이 서로 양립불가능하게 보일 때에도 실제로는 당위 그 자체가 충돌하거나 양립불가능한 것은 아니다. 이를테면 '약속을 했으면 지켜야 한다'와 '위험에 빠진 아이를 구하고 보호해야 한다'는 닫힌 형식의 당위문은 아이를 구하기 위해서는 약속을 어겨야 하는 상황에서 그 형식 자체로는 양립불가능하지만, 열린 형식의 당위문으로 바꾸어 보면 그렇지 않다. '아이를 구하고 보호해야 할 필요'가 '약속했으면 약속을 어기는 것을 정당화할 사유가 없는 한 약속한 바를 지켜야 한다'는 당위문에서 '정당화할 사유'에 해당된다고 이해할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_236"><h4>워크북 · 헌법논증이론_236</h4><p class="question-stem">다음 중 옳은 진술은?</p><ol class="choices"><li>어떤 공권력의 행사가 기본권을 제한할 때 준수해야 하는 원칙을 하나라도 위반한다면 그것은 위헌이다.</li><li>공권력의 행사 또는 불행사가 행위규범을 위반한다면 그것은 위헌이다.</li><li>입법재량의 범위 내에서 입법자는 헌법규범으로부터 완전히 자유로워진다.</li><li>어떤 공권력의 행사가 관련된 기본권제한원칙을 모두 준수하여 합헌이라는 결론이 나온다면, 정부는 그와 같이 공권력을 행사해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 해당 사안에서 준수해야 하는 기본권 제한 원칙 하나의 위반으로도 위헌이다. 다른 원칙 준수가 이를 자동 상쇄하지 않는다.</li><li><strong>비선택</strong> · 행위규범은 통제규범보다 넓다. 위반한 규범이 재판상 통제 기준인지 구별해야 한다.</li><li><strong>비선택</strong> · 재량은 선택 영역이지 모든 헌법적 책임에서 해방되는 영역이 아니다.</li><li><strong>비선택</strong> · 합헌은 허용의 의미이지 실시의 적극적 의무가 아니다. 더 나은 합헌 정책으로 바꿀 여지도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①은 옳은 진술이다. 예를 들어 소급입법금지원칙을 위반했다면 명확성원칙을 준수하여도 위헌이다. ②는 틀렸다. 행위규범을 위반한다고 해서 꼭 위헌이 되는 것은 아니다. 재판규범 또는 통제규범이기도 한 규범을 위반해야 위헌이다. 그래서 행위규범에는 위반되지만 재판규범에는 위반되지 않는 행위가 있다. 입법재량의 범위 내라 할지라도 입법자가 대규모의 국가재정을 어리석게 낭비한다면 이는 행위규범을 위반했다는 비난을 받을 수 있으므로 ③도 틀렸다. ④도 틀렸다. 합헌 판단이 난다고 해서 그것이 정부가 꼭 해야 하는 일이라는 적극적인 의미는 없다. 단지 권한 범위 내에 있다는 소극적인 의미만 있다. 그렇지 않다면 입법자에게는 어리석게 국가재정을 낭비하지만 기본권을 침해하지 않아 합헌 판단을 받은 법률을 합리적으로 재정을 절약하는 내용으로 변경할 권한이 없게 되는데 이는 터무니없다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_237"><h4>워크북 · 헌법논증이론_237</h4><p class="question-stem">밑줄 친 곳에 들어갈 말로 올바른 것은?<br><br>위헌인 범위를 제외한 통제규범을 어기지 않아 합헌인 범위 내에서 입법자는 헌법재판소에 의해 위헌으로 선언되어 통제될 대상이 아닌, 실험과 선택의 권한을 갖는다. 이러한 권한을 보통 ______이라/라 한다. 그러나 ______가/이 있다고 하여 그 범위 내에서 입법자가 고려해야 할 아무런 규범도 없다는 뜻이 아니다. 입법자는 효율적이고, 되도록 더 형평성 있고 부작용이 덜하고 공동의 번영은 늘리는 선택을 해야 한다.</p><ol class="choices"><li>입법재량</li><li>주권면제</li><li>입법통제</li><li>사법심사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 입법자가 위헌의 한계 안에서 여러 제도와 정책을 선택할 영역인 입법재량이다.</li><li><strong>비선택</strong> · 주권면제는 여기서 설명하는 입법 선택권의 이름이 아니다.</li><li><strong>비선택</strong> · 입법통제는 입법을 심사·제한하는 쪽의 표현이며 빈칸은 선택하는 권한이다.</li><li><strong>비선택</strong> · 사법심사는 재판기관의 심사다. 입법부의 실험·선택 권한과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_238"><h4>워크북 · 헌법논증이론_238</h4><p class="question-stem">다음 사례에서, 당위, 권리, 의무에 관한 진술로 옳은 것은?<br><br>6시 정각에 문을 닫는 가게에서 급하게 어떤 물건이 꼭 필요한 손님 A가 6시 5초에 왔는데 그 긴급한 사정을 알면서도 직원 B는 영업이 끝났다고 기계적으로 문을 닫아버렸다.</p><ol class="choices"><li>손님 A는 직원 B에게 소정근로시간을 넘겨 일을 하도록 요구할 권리가 있다.</li><li>직원 B는 위와 같이 인색하고 냉정하게 거래를 거절해도 무방하다.</li><li>손님 A가 자신의 필요가 크다는 점을 들어 B에 대하여 권리를 갖고 B가 그에 상응하는 의무를 곧바로 진다는 원리가 도입된다면, 자율적인 인생 계획의 형성 및 추구는 사실상 가능하지 않게 된다.</li><li>당위의 영역은 권리와 의무의 영역과 정확히 일치한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 급한 필요만으로 직원의 근무시간을 연장시킬 청구권이 곧 생기지는 않는다.</li><li><strong>비선택</strong> · 교재의 배려 가능한 사례 설정에서는 냉정함을 비판할 이유가 있다. 청구권 부재를 모든 당위의 부재로 바꿨다.</li><li><strong>선택</strong> · 타인의 필요가 언제나 자기 삶을 중단시킬 청구권을 만든다면 각자의 자율적 계획을 지키기 어렵다는 것이 교재의 근거다.</li><li><strong>비선택</strong> · 당위가 더 넓다. 배려할 이유가 있어도 상대가 강제할 권리와 그에 대응하는 의무까지 곧 생기지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③과 같은 이유 때문에 필요는 곧바로 의무를 지우지 못하며 그에 상응하는 권리를 생성하지 못한다. 그래서 ①과 ④는 틀렸다. 당위의 영역은 권리와 의무의 영역보다 넓다. 직원 B는 그렇게 인색하고 냉정하게 거래를 거절해서는 안 된다. 이는 길을 물어보는 낯선 사람에게 이유 없이 쌀쌀맞게 대하는 것이 그 사람의 권리를 침해하지는 않지만, 그렇게 해서는 안 되는 것과 마찬가지이다. 그래서 ②와 같이 '무방하다'는 표현은 틀렸다. 마찬가지 이치로 입법자에게 적용되는 모든 당위가 통제규범에 근거를 두는 것은 아니지만, 통제규범을 위반하지 않는 영역인 입법재량의 영역에서도 입법자는 자비롭고 현명하고 정의롭게 행위해야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_239"><h4>워크북 · 헌법논증이론_239</h4><p class="question-stem">가치에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>가치 논의의 출발점은 일인칭이다.</li><li>가치를 행위 이유로 언급할 때는 복수의 주체들 사이의 권리·의무 관계 및 그러한 관계로 표현되는 지위를 언급할 수밖에 없다.</li><li>추구하거나 보유할 만한 것으로 인정되거나 선호되는 선(good)을 추가로 향유하거나 가질 만하다는 상호주관적 선호가 공유되는 경우에 행위 이유로서의 힘을 갖는다.</li><li>가치는 그것을 보유하거나 추구할 만하다고 수용할 수 있는 토대를 가진 인적 범위 내에서 행위의 이유가 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자신 또는 확장된 우리의 복리를 묻는 일인칭 관점이 가치 논의의 출발점이다.</li><li><strong>선택</strong> · 건강이나 도구가 나에게 좋다고 말할 때 언제나 타인과의 권리·의무 관계를 언급해야 하는 것은 아니다. 규범의 특성을 옮겼다.</li><li><strong>비선택</strong> · 그 좋음을 더 누릴 이유로 수용하는 토대가 공유되는 범위에서 행위 이유의 힘을 갖는다는 설명이다.</li><li><strong>비선택</strong> · 인정 가능한 토대를 가진 범위가 중요하다. 어떤 가치든 모든 신조의 사람을 무조건 동일하게 구속하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 가치를 행위 이유로 언급할 때에는 권리·의무 관계 및 그러한 관계로 표현되는 지위를 언급할 필요가 원칙적으로 없다. 그런 관계와 지위를 논리적으로 암묵적으로라도 언급할 수밖에 없는 것은 규범이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_240"><h4>워크북 · 헌법논증이론_240</h4><p class="question-stem">다음 두 명제에 관한 진술로 틀린 것은?<br><br>r: A는 100만 원 채권의 채권자이다.<br>s: B는 100만 원 채무의 채무자이다.</p><ol class="choices"><li>r과 s로부터 'A는 B에 대하여 100만 원을 지급받을 권리가 있는 채권자이다'라는 결론이 도출되지는 않는다.</li><li>단지 r과 s만 주어졌다면, A가 B에 대한 채권자가 아니라 그 외 다른 사람에 대한 채권자일 가능성도 있다.</li><li>특정한 채권의 채권자와 채무자의 관계에 대한 진술은 속성(채권자임, 채무자임)에 관한 기초 진술이 있고 관계(~에 대하여 ~~ 채권자이다)를 나타내는 술어의 뜻이 주어져도 연역적으로 도출될 수 없다.</li><li>'A는 B에 대하여 100만 원을 지급받을 권리가 있는 채권자이다'라는 진술에 표현된 채권자와 채무자의 관계는 외적 관계이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · A와 B가 서로 그 채권·채무의 상대방인지 주어지지 않았다.</li><li><strong>비선택</strong> · A는 C에게 받을 돈이 있고 B는 D에게 갚을 돈이 있을 수 있다는 반례가 가능하다.</li><li><strong>비선택</strong> · 상대방 관계가 추가되어야 하므로 두 속성 진술과 술어 뜻만으로 특정 권리 관계를 도출할 수 없다.</li><li><strong>선택</strong> · 키 비교 같은 외적 관계가 아니라 상대방과의 내적 관계다. 질문이 틀린 진술을 묻으므로 ④를 고른다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 내적 관계이다. ①, ②, ③은 모두 내적 관계의 특성에서 나오는 것이다. 반면에 'A의 키가 170cm이다'라는 진술과 'B의 키가 180cm이다'라는 진술만 주어져도 'B는 A보다 키가 크다'는 관계에 대한 진술이 도출될 수 있다. 이는 도출되는 진술이 외적 관계에 대한 진술이기 때문이다. 규범 명제는 내적 관계를 내포하는 진술이다. 그러므로 규범은 복수의 존재를 전제로 하고 그 사이의 관계를 규율하는 이유가 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_241"><h4>워크북 · 헌법논증이론_241</h4><p class="question-stem">다음을 읽고 기본권 문제의 해결에서 규범 논거와 가치 논거의 관계를 올바르게 설명한 것을 고르시오.<br><br>가치 논증은 규범 논증을 통해 도출된 규범을 위반하지 않는 한도 내에서, 그리고 규범이 고려를 허용하는 한도에서 기본권 사안의 결론을 좌우할 수 있다. 사실 명제와 가치 명제의 양상이 다르듯이 가치 명제와 규범 명제의 양상이 다르기 때문에, 규범은 가치에 관한 고려만으로 도출될 수 없고 규범 명제를 전제하여 유관한 가치를 골라내고 유관한 방식으로 파악해야 한다.</p><ol class="choices"><li>가치 논거는 규범 논거에 우선한다.</li><li>규범 논거는 가치 논거에 우선한다.</li><li>가치 논거와 규범 논거는 동등하다.</li><li>규범 논거 혹은 가치 논거 어느 한쪽만 요구된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 방향이 반대다. 가치로 규범을 마음대로 뒤집는 것이 아니다.</li><li><strong>선택</strong> · 규범이 고려할 가치와 방식을 정한다는 점에서 규범 논거의 우선성이다.</li><li><strong>비선택</strong> · 동등한 점수끼리 더 큰 쪽을 고르는 구조라고 설명하지 않는다.</li><li><strong>비선택</strong> · 가치는 규범이 허용한 범위에서 결론에 기여할 수 있다. 둘 중 하나를 완전히 제거하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_242"><h4>워크북 · 헌법논증이론_242</h4><p class="question-stem">'가치를 누리는 주체가 복수(複數)라고 하더라도, 그 주체들의 관점을 모종의 방식으로 융합하여 가치를 조망하는 관점을 단수(單數)로 만들면 된다'는 발상에 비판적인 입장에 어울리는 진술로 적합하지 않은 것은?</p><ol class="choices"><li>A가 B의 구명조끼를 몰래 빼앗아 입을 경우에 이득을 보고 손해를 보는 A+B라는 존재는 한낱 관념적 존재일 뿐이므로, 이를 실재하는 존재처럼 다루어서는 안 된다.</li><li>가치를 조망하는 하나의 관점을 상정하기 위해서는 이미 은연중에 논증 없이 규범을 도입하게 된다.</li><li>어떤 행위를 하면 한 사람이 입는 불이익이 40이고, 두 사람이 얻는 이익이 50이라면, 10만큼의 순이익이 발생하므로 그 행위를 해야 한다.</li><li>가치 명제만으로는 규범 명제를 도출할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 각자의 손익을 느끼는 실재 단일 주체가 아닌 합계를 실체화하는 문제를 지적한다.</li><li><strong>비선택</strong> · 여럿을 하나의 의사결정 관점으로 통합할 권한과 기준이라는 규범 전제가 숨는다.</li><li><strong>선택</strong> · 50−40=10이라는 합계만으로 행위 의무를 정했다. 누가 어떤 희생을 요구할 권한이 있는지 빠졌으므로 비판 입장에 어울리지 않는다.</li><li><strong>비선택</strong> · 가치만으로 권리·의무가 도출되지 않으며 규범 전제가 필요하다는 결론이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 가치 명제만을 전제로 하여 규범 명제를 도출할 수 있다고 보는 입장에 어울리는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_243"><h4>워크북 · 헌법논증이론_243</h4><p class="question-stem">다음 중 입헌 민주주의 사회의 기본권 문제의 해결에서 규범 논거가 가치 논거에 우선하는 이유에 속하지 않는 것은?</p><ol class="choices"><li>구속력의 보편성에 상응하는 정당화 논거의 보편성이 요청된다.</li><li>복수의 주체를 일인칭으로 통합하기 위한 전제에 대한 논증이 요청된다.</li><li>기본권 논증의 공적 완결성이 요청된다.</li><li>기본권의 행사 내용이 명예로운 존재 양식과 행동 양식을 제공한다는 생각이 밑바탕이 되어야 기본권의 행사를 각별히 보호할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 모두를 구속할 기본권 질서에는 모두에게 정당화할 공적 이유가 필요하다.</li><li><strong>비선택</strong> · 공동체를 한 사람처럼 말하기 전에 구성원 사이의 결정권 관계를 정당화해야 한다.</li><li><strong>비선택</strong> · 특정 인생관·신조에 마지막 결론을 맡기지 않고 공적 이유로 정당화를 완결해야 한다.</li><li><strong>선택</strong> · 행사 내용의 미덕을 먼저 승인해야 권리를 보호한다는 가치 우선의 논거다. 교재는 무종교의 자유와 공존을 설명하는 데 생기는 문제를 비판한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 국가 완전주의자인 마이클 샌델(Michael Sandel)과 같은 논자의 주장으로, 가치 논거가 규범 논거에 선재하거나 우선한다고 보는 입장을 진술한 것이다. 그러나 이렇게 보게 되면 종교의 자유를 인정하기 위해서는 종교적 믿음은 명예로운 존재 양식과 행동 양식을 제공한다는 생각이 밑바탕이 되어야 하는데, 이는 무종교가 명예로운 존재 양식과 행동 양식을 제공하지 못한다는 생각을 함축한다. 논리를 일관할 경우, 이는 종교를 믿지 않을 자유가 종교의 자유라는 기본권의 내용에 포함되지 않는다는 결론으로 가게 되는데 이는 구속력의 보편성에 상응하는 정당화 논거의 보편성의 요청을 충족하지 못하는 것이다. 입헌 민주주의 사회에서는 미덕에 관한 믿음의 일치가 있어야만 기본권을 보장할 수 있다는 발상으로는 수범의무에 상응하는 정당화를 제공하지 못한다. ①, ②, ③ 이외에 불편부당성의 요청도 규범의 논거가 가치의 논거에 우선해야 하는 이유 중 하나이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_244"><h4>워크북 · 헌법논증이론_244</h4><p class="question-stem">입헌 민주주의 사회의 기본권 질서 설정에서 가치 논증이 하는 역할에 관한 진술로 옳은 것은?</p><ol class="choices"><li>사회의 다수가 사실적으로 공유하는 가치는 곧바로 헌법적 가치로 인정되어 논증에 투입될 수 있다.</li><li>합리적 인생 계획 어느 것에나 소용이 되는 것들임을 논증을 통해 보여줄 수 있는 일반적 가치는 법해석에서 규범을 구체화하는 역할을 할 수 있다.</li><li>헌법논증에서 역할을 할 수 있는 가치는 선택성이 뚜렷하게 두드러지는 가치이다.</li><li>기본권 질서 설정에서 가치에 관한 논의는 아무런 역할을 할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 다수의 실제 선호는 소수의 지위를 정당하게 제한할 공적 근거와 같지 않다.</li><li><strong>선택</strong> · 논증으로 비선택적인 공통 소용을 보여 주는 기본 가치는 규범에 저촉되지 않는 범위에서 구체화에 활용된다.</li><li><strong>비선택</strong> · 특정 신조·취향을 채택해야만 이유가 되는 선택적 가치의 강요가 문제다. 여기서는 비선택성이 중요하다.</li><li><strong>비선택</strong> · 규범의 우선성을 가치의 전면 배제로 바꿨다. 허용된 범위에서 합리적 가치 판단은 역할을 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②가 '논증적으로' 모두가 공유할 수 있는 가치를 이야기하는 것이므로 옳다. 자유, 자존감의 사회적 기반, 자연자원, 쾌적한 환경, 모든 목적에 소용이 되는 재화 등이 이에 해당한다. 종교인이건 비종교인이건, 음악가이건 요리사이건 모두 다른 사정이 동일하다면 이러한 것들을 더 보유하거나 누릴 일응의 이유가 있다는 진술은 참이 된다. 즉 이러한 가치들은 비선택적임을 논증할 수 있는 가치이다. 따라서 ③은 반대로 서술되어 있으므로 틀렸다. 또한 어떤 규범에 대해 가능한 두 해석이 다른 면에서는 동일한데 한쪽이 모든 이에게 비선택적으로 덜 소용이 되는 가치보다 더 소용이 되는 가치(이를테면 쾌적한 환경)를 보다 증진함이 명백하다면, 그쪽을 택하는 것은 법규범을 구체화하는 해석에 활용될 수 있는 합리적 논증에 속한다. 그러므로 ④는 틀렸다. ①은 '논증적으로 모두가 공유할 수 있는'을 '다수가 사실적으로 공유하는'으로 잘못 표현하여 틀렸다. ①과 같이 보면 특정한 문화생활은 가치 있고 그와 다른 문화생활은 무가치하다고 여기는 사람들이 다수이기만 하면 자신들의 문화생활을 우대하는 정책에 필요한 가치 논거를 헌법논증의 차원에서 확보할 수 있게 된다. 그러나 그런 식으로 보게 되면 헌법 제10조의 행복추구권과 헌법 제11조의 평등원칙이 결합하여 도출되는 국가 중립성 원칙을 심대하게 어기게 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_245"><h4>워크북 · 헌법논증이론_245</h4><p class="question-stem">동성동본금혼제에 관한 헌법재판소 결정(헌재 1997. 7. 16. 95헌가6등)의 설시 내용에 어긋나는 것은?</p><ol class="choices"><li>전통문화의 보존이라는 동성동본금혼제의 입법목적은 정당하다.</li><li>금혼의 범위를 동성동본인 혈족, 즉 남계혈족에만 한정하는 것은 헌법상 평등의 원칙에도 위반된다.</li><li>현대사회는 '자유와 평등'을 근본이념으로 하며 신분적 계급제도와 남존여비사상을 배척한 자유민주주의 사회라는 점을 전제하여 판단해야 한다.</li><li>헌법 제36조 제1항은 '개인의 존엄과 양성의 평등'의 바탕 위에서 혼인과 가족생활이 성립되고 유지되어야 함을 천명하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 교재가 인용한 결정 이유는 해당 목적이 더 이상 기본권을 제한할 사회질서·공공복리에 해당하지 않는다고 본다. 목적은 정당하다는 일반화는 어긋난다.</li><li><strong>비선택</strong> · 부계 혈족만 중심으로 혼인을 제한하는 성별 차별에 합리적 이유가 없다고 판단했다.</li><li><strong>비선택</strong> · 변화한 자유·평등의 헌법질서를 기준으로 전통 제도를 평가한다.</li><li><strong>비선택</strong> · 제36조 제1항의 개인의 존엄과 양성평등이 핵심 심사 기준이다. 최종 주문은 헌법불합치임을 함께 기억한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그 입법목적이 이제는 혼인에 관한 국민의 자유와 권리를 제한할 사회질서나 공공복리에 해당될 수 없다는 점에서 헌법 제37조 제2항에도 위반된다고 판단된다고 하였다. 특정 전통문화의 가치에 관한 논거는 개인의 존엄과 양성의 평등과 같은 규범 논거에 우선할 수 없음을 보여주는 대표적인 판례이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 09' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 09|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

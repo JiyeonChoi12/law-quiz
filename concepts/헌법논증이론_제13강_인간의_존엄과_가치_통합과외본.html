@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제13강 인간의 존엄과 가치 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 13</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제13강 인간의 존엄과 가치 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>똑똑하거나 쓸모 있어야 존엄한 사람일까</h1>
+<p>누군가 내 발을 밟고 있다. 나는 “제가 능력이 좋으니 발을 치워 주세요”라고 증명해야 할까? 아니다. <strong>내 몸에 대한 부당한 침범을 멈추라고 요구할 수 있는 사람</strong>이라는 것만으로 출발한다. 이 강의의 존엄은 칭찬받을 업적이나 높은 몸값이 아니라, 누구에게도 한낱 물건처럼 취급되지 않을 동등한 지위다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나</td>
+<td>인간 존엄의 근거와 자기결정·관계·취약성·사회적 생활 조건의 존중.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>유용성·능력·신분으로 사람의 기본적 권리 자격에 등급을 매기지 않기 위해서.</td>
+</tr>
+<tr>
+<td>전체 속 위치</td>
+<td>제12강의 의무론이 지키려는 ‘독립된 한 사람’의 지위를 구체화한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>의무론 → 인간 존엄의 사상적 기초 → 제14강의 헌법 규범으로서 존엄.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>존엄=사회적 가격, 자율=혼자 살기, 치매=존엄 상실이라고 잘못 이해한다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 347–366쪽. 형성평가 7개·워크북 9개, 총 16문항. 중요도는 학습 우선순위이며 실제 출제율·오답률은 제공되지 않았다. 교재의 사상적 논증과 법원의 실제 결론을 구별하고, 판례 사례와 가상 사례를 표시한다.</p>
+<h1>1. 인간을 권리의 주인으로 인정한다</h1>
+<h2 id="argument-13-01" data-concept-id="argument-13-01">1-1. 존엄은 국가가 주는 상장이 아니다 ★★★★★</h2>
+<p><strong>교재 348–349쪽 / 문단의 목적:</strong> 기본권의 출발점이 국가의 기분이나 입법자의 선물이 아님을 설명한다. 제2차 세계대전 이후 인권 질서는 모든 인간의 고유한 존엄과 동등한 권리를 국가권력의 기초로 삼았다. 세계인권선언 제6조는 어디서나 법 앞의 인격체로 인정받을 권리를 말한다. 헌법 제10조도 국가가 불가침의 기본적 인권을 <strong>확인하고 보장</strong>할 의무를 정한다. ‘없던 인간 가치를 국가가 만들어 준다’는 문장이 아니다. <a href="https://www.ohchr.org/en/UDHR/Documents/60UDHR/DECLARATION.pdf">세계인권선언 원문</a>.</p>
+<p>나이·성별·장애·민족·종교·정치적 견해·사회경제적 지위 때문에 사람으로서의 기본적 존중을 덜 받아도 되는 것이 아니다. 어떤 제도가 이를 인정하지 않는다고 존엄 자체가 사라지는 것도 아니다. 실제 법적 보장과 인간이 마땅히 갖는 지위를 구별해야 잘못된 제도를 비판할 수 있다.</p>
+<p><strong>존엄과 평등의 관계:</strong> 존엄은 인간 고유의 위상과 대체할 수 없는 중요성에, 평등은 사람들 사이의 동등한 지위에 초점을 둔다. 두 말이 사전적으로 같은 뜻은 아니지만 근대의 인간 존엄 사상은 만인의 평등과 결합했다. 인간의 존엄을 설명한다고 다른 생명에 대한 모든 의무가 없다고 결론 내리는 것도 아니다.</p>
+<p>종교·철학·문화마다 존엄을 지지하는 설명은 다를 수 있다. 그래도 사람이 부당한 침해를 받지 않을 주체라는 핵심에 합의할 수 있다. <strong>시험:</strong> 303번의 ‘입법자의 결단으로 창출’은 틀리다. <strong>키워드:</strong> 천부적 자격, 확인·승인·보장. <strong>한 줄:</strong> 국가가 인정해야만 사람이 되는 것이 아니라 사람이기에 국가도 존중해야 한다.</p>
+<h2 id="argument-13-02" data-concept-id="argument-13-02">1-2. 발을 치워 달라는 요구: 도덕적 권위의 발견 ★★★★★</h2>
+<p><strong>교재 349–351쪽 / 문단의 목적:</strong> 존엄을 손에 잡히는 두 사람의 관계로 바꾼다. A가 B의 발을 밟는다. B가 “제 발을 밟고 있어요. 치워 주세요”라고 말한다. 별다른 정당한 사유가 없다면 A는 발을 떼야 한다. 왜일까?</p>
+<table>
+<thead>
+<tr>
+<th>A가 발을 뗀 이유</th>
+<th>무엇을 인정했나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B가 직장 상사라 무서워서</td>
+<td>신분·권력. 아직 인간 존엄의 근거와 다름.</td>
+</tr>
+<tr>
+<td>B의 비명 때문에 내가 불편해서</td>
+<td>A 자신의 불쾌감. B의 요구권 인정과 같지 않음.</td>
+</tr>
+<tr>
+<td>B가 다치면 사회 생산성이 떨어져서</td>
+<td>B의 유용성. 유용하지 않으면 밟아도 되는 위험을 남김.</td>
+</tr>
+<tr>
+<td>사회의 고통 총량을 줄이기 위해서</td>
+<td>결과 가치의 계산. B의 독립된 요구 권위를 인정했는지는 불분명.</td>
+</tr>
+<tr>
+<td>B가 타당하게 침범 중지를 요구할 사람이라서</td>
+<td>B의 도덕적 권위와 그에 대응하는 나의 의무.</td>
+</tr>
+</tbody></table>
+<p><strong>도덕적 권위</strong>는 “내가 원하면 아무 명령이나 해도 된다”는 권력이 아니다. <strong>타당한 요구를 상대에게 제시하고 그에 맞게 행동할 의무를 물을 지위</strong>다. 내 요구가 옳다는 전제와 상대의 의무가 함께 들어 있다. 이유 없는 폭력의 중지를 요구하는 것과 내 취향을 타인에게 강요하는 것은 다르다.</p>
+<p>교재는 노예제의 부당함을 대비한다. 노예제 사회가 어떤 사람을 ‘사회적으로 죽은 존재’처럼 취급한다는 것은, 그 사람이 실제로 인간의 존엄을 잃었다는 말이 아니다. 노동력이나 소유주의 이익 때문에 몸을 보호하더라도 <strong>그 사람 자신의 타당한 요구에 응답할 지위</strong>를 부인하는 질서가 잘못되었다는 뜻이다. 역사적 모든 노예제의 권리 구조가 완전히 동일했다는 설명으로 읽지 말고, 독립적 권위 부정의 전형을 보자.</p>
+<p><mark class="yellow">내 요구가 타당하다면 상대가 누구든 그에게 요구할 수 있는 동등한 지위가 존엄의 핵심이다.</mark> <strong>시험:</strong> 098·099·304번. 098번 ④의 ‘발고’는 ‘밟고’의 원자료 오기이며 정답 판단에는 영향이 없다. <strong>한 줄:</strong> 발을 치워야 하는 이유는 내가 비싼 노동력이어서가 아니라 내 몸의 주체이기 때문이다.</p>
+<h2 id="argument-13-03" data-concept-id="argument-13-03">1-3. 칸트의 존엄: 사람의 가격과 다른 가치 ★★★★★</h2>
+<p><strong>교재 351–352쪽 / 문단의 목적:</strong> 도덕적 권위를 사회적 유용성과 분리한다. 물건은 다른 물건이나 돈으로 바꿀 수 있지만, 독립된 인격체인 한 사람은 단지 다른 사람을 더 투입하면 대체되는 비용 단위가 아니다. 칸트가 말하는 존엄은 타인의 목적에 얼마나 유용한지에 따라 오르내리는 가격과 다른 <strong>고유한 내적 가치</strong>다.</p>
+<p>교재는 홉스가 능력의 쓰임새와 타인의 평가에 따라 ‘사람의 가격’을 말한 대목을 비교한다. 이 비교의 목적은 임금·서비스 가격의 존재 자체를 부인하는 것이 아니라, 그러한 가격과 <strong>사람을 존중받을 주체로 대할 자격</strong>을 혼동하지 않는 데 있다. 높은 임금을 받는 사람에게 더 많은 기본적 존엄이 생기지 않는다.</p>
+<p>‘목적 그 자체로 대하라’에서 함정은 <strong>수단으로 전혀 이용하지 말라</strong>가 아니라 <strong>한낱 수단으로만 취급하지 말라</strong>는 것이다. 우리는 돈을 내고 운전·진료·수업 서비스를 받으며 서로 도움을 준다. 이때도 상대의 동의·권리·독립된 목적을 존중해야 한다. 동의 없는 착취처럼 사람의 요구 지위를 지워 버리는 것이 문제다. 자기 자신도 단순 소비품처럼 취급할 수 있다는 뜻은 아니다.</p>
+<p>존엄은 인간 삶이 좋다고 칭찬만 하는 가치가 아니다. 어린아이·노인·도움이 필요한 사람을 학대하지 말고 보호하라는 <strong>강한 의무론적 요구</strong>를 낳는다. 그러므로 이익 총합을 늘리기 위해 존엄을 팔거나 넘길 수 있다는 식으로 취급하지 않는다. <strong>시험:</strong> 305번. <strong>한 줄:</strong> 유용하지 않아도 존중받는 지위가 존엄이다.</p>
+<h1>2. 능력은 달라도 왜 존엄은 동등할까</h1>
+<h2 id="argument-13-04" data-concept-id="argument-13-04">2-1. 실천이성과 공적·사적 자치 ★★★★★</h2>
+<p><strong>교재 352–353쪽 / 문단의 목적:</strong> 인간의 자율성을 욕심대로 행동하는 능력과 구별한다. 실천이성은 함께 살아가는 사람들이 받아들일 수 있는 행동 규범을 생각하고, 그 규범에 맞게 자신의 목적과 행동을 세워 갈 능력이다. 보상을 보면 움직이는 단순 반응이나 힘센 사람에게 무조건 따르는 타율과 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>능력</th>
+<th>쉬운 질문</th>
+<th>교재의 뜻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>공적 자치</td>
+<td>우리에게 적용할 공정한 규칙을 함께 만들 수 있나?</td>
+<td>사회적 상호작용·협동의 규칙 형성에 참여하고 타인의 정당한 이해를 고려하며 준수하는 능력.</td>
+</tr>
+<tr>
+<td>사적 자치</td>
+<td>나는 어떤 삶을 살고 싶은가?</td>
+<td>좋은 삶의 관념과 인생 목표를 형성·추구하고 필요하면 수정하는 능력.</td>
+</tr>
+</tbody></table>
+<p>예를 들어 주민회의에서 공동주택의 공정한 생활 규칙을 논의하는 것은 공적 자치, 자신의 진로·신앙·생활 계획을 숙고하는 것은 사적 자치와 연결된다. 앞의 예가 ‘정부기관에서만 가능’한 것은 아니며, 뒤의 예도 ‘남에게 아무 영향이 없는 것만’이라는 뜻은 아니다. 이 강의의 철학적 사적 자치는 민법의 계약자유 설명보다 넓다.</p>
+<p>두 능력을 가진 존재로 인정하는 것에 더하여, 실제로 계발하고 행사할 여건도 중요하다. 굶주리거나 폭력에 시달려 선택할 여지가 전혀 없다면 형식적으로 ‘네가 선택해’라고 말하는 것으로 충분하지 않다. <strong>시험:</strong> 100·101·306번. <strong>한 줄:</strong> 자율은 내 삶을 꾸리는 능력과 우리 규칙을 함께 만드는 능력이다.</p>
+<h2 id="argument-13-05" data-concept-id="argument-13-05">2-2. 영역 속성: 원 중심에 있다고 더 인간인 것은 아니다 ★★★★★</h2>
+<p><strong>교재 354–355쪽 / 문단의 목적:</strong> “능력이 다른데 인간 가치도 다른 것 아닌가?”라는 반론을 처리한다. 기억력·판단력·공감 능력의 정도는 서로 다를 수 있다. 교재의 <strong>영역 속성 논변</strong>은 이런 차이를 부인하지 않으면서, 일정한 영역에 속한다는 자격과 그 안에서의 수량 차이를 구별한다.</p>
+<p>원을 그려 보자. 안의 점들은 중심과의 거리가 모두 다르다. 그러나 원 안에 속한다는 점에서는 모두 같다. 부산광역시 안에서도 중심부와 경계 가까운 곳은 위치가 다르지만 모두 부산에 속한다. <strong>얼마나 중심에 가까운가</strong>와 <strong>그 구역 안인가</strong>는 다른 질문이다. 교재의 지리 비유는 행정구역 소속을 설명하려는 것이므로 인접 도의 명칭은 암기 대상이 아니다.</p>
+<p>인간 능력의 실제 정도인 <strong>실수량 속성</strong>과, 임계 수준을 충족하는 <strong>영역 속성</strong>을 이처럼 나눈다. 영역 안에서 더 뛰어나다고 기본적 권리 자격을 더 많이 갖는 것이 아니다. 이것이 능력의 수량 차이에서 곧 존엄의 등급을 끌어내는 논법에 대한 첫 답변이다.</p>
+<p>다만 이 논변만으로 임계 수준의 능력을 지금 드러내지 못하는 사람의 문제까지 모두 해결했다고 하면 부족하다. 교재는 다음의 잠재력·생애 과정 논증으로 보완한다. <strong>범위에 속함이 동등한 권리의 충분한 근거라는 논변을, 범위 밖으로 판정한 사람은 무권리라는 배제 공식으로 바꾸지 않는다.</strong> <strong>시험:</strong> 097·307번. <strong>한 줄:</strong> 능력의 점수와 기본적 존중을 받을 자격은 같은 눈금이 아니다.</p>
+<h2 id="argument-13-06" data-concept-id="argument-13-06">2-3. 불투명성 존중: 존엄 점수를 받으려 마음속까지 공개해야 할까 ★★★★★</h2>
+<p><strong>교재 356쪽 / 문단의 목적:</strong> 왜 세밀한 능력 측정을 권리 자격의 기준으로 삼지 않는지 추가로 설명한다. 사람이 기본적 권리를 유지하려면 매일 감정·판단·가치관을 낱낱이 공개하여 점수를 받아야 한다고 상상하자. 기본적 인격의 보호막이 사라진다. 사람들은 채점자의 취향에 맞게 자기 마음을 길들이고, 자기 삶을 표준 모델로 삼아 다른 이들을 낮게 평가하려고 싸우게 된다.</p>
+<p><strong>불투명성 존중</strong>은 거짓말·범죄 은폐를 무조건 허용하는 원칙이 아니다. 기본적 권리 자격을 인정받기 위해 내면 전체를 투명하게 제출하고 서열화당하지 않을 존중이다. 특정 업무에 필요한 능력을 공정하게 평가하는 것과, 인간으로 대우할 등급을 매기는 것은 다르다.</p>
+<p>영역 속성의 판단은 행위자성이 발휘되는 외적 모습 등을 통해 합당한 공통 판단이 가능하다고 교재는 설명한다. 반면 실수량을 종합 측정하여 존엄을 차등 배분하면 평화로운 공존·공정한 협동을 가능하게 할 지위 자체를 무너뜨린다. 이것을 제11강의 <strong>수행적 모순</strong>과 연결한다. <strong>시험:</strong> 308번. <strong>한 줄:</strong> 권리의 주인이 되려면 채점자가 좋아하는 인격을 연기해야 하는 사회는 동등한 존엄의 사회가 아니다.</p>
+<h2 id="argument-13-07" data-concept-id="argument-13-07">2-4. 영아·코마·알츠하이머: 현재 발휘 능력이 존엄의 입장권은 아니다 ★★★★★</h2>
+<p><strong>교재 356–357쪽 / 문단의 목적:</strong> 능력 중심 논증이 배제로 흐르지 않도록 생애 전체를 본다. 갓난아이는 아직 많은 판단을 못 한다. 사고로 의식을 잃은 사람은 지금 선택을 표현하기 어렵다. 알츠하이머병으로 인지 기능이 쇠퇴한 사람도 있다. 그렇다고 존엄이 사라지는가? 교재의 답은 <strong>아니다</strong>다.</p>
+<p>사람의 능력은 서서히 발현되고, 사고·유전적 요인으로 발현에 장애가 생기기도 하며, 노령화로 쇠퇴한다. 이 과정은 인간의 생애에 공통으로 관련된다. 중요한 것은 인간적 능력을 <strong>지금 높은 성적으로 실현하고 있는지</strong>가 아니라 잠재력과 그 발현·장애·쇠퇴의 생애적 이해다. 이를 ‘앞으로 반드시 회복될 사람만 존엄하다’는 회복 예측 검사로 바꾸어서도 안 된다. 교재가 보호하려는 범위에는 능력을 다시 충분히 발휘하지 못하는 사람도 포함된다.</p>
+<p>“젊고 유능할 때는 존엄하지만 늙으면 박탈된다”면 젊은 때의 존중도 이미 조건부 상품 취급이다. 나중에 성능이 떨어지면 버릴 물건과 같은 지위를 부여했기 때문이다. 질병에 걸렸다는 사실을 곧 ‘인생의 마지막 단계’라는 의학적 판단으로 바꿀 수도 없다. 102번 ④는 생애 과정의 대비이지 알츠하이머병의 진행이나 예후를 진단하는 설명이 아니다.</p>
+<p><mark class="pink">능력이 감소하면 지원이 더 필요할 수 있지만 사람으로서의 존엄이 감소하는 것은 아니다.</mark> <strong>시험:</strong> 102번에서 현재 충분한 발휘를 결정 기준으로 삼는 ①이 부적합. <strong>한 줄:</strong> 존엄은 매 순간 능력시험에 합격해야 갱신되는 자격증이 아니다.</p>
+<h1>3. 자기결정과 좋은 관계는 함께 자란다</h1>
+<h2 id="argument-13-08" data-concept-id="argument-13-08">3-1. 선택 결과뿐 아니라 선택 과정이 중요한 이유 ★★★★☆</h2>
+<p><strong>교재 357–358쪽 / 문단의 목적:</strong> 자기결정의 가치를 결과의 효율성과 분리한다. 타인이 늘 가장 좋은 길을 대신 골라 주어도 그 삶이 전부 나의 삶이 되는 것은 아니다. 우리는 선택하면서 배우고, 틀린 선택을 돌아보고, 자신의 가치와 인생 계획을 수정한다. 선택 과정 자체가 삶에 의미를 주고 자기 능력을 행사하는 과정이다.</p>
+<p>자기결정 능력 존중은 어떤 선택이든 무조건 칭찬하거나 위험을 알리지 말라는 뜻이 아니다. 관련 정보를 제공하고 다른 사람의 권리를 고려하되 당사자를 판단할 주체로 대한다는 뜻이다. 도움이 필요하다고 의견을 무시하고 인생 전체를 대신 결정하는 것과, 이해·표현을 도와 선택을 가능하게 하는 것은 다르다.</p>
+<p><strong>시험:</strong> 309번의 삶의 서사와 독립된 개별 인격체라는 표현. <strong>키워드:</strong> 삶의 주인, 과정의 가치, 계획 수정. <strong>한 줄:</strong> 좋은 결과를 얻는 사람만이 아니라 자신의 삶을 선택하는 사람으로 존중한다.</p>
+<h2 id="argument-13-09" data-concept-id="argument-13-09">3-2. 관계성 존중: 도움을 받는다고 자율이 사라질까 ★★★★★</h2>
+<p><strong>교재 358–359쪽 / 문단의 목적:</strong> 자율적 인간을 아무에게도 기대지 않는 고립된 존재로 오해하지 않게 한다. 아기는 사람들과 지내며 언어를 배운다. 생각하고 판단하는 능력도 타인의 관점을 듣고 응답하며 자란다. 자율성은 완성된 상태로 태어나 나중에 관계 때문에 감소하기만 하는 것이 아니라, <strong>관계와 상호 의존 속에서 형성</strong>된다.</p>
+<p>친구의 조언을 듣고 진로를 더 잘 선택할 수 있다. 번역·의사소통 지원을 받아 자신의 의사를 더 분명히 표현할 수도 있다. 이런 도움은 자율성을 키울 수 있다. 반대로 겁을 주거나 정보를 독점해 상대가 떠나지 못하게 만드는 관계는 자율성을 줄인다. 따라서 ‘관계가 있느냐’만이 아니라 <strong>그 관계가 선택과 독립된 지위를 어떻게 변화시키는가</strong>를 보아야 한다.</p>
+<p><mark class="green">좋은 관계의 형성·유지 여건을 보장하는 것은 자기결정과 경쟁하는 일이 아니라 그것을 가능하게 하는 일이 될 수 있다.</mark> <strong>시험:</strong> 309번 ③의 ‘본질적 상충’이 함정이다. <strong>한 줄:</strong> 혼자 해야 자율인 것이 아니라 도움 속에서도 내가 주체로 남는 것이 중요하다.</p>
+<h2 id="argument-13-10" data-concept-id="argument-13-10">3-3. 존엄을 실제로 행사하게 하는 아홉 역량 묶음 ★★★★☆</h2>
+<p><strong>교재 359쪽 / 문단의 목적:</strong> 자율성의 말뿐인 인정과 실제 여건의 보장을 구별한다. 교재는 누스바움의 논의를 바탕으로 필수 역량을 다음처럼 예시한다. 원래 이론의 목록 전체를 그대로 옮겼다는 뜻이 아니라 <strong>이 교재가 제시한 아홉 묶음</strong>을 빠짐없이 보자.</p>
+<table>
+<thead>
+<tr>
+<th>역량</th>
+<th>쉬운 설명·생활 장면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 생명</td>
+<td>피할 수 있는 조기 사망 없이 삶을 영위할 여건.</td>
+</tr>
+<tr>
+<td>② 신체 건강</td>
+<td>적절한 영양·주거·건강 유지.</td>
+</tr>
+<tr>
+<td>③ 신체 온전성</td>
+<td>이동과 생식 여부의 결정, 신체적 침해로부터 안전, 자신의 몸에 관한 선택.</td>
+</tr>
+<tr>
+<td>④ 감각·상상·사유</td>
+<td>느끼고 상상하고 추론하며 이를 위해 교육받을 기회.</td>
+</tr>
+<tr>
+<td>⑤ 정서</td>
+<td>사랑·슬픔·감사·열망·정당한 분노를 경험하고 표현할 여건.</td>
+</tr>
+<tr>
+<td>⑥ 인생 계획</td>
+<td>어떻게 살지 생각하고 계획을 비판적으로 수정할 능력.</td>
+</tr>
+<tr>
+<td>⑦ 관계 맺음</td>
+<td>존중받는 사회적 관계를 만들고 유지하는 능력.</td>
+</tr>
+<tr>
+<td>⑧ 여가</td>
+<td>휴식하고 놀이·즐거움을 누릴 여건.</td>
+</tr>
+<tr>
+<td>⑨ 정치적·경제적 자율</td>
+<td>삶에 영향을 주는 결정에 참여, 재산 보유의 기회, 차별 없는 구직, 인신·재산의 법적 보호.</td>
+</tr>
+</tbody></table>
+<p>예를 들어 배움의 권리를 형식적으로 준 뒤 읽을 기회와 이동 수단을 전혀 보장하지 않으면 능력 행사가 막힐 수 있다. 역량은 현재 달성한 성과와 같지 않다. 여가를 누릴 여건과 반드시 어떤 여가를 즐기도록 강제하는 것도 다르다. ⑨의 영장 없는 수색·체포로부터의 자유라는 표현은 법적 보호의 취지를 말하며, 현행법의 합헌적인 영장주의 예외까지 없다는 주장이 아니다. <strong>한 줄:</strong> 존엄을 존중하려면 ‘할 수 있다’는 말과 실제로 선택할 여건 사이의 간격을 보아야 한다.</p>
+<h1>4. 몸을 가진 사람의 취약성을 보호한다</h1>
+<h2 id="argument-13-11" data-concept-id="argument-13-11">4-1. 취약성의 세 층: 몸·상황·부정의 ★★★★★</h2>
+<p><strong>교재 360–363쪽 / 문단의 목적:</strong> 인간을 추상적 사고 능력만이 아니라 아프고 다칠 수 있는 몸을 가진 존재로 본다. 사람의 주체성과 개별성은 살아 있는 몸의 체험에서 형성된다. 우리는 태어나고 변하고 쇠퇴하며 죽는다. 신체적 공격뿐 아니라 모욕·차별·심리적 공격에도 상처받는다. 인권 규범이 고문·착취·폭력·빈곤 등의 문제에 주목하는 이유다.</p>
+<table>
+<thead>
+<tr>
+<th>구별</th>
+<th>발생 근거</th>
+<th>교재 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>존재론적·본래적 취약성</td>
+<td>몸을 가진 인간이라는 공통 조건</td>
+<td>누구나 아프고 다칠 수 있으며 돌봄을 필요로 함.</td>
+</tr>
+<tr>
+<td>상황적 취약성</td>
+<td>특정 관계·장소·상황</td>
+<td>환자와 의료기관, 학생과 학교, 군인과 군대, 수용자와 교도소, 노동자와 고용주.</td>
+</tr>
+<tr>
+<td>사회구조적 부정의에 기인한 취약성</td>
+<td>편견·낙인·차별·억압·예속 등</td>
+<td>박해·제도적 배제 때문에 위험에 더 노출됨. 상황적 취약성의 하위 범주.</td>
+</tr>
+</tbody></table>
+<p>세 가지는 서로 절대 겹치지 않는 상자가 아니다. 한 사람에게 몸의 취약성, 수용된 상황, 차별적 제도가 동시에 작용할 수 있다. 그 원인을 나누어야 필요한 보호도 찾아낼 수 있다. <strong>시험:</strong> 103·311번. ‘생성–변화–쇠퇴–죽음’은 존재론적, ‘특정 상황의 맥락’은 상황적이라는 단서를 찾자. <strong>한 줄:</strong> 누구나 취약하지만 어떤 상황과 제도는 특정 사람을 더 취약하게 만든다.</p>
+<h2 id="argument-13-12" data-concept-id="argument-13-12">4-2. 유치장 화장실: 건강을 해치지 않아도 인격권을 침해한다 ★★★★★</h2>
+<p><strong>교재 361–362쪽 / 문단의 목적:</strong> 구금된 사람의 생활 조건이 존엄 문제임을 보여 준다. <strong>등장인물:</strong> 유치인들과 경찰. <strong>사건:</strong> 가림시설이 부족해 다른 유치인과 경찰에게 몸이 드러날 수 있고 소리·냄새가 퍼지는 화장실을 사용하도록 했다. <strong>갈등:</strong> 구금·관리의 필요 때문에 이런 수치를 감수해야 하는가? <strong>재판:</strong> 2000헌마546, 2001.7.19.</p>
+<p><strong>법원의 고민:</strong> 유치인은 다른 화장실을 자유롭게 고를 수 없다. 용변은 피할 수 없는 생리 현상이다. 시설과 관리 때문에 기본적 품위를 지키기 어렵다면 국가가 그 상황을 만들고 강제한 것이다. <strong>결론:</strong> 문제된 사용 강제는 헌법 제10조에서 나오는 인격권을 침해하여 위헌. <strong>반대 결론의 문제:</strong> ‘육체적 질병이 생기지 않았다’는 이유만으로 사람을 굴욕적인 환경에 계속 둘 수 있게 된다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=134482">결정 원문</a>.</p>
+<p><strong>문장별 쉬운 번역:</strong> ‘수인하기 어려운 정도’ → 단순 불편을 넘어 참으라고 요구하기 어려움. ‘비인도적·굴욕적’ → 사람의 기본적 품위를 훼손함. ‘건강 침해에 이르지 않더라도’ → 몸의 질병 증명만으로 존엄 침해를 판단하지 않음. ‘인격권 침해’ → 사람으로서 자기 모습과 품위를 보호받을 지위를 해침.</p>
+<p>유치가 끝났어도 반복 가능성과 헌법적 해명의 필요성 때문에 심판 이익이 인정된다는 절차적 논점도 있다. <strong>한 줄:</strong> 갇혀 있다는 이유로 사람의 수치심과 품위가 보호 대상에서 빠지지 않는다.</p>
+<h2 id="argument-13-13" data-concept-id="argument-13-13">4-3. 과잉 신체수색: 안전 목적이 모든 방법을 허용하지 않는다 ★★★★★</h2>
+<p><strong>교재 361쪽 각주 / 문단의 목적:</strong> 상황적 취약성 보호를 다른 구금 사례로 확장한다. <strong>등장인물:</strong> 선거법 위반 혐의로 체포된 여성 청구인들과 경찰. <strong>사건:</strong> 이미 초기 수색에서 위험물이 없음을 확인했고 변호인 접견도 관찰한 상황에서, 다시 신체를 노출시키고 앉았다 일어서기를 반복하게 했다. <strong>갈등:</strong> 유치장 안전을 위한 수색이라는 이유로 필요 이상의 노출을 강요할 수 있는가?</p>
+<p><strong>재판·고민:</strong> 2000헌마327, 2002.7.18. 수용자의 생명·신체 및 질서 보호를 위한 적정한 수색은 필요할 수 있다. 하지만 위험물 은닉 가능성이 매우 낮은 구체적 상황과 굴욕적 방법을 함께 봐야 한다. <strong>최종:</strong> 필요한 최소 범위를 벗어난 수색으로 인격권과 신체의 자유를 침해하여 위헌. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=134477">결정 원문</a>.</p>
+<p><strong>쉬운 번역:</strong> ‘권력적 사실행위’ → 문서로 명령서를 주지 않아도 우월한 공권력으로 사람 몸에 실제 강제한 행위. ‘최소한도 이탈’ → 목적을 위해 꼭 필요한 정도를 넘음. ‘인격권 및 신체의 자유’ → 몸을 강제로 다루는 문제와 사람의 품위를 해치는 문제가 함께 생김. 모든 수색 자체를 금지한 판례로 외우지 않는다. 반대로 안전이라는 단어만으로 수단의 필요성을 건너뛰어도 안 된다. <strong>한 줄:</strong> 통제를 받는 사람일수록 그 몸을 다루는 국가의 이유와 한계를 더 분명히 물어야 한다.</p>
+<h2 id="argument-13-14" data-concept-id="argument-13-14">4-4. 난민 A의 이야기: 발생한 피해와 발생 위험을 함께 본다 ★★★★☆</h2>
+<p><strong>교재 362–363쪽 / 문단의 목적:</strong> 취약성 분류를 하나의 생애에 겹쳐 적용한다. <strong>교재의 가상 인물 A</strong>가 난민 수용소에서 정신적 어려움을 겪는다. 병과 스트레스에 취약한 몸이라는 점은 존재론적 차원이다. 수용소에 머물며 이동·정보·지원에 제약을 받는 상황은 상황적 차원이다. 고국의 정치적 박해, 입국국의 차별적 제도나 낙인이 위험을 더했다면 사회구조적 부정의 차원도 있다.</p>
+<p>이 사례는 난민 모두에게 특정 질환이 있다는 일반화가 아니며, 실제 개인의 진단을 내리는 것도 아니다. <strong>어떤 원인이 어떤 추가 위험을 만드는가</strong>를 따지는 예다. A의 문제가 개인 건강만이라고 하면 제도적 박해를 놓치고, 제도 문제만 있다고 하면 당장 필요한 치료와 돌봄을 놓칠 수 있다.</p>
+<p>이미 현실화한 취약성에 대응하는 것과, 아직 피해가 나지는 않았지만 생길 경향·위험이 큰 취약성을 예방하는 것을 함께 해야 한다. 학대가 생긴 뒤 치료하는 일뿐 아니라 학대가 쉬운 감시 사각지대와 의존 구조를 개선하는 일도 존엄 보호다. <strong>한 줄:</strong> 보호는 상처가 생긴 뒤의 구조만이 아니라 부당한 위험의 예방까지 포함한다.</p>
+<h2 id="argument-13-15" data-concept-id="argument-13-15">4-5. 평균 건강이 좋아졌다는 계산만으로 충분할까 ★★★★☆</h2>
+<p><strong>워크북 310번 사례 연결 / 목적:</strong> ‘관계 속의 인간’이라는 말로 개인 몸의 경계를 지우지 못하게 한다. 몽룡의 몸을 해치면 길동과 춘향의 건강을 좋게 할 수 있다고 가정하자. 세 사람을 하나의 거대한 몸처럼 합산하여 ‘전반적인 건강이 개선됐다’고만 말하면 몽룡의 독립된 요구 지위를 놓친다.</p>
+<p>워크북 해설은 어떤 가상의 약품을 물에 섞으면 99%에게 질병 예방 효과가 있지만 1%는 사망하며, 각자 선택할 수 없게 한다는 극단적인 사고실험을 든다. 평균수명 수치가 좋아져도 그 사실만으로 강제 투여를 정당화하지 못한다는 뜻이다. <strong>실제 수돗물·예방접종·어떤 약품의 안전성에 관한 자료가 아니며, 현실의 공중보건 정책을 이 가정과 동일시하지 않는다.</strong> 실제 정책은 과학적 근거, 위험, 동의와 권리, 대안과 법적 기준을 별도로 검토한다.</p>
+<p>중요한 것은 여러 사람의 이익이 존재한다는 사실을 무시하는 게 아니라, 영향을 받는 <strong>각 사람에게도 정당화할 수 있는가</strong>다. <strong>시험:</strong> 310번 ②의 공동체·총건강이라는 말에 속지 않는다. <strong>한 줄:</strong> 관계를 존중한다는 말은 개인을 관계 전체의 소모품으로 만들라는 말이 아니다.</p>
+<h1>5. 존엄은 삶의 사회적 조건까지 요구한다</h1>
+<h2 id="argument-13-16" data-concept-id="argument-13-16">5-1. 사회적 존엄·인간다운 생활: 간섭하지 않는 것만으로 충분할까 ★★★★★</h2>
+<p><strong>교재 363–365쪽 / 문단의 목적:</strong> 자기결정과 취약성 보호를 경제·사회·문화적 생활 조건에 연결한다. “너는 자유롭다”고 말하면서 굶주림·배제·착취 때문에 실제 선택과 참여가 막혀 있다면 존중은 형식에 머무를 수 있다. 그래서 사회적 존엄은 스스로를 존중하고 동료 시민에게도 동등한 구성원으로 존중받을 수 있는 삶의 조건을 묻는다.</p>
+<p>1919년 바이마르헌법의 경제 질서 조항과 우리 헌법 제34조 제1항의 인간다운 생활을 할 권리는 이 문제의식을 보여 준다. 일자리와 소득활동의 기회, 교육·문화·사회 참여 조건은 동등한 시민 지위와 연결된다. 다만 직업이 없거나 도움을 받는 사람에게 존엄이 없다는 뜻은 정반대의 오해다. 누구도 그런 이유로 배제되지 않도록 조건을 보장하자는 이야기다.</p>
+<p><strong>원문 확인:</strong> 교재 364쪽은 경제적·사회적·문화적 권리와 관련하여 세계인권선언 ‘제21조’를 적지만, 해당 내용은 <strong>제22조</strong>이고, 존엄에 맞는 보수와 생활은 <strong>제23조 제3항</strong>에 있다. 제21조는 정치 참여에 관한 조항이다. 조문 번호는 이처럼 구별해서 읽는다. <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights/">유엔 공식 선언문</a>.</p>
+<p><strong>2016헌마448의 맥락:</strong> 생계급여 신청자가 자활사업 참가 조건과 그 유예 범위를 다툰 사건이다. 헌재는 인간다운 생활에 필요한 최소한의 물질적 급부를 요구할 구체적 권리가 상황에 따라 도출될 수 있음을 설명했다. 그러나 <strong>그 사건에서 청구인이 승소한 것은 아니다.</strong> 법률 조항 부분은 각하, 대학원생 등에게 조건 유예를 두지 않은 시행령 부분은 기본권 침해를 인정하지 않아 기각했다. 추상적 권리의 인정과 해당 청구의 인용을 구별해야 한다. <a href="https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=1002489&cbIdx=1195">헌법재판소 공식 사건 설명</a>.</p>
+<p><strong>판례 문장 번역:</strong> ‘최소한의 물질적 생활 유지’ → 인간다운 삶이 무너지지 않을 최소 기반. ‘상황에 따라 직접 도출’ → 모든 원하는 급부를 조건 없이 받을 수 있다는 말이 아님. ‘구체적 권리’ → 단순한 정책 목표에만 머물지 않을 수 있음. 급부의 범위와 방식에는 입법 형성·재정·사안별 심사 문제가 따른다.</p>
+<p><mark class="blue">제10조의 존엄·행복추구와 제11조의 평등, 제34조의 인간다운 생활이 이어진다.</mark> 법 앞의 평등도 사람들의 동등한 존엄에서 근거를 찾는다. 여기서 ‘동등한 대우’는 사정이 다른 사람을 기계적으로 동일하게 처리한다는 말이 아니라, 차이를 두려면 정당한 이유를 제시해야 한다는 뜻이다. <strong>한 줄:</strong> 존엄은 간섭을 멈추라는 요구인 동시에 동등하게 살아갈 기반을 보라는 요구다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>인간 존엄성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 人(사람 인) 間(사이 간) 尊(높을 존) 嚴(엄할 엄) 性(성품 성). 존은 높이 대함, 엄은 함부로 범하지 못함.. <strong>③ 합친 뜻:</strong> 사람을 함부로 물건처럼 취급하지 못할 고유한 지위.. <strong>④ 이름의 이유:</strong> 높은 신분이 아니라 모든 사람에게 침범할 수 없는 중요성을 인정한다..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인간이라는 이유로 동등한 기본적 존중과 권리의 자격을 가진다는 원리.. <strong>⑥ 쉬운 말:</strong> 능력·돈·나이에 관계없이 사람으로 존중받음.. <strong>⑦ 사례:</strong> 발을 밟힌 사람은 생산성을 증명하지 않아도 중지를 요구할 수 있음..</p>
+<p><strong>⑧ 시험:</strong> 303·305번 창출·유용성 함정.. <strong>⑨ 비교·기억법:</strong> 칭찬받을 업적·명성·시장 가격과 다름..</p>
+<h3>도덕적 권위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 道(길 도) 德(덕 덕) 的(과녁 적) 權(권세 권) 威(위엄 위). 도덕은 마땅한 길과 품성, 권위는 정당하게 요구할 힘.. <strong>③ 합친 뜻:</strong> 타당한 요구로 상대에게 응답 책임을 물을 지위.. <strong>④ 이름의 이유:</strong> 단순한 물리적 힘이나 사회적 지위와 다른 규범적 힘이기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 각 인간이 자신의 권리와 관련하여 정당한 요구를 제시하고 의무를 주장할 자격.. <strong>⑥ 쉬운 말:</strong> 내 몸을 부당하게 해치지 말라고 너에게 당당히 말할 자격.. <strong>⑦ 사례:</strong> 발을 치우는 이유가 상사의 명령이 아니라 B의 타당한 요구인 경우..</p>
+<p><strong>⑧ 시험:</strong> 098·099·304번 요구 자체와 결과 효용 분리.. <strong>⑨ 비교·기억법:</strong> 권력은 강제로 움직일 사실적 힘, 권위는 정당한 요구의 자격..</p>
+<h3>천부적·불가침</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 天(하늘 천) 賦(줄 부) 的(과녁 적) / 不(아닐 불) 可(옳을 가) 侵(침노할 침).. <strong>③ 합친 뜻:</strong> 사람이라는 이유로 갖춤 / 함부로 침범할 수 없음.. <strong>④ 이름의 이유:</strong> 입법자가 주지 않아도 인권의 근거가 있다는 뜻으로 사용..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본적 인권이 국가의 임의적 선물로 창출되는 것이 아니라는 사상을 나타낸다.. <strong>⑥ 쉬운 말:</strong> 국가가 허락하지 않아도 사람을 함부로 다룰 수 없는 것.. <strong>⑦ 사례:</strong> 노예제의 법적 부인이 실제 인간의 존엄 상실을 뜻하지 않음..</p>
+<p><strong>⑧ 시험:</strong> 303번 확인·보장과 창출 구별.. <strong>⑨ 비교·기억법:</strong> 천부적이라는 말이 반드시 특정 종교의 믿음을 전제하지는 않음..</p>
+<h3>실천이성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 實(열매 실) 踐(밟을 천) 理(다스릴 이) 性(성품 성). 실천은 실제 행동으로 옮김, 이성은 이유를 헤아리는 능력.. <strong>③ 합친 뜻:</strong> 어떻게 행동할지를 이유에 따라 생각하는 능력.. <strong>④ 이름의 이유:</strong> 세계를 아는 것만 아니라 행동을 규율하는 이성이므로 실천이성..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 보편적 행동 규범을 스스로 숙고하고 그에 맞게 목적·행동을 정하는 능력.. <strong>⑥ 쉬운 말:</strong> 남도 받아들일 수 있는 규칙인지 생각하고 그 규칙에 맞게 행동.. <strong>⑦ 사례:</strong> 함께 쓸 시설의 공정한 규칙을 생각하며 자신의 욕구를 조정..</p>
+<p><strong>⑧ 시험:</strong> 100번 자율성 능력.. <strong>⑨ 비교·기억법:</strong> 단순 반응·생존 능력·외부 명령에 대한 복종과 다름..</p>
+<h3>공적·사적 자치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공변될 공) 私(사사 사) 的(과녁 적) 自(스스로 자) 治(다스릴 치).. <strong>③ 합친 뜻:</strong> 공동의 일을 스스로 다스림 / 자기 삶을 스스로 이끎.. <strong>④ 이름의 이유:</strong> 자율성이 작동하는 공동 규칙과 개인 인생의 측면을 구별..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공적 자치는 협동 규칙의 형성·준수, 사적 자치는 좋은 삶의 관념·인생 계획의 형성·수정.. <strong>⑥ 쉬운 말:</strong> 우리 규칙을 함께 세우기와 나의 삶을 계획하기.. <strong>⑦ 사례:</strong> 주민의 공정한 공동 규칙 논의와 개인의 진로 계획..</p>
+<p><strong>⑧ 시험:</strong> 101=사적, 306=공적.. <strong>⑨ 비교·기억법:</strong> 이 강의의 사적 자치는 민법의 계약자유보다 넓은 철학적 개념..</p>
+<h3>영역 속성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 領(거느릴 영) 域(지경 역) 屬(무리 속) 性(성품 성). 영역은 일정 범위, 속성은 그것에 속하는 성질.. <strong>③ 합친 뜻:</strong> 정해진 범위에 속한다는 성질.. <strong>④ 이름의 이유:</strong> 원 안의 위치가 달라도 내부 소속은 같다는 비유에서 이름을 이해..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 능력의 임계 수준을 충족한 사람들의 동등한 권리 자격을 설명하는 논변의 개념.. <strong>⑥ 쉬운 말:</strong> 원 한가운데 있든 가장자리 가까이 있든 모두 원 안.. <strong>⑦ 사례:</strong> 부산의 서로 다른 위치도 부산이라는 구역 소속은 같음..</p>
+<p><strong>⑧ 시험:</strong> 097·307번 최소 임계·원 안의 점이라는 단서.. <strong>⑨ 비교·기억법:</strong> 영역 안에서 능력 점수가 높다고 더 존엄한 것은 아니며 배제 공식으로 사용하지 않음..</p>
+<h3>실수량 속성·임계 수준</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 實(열매 실) 數(셀 수) 量(헤아릴 량) / 臨(임할 임) 界(지경 계) 水(물 수) 準(법도 준).. <strong>③ 합친 뜻:</strong> 연속적인 수량의 정도 / 경계가 되는 기준 수준.. <strong>④ 이름의 이유:</strong> 실수량은 실수했다고 할 때의 실수가 아니라 수학적 양의 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 능력 정도의 차이와 영역에 속하는지의 경계를 구별하는 개념.. <strong>⑥ 쉬운 말:</strong> 서로 기억력이 다르다는 점과 권리 자격이 같다는 점은 함께 가능.. <strong>⑦ 사례:</strong> 원의 점마다 좌표는 달라도 내부라는 속성은 동등..</p>
+<p><strong>⑧ 시험:</strong> 307번 실수량과 영역 바꿔치기.. <strong>⑨ 비교·기억법:</strong> 특정 업무 능력 평가와 인간 기본권 자격 등급화는 다름..</p>
+<h3>불투명성 존중</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불) 透(통할 투) 明(밝을 명) 性(성품 성) 尊(높을 존) 重(무거울 중).. <strong>③ 합친 뜻:</strong> 모든 내면을 비추어 들여다보지 않는 존중.. <strong>④ 이름의 이유:</strong> 불투명은 숨기는 범죄가 아니라 인격의 보호막을 나타내는 비유..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본적 권리 자격을 위해 내면 전체를 노출·종합 서열 평가받도록 강요하지 않음.. <strong>⑥ 쉬운 말:</strong> 사람 대우를 받으려 마음속을 전부 보여 줄 의무는 없다.. <strong>⑦ 사례:</strong> 모범 인격 점수에 따라 기본권을 갱신하는 제도는 잘못..</p>
+<p><strong>⑧ 시험:</strong> 308번 내면 공개·순치된 인격이라는 단서.. <strong>⑨ 비교·기억법:</strong> 적법한 수사·구체적 직무 평가를 모두 금지하는 원칙은 아님..</p>
+<h3>잠재력·발현·쇠퇴</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 潛(잠길 잠) 在(있을 재) 力(힘 력) / 發(필 발) 現(나타날 현) / 衰(쇠할 쇠) 退(물러날 퇴).. <strong>③ 합친 뜻:</strong> 잠겨 있는 가능성 / 드러남 / 약해짐.. <strong>④ 이름의 이유:</strong> 눈앞의 성능과 생애적 인간 능력을 구별하는 이름..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 능력을 현재 성과만으로 보지 않고 발달·장애·노화의 인간 생애에 놓아 보는 개념.. <strong>⑥ 쉬운 말:</strong> 아직 못하거나 이제 잘 못해도 사람의 존엄은 같음.. <strong>⑦ 사례:</strong> 영아·코마 상태·알츠하이머병을 가진 사람의 존엄..</p>
+<p><strong>⑧ 시험:</strong> 102번 현재 충분히 발휘가 결정 기준이라는 보기 오답.. <strong>⑨ 비교·기억법:</strong> 반드시 회복할 가능성이 있는 사람만 존엄하다는 뜻 아님..</p>
+<h3>자기결정·관계성 존중</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 自(스스로 자) 己(몸 기) 決(결단할 결) 定(정할 정) / 關(관계할 관) 係(맬 계) 性(성품 성).. <strong>③ 합친 뜻:</strong> 내 삶을 선택함 / 선택 능력을 형성하는 관계를 존중함.. <strong>④ 이름의 이유:</strong> 선택의 주인과 그 능력이 자라는 관계를 함께 표현..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 개인의 인생 설계와 이를 형성·유지하는 상호 의존의 여건을 함께 보장하는 두 측면.. <strong>⑥ 쉬운 말:</strong> 도와주되 내 대신 인생을 모두 정해 버리지는 않기.. <strong>⑦ 사례:</strong> 친구와 대화하거나 표현 지원을 받아 선택 능력이 커짐..</p>
+<p><strong>⑧ 시험:</strong> 309번 의존과 자율의 본질적 상충은 오답.. <strong>⑨ 비교·기억법:</strong> 강압적 의존은 자율을 해치지만 의존 자체가 언제나 자율을 감소시키지는 않음..</p>
+<h3>역량</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 力(힘 역) 量(헤아릴 량). 힘을 발휘할 수 있는 정도라는 원뜻.. <strong>③ 합친 뜻:</strong> 어떤 삶과 행위를 실제로 선택·실현할 가능성.. <strong>④ 이름의 이유:</strong> 형식적 허용만 아니라 할 수 있는 힘과 여건을 묻는다..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 생명·건강·교육·관계·정치경제적 자율 등 인간다운 능력 행사의 실질적 여건을 보는 개념.. <strong>⑥ 쉬운 말:</strong> 갈 수 있다고 말만 하지 않고 실제 갈 길도 있는지 보기.. <strong>⑦ 사례:</strong> 배울 권리는 있지만 접근할 교육 여건이 없는 상황..</p>
+<p><strong>⑧ 시험:</strong> 교재의 아홉 묶음은 자기결정·관계 능력의 필수 조건 예시.. <strong>⑨ 비교·기억법:</strong> 기회·가능성인 역량과 실제 달성한 성과·기능은 구별..</p>
+<h3>취약성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 脆(무를 취) 弱(약할 약) 性(성품 성). 무르고 약해 손상되기 쉬움.. <strong>③ 합친 뜻:</strong> 몸과 관계가 손상·고통에 노출될 수 있는 성질.. <strong>④ 이름의 이유:</strong> 인간이 상처받을 수 있는 존재임을 나타낸다..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 존재론적 공통 조건, 상황적 관계, 구조적 부정의의 차원에서 보호 필요성을 살피는 개념.. <strong>⑥ 쉬운 말:</strong> 누구나 다칠 수 있지만 갇히거나 차별받으면 위험이 더 커질 수 있음.. <strong>⑦ 사례:</strong> 난민 A의 몸·수용 상황·박해가 겹침..</p>
+<p><strong>⑧ 시험:</strong> 103·311번 원인별 분류.. <strong>⑨ 비교·기억법:</strong> 특정 집단을 본질적으로 무능하다고 평가하는 말이 아님..</p>
+<h3>존재론적·상황적 취약성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 存(있을 존) 在(있을 재) 論(논할 론) / 狀(형상 상) 況(상황 황) 的(과녁 적).. <strong>③ 합친 뜻:</strong> 존재 자체의 조건 / 처한 사정의 조건.. <strong>④ 이름의 이유:</strong> 인간인 까닭인가 특정 상황 때문인가로 이름을 나눔..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 몸을 가진 인간 공통의 취약성과 특정 관계·환경에서 추가되는 취약성.. <strong>⑥ 쉬운 말:</strong> 아플 수 있음과 치료기관에 의존해 선택이 제한됨은 다른 차원.. <strong>⑦ 사례:</strong> 구금 상태에서 화장실을 자유롭게 바꿀 수 없음..</p>
+<p><strong>⑧ 시험:</strong> 311번 상황 맥락이라는 단서.. <strong>⑨ 비교·기억법:</strong> 한 사람에게 두 차원이 함께 나타날 수 있음..</p>
+<h3>사회구조적 부정의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 社(모일 사) 會(모일 회) 構(얽을 구) 造(지을 조) 不(아닐 부) 正(바를 정) 義(옳을 의).. <strong>③ 합친 뜻:</strong> 사회에 얽혀 굳어진 부당한 관계·제도.. <strong>④ 이름의 이유:</strong> 개인의 불운만이 아니라 사회가 만든 원인을 가리킨다..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 편견·낙인·차별·억압·예속 등으로 특정 사람의 취약성을 더하는 구조.. <strong>⑥ 쉬운 말:</strong> 누가 잘못 설계한 규칙 때문에 어떤 사람들만 더 다치는지 보기.. <strong>⑦ 사례:</strong> 정치적 박해로 난민이 되고 도착국의 차별까지 겪는 A..</p>
+<p><strong>⑧ 시험:</strong> 103번 상황적 취약성의 하위 범주.. <strong>⑨ 비교·기억법:</strong> 존재론적 취약성과 동일하지 않으며 동시에 작용할 수 있음..</p>
+<h3>인격권·신체의 자유</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 人(사람 인) 格(격식 격) 權(권세 권) / 身(몸 신) 體(몸 체) 自(스스로 자) 由(말미암을 유).. <strong>③ 합친 뜻:</strong> 인격 주체의 보호 권리 / 몸을 부당한 강제에서 지킬 자유.. <strong>④ 이름의 이유:</strong> 몸과 인격이 권리의 대상이자 주체의 기반이기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인간의 품위·인격적 가치와 신체에 대한 공권력 침해를 통제하는 권리.. <strong>⑥ 쉬운 말:</strong> 구금되어도 함부로 노출·모욕·과잉수색을 당해도 되는 사람이 아님.. <strong>⑦ 사례:</strong> 유치장 화장실 2000헌마546, 과잉수색 2000헌마327..</p>
+<p><strong>⑧ 시험:</strong> 건강 피해가 없더라도 인격권 침해가 가능.. <strong>⑨ 비교·기억법:</strong> 필요한 적정 수색과 필요 이상 굴욕적 수색은 구별..</p>
+<h3>사회적 존엄</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 社(모일 사) 會(모일 회) 的(과녁 적) 尊(높을 존) 嚴(엄할 엄).. <strong>③ 합친 뜻:</strong> 사회 속 동등한 구성원으로 존중받을 지위와 여건.. <strong>④ 이름의 이유:</strong> 사적 내면만 아니라 삶의 사회적 조건까지 확장하기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인간다운 생활·경제사회문화적 권리 등을 통해 실질적 자유와 참여 기반을 보장하려는 존엄의 측면.. <strong>⑥ 쉬운 말:</strong> 자유롭게 살라고만 하지 말고 배제·빈곤으로 선택이 막히는 조건도 보기.. <strong>⑦ 사례:</strong> 헌법 제34조의 인간다운 생활과 최소 물질적 기반..</p>
+<p><strong>⑧ 시험:</strong> 2016헌마448의 일반 법리와 실제 기각·각하를 구별.. <strong>⑨ 비교·기억법:</strong> 취업·소득이 있는 사람만 존엄하다는 뜻은 아님..</p>
+<h1>문제 연결 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제 번호</th>
+<th>중심 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>098</td>
+<td>발을 뗀 결과만 같으면 도덕적 권위를 인정했다고 착각.</td>
+</tr>
+<tr>
+<td>102</td>
+<td>현재 능력의 발휘를 존엄 자격의 결정 기준으로 삼음.</td>
+</tr>
+<tr>
+<td>307</td>
+<td>실수량의 차이와 영역 속성의 동등성을 혼동.</td>
+</tr>
+<tr>
+<td>308</td>
+<td>내면의 전면 평가를 당연한 권리 자격 심사라고 여김.</td>
+</tr>
+<tr>
+<td>309</td>
+<td>도움·의존은 언제나 자율성을 해친다고 단정.</td>
+</tr>
+</tbody></table>
+<p>부록은 <strong>16문항·64개 보기</strong>를 전부 분석한다. ‘권위의 인정’과 ‘효과로서의 발 떼기’를 구별하고, 취약성 세 범주의 상하·중첩 관계를 확인하자. 실제 오답률을 제공받지 않아 빈출 함정이라는 표현은 문항의 반복 논점과 학습상 혼동 가능성에 따른 것이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 병실의 요청:</strong> 환자에게 직원이 “당신이 유명 작가라 병원 평판을 위해 요청을 듣겠다”고 한다. 환자의 존엄을 가장 직접 존중한 근거인가? <strong>정답:</strong> 아니다. 유명하지 않아도 타당한 신체·생활상의 요구에 응답할 독립된 주체라는 근거가 필요하다. <strong>출제 의도:</strong> 좋은 대우의 결과와 존엄의 이유 분리.</p>
+<p><strong>응용 2 · 마음 공개 검사:</strong> 기본적 권리를 유지하려면 시민이 매주 생각·감정·가치관을 공개하여 국가가 정한 모범 인격 점수를 받아야 한다. 어떤 문제가 중심인가? <strong>정답:</strong> 불투명성 존중을 해치고 권리 자격을 내면의 차등 평가에 종속시킨다. <strong>출제 의도:</strong> 영역 속성과 실수량 평가의 차이.</p>
+<p><strong>응용 3 · 그림으로 선택:</strong> 말을 하기 어려운 사람이 그림판과 지원자의 도움으로 거주 장소에 관한 자신의 의사를 표현한다. 의존했으니 자율적 선택이 아닌가? <strong>정답:</strong> 아니다. 지원이 당사자의 이해·표현을 돕는지, 대신 강요하는지 봐야 한다. <strong>출제 의도:</strong> 관계적 자율성의 구체적 적용.</p>
+<p><strong>응용 4 · 시설의 재난 위험:</strong> 누구나 화재에 다칠 수 있지만 특정 시설의 거주자는 출입이 통제되어 대피가 어렵고, 차별적 예산 배제로 경보기까지 없다. 취약성을 나누라. <strong>정답:</strong> 몸이 다칠 수 있음은 존재론적, 출입 통제 상황은 상황적, 차별적 제도 배제는 구조적 부정의에 기인한 취약성이다. 서로 중첩된다. <strong>출제 의도:</strong> 세 범주를 사람 세 집단으로 나누지 않기.</p>
+<p><strong>응용 5 · 능력의 쇠퇴:</strong> 공동체가 “지금은 판단력이 좋아 존중하지만 나중에 쇠퇴하면 사람 대우를 철회하겠다”고 한다. 왜 현재의 존중도 문제인가? <strong>정답:</strong> 지금도 독립된 사람 자체가 아니라 성능을 조건으로 존중한 것이기 때문이다. 발현·장애·쇠퇴를 포함하는 인간 삶 전체에서 존엄을 보아야 한다. <strong>출제 의도:</strong> 현재 능력 발휘와 존엄의 토대 분리.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제13강</h1>
+<p><strong>TOP3:</strong> 도덕적 권위 / 영역 속성과 잠재력 / 자기결정·관계·취약성.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>존엄</td>
+<td>인간이라는 이유로 동등한 존중과 타당한 요구의 지위를 가짐.</td>
+</tr>
+<tr>
+<td>국가 역할</td>
+<td>인권을 창출해 선물하는 것이 아니라 확인·보장.</td>
+</tr>
+<tr>
+<td>발 사례</td>
+<td>신분·생산성·고통 합계 아닌 B 자신의 타당한 요구 권위.</td>
+</tr>
+<tr>
+<td>칸트</td>
+<td>목적 그 자체. 유용성에 따라 정해지는 가격과 다름.</td>
+</tr>
+<tr>
+<td>수단 금지</td>
+<td>협력 일반 금지 아님. 한낱 수단으로만 취급 금지.</td>
+</tr>
+<tr>
+<td>공적 자치</td>
+<td>공정한 협동 규칙의 형성에 참여하고 준수할 능력.</td>
+</tr>
+<tr>
+<td>사적 자치</td>
+<td>좋은 삶의 관념·인생 계획을 형성·추구·수정할 능력.</td>
+</tr>
+<tr>
+<td>영역·실수량</td>
+<td>구역 소속 자격 / 능력 정도의 수량. 후자가 존엄의 등급 아님.</td>
+</tr>
+<tr>
+<td>불투명성 존중</td>
+<td>권리 자격을 위해 내면 전부를 공개·서열화당하지 않음.</td>
+</tr>
+<tr>
+<td>잠재력·생애</td>
+<td>발현·장애·쇠퇴. 현재 능력 부족이 존엄 박탈 사유 아님.</td>
+</tr>
+<tr>
+<td>관계성</td>
+<td>상호 의존이 자율성을 형성·증진할 수도 있음.</td>
+</tr>
+<tr>
+<td>취약성 3층</td>
+<td>몸의 공통 조건 / 특정 상황 / 상황 중 구조적 부정의.</td>
+</tr>
+<tr>
+<td>보호 범위</td>
+<td>이미 생긴 피해에 대응 + 발생 위험 예방.</td>
+</tr>
+<tr>
+<td>두 유치장 사건</td>
+<td>화장실: 인격권 / 과잉수색: 인격권·신체의 자유 침해.</td>
+</tr>
+<tr>
+<td>사회적 존엄</td>
+<td>자유 행사의 생활 기반과 동료 시민의 동등한 존중.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 도움받는 사람도, 능력이 쇠퇴한 사람도, 유용성을 증명하지 못하는 사람도 동등한 존엄의 주체다.</p>
+<p><strong>사례를 풀 순서:</strong> 누구의 타당한 요구인가 → 유용성과 지위 구별 → 자율·관계 → 취약성 원인 → 존중·보호·생활 조건.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 발 사례에서 요구권과 결과 가치를 나누고, 영아·노인·지원받는 사람의 존엄을 설명할 수 있다. 🟡 <strong>복습 필요:</strong> 용어는 외웠지만 취약성의 중첩이나 의존과 자율의 관계가 헷갈린다. 🔴 <strong>이해 부족:</strong> 능력이 높은 사람이 더 존엄하거나, 도움받으면 자기결정이 사라진다고 생각한다. 현재 답안을 받지 않아 실제 이해도를 확정한 평가는 아니다. <strong>복습 TOP3:</strong> 도덕적 권위 / 불투명성 존중 / 관계성과 취약성.</p>
+<h1>문제 부록 · 16문항·64개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_097"><h4>형성평가 · 헌법논증이론_097</h4><p class="question-stem">인간 존엄의 토대가 되는 속성인 능력에서 차이가 있지만 최저한 임계 수준을 충족하는 개인들은 모두 마치 원 내부의 점들처럼, 인간을 규정하는 영역 속성을 똑같이 가지는 것으로 간주할 수 있다는 논변을 무엇이라고 하는가?</p><ol class="choices"><li>영역 속성 논변</li><li>실수량 속성 논변</li><li>취약성 존중 논변</li><li>관계성 존중 논변</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 임계 수준을 충족해 같은 영역에 속한다는 동등한 자격을 설명하는 영역 속성 논변이다.</li><li><strong>비선택</strong> · 능력의 정도를 수량으로 비교하는 속성이다. 지문은 그 차이에서 존엄의 차등을 도출하지 말자고 한다.</li><li><strong>비선택</strong> · 다치고 의존할 수 있는 몸의 보호와 관련된 별도 논점이다.</li><li><strong>비선택</strong> · 자율성의 형성과 유지에 중요한 관계의 성격을 존중하는 별도 논점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_098"><h4>형성평가 · 헌법논증이론_098</h4><p class="question-stem">A가 B의 발을 어떤 이유에선지 모르지만 밟고 있는 상황이다. 이 때 의심의 여지없이 A가 B의 도덕적 권위를 인정한다고 분명히 확인할 수 있는 경우는?</p><ol class="choices"><li>B가 ‘당신은 지금 세계 전체의 고통 총량을 늘리고 있다’고 이야기하자 A가 고통 총량을 줄이기 위해 발을 뗀다.</li><li>B가 ‘당신은 지금 사회 전체의 생산성을 불필요하게 하락시키고 있다’고 이야기하자 A가 사회 전체의 생산성을 염려하여 발을 뗀다.</li><li>B가 ‘당신이 내 발을 밟고 있다. 치워 달라’고 이야기하자 A는 B도 인정할 수 있는 발을 계속 밟고 있어야 할 정당화 사유가 없는 상태에서 B가 그러한 요구를 하였다는 것만으로 발을 치운다.</li><li>B가 ‘당신이 내 발을 발고 있다. 치워 달라’고 이야기하자 A는 B가 아무말도 하지 않은 것처럼 발을 계속 밟고 휘파람을 분다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 결과로 발을 떼었어도 사회의 고통 합계를 줄이려는 것만으로 B 자신의 요구 권위를 인정했는지는 확인되지 않는다.</li><li><strong>비선택</strong> · 생산성이라는 유용성을 위해 보호하는 것은 독립된 권위의 인정과 같지 않다.</li><li><strong>선택</strong> · B의 타당한 요구와 그에 대응하는 의무 자체를 인정하여 발을 치우므로 도덕적 권위를 명확히 존중한다.</li><li><strong>비선택</strong> · B의 요구를 없는 말처럼 무시하므로 권위를 존중하지 않는다. 발고는 밟고의 원자료 오기다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_099"><h4>형성평가 · 헌법논증이론_099</h4><p class="question-stem">A가 B의 발을 밟고 서 있다. B는 ‘발을 치워 달라’고 A에게 요구한다. 이 요구를 A가 들어줘야 하는 이유로 인간 존엄의 핵심에 가장 가까운 것은?</p><ol class="choices"><li>B는 A의 직장 상사이기 때문에 상사의 말에 복종해야 한다.</li><li>B의 고통 반응이 A의 마음을 불편하게 한다.</li><li>B의 발을 상하게 하면 이후 B의 생산성이 떨어질 것이므로 A가 B의 발을 밟고 서 있는 행위의 사회적 편익보다 비용이 더 크다.</li><li>B는 사람이라는 이유만으로 자신의 신체에 침범하는 사람에게 그 침범을 하지 말라고 요구할 수 있는 도덕적 권위를 가진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 직장 상사라는 신분이 아니라 사람이라는 지위가 근거다.</li><li><strong>비선택</strong> · A의 마음이 불편하지 않으면 계속 밟아도 된다는 결론을 막지 못한다.</li><li><strong>비선택</strong> · 사회적 생산성의 비용·편익은 B 자신의 독립된 요구 권위와 다른 이유다.</li><li><strong>선택</strong> · 인간이라는 이유로 부당한 신체 침범의 중지를 요구할 수 있는 도덕적 권위가 핵심이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_100"><h4>형성평가 · 헌법논증이론_100</h4><p class="question-stem">실천이성의 능력이란 여타의 이성적 존재자들이 모두 받아들일 수 있는 보편적 행동규범이 어떤 것일지 스스로 생각해서 그 규범을 수립하고, 그에 맞게 자신의 행동 목적을 설정하여 추구할 수 있는 이것이다. 그리고 이성적 행위자는 이것을 가진 존재자를 일컫는다. 이것은 무엇인가?</p><ol class="choices"><li>자율성 능력</li><li>타율성 능력</li><li>반응 능력</li><li>생존 능력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 보편적 행동 규범을 스스로 생각하고 자기 목적과 행동을 조정하는 자율성 능력이다.</li><li><strong>비선택</strong> · 외부 의지에 의해 움직이는 타율은 이 정의와 반대다.</li><li><strong>비선택</strong> · 자극에 반응하는 것만으로 규범을 숙고·수립하는 실천이성의 의미가 충족되지 않는다.</li><li><strong>비선택</strong> · 생존 가능성만을 묻는 개념이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_101"><h4>형성평가 · 헌법논증이론_101</h4><p class="question-stem">칸트의 이성적 자율성 능력은 두 가지 자율성 능력으로 구체화할 수 있다. 그 중 하나로서 각자 자신의 삶에서 무엇이 가치 있는지, 가치 있고 행복한 삶이 무엇인지에 대한 나름대로의 관념을 형성하고 이에 따라 나름의 인생목표를 설정하고 추구하며, 필요하다면 자신의 그 관념을 수정할 수 있는 능력을 무엇이라 하는가?</p><ol class="choices"><li>기본권 보유 능력</li><li>기본권 행사 능력</li><li>사적 자치 능력</li><li>공적 자치 능력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기본권을 가질 자격 일반과 인생 계획 형성 능력의 명칭을 구별한다.</li><li><strong>비선택</strong> · 권리의 행사 가능성 일반을 가리키며 지문의 정확한 명칭은 아니다.</li><li><strong>선택</strong> · 자신의 좋은 삶·인생 목표를 형성하고 수정하는 사적 자치 능력이다.</li><li><strong>비선택</strong> · 공동의 공정한 규칙 형성·준수에 참여하는 공적 자치 능력이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_102"><h4>형성평가 · 헌법논증이론_102</h4><p class="question-stem">알츠하이머 병에 걸려 인식능력이 심각하게 훼손된 노인 A가 있다. 이 A가 인간 존엄성을 갖는다는 결론의 근거로 적합하지 못한 것은?</p><ol class="choices"><li>인간 존엄성의 토대인 속성과 능력을 현재 실제로 충분히 실현하고 발휘하고 있다는 점이 존엄성을 갖기 위한 결정적인 기준이다.</li><li>인간 존엄성의 토대인 인간적 능력들이 서서히 펼쳐져 발현되는 과정, 사고나 유전적 요인으로 인해 발현에 장애가 생기는 과정, 노령화로 능력 발현이 쇠퇴해가는 과정은 인간 삶에 공통되게 발생할 수 있는 것이다.</li><li>젊고 유능한 동안에는 인간 존엄성에 기초한 대우를 받지만 정신적·신체적 능력이 일정 수준 이하로 쇠락하면 곧바로 그런 대우를 받을 자격이 박탈되는 존재는 이미 젊고 유능한 동안에도 존엄성이 없는 존재이다.</li><li>영아가 인간 존엄성의 토대인 속성과 능력을 향한 잠재력을 가지는 인간 삶의 시작 단계의 존재로서 인간 존엄성을 갖는 것과 마찬가지로, 인간 삶의 과정 중의 하나에 있는 끝 단계의 존재도 인간 존엄성을 갖는다고 보아야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 현재 충분히 발휘하는 능력을 존엄의 결정 기준으로 삼으면 인지 능력이 쇠퇴한 A의 존엄을 설명하지 못한다.</li><li><strong>비선택</strong> · 발현·장애·쇠퇴를 인간 생애 전체의 공통 과정으로 이해하는 근거다.</li><li><strong>비선택</strong> · 쇠퇴하면 박탈될 존중은 처음부터 성능에 조건을 붙인 존중이었다는 비판이다.</li><li><strong>비선택</strong> · 현재 능력 수준이 아니라 생애 과정의 인간이라는 점을 존중한다. 끝 단계라는 표현은 추상적 생애 대비이지 알츠하이머병 자체가 곧 임종 단계라는 의학적 설명은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_103"><h4>형성평가 · 헌법논증이론_103</h4><p class="question-stem">인간의 취약성 가운데 사회구조적 부정의에 기인한 취약성이 아니라 존재론적 취약성에 대한 설명인 것은?</p><ol class="choices"><li>상황에 기인하는 취약성의 하위 범주이다.</li><li>사회적 편견 및 낙인, 제도적/비제도적 차별, 사회적 불평등이나 정치적 억압 등 사회적 부정의로 인해 다른 사회집단들이나 개인들보다 특정 집단이나 개인들에게 발생하는 취약성이다.</li><li>사회구조적 부정의에 기인한 취약성은 실제로 발생하는 것일 수도 있고, 실제로 발생하지 않을지라도 언제라도 발생할 잠재적 경향을 가진 것일 수도 있다.</li><li>몸을 가진 육체적 존재로서의 인간은 생성-변화-쇠퇴-죽음의 경로를 밟는 존재라는 점에서 생겨나는 취약성이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 구조적 부정의에 기인한 취약성이 상황적 취약성의 하위 범주라는 설명이다.</li><li><strong>비선택</strong> · 편견·차별·억압이라는 사회구조적 부정의의 특징이다.</li><li><strong>비선택</strong> · 구조적 취약성도 현실화하거나 잠재적 위험으로 존재할 수 있다는 설명이다.</li><li><strong>선택</strong> · 몸을 가진 인간 공통의 생애 과정에서 생기는 존재론적 취약성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 존재론적 취약성에 대한 설명</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_303"><h4>워크북 · 헌법논증이론_303</h4><p class="question-stem">인간 존엄성에 관한 진술로 명백히 틀린 것은?</p><ol class="choices"><li>유엔 인권선언 제6조의 &quot;모든 인간은 세계 어디에서나 법 앞에서 권리주체(person)로서 승인받을 권리를 가진다&quot;는 규정은 인간 존엄성이 인류 사회가 제대로 작동하고 기능하기 위한 필수불가결한 기초라는 점을 나타낸다.</li><li>대한민국 헌법 제10조는 기본적 인권이 입법자의 결단의 산물, 즉 실정법 질서가 창출함으로써 비로소 성립하는 것임을 규정한다.</li><li>모든 인간은 오로지 인간이라는 이유만으로 절대적으로 존중받고 기본적 인권을 평등하게 누릴 천부적 자격이 있다는 것이다.</li><li>개별 국가와 국가들의 국제공동체는 모든 인간이 천부적으로 존엄하므로 기본적 권리를 가진다는 점을 확인·승인하고 보장할 의무를 지게 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법 앞의 주체로 승인받을 권리는 존엄의 기초적 지위를 나타낸다.</li><li><strong>선택</strong> · 국가는 불가침의 인권을 확인·보장한다. 입법자가 결단해야 비로소 인간적 자격이 생긴다는 뜻이 아니다.</li><li><strong>비선택</strong> · 나이·신분·능력 등에 의존하지 않는 천부적 자격의 설명이다.</li><li><strong>비선택</strong> · 국가와 국제공동체는 이미 인간이 가진 권리의 확인·보장 의무를 진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> &quot;국가는 개인이 가지는 불가침의 기본적 인권을 확인하고 보장할 의무가 있다&quot;는 규정은 기본적 인권이 헌법제정자 또는 입법자의 결단의 산물이 아니며 실정법 질서가 창출함으로써 비로소 성립하는 것도 아니라는 점을 보여준다. 입법자의 선택에 따라 없을 수도 있는 것이라면 불가침이라 할 수 없으며 인간의 권리라고 할 수도 없을 것이기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_304"><h4>워크북 · 헌법논증이론_304</h4><p class="question-stem">다음 중 인간 존엄성의 기초가 되는 도덕적 권위에 관한 진술로 틀린 것은?</p><ol class="choices"><li>누군가 부여하지 않았는데도 오로지 사람이라는 이유만으로 내가 내 발을 밟고 있는 상대방 '너'(상대방이 누구든 상관없이)에게 발을 치워달라고 당당하게 요구할 수 있는 도덕적 권위이다.</li><li>그 도덕적 권위를 존중하지 않으면 비난을 듣고 모종의 책임을 지게 된다.</li><li>그 도덕적 권위는, 그것을 인정하면 사회 구성원 전체 복리를 위해 유용하기 때문에만 인정되는 것이다.</li><li>그런 권위를 가진 '내'가 타당한 요구를 했다면, 상대방인 '너'는 그렇게 할 의무를 진다는 점도 전제되어야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 타당한 신체 침범 중지 요구를 인간이라는 이유로 제시할 지위다.</li><li><strong>비선택</strong> · 타당한 요구에 응답하지 않는 사람에게 비난과 책임을 물을 수 있다는 관계가 포함된다.</li><li><strong>선택</strong> · 유용성 때문에만 인정하면 유용성이 사라졌을 때 권위를 지키지 못한다. 도덕적 권위를 도구적 보호로 바꾼 오답이다.</li><li><strong>비선택</strong> · 타당한 요구권에는 상대방의 그에 맞는 의무가 대응한다. 아무 요구든 무조건 복종시킨다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 사회 구성원 전체 복리를 위해 유용하기 때문에만 도구적으로, 권리의 기초가 되는 권위를 인정받는 사람은 실상은 '사회적으로 죽은 존재', 즉 노예와 마찬가지이다. 노예도 신체로 함부로 훼손당하지 않을 실정법적 권리를 가질 수는 있지만, 이는 노예의 신체를 함부로 훼손하면 그로 인해 사회에 유용한 노동력이 상실되기 때문에만 인정되는 것이다. 노예는 다른 사람의 복리와 상관없이 독자적으로 자신의 신체라는 이유만으로 그 신체에 대한 침해를 방어할 요구를 할 수 있는 도덕적 권위를 인정받지 못하는 존재이다. 그리고 노예제는 인간 존엄성에 위반되는 패러다임적 사례이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_305"><h4>워크북 · 헌법논증이론_305</h4><p class="question-stem">칸트는 인간 개개인은 다른 개인들로 결코 대체될 수 없는 '고유한 가치'를 가지며, 그 자체가 목적인 존재라고 하였다. 그리고 스스로가 목적인 존재들의 가치, 상대방에게 또는 사회적으로 유용한 존재인지에 대한 평가에 따라 결정되지 않는 인간의 내적 가치를 이것이라 명명하였다. 이것은 무엇인가?</p><ol class="choices"><li>신분</li><li>존엄성</li><li>계급</li><li>민족 정체성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 존엄은 신분 고하에 따라 배분하는 것이 아니다.</li><li><strong>선택</strong> · 교환 가격·사회적 유용성과 다른 고유한 내적 가치가 존엄성이다.</li><li><strong>비선택</strong> · 계급이 높을수록 사람으로서 더 존엄하다는 견해가 아니다.</li><li><strong>비선택</strong> · 특정 민족에 속해야 생기는 가치가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_306"><h4>워크북 · 헌법논증이론_306</h4><p class="question-stem">칸트의 이성적 자율성 능력은 두 가지 자율성 능력으로 구체화할 수 있다. 일생 전반에 걸쳐 사회적 상호작용을 맺으면서 사회적 협동 과정에 참여하는 사회적 존재로서 사회적 상호작용 및 협동 과정을 규제하는 규칙들과 자기 삶에 중대한 영향을 미칠 규칙들의 수립에 관여할 능력을 무엇이라고 하는가?</p><ol class="choices"><li>기본권 보유 능력</li><li>기본권 행사 능력</li><li>사적 자치 능력</li><li>공적 자치 능력</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기본권 보유 자격 일반이 아니라 규칙 형성에 참여하는 능력을 묻는다.</li><li><strong>비선택</strong> · 기본권 행사 능력 일반과 구별한다.</li><li><strong>비선택</strong> · 자기 인생 목표·좋은 삶의 관념을 형성·수정하는 능력이다.</li><li><strong>선택</strong> · 공동 규칙의 수립·협동·준수에 참여하는 공적 자치 능력이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_307"><h4>워크북 · 헌법논증이론_307</h4><p class="question-stem">______에 들어갈 가장 적합한 말은?<br><br>인간 존엄과 근원적 평등의 토대는 모든 인간이 가진다고 여겨지는 능력들, 가령 이성과 지성, 도덕적 주체성 등에서 찾지만 이 능력들은 개인마다 상이하므로 사람들은 동등한 존엄 가치를 가지는 것이 아니라 차등적인 가치를 가지는 것이 아니냐는 견해가 있다. 이에 대한 반론 중 하나로 지적 능력, 도덕적 능력, 자율성 능력 등에서 개인마다 차이가 분명 있다는 점을 인정하면서도 인간의 공통된 능력들의 최저한 임계수준을 충족하는 개인들은 모두 마치 원 내부의 점들처럼, 인간을 규정하는 ______을 똑같이 가지는 것으로 간주할 수 있다는 논변이 제시될 수 있다.</p><ol class="choices"><li>털 없는 두 발 달린 포유류 속성</li><li>실수량 속성</li><li>영역 속성</li><li>스칼라 속성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 외형 묘사는 교재의 동등한 도덕적 자격을 설명하는 논변의 이름이 아니다.</li><li><strong>비선택</strong> · 지문이 인정하면서도 존엄의 차등과 분리하는 능력 정도의 수량 속성이다.</li><li><strong>선택</strong> · 원 안의 점들이 위치는 달라도 안에 속한다는 자격은 같은 영역 속성이다.</li><li><strong>비선택</strong> · 정도의 크기를 비교하는 스칼라 표현은 영역에 속함이라는 동등한 자격과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_308"><h4>워크북 · 헌법논증이론_308</h4><p class="question-stem">인간 존엄성을 구체적인 속성의 상이한 정도에 따라 차등적으로 인정하는 것은, (    )에 어긋난다. 그렇게 구체적인 속성을 세부적으로 측정하고 종합 평가를 내리기 위해서는 각 구성원의 내면을 철저히 들여다보아야 하는데, 이는 문명 사회에서 필수적인 보호막을 완전히 제거할 뿐만 아니라 순치된 인격을 강제하는 결과를 낳을 것이다. 빈칸에 들어갈 가장 정확한 개념은?</p><ol class="choices"><li>불투명성 존중</li><li>자격점수</li><li>사회적 신용</li><li>예의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 권리 자격을 유지하려 내면 전체를 드러내어 서열 평가받게 하지 말라는 불투명성 존중이다.</li><li><strong>비선택</strong> · 지문이 비판하는 평가 도구이지 보호 원칙이 아니다.</li><li><strong>비선택</strong> · 경제적 신용 평가나 사회적 평판 일반을 묻는 것이 아니다.</li><li><strong>비선택</strong> · 일상적 예절보다 더 근본적인 동등한 권리 자격의 보호 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_309"><h4>워크북 · 헌법논증이론_309</h4><p class="question-stem">다음 중 인간 존엄성 존중의 두 가지 측면에 관한 진술로 틀린 것은?</p><ol class="choices"><li>자기결정능력의 존중이란 스스로가 삶의 주인이 되어 삶의 서사를 써나가고 고유한 색깔로 채워나갈 능력에 대한 존중이다.</li><li>자신이 믿는 가치들에 입각해서 좋은 것과 나쁜 것을 가려내고 좋은 것을 추구하는 데 관심을 두는 독립된 개별적 인격체로서의 능력을 자율성의 능력이라고 할 수 있다.</li><li>자율성의 능력은 타인에의 의존 및 타인과의 관계 맺음과 본질적인 상충 관계에 있다.</li><li>자율성의 유지와 증진에 필수적인 좋은 관계를 창출하고 유지하는 능력도 인간 존엄성의 보장에 필수적이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 삶의 주인이 되어 선택·학습·계획을 하는 능력의 존중이다.</li><li><strong>비선택</strong> · 독립된 인격체가 자기 가치에 따라 삶을 꾸리는 능력의 설명이다.</li><li><strong>선택</strong> · 자율성은 타인과 관계 맺고 의존하면서 형성·증진될 수 있다. 본질적으로 상충한다는 단정이 틀리다.</li><li><strong>비선택</strong> · 좋은 관계를 만들고 유지하는 여건과 능력도 존엄 보장의 일부다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자율성 능력 또는 역량의 발생과 형성 과정에 주목하면, 자율성은 타인과 관계를 맺으면서 타인에 의존함으로써 발생하고 형성된다는 것을 알 수 있다. 이를테면 친구는 서로 의존하고 관계 맺지만 그렇다고 해서 우정이 본질적으로 자율성과 상충관계에 있는 것은 아니다. 오히려 우정은 자기 삶의 서사를 써나가는 방식이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_310"><h4>워크북 · 헌법논증이론_310</h4><p class="question-stem">다음 중 몸을 가진 존재로서의 인간 취약성 존중에 관한 진술로 틀린 것은?</p><ol class="choices"><li>인간의 주체성과 개별성은 살아 있는 몸이 체험하는 것들에서 출발하고 형성된다.</li><li>인간은 공동체 관련적인 존재이므로, 몽룡이의 육체를 손상하는 부수효과를 수반하지만 길동과 춘향이의 육체를 건강하게 만들 수 있는 조치를 실시하는 것은 전반적인 몸 건강을 증진한 것으로서 그 취약성을 존중한 것이다.</li><li>빈곤, 차별, 강제노역과 착취, 고문, 강간, 폭행, 집단학살 등을 방지하고 이로부터 안전을 보장하겠다는 인권 사상은 바로 인간의 이런 취약성을 중심에 두고 있다.</li><li>인간이 생성-변화-쇠퇴-죽음의 경로를 밟으며 여러 위험과 고통에 취약성을 갖는 존재라는 점에 주목하는 존중이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 살아 있는 몸의 체험을 주체성·개별성의 토대로 본다는 설명이다.</li><li><strong>선택</strong> · 각 사람의 몸과 독립된 지위를 전체 건강 합계로 지워 버린다. 한 사람의 부당한 손상을 타인의 이익만으로 정당화하지 못한다.</li><li><strong>비선택</strong> · 폭력·착취·차별 등의 위험으로부터 보호하는 인권의 이유와 연결된다.</li><li><strong>비선택</strong> · 육체적 존재의 변화·쇠퇴·고통이라는 취약성에 주목한다. 원자료 해설의 물·약품 사례는 가상의 사고실험이며 실제 공중보건 정책의 효과·안전성 설명이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②와 같은 진술은 각자가 경계를 가진 몸에 자리하는 개별적인 독립적 인격체라는 점을 무시하는 것이다. 예를 들어 수돗물에 타서 음용하도록 하면 99퍼센트의 국민들에게 부작용 없이 어떤 심각한 질병을 예방케 하지만 1퍼센트의 국민은 부작용으로 사망케 하는 약품이 있다고 해보자. 그 약품을 수돗물에 탔을 때 평균 수명이 0.6개월 늘어난다 할지라도, 이런 약품을 각자가 선택해서 복용하도록 하지 않고 수돗물에 일률적으로 타는 것은 그 1퍼센트의 국민의 몸을 가진 존재로서 취약성을 존중하지 않은 것이다. 전반적인 몸 건강 증진을 이야기하는 것은 몸에 대한 근본적인 도덕적 권위가 없다고 보는 것이며, 그래서 그들을 오로지 도구적 권리만 가지는 사회적으로 죽은 존재로 보는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_311"><h4>워크북 · 헌법논증이론_311</h4><p class="question-stem">인간 취약성 가운데 존재론적 취약성이 아니라 상황적 취약성에 대한 설명인 것은?</p><ol class="choices"><li>인간이면 보편적으로 가지는 인간 본래의 취약성이다.</li><li>사람들의 상호의존성의 뿌리가 되는 취약성이다.</li><li>이 취약성으로부터의 안전을 확보하기 위해 기본적인 인간 존엄성 보호 요청이 등장하였다.</li><li>개인들 또는 집단이 처한 상황적 맥락에서 기인한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 인간이면 보편적으로 가진다는 것은 존재론적 취약성이다.</li><li><strong>비선택</strong> · 공통된 몸의 취약성 때문에 서로 의존한다는 존재론적 설명이다.</li><li><strong>비선택</strong> · 기본적인 안전·존엄 보호의 출발점을 나타낸다.</li><li><strong>선택</strong> · 특정 관계나 상황의 맥락 때문에 생기는 상황적 취약성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 상황적 취약성에 대한 설명이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 13' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 13|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

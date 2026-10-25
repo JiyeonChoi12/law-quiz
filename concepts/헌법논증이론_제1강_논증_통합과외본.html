@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제1강 논증 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 01</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제1강 논증 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>이 강의는 ‘맞는 말처럼 들림’과 ‘정말 근거가 있음’을 가르는 수업이다</h1>
+<p>친구가 “내 말 믿어. 다들 그렇게 말해”라고 한다. 여러 사람이 동의하면 그 말은 정말 참이 될까? 법원이나 헌법재판소가 같은 말을 오래 반복했다면, 더는 이유를 물을 수 없을까? 제1강은 <strong>누가 얼마나 자신 있게 말했는지가 아니라, 지금 묻는 질문에 맞는 근거가 있는지</strong>를 확인하는 방법을 가르친다.</p>
+<table>
+<thead>
+<tr>
+<th>먼저 물을 것</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 배우나</td>
+<td>주장과 근거 사이의 연결이 제대로 된 것인지 검사한다.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>‘때문에’라는 말이나 권위 있는 직함만으로 엉뚱한 이유가 진짜 이유처럼 보이기 때문이다.</td>
+</tr>
+<tr>
+<td>과목에서의 자리</td>
+<td>헌법의 결론을 외우기 전에, 그 결론을 뒷받침하는 방법을 배우는 입구다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>헌법의 기초에서 배운 기본권 심사를 논증의 눈으로 다시 본다. 다음 강에서는 자료와 보장책을 어떻게 결합하는지 배운다.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>나쁜 근거로 우연히 맞힌 답과 제대로 증명한 답을 구별하지 못한다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 제1강 1–18쪽. 제공 자료의 관련 문제는 형성평가 8개·워크북 14개, 총 22개다. 제공 JSON에는 출제 연도나 실제 오답률이 없어 이를 임의로 만들지 않았다. 별표는 제공 문제의 반복과 뒤 강의 이해에 필요한 정도를 함께 고려한 학습 우선순위다.</p>
+<p><strong>읽는 기준:</strong> 이 과목은 판례를 소개하는 동시에 판례의 논증을 비판한다. ‘재판소가 실제 내린 결론’, ‘교재 저자의 비판’, ‘이해를 위한 가상 사례’를 서로 구분한다. 노랑은 암기, 초록은 이유, 분홍은 함정, 파랑은 연결이다.</p>
+<h1>1. 논증의 목적과 성공 조건</h1>
+<h2 id="argument-01-01" data-concept-id="argument-01-01">1-1. 논증과 설득: 참을 밝히기와 믿음을 바꾸기 ★★★★★</h2>
+<p><strong>교재 2쪽 / 문단의 목적:</strong> 헌법논증도 일반적인 논증의 요건을 피할 수 없다는 출발점을 세운다. 헌법이라는 거창한 말을 붙인다고 근거 없는 주장이 정당해지지 않는다.</p>
+<p>민지는 “창밖에 비가 와”라고 하고, 준호는 “증거가 뭐야?”라고 묻는다. 민지가 창밖과 젖은 우산을 보여 주며 실제 비가 오는지를 밝히면 논증이다. 반대로 비가 오지 않는데도 준호가 그 말을 믿게 만드는 데 성공했다면 설득에는 성공했지만, 논증에는 성공하지 못했다.</p>
+<p><mark class="yellow">논증은 논거를 결합하여 명제의 참·거짓을 밝히려는 언어 활동이고, 목표는 진리의 발견 또는 확립이다.</mark> 설득은 상대방도 자신의 믿음을 받아들이도록 하는 언어 활동이며, 목표는 믿음의 일치다. 둘 다 말로 이루어지지만 성공을 판정하는 기준이 다르다.</p>
+<p><strong>시험:</strong> ‘상대방이 내 믿음을 받아들인다’는 표현을 논증의 정의에 끼워 넣으면 바꿔치기다. <strong>키워드:</strong> 참·거짓 / 믿음의 일치. <strong>한 줄:</strong> 남이 믿었다는 사실만으로 내 말이 참이 되지는 않는다.</p>
+<h2 id="argument-01-02" data-concept-id="argument-01-02">1-2. 다섯 요건: 질문·근거·결합·반론·대안 ★★★★★</h2>
+<p><strong>교재 3쪽 / 문단의 목적:</strong> 논증을 막연한 말솜씨가 아니라 검사 가능한 활동으로 만든다.</p>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>정확한 정리</th>
+<th>쉽게 묻기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>주제를 식별하고 일관되게 고정</td>
+<td>지금 무엇을 증명하려고 하지?</td>
+</tr>
+<tr>
+<td>2</td>
+<td>주제에 적합한 참인 논거를 확보</td>
+<td>사실이면서 이 질문에 도움이 되는가?</td>
+</tr>
+<tr>
+<td>3</td>
+<td>논거를 적합한 방식으로 결합</td>
+<td>그 이유들로 정말 이 결론이 나오나?</td>
+</tr>
+<tr>
+<td>4</td>
+<td>일응 그럴 법한 이의를 성공적으로 처리</td>
+<td>그럴듯한 반박에 제대로 답했나?</td>
+</tr>
+<tr>
+<td>5</td>
+<td>대안보다 주장 명제가 참일 개연성이 높음을 제시</td>
+<td>다른 설명보다 왜 이것이 나은가?</td>
+</tr>
+</tbody></table>
+<p>예를 들어 급식실 음식 때문에 배탈이 났다고 주장하려면, 먼저 ‘누가 음식을 만들었나’가 아니라 ‘그 음식이 배탈 원인인가’를 고정한다. 섭취·증상·검사 자료를 모으고, 그것들이 원인 판단과 연결되는 이유를 설명하며, 다른 음식이나 질환 때문이라는 반론도 다뤄야 한다. 친구들이 다 동의한다는 말은 이 다섯 단계를 대신하지 못한다.</p>
+<p><strong>시험:</strong> 모든 논거 하나하나가 반드시 결정적이어야 하는 것은 아니다. 약한 근거들이 적절히 결합되어 의미 있는 지지를 제공할 수 있다. <strong>한 줄:</strong> 질문부터 대안 비교까지가 논증의 한 세트다.</p>
+<h2 id="argument-01-03" data-concept-id="argument-01-03">1-3. 성공은 영원한 진리 보증서가 아니다 ★★★★☆</h2>
+<p><strong>교재 3쪽 각주 2 / 문단의 목적:</strong> 인간의 지식이 수정될 수 있다는 점과 오늘의 논증을 성실하게 해야 한다는 점을 함께 설명한다.</p>
+<p>최선의 장비로 반복 실험을 하여 결론을 세운 과학자가 있다고 하자. 수십 년 뒤 더 정밀한 실험으로 결론이 수정되었다고 해서, 과거의 논증이 그 당시에도 아무 자격이 없었다는 뜻은 아니다. 교재에서 성공은 <mark class="yellow">현재의 논증대화에서 타당성을 승인받을 자격을 얻는 것</mark>이다. 누구도 곧바로 진리를 들여다볼 수 없으므로 이유를 제시하고 비판을 견디는 과정이 필요하다.</p>
+<p><mark class="pink">‘나중에 바뀔 수 있다’는 말은 ‘지금 아무렇게나 주장해도 된다’는 뜻이 아니다.</mark> 당시에도 알려진 반론을 무시한 논증은 이 설명으로 구제되지 않는다. <strong>시험:</strong> 성공=영원불변은 틀림. <strong>한 줄:</strong> 수정 가능성과 현재의 정당화는 양립한다.</p>
+<h2 id="argument-01-04" data-concept-id="argument-01-04">1-4. 강한 주장과 요건: 센 목소리가 아니라 더 많은 조건 ★★★★☆</h2>
+<p><strong>교재 3쪽 각주 3·4 / 문단의 목적:</strong> 일상어와 논증이론의 전문어를 구별한다. ‘민지는 학생이다’보다 ‘민지는 학생이고 전교 회장이다’는 주장이 강하다. 뒤의 문장은 두 사실이 모두 성립해야 참이 되기 때문이다. 회장이라는 부분이 틀리면 전체가 거짓이다.</p>
+<p>교재의 아인슈타인 사례도 같다. 남성이라는 주장에 어느 시대를 살았다는 조건까지 보태면 더 강한 주장이 된다. 여기서 강함은 더 믿음직함이나 더 쉬운 입증을 뜻하지 않는다. <strong>요건</strong>은 결론이 참이 되거나 효과가 발생하기 위해 갖추어야 하는 전제다. 결론·효과 자체와 혼동하지 않는다.</p>
+<p><strong>시험:</strong> 강한 주장이 보통 더 입증하기 쉽다는 보기가 함정이다. <strong>키워드:</strong> 참이 될 조건 / 전제와 결과. <strong>한 줄:</strong> 더 많이 주장하면 더 많이 뒷받침해야 한다.</p>
+<h1>2. 질문을 정확히 찾고 끝까지 유지하기</h1>
+<h2 id="argument-01-05" data-concept-id="argument-01-05">2-1. 주제의 식별과 주제화 ★★★★★</h2>
+<p><strong>교재 4쪽 / 문단의 목적:</strong> 논증의 시작은 근거 수집보다 질문의 확정이라는 점을 설명한다. 주제는 논증대화에서 다루는 쟁점이고, 식별은 어떤 차원의 어떤 질문인지 가려내는 일이다. 숨은 질문을 논의의 대상으로 꺼내는 활동은 <strong>주제화</strong>다.</p>
+<p>돈을 빌려주고 못 받은 사건에서는 ‘돈을 갚아야 하는가’라는 질문이 비교적 분명하다. 복잡한 거래에서는 계약의 무효나 당사자 지위 같은 쟁점이 배경에 숨어 있을 수 있다. 당사자가 이를 제기하거나 판사가 석명권을 통해 분명히 하도록 할 수 있다. 그렇다고 아무 쟁점이나 들고오면 되는 것은 아니다.</p>
+<p><strong>교재 사례:</strong> 해고무효확인이라는 민사사건에서 중앙노동위원회의 재심판정에 대한 행정소송의 제척기간을 그대로 끌어오면, 서로 다른 소송의 질문을 섞는다. ‘해고가 무효인가’와 ‘행정기관의 재심판정을 취소할 것인가’는 같지 않다. 이는 해당 기간 규칙이 이 민사소송에 그대로 적용된다는 전제가 없다는 지적이다.</p>
+<p><strong>원자료 주의:</strong> 형성평가 003은 질문에서 ‘주제화’를 묻지만 ④가 ‘주제’로 되어 있다. 원본 정답 ④는 보존하되, 정확한 답의 용어는 <strong>주제화</strong>라고 기억한다. <strong>한 줄:</strong> 숨어 있는 질문을 꺼내는 행동과 꺼낸 질문 자체는 다르다.</p>
+<h2 id="argument-01-06" data-concept-id="argument-01-06">2-2. 영하 4도와 짜증: 같은 자료도 질문에 따라 달라진다 ★★★★★</h2>
+<p><strong>교재 5–6쪽 / 사례의 목적:</strong> 논거의 적합성은 자료에 붙어 있는 고정된 속성이 아니라 주제와의 관계라는 점을 보여 준다.</p>
+<p><strong>등장인물 → 사건:</strong> A가 기온을 묻자 B가 영하 4도라고 답한다. A는 “추워서 짜증 나!”라고 말한다. <strong>갈등:</strong> B는 A의 기분을 달래겠다며 “그럼 영상 10도야”라고 바꾼다. <strong>분석:</strong> A는 기온에 반론을 제기한 것이 아니라 자신의 감정을 표현했다. B가 감정을 이유로 기온을 바꾸면 애초에 기온을 묻고 답한 활동을 무너뜨린다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>온도계의 영하 4도 표시</th>
+<th>추우면 A가 짜증 낸다는 사실</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>실제 기온은?</td>
+<td>정상 작동 등의 전제 아래 적합</td>
+<td>기온을 바꾸는 근거로 부적합</td>
+</tr>
+<tr>
+<td>A의 심리 상태는?</td>
+<td>추위가 원인인지 판단할 자료</td>
+<td>감정 예측에 적합할 수 있음</td>
+</tr>
+</tbody></table>
+<p><mark class="green">기분이 나쁘다는 사실은 진짜일 수 있어도, 그 사실이 실제 온도의 수치를 바꾸지는 않는다.</mark> <strong>시험:</strong> 자료의 참과 주제 적합성을 별도로 검사한다. <strong>한 줄:</strong> 사실인 말도 질문을 잘못 만나면 엉뚱한 근거다.</p>
+<h2 id="argument-01-07" data-concept-id="argument-01-07">2-3. 주제의 고정: 질문을 찾았다고 끝이 아니다 ★★★★★</h2>
+<p><strong>교재 6쪽 / 문단의 목적:</strong> 논증 도중 질문이 바뀌는 오류를 잡는다. ‘급식비 인상이 꼭 필요한가’를 논하다가 ‘다른 학교보다는 싸다’는 말만 하면 필요성에 답한 것이 아닐 수 있다. 가격의 비교와 인상의 필요성은 별도 질문이다.</p>
+<p>주제를 처음 정확하게 식별해도 저절로 유지되지는 않는다. 교재가 법률가의 사례를 든 이유는 전문 지식이 많아도 주제 이동을 못 알아차릴 수 있기 때문이다. <strong>시험:</strong> 식별하면 언제나 자동으로 고정된다는 주장은 틀리다. <strong>한 줄:</strong> 논증의 중간에도 첫 질문으로 돌아와 확인한다.</p>
+<h2 id="argument-01-08" data-concept-id="argument-01-08">2-4. 문예진흥기금 사건: 실제 결정과 교재의 비판을 나누기 ★★★★★</h2>
+<p><strong>교재 6–9쪽 / 판례:</strong> 헌재 2003.12.18. 2002헌가2. <strong>등장인물:</strong> 문화시설 이용자, 모금 관계자, 입법자, 재판관들. <strong>사건:</strong> 공연장 등 이용자에게 문화예술 진흥을 위한 기금을 관람료와 별도로 부담시키는 제도에서 모금 관련 사항을 대통령령에 맡긴 법률조항이 문제되었다.</p>
+<p><strong>재판의 질문:</strong> 국회가 스스로 정해야 할 범위를 제대로 정하지 않고 행정부에 넓게 맡겼는가? 모금 제도 자체도 국민의 권리를 부당하게 제한하는가? <strong>실제 최종 결정의 이유:</strong> 문제된 위임조항은 포괄위임입법금지원칙에 위반되어 위헌으로 판단되었다. <strong>별도 위헌의견:</strong> 네 재판관은 특별부담금 제도 자체의 헌법적 한계 일탈도 지적했다. <strong>교재가 집중하는 부분:</strong> 합헌의견이 피해최소성에 관해 내놓은 이유의 적합성이다.</p>
+<p><strong>의견을 쉬운 말로 번역:</strong> ‘관람객이 문예진흥에 더 특별한 부담을 질 합리적 이유가 없다’는 말은 “오히려 문화생활에 참여하는 사람에게 왜 추가 부담을 씌우지?”라는 질문이다. 반면 ‘실제 부담률이 2–9%에 불과하다’는 말은 “훨씬 심한 부담보다 가볍다”는 취지다. 저자는 두 번째 말이 덜 제한적인 대안의 존재를 답하지 못한다고 비판한다.</p>
+<p><mark class="pink">교재의 논증 비판을 ‘재판소 전체가 피해최소성 위반으로 결정했다’고 바꾸면 안 된다.</mark> <strong>다른 결론이면 생기는 문제:</strong> 더 가혹한 조치를 상상할 수 있다는 이유만으로 제한이 정당해지면, 기본권 심사가 거의 항상 국가 편으로 끝나 버린다. <strong>한 줄:</strong> 결정의 공식 근거와 개별 의견에 대한 저자의 평가는 별개다.</p>
+<h2 id="argument-01-09" data-concept-id="argument-01-09">2-5. 피해최소성의 사실적 측면과 규범적 측면 ★★★★★</h2>
+<p><strong>교재 7–9쪽 / 문단의 목적:</strong> 필요성 심사의 질문을 정확히 고정한다. 헌법 제37조 제2항은 공익 목적이면 어떤 제한도 허용하는 조항이 아니다. 필요한 경우에 한정하여 법률로 제한하도록 하고 본질적 내용의 침해도 금지한다. 권력을 쓰기 전에 ‘더 덜 제한하면서 목적을 이룰 방법은 없는가’를 묻게 하는 취지다.</p>
+<p>교재의 <strong>사실적 심사</strong>는 같은 공익을 이루면서 덜 제한하는 대안을 비교한다. 문예진흥 재원을 소득에 따른 일반 과세로 마련하는 방안이 예다. <strong>규범적 심사</strong>는 공익을 해치지 않은 사람을 해친 사람처럼 묶어 부담시키는 것이 정당한지 묻는다. 문화활동에 자발적으로 기여하는 관람객에게 특별한 추가 부담을 지우는 이유가 있는지가 예다. 이 두 측면의 구체화는 교재의 설명 방식이다.</p>
+<p><strong>세 가지 가상 반례:</strong> 특정 지역에만 추가 세금을 걷고 “더 높은 세율도 가능했다”고 말하기, 여당 비판을 처벌하면서 “야당 비판까지 막지는 않았다”고 말하기, 징역 3년을 정하고 “10년도 가능했다”고 말하기는 모두 덜 제한적인 대안을 묻는 질문에 답하지 않는다. 통금 시간을 더 길게 할 수도 있었다거나 집·관 안에 더 세게 가둘 수도 있었다는 비교도 같다. 이것이 일정 범위에서 강제를 더 연장할 수 있다는 설명의 뜻이다.</p>
+<p><strong>용어 주의:</strong> 교재는 ‘침해’에 이미 정당화되지 않은 권리 위반이라는 평가가 들어 있다고 보아, 직접 인용 외에는 ‘피해최소성’을 사용한다. 다른 교재·판례의 ‘침해최소성’ 표현을 무조건 오기라고 보지는 않는다. <strong>시험:</strong> 125·131의 ‘더 심하게 할 수도 있었다’가 함정. <strong>한 줄:</strong> 더 나쁜 것보다 낫다는 말은 꼭 필요한 조치라는 증명이 아니다.</p>
+<h1>3. 참인 자료를 적합한 근거로 바꾸는 연결 전제</h1>
+<h2 id="argument-01-10" data-concept-id="argument-01-10">3-1. 거짓 근거와 우연히 참인 결론 ★★★★☆</h2>
+<p><strong>교재 10쪽 / 문단의 목적:</strong> 결론의 참과 그 결론을 얻은 논증의 성공을 분리한다. 수학 문제를 찍어 맞혀도 풀이를 증명한 것은 아니다. 마찬가지로 거짓 근거에서 출발한 결론이 우연히 참일 수는 있으나, 그 근거가 결론의 참을 보증하지는 못한다.</p>
+<p>논거가 반박되어 거짓임이 드러났다면 두 길이 있다. 결론을 수정하거나, 그 잘못된 논거를 빼도 나머지 근거가 결론을 지지한다는 점을 적극적으로 보여 준다. <mark class="pink">‘근거 하나가 틀렸으니 결론도 무조건 거짓’과 ‘결론이 맞으니 모든 근거도 옳다’는 둘 다 성급하다.</mark> <strong>시험:</strong> 124의 ‘참일 경우가 아예 없다’를 경계한다. <strong>한 줄:</strong> 정답과 올바른 풀이를 따로 채점한다.</p>
+<h2 id="argument-01-11" data-concept-id="argument-01-11">3-2. ‘왜냐하면’과 복사기 실험: 이유 모양에 속지 않기 ★★★★☆</h2>
+<p><strong>교재 10–12쪽 / 문단의 목적:</strong> 문장의 겉모양과 논거의 실질을 구분한다. 교재의 인물 A는 자신만 오류를 범하지 않는다고 하면서, 신체의 한계를 초월했고 모든 것을 혼자 알아냈으며 역사적 경험칙도 자신에게는 적용되지 않는다고 말한다. 하지만 ‘나는 특별하다’는 말의 근거로 같은 주장을 반복하면 순환이다. 인간은 신체적 한계를 갖고 타인의 지식에도 의존하므로 자기 확신만으로 오류 가능성을 없앨 수 없다.</p>
+<p>교재는 1978년 복사기 양보 요청 실험도 소개한다. 이유 없이 요청하는 경우, 급하다는 이유를 대는 경우, 복사하고 싶다는 공허한 이유를 붙이는 경우를 비교해 사람들이 이유의 적합성보다 이유가 붙은 모양에 반응할 수 있음을 보여 준다. <strong>여기서는 교재가 제시한 연구의 요지만 사용하며, 실험 조건별 비율을 임의로 일반화하지 않는다.</strong></p>
+<p><strong>시험:</strong> ‘이므로’, ‘그 근거로’, ‘첫째·둘째’라는 표현이 있다고 적합한 논거가 되는 것은 아니다. <strong>키워드:</strong> 실질 / 순환 / 피상적 형식. <strong>한 줄:</strong> 이유처럼 생겼는지 말고 이유가 되는지를 본다.</p>
+<h2 id="argument-01-12" data-concept-id="argument-01-12">3-3. 돈을 갚았다는 증거와 정직한 인생 이야기 ★★★★★</h2>
+<p><strong>교재 13쪽 / 가상 재판:</strong> A가 B에게 100만 원을 1년 기한으로 빌려주었다. 만기가 지나 A가 청구하자 B는 빌린 사실은 인정하면서 이미 갚았다고 한다. 판사가 “갚았다는 자료가 있나요?”라고 묻자 B는 가족과 친구들의 정직성 칭찬 진술서만 낸다.</p>
+<p><strong>법원의 고민:</strong> B가 평소 착하다는 평가와 이 돈을 갚았다는 사실은 연결되는가? 교재는 영수증·계좌이체 기록·변제 당시 동석자의 증언처럼 구체적 변제를 뒷받침하는 자료와 일반적 인품 자료를 구별한다. <strong>사례의 결론:</strong> 인품 진술서만으로는 B가 변제의 입증책임을 다한 것이 아니다. 다른 적합한 증거가 없다면 교재의 설정에서는 A가 승소한다. 이는 실제 판례가 아니라 논거 적합성을 설명하는 가상 소송이다.</p>
+<p><strong>왜 그렇게 판단하나:</strong> ‘평소 정직하다고 칭찬받는 사람은 개별 채무도 갚았다’는 연결이 타당하지 않기 때문이다. 반대로 인정하면 인품 칭찬만 모아 빚에서 벗어나는 길이 열린다. A가 그 진술서의 서명까지 위조되었다고 반드시 입증할 필요는 없다. 진짜 작성된 문서여도 주제 적합성에서 막힐 수 있다.</p>
+<p><strong>한 문장씩 번역:</strong> 자료의 진실성=“실제로 그런 칭찬을 했다.” 주제 적합성=“그 칭찬으로 이 돈을 갚았다는 걸 알 수 있나?” 신빙성=“이 진술을 얼마나 믿을 수 있나?” <mark class="green">문서가 진짜라는 것과 그 문서가 이 쟁점을 증명한다는 것은 다르다.</mark> <strong>한 줄:</strong> 갚았는지 묻는데 착한 사람인지 답하지 않는다.</p>
+<h2 id="argument-01-13" data-concept-id="argument-01-13">3-4. 보장책: 자료와 결론 사이의 숨은 다리 ★★★★★</h2>
+<p><strong>교재 13–14쪽 / 문단의 목적:</strong> 자료 D가 결론 C를 뒷받침하려면 연결 전제 W가 필요함을 드러낸다. 여기서 보장책은 사람의 신용을 보증하는 보증인이 아니라, <strong>그 자료를 그 결론의 적합한 논거로 인정하게 하는 전제</strong>다.</p>
+<table>
+<thead>
+<tr>
+<th>자료 D</th>
+<th>보장책 W</th>
+<th>결론 C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>온도계가 영하 4도를 가리킨다</td>
+<td>이 장비는 정상 작동하며 실제 온도를 표시한다</td>
+<td>현재 기온은 영하 4도다</td>
+</tr>
+<tr>
+<td>지인들이 B를 정직하다고 칭찬한다</td>
+<td>평소 인품의 칭찬만으로 개별 채무의 변제를 증명할 수 있다</td>
+<td>B는 이 돈을 갚았다</td>
+</tr>
+</tbody></table>
+<p>첫째 연결은 장비의 원리·상태에 관한 전제가 갖춰지면 쓸 수 있다. 둘째 연결은 교재의 사례에서 타당하지 않다. 자료가 참이라는 이유만으로 연결 전제까지 참이 되는 것은 아니다.</p>
+<p>일상에서는 온도계의 원리를 공유하므로 매번 자세히 설명하지 않는다. 그러나 조선 시대 사람이 처음 온도계를 본다면 “그 표시가 왜 기온을 알려 주나요?”라고 물을 수 있다. 이때 보장책을 명시적으로 식별해야 한다. <strong>시험:</strong> 식별은 타당성을 따지기 위한 전제다. 정체를 전혀 파악하지 않은 전제를 이미 반박했다고 할 수 없다. <strong>한 줄:</strong> “그래서 왜?”가 숨은 보장책을 찾는 질문이다.</p>
+<h2 id="argument-01-14" data-concept-id="argument-01-14">3-5. 시행령·다른 법률·외국 법률이 있다고 합헌인가 ★★★★★</h2>
+<p><strong>교재 14–17쪽 / 문단의 목적:</strong> 헌법에 대한 하위규범의 관계를 거꾸로 세우는 오류를 막는다. 법률 X가 기본권을 과도하게 제한하는지 묻는데, 그 법률을 시행하는 대통령령에도 같은 내용이 있다는 이유만 대면 무엇이 문제일까? 이를 인정하면 행정부가 시행령을 고쳐 헌법의 판단 기준까지 바꿀 수 있는 셈이다. 헌법이 하위법을 심사해야지 하위법의 반복이 헌법을 만들지 않는다.</p>
+<p>비슷한 다른 법률 Y가 있다는 사실도 일반적인 합헌 증명은 아니다. 그렇다면 위헌적인 제한을 하나에서 열 개로 늘릴수록 정당해지는 이상한 결론이 나온다. 외국 여러 나라가 같은 제도를 둔다는 사실도 그 자체로 우리 헌법상 정당화를 대신하지 못한다.</p>
+<p><strong>다만 교재가 인정한 제한적 상황:</strong> 쟁점이 평등이고, 주장자가 비교 대상 법률 Y의 합헌성을 받아들이는 논증대화에서는 유사한 처우의 존재가 관련 논거가 될 수 있다. 그러나 주장자가 X와 Y 양쪽의 과잉 제한을 같은 원리로 비판한다면 “Y도 있어”는 답이 아니다. Y의 위헌심판을 직접 청구할 적격이 없다는 사정과 Y의 내용을 정당하다고 인정하는 것은 다르다.</p>
+<p><strong>시험:</strong> ‘다른 법률은 언제나 무관’도, ‘존재만으로 일반적으로 합헌 근거’도 피한다. <strong>한 줄:</strong> 같은 제한이 많다는 것과 그 제한이 정당하다는 것은 다르다.</p>
+<h2 id="argument-01-15" data-concept-id="argument-01-15">3-6. 확립된 판례도 제대로 된 반론에는 답해야 한다 ★★★★★</h2>
+<p><strong>교재 17–18쪽 / 문단의 목적:</strong> 선례 존중과 권위의 무조건적 복종을 구분한다. 법치주의는 안정된 기준을 존중할 이유를 준다. 이미 처리한 반론을 매 사건 처음부터 반복할 의무도 없다. 그러나 선례 자체에 일응 타당한 새로운 비판이 제기되었다면, 그 비판에 답해야 한다.</p>
+<p>“틀렸다는 이유를 제시합니다”라는 말에 “오래 해왔습니다”만 반복하면 정당화가 되지 않는다. 오래된 노예제나 반복 폭행도 횟수가 많다고 옳은 일이 되지 않는다는 교재의 예가 이 점을 강조한다. 실제로 교재는 간통죄와 병역종류 조항에 관한 종전 판단이 바뀐 점을 들며 선례가 영원히 고정되는 것은 아니라고 설명한다. 여기서 사건별 주문 유형·적용 범위는 각 사건의 별도 문제다.</p>
+<p><mark class="blue">사실에서 곧바로 당위를 끌어내는 문제는 제8·10강, 선례와 법도그마틱의 관계는 제12강으로 이어진다.</mark> <strong>시험:</strong> 130의 ‘확립된 견해라는 말로 새로운 논박도 배척’이 함정이다. <strong>한 줄:</strong> 선례는 출발점이 될 수 있지만 모든 반론의 종착점은 아니다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>論證 논증</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 論(논할 론): 따져 말함, 證(증거 증): 근거를 대어 밝힘. <strong>③ 합친 뜻:</strong> 근거를 따져 밝혀 내기. <strong>④ 이름의 이유:</strong> 말만 하는 것이 아니라 이유로 밝힌다는 뜻.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 논거의 결합으로 명제의 참·거짓을 밝히려는 언어 활동. <strong>⑥ 쉬운 말:</strong> 내 말이 왜 맞는지 보여 주기. <strong>⑦ 사례:</strong> 온도계와 장비 상태로 실제 기온을 설명한다.</p>
+<p><strong>⑧ 시험:</strong> 목표는 진리의 발견·확립. <strong>⑨ 비교·기억법:</strong> 설득은 믿음의 일치가 목표.</p>
+<h3>說得 설득</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 說(말씀 설): 말함, 得(얻을 득): 얻음. <strong>③ 합친 뜻:</strong> 말로 상대의 수긍을 얻기. <strong>④ 이름의 이유:</strong> 남의 동의를 얻는 쪽에 초점이 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대방이 자신의 믿음을 받아들이게 하는 언어 활동. <strong>⑥ 쉬운 말:</strong> 상대도 내 생각을 믿게 만들기. <strong>⑦ 사례:</strong> 거짓말에도 상대가 속아 믿을 수 있다.</p>
+<p><strong>⑧ 시험:</strong> 논증과 공통점은 언어 활동. <strong>⑨ 비교·기억법:</strong> 믿게 했는지와 참인지 따로 검사.</p>
+<h3>要件 요건</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 要(요긴할 요): 꼭 필요함, 件(사건 건): 낱 항목. <strong>③ 합친 뜻:</strong> 꼭 갖추어야 할 항목. <strong>④ 이름의 이유:</strong> 결과를 받쳐 주는 필수 전제를 가리키기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 결론·효과·개념 해당성을 위해 성립해야 하는 조건. <strong>⑥ 쉬운 말:</strong> 결과가 나오기 전에 갖춰야 할 것. <strong>⑦ 사례:</strong> 학생이자 회장이라는 주장은 두 조건이 필요하다.</p>
+<p><strong>⑧ 시험:</strong> 요건을 결과 자체라고 하면 틀림. <strong>⑨ 비교·기억법:</strong> 요건은 앞, 효과는 뒤.</p>
+<h3>主題·主題化 주제·주제화</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 主(주인 주): 중심, 題(제목 제): 문제, 化(될 화): 상태로 만듦. <strong>③ 합친 뜻:</strong> 중심 문제·그 문제로 드러내기. <strong>④ 이름의 이유:</strong> 배경에 있던 것을 논의의 중심으로 올리기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주제는 쟁점이고 주제화는 숨은 쟁점을 명확한 대상으로 만드는 활동. <strong>⑥ 쉬운 말:</strong> 무엇을 따질지 꺼내 놓기. <strong>⑦ 사례:</strong> 해고 소송에서 어떤 조치의 효력을 다투는지 정한다.</p>
+<p><strong>⑧ 시험:</strong> 003의 정확한 용어는 주제화. <strong>⑨ 비교·기억법:</strong> 대상과 대상을 만드는 활동을 구별.</p>
+<h3>識別·固定 식별·고정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 識(알 식): 알아봄, 別(다를 별): 구별, 固(굳을 고): 단단함, 定(정할 정): 정함. <strong>③ 합친 뜻:</strong> 구별하여 알아봄·흔들리지 않게 정함. <strong>④ 이름의 이유:</strong> 처음 찾는 일과 계속 유지하는 일이 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주제를 가려낸 뒤 논증 중 일관되게 유지하는 일. <strong>⑥ 쉬운 말:</strong> 질문을 찾고 중간에 바꾸지 않기. <strong>⑦ 사례:</strong> 실제 기온에서 상대 기분으로 바꾸지 않는다.</p>
+<p><strong>⑧ 시험:</strong> 식별하면 자동으로 고정된다는 보기는 틀림. <strong>⑨ 비교·기억법:</strong> 시작 검사와 중간 검사를 모두 한다.</p>
+<h3>論據 논거</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 論(논할 론): 따져 말함, 據(의거할 거): 기대는 근거. <strong>③ 합친 뜻:</strong> 주장이 기대는 이유. <strong>④ 이름의 이유:</strong> 결론이 그 이유에 의지하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해당 주제에서 주장을 뒷받침하기 위해 제시하는 이유·근거. <strong>⑥ 쉬운 말:</strong> 내 답을 받쳐 주는 말. <strong>⑦ 사례:</strong> 정상 온도계의 수치가 기온 판단을 지지한다.</p>
+<p><strong>⑧ 시험:</strong> 참과 주제 적합성이 함께 필요. <strong>⑨ 비교·기억법:</strong> 이유처럼 생긴 말과 진짜 이유를 구별.</p>
+<h3>資料 자료</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자): 바탕·재료, 料(헤아릴 료): 판단 재료. <strong>③ 합친 뜻:</strong> 판단에 쓰는 재료. <strong>④ 이름의 이유:</strong> 아직 적합한 근거인지 검토할 재료라는 뜻.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 논증에 투입되기 위해 제시된 정보 D. <strong>⑥ 쉬운 말:</strong> 우선 가져온 정보. <strong>⑦ 사례:</strong> 친구가 쓴 인품 칭찬 진술서.</p>
+<p><strong>⑧ 시험:</strong> 진실한 자료라도 결론을 곧바로 지지하지 않음. <strong>⑨ 비교·기억법:</strong> 자료 D와 적합한 논거는 같지 않다.</p>
+<h3>保障策 보장책</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 保(지킬 보): 지킴, 障(막을 장): 막아 지킴, 策(꾀 책): 방책. <strong>③ 합친 뜻:</strong> 연결을 뒷받침하는 방책. <strong>④ 이름의 이유:</strong> 왜 그 자료에서 결론으로 갈 수 있는지를 뒷받침하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자료가 결론을 지지하는 적합한 논거가 되게 하는 연결 전제 W. <strong>⑥ 쉬운 말:</strong> 그 정보로 그 답을 내도 되는 이유. <strong>⑦ 사례:</strong> 온도계가 정상 작동하여 실제 기온을 표시한다는 전제.</p>
+<p><strong>⑧ 시험:</strong> 식별 후 타당성을 평가. <strong>⑨ 비교·기억법:</strong> 금전채무의 보증이나 무오류 보증서가 아니다.</p>
+<h3>妥當性 타당성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 妥(온당할 타): 알맞음, 當(마땅할 당): 들어맞음, 性(성품 성): 성질. <strong>③ 합친 뜻:</strong> 알맞게 들어맞는 성질. <strong>④ 이름의 이유:</strong> 이유가 그 자리에 적합한지 따지기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이 강에서는 논증이나 전제가 정당하게 승인될 만한 성질. <strong>⑥ 쉬운 말:</strong> 왜 받아들여도 되는지 견딜 수 있음. <strong>⑦ 사례:</strong> 새로운 반박에 답하여 논증을 지킨다.</p>
+<p><strong>⑧ 시험:</strong> 타당성 승인 자격과 영원한 진리를 구별. <strong>⑨ 비교·기억법:</strong> 후속 강의의 좁은 형식적 타당성 용법은 따로 구별.</p>
+<h3>蓋然性 개연성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 蓋(대개 개): 대체로, 然(그럴 연): 그러함, 性(성품 성): 성질. <strong>③ 합친 뜻:</strong> 그럴 법한 정도. <strong>④ 이름의 이유:</strong> 필연적 확실성과 다른 가능성의 정도를 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 주장이 참일 가능성이 대안보다 높다고 평가되는 정도. <strong>⑥ 쉬운 말:</strong> 어느 설명이 더 맞을 법한가. <strong>⑦ 사례:</strong> 잘못된 온도계라는 대안도 검토한다.</p>
+<p><strong>⑧ 시험:</strong> 모든 논거가 결정적일 필요는 없음. <strong>⑨ 비교·기억법:</strong> 개연성과 필연성은 다르다.</p>
+<h3>比例·必要性 비례·필요성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 比(견줄 비): 비교, 例(법식 례): 일정한 기준, 必(반드시 필): 필수, 要(요긴할 요): 필요, 性(성품 성): 성질. <strong>③ 합친 뜻:</strong> 목적과 수단의 관계·꼭 필요한 성질. <strong>④ 이름의 이유:</strong> 목적을 이유로 제한을 무제한 허용하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권 제한 목적과 수단을 심사하며 덜 제한적인 대안 등을 검토하는 기준. <strong>⑥ 쉬운 말:</strong> 같은 목적을 덜 힘들게 이루는 길이 있나. <strong>⑦ 사례:</strong> 일반 과세와 관람객 특별부담을 비교한다.</p>
+<p><strong>⑧ 시험:</strong> 더 가혹한 조치보다 낫다는 말은 필요성 증명 아님. <strong>⑨ 비교·기억법:</strong> 적합성·필요성·법익균형을 섞지 않는다.</p>
+<h3>先例 선례</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선): 앞섬, 例(법식 례): 본보기. <strong>③ 합친 뜻:</strong> 앞서 이루어진 판단의 예. <strong>④ 이름의 이유:</strong> 먼저 내려진 결론과 이유가 기준이 되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이후 판단에서 참조되는 과거의 재판상 판단. <strong>⑥ 쉬운 말:</strong> 전에 비슷한 사건을 어떻게 판단했나. <strong>⑦ 사례:</strong> 확립된 판례를 새로운 논거로 비판한다.</p>
+<p><strong>⑧ 시험:</strong> 존중할 이유는 있으나 무제한 일반적 적합성은 아님. <strong>⑨ 비교·기억법:</strong> 반복되었다는 사실과 옳다는 판단을 구별.</p>
+<h1>문제 연결 TOP5와 출제자의 시선</h1>
+<table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>문제 ID 끝번호</th>
+<th>묻는 핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>125</td>
+<td>피해최소성의 질문을 더 가혹한 제한과의 비교로 바꾸는 오류</td>
+</tr>
+<tr>
+<td>2</td>
+<td>127</td>
+<td>자료의 진정성과 주제 적합성·보장책의 구별</td>
+</tr>
+<tr>
+<td>3</td>
+<td>128</td>
+<td>시행령·다른 법률이 있다고 합헌이 되는지</td>
+</tr>
+<tr>
+<td>4</td>
+<td>130</td>
+<td>선례에 대한 일응 타당한 반론의 처리</td>
+</tr>
+<tr>
+<td>5</td>
+<td>120</td>
+<td>논증의 성공과 영원한 진리의 차이</td>
+</tr>
+</tbody></table>
+<p>반복되는 축은 <strong>논증/설득, 식별/고정, 자료/보장책, 권위/정당화</strong>다. 실제 오답률은 없으므로 ‘많이 틀린 것으로 측정된 보기’ 대신 주의할 함정을 분석한다. ‘항상·자동·아예 없음·반드시 결정적’ 같은 강한 표현이 나오면 성립 조건이 과장되었는지 확인한다. 003의 용어 오류는 본문에서 별도로 표시했다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 도서관의 추가 요금.</strong> 도서관이 야간 운영비를 마련하려고 야간 이용자에게만 큰 추가 요금을 부과했다. 담당자는 “이용료를 열 배 올리지 않은 것만으로도 최소한의 제한”이라고 한다. 무엇을 다시 물어야 할까? <strong>정답·이유:</strong> 동등한 운영 목적을 덜 제한적으로 이룰 대안이 있는지, 이용자에게 특별 부담을 지울 규범적 이유가 있는지를 물어야 한다. <strong>출제 의도:</strong> 더 나쁜 조치와의 비교를 필요성 심사로 착각하지 않기.</p>
+<p><strong>응용 2 · 실험 결과의 수정.</strong> 2024년 최선의 검사로 정당화된 과학적 결론이 2034년 새로운 장비로 수정되었다. “2024년 논증도 무조건 실패였다”는 평가는 맞는가? <strong>정답·이유:</strong> 아니다. 당시의 타당성 승인 자격과 영원한 진리 보증을 구별한다. 다만 당시에도 알려진 반론을 무시했는지는 별도로 보아야 한다. <strong>출제 의도:</strong> 성공의 시점과 오류 가능성.</p>
+<p><strong>응용 3 · 분실물과 인품.</strong> 반 친구가 잃어버린 이어폰을 돌려줬다고 주장하며 봉사상만 제출했다. 반장이 왜 충분하지 않다고 하는가? <strong>정답·이유:</strong> 봉사상 자체가 진짜여도 ‘봉사상을 받았으면 이 물건도 반환했다’는 보장책이 성립하지 않는다. 반환 당시의 자료가 필요하다. <strong>출제 의도:</strong> 자료 진실성과 적합성.</p>
+<p><strong>응용 4 · 오래된 학교 규칙.</strong> 복장 규칙이 부당하다는 구체적인 반론에 학교가 “30년간 유지했다”고 답한다. 그것만으로 논증이 끝나는가? <strong>정답·이유:</strong> 아니다. 안정성에 관한 이유는 있을 수 있지만, 제시된 반론을 다룬 것은 아니다. <strong>출제 의도:</strong> 역사적 존재와 규범적 정당성.</p>
+<p><strong>응용 5 · 방의 온도와 실망.</strong> 방 온도가 15도라는 측정에 동생이 “20도면 좋겠는데”라고 말한다. 형은 20도로 기록한다. 형의 오류는? <strong>정답·이유:</strong> 원하는 온도와 실제 온도라는 주제를 섞었다. 동생의 희망은 심리 상태에는 관련되지만 측정값을 바꾸는 이유는 아니다. <strong>출제 의도:</strong> 감정 표출과 사실에 대한 이의의 구별.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제1강</h1>
+<p><strong>TOP3:</strong> 주제 식별·고정 / 자료와 보장책 / 논증과 설득.</p>
+<table>
+<thead>
+<tr>
+<th>구별</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>논증</td>
+<td>논거 결합으로 명제의 참·거짓을 밝힌다.</td>
+</tr>
+<tr>
+<td>설득</td>
+<td>상대방의 믿음을 자신의 믿음과 일치시킨다.</td>
+</tr>
+<tr>
+<td>성공</td>
+<td>현재 대화에서 타당성을 승인받을 자격. 영원불변 아님.</td>
+</tr>
+<tr>
+<td>5요건</td>
+<td>질문 고정 → 참·적합한 근거 → 결합 → 이의 처리 → 대안 비교.</td>
+</tr>
+<tr>
+<td>강한 주장</td>
+<td>참이 될 조건이 많다. 센 말투·쉬운 입증 아님.</td>
+</tr>
+<tr>
+<td>주제화</td>
+<td>숨은 쟁점을 명확한 논의 대상으로 꺼내는 활동.</td>
+</tr>
+<tr>
+<td>고정</td>
+<td>처음 찾은 질문을 도중에 다른 질문으로 바꾸지 않기.</td>
+</tr>
+<tr>
+<td>피해최소성</td>
+<td>같은 공익을 덜 제한하며 이룰 대안과 규범적 이유를 검토.</td>
+</tr>
+<tr>
+<td>잘못된 비교</td>
+<td>‘더 심한 제한도 가능했다’는 필요성의 근거 아님.</td>
+</tr>
+<tr>
+<td>자료 D</td>
+<td>제시된 정보. 참이라고 언제나 적합한 것은 아님.</td>
+</tr>
+<tr>
+<td>보장책 W</td>
+<td>자료 D가 결론 C를 지지하게 하는 연결 전제.</td>
+</tr>
+<tr>
+<td>거짓 논거</td>
+<td>결론이 우연히 참일 수 있지만 그 참을 보증하지 못함.</td>
+</tr>
+<tr>
+<td>다른 법률</td>
+<td>존재·반복만으로 합헌성 강화 불가. 제한적 비교 상황은 별도.</td>
+</tr>
+<tr>
+<td>선례</td>
+<td>존중할 이유는 있으나 타당한 새로운 반론에는 답해야 함.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 어떤 자료가 참이라는 것과 그 자료가 이 질문의 적합한 논거라는 것은 다르다.</p>
+<p><strong>사례를 풀 순서:</strong> 질문 확정 → 자료의 참 → 연결 전제 식별 → 연결의 타당성 → 반론 처리.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 이해 완료: 기온·변제·문예진흥기금 세 사례에서 질문과 잘못된 근거를 스스로 분리할 수 있다. 🟡 복습 필요: 정의는 외웠지만 보장책을 문장으로 만들기 어렵다. 🔴 이해 부족: 다수가 믿거나 판례가 반복되면 이유 없이 참이 된다고 생각한다. 실제 답안을 아직 확인하지 않았으므로 진단은 자가점검 기준이다.</p>
+<p><strong>복습 TOP3:</strong> ① ‘더 심하게 할 수도 있었다’가 왜 피해최소성의 답이 아닌지 ② 인품 진술서에 숨어 있는 보장책 ③ 선례 존중과 새로운 이의 처리의 관계.</p>
+<p>참고: 첨부 교재 제1강 및 제공 JSON의 형성평가·워크북. 조문의 현행 문언은 <a href="https://www.law.go.kr/lsLinkProc.do?joNo=003700&lsClsCd=L&lsId=001444&mode=4">국가법령정보센터 헌법 제37조</a>에서 확인할 수 있다. 실제 사건 소개와 교재의 규범적 비판은 구분하여 읽는다.</p>
+<h1>문제 부록 · 22문항·88개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_001"><h4>형성평가 · 헌법논증이론_001</h4><p class="question-stem">명제의 참·거짓을 논거들의 결합을 통해 보여 주려는 언어적 활동을 무엇이라고 하는가?</p><ol class="choices"><li>설득</li><li>논증</li><li>명령</li><li>대화</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 설득의 목표는 상대방과 믿음을 일치시키는 것이다. 참·거짓의 논거적 해명과 구별한다.</li><li><strong>선택</strong> · 명제의 참·거짓을 논거들의 결합으로 밝힌다는 정의가 논증이다.</li><li><strong>비선택</strong> · 명령은 어떤 행동을 하라고 요구하는 언어행위다. 그 자체로 참·거짓의 논거적 입증은 아니다.</li><li><strong>비선택</strong> · 대화는 넓은 말이다. 일상 대화가 모두 논증을 하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_002"><h4>형성평가 · 헌법논증이론_002</h4><p class="question-stem">채무변제의 입증이라는 주제가 문제된 사건에서 피고가 자신이 정직하게 살아왔다는 삶의 일대기를 서술한 진술서가 논거로 적합하지 못한 이유로 가장 알맞은 것은?</p><ol class="choices"><li>자신이 채무를 변제했다는 피고 진술의 신빙성은 주제와 전적으로 무관하다.</li><li>그 진술서가 채무자 진술의 신빙성의 적합한 자료로 삼기 위한 전제, 즉 대립당사자 중 정직한 삶의 일대기를 더 잘 써낸 사람의 사건 관련 주장이 참일 개연성이 높다고 봐야 한다는 보장책이 타당하지 못하다.</li><li>사건 자체가 아니라 사건 경위에 관해 설명하는 진술은 민사소송법상 금지된다.</li><li>삶의 일대기에 대한 진술은 판사가 석명을 구하기 전까지는 할 수 없도록 규정되어 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 변제했다는 구체적 진술의 신빙성은 관련될 수 있다. 문제는 일반적인 인품 칭찬이 이를 충분히 입증하지 못한다는 데 있다.</li><li><strong>선택</strong> · 일대기를 잘 쓰거나 평소 정직하다는 칭찬에서 개별 변제 사실로 넘어가는 연결 전제가 타당하지 않다.</li><li><strong>비선택</strong> · 사건 경위의 설명 자체가 민사소송에서 금지된다는 규칙은 이 사례의 이유가 아니다.</li><li><strong>비선택</strong> · 판사의 석명 전에는 인생 이야기를 할 수 없다는 일반적 금지 때문이 아니다. 자료의 주제 적합성을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_003"><h4>형성평가 · 헌법논증이론_003</h4><p class="question-stem">의문이 제기되지 않는 배경으로부터 어떤 것을 명시적으로 식별하여 끄집어내어서 분명한 논의의 대상으로 만드는 것을 무엇이라고 하는가?</p><ol class="choices"><li>논증</li><li>논거</li><li>논거구조</li><li>주제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 논증은 근거를 결합해 참·거짓을 밝히는 활동이다. 숨은 쟁점을 꺼내는 활동의 정확한 이름은 주제화다.</li><li><strong>비선택</strong> · 논거는 주장을 뒷받침하는 이유다. 쟁점을 꺼내는 활동과 다르다.</li><li><strong>비선택</strong> · 논거구조는 논거들이 결론을 지지하도록 결합된 구조다.</li><li><strong>선택</strong> · 원본은 ④를 정답으로 지정했으나 보기의 주제는 주제화의 오기 또는 불완전 표기로 보인다. 주제는 쟁점 자체, 주제화는 쟁점을 꺼내는 활동이다. 원본 정답은 변경하지 않았다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_004"><h4>형성평가 · 헌법논증이론_004</h4><p class="question-stem">다음 중 논증에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>헌법논증은 논증의 일종이다.</li><li>논증은 명제의 참·거짓을 논거들의 결합을 통해 보여주려는 언어적 활동이다.</li><li>논증의 주된 목적은 상대방이 나의 믿음을 참된 믿음이라고 받아들이도록 만드는 것이다.</li><li>논증의 목표는 진리의 발견 또는 확립이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 헌법을 대상으로 한다고 논증의 일반 요건에서 벗어나지 않는다.</li><li><strong>비선택</strong> · 참·거짓을 논거 결합으로 밝히려는 활동이라는 정의에 맞다.</li><li><strong>선택</strong> · 상대방이 내 믿음을 참이라고 받아들이게 만드는 목표는 설득의 설명이다. 정의 바꿔치기가 함정이다.</li><li><strong>비선택</strong> · 진리의 발견 또는 확립은 논증의 목표다. 모든 청중의 동의 여부와 같지 않다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_005"><h4>형성평가 · 헌법논증이론_005</h4><p class="question-stem">요건(condition; requirements)에 대한 설명으로 타당하지 않은 것은?</p><ol class="choices"><li>어떤 결론에 참의 값을 할당하기 위해 성립해야 하는 것들이다.</li><li>어떤 효과가 발생하기 위해 갖추어져야 하는 전제들이다.</li><li>어떤 개념에 어떤 현상이나 사태가 속하기 위해 성립해야 하는 것들을 의미한다.</li><li>결론이나 효과 자체를 말한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 결론에 참값을 부여하기 위해 충족해야 할 전제를 요건이라고 설명할 수 있다.</li><li><strong>비선택</strong> · 법적 효과가 생기기 위해 갖추어야 하는 전제도 요건의 용법이다.</li><li><strong>비선택</strong> · 어떤 개념에 해당하기 위한 조건도 요건이다.</li><li><strong>선택</strong> · 요건은 결과가 아니라 결과에 앞서 갖추어야 하는 조건이다. 전제와 효과를 거꾸로 놓았다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 결론이나 효과 자체는 요건이 성립하였을 때 따라나오는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_006"><h4>형성평가 · 헌법논증이론_006</h4><p class="question-stem">논증의 요건 가운데 주제의 식별에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>주제의 식별은 논증하고자 하는 것이 어떤 질문에 대한 것인가를 적합하게 가려내는 것을 의미한다.</li><li>주제의 식별에서 주제란 논증대화의 대상이 되는 논의의 쟁점을 지칭하는 말이다.</li><li>논증대화에서 주제는 항상 명확하게 드러나 있다.</li><li>식별된 주제에 따라 적합한 논거와 적합하지 않은 논거가 가려진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어떤 질문에 답하는 활동인지 가려내는 것이 식별이다.</li><li><strong>비선택</strong> · 논증대화에서 다루는 쟁점이 주제다.</li><li><strong>선택</strong> · 항상 명확한 것은 아니다. 배경에 묻힌 쟁점을 주제화해야 할 수 있다.</li><li><strong>비선택</strong> · 질문을 정해야 어떤 자료가 답에 관련되는지 판별할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 논증대화에서 주제가 소홀하게 취급되거나 당연하세 여겨졌던 배경에 묻혀 있거나 잘 보이지 않도록 숨겨져 있는 경우가 있다. 이런 주제를 명시적으로 식별하여 끄집어내어서 분명한 논의의 대상으로 만드는 것을 주제화라고 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_007"><h4>형성평가 · 헌법논증이론_007</h4><p class="question-stem">주제의 고정에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>논증에서 주제의 고정은 주제를 식별하기만 하면 언제나 자동으로 이루어진다.</li><li>주제를 고정하지 않으면 논증 도중에 주제를 바꾸어버리면서도 원래의 주제에 대해 이야기하는 척 할 위험이 생긴다.</li><li>주제를 고정하지 않아서 논증 도중에 주제가 바뀌면 부적합한 논거를 적합한 논거로 잘못 알고 투입하여도 알아차릴 수 없다.</li><li>법률가도 논의의 주제를 슬쩍 이동시켜 전혀 다른 것으로 만드는 경우가 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 식별과 고정은 별도 과제다. 처음 정확히 찾아도 도중에 질문이 바뀔 수 있다.</li><li><strong>비선택</strong> · 처음 질문에 답하는 척하면서 다른 질문으로 바뀌는 것이 고정 실패의 위험이다.</li><li><strong>비선택</strong> · 주제가 바뀌면 원래 질문에 부적합한 자료를 적합하다고 착각할 수 있다.</li><li><strong>비선택</strong> · 교재는 전문 법률가의 논증에서도 주제 이동이 일어남을 판례 의견 분석으로 보여 준다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 주제를 식별하더라도 일관되게 고정하지 않으면 주제가 전혀 다른 것으로 바뀔 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_008"><h4>형성평가 · 헌법논증이론_008</h4><p class="question-stem">논거에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>논거는 주제에 적합해야 한다.</li><li>문법적으로 근거제시에 전형적인 어구들 예컨대 ‘~이기 때문에’, ‘~를 고려할 때’, ‘~가 근거이다’라는 어구들이 사용되기만 하면, 거론된 것이 주제에 적합한 논거임을 보여준다.</li><li>그 자체로 진실성이 있는 자료가 제시된다 하더라도, 그것만으로 곧바로 결론을 가리키는 힘이 있는 것은 아니다.</li><li>자료가 정당한 논거가 되기 위해서는, 그 자료를 적합한 논거로 식별해주는 전제가 우선 성립해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자료는 지금 다루는 질문을 뒷받침해야 한다.</li><li><strong>선택</strong> · 때문에라는 접속 표현만으로 실질적 연결이 생기지 않는다. 말의 모양과 논거 적합성을 바꿔치기한 것이다.</li><li><strong>비선택</strong> · 진짜 작성된 인품 진술서도 변제 사실을 곧바로 증명하지 못한다.</li><li><strong>비선택</strong> · 자료에서 결론으로 넘어갈 수 있게 하는 타당한 보장책이 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 문법적으로 근거제시에 전형적인 어구들 예컨대 ‘~이기 때문에’, ‘~를 고려할 때’, ‘~가 근거이다’라는 어구를 사용했다고 해서 주제에 적합한 논거가 자동적으로 될 리 만무하다. 이런 피상적인 특징은 결코 그 자체로서 논거를 적합한 것으로 만들어주지 못한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_118"><h4>워크북 · 헌법논증이론_118</h4><p class="question-stem">다음 중 논증과 설득의 공통점은?</p><ol class="choices"><li>그 목표가 진리의 발견 또는 확립이다.</li><li>언어적 활동이다.</li><li>이유와 근거가 좋은 순서와 체계를 이루어야 성공한다.</li><li>내가 믿는 것을 남도 믿도록 하는 활동이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 진리의 발견·확립은 논증의 목표다. 설득은 믿음의 일치가 목표이므로 공통점이 아니다.</li><li><strong>선택</strong> · 논증도 설득도 언어를 사용하는 활동이다. 성공 기준은 서로 다르다.</li><li><strong>비선택</strong> · 좋은 순서·체계의 이유와 근거는 논증의 성공을 설명한다. 설득은 비합리적 방법으로도 성공할 수 있다.</li><li><strong>비선택</strong> · 남도 내 믿음을 갖게 한다는 것은 설득의 목표다. 논증의 정의가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①, ③은 논증에 대한 설명이고, ④는 설득에 대한 설명이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_119"><h4>워크북 · 헌법논증이론_119</h4><p class="question-stem">다음 중 논증이론에서 어떤 주장, 명제, 진술이 '강하다'거나 '약하다'고 하는 것에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>'아인슈타인은 남성이다'라는 진술에 비해 '아인슈타인은 남성이며 19~20C에 걸쳐 살았던 사람이다'가 더 강한 진술이다</li><li>어떤 주장이 강하다는 것은 그 주장이 참이기 위해 성립해야 하는 것들이 더 많다는 뜻이다.</li><li>어떤 주장이 약하다는 것은 그 주장이 참이기 위해 성립해야 하는 것들이 더 적다는 뜻이다.</li><li>일반적으로 더 강한 주장이 더 약한 주장에 비해 입증하기 더 쉽다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두 번째 주장은 성별 외에 생존 시대라는 조건까지 충족해야 하므로 더 강하다.</li><li><strong>비선택</strong> · 강함은 참이 되기 위해 성립해야 하는 것이 더 많다는 뜻이다.</li><li><strong>비선택</strong> · 약한 주장은 요구되는 조건이 더 적다. 논리적 약함이 곧 무가치함은 아니다.</li><li><strong>선택</strong> · 조건이 더 많은 강한 주장은 일반적으로 더 많은 입증 부담을 진다. 강하다는 말을 쉬운 입증으로 바꾸면 틀린다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 일반적으로 더 약한 주장이 더 강한 주장에 비해 입증하기 더 쉽다. 예를 들어 ①에서 제시된 두 진술 중에서 전자는 아인슈타인이 남성이기만 하면 참이 되는 진술이지만, 후자는 아인슈타인이 남성인 것에 더해 19~20C에 걸쳐 살았다는 조건까지 성립해야 참이 되고 둘 중 어느 하나라도 성립하지 않으면 거짓이 되는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_120"><h4>워크북 · 헌법논증이론_120</h4><p class="question-stem">'어떤 논증이 성공하였다'는 진술의 의미로 보기에 부적절한 것은?</p><ol class="choices"><li>영원불변의 진리가 확립되었다.</li><li>현재의 논증대화에서 그 타당성이 승인될 자격을 얻었다.</li><li>실험물리학에서는 현재 최선의 기술로 반복된 실험결과를 꼼꼼하게 분석함으로써 이론물리학자가 제시한 물리법칙에 상응하는 현상이 실재한다는 것을 보여준 것이 이에 해당한다.</li><li>어떤 논증이 성공하였다고 해서 진리를 보장해주지는 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 성공은 현재 논증대화에서 정당화된다는 뜻이지 영원한 수정 불가능성을 보장하지 않는다.</li><li><strong>비선택</strong> · 현재의 대화에서 타당성 승인을 받을 자격이라는 교재의 정의에 맞다.</li><li><strong>비선택</strong> · 당시 최선의 실험과 분석이 논증을 성공시킬 수 있다. 이후 수정 가능성과 모순되지 않는다.</li><li><strong>비선택</strong> · 유한한 인간의 논증이 성공해도 절대적 진리의 보증서는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 인간은 유한한 이성을 가진 존재이므로 논증이 성공하였다고 하여 영원불변의 진리가 확립되었다고 볼 수 없다. 예를 들어 ③과 같은 방식으로 과학적 논증이 성공하여도, 그 논증에서 제시된 결론은 이후 현격히 더 발전된 기술의 반복실험에 의해 뒤집힐 수도 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_121"><h4>워크북 · 헌법논증이론_121</h4><p class="question-stem">논증이 성공하기 위해 갖추어져야 할 요건으로 틀린 것은?</p><ol class="choices"><li>주제를 정확하게 식별하여 일관되게 고정해야 한다.</li><li>주제에 적합한 참인 논거를 적합한 방식으로 결합해야 한다.</li><li>주장된 결론이 이미 광범위하게 수용되어 있어야만 한다.</li><li>그럴 법한 이의제기를 성공적으로 처리해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 질문을 정확히 가려내고 끝까지 유지해야 한다.</li><li><strong>비선택</strong> · 논거의 참·적합성과 결합 방식 모두 필요하다.</li><li><strong>선택</strong> · 이미 널리 믿어진다는 것은 사람들의 태도에 관한 사실이다. 새롭고 소수만 주장한 결론도 논증으로 정당화될 수 있다.</li><li><strong>비선택</strong> · 일응 그럴 법한 반론은 무시하지 말고 성공적으로 처리해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명제태도에 관한 사정으로 광범위한 수용은 설득의 성공과는 상관성이 있을 수 있지만 논증의 성공과는 관계없다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_122"><h4>워크북 · 헌법논증이론_122</h4><p class="question-stem">다음 중 틀린 진술은?</p><ol class="choices"><li>주제의 식별은 논증하고자 하는 것이 어떤 차원 논의의 어떤 질문에 대한 것인가를 적합하게 가려내는 것을 의미한다.</li><li>주제란 논증대화의 대상이 되는 논의의 쟁점을 지칭하는 말이다.</li><li>모든 주제들이 명확하게 특정된 채로 제시된다.</li><li>식별된 주제에 따라 적합한 논거와 적합하지 않은 논거가 가려진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어떤 차원의 어떤 질문인지 구분하는 것이 식별이다.</li><li><strong>비선택</strong> · 쟁점 자체가 주제라는 설명이다.</li><li><strong>선택</strong> · 숨은 쟁점도 있다. 예를 들어 통신 차단 명령과 사전검열금지의 관계를 논의 대상으로 끄집어낼 수 있다.</li><li><strong>비선택</strong> · 같은 자료도 질문에 따라 적합 여부가 달라진다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 주제들은 소홀하게 취급되거나 당연하게 여겨졌던 배경에 묻혀 있거나 잘 보이지 않도록 숨겨져 있기도 하다. 예를 들어 전기통신사업자로 하여금 일정한 내용의 통신은 차단하도록 명령하고 이를 어기면 처벌하는 법률이 있다고 할 때, 이 법률이 과연 사전검열금지원칙 위반인지 아닌지의 주제는 명확하게 특정된 채로 제시되지 않는다. 오히려 이 원칙 위반을 문제 삼는 헌법논증대화에서 주제화가 되어야 비로소 분명하게 드러나게 된다고 할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_123"><h4>워크북 · 헌법논증이론_123</h4><p class="question-stem">주제화에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>주제화란 의문이 제기되지 않은 배경으로부터 어떤 것을 명시적으로 식별하여 끄집어내어서 분명한 논의의 대상으로 만드는 것을 말한다.</li><li>민사사건에서 행정소송에서 준수해야 하는 제척기간을 준수하지 않았다는 쟁점을 제기하는 것은 그릇되게 주제화한 것이다.</li><li>주제화가 타당하고 명시적이고 명확하게 이루어진다면 논증대화 참여자가 엉뚱한 논거를 제시할 가능성이 낮아진다.</li><li>'지금 기온이 몇 도지?'라는 물음에 답할 때 주제는, 기온을 물은 자의 심리적 상태의 예측이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 숨은 쟁점을 드러내 논의 대상으로 만드는 것이 주제화다.</li><li><strong>비선택</strong> · 교재의 해고무효확인 민사사건에 별도 행정소송 기간 규칙을 그대로 끌어오는 경우를 말한다. 민사에 기간 규정이 전혀 없다는 일반 명제는 아니다.</li><li><strong>비선택</strong> · 분명한 질문을 공유하면 엉뚱한 근거를 투입할 위험이 줄어든다.</li><li><strong>선택</strong> · 기온을 물었으면 주제는 실제 기온이다. 질문한 사람의 기분을 예측하는 문제로 바꾸면 안 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> '지금 기온이 몇 도지?'라는 물음에 답할 때 주제는 객관적인 사실로서 현재의 기온이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_124"><h4>워크북 · 헌법논증이론_124</h4><p class="question-stem">다음 중 논거에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>명제의 참을 보증하기 위해 논거로 제시된 언명은 진지한 이의를 성공적으로 처리할 수 있을 정도로, 상치되는 언명에 비해 참일 개연성이 높아야 한다.</li><li>거짓임이 판명된 논거를 투입한 논증에서 도출된 결론 언명이 참인 경우는 아예 있을 수 없다.</li><li>거짓임이 판명된 논거를 투입한 논증은 결론 언명이 참인지 거짓인지를 가려내는 데 도움을 주지 못한다.</li><li>어떤 논거가 이의제기에 의해 거짓임이 드러나면 결론 전체를 바꾸든지, 아니면 다른 논거들만으로도 결론이 뒷받침되기 때문에 기본적인 논증의 골자는 훼손되지 않는다는 점을 적극적으로 보여줘야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재는 진지한 반론을 견디며 상치되는 언명보다 참일 개연성을 확보해야 한다고 설명한다.</li><li><strong>선택</strong> · 거짓 논거를 넣었어도 결론이 우연히 참일 수 있다. 아예 없다는 표현이 과장이다.</li><li><strong>비선택</strong> · 잘못된 근거는 결론의 참·거짓을 정당하게 가려내지 못한다. 찍어서 맞힌 답과 같다.</li><li><strong>비선택</strong> · 결론을 수정하거나 잘못된 근거 없이도 결론이 지지된다는 것을 보여 주어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 거짓임이 판명된 논거를 투입한 논증에서 도출된 결론 언명은 우연히 참일 수도 있다. 다만 그 언명이 참인 이유는 그 언명을 결론으로 도출한 논증의 건전성이나 타당성과는 무관하다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_125"><h4>워크북 · 헌법논증이론_125</h4><p class="question-stem">다음 중 어떤 법률조항의 피해최소성 원칙 위반/준수 여부라는 주제에 부적합한 논거는?</p><ol class="choices"><li>그 법률조항보다 기본권을 더 심하게 제한하는 법률조항을 상상할 수 있으며, 그렇게 상상된 법률조항에 비해 그 법률조항은 기본권을 덜 제한한다.</li><li>그 법률조항은 공익을 저해하는 성격을 갖지 않는 행위도 공익을 저해하는 행위로 간주하고 있다.</li><li>그 법률조항보다 기본권을 덜 제한하면서 동등한 공익을 달성할 수 있는 대안이 없다.</li><li>그 법률조항보다 기본권을 덜 제한하면서도 동등한 공익을 달성할 수 있는 대안이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 더 가혹한 제한을 상상하는 것은 같은 공익을 덜 제한적으로 이룰 대안을 찾는 질문과 다르다. 준수·위반 어느 쪽의 적합한 근거도 아니다.</li><li><strong>비선택</strong> · 공익을 해치지 않는 행위를 해치는 행위처럼 묶었다는 것은 교재의 규범적 측면에서 위반을 지지하는 논거다.</li><li><strong>비선택</strong> · 동등한 공익을 이루는 덜 제한적인 대안이 없다는 사실은 필요성 준수를 지지할 수 있다. 그것만으로 전체 합헌 판단이 끝나지는 않는다.</li><li><strong>비선택</strong> · 그런 대안이 있다는 사실은 피해최소성 위반을 지지한다. 적합한 논거란 찬성 논거만 뜻하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③ 및 ④는 피해최소성 심사의 사실적 심사 부분에서 각각 원칙 준수와 원칙 위반이라는 결론을 뒷받침할 수 있는 적합한 논거이다. 또한 ②는 피해최소성 심사의 규범적 심사 부분에서 원칙 위반이라는 결론을 뒷받침할 수 있는 적합한 논거이다. 그러나 ①은 엉뚱한 주제에 관한 논거이다. 그 엉뚱한 주제란 '인간생활에서 기본권에 대한 문제된 제약보다 더 심한 제약을 상상할 수 있는가'라는 질문에 대한 답을 논하는 것이다. 그런데 이를테면 범죄를 예방한다는 목적을 위한 자정부터 새벽 4시 사이의 통금제도보다는 밤 10시부터 아침 6시 사이의 통금제도가 더 심한 제약이라고 상상할 수 있다. 그러나 이것은 애초에 범죄예방을 위한 전국민 통금제도 실시가 피해최소성을 충족하는가의 주제와는 무관한 논거이다. 국가의 기본권 제한은 일정 범위 내에서 연장성을 가지므로 거의 절대다수의 경우에 임의의 강제적 조치보다 더 심한 강제적 조치를 떠올릴 수 있다. 엉뚱한 주제에 관한 논거는 피해최소성 원칙을 위반했다는 논거로도, 준수했다는 논거로도 사용할 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_126"><h4>워크북 · 헌법논증이론_126</h4><p class="question-stem">성공적인 논증이 되려면 그 논증에 투입되는 논거가 반드시 갖추어야 할 속성에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>결정적인 것이어야 한다.</li><li>거짓임이 판명된 것이 아니어야 한다.</li><li>이의를 성공적으로 처리할 수 있을 정도로, 상치되는 언명에 비해 참일 개연성이 높아야 한다.</li><li>주제에 적합해야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 각 논거가 홀로 결정적일 필요는 없다. 적합한 결합과 대안보다 나은 개연성 확보로도 논증은 성공할 수 있다.</li><li><strong>비선택</strong> · 이미 거짓으로 드러난 근거로 결론을 정당화할 수는 없다.</li><li><strong>비선택</strong> · 이의를 견디며 반대 언명보다 높은 개연성을 확보해야 한다. 요구되는 입증 수준은 주제에 따라 다를 수 있다.</li><li><strong>비선택</strong> · 현재의 주제와 관련된 이유여야 한다. 참이면서도 무관한 사실은 부족하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 논거가 결정적이라면 성공적 논증을 쉽게 할 수는 있을 것이다. 그러나 그렇다고 해서 성공적인 논증에 투입되는 모든 각각의 논거가 결정적일 필요는 없다. 하나만 따로 떼어내서 보자면 결정적이지 않은 논거들이 결합되어 결정적인 논증을 만들어낼 수도 있다. 더 나아가, 논증의 성공은 꼭 그 논증이 결정적이어야만 성립하는 것도 아니다. 결정적인 논증이 되지 않더라도 주장된 결론이 대안적 결론에 비해 참일 개연성이 높은 것임을 보여주기만 하여도 논증은 성공할 수 있다. 물론 참일 개연성이 높은 정도는, 다루고 있는 주제에 따라 달리 요구될 수도 있다. 예를 들어 민사재판에 비해 형사재판에서는 훨씬 더 높은 정도의 입증이 요구된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_127"><h4>워크북 · 헌법논증이론_127</h4><p class="question-stem">다음과 같은 사례가 있다고 할 때, 틀린 진술은?<br><br>A가 B에게 100만 원을 1년 기한으로 빌려줬다. 1년이 지난 뒤 A가 B에게 채무이행을 구하는 소를 제기했다. B는 자신이 그 돈을 빌린 것은 사실이지만 그 돈을 이미 갚았으며 그 말은 거짓말이 결코 아니라고 하면서, 그에 대한 증거로 자신이 매우 정직하게 살아왔다는 점을 경탄하고 칭찬하는 내용이 담긴 가족과 주위 친구들의 진술서들만을 제출하였다.</p><ol class="choices"><li>B의 정직성에 관한 주위 사람들의 진술 같은 것을 자료(資料; data)라고 칭할 수 있다.</li><li>A가 승소하기 위해서는 B가 제출한 진술서들이 실제로는 그 작성자 명의로 된 사람들에 의해 작성된 적이 없다는 점을 반드시 적극적으로 주장·입증해야 한다.</li><li>B가 제출한 진술서들을 토대로 '돈을 갚았다'는 B의 주장이 입증된다고 하려면, '채무자의 일반적인 정직성에 대한 주위 사람들의 진술은 구체적 채무의 이행을 입증하는 증거가 된다'는 내용의 보장책이 타당해야 한다.</li><li>타당한 보장책에 의해서 적합한 논거로 인정되지 않는 자료는, 적합한 논거가 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주변 사람의 진술서는 우선 제시된 자료다. 자료라는 이름만으로 변제에 적합한 증거가 되지는 않는다.</li><li><strong>선택</strong> · A가 문서의 위조를 반드시 입증할 필요는 없다. 문서가 진짜여도 일반적 인품에서 개별 변제로 넘어가는 보장책이 타당하지 않다.</li><li><strong>비선택</strong> · 진술서가 변제를 증명한다는 결론을 내려면 이런 연결 전제가 타당해야 한다. 실제로 타당하다는 진술과 조건부 설명을 구별한다.</li><li><strong>비선택</strong> · 적합성을 인정할 타당한 보장책이 없다면 그 자료는 해당 쟁점의 적합한 논거가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③에서 식별된 내용의 보장책은 부당하다. 왜냐하면 그런 보장책을 인정하게 되면, 누구든지 자신의 일반적 정직성에 대한 주장·입증만으로 구체적인 채무에서 벗어날 수 있게 되기 때문이다. 그 외에 채무이행을 구하는 소에서 해당 자료를 적합한 논거로 사용케 할 다른 보장책도 없다. 따라서 그런 진술서들은 애초에 해당 민사소송의 주제에 적합한 논거가 아니다. 적합한 논거가 아닌 자료는, 그 증거능력을 부인하거나 신빙성을 적극적으로 탄핵할 대상이 아니다. B는 여전히 자신의 입증책임을 다하지 못하였으므로, B가 다른 증거를 제출하지 않는 한 A는 승소할 것이다. 따라서 ②는 틀렸다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_128"><h4>워크북 · 헌법논증이론_128</h4><p class="question-stem">p라는 내용을 갖는 어떤 법률 X의 과잉금지원칙 위반이 문제되었을 때, 그 법률 X의 과잉금지원칙 위배 여부라는 주제에 적합한 논거가 일반적으로 될 수 있는 것은?</p><ol class="choices"><li>그 법률 X를 집행하기 위해 제정된 시행령도 p라는 내용을 갖는다는 사실</li><li>그 법률 X와 유사한 다른 법률 Y도 p와 비슷한 내용을 갖는다는 사실</li><li>그 법률 X가 추구하는 목적이 공익에 속하는 정당한 것이라는 사실</li><li>다른 국가 A, B, C도 그 법률 X와 유사한 법률을 시행하고 있다는 사실</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 하위규범인 시행령의 같은 내용으로 상위 헌법에 대한 적합성을 증명할 수 없다.</li><li><strong>비선택</strong> · 다른 법률의 존재만으로는 일반적 합헌 논거가 아니다. 교재가 든 제한적인 평등 비교 상황과 구분한다.</li><li><strong>선택</strong> · 과잉금지 심사에서 목적의 정당성은 실제 심사 항목이므로 관련 논거다. 다만 이것 하나로 다른 심사까지 통과하지는 않는다.</li><li><strong>비선택</strong> · 외국에서 시행한다는 사실만으로 국내 헌법상 정당화가 완성되지 않는다. 반복되는 입법 사실을 정당성으로 바꾸는 함정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①을 적합한 논거로 인정한다면, 해당 법률이 보다 상위의 법규범인 헌법 준수 또는 위반의 쟁점에 대하여 그보다 하위의 법규범이 유사한 취지를 규정하고 있다는 사실이 적합한 논거가 된다는 보장책을 채택한 셈이 되는데, 이 보장책은 시행령들의 내용을 변경함으로써 헌법규범을 변경할 수 있다는 결과가 되어 부당하다. 따라서 ①은 타당한 보장책으로 식별되는 적합한 논거가 아니다. 유사한 내용을 가진 다른 법률의 존재는, 평등원칙 위반이라는 제한된 쟁점에 관하여 그 법률의 위헌성을 주장하는 이가 그와 유사한 내용의 다른 법률의 합헌성은 받아들이는 경우에만 적합한 논거가 될 수 있다. 따라서 '일반적으로' 적합한 논거라고 할 수 없다. 그리고 유사한 내용의 법률이 여럿 있다고 해서 적합한 논거가 된다고 보게 되면, 위헌적인 입법이 여러 번 반복되면 그것이 합헌이 된다는 보장책을 채택하는 셈이므로, ② 또한 부적합한 논거이다. ④ 역시 다른 나라에서 유사한 법률이 입법되었다는 사실 자체로 국내에서 그 합헌성이 강화된다는 보장책을 전제로 한다. 이런 보장책은 세계적인 차원에서 부당한 법률 제정이라는 잘못이 많아지면 많아질수록 잘못이 아닌 정당한 행위가 된다는 것이기 때문에 부당하다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_129"><h4>워크북 · 헌법논증이론_129</h4><p class="question-stem">보장책에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>자료를 적합한 논거로 식별해주는 전제를 보장책이라 한다.</li><li>보장책이 대화 당사자들 사이에 공유되어 당연시되고 있지 않다면 자료를 근거로 삼은 사람은 보장책을 제시해야 한다.</li><li>보장책을 제시하라는 요구를 보장책의 명시적 식별에 대한 요청으로 칭할 수 있다.</li><li>보장책의 내용을 전혀 식별하지 않은 상태에서도 보장책의 타당성에 대한 이의제기를 할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자료를 해당 결론의 적합한 근거로 식별하게 하는 전제가 보장책이다.</li><li><strong>비선택</strong> · 배경으로 공유되지 않아 연결이 의심받으면 자료를 쓴 사람이 보장책을 드러내야 한다.</li><li><strong>비선택</strong> · 어떤 연결을 전제했는지 밝히라는 요청이 명시적 식별 요청이다.</li><li><strong>선택</strong> · 무엇인지를 전혀 식별하지 않고 그 보장책의 타당성을 이미 검토했다고 할 수는 없다. 식별이 평가의 전제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 보장책의 식별은 보장책의 타당성에 대한 이의제기의 전제가 된다. 문제 삼는 대상이 무엇인지 식별하지 않으면 이의를 제기할 수 없기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_130"><h4>워크북 · 헌법논증이론_130</h4><p class="question-stem">어떤 사건에 대한 헌법재판소의 결정문에 &quot;~는 당원의(당 재판소의) 확립된 견해이다&quot;라는 문구가 등장한 경우, 이에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>그와 같은 표피적인 문구의 사용만으로 부당한 논제를 정당한 논제로 만들어주지는 않는다.</li><li>법치주의 원칙에 따라 잘 안착된 헌법 선례를 존중한다는 제한적 의미를 가질 수는 있다.</li><li>헌법소원심판 청구인이 헌법재판소의 기존 법리적 견해를, 일응 타당한 근거와 함께 논박하고 있는 경우에도, 위 문구를 사용하여 이를 간단히 배척할 수 있다.</li><li>선례가 어느 경우에나 무제한적으로 일반적 논거 적합성을 가지는 것은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 권위적인 문구의 외형만으로 논제의 정당성이 생기지 않는다.</li><li><strong>비선택</strong> · 새로운 타당한 이의가 없는 상황에서는 안정된 선례를 존중할 이유가 있다.</li><li><strong>선택</strong> · 선례 자체에 타당한 반론이 제기되었는데 확립된 견해라고만 반복하면 그 반론을 처리한 것이 아니다.</li><li><strong>비선택</strong> · 선례의 적합성에도 논증 상황과 반론의 내용이라는 조건이 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 헌법소원심판 청구인이 만일 헌법재판소의 확립된 견해 자체를 일응 타당한 근거를 들어 공박하고 있다면, 그 공박에 정면으로 맞서는 논증을 펼쳐 그 이의를 성공적으로 처리하여야지, 이의제기한 자가 불안정화시키고자 하는 바로 그 견해가 안정되어 있다는 말만 되풀이해서는 타당한 논증이 될 수 없다. 만일 그렇다면 헌법재판소는 언제나 같은 유형의 사건에 관하여 그 어떤 새로운 논박이 제기되더라도 '당원의 확립된 견해이다'라는 문구만 쓰면 이를 성공적으로 처리한 셈이 되어 터무니없는 결과가 초래될 것이다. 물론 일응 타당한 근거조차 없는 진지하지 못한 이의에 대응하여 논증해야 하거나, 선례에서 이미 성공적으로 처리한 이의를 매번 반복해서 처리해야 하는 것은 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_131"><h4>워크북 · 헌법논증이론_131</h4><p class="question-stem">모금대상인 공연시설 등을 이용하는 국민들에게서 문예진흥의 목적을 달성하는 데 필요한 기금을 원래의 관람료에 더하여 추가로 부담하도록 하는 법률조항이 피해최소성 원칙을 위반하는가라는 주제에 대하여 적합한 논거가 아닌 것은?</p><ol class="choices"><li>문예진흥기금의 모금대상인 시설을 이용하는 국민들이 공연 등을 관람한다는 이유만으로 문예진흥의 목적을 달성하는 데 더 특별한 부담을 져야 할 공익을 저해하는 행위를 한 바가 없다.</li><li>공연 등을 관람하는 사람들은 문예진흥에 더 자발적으로 기여하는 행위를 한 것인데, 마치 공익을 저해한 행위를 하는 사람들로 대우하는 것은 부당하다.</li><li>공연 등을 관람하는 국민들에게 특별부담금을 납부하도록 하는 것에 비해 기본권을 덜 제한하는 수단으로서, 소득을 기초로 한 일반 과세에 의해 문예진흥을 위한 재원을 마련하는 수단이 있다.</li><li>이 법률조항이 명하는 보금에 의해 국민의 재산권 및 평등권이 제한된다고 하여도 영화관·공연장·박물관·미술관·고궁 등의 관람객이나 이용자에게 실제로 입장요금의 2~9%를 부가·징수(법 시행령 별표 1에 의한 보금액의 기준은 2~10%)하고 있는 데 불과하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 관람객이 특별 부담을 질 집단인지 묻는 규범적 질문에 관련된다.</li><li><strong>비선택</strong> · 오히려 문화활동에 기여하는 사람을 공익 저해자처럼 취급한다는 교재의 비판이다.</li><li><strong>비선택</strong> · 같은 재원 목적을 덜 제한적으로 이룰 대안이라는 사실적 측면에 관련된다.</li><li><strong>선택</strong> · 낮은 비율이라는 점만으로 덜 제한적 대안의 존재를 답하지 못한다. 원자료 보금은 문맥상 모금의 오기이며 판단 대상은 이 논거의 적합성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 피해최소성 심사의 주제를 '해당 기본권 제한보다 더 심한 기본권 제한을 상상할 수 있는가'라는 엉뚱한 주제로 바꾸어야 적합하다고 착각할 수 있는 논거이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 01' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 01|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

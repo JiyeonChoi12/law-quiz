@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제5강 법 논증의 기초 사실 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 05</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제5강 법 논증의 기초 사실 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>‘돈을 보냈다’와 ‘빚을 갚았다’ 사이에 무엇이 숨어 있나</h1>
+<p>누군가 돈을 보냈다는 사진이 있다. 그것만 보고 빚을 갚았다고 할 수 있을까? 선물일 수도 있고, 다른 거래의 대금일 수도 있다. ‘돈을 보냈다’보다 <strong>‘유효한 채무를 모두 변제했다’</strong>에는 확인할 사실과 법적 판단이 더 많이 들어 있다. 제5강은 사실을 말하는 척하면서 결론을 미리 끼워 넣지 않는 법을 배운다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>강의의 위치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나</td>
+<td>사실의 뜻과, 사실을 설명하는 기술의 적절한 두께.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>‘소유자·공익·가해자’라는 이름 속에 증명할 결론이 숨을 수 있다.</td>
+</tr>
+<tr>
+<td>과목 전체의 자리</td>
+<td>법논증의 자료 D가 무엇을 담아야 하는지 정한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>제4강의 비인식적 압력을 말의 구성에서도 찾아내고, 제6강은 사실의 긍정·부정을 구별한다.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>계약서가 있음→유효한 계약, 피해가 있음→특정인의 범죄라는 도약을 놓친다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 89–120쪽. 형성평가 7개·워크북 12개, 총 19문항. 별표는 학습 우선순위다. 철학적 사실 분류와 개별 법률 사건의 요건을 구별하고, 판례의 법정의견·반대의견·저자의 비판을 따로 읽는다.</p>
+<h1>1. 세계에서 무엇이 성립했는가</h1>
+<h2 id="argument-05-01" data-concept-id="argument-05-01">1-1. 사실과 반사실적 조건문 ★★★★★</h2>
+<p><strong>교재 90–92쪽 / 문단의 목적:</strong> 실제 사실을 말하는 것과 가정을 통해 실제 세계를 이해하는 것을 구별한다. 엄밀한 의미의 사실은 우리가 사는 세계에서 과거·현재 실제로 성립한 사태다. ‘만일 그때 달랐다면’의 세계가 실제 발생한 사실로 바뀌는 것은 아니다.</p>
+<p><strong>택시에서 만난 두 사람:</strong> 철수는 늦잠을 자고 택시를 급히 탔다가 영희와 만나 결혼했다. 실제 사실은 그렇게 만나 결혼했다는 것이다. 늦잠을 안 잤으면 다른 교통수단을 타서 만나지 못했을 것이라는 가정은 실제 사실은 아니지만, 서로 모르는 사람들이 만날 구체적 기회가 중요하다는 현실의 관계를 드러낸다. 이것이 넓은 의미에서 사실에 관한 진술로 유의미한 이유다.</p>
+<p><strong>뇌물 진술:</strong> A가 B에게 뇌물을 주었다고 말한다. 그런데 업무·친교·소개·연락 등 만남의 계기를 보여 주는 자료가 전혀 없다면, 그 진술의 신빙성을 의심할 이유가 생긴다. 만남의 계기가 증명되지 않았다는 사실만으로 절대로 만날 수 없었다고 단정하는 것은 아니다. 다른 만남의 가능성과 증거도 검토한다.</p>
+<p><strong>교통사고:</strong> 제한속도를 지켰다면 사고가 없었을까, 지켰어도 갑작스러운 끼어들기 때문에 났을까? CCTV와 속도·거리 등을 이용해 가정을 비교한다. 주의의무 위반과 결과의 관계를 판단하는 데 필요하다. 이때 속도를 바꾸어 생각하는 목적 외에 날씨·차량 위치까지 마음대로 바꾸면 다른 사건을 상상한 셈이다. 자동차 색깔을 바꾸는 가정은 이 사안에서 결과에 영향을 주면 부적합하고, 영향이 없으면 불필요하다.</p>
+<p><strong>미래 조건도 포함:</strong> 공을 놓으면 떨어질 것이라는 조건적 예측처럼 앞으로 일어날 일에 관한 판단도 규범 적용에 쓰인다. 관련 과학 법칙이 추론을 뒷받침한다. <mark class="yellow">가정은 필요한 부분만 바꾸고 나머지는 현실에 가장 가깝게 유지한다.</mark> <strong>한 줄:</strong> 반사실적 추론은 아무 세계나 지어내는 일이 아니다.</p>
+<h2 id="argument-05-02" data-concept-id="argument-05-02">1-2. 대상·관계·사태·사건·행위 ★★★★☆</h2>
+<p><strong>교재 92–94쪽 / 문단의 목적:</strong> 사실을 구성하는 것을 설명한다. 대상은 철수·영희·벽돌·빗자루처럼 지칭할 수 있는 구체적 사물이고, 관계는 그 대상이 결합한 방식이다. 대상들의 결합이 사태이며, 그 사태가 실제 성립하면 사실이라고 한다.</p>
+<p>열차로 부산에서 서울까지 이동했다는 사건은 사람과 열차가 시간의 흐름에 따라 여러 위치를 차지한 사태들의 결합으로 풀어 쓸 수 있다. 이때 <strong>번역</strong>은 다른 기술로 바꾸어도 참·거짓의 판정이 달라지지 않는다는 뜻이다. 교재의 열차 예는 이 논리 구조를 익히기 위한 것이며 표기된 날짜·열차편을 실제 운행 연혁으로 외우지 않는다.</p>
+<p>‘샘이 숀을 찼다’는 행위는 샘에 의한 숀의 차임이라는 사건이 적어도 하나 있다는 식으로 분석할 수 있다. <strong>심화:</strong> ‘적어도 하나 존재한다’고 논리적으로 나타내는 것이 존재양화다. 행위를 사건으로, 사건을 시공간적 결합으로 풀어 보는 이유는 어떤 사실을 주장했는지 명확히 하려는 것이다.</p>
+<p>공이 둥글다는 것은 표면과 중심의 공간 관계로, 노랗다는 것은 빛·눈·지각의 조건과 결합해 설명할 수 있다. 하지만 ‘기부를 거절한 것은 정의롭지 못했다’에는 행위 사실에 더해 규범적 평가가 있다. <strong>물리적 배열만 말하고 정의의 판단까지 끝냈다고 해서는 안 된다.</strong> <strong>한 줄:</strong> 실제 사태를 묘사하는 것과 그 사태가 옳은지 평가하는 것은 다른 단계다.</p>
+<h2 id="argument-05-03" data-concept-id="argument-05-03">1-3. 빗자루와 집 안의 개: 이름도 존재를 약속한다 ★★★★☆</h2>
+<p><strong>교재 94–96쪽 / 문단의 목적:</strong> 복합 대상의 이름이 여러 사실을 한꺼번에 함축한다는 점을 보인다. 빗자루는 비와 자루가 특정 방식으로 결합한 대상이다. ‘도구함에 빗자루 두 개가 있다’는 말을 부품과 결합 관계로 풀 수도 있다. 일상에서는 빗자루라고 부르는 것이 빠르지만 처음 배우는 사람에게는 부품의 결합을 설명해야 할 수 있다. 기계의 A·B·C 모델 이름을 배우기 전 조립 구조를 먼저 보는 예도 같다.</p>
+<p><strong>룸메이트의 거짓말:</strong> B가 A에게 ‘집 안에 큰 개가 날뛴다’며 못 들어가게 한다. 실제 아무것도 없었다. B는 ‘존재한다는 말은 안 했다’고 빠져나갈 수 없다. 개가 날뛴다는 말 자체가 그런 개의 존재를 함축하기 때문이다. 이것이 존재론적 언질이다.</p>
+<p>법에서도 ‘공익 I를 실현한다’고 부르면 I가 실제 이익을 낳고 공익의 규범적 요건도 갖춘 것처럼 전제할 수 있다. 입법자가 공익이라고 생각했다는 심리적 사실만으로 그 전제가 참이 되지는 않는다. 문제 175의 우생학적 출산 통제 예에서도 국가안전이라는 이름이 차별적 통제를 정당한 공익으로 바꾸지 못한다.</p>
+<p><strong>심화의 경계:</strong> 더 이상 나뉘지 않는 완전 단순 대상이 있는지는 어려운 철학 쟁점이다. 이 강의의 법논증에서는 복합 대상을 다루므로 그 논쟁부터 해결해야 할 필요는 없다. <strong>한 줄:</strong> 명사 하나에도 증명할 사실과 평가가 압축될 수 있다.</p>
+<h1>2. 기술의 두께를 읽는 법</h1>
+<h2 id="argument-05-04" data-concept-id="argument-05-04">2-1. 같은 행위를 다른 목적에 맞춰 재기술하기 ★★★★☆</h2>
+<p><strong>교재 96–97쪽 / 문단의 목적:</strong> 기술은 사물·과정의 내용과 특징을 서술하는 것이며, 기술 방식은 목적에 따라 달라짐을 설명한다. 기술은 技術이라는 솜씨가 아니라 記述이라는 서술이다. 하나의 사태를 다른 방식으로 다시 서술하면 재기술이다.</p>
+<p>‘복수하고 있었다’는 동기를, ‘체스의 루크를 움직였다’는 규칙 속 행위를, ‘그를 죽였다’는 결과를, ‘옳은 일을 했다’는 평가를 드러낸다. 돈을 갚은 사건도 ‘오늘 아침 1천만 원을 이체했다’, ‘채무를 이행했다’, ‘10년 동안 바라던 일을 마쳤다’로 달리 설명할 수 있다. <strong>각 말이 실제로 참일 조건과 어떤 측면을 설명하려는지</strong>를 확인해야 한다. 아무 송금이나 모두 변제라는 뜻은 아니다. <strong>한 줄:</strong> 같은 일에 여러 설명이 가능하지만 모두 같은 정보를 전면에 놓지는 않는다.</p>
+<h2 id="argument-05-05" data-concept-id="argument-05-05">2-2. 죽음을 야기했다·죽였다·살인범죄를 저질렀다 ★★★★★</h2>
+<p><strong>교재 97–99쪽 / 문단의 목적:</strong> 두께는 문장의 길이가 아니라 평가와 추가 사실의 포함 정도임을 보여 준다. 얇은 기술은 상대적으로 적게, 두꺼운 기술은 상대적으로 많이 포함한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재의 사건</th>
+<th>D1 죽음을 야기</th>
+<th>D2 죽이는 행위</th>
+<th>D3 살인범죄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C에게 묶인 A가 물체처럼 던져져 B가 추락</td>
+<td>참</td>
+<td>거짓</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>C의 생명을 구하기 위해 불가피하게 B를 죽임: 정당방위가 성립하는 설정</td>
+<td>참</td>
+<td>참</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>A가 충동으로 B를 찔러 죽임: 다른 조각사유가 없는 설정</td>
+<td>참</td>
+<td>참</td>
+<td>참</td>
+</tr>
+</tbody></table>
+<p>첫 사건은 A의 몸이 원인이 되었어도 A의 의지에 따른 행위가 아니다. 둘째는 의도한 행위이지만 정당화될 수 있다. 셋째의 범죄 결론에는 위법성과 책임에 관한 사실·평가까지 필요하다. 이 표는 <strong>교재가 정의한 단계</strong>다. 일상어 ‘죽였다’가 언제나 고의를 뜻한다는 일반 언어 규칙으로 확대하지 않는다.</p>
+<p>포함 관계가 성립하는 같은 사태의 기술에서는 <strong>두꺼운 기술이 참이면 그 안의 얇은 기술도 참</strong>이다. 얇은 기술만 참이라고 더 두꺼운 평가까지 참인 것은 아니다. 따라서 얇은 기술에는 동의하면서 두꺼운 기술에는 동의하지 않을 수 있다. 아무 관련 없는 두 문장 사이에도 이 관계가 자동 성립하는 것은 아니다.</p>
+<p><strong>각주 보완:</strong> 단순히 ‘걷는다’도 의식·의도라는 의미를 담을 수 있어 완전히 얇은 것은 아니다. 몽유병 상태의 신체 이동과 구별해야 하는 사건도 있다. <strong>한 줄:</strong> 결과가 발생했다는 말 속에 의도·위법성·책임까지 자동으로 들어 있지는 않다.</p>
+<h2 id="argument-05-06" data-concept-id="argument-05-06">2-3. ‘소유자’와 ‘공익’이 먼저 결론을 말해 버릴 때 ★★★★★</h2>
+<p><strong>교재 99–100쪽 / 문단의 목적:</strong> 서술어뿐 아니라 명사에도 두꺼운 판단이 들어감을 보인다. A와 B가 계약하고 3억 원을 주고받고 부동산을 인도했으며 등기부에 A가 기재되었다. 그래도 A가 유효하게 소유권을 취득했는지에는 계약 효력·B의 권리 등 추가 검토가 필요하다.</p>
+<p>교재는 진의 아닌 의사표시·반사회질서·사해행위 등을 검토할 사정으로 든다. <strong>주의:</strong> 진의 아닌 표시가 언제나 무효인 것은 아니며, 사해행위취소도 모든 관계에서 소유권을 처음부터 없애는 효과라고 단순화하면 안 된다. 이 강의의 핵심은 개별 민법 요건을 생략한 채 등기 사실만으로 권리 결론을 끝내지 말라는 것이다.</p>
+<p>소유권 자체가 다투어지는 사건에서 ‘소유자 A가 저당권을 설정했다’고 전제하면 바로 증명할 소유권을 몰래 확정한다. 공익 여부가 다투어지는데 ‘공익을 달성하므로 제한은 정당하다’고만 말하는 것도 같다. <mark class="pink">이름을 붙이는 것은 그 이름의 법적 요건을 증명하는 일이 아니다.</mark> <strong>한 줄:</strong> ‘누가 소유자인가’를 묻는 자리에서 ‘소유자 A’로 답을 시작하지 않는다.</p>
+<h2 id="argument-05-07" data-concept-id="argument-05-07">2-4. 독이 든 커피와 계약서: 참인 기술도 부적합할 수 있다 ★★★★★</h2>
+<p><strong>교재 100–101쪽 / 문단의 목적:</strong> 적절한 두께는 해당 논증의 목적에 따라 정해야 한다. 기초 사실은 자료 D이고, 결론 C로 가려면 추가 사실과 보장책 W가 필요하다. 계약 체결, 계약서 작성, 인영이 찍힌 서류의 제출은 서로 같은 두께가 아니다.</p>
+<p><strong>커피 사례:</strong> C가 몰래 독을 넣었다. 이를 모르는 A가 B에게 커피를 건넸다. ‘A가 독이 든 액체를 건넸다’는 문장은 참일 수 있다. 그러나 건네는 신체 움직임을 의도했다는 것과 독을 먹일 의도가 있었다는 것은 다르다. 책임을 묻는 자리에서는 ‘독을 모른 채 커피를 건넸다’는 더 두꺼운 기술이 오히려 필요한 정보를 준다. 지식·의도에 관한 증거도 별도로 확인해야 한다.</p>
+<p><strong>시험:</strong> 어떤 기술이 참이라는 이유만으로 모든 논증에서 적합한 것은 아니다. 기술 목적을 고정하지 않으면 참여자가 자의적으로 두께를 바꾸며 서로 다른 이야기를 하게 된다. <strong>한 줄:</strong> 문장이 참인지뿐 아니라 지금 판단에 필요한 차이를 전달하는지 묻는다.</p>
+<h1>3. 최소한으로 담되 결론을 미리 넣지 않기</h1>
+<h2 id="argument-05-08" data-concept-id="argument-05-08">3-1. 원자 묘사만으로 윙크와 혼인을 이해할 수 없다 ★★★★★</h2>
+<p><strong>교재 102–105쪽 / 문단의 목적:</strong> 무조건 얇을수록 객관적이고 좋다는 생각을 막는다. 헌법소원 청구인을 세포·원자의 수와 위치로 끝없이 서술하면 정작 무슨 권리가 침해됐는지 말하기도 전에 시간이 끝난다. 교재의 과장된 숫자는 비효율성을 보이는 설정이지 생물학 수치 암기 자료가 아니다.</p>
+<p><strong>세 번의 눈깜빡임:</strong> 철수는 티끌 때문에 한쪽 눈을 감았다. 영희는 호의 표시로 오해해 웃으며 윙크했다. 다영은 그 오해를 보고 영희를 놀리려고 흉내 냈다. 신체 움직임은 비슷해도 생리 반응·낭만적 호의·놀림은 다르다. 원자의 이동만 말하면 왜 부끄러워했고 왜 놀렸는지 이해할 수 없다. 여기의 사회적 의미는 공공행사라는 뜻이 아니라 사람들이 공유한 배경에서 행위를 이해한다는 뜻이다.</p>
+<p><strong>제도적 사실:</strong> 혼인은 두 몸이 오래 같은 공간에 있었거나 결혼식이 열렸다는 물리적 사실과 같지 않다. 대한민국 법률혼은 신고 등 유효 요건을 갖춰야 하고, 결혼식·장기간 동거 자체가 이를 대신하지 않는다. 사실혼의 별도 보호 문제는 구별한다. 입학·졸업·취업·임대차·매매도 제도 안에서 의미가 생긴다.</p>
+<p>외계인이 체스판의 말 이동을 모두 기록해도 체스의 규칙과 맥락을 모르면 체크메이트나 경기 방해를 이해하지 못한다. <strong>정확성 보완:</strong> 체크메이트는 단지 다음 수에 왕이 잡힌다는 예고가 아니라, 왕이 공격받고 합법적으로 벗어날 수 없는 상태다. 교재의 예는 사회적 규칙을 알아야 상황을 이해한다는 점에 초점을 둔다. <a href="https://handbook.fide.com/chapter/e012023">FIDE 체스 규칙</a></p>
+<p>교재가 말하는 ‘번역 가능하지만 환원 불가능’은 자연적 사실과의 대응을 기술할 수 있다고 가정해도, 사회적 의미를 설명하는 틀 없이 원자 기록만으로 제도적 의미를 전달할 수는 없다는 뜻이다. 이런 철학적 논증을 실제로 모든 뇌의 대응 지도가 완성됐다는 과학적 사실로 읽지 않는다. <strong>한 줄:</strong> 법적 판단을 시작할 만큼의 사회적 의미는 남겨야 한다.</p>
+<h2 id="argument-05-09" data-concept-id="argument-05-09">3-2. 최소 두께와 최대 두께 사이에서 판단한다 ★★★★★</h2>
+<p><strong>교재 105–107쪽 / 문단의 목적:</strong> 양방향의 한계를 정한다. 최소 두께는 의사소통과 규범적 판단을 위해 필요한 사회적 의미를 확보하는 선이다. 최대 두께는 다툴 결론·추가 사실을 입증 없이 미리 넣지 않는 선이다. 가장 얇게도, 가장 두껍게도 아닌 <strong>해당 쟁점에 적절한 두께</strong>가 필요하다.</p>
+<table>
+<thead>
+<tr>
+<th>점검 질문</th>
+<th>문제가 있으면 할 일</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이 설명만으로 달리 판단해야 할 사건들을 구별할 수 있나?</td>
+<td>의식·의도·정당방위 상황 등 필요한 사실을 추가한다.</td>
+</tr>
+<tr>
+<td>아직 입증할 사실이나 평가를 이미 포함했나?</td>
+<td>기술을 나누어 추가 사실의 증거와 규범적 보장책을 요구한다.</td>
+</tr>
+</tbody></table>
+<p>계약서가 있다는 이유만으로 곧바로 돈을 갚으라고 하면, 인영이 실제 인장과 다르다는 자료나 감정 필요를 제기할 수 있다. 문서의 존재, 진정한 작성, 유효한 계약, 현재 채무 존속을 구별한다. 반대로 유효한 채무가 이미 있다고 표현해 버렸다면 그 유효성을 뒷받침할 사실과 법적 이유를 풀어 쓰게 한다.</p>
+<p><mark class="green">너무 얇으면 필요한 차이가 사라지고, 너무 두꺼우면 증명할 결론을 미리 얻는다.</mark> <strong>원자료 주의:</strong> 041의 둘째 빈칸 앞 ‘미치지 못하는’은 뒤의 설명상 ‘넘는’으로 읽어야 한다. 183 해설 및 교재 108쪽의 ‘최소 두께의 한계’도 결론 선취를 말하는 문맥에서는 최대 두께 초과의 문제다. <strong>한 줄:</strong> 사실은 충분히, 다툴 결론은 아직 넣지 않는다.</p>
+<h1>4. 말의 두께가 법적 판단을 왜곡하는 사례</h1>
+<h2 id="argument-05-10" data-concept-id="argument-05-10">4-1. 피고인·가해자·피해자를 부르는 방식 ★★★★★</h2>
+<p><strong>교재 108–110쪽 / 가상 입법:</strong> 형사재판의 피고인을 모두 가해자·범죄자로 부르도록 법이 정했다고 가정한다. 피고인은 공소가 제기되어 범죄 성립을 판단받는 절차상 지위이지, 유죄가 확정됐다는 결론이 아니다. 반면 범죄자는 그 결론을 먼저 담는다. 특별 정의로 뜻을 좁혀 적어도 일상적 말뜻이 주는 유죄 방향의 압력을 불필요하게 만들 수 있다는 것이 교재의 비판이다.</p>
+<p><strong>해악과 책임의 차이:</strong> 교통사고로 누군가 다쳤어도 특정인에게 고의·과실 책임이 없을 수 있다. 낯선 사람에게 강도를 당한 사실은 있지만 지금 기소된 사람이 범인이 아닐 수도 있다. 따라서 피고인이 무죄라는 것과 피해 사실 자체가 없다는 것은 항상 같지 않다.</p>
+<p><strong>감금 주장 사례:</strong> 여론 조작에 관한 질문을 피하려고 공무원이 스스로 방 안에서 나오지 않은 상황을 교재가 제시한다. 실제 감금이 있었는지를 다투면서 그를 이미 ‘그 피고인에게 감금당한 피해자’라고 규정하면 결론을 선취한다. 감금 사실이 없다고 판단하는 문장 안에 감금 피해를 확정한 표현을 넣는 모순이 생긴다. 특정 실명 사건의 판결을 이 가정만으로 단정하지 않는다.</p>
+<p><strong>제한을 분명히:</strong> 이것은 모든 절차에서 ‘피해자’라는 용어 사용이 금지된다는 현행법 설명이 아니다. 보호·진술 등 절차상 호칭과 유죄 확정 판단을 구분하며, 피해 호소를 존중하는 것과 특정 피고인의 죄책을 입증하는 일을 함께 유지한다. 헌법 제27조 제4항의 무죄추정과 제103조의 독립심판이 판단을 선취하지 말라는 논거가 된다. <strong>한 줄:</strong> 절차에서 누구인지 밝히는 이름을 범죄가 증명됐다는 결론으로 쓰지 않는다.</p>
+<h2 id="argument-05-11" data-concept-id="argument-05-11">4-2. 허위 통신 사건: 다수의견과 보충의견 나누기 ★★★★☆</h2>
+<p><strong>교재 110–111쪽 / 사건 흐름:</strong> 인터넷 표현에 구 전기통신기본법이 적용됐다 → 금지되는 허위 통신의 경계가 문제됐다 → 헌법재판소는 2010.12.28. 해당 조항을 위헌으로 판단했다. 제3강에서 본 2008헌바157 등 사건이다.</p>
+<p><strong>정확한 의견 구분:</strong> ‘공익을 해할 목적’의 불명확성이 위헌 판단의 근거이고, 교재가 길게 인용한 ‘허위의 통신’의 추상성 논의는 네 재판관의 보충의견이다. 허위라는 말은 내용의 거짓과 명의·형식의 거짓을 모두 가리킬 수 있는데, 무엇을 처벌하는지 충분히 구체화되지 않았다는 지적이다.</p>
+<p><strong>쉬운 번역:</strong> ① 오래 적용되지 않던 조항이 갑자기 넓게 쓰였다. ② 금지 대상을 구체화하지 않으면 첫 적용자의 자의적 해석이 표준처럼 될 위험이 있다. ③ 국민이 경계를 미리 알 수 있도록 법문과 체계를 명확하게 해야 한다. 이 사례는 평가가 압축된 개념을 이름만 보고 분명하다고 여기는 위험을 보여 준다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=14697">결정과 보충의견 원문</a></p>
+<h2 id="argument-05-12" data-concept-id="argument-05-12">4-3. 불온도서 사건: 군의 특수성이 무엇을 정당화하나 ★★★★★</h2>
+<p><strong>교재 111–117쪽 / 등장인물:</strong> 책을 읽으려는 군인, 규율을 정한 국가, 심사하는 재판관. <strong>사건:</strong> 구 군인복무규율이 불온 표현물의 소지·전파 등을 금지했다. <strong>갈등:</strong> 군사적 특수성만으로 넓은 위임과 추상적 금지가 정당화되는가? <strong>실제 결정:</strong> 2010.10.28. 2008헌마638의 법정의견은 이 규율에 대한 기본권 침해 주장을 받아들이지 않았다. 교재의 반대 논증을 실제 위헌 결정으로 외우면 안 된다.</p>
+<p><strong>법정의견을 쉬운 말로:</strong> 군 조직과 정신전력은 특수하고 전문적이어서 행정부의 재량을 넓게 인정할 필요가 있다. 불온성도 국가의 존립·안전이나 자유민주주의 체제 등에 관한 위험과 군인의 정신전력 저해라는 제한된 뜻으로 해석할 수 있다고 보았다.</p>
+<p><strong>반대의견과 저자의 비판:</strong> 책 읽기는 사상·학문·행복추구와 인격 형성의 핵심이다. 그래서 제한의 중요한 내용은 법률이 정하고 명확하게 규율해야 한다. 2001헌마882에서 인용한 법률유보 논리는 중요한 기본권 문제일수록 공개 토론과 이익 조정을 거치는 국회의 법률 규율이 필요하다는 것이다.</p>
+<p><strong>숨은 전제 두 개를 풀기:</strong> 첫째, 국가가 불온하다고 지정한 책을 읽으면 곧바로 복무 충실이 저해된다는 것은 단순한 정의나 과학 법칙이 아니다. 둘째, 정신전력과 관련된다는 사실만으로 법률유보 원칙의 예외가 된다는 것도 별도로 논증할 규범이다. ‘특별권력관계·독자적 재량’이라는 이름에 그 결론을 넣으면 논증을 건너뛴다.</p>
+<p>교재는 베버의 사회학 고전, 장하준의 경제학 저서, 피케티 해설서까지 제한 논의에 등장한 사례를 들어 지정의 자의성을 지적한다. 이 책들이 모두 같은 해 같은 23종 목록이었다고 합쳐 읽지 않는다. 군 법무관이 헌법소원을 냈다가 징계·전역을 다투며 오랜 소송을 한 사례도 통제 장치의 현실적 어려움을 보여 준다.</p>
+<p><strong>두 원칙 구별:</strong> 국방의 중요성은 기본권 제한의 비례 판단에서 고려될 수 있다. 그렇다고 누가 어떤 형식으로 기본권 제한을 정해야 하는지의 법률유보 문제까지 자동으로 해결되지는 않는다. 군인은 일반인과 다른 정도의 거주·이전 제한을 받을 수 있어도, 모든 법치주의 원칙의 심사를 생략할 수 있다는 뜻은 아니다.</p>
+<p><strong>명확성에 대한 저자의 비판:</strong> 금지된 뜻이 매우 넓은 말을 나중에 재판관이 좁혀 설명했다고 처음부터 국민에게 분명했다고 할 수는 없다는 주장이다. 다만 <strong>정의 조항 없는 모든 개념이 자동 위헌이며 모든 한정해석이 금지된다는 확정 판례는 아니다.</strong> 182번은 이 사건의 남용 위험을 비판하는 교재의 문맥에서 읽는다. <strong>한 줄:</strong> ‘군대니까 다르다’라는 이름 대신 무엇이 왜 다른지 각각 증명한다.</p>
+<h2 id="argument-05-13" data-concept-id="argument-05-13">4-4. 후속 소송과 훈련소 전화 사건 ★★★★☆</h2>
+<p><strong>교재 114쪽 각주·117–118쪽 / 후속 사건 1:</strong> 헌법소원을 제기한 군 법무관에 대한 징계·전역이 다투어졌다. 대법원 2018.3.22. 2012두26401은 정당한 재판청구권 행사를 곧 명령 불복종으로 볼 수 있는지를 검토해 원심을 파기환송했다. 이 판결 자체를 단순히 ‘즉시 복직 확정’이라고 쓰지 않는다. 권리를 행사하는 것과 군의 명령체계를 파괴하는 행위를 구별한 점이 중요하다. <a href="https://www.scourt.go.kr/supreme/media/MediaActivityViewAction.work?gubun=706&pageIndex=1&pageSize=12&seqnum=60">대법원의 선고 설명</a></p>
+<p><strong>후속 사건 2:</strong> 책의 저자·출판사 측은 불온도서 지정으로 인한 손해배상을 청구했다. 대법원 2018.10.25. 2013다44720은 양질의 교양서까지 일괄 지정한 경우의 위법성과 명예 침해 등을 더 심리해야 한다며 파기환송했다. 모든 배상 요건과 금액이 그 판결로 확정된 것은 아니다. 교재는 오랜 사후 심사 끝에 제한 해석을 얻었다는 사실과 처음부터 법문이 명확했는지를 구별한다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=206351">판결 원문</a></p>
+<p><strong>전화 사건:</strong> 훈련병은 훈련 기간의 공중전화 통제가 통신의 자유 등을 침해한다고 주장했다. 2010.10.28. 2007헌마890의 법정의견은 군 훈련의 전문성·신속한 지휘 필요 등을 고려해 청구를 기각했다. <strong>교재식 비판의 질문:</strong> 전문성에 맞는 규율이 필요하다는 것과 포괄위임금지·비례원칙을 모두 느슨하게 적용해도 된다는 것은 같은 명제인가? 036은 실제 법정의견을 묻는 문제가 아니라 그 의견을 비판하는 입장에 적합한 주장을 묻는다.</p>
+<p><mark class="blue">제6강은 이 자료 D 안에서 ‘어떤 사태가 있다’와 ‘없다’가 어떻게 다른지 이어서 살핀다.</mark> <strong>한 줄:</strong> 사건의 실제 주문과 저자의 비판 방향을 두 줄로 나누어 외운다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>事實·事態 사실·사태</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 事(일 사): 일, 實(열매 실): 실제, 態(모습 태): 상태. <strong>③ 합친 뜻:</strong> 실제 일·대상들이 결합한 상태. <strong>④ 이름의 이유:</strong> 가능한 결합과 실제 성립을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사태는 대상들의 결합, 사실은 세계에 실제 존립하는 사태. <strong>⑥ 쉬운 말:</strong> 있을 수 있는 모습과 실제로 그런 모습. <strong>⑦ 사례:</strong> 철수와 영희가 실제 결혼함.</p>
+<p><strong>⑧ 시험:</strong> 실제 세계와 단순 가정 구별. <strong>⑨ 비교·기억법:</strong> 대상은 사물, 관계는 결합 방식.</p>
+<h3>反事實的 반사실적</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 反(돌이킬 반): 반대, 事(일 사): 일, 實(열매 실): 실제, 的(과녁 적): 성질. <strong>③ 합친 뜻:</strong> 실제와 다르게 가정함. <strong>④ 이름의 이유:</strong> 일어나지 않은 조건으로 현실의 관계를 살피기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제로 성립한 조건이 달랐을 경우의 사태를 따지는 것. <strong>⑥ 쉬운 말:</strong> 그때 달랐다면 어땠을까. <strong>⑦ 사례:</strong> 제한속도를 지켰어도 사고가 났을까.</p>
+<p><strong>⑧ 시험:</strong> 필요한 가정 외에는 현실과 인접하게. <strong>⑨ 비교·기억법:</strong> 가정한 사건이 실제 발생했다는 뜻 아님.</p>
+<h3>記述·再記述 기술·재기술</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 記(기록할 기): 기록, 述(펼 술): 서술, 再(두 재): 다시. <strong>③ 합친 뜻:</strong> 내용을 서술함·다시 서술함. <strong>④ 이름의 이유:</strong> 같은 사태의 다른 측면을 드러낼 수 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사물·과정의 내용과 특징을 설명하고 다른 방식으로 바꾸어 설명하는 것. <strong>⑥ 쉬운 말:</strong> 같은 일을 다른 목적에 맞게 말하기. <strong>⑦ 사례:</strong> 송금·변제·오랜 소망 달성.</p>
+<p><strong>⑧ 시험:</strong> 기술 技術이라는 솜씨와 다른 한자. <strong>⑨ 비교·기억법:</strong> 동기·규칙·결과·평가에 따라 기술 기능이 다름.</p>
+<h3>存在論的 言質 존재론적 언질</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 存(있을 존): 있음, 在(있을 재): 자리함, 論(논할 론): 논의, 的(과녁 적): 성질, 言(말씀 언): 말, 質(바탕 질): 담보. <strong>③ 합친 뜻:</strong> 존재한다는 말의 약속. <strong>④ 이름의 이유:</strong> 그 말을 참이라고 하려면 해당 존재를 인정해야 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 진술이 특정 대상이나 결합의 실제 존재를 함축하는 것. <strong>⑥ 쉬운 말:</strong> 그렇게 말했으면 있다는 뜻도 책임지기. <strong>⑦ 사례:</strong> 집 안에 개가 날뛰면 개의 존재를 함축.</p>
+<p><strong>⑧ 시험:</strong> 존재한다는 단어가 없어도 가능. <strong>⑨ 비교·기억법:</strong> 입법자가 공익이라고 믿음과 실제 공익은 별개.</p>
+<h3>複合對象 복합 대상</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 複(겹칠 복): 겹침, 合(합할 합): 결합, 對(대할 대): 마주함, 象(모양 상): 대상. <strong>③ 합친 뜻:</strong> 여러 부분이 합쳐진 대상. <strong>④ 이름의 이유:</strong> 명칭 하나에 여러 결합이 포함되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 더 단순한 대상·관계로 분석 가능한 대상. <strong>⑥ 쉬운 말:</strong> 부품이 연결된 하나의 물건. <strong>⑦ 사례:</strong> 비와 자루로 된 빗자루.</p>
+<p><strong>⑧ 시험:</strong> 간단한 명사에도 복합 사실 포함. <strong>⑨ 비교·기억법:</strong> 완전 단순 대상의 철학 논쟁은 심화.</p>
+<h3>歸屬 귀속</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 歸(돌아갈 귀): 돌아감, 屬(무리 속): 속함. <strong>③ 합친 뜻:</strong> 어떤 대상에 속하게 함. <strong>④ 이름의 이유:</strong> 누구의 어떤 성질인지 특정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 성질이나 책임 등을 특정 대상에 돌려 붙임. <strong>⑥ 쉬운 말:</strong> 그 사람이나 물건의 성질이라고 말하기. <strong>⑦ 사례:</strong> 공은 둥글다·행위는 부당하다.</p>
+<p><strong>⑧ 시험:</strong> 물리적 속성과 규범적 평가를 구별. <strong>⑨ 비교·기억법:</strong> 평가를 붙였다고 평가의 근거까지 제시된 것은 아님.</p>
+<h3>基礎事實 기초 사실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 基(터 기): 바탕, 礎(주춧돌 초): 기초, 事(일 사): 일, 實(열매 실): 실제. <strong>③ 합친 뜻:</strong> 판단의 바탕이 되는 사실. <strong>④ 이름의 이유:</strong> 결론에 이르기 위한 정보의 출발점이기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 규범 판단에 필요한 자료로 투입되는 사실. <strong>⑥ 쉬운 말:</strong> 판단 전에 확인하는 사건 정보. <strong>⑦ 사례:</strong> 인영이 찍힌 계약서가 제출됨.</p>
+<p><strong>⑧ 시험:</strong> D이며 W를 거쳐 C로 연결. <strong>⑨ 비교·기억법:</strong> 기초라는 이름으로 다툴 결론까지 미리 넣지 않음.</p>
+<h3>最小·最大 두께</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 最(가장 최): 가장, 小(작을 소): 작음, 大(큰 대): 큼. <strong>③ 합친 뜻:</strong> 필요한 하한·넘지 말 상한. <strong>④ 이름의 이유:</strong> 너무 얇아도 너무 두꺼워도 논증이 안 되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 최소는 사회적 이해를 위한 하한, 최대는 결론 선취를 막는 상한. <strong>⑥ 쉬운 말:</strong> 필요한 뜻은 담고 다툴 답은 빼기. <strong>⑦ 사례:</strong> 피고인은 절차 지위, 범죄자는 유죄 함축.</p>
+<p><strong>⑧ 시험:</strong> 참인 기술도 맥락에 부적합 가능. <strong>⑨ 비교·기억법:</strong> 문장 길이와 두께는 다름.</p>
+<h3>制度的 事實 제도적 사실</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 制(절제할 제): 정함, 度(법도 도): 제도, 的(과녁 적): 성질, 事(일 사): 일, 實(열매 실): 실제. <strong>③ 합친 뜻:</strong> 제도의 의미 속에 성립한 사실. <strong>④ 이름의 이유:</strong> 물리적 위치만으로 법적 지위를 알 수 없기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공유된 규칙과 사회적 의미로 성립·이해되는 사실. <strong>⑥ 쉬운 말:</strong> 규칙을 알아야 무슨 일인지 아는 사실. <strong>⑦ 사례:</strong> 혼인·입학·임대차.</p>
+<p><strong>⑧ 시험:</strong> 물리적 대응과 사회적 의미의 환원을 구별. <strong>⑨ 비교·기억법:</strong> 결혼식·동거와 유효한 법률혼은 같은 사실이 아님.</p>
+<h3>先取 선취</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선): 먼저, 取(취할 취): 취함. <strong>③ 합친 뜻:</strong> 먼저 가져옴. <strong>④ 이름의 이유:</strong> 해야 할 검증 전에 답을 확보한 척하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 나중에 입증·논증할 결론을 전제에 미리 넣는 것. <strong>⑥ 쉬운 말:</strong> 답을 미리 정해 놓고 시작하기. <strong>⑦ 사례:</strong> 소유권이 쟁점인데 소유자 A라고 부름.</p>
+<p><strong>⑧ 시험:</strong> 명사형 개념에도 발생. <strong>⑨ 비교·기억법:</strong> 필요한 사회적 의미를 모두 제거하라는 말은 아님.</p>
+<h3>法律留保 법률유보</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법): 규범, 律(법칙 률): 법률, 留(머무를 류): 남김, 保(지킬 보): 보장. <strong>③ 합친 뜻:</strong> 법률의 규율에 맡겨 둠. <strong>④ 이름의 이유:</strong> 중요한 결정을 민주적 입법에 맡기기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본권 제한 등에서 법률의 근거·규율을 요구하는 원칙. <strong>⑥ 쉬운 말:</strong> 중요한 권리 제한은 행정이 마음대로 정하지 않기. <strong>⑦ 사례:</strong> 군 독서 제한의 법률상 근거와 위임 범위.</p>
+<p><strong>⑧ 시험:</strong> 비례원칙과 별개로 심사. <strong>⑨ 비교·기억법:</strong> 중요한 본질적 사항은 의회가 직접 정할 필요.</p>
+<h3>包括委任禁止 포괄위임금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 包(쌀 포): 감쌈, 括(묶을 괄): 묶음, 委(맡길 위): 위임, 任(맡길 임): 맡김, 禁(금할 금): 금함, 止(그칠 지): 멈춤. <strong>③ 합친 뜻:</strong> 내용을 통째로 넘기는 위임을 금함. <strong>④ 이름의 이유:</strong> 위임될 내용의 기준을 법률이 제시해야 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법률이 구체적 범위 없이 중요 규율을 하위 규범에 맡기는 것을 제한. <strong>⑥ 쉬운 말:</strong> 무엇을 정할지도 안 쓰고 전부 알아서 하라 하지 않기. <strong>⑦ 사례:</strong> 군인 복무 위임이 얼마나 구체적인지 다툼.</p>
+<p><strong>⑧ 시험:</strong> 전문성이 있다는 말만으로 모든 위임 요건 면제 안 됨. <strong>⑨ 비교·기억법:</strong> 행정입법 자체를 모두 금지하는 원칙은 아님.</p>
+<h3>無罪推定 무죄추정</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 無(없을 무): 없음, 罪(허물 죄): 범죄, 推(밀 추): 미루어 봄, 定(정할 정): 정함. <strong>③ 합친 뜻:</strong> 유죄 확정 전 무죄로 대우함. <strong>④ 이름의 이유:</strong> 국가가 유죄를 입증해야 하며 절차에서 결론을 앞당기지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 형사피고인을 유죄판결 확정 전까지 무죄로 추정하는 헌법 원칙. <strong>⑥ 쉬운 말:</strong> 재판받는다는 이유만으로 범죄자라고 확정하지 않기. <strong>⑦ 사례:</strong> 피고인을 법정에서 모두 범죄자라 부르는 가상 법률 비판.</p>
+<p><strong>⑧ 시험:</strong> 피해 호소 존중과 피고인의 유죄 입증을 분리. <strong>⑨ 비교·기억법:</strong> 모든 피해자 호칭이 불법이라는 뜻 아님.</p>
+<h1>문제 연결 TOP5와 원자료 점검</h1>
+<table>
+<thead>
+<tr>
+<th>ID 끝번호</th>
+<th>출제 의도·주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>173</td>
+<td>반사실 가정의 범위 통제</td>
+</tr>
+<tr>
+<td>175</td>
+<td>복합 명사와 공익의 선취</td>
+</tr>
+<tr>
+<td>178</td>
+<td>원자료 오류: 지정 정답 ④도 교재 설명과 일치</td>
+</tr>
+<tr>
+<td>183</td>
+<td>유죄 판단을 호칭에 넣는 문제</td>
+</tr>
+<tr>
+<td>184</td>
+<td>비례원칙과 법률유보의 구별</td>
+</tr>
+</tbody></table>
+<p><strong>178번은 오류 의심 문항이다.</strong> 네 보기 모두 정의·본문과 일치한다. 특히 ④는 얇은 기술에 대한 동의가 더 쉽다고 하므로 원자료 해설과도 같은 말이다. ‘틀린 보기 ④’라는 기존 정답은 그대로 보존하되 <strong>④의 내용이 틀렸다고 외우지 않는다.</strong> 035의 ‘재기’는 문맥상 재기술이며, 041의 둘째 ‘미치지 못하는’은 ‘넘는’으로 읽는다. 실제 오답률은 제공되지 않았다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 우산 접촉.</strong> 바람에 날아간 민수의 우산이 지수를 다치게 했다. ‘민수의 우산이 상해를 야기했다’만으로 민수의 범죄가 증명되나? <strong>정답:</strong> 아니다. 행위·주의의무·예견 가능성 등 추가 사실과 규범적 평가가 필요하다. <strong>출제 의도:</strong> 얇은 사실에서 범죄로 도약 금지.</p>
+<p><strong>응용 2 · 기부금 계좌.</strong> 송금 화면을 보고 ‘기부자가 약정한 기부의무를 모두 이행했다’고 했다. 무엇을 더 확인할까? <strong>정답:</strong> 약정의 내용·효력, 송금 목적·수취인·금액, 잔여 의무 등을 확인한다. <strong>출제 의도:</strong> 두꺼운 기술 분해.</p>
+<p><strong>응용 3 · 박수.</strong> 공연 뒤 A는 감사로, B는 비꼬려고 같은 박수를 쳤다. 손바닥 이동만 적으면 충분한가? <strong>정답:</strong> 동기와 상호작용을 평가하는 자리에서는 사회적 의미를 추가해야 한다. <strong>출제 의도:</strong> 최소 두께.</p>
+<p><strong>응용 4 · 불량 판매자.</strong> 계약 위반 여부를 심사하며 첫 문장부터 ‘불량 판매자가 환불을 거부했다’고 썼다. <strong>정답:</strong> 다툴 위반·평가를 미리 넣었을 수 있다. 판매 내용과 환불 조건부터 구체적으로 서술한다. <strong>출제 의도:</strong> 최대 두께.</p>
+<p><strong>응용 5 · 지각 가정.</strong> 버스 지연 때문에 시험에 늦었는지 묻는데 ‘시험장이 없었다면 늦지 않았을 것’이라고 한다. <strong>정답:</strong> 버스 지연의 영향을 따질 목적에 필요한 부분을 넘어 사건 자체를 바꾸었다. <strong>출제 의도:</strong> 인접한 반사실 세계.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제5강</h1>
+<p><strong>TOP3:</strong> 두께의 포함 관계 / 최소·최대 두께 / 명사 속 결론 선취.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사실</td>
+<td>세계에 실제 존립하는 사태.</td>
+</tr>
+<tr>
+<td>사태</td>
+<td>대상들의 결합. 관계는 결합 방식.</td>
+</tr>
+<tr>
+<td>반사실</td>
+<td>필요한 가정만 바꾸고 현실에 가장 가깝게.</td>
+</tr>
+<tr>
+<td>기술</td>
+<td>내용·특징을 서술. 기술의 길이와 두께는 다름.</td>
+</tr>
+<tr>
+<td>재기술</td>
+<td>같은 사태를 다른 목적·측면에서 다시 설명.</td>
+</tr>
+<tr>
+<td>얇음·두꺼움</td>
+<td>평가 및 평가에 필요한 추가 사실의 상대적 포함 정도.</td>
+</tr>
+<tr>
+<td>진리 관계</td>
+<td>포함 관계에서 두꺼운 참→얇은 참, 역은 보장 안 됨.</td>
+</tr>
+<tr>
+<td>최소 두께</td>
+<td>법적 판단에 필요한 사회적 의미·사실 확보.</td>
+</tr>
+<tr>
+<td>최대 두께</td>
+<td>다툴 결론을 증거·논증 없이 미리 넣지 않기.</td>
+</tr>
+<tr>
+<td>질문 1</td>
+<td>다른 결론이 필요한 사태를 구별할 만큼 설명했나?</td>
+</tr>
+<tr>
+<td>질문 2</td>
+<td>아직 증명할 사실·규범을 이미 넣었나?</td>
+</tr>
+<tr>
+<td>함정 명사</td>
+<td>소유자·공익·범죄자·특별권력관계.</td>
+</tr>
+<tr>
+<td>독 커피</td>
+<td>건넬 의도와 독을 먹일 의도는 다름.</td>
+</tr>
+<tr>
+<td>원칙 구별</td>
+<td>공익이 중요해도 법률유보가 자동 면제되지 않음.</td>
+</tr>
+<tr>
+<td>자료 오류</td>
+<td>178은 ④도 옳음. 041 둘째 문구는 최대 두께를 넘음.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 사실을 기술한다면서 아직 논증할 결론을 먼저 넣지 않는다.</p>
+<p><strong>사례를 풀 순서:</strong> 판단 쟁점 → 인정 사실 → 빠진 사회적 의미 → 숨은 평가 → 증거와 보장책.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 이해 완료: 세 죽음 사례를 구별하고 ‘소유자’ 속 숨은 전제를 꺼낸다. 🟡 복습 필요: 두꺼운 기술은 알아도 무조건 얇게만 써야 한다고 생각한다. 🔴 이해 부족: 명칭·등기·문서가 있으면 법적 결론까지 증명됐다고 생각한다. 자가점검 기준이며 아직 실제 답안을 평가한 것은 아니다. <strong>복습 TOP3:</strong> 두께와 진리조건, 최소·최대 경계, 사실과 규범평가 분리.</p>
+<h1>문제 부록 · 19문항·76개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_035"><h4>형성평가 · 헌법논증이론_035</h4><p class="question-stem">다음 중 하나의 사태를 다른 방식으로 다시 기술하는 것을 무엇이라고 하는가?</p><ol class="choices"><li>사태</li><li>사건</li><li>속성</li><li>재기</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사태는 대상들의 결합이다.</li><li><strong>비선택</strong> · 사건은 시간 속에 발생한 일로 다시 서술하는 활동의 명칭이 아니다.</li><li><strong>비선택</strong> · 속성은 대상에 귀속하는 성질이다.</li><li><strong>선택</strong> · 원자료 재기는 문맥상 재기술을 뜻한다. 같은 사태를 다른 방식으로 다시 서술한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_036"><h4>형성평가 · 헌법논증이론_036</h4><p class="question-stem">다음은 훈련소 공중전화 사용금지가 청구인의 기본권(통신의 자유)을 침해하고 포괄위임금지원칙에 반하는지 여부에 대하여 합헌으로 판단한 헌법재판소 결정(헌재 2010. 10. 28. 2007헌마890) 법정의견의 설시 내용이다. 이를 비판하는 입장에서 제기될 주장으로 부적합한 것을 고르시오.<br><br>군의 특수한 사명을 수행하기 위하여 모든 국민에게 국방의무가 부과되고, 군인의 복무 및 군인훈련은 일반 사회생활과는 현저하게 다른 특수하고 전문적인 영역이어서 군사전문가인 지휘관에게 포괄적으로 일임할 필요가 있으며, 군대에 대한 통수와 지휘는 예측할 수 없는 다양한 상황에 대하여 신속하고 전문적·효과적으로 이루어져야 하므로, 군인사법 제47조의2가 군인의 복무에 관한 사항에 관한 규율권한을 대통령령에 위임하면서 다소 개괄적으로 위임하였다고 하여 헌법 제75조의 포괄위임금지원칙에 어긋난다고 보기 어렵다.</p><ol class="choices"><li>특수하고 전문적인 영역이라는 것은, 그 특수성과 전문성에 맞는 규율이 이루어져야 할 이유일 뿐이지, 그 영역에 관하여 포괄적인 위임을 해도 포괄위임금지원칙에 어긋나지 않는다고 볼 이유는 아니다.</li><li>헌법사안에서 국민이 국가와 맺는 관계가 특별권력관계라는 개념에 일단 포섭된다면, 그 개념 정의(定意) 자체로 그 관계의 규율에 관해서는 법률유보원칙을 완화해서 적용하여야 한다는 결론이 논리적으로 도출된다.</li><li>‘특별권력관계’는 헌법논증대화를 정밀하게 하기에는 지나치게 두꺼운 개념이다.</li><li>통신의 자유 제한으로 얻는 공익은 과잉금지원칙 심사에서 피해의 최소성이나 법익 균형성 등에서 제한의 한 논거로 고려되어야 하지, 군인의 규율에 대해 ‘포괄적으로 일임할 필요’에 의해 모든 헌법원칙의 심사를 완화할 이유로 사용되어서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 특수성에 맞는 규율 필요와 포괄위임을 허용할 근거를 분리하는 비판이다.</li><li><strong>선택</strong> · 특별권력관계라는 이름에 들어갔다는 것만으로 법률유보 완화가 정당화된다는 주장은 오히려 교재가 비판하는 결론 선취다.</li><li><strong>비선택</strong> · 규범적 결론을 미리 포함한 채 근거로 쓰기에는 부당하게 두껍다는 비판이다.</li><li><strong>비선택</strong> · 통신 제한의 공익과 법률유보·위임의 요건을 따로 심사하자는 비판이다. 실제 법정의견과 비판 입장을 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_037"><h4>형성평가 · 헌법논증이론_037</h4><p class="question-stem">세계에서 존립하는 사태들을 무엇이라 하는가?</p><ol class="choices"><li>사실</li><li>지식</li><li>결과</li><li>인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 세계에서 실제 성립하는 사태가 사실이다.</li><li><strong>비선택</strong> · 지식은 사실 자체와 구별된다.</li><li><strong>비선택</strong> · 결과는 원인에 뒤따르는 것 등으로 사실 전체의 정의가 아니다.</li><li><strong>비선택</strong> · 제시된 정의에 해당하는 개념은 사실이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_038"><h4>형성평가 · 헌법논증이론_038</h4><p class="question-stem">구체적 사물들인 대상들(things)의 결합을 무엇이라고 하는가</p><ol class="choices"><li>사태</li><li>해석</li><li>규범</li><li>마</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 구체적 대상들의 결합이 사태다.</li><li><strong>비선택</strong> · 해석은 의미를 이해하는 활동이다.</li><li><strong>비선택</strong> · 규범은 해야 할 것·허용되는 것 등의 기준이다.</li><li><strong>비선택</strong> · 제시된 정의에 해당하는 개념은 사태다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_039"><h4>형성평가 · 헌법논증이론_039</h4><p class="question-stem">법논증에서 기술에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>하나의 사태는 여러 가지 방식으로 기술될 수 있다.</li><li>얇은 기술은 규범이나 가치에 의한 평가 및 그러한 평가에 필요한 사실이 상대적으로 덜 포함된 것을 의미한다.</li><li>두꺼운 기술은 규범이나 가치에 의한 평가 및 그러한 평가에 필요한 기술이 상대적으로 더 포함된 기술을 뜻한다.</li><li>같은 사태에 대한 두꺼운 기술이 참이더라도 얇은 기술은 참이 아닐 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 동기·결과·규칙·평가 등 목적에 따라 다르게 기술할 수 있다.</li><li><strong>비선택</strong> · 얇음은 상대적으로 평가와 관련 추가 사실이 적게 포함된다는 뜻이다.</li><li><strong>비선택</strong> · 두꺼움은 상대적으로 평가와 필요한 추가 사실이 더 포함된다는 뜻이다.</li><li><strong>선택</strong> · 포함 관계의 두꺼운 기술이 참이면 그 안의 얇은 기술도 참이다. 역방향이 보장되지 않는다는 말을 뒤집었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 같은 사태에 대한 얇은 기술이 참이더라도 두꺼운 기술이 참이 아닐 수 있다. 그러나 같은 사태에 대한 두꺼운 기술이 참이라면 얇은 기술은 참이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_040"><h4>형성평가 · 헌법논증이론_040</h4><p class="question-stem">의사소통의 효율성과 이해가능성을 위해 적어도 그만큼은 담아내야 하는 사회적 의미와 가치론적·규범론적 평가를 법논증대화가 가능하기 위한 기술(記述)의 (       )라고 칭할 수 있다. (       )에 들어갈 말로 알맞은 것은?</p><ol class="choices"><li>두께</li><li>최소 두께</li><li>최대 두께</li><li>진리조건</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 두께라는 일반 개념보다 필요한 하한선을 묻는다.</li><li><strong>선택</strong> · 사회적 의미를 확보해야 하는 하한선이 최소 두께다.</li><li><strong>비선택</strong> · 최대 두께는 결론 선취를 막는 상한선이다.</li><li><strong>비선택</strong> · 진리조건은 해당 기술이 참이 되기 위한 조건이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_041"><h4>형성평가 · 헌법논증이론_041</h4><p class="question-stem">다음은 적절한 기술을 가려내는 방법이다. 밑줄 친 곳에 들어갈 말을 순서대로 올바르게 나열한 것은?<br><br>______________에 미치지 못하는 기술을 가려내는 방법은 ‘그와 같이 얇은 기술만으로는 사회적 의미를 고려할 때 분별되어야 하는 사태가 분별되지 못하는가’라는 질문을 던지는 것이 핵심이다.<br><br>____________ 에 미치지 못하는 기술을 가려내는 방법은 ‘입증내지 논증되어야 할 추가적 사실 성립이나 규범적 평가가 어떤 기술 안에 포함됨으로써 입증이나 논증 없이 선취되었는가’란 질문을 던져보는 것이다.</p><ol class="choices"><li>최소 두께, 최대 두께</li><li>최소 두께, 적절한 두께</li><li>최대 두께, 최소 두께</li><li>최대 두께, 적절한 두께</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 첫 문장은 최소 두께, 둘째의 선취 점검은 최대 두께다. 둘째 빈칸 뒤 미치지 못하는은 넘는으로 읽어야 문맥이 맞는다.</li><li><strong>비선택</strong> · 결론을 선취했는지는 적절한 두께의 일반 명칭보다 최대 한계의 문제다.</li><li><strong>비선택</strong> · 필요한 차이를 못 드러내는 문제는 최소 두께 미달이다.</li><li><strong>비선택</strong> · 첫째는 최소, 둘째는 최대 두께의 경계를 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_173"><h4>워크북 · 헌법논증이론_173</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>반사실적 세계나 미래의 가능세계는 아무런 한계 없이 상정하여 그런 세계에서 전개될 사태에 관한 진술을 재판에서 활용해도 무방하다.</li><li>과실범에 관한 형사재판에서 피고인의 주의의무위반과 피해자의 피해 사이의 인과관계에 관한 판단은, 반사실적 조건하에서 전개될 사태에 관한 추론을 필요로 한다.</li><li>조건적인 미래의 사태에 관한 진술도 재판에서 활용되는 진술이다.</li><li>과거에 실제로 성립한 조건과 다른 반사실적 조건하에서 전개될 사태에 대한 진술은, 현실세계에서 실제로 성립하는 것을 간접적으로 나타낸다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 가정은 목적에 꼭 필요한 부분 외에는 현실에 가장 인접해야 한다. 쟁점을 벗어난 세계를 임의로 만들 수 없다.</li><li><strong>비선택</strong> · 주의의무를 지켰다면 결과가 어땠을지를 비교하는 추론이 필요하다.</li><li><strong>비선택</strong> · 관련 조건이 실현되면 무엇이 일어날지에 대한 판단도 법적 논증에 쓰인다.</li><li><strong>비선택</strong> · 반사실 가정 자체가 실제 발생 사실은 아니어도 현실의 인과적 관계 등을 간접적으로 드러낼 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 반사실적 세계나 미래의 가능세계의 상정에는 명시적 한계가 있다. 다시 말해 반사실적 세계나 가능세계는, 현실세계에 관하여 유의미한 것을 드러내기 위한 목적에 꼭 필요한 가정 부분을 제외하고는 현실세계와 가장 인접한 세계여야 한다. 피고가 채무를 이행하지 않은 것과 원고의 손해가 상당인과관계가 있는지를 살피기 위해, 피고가 원고에게 아무런 채무를 부담하지 않는 반사실적 세계를 상정할 필요는 전혀 없으며, 그런 세계를 상정하여 그 세계에서 전개될 사태에 관한 진술을 확인한다고 하더라도 피고의 채무불이행이 문제된 그 재판에 아무런 도움이 되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_174"><h4>워크북 · 헌법논증이론_174</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>사건은 시공간에서 대상들이 일련의 위치를 차지함이라는 사태의 형식으로 번역할 수 있다.</li><li>행위는 사건의 일종으로 바꾸어 표현할 수 있다.</li><li>'철수가 어제 …한 것은 정의롭지 못했다'라는 진술은 물리적 대상들의 결합으로 환원될 수 있다.</li><li>'교실 도구함에 빗자루가 두 개 있다'는 형태의 복합 대상이 존재한다는 언질은 '교실 도구함에 비와 자루가 각각 두 개 있으며 각 비와 각 자루가 홈에 맞추어 결합된 채로 있다'는 형태의 복합 사태가 존립한다는 언질에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사건을 시간에 따른 대상들의 위치·관계로 풀어 쓸 수 있다는 교재의 분석이다.</li><li><strong>비선택</strong> · 행위를 일정한 주체의 사건으로 표현할 수 있다.</li><li><strong>선택</strong> · 정의롭지 못했다는 것은 규범적 평가를 포함하므로 물리적 결합만으로 환원되지 않는다.</li><li><strong>비선택</strong> · 빗자루라는 복합 대상의 존재는 부품이 특정하게 결합한 사태를 함축한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> '이 공은 둥글다'와 같은 속성 귀속 진술이 대상들의 결합으로 나타내질 수 있으려면, 그 속성은 물리적 속성으로 환원될 수 있는 속성이어야 한다. '정의롭다', '좋다'와 같은 규범 속성이나 가치 속성은 그런 환원이 불가능하므로, 물리적 대상들의 결합으로 환원될 수 없다. 이것은 대상들의 결합에 관한 진술만 전제로 삼아서는 규범이나 가치 판단을 결론으로 이끌어낼 수 없다는 중요한 논지의 근거가 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_175"><h4>워크북 · 헌법논증이론_175</h4><p class="question-stem">복합 대상에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>'법률 X가 공익 I에 기여한다'는 진술은, '법률 X가 어떤 사태를 초래하는 데 기여하고, 그와 같은 사태로의 변화로 인해 I 유형의 어떤 이익이 발생하고, 그 이익은 공익의 요건을 갖춘 것이다'라는 진술이 거짓인 경우에도, 법률 X를 입법한 사람이 그 입법 목표를 추상적인 공익 개념에 속하는 것으로 생각했다면 참이다.</li><li>'지금 집 안에 커다란 개가 미쳐 날뛰고 있다'라고 말한다면, 이는 '지금 집 안에 커다란 개이면서 미쳐 날뛰는 것이 적어도 하나 이상 존재한다'는 언질을 주는 것이다.</li><li>명시적으로 '존재한다'는 문구를 쓰지 않더라도 복합 대상을 주어나 목적어로 하는 진술은 많은 경우 존재 함축을 갖는다.</li><li>법논증에서 거론되는 대상은 언제나 복합 대상이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 입법자가 공익이라고 믿었다는 사실은 실제 이익 발생과 규범적 요건 충족을 대신하지 못한다.</li><li><strong>비선택</strong> · 개가 날뛴다는 진술은 그러한 개의 존재를 함축한다.</li><li><strong>비선택</strong> · 존재한다는 단어가 없어도 주어·목적어의 사용에 존재 언질이 포함될 수 있다.</li><li><strong>비선택</strong> · 이 교재가 다루는 법논증의 대상들은 더 단순한 구성·관계로 분석 가능한 복합 대상이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①과 같은 생각은, 복합 대상에 관하여 존재론적 언질을 부주의하게 함으로써 쟁점이 되고 있는 사태가 실제로 존립하는지 그리고 그런 사태가 규범적 요건을 갖추었는지에 대한 논증을 하지 않고서도 그런 논증이 이루어졌다는 착각에 빠진 생각이다. 입법자가 입법으로 인해 달성될 사태가 공익 개념에 속한다고 생각했다는 사실은 그 입법이 실제로 공익에 부합하는 사태를 초래하는 데 기여하는 입법이 되도록 보장해주지 않는다. 예를 들어 국가안전보장을 위해서는 튼튼한 신체를 갖춘 국민이 태어나야 하고, 그러기 위해서는 우생학적 조치를 취해야 한다고 여기면서 인종이나 민족에 따라 국민의 출산에 관한 결정권을 제한하거나 우대하여 지원하는 입법의 목적을 생각해보라. 이 입법 목적이 국가안전보장이라는 추상적 개념에 속한다고 입법자가 생각해보고 하더라도, 그 입법 목적이 실제로 공익을 위한 정당한 것이 되지는 않는다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_176"><h4>워크북 · 헌법논증이론_176</h4><p class="question-stem">사물이나 과정의 내용과 특징을 서술하는 것을 의미하는 것은?</p><ol class="choices"><li>승인(承認; approval)</li><li>규정(規定; prescription)</li><li>평가(評價; evaluation)</li><li>기술(記述; description)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 승인은 받아들여 인정하는 것이다.</li><li><strong>비선택</strong> · 규정은 정하거나 지시하는 것과 관련된다.</li><li><strong>비선택</strong> · 평가는 가치·옳고 그름 등을 판단하는 기능이다.</li><li><strong>선택</strong> · 내용과 특징을 서술하는 것이 기술 記述이다. 솜씨 技術과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_177"><h4>워크북 · 헌법논증이론_177</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>하나의 사태는 한 가지 방식으로만 기술될 수 있다.</li><li>행위에 관한 기술 중 어떤 것은 동기를 귀속시키는 기능을 한다.</li><li>행위에 관한 기술 중 어떤 것은 행위를 규칙의 맥락 속에 위치시키는 기능을 한다.</li><li>행위에 관한 기술 중 어떤 것은 결과를 알리는 기능을 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 하나의 사태도 여러 목적·측면에 따라 다르게 기술할 수 있다.</li><li><strong>비선택</strong> · 복수하고 있었다는 동기를 나타내는 설명이다.</li><li><strong>비선택</strong> · 루크를 움직였다는 것은 체스 규칙의 맥락을 드러낸다.</li><li><strong>비선택</strong> · 죽였다와 같은 표현은 행위의 결과를 드러낼 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②, ③, ④와 같은 상이한 목적에 봉사하기 위해 하나의 사태가 여러 가지 방식으로 기술될 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_178"><h4>워크북 · 헌법논증이론_178</h4><p class="question-stem">얇은 기술과 두꺼운 기술에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>얇은 기술(thin description)은 규범이나 가치에 의한 평가 및 그러한 평가에 필요한 사실이 상대적으로 덜 포함된 기술이다.</li><li>두꺼운 기술(thick description)은 규범이나 가치에 의한 평가 및 그러한 평가에 필요한 사실이 상대적으로 더 포함된 기술이다.</li><li>규범 및 가치 평가의 혼입 정도, 그리고 그러한 평가에 필요한 추가 사실의 포함 정도에 따라 상대적으로 얇은 기술과 두꺼운 기술이 나뉜다.</li><li>명제태도의 측면에서 보면 두꺼운 기술이 포함하는 얇은 기술에 대한 동의를 확보하기가 그 두꺼운 기술에 대한 동의를 확보하기보다 더 쉽다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이 보기의 얇은 기술 정의는 교재와 일치한다.</li><li><strong>비선택</strong> · 이 보기의 두꺼운 기술 정의도 교재와 일치한다.</li><li><strong>비선택</strong> · 상대적인 평가·추가 사실의 포함 정도라는 설명도 맞다.</li><li><strong>선택</strong> · 원본 정답은 ④이지만 문장 내용은 교재 및 제공 해설과 일치하여 옳다. 얇은 기술의 동의가 더 쉽다는 설명이다. 현재 네 보기에는 명백한 오답이 없어 문항·정답 데이터 오류로 표시한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 명제태도의 측면에서 보면 얇은 기술에 대한 동의를 확보하기가 두꺼운 기술에 대한 동의를 확보하기보다 더 쉽다. 두꺼운 기술에 동의하려면, 그 두꺼운 기술이 포함하는 얇은 기술에 대한 동의에 더해 두꺼움을 초래한 규범론적 또는 가치론적 평가의 타당성과 그런 평가에 필요한 추가 사실의 성립까지 동의해야 하기 때문이다. 예를 들어 'A가 B의 죽음을 야기하는 사건이 발생하였다'는 얇은 기술에 동의하는 사람도 'A는 B를 살해하는 범죄를 저질렀다'는 두꺼운 기술에는 동의하지 않을 수도 있다. A가 C에 의해 떠밀려 B와 부딪히고 그 바람에 B가 다가오는 차량에 치여 사망했다면, 이 경우 위 얇은 기술은 참이지만 두꺼운 기술은 거짓이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_179"><h4>워크북 · 헌법논증이론_179</h4><p class="question-stem">두꺼운 기술에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>'X는 A가 소유하는 부동산이다'라는 두꺼운 기술이 참이려면 A의 X에 대한 소유권을 무효로 만들 수 있는 다른 모든 사정(사실 및 규범적 평가)이 없어야 한다.</li><li>두꺼운 기술은 술어가 아니라 명사형 개념으로 등장할 수 있다.</li><li>A가 X의 소유자임이 논증의 대상이 되고 있는 주제 그 자체임에도 불구하고 'X의 소유자 A는 B에게 유효하게 저당권을 설정하였다'는 명제를 법논증에서 사용해도 무방하다.</li><li>명사 형태로 간략히 어떤 개념을 압축하여 제시한다고 해서 논증이 필요하지 않은 부분이라고 착각해서는 안 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 소유권이라는 법적 지위는 성립·효력 요건까지 갖춰야 한다는 취지다. 개별 무효·취소 효과는 민법 요건별로 구별한다.</li><li><strong>비선택</strong> · 소유자·공익 같은 명사에도 평가가 압축될 수 있다.</li><li><strong>선택</strong> · 소유권 자체가 쟁점인데 소유자라고 전제하면 입증할 결론을 선취한다.</li><li><strong>비선택</strong> · 명사로 줄여 썼어도 그 속의 사실·평가를 논증해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 'X의 소유자 A는 B에게 유효하게 저당권을 설정하였다'는 명제는 A를 수식하는 '소유자'라는 문구를 씀으로써 A가 이미 소유자에 해당하는 법적 지위를 확보하였음을 진술한다. 따라서 A의 소유권 자체가 소송에서 다툼의 대상이 되고 있다면, A가 소유자임을 논증하면서 그 결론을 이미 선취하고 있는 두꺼운 명사형 기술인 '소유자 A'와 같은 표현을 써서는 안 된다. 이는 A가 B에게 폭행죄를 범했는지 자체가 주제가 되고 있는 형사재판에서 '피해자 B'와 같은 표현을 써서는 안 되는 것과 마찬가지이다. '피해자 B'는 'B는 피해를 입은 사람이며 B는'이라는 내용을 내포하기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_180"><h4>워크북 · 헌법논증이론_180</h4><p class="question-stem">기초사실은 규범적 판단을 내리기 위해 필요한 자료로 투입되는 사실을 의미한다. 기초사실의 논거구조에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>기초사실은 자료(D)에 해당한다.</li><li>어떤 기술이 주어진 사실에 대하여 참으로 성립하기만 하면, 그 형태의 기술이 모든 맥락의 모든 논증에서 적합하게 사용될 수 있다.</li><li>기초사실이 얼마나 얇은 기술로 제기되었는가에 따라 추가로 요구되는 자료와 규범적 보장책이 달라진다.</li><li>자료는 곧바로 결론에 도달할 수 없고 결론(C)에 도달하기 위해서는 보장책이 되는 명제(W)가 필요하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 기초 사실은 규범적 판단의 자료 D다.</li><li><strong>선택</strong> · 참이라는 것과 해당 논증 목적에 적절한 두께라는 것은 다르다.</li><li><strong>비선택</strong> · 기술에 무엇이 이미 포함됐는지에 따라 추가 자료·규범적 연결이 달라진다.</li><li><strong>비선택</strong> · 사실 자료에서 결론으로 가려면 연결을 뒷받침하는 보장책이 필요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 기술이 주어진 사실에 대하여 참으로 성립한다는 것만으로 모든 논증에서 그 형태의 기술을 사용해도 된다는 결론이 나오지 않는다. 참인 기술이라 할지라도 문제된 논의의 맥락에서 부당하게 얇거나 부당하게 두꺼운 기술이라서 부적합할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_181"><h4>워크북 · 헌법논증이론_181</h4><p class="question-stem">결론을 선취하는 내용이 묵시적으로라도 담겨 있어서는 안 된다는 제약을 지키기 위해 넘어서는 안 되는 사회적 의미와 가치론적·규범론적 평가가 담기는 정도를 법논증대화에서 허용되는 기술의 (    )라고 칭할 수 있다. (    )에 들어갈 말로 알맞은 것은?</p><ol class="choices"><li>두께</li><li>최대 두께</li><li>최소 두께</li><li>진리조건</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반적인 포함 정도가 아니라 넘지 말아야 할 상한을 묻는다.</li><li><strong>선택</strong> · 결론 선취를 막는 상한선이 최대 두께다.</li><li><strong>비선택</strong> · 최소 두께는 필요한 사회적 의미를 확보하는 하한이다.</li><li><strong>비선택</strong> · 진리조건은 참이 되기 위한 조건으로 상한선 명칭과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_182"><h4>워크북 · 헌법논증이론_182</h4><p class="question-stem">다음은 기술의 적절한 두께와 명확성 원칙 위반 판단 기준에 관한 설명이다. ㉠, ㉡에 들어갈 말로 알맞은 것은?<br><br>법령에서 명확한 정의조항 없이 ( ㉠ ) 개념을 쓰는 것은 명확성 원칙 위반으로 보아야 한다. 명확성 원칙 위반이 문제되었을 때, 법령에서 아무런 정의 규정 없이 사용하고 있어 남용의 위험에 그대로 노출되어 있는 개념을, 헌법재판관이 더 ( ㉡ ) 개념으로 바꾸어 풀이하는 것은 수사적 조작이다. 왜냐하면 위헌 여부가 문제된 법령은 바로 그렇게 ( ㉠ ) 개념을 쓰고 있는 법령이지 ( ㉡ ) 개념을 쓰고 있는 법령이 아니기 때문이다.</p><ol class="choices"><li>㉠ 두꺼운 ㉡ 얇은</li><li>㉠ 두꺼운 ㉡ 두꺼운</li><li>㉠ 얇은 ㉡ 두꺼운</li><li>㉠ 얇은 ㉡ 얇은</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 교재가 비판하는 것은 두꺼운 불온 개념을 나중에 더 얇게 바꾸어 처음부터 명확했다고 보는 판단이다. 모든 정의 없는 용어나 한정해석이 자동 위헌이라는 판례 공식은 아니다.</li><li><strong>비선택</strong> · 문제의 비판은 같은 두께를 유지했다는 것이 아니라 더 얇은 해석으로 바꿨다는 것이다.</li><li><strong>비선택</strong> · 원래 개념이 얇았다는 설명이 아니다.</li><li><strong>비선택</strong> · 원래 두꺼운 개념과 나중의 얇은 개념을 대비한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_183"><h4>워크북 · 헌법논증이론_183</h4><p class="question-stem">형사재판에서 유무죄가 가려져야 할 사람을 '가해자'라고 칭하고 피해를 입었다고 증언하거나 수사기관에서 진술한 사람을 '피해자'라고 칭하여야 한다는 내용의, 형사소송법개정안이 발의되었다고 가정해보자. 이 법률안에 관한 진술로 타당하지 않은 것은?</p><ol class="choices"><li>현행 형사소송법에서 사용되는 '피고인' 개념은 '검사에 의해 공소사실에 해당하는 행위를 하였으며 그 행위가 범죄라고 주장되는 사람'을 형사절차에서 특정하는 개념으로, 적절한 두께를 가진 개념이다.</li><li>'가해자'란 피해를 가한 사람을 가리키므로 '가해자 A는 … 이다'라는 진술은 'A는 피해를 가한 사람이며 … 이다'라는 진술과 동치이다.</li><li>&quot;형사재판에서 '가해자'라 함은 공소가 제기되어 유무죄가 가려져야 할 사람을 가리킨다&quot;라는 특별히 정의(定義)하는 규정이 법률안의 조항에 포함되어 있다면, 해당 법률안은 바람직하다.</li><li>피고인 A와, A에 의하여 감금되었다고 진술하는 증인 B 사이에 벌어진 일만이 문제되는 감금죄 사건에서, 피고인에게 감금죄 무죄를 선고하는 판결문에 '피고인 A는, 피해자 B를 감금한 사실이 없다'고 기재하게 되면, 이는 '피고인 A는, 피고인 A에 의해 감금되는 피해를 입은 B를 감금한 사실이 없다'는 모순 명제를 사용하는 것이 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 피고인은 공소제기된 절차상 지위이며 유죄 결론을 포함하지 않는다.</li><li><strong>비선택</strong> · 일상적 가해자라는 표현은 가해 사실을 이미 내포하므로 그 함축을 점검한다.</li><li><strong>선택</strong> · 특별 정의를 붙여도 일상적 유죄 함의가 불필요한 판단 압력을 만들 수 있어 바람직하다는 결론이 나오지 않는다.</li><li><strong>비선택</strong> · 이 문제는 B가 바로 A의 감금 피해를 입었다는 결론을 이름에 포함시킨 설정이다. 모든 무죄에서 피해자가 없다는 뜻도, 모든 절차상 피해자 호칭이 모순이라는 뜻도 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 다른 대안적 용어(피고인)가 있음에도 불구하고 일상용어에서 뚜렷한 규범적 함의(유죄임)를 갖는 용어(가해자, 범죄자)를 형사재판에서 굳이 가져다 쓰는 것은, 그 규범적 내용이 함축되어 지시하는 방향(유죄 판결)으로 판사의 사고를 기울게 하는 목적 이외에는 아무런 이유를 갖지 못한다. 그런 두꺼운 개념은 형사재판의 법논증대화에서 사용되기에는 기술의 최소 두께의 한계를 벗어나, 법논증대화의 참여자들에게 한쪽 방향의 결론으로 사고를 기울이도록 비인식적 이유의 압력을 부가하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_184"><h4>워크북 · 헌법논증이론_184</h4><p class="question-stem">다음 법령에 관한 진술로 타당한 것은?<br><br>군인복무규율(1998. 12. 31. 대통령령 제15954호로 개정된 것) 제16조의2(불온표현물 소지·전파 등의 금지) 군인은 불온유인물·도서·도화 기타 표현물을 제작·복사·소지·운반·전파 또는 취득하여서는 아니되며, 이를 취득한 때에는 즉시 신고하여야 한다.</p><ol class="choices"><li>국방부에서 불온하다고 지정한 책을 읽으면 군인으로서 복무의 충실에 저해가 된다는 명제는 분석 명제로서 참이거나 적어도 과학법칙적 경험 명제로서 참인 단순한 사실이다.</li><li>책 읽을 자유라는 기본권 행사 영역이 &quot;군인의 복무 기타 병영생활 및 정신전력 등과 밀접하게 관련되어 있는 부분&quot;이라는 기술은 규범적 평가 및 가치 평가가 심하게 혼입된 두꺼운 기술이다.</li><li>'특별권력관계' 또는 '군조직의 특수성'이라는 두꺼운 개념을 언급하거나 그 개념의 내용을 풀어 언급함으로써 결론을 선취하여도 무방하다.</li><li>비례의 원칙과 법률유보원칙은 동일한 원칙이므로, 비례의 원칙에서 고려될 공익이 크다면 법률유보원칙을 느슨하게 적용해도 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 지정된 책을 읽으면 복무가 저해된다는 것은 개념 분석만으로도 과학 법칙만으로도 자동 입증되지 않는다.</li><li><strong>선택</strong> · 독서와 정신전력의 관계 및 평가를 강하게 포함한 두꺼운 기술이라는 교재의 비판이다.</li><li><strong>비선택</strong> · 특수성이라는 이름 속에 논증할 결론을 넣는 것은 허용될 수 없는 선취다.</li><li><strong>비선택</strong> · 비례원칙과 법률유보는 별개다. 큰 공익만으로 법률의 규율·위임 요건을 자동 완화하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 책을 읽으면 군인으로서 복무의 충실에 저해가 된다는 것은 대단히 복합적인 사실이다. 국방부에서 불온하다고 지정한 책을 읽는 것이 곧바로 군복무의 충실에 저해가 된다고 볼 수 없는 수많은 경우가 있기 때문이다. 이를테면 불온서적으로 지정된 바 있는 막스 베버의 사회학 고전인 『프로테스탄티즘 윤리와 자본주의 정신』이 군복무 충실에 저해가 된다는 사실은 개념 분석에 의해 참임이 증명될 수도 없고 또 과학법칙을 적용하여 도출되는 경험 명제도 아니다. 따라서 ①은 틀렸고 반면에 ②는 옳다. ③과 같은 형태의 논증은 전형적으로 적절한 두께를 벗어난 두꺼운 기술로 인해 논증에서 오류를 범하는 것이다. 두 원칙은 동일한 원칙이 아니고, 법률유보원칙의 엄격성은 공익뿐만 아니라 제한되는 기본권의 성격, 그 제한의 형태, 그리고 제한의 심각성의 함수이기도 하므로 ④는 틀렸다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 05' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 05|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

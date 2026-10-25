@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제7강 당위: 행위의 이유 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block.tone-plain,.study-block.tone-term{break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 07</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제7강 당위: 행위의 이유 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>시계를 지키느라 사랑하는 사람을 놓친다면</h1>
+<p>연인이 위험에 빠졌다. 달려가면 구할 수 있는데, 도중에 연인이 준 시계를 두고 왔다는 생각이 든다. “소중한 선물이니까 시계부터 찾자.” 정말 사랑을 위한 선택일까? 제7강은 <strong>왜 어떤 일을 해야 하는지, 무엇이 정말 좋은 것인지, 좋은 것을 위한 수단이 목적을 삼켜 버리는 때는 언제인지</strong>를 가르친다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇인가</td>
+<td>행위자에게 있는 행위의 이유를 사실·가치·규범으로 나누고 가치의 구조를 이해한다.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>몸이 움직였다는 사실만으로 책임을 묻거나, 숫자가 커졌다는 이유만으로 좋은 정책이라고 판단하지 않기 위해서다.</td>
+</tr>
+<tr>
+<td>과목 속 위치</td>
+<td>사실 분석에서 본격적인 가치·규범 논증으로 넘어가는 다리다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>제6강은 입증 부담과 자유, 이번 강은 행위와 가치, 제8강은 가치와 규범의 차이다.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>수범자 아닌 존재를 비난하고, 수단을 무조건 늘리며, 자유를 없애면서 행복을 주었다고 착각한다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 143–170쪽. 형성평가 7개·워크북 16개, 총 23문항. 별표는 이 자료에서의 학습 우선순위다. <strong>사례의 지위:</strong> 교재의 철학적 정의와 정책 논증을 설명하되 이를 모두 확립된 판례·현행 조문의 문언으로 바꾸지 않는다. 특히 책임 감경, 최저임금 정책, 미국 헌법 해석에 관한 부분을 구별해서 읽는다.</p>
+<h1>1. 해야 한다고 말하려면 행위와 행위자를 알아야 한다</h1>
+<h2 id="argument-07-01" data-concept-id="argument-07-01">1-1. 당위와 행위: 윙크와 눈 깜빡임 ★★★★★</h2>
+<p><strong>교재 144쪽 / 문단의 목적:</strong> ‘해야 한다’의 적용 대상을 정한다. 당위는 해야 하는 것이고, 해야 하는 것은 행위자에게 그렇게 할 이유가 있는 것이다. ‘그렇게 하고 싶은 충동이 든다’와 같은 말이 아니다. 행위는 이유를 고려하여 하거나 하지 않기를 스스로 결정할 수 있는 정신적·신체적 움직임 또는 움직이지 않음이다. 처음부터 선택했거나 적어도 도중에 바꿀 수 있어야 한다.</p>
+<p><strong>교재 사례:</strong> 눈에 먼지가 들어가 눈을 감았다 뜬 사람과 친구에게 호감을 표시하려고 윙크한 사람은 신체 동작이 비슷하다. 그러나 ‘윙크 금지’라는 게임 규칙이 적용되는지는 다르다. 어떤 의도와 믿음으로 움직였는지 알아야 규칙에 해당하는지, 즉 포섭되는지 판단할 수 있다. 허용·금지·의무뿐 아니라 권리를 만들고 옮기는 형성적 행위도 정신적·신체적 맥락을 함께 봐야 한다.</p>
+<p><mark class="yellow">행위는 단순한 몸의 이동이 아니라 이유에 따라 선택·변경할 수 있는 의미 있는 움직임 또는 움직이지 않음이다.</mark> <strong>시험 질문:</strong> 모든 신체 움직임이 행위인가? 아니다. <strong>키워드:</strong> 의지·이유·선택 가능성·정신 상태. <strong>한 줄:</strong> 똑같이 눈을 감아도 무슨 행동인지는 마음과 맥락이 결정한다.</p>
+<h2 id="argument-07-02" data-concept-id="argument-07-02">1-2. 가만히 있는 것도 행위, 휩쓸림은 아닐 수 있다 ★★★★★</h2>
+<p><strong>교재 145–146쪽 / 문단의 목적:</strong> 부작위와 단순한 사건을 구별한다. 좁은 통로에서 누군가 지나가려는 것을 알면서 일부러 버티면 통로를 막는 행위다. 천식 발작으로 흡입기에 갈 수 없는 사람 옆에서, 쉽게 가져다줄 수 있는데도 인터넷만 보는 것은 구조하지 않는 행위다. <strong>규범적 평가 대상이라는 말과 언제나 특정 범죄가 성립한다는 말은 다르다.</strong> 형사책임은 별도의 의무와 구성요건을 따진다.</p>
+<p>몰래 수면제 주사를 맞아 잠든 사람이 납치되어 언덕에 놓인다. 잠결에 뒤척이다 굴러 내려가 행인과 충돌했다면 그 움직임 자체는 의지로 결정한 행위가 아니다. 책임의 초점은 위험한 위치에 놓은 타인의 행위로 옮겨 간다. 예측 불가능한 회오리바람에 휩쓸린 것도 비슷하다. 반대로 태풍 경고를 보고 위험을 알면서 밖으로 나갔다면 앞선 선택을 검토할 수 있다. 결과 발생 순간만 떼어 보면 안 된다.</p>
+<p><strong>워크북의 조카 사례:</strong> 조카를 위험한 제방에 데려가 놓고 물에 빠지는 것을 보며 구조하지 않는 삼촌과, 멀리 외국에서 일어난 사고를 모르고 국내에서 잠든 삼촌은 다르다. 둘 다 몸을 움직이지 않았다는 말로 같게 취급하지 않는다. <strong>시험 함정:</strong> 부작위는 행위가 아니다 → 틀림. <strong>한 줄:</strong> 가만히 있음도 선택일 수 있고, 움직였어도 선택이 아닐 수 있다.</p>
+<h2 id="argument-07-03" data-concept-id="argument-07-03">1-3. 믿음은 직접 못 바꿔도 확인하지 않은 행동은 묻는다 ★★★★★</h2>
+<p><strong>교재 145–146쪽 및 052·198번 / 문단의 목적:</strong> 믿음 상태와 믿음을 형성한 과정을 분리한다. 지구가 태양 주위를 돈다는 것을 아는 사람이 의지 한 번으로 그 반대를 진심으로 믿을 수는 없다. 믿음 상태 자체는 의지로 선택하는 행위가 아니다. 그러나 확인할 자료가 있다는 것을 알면서 귀찮아서 안 보는 것은 선택한 행위다.</p>
+<p><strong>썰매 사건:</strong> 철수는 아래 길에 사람이 없다고 굳게 믿는다. 한 번 출발하면 멈추거나 방향을 틀기 어려운 썰매를 타고 내려가다 나무 뒤에서 나온 행인을 다치게 한다. “정말 없다고 믿었어요”만으로 책임이 끝나지 않는다. 출발 전 확인할 수 있었는지, 위험을 예견·회피할 주의의무를 위반했는지 살핀다. 반대로 다쳤다는 결과만으로 곧 과실치상이 되는 것도 아니다.</p>
+<p><strong>법률상담 사례:</strong> 정확한 답을 위해 판례를 다시 찾아야 한다는 것을 알면서도 확인하지 않은 변호사의 부작위는 평가 대상이다. 인식 없는 과실에서도 ‘위험을 몰랐음’ 그 자체보다 그 상태를 초래한 앞선 행위·부작위가 중요하다. <strong>키워드:</strong> 상태와 형성 과정, 주의의무, 결과책임 금지. <strong>한 줄:</strong> 몰랐다는 상태와 알아볼 일을 안 했다는 행동은 다르다.</p>
+<h2 id="argument-07-04" data-concept-id="argument-07-04">1-4. 행위자성은 능력이지 매 순간의 발휘가 아니다 ★★★★☆</h2>
+<p><strong>교재 146–147쪽 / 문단의 목적:</strong> 이유를 검토하고 선택할 능력을 규범의 전제로 삼는다. 팔을 들 수 있다고 항상 팔을 들고 있어야 하는 것은 아니다. 마찬가지로 행위자는 일부 행위에서 이유를 따져 결정·변경할 수 있는 능력이 있으면 된다. 모든 순간 실제로 이유를 생각해야만 행위자가 되는 것이 아니다.</p>
+<p>교재는 갓난아기·개처럼 이유를 제시하며 결정의 정당성을 주고받을 수 없는 존재를 이 의미의 행위자로 보지 않는다. 이는 인간의 존엄·권리 보유 여부나 동물의 복지 가치를 부정하는 주장이 아니다. 6개월 아기가 머리카락을 뽑았다고 성인에게 하듯 고의·과실을 묻지 않는다. 사람을 다치게 한 동물에 대한 법적 조치도 동물을 규범 위반자로 처벌한다는 설명과 다르다.</p>
+<p>성인에게 시험을 왜 준비하는지 물으면 이유를 답하고 다른 조언을 검토할 수 있다. 그에게 조언하는 사람은 상대도 이유를 이해할 수 있음을 전제한다. 무심코 머리를 긁던 사람도 차가 낭떠러지에 걸려 작은 움직임이 모두를 위험하게 하면 멈출 수 있다. <strong>시험 함정:</strong> 행위자인 사람의 모든 움직임에 행위자성이 발휘된다 → 틀림. <strong>한 줄:</strong> 능력을 가졌다는 것과 지금 그것을 썼다는 것은 다르다.</p>
+<h2 id="argument-07-05" data-concept-id="argument-07-05">1-5. 수범자: 규칙을 따를 능력과 그 규칙의 성원됨 ★★★★★</h2>
+<p><strong>교재 148–149쪽 / 문단의 목적:</strong> ‘누구에게 이 규칙을 지키라 할 수 있는가’를 묻는다. 첫째 수범능력: 규범을 이해하고 상황에 적용하여 행동할 능력이다. 행위자성이 뼈대지만 법·문화·단체 규칙에서는 규칙을 고지받고 이해할 공정한 기회도 필요하다. 낯선 언어의 나라에 막 표류한 사람은 행위자라도 복잡한 현지 규칙을 즉시 이해하기 어렵다. 이는 <strong>외국인은 법 적용을 모두 면제받는다</strong>는 법리가 아니다.</p>
+<p>훈련받은 침팬지가 사람을 공격하지 않아도 규범을 이해해 준수한 것과는 다르다. 스트레스로 공격했다면 규범을 알면서 위반한 것이라고 비난하지 않는다. 동물에 대한 처분을 정한 법령의 수범자는 그것을 적용하는 사람이다. <strong>규범에 우연히 일치하는 움직임 ≠ 규범의 준수.</strong></p>
+<p>교재는 사건의 인과관계 전반에서 행위자성이 부족하면 책임 감경, 결여되면 책임 조각을 설명한다. 다만 이것은 책임의 이론적 기초다. 현행 형법의 심신미약이 언제나 필요적으로 감경된다는 뜻은 아니다. 2018년 개정 뒤 제10조 제2항은 임의적 감경 구조다. 심신장애의 구체적 요건과 원인에 있어서 자유로운 행위 등은 따로 확인한다. <a href="https://law.go.kr/LSW/precInfoP.do?precSeq=214247">대법원 2018도5475 전원합의체의 임의적 감경 설명</a></p>
+<p>둘째 성원됨: 그 규범 질서가 적용되는 세계에 속해야 한다. 회사 규칙은 임직원, 교회 규칙은 해당 교회 구성원, 당규는 당원에게 적용된다. 비당원에게 당원 징계를 할 수는 없다. 비당원이 명예를 훼손했다면 별도로 국가의 법이 적용되는 것이지 당규가 확대되는 것이 아니다. 관광객은 시민권이 없어도 그 나라 법질서에 부분적으로 속한다. 두 국가 사이의 조약도 그 규범관계의 범위를 정해 봐야 한다. <strong>한 줄:</strong> 이해·실행할 능력과 그 규범의 적용 범위 안에 있다는 두 조건을 묻는다.</p>
+<h1>2. 사실은 어떤 방식으로 행위의 이유가 되는가</h1>
+<h2 id="argument-07-06" data-concept-id="argument-07-06">2-1. 이유는 사실·가치·규범, 충동과는 다르다 ★★★★☆</h2>
+<p><strong>교재 149–150쪽 / 문단의 목적:</strong> 행위를 찬성하거나 반대하는 데 관련되는 고려사항을 이유라고 정의한다. 사실은 실제 성립하는 사태, 가치는 누리거나 얻으면 주체에게 좋은 것, 규범은 수범자들의 관계·지위를 정하는 권리와 의무의 할당이다. 다음 강은 규범을 본격적으로 다룬다.</p>
+<p>먼 지역의 내일 회의가 공식 취소되었다. 회의 참석이라는 목적 때문에 그곳에 가야 한다는 이유는 사라졌다. 다른 방문 목적이 있다면 이야기가 달라지지만, ‘회의가 없는데 회의를 하러 반드시 가야 해’라는 충동만으로 당위를 만들 수는 없다. 교재의 반복적 손 씻기 사례도 충동이 존재한다는 사실과 그 행동의 타당한 이유를 구별하려는 예다. 특정 행동만으로 누군가의 질환을 진단하라는 뜻은 아니다. <strong>한 줄:</strong> 하고 싶은 마음이 생긴 원인과 그 일을 해도 되는 이유는 별개다.</p>
+<h2 id="argument-07-07" data-concept-id="argument-07-07">2-2. 유관한 이유는 반드시 결론을 결정하지 않아도 된다 ★★★★★</h2>
+<p><strong>교재 150–152쪽 / 문단의 목적:</strong> 무관한 정보와 결정적이지 않은 정보를 구별한다. 광주에서 서울로 가는데 강릉발 버스가 편하다는 정보는 보통 무관하다. 광주에서 탈 기차가 밤 9시에야 있다는 정보는 일정·비용·안전·편안함과 함께 고려할 관련 사실이다. 그래도 기차를 고를 수는 있다. 선택을 뒤집지 못했다고 관련성까지 없어지는 것은 아니다.</p>
+<p>작은 흠집이 있는 의자 한 개만 있어 다시 오는 수고 때문에 그냥 산다. 그렇다고 흠집이 무관한 것은 아니다. 같은 가격·모양·조건의 깨끗한 의자가 바로 옆에 있으면 그쪽을 고를 이유가 있다. 흠집이 훨씬 많아도 선택이 달라질 수 있다. <strong>다른 사정이 동일할 때 선택에 차이를 낼 수 있음</strong>이 유관성의 단서다. 그 배경에서 찬반을 확정하는 것이 결정적 이유다.</p>
+<p><strong>전등 사건:</strong> 길동은 늘 퇴근 후 스위치를 올린다. 어느 날 악인이 몽룡을 납치하여 전선에 감고 그 스위치에 연결했다. 몽룡이 “올리면 내가 죽어요”라고 알렸다. 그 연결 사실은 단순한 방 밝히기를 사람을 죽게 하는 행동으로 바꾼다. 알고도 실행하는 경우의 의도·인식까지 봐야 한다. 유관한 사실은 행위 결과뿐 아니라 행위 자체의 성격·규모·지위도 바꾼다. <strong>한 줄:</strong> 유관은 영향을 줄 수 있음, 결정적은 이 배경에서 결론을 확정함이다.</p>
+<h2 id="argument-07-08" data-concept-id="argument-07-08">2-3. 질문과 선결 쟁점이 바뀌면 관련성도 바뀐다 ★★★★★</h2>
+<p><strong>교재 152–154쪽 / 문단의 목적:</strong> 사실마다 영구적인 ‘유관’ 딱지가 붙어 있지 않음을 설명한다. 대여금 청구에서는 실제 대여가 있었는지가 중요하고 보통 출신 지역·학력·수면 습관은 무관하다. 직업 제한 사건에서는 어떤 활동을 금지했는지가 중요하며 입법 정당이 재판관의 지지 정당인지와는 별개다. 교재의 이율·일자 예시는 규범적 결론에 필요한 사실을 보이려는 예이지 모든 사건의 현재 지연손해금 계산식이 아니다.</p>
+<p>학력은 학위가 필요한 채용 분쟁에서는 관련된다. 교재의 J.D.와 J.S.D. 예시는 어느 학위를 법적으로 어떻게 취급하는지 아직 다투는 설정이다. 오늘의 모든 채용에서 어느 하나만 인정된다는 결론이 아니다. 기초생활수급 여부도 통상의 표현의 자유 사건에서는 무관할 수 있지만 생계급여의 인간다운 생활 보장 문제에서는 중요하다.</p>
+<p><strong>보증금 사건:</strong> 영희는 철수에게 보증금 1천만 원을 달라고 한다. 그런데 철수는 임대인도 채무 인수자도 아니고 계약과 전혀 무관한 사람이다. 보증금 액수와 기간 만료를 더 살펴도 그에게 반환책임을 물을 수 없다. 이 설정에서는 철수가 법적 반환의무를 지는 사람인지가 선결 쟁점이다. 틀린 상대에게 청구했다는 전제이므로 <strong>기각</strong>을 말하며 모든 절차상 잘못을 각하라고 부르지 않는다.</p>
+<p><mark class="green">법적 질문과 먼저 해결할 쟁점이 정해져야 어떤 사실을 어떤 방식으로 고려할지 알 수 있다.</mark> 사실 자체만으로 자동으로 ‘해야 한다’가 나오지 않는다. <strong>시험:</strong> 206번은 계약 만료가 임대인 여부보다 선결이라고 뒤집는다. <strong>한 줄:</strong> 답할 질문부터 정해야 중요한 사실도 정해진다.</p>
+<h1>3. 좋다는 것은 무엇이고 어떻게 알아보는가</h1>
+<h2 id="argument-07-09" data-concept-id="argument-07-09">3-1. 가치의 출발점과 돌봄으로의 확장 ★★★★☆</h2>
+<p><strong>교재 154–156쪽 / 문단의 목적:</strong> 먼저 한 주체에게 좋은 것을 파악한 뒤 더 넓은 가치 논의로 나간다. 출발 정의에서 가치는 그것을 누리거나 그러한 사태를 만들 일응의 한 이유가 되는 좋은 것이다. 일응은 일단 한쪽 방향을 지지한다는 뜻이지 언제나 최종 결정을 지배한다는 뜻이 아니다.</p>
+<p>이 정의만으로 모든 경우가 끝나지는 않는다. 아기는 판단 능력이 없어도 굶주림·고통은 나쁘고 적절한 영양·발달은 좋다. 공중화장실을 깨끗이 쓰는 것은 내게 조금 불편해도 다음 사람에게 좋다. 친구의 책이 잘 팔려 기쁜 것은 친구에게 얻어낼 후속 이익 때문만이 아니다. 친구에게 좋은 일이 생겼다는 것 자체가 우정의 기쁨이다.</p>
+<p>왜 사리적인 일인칭에서 시작할까? 다른 존재에게 좋은 것을 판단할 때도 그 존재가 판단할 수 있다면 무엇을 선택할 이유가 있는지 물어야 한다. 내 취향을 남에게 강요하면서 ‘너를 위한 것’이라 부르면 안 된다. 적절한 식사의 좋음을 이해한 뒤 아이에게 맞는 영양을 고려하듯 자기 관점의 복리 분석에서 돌봄 관점으로 확장한다. <strong>사리적 = 자기 이익에 관심, 반드시 이기적 = 타인 무시라는 뜻은 아님.</strong></p>
+<p><strong>154쪽 심화 각주:</strong> 비교하는 모든 가능 세계에서 주체가 계속 존재해야만 가치 비교가 가능한 것은 아니라는 논점이다. 교재는 극단적 박해 아래 생존과 죽음의 비극적 선택을 예로 든다. 이 예의 기능은 비교 가능한 사태의 범위를 묻는 것이지 현실의 자기 위해를 권고하는 데 있지 않다. <strong>한 줄:</strong> 나에게 좋은 것의 구조를 먼저 이해하고 타인의 관점에 맞춰 확장한다.</p>
+<h2 id="argument-07-10" data-concept-id="argument-07-10">3-2. 비교 심사: 다른 것은 같고 X만 더 있다면 ★★★★★</h2>
+<p><strong>교재 156–157쪽 / 문단의 목적:</strong> 막연한 ‘좋음’을 비교 조건으로 풀어 준다. A와 B의 다른 조건은 모두 같고 A에만 X가 추가된다. 합리적인 주체가 A를 선호할 만하다면 X는 가치가 있다. 고통·지루함·추함·거짓의 추가는 보통 이 심사를 통과하지 못하고, 쾌락·미·진리 또는 고통·거짓 믿음의 제거는 통과한다는 것이 교재의 설명이다.</p>
+<p>조건을 함께 바꿔서는 안 된다. 고통을 더하는 동시에 생명을 구한다면 고통만의 추가를 비교한 것이 아니다. 실제 선택이 언제나 가치의 정확한 지표인 것도 아니다. 교재는 합리적으로 선호할 <strong>이유가 있는가</strong>를 묻는다. <strong>207번 함정:</strong> 무인도에서 혼자 건강을 누리는 것도 좋을 수 있다. 그렇다고 건강 자체가 곧 정의·의무라는 관계적 개념이 되는 것은 아니다. <strong>한 줄:</strong> 다른 조건을 고정하고 X가 더 있는 삶을 택할 이유를 묻는다.</p>
+<h2 id="argument-07-11" data-concept-id="argument-07-11">3-3. 사실을 알아도 가치에 반응하지 못할 수 있다 ★★★★☆</h2>
+<p><strong>교재 157–158쪽 / 문단의 목적:</strong> 사실의 인식과 좋고 나쁨의 평가를 나눈다. 아무 다른 이유도 없이 손을 불에 대며 고통을 반복하는 사람은 불이 뜨겁다는 사실을 정확히 알아도 고통의 나쁨에 적합하게 반응하지 못한다. 그러나 불길이 유일한 탈출로라면 화상을 감수하고 나오는 것은 더 큰 위험을 피하는 합리적 행동일 수 있다.</p>
+<p>‘고통은 나쁘다’를 알아보는 것은 적합한 반응, 충돌하는 가치의 비중을 제대로 고려하는 것은 적절한 고려다. 고통이 일응 반대 이유라고 해서 어떤 상황에서든 고통을 피하는 선택이 최종 답은 아니다.</p>
+<p>교재는 극심한 통증을 오래 겪는 삶과 통증을 조절하되 더 짧은 삶의 <strong>가상적 선택</strong>을 제시한다. 이는 진통제가 실제로 항상 수명을 줄인다는 의학적 사실 주장이 아니다. 가정한 사실을 모두 확정해도 삶의 길이와 삶의 질에 대한 가치 판단 없이는 최종 선택이 도출되지 않는다는 논증이다. 실제 치료는 이 예로 판단하지 않는다. <strong>한 줄:</strong> 사실은 선택의 조건을 알려 주고 가치 판단은 그 조건을 어떻게 평가할지 알려 준다.</p>
+<h2 id="argument-07-12" data-concept-id="argument-07-12">3-4. 잔인하다는 말에는 평가가 들어 있다 ★★★★★</h2>
+<p><strong>교재 158–159쪽 / 문단의 목적:</strong> 두꺼운 기술을 순수 사실처럼 쓰는 오류를 막는다. ‘잔인하다’는 단지 고통의 양이 크다는 보고가 아니다. 불필요하거나 과도한 고통이라는 가치·규범적 평가가 들어 있다. “잔인한 일이므로 나쁘다”에서 사실만으로 가치를 얻었다고 생각했다면 이미 첫 단어에 평가를 넣었는지 살핀다.</p>
+<p>감염으로 생명이 위험하여 불가피하게 팔을 절단하는 치료와, 재미로 또는 절도 처벌을 위해 팔을 절단하는 행위는 물리적 손상이 비슷해도 맥락·목적·필요성이 다르다. 교재는 후자의 처벌을 비판하면서 범죄자를 이유에 반응하는 행위자로 대우한다는 전제와 신체를 원인으로 응징하는 생각의 충돌까지 검토한다. 이는 특정 수술의 의학적 필요성을 여기서 판정하라는 뜻이 아니다.</p>
+<p>미국 수정헌법 제8조의 잔인하고 비정상적인 형벌 문제도 고통의 양이나 통계적 희귀함만으로 끝나지 않는다는 것이 교재의 관점이다. 입안자들이 사형을 어떻게 생각했는지는 명제 태도에 관한 사실이지 현재의 규범 판단 그 자체가 아니다. <strong>주의:</strong> 이 설명은 교재의 해석론이다. 미국의 모든 재판이 역사적 자료를 배제한다거나 미국에서 사형 일반이 이미 위헌이라는 설명이 아니다. <strong>한 줄:</strong> ‘잔인’은 사실 보고와 평가가 함께 든 두꺼운 개념이다.</p>
+<h1>4. 목적·수단·필수 구성 부분을 구별한다</h1>
+<h2 id="argument-07-13" data-concept-id="argument-07-13">4-1. 본유적 가치와 도구적 가치는 한 활동에 함께 있을 수 있다 ★★★★★</h2>
+<p><strong>교재 160–161쪽 / 문단의 목적:</strong> 좋은 것의 서로 다른 이유를 구별한다. 본유적 가치는 그 자체가 목적이며 다른 가치로 환원되지 않는 긍정적 전반적 가치다. 교재는 진리·우정·미 등을 예로 들며 다원성을 인정한다. 편안한 거짓을 믿는 편이 즐거워도 진실을 탐구할 이유가 남는다. 친구에게서 돈·명예를 못 얻는다고 우정의 이유가 전부 없어지지는 않는다. 형편없는 작품에서 즐거움만 많이 느끼도록 가르치는 교육이 훌륭한 감식안을 길러 주는 교육과 같은 것도 아니다.</p>
+<p>도구적 가치는 다른 가치 있는 것을 얻는 수단으로서의 가치다. 화폐는 물건·서비스를 얻는 기능을 잃으면 그 <strong>화폐로서의</strong> 가치가 사라진다. 교재의 극심한 인플레이션·문명 붕괴 사례가 그 점을 보여 준다. 종이에 불을 붙이는 용도나 수집 가치는 다른 기능의 논의다.</p>
+<p>독서는 지식·문제 해결에 도움이 된다는 도구적 측면과 그 활동 고유의 지향적 즐거움이라는 본유적 측면이 함께 있다. 테니스를 즐겨도 독서의 즐거움과 완전히 같지는 않다. 읽은 내용을 많이 잊거나 직업에 당장 도움이 없어도 독서가 무의미해지지 않는다. <strong>시험 함정:</strong> 함께 있으니 개념상 구별 불가 → 틀림. <strong>한 줄:</strong> 무엇을 얻기 위해 좋은가와 그 자체로 좋은가를 나눈다.</p>
+<h2 id="argument-07-14" data-concept-id="argument-07-14">4-2. 물신숭배: 수단을 지키느라 목적을 해친다 ★★★★★</h2>
+<p><strong>교재 161–163쪽 / 문단의 목적:</strong> 구별을 놓쳤을 때 실제로 어떤 실수가 생기는지 설명한다. 어떤 수단이 특정 조건·범위에서 목적에 도움이 된다. 도움 된 경험이 쌓이자 그 수단 자체가 원래부터 좋은 것처럼 느껴진다. 목적을 잊고 수단을 늘리다가, 더 이상 도움이 안 되거나 오히려 해로운 상황에서도 계속한다. 이것이 도구적 가치의 물신숭배다.</p>
+<p><strong>시계 이야기:</strong> 연인을 사랑해서 선물 시계를 아끼던 사람이 위기에 빠진 연인을 구하러 가다가 시계를 되찾으려고 돌아선다. 징표를 지키느라 사랑하는 사람을 잃는 모순이다. <strong>수술 이야기:</strong> 수술은 필요한 환자에게 필요한 만큼 건강에 기여한다. 수술 건수 자체가 많을수록 언제나 좋은 것은 아니다. 환자의 상태를 보지 않고 수술을 늘리는 것은 목적을 놓친다.</p>
+<p><mark class="pink">도구는 목적의 가치 속성을 통째로 물려받지 않는다. 기여 조건과 한도를 계속 확인해야 한다.</mark> ‘좋은 정책’이라는 이름도 영구적인 보증서가 아니다. <strong>키워드:</strong> 제한적 기여·속성 이전의 착각·목적 훼손. <strong>한 줄:</strong> 점수가 아니라 그 점수로 이루려던 삶을 보자.</p>
+<h2 id="argument-07-15" data-concept-id="argument-07-15">4-3. 최저임금 사례: 교재는 숫자 양쪽의 물신숭배를 비판한다 ★★★★☆</h2>
+<p><strong>교재 163–166쪽 / 문단의 목적:</strong> 공공정책을 본래 목적에 비추어 점검한다. 헌법 제32조 제1항은 근로권, 고용 증진·적정임금 보장 노력, 법률에 따른 최저임금제 시행을 규정한다. 제도의 취지는 근로자의 생활을 보장하는 것이지 숫자 자체의 최대화가 아니다. 교재는 여기서 근로자 집단을 현재 취업자뿐 아니라 취업하려는 사람까지 포함해 읽는다.</p>
+<p><strong>한쪽 오류:</strong> 시급 3만 원보다 5만 원, 그보다 100만 원이 언제나 좋다고 하면 실제 고용 기회가 사라질 수 있는 한계를 보지 못한다. <strong>반대쪽 오류:</strong> 임금이 생계 유지도 못 할 정도로 낮거나 시간이 지나치게 짧은데 고용자 수만 늘었다고 성공이라 하면 역시 근로자의 복리를 놓친다. 시급·고용률은 모두 목적에 기여하는지 확인할 수단이다. 10명이 40시간 일하다 11명이 30시간 일하면 사람 수는 늘어도 총 노동시간은 400에서 330으로 줄어드는 예도 함께 본다.</p>
+<p>저자는 직업의 자유에 대한 과도한 제한을 피하는 과잉금지와 생계 보장 부족을 막는 과소보호금지를 함께 적용하고, 근로로 자기 재생산—의식주·건강 등 삶을 지속할 조건—이 가능한지와 취업 배제·소득 악화가 생기는지를 관찰하자고 주장한다. 생활 보장이 부족하면 임금 조정·사회보장·공공재 공급을, 고용 배제 문제가 생기면 인상 중지·대체 수단·국가의 고용 보완 책임을 논한다.</p>
+<p><strong>심화 각주의 논리:</strong> 저자는 국가가 적극적 규제로 고용을 배제했다면 우연히 발생한 실업을 방치한 경우와 책임이 다르다고 본다. 직접 고용이나 지원을 통한 고용·종전 소득 보전이라는 ‘최후 고용자’ 책임을 제안한다. 단순한 소득 보전만으로 직업적 자아실현의 제한까지 모두 복구하지는 못하므로 대체 수단도 필요하다는 주장이다. 행위와 방치의 차이는 자신이 낸 교통사고 피해자를 구조할 의무의 예로 설명한다. 우연히 현장을 지나간 모든 사람에게 모든 상황에서 법적 의무가 없다는 뜻으로 일반화하지 않는다.</p>
+<p><strong>반드시 구분:</strong> 이것은 저자의 헌법적 정책 논증이지 ‘고용지표 하락만 발견하면 인상이 법적으로 자동 무효’라는 확립된 판례 공식이 아니다. 최저임금이 고용에 미치는 효과는 교재 각주도 시장 여건과 실증 관찰의 문제로 다룬다. 감소를 관찰했다는 사실만으로 인과관계를 항상 확정할 수도 없다. 교재의 과거 생계급여 요건·대상 비율·자활급여 액수는 당시 설명 자료이며 현재 수급 안내로 쓰지 않는다. <strong>한 줄:</strong> 임금도 고용도 실제 삶에 도움이 되는지를 함께 확인한다.</p>
+<h2 id="argument-07-16" data-concept-id="argument-07-16">4-4. 구성적 가치: 없으면 그 좋은 것 자체가 성립하지 않는다 ★★★★★</h2>
+<p><strong>교재 166–168쪽 / 문단의 목적:</strong> 수단과 필수 구성 부분을 구별한다. 구성적 가치는 본유적 가치를 갖는 것의 필수불가결한 구성 부분이다. 자유는 종교생활·우정·직업적 자아실현의 대표적인 구성 조건이다. 음식을 먹을 수 있는데 종교적 이유로 안 먹는 금식과 식량이 없어 굶는 것은 같지 않다. 법이 특정인을 친구로 만나라고 강요하여 대화하는 것과 우정도 다르다.</p>
+<p>누구나 국가가 할당한 직업만 해야 한다면 교사가 자신의 소명에 따라 교사가 되었다는 선택의 의미가 훼손된다. 국가가 지정한 사실만 발표하게 해 놓고 역사 논문에 각주를 많이 달게 해도 학문의 자유로운 진리 탐구를 대신하지 못한다. 단순히 겉모양을 재현한 것과 그 활동의 가치를 누리는 것을 구별한다.</p>
+<p>구성적 가치는 자유만이 아니다. 공정한 경기는 승리의 성취·탁월성의 영예를 가능하게 한다. 심판의 편파 판정으로 얻은 메달에 박수를 많이 보낸다고 공정한 승리의 가치가 생기지 않는다. <mark class="blue">제5강의 행위 기술과 제8강의 규범을 연결하자. 자유·평등을 없앤 뒤 겉모양만 남기면 활동의 성격 자체가 달라진다.</mark> <strong>한 줄:</strong> 도구는 얻는 데 도움, 구성 조건은 그것이 바로 그것이게 함이다.</p>
+<h2 id="argument-07-17" data-concept-id="argument-07-17">4-5. 문화국가 판례: 좋은 문화를 정해 강요하면 될까 ★★★★★</h2>
+<p><strong>교재 168–169쪽 / 판례의 기능:</strong> 문화 향유의 자유가 문화의 가치에 어떤 역할을 하는지 실제 결정으로 보여 준다. ‘건전한 문화만 강제하면 문화국가가 된다’는 주장은 자율적인 평가·향유·성취라는 구성 조건을 놓친다. 국가의 역할은 다양한 문화가 생겨날 환경을 조성하는 데 있다.</p>
+<p><strong>등장인물 → 사건:</strong> 실제 병합 사건에는 학교 인근에서 극장을 운영하다 학교보건법 위반으로 기소된 운영자들이 있었다. 한 사건은 유치원, 다른 사건은 초등학교 인근 극장이었다. <strong>갈등 → 재판:</strong> 학교 주변에서 극장을 광범위하게 금지하는 법이 학습 환경 보호를 위해 필요한 범위를 넘었는지가 위헌법률심판에 올라왔다. <strong>헌재의 고민:</strong> 학교 보호는 중요하지만 학교의 종류와 학생들의 자율성, 극장 영업의 자유도 따로 봐야 한다. 문화 자체를 일률적으로 억제하는 것이 문화국가에 맞는가?</p>
+<p><strong>최종 결정:</strong> 2004.5.27. 2003헌가1 등은 대학 등 고등교육법상 학교 부분을 위헌, 초·중등교육법상 학교 부분을 헌법불합치로 판단하고 해당 부분 적용을 중지시켰다. 교재가 인용한 대학 부분은 성숙한 학생의 자율성을 이유로 극장의 일반적 금지가 최소침해성을 넘었다는 논증이다. 실제 사건의 등장인물을 대학생으로 바꾸어 꾸미지 않는다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=134668&mode=1">헌재 2003헌가1 등 결정</a></p>
+<p><strong>교재 인용 문장 순서대로 쉬운 번역:</strong> ① 헌법 전문·제9조 등은 문화생활과 전통문화 발전을 국가의 과제로 둔다. ② 양심·종교·표현·학문·예술의 자유가 있어야 서로 다른 문화가 자란다. ③ 국가가 하나의 취향을 편들며 문화를 통제하기보다 다양한 문화가 생길 환경을 마련해야 한다. ④ 엘리트 문화뿐 아니라 서민·대중문화도 배려 대상이다. ⑤ 대학생은 자율적으로 판단할 성숙성을 갖추었다. ⑥ 영화에 빠져 공부를 소홀히 할 가능성만으로 일반적 금지를 정당화하기 어렵다. ⑦ 그러므로 대학 주변 극장 영업의 자유를 필요 최소한보다 많이 제한했다.</p>
+<p>다른 결론으로 국가가 ‘천박하다’는 이유만으로 문화 전체를 선택해 주면 시민의 자율성과 다양성이 사라질 수 있다. 그렇다고 문화 진흥 정책이나 구체적 위험 규제를 모두 금지한다는 뜻은 아니다. <strong>한 줄:</strong> 문화국가는 하나의 정답 문화를 강요하는 국가가 아니다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>當爲 당위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 當(마땅 당): 마땅함, 爲(할 위): 함. <strong>③ 합친 뜻:</strong> 마땅히 해야 함. <strong>④ 이름의 이유:</strong> 단순한 있음과 해야 함을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 행위자에게 그렇게 행위할 이유가 있는 것. <strong>⑥ 쉬운 말:</strong> 왜 그 일을 해야 하지에 대한 답. <strong>⑦ 사례:</strong> 취소된 회의를 하러 갈 이유는 사라짐.</p>
+<p><strong>⑧ 시험:</strong> 사실·충동과 구별. <strong>⑨ 비교·기억법:</strong> 모든 일응의 이유가 최종 의무는 아님.</p>
+<h3>行爲·不作爲 행위·부작위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행): 행함, 爲(할 위): 함, 不(아닐 부): 아님, 作(지을 작): 함. <strong>③ 합친 뜻:</strong> 행함·해야 하거나 할 수 있는 일을 하지 않음. <strong>④ 이름의 이유:</strong> 몸의 이동과 규범적으로 의미 있는 행위를 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이유에 따라 선택·변경 가능한 움직임 또는 움직이지 않음. <strong>⑥ 쉬운 말:</strong> 움직여서도 가만히 있어서도 선택할 수 있음. <strong>⑦ 사례:</strong> 좁은 길에서 일부러 비켜주지 않음.</p>
+<p><strong>⑧ 시험:</strong> 부작위도 행위에 포함될 수 있음. <strong>⑨ 비교·기억법:</strong> 규범 평가 대상과 특정 범죄 성립은 별개.</p>
+<h3>包攝 포섭</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 包(쌀 포): 감쌈, 攝(당길 섭): 거두어 들임. <strong>③ 합친 뜻:</strong> 범위 안에 포함시킴. <strong>④ 이름의 이유:</strong> 규칙의 범위 속에 사건을 넣어 보기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구체적 사안이 일반 규범의 요건에 해당하는지 판단하는 것. <strong>⑥ 쉬운 말:</strong> 이 일이 그 규칙에서 말한 경우일까. <strong>⑦ 사례:</strong> 눈 깜빡임이 윙크 금지에 해당하는지.</p>
+<p><strong>⑧ 시험:</strong> 의도·믿음 등 필요한 사정을 파악. <strong>⑨ 비교·기억법:</strong> 겉모양만 같다고 같은 행위는 아님.</p>
+<h3>行爲者性 행위자성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행): 행함, 爲(할 위): 함, 者(놈 자): 사람, 性(성품 성): 성질. <strong>③ 합친 뜻:</strong> 행위자로서의 능력. <strong>④ 이름의 이유:</strong> 이유를 제시하고 수정할 수 있음을 책임 논의의 기초로 삼기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 이유를 고려하여 하거나 하지 않을 수 있는 능력. <strong>⑥ 쉬운 말:</strong> 왜냐하면을 이해하고 행동을 바꿀 능력. <strong>⑦ 사례:</strong> 위험한 차 안에서는 머리 긁기를 멈춤.</p>
+<p><strong>⑧ 시험:</strong> 능력 보유와 매 순간 실제 발휘를 구별. <strong>⑨ 비교·기억법:</strong> 행위자성 부재가 권리·복지 가치의 부재는 아님.</p>
+<h3>受範者·受範能力 수범자·수범능력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 受(받을 수): 받음, 範(법 범): 본보기·규범, 者(놈 자): 사람, 能(능할 능): 할 수 있음, 力(힘 력): 힘. <strong>③ 합친 뜻:</strong> 규범을 적용받는 주체·규범을 따를 능력. <strong>④ 이름의 이유:</strong> 지킬 수 있고 적용 대상인 존재에게 규칙을 요구하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 규범을 이해하고 상황에 적용하여 판단대로 행위할 능력을 갖추고 그 질서에 속하는 주체. <strong>⑥ 쉬운 말:</strong> 이 규칙을 이해하고 따를 수 있는 해당 사람. <strong>⑦ 사례:</strong> 회사 직원에게 취업규칙 적용.</p>
+<p><strong>⑧ 시험:</strong> 행위자성만으로 모든 규범에 대한 수범능력 완성 안 됨. <strong>⑨ 비교·기억법:</strong> 규범과 일치하는 훈련 반응과 준수는 다름.</p>
+<h3>成員 성원</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 成(이룰 성): 이룸, 員(인원 원): 구성원. <strong>③ 합친 뜻:</strong> 질서를 이루는 구성원. <strong>④ 이름의 이유:</strong> 어느 범위에 규범이 적용되는지 정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 특정 규범 질서의 적용되는 세계에 속하는 지위. <strong>⑥ 쉬운 말:</strong> 그 규칙이 적용되는 사람인가. <strong>⑦ 사례:</strong> 당원이 아닌 사람에게 당원 징계 불가.</p>
+<p><strong>⑧ 시험:</strong> 관광객의 부분적 성원됨도 인정. <strong>⑨ 비교·기억법:</strong> 시민권 같은 완전한 구성원 자격과 항상 동일하지 않음.</p>
+<h3>減輕·阻卻 감경·조각</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 減(덜 감): 줄임, 輕(가벼울 경): 가볍게 함, 阻(막을 조): 막음, 卻(물리칠 각): 물리침. <strong>③ 합친 뜻:</strong> 줄임·성립을 막거나 배제함. <strong>④ 이름의 이유:</strong> 부족과 결여의 법적 의미가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 책임·형벌의 정도를 낮추는 것과 책임 등의 성립을 배제하는 것을 구별. <strong>⑥ 쉬운 말:</strong> 가볍게 보는 것과 성립하지 않는 것을 나누기. <strong>⑦ 사례:</strong> 교재는 행위자성 부족과 결여를 대비.</p>
+<p><strong>⑧ 시험:</strong> 심신미약의 현행 임의적 감경과 이론 설명 구별. <strong>⑨ 비교·기억법:</strong> 책임 조각과 위법성 조각도 서로 다름.</p>
+<h3>有關·決定的 理由 유관·결정적 이유</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 有(있을 유): 있음, 關(빗장 관): 관련, 決(결단할 결): 결정, 定(정할 정): 확정, 的(과녁 적): 성질, 理(다스릴 리): 이치, 由(말미암을 유): 까닭. <strong>③ 합친 뜻:</strong> 관련 있음·결론을 확정하는 이유. <strong>④ 이름의 이유:</strong> 고려할 만함과 최종 결정력이 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유관은 행위·결과의 성격 등에 차이를 내는 것, 결정적은 배경에서 찬반을 확정하는 것. <strong>⑥ 쉬운 말:</strong> 신경 쓸 일이라고 꼭 그 하나로 결정되지는 않음. <strong>⑦ 사례:</strong> 의자의 작은 흠집과 재방문 수고.</p>
+<p><strong>⑧ 시험:</strong> 유관하지만 비결정적일 수 있음. <strong>⑨ 비교·기억법:</strong> 사실 자체에 영구적인 관련성 딱지가 붙지 않음.</p>
+<h3>先決爭點 선결 쟁점</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 先(먼저 선): 먼저, 決(결단할 결): 해결, 爭(다툴 쟁): 다툼, 點(점 점): 지점. <strong>③ 합친 뜻:</strong> 먼저 풀 다툼. <strong>④ 이름의 이유:</strong> 논증에 판단 순서가 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해결 결과에 따라 다른 쟁점의 관련성이 사라지거나 달라지는 쟁점. <strong>⑥ 쉬운 말:</strong> 그다음 질문을 할 필요가 있는지 먼저 확인하기. <strong>⑦ 사례:</strong> 피고가 임대인인지가 보증금 액수보다 먼저.</p>
+<p><strong>⑧ 시험:</strong> 계약 만료와 임대인 여부의 순서를 뒤집지 않기. <strong>⑨ 비교·기억법:</strong> 중요해 보이는 사실이 언제나 선결인 것은 아님.</p>
+<h3>一應·私利的 福祉 일응·사리적 복지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 一(한 일): 일단, 應(응할 응): 대응, 私(사사로울 사): 자신, 利(이로울 리): 이익, 的(과녁 적): 성질, 福(복 복): 행복, 祉(복 지): 복리. <strong>③ 합친 뜻:</strong> 일단의 방향·자기 이익에 관한 복리. <strong>④ 이름의 이유:</strong> 최종 판단 전 한 이유와 주체 관점을 특정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일응의 이유는 한 방향을 지지하되 다른 이유와 함께 고려되며 사리적 관점은 자신에게 좋음을 살피는 출발점. <strong>⑥ 쉬운 말:</strong> 나에게 좋은 이유 하나를 먼저 찾기. <strong>⑦ 사례:</strong> 고통을 피할 이유가 있어도 탈출을 위해 감수함.</p>
+<p><strong>⑧ 시험:</strong> 사리적은 반드시 타인을 무시하는 이기적 태도가 아님. <strong>⑨ 비교·기억법:</strong> 자기 관점에서 타인을 돌보는 관점으로 확장 가능.</p>
+<h3>本有的 價値 본유적 가치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 本(근본 본): 본래, 有(있을 유): 가짐, 的(과녁 적): 성질, 價(값 가): 값, 値(값 치): 값어치. <strong>③ 합친 뜻:</strong> 그 자체에 있는 가치. <strong>④ 이름의 이유:</strong> 별도 보상을 얻지 않아도 추구할 이유가 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 가치로 환원되지 않는 긍정적인 전반적 가치로서 그 자체가 목적. <strong>⑥ 쉬운 말:</strong> 그 자체로 좋은 것. <strong>⑦ 사례:</strong> 돈을 얻지 못해도 소중한 우정.</p>
+<p><strong>⑧ 시험:</strong> 진리·미·우정의 다원성. <strong>⑨ 비교·기억법:</strong> 어떤 것이 본유적이면 도구적 가치를 함께 가질 수 없다는 말은 틀림.</p>
+<h3>道具的 價値 도구적 가치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 道(길 도): 길, 具(갖출 구): 도구, 的(과녁 적): 성질, 價(값 가): 값, 値(값 치): 값어치. <strong>③ 합친 뜻:</strong> 다른 좋은 것에 이르는 도구의 가치. <strong>④ 이름의 이유:</strong> 기여하는 목적에 가치의 이유가 의존하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 다른 가치 있는 것의 수단으로서 갖는 가치. <strong>⑥ 쉬운 말:</strong> 다른 좋은 것을 얻도록 도와서 좋음. <strong>⑦ 사례:</strong> 필요한 수술이 건강에 기여함.</p>
+<p><strong>⑧ 시험:</strong> 기여하는 여건과 한도 확인. <strong>⑨ 비교·기억법:</strong> 도구적이라고 중요하지 않다는 뜻은 아님.</p>
+<h3>構成的 價値 구성적 가치</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 構(얽을 구): 구성, 成(이룰 성): 성립, 的(과녁 적): 성질, 價(값 가): 값, 値(값 치): 값어치. <strong>③ 합친 뜻:</strong> 좋은 것을 이루는 필수 부분의 가치. <strong>④ 이름의 이유:</strong> 없으면 바로 그 가치 있는 활동이 성립하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 본유적 가치를 갖는 것의 필수불가결한 구성 부분. <strong>⑥ 쉬운 말:</strong> 있으면 편한 것이 아니라 없으면 그것이 아니게 되는 조건. <strong>⑦ 사례:</strong> 자유 없는 강제 교우는 우정의 겉모양일 뿐.</p>
+<p><strong>⑧ 시험:</strong> 자유뿐 아니라 공정한 경기의 조건도 포함. <strong>⑨ 비교·기억법:</strong> 수단의 인과적 도움과 활동을 성립시키는 조건을 구별.</p>
+<h3>物神崇拜 물신숭배</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 物(물건 물): 물건, 神(귀신 신): 신, 崇(높을 숭): 높임, 拜(절 배): 숭배. <strong>③ 합친 뜻:</strong> 도구를 신처럼 떠받듦. <strong>④ 이름의 이유:</strong> 목적의 가치가 도구에 옮겨 갔다고 착각하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 제한적으로 목적에 기여하는 수단을 목적 자체의 본유적 가치처럼 여기는 오류. <strong>⑥ 쉬운 말:</strong> 목적은 잊고 수단만 무조건 늘리기. <strong>⑦ 사례:</strong> 연인을 구하는 대신 연인이 준 시계부터 찾음.</p>
+<p><strong>⑧ 시험:</strong> 최저임금 수치와 고용자 수 양쪽에 적용 가능. <strong>⑨ 비교·기억법:</strong> 단순히 물건을 좋아한다는 취향의 비난과 다름.</p>
+<h3>過剩禁止·過少保護禁止 과잉금지·과소보호금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 過(지날 과): 지나침, 剩(남을 잉): 넘침, 少(적을 소): 부족, 保(지킬 보): 보호, 護(보호할 호): 지킴, 禁(금할 금): 금함, 止(그칠 지): 멈춤. <strong>③ 합친 뜻:</strong> 지나친 제한 금지·지나치게 부족한 보호 금지. <strong>④ 이름의 이유:</strong> 국가가 너무 많이 해도 너무 적게 해도 권리가 문제되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가의 권리 제한이 과도하지 않아야 한다는 요구와 필요한 보호가 부족하지 않아야 한다는 요구. <strong>⑥ 쉬운 말:</strong> 억누르지 말고 필요한 보호도 빠뜨리지 않기. <strong>⑦ 사례:</strong> 교재의 취업 기회 제한과 근로생활 보장 비교.</p>
+<p><strong>⑧ 시험:</strong> 구체적 정책 해법과 확립된 판례 공식을 동일시하지 않기. <strong>⑨ 비교·기억법:</strong> 어떤 수치의 최대화가 곧 두 원칙의 충족은 아님.</p>
+<h3>文化國家·不偏不黨 문화국가·불편부당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 文(글월 문): 문화, 化(될 화): 변화, 國(나라 국): 국가, 家(집 가): 집단, 不(아닐 불): 아님, 偏(치우칠 편): 편향, 黨(무리 당): 편듦. <strong>③ 합친 뜻:</strong> 문화 발전을 돕는 국가·치우쳐 편들지 않음. <strong>④ 이름의 이유:</strong> 문화의 개별성·다양성이 자유 위에서 자라기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자율적이고 다양한 문화가 형성·향유될 풍토를 마련하는 문화국가의 원리. <strong>⑥ 쉬운 말:</strong> 국가 취향 하나로 모두를 줄 세우지 않기. <strong>⑦ 사례:</strong> 대학 주변 극장 금지와 대중문화의 가치.</p>
+<p><strong>⑧ 시험:</strong> 엘리트 문화만 정책 대상이라는 보기는 틀림. <strong>⑨ 비교·기억법:</strong> 문화 진흥 책임을 없애는 방임과는 다름.</p>
+<h1>문제 연결 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제 번호</th>
+<th>무엇을 확인하는가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>052</td>
+<td>믿음 상태·앞선 주의의무 위반·결과책임 구별.</td>
+</tr>
+<tr>
+<td>200</td>
+<td>행위자성이 수범능력의 충분조건인지.</td>
+</tr>
+<tr>
+<td>206</td>
+<td>임대인 여부와 기간 만료의 선결 관계.</td>
+</tr>
+<tr>
+<td>210</td>
+<td>한 활동의 본유적·도구적 가치 동시 보유.</td>
+</tr>
+<tr>
+<td>212</td>
+<td>문화국가와 문화 향유의 자유.</td>
+</tr>
+</tbody></table>
+<p>아래 부록에 <strong>23문항·92개 보기 전체</strong>를 연결했다. 실제 오답률 데이터는 없으므로 가장 많이 틀렸다고 단정하지 않는다. 주의할 함정은 <strong>결과만으로 책임 판단, 결정적이지 않으면 무관, 가치와 의무 동일시, 수단의 무조건 최대화, 자유 없는 가치 향유</strong>다. 056번 원자료의 ‘혹정’은 문맥상 ‘확정’이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 잠든 방송 진행자.</strong> 민수는 자동 조명 아래 몰래 약물을 투여받아 잠든 뒤 몸을 돌려 옆 사람을 밀쳤다. 이것만으로 민수의 선택 행위인가? <strong>답:</strong> 아니다. 비자발적인 상태가 된 경위까지 봐야 하며 타인의 투약 행위를 별도로 살핀다. <strong>출제 의도:</strong> 물리적 원인과 행위·책임의 구별.</p>
+<p><strong>응용 2 · 할인율 1위.</strong> 지연은 냉장고를 고른다. 할인율이 큰 제품이 전기를 더 쓰고 수리도 어렵다. ‘할인율 최고니까 최선’은 어떤 오류인가? <strong>답:</strong> 경제적 생활에 기여하는 지표를 목적 자체로 만든 물신숭배 위험이다. 총비용·필요·신뢰성을 함께 본다. <strong>출제 의도:</strong> 제한적 기여 관계.</p>
+<p><strong>응용 3 · 동아리 징계.</strong> 사진 동아리가 비회원 은수에게 월례 모임 불참 벌점을 매겼다. 은수가 규칙을 이해할 수 있다면 벌점은 정당한가? <strong>답:</strong> 이해 능력만으로 부족하다. 해당 단체 규범의 성원됨이 없다. <strong>출제 의도:</strong> 수범자 두 요건의 독립성.</p>
+<p><strong>응용 4 · 환불 영수증.</strong> 다온은 가게 A가 아닌 아무 관련 없는 가게 B에 A의 영수증을 내며 환불을 요구한다. 물건의 불량 정도가 먼저인가? <strong>답:</strong> B가 반환의무를 지는 주체인지가 먼저다. 채무 승계 등도 없는 무관한 B라면 불량 정도를 더 확인해도 그 청구를 받아들일 수 없다. <strong>출제 의도:</strong> 선결 쟁점에 따른 관련성 변화.</p>
+<p><strong>응용 5 · 정답이 정해진 작곡 대회.</strong> 학교는 학생의 창의성을 키운다며 특정 선율만 사용하도록 강제하고 그 선율을 가장 똑같이 복제한 작품에 창작상을 준다. 상과 박수로 창작의 가치를 보장했는가? <strong>답:</strong> 자유로운 창작과 평가의 구성 조건을 제거했다면 형식적 보상이 그 가치를 대신하지 못한다. 다만 특정 모방 기술을 연습하는 수업과 자유 창작 대회는 목적이 다르므로 구별한다. <strong>출제 의도:</strong> 구성적 가치와 활동의 성격.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제7강</h1>
+<p><strong>TOP3:</strong> 행위자와 수범자 / 유관성과 선결 쟁점 / 본유·도구·구성적 가치.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>당위</td>
+<td>해야 함, 그렇게 행위할 이유가 있음.</td>
+</tr>
+<tr>
+<td>행위</td>
+<td>이유에 따라 선택·변경 가능한 움직임 또는 부작위.</td>
+</tr>
+<tr>
+<td>믿음</td>
+<td>상태 자체와 자료를 확인하지 않은 행위를 분리.</td>
+</tr>
+<tr>
+<td>행위자성</td>
+<td>이유에 반응할 능력. 매 순간 발휘할 필요 없음.</td>
+</tr>
+<tr>
+<td>수범자</td>
+<td>수범능력 + 규범 질서의 성원됨.</td>
+</tr>
+<tr>
+<td>이유</td>
+<td>사실·가치·규범의 유관한 고려사항.</td>
+</tr>
+<tr>
+<td>유관</td>
+<td>달리 성립하면 행위·결과의 성격·규모·지위에 차이.</td>
+</tr>
+<tr>
+<td>결정적</td>
+<td>해당 배경에서 찬반을 확정. 유관과 동일하지 않음.</td>
+</tr>
+<tr>
+<td>선결 쟁점</td>
+<td>먼저 해결되면 다른 사실이 무관해질 수 있음.</td>
+</tr>
+<tr>
+<td>비교 심사</td>
+<td>다른 조건은 같고 X만 더 있을 때 합리적 선호.</td>
+</tr>
+<tr>
+<td>본유</td>
+<td>다른 가치로 환원되지 않는 목적 자체.</td>
+</tr>
+<tr>
+<td>도구</td>
+<td>다른 좋은 것을 얻는 수단. 기여 조건·한도 확인.</td>
+</tr>
+<tr>
+<td>구성</td>
+<td>없으면 그 본유적 가치가 성립하지 않는 필수 부분.</td>
+</tr>
+<tr>
+<td>물신숭배</td>
+<td>수단에 목적의 가치를 그대로 옮겨 붙임.</td>
+</tr>
+<tr>
+<td>문화국가</td>
+<td>자유·다양성이 자랄 환경. 국가 취향의 강제 아님.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 유관하지만 결정적이지 않을 수 있고, 한 활동에 본유적 가치와 도구적 가치가 함께 있을 수 있다.</p>
+<p><strong>사례를 풀 순서:</strong> 선택 가능한 행위? → 수범자? → 관련 사실·선결 쟁점? → 목적·수단·구성 조건? → 종합 판단.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 썰매·보증금·선물 시계·강제된 친구 사례를 각각 다른 개념으로 설명할 수 있다. 🟡 <strong>복습 필요:</strong> 정의는 알지만 결정적이지 않은 이유를 무관하다고 부르거나 수범자 두 조건을 섞는다. 🔴 <strong>이해 부족:</strong> 결과가 나쁘면 무조건 책임, 정책 수치가 커지면 무조건 좋은 것으로 판단한다. 이는 자기 점검 기준이며 실제 답변 없이 이해도를 확정한 평가가 아니다. <strong>복습 TOP3:</strong> 믿음과 행위, 유관성과 선결 쟁점, 가치 세 유형.</p>
+<h1>문제 부록 · 23문항·92개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_052"><h4>형성평가 · 헌법논증이론_052</h4><p class="question-stem">철수는 주위에 행인이 돌아다니지 않는다고 굳게 믿고 길 곁의 언덕 정상에서부터 큰 썰매를 타고 내려온다. 철수가 타는 단순한 구조의 썰매는 내려오는 도중 사람을 발견하더라도 멈추거나 방향을 쉽게 틀 수 없다. 철수가 언덕 아래 길까지 오는 순간 시야를 가렸던 나무 뒤쪽에서 걸어오고 있는 행인이 모습이 보였고 행인은 철수의 썰매와 충돌하여 크게 다쳤다. 이에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>철수의 행위는 형법상 과실치상죄에 해당할 수도 있다.</li><li>철수가 행인이 돌아다니지 않는다고 믿고 있었던 상태, 즉 믿음 상태 자체는 행위가 아니다.</li><li>철수의 행위가 과실치상죄에 해당하는가는 오로지 결과에 의해 결정된다.</li><li>행인이 돌아다니지 않는다고 믿은 마음 상태를 초래하게 된 데에 행위가 개입되어 있다고 평가된다면 철수는 규범적 책임을 피할 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 주의의무 위반 등 요건이 인정되면 과실치상죄가 성립할 수 있다. 가능성과 자동 성립은 다르다.</li><li><strong>비선택</strong> · 사람이 없다고 믿는 상태 자체를 의지로 직접 선택하는 행위로 보지는 않는다.</li><li><strong>선택</strong> · 결과만으로 정해지지 않는다. 출발 전 확인 가능성, 예견·회피 가능성과 주의의무 위반 등을 살핀다.</li><li><strong>비선택</strong> · 몰랐다는 상태를 초래한 데에 책임 있는 확인 생략 등의 행위가 개입했다면 전체 과정에 대한 규범적 책임을 검토한다. 단순한 인과적 개입만으로 모든 형사요건이 충족되는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_053"><h4>형성평가 · 헌법논증이론_053</h4><p class="question-stem">본유적 가치에 어떤 여건에서 어떤 한도로 기여하는 도구적 가치 그 자체를 마치 본유적 가치인 것처럼 고려하는 현상을 무엇이라고 하는가?</p><ol class="choices"><li>구성적 가치</li><li>카오스</li><li>자유방임</li><li>물신숭배</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 구성적 가치는 본유적 가치의 필수 구성 부분이다.</li><li><strong>비선택</strong> · 카오스라는 혼돈의 이름은 수단을 목적처럼 여기는 이 개념의 명칭이 아니다.</li><li><strong>비선택</strong> · 자유방임은 개입을 줄이는 태도·정책과 관련된 말로 제시된 정의와 다르다.</li><li><strong>선택</strong> · 물신숭배다. 제한된 조건에서 좋은 수단에 목적 자체의 가치가 옮겨 붙었다고 착각한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_054"><h4>형성평가 · 헌법논증이론_054</h4><p class="question-stem">해야하는 것, 행위자에게 그렇게 행위할 이유가 있는 것을 의미하는 말로 올바른 것은?</p><ol class="choices"><li>당위</li><li>사실</li><li>존재</li><li>사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 당위는 해야 하는 것, 그렇게 행위할 이유가 있는 것이다.</li><li><strong>비선택</strong> · 사실은 세계에 실제 성립하는 사태다. 그 자체만으로 언제나 해야 함이 도출되지는 않는다.</li><li><strong>비선택</strong> · 존재는 있음에 관한 것으로 당위와 구별된다.</li><li><strong>비선택</strong> · 원자료의 사라는 보기 자체로는 제시된 정의에 대응하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_055"><h4>형성평가 · 헌법논증이론_055</h4><p class="question-stem">법규범과 관련해서 의미 있는 행위자에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>이유들을 고려하여 하거나 하지 않을 수 있는 능력을 지닌 존재를 말한다.</li><li>단 하나의 행위도 그렇게 할 수 없으면 행위자가 아니다.</li><li>보통의 성인은 행위자성이 있다.</li><li>행위자성이 있는 사람의 모든 움직임 또는 움직이지 않음은 행위자성이 발휘된 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이유를 고려하여 행동 여부를 선택할 능력이 행위자성이다.</li><li><strong>비선택</strong> · 단 하나의 행위에서도 그런 선택을 할 수 없다면 이 정의의 행위자성이 없다.</li><li><strong>비선택</strong> · 교재는 보통의 성인을 이유에 응답할 능력이 있는 행위자의 예로 든다.</li><li><strong>선택</strong> · 능력을 갖고 있어도 잠든 뒤의 뒤척임이나 갑자기 떠밀린 움직임에서 그 능력을 발휘한 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 행위자성이 있는 사람의 움직임이라 할지라도, 이를테면 잠든 상태에서의 뒤척임 자체나 뒷 사람에게 떠밀려서 앞으로 넘어짐은 행위자성이 발휘된 것이 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_056"><h4>형성평가 · 헌법논증이론_056</h4><p class="question-stem">______________에 가장 적합한 말은?<br><br>____________은/는 어떤 행위를 찬성하거나 반대하는 데 유관한 고려사항이다. 이것은 사실, 가치, 규범으로 나누어 볼 수 있다. 사실은 세계에 존립하는 사태이고, 가치는 주체가 누리거나 얻으면 그 주체에게 좋은 것이다. 규범은 수범자들 사이의 관계를 혹정하고 그 지위를 보장하는 권리와 의무를 수범자들에게 할당하는 것이다.</p><ol class="choices"><li>원인</li><li>속성</li><li>이유</li><li>조</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원인은 어떤 일이 발생한 경위이며 찬반을 정당화하는 고려사항과 같지 않다.</li><li><strong>비선택</strong> · 속성은 대상의 성질이지 세 유형을 포괄하는 행위의 고려사항 명칭이 아니다.</li><li><strong>선택</strong> · 이유는 사실·가치·규범으로 구별되는 유관한 고려사항이다. 원자료 혹정은 문맥상 확정이다.</li><li><strong>비선택</strong> · 원자료 조라는 보기 자체는 이 정의에 맞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_057"><h4>형성평가 · 헌법논증이론_057</h4><p class="question-stem">이유로서의 사실에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>구체적 사건의 법논증에서는 유관한 사실과 무관한 사실을 가려내야 한다.</li><li>유관성과 무관성은 사실들 자체에 부착되어 있거나 결박되어 있다.</li><li>하나의 사실은 그와 연계된 다른 사실들이 어떠한가에 따라 유관할 수도 있고 무관할 수도 있다.</li><li>법논증에서 논거구조를 정확하게 이해하여야 선결 쟁점이 무엇인지 파악하게 되는데, 선결 쟁점이 무엇인지를 파악해야 유관한 사실과 무관한 사실을 올바르게 구분할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 관련 없는 사실을 제거하는 것도 구체적 법논증의 일이다.</li><li><strong>선택</strong> · 유관성은 사실에 영구 부착된 성질이 아니다. 학력이 대여금 소송에서는 보통 무관해도 학위 요건 분쟁에서는 유관하다.</li><li><strong>비선택</strong> · 임대인인지 등 연계된 사실에 따라 보증금 액수의 관련성이 달라진다.</li><li><strong>비선택</strong> · 논거 구조를 알아야 먼저 풀 쟁점을 정하고 나머지 사실의 관련성을 판단할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 유관성과 무관성은 사실들 자체에 부착되어 있거나 결박되어 있지 않다. 예를 들어 원고의 학력은 통상의 대여금반환청구소송에서는 무관한 사실이지만, 어떤 학위를 요건으로 하는 임용절차의 임용거부처분취소소송에서는 유관한 사실일 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_058"><h4>형성평가 · 헌법논증이론_058</h4><p class="question-stem">가치는 여러 가지로 분류할 수 있다. 다음 밑줄 친 곳에 들어갈 말로 가장 적합한 것은?<br>어떤 것이 그 자체로 목적인 경우에, 즉 다른 어떤 것의 가치로도 환원될 수 없는 긍정적인 전반적 가치를 갖고 있는 경우 오직 그 경우에 그것은______________가 있다.</p><ol class="choices"><li>본유적 가치</li><li>도구적 가치</li><li>구성적 가치</li><li>자연적 가치</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 본유적 가치의 정의다. 다른 가치의 수단으로만 환원되지 않는다.</li><li><strong>비선택</strong> · 도구적 가치는 다른 가치 있는 것을 얻는 수단이다.</li><li><strong>비선택</strong> · 구성적 가치는 본유적 가치를 갖는 것의 필수 구성 부분이다.</li><li><strong>비선택</strong> · 자연적 가치라는 말은 제시된 필요충분조건의 개념 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_197"><h4>워크북 · 헌법논증이론_197</h4><p class="question-stem">당위의 정의에서 언급되는 행위, 즉 당위 개념이 적용되는 행위에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>행위를 파악하기 위해서는 의도나 믿음과 같은 일정한 정신 상태를 파악하는 것이 필요하다.</li><li>신체 움직임은 행위가 될 수 있지만 신체를 움직이지 않음은 행위가 될 수 없다.</li><li>깨어 있는 정신 상태를 갖추지 못한 상태에서 비로소 결정된 움직임은 행위가 아니다.</li><li>어떤 것을 참으로 믿는 것 자체는 행위가 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 윙크와 먼지 때문에 눈을 깜빡임을 나누려면 의도·믿음을 살펴야 한다.</li><li><strong>선택</strong> · 할 수 있는 구조를 일부러 하지 않는 것처럼 움직이지 않음도 선택 가능한 행위다.</li><li><strong>비선택</strong> · 그 상태에서 비로소 결정된 비자발적 움직임은 행위가 아니다. 앞선 자발적 선택이 있었는지는 별도로 본다.</li><li><strong>비선택</strong> · 믿음은 의지 한 번으로 바꾸는 상태가 아니다. 다만 그 믿음을 형성한 자료 확인 등의 행위는 평가한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 신체 움직임뿐만 아니라 신체를 움직이지 않음도 행위가 될 수 있다. 예를 들어 조카를 미끄러지기 쉬운 제방 위로 데려온 후 조카가 물에 빠지자, '구조하지 않고 그대로 지켜보는 것'은 신체를 움직이지 않음이지만 당위 개념이 적용되는 행위이다. 즉 해야 하는 것을 하지 않은 것이자, 더 나아가, 의무를 위반한 행위이다. 이런 움직이지 않음은 규범적 평가를 피할 수 없다. 반면에 먼 외국에 살고 있는 조카가 그 외국의 제방 위에서 떨어졌는데 국내에 있는 삼촌이 집에서 잠을 자면서 신체를 움직이지 않는 것은 당위 개념이 적용되는 행위가 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_198"><h4>워크북 · 헌법논증이론_198</h4><p class="question-stem">규범적 평가의 대상이 되는 행위인 것은?</p><ol class="choices"><li>전혀 예기치 못한 곳에서 타인에 의해 자기도 모르게 수면제 주사를 맞아 잠이 드는 것</li><li>잠이 든 상태에서 납치를 당하여 몸을 뒤척이는 바람에 언덕을 굴러내려가는 것</li><li>예보도 되지 않은 갑작스러운 세찬 회오리바람에 휩쓸리는 것</li><li>법률상담에서 정확한 답을 주기 위해서는 판례를 직접 다시 찾아봐야 한다는 것을 알면서도 판례를 찾아보지 않는 것</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 예상하지 못한 강제 투약으로 잠드는 것은 그 사람의 선택 행위가 아니다.</li><li><strong>비선택</strong> · 납치된 수면 상태에서 비로소 발생한 뒤척임 자체는 의지의 선택이 아니다.</li><li><strong>비선택</strong> · 예측 불가능한 바람에 휩쓸리는 것은 제시된 조건에서는 선택한 행동이 아니다.</li><li><strong>선택</strong> · 확인할 필요를 알면서 자료를 보지 않는 것은 선택한 부작위이며 평가할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 믿음 상태 자체는 행위가 아니다. 그러나 어떤 결정을 내리기 위해서는 어떤 종류의 자료를 보아야 한다는 것을 알면서도 귀찮아서 그 자료를 보지 않는 것은 행위이다. 그 결과 초래된 믿음 상태에는 행위가 개입된 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_199"><h4>워크북 · 헌법논증이론_199</h4><p class="question-stem">이유들을 고려하여 하거나 하지 않을 수 있는 능력을 무엇이라고 하는가? 가장 정확한 개념을 고르시오.</p><ol class="choices"><li>동작가능성</li><li>행위자성</li><li>의욕능력</li><li>자유의지</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 동작할 수 있다는 물리적 능력만으로 이유에 반응할 능력을 설명하지 못한다.</li><li><strong>선택</strong> · 행위자성이다. 이유를 고려하여 하거나 하지 않을 능력을 뜻한다.</li><li><strong>비선택</strong> · 의욕이 생기는 능력만으로 이유를 검토·수정하는 능력을 모두 포괄하지 못한다.</li><li><strong>비선택</strong> · 자유의지라는 넓은 철학 개념보다 교재에서 정의한 정확한 명칭은 행위자성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_200"><h4>워크북 · 헌법논증이론_200</h4><p class="question-stem">수범자는 규범을 준수해야 하는 주체이다. 수범자에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>행위자성이 있다면 규범이라면 어느 것이나 따를 수 있는 능력이 갖추어진 셈이다.</li><li>규범을 준수하려면 수범능력이 있어야 한다.</li><li>책임 감경은 문제가 되는 사건의 인과관계 전반에 걸쳐 행위자성이 항구적·일시적으로 부족할 때 이루어진다.</li><li>책임 조각은 문제가 되는 사건의 인과관계 전반에 걸쳐 행위자성이 결여되어 있을 때 이루어진다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 행위자성만으로 모든 규칙을 이해할 능력이 자동 완성되지는 않는다. 고지받고 이해할 공정한 기회 등이 더 필요하다.</li><li><strong>비선택</strong> · 규범의 내용을 이해·적용하여 행동할 수범능력이 필요하다.</li><li><strong>비선택</strong> · 교재의 책임 기초 설명에서 행위자성의 부족은 감경과 연결된다. 현행 형법의 심신미약이 항상 필요적 감경이라는 의미로 읽지 않는다.</li><li><strong>비선택</strong> · 교재는 사건의 인과관계 전반에서 행위자성이 결여된 경우 책임 조각을 설명한다. 법적 책임은 구체적 요건별로 적용한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 수범능력은 기본적으로 행위자성을 골간으로 한다. 하지만 수범능력에는 행위자성 이외의 부분까지도 필요하다. 특히 해당 종류의 규범을 고지받고 이해할 공정한 기회를 가져야 한다. 예를 들어 언어가 전혀 통하지 않는 외국에 막 표류한 사람은 그 외국에 특유한 복잡한 법률규범을 준수할 능력이 없을 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_201"><h4>워크북 · 헌법논증이론_201</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>수범자가 되려면 규범을 발령하는 규범질서의 세계에 속한다는 성원됨(membership)을 갖추어야 한다.</li><li>도덕규범은 모든 행위자인 인간을 성원으로 하는 세계에 적용된다.</li><li>특정 정당의 당규는 당원의 명예를 훼손한 비당원(非黨員)에게도 적용된다.</li><li>관광객으로 외국에 간 사람은 그 외국의 법규범질서의 세계에 부분적으로 속하게 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 그 규범이 적용되는 질서에 속하는 성원됨이 필요하다.</li><li><strong>비선택</strong> · 교재는 도덕규범을 모든 행위자인 인간에게 적용되는 것으로 설명한다.</li><li><strong>선택</strong> · 비당원은 당규상 징계의 수범자가 아니다. 명예훼손은 별도로 국가 법질서의 요건에 따라 다룬다.</li><li><strong>비선택</strong> · 시민권을 가진 완전한 구성원이 아니어도 관광객은 해당 국가 법질서에 부분적으로 속한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 내가 S당의 당원이 아닌데 갑자기 S당이 나에게 당원에 대한 징계 처분을 내린다면 그러한 징계 처분은 애초부터 무의미한 것, 완전한 무효이며 나의 어떠한 규범적 지위에도 변동을 가져오지 못한다. 나는 S당의 당규가 적용되는 규범질서의 세계에 속하는 사람이 아니다. 물론 S당 당원의 명예를 훼손한다면 명예훼손죄에 관한 법률을 적용받게 될 것인데, 이는 S당의 당규가 아니라, 내가 성원됨 요건을 갖췄기 때문에 수범자가 되는 국가의 법규범의 적용을 받는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_202"><h4>워크북 · 헌법논증이론_202</h4><p class="question-stem">어떤 행위를 찬성하거나 반대하는 데 유관한 고려사항(considerations)을 통틀어 무엇이라고 하는가?</p><ol class="choices"><li>이유</li><li>수범자</li><li>행위자성</li><li>미덕</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이유가 찬반에 유관한 고려사항 전체의 이름이다.</li><li><strong>비선택</strong> · 수범자는 규범을 준수해야 할 주체다.</li><li><strong>비선택</strong> · 행위자성은 이유에 따라 행위를 선택할 능력이다.</li><li><strong>비선택</strong> · 미덕은 특정 행위를 지지하는 고려사항 중 하나가 될 수 있지만 전체 이유의 명칭은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 행위가 덕스럽다는 것은 그 행위를 찬성할 (간접적인) 유관한 고려사항 중 하나이다. 따라서 ④는 행위를 찬성하거나 반대하는 고려사항 전부를 통틀어 일컫는 개념은 되지 못한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_203"><h4>워크북 · 헌법논증이론_203</h4><p class="question-stem">다음은 행위의 이유를 설명하는 맥락에서 나오는 진술이다. ⓐ______, ⓑ______에 들어갈 말을 순서대로 나열한 것은?<br><br>ⓐ______이란 달리 성립한다면 행위 자체나 행위 결과의 성격·규모·지위에 차이를 가져오는 것이다. 자신의 집 전등 스위치와 연결된 전선으로 사람이 칭칭 감겨 있다는 사정이 그 예이다. ⓑ______은 달리 성립한다고 해서 문제되는 행위 자체나 행위 결과의 성격·규모·지위에 차이를 가져오지 않는다. 대여금 반환 청구 소송에서 원고의 수면 습관에 관한 사실이 그 예이다.</p><ol class="choices"><li>사실, 반사실</li><li>합법, 위법</li><li>실질, 형식</li><li>유관한 사실, 무관한 사실</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 반사실은 실제와 다른 가정이며 무관한 사실이라는 뜻이 아니다.</li><li><strong>비선택</strong> · 합법·위법은 법적 평가로 관련성의 정의와 다르다.</li><li><strong>비선택</strong> · 실질·형식은 이 두 정의의 명칭이 아니다.</li><li><strong>선택</strong> · 유관한 사실과 무관한 사실이다. 스위치 연결은 행위 성격을 바꾸지만 통상의 대여금 소송에서 수면 습관은 결론에 관련되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_204"><h4>워크북 · 헌법논증이론_204</h4><p class="question-stem">문제되는 배경에서 그 사실만으로 쟁점이 되는 행위에 대한 찬성과 반대를 확정하는 이유를 무엇이라고 하는가?</p><ol class="choices"><li>결정적 이유</li><li>중요한 이유</li><li>유의미한 이유</li><li>사소한 이유</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 결정적 이유다. 그 배경에서 찬반을 확정한다.</li><li><strong>비선택</strong> · 중요해도 다른 고려 때문에 최종 찬반을 확정하지 못할 수 있다.</li><li><strong>비선택</strong> · 유의미하거나 유관한 이유가 반드시 결정적이지는 않다.</li><li><strong>비선택</strong> · 사소하다는 정도 표현이 아니라 결론 확정의 역할을 묻는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_205"><h4>워크북 · 헌법논증이론_205</h4><p class="question-stem">______이란/란 주체에게 그것을 향유하는 행위를 할, 또는 그것이 담긴 사태를 초래할 일응의 한 이유가 되는 좋은 것이다. ______에 들어갈 가장 적합한 말은?</p><ol class="choices"><li>사실</li><li>가치</li><li>당위</li><li>원인</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사실은 실제 존립하는 사태이며 좋은 것의 정의와 다르다.</li><li><strong>선택</strong> · 가치다. 그것을 누리거나 초래할 일응의 이유가 된다.</li><li><strong>비선택</strong> · 당위는 해야 함을 뜻하며 일응의 한 이유가 되는 좋은 것 자체와 구별된다.</li><li><strong>비선택</strong> · 원인은 결과를 발생시키는 경위·요인으로 이 정의와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_206"><h4>워크북 · 헌법논증이론_206</h4><p class="question-stem">원고는 피고에 대하여 보증금 10,000,000원을 지급하라는 내용을 청구취지로 한 소가 제기되었다. 그 청구원인은 원고가 임차인인데 임대차계약기간이 만료되어 해당 금액의 보증금의 반환을 구한다는 것이다. 이에 관한 진술로 틀린 것은?</p><ol class="choices"><li>원고가 어느 지역 출신인가는 무관한 사실이다.</li><li>피고가 임대인이 아니라 전혀 무관계한 사람이라면, 원고가 보증금 10,000,000원으로 주택을 임차하여 거주해왔다는 것이 사실이라고 하여도 기각 판결을 내릴 수밖에 없다.</li><li>만일 성립한다면 다른 사실들을 무관한 것으로 만드는 사실들을 선결 쟁점에 관한 사실들이라고 한다.</li><li>보증금반환청구소송에서 '원고가 임차인인 임대차계약기간이 만료되었다'는 사실은 '피고가 임대인이다'라는 사실보다 선결 쟁점에 관한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 출신 지역은 제시된 보증금 반환의 법률요건과 무관하다.</li><li><strong>비선택</strong> · 피고가 아무 반환의무도 지지 않는 무관한 사람이라는 설정이므로 그에 대한 청구는 기각된다.</li><li><strong>비선택</strong> · 먼저 해결되면 다른 사실의 결론 관련성을 없애는 것이 선결 쟁점에 관한 사실이다.</li><li><strong>선택</strong> · 순서가 반대다. 피고가 법적 반환의무를 지는 임대인인지가 먼저이며, 그가 전혀 무관하면 계약기간 만료를 더 볼 필요가 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 피고가 임대인인지에 관한 사실이 선결 쟁점에 관한 사실이다. 왜냐하면 피고가 원고에게 주택을 임대해준 임대인이 아니라면, 피고의 임대차계약기간이 만료했는지 더 나아가 살필 필요 없이 해당 사건에 대해서는 기각 판결이 선고될 것이기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_207"><h4>워크북 · 헌법논증이론_207</h4><p class="question-stem">밑줄 친 곳에 들어갈 가장 적합한 말은?<br><br>주체와 관련된 두 사태 A, B가 있는데 A와 B는 다른 모든 점에서 동일하고 오로지 A에서는 B에서보다 주체에게 귀속되는 (또는 관련되는) X가 추가로 있다는 점만 다르다. 이때 합리적인 주체가 A를 선호할 만하다면 X는 ______.</p><ol class="choices"><li>책무적이다.</li><li>정의롭다.</li><li>가치 있다.</li><li>의무이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 책무는 관계에서 부담하는 책임의 개념이다. 비교만으로 곧바로 도출되지 않는다.</li><li><strong>비선택</strong> · 정의는 구성원 사이의 관계에 관한 판단이며 한 주체의 좋음 자체와 다르다.</li><li><strong>선택</strong> · 가치 있다가 맞다. 다른 조건이 같을 때 합리적으로 선호할 이유가 있는 좋음을 묻는다.</li><li><strong>비선택</strong> · 가치가 있다는 것만으로 그 상태를 누릴 의무가 생기지는 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 문장의 주어가 '주체'임을 주목하라. 즉 단 한 명의 주체에게도 성립하는 진술이다. 그러므로 정의롭거나 의무적·책무적이라는 관계적 술어는 적합한 말이 아니다. 무인도에 홀로 살아가는 사람은 아픈 상태보다 건강한 상태를 선호할 만하겠지만 그렇다고 건강 그 자체가 정의롭거나 의무인 것은 아니다. 어떤 구성원의 건강의 심각한 훼손을 다른 구성원들의 작은 부담만으로 방지할 수 있는데 그 훼손을 방치하는 경우에는 규범의 문제가 될 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_208"><h4>워크북 · 헌법논증이론_208</h4><p class="question-stem">'X는 잔인하다'는 진술에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>미국 수정헌법 제8조에서 금지하고 있는 '잔인하고 비정상적인 형벌'은 고통을 많이 발생시키고 역사상 실행되는 경우가 통계적으로 드문 형벌을 가리킨다.</li><li>미국 수정헌법 제8조에서 금지하고 있는 잔인하고 비정상적인 형벌에 해당하는지 여부는, 당시 수정헌법을 입안하고 비준한 사람들이 그러한 형벌이라고 생각했던 것이 무엇인가에 달려 있다.</li><li>'잔인하다'는 술어는 가치 판단과 규범 판단이 용법상 불가분으로 혼입되어 있는 평가를 함께 나타낸다.</li><li>물리적으로 같은 양의 고통을 발생시키는 동일한 행위라면 목적 및 효과, 맥락과 상관없이 똑같이 잔인하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 고통의 양과 역사적 발생 빈도만으로 규범적 평가가 끝나지 않는다.</li><li><strong>비선택</strong> · 과거 입안자들이 무엇을 생각했는지에 관한 사실만으로 현재의 규범 판단을 대체할 수 없다는 교재의 입장이다. 모든 역사적 자료가 무의미하다는 뜻은 아니다.</li><li><strong>선택</strong> · 잔인하다는 말에는 불필요·과도한 고통이라는 가치·규범적 평가가 함께 들어 있다.</li><li><strong>비선택</strong> · 같은 신체 손상도 필요한 치료와 재미를 위한 훼손에서는 평가가 다르다. 목적·맥락을 빼지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 어떤 형벌이 미국 수정헌법 제8조에 위반되어 위헌이라고 하기 위해서는, 어떤 형벌이 고통을 많이 발생시키는 것이라는 사실만 확정해서는 안 되고 그 고통이 제어 없는 복수심의 만족과 같은 악덕에서 비롯된 부분이 있다는 사정이나 입헌 민주주의 국가의 범죄 처벌 규범에 비추어 불필요하고 과도하다는 사정까지 확인되어야 하므로, ①은 틀렸다. 재미로 사람을 마취한 후 팔을 자르는 행위는 극도로 잔인함에 비해, 심각하게 진행된 세균 감염증을 겪는 사람의 목숨을 구하기 위해 사람을 마취한 후 팔을 자르는 행위는 발생하는 고통이 동일하더라도 잔인하지 않으므로, ④는 틀렸고 ③은 옳다. 수정헌법 제8조에서 규정한 잔인하고 비정상적인 형벌에 해당하느냐라는 질문은, 당시 수정헌법을 입안하고 비준한 사람들이 사형을 잔인하고 비정상적인 형벌로 생각했는가라는 명제태도에 관한 사실을 살펴봄으로써 답할 수 없다. 과거 사람들의 명제태도에 관한 사실은, 현재 법규범의 해석·적용에 대한 규범 판단을 대체할 수 없기 때문이다. 따라서 ②는 틀렸다. ②와 같이 보면 헌법의 모든 규범적 개념들은, 그 규범적 개념들에 속하는 사태라고 헌법 입안자가 생각했던 바의 의미만을 갖게 될 것이므로, 헌법논증은 헌법 입안자의 마음을 추측하는 역사학이나 심리학의 작업으로 환원될 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_209"><h4>워크북 · 헌법논증이론_209</h4><p class="question-stem">다음 중 본유적 가치의 다원성을 인정하는 전제에서 볼 때 옳은 것은?</p><ol class="choices"><li>진리를 추구하는 이유는, 쾌락적인 삶을 사는 데 기여하는지 여부로 환원된다.</li><li>우정은 친구관계를 유지할 때 나오는 쾌락의 가치로 환원된다.</li><li>형편없는 예술작품에서 미적 쾌락을 많이 누리게끔 하는 감식안을 형성하는 교육이 완벽하게 실행되면, 그 사회에서는 형편없는 예술작품이 뛰어난 예술작품으로서 미적 가치를 갖는다.</li><li>주위 사람들이 모두 같은 정치적 신조를 믿고 있어서 그 신조에서 이탈하면 크게 불편하게 될지라도, 그 정치적 신조가 참인지 탐구할 이유가 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 진리를 쾌락의 수단으로만 환원하므로 본유적 가치의 다원성을 인정하는 전제와 어긋난다.</li><li><strong>비선택</strong> · 우정의 가치를 쾌락에 모두 환원하는 설명이다.</li><li><strong>비선택</strong> · 즐거움을 많이 느끼도록 훈련했다고 그 작품의 미적 탁월성이 자동으로 높아지는 것은 아니라는 교재의 논증이다.</li><li><strong>선택</strong> · 불편해져도 진리를 탐구할 독립적인 이유가 있다. 즐거움으로 전부 환원되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①, ②, ③은 모두 쾌락주의적 가치 환원론을 전제로 한 진술이다. 즉 쾌락 이외의 본유적 가치는 인정하지 않는 입장에서 나오는 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_210"><h4>워크북 · 헌법논증이론_210</h4><p class="question-stem">도구적 가치에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>도구적 가치를 갖는 것은 오로지 도구적 가치만 갖고, 본유적 가치를 갖는 것은 오로지 본유적 가치만 갖는다.</li><li>구체적인 것들에 도구적 가치와 본유적 가치가 함께 있는 경우가 흔하지만 개념상 이 둘은 구분이 가능하다.</li><li>구체적인 것들에 도구적 가치와 본유적 가치가 함께 있는 경우가 없다.</li><li>도구적 가치와 본유적 가치를 구분해야 할 이유가 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한 활동에 두 가치가 함께 있을 수 있으므로 오로지라는 단정이 틀렸다.</li><li><strong>선택</strong> · 함께 있더라도 수단으로서 좋은 면과 자체로 좋은 면은 개념상 구분할 수 있다.</li><li><strong>비선택</strong> · 독서는 지식 활용의 수단이면서 그 활동 고유의 즐거움도 주는 반례다.</li><li><strong>비선택</strong> · 구별하지 않으면 수단을 무조건 늘려 목적을 해치는 물신숭배에 빠질 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 좋은 책을 읽는 것은 알게 된 것을 토대로 일을 하거나 논문을 쓰는 데 도움이 된다는 면에서 도구적 가치를 갖지만, 그 책 읽기 자체가 주는 즐거움이나 진리의 파악이라는 본유적 가치도 갖는다. 이 예가 보여주듯이 도구적 가치와 본유적 가치를 함께 갖는 구체적인 것들은 많으므로 ①과 ③은 틀렸고, 또 이 예가 보여주듯이 개념상 구분이 가능하므로 ②는 옳다. 그리고 도구적 가치와 본유적 가치의 구분은 물신숭배에 빠져 개인적으로 인생을 낭비하거나 사회적으로 어리석은 정책을 펼쳐 부작용만 가져오지 않기 위해 잘 이해하고 유념해야 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_211"><h4>워크북 · 헌법논증이론_211</h4><p class="question-stem">구성적 가치에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>국가가 지정한 역사적 사실만을 참이라고 발표하라는 명령이 실효적으로 관철되는 사회에서도, 각주와 참고문헌을 많이 달아 역사학 논문을 쓴다면 진리 파악이라는 본유적 가치를 향유하는 것이다.</li><li>구성적 가치를 갖는 대표적인 예는 자유이다.</li><li>어떤 것이 본유적 가치를 갖는 것의 필수불가결한 구성부분일 때 그것은 구성적 가치를 갖는다.</li><li>구성적 가치에 대한 고려를 빠뜨린 주장은 부당한 가치 이해를 전제로 하는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 자유로운 탐구를 금지한 채 논문의 형식만 갖춰도 진리 탐구의 가치를 누린다는 설명은 구성 조건을 놓친다.</li><li><strong>비선택</strong> · 자유는 진정한 신앙·우정·자아실현 등의 필수 구성 조건이 될 수 있다.</li><li><strong>비선택</strong> · 필수불가결한 구성 부분이라는 것이 구성적 가치의 정의다.</li><li><strong>비선택</strong> · 가치를 성립시키는 조건을 빼고 겉모습만 추구하면 그 가치 이해가 잘못될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 그런 사회에서 학자는 논문의 외관을 갖춘 글을 발표하더라도, 학문활동을 하는 것이 아니라 국가에 의해 공인된 사실을 치장하는 일련의 몸짓을 연쇄적으로 하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_212"><h4>워크북 · 헌법논증이론_212</h4><p class="question-stem">문화 향유의 본유적 가치의 구성적 조건을 고려할 때, 다음 중 옳은 진술은?</p><ol class="choices"><li>헌법의 기본원리인 문화국가의 원리란 건전한 문화를 적극적으로 우대하고 불건전한 문화를 억제하는 원리를 말한다.</li><li>국민의 문화 향유를 자율에 맡겨두는 것은 천박한 문화가 인기 있는 세태를 그대로 둠으로써 문화국가원리에 따른 국가의 의무를 위반하게 된다.</li><li>문화국가에서 문화정책은 그 초점이 문화 그 자체에 있는 것이 아니라 문화가 생겨날 수 있는 문화풍토를 조성하는 데 두어야 한다.</li><li>서민문화, 대중문화는 엘리트문화와 달리 그 가치를 인정하거나 정책적인 배려의 대상으로 삼을 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가가 정한 건전성의 취향을 강요하는 것으로 문화국가를 정의하지 않는다.</li><li><strong>비선택</strong> · 시민의 자율적 문화 향유는 문화 가치의 구성 조건이다. 인기 있는 문화가 마음에 안 든다는 이유만으로 자율 보장이 국가의무 위반이 되지 않는다.</li><li><strong>선택</strong> · 문화가 생겨날 풍토를 마련하는 데 초점을 둔다는 헌재의 설명이다.</li><li><strong>비선택</strong> · 서민·대중문화도 가치 인정과 정책적 배려의 대상이다. 엘리트 문화에만 한정하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 07' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 07|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

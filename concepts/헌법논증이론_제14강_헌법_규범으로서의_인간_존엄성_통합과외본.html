@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제14강 헌법 규범으로서의 인간 존엄성 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 14</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제14강 헌법 규범으로서의 인간 존엄성 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>사람을 존중한다는 말은 국가에 무엇을 요구할까</h1>
+<p>미용사에게 돈을 내고 머리를 잘라 달라고 부탁하는 것도 다른 사람의 능력을 ‘수단’으로 이용하는 일이다. 그런데 왜 이것은 괜찮고, 열 명을 살리려고 건강한 한 사람의 장기를 강제로 가져가는 것은 안 될까? <strong>상대도 자기 삶의 주인이며, 그에게도 정당화할 수 있는 규칙 아래 협력하는가</strong>가 갈림길이다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>결국 무엇을 설명하나</td>
+<td>존엄이 실제 법적 판단을 이끄는 규범이 되는 방법.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>‘존엄하니까’라는 말만 반복하거나 좋은 목적이면 무엇이든 허용하는 오류를 막기 위해.</td>
+</tr>
+<tr>
+<td>전체 속 위치</td>
+<td>앞 강의 인간 존엄 사상을 헌법 해석·국가의 금지 및 보호 의무로 구체화한다.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>인간의 동등한 지위 → 국가가 해서는 안 될 일·해야 할 일 → 제15강 국가 중립성.</td>
+</tr>
+<tr>
+<td>모르면 무엇이 막히나</td>
+<td>수단과 한낱 수단, 불쾌감과 권리 침해, 최소 보장과 최대 편의의 차이.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 367–396쪽. 형성평가 7문항·워크북 11문항, 총 18문항. 별점은 학습 우선순위이며 실제 출제율·오답률은 제공되지 않았다. <strong>교재의 철학적 논증, 판례의 실제 결론, 현재 법률의 요건을 분리한다.</strong> 특히 장기·세포·긴급 구조 사례는 가정에 따른 규범 분석이지 실제 의료·응급 행동 지침이 아니다.</p>
+<h1>1. 추상적인 존엄이 어떻게 법이 되는가</h1>
+<h2 id="argument-14-01" data-concept-id="argument-14-01">1-1. 뜻을 다투는 개념이라고 빈말은 아니다 ★★★★☆</h2>
+<p><strong>교재 368–370쪽 / 문단의 목적:</strong> “사람마다 존엄의 뜻이 다르니 법적 논증에는 쓸 수 없다”는 반론에 답한다. 교재는 여러 나라의 헌법과 재판에서 존엄이 중요한 역할을 한다고 소개하지만, 추상적 구호에 불과하거나 논증이 막힐 때 자기 세계관을 밀어 넣는 도구로 오용된다는 비판도 인정한다. 이 문제를 해결하려면 <strong>뜻을 구체화하고 그 이유를 논증</strong>해야 한다. 106번의 ‘150개국’은 교재가 인용한 자료에 따른 서술이며 2026년 현황을 새로 집계한 수치가 아니다.</p>
+<p>‘본질적으로 다투어지는 개념’은 단지 누군가 단어 뜻을 몰라서 다투는 개념이 아니다. 민주주의·정의·존엄처럼 여러 중요한 요소가 얽혀 있고, 무엇을 중심에 둘 것인지 계속 논쟁할 수밖에 없는 개념이다. 교재의 일곱 특징을 한 흐름으로 읽어 보자.</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>쉬운 설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>높은 긍정적 평가</td>
+<td>서로 다른 편도 자기 입장이 존엄을 잘 지킨다고 말한다.</td>
+</tr>
+<tr>
+<td>복합적 구성</td>
+<td>자율·평등·취약성 등 여러 요소가 얽힌다.</td>
+</tr>
+<tr>
+<td>요소별 강조의 차이</td>
+<td>누구는 선택, 누구는 보호를 더 강조한다.</td>
+</tr>
+<tr>
+<td>개방성</td>
+<td>시대·상황에 따라 의미가 발전하며 변화를 모두 예측하기 어렵다.</td>
+</tr>
+<tr>
+<td>상호 논쟁의 인정</td>
+<td>상대의 다른 이해를 알고 자기 해석이 더 타당한 이유를 댄다.</td>
+</tr>
+<tr>
+<td>전범 사례</td>
+<td>무엇을 설명해야 할지 가늠하는 공통의 대표 사례가 있다.</td>
+</tr>
+<tr>
+<td>정합성의 발전</td>
+<td>논쟁을 거쳐 더 설득력 있고 앞뒤 맞는 이해로 발전할 수 있다.</td>
+</tr>
+</tbody></table>
+<p>여기서 <strong>전범(典範)</strong>은 전쟁범죄자가 아니라 기준이 되는 전형이다. 노예화·집단학살·고문·강제노동·추방 등 참혹한 취급은 존엄을 왜 지켜야 하는지 보여 주는 부정적 전형이다. 어떤 해석이 이런 취급을 오히려 존엄 존중이라고 한다면 그 해석을 비판할 공통 기준이 생긴다. 다만 각 법률상 용어의 정확한 범위·예외까지 이 목록 하나로 모두 정했다는 뜻은 아니다.</p>
+<p><strong>시험:</strong> 312번 ‘의미가 고정’, 313번 ‘전범이 없다’는 틀리다. <strong>키워드:</strong> 복합성·개방성·전범·정합성. <strong>한 줄:</strong> 다툼이 있다는 사실과 아무 말이나 가능하다는 결론은 다르다.</p>
+<h2 id="argument-14-02" data-concept-id="argument-14-02">1-2. 구체화 관계와 정당화 근거관계: 학문의 자유 사례 ★★★★★</h2>
+<p><strong>교재 370–373쪽 / 문단의 목적:</strong> 존엄을 가치의 칭찬에서 행동 규범으로 옮긴다. ‘존엄한 상태가 좋다’는 가치 문장이고, ‘사람을 고문해서는 안 된다’는 금지 규범이다. 규범은 <strong>해야 한다·해서는 안 된다·해도 된다</strong>의 모습을 가진다. 추상적이라고 규범이 아닌 것은 아니다. 더 구체적인 요구로 풀고, 그 요구가 원래 규범에서 왜 나오는지 설명할 수 있으면 된다.</p>
+<p>교재는 학문의 자유로 연습시킨다. ① 학문 연구와 가르침의 자유를 인정한다. ② 학문은 진리를 성실하고 체계적으로 탐구하는 활동이라는 의미를 밝힌다. ③ 국가가 그러한 활동과 성과의 전달에 필요한 인적·물적·조직적 여건을 지원해야 하는가를 논한다. ④ 학자가 부당한 국가 개입에 맞설 수 있는 방어권을 도출한다. 뒤의 문장들이 그저 하고 싶은 주장을 덧붙인 것이 아니라 앞의 원리에서 나오는 <strong>이유</strong>를 제시해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>관계</th>
+<th>묻는 것</th>
+<th>암기</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>구체화 관계</td>
+<td>추상적인 A가 구체적으로 어떤 B를 뜻하는가?</td>
+<td>내용의 세분화. 104번.</td>
+</tr>
+<tr>
+<td>정당화 근거관계</td>
+<td>왜 B가 A의 내용으로 인정될 수 있는가?</td>
+<td>이유의 뒷받침. 314번.</td>
+</tr>
+</tbody></table>
+<p>‘자유’, ‘학문’이라는 말 자체의 범위가 열려 있는 <strong>의미론적 개방성</strong>뿐 아니라, 헌법 전체의 다른 규범과 어떤 관계를 이루는지도 해석해야 하는 <strong>체계적 개방성</strong>이 있다. 존엄에서도 같다. “내 정책이 좋아 보인다”가 아니라 인간을 동등한 주체로 존중한다는 원리와 그 정책 사이의 논증을 보여 줘야 한다. <strong>한 줄:</strong> 구체화는 뜻을 풀어 쓰기이고 정당화는 그 풀이가 왜 맞는지 설명하기다.</p>
+<h2 id="argument-14-03" data-concept-id="argument-14-03">1-3. 실질적 근본규범: 법이 사람을 위해 존재한다 ★★★★★</h2>
+<p><strong>교재 373–376쪽 / 문단의 목적:</strong> 존엄을 도로교통법의 한 규칙처럼 다른 규칙과 나란히 놓지 않도록 한다. 인간은 능력·문화·신념이 달라도 동등한 기본 지위를 가진다. 존엄은 국가권력이 정당한 이유와 행사 한계를 정하고, 기본권의 중요성과 해석을 지도하며, 법규범의 내용·효력을 평가하는 <strong>실질적 근본규범</strong>이다. 입법 절차를 지켰는지만 검사하는 형식적 기준에 그치지 않는다.</p>
+<p>국가가 “사람을 보호하기 위해 존재한다”고 하면서 일부를 국가 목적의 소모품으로 취급한다면 자기 존재 이유를 거스른다. 기본권 조항을 해석할 때도 존엄에 어긋나는 전제를 끼워 넣어 합헌 결론을 만들었다면 논증을 다시 검토해야 한다. 교재가 신체의 자유, 양심, 표현·결사, 명예, 사적 영역의 정보 등 여러 기본권 판례를 열거한 이유는 <strong>존엄이 한 조문에만 갇혀 있지 않음</strong>을 보여 주기 위해서다.</p>
+<p><strong>94헌바37의 문장:</strong> 자유 영역의 중요도를 판단할 때 인간 존엄성을 기준으로 삼는다는 취지다. ‘공공복리면 무조건 우선’이라는 말이 아니다. 108번의 결정일 ‘1995. 4. 25.’는 오류이며 실제는 <strong>1999. 4. 29.</strong>이다. <a href="https://history.ccourt.go.kr/site/history/03/10301000000002020101203.jsp">헌법재판소 공식 연혁</a>.</p>
+<p><strong>2007다27670을 읽을 때의 주의:</strong> 교재와 317번이 인용한 근본규범·해석 기준·흠결 보충의 설명은 <strong>안대희 대법관의 반대의견에 대한 보충의견</strong>에 나온다. 유체·유골의 인도를 두고 가족들이 다툰 사건에서, 망인이 생전에 정한 의사를 법적으로 어떻게 존중할지를 논한 맥락이다. 사건 전체의 최종 주문은 상고기각이며, 이 문장을 곧바로 모든 재판관의 동일한 사건 결론으로 읽지 않는다. 여기서는 ‘근본규범’이라는 빈칸의 논리적 역할을 익힌다. <a href="https://law.go.kr/precInfoP.do?precSeq=136126">판결 원문, 보충의견 8. 나.</a>.</p>
+<p><strong>문장별 번역:</strong> 국가작용의 목적·가치판단 기준 → 국가가 무엇을 위해 어떤 방향으로 움직여야 하는지 가늠. 법규범의 효력·내용 해석 기준 → 어떤 뜻으로 읽어야 하고 유효한지 판단. 흠결 보충 → 명시 규정이 비어 있어도 사람의 존중을 기준으로 해법을 찾음. <strong>한 줄:</strong> 존엄은 법의 한 항목인 동시에 법 전체가 사람을 대하는 방향을 정하는 기준이다.</p>
+<h2 id="argument-14-04" data-concept-id="argument-14-04">1-4. 극단적 불법과 법의 전제 ★★★☆☆</h2>
+<p><strong>교재 376쪽 / 문단의 목적:</strong> 모든 형식적 법률이 실질적으로도 정당한 법인지 묻는다. 라드브루흐의 논의는 평등을 의도적으로 부인하는 극단적 부정의 앞에서 법적 형식만으로 정당성을 보장할 수 없다는 문제의식을 보인다. 마음에 안 드는 법을 개인이 곧바로 무시해도 된다는 허가가 아니다.</p>
+<p>또 법이 사람을 자기 행위를 조정하고 규범에 응답할 주체로 대하지 않는다면, 법의 명령과 책임이라는 실천 자체도 흔들린다. 다만 이것을 “규범을 지금 이해하지 못하는 영아·장애인에게는 권리가 없다”로 바꾸면 제13강의 생애·취약성 논증을 정반대로 읽은 것이다. <strong>심화:</strong> 법의 정당성 토대와 개별 법률의 현행 효력·구제 절차를 구별한다. <strong>한 줄:</strong> 법 형식은 존엄을 지우는 백지 허가증이 아니다.</p>
+<h1>2. 권리를 가질 권리</h1>
+<h2 id="argument-14-05" data-concept-id="argument-14-05">2-1. 메타권리: 왜 내게도 이유를 설명해야 하나 ★★★★★</h2>
+<p><strong>교재 376–379쪽 / 문단의 목적:</strong> “자율성·인격권만 있어도 되는데 존엄은 쓸모없는 중복 표현 아닌가?”라는 비판에 답한다. 교재가 소개하는 매클린·핑커 등의 비판과 달리, 존엄을 개별 권리의 근원적 지위로 보는 설명이 있다. 신체의 보호와 법치, 선택의 자유, 인간다운 삶의 사회적 조건 등 다양한 권리들이 여기서 뻗어 나온다고 보는 것이다.</p>
+<p><strong>메타권리</strong>는 다른 사람보다 권리를 더 많이 가진다는 뜻이 아니다. ‘권리들을 가질 권리’, 즉 국가가 나를 이유를 제시받을 독립된 주체로 인정해야 한다는 상위의 지위다. 국가가 내 자유를 제한할 때 “다른 이익이 크니 너에게는 설명할 필요가 없다”고 해서는 안 된다. 개별 자유 제한을 정당화해야 한다는 요구 자체를 또 다른 이익 비교로 제거하면, 그 정당화의 정당화를 끝없이 요구하는 문제가 생긴다.</p>
+<p><mark class="yellow">개별 기본권에 대한 제한을 심사하는 문제와, 각 사람에게 정당화할 의무 자체를 없애는 문제는 다르다.</mark> 316번은 이 메타권리 견해를 묻는다. 이를 ‘모든 파생 기본권은 어떤 경우에도 제한할 수 없다’로 확장하지 않는다. <strong>시험:</strong> 통상의 형량 가능한 기본권과 같은 층위라는 보기를 경계. <strong>한 줄:</strong> 국가가 내게도 정당한 이유를 제시할 상대방으로 대해야 한다는 지위다.</p>
+<h2 id="argument-14-06" data-concept-id="argument-14-06">2-2. 굴욕적 취급 금지와 기분 나쁨의 차이 ★★★★☆</h2>
+<p><strong>교재 378–379쪽 / 문단의 목적:</strong> 권리의 주체라는 지위가 실제 사회의 대우에서 무엇을 요구하는지 밝힌다. 사람을 그 공동체에서 모멸적인 것으로 여겨지는 방식으로 취급하지 말라는 요구가 있다. 구금되거나 돌봄을 받는 사람도 사생활과 인격을 지닌 구성원이다. 범죄를 저질렀다는 이유로 모욕의 대상이 되는 것은 아니다.</p>
+<p>다만 ‘굴욕스럽게 느꼈다’는 개인적 감정이 언제나 법적 위반을 확정하지는 않는다. 적법한 목적을 위한 필요한 조치에 불가피하게 수반되는 불편·당혹감과, 일부러 모욕하여 굴복시키거나 겁을 주는 처우는 다르다. 국가가 특정 집단의 ‘정상적인 삶’을 강요하며 다른 삶을 열등하게 대하는 것 역시 존엄의 이름으로 정당화할 수 없다. 이는 다음 강 중립성과 이어진다.</p>
+<p><strong>교재 각주의 유보:</strong> 정당화받을 권리는 메타권리의 성격이 선명하지만, ‘굴욕적 취급을 받지 않을 권리’ 전체를 같은 의미의 메타권리로 보기 위해서는 범위와 논증을 더 정밀하게 밝혀야 한다. 두 표현을 아무 설명 없이 완전히 동일시하지 않는다. <strong>한 줄:</strong> 존엄은 모욕을 막는 기준이지 어떤 불쾌한 감정도 없애 주는 보증은 아니다.</p>
+<h1>3. 수단으로 협력하기와 한낱 수단으로 버리기</h1>
+<h2 id="argument-14-07" data-concept-id="argument-14-07">3-1. 과밀수용 판례와 목적 정식 ★★★★★</h2>
+<p><strong>교재 379–381쪽 / 문단의 목적:</strong> 국가가 형벌을 집행해도 인간을 단순 객체로 바꿀 수 없음을 보여 준다. 2013헌마142에서 청구인은 여러 사람이 함께 있는 매우 좁은 수용 공간에서 생활했다. <strong>등장인물:</strong> 수용자와 교정 당국. <strong>갈등:</strong> 국가가 구금할 수 있다는 것과 인간다운 최소 공간까지 빼앗아도 된다는 것이 같은가? <strong>법원의 고민:</strong> 수용 공간·기간·시설과 처우를 종합하여 신체의 정상 기능과 인격적 존중이 가능한지 보아야 한다. <strong>결론:</strong> 해당 과밀수용 행위의 인간 존엄과 가치 침해를 인정했다. 단순히 불편한 시설이라서가 아니라 국가가 강제로 머물게 한 조건에서 기본적 인간 지위를 훼손했기 때문이다. <a href="https://law.go.kr/LSW/detcInfoP.do?detcSeq=53147">2016. 12. 29. 결정 원문</a>.</p>
+<p><strong>문장 번역:</strong> 국가행위의 단순 객체로 취급할 수 없음 → 형벌 목적을 위해 마음대로 다룰 물건이 아님. 인간으로서의 기본 품위 유지 → 구금되어도 몸과 인격을 존중해야 함. 인간을 목적 그 자체로 대함 → 각자의 독립된 삶과 요구 지위를 인정함. 반대 결론을 일반화하면 ‘범죄자니까 어떤 처우도 가능’해진다.</p>
+<p>칸트의 <strong>목적 정식</strong>은 서로의 도움을 이용하지 말라는 말이 아니다. “나에게 도움이 되더라도 상대의 주체성은 지워서는 안 된다”는 뜻이다. 여기서 인격체는 철학적 의미의 인간 주체를 가리키므로 민법의 법인 제도와 곧바로 동일시하지 않는다. <strong>시험:</strong> 109번 ‘수단인 면이 조금이라도 있으면 금지’는 틀리다. <strong>한 줄:</strong> 형벌은 자유의 제한일 수 있어도 사람을 물건으로 바꾸는 절차가 아니다.</p>
+<h2 id="argument-14-08" data-concept-id="argument-14-08">3-2. 첫째 요건: 타인에게 속하는 것을 의도적으로 이용했나 ★★★★★</h2>
+<p><strong>교재 382–384쪽 / 문단의 목적:</strong> 한낱 수단 여부를 느낌이 아니라 요건으로 분석한다. 첫째는 내 목표를 위해 타인의 몸·마음 또는 그 사람에게 정당하게 속하는 것을 <strong>의도적으로 수단 삼아 이용</strong>했는가다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>무엇을 이용했나</th>
+<th>왜 중요한가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>날아오는 돌을 막으려고 타인의 몸을 방패로 삼음</td>
+<td>신체</td>
+<td>상대 몸이 내 방어 계획의 도구가 됨.</td>
+</tr>
+<tr>
+<td>위협·최면으로 금고 비밀번호를 알아냄</td>
+<td>정신·기억·의사 작용</td>
+<td>마음을 작동시켜 내가 원하는 정보를 얻음.</td>
+</tr>
+<tr>
+<td>자녀의 일기장을 몰래 읽음</td>
+<td>사적 기록과 내면</td>
+<td>좋은 부모가 되려는 목적만으로 권한이 생기지 않음.</td>
+</tr>
+<tr>
+<td>사적인 대화 내용을 이용함</td>
+<td>대화 참여자들의 사적 영역</td>
+<td>정보가 나와 관련됐다고 다른 참여자의 권리가 사라지지 않음.</td>
+</tr>
+<tr>
+<td>타인의 주거·창작물을 마음대로 이용함</td>
+<td>정당한 생활 공간·창작에 대한 권리</td>
+<td>임차인도 정당한 주거권을 가지며 그림도 창작자의 인격·활동과 연결됨.</td>
+</tr>
+</tbody></table>
+<p>‘속한다’는 것은 민법상 물건 소유권 한 가지만을 뜻하지 않는다. 몸의 완전성, 인격적 활동과 공존·협동의 기반에 관한 정당한 자격까지 본다. 반대로 세상 모든 것을 내 권리라고 넓힐 수는 없다. <strong>시험:</strong> 318번 첫째 요건과 319번 사례. <strong>한 줄:</strong> 내 목적을 위해 실제로 누구의 몸·마음·정당한 영역을 가져다 썼는지 먼저 찾는다.</p>
+<h2 id="argument-14-09" data-concept-id="argument-14-09">3-3. 더 절실하게 필요해도 바로 내 것이 되지는 않는다 ★★★★☆</h2>
+<p><strong>교재 383–385쪽 / 문단의 목적:</strong> 필요성·유래·불쾌감만으로 타인의 권리 경계를 바꾸는 오류를 막는다. 신장 기능이 나쁜 사람이 다른 사람의 건강한 신장을 더 절실히 필요로 해도, 그 이유만으로 타인의 신장이 그의 것이 되지 않는다. 새 직원에게 사흘 걸릴 사무작업을 숙련자가 30분에 끝낼 수 있어도 그 노동이 당연히 새 직원에게 귀속되는 것은 아니다. 채무가 많은 가족이 수많은 사람에게 조금씩 받으면 위기를 벗어날 수 있어도 각자의 돈이 저절로 그 가족의 돈이 되지는 않는다.</p>
+<p>또 ‘타인에게서 비롯됨’과 ‘여전히 타인에게 속함’도 다르다. 적법하게 이용 권한을 얻은 음악을 들으며 청소한다고 그때마다 음악가의 현재 몸과 노동을 강제로 쓰는 것은 아니다. 물론 음악 파일을 이용할 권한과 저작권 자체를 취득하는 것은 다르며, 허락된 이용 범위를 넘는지는 별개로 따져야 한다.</p>
+<p>내가 내 영역의 것을 사용하여 누군가 기분이 나빠졌다는 이유만으로 그 사람이 사용을 금지할 권한까지 갖는 것도 아니다. 특정 집단이 사회 전체의 분위기·문화를 자기 소유처럼 주장한다면 타인의 삶을 지배하게 된다. 직원의 실수를 존중하는 방식으로 지적하고 업무 지침을 알려 주는 319번 ③은 단순히 불쾌할 수 있다는 이유로 타인에게 속한 것을 사용한 사례가 되지 않는다. 모욕·괴롭힘까지 허용한다는 뜻은 아니다. <strong>한 줄:</strong> 필요·유래·불쾌감은 각각 정당한 귀속의 충분한 이유가 아니다.</p>
+<h2 id="argument-14-10" data-concept-id="argument-14-10">3-4. 둘째 요건: 그 이용 규칙을 합당하게 거부할 수 있나 ★★★★★</h2>
+<p><strong>교재 385–387쪽 / 문단의 목적:</strong> 첫째 요건만으로는 부족함을 설명한다. 미용사가 서비스를 제공하고 손님이 비용을 내는 협력도 서로의 능력·재산을 이용한다. 그러나 자유롭고 동등한 사람들 사이의 공정한 거래 규칙이라면 상대를 한낱 수단으로만 보는 것은 아니다.</p>
+<p>둘째는 그 이용을 허용하는 <strong>일반적 준칙</strong>을 상대가 자유롭고 평등한 사람으로서 <strong>합당하게 거부할 수 있는가</strong>다. ‘나는 싫다’는 실제 감정과 ‘이런 규칙을 서로에게 적용하는 것은 정당하지 않다’는 이유를 나눈다. 미용 솜씨가 마음에 들지 않으면 다른 곳에 갈 수 있고, 소개팅 후 연인으로 만나고 싶지 않다면 교류를 이어 가지 않을 수 있다. 상대를 위해 마음에도 없는 거래·연애를 계속하라고 강요하면 오히려 나의 독립된 삶을 부인한다.</p>
+<p>반면 갚을 의사가 없으면서 갚겠다고 속여 돈을 빌리는 준칙은 상대의 선택을 기망으로 왜곡한다. 상대가 돈을 건네었다는 겉모습만으로 정당한 협력이 되지 않는다. <strong>시험:</strong> 105·109·318번. <mark class="pink">첫째 요건 충족 ≠ 곧 침해. 실제 동의 ≠ 언제나 정당화.</mark> <strong>한 줄:</strong> 서로 이용할 수는 있지만 상대도 정당하게 받아들일 규칙 아래여야 한다.</p>
+<h2 id="argument-14-11" data-concept-id="argument-14-11">3-5. 합당한 거부의 세 유형과 동의의 함정 ★★★★★</h2>
+<p><strong>교재 386–390쪽 / 문단의 목적:</strong> 합당한 거부를 막연한 도덕적 느낌으로 남기지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>교재의 뜻</th>
+<th>이야기로 이해</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적 자체가 부당함</td>
+<td>목적부터 정당화되지 않음</td>
+<td>돈을 훔치려 금고 관리자를 협박.</td>
+</tr>
+<tr>
+<td>동의의 토대가 왜곡됨</td>
+<td>강요·기망, 또는 부정의한 권한 배분</td>
+<td>본인의 혼인·예배 결정권을 다른 사람에게 줘 놓고 당사자가 동의했다고 함.</td>
+</tr>
+<tr>
+<td>비동의와 중대한 능력 훼손</td>
+<td>자기 삶을 꾸리고 협동할 능력을 사소하지 않게 훼손</td>
+<td>동의 없이 신체를 중대하게 손상하여 타인의 목적에 동원.</td>
+</tr>
+</tbody></table>
+<p>둘째 유형은 동의서 한 장으로 해결되지 않는다. 협박당한 사람이 ‘예’라고 했거나 애초에 고를 수 있어야 할 선택지를 부당한 제도가 없애 버렸다면, 자유롭고 동등한 선택이라고 하기 어렵다. 반대로 목적에 <strong>정서적으로 공감하지 않는다</strong>는 사실만으로 합당한 거부가 되는 것도 아니다. 공격자가 방어 행위를 싫어해도 그 감정만으로 적정한 방어가 금지되지는 않는다.</p>
+<p><strong>318번 문장 주의:</strong> 지문에서 둘째 요건은 ‘합당하게 거부할 수 있음’이다. 따라서 ‘실제 동의가 있으면 언제나 둘째 요건 충족’이라는 ④는 틀리다. 이를 반대로 바꾸어 ‘동의만 있으면 언제나 둘째 요건 불충족, 따라서 존엄 침해 없음’이라고 외워도 틀리다. 동의의 자유·정보·정당한 배경과 행위의 목적을 살펴야 한다. <strong>한 줄:</strong> 동의가 있었는지만 묻지 말고 무엇에 어떤 조건에서 동의했는지 묻는다.</p>
+<h2 id="argument-14-12" data-concept-id="argument-14-12">3-6. 한 명의 장기, 추첨, 자발적 기증, 남은 세포 ★★★★★</h2>
+<p><strong>교재 387–390쪽 / 문단의 목적:</strong> 좋은 목적·공정한 추첨·실제 동의라는 말로 요건 판단을 생략하지 않게 한다. 건강한 한 사람을 강제로 수술해 열 명을 살리는 가정은 한 사람의 몸을 다른 목적의 자원으로 만든다. 의료 불신 때문에 장기적으로 손해라는 이유만으로 금지하는 것이 아니다. 국가가 무작위로 100명을 뽑아 1,000명을 살린다고 하고 병원 기피 문제도 없다고 가정해도, 각자의 삶을 강제로 지울 권한이 생기지 않는다.</p>
+<p>자발적으로 신장 하나를 기증하는 사례는 이와 다르다. 교재는 정당한 목적을 위해 자신의 의사에 따라 희생하는 행위를 곧바로 한낱 수단 취급이라고 보지 않는다. <strong>실제 기증은 충분한 설명·자유로운 동의·법정 절차·의학적 안전 판단이 필요하며 이 사고실험은 기증 권유가 아니다.</strong></p>
+<p>어떤 감염병에 선천적 저항력이 있는 사람이 치과 진료 후 남긴 구강 상피세포로 치료제를 만드는 가정도 있다. 교재는 그 사용으로 본인의 삶을 형성하고 관계를 맺는 기본 능력이 훼손되지 않는다는 가정 아래, 비동의만으로 한낱 수단 취급이라고 결론 내리지 않는다. 이것이 320번 ②의 교재상 판단이다.</p>
+<p><mark class="pink">세포를 이용한 사고실험의 철학적 결론은 실제 연구의 무동의 사용 허가가 아니다.</mark> 현실의 인체유래물 연구에는 충분한 설명과 서면동의, 법정 면제 요건 등 별도의 법적 심사가 필요하다. 개인정보·제공 범위·연구 심의도 따로 검토한다. <a href="https://law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900408709">생명윤리법 제37조 현행 조문</a>.</p>
+<p><strong>각주까지 연결:</strong> 재산상 손실은 정당한 보상으로 회복할 수 있는 경우가 있으나, 몸과 마음의 중대한 침해를 돈을 주면 모두 정당화할 수 있는 것은 아니다. 신체·정신에 대한 최소·일시적 개입이라도 엄격한 전제와 회복 가능성 등을 살펴야 한다. <strong>한 줄:</strong> 좋은 목적과 공정한 추첨도 다른 사람의 몸을 내 자원으로 바꾸지 못한다.</p>
+<h1>4. 금지와 보장의 두 방향</h1>
+<h2 id="argument-14-13" data-concept-id="argument-14-13">4-1. 열 명을 태운 차: 한낱 수단이 아니어도 침해할 수 있다 ★★★★★</h2>
+<p><strong>교재 390–391쪽 / 문단의 목적:</strong> 존엄 침해를 오직 ‘수단 이용’ 하나로 축소하지 않는다. 뱀독에 중독된 열 명을 실은 차가 병원으로 간다. 길에 묶인 한 사람이 있고, 가정상 조금만 늦어도 열 명이 죽는다. 운전자가 그를 치고 통과한다면?</p>
+<p>이때 길에 있는 사람의 몸을 이용해야 환자가 낫는 것은 아니다. 그 사람이 없다면 목적은 더 쉽게 달성된다. 따라서 장기 적출처럼 피해자의 몸이 목적 실현의 <strong>수단</strong>이 된 경우와는 다르다. 그러나 교재는 그 한 사람을 다른 목적에 아무렇게나 휘말려도 되는 존재, 전체 가치의 작은 조각으로 취급했다는 점에서 존엄의 <strong>소극적 금지 규범</strong>을 위반한다고 설명한다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>장기 적출 가정</th>
+<th>차량 통과 가정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>희생자의 역할</td>
+<td>그의 장기를 써야 목적을 달성</td>
+<td>길에 없었다면 더 쉽게 달성</td>
+</tr>
+<tr>
+<td>침해 논리</td>
+<td>한낱 수단 취급</td>
+<td>부수적으로 버려도 되는 존재로 취급</td>
+</tr>
+<tr>
+<td>공통 오류</td>
+<td>타인의 생명 수로 한 사람의 독립된 지위를 지움</td>
+<td>타인의 생명 수로 한 사람의 독립된 지위를 지움</td>
+</tr>
+</tbody></table>
+<p>이는 교재의 엄격한 가정에 대한 규범 논증이지 실제 교통사건의 고의·과실·긴급피난 판단을 모두 대신하는 판례가 아니다. <strong>시험:</strong> 320번 ④. <strong>한 줄:</strong> 수단이 아니었다는 답은 모든 존엄 침해가 없었다는 답이 아니다.</p>
+<h2 id="argument-14-14" data-concept-id="argument-14-14">4-2. 연못의 아이와 국가의 예산: 적극적 의무가 생기는 이유 ★★★★☆</h2>
+<p><strong>교재 391–393쪽 / 문단의 목적:</strong> 존엄이 ‘손대지 말라’만 요구하는 것이 아님을 밝힌다. 연못의 아이를 <strong>안전하게 구조할 수 있고</strong>, 내 손해는 값비싼 옷이 망가지는 정도라고 가정하자. 아이의 생명을 지키는 긴절성과 내가 부담할 손실을 비교하면, 가벼운 재산 손해를 이유로 외면하는 준칙은 아이에게 정당화하기 어렵다. 현실에서는 구조자의 안전과 전문 구조 요청 등 구체적 상황을 먼저 고려해야 한다.</p>
+<p>그렇다고 세상에 더 큰 필요가 있는 곳마다 내 모든 시간·재산을 내놓아야 한다는 것은 아니다. 그렇게 하면 나 자신의 고유한 삶은 사라지고 타인의 이익을 극대화하는 도구만 남는다. 그래서 적극적 의무에는 <strong>긴절성, 공정하고 적정한 부담, 실행 가능성</strong>이 중요하다.</p>
+<p>국가도 마찬가지다. 가장 기본적인 삶의 조건이 무너지는 사람들을 구할 수 있는데 방치하면서, 훨씬 덜 절박한 고급 문화 향유·단체의 신조 선전·장식물·홍보·축제를 우선하면 문제가 된다. 문화·축제가 언제나 위헌이라는 말이 아니라 <strong>무엇을 방치하고 무엇을 먼저 하느냐</strong>를 묻는 것이다. <mark class="green">도움받는 사람의 존엄뿐 아니라 부담하는 사람의 독립된 삶도 함께 존중해야 한다.</mark> <strong>한 줄:</strong> 긴절한 기본 조건의 보호는 의무가 될 수 있지만 무한한 희생 의무는 아니다.</p>
+<h2 id="argument-14-15" data-concept-id="argument-14-15">4-3. 소극적 규범·적극적 통제규범·증진의 행위규범 ★★★★★</h2>
+<p><strong>교재 393–394쪽 / 문단의 목적:</strong> ‘좋은 일을 하라’는 모든 요구의 법적 강도가 같지 않음을 구분한다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>요구</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>소극적 금지</td>
+<td>사람을 한낱 수단·임의의 희생물로 다루지 말라</td>
+<td>존중의 최소 경계선을 지키는 강한 제한.</td>
+</tr>
+<tr>
+<td>적극적 통제·재판규범</td>
+<td>공정한 부담으로 긴절한 기본 생활 조건을 보장·복구하라</td>
+<td>국가의 방치 등을 법적으로 심사할 기준.</td>
+</tr>
+<tr>
+<td>추가 증진의 행위규범</td>
+<td>가능하면 더 좋은 건강·문화·생활 수준을 실현하라</td>
+<td>여러 자원·목표와 조정하는 정책 지침.</td>
+</tr>
+</tbody></table>
+<p>교재는 노예제·고문·강제노역과 자의적인 압수수색의 통제를 근대 법질서의 중요한 원형으로 거론한다. 다만 ‘영장 없는 압수수색 금지’라는 압축 표현을 헌법·법률이 정한 모든 영장주의 예외도 없다는 뜻으로 외우지 않는다. 이 대목은 사람을 보호하는 경계의 중요성을 설명한다.</p>
+<p>추가적인 편의를 늘리기 위해 강한 소극적 금지를 희생시키면 그 금지는 아무 제약도 아니게 된다. 반면 공정한 부담 배분과 사회적 분업을 이용하면 기본 조건의 보장과 자율적 삶의 존중은 조화될 수 있다. 322번 ④는 그 가능성을 말한다.</p>
+<p><strong>함정 사례:</strong> 과밀수용 개선에 예산과 적극적인 공사가 든다고 해서 침해가 ‘적극적 보장 부족’으로만 분류되는 것은 아니다. 국가가 사람을 <strong>강제로 구금하고 그 조건을 지배</strong>했다는 점과 결합해 보므로 교재는 소극적 규범의 문제로 분류한다. 강제로 가둔 사람에게 음식을 주지 않아 굶게 하는 경우도 ‘아무 행동을 안 했으니 침해하지 않았다’고 할 수 없다. <strong>한 줄:</strong> 돈이 드는지보다 국가와 당사자 사이에 어떤 침해·보장 관계가 있는지 본다.</p>
+<h2 id="argument-14-16" data-concept-id="argument-14-16">4-4. 살아 있기만 하면 인간다운 생활인가 ★★★★★</h2>
+<p><strong>교재 394–396쪽 / 문단의 목적:</strong> 최소한의 물질적 생존과 동등한 구성원으로서 능력을 발휘할 기본 조건을 비교한다. 교재가 소개하는 헌재 법리는 상황에 따라 최소한의 물질적 생활을 위한 구체적 급부청구권이 도출될 수 있다고 보고, 그 이상의 건강하고 문화적인 생활을 위한 폭넓은 정책적 노력을 행위규범으로 설명한다. 모든 원하는 급부가 곧바로 개인의 청구권이 되는 것은 아니다.</p>
+<p>여기서 <strong>교재 저자의 비판</strong>이 이어진다. 재판에서 보장할 최소 조건을 언제나 미리 정한 생존 물품에만 가두면 다음 문제가 남는다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>단순한 불편을 넘는 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>몸을 덮을 옷은 있지만 취업 면접에 갈 적절한 옷을 전혀 구할 수 없음</td>
+<td>자활·직업으로 가는 기본 경로가 닫힘.</td>
+</tr>
+<tr>
+<td>부모 소득 때문에 감당 가능한 고등교육의 기회가 전무함</td>
+<td>학습·진로의 기본 능력 발현 경로가 막힘.</td>
+</tr>
+<tr>
+<td>이동 제약과 교통수단·비용 부족으로 투표하러 갈 수 없음</td>
+<td>공적 자치에 실제 참여할 길이 막힘.</td>
+</tr>
+<tr>
+<td>생존은 가능하지만 장기적으로 건강이 뚜렷이 나빠질 식단만 가능</td>
+<td>몸의 기본 능력 유지가 위협받음.</td>
+</tr>
+</tbody></table>
+<p>이것은 위 각 급부를 법원이 모두 이미 인정했다는 판례 목록이 아니다. 저자는 <strong>기본 능력의 행위 경로, 객관적 긴절성, 부담의 정도, 다른 예산의 우선순위</strong>를 검토하여 보장 범위를 더 충실히 논증해야 한다고 주장한다.</p>
+<p>반면 다인실보다 1인실이 더 쾌적하다는 이유만으로 국가가 모두에게 1인실을 제공해야 하는 것은 아니다. 다인실 때문에 신체의 완전성이나 기본적 자치 능력이 중대하게 훼손된다는 추가 사정이 필요하다. 물론 감염·사생활 등 구체적 위험이 있으면 별도의 판단을 해야 한다. <strong>시험:</strong> 321번 ③. <mark class="blue">제13강의 역량·취약성 → 제14강의 보장 의무 → 제15강의 각자 다른 삶에 대한 국가 중립성.</mark> <strong>한 줄:</strong> 최상의 쾌적함과 삶의 기본 길이 막히지 않을 조건은 다르다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>본질적으로 다투어지는 개념</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 本(근본 본) 質(바탕 질) 的(과녁 적) 槪(대개 개) 念(생각 념). 본질은 근본 성격, 개념은 대상을 묶어 파악하는 생각.. <strong>③ 합친 뜻:</strong> 핵심 의미와 올바른 사용에 지속적인 논쟁이 내재한 개념.. <strong>④ 이름의 이유:</strong> 모르는 단어의 단순 오해가 아니라 중심 의미를 다투기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 존엄·정의처럼 복합적 요소·개방성·전범을 지니고 해석 논쟁으로 발전하는 개념.. <strong>⑥ 쉬운 말:</strong> 같은 존엄을 지키자고 하면서도 무엇이 더 중요한지 토론한다.. <strong>⑦ 사례:</strong> 자율을 강조하는 해석과 취약한 사람 보호를 강조하는 해석..</p>
+<p><strong>⑧ 시험:</strong> 312·313번 고정성·전범 부재는 오답.. <strong>⑨ 비교·기억법:</strong> 아무 해석이나 타당하다는 상대주의와 다름..</p>
+<h3>전범·정합성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 典(법 전) 範(법 범) / 整(가지런할 정) 合(합할 합) 性(성품 성).. <strong>③ 합친 뜻:</strong> 기준이 되는 전형 / 서로 앞뒤가 맞는 성질.. <strong>④ 이름의 이유:</strong> 전범은 본보기, 정합은 요소가 어울려 맞음이라는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대표 사례와의 부합 및 여러 판단의 일관성을 통해 해석을 평가하는 개념.. <strong>⑥ 쉬운 말:</strong> 고문을 존엄 존중이라고 하는 해석은 공통의 기준에 맞지 않는다.. <strong>⑦ 사례:</strong> 노예제·고문이라는 부정적 전형을 설명할 수 있는지 검사..</p>
+<p><strong>⑧ 시험:</strong> 313번 전범 사례가 있다는 점.. <strong>⑨ 비교·기억법:</strong> 전범 典範과 전쟁범죄자 戰犯은 한자도 뜻도 다름..</p>
+<h3>구체화 관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 具(갖출 구) 體(몸 체) 化(될 화) 關(관계할 관) 係(맬 계).. <strong>③ 합친 뜻:</strong> 추상적인 뜻에 구체적 내용을 갖추는 관계.. <strong>④ 이름의 이유:</strong> 막연한 원리에 적용 가능한 몸체를 입히는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 추상 규범의 요구·금지·허용을 구체적인 사안의 규범으로 밝히는 관계.. <strong>⑥ 쉬운 말:</strong> 존엄을 지켜라를 강제로 모욕하지 말라 같은 요구로 푼다.. <strong>⑦ 사례:</strong> 학문의 자유에서 부당한 연구 간섭에 대한 방어권 설명..</p>
+<p><strong>⑧ 시험:</strong> 104번 정답.. <strong>⑨ 비교·기억법:</strong> 정당화 근거관계는 그 풀이를 지지하는 이유의 관계..</p>
+<h3>정당화·파생규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 正(바를 정) 當(마땅 당) 化(될 화) / 派(물갈래 파) 生(날 생) 規(법 규) 範(법 범).. <strong>③ 합친 뜻:</strong> 마땅한 이유를 제시함 / 근원 규범에서 갈라져 나온 규범.. <strong>④ 이름의 이유:</strong> 가지가 뻗듯 근거에서 새 규범 내용이 도출됨..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구체 규범이 원래 규범의 내용이라는 것을 논증해 도출하는 관계.. <strong>⑥ 쉬운 말:</strong> 왜 그 원칙이 이 경우에도 적용되는지 다리를 놓는다.. <strong>⑦ 사례:</strong> 연구 자유의 의미와 국가 지원·방어권의 근거 연결..</p>
+<p><strong>⑧ 시험:</strong> 314번 단순 연접·상관과 구별.. <strong>⑨ 비교·기억법:</strong> 생각나는 정책을 원칙 뒤에 붙이는 것과 다름..</p>
+<h3>실질적 근본규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 實(열매 실) 質(바탕 질) 的(과녁 적) 根(뿌리 근) 本(근본 본) 規(법 규) 範(법 범).. <strong>③ 합친 뜻:</strong> 내용의 정당성을 떠받치는 뿌리 규범.. <strong>④ 이름의 이유:</strong> 법질서가 지켜야 하는 실질 내용을 정하는 토대이기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국가권력의 정당성·한계, 법규범의 내용·효력·해석을 지도하는 존엄의 지위.. <strong>⑥ 쉬운 말:</strong> 법을 제대로 만들었는지만 아니라 사람을 어떻게 대하는지도 묻는다.. <strong>⑦ 사례:</strong> 입법 절차를 지켜도 사람을 소모품으로 대하는 내용을 비판..</p>
+<p><strong>⑧ 시험:</strong> 107·315·317번.. <strong>⑨ 비교·기억법:</strong> 형식적 절차 기준이나 개별 교통 규칙과 같은 층위가 아님..</p>
+<h3>법의 흠결·보충</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 法(법 법) 欠(하품 흠: 부족함의 뜻) 缺(이지러질 결) 補(기울 보) 充(찰 충).. <strong>③ 합친 뜻:</strong> 법 규율의 빈 곳을 원리 등으로 채움.. <strong>④ 이름의 이유:</strong> 빠진 부분을 메운다는 이름..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 명시 규율이 부족한 사안에서 정당한 해석·원리를 통해 해결 기준을 마련함.. <strong>⑥ 쉬운 말:</strong> 법전에 딱 적힌 문장이 없을 때 무엇을 근거로 풀지 생각한다.. <strong>⑦ 사례:</strong> 317번 존엄이 흠결 보충의 제1차 원리라는 설명..</p>
+<p><strong>⑧ 시험:</strong> 모든 효력·내용의 기준이라는 말에서 근본규범 찾기.. <strong>⑨ 비교·기억법:</strong> 법관이 취향대로 새 규칙을 만드는 것과 다름..</p>
+<h3>메타권리</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 메타(meta)는 외래어로 위·넘어선 층위를 나타내며 대응 한자를 만들지 않음. 權(권세 권) 利(이로울 리).. <strong>③ 합친 뜻:</strong> 다른 권리를 가질 주체임을 인정하는 상위의 권리.. <strong>④ 이름의 이유:</strong> 개별 권리 하나보다 그 권리들의 토대라는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재에서는 권리들을 가질 권리, 특히 국가 결정에 대해 정당화를 요구할 지위.. <strong>⑥ 쉬운 말:</strong> 국가가 나도 이유를 설명해 줄 사람으로 대해야 한다.. <strong>⑦ 사례:</strong> 내 자유를 제한하며 나에게는 설명할 필요 없다고 할 수 없음..</p>
+<p><strong>⑧ 시험:</strong> 316번 일반 형량 대상과 동일시 금지.. <strong>⑨ 비교·기억법:</strong> 파생 기본권이 모두 절대 무제한이라는 뜻은 아님..</p>
+<h3>굴욕적 취급</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 屈(굽힐 굴) 辱(욕될 욕) 的(과녁 적) 取(취할 취) 扱(미칠 급).. <strong>③ 합친 뜻:</strong> 인격을 낮추고 모욕하는 방식의 대우.. <strong>④ 이름의 이유:</strong> 몸이나 마음을 굴복시켜 치욕을 주는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 인간을 공동체에서 존중받을 주체가 아닌 것처럼 대하는 처우의 문제.. <strong>⑥ 쉬운 말:</strong> 죄를 지었다고 공개적으로 사람 취급을 안 해도 되는 것은 아니다.. <strong>⑦ 사례:</strong> 구금·돌봄 상황에서의 의도적 모멸..</p>
+<p><strong>⑧ 시험:</strong> 불쾌감 하나로 모든 행위가 위반이라는 함정.. <strong>⑨ 비교·기억법:</strong> 정당한 조치에 불가피하게 따르는 당혹감과 구별..</p>
+<h3>목적 정식·한낱 수단</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 目(눈 목) 的(과녁 적) 定(정할 정) 式(법 식) / 手(손 수) 段(층계 단).. <strong>③ 합친 뜻:</strong> 목적으로 대하라는 원칙의 표현 / 목표에 쓰는 도구에 불과한 존재.. <strong>④ 이름의 이유:</strong> 도구적 쓰임새만 남기고 인격을 지우지 말라는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 상대도 독립된 삶과 권리의 주체로 존중해야 한다는 의무론적 요구.. <strong>⑥ 쉬운 말:</strong> 도움을 받아도 그 사람을 마음대로 써 버릴 물건으로 보지 않는다.. <strong>⑦ 사례:</strong> 미용 서비스와 강제 장기 적출의 대비..</p>
+<p><strong>⑧ 시험:</strong> 109번 모든 수단 이용 금지는 틀림.. <strong>⑨ 비교·기억법:</strong> 공정한 협력과 한낱 수단 취급은 다름..</p>
+<h3>준칙·합당한 거부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 準(법도 준) 則(법칙 칙) / 合(합할 합) 當(마땅 당) 拒(막을 거) 否(아닐 부).. <strong>③ 합친 뜻:</strong> 행위를 허용하는 기준 / 정당한 이유에 따른 거절.. <strong>④ 이름의 이유:</strong> 내 기분 아닌 서로에게 마땅한 규칙을 묻기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자유롭고 평등한 사람 사이에 적용할 행동 규칙을 합리적으로 받아들일 수 있는지 판단.. <strong>⑥ 쉬운 말:</strong> 누구나 이런 일을 해도 된다는 규칙에 어떤 이유로 반대하는지 본다.. <strong>⑦ 사례:</strong> 속여 빌려도 된다는 규칙은 상대의 선택권을 파괴..</p>
+<p><strong>⑧ 시험:</strong> 110·318번 동의와 감정을 요건과 구별.. <strong>⑨ 비교·기억법:</strong> 실제 싫어함 또는 실제 서명과 같지 않음..</p>
+<h3>귀속·신체 완전성·인격적 통합성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 歸(돌아갈 귀) 屬(무리 속) / 身(몸 신) 體(몸 체) 完(완전할 완) 全(온전할 전) / 人(사람 인) 格(격식 격) 統(거느릴 통) 合(합할 합).. <strong>③ 합친 뜻:</strong> 누구에게 정당하게 속함 / 몸의 온전함 / 자기 삶을 하나의 주체로 이끄는 온전함.. <strong>④ 이름의 이유:</strong> 사람에게 가장 밀접한 영역의 주인을 확인하는 뜻..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타인의 몸·정신·생활 영역을 수단으로 사용하는지 판단하는 기반.. <strong>⑥ 쉬운 말:</strong> 남의 몸과 일기와 생활 공간은 내 필요만으로 내 것이 되지 않는다.. <strong>⑦ 사례:</strong> 일기·집·대화·창작물의 이용..</p>
+<p><strong>⑧ 시험:</strong> 318·319번 속함의 범위.. <strong>⑨ 비교·기억법:</strong> 재산 소유권만의 문제도 아니고 사회 분위기 전부가 내 것인 것도 아님..</p>
+<h3>기망·강요·자발성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 欺(속일 기) 罔(속일 망) / 強(강할 강) 要(구할 요) / 自(스스로 자) 發(필 발) 性(성품 성).. <strong>③ 합친 뜻:</strong> 속임 / 억지로 요구함 / 스스로 선택함.. <strong>④ 이름의 이유:</strong> 서명이라는 결과보다 선택이 나온 과정을 보기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 겉으로 있는 동의가 자유·정보·정당한 선택 조건을 갖추었는지 구별하는 개념.. <strong>⑥ 쉬운 말:</strong> 속거나 위협받아 한 예와 자유롭게 한 예는 다르다.. <strong>⑦ 사례:</strong> 갚을 생각 없이 돈을 빌리거나 혼인 선택지를 부당하게 없앰..</p>
+<p><strong>⑧ 시험:</strong> 318번 실제 동의의 자동 효과 부정.. <strong>⑨ 비교·기억법:</strong> 법률별 동의·의사표시 요건은 별도 검토..</p>
+<h3>소극적 규범·적극적 규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소) 極(다할 극) 的(과녁 적) / 積(쌓을 적) 極(다할 극) 的(과녁 적) 規(법 규) 範(법 범).. <strong>③ 합친 뜻:</strong> 침해하지 말라는 규범 / 보호·보장하라는 규범.. <strong>④ 이름의 이유:</strong> 성격이 소심·활발하다는 뜻이 아니라 금지·작위 방향의 구별..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 존엄을 침해하는 대우의 금지와 기본 생활 조건의 보장·증진이라는 두 구현 방향.. <strong>⑥ 쉬운 말:</strong> 해치지 말기와 필요한 기본 도움을 제공하기.. <strong>⑦ 사례:</strong> 과밀수용은 강제 구금의 침해, 기본 생활 경로 지원은 적극 보장..</p>
+<p><strong>⑧ 시험:</strong> 322번 돈·작위가 든다고 모두 적극 규범 아님.. <strong>⑨ 비교·기억법:</strong> 행위의 겉모양과 규범적 관계를 구별..</p>
+<h3>긴절성·적정한 부담</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 緊(긴할 긴) 切(끊을 절: 절실함) 性(성품 성) / 適(맞을 적) 正(바를 정) 負(질 부) 擔(멜 담).. <strong>③ 합친 뜻:</strong> 급하고 절실함 / 공정하게 감당할 정도의 짐.. <strong>④ 이름의 이유:</strong> 단순히 있으면 좋음과 지금 없으면 삶의 길이 무너짐을 구별..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 기본 조건 보장 의무의 우선성과 다른 사람의 자율적 삶을 함께 판단하는 기준.. <strong>⑥ 쉬운 말:</strong> 장식보다 투표할 길이 먼저 필요한지, 누가 어느 정도 부담할지 본다.. <strong>⑦ 사례:</strong> 아이 구조의 옷 손상, 국가 예산의 긴급 조건 우선..</p>
+<p><strong>⑧ 시험:</strong> 321·322번 기본 능력·공정한 부담 단서.. <strong>⑨ 비교·기억법:</strong> 항상 더 큰 필요를 위해 나의 모든 삶을 희생하라는 뜻 아님..</p>
+<h3>행위규범·통제규범·재판규범</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 行(다닐 행) 爲(할 위) / 統(거느릴 통) 制(절제할 제) / 裁(마를 재) 判(판가름할 판) 規(법 규) 範(법 범).. <strong>③ 합친 뜻:</strong> 행동 방향 / 적정성을 검사하는 기준 / 재판 판단의 기준.. <strong>④ 이름의 이유:</strong> 누가 어떤 역할에서 규범을 쓰는지에 따른 이름..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 정책을 지향하게 하는 규범과 위법한 국가 작용·방치를 심사하는 규범을 구별.. <strong>⑥ 쉬운 말:</strong> 더 잘하라는 목표와 잘못했으니 고치라는 판단 기준은 구별된다.. <strong>⑦ 사례:</strong> 최대 쾌적함 증진과 긴절한 최소 조건의 보장..</p>
+<p><strong>⑧ 시험:</strong> 적극적 규범이 전부 행위규범에 그친다는 보기는 틀림.. <strong>⑨ 비교·기억법:</strong> 한 규범이 여러 역할을 가질 수 있음..</p>
+<h3>공적·사적 자치의 기본 조건</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 公(공변될 공) 私(사사 사) 的(과녁 적) 自(스스로 자) 治(다스릴 치) 基(터 기) 本(근본 본) 條(가지 조) 件(물건 건).. <strong>③ 합친 뜻:</strong> 공동 규칙과 자기 삶을 스스로 이끌 토대.. <strong>④ 이름의 이유:</strong> 자유가 실제 작동할 길을 여는 전제이기 때문..</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자기 삶의 계획·사회적 협동·정치 참여가 가능하도록 하는 기본 역량과 생활 여건.. <strong>⑥ 쉬운 말:</strong> 표를 던질 권리가 있어도 투표소에 갈 길이 전혀 없으면 부족하다.. <strong>⑦ 사례:</strong> 면접 옷·교육 기회·이동·건강 유지의 교재 사례..</p>
+<p><strong>⑧ 시험:</strong> 321번 기본 경로와 최대 쾌적함 구별.. <strong>⑨ 비교·기억법:</strong> 저자의 확장 논증과 법원이 이미 인정한 구체 청구권은 구별..</p>
+<h1>문제 연결 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>꼭 잡을 함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>314</td>
+<td>구체화된 규범은 원래 규범과 정당화 근거관계가 있어야 한다.</td>
+</tr>
+<tr>
+<td>316</td>
+<td>메타권리와 개별 파생 기본권을 같은 층위로 놓지 않는다.</td>
+</tr>
+<tr>
+<td>318</td>
+<td>실제 동의 하나만으로 침해 여부를 자동 판정하지 않는다.</td>
+</tr>
+<tr>
+<td>320</td>
+<td>한낱 수단이 아니어도 임의의 희생물로 대우하면 존엄 문제.</td>
+</tr>
+<tr>
+<td>322</td>
+<td>개선에 예산이 들어도 강제 구금의 처우는 소극적 규범 문제.</td>
+</tr>
+</tbody></table>
+<p>부록은 <strong>18문항·72개 보기</strong> 전부를 해설한다. 실제 오답률 자료는 없어 ‘함정’은 보기의 구조상 혼동 가능성을 뜻한다. 108번 날짜, 317번 보충의견의 출처, 318번 요건의 문장 방향, 320번 세포 사례의 가정과 실제 연구법을 특히 구별한다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 공공 기록:</strong> 구청이 “통계 효율을 위해 소수 주민을 이름 없는 자원으로 관리하겠다. 반대 이유는 듣지 않겠다”고 한다. 무엇이 문제인가? <strong>정답:</strong> 효율 총합만으로 각 개인에게 정당화받을 지위를 지우는 점이다. 실제 정책의 다른 위법 요건과 별도로 메타권리의 관점에서 비판한다. <strong>출제 의도:</strong> 개별 권리 제한과 정당화 지위 박탈의 차이.</p>
+<p><strong>응용 2 · 음악 선생님:</strong> 학생이 수업료를 내고 교습을 받다가 교수법이 맞지 않아 적법하게 계약을 끝낸다. “선생님을 내 목적의 수단으로 썼으니 존엄 침해”인가? <strong>정답:</strong> 아니다. 공정한 협력과 종료 규칙을 지켰다면 수단 이용만으로 한낱 수단 취급이 되지 않는다. <strong>출제 의도:</strong> 두 요건을 나누어 적용.</p>
+<p><strong>응용 3 · 동의서의 배경:</strong> 복지시설이 실제로는 받을 자격이 있는 식사를 끊겠다고 위협하여 홍보 촬영 동의를 받는다. 서명했으니 충분한가? <strong>정답:</strong> 아니다. 선택지를 부당하게 제거한 강요의 배경과 인격적 권리를 살펴야 한다. <strong>출제 의도:</strong> 실제 동의와 합당한 정당화 분리.</p>
+<p><strong>응용 4 · 휠체어 출입구:</strong> 공공 투표소의 작은 출입구 개선으로 참여가 가능하지만 예산은 전부 장식 조명에 쓰기로 한다. 교재의 적극적 규범으로 무엇을 묻나? <strong>정답:</strong> 기본적 정치 참여 경로가 막혔는지, 개선 부담이 공정하고 감당 가능한지, 덜 긴절한 목표를 왜 우선했는지 묻는다. 예산이라는 말만으로 방치가 정당화되지 않는다. <strong>출제 의도:</strong> 필요성·부담·우선순위의 논증.</p>
+<p><strong>응용 5 · 국가의 대기실:</strong> 국가가 사람들을 강제로 머물게 한 대기실에 숨쉬기 어려울 정도로 과밀하게 넣었다. 시설 확장에 돈이 드니 오직 적극적 복지 문제인가? <strong>정답:</strong> 아니다. 국가가 강제로 지배한 처우 자체의 침해 문제를 먼저 본다. <strong>출제 의도:</strong> 소극·적극 분류를 지출·무지출과 혼동하지 않기.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제14강</h1>
+<p><strong>TOP3:</strong> 근본규범·메타권리 / 한낱 수단의 두 요건 / 소극·적극 구현.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>다투는 개념</td>
+<td>복합적·개방적. 전범이 있고 논쟁으로 정합성 발전.</td>
+</tr>
+<tr>
+<td>구체화</td>
+<td>추상 A가 구체적 B를 뜻함. 둘 사이의 정당화 필요.</td>
+</tr>
+<tr>
+<td>근본규범</td>
+<td>국가 정당성·한계, 기본권 중요도, 해석·효력·흠결 기준.</td>
+</tr>
+<tr>
+<td>실질적</td>
+<td>절차만이 아니라 법의 내용도 평가.</td>
+</tr>
+<tr>
+<td>메타권리</td>
+<td>권리들을 가질 권리. 각 개인에게 정당화할 지위.</td>
+</tr>
+<tr>
+<td>한낱 수단 ①</td>
+<td>타인의 몸·마음·정당한 영역을 의도적으로 이용.</td>
+</tr>
+<tr>
+<td>한낱 수단 ②</td>
+<td>그 이용 준칙을 자유·평등한 사람이 합당하게 거부 가능.</td>
+</tr>
+<tr>
+<td>거부 3유형</td>
+<td>부당 목적 / 왜곡된 동의·배경 / 비동의와 중대한 능력 훼손.</td>
+</tr>
+<tr>
+<td>불충분한 단서</td>
+<td>더 필요함·유래함·불쾌함·실제 동의만으로 결론 못 냄.</td>
+</tr>
+<tr>
+<td>미용·소개팅</td>
+<td>공정한 협력·교류의 선택과 종료는 존중 가능.</td>
+</tr>
+<tr>
+<td>장기·차량</td>
+<td>한낱 수단 / 임의의 희생물. 둘 다 독립된 지위 문제.</td>
+</tr>
+<tr>
+<td>적극적 의무</td>
+<td>긴절한 기본 조건 + 공정하고 적정한 부담.</td>
+</tr>
+<tr>
+<td>추가 증진</td>
+<td>행위규범. 최대 편의가 모두 직접 청구권은 아님.</td>
+</tr>
+<tr>
+<td>과밀수용</td>
+<td>강제 구금의 처우 문제. 예산 소요만으로 적극 규범 아님.</td>
+</tr>
+<tr>
+<td>저자의 비판</td>
+<td>생존만 아니라 자치·협동의 기본 경로가 막혔는지 심사.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 서로를 수단으로 이용하는 협력은 가능하지만, 상대에게 정당화할 독립된 주체의 지위를 지워서는 안 된다.</p>
+<p><strong>사례를 풀 순서:</strong> 누구에게 속함 → 의도적 이용 → 합당한 거부 → 별도 희생물 취급 → 긴절한 조건·공정한 부담.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 미용·장기·차량·과밀수용을 서로 다른 이유로 설명할 수 있다. 🟡 <strong>복습 필요:</strong> 두 요건은 알지만 실제 동의와 합당한 거부를 혼동한다. 🔴 <strong>이해 부족:</strong> 수단이면 모두 금지이거나 좋은 목적·많은 생명이면 무엇이든 허용된다고 생각한다. 답안을 받지 않아 실제 성취도를 확정한 평가는 아니다. <strong>복습 TOP3:</strong> 메타권리 / 두 요건과 세 거부 유형 / 적극적 통제규범과 증진 규범.</p>
+<h1>문제 부록 · 18문항·72개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_104"><h4>형성평가 · 헌법논증이론_104</h4><p class="question-stem">인간 존엄성 규범과 같은 추상적인 규범(A)의 내용을 구체화하여 그것이 보다 구체적 사안에서 명령(요구)하거나 금지하거나 허용하는 규범 내용(B)을 명확하게 할 수 있을 때 둘 사이에 성립하는 관계를 무엇이라고 하는가?</p><ol class="choices"><li>구체화 관계</li><li>추상화 관계</li><li>소반대 관계</li><li>근친 관계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 추상 규범의 내용을 구체적인 요구·금지·허용으로 밝히는 구체화 관계다.</li><li><strong>비선택</strong> · 구체적인 것에서 공통 요소를 뽑아 일반화하는 반대 방향의 표현이다.</li><li><strong>비선택</strong> · 규범 문장 사이의 논리적 관계와 구체화 관계를 혼동한 보기다.</li><li><strong>비선택</strong> · 이 문맥의 규범 논증 관계를 나타내는 용어가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_105"><h4>형성평가 · 헌법논증이론_105</h4><p class="question-stem">다음 중 한낱 수단 취급 금지원칙에 위반되지 않는 행위는?</p><ol class="choices"><li>친구의 게임기를 너무 사용하고 싶어서 2주간 사용할 생각으로 몰래 들고 나왔다.</li><li>소개팅을 했는데 연인으로 매력이 없다 생각되어 더 이상 연락을 하지 않았다.</li><li>테러 용의자의 소재를 알기 위해 용의자의 아들을 고문하였다.</li><li>장기부전에 빠진 10명을 살리기 위해 건강한 1명을 기습적으로 마취한 후 해부하였다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 게임기는 친구에게 속하며 몰래 가져가는 이용 준칙은 친구가 합당하게 거부할 수 있다. 반환할 생각만으로 정당화되지 않는다.</li><li><strong>선택</strong> · 연인으로 교류를 계속할지 선택하는 것은 각자의 자유다. 상대를 위해 원치 않는 교류를 강제할 수 없다.</li><li><strong>비선택</strong> · 아들의 몸을 소재 파악의 수단으로 삼고 고문한다. 수사 목적만으로 정당화할 수 없다.</li><li><strong>비선택</strong> · 한 사람의 신체를 타인의 생명을 위한 강제 자원으로 삼는다. 생명 수의 합만으로 정당화할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_106"><h4>형성평가 · 헌법논증이론_106</h4><p class="question-stem">인간존엄성의 이상에 관한 논의와 설명으로 틀린 것은?</p><ol class="choices"><li>세계 150개국의 헌법 및 헌법재판에서 인간존엄성을 최고의 가치로 선언하고 있다.</li><li>국내법 질서를 수립할 때 영향을 주었을 뿐, 국내법 질서 속에서 법적 논증과 결정에 중요한 역할을 수행할 수는 없다.</li><li>지나치게 추상적이어서 구체적인 결론을 이끌어 낼 수 없다거나 수사적 용어로서 엄밀한 논증이 필요한 법적 판단에 부적합하다는 비판이 있다.</li><li>합리적 논증이 끝나는 지점에서 자신의 세계관과 윤리관을 끌어들이는 수단으로 오용된다는 비판이 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 교재가 인용한 자료에 따른 설명이다. 150이라는 수치를 현재의 새 통계로 재확인한 것은 아니다.</li><li><strong>선택</strong> · 존엄은 질서 수립의 배경만이 아니라 법 해석·효력 판단·국가 행위의 한계에도 역할을 한다. 따라서 틀린 설명이다.</li><li><strong>비선택</strong> · 추상적 수사에 그친다는 비판은 실제로 교재가 소개하는 비판이다. 그 비판을 소개하는 것과 동의하는 것은 다르다.</li><li><strong>비선택</strong> · 논증을 생략한 채 자신의 세계관을 주입하는 데 오용된다는 비판을 소개한 옳은 보기다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_107"><h4>형성평가 · 헌법논증이론_107</h4><p class="question-stem">인간 존엄성 규범에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>도로교통법이나 민법과 같은 층위와 지위에 있는 규범이다.</li><li>국가와 법질서 정당화의 토대가 되고 국가와 법질서가 지향해야 할 최고 원리이다.</li><li>'국가와 국가권력의 정당성 원칙'이자 '국가권력의 한계'를 설정한다.</li><li>기본권 규범들을 포함한 헌법규범들의 해석을 지도하는 원리규범이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 개별 법률의 규칙과 동일 층위가 아니라 국가·법질서의 정당성과 한계를 지도하는 실질적 근본규범이다.</li><li><strong>비선택</strong> · 법질서의 정당성 토대와 지향을 제공한다는 설명이다.</li><li><strong>비선택</strong> · 왜 권력을 행사할 수 있는가와 어디까지 행사할 수 있는가를 함께 제약한다.</li><li><strong>비선택</strong> · 개별 기본권을 포함한 헌법규범 해석을 지도한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_108"><h4>형성평가 · 헌법논증이론_108</h4><p class="question-stem">헌재 1995. 4. 25. 94헌바37 결정은 “우리 헌법구조에서 보다 더 중요한 자유영역과 덜 중요한 자유영역을 나눌 수 있다면, 이를 판단하는 기준은 ______________이다”라고 하였다. ______________에 들어갈 말로 알맞은 것은?</p><ol class="choices"><li>공공복리</li><li>건전함</li><li>인간의 존엄성</li><li>평등</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공공복리가 아니라 인간 존엄성과의 관련이 문제의 빈칸이다.</li><li><strong>비선택</strong> · 건전함이라는 모호한 평가로 기본권 중요도를 정하지 않는다.</li><li><strong>선택</strong> · 인간 존엄성이 정답이다. 원문에 적힌 결정일은 오류이며 94헌바37은 1999. 4. 29. 결정이다.</li><li><strong>비선택</strong> · 평등도 중요한 원리이지만 이 인용의 빈칸은 인간 존엄성이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_109"><h4>형성평가 · 헌법논증이론_109</h4><p class="question-stem">인간 존엄성 규범의 강력한 의무론적 속성은 이른바 ‘목적 정식’으로 구현된다. 이에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>인간성 존엄성 규범의 강력한 의무론적 속성의 구현 내용 중 하나이다.</li><li>이른바 ‘목적 정식’이 표현하는 규범내용은 ‘한낱 수단 취급 금지원칙’이다.</li><li>목적 정식은 우리 자신이나 타인을 목표달성을 위한 수단으로 취급하는 면이 있는 행위를 결코 해서는 안 된다는 내용이다.</li><li>목적 정식은 국가가 형벌권을 행사함에 있어서도 사람을 국가행위의 단순한 객체로 취급하거나 비인간적이고 잔혹한 형벌을 부과하는 것을 금지한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 목적 정식은 독립된 사람의 지위를 강한 의무론적 제약으로 표현한다. 인간성 존엄성이라는 문구는 인간 존엄성으로 읽는다.</li><li><strong>비선택</strong> · 핵심은 한낱 수단 취급의 금지다.</li><li><strong>선택</strong> · 서로 서비스를 이용하는 협력까지 금지하지 않는다. 수단인 면이 있음과 한낱 수단으로만 대함은 다르다.</li><li><strong>비선택</strong> · 형벌 목적이 있어도 국가의 단순 객체로 만들거나 잔혹하고 비인간적으로 처우할 수 없다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 목적정식은 우리 자신이나 타인을 목표달성을 위한 ‘한낱 수단’으로 취급해서는 안 된다는 내용이다. 미용실에 가서 미용사에게 머리를 깎게 하는 일상적인 행위도 수단으로 취급하는 면은 있다. 그러나 그러한 면이 있다 하더라도 그것이 곧 인간 존엄성에 위반되는 것은 아니다. 오히려 자신의 목적, 즉 머리를 잘 깎은 상태를 달성하고자 하는 목적에 부합하지 않음에도 불구하고 같은 미용사에게 계속 가도록 만드는 규범이야말로 인간 존엄성에 위반된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_110"><h4>형성평가 · 헌법논증이론_110</h4><p class="question-stem">타인에게 속하는 것을 행위자의 목적 실현을 위한 수단으로 이용하는 행위를 허용하는 준칙을 (타인이) 합당하게 거부할 수 있는 전형적인 세 가지 유형에 속하지 않는 것은?</p><ol class="choices"><li>목적 자체가 부당한 경우</li><li>목적에 정서적으로 공감하지 못하는 경우</li><li>동의의 전제가 되는 법질서가 각자에게 속하는 것을 잘못 규정하거나 전제하고 있건 경우</li><li>타인의 동의가 없었는데 그 행위로 인하여 그 타인에게는 자신의 가치에 따라 삶을 꾸려나가고 다른 사람과 관계를 맺고 협동하는 능력이 사소하지 않게 훼손되는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 목적부터 부당하면 그 목적을 위해 타인의 것을 이용하는 준칙을 합당하게 거부할 수 있다.</li><li><strong>선택</strong> · 정서적으로 공감하지 못한다는 사실만으로 부당한 목적이나 합당한 거부가 성립하지 않는다. 공격자가 정당한 방어를 싫어해도 마찬가지다.</li><li><strong>비선택</strong> · 본인에게 있어야 할 결정권을 다른 사람에게 배분한 부정의한 배경에서는 겉으로 동의가 있어도 정당성이 확보되지 않는다. 있건은 있던의 오기로 읽는다.</li><li><strong>비선택</strong> · 비동의 상태에서 자기 삶과 관계·협동의 기본 능력을 중대하게 훼손하면 합당하게 거부할 수 있는 전형이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 목적에 정서적으로 공감하지 못하는 것이라고 해서, 목적이 부당하다고 볼 수 없다. 예를 들어 타인을 폭행하는 공격자는, 피해자를 위한 방위 행위에 정서적으로 공감을 하지 않을 것인데, 피해자를 방위하기 위해 공격자에게 물리력을 행사하는 것은 한낱 수단 취급 금지원칙에 어긋나지 않는다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_312"><h4>워크북 · 헌법논증이론_312</h4><p class="question-stem">본질적으로 다투어지는 개념으로서 인간 존엄성을 논의할 때, '본질적으로 다투어지는 개념'에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>개념의 사용자들이 그 개념의 적절한 의미와 사용을 둘러싸고 끝없는 논쟁을 벌이는 것이 불가피한 개념을 의미한다.</li><li>개념 사용자들이 서로서로 각자가 제시하는 특정한 의미를 열정적으로 옹호하고 상대방의 용법을 비판하는 것을 의미한다.</li><li>매우 복합적인 요소들로 구성된다.</li><li>언어사용자라면 시간이 흘러도 누구나 명확하고 분명하게 그 경계를 인식할 수 있도록 개념의 의미가 고정되어 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 단순한 사전 뜻의 착오가 아니라 적절한 의미·사용에 관해 지속적 논쟁이 일어나는 개념이다.</li><li><strong>비선택</strong> · 자신의 용법을 옹호하고 상대의 해석을 비판하는 특징을 설명한다.</li><li><strong>비선택</strong> · 여러 요소가 복합적으로 얽혀 있어 강조점이 달라진다.</li><li><strong>선택</strong> · 의미가 고정되어 누구나 항상 같은 경계를 아는 것이 아니라 개방되어 변화할 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 개념의 의미가 고정되어 있지 않고 열려 있어 상황의 변화에 따라 상당한 의미 변경이 이루어지는 종류의 개념이며, 그 의미 변경을 사전에 예측하기 어렵다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_313"><h4>워크북 · 헌법논증이론_313</h4><p class="question-stem">본질적으로 다투어지는 개념으로서 인간 존엄성을 논의할 때, '본질적으로 다투어지는 개념'에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>해당 개념의 의미는 고정되지 않고 열려 있어 상황의 변화에 따라 상당한 의미 변경이 이루어지는 종류의 개념이며, 그 의미 변경을 사전에 예측하기 어렵다.</li><li>해당 개념의 복합적 요소들은 매우 다양하게 기술될 수 있고 요소들의 가치와 중요도는 매우 상이하게 매겨져 입장에 따라 특정한 요소들을 중심 요소로 내세운다.</li><li>해당 개념에는 개념 사용자들이 그 개념의 기원(원형)으로 삼는 전범(典範) 사례들이 없다.</li><li>해당 개념의 의미와 용법에 대한 논쟁을 통해서 개념 해석들 중 어떤 것들은 더 설득력이 있는 것으로 평가되면서 해당 개념의 의미로 통합되고, 그리하여 그 개념은 점점 더 정합적인 개념으로 발전해간다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상황에 따라 의미가 변할 수 있고 그 변화를 미리 전부 예측하기 어렵다.</li><li><strong>비선택</strong> · 자율·평등·보호 등 여러 요소 가운데 무엇을 중심에 둘지 입장 차이가 생길 수 있다.</li><li><strong>선택</strong> · 공통의 원형·전범 사례가 있다. 노예제·고문을 존엄 존중이라 설명한다면 그 해석을 비판할 수 있다.</li><li><strong>비선택</strong> · 설득력 있는 해석이 통합되며 더 정합적으로 발전할 가능성을 설명한다. 모든 논쟁이 즉시 합의된다는 뜻은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 ④와 어긋나는 진술이다. 만일 그 개념의 원형이 되는 전범 사례, 패러다임 사례가 없다면 그 개념이 합리적 논쟁을 통해 더 정합적으로 발전해나갈 여지가 없을 것이다. 이를테면 노예제, 고문이 인간 존엄성에 위반되는 패러다임이 되는 사례들이다. 그래서 인간 존엄성 개념에 대해 제안된 어떤 해명이 이런 사례를 오히려 인간 존엄성을 존중한 것이라고 평가한다면, 그 해명은 부당한 해명이라고 합리적으로 평가될 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_314"><h4>워크북 · 헌법논증이론_314</h4><p class="question-stem">다음 ______에 들어갈 말로 가장 적합한 것은?<br><br>원래의 추상적 규범 문장 ①과 구체화된 규범 문장 ②, ③, ④가 적절한 ______에 있다고 받아들여진다면, 뒤의 규범 문장들은 논증 과정을 통해 규범 문장 ①로부터 도출된 규범들(derivative norms)이며 규범 문장 ①의 내용에 포함된다고 할 수 있다.</p><ol class="choices"><li>연접관계</li><li>정당화 근거관계</li><li>상관관계</li><li>모순관계</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문장을 단순히 나란히 잇는 것만으로 규범이 도출되지 않는다.</li><li><strong>선택</strong> · 원래 규범이 구체적 규범을 왜 뒷받침하는지 보이는 정당화 근거관계가 필요하다.</li><li><strong>비선택</strong> · 함께 나타난다는 상관만으로 규범의 근거가 되지 않는다.</li><li><strong>비선택</strong> · 서로 양립할 수 없는 모순이 아니라 근거를 통한 도출 관계다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_315"><h4>워크북 · 헌법논증이론_315</h4><p class="question-stem">우리 법질서에서 인간 존엄성 규범의 역할에 관한 헌법재판소와 대법원의 입장이라고 볼 수 없는 것은?</p><ol class="choices"><li>인간의 존엄과 가치는 '국가와 국가권력의 정당성 원칙'이자 '국가권력의 한계'를 설정한다.</li><li>구체적 사안에서 관련된 기본권적 법익의 중요도를 판단하는 기준이 된다.</li><li>최고의 헌법적 가치로서 인간 존엄성은 법규범의 해석을 향도하고 규제하는 역할을 한다.</li><li>입법절차준수 여부에 의거해 입법의 효력을 판별하는 형식적 근본규범이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국가권력의 정당한 목적과 한계를 함께 설정한다.</li><li><strong>비선택</strong> · 구체적 기본권적 이익이 존엄에 얼마나 중요한지 판단하는 기준이다.</li><li><strong>비선택</strong> · 법규범을 존엄에 부합하게 해석하도록 이끈다.</li><li><strong>선택</strong> · 절차 준수 여부만 보는 형식적 근본규범이 아니라 내용의 정당성까지 평가하는 실질적 근본규범이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 법질서의 정당성 기초이자 개개의 법규범의 효력을 판별하는 기준인 '실질적 근본규범'이다. 예를 들어 어떤 법률이 헌법의 개별 기본권 조항을 위반하였는지 판단할 때, 그 법률이 합헌이라는 판단의 근거가 된 개별 기본권 조항의 해석이 인간 존엄성에 위반되는 규범 명제를 투입하여 도출된 것이라면, 그런 논증은 해당 법률의 합헌성을 뒷받침하지 못한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_316"><h4>워크북 · 헌법논증이론_316</h4><p class="question-stem">인간 존엄성은 통상의 기본권과 같은 층위에 놓이는 권리가 아니며, 보다 높은 층위에 있는 상위의 권리, 즉 메타권리라고 보는 견해와 어울리지 않는 것은?</p><ol class="choices"><li>인간 존엄성 보호에 대한 기본권을 별도로 상정할 수 있고 이 기본권도 과잉금지원칙의 적용을 받는다.</li><li>인간 존엄성으로부터 다양한 권리들이 파생되어 나왔다.</li><li>인간 존엄성은 권리들을 가질 권리를 함축한다.</li><li>헌법규범 가운데에서도 근본규범으로서 모든 국가작용의 목적과 가치 판단의 기준을 제공하고, 국가 결정이 개개의 구성원에 대하여 정당화될 것을 요구한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 메타권리 자체를 통상의 형량 가능한 기본권과 나란히 둔 설명이므로 해당 견해와 맞지 않는다. 파생된 개별 기본권의 제한 문제와 구별한다.</li><li><strong>비선택</strong> · 다양한 기본권이 존엄을 보장하는 방향으로 파생되었다는 설명과 어울린다.</li><li><strong>비선택</strong> · 권리들을 가질 권리라는 표현은 독립된 권리 주체의 상위 지위를 나타낸다.</li><li><strong>비선택</strong> · 국가의 결정을 각 구성원에게 정당화해야 한다는 지위를 설명한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①은 인간 존엄성을 통상의 기본권과 같은 층위의 기본권으로 간주하는 진술이다. 즉 인간 존엄성을 형량가능한 것으로 보는 시각에 어울리는 진술이다. 그러나 이러한 시각은 인간 존엄성이라는 메타권리 그 자체와, 그로부터 파생된 인격권 등의 기본권을 구별하지 않는 오류를 범한 것이라고 지적할 수 있다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_317"><h4>워크북 · 헌법논증이론_317</h4><p class="question-stem">대법원 2008. 11. 20. 선고 2007다27670 판결 내용 중 일부이다. 맥락상 밑줄 곳에 가장 적합한 말은?<br><br>헌법 제10조의 인간 존엄성 규정은 헌법규범 가운데에서도 ______으로서 모든 국가작용의 목적과 가치판단의 기준을 제공하고, 모든 법규범 효력과 내용을 해석하는 기준이 되며, 법의 흠결을 보충하는 제1차 원리가 된다.</p><ol class="choices"><li>행위규범</li><li>근본규범</li><li>통제규범</li><li>사회규범</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 행동 방향을 제시한다는 면은 있지만 모든 법규범의 효력·해석 기준이라는 강조에는 근본규범이 더 정확하다.</li><li><strong>선택</strong> · 근본규범이 빈칸의 정답이다. 정확히는 안대희 대법관의 반대의견에 대한 보충의견에 나온 문장이다.</li><li><strong>비선택</strong> · 심사 기준이라는 면도 있지만 제시문의 전체 법질서에 대한 근원적 역할을 가장 정확히 나타내지 않는다.</li><li><strong>비선택</strong> · 사회규범이라는 넓은 분류보다 법질서 전체의 토대라는 의미가 중심이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 물론 인간 존엄성 규정이 통제규범이자 행위규범이며 사회규범이기도 하지만, 해당 설시 내용에서 강조하는 것은 인간 존엄성 규정이 '모든 법규범 효력과 내용을 해석하는 기준'으로서 근본적인 작용을 한다는 점이다. 따라서 적합한 말은 '근본규범'이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_318"><h4>워크북 · 헌법논증이론_318</h4><p class="question-stem">한낱 수단으로 취급하는 행위는 다음의 두 가지 요건을 필요로 한다. 이에 대한 설명으로 틀린 것은?<br><br>첫 번째 요건: 나의 목표를 달성하고자 의도적으로 타인 자체를 포함하여 타인에게 속하는 것을 목표 실현의 수단으로 이용하는 행위일 것.<br>두 번째 요건: 타인에게 속하는 것을 나의 목적을 위해 이용하는 내 행동을 허용하는 준칙을 타인이 평등하고 자유로운 존재로서 행위 조정의 일반적 준칙으로 합당하게 거부할 수 있다는 것.</p><ol class="choices"><li>'타인 자체'는 타인의 신체와 정신 그 자체를 가리킨다.</li><li>'타인에게 속하는 것'은 신체와 정신뿐만 아니라 타인이 그에 대한 자격을 주장할 수 있는 것으로 공존과 협동의 전제가 되는 각자의 신체 완전성 및 인격적 통합성 발현의 전제조건이자 결과로서 그 타인에게 가장 밀접하게 귀속되는 것으로 보아야 하는 것들이다.</li><li>첫 번째 요건만으로는 인간 존엄성에 대한 침해가 되는 한낱 수단 취급의 충분조건이 되지 못한다.</li><li>행위 상대방의 실제의 동의가 있다면 언제나 두 번째 요건을 충족한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 신체와 정신 자체를 목적 달성의 도구로 삼는 경우를 포함한다.</li><li><strong>비선택</strong> · 소유권 한 가지만 아니라 신체·인격의 발현과 공존·협동에 관한 정당한 귀속을 살핀다.</li><li><strong>비선택</strong> · 미용 서비스처럼 첫째 요건에 해당해도 공정한 협력일 수 있으므로 첫째만으로 충분하지 않다.</li><li><strong>선택</strong> · 실제 동의로 둘째 요건이 언제나 성립하는 것은 아니다. 둘째는 합당하게 거부할 수 있음이며 동의의 강요·기망·부정의한 배경을 살펴야 한다. 반대로 동의만 있으면 언제나 침해가 없다고 외워도 틀리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 실제의 동의가 있는 경우라 할지라도 그 동의가 강요나 기망에 의해 이루어지거나 아니면 동의의 전제가 된 법질서가 각자에게 속하는 것을 잘못 규정하거나 전제하고 있던 경우라면 동의가 있었다는 사정은 한낱 수단으로 취급한 행위가 아니라고 볼 근거가 되지 못한다. 강요나 기망에 의한 동의는 자유롭고 평등한 주체로서 자기가 선택한 가치에 따라 자기 삶을 꾸려나가고 다른 사람과 관계를 맺는 능력의 발현을 일부러 훼손하게 만든 상태에서 나온 동의이다. 그리고 동의의 전제가 되는 법질서가 이를테면 혼인에 대한 결정권이나 종교 예배 참석에 대한 결정권의 일부가 당사자 본인이 아니라 행위를 하는 상대방에게 속해 있다고 잘못 규정하거나 전제하고 있던 경우라면 그 동의는 정의로운 배경하에서라면 당연히 있었을 선택지를 그릇되게 제거한 상태에서 나온 동의이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_319"><h4>워크북 · 헌법논증이론_319</h4><p class="question-stem">다음 중 한낱 수단 취급 금지원칙에 위배되지 않는 행위는?</p><ol class="choices"><li>날아오는 돌멩이를 막기 위해 타인의 몸을 들어 방패막이로 쓴다.</li><li>금고의 돈을 훔치기 위해 금고 관리자를 총으로 위협하여 비밀번호를 말하게 한다.</li><li>부하직원이 불쾌해할 것을 알면서도 어느 부분에 업무상 실수가 있었는지 지적하고 이를 방지하기 위한 지침을 알려준다.</li><li>자녀가 올바르게 생활하고 있는지 알기 위해 일기장을 훔쳐본다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 타인의 몸을 내 방어에 의도적으로 쓰며 그 사람의 독립된 권리를 지운다.</li><li><strong>비선택</strong> · 관리자의 기억과 의사 작용을 협박으로 동원하여 부당한 목적을 달성한다.</li><li><strong>선택</strong> · 정당한 업무 피드백은 불쾌할 수 있다는 이유만으로 상대에게 속한 것을 사용한 행위가 되지 않는다. 모욕·괴롭힘을 일반적으로 허용한다는 뜻은 아니다.</li><li><strong>비선택</strong> · 일기라는 사적 영역을 동의 없이 이용하는 것을 교육 목적만으로 정당화하지 못한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 타인에게 속하는 것을 사용하는 행위 자체가 없었다. 나머지는 모두 타인에게 속하는 것을 이용하는 행위이면서 또한 그 행위를 허용하는 원리를 그 이용된 것을 보유한 개인이 합당하게 거부할 수 있는 경우이다. ③이 한낱 수단 취급 금지원칙에 위배된다는 명제는 불쾌함을 이유로 자신에게 속하는 것을 자의적으로 넓힐 수 있다는 규범을 전제하므로 부당하다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_320"><h4>워크북 · 헌법논증이론_320</h4><p class="question-stem">다음 중 인간 존엄성을 소극적으로 구현하는 원칙에 위배되는 것은?</p><ol class="choices"><li>어떤 사람이 자발적으로 낯선 환자를 위하여 자신의 신장 중 하나를 기증하여 이식한다.</li><li>치명적인 감염병에 선천적 저항력이 있는 사람이 치과진료를 받아 병원에서 보관하게 된 구강 상피세포를 과학자가 사용하여 백신이나 치료제를 개발한다.</li><li>미용사가 머리를 잘 못 깎기 때문에 그 미용사에게 다시는 가지 않는다.</li><li>뱀독에 중독되어 단 일 초도 지체하지 않고 병원에 데려가야 하는 사람 10명을 태운 차량의 운전자가 도로에 묶여 있는 사람을 보고 그대로 치고 지나가 1명이 죽고 10명을 살렸다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 정당한 목적과 자발적 동의에 기초한 기증은 강제 적출과 다르다. 실제 기증은 법정 절차와 의학적 판단이 별도로 필요하다.</li><li><strong>비선택</strong> · 기본적 삶·협동 능력이 훼손되지 않는다는 교재의 가정에서 정답 대상이 아니다. 실제 인체유래물 연구의 무동의 이용을 허가한 법률 설명이 아님을 주의한다.</li><li><strong>비선택</strong> · 원치 않는 서비스를 계속 이용할 의무는 없다. 미용사도 자유롭고 공정한 거래 종료의 원칙을 합당하게 거부할 수 없다.</li><li><strong>선택</strong> · 몸이 목적 달성의 수단은 아니어도 다른 사람의 목적에 아무렇게나 희생되어도 되는 존재로 취급하므로 소극적 규범을 위반한다는 교재의 판단이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①은 정당한 목적을 위해 자발적인 동의에 의해 이루어진 행위이므로 위배되지 않는다. ②는 그 사람이 자신의 선관에 따라 자기 삶을 형성하고 자신이 생각하는 정의로운 준칙에 따라 다른 사람과 관계 맺을 능력이 훼손되지 않으므로 정당화된다. ③은 미용사도 합당하게 거부할 수 없는 자율적인 거래 또는 교류의 원칙에 의한 것이다. ④는 운전자나 환자의 목적 추구에 아무렇게나 휘말려들어가도 되는 존재로 도로에 묶인 사람을 대우한 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_321"><h4>워크북 · 헌법논증이론_321</h4><p class="question-stem">다음 중 국가가 그 상황을 구제하는 적극적 조치를 취하지 않는다고 하여 인간 존엄성을 적극적으로 구현하는 원칙에 위배된다고 판단하기 어려운 것은?</p><ol class="choices"><li>노숙자가 취업을 위해 면접에 입고 갈 옷을 자력으로 전혀 구할 수 없어 계속 노숙생활을 해야 하는데 국가의 급부는 오로지 점심식사를 무료로 제공하고 겨울 동안 잠잘 곳을 제공하는 데 그치고 자활을 위한 추가적인 급부는 전혀 이루어지고 있지 않다.</li><li>부모의 자산·소득 수준이 낮은 사람은 자력으로 받을 수 있는 고등교육의 기회가 전무하다.</li><li>병원에 입원한 환자 다수가 1인실이 아니라 다인실에서 생활하며 치료를 받는다.</li><li>이동능력이 제한된 장애가 있는 사람이 스스로 활용할 수 있는 교통수단이 없거나 교통수단을 탈 돈이 없어 투표를 하러 가지 못한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 취업·자활로 나아갈 기본 경로가 차단된 사례다. 저자는 단순 생존 급부에 한정하지 말고 긴절성·부담을 검토해야 한다고 주장한다.</li><li><strong>비선택</strong> · 경제적 배경 때문에 고등교육의 기회가 전무하다면 기본 능력 발현 경로의 차단 여부를 검토해야 한다. 모든 학비 급부가 이미 확정된 청구권이라는 뜻은 아니다.</li><li><strong>선택</strong> · 1인실이 더 쾌적하다는 점만으로 다인실이 기본 자치·신체 능력을 중대하게 해친다고 단정할 수 없다. 추가 위험 사실이 있으면 별도 심사한다.</li><li><strong>비선택</strong> · 투표 참여의 기본 경로가 막혔다. 공적 자치의 실질적 기회와 지원 부담을 함께 검토한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ③은 1인실에서 치료를 받으면 훼손되지 않는 사적 자치 능력이나 공적 자치 능력, 또는 그 전제가 되는 신체 완전성이 다인실에서 치료를 받으면 중대하게 훼손된다는 점이 먼저 입증되어야 한다. 다인실이 아니라 1인실에서 치료를 받으면 훨씬 쾌적하겠지만, 가능한 한 최대한의 쾌적함을 국가가 마련해주어야 할 책임이 인간 존엄성 규범에서 도출된다고 보기는 어렵다. 그러한 정책 실행을 위해서는 필연적으로 큰 자원의 투입을 요하므로 이로 인해 다른 이익이 상실될 것이다. 그런데 그런 쾌적함의 이익은, 투표하러 갈 수 없거나 직업을 이예 구할 수 없는 것과는 달리, 인간 존엄에 필수적인 두 능력에 치명적이어서 다른 이익보다 긴절하여 우선한다고 볼 수 없다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_322"><h4>워크북 · 헌법논증이론_322</h4><p class="question-stem">인간 존엄성의 소극적·적극적 구현 양태에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>한낱 수단 금지 원칙은 인간 존엄성이 헌법규범으로 구현되는 강력하고 대표적인 형태 중 하나이다.</li><li>구치소 내부의 과밀수용은 수형자의 인간 존엄을 침해하는 것이므로 위헌이라는 헌법재판소의 결정은 인간 존엄성 규범에 대한 적극적인 방식의 실현을 확인한 것이다.</li><li>인간 존엄성은 적극적 규범으로도 구현될 수 있다.</li><li>상대적으로 우호적인 입헌 민주주의 사회의 여건에서는 인간 존엄성 규범의 구현 양태 중 소극적 헌법규범과 적극적 규범 중 재판규범에 해당하는 헌법규범은 조화를 이룰 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 한낱 수단 금지는 존엄의 강력한 소극적 구현 중 하나다. 유일한 침해 유형은 아니다.</li><li><strong>선택</strong> · 국가가 강제로 구금한 처우와 결합하여 판단하므로 교재는 소극적 구현으로 본다. 개선에 돈·행동이 든다는 이유로 적극적 규범으로 바꾸지 않는다.</li><li><strong>비선택</strong> · 긴절한 기본 조건을 보장·복구하라는 적극적 의무도 도출된다.</li><li><strong>비선택</strong> · 공정하고 적정한 부담의 조건과 사회적 분업을 통해 강한 금지와 기본 보장 의무가 조화될 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 구치소 내부의 과밀수용은 수형자의 인간 존엄을 침해하는 것이므로 위헌이라는 헌법재판소의 결정은 인간 존엄성 규범에 대한 소극적인 방식의 실현을 확인한 것이다. 국가가 강제로 구금한 후에 신체의 정상적 기능 훼손과 관련하여 일어나는 일은 그 처우의 개선에 재정이 소요된다거나 작위를 요구한다고 하더라도 하더라도, 강제 구금과 결합하여 판단되어야 하므로 인간 존엄성의 소극적 구현 규범이 문제되는 것이다. 이는 정신병이 심한 환자를 병원에서 강제로 구금하고는 음식을 주지 않아 굶어 죽게 하였다면 소극적 규범을 위반한 것과 마찬가지이다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 14' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 14|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

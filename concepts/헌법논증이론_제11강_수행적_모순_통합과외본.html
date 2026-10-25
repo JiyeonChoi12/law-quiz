@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>헌법논증이론 제11강 수행적 모순 · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">CONSTITUTIONAL ARGUMENT · CHAPTER 11</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">헌법논증이론</span>
+    <span class="brand-sub">제11강 수행적 모순 · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./헌법논증이론_개념.html">헌법논증이론 개념 목록</a><a href="../index.html?subject=헌법 논증 이론">문제 풀기</a></nav><h1>‘네 생각을 존중하니 내 말에 반대하지 마’는 왜 이상할까</h1>
+<p>“이 규칙이 옳다는 것을 네 판단으로 인정해 줘. 하지만 네가 반대하면 네 판단은 무효야.” 앞부분은 상대를 판단할 사람으로 불러 놓고 뒷부분은 그 지위를 빼앗는다. 제11강의 <strong>수행적 모순</strong>은 단순히 말과 행동이 달라 보기 싫다는 이야기가 아니다. <strong>어떤 주장을 하는 데 꼭 필요한 조건을 그 주장 내용이 스스로 부인하는 문제</strong>다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>이 강의의 답</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>무엇을 설명하나</td>
+<td>말로 어떤 행위를 하는지, 그 행위의 성립 조건과 주장 내용이 충돌하는지.</td>
+</tr>
+<tr>
+<td>왜 필요한가</td>
+<td>위협·조작·가치 강요를 정당한 헌법 논증으로 포장하지 못하게 하기 위해서다.</td>
+</tr>
+<tr>
+<td>과목 속 위치</td>
+<td>자유롭고 평등한 수범자의 지위를 논증의 성립 조건으로 드러내는 단원.</td>
+</tr>
+<tr>
+<td>앞뒤 연결</td>
+<td>제10강의 사회 질서 → 화행의 조건 → 제12강의 헌법 해석 체계.</td>
+</tr>
+<tr>
+<td>모르면 생기는 문제</td>
+<td>설득 성공=타당, 말이 문법에 맞음=유효한 명령, 모든 거짓 약속=수행적 모순이라고 오해한다.</td>
+</tr>
+</tbody></table>
+<p>범위: 교재 277–306쪽. 형성평가 8개·워크북 19개, 총 27문항. 별표는 학습 우선순위이며 실제 오답률 자료는 없다. 헌법 논증의 분석은 교재의 이론을 따르되 법적 효력과 철학적 타당성을 구별한다. 086번의 원자료 보기 오기는 본문과 부록에서 별도 안내한다.</p>
+<h1>1. 말은 소리인 동시에 행동이다</h1>
+<h2 id="argument-11-01" data-concept-id="argument-11-01">1-1. 화행과 언어적 접점: 플라톤과 지금도 만날 수 있을까 ★★★★☆</h2>
+<p><strong>교재 278–279쪽 / 문단의 목적:</strong> 말의 물리적 전달과 의미의 전달을 구별한다. <strong>화행</strong>은 언어적 상호작용에서 말을 사용해 사회적으로 의미 있는 행위를 하는 것이다. 여기의 말하기는 입으로 소리를 내는 것만이 아니라 글·문서·안내판 같은 표현도 포함한다. 화자는 의미를 발신하고 청자는 그것을 의미로 받아들인다.</p>
+<p>소음 측정기로 대화의 데시벨만 재는 것은 언어적 접점이 아니다. 플라톤이 말하며 생긴 공기의 온도 변화가 오늘까지 물리적으로 영향을 미친다는 가정도 의미의 연결은 아니다. 반면 『크리톤』의 필사·번역·책을 통해 현대 독자가 내용을 읽는 것은 언어적 접점이다. 당사자들이 같은 시각에 만나거나 서로 답할 수 있어야만 의미의 통로가 생기는 것은 아니다.</p>
+<p>사회적 의미를 부여한 맥락 없이 무작위 음절을 외치는 것과 ‘머리가 아프다’고 건강 상태를 알리며 공감을 구하는 것은 다르다. 전자는 단순 소리, 후자는 보고·요청 등의 행위일 수 있다. 낯선 언어를 내가 모른다고 곧 무의미한 소리라는 뜻은 아니다.</p>
+<p>혼인신고서를 적법하게 작성·신고하는 행위도 종이에 글자를 나열하는 데 그치지 않고 법적 관계를 형성한다. 다만 아무 문서나 제출하면 혼인이 성립하는 것이 아니라 법정 요건과 절차를 갖춰야 한다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1026989973">민법 제812조</a>. <strong>시험:</strong> 084·263번. <strong>한 줄:</strong> 소리가 닿는 것보다 뜻이 전달되고 그 말로 무엇을 하는지가 중요하다.</p>
+<h2 id="argument-11-02" data-concept-id="argument-11-02">1-2. 여섯 실패 사례: 불발과 남용을 구별하자 ★★★★★</h2>
+<p><strong>교재 279–281쪽 / 문단의 목적:</strong> 문장을 이해할 수 있어도 의도한 사회적 행위가 성립하지 않을 수 있음을 보여 준다. 오스틴의 분류를 사례로 먼저 보자.</p>
+<table>
+<thead>
+<tr>
+<th>교재 사례</th>
+<th>빠진 조건</th>
+<th>분류</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“당신이 최고”라고 말하면 자동으로 연인이 된다고 믿음</td>
+<td>그런 효과를 주는 수용된 관습적 절차가 없음</td>
+<td>A.1 부당 발동·불발</td>
+</tr>
+<tr>
+<td>길거리 다툼 상대에게 “유죄를 선고한다”</td>
+<td>적법한 판결을 할 사람·상황·권한이 아님</td>
+<td>A.2 부당 발동·불발</td>
+</tr>
+<tr>
+<td>무엇인지 정하지 않고 “좋은 상품을 팔겠다”</td>
+<td>청약 내용을 특정할 정확한 집행이 부족</td>
+<td>B.1 부당 집행·불발</td>
+</tr>
+<tr>
+<td>“제시한 값보다 10만 원 싸게 사는 데 승낙”</td>
+<td>원래 청약을 그대로 수용하는 완전한 승낙이 아님</td>
+<td>B.2 부당 집행·불발</td>
+</tr>
+<tr>
+<td>미안하지도 않고 귀찮아서 “사과한다”</td>
+<td>절차가 요구하는 마음·진지한 의도가 없음</td>
+<td>Γ.1 남용</td>
+</tr>
+<tr>
+<td>사과하자마자 같은 잘못을 반복</td>
+<td>요구되는 후속 행동을 하지 않음</td>
+<td>Γ.2 남용</td>
+</tr>
+</tbody></table>
+<p><strong>불발</strong>은 의도한 행위가 성립하지 않은 경우다. 관습·적합한 당사자와 상황·정확하고 완전한 절차가 중요하다. ‘좋은 상품’만 말한 것은 청약의 유인으로 평가될 수 있고, 가격을 바꾼 승낙은 새로운 청약일 수 있다. 아무 사회적 효과도 없다는 뜻이 아니라 <strong>원래 의도한 청약·승낙이 아니라는 뜻</strong>이다. 민법 제534조도 변경을 가한 승낙을 원청약의 거절과 새 청약으로 본다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20230628&joNo=010900&lsiSeq=246569&urlMode=lsInfoP">민법의 해당 조문</a>.</p>
+<p><strong>남용</strong>은 사과·약속의 외형을 취했지만 진정성과 이행이 빠진 경우다. 마음이 없었다고 약속 자체를 전혀 하지 않은 것으로 지워 버릴 수는 없다. 오히려 ‘약속했으면서 지키지 않았다’고 비판한다. 법적 계약 책임도 이 화행 분류 하나만으로 자동 소멸하지 않는다. 조작된 통계로 사람을 잠시 믿게 할 수도 있지만 조작 사실까지 공개하면 진지한 사실 주장으로 인정받지 못한다. <strong>한 줄:</strong> 의도한 행위가 아예 불발한 것과 성립한 행위를 허울뿐으로 남용한 것은 다르다.</p>
+<h2 id="argument-11-03" data-concept-id="argument-11-03">1-3. 발화·수반·효과: 경고와 길을 비킨 결과는 다르다 ★★★★★</h2>
+<p><strong>교재 282–284쪽 / 문단의 목적:</strong> 하나의 말에 담긴 세 측면을 나눈다. “뒤에서 차가 와요!”라는 말을 보자.</p>
+<table>
+<thead>
+<tr>
+<th>측면</th>
+<th>무엇을 보나</th>
+<th>차가 오는 사례</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>발화행위</td>
+<td>뜻과 지시가 있는 어휘를 문법에 맞게 말함</td>
+<td>뒤에서 차가 온다는 내용을 말한다.</td>
+</tr>
+<tr>
+<td>발화수반행위</td>
+<td>그 말을 함으로써 수행한 사회적 행위</td>
+<td>상대에게 경고한다.</td>
+</tr>
+<tr>
+<td>발화효과행위</td>
+<td>그 말로 야기하려는 후속 결과</td>
+<td>상대가 비켜 안전해지게 한다.</td>
+</tr>
+</tbody></table>
+<p>발화행위는 음성행위(소리), 형태행위(어휘·문법), 의미행위(뜻·지시)로 더 나눌 수 있다. <strong>발화수반</strong>에는 보고·주장·보증·경고·판결·임명·공소·비판·약속·권유·계약·고백 등이 있다. <strong>발화효과</strong>는 말을 수단 삼아 생기는 인과적 결과에 주목한다. 같은 행위를 세 시간 순서로 완전히 분리한 것이 아니라 분석하는 측면이 다르다.</p>
+<p>교재가 인용한 ‘그녀를 쏘라’라는 폭력적 문장도 행위 분석을 위한 예다. 문장의 뜻을 말함은 발화, 그렇게 하라고 촉구함은 발화수반, 청자가 실제 그 행동을 하도록 영향을 미침은 발화효과다. 촉구의 정당성이나 실행 방법을 승인하는 사례가 아니다.</p>
+<p>발화수반행위는 <strong>언표내적 행위</strong>, 발화효과행위는 <strong>언표외적 행위·발화수단적 행위</strong>로도 불린다. <mark class="pink">086번 ④는 원자료에 ‘발화수반적행위’라고 되어 있지만 교재 282쪽 각주는 ‘발화수단적 행위’다. 인쇄본까지 대조했다. 원본 정답은 ②지만, 보기 그대로라면 ④에도 용어 오류가 있으므로 주의한다.</mark> <strong>시험:</strong> 082·085·086·264·265·266번. <strong>한 줄:</strong> 말의 내용, 말로 한 행위, 말 뒤에 생긴 결과를 세 칸에 나누자.</p>
+<h2 id="argument-11-04" data-concept-id="argument-11-04">1-4. 쉬게 해 줬다고 아프다는 말이 참이 된 것은 아니다 ★★★★★</h2>
+<p><strong>교재 283–285쪽 각주 포함 / 문단의 목적:</strong> 효과의 성공을 타당성 승인과 혼동하지 않는다. A는 아프지 않은데 쉬고 싶어 상사에게 ‘아프다’고 말한다. 상사는 그 말을 사실로 믿지 않지만 피로를 고려해 쉬게 한다. 휴식이라는 효과는 얻었지만 아프다는 사실 주장의 진리성이 승인된 것은 아니다.</p>
+<p>길거리에서 ‘유죄’라고 말해 행인이 당황했다면 당혹감을 주는 효과는 생겼다. 그렇다고 유효한 유죄판결을 선고한 것은 아니다. ‘쓰레기를 주워라’는 말에 청자가 심통이 나서 오히려 쓰레기를 차 버렸다면 발화가 낳은 결과는 의도와 다를 수 있다. 효과는 청자의 이해와 반응도 포함하므로 발화 시점의 문장만으로 성패가 확정되지 않는다.</p>
+<p>타당성의 주제를 결정하는 데 중요한 것은 <strong>무슨 발화수반행위를 했는가</strong>다. 아프다는 보고는 건강 상태의 참·거짓, 명령은 권한과 정당성, 약속은 그 약속의 성립 조건을 묻는다. ‘어제 가지 않았지만 어제 갔음을 지금 약속한다’는 말은 과거 사실을 미래의 약속으로 만들려 하므로 행위 양상과 내용이 맞지 않는다. <strong>한 줄:</strong> 원하는 반응을 얻은 성공과 참되거나 정당한 주장이라는 성공은 다르다.</p>
+<h1>2. 말의 양상을 밝히면 어떤 반론을 해야 하는지도 보인다</h1>
+<h2 id="argument-11-05" data-concept-id="argument-11-05">2-1. ‘나는 이 말로써 너에게 p를 M한다’ ★★★★★</h2>
+<p><strong>교재 285–287쪽 / 문단의 목적:</strong> 숨은 수행 동사를 드러내 문장을 분석한다. 표준 형식의 ‘나’는 화자, ‘너’는 청자, p는 명제 부분, M은 수행 동사다. <strong>‘이 말로써’는 지금 이 말을 통해 해당 행위를 한다는 표시</strong>다. ‘문을 닫다’라는 비슷한 내용도 수행 동사가 바뀌면 다른 행위가 된다.</p>
+<table>
+<thead>
+<tr>
+<th>문장 양상</th>
+<th>예</th>
+<th>맞는 반문의 방향</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>명령</td>
+<td>네가 문을 닫도록 명령한다</td>
+<td>네게 그런 명령 권한이 있는가?</td>
+</tr>
+<tr>
+<td>질문</td>
+<td>네가 문을 닫았는지 묻는다</td>
+<td>무엇을 묻는지, 전제와 상황은 적절한가?</td>
+</tr>
+<tr>
+<td>약속</td>
+<td>내가 문을 닫을 것을 약속한다</td>
+<td>약속의 대상·조건·당사자 관계가 맞는가?</td>
+</tr>
+<tr>
+<td>사실 주장</td>
+<td>네가 문을 닫았다고 주장한다</td>
+<td>실제 닫은 사람은 누구인가?</td>
+</tr>
+<tr>
+<td>규범 주장</td>
+<td>문을 닫는 것이 옳다고 주장한다</td>
+<td>관련 이유를 고려해 정당한가?</td>
+</tr>
+<tr>
+<td>표출적 진술</td>
+<td>문이 닫히기를 바란다고 말한다</td>
+<td>실제 그런 마음인가?</td>
+</tr>
+</tbody></table>
+<p>교재는 ‘문이 계속 열려 있었다’는 반문으로 질문의 맥락과 전제를 검토하는 예를 든다. 다만 <strong>일반적인 “닫았니?”는 “아니”라고 답할 수 있는 정상적인 질문</strong>이다. 거짓 전제를 강요하는 질문과 단순 사실 확인 질문을 혼동하지 않는다. 약속의 예 역시 누가 수행할 행위인지 밝혀 ‘내가 닫겠다’로 이해하면 쉽다.</p>
+<p>사실 주장에 “어머니가 닫았다”고 반박하면 진리성을, 회복 중인 사람이 환기를 필요로 하는 상황에서 닫지 말아야 한다고 하면 규범의 정당성을, 속으로는 열어 두길 바라면서 반대로 말한다고 하면 표출의 성실성을 다투는 것이다. 실제 환자의 회복 방법을 단정하는 의학 지침이 아니라 교재가 둔 상황 가정이다. <strong>시험:</strong> 267·269번. <strong>한 줄:</strong> 같은 내용처럼 보여도 주장·명령·약속 중 무엇을 했는지부터 찾자.</p>
+<h2 id="argument-11-06" data-concept-id="argument-11-06">2-2. 진리성·정당성·성실성과 이해 가능성 ★★★★★</h2>
+<p><strong>교재 287–288쪽 / 문단의 목적:</strong> 세 표준적 화행에서 명제의 타당성과 화행의 적절성이 직접 연결됨을 설명한다. 사실 주장은 <strong>사실로 성립하는가</strong>, 규범 주장은 <strong>규범으로 정당한가</strong>, 표출적 진술은 <strong>표출한 마음이 진실한가</strong>를 묻는다. 모두 먼저 무슨 뜻인지 이해할 수 있어야 한다. 문이 전혀 없는 벌판에서 ‘그 문’이라 말하면 어느 대상을 뜻하는지부터 확인한다.</p>
+<p>명령문도 효력을 다툴 수 있다. 대통령령에 대한 법률유보 위반 주장은 해당 명령을 발할 법률상 권한이 있는지 묻는 이의다. 참·거짓 문장만 논증 대상이고 명령은 무조건 따라야 하는 것이 아니다. 다만 모든 대통령령의 모든 내용을 똑같은 방식의 개별 법률 위임이 있어야만 가능하다고 일반화하지 않고 해당 규율의 성격과 근거를 따진다.</p>
+<p><strong>각주의 협박 사례:</strong> ‘돈을 주지 않으면 상사에게 알리겠다’에 대하여 ① 실제 알릴 뜻이 없다는 성실성 반박, ② 알릴 사실이 없다는 진리성 반박, ③ 상사가 이미 알아 협박이 작동하지 않는다는 맥락 반박이 가능하다. 이처럼 비표준적 화행은 부적절성의 이유가 명제 부분의 타당성과 곧바로 일치하지 않을 수 있다.</p>
+<p>‘쓰레기 냄새가 나기 시작한다고 생각하지 않니?’도 질문과 치워 달라는 요구가 섞인 간접 화행일 수 있다. 모든 실제 말을 단일 수행 동사로 분석하는 데는 논의의 여지가 있다. 이 강의는 특히 <strong>표준적 규범 주장, 그중 헌법 규범 주장</strong>에 초점을 맞춘다. <strong>시험:</strong> 270·271번. <strong>한 줄:</strong> 사실은 진리, 규범은 정당성, 마음 표현은 성실성, 그 이전에는 뜻의 이해다.</p>
+<h1>3. 수행적 모순은 단순한 위선보다 좁은 개념이다</h1>
+<h2 id="argument-11-07" data-concept-id="argument-11-07">3-1. 수행적 오류 안에 수행적 모순이 들어간다 ★★★★★</h2>
+<p><strong>교재 289–291쪽 / 문단의 목적:</strong> 논증적으로 고쳐야 할 내용을 특정한다. 수행적 오류는 화행을 부적절하게 하는 조건 위반을 넓게 가리킨다. 수행적 모순은 그중 <strong>명제 내용이나 필수 전제가 발화수반적 성립 조건을 부인하여, 진지한 주장을 유지하려면 명제 내용을 바꾸어야 하는 경우</strong>다.</p>
+<p>사과한 뒤 경멸하며 웃거나 ‘한 번 사과했으니 됐지’라고 화내는 것은 사과의 남용이라는 수행적 오류일 수 있다. 침략에 사죄한다고 말하고 이후 그 침략을 찬양하는 행동을 하는 사례도 교재는 후속 이행의 오류로 소개한다. 그렇다고 사과라는 말을 했다는 사실 자체가 사라지거나 모든 잘못된 사과가 곧 교재의 좁은 수행적 모순이 되는 것은 아니다.</p>
+<p>갚을 생각 없이 ‘100만 원을 빌려주면 꼭 갚겠다’고 말한 사람은 약속을 했지만 지킬 생각이 없었던 것이다. 약속 자체를 하지 않았다며 책임을 지울 수 없게 해서는 안 된다. 반대로 판사가 판사실에서 잠깐 졸다 법정인 줄 알고 주문을 읽었다면 장소·절차를 바로잡고 같은 내용을 적절하게 선고할 수 있다. 내용 변경 없이 조건을 고칠 수 있는 오류의 예다. 실제 판결의 적법성은 해당 법정 절차에 따른다.</p>
+<p><mark class="yellow">수행적 모순 ⊂ 수행적 오류. 모든 모순은 오류지만 모든 오류가 모순은 아니다.</mark> <strong>시험:</strong> 088·272번. <strong>키워드:</strong> 명제 내용 변경 필요성, 불발·남용. <strong>한 줄:</strong> 거짓 약속도 약속일 수 있고, 잘못된 수행을 모두 모순이라고 부르지는 않는다.</p>
+<h2 id="argument-11-08" data-concept-id="argument-11-08">3-2. 서울이 수도라고 주장하지만 거짓이라고? ★★★★★</h2>
+<p><strong>교재 292–294쪽 / 문단의 목적:</strong> 문장의 뜻과 발화 맥락을 구분한다. “나는 서울이 한국의 수도라고 주장하며, 서울이 한국의 수도라는 것은 거짓이다.” 이 문장만의 의미를 보면 어떤 사람이 거짓인 내용을 주장한다는 상황을 기술할 수 있다. <strong>‘p를 주장한다’와 ‘p가 거짓이다’는 함께 기술될 수 있으므로 문장 자체가 언제나 p∧¬p는 아니다.</strong></p>
+<p>하지만 상대에게 지금 진지하게 p가 참이라고 승인해 달라고 주장하면서, 같은 말로 p가 거짓이라고도 승인해 달라고 한다면 화행의 문제가 드러난다. <strong><a href="p">사실 주장</a></strong>가 전제하는 진리성 요구를 자신의 다른 내용이 부인한다. 이것이 수행적 모순이다. ‘서울이 수도’라는 개별 사실의 법적 정의를 새로 연구하는 문제가 아니라 동일 p에 대한 주장의 구조를 보는 문제다.</p>
+<p>워크북이 든 갈릴레오의 일기 역시 <strong>가상의 문장 예</strong>다. ‘나는 사람들에게 천동설을 주장하지만 그것은 거짓이다’라고 자신의 행동을 기록하는 것은 가능하다. 실제 역사적 일기 인용이라고 외우지 않는다. 발화 맥락을 고정해야 한다.</p>
+<p>고치는 길은 두 가지다. ‘나는 장난·기망을 한 것이지 진지한 사실 주장을 한 게 아니다’라고 인정하면 그 논증에서 물러난 셈이다. <strong>진지한 논증을 계속하려면 충돌하는 명제 내용을 고쳐야 한다.</strong> 예를 들어 p가 거짓이라는 후반부를 수정한다. ‘농담인데 왜 그래’는 주장을 정당화한 것이 아니다. <strong>시험:</strong> 273번. <strong>한 줄:</strong> 거짓을 주장했다는 보고와 지금 거짓을 참으로 진지하게 인정해 달라는 행위를 구별하자.</p>
+<h2 id="argument-11-09" data-concept-id="argument-11-09">3-3. ‘너는 없다’와 잠든 사람의 메모 ★★★★★</h2>
+<p><strong>교재 292쪽 각주·294–295쪽 / 문단의 목적:</strong> 같은 문장도 맥락에 따라 수행적 모순 여부가 달라짐을 보인다. A가 B를 향해 “너는 존재하지 않아. 이 주장이 참이라고 이유를 보고 인정해 줘”라고 말한다. 표준 형식은 ‘나는 이 말로써 너에게 네가 존재하지 않는다고 사실 주장한다’다. 진지한 승인을 요청할 청자를 전제하면서 그 청자의 존재를 부인한다.</p>
+<p>혼잣말로 생각하거나 소설 속 인물의 대사를 읽는 것과 실제 상대에게 근거에 의한 승인을 요구하는 것은 다르다. <strong>“너는 존재하지 않는다”라는 문장 자체가 모든 맥락에서 의미론적 모순은 아니다.</strong> 083번의 청중에게 자아 이외는 환상이라고 진지하게 납득시키려는 강연도 같은 맥락의 문제다. 이것 하나로 모든 회의주의 철학의 논쟁이 끝난다는 식으로 확대하지 않는다.</p>
+<p>‘나는 잠들어 있다’는 메모를 호텔 방문에 붙여 아침에 깨우지 말라고 알릴 수 있다. 작성 시점과 전달되는 상황을 고려하면 문제없다. 깨어서 대화하며 자신이 바로 지금 잠들어 있다고 진지하게 말하는 맥락과 다르다. <strong>수행적 모순 검사는 문자열만 찾는 검사가 아니다.</strong></p>
+<p><strong>검사 순서:</strong> ① 누구에게 무슨 행위 M을 하는가? ② 그 행위가 유효하려면 어떤 조건이 필요한가? ③ p와 숨은 전제를 모두 적는다. ④ 그 내용이 성립 조건을 부인하는가? ⑤ 부인한다면 내용을 수정해야 하는가? <strong>시험:</strong> 274·275번. <strong>한 줄:</strong> 상대에게 인정해 달라고 하면서 상대의 존재·판단 지위를 없애지 말자.</p>
+<h1>4. 헌법 규범 주장은 위협도 신념 보고도 아니다</h1>
+<h2 id="argument-11-10" data-concept-id="argument-11-10">4-1. ‘이 법은 합헌이다’라는 말로 무엇을 하나 ★★★★★</h2>
+<p><strong>교재 289·295–296쪽 / 문단의 목적:</strong> 헌법 주장에 필요한 규범적 조건을 분명히 한다. ‘기본권 R을 제한하는 법률 X는 합헌이다’는 말은 단순히 ‘나는 그렇게 믿는다’는 자기 심리의 보고도, 그 법을 좋아한다는 감정 표현도 아니다. <strong>그 헌법적 명제가 타당성을 승인받을 자격이 있다고 주장하는 행위</strong>다.</p>
+<p>헌법 규범 주장에는 최종 합헌·위헌 결론뿐 아니라 그 결론을 지지하는 전제의 규범 명제도 포함된다. 각 전제를 논거로 결합해 결론을 도출하는 것이 헌법 논증이다. 따라서 결과 문장에 합헌이라는 말을 적었다고 논증의 조건을 건너뛸 수 없다.</p>
+<p>성립 조건을 어긴 말은 위협·조작·유도·힘의 과시로 효과를 낼 수 있어도 유효한 규범 주장으로 타당성을 얻은 것은 아니다. 여기서 ‘유효하지 않다’는 화행 분석을 특정 법령이 재판 절차 없이 즉시 무효가 된다는 실정법 결론과 혼동하지 않는다. <strong>시험:</strong> 087번. <strong>한 줄:</strong> 합헌이라고 느낀다는 보고가 아니라 모두에게 제시할 정당한 이유를 주장하는 것이다.</p>
+<h2 id="argument-11-11" data-concept-id="argument-11-11">4-2. 폭력배의 ‘해야 한다’: 두 방식의 모순 ★★★★★</h2>
+<p><strong>교재 296–299쪽 / 문단의 목적:</strong> 제10강의 질서를 화행 조건으로 다시 분석한다. 터무니없는 사회의 폭력배 A와 B는 서로 반대되는 일을 요구하며 미래에 돌이켜 봐도 자기 마음에 들라고 한다. 무엇을 해도 나중에 바뀔 수 있다. 행위자는 위험한 동물의 위협을 피하듯 안전을 위해 반응하지만 두 폭력배를 정당한 명령권자로 인정할 이유를 얻은 것은 아니다.</p>
+<p>조직화된 약탈 질서에서는 소득의 3분의 2를 바치라는 규칙이 안정적으로 집행된다. 예측 가능성은 생겼지만 여전히 화자는 위험의 원천이고 청자는 위험에 반응하는 존재라는 전제를 놓고 있다. 이를 ‘타당한 규범을 주장한다’로 꾸미면 두 모순이 드러난다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>승인받겠다는 말</th>
+<th>동시에 숨기거나 드러낸 말</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>경우 1</td>
+<td>공적 이유로 타당한지 검토해 승인해 달라</td>
+<td>승인 여부는 아무 의미가 없고 힘으로 관철하겠다.</td>
+</tr>
+<tr>
+<td>경우 2</td>
+<td>타당성과 관련된 이유에 따라 얻은 승인을 원한다</td>
+<td>위협으로 반대를 막고 강제로 얻은 승인만 취하겠다.</td>
+</tr>
+</tbody></table>
+<p>법전을 만들고 법무부 장관·법원이라는 이름을 붙여도 이유에 의한 승인을 부인하는 구조가 고쳐지지는 않는다. <strong>모든 법적 제재가 폭력배의 위협과 같다는 주장이 아니다.</strong> 정당화된 규범의 집행과, 정당한 이유와 무관하게 강제로 승인시킨다는 구조를 구별해야 한다. <strong>한 줄:</strong> 이유를 검토한 승인을 요구하면서 검토와 반대를 무의미하게 만들면 모순이다.</p>
+<h2 id="argument-11-12" data-concept-id="argument-11-12">4-3. 영적 번영·문화·GDP: 좋은 가치로 가린 지배 ★★★★★</h2>
+<p><strong>교재 299–300·302쪽 / 문단의 목적:</strong> 노골적 폭력이 없어 보여도 묵시적 전제가 대등한 지위를 훼손할 수 있음을 보인다. 지배자 질서는 ‘공동체의 영적 번영을 위해 성직자 조직에 소득의 3분의 1을 내라’고 주장한다. 우리 모두를 위해 좋다는 말이므로 겉에는 약탈의 전제가 드러나지 않는다. 그러나 교재는 두 전제를 찾아낸다.</p>
+<p><strong>첫째, 규범을 특정 가치로 환원한다.</strong> 그 신앙을 공유하는 사람에게 통하는 이유를 모든 수범자에게 통하는 공적 이유라고 말한다. <strong>둘째, 권력자가 무엇이 좋은 삶인지 타인 대신 판단할 인식적 특권을 선취한다.</strong> 대등한 판단자에게 승인받겠다고 하면서 실제로는 일부만 판단하고 나머지는 받아들여야 한다는 지위를 둔다.</p>
+<p>영적 번영을 GDP·전통문화·국위선양·여가로 바꾸어도 이런 추론 구조가 같다면 문제는 남는다. 그 가치 자체가 모두 나쁘다는 것이 아니라, 권한과 관계를 정당화하지 않고 가치를 충분한 근거로 삼는 방식이 문제다. ‘우리 민족’, ‘공동체의 성공’ 같은 표현도 누구의 판단과 이의가 지워지는지 확인해야 한다.</p>
+<p><strong>277번 Q국:</strong> 통치권자가 건전한 문화만 허용하고 나머지는 금지한다. 선거로 뽑혔다고 모든 시민의 문화 평가를 대신할 인식적 특권이 생기지는 않는다. 특정 권한을 민주적으로 부여하는 절차와 그 권한 내용의 정당화는 함께 필요하다. <strong>시험:</strong> 083·277번. <strong>한 줄:</strong> 좋은 목적의 이름과 선거의 사실만으로 다른 시민의 판단 지위를 가져갈 수 없다.</p>
+<h2 id="argument-11-13" data-concept-id="argument-11-13">4-4. 월급 500만 원의 노예: 이득을 주면 강제해도 될까 ★★★★★</h2>
+<p><strong>교재 300–302쪽 / 문단의 목적:</strong> 자기결정권 탈취가 가치 합계로 사라지지 않음을 극적으로 보여 준다. A가 길 가는 B에게 월수입을 묻는다. B는 100만 원이라 답한다. A는 ‘합격, 이제 내 노예’라고 선언하고 사람들을 동원해 데려가려 한다. B가 거부하자 A는 ‘나는 월급 500만 원을 주니 잃는 자유보다 소득 증가가 더 크다’고 말한다.</p>
+<p>금액만 보면 100만 원에서 500만 원은 400만 원, 즉 <strong>400% 증가</strong>다. 하지만 그 산술이 B의 몸과 삶을 강제 통제할 권한을 만들지는 않는다. B가 근로조건을 검토하고 자유롭게 고용계약을 맺는 것과 강제로 노예화되는 것은 다르다. 동의가 있어도 노예제 자체가 정당해진다는 뜻도 아니다. 교재의 대비는 <strong>자발적인 근로관계와 강제적 자기결정 박탈</strong>이다.</p>
+<p>A가 혼자가 아니라 B를 제외한 다수여도, 추가로 주겠다는 것이 돈 대신 미덕·진리·아름다움이어도, 하루나 일 년 중 일부 시간만 강제해도 탈취의 본질은 유지된다. 규모와 강도는 달라도 심원한 목표와 경로를 자신이 정할 지위를 다른 사람이 대신 행사한다는 문제가 남는다. <mark class="green">타인의 좋은 삶을 도와주는 일과 타인의 삶을 대신 결정할 권한을 갖는 일은 다르다.</mark> <strong>한 줄:</strong> 네게 이익이라는 판단은 네 삶의 결정권을 빼앗을 허가증이 아니다.</p>
+<h1>5. 실전에서는 일곱 조건을 검사한다</h1>
+<h2 id="argument-11-14" data-concept-id="argument-11-14">5-1. 규범 논증의 일곱 전제와 몸의 경계 ★★★★★</h2>
+<p><strong>교재 302–303쪽 / 문단의 목적:</strong> 수행적 모순을 찾아낼 검토 기준을 명시한다. 실제로 모든 국민이 한 방에 모여 만장일치해야만 규범이 성립한다는 절차 규정이 아니라, 타당성을 주장할 때 누구의 지위를 배제해서는 안 되는지를 밝히는 논증의 전제다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>쉬운 확인 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a 논증의 장</td>
+<td>지금 힘겨루기가 아니라 규범적 이유를 검토하는가?</td>
+</tr>
+<tr>
+<td>b 모든 수범자의 참여 가능성</td>
+<td>의무를 지울 사람에게 이의를 제기할 지위도 인정하는가?</td>
+</tr>
+<tr>
+<td>c 복수 주체의 경계</td>
+<td>사람마다 자기 몸·인격과 삶의 영역을 가진 존재로 대하는가?</td>
+</tr>
+<tr>
+<td>d 평등한 승인·이의 지위</td>
+<td>일부만 인식적 특권을 갖고 다른 사람의 진지한 반론을 무효로 하지 않는가?</td>
+</tr>
+<tr>
+<td>e 인식적 이유와 자유</td>
+<td>위협·충동·변덕·편파적 애호 대신 타당성에 관련된 이유를 검토하는가?</td>
+</tr>
+<tr>
+<td>f 공존·협동의 공적 원리</td>
+<td>힘의 위협이 없어도 따를 우선적 이유를 찾는가?</td>
+</tr>
+<tr>
+<td>g 정직한 근거 제시</td>
+<td>원하는 결론을 관철하려 근거를 속이거나 숨기지 않는가?</td>
+</tr>
+</tbody></table>
+<p><strong>278번의 신체 사례:</strong> 실업자인 B를 밀어 다치게 하면 생산적인 직업을 가진 C의 다리를 보호할 수 있다고 하자. 사람을 거대한 공동체의 구별 없는 부분으로 보면 B는 ‘내 다리’라는 권리 대신 ‘곧 내가 더 생산적일 것’이라는 효용으로만 항변하게 된다. 이것은 개인의 경계와 지위를 지운 결과다. 공동체 관련성·구속성은 내 행동이 타인의 권리에 영향을 주므로 정당한 원리로 조정해야 한다는 뜻이지 내 몸과 네 몸의 구별이 없다는 뜻이 아니다.</p>
+<p>수감자 역시 규범의 수범자라는 이유를 유지하면서 규범적 이의를 제기할 지위를 원천 배제할 수 없다는 것이 교재의 논점이다. 실제 선거권이나 모든 제도별 참가 방식이 아무 조건 없이 동일하다는 주장을 하는 것은 아니다. <strong>279번:</strong> 결론이 옳아 보인다고 근거를 숨겨 설득하면 정직한 검토의 전제를 어긴다. 결론을 논증 전에 절대 확정하고 대화를 관철 수단으로만 취급한 것이다. <strong>한 줄:</strong> 의무를 부과할 사람은 몸과 판단의 경계를 가진 대등한 논증 주체이기도 하다.</p>
+<h2 id="argument-11-15" data-concept-id="argument-11-15">5-2. 상위 지위를 무너뜨리는 하위 논거를 거른다 ★★★★★</h2>
+<p><strong>교재 303–305쪽 / 문단의 목적:</strong> 일곱 전제를 논거 선택의 관문으로 활용한다. 기본권 제한의 구체적 규칙은 그 규칙을 정당화하는 상위 관계, 끝으로 자유롭고 평등한 기본권 주체의 근본 지위를 유지해야 한다. 하위 결론을 얻으려고 그 결론을 논의할 수 있게 하는 상위 지위를 부인하면 수행적 모순이다.</p>
+<p>전형적인 문제는 ① 영향을 받는 일부를 지워 ‘공동체 전체’를 먼저 상정함, ② 반론 지위를 불평등하게 하거나 타인의 결정권을 빼앗음, ③ 인원수·경제력·강한 확신을 실질적 논거 대신 씀, ④ 좋은 말로 이 전제를 숨김이다. 맥락을 고정하지 않고 아무 데서나 유리한 논거를 가져오면 상위 관계를 깨는 근거가 섞인다.</p>
+<p><strong>280번 네 주장:</strong> A는 법률에 심의·시정요구가 적혀 있다는 이유만으로 블로그 폐쇄가 기본권 침해가 아니라고 한다. 법률의 존재만으로 그 권한의 헌법적 정당성을 증명하려 해 상하 관계를 뒤집는다. B는 국가가 시민의 참·거짓 판단을 대신하는 특권을 비판한다. C는 특정 현행 법률이 바뀌어서는 안 된다는 의무교육이 시민의 판단을 입법자의 판단에 종속시킨다고 비판한다. D는 다수가 폭력을 쉽게 행사할수록 타인의 표현을 막을 권한이 커지는 원리를 비판한다. <strong>질문은 각 결론의 최종 법적 타당성이 아니라 수행적 모순 여부</strong>다. A를 고르는 이유를 나머지 모든 규제의 위헌 확정으로 확대하지 않는다.</p>
+<p><strong>281번 감염병·출입기록:</strong> A는 기록 의무와 정보 축적의 공익이 사생활 제한보다 크다고 하고 B는 반대라고 한다. A가 ‘다수가 내 결론을 좋아하니 너는 틀려’라고 답하면 비교 판단의 실질적 이유를 제시하지 않았다. 다수의 승인 태도는 사실 자료일 수 있으나 그 자체로 소수의 반론 지위를 낮추는 근거가 아니다. 이 문제는 특정 실제 방역 조치의 합헌·위헌을 자동 판정하지 않고 제시된 논증의 결함을 묻는다.</p>
+<p><mark class="blue">제12강에서는 이렇게 걸러낸 규범 논거로 헌법 개념과 해석 체계를 어떻게 구성할지 살핀다.</mark> <strong>시험:</strong> 089·276·280·281번. <strong>한 줄:</strong> 기본권을 구체화하는 논거가 기본권 주체의 대등한 지위를 먼저 없애서는 안 된다.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>화행·언어행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 話(말씀 화) 行(갈 행), 言(말씀 언) 語(말씀 어) 行(갈 행) 爲(할 위). <strong>③ 합친 뜻:</strong> 말로 행위를 함. <strong>④ 이름의 이유:</strong> 발화가 소리를 넘어서 약속·명령 등의 행동이 되기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 언어적 상호작용에서 의미 있는 말을 통해 사회적 행위를 수행하는 것. <strong>⑥ 쉬운 말:</strong> 말로 보고하고 부탁하고 약속하는 것이다. <strong>⑦ 사례:</strong> 적법한 혼인신고는 글을 쓰는 동시에 법적 관계 형성에 참여한다.</p>
+<p><strong>⑧ 시험:</strong> 084번 정의;263번 의미의 통로. <strong>⑨ 비교·기억법:</strong> 소리의 전달과 뜻의 전달을 구별.</p>
+<h3>언어적 접점</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 言(말씀 언) 語(말씀 어) 的(과녁 적) 接(이을 접) 點(점 점). <strong>③ 합친 뜻:</strong> 의미가 이어지는 접촉점. <strong>④ 이름의 이유:</strong> 소리·열 같은 물리 효과가 아니라 뜻에 관심을 갖기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 언어 내용을 가능한 한 보존하며 전달하는 통로. <strong>⑥ 쉬운 말:</strong> 귀에 닿는 소음과 내용을 읽는 것은 다르다. <strong>⑦ 사례:</strong> 플라톤의 책을 번역해 읽는 것은 언어적 접점.</p>
+<p><strong>⑧ 시험:</strong> 263번 소음계 측정은 아님. <strong>⑨ 비교·기억법:</strong> 같은 시각에 직접 말해야만 가능한 것은 아니다.</p>
+<h3>불발·남용</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아니 불) 發(필 발), 濫(넘칠 남) 用(쓸 용). <strong>③ 합친 뜻:</strong> 행위의 발동 실패와 허울뿐인 사용. <strong>④ 이름의 이유:</strong> 절차 자체가 성립하는 문제와 제대로 수행하는 문제가 다르다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 불발은 의도한 행위의 성립 실패;남용은 진정성·후속 이행의 결함. <strong>⑥ 쉬운 말:</strong> 판사가 아닌 선고와 마음 없는 사과는 실패 방식이 다르다. <strong>⑦ 사례:</strong> 가격을 바꾼 승낙은 새 청약일 수 있고 불성실한 약속은 여전히 약속일 수 있다.</p>
+<p><strong>⑧ 시험:</strong> 088·272번의 오류 범위. <strong>⑨ 비교·기억법:</strong> 남용을 곧 약속·계약의 법적 무효라고 일반화하지 않는다.</p>
+<h3>발화행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발) 話(말씀 화) 行(갈 행) 爲(할 위). <strong>③ 합친 뜻:</strong> 뜻 있는 말을 내어 놓는 행위. <strong>④ 이름의 이유:</strong> 어떤 내용을 언어로 표현하는 기반을 본다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 어휘·문법·뜻·지시를 갖춘 내용을 말하는 측면. <strong>⑥ 쉬운 말:</strong> 뒤에서 차가 온다는 말을 소리와 뜻을 갖추어 한다. <strong>⑦ 사례:</strong> 음성·형태·의미행위로 나눈다.</p>
+<p><strong>⑧ 시험:</strong> 264번;타당성의 주제를 결정하는 수반과 구별. <strong>⑨ 비교·기억법:</strong> 무슨 말을 했는가.</p>
+<h3>발화수반행위·발화수반력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발) 話(말씀 화) 隨(따를 수) 伴(짝 반) 行(갈 행) 爲(할 위), 力(힘 력). <strong>③ 합친 뜻:</strong> 말에 수반되는 사회적 행위와 그 효력. <strong>④ 이름의 이유:</strong> 말 자체로 어떤 행위를 수행하기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 말함으로써 주장·약속·명령 등을 하고 그것이 유효하게 성립하는 효력. <strong>⑥ 쉬운 말:</strong> 차가 온다는 말로 경고한다. <strong>⑦ 사례:</strong> 임명·판결·약속은 주체와 절차 등의 조건을 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 082·085번;086②는 이 설명을 효과로 바꿈. <strong>⑨ 비교·기억법:</strong> 수반은 말로 무엇을 했는가, 언표내적.</p>
+<h3>발화효과행위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 發(필 발) 話(말씀 화) 效(본받을 효) 果(열매 과) 行(갈 행) 爲(할 위). <strong>③ 합친 뜻:</strong> 말로 낳으려는 후속 결과의 측면. <strong>④ 이름의 이유:</strong> 말 뒤의 성과에 관심을 두기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 청자의 반응 등을 통해 세계의 인과적 변화를 야기하려는 행위. <strong>⑥ 쉬운 말:</strong> 경고를 듣고 실제 비켜 안전해지는 결과다. <strong>⑦ 사례:</strong> 병이라는 말을 믿지 않아도 상사가 휴식을 준다.</p>
+<p><strong>⑧ 시험:</strong> 265·266번, 타당성 승인 없이도 효과 가능. <strong>⑨ 비교·기억법:</strong> 언표외적·발화수단적. 086④ 원자료 수반은 오기.</p>
+<h3>수행동사·명제 부분</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遂(이를 수) 行(갈 행) 動(움직일 동) 詞(말씀 사), 命(목숨 명) 題(제목 제) 部(떼 부) 分(나눌 분). <strong>③ 합친 뜻:</strong> 행위를 표시하는 동사와 그 내용. <strong>④ 이름의 이유:</strong> 같은 내용도 말로 하는 행위가 달라지기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 표준 형식에서 M은 주장·명령·약속 등의 종류, p는 해당 내용. <strong>⑥ 쉬운 말:</strong> 문 닫기를 명령·약속·주장하는 것은 서로 다르다. <strong>⑦ 사례:</strong> 나는 이 말로써 너에게 p를 M한다.</p>
+<p><strong>⑧ 시험:</strong> 267번 수행동사,274번은 명제 부분. <strong>⑨ 비교·기억법:</strong> 내용 p와 수행 M을 분리.</p>
+<h3>타당성 요구</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 妥(온당할 타) 當(마땅할 당) 性(성품 성) 要(요긴할 요) 求(구할 구). <strong>③ 합친 뜻:</strong> 그 맥락에 맞게 타당함을 승인해 달라는 요구. <strong>④ 이름의 이유:</strong> 주장이 단순 소리가 아니라 이유를 검토하는 상대를 향하기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 표준적 화행에서 진리·정당성·성실성 등 해당 조건의 충족을 승인받으려는 것. <strong>⑥ 쉬운 말:</strong> 내 말을 그냥 듣기만 말고 근거에 맞는다고 인정해 달라는 것이다. <strong>⑦ 사례:</strong> 비가 온다는 보고는 진리성의 승인을 요구한다.</p>
+<p><strong>⑧ 시험:</strong> 271번, 합헌성보다 넓음. <strong>⑨ 비교·기억법:</strong> 실제 동의를 얻었다는 결과와 구별.</p>
+<h3>진리성·정당성·성실성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 眞(참 진) 理(다스릴 리), 正(바를 정) 當(마땅할 당), 誠(정성 성) 實(열매 실), 性(성품 성). <strong>③ 합친 뜻:</strong> 참됨·규범적 옳음·마음 표현의 진실함. <strong>④ 이름의 이유:</strong> 다른 화행에는 다른 종류의 이의가 맞기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사실 주장·규범 주장·표출적 진술을 각각 검토하는 타당성 차원. <strong>⑥ 쉬운 말:</strong> 정말 그랬나, 옳은가, 진심인가를 나눈다. <strong>⑦ 사례:</strong> 어머니가 닫음·문을 닫을 이유·닫히길 바라는 진심.</p>
+<p><strong>⑧ 시험:</strong> 270번 규범은 정당성. <strong>⑨ 비교·기억법:</strong> 세 가지 모두 먼저 이해 가능성을 전제.</p>
+<h3>수행적 오류</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遂(이를 수) 行(갈 행) 的(과녁 적) 誤(그르칠 오) 謬(그르칠 류). <strong>③ 합친 뜻:</strong> 말로 행하는 과정의 조건 위반. <strong>④ 이름의 이유:</strong> 성립·진정성·후속 행동 등 여러 단계에서 실패할 수 있기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 화행을 부적절하게 만드는 조건 위반을 넓게 가리킨다. <strong>⑥ 쉬운 말:</strong> 같은 내용을 올바른 상황에서 다시 하면 고칠 수 있는 오류도 있다. <strong>⑦ 사례:</strong> 판사실에서 선고인 줄 착각해 읽은 판결문.</p>
+<p><strong>⑧ 시험:</strong> 088·272번;모순보다 넓음. <strong>⑨ 비교·기억법:</strong> 오류라고 모두 내용 자체의 수행적 모순인 것은 아니다.</p>
+<h3>수행적 모순</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 遂(이를 수) 行(갈 행) 的(과녁 적) 矛(창 모) 盾(방패 순). <strong>③ 합친 뜻:</strong> 주장 행위와 그 내용이 성립 조건에서 충돌함. <strong>④ 이름의 이유:</strong> 그 말을 통해 기대한 효력을 그 말 자체가 무너뜨리기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 명제 내용·필수 전제가 해당 발화수반행위의 성립 조건을 부인하는 오류. <strong>⑥ 쉬운 말:</strong> 네 판단으로 인정해 달라면서 네 판단 자격은 없다고 한다. <strong>⑦ 사례:</strong> 청자에게 그 청자가 존재하지 않음을 진지하게 승인받으려 한다.</p>
+<p><strong>⑧ 시험:</strong> 083·268·273·274·275번. <strong>⑨ 비교·기억법:</strong> 문장 자체의 의미론적 모순과 다를 수 있다.</p>
+<h3>의미론·화용론</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 意(뜻 의) 味(맛 미) 論(논할 론), 話(말씀 화) 用(쓸 용) 論(논할 론). <strong>③ 합친 뜻:</strong> 말의 뜻과 맥락 속 사용을 다루는 논의. <strong>④ 이름의 이유:</strong> 같은 문장도 누구에게 어떤 상황에서 쓰는지에 따라 달라진다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 문장의 의미와 실제 발화가 어떤 행위로 성립하는 조건을 구별한다. <strong>⑥ 쉬운 말:</strong> 잠들었다는 방문 메모와 깨어 대화하며 하는 말은 다르다. <strong>⑦ 사례:</strong> 거짓을 주장했다는 일기와 지금의 진지한 사실 주장을 나눈다.</p>
+<p><strong>⑧ 시험:</strong> 273번의 의미론적 모순 오판 주의. <strong>⑨ 비교·기억법:</strong> 문자열만으로 수행적 모순을 판정하지 않는다.</p>
+<h3>인식적 지위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 認(알 인) 識(알 식) 的(과녁 적) 地(땅 지) 位(자리 위). <strong>③ 합친 뜻:</strong> 이유를 알고 판단하는 주체의 지위. <strong>④ 이름의 이유:</strong> 대등한 판단자로 인정받는지가 논증의 조건이기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 논거를 검토하고 승인·불승인할 자격과 관계. <strong>⑥ 쉬운 말:</strong> 네가 스스로 따져 보고 반대할 자격이 있는가다. <strong>⑦ 사례:</strong> 선거로 뽑혀도 시민의 좋은 삶 판단을 전부 대신할 특권은 없다.</p>
+<p><strong>⑧ 시험:</strong> 277·278번;전문성의 차이와 기본 지위의 평등은 구별. <strong>⑨ 비교·기억법:</strong> 모두 같은 지식을 가졌다는 사실 명제가 아니다.</p>
+<h3>탈취 금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 奪(빼앗을 탈) 取(취할 취) 禁(금할 금) 止(그칠 지). <strong>③ 합친 뜻:</strong> 다른 사람의 결정 지위를 빼앗지 않음. <strong>④ 이름의 이유:</strong> 이익을 대신 평가한 사람이 곧 결정권자가 되는 것은 아니기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 교재가 심원한 가치·목표·경로에 대한 자기결정 지위의 찬탈을 비판하는 원리. <strong>⑥ 쉬운 말:</strong> 월급을 더 준다고 남을 강제 노예로 만들 수 없다. <strong>⑦ 사례:</strong> 100만 원 수입을500만 원으로 늘린다며 강제하는 사례.</p>
+<p><strong>⑧ 시험:</strong> 083·277번의 가치 강요와 연결. <strong>⑨ 비교·기억법:</strong> 강제의 양이 줄어도 지위 탈취의 성격은 남을 수 있다.</p>
+<h3>논증의 정직성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 論(논할 논) 證(증거 증) 正(바를 정) 直(곧을 직) 性(성품 성). <strong>③ 합친 뜻:</strong> 이유를 숨기거나 속이지 않고 제시함. <strong>④ 이름의 이유:</strong> 대화를 미리 정한 결론의 관철 수단으로 바꾸지 않기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 타당한 주장은 승인하고 부당한 주장은 불승인하려는 목적에 맞춰 논거를 진솔하게 내놓는 조건. <strong>⑥ 쉬운 말:</strong> 결론이 좋다고 생각해도 반대 근거를 일부러 숨기지 않는다. <strong>⑦ 사례:</strong> 실용적 동기를 다른 근거로 위장해 권위를 유지하려는 설명.</p>
+<p><strong>⑧ 시험:</strong> 279번의 은폐 허용 보기는 틀림. <strong>⑨ 비교·기억법:</strong> 결론의 우연한 옳음과 논증의 정직성은 다른 문제.</p>
+<h3>상위·하위 관계</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 上(위 상) 位(자리 위), 下(아래 하) 位(자리 위) 關(빗장 관) 係(맬 계). <strong>③ 합친 뜻:</strong> 논의를 가능하게 하는 근본 지위와 구체적 관계. <strong>④ 이름의 이유:</strong> 논증의 전제를 파괴하며 결론의 승인을 요구할 수 없기 때문이다.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 하위 규칙의 정당화는 자유롭고 평등한 근본 지위를 모든 경로에서 유지해야 한다. <strong>⑥ 쉬운 말:</strong> 법률이 있다는 말만으로 그 법률이 기본권을 침해하지 않는다고 할 수 없다. <strong>⑦ 사례:</strong> 280번 법률 존재를 들어 합헌이라 주장한 A.</p>
+<p><strong>⑧ 시험:</strong> 089·280·281번;수적 우위도 평등한 반론 지위를 대신하지 못함. <strong>⑨ 비교·기억법:</strong> 상위 조건은 적합한 논거를 거르는 관문.</p>
+<h1>문제 연결 TOP5</h1>
+<table>
+<thead>
+<tr>
+<th>문제 번호</th>
+<th>가장 중요한 구별</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>086</td>
+<td>수반은 타당성 주제, 효과는 후속 결과. ④의 수반→수단 오기 주의.</td>
+</tr>
+<tr>
+<td>088</td>
+<td>불성실한 약속은 약속 자체가 없던 수행적 모순과 다르다.</td>
+</tr>
+<tr>
+<td>273</td>
+<td>의미론적 내용과 진지한 주장 맥락을 구별한다.</td>
+</tr>
+<tr>
+<td>278</td>
+<td>공동체 관련성은 각자의 몸·인격 경계를 지우지 않는다.</td>
+</tr>
+<tr>
+<td>281</td>
+<td>다수의 실제 승인 태도는 규범적 논거의 대용품이 아니다.</td>
+</tr>
+</tbody></table>
+<p>부록에 <strong>27문항·108개 보기</strong>를 모두 연결했다. 원자료의 정답·보기는 보존했고 086번 오류는 별도 표시한다. 반복되는 개념군은 화행의 세 측면, 표준적 타당성 요구, 오류와 모순의 포함관계, 일곱 전제, 상위 지위를 훼손하는 논증이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 사서가 아닌 친구.</strong> 도서관 이용자가 친구에게 ‘오늘부터 너를 이 도서관 직원으로 임명한다’고 말한다. 친구가 기뻐했다면 임명이 유효한가? <strong>답:</strong> 아니다. 발화와 기쁨의 효과는 있어도 적법한 임명 권한·절차가 없다. <strong>출제 의도:</strong> 효과 성공과 수반행위 성립의 차이.</p>
+<p><strong>응용 2 · 대표의 토론.</strong> 대표가 주민에게 ‘계획이 타당한지 자유롭게 검토하되, 반대 의견은 주민의 의견으로 인정하지 않겠다’고 말한다. <strong>답:</strong> 승인을 요청할 대등한 검토 지위를 전제하면서 불승인의 지위를 부인한다. 정당한 이의 처리의 조건과 충돌한다. <strong>출제 의도:</strong> 수행적 모순의 관계적 조건.</p>
+<p><strong>응용 3 · 과거의 편지.</strong> 지연이 ‘나는 그때 이 계약이 공정하다고 주장했지만 실제로는 불공정하다고 믿었다’고 일기에 적었다. 항상 수행적 모순인가? <strong>답:</strong> 아니다. 과거의 행동·믿음을 보고하는 문장일 수 있다. 지금 상대에게 동일 규범의 타당성과 부당함을 동시에 승인해 달라는 맥락인지 따져야 한다. <strong>출제 의도:</strong> 문자열과 화행 맥락 구별.</p>
+<p><strong>응용 4 · 더 행복한 직업.</strong> 시가 다수의 설문을 근거로 예술가보다 공무원이 행복하니 예술가의 직업을 강제로 바꾸겠다고 한다. <strong>답:</strong> 행복의 가치 자료만으로 직업 선택을 대신할 권한이 생기지 않는다. 당사자의 심원한 목표와 경로의 결정 지위를 검토해야 한다. <strong>출제 의도:</strong> 가치 환원과 자기결정 탈취.</p>
+<p><strong>응용 5 · 숨긴 연구.</strong> 정책위원이 반대 연구를 숨기면서 ‘나는 모든 이유를 정직하게 제시하니 타당성을 인정해 달라’고 한다. 결론이 우연히 옳으면 문제없는가? <strong>답:</strong> 아니다. 이유를 검토한 승인이라는 목적을 은폐로 무너뜨렸다. 결론의 우연한 적중이 진지한 논증의 조건 위반을 치유하지 않는다. <strong>출제 의도:</strong> 정직성·전략적 설득의 한계.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제11강</h1>
+<p><strong>TOP3:</strong> 화행 세 측면 / 수행적 오류와 모순 / 일곱 전제 검사.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>시험 직전 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>화행</td>
+<td>의미의 통로를 통해 말로 사회적 행위를 함.</td>
+</tr>
+<tr>
+<td>불발 A·B</td>
+<td>관습·적합한 주체·정확하고 완전한 절차의 결여.</td>
+</tr>
+<tr>
+<td>남용 Γ</td>
+<td>진정성·후속 이행의 결여. 약속 자체가 사라지는 것은 아님.</td>
+</tr>
+<tr>
+<td>발화</td>
+<td>뜻·지시·어휘·문법을 갖추어 말함.</td>
+</tr>
+<tr>
+<td>수반</td>
+<td>말로 주장·명령·약속 등을 함. 타당성의 주제 결정.</td>
+</tr>
+<tr>
+<td>효과</td>
+<td>말로 후속 결과를 유발. 타당성 불승인에도 성공 가능.</td>
+</tr>
+<tr>
+<td>표준 형식</td>
+<td>나는 이 말로써 너에게 p를 M한다.</td>
+</tr>
+<tr>
+<td>세 타당성</td>
+<td>사실=진리성, 규범=정당성, 마음 표출=성실성.</td>
+</tr>
+<tr>
+<td>공통 전제</td>
+<td>무엇을 뜻하는지 이해 가능해야 한다.</td>
+</tr>
+<tr>
+<td>모순 ⊂ 오류</td>
+<td>진지한 주장 유지에는 명제 내용 수정이 필요.</td>
+</tr>
+<tr>
+<td>검사</td>
+<td>p·숨은 전제와 발화수반적 성립 조건이 충돌하는가?</td>
+</tr>
+<tr>
+<td>일곱 조건</td>
+<td>논증의 장·모든 수범자·개인의 경계·평등·인식적 이유·공존·정직.</td>
+</tr>
+<tr>
+<td>탈취 금지</td>
+<td>더 좋은 가치·다수 지지로 자기결정 지위를 뺏지 못함.</td>
+</tr>
+<tr>
+<td>상하 관계</td>
+<td>하위 결론을 위해 상위의 자유롭고 평등한 지위를 부인하지 못함.</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 말로 얻은 효과가 그 말의 타당성은 아니다. 승인받을 상대의 지위를 부인하며 승인을 요구할 수 없다.</p>
+<p><strong>사례를 풀 순서:</strong> 말의 양상 M → 명제 p → 성립 조건 → 숨은 전제 → 충돌·내용 수정 필요 → 상위 지위 유지.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 거짓 병가·사과·서울 주장·노예 월급·출입기록 사례를 다른 개념으로 분석한다. 🟡 <strong>복습 필요:</strong> 세 화행은 알지만 오류와 모순 또는 효과와 승인을 섞는다. 🔴 <strong>이해 부족:</strong> 사람을 설득했으면 타당하고 다수가 찬성하면 반론 지위를 줄여도 된다고 본다. 실제 답변을 받기 전의 자기 점검 기준이다. <strong>복습 TOP3:</strong> 세 화행, 의미론적·수행적 모순, 일곱 전제.</p>
+<h1>문제 부록 · 27문항·108개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-헌법논증이론_082"><h4>형성평가 · 헌법논증이론_082</h4><p class="question-stem">어떤 말을 함으로써 보고하기, 주장하기, 권유하기, 계약하기, 약속하기 등등 여러 가지 행위를 수행하는 것을 무엇이라고 하는가?</p><ol class="choices"><li>발화행위</li><li>발화수반행위</li><li>발화효과행위</li><li>전략적 행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 내용 있는 말을 하는 측면이며 그 말로 어떤 사회적 행위를 하는지까지 특정한 명칭은 아니다.</li><li><strong>선택</strong> · 말함으로써 주장·보고·약속 등을 수행하는 발화수반행위다.</li><li><strong>비선택</strong> · 상대가 믿거나 움직이는 등 후속 결과를 야기하는 측면이다.</li><li><strong>비선택</strong> · 목적 달성을 위한 전략이라는 일반 분류보다 교재의 화행 세 측면 중 수반이 정확하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_083"><h4>형성평가 · 헌법논증이론_083</h4><p class="question-stem">수행적 모순에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>수행적 오류의 부분집합이다.</li><li>청중에게 자아를 제외한 모든 것은 환상이라고 진지하게 납득시키고자 하는 강연자는 수행적 모순을 범한다.</li><li>수행적 모순을 범하는 화행으로 이야기된 명제는 필연적으로 의미론적 모순을 내포한다.</li><li>자유보다 전통문화계승이 가치 있다는 논거만으로 자유를 제한하는 것은 헌법규범주장 행위로서 수행적 모순을 범한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 화행의 조건 위반인 수행적 오류 중 명제 내용을 고쳐야 하는 좁은 부분이다.</li><li><strong>비선택</strong> · 청중을 진지한 승인 주체로 대하면서 그 존재를 부인하는 맥락에서 수행적 모순이 된다.</li><li><strong>선택</strong> · 문장 자체에 의미론적 모순이 없어도 화행의 성립 조건과 내용이 충돌할 수 있다.</li><li><strong>비선택</strong> · 특정 전통의 가치만으로 자유를 강제 제한할 권한을 도출하면 평등한 판단 지위를 부인하는 전제가 숨어 있다는 교재의 분석이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_084"><h4>형성평가 · 헌법논증이론_084</h4><p class="question-stem">언어적 상호작용의 맥락에서 언어를 사용하여 사회적으로 의미있는 행위를 하는 것을 무엇이라 하는가?</p><ol class="choices"><li>화행</li><li>행동</li><li>대화</li><li>표현</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 언어적 상호작용에서 사회적으로 의미 있는 행위를 하는 화행의 정의다.</li><li><strong>비선택</strong> · 행동은 언어를 쓰지 않는 행위까지 포함하는 더 넓은 말이다.</li><li><strong>비선택</strong> · 대화는 관련되지만 한 화자가 말로 수행하는 약속·명령 등을 특정한 개념명은 화행이다.</li><li><strong>비선택</strong> · 표현이라는 넓은 단어보다 제시된 이론의 정확한 용어를 고른다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_085"><h4>형성평가 · 헌법논증이론_085</h4><p class="question-stem">오스틴의 구분에 따르면 밑줄 친 곳에 들어갈 알맞은 말은?<br><br>____________는 그 말을 함으로써 “정보를 제공하거나 보증하거나 경고함, 판결이나 의도를 알림, 형을 언도함, 임명 혹은 공소 혹은 비판을 함, 동일함을 증명하기 또는 기술하기” 등의 행위를 수행하는 것이다. 그 이외에도 보고하기, 주장하기, 권유하기, 계약하기, 약속하기 등등 여러 가지 행위를 말로써 수행하는 것이다.</p><ol class="choices"><li>발화행위</li><li>발화수반행위</li><li>발화효과행위</li><li>소극적 행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 뜻 있는 발화를 하는 측면 자체를 가리킨다.</li><li><strong>선택</strong> · 말로 정보 제공·경고·판결·계약·약속 등을 수행하는 발화수반행위다.</li><li><strong>비선택</strong> · 타인의 이동·믿음 등 후속 결과를 유발하는 측면과 구별한다.</li><li><strong>비선택</strong> · 화행 세 측면의 구별과 관련 없는 분류다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_086"><h4>형성평가 · 헌법논증이론_086</h4><p class="question-stem">발화효과행위에 대한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>화자의 발화효과행위의 성공은, 청자가 말의 내용의 타당성을 승인할 수 없을 때도 성립하는 경우가 있다.</li><li>발화효과행위는 말의 타당성의 주제와 가장 밀접히 관련된다.</li><li>발화효과행위는 언표의 내용 자체에 포함되지 않는 것을 의도한 행위라는 점을 강조하여 언표외적 행위로 말하기도 한다.</li><li>발화효과행위는 어떤 결과를 의도하기 위해 수단으로 사용되었다는 점을 강조하여 발화수반적행위라고 말하기도 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 상사가 병이라는 주장을 믿지 않으면서도 쉬게 하는 경우처럼 효과는 타당성 불승인에도 생길 수 있다.</li><li><strong>선택</strong> · 원자료의 의도된 정답이다. 타당성의 주제를 결정하는 것은 발화수반행위이지 효과행위가 아니다.</li><li><strong>비선택</strong> · 후속 결과의 측면을 강조하여 언표외적 행위라고도 한다.</li><li><strong>비선택</strong> · 원자료 오기 주의: 교재 282쪽 각주는 발화수단적 행위다. 수반적이라고 적힌 이 보기 역시 문자 그대로는 틀려 단일정답성이 손상되어 있다. 원본 정답 ②는 보존하되 수반→수단으로 고쳐 읽어야 의도된 문제가 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②는 발화수반행위에 대한 설명이다. 예를 들어 A가 쉬고 싶어서 아프지 않으면서도 직장 상사에게 ‘아프다’라고 말하였는데 직장 상사가 그렇게까지 말을 하는 A의 피로를 감안하여 쉬게 해주었다고 하자. 결과적으로 A의 ‘아프다’는 주장의 타당성은 승인되지 않았지만 A는 그 말을 함으로써 휴식을 취한다는 결과를 인과적으로 성취한 것이다. 즉 이 경우에 발화효과행위는 성공하였지만, 아프다는 주장이 A의 몸 상태에 관한 사실 주장으로서 성공한 것은 아니다. 그런데 ‘아프다’라는 말의 주제는 A의 몸 상태에 관한 사실이다. 따라서 발화효과행위의 성공은 청자가 말의 내용의 타당성을 승인할 수 없을 때에도 이루어질 수 있고, 또한 그래서 타당성 주제와 밀접히 관련되는 것도 아니다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_087"><h4>형성평가 · 헌법논증이론_087</h4><p class="question-stem">헌법규범주장에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>어떤 것을 타당한 헌법규범이라고 주장하는 것이다.</li><li>헌법논증은 전제가 되는 헌법규범주장들을 논거로서 결합하여 결론부에 해당하는 헌법규범을 이끌어내고자 하는 언어적 활동이라고 할 수 있다.</li><li>헌법규범주장은 우선 규범주장이 행위로서 의미있게 성립하기 위한 조건을 필히 만족시켜야 한다.</li><li>어떤 행위가 겉으로는 규범주장처럼 보이지만, 규범주장이 의미 있게 성립하기 위한 조건을 어긴다고 해도 규범주장행위를 한 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 어떤 명제가 타당한 헌법 규범임을 주장하는 행위다.</li><li><strong>비선택</strong> · 헌법 규범의 전제들을 결합하여 결론을 도출하는 언어 활동이라는 설명이다.</li><li><strong>비선택</strong> · 규범 주장의 한 종류이므로 그 행위가 성립하기 위한 조건을 충족해야 한다.</li><li><strong>선택</strong> · 조건을 어기면 위협·조작 등의 효과는 있어도 유효한 규범 주장 행위를 한 것으로 인정되지 않는다는 교재의 구별이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 만일 어떤 행위가 겉으로는 규범주장처럼 보이지만, 규범주장이 의미 있게 성립하기 위한 조건을 어긴다면, 그것은 규범주장행위를 하지 않은 것이 된다. 조작이나 유도, 경고나 위협, 세(勢)의 과시 같은 다른 행위를 한 것이 될 수는 있다. 그러나 규범주장행위를 한 것이 아니게 된다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_088"><h4>형성평가 · 헌법논증이론_088</h4><p class="question-stem">수행적 모순과 수행적 오류에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>수행적 모순은 수행적 오류의 부분집합에 속한다.</li><li>수행적 오류는 화행을 부적절한 것으로 만드는 조건의 위반을 널리 가리키는 것이다.</li><li>수행적 모순은 ‘명제부분’의 내용을 바꾸지 않고서는 수행적 오류를 치유할 수 없는 경우이다.</li><li>갚을 의사 없이 “꼭 갚을테니 100만원을 빌려달라”고 말한 사람의 경우가, 갚겠다는 약속 자체를 하지 않은 수행적 모순의 대표적 사례이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 모순은 오류의 좁은 하위 범주다.</li><li><strong>비선택</strong> · 불발·남용 등을 포함한 부적절성의 조건 위반을 넓게 가리킨다.</li><li><strong>비선택</strong> · 진지한 논증을 유지하려면 충돌하는 명제 내용이나 필수 전제를 고쳐야 하는 경우다.</li><li><strong>선택</strong> · 갚을 의사 없는 약속도 약속 자체는 한 것이다. 약속의 남용·불이행 문제이지 약속을 하지 않았다는 수행적 모순의 대표 사례는 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 수행적 모순은 수행적 오류의 부분집합에 속하면서도 ‘명제부분’의 내용을 바꾸지 않고서는 오류를 치유할 수 없는 경우로 정의된다. 표준적 화행에서 명제의 타당성 주장을 불승인하는 경우와 그 외의 화행 부적절성을 지적하는 경우를 비교해서 살펴보면 이 차이가 분명하게 드러난다. “p가 사실이다”라고 말한 이에게는 “너는 ‘p가 사실이다’라고 말했지만 p는 사실이 아니었다”라고 비판하는 것이 통례이다. 반면에 약속을 지킬 생각 없이 “q를 약속한다”라고 말한 이에게는 “너는 ‘q를 약속한다’라고 말했지만 q를 약속하지 않았다”고 비판하지 않는다. 대신에 “너는 q를 약속했지만 q를 이행하지 않았다”라고 비판한다. 그렇기 때문에 수행적 오류에는 속하지만 수행적 모순의 경우는 아니다. 약속이라는 수행행위, 발화수반행위 자체는 한 것이기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_089"><h4>형성평가 · 헌법논증이론_089</h4><p class="question-stem">헌법규범 논증에서 수행적 모순을 범하게 되는 전형적인 논증 형태나 상황은 어느 것인가?</p><ol class="choices"><li>규범적 논증대화의 장이 있으며 문제의 화행은 그 장에서 규범적 논증으로서 개진된다.</li><li>규범의 수범자가 될 사람들은 모두 그 장에 참여하여 이의를 제기하고 주장을 검토할 수 있다.</li><li>주장된 규범에 이의를 제기하고 논거를 검토하여 주장된 것을 승인할 지위는 평등하다.</li><li>하위 차원의 논증대화의 주제에 관한 결론을 주장하기 위하여, 그 상위 차원의 지위를 부인하는 것을 전제하고 있는 논거를 도입한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 유효한 규범적 논증의 장이라는 성립 조건이다.</li><li><strong>비선택</strong> · 의무를 지울 사람에게 이의 제기 지위도 인정한다는 성립 조건이다.</li><li><strong>비선택</strong> · 동등한 승인·이의 지위라는 성립 조건이다.</li><li><strong>선택</strong> · 하위 논의를 가능하게 한 상위 지위를 부인하는 전제를 사용하므로 수행적 모순에 해당한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_263"><h4>워크북 · 헌법논증이론_263</h4><p class="question-stem">다음 중 틀린 것은?</p><ol class="choices"><li>언어적 상호작용은 언어적 접점을 통해 화자와 청자가 되는 관계에서 언어의 의미를 통해 일어나는 작용이다.</li><li>화자는 의미 있는 언어를 발신하는 사람을 말한다.</li><li>청자는 화자가 발신한 것을 의미 있는 언어로 받아들이는 사람을 말한다.</li><li>어떤 사람이 소리 내어 말한 것을 물리적으로 듣는 접촉점이 곧 언어적 접점이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 물리적 영향만이 아니라 의미의 통로가 필요하다.</li><li><strong>비선택</strong> · 의미 있는 언어를 발신하는 쪽이 화자다.</li><li><strong>비선택</strong> · 발신을 의미 있는 언어로 받아들이는 쪽이 청자다.</li><li><strong>선택</strong> · 소음계의 음량 측정은 의미를 전달하지 않는다. 반대로 글·번역은 직접 소리를 듣지 않아도 언어적 접점이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 물리적 접점이 곧 언어적 접점은 아니다. 소음 측정기를 통해 근처 대화 소리의 크기를 측정하는 것은 언어적 접점이 되지 못한다. 반면에 글로 남김, 번역, 통역은 소리 내어 말한 것을 귀로 듣는 접점을 구성하지는 못하지만 그래도 언어적 접점이다. 언어적 접점은 언어적 내용에 관심을 가지고 그 언어적 내용을 가능한 한 소실하지 않고 전달하는 통로를 의미하기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_264"><h4>워크북 · 헌법논증이론_264</h4><p class="question-stem">오스틴의 구분에 따르면 밑줄 친 곳에 들어갈 알맞은 말은?<br><br>______는 어떤 내용을 가진 것을 말하는 것 자체를 의미한다. 소리를 내고, 어휘에 속하는 것을 문법에 맞게 뜻을 담고 있는 내용으로 소리를 내어 말을 하는 것이다. 이것은 다시 음성행위, 형태행위, 그리고 의미행위로 구별할 수 있다.</p><ol class="choices"><li>발화행위</li><li>발화수반행위</li><li>발화효과행위</li><li>소극적 행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 음성·형태·의미를 갖추어 말하는 발화행위의 정의다.</li><li><strong>비선택</strong> · 그 말을 함으로써 약속·주장 등을 수행하는 측면이다.</li><li><strong>비선택</strong> · 그 말의 영향으로 세계에 후속 결과를 낳으려는 측면이다.</li><li><strong>비선택</strong> · 소극적 행위는 이 정의가 가리키는 오스틴의 용어가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_265"><h4>워크북 · 헌법논증이론_265</h4><p class="question-stem">오스틴의 구분에 따르면 밑줄 친 곳에 들어갈 알맞은 말은?<br><br>______는 &quot;지금 뒤에서 차가 오고 있다&quot;고 말하여 청자가 길을 비켜서게 하여 안전을 확보하게 하려는 것과 같이 화행을 함으로써 세계에 어떤 후속 결과를 야기하려는 것이다.</p><ol class="choices"><li>발화행위</li><li>발화수반행위</li><li>발화효과행위</li><li>소극적 행위</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 차가 온다는 내용을 말하는 자체에 주목하면 발화행위다.</li><li><strong>비선택</strong> · 경고하는 행위에 주목하면 발화수반행위다.</li><li><strong>선택</strong> · 청자가 비켜서 안전해지는 후속 결과를 야기하려는 측면이므로 발화효과행위다.</li><li><strong>비선택</strong> · 문제는 부작위·소극성을 묻지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_266"><h4>워크북 · 헌법논증이론_266</h4><p class="question-stem">발화효과행위에 대한 설명으로 옳은 것은?</p><ol class="choices"><li>화자의 발화효과행위의 성공은 청자가 말의 내용의 타당성을 승인할 수 있을 때에만 성립한다.</li><li>발화효과행위는 말의 타당성의 주제와 가장 밀접히 관련된다.</li><li>발화효과행위는 언표의 내용 자체에 포함된 것을 의도한 행위라는 점을 강조하여 언표내적 행위라고도 한다.</li><li>발화효과행위는 화행을 함으로써 세계에 어떤 후속 결과를 야기하려는 행위 측면이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 타당성이 승인되지 않아도 원하는 결과를 얻을 수 있다. 병을 믿지 않지만 휴식을 허용하는 사례가 반례다.</li><li><strong>비선택</strong> · 타당성의 주제는 발화수반행위와 밀접하다. 효과는 인과적 후속 성과다.</li><li><strong>비선택</strong> · 언표내적은 수반행위 쪽의 용어다. 효과는 언표외적·발화수단적이라고 부른다.</li><li><strong>선택</strong> · 말로 후속 결과를 유발하려는 측면이라는 정확한 정의다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ①, ②는 발화수반행위에 대한 설명이다. 예를 들어 A가 쉬고 싶어서 아프지 않으면서도 직장 상사에게 '아프다'라고 말하였는데 직장 상사가 그렇게까지 말을 하는 A의 피로를 감안하여 쉬게 해주었다고 하자. 결과적으로 A의 '아프다'는 주장의 타당성은 승인되지 않았지만 A는 그 말을 함으로써 휴식을 취한다는 결과를 인과적으로 성취한 것이다. 즉 이 경우에 발화효과행위는 성공하였지만, 아프다는 주장이 A의 몸 상태에 관한 사실 주장으로서 성공한 것은 아니다. 그런데 '아프다'라는 말의 주제는 A의 몸 상태에 관한 사실이다. 따라서 발화효과행위의 성공은 청자가 말의 내용의 타당성을 승인할 수 없을 때에도 이루어질 수 있고, 또한 그래서 타당성 주제와 밀접히 관련되는 것도 아니다. 따라서 ③에서 진술된 것과는 반대로, 발화효과행위는 언표의 내용 자체에 포함되지 아니한 것을 의도한 행위라는 점을 강조하여 언표외적 행위라고 칭하기도 한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_267"><h4>워크북 · 헌법논증이론_267</h4><p class="question-stem">밑줄 친 곳에 들어갈 말로 올바른 것은?<br><br>모든 화행은 그 화행이 어떤 발화수반행위인가를 밝혀 구분할 수 있다. 이렇게 주어진 화행에 수반되는 발화수반행위의 종류를 알아보는 방법을 문장 양상의 식별이라고 한다. 문장의 양상은 표준적인 문장 형식의 ______의 종류를 밝힘으로써 파악할 수 있다.</p><ol class="choices"><li>단언동사(斷言動詞)</li><li>수행동사(遂行動詞)</li><li>경험동사(經驗動詞)</li><li>성취동사(成就動詞)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 단언만이 아니라 명령·약속·질문 등 여러 양상을 포괄해야 한다.</li><li><strong>선택</strong> · 표준 형식의 주장한다·명령한다·약속한다처럼 어떤 행위를 하는지 드러내는 수행동사다.</li><li><strong>비선택</strong> · 경험을 서술하는 동사의 일반 명칭을 묻는 것이 아니다.</li><li><strong>비선택</strong> · 후속 성취의 유무가 아니라 그 말을 통해 어떤 행위를 하는지를 식별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_268"><h4>워크북 · 헌법논증이론_268</h4><p class="question-stem">표준적 화행에 담긴 명제 부분이 그 사회의 규칙에 비추어 의미 있고 이해가능하게 말을 사용하는 맥락에서 예기되는 발화수반력을 무화시키는 내용이나 전제를 담고 있는 것을 무엇이라고 하는가?</p><ol class="choices"><li>수행적 모순</li><li>수행적 성취</li><li>수행적 사태</li><li>수행적 작동</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 내용·전제가 해당 화행의 발화수반적 성립 조건을 스스로 부인하는 수행적 모순이다.</li><li><strong>비선택</strong> · 성취라는 말은 성립 조건과 충돌하는 오류를 뜻하지 않는다.</li><li><strong>비선택</strong> · 사태라는 일반 명칭보다 조건과 내용의 충돌이 핵심이다.</li><li><strong>비선택</strong> · 작동은 이 이론의 오류 분류 명칭이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_269"><h4>워크북 · 헌법논증이론_269</h4><p class="question-stem">발화수반행위에 대한 이의제기에 관한 설명으로 틀린 것은?</p><ol class="choices"><li>어떤 발화수반행위에 대한 이의제기는, 그 발화수반행위의 종류에 따라 상이한 종류의 것이 된다.</li><li>사실주장에 대한 이의, 규범주장에 대한 이의, 표출적 진술에 대한 이의는 명제 부분의 타당성을 직접 다투고 있다는 점에서 독특한 특성을 지닌다.</li><li>문을 닫을 것을 명령한 사람에게, 그 사람이 그것을 명령할 권한이 없다고 이의를 제기할 수 있다.</li><li>진위 문장(참과 거짓을 진술하는 문장)은 그 발화수반적 효력을 다툴 수 있지만 명령 문장(명령을 내리는 문장)은 그 발화수반적 효력을 다툴 수 없다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 명령은 권한, 사실은 진리 등 행위 종류에 맞춰 반박한다.</li><li><strong>비선택</strong> · 세 표준 화행은 각각 진리·정당성·성실성으로 명제 부분을 직접 검토한다.</li><li><strong>비선택</strong> · 명령할 권한이 없다는 반론은 발화수반적 효력을 다투는 적절한 방식이다.</li><li><strong>선택</strong> · 명령도 권한·정당성 등 조건을 다툴 수 있다. 참·거짓 문장만 검토 가능하다는 주장은 틀리다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 발화수반적 효력을 다툴 수 있다는 점에서는 진위 문장과 명령 문장이 차이가 없다. ③처럼 권한의 결여를 주장할 수 있다. 국민이 어떤 대통령령의 효력을 법률유보원칙 위반이라는 이유로 다툰다면, 대통령이 그와 같은 명령을 발령할, 법률에 근거한 권한이 없다고 이의를 제기하는 것이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_270"><h4>워크북 · 헌법논증이론_270</h4><p class="question-stem">세 종류의 표준적 화행에 대한 이의는 명제 부분의 타당성을 다투는데, 규범주장에 대한 이의는 명제 부분이 ______. 밑줄 친 곳에 들어갈 가장 알맞은 말은?</p><ol class="choices"><li>사실로 성립하지 않는다는 것이다.</li><li>규범으로 부당하다는 것이다.</li><li>진실되지 못하다는 것이다.</li><li>의미가 이해되지 않는다는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사실 주장의 진리성을 다투는 설명이다.</li><li><strong>선택</strong> · 규범 주장은 그 내용이 정당한 규범인지가 쟁점이다.</li><li><strong>비선택</strong> · 표출적 진술의 성실성을 다투는 설명이다.</li><li><strong>비선택</strong> · 이해 가능성은 세 화행의 타당성 검토에 앞선 공통 조건이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_271"><h4>워크북 · 헌법논증이론_271</h4><p class="question-stem">밑줄 친 곳에 공통으로 들어갈 말로 올바른 것은?<br><br>______ 요구란 어떤 발화가 이해가능하고 의미 있게 말을 하려면 전제할 수밖에 없는 조건을 인식하면서, 그 조건에 따라 정해지는 종류의 ______을 승인할 것을 요구하는 것이다. 예를 들어 '지금 밖에 비가 오고 있어'라고 말할 때는 비가 오고 있다는 것이 진리라는 주장을 하고 있는 것이다.</p><ol class="choices"><li>진솔성</li><li>성실성</li><li>타당성</li><li>합헌성</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 진솔성은 주로 마음의 표현이나 정직성에 관련된 좁은 개념이다.</li><li><strong>비선택</strong> · 성실성은 표출적 진술의 한 타당성 차원이지 전체를 포괄하지 않는다.</li><li><strong>선택</strong> · 맥락에 따라 진리·정당성·성실성 등을 승인해 달라는 타당성 요구다.</li><li><strong>비선택</strong> · 헌법 주장에서 문제될 수 있으나 비가 온다는 사실 주장까지 합헌성을 요구하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_272"><h4>워크북 · 헌법논증이론_272</h4><p class="question-stem">다음 중 수행적 오류에 대한 설명으로 틀린 것은?</p><ol class="choices"><li>수행적 오류는 화행을 부적절한 것으로 만드는 조건의 위반을 널리 가리키는 것으로 정의된다.</li><li>어떤 행위에 대해 '내가 너를 부당하게 대한 것을 사죄한다'고 말한 뒤 곧바로 어깨를 으쓱하고 경멸하는 표정으로 웃는 것은 수행적 오류의 한 예이다.</li><li>수행적 모순은 모두 수행적 오류에 속한다.</li><li>수행적 오류라면 모두 수행적 모순에 해당한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 화행 성립·이행의 조건을 위반한 넓은 오류 범주다.</li><li><strong>비선택</strong> · 사과 직후 경멸하는 행동은 사과의 진정성과 이행을 해치는 남용의 예다.</li><li><strong>비선택</strong> · 수행적 모순은 수행적 오류의 부분집합이다.</li><li><strong>선택</strong> · 포함관계를 뒤집었다. 장소·절차를 고치거나 진정성을 바로잡아 같은 내용으로 수행할 수 있는 오류도 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 수행적 모순이 수행적 오류의 부분집합이므로, 수행적 오류 중에는 수행적 모순이 아닌 것들이 있다. ②에서 든 예와 같은 경우가 그러하다. 그런 경우에는, 수행적 모순과는 달리, 그 화행에 담긴 명제 내용 자체의 타당성이 부인되지 않는다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_273"><h4>워크북 · 헌법논증이론_273</h4><p class="question-stem">다음 문장에 관한 진술로 틀린 것은?<br><br>나는 서울이 한국의 수도라고 주장하며, 서울이 한국의 수도라는 것은 거짓이다.</p><ol class="choices"><li>그 자체로 의미론적 모순을 내포한다.</li><li>발화자가 어느 도시가 한국의 수도인가에 관하여 진지한 주장행위를 위 문장을 듣는 상대방에게 하기 위해 위 문장을 발화함으로써 하는 발화수반행위는 수행적 모순을 범한다.</li><li>'서울이 한국의 수도라는 것은 거짓이다'라는 명제 부분을 '서울이 한국의 수도라는 것은 참이다'로 변경하면 수행적 모순은 치유된다.</li><li>수행적 모순은 문장 양상 분석을 통해 명시적으로 드러낼 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 누군가 거짓을 주장한다는 보고는 의미상 가능하다. 문장 자체가 필연적인 의미론적 모순이라는 설명은 틀리다.</li><li><strong>비선택</strong> · 상대에게 지금 진지하게 참의 승인을 요구하면서 그 참을 부인하는 맥락에서는 수행적 모순이다.</li><li><strong>비선택</strong> · 앞의 진리성 요구를 부인하던 내용을 수정하면 그 충돌은 해소된다.</li><li><strong>비선택</strong> · 사실 주장이라는 수행 양상을 명시하면 숨어 있던 진리성 요구와 부인이 드러난다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 의미론적 모순은 없다. 거짓을 주장하는 것은 인간 사회에서 늘 일어나는 일이다. 예를 들어 갈릴레오가 '나는 태양이 지구의 주위를 돈다고 사람들에게 주장하며, 태양이 지구의 주위를 도는 것은 거짓이다'라고 일기에 썼다고 해보자. 이는 정확히 참인 진술이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_274"><h4>워크북 · 헌법논증이론_274</h4><p class="question-stem">다음 빈칸에 들어갈 알맞은 말을 순서대로 나열한 것은?<br><br>일반적인 수행적 모순 검사: 화행 'Mp'의 (    ) p 또는 p의 전제가 그 화행이 (    )을 갖기 위한 조건과 모순될 때, 그 화행은 수행적 모순을 범하는 것이다. 화행의 전제가 되는 (    )을 모두 명기하여 그것들과 언표된 명제 및 그 명제의 전제들 사이에 모순이 발생하는지를 살펴봄으로써 이를 검사할 수 있다.</p><ol class="choices"><li>명제 부분, 발화수반적 효력, 타당성 조건</li><li>수행동사 부분, 발화효과적 성공, 진솔성 조건</li><li>수행동사 부분, 확정적 진리 효력, 이해가능성 조건</li><li>명제 부분, 발화수반적 효력, 이해가능성 조건</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 명제 부분·발화수반적 효력·타당성 조건이라는 검사 요소가 정확하다.</li><li><strong>비선택</strong> · 후속 효과의 성공이 아니라 수반행위의 성립 조건과 명제 내용을 비교한다.</li><li><strong>비선택</strong> · 모든 화행이 확정적 사실 진리를 주장하는 것은 아니다. 명령·규범의 조건도 구별한다.</li><li><strong>비선택</strong> · 이해 가능성도 필요하지만 그것만이 아니라 그 화행 전체의 타당성 조건을 명기해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 별도 해설 없음</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_275"><h4>워크북 · 헌법논증이론_275</h4><p class="question-stem">다음 대화 중 A의 '너는 존재하지 않는다'는 주장에 관한 진술로 틀린 것은?<br><br>A: 너는 존재하지 않는다. 왜냐하면 인식주체인 나에게 확실한 것은 너처럼 말하고 움직이는 어떤 형상을 내가 지각하는 듯한 인상을 갖는다는 것뿐이기 때문이다.<br>B: 방금 그 말은 참인가?<br>A: 그렇다.<br>B: 또한 방금 그 말로써 사실주장을 하는 것인가?<br>A: 그렇다.</p><ol class="choices"><li>&quot;너는 존재하지 않는다&quot;라는 주장은 표준적 문장 형식에서는 &quot;나는 이 말로써 너에게 네가 존재하지 않는다고 사실주장한다&quot;는 것이 된다.</li><li>사실주장은 사실 명제의 참을 승인해줄 논증대화 참여자를 전제한다.</li><li>참이라고 생각하는 사실 명제를 혼잣말하는 것과 그 명제를 참이라고 주장하는 것은 정확히 같은 행위이다.</li><li>'너는 존재하지 않는다'는 명제는 의미론적 모순은 아니다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 화자·청자·명제·수행동사를 명시한 표준 형식이다.</li><li><strong>비선택</strong> · 진지한 주장은 근거를 검토하여 참을 승인할 의사소통 상대를 전제한다.</li><li><strong>선택</strong> · 같은 단어를 혼잣말하는 것과 상대에게 진리 승인을 요구하는 것은 같은 수반행위가 아니다.</li><li><strong>비선택</strong> · 문장만 떼면 의미론적 모순은 없다. 실제 청자에게 그 존재 부정을 승인받으려는 맥락이 문제다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 같은 행위가 아니다. 발화행위 측면에서는 같은 행위라 할지라도, 전자는 혼잣말하는 행위이고 후자는 사실주장 행위이다. 혼잣말하는 행위와는 달리 사실주장행위는 나의 주장을 근거에 의해 승인해줄 의사소통주체를 전제로 한다. 그런 의사소통주체의 존재를 부인하면서 그런 주체에게 승인받고자 하는 것은 의미론적 모순은 아니지만 수행적 모순이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_276"><h4>워크북 · 헌법논증이론_276</h4><p class="question-stem">수행적 모순을 범하는 규범의 주장이 해당하거나 귀결될 수 있는 것이 아닌 것은?</p><ol class="choices"><li>한낱 힘센 자의 자기 욕구의 현시(터무니없는 사회질서)</li><li>효율적인 약탈과 착취의 안정적 패턴에 관한 보고나 경고(약탈적 사회질서)</li><li>일부 사람들이 자신들의 가치 추구를 위해 다른 사람들의 삶을 종속시키는 도구화의 패턴(질서정연한 사회질서를 지향하지 않는 지배자 사회질서)</li><li>구성원들의 근본적으로 자유롭고 평등한 관계의 유지·복구·강화(질서정연한 사회질서)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공적 규범의 조건이 무너지면 힘센 사람의 욕구 표명으로 남을 수 있다.</li><li><strong>비선택</strong> · 안정적인 위협의 패턴을 보고·경고하는 말로 남을 수 있다.</li><li><strong>비선택</strong> · 타인의 삶을 지배 집단의 가치 추구 수단으로 만드는 패턴이 될 수 있다.</li><li><strong>선택</strong> · 자유롭고 평등한 관계의 유지·복구·강화는 수행적 모순을 피하는 정당화의 방향이지 그 모순의 귀결이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 규범의 주장이 수행적 모순을 범하지 않을 때 가능하다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_277"><h4>워크북 · 헌법논증이론_277</h4><p class="question-stem">다음과 같은 가상의 나라, Q국(國)에 대한 설명으로 명백히 틀린 것은?<br><br>Q국의 헌법 조항 중 하나는 '국민의 건전하고 조화로운 정신을 위해 국가는 문화를 관리한다'고 규정하고 있고 다른 하나는 '국민의 문화의 자유는 건전하고 조화로운 정신을 갖추기 위한 목적을 위해서만 행사될 수 있다'고 규정하고 있다. 이 두 헌법 조항에 근거하여 Q국은, Q국의 통치권자가 천박하고 저열하며 불건전하고 갈등을 초래하는 정신을 초래한다고 여기는 모든 문화 활동을 금지한다.</p><ol class="choices"><li>Q국은 규범이 가치에서 도출되며 가치를 추구하는 행위를 조정하거나 제약하는 역할을 하는 규범이 없다는 전제를 도입하고 있다.</li><li>Q국은 각자에게 어떤 것이 가치 있는가를 통치권을 가진 사람들이 대신 판단할 지위에 있다는 전제를 도입하고 있다.</li><li>Q국의 통치권자가 선거에 의해 선출된 사람으로 구성된다면, Q국의 통치권자는 어떤 문화가 건전한지 아니면 천박한지 모든 국민을 위하여 판단할 인식적 지위를 주장하여도 수행적 모순을 범하는 것은 아니다.</li><li>Q국은 문화에 관한 특정한 가치 판단을 공유하는 사람들에게만 한정된 행위 조정의 이유가, 수범자 모두에게 보편적으로 행위 의무를 발생시키는 행위 조정의 공적 이유라고 주장하고 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문화적 좋음이라는 가치로부터 규범을 바로 도출하는 전제를 사용한다.</li><li><strong>비선택</strong> · 통치자가 시민의 좋은 삶 판단을 대신할 지위를 선취한다.</li><li><strong>선택</strong> · 선거 사실만으로 시민보다 우월한 가치 판단의 규범적 지위가 생기지 않는다. 권한의 내용은 여전히 정당화해야 한다.</li><li><strong>비선택</strong> · 특정 문화 평가를 공유하는 범위의 이유를 모든 사람에게 보편적인 이유인 것처럼 주장하는 구조다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> Q국의 통치권자가 선거로 선출된 사람이라 하여도, 여전히 그 인식적 지위는 규범적으로 정당화되어야 한다. 그런데 인식적 특권을 가지는 지위에 있는 사람은 인식적으로 열등한 지위에 있는 사람과 평등하고 자유로운 논증대화를 하는 것이 아니다. 그저 자신의 판단을 다른 사람들에게 부과할 수 있을 뿐이다. 그러므로 인식적으로 열등하여 자신이 대신 검토하는 결론을 받아들여야 하는 종속적인 부자유한 지위에 있는 사람들에게서 그 인식적 지위를 승인받고자 하는 것이므로 수행적 모순을 범한다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_278"><h4>워크북 · 헌법논증이론_278</h4><p class="question-stem">다음 중 규범주장이 유효하기 위해 성립하는 것으로 상정될 수밖에 없는 전제조건에 속하는 것은?</p><ol class="choices"><li>논증대화 참여자들은 복수(複數)의 주체들로서 공동체와 관련을 맺고 공동체에 구속되므로 각자에게 속하는 신체와 인격의 경계를 갖지는 않는다.</li><li>규범의 수범자가 될 사람들 모두가 그 장에 참여하여 이의를 제기하고 주장을 검토할 수 있는 것은 아니고, 범죄를 저질러 수감되어 있는 사람들은 수범의무는 지되, 논증대화에 참여할 수는 없다.</li><li>규범적 논증대화의 장이 있으며 문제의 화행은 그 장에서 규범적 논증으로서 개진된 것이다.</li><li>주장된 규범에 이의를 제기하고 논거를 검토하여 주장된 것을 승인할 지위는 불평등하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 공동체 관련성은 몸·인격의 경계 소멸이 아니다. 자신의 신체와 삶에 더 밀접한 영역을 가진 별개 주체여야 한다.</li><li><strong>비선택</strong> · 의무를 지는 사람의 규범적 이의 제기 지위를 수감 사실만으로 원천 배제할 수 없다는 교재의 원리다. 개별 제도의 참가 방식과는 구별한다.</li><li><strong>선택</strong> · 규범적 논증의 장에서 해당 화행을 개진한다는 첫째 전제다.</li><li><strong>비선택</strong> · 주장을 검토하고 승인·불승인할 지위는 평등해야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 논증대화 참여자들은 복수의 주체들로서 각자 자신에게 속하는 신체와 인격을 가지며 남들보다 자기에게 더 밀접한 신체 활동과 인격 발현의 영역을 가진 경계(境界)가 있고 서로 구별(區別)되는 존재들이다. 입헌 민주주의 내의 구성원이 공동체 관련성과 공동체 구속성을 가진다는 말을 그런 경계가 없다거나 그런 경계가 흐릿하다는 의미로 받아들일 수는 없다. 그럴 경우에는 각자에게 규범 명제를 승인받는다는 대화의 전제 자체가 성립하지 않을 것이다. 예를 들어 A와 B의 각각의 신체가 경계를 갖지 않는다면, A가 B의 신체에 상해를 발생시키는 것을 허용하는 원리에 대하여 A는 B의 승인을 받을 필요가 없을 것이다. A의 신체나 B의 신체 모두 어떤 거대존재의 일부에 불과할 것이므로, 그 거대존재의 관점에서 가치 있다는 점만 확인되면 A는 곧바로 그런 원리를 전제로 행위해도 될 것이다. 그렇게 본다면 예를 들어 직업이 없는 B를 밀쳐 B의 다리를 부러지게 하면 현재 생산적인 직업 활동을 하고 있는 C의 다리가 부러지는 것을 막을 수 있는 경우에 A는 B를 밀쳐 B의 다리가 부러지게 해도 될 것이다. 그리고 그 경우 B는 A의 행위로 인해 부러지는 것이 B 자신의 다리이지 C의 다리는 아니라는 이의를 제기할 수 없다는 터무니없는 결과가 발생한다. 즉 B가 설사 이의를 제기한다고 하여도, 자신은 지금 실업상태이지만 곧 C보다 더 유용한 직업에 종사할 예정이라는 등의 이유를 들어서만 이의를 제기할 수 있게 된다. B의 권리와 자유는 B의 지위를 보호하는 것이 아니라, B를 통하여 기여하게 될 어떤 공통의 가치에 복무하는 한낱 수단적인 것으로 이해하게 된다. 이러한 결과를 피하기 위해서 공동체 관련성과 공동체 구속성이란, A가 자신의 신체를 움직여 하는 행위라 할지라도 다른 사람의 권리와 자유를 제한하게 될 수 있으므로 그런 제한을 허용하는 원리가 규범적 논증대화의 장에서 승인되는 경우에만 그런 행위를 할 수 있다는 것을 의미한다고 보아야 한다. 따라서 ①은 틀렸다. 수범의무를 지는 사람은 모두 논증대화에 참여할 수 있어야 하므로 ②는 틀렸다. ④도 '평등'해야 하므로 틀렸다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_279"><h4>워크북 · 헌법논증이론_279</h4><p class="question-stem">다음 중 규범주장이 유효하기 위해 성립하는 것으로 상정될 수밖에 없는 전제조건에 속하지 않는 것은?</p><ol class="choices"><li>주장된 규범에 이의를 제기하고 논거를 검토하여 주장된 것을 승인할 지위는 평등하다.</li><li>논증대화의 참여자들은 논증대화의 주제인 규범에 관한 인식적 이유들만을 오롯이 고려하여 결론을 도출한다.</li><li>참여자들은 평화로운 공존과 공정한 협동의 원리, 즉 힘의 위협이 없을 때에도 이성적 행위자라면 따를 우선적 이유가 있는 공적 행위 조정의 원리를 찾고자 한다.</li><li>참여자들은 타당한 규범적 결론을 설득하는 데 도움이 된다면, 그 결론을 뒷받침하는 근거 중 일부를 숨기거나 다른 것으로 내세워야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 평등한 승인·이의 지위는 성립 조건 d다.</li><li><strong>비선택</strong> · 타당성과 유관한 인식적 이유를 고려할 자유는 조건 e다.</li><li><strong>비선택</strong> · 힘의 위협 없이도 따를 공적 공존·협동 원리를 찾는 조건 f다.</li><li><strong>선택</strong> · 원하는 결론의 관철을 위해 근거를 숨기면 정직한 논증의 조건 g를 위반한다. 옳다고 확신한다는 말이 은폐를 정당화하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ④는 타당한 규범적 결론이, 논증대화에 선재하여 독립적으로 도출될 수 있다고 전제하고 있다. 이는 규범주장을 합리적 의사소통행위가 아니라 전략적 행위로 잘못 이해하는 것이다. 타당한 규범적 결론을 합의하기 위하여 논증대화를 하는 것인데, 그 논증대화에 진입하기 이전에 이미 결론을 내려놓고, 논증대화는 단지 자신이 내린 결론을 관철하기 위한 수단으로 보는 것이므로, 이는 수행적 모순을 범한다. 즉 '나는 내가 하는 규범주장의 타당성을 승인받기 위하여, 내가 이미 내린 결론을 관철하기 위하여 내 규범주장의 근거들을 숨기면서 그 타당성을 승인받고자 한다'와 같은 행위를 하는 셈이 되는 것이다. 이는 '참여자들은 논거들이 적합하고 적절하게 결합되었는지를 검토하여 타당한 규범주장은 승인하고 부당한 규범주장은 불승인하고자 하는 목적 외에 다른 목적을 위하여 기망이나 은폐를 하지 않으며 정직하고 진솔하게 자신의 결론과 그 결론을 뒷받침하는 논거를 제시한다'는 유효한 규범주장이 성립하기 위한 전제 중 하나를 위반했기 때문이다. 법이론 가운데 판사가 공동체 전체의 번영을 위해 가장 효과적인 결론을 내리면서, 그 결론의 직접적인 근거-이를테면 실용주의적 근거-가 대중에게 알려지면 판결의 권위가 받아들여지지 않을 우려가 있다면 이를 다른 근거로 위장할 수도 있다는 이론이 있는데, 그런 이론은 바로 이 전제를 위반한다고 하겠다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_280"><h4>워크북 · 헌법논증이론_280</h4><p class="question-stem">다음 A, B, C, D 중 헌법규범 논증에서 수행적 모순을 범하는 주장을 하는 사람은? (주장 자체의 최종적 타당성은 별론으로 하고, 그 주장이 헌법규범 논증으로서 수행적 모순을 범하는지만 검토하라)</p><ol class="choices"><li>A: 방송통신심의위원회가 불건전한 글이 올라온 블로그를 폐쇄하는 것은 기본권인 언론·출판의 자유를 침해하지 않는다. 왜냐하면 '방송통신위원회의 설치 및 운영에 관한 법률'이 방송통신심의위원회의 직무의 하나로 '건전한 통신윤리의 함양을 위하여 필요한 사항으로서 대통령령이 정하는 정보의 심의 및 시정요구'를 규정하고 있기 때문이다.</li><li>B: 허위사실의 통신을 일반적으로 금하는 법률조항은, 일반 국민은 스스로 사실주장의 진위 여부를 판별할 능력이 부족하여 그 판단을 국가의 통치권을 현실적으로 행사하는 이들이 대신 행사할 지위에 있다는 전제를 도입해야 하므로, 언론·출판의 자유를 침해한다.</li><li>C: 이미 입법된 특정 법률이 정당하여 변경되어서는 안 된다는 교육을 의무적으로 받도록 하는 법률조항은, 법률의 제정·개정·폐지의 바람직함에 관하여 그 특정 법률을 입법한 입법자의 판단을 일반 국민이 자신의 판단으로 삼아야 한다는 전제를 도입해야 하므로, 양심의 자유를 침해하고 평등원칙에 위반된다.</li><li>D: 어떤 표현을 금지하지 않으면 그 표현 때문에 불쾌감을 느끼고 화가 난 다수가 폭력행위를 할 수 있으므로 그 표현을 금지할 수 있다는 원리는, 누구든 폭력행위를 쉽게 할 성향을 갖추면 다른 사람의 표현을 금지할 수 있는 지위에 서게 하므로 부당하다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 하위 법률에 권한이 적혔다는 사실만으로 그 권한의 행사에 대한 헌법적 정당화를 완료해 기본권 심사의 상하 관계를 뒤집었다.</li><li><strong>비선택</strong> · 국가가 시민의 사실 판단을 대신할 특권이라는 숨은 전제를 비판한다. 이 분석 자체가 수행적 모순은 아니다.</li><li><strong>비선택</strong> · 입법자의 판단을 시민에게 고정적으로 강제하는 종속 관계를 비판하는 구조다.</li><li><strong>비선택</strong> · 폭력 성향이 강할수록 타인의 표현을 제한할 권한이 커지는 원리의 부당함을 지적한다. 이 문제는 B·C·D 결론의 최종 적법성 전부를 확정하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> A의 주장은, 하위 차원의 논증대화의 주제에 관한 결론을 주장하기 위하여 그 상위 차원의 지위, 즉 기본권 주체로서의 지위를 부인하는 것을 전제로 하고 있는 논거를 도입한 것이다. 그렇지 않으면 헌법보다 하위규범인 법률의 존재를 들어 기본권 침해가 아니라는 주장을 할 수 없기 때문이다.</p></details></section>
+
+<section class="question-card" id="question-헌법논증이론_281"><h4>워크북 · 헌법논증이론_281</h4><p class="question-stem">법익 균형성 심사를 한다는 명목으로 다음 A와 같은 주장에 수행적 모순 검사를 적용할 경우 나올 진술로 틀린 것은?<br><br>A: 감염병예방 조치로서 국가가 모든 국민에게 다중출입시설 출입에 관한 정보를 국가가 언제든 조사할 수 있는 상태로 기록할 의무를 지우고, 또한 그 대부분의 정보를 QR 코드 형태로 축적하는 것은 법익 균형성 심사를 통과한다. 왜냐하면 이 경우 제한되는 사생활의 비밀과 자유의 법익보다, 그러한 제한으로 얻게 되는 공익이 더 크기 때문이다.<br>B: 나는 정확히 같은 사안에 대해서 정반대의 결론을 주장하는 바이다. 왜냐하면 이 경우 제한되는 사생활의 비밀과 자유의 법익이, 그러한 제한으로 얻게 되는 공익보다 더 크기 때문이다.<br>A: 너의 법익 균형성 판단은 소수의 매우 별난 판단이므로 틀렸다. 왜냐하면 다수 국민이 그러한 제한을 기꺼이 받아들이기 때문이다.</p><ol class="choices"><li>A의 주장은 다수가 실제로 기꺼이 받아들이는 법익 균형 판단을 반영하는 반면에, B의 주장은 평균적이지 못한 별난 판단을 반영하는 것이므로 A의 주장이 옳다.</li><li>논거로 근거지을 수 없는 명제태도의 지배적 우세 같은 요소가 논거로서 힘을 갖는다고 간주하면, 다수가 강하게 확신하는 명제태도는 실질적인 규범적 논거 없이 언제나 타당한 것으로 승인되는 결과가 나온다.</li><li>실질적 규범적 논거가 있어야 타당성이 승인될 수 있는 논증대화에서, 실질적 규범적 논거 없이 타당성이 승인될 수 있다고 주장하는 것은 수행적 모순이다.</li><li>수적 우위가 논거로서 힘을 갖는다고 본다면 자신과 같은 견해를 갖는 사람들의 규모에 비례하여 이의의 제기와 주장의 승인에 관한 지위가 불평등하게 성립된다고 전제하게 되는 것이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 다수가 같은 결론을 승인한다는 사실로 실질적 규범 근거를 대체했다. 평등한 반론의 지위를 부인하므로 잘못된 평가다.</li><li><strong>비선택</strong> · 명제태도의 수적 우위만으로 타당성을 인정하면 근거 없는 확신도 언제나 승리하게 된다.</li><li><strong>비선택</strong> · 논거에 의한 승인을 요구하면서 논거 없이 승인될 수 있다고 하는 충돌을 드러낸다.</li><li><strong>비선택</strong> · 같은 견해의 인원수만큼 승인·이의 지위를 높이면 참여자의 근본적 평등을 부인하게 된다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> ②, ③, ④와 같은 이유 때문에, A의 주장은 필요한 논거를 들어 해당 국가의 조치가 법익 균형성을 충족했다는 명제가 헌법규범적 논증대화에서 타당성 승인을 받을 자격이 있음을 보여주었다고 할 수 없다. 왜냐하면 A와 정확히 같은 개념과 형식을 사용해서 A의 결론과 정반대되는 결론을 B와 같이 주장할 수 있는데, 이 두 결론 중 A 자신이 내세우는 결론이 더 참일 개연성이 높다는 근거로 A는 단지 같은 명제태도를 받아들이는 사람들이 수적으로 우위에 있다는 점만을 들었기 때문이다. 법익 균형성 심사는 어느 법익이 더 중요하다고 느껴지는가에 대한 지배적인 명제태도의 확인으로 잘못 오해되곤 하는데, 그런 오해는 수행적 모순을 범한다.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '헌법논증이론 · CHAPTER 11' : 'PART · CONSTITUTIONAL ARGUMENT';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(헌법논증이론 · CHAPTER 11|PART · CONSTITUTIONAL ARGUMENT)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('argument-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
