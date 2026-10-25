@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제14강 부가가치세(2) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 14</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제14강 부가가치세(2) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>제14강 부가가치세(2) · 누가 거래했고, 무엇으로 증명할까</h1>
+<p>교재239~256쪽과14강 강의록을 따라 사업자등록→세금계산서→오류 수정 순서로 읽는다. 교재 사례와 판례의 요건을 유지하되 실제 발언이 아닌 대화는 이해용 재구성이다. 이 강의 직접 기출은1문항이며 증빙·공제 관련 문제는13강과 교차 연결한다.</p>
+<h2>단원을 여는 다섯 질문</h2>
+<p>① <strong>결국 무엇인가?</strong> 거래의 주체를 등록하고, 공급과 세액을 세금계산서로 서로 확인하는 방법이다. ② <strong>왜 필요한가?</strong> 앞사람의 매출세액이 뒷사람의 매입세액이므로 두 기록을 대조할 수 있어야 한다. ③ <strong>전체 위치는?</strong> 13강에서 배운 전단계세액공제가 실제로 작동하게 하는 장치다. ④ <strong>앞뒤 연결은?</strong> <mark class="blue">13강의 공급·공제를 증명하고, 15강의 영세율·면세에서도 어떤 증빙이 필요한지 구별한다.</mark> ⑤ <strong>모르면?</strong> 사업자등록증이 없으니 세금도 없다고 생각하거나, 영수증·세금계산서·수정세금계산서를 같은 것으로 취급한다.</p>
+<p><strong>핵심 한 문장:</strong> <mark class="yellow">사업자의 실질, 등록 단위, 거래 증빙, 수정 사유를 서로 나누어 판단한다.</mark></p>
+<p><strong>중요도:</strong> ★★★★★ 사업자·필요적 기재사항·사실과 다른 계산서 / ★★★★☆ 등록 단위·수정세금계산서 / ★★★☆☆ 전자발급·영수증 / ★★☆☆☆ 심화 헌법 판단. 제공 기출과 이해 연결에 따른 우선순위이며 실제 시험 빈도·오답률 통계가 아니다.</p>
+<h2 id="tax-14-01" data-concept-id="tax-14-01">14-1. 사업자는 영리 목적이 있어야 할까 ★★★★★</h2>
+<p><strong>교재240~242쪽 · 제2·3조의 역할:</strong> 부가가치세의 납세자가 될 사람을 정한다. 사업자와 재화 수입자가 납세의무자이며, 개인·법인·법인격 없는 사단·재단 등도 해당할 수 있다. 국가·지방자치단체·지방자치단체조합도 법인 범위에 포함한다.</p>
+<p>사업자는 <strong>영리인지 비영리인지와 관계없이 사업상 독립적으로 재화·용역을 공급하는 자</strong>다. 여기서 독립은 자신의 계산과 책임으로 사업을 한다는 뜻이다. 사용자에게 종속되어 월급 받는 근로자의 일과 구별한다. 이익이 안 났다고 사업자가 아닌 것도 아니다.</p>
+<p><strong>기본 판례 — 2010두8430, 2010.9.9.</strong> 법원은 부가가치를 만들어 낼 사업 형태와 계속·반복의 의사를 중심으로 판단한다. 교재가 함께 적은 소득세의 사업소득은 영리를 목적으로 한 독립·계속·반복 활동이라는 점에서 범위를 비교한다. <strong>번역:</strong> 비영리라는 이름만으로 VAT 사업자에서 제외하지 말고, 경제적 공급활동의 구조를 보라는 뜻이다.</p>
+<p><strong>교재 사례 — 90누8442, 1991.5.28.</strong> 건축설계사무소에서 일하던 사람이 건설회사 명의를 빌려 다른 회사와 노무도급계약을 맺고 한 번의 용역을 제공했다. 관청과 납세자의 충돌은 “일하는 데 시간이 오래 걸렸으니 계속적 사업인가?”였다. 법원은 시간의 경과가 필요한 <strong>한 번의 용역 제공 의사</strong>를 여러 차례 공급할 계속·반복 의사와 동일시하지 않았고, 이 사례에서 사업자성을 부정했다. <strong>반대 결론의 문제:</strong> 몇 달 걸린 한 번의 일을 곧 반복 영업으로 오해하게 된다. 이 판례가 인용하는84누629·89누2646도 사업형태·반복 의사라는 기준의 연결 판례다.</p>
+<p><strong>교재 사례 — 2010두29192, 2013.2.28.</strong> 부동산을 판 사람이 거래 횟수가 적다는 이유로 사업이 아니라고 다툰다. 법원은 해당 건만 떼어 보지 말고 취득·보유·조성 여부·규모·횟수·형태·상대방, 다른 보유 부동산과 거래 전후 사정까지 보라고 했다. 구 시행규칙의 횟수는 예시이지 그보다 적으면 무조건 사업이 아니게 되는 안전선이 아니다. <strong>번역:</strong> 적게 팔았어도 전체가 반복 매매사업이면 사업성은 인정될 수 있다.</p>
+<p><strong>두 사례 비교:</strong> 오래 걸린1회≠반복 / 횟수 적음≠무조건 비사업. <strong>시험·키워드·한 줄:</strong> 영리 불문 / 독립 / 사업 형태 / 계속·반복 의사 / <strong>기간이나 횟수 하나보다 활동 전체를 본다.</strong></p>
+<h2 id="tax-14-02" data-concept-id="tax-14-02">14-2. 지방자치단체가 운영하면 모두 면세일까 ★★★★☆</h2>
+<p><strong>교재242~243쪽 · 문단의 역할:</strong> 법인세에서 배운 국가·지방자치단체의 지위를 그대로 옮기지 않도록 한다. 법인세 납세의무에서 제외되는 것과 부가가치세 과세거래의 납세주체가 되는 것은 다른 문제다. 국가 등이 공급하는 법정 재화·용역의 면세 규정도 있지만 전부 면세라는 뜻은 아니다.</p>
+<p><strong>교재 사례 — 2015두48754, 2017.7.11.</strong> 지방자치단체가 시설 관리를 단체에 맡겨 사용·수익하게 한다. 그 단체는 자기 명의와 계산으로 제3자에게 서비스를 판다. 지자체는 “공익적인 시설이니 우리가 소비자에게 면세 서비스를 공급한 것 아닌가요?”라는 논리를 펼 수 있다.</p>
+<p>법원은 거래를 둘로 나눈다. <strong>지자체→단체는 시설 임대</strong>, <strong>단체→이용자는 별도의 공급</strong>이다. 지자체가 제3자에게 직접 공급한 것이 아니므로 그 논리로 면세할 수 없다. 지자체가 독립 공급주체로 대가를 받는 임대용역을 공급한 경우 과세되고, 관련 매입세액은 법에 따라 공제한다. 행정재산이거나 시설 이용이 공익적이라는 사정만으로 달라지지 않는다.</p>
+<p><strong>문장 번역:</strong> 자신의 명의·계산→그 단체의 거래다 / 부동산임대용역→지자체가 넘긴 것은 시설 사용의 기회다 / 공익성만으로 다르게 못 봄→좋은 목적과 법정 면세요건을 구별한다. <strong>다른 결론의 문제:</strong> 같은 임대라도 시설의 공익적 명칭에 따라 과세가 달라진다. <strong>시험·키워드·한 줄:</strong> 공급주체 / 두 단계 / 대가 있는 임대 / <strong>누가 누구에게 무엇을 공급했는지 화살표를 두 개 그린다.</strong></p>
+<h2 id="tax-14-03" data-concept-id="tax-14-03">14-3. 사업자등록은 왜 필요하고 언제 할까 ★★★★☆</h2>
+<p><strong>교재243~246쪽 · 제8조의 취지:</strong> 사업자와 사업 내용을 알아야 매출과 매입을 맞출 수 있다. <mark class="green">사업자등록은 서로의 거래를 확인하기 위한 출발점이므로, 단순한 명단 작성에 그치지 않는다.</mark></p>
+<p>원칙은 <strong>사업장마다 사업 개시일부터20일 이내 신청</strong>이다. 새로 시작할 사람은 개시 전에도 신청할 수 있다. 하나의 주인이 여러 가게를 운영하더라도 기본은 사업장별 등록이다. 등록을 안 했다고 실제 공급에 대한 사업자성과 납세의무가 사라지지는 않는다. 미등록가산세·매입세액 불공제 등 법정 불이익을 검토한다.</p>
+<p><strong>교재 조문번호 보완:</strong> 243쪽의 등록 전 매입세액 불공제에 적힌 ‘제38조 제1항 제8호’는 <strong>제39조 제1항 제8호</strong>를 확인해야 한다. 또한13강에서 본 법정 기한 내 신청의 공제 예외가 있으므로 등록 전 매입을 예외 없이 전부 불공제라고 외우지 않는다.</p>
+<p><strong>헌재 사례 — 2011헌바168, 2013.11.28.</strong> 면세사업자로 등록했던 기간의 매입세액을 과세사업 등록 전 매입으로 보아 공제하지 않는 구법이 문제되었다. 납세자는 재산권·평등 침해를 주장했다. 헌재는 부가세 과세사업의 등록이 전단계세액공제와 다른 세목의 정확한 과세에도 중요하며, 면세사업자 등록이 과세사업자 등록의무 이행과 같지 않다는 점을 보아 위헌 주장을 받아들이지 않았다. 당시 구법의 합헌 판단을 현재 모든 예외 부정으로 확대하지 않는다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=33793&mode=1">공식 결정</a></p>
+<p><strong>교재 인용문 번역:</strong> 납세자·과세자료 파악→누가 어떤 거래를 했는지 알아야 한다 / 공평과세→등록한 사업자만 부담하게 두지 않는다 / 단순 협력 이상→의무 불이행에 별도 불이익이 있다. 인용된81누416은 등록신청서 제출 시점을 보는 설명과 연결된다. <strong>시험·키워드·한 줄:</strong> 20일 / 개시 전 가능 / 사업장별 / <strong>등록은 사업자를 만드는 마법이 아니라 사업을 세법상 드러내는 의무다.</strong></p>
+<h2 id="tax-14-04" data-concept-id="tax-14-04">14-4. 사업자 단위 과세와 총괄납부는 다르다 ★★★★☆</h2>
+<p><strong>교재244~245쪽 · 제8·51조의 역할:</strong> 가게가 여럿인 사업자의 편의를 제공하면서 등록·신고·납부 단위를 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>방식</th>
+<th>등록·신고의 단위</th>
+<th>납부</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>원칙</td>
+<td>사업장마다</td>
+<td>사업장마다</td>
+</tr>
+<tr>
+<td>사업자 단위 과세</td>
+<td>본점·주사무소 중심의 하나의 사업자등록으로 통합</td>
+<td>사업자 단위</td>
+</tr>
+<tr>
+<td>주사업장 총괄납부</td>
+<td>각 사업장 등록·각 사업장 신고 유지</td>
+<td>주된 사업장에서 총괄</td>
+</tr>
+</tbody></table>
+<p>두 사업장 이상, 또는 하나이지만 추가 개설하려는 경우 등 법정 요건에서 신청한다. <strong>총괄납부의 ‘납부’ 두 글자를 붙잡자.</strong> 돈을 합쳐 낸다는 것과 신고서를 한 사업장으로 합친다는 것은 다르다.</p>
+<p><strong>교재 사례 — 2013두17800, 2013.12.26.</strong> 사업자 단위 과세가 아닌 사업자가 지점을 별도 등록하지 않고 지점 매출까지 본점 매출에 합쳐 본점 세무서에 신고했다. “어차피 같은 사장인데 신고한 것 아닌가요?”가 쟁점이다. 법원은 그 신고를 별개 사업장인 지점의 적법한 예정·확정신고로 볼 수 없다고 판단했다. 인용된84누502와 같은 사업장별 신고 원리다. 반대로 인정하면 법이 정한 사업장별 과세자료와 신고 체계가 무너진다.</p>
+<p><strong>자료 대조:</strong> 강의록12쪽은 이 문장을 소개하며 ‘90누8442’라고 표시하지만, 그것은 앞의 한 번의 용역 사건이다. 여기서는 교재245쪽의 <strong>2013두17800</strong>으로 구별한다. <strong>시험·키워드·한 줄:</strong> 등록 통합 vs 납부 통합 / <strong>같은 사람이 운영해도 아무 신청 없이 본점에 모두 합칠 수는 없다.</strong></p>
+<h2 id="tax-14-05" data-concept-id="tax-14-05">14-5. 세금계산서는 공급자의 매출과 매입자의 공제를 잇는다 ★★★★★</h2>
+<p><strong>교재246~248쪽 · 제32조의 역할:</strong> 공급자는 “이만큼 팔았다”, 매입자는 “그 거래를 공급받아 이 세액을 부담했다”는 기록을 남긴다. 세금계산서는 공급·세액을 표시하는 송장으로, 단순 현금 입금 확인서가 아니다. 외상거래도 공급시기에 발급 문제가 생긴다.</p>
+<p><strong>그림14-1을 읽는 표 — 서식 전체를 외우지 말고 역할을 본다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>서식 칸</th>
+<th>무엇을 확인하나</th>
+<th>법정 핵심 구분</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>공급자 등록번호·성명 또는 명칭</td>
+<td>누가 팔았나</td>
+<td>필요적 기재사항</td>
+</tr>
+<tr>
+<td>공급받는 자 등록번호 등</td>
+<td>누가 공급받았나</td>
+<td>필요적 기재사항</td>
+</tr>
+<tr>
+<td>공급가액·부가세액</td>
+<td>얼마의 거래·세금인가</td>
+<td>필요적 기재사항</td>
+</tr>
+<tr>
+<td>작성 연월일</td>
+<td>어느 거래시점인가</td>
+<td>필요적 기재사항</td>
+</tr>
+<tr>
+<td>상호·주소·업태·종목·품목·규격·수량·단가·비고</td>
+<td>거래의 구체적 내용</td>
+<td>그 밖의 기재사항을 함께 확인</td>
+</tr>
+<tr>
+<td>현금·수표·어음·외상미수금·영수/청구</td>
+<td>결제 상태</td>
+<td>외상이라는 이유로 미발급하지 않음</td>
+</tr>
+</tbody></table>
+<p>공급받는 자가 사업자가 아닌 경우 등에는 법령에 따른 고유번호·주민등록번호 규정을 본다. <strong>공급자의 성명·명칭과 공급받는 자의 성명·명칭은 필요적 기재사항에서 같은 취급이 아니다.</strong> 뒤의 명의대여 판례에서 이 차이가 중요하다.</p>
+<p><strong>헌재 사례 — 2017헌바340, 2019.11.28.</strong> 세금계산서를 받지 못한 매입자에게 공제를 막는 법이 재산권을 지나치게 제한하는지 문제되었다. 매입자는 “물건을 산 사실은 있는데 왜 불공제하나요?”라고 다툰다. 헌재는 판매자만 아니라 구매자도 증빙 수취에 참여해야 담합·무자료거래를 막고 상호 검증이 가능하다고 보아 합헌이라고 판단했다. 매입자발행제도 등 보완장치도 고려했다. <a href="https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=153797&mode=1">공식 결정 요지</a></p>
+<p><strong>문장 번역:</strong> 발급자만 규율하면 부족→둘이 안 주고 안 받기로 맞출 수 있다 / 세원포착 곤란→부가세뿐 아니라 소득세·법인세 매출도 숨을 수 있다 / 수취의무 필요→사는 사람에게도 정확한 증빙을 받게 한다. <strong>시험·키워드·한 줄:</strong> 네 묶음 / 상호 검증 / <strong>세금계산서는 한 장으로 양쪽의 거래를 대조하는 증거다.</strong></p>
+<h2 id="tax-14-06" data-concept-id="tax-14-06">14-6. 전자세금계산서·영수증·신용카드전표 ★★★☆☆</h2>
+<p><strong>교재248~250쪽 · 제32·33·36조의 역할:</strong> 거래 구조에 맞는 증빙을 정한다.</p>
+<p>법인과 법정 규모 이상 개인은 전자세금계산서를 발급하고 <strong>발급일 다음 날까지 국세청에 전송</strong>한다. 의무 대상이 아니어도 전자발급·전송이 가능하다. 현행 국세청 안내상 개인 기준은 직전 연도 사업장별 과세·면세 공급가액 합계8천만 원 이상이다. 의무기간과 전환 규정도 함께 확인한다. <strong>거래상대방에게 발급</strong>하는 것과 <strong>국세청에 전송</strong>하는 것은 다른 행위다. <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7786&mi=2450">발급·전송 안내</a></p>
+<p>면세 재화·용역에는 부가세 세금계산서 발급의무가 없다. 다만 다른 세법상 계산서 등 증빙 의무까지 사라진다는 뜻은 아니다. 세금계산서 발급이 어렵거나 불필요한 법정 경우에도 면제할 수 있다. 교재는 택시·노점·행상, 미용·욕탕 등과 소매업의 법정 경우를 들며, <strong>소매업은 상대방이 세금계산서를 요구하지 않는 경우라는 조건</strong>을 붙인다. 강의록의 수출 역시 법정 발급 면제 범위를 확인해야 하며 모든 영세율 거래가 미발급 대상인 것은 아니다.</p>
+<p>주로 최종소비자에게 공급하는 법정 사업자와 일정 규모 이하 간이과세자는 세금계산서 대신 영수증 발급 체계를 적용한다. 교재 시행령73조 목록은 <strong>소매·음식점(다과점 포함)·숙박·미용욕탕·여객운송·입장권 사업</strong>이다. 금전등록기로 공급대가를 적은 계산서를 발급할 수도 있고, 신용카드 매출전표·현금영수증은 영수증으로 본다.</p>
+<p>공급받는 사업자가 등록증을 제시하며 요구하는 등 법정 경우에는 영수증 발급 업종이어도 세금계산서를 발급한다. 다만 세금계산서 발급이 허용되지 않는 업종·간이과세자 유형 등의 예외가 있으므로 <strong>모든 영수증 발급자에게 무조건 요구하면 된다고 확대하지 않는다.</strong> 카드전표·현금영수증의 매입세액 공제도 별도 법정 요건을 본다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 발급/전송 / 면세 증빙 구별 / 소비자 거래 / 요구 시 법정 전환 / <strong>증빙 이름이 비슷해도 발급의무와 공제효과는 따로 확인한다.</strong></p>
+<h2 id="tax-14-07" data-concept-id="tax-14-07">14-7. 사실과 다른 세금계산서와 명의대여 판례 ★★★★★</h2>
+<p><strong>교재250~252쪽 · 제39·60조의 역할:</strong> 공급·세액을 거짓이나 부정확한 자료로 맞추는 것을 막는다. 필요적 기재사항 누락·사실과 다른 기재는 매입자의 공제 제한, 공급자의 법정 가산세로 연결된다. 교재가 든 기재불성실 유형의1%를 모든 가공·위장 거래 가산세율이라고 외우지 않는다. 위반 유형마다 법정 요건과 세율이 다르다.</p>
+<p>일부 착오가 있더라도 나머지 기재사항으로 거래를 확인할 수 있는 법정 예외는 공제 가능하며, 대응하는 기재불성실 가산세의 예외도 확인한다. <strong>오타 한 글자=공제 전부 박탈</strong>도, <strong>실제 돈을 줌=증빙 오류 모두 무시</strong>도 아니다.</p>
+<p><strong>교재 사례 — 2016두62726, 2019.8.30.</strong> 실제 사업자甲이乙의 명의를 빌려 등록했지만, 그 사업장을 온전히 자기 계산·책임으로 운영하며 신고·납부했다. 매입 세금계산서에는 그 명의인의 등록번호가 공급받는 자 번호로 적혔다. 관청과 납세자가 이 계산서를 사실과 다른 것으로 볼지 다툰다.</p>
+<p>법원은 <strong>공급받는 자의 필요적 기재사항은 등록번호</strong>이며, 성명·명칭은 공급자와 같은 방식의 필요적 사항이 아니라는 문언을 보았다. 해당 사업장이 실제 사업자의 사업장으로 완전히 특정되어 그 번호가 실제 사업자의 번호로 기능한다면, 이름이 다르다는 이유만으로 불공제 대상 계산서라고 할 수 없다고 판단했다.</p>
+<p><strong>한 줄씩 번역:</strong> 상호 검증의 정확성→번호로 거래 양쪽이 맞는가 / 공급자·공급받는 자의 문언 차이→법이 필수로 적으라는 범위가 다르다 / 온전히 특정→아무 타인의 번호여도 된다는 말이 아니다 / 실제 등록번호로 기능→그 사업장과 실제 거래를 식별할 수 있는 특수한 사실관계다. 강의록의2014두35706은 정확성과 진실성 취지의 연결 판례다.</p>
+<p><mark class="pink">이 판례는 명의대여가 적법하다는 허가증도, 공급자의 명의가 달라도 항상 괜찮다는 판결도 아니다.</mark> 다른 제재와 법률관계는 별개다. <strong>반대 결론의 문제:</strong> 법이 구별한 필수 사항을 무시하고 이름 차이만으로 실제 거래 공제를 막게 된다. <strong>시험·키워드·한 줄:</strong> 공급받는 자 / 등록번호 / 실제 사업장 특정 / <strong>누구의 어떤 기재사항이 다른지부터 구별한다.</strong></p>
+<h2 id="tax-14-08" data-concept-id="tax-14-08">14-8. 수정세금계산서: 실수 수정과 나중의 거래 변동 ★★★★☆</h2>
+<p><strong>교재252~254쪽·강의록27쪽 · 제32조 제7항·시행령70조의 역할:</strong> 처음 자료가 잘못됐거나 거래가 나중에 바뀌었을 때 기록을 법정 방식으로 고친다. 마음대로 취소 문서를 만들었다고 다 유효하지는 않다.</p>
+<table>
+<thead>
+<tr>
+<th>교재·강의록의 사유</th>
+<th>어떻게 읽나</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 재화 환입</td>
+<td>돌아온 날을 작성일로, 원래 작성일 비고, 마이너스</td>
+</tr>
+<tr>
+<td>② 계약 해제로 공급되지 않음</td>
+<td>해제일을 작성일로, 원래 작성일 비고, 마이너스</td>
+</tr>
+<tr>
+<td>③ 해지 등으로 공급가액 증감</td>
+<td>증감 사유 발생일, 늘면 플러스·줄면 마이너스</td>
+</tr>
+<tr>
+<td>④ 공급 뒤 내국신용장·구매확인서</td>
+<td>강의록 추가: 공급 과세기간 종료 후25일 이내 등 법정 요건 확인</td>
+</tr>
+<tr>
+<td>⑤ 필요 사항의 착오</td>
+<td>원래 내용 마이너스+바른 내용 플러스, 경정 사전 인지 제외 요건</td>
+</tr>
+<tr>
+<td>⑥ 착오 외 잘못</td>
+<td>교재 기준 확정신고기한 다음 날부터1년 이내, 원래 취소+바른 발급, 제외 요건</td>
+</tr>
+<tr>
+<td>⑦ 착오로 전자계산서 이중발급</td>
+<td>중복 내용을 마이너스로 정정</td>
+</tr>
+<tr>
+<td>⑧ 면세 등 발급대상 아닌 거래에 발급</td>
+<td>원래 내용을 마이너스로 취소</td>
+</tr>
+<tr>
+<td>⑨ 세율 잘못 적용</td>
+<td>원래 취소+올바른 세율로 발급, 경정 사전 인지 제외 요건</td>
+</tr>
+</tbody></table>
+<p>교재의 붉은색·음의 표시는 <strong>음수(−)</strong>, 검은색 표시는 양수(+)로 이해한다. 실제 전자발급은 서식과 절차를 따른다. 단순히 수정세금계산서만 냈다고 수정신고·경정청구 등 세액 정산 절차까지 자동으로 끝나지는 않는다. 착오 외 잘못의1년 기한 등은 <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?lspttninfSeq=112887">2026.4.1. 시행령 제70조</a>에서도 확인된다.</p>
+<p><strong>경정을 미리 안 경우의 교재 목록:</strong> 세무조사 통지, 현지 출장·확인 착수, 과세자료 해명 안내, 이에 준하는 경우다. 이런 사유와 경정 사전 인지를 확인한다. ‘모든 수정은 언제나 가능’이 아니라 <strong>사유·기한·작성일·제외 요건</strong>을 각각 본다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 환입/해제/가격 증감/착오/착오 외/중복/비대상/세율 / <strong>처음부터 틀린 기록을 고치는 것과 나중에 달라진 거래를 반영하는 것은 다르다.</strong></p>
+<h2 id="tax-14-09" data-concept-id="tax-14-09">14-9. 수정했다고 원래 잘못까지 없어지지는 않는다 ★★★★☆</h2>
+<p><strong>교재254~255쪽 · 판례의 역할:</strong> 수정의 효력과 제재를 분리한다.</p>
+<p><strong>2011두8178, 2013.4.11.</strong> 처음 세금계산서의 공급가액이 후발 사유로 늘거나 줄었다. 어느 시기의 과세표준을 고칠지가 문제다. 법원은 사유 발생일을 작성일로 하고, <strong>증감액을 그 사유 발생 과세기간에 반영</strong>하는 취지를 설명했다. 처음 계산서를 모두 취소하고 새로 쓰는 오류 정정과 다르다. 교재의 착오 정정은 적법한 수정 후 원래 계산서가 효력을 잃지만, 후발 가격 증감은 원래 거래를 유지하고 차액을 반영한다.</p>
+<p><strong>이해 사례:</strong> 상반기100으로 정상 공급했고 하반기에 법정 사유로10을 감액했다면, 후발 감액을 해당 시기 수정자료로 반영하는 구조다. 애초100이 아니라90인데 잘못 썼던 경우와 구별한다. 무조건 원래 기간만 고치게 하면 뒤의 변동 때문에 과거 거래를 계속 다시 뒤집어야 한다.</p>
+<p><strong>조세심판 사례 — 2023서0257, 2024.3.14.</strong> 거래 없이 거짓 계산서를 발급한 사람이 이를 취소하려고 마이너스 수정계산서를 냈다. 관청은 수정계산서에도 별도의 거짓 발급 가산세를 붙였다. 심판원은 원래 자료와 취소 자료는 연결되어 있고, 잘못을 돌리려는 행위에 가산세를 더 붙이는 것은 부당하다고 보아 <strong>수정계산서에 대한 추가 가산세 처분</strong>을 잘못으로 판단했다. 인용된2020중2399, 2021.8.23.도 같은 취지다.</p>
+<p><mark class="pink">‘수정본에 추가 가산세를 붙이지 않는다’와 ‘최초 거짓 발급의 제재가 사라진다’는 정반대다.</mark> 원래 거짓 발급에는 제재할 수 있다. 또한 거짓 세금계산서의 취소를 위한 문서가 적법한 수정 발급 사유를 충족하는지도 별도 문제다. 무효인 수정본을 냈다고 최초 거래가 정상으로 바뀌지 않는다.</p>
+<p><strong>판단 문장 번역:</strong> 상관관계 있는 하나의 거래→원본과 취소본을 연결해 봄 / 잘못 수정에 더 큰 불이익→취소 행동 자체에 같은 벌을 덧붙이지 않음 / 원래 발급 제재 가능→처음 잘못은 그대로 책임짐. <strong>시험·키워드·한 줄:</strong> 원본 효력 / 후발 증감 / 추가 제재와 최초 제재 분리.</p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>사업자·독립·계속·반복</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 事(일 사), 業(업 업), 者(사람 자); 獨(홀로 독), 立(설 립); 繼(이을 계), 續(이을 속); 反(돌이킬 반), 復(다시 복). <strong>③ 합친 뜻:</strong> 업을 하는 사람·자기 책임으로 섬·이어짐·되풀이. <strong>④ 이름의 이유:</strong> 한 번의 개인 활동과 경제적 사업을 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영리 불문 독립 공급과 사업형태·계속 반복 의사. <strong>⑥ 쉬운 말:</strong> 자기 책임으로 공급을 이어가려는가. <strong>⑦ 사례:</strong> 설계사무소 근무자의 한 번의 용역.</p>
+<p><strong>⑧ 시험:</strong> 기간과 횟수만으로 단정 금지. <strong>⑨ 비교·기억법:</strong> 소득세 영리 목적 설명과 비교.</p>
+<h3>사용수익·위탁·행정재산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 使(부릴 사), 用(쓸 용), 收(거둘 수), 益(더할 익); 委(맡길 위), 託(부탁할 탁); 行(다닐 행), 政(정사 정), 財(재물 재), 産(낳을 산). <strong>③ 합친 뜻:</strong> 쓰고 이익 얻음·맡김·행정 목적 재산. <strong>④ 이름의 이유:</strong> 시설 소유자와 실제 서비스 공급자를 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 지자체와 운영단체 사이 공급관계 판단. <strong>⑥ 쉬운 말:</strong> 가게를 빌려 준 사람과 손님에게 판 사람 나누기. <strong>⑦ 사례:</strong> 지자체 시설을 단체가 자기 계산으로 운영.</p>
+<p><strong>⑧ 시험:</strong> 대가 있는 임대와 공익성. <strong>⑨ 비교·기억법:</strong> 공익 목적만으로 법정 면세 단정 금지.</p>
+<h3>사업자등록·본점·주사무소·총괄납부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 登(오를 등), 錄(기록할 록); 本(근본 본), 店(가게 점); 主(주인 주), 事(일 사), 務(힘쓸 무), 所(바 소); 總(거느릴 총), 括(묶을 괄), 納(들일 납), 付(줄 부). <strong>③ 합친 뜻:</strong> 사업 명부에 기록·중심 사업장·묶어 세금 내기. <strong>④ 이름의 이유:</strong> 자료 파악과 다사업장 편의를 조화시키기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 사업장별 등록 원칙과 사업자 단위·주사업장 특례. <strong>⑥ 쉬운 말:</strong> 명부와 신고를 합칠지 돈만 합쳐 낼지. <strong>⑦ 사례:</strong> 지점 매출을 본점 신고에 무단 포함.</p>
+<p><strong>⑧ 시험:</strong> 개시20일, 개시 전 가능. <strong>⑨ 비교·기억법:</strong> 총괄납부는 등록·신고 통합 아님.</p>
+<h3>세금계산서·송장·발급·수취·전송</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 稅(세금 세), 金(쇠 금), 計(셀 계), 算(셀 산), 書(글 서); 送(보낼 송), 狀(문서 장); 發(필 발), 給(줄 급); 受(받을 수), 取(취할 취); 傳(전할 전). <strong>③ 합친 뜻:</strong> 거래와 세액 문서·거래 명세·내줌·받음·보냄. <strong>④ 이름의 이유:</strong> 양쪽 기록을 맞춰 탈루를 막기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공급자 매출자료와 매입자 공제증빙, 전자발급·전송. <strong>⑥ 쉬운 말:</strong> 판 쪽 기록과 산 쪽 기록을 맞추는 거래표. <strong>⑦ 사례:</strong> 외상 공급에도 발급 검토.</p>
+<p><strong>⑧ 시험:</strong> 전자발급과 국세청 다음 날 전송. <strong>⑨ 비교·기억법:</strong> 현금 받은 사실만 나타내는 영수증과 다름.</p>
+<h3>필요적 기재사항·임의적 기재사항</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 必(반드시 필), 要(요긴할 요), 的(과녁 적), 記(기록할 기), 載(실을 재), 事(일 사), 項(항목 항); 任(맡길 임), 意(뜻 의). <strong>③ 합친 뜻:</strong> 반드시 적을 핵심·그 밖의 표시. <strong>④ 이름의 이유:</strong> 핵심 식별과 부수 정보의 오류 효과가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법32조1항1~4호와 그 밖의 사항을 구별. <strong>⑥ 쉬운 말:</strong> 누가 누구에게 언제 얼마를 공급했나. <strong>⑦ 사례:</strong> 공급받는 자 이름과 번호의 차이.</p>
+<p><strong>⑧ 시험:</strong> 공급자와 매입자 필수사항 비대칭. <strong>⑨ 비교·기억법:</strong> 임의적이라는 말이 허위 작성 허용을 뜻하지 않음.</p>
+<h3>영수증·매출전표·현금영수증</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 領(거느릴 영), 收(거둘 수), 證(증거 증); 賣(팔 매), 出(날 출), 傳(전할 전), 票(표 표); 現(나타날 현), 金(쇠 금). <strong>③ 합친 뜻:</strong> 받은 증거·매출 기록표·현금 거래 증거. <strong>④ 이름의 이유:</strong> 거래 형태에 맞는 간명한 자료가 필요하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 최종소비자 거래 등의 법정 증빙 체계. <strong>⑥ 쉬운 말:</strong> 소매점 영수증과 사업자 세금계산서 구별. <strong>⑦ 사례:</strong> 카드전표·현금영수증은 법정 영수증.</p>
+<p><strong>⑧ 시험:</strong> 요구 시 세금계산서 전환도 법정 범위. <strong>⑨ 비교·기억법:</strong> 면세 계산서와 부가세 세금계산서 구별.</p>
+<h3>명의대여·가산세·무자료거래</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 名(이름 명), 義(옳을 의), 貸(빌릴 대), 與(줄 여); 加(더할 가), 算(셀 산), 稅(세금 세); 無(없을 무), 資(바탕 자), 料(헤아릴 료). <strong>③ 합친 뜻:</strong> 이름 빌려줌·추가 세금·증빙 없는 거래. <strong>④ 이름의 이유:</strong> 기록과 실질의 어긋남이 세금 확인을 어렵게 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 사업자 특정과 증빙 위반의 법정 불이익. <strong>⑥ 쉬운 말:</strong> 이름만 다르나 실제 거래번호는 누구 것인가. <strong>⑦ 사례:</strong> 2016두62726 공급받는 자 번호.</p>
+<p><strong>⑧ 시험:</strong> 온전히 실제 사업장으로 특정되는 조건. <strong>⑨ 비교·기억법:</strong> 명의대여 적법화 판례가 아니며 원본 거짓 발급 제재 별도.</p>
+<h3>수정·착오·환입·해제·해지·후발</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 修(닦을 수), 正(바를 정); 錯(섞일 착), 誤(그르칠 오); 還(돌아올 환), 入(들 입); 解(풀 해), 除(덜 제), 止(그칠 지); 後(뒤 후), 發(필 발). <strong>③ 합친 뜻:</strong> 바로잡음·잘못 앎·돌아옴·계약을 풀거나 끝냄·나중 발생. <strong>④ 이름의 이유:</strong> 처음 오류와 나중 거래 변동을 다르게 반영하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 사유와 시점에 맞춘 계산서 정정. <strong>⑥ 쉬운 말:</strong> 처음100이 오타였나 나중10깎았나. <strong>⑦ 사례:</strong> 후발 가액 감소와 가공 원본 취소.</p>
+<p><strong>⑧ 시험:</strong> 작성일·기한·경정 사전 인지. <strong>⑨ 비교·기억법:</strong> 수정본 추가 제재 제한≠원본 면책.</p>
+<h1>기출 TOP5 · 직접1문항과 교차4문항</h1>
+<table>
+<thead>
+<tr>
+<th>우선</th>
+<th>문제 위치</th>
+<th>연결할 개념</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2021_068 · 이 강 부록</td>
+<td>영리 불문·사업상 독립</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2021_073 · 13강</td>
+<td>세금계산서 일부 착오의 예외</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2019_033 · 13강</td>
+<td>시기 잘못과 법정 공제 예외</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021_067 · 13강</td>
+<td>증빙으로 매출·매입세액 맞추기</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2021_072 · 13강</td>
+<td>공급시기와 작성·발급 연결</td>
+</tr>
+</tbody></table>
+<p>이 강 관련 문제를5개로 꾸며 만들지 않았다. 직접1문항과 복습용 교차4문항이며, 원본 문제는 각 소속 강 부록에 보존한다. 함정은 영리 목적 필수, 같은 사장이니 합산 신고, 명의대여면 항상 공제/항상 불공제, 수정하면 최초 제재 소멸이라는 단정이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 비영리 단체의 반복 판매.</strong> 비영리 단체가 독립된 가게에서 꾸준히 물건을 판다. 영리 목적이 없으니 사업자가 아닐까? <strong>정답:</strong> 비영리라도 독립·계속·반복 공급이면 사업자 판단 대상이다. 면세는 별도 규정을 본다. <strong>출제 의도:</strong> 사업자성과 면세 구별.</p>
+<p><strong>응용 2 · 본점이 돈을 낸다.</strong> 지점 세금을 본점에서 총괄납부하도록 신청했다. 지점 신고도 이제 필요 없나? <strong>정답:</strong> 총괄납부는 납부 통합이고 등록·신고는 사업장별로 유지한다. <strong>출제 의도:</strong> 사업자 단위 과세와 구별.</p>
+<p><strong>응용 3 · 전자발급 완료 버튼.</strong> 사업자가 거래상대방에게 전자발급했으니 국세청 전송은 생략해도 된다고 했다. <strong>정답:</strong> 발급과 전송 의무는 구별하며 법정 다음 날 전송을 확인한다. <strong>출제 의도:</strong> 두 의무의 대상 차이.</p>
+<p><strong>응용 4 · 뒤늦은 반품.</strong> 처음에는 정상 판매했지만 다음 과세기간에 물건을 반품받았다. 처음부터 허위 작성한 경우와 같은가? <strong>정답:</strong> 후발 환입 사유와 작성일·음수 수정 절차를 본다. 처음 기록의 착오 정정과 다르다. <strong>출제 의도:</strong> 오류와 후발 변동 구별.</p>
+<p><strong>응용 5 · 가짜를 취소했다.</strong> 가공계산서를 취소하는 문서를 냈으니 원래의 가산세도 모두 면제라고 주장한다. <strong>정답:</strong> 수정본에 대한 중복 추가 제재 문제와 최초 거짓 발급 제재는 별개다. <strong>출제 의도:</strong> 심판결정의 범위를 과장하지 않기.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제14강</h1>
+<p><strong>TOP3:</strong> 사업자의 실질 / 필요적 기재사항 / 수정 사유·효과.</p>
+<table>
+<thead>
+<tr>
+<th>핵심</th>
+<th>한 줄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사업자</td>
+<td>영리 불문, 독립·사업 형태·계속 반복 의사</td>
+</tr>
+<tr>
+<td>판례 비교</td>
+<td>긴1회≠반복, 적은 횟수≠비사업</td>
+</tr>
+<tr>
+<td>국가·지자체</td>
+<td>부가세 납세주체 가능, 법정 면세는 따로</td>
+</tr>
+<tr>
+<td>등록</td>
+<td>사업장별, 개시일부터20일 이내, 개시 전 가능</td>
+</tr>
+<tr>
+<td>단위 과세</td>
+<td>사업자등록·신고 등을 사업자 단위로</td>
+</tr>
+<tr>
+<td>총괄납부</td>
+<td>등록·신고는 사업장별, 납부만 주사업장</td>
+</tr>
+<tr>
+<td>필수4묶음</td>
+<td>공급자 번호·이름 / 공급받는 자 번호 / 가액·세액 / 날짜</td>
+</tr>
+<tr>
+<td>전자</td>
+<td>발급과 국세청 전송 구별, 다음 날 전송</td>
+</tr>
+<tr>
+<td>사실과 다름</td>
+<td>필수 사항·거래 확인 예외·제재 유형 확인</td>
+</tr>
+<tr>
+<td>명의 판례</td>
+<td>공급받는 자 번호가 실제 사업장 번호로 기능하는 조건</td>
+</tr>
+<tr>
+<td>수정</td>
+<td>처음 오류 정정 vs 후발 환입·해제·가액 증감</td>
+</tr>
+<tr>
+<td>거짓 원본</td>
+<td>취소본 추가 제재 제한≠최초 제재 면제</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 총괄납부는 통합신고가 아니다. 공급자와 공급받는 자의 필요적 기재사항은 같지 않다.</p>
+<p><strong>사례를 풀 순서:</strong> 실질 사업자 →공급관계 →등록·신고 단위 →증빙 종류·필수 사항 →예외 →수정 사유·시점 →각 제재.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 비영리·1회 용역·총괄납부·명의대여·수정 효과를 각각 조건과 함께 설명한다. 🟡 <strong>복습 필요:</strong> 원칙은 알지만 증빙 예외나 후발 수정 시기를 혼동한다. 🔴 <strong>이해 부족:</strong> 등록증이 사업자성을 만들고 수정본이 최초 잘못을 모두 지운다고 생각한다. 실제 답변을 받기 전에는 수준을 단정하지 않는다.</p>
+<p><strong>복습 TOP3:</strong> 14-1 사업자 / 14-5~14-7 증빙 필수 사항 / 14-8~14-9 수정·제재. 교재256쪽 요약을 사례와 한 쌍씩 연결한다.</p>
+<h1>문제 부록 · 1문항·4개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_068"><h4>기출문제 · 세법_기출2021_068</h4><p class="question-stem">[2021 기말고사 · 68번]<br>다음 중 부가가치세의 사업자에 관한 설명으로 옳지 않은 것을 고르시오.</p><ol class="choices"><li>영리 목적으로 경제 활동을 하는 사람만 해당한다.</li><li>사업상 독립적으로 재화나 용역을 공급하는 사람이다.</li><li>소득세법에서 말하는 사업자 개념보다 조금 더 넓다.</li><li>개인이나 법인이 모두 포함될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀린 설명이므로 정답. 영리·비영리 목적을 불문하고 사업상 독립적으로 공급하는지를 판단한다. 비영리법인의 모든 공급이 자동 면세인 것도 아니다.</li><li><strong>비선택</strong> · 사업상 독립적인 재화·용역 공급이라는 법정 정의다. 판례는 사업형태와 계속·반복 의사 등 실질을 본다.</li><li><strong>비선택</strong> · 소득세 사업소득의 영리 목적 설명과 달리 부가가치세는 비영리 목적도 포함한다는 비교다. 두 세목의 사업자·과세 범위를 항상 동일시하지 않는다.</li><li><strong>비선택</strong> · 개인·법인뿐 아니라 법인격 없는 단체도 법정 요건에서 납세자가 될 수 있다. 국가·지자체도 일률적으로 제외되지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 1번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 14' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 14|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

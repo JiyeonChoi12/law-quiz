@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제11강 법인세(2) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 11</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제11강 법인세(2) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>세법의 기초 · 제11강 법인세(2)</h1>
+<p>교재 인쇄면 175~202쪽 · 제11강 강의록 · 연결 기출 15문항·60개 보기</p>
+<p><strong>이번 강의 질문:</strong> “회사에 돈이 들어오면 모두 이익이고, 돈을 쓰면 모두 비용일까?” 돈의 이동보다 자본·손익의 성격, 법정 인정 요건, 실제 지출의 이유를 본다. 가장 중요한 대비는 <strong>담합하려고 준 돈</strong>과 <strong>피해자의 실제 손해를 배상한 돈</strong>이다.</p>
+<p><mark class="yellow">익금·손금 판정</mark> / <mark class="green">인정·제한 이유</mark> / <mark class="pink">원칙·예외·옛 기출</mark> / <mark class="blue">배당·부가가치세 연결</mark>. 교재의 긴 조문 목록도 빠뜨리지 않고 기능별로 풀었다. 교재 설명 밖의 기출 보충은 별도로 표시한다.</p>
+<h1>전체 지도</h1>
+<p>① 법인소득에 더할 익금과 뺄 손금을 판정한다. ② 출자금·맡아 둔 세금·실제 매출은 성격이 다르고, 비용도 모두 국가가 세금 감소로 인정할 수는 없기 때문이다. ③ 10강의 ‘익금−손금’ 공식을 채우는 강의다. ④ 소득세의 배당 조정, 10강의 세무조정과 연결된다. 12강에서는 이 금액을 어느 사업연도에 넣고 특수관계 거래를 어떻게 바로잡는지 배운다. ⑤ 이 강을 모르면 출자받은 돈에 매출세금을 계산하거나 벌금도 사업 경비라며 전부 빼게 된다.</p>
+<p><strong>민서와 선생님:</strong> “회사 통장에 1억 원 들어왔어요.” “상품을 팔았니, 주주가 출자했니, 은행에서 빌렸니? 같은 입금이어도 세법의 자리는 달라.”</p>
+<h1>교재 순서대로 읽기</h1>
+<h2 id="tax-11-01" data-concept-id="tax-11-01">11-1. 익금과 자본: 사업으로 번 몫과 주주가 맡긴 밑천 ★★★★★</h2>
+<p><strong>교재 176~177쪽 · 문단의 의도:</strong> 익금의 넓은 정의와 자본 납입의 제외를 함께 읽는다. 제15조의 익금은 자본·출자 납입 및 법정 제외를 빼고 순자산을 증가시키는 거래에서 발생한 이익·수입이다. 순자산은 자산에서 부채를 뺀 몫이다.</p>
+<p><strong>자산=부채+자본.</strong> 회사가 가진 자산 중 채권자에게 갚을 의무를 빼고 남는 잔여지분이 회계상 자본이다. 이 자본은 상법상 자본금만을 뜻하지 않는다. 회사 사업으로 쌓인 이익잉여금 등도 회계상 자본의 구성요소다. 주주가 회사의 모든 개별 재산을 직접 소유한다는 뜻도 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>가상 거래</th>
+<th>순자산 변화</th>
+<th>법인소득의 기본 판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주주가 100 출자</td>
+<td>현금·자본 100 증가</td>
+<td>법정 자본 납입이므로 일반 익금 아님</td>
+</tr>
+<tr>
+<td>은행에서 100 차입</td>
+<td>현금·부채가 함께 증가</td>
+<td>입금 100이 수익 아님</td>
+</tr>
+<tr>
+<td>원가 60 상품을 100 판매</td>
+<td>다른 조건 같으면 순증 40</td>
+<td>매출 익금100과 대응 손금60</td>
+</tr>
+<tr>
+<td>주주에게 출자 원금 환급</td>
+<td>현금·자본 감소</td>
+<td>법정 자본 환급은 일반 손금 아님</td>
+</tr>
+</tbody></table>
+<p><strong>자본거래</strong>는 출자·감자 환급·잉여금 배분 등 소유자 지위와 관련된 거래다. <strong>손익거래</strong>는 사업의 수익·비용을 발생시키는 거래다. 주주와 거래했다는 이유만으로 모두 자본거래는 아니다. 주주에게 상품을 정상적으로 판매하는 거래는 매출이 될 수 있다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 잔여지분 / 입금≠익금 / 출자와 매출. <strong>2021_057의 자본 납입과 2021_058의 자본 환급은 서로 짝이다.</strong></p>
+<h2 id="tax-11-02" data-concept-id="tax-11-02">11-2. 할증발행과 자본차익: 액면보다 더 받았다고 매출이 아니다 ★★★★★</h2>
+<p><strong>교재 177~180쪽 · 문단의 의도:</strong> 상법상 자본금과 실제 출자받은 금액의 차이를 설명한다. 액면주식에서는 액면가×발행주식수가 법정 자본금의 기본 계산이다. 무액면주식에는 별도 규정이 있으므로 모든 주식에 액면이 반드시 있다고 가정하지 않는다.</p>
+<p><strong>교재 숫자를 그대로 검산:</strong> 액면 5,000원짜리 주식 100주를 주당 20,000원에 발행하면 실제 납입은 200만 원, 자본금은 50만 원, 초과액은 150만 원이다. 이 150만 원은 고객에게 상품을 팔아 번 돈이 아니라 주주가 주식을 받으려고 낸 밑천이다. 회계상 주식발행초과금·자본잉여금, 상법상 자본준비금 적립, 세법상 주식발행액면초과액의 익금불산입으로 연결한다.</p>
+<table>
+<thead>
+<tr>
+<th>제17조의 자본거래 항목</th>
+<th>쉬운 뜻·주요 경계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주식발행액면초과액</td>
+<td>납입액 중 법정 자본금 초과 부분. 채무 출자전환의 시가 초과 등 법정 예외 주의</td>
+</tr>
+<tr>
+<td>포괄적 주식교환차익</td>
+<td>완전모회사 형성 과정의 법정 자본 증가 한도와 실제 증가액 차이</td>
+</tr>
+<tr>
+<td>포괄적 주식이전차익</td>
+<td>주식이전으로 세운 완전모회사의 법정 한도와 자본금 차이</td>
+</tr>
+<tr>
+<td>감자차익</td>
+<td>자본감소액에서 주식 소각·주금 반환·결손 보전 등 법정 금액을 뺀 차이</td>
+</tr>
+<tr>
+<td>합병차익</td>
+<td>승계 자산에서 채무·주주 지급액·자본금 증가 등을 반영한 법정 차이</td>
+</tr>
+<tr>
+<td>분할차익</td>
+<td>분할·분할합병으로 받은 재산과 승계 채무·지급액·자본금 등의 법정 차이</td>
+</tr>
+</tbody></table>
+<p>합병·분할에는 법이 별도로 익금으로 규정하는 금액의 제외 조항이 있다. <strong>자본차익이라는 이름만으로 모든 관련 이익이 영구 비과세라는 뜻은 아니다.</strong> 조직재편의 세부 계산은 심화 ★★☆☆☆이지만 출자금과 사업수익 구별은 필수다.</p>
+<p><strong>교재 판례 — 2010두17564 전원합의체, 2012.11.22.:</strong> 교재는 주식 납입금의 실질을 강조한 법리를 인용한다. 원문에서는 채무를 주식으로 바꾸는 출자전환 때 주식 시가 초과 부분을 당시 시행령만으로 익금 취급할 수 있는지가 다투어졌다. 다수의견은 당시 법률의 문언과 위임 범위를 넘어 과세 범위를 넓힌 시행령을 인정하지 않았다. <strong>번역:</strong> 출자 납입으로 늘어난 재산은 사업으로 번 이익과 다르고, 그 범위를 바꾸려면 적법한 법적 근거가 필요하다. 현재 제17조에는 채무 출자전환 관련 명문 예외가 있으므로 옛 판결의 결론을 현행 모든 출자전환에 그대로 적용하지 않는다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=166954">공식 판결</a></p>
+<p><strong>시험·키워드·한 줄:</strong> 액면·발행가 / 자본준비금 / 당시 법과 현재 예외. <strong>200만 원을 받았다고 자본금이 모두 200만 원이거나 초과 150만 원이 영업이익이 되는 것은 아니다.</strong></p>
+<h2 id="tax-11-03" data-concept-id="tax-11-03">11-3. 수익의 넓은 범위와 익금불산입: 먼저 포함, 다음 제외 ★★★★★</h2>
+<p><strong>교재 180~184쪽 · 문단의 의도:</strong> 시행령의 수익 목록을 읽은 다음 법률상 제외 규정을 겹쳐 읽도록 한다. 목록에 있다고 무조건 최종 과세라는 뜻도, 목록에 안 보이면 무조건 비과세라는 뜻도 아니다.</p>
+<p><strong>수익의 범위 전체 지도:</strong> 사업수입, 자산·자기주식 양도금액, 임대료, 평가차익, 무상으로 받은 자산, 채무 면제·소멸에 따른 부채 감소, 과거 손금의 환입, 특수관계 자본거래로 분여받은 법정 이익, 법정 미회수 가지급금·이자, 보험회사·주택도시보증공사 책임준비금의 법정 감소액, 그 밖의 귀속되었거나 귀속될 수익을 포함한다.</p>
+<p>사업수입은 법정 매출에누리·할인 등을 조정한다. 임직원에게 시가보다 낮게 공급한 차액에 관한 규정, 추계 시 임대보증금 수입의 계산 등도 있다. 자기주식 매각과 신주 발행은 같은 말이 아니다. 책임준비금의 감소는 예전에 부담으로 잡았던 금액이 줄어드는 구조이며 할인율 평가 변화 등 제외를 확인한다.</p>
+<p><strong>무상수증이익 가상 예:</strong> 회사가 설비 100을 공짜로 받으면 자산이 늘어 순자산이 증가한다. <strong>채무면제이익 가상 예:</strong> 갚을 빚 100을 면제받으면 현금이 새로 들어오지 않아도 부채가 줄어 순자산이 증가한다. 따라서 현금 입금이 없다고 익금도 없다는 말은 틀리다.</p>
+<table>
+<thead>
+<tr>
+<th>제18조 익금불산입 항목</th>
+<th>왜 빼는가·어디까지인가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>일반 평가이익</td>
+<td>아직 실현되지 않은 장부상 평가, 제42조 등 법정 예외 구별</td>
+</tr>
+<tr>
+<td>이미 과세된 소득</td>
+<td>동일 소득의 연도 간 중복 과세 방지, 법정 비과세·면제 소득 포함</td>
+</tr>
+<tr>
+<td>불산입했던 법인세·법인지방소득세 환급·충당</td>
+<td>당초 비용으로 빼지 않았으므로 되돌려 받는 단계도 조정</td>
+</tr>
+<tr>
+<td>국세·지방세 과오납 환급금 이자</td>
+<td>법정 익금불산입</td>
+</tr>
+<tr>
+<td>부가가치세 매출세액</td>
+<td>고객에게 받아 국가에 낼 돈이지 회사 매출 자체가 아님</td>
+</tr>
+<tr>
+<td>수증·채무면제 중 법정 이월결손금 보전액</td>
+<td>법정 손실 보전 범위의 특례, 전액 무조건 제외 아님</td>
+</tr>
+<tr>
+<td>연결법인 간 법정 정산액</td>
+<td>연결납세 내부 정산 조정</td>
+</tr>
+<tr>
+<td>자본준비금 감액배당의 법정 금액</td>
+<td>주식 장부가액 한도 및 재원별 제외 등 확인</td>
+</tr>
+</tbody></table>
+<p><strong>평가이익을 조심하는 이유:</strong> 회사가 자산 값을 임의로 올리고 뒤에 높은 취득원가처럼 감가상각하면 연도별 소득을 조작할 수 있다. 세법은 일반 평가손익을 배제하되 법이 정한 평가에는 예외를 둔다. ‘평가차익’이 시행령 수익 목록에 있다는 사실과 제18조의 원칙적 익금불산입은 함께 읽어야 한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 자산 증가·부채 감소 / 맡은 세금 / 일반 규정과 제외. <strong>업무와 무관한 부동산을 팔아 얻은 이익도 법인 익금이 될 수 있다. 비용의 업무관련성 요건을 수익의 무조건 제외 근거로 바꾸지 않는다.</strong></p>
+<h2 id="tax-11-04" data-concept-id="tax-11-04">11-4. 법인이 받는 배당과 기출 속 이중과세 조정 ★★★★★</h2>
+<p><strong>교재 184~186쪽 · 문단의 의도:</strong> 자회사 이익에 법인세를 매긴 뒤 모회사 배당에 다시 법인세를 매기는 경제적 중복을 조정한다. 내국법인이 다른 내국법인에게서 받은 적격 수입배당금 중 법정 금액을 익금에 넣지 않는다. 개인 주주의 배당가산·세액공제와 적용 방식이 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>피출자법인 출자비율</th>
+<th>교재·현행 조문상 기본 익금불산입률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>50% 이상</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>20% 이상~50% 미만</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>20% 미만</td>
+<td>30%</td>
+</tr>
+</tbody></table>
+<p>기본 계산은 각 법인별 배당×불산입률 합계에서 법정 차입금 이자 관련 차감액 등을 반영한다. 차감 후 음수이면 0으로 본다. 고유목적사업준비금을 손금에 넣는 비영리법인 등 적용대상 제외도 있다. <strong>100% 불산입률이라는 말과 모든 조건에서 받은 배당 전액이 반드시 제외된다는 말은 다르다.</strong> <a href="https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031192325">현행 제18조의2</a></p>
+<p><strong>적용 제외의 이유와 목록:</strong> 배당기준일 전 3개월 이내 취득 주식의 배당, 배당 지급액 소득공제를 받는 법인의 배당, 법정 비과세·면제·감면 법인의 배당, 배당 공제를 받는 법인과세 신탁재산의 배당, 위법하게 감액한 재평가적립금, 특정 합병·분할 자본준비금 감액배당, 법인세가 과세되지 않은 법정 배당 등은 규정에 따라 제외한다. 이미 회사 단계의 부담이 없거나 법이 이중 혜택을 막는 유형인지 확인하는 것이다.</p>
+<p><strong>가상 사례:</strong> 30% 출자한 국내법인에서 적격 배당 1,000을 받고 이자 차감 등 다른 조정이 없으면 기본 불산입은 800, 남는 금액은 200이다. 30% 지분이라는 이유로 30%만 빼는 것이 아니다.</p>
+<p><strong>기출 보충 A — 지급하는 배당·주식배당·의제배당:</strong> 회사가 주주에게 이익을 배당하는 것은 번 돈의 분배이므로 일반 손금이 아니다. 주식으로 배당했다고 주주에게 절대 배당소득이 생기지 않는 것은 아니다. 이익잉여금의 자본전입 등 의제배당과 자본준비금의 자본전입을 재원별로 구분한다. 자본준비금 전입도 모든 재원에서 무조건 비과세는 아니다. 감자·소각·합병 등에서 주주가 받은 법정 대가가 주식 취득금액을 넘는 부분도 의제배당을 검토한다. 2021_056의 ‘피합병법인이 취득하는 합병신주’는 통상 <strong>소멸법인의 주주가 합병대가를 받는 상황</strong>을 가리키는 표현상 보완이 필요하다.</p>
+<p><strong>기출 보충 B — 특수목적회사:</strong> 유동화전문회사 등 법정 도관 성격의 회사에는 일정 배당요건 아래 배당 지급액의 소득공제 특례가 있다. 이는 모든 회사의 배당을 손금으로 인정하는 일반 규칙이 아니다.</p>
+<p><strong>기출 보충 C — 연결납세와 동업기업:</strong> 연결납세는 일정 지배관계의 법인들을 법정 방식으로 묶어 과세한다. 2019_029의 ‘100% 모자회사만’은 당시 기준이고, 현행 연결지배 기준은 <strong>90% 이상</strong>이다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032169351">현행 정의</a>. 동업기업 과세특례는 법정 대상이 신청해 적용받으면 단체 단계를 통과하여 동업자의 소득세·법인세로 과세하는 방식이지 모든 인적회사가 강제로 적용받는 방식이 아니다. 일반적인 합명·합자회사 등 대상과 특수 법인의 요건을 확인한다. 유한회사와 유한책임회사는 같은 이름의 회사가 아니다. <a href="https://g.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7999&mi=2380">국세청 제도 안내</a></p>
+<p><strong>시험·키워드·한 줄:</strong> 개인 가산·공제 / 법인 익금불산입 / 법정 도관 특례 / 연결90%. <strong>경제적 중복을 조정하는 여러 제도를 전부 같은 공제라고 부르지 않는다.</strong></p>
+<h2 id="tax-11-05" data-concept-id="tax-11-05">11-5. 손금의 범위와 요건: 사업에 썼다는 한마디로 끝나지 않는다 ★★★★★</h2>
+<p><strong>교재 186~192쪽 · 문단의 의도:</strong> 손금은 자본·출자 환급, 잉여금 처분과 법정 제외를 뺀 순자산 감소 거래의 손실·비용이다. 아래 목록은 교재의 시행령 제19조를 기능별로 다시 배열한 것이다. 각 항목의 법정 조건·한도는 그대로 중요하다.</p>
+<table>
+<thead>
+<tr>
+<th>범주</th>
+<th>교재에 열거된 손비</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>판매·자산</td>
+<td>판매상품 원가와 부대비용, 보관·포장·운반·판매장려금·수당, 양도자산 장부가액</td>
+</tr>
+<tr>
+<td>인건비·보상</td>
+<td>일반 인건비, 요건 갖춘 해외현지법인 파견 인건비, 공통 지급기준의 출산·양육 지원, 법정 임직원 지원 이익</td>
+</tr>
+<tr>
+<td>자산 사용</td>
+<td>수선비, 유형·무형자산 감가상각, 특수관계 자산 취득의 법정 차이 관련 감가상각 상당액, 임차료·차입이자</td>
+</tr>
+<tr>
+<td>손실·공과</td>
+<td>대손세액공제를 받지 않은 법정 부가가치세 미수금, 평가차손의 법정 취급, 제세공과금·외국법인세의 조건별 처리</td>
+</tr>
+<tr>
+<td>단체·개발·사회</td>
+<td>적격 단체 회비, 광업 탐광·개발비, 법정 무료진료, 잉여 식품·생활용품 기증 장부가액</td>
+</tr>
+<tr>
+<td>교육·복지</td>
+<td>업무 관련 해외시찰·훈련, 근로청소년 학급·계약학과 운영, 현장실습 수당, 우리사주조합 출연</td>
+</tr>
+<tr>
+<td>전시·광고</td>
+<td>여러 사람이 보는 공간의 미술품 취득액에 관한 계상·금액 요건, 광고 물품과 특정인 기증의 한도</td>
+</tr>
+<tr>
+<td>주식기준 보상</td>
+<td>금융지주·해외모회사 보상비용 보전, 주식매수선택권·우리사주선택권 행사 차액과 법정 금전보상</td>
+</tr>
+<tr>
+<td>고용·기금</td>
+<td>중소·중견기업 법정 기여금, 사망 임직원 유족 일시 지원, 사내·공동·협력중소기업 근로복지기금 출연</td>
+</tr>
+<tr>
+<td>금융·기타</td>
+<td>보험회사·주택도시보증공사 책임준비금 법정 증가액, 그 밖의 귀속 손비</td>
+</tr>
+</tbody></table>
+<p>예를 들어 교재의 공용공간 미술품은 거래단위별 1,000만 원 이하와 비용 계상 등 조건이 있고, 특정인 광고 물품에는 연간 5만 원 및 개당 3만 원 이하 물품 제외 등의 조건이 제시된다. 이는 ‘좋은 목적이면 아무 금액이나 전부 공제’라는 제도가 아니다. 신고 시에는 적용연도별 조문을 확인한다.</p>
+<p><strong>제19조 제2항 문장을 정확히 읽기:</strong> 사업과 관련하여 발생·지출한 비용으로서 <strong>일반적으로 인정되는 통상적인 것이거나 수익과 직접 관련된 것</strong>이다. 교재의 ‘사업관련성·통상성·수익관련성’이라는 세 키워드는 기억에 도움이 되지만, 조문은 통상성과 직접 수익관련성을 ‘이거나’로 연결한다. 무조건 세 항목을 모두 같은 방식으로 충족해야 한다고 바꾸지 않는다.</p>
+<p><strong>교재 판례 — 2007두12422:</strong> 통상적인 비용은 같은 업종의 다른 회사도 같은 상황에서 지출했을 것으로 인정되는 비용이다. 경위·목적·형태·액수·효과를 객관적으로 본다. 교재는 사회질서 위반 비용 제외라는 일반 법리를 발췌했다. 원사건에서는 담배 수입판매회사가 신규시장 개척 등을 위해 대리점에 인건비·차량비 등을 지원한 지출이 문제였고, 법원은 구체적 사정 아래 통상적 판매부대비용으로 인정했다. <strong>이 판례 자체의 모든 지출을 위법 비용으로 부인했다고 읽으면 틀린다.</strong> <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2007%EB%91%9012422">원사건 확인</a></p>
+<p><strong>교재 담합 사례 — 2017두51310:</strong> 보일러 연도 시공업체들이 담합사례금을 가장 많이 제시한 업체를 낙찰 예정자로 정했다. 다른 업체들은 높은 금액으로 형식 입찰하고, 낙찰업체가 공사대금 일부를 나눠 주었다. 관청은 받은 담합금은 익금에 넣고 준 담합금은 손금에서 뺐다. 회사는 수주를 위해 쓴 비용이라고 주장할 수 있지만 법원은 자유로운 입찰경쟁을 제한하려는 지출 자체가 사회질서에 반하여 손금으로 인정하지 않았다.</p>
+<p><strong>문장별 번역:</strong> ① 사업 관련 → 영업을 하다가 발생했는가. ② 통상적 비용 → 같은 상황의 정상적 사업자도 낼 비용인가. ③ 수익 직접 관련 → 매출과 연결되어도 법정 불산입·사회질서 한계를 넘을 수 없는가. ④ 담합금 부인 → 위법이익에 세금을 매기면서 그 위법행위를 실행한 지출에 세금 혜택을 주지 않는 구조다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 조문 ‘이거나’ / 객관적 사정 / 지출 자체의 성격. <strong>수익을 얻으려고 썼다는 이유만으로 모든 비용이 손금이 되는 것은 아니다.</strong></p>
+<h2 id="tax-11-06" data-concept-id="tax-11-06">11-6. 자본 환급·대손금: 돈을 못 받았어도 법정 조건을 본다 ★★★★☆</h2>
+<p><strong>교재 192~194쪽 · 문단의 의도:</strong> 익금에서 자본 납입을 뺀 것과 짝으로, 자본 환급·잉여금 처분도 손금에서 뺀다. 제20조는 잉여금 처분을 손비로 계상한 금액과 법정 주식할인발행차금 등을 불산입한다. 액면 미달 신주 발행의 미달액과 법정 신주발행비를 일반 영업비용과 혼동하지 않는다.</p>
+<p><strong>대손금:</strong> 채권 중 채무자의 파산 등 법정 사유로 회수할 수 없는 금액이다. 받을 권리가 자산이었는데 회수 불능이 되면 손실이므로 법정 요건 아래 손금으로 인정한다. 이후 회수한 금액은 익금으로 돌린다. 못 받을 듯하다는 막연한 예상만으로 모든 채권을 즉시 손금에 넣지는 않는다.</p>
+<p><strong>교재 표현 보완:</strong> ‘대손금은 결산조정’은 대표적인 유형의 설명이다. 실제는 법정 소멸 등 사유가 발생한 해에 귀속하는 유형과 회수불능 사유에 더해 장부상 손금 계상이 요구되는 유형을 나누어야 한다. 10강 2012누1424도 계상이 필요한 특정 대손금에 관한 판례다.</p>
+<p><strong>보증 구상채권:</strong> 남의 빚을 보증했다가 대신 갚으면 원래 채무자에게 돌려달라고 청구할 권리가 생긴다. 이 구상채권의 대손은 원칙적 불산입과 법정 열거 예외가 있다. 업무 관련이 있다고 주장하거나 실제 회수 불능이라고 입증한 것만으로 예외가 자동 성립하지 않는다. 특수관계인 업무무관 가지급금 등의 대손도 법정 제한을 본다.</p>
+<p><strong>교재 판례 — 2013두17534, 2016.1.14.:</strong> 보증을 이행한 뒤 구상채권을 회수하지 못한 회사가 대손 손금 인정을 구했다. 법원은 과다한 보증·차입을 억제하고 재무구조를 건전하게 하려는 법 취지에 따라, 예외적으로 인정되는 보증은 시행령에 열거된 유형에 한정된다고 판단했다. <strong>번역:</strong> 보증이 회사에 도움이 됐다는 넓은 이유만으로 법이 정한 예외 목록을 확장할 수 없다. 교재에 없는 회사명·금액은 실제 사실로 덧붙이지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 회수 불능 사유 / 귀속·계상 / 보증의 열거 예외 / 회수 시 익금. <strong>대손금은 손해라는 사실과 세법상 인정 여부를 순서대로 판단한다.</strong></p>
+<h2 id="tax-11-07" data-concept-id="tax-11-07">11-7. 세금·벌금·손해배상: 제재와 피해 회복을 나누기 ★★★★★</h2>
+<p><strong>교재 194~197쪽 · 문단의 의도:</strong> 현금 지출이어도 손금에서 빼는 정책적 이유를 보여 준다. 법인세·법인지방소득세 자체를 손금에 넣으면 그 법인세 계산이 다시 변하는 문제와 법정 불산입 구조가 있다. 공제 가능한 부가가치세 매입세액은 매출세액과 정산할 금액이지 일반 비용이 아니다. 다만 면세사업 등 법정 예외로 원가·손금에 반영하는 매입세액은 구별한다.</p>
+<p><strong>제21조 목록을 빠짐없이:</strong> 법인세·법인지방소득세와 법정 외국법인세 관련 조정, 의무불이행에 따른 세액·가산세, 법정 부가가치세 매입세액, 아직 판매하지 않은 반출제품의 개별소비세·주세·교통에너지환경세 미납액(가격 가산 등 예외), 벌금·과료·과태료·가산금·강제징수비, 임의 공과금, 법 위반에 대한 제재 공과금, 연결법인 간 법정 세액 정산 지급액을 본다. 모든 세금·공과금이 무조건 손금불산입은 아니다.</p>
+<p><strong>벌금 등의 이유:</strong> 국가가 법 위반에 벌을 부과하면서 그 금액만큼 과세소득을 줄여 주면 제재의 일부를 세금 혜택으로 되돌려 주게 된다. 그래서 사업 관련 위반이라도 법정 불산입한다. 형사 벌금·과료와 행정상 과태료는 법적 성격이 다르지만 이 조문의 불산입 목록에 함께 들어간다.</p>
+<p><strong>징벌적 손해배상:</strong> 실제 손해를 넘는 법정 징벌 부분은 제21조의2에 따라 불산입한다. 교재는 공정거래법상 일정 위반의 최대 3배 배상 구조를 예로 든다. 다른 법률의 배수·요건까지 모두 3배라고 일반화하지 않는다. 실제 손해 100에 총 300을 배상하는 가상 사례에서 법정 징벌 초과 부분은 200이고, 300 전액을 같은 이유로 부인하는 것이 아니다.</p>
+<p><strong>교재 핵심 사례 — 2021두35308, 2024.9.12.:</strong> 금융지주회사 자회사 은행이 민사 확정판결에 따라 상대방에게 실제 손해배상금과 지연손해금을 지급했다. 회사 쪽은 이를 손금으로 반영했지만 관청은 불산입했다. 대법원은 지출 자체가 사회질서 위반이라고 볼 수 없고, 실제 손해를 벗어난 과도한 금액이라고 단정하기 어려우며, 같은 업종의 회사도 같은 상황에서 지급했을 비용이라고 보았다. 손금을 부인한 원심은 파기환송되었다. <a href="https://law.go.kr/LSW/precInfoP.do?precSeq=241587">공식 판결</a></p>
+<p><strong>왜 담합금과 다른가:</strong> 담합금은 경쟁을 깨뜨리기 위해 주는 실행 비용이다. 이 사건 배상금은 이미 생긴 피해를 민사판결에 따라 회복시키는 비용이다. 원인이 불법행위였다는 점만 붙잡고 지출의 기능까지 같게 보면 안 된다. 반대로 모든 합의금·위약금이 무조건 손금이라는 뜻도 아니며 사업관련성·액수·법정 불산입 등을 확인한다.</p>
+<p><strong>판례 번역:</strong> 실제 손해 배상 → 피해를 원상회복하는 돈. 지출 자체의 사회질서 → 돈을 주는 행위가 위법행위 실행인가 피해 복구인가. 통상적 → 같은 상황의 동종 사업자도 법적 책임을 이행할 비용. 입법정책 → 법에 없는 불산입 범위를 도덕적 비난만으로 무한히 만들지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 벌금 / 실제 배상 / 징벌 초과 / 지출 자체. <strong>불법행위가 원인이라는 이유만으로 뒤따르는 모든 손해배상금을 손금에서 배제하지 않는다.</strong></p>
+<h2 id="tax-11-08" data-concept-id="tax-11-08">11-8. 평가손실과 감가상각: 가격 하락과 원가 배분은 다르다 ★★★★★</h2>
+<p><strong>교재 197~198쪽 · 문단의 의도:</strong> 일반 자산 평가손실의 불산입과 감가상각비의 조건부 산입은 모순이 아니다. 평가손실은 현재 가치를 다시 매긴 차이이고, 감가상각은 여러 해 사용할 자산의 취득원가를 사용 기간에 배분하는 계산이다.</p>
+<p>제22조는 일반 평가손실을 불산입하고 법정 평가 예외는 따로 본다. 제23조의 일반 구조는 법정 감가상각자산의 비용을 결산에서 계상한 경우 <strong>상각범위액 한도 내 계상액</strong>을 손금에 넣는 것이다. 토지는 감가상각 대상이 아니고 건물·기계 등 유형자산, 특허권 등 무형자산은 법정 대상이 될 수 있다. 판매하려고 보유한 건물·토지는 재고자산 성격을 보므로 ‘부동산이면 항상 고정자산’은 틀리다.</p>
+<p><strong>가상 원가 배분:</strong> 5년 사용하는 기계를 500에 사고 잔존가액 0·정액 배분을 가정하면 해마다 100씩 비용을 나누는 원리다. 1년 뒤 중고 시세가 350이라는 이유만으로 감가상각비가 자동 150이 되는 것은 아니다. 실제는 법정 내용연수·상각방법·한도·특례를 적용한다.</p>
+<p><strong>기출 계산 — 2019_022:</strong> 장부 감가상각비 10,000원, 세법상 한도 12,000원, 전기 부인액 없음이면 일반 결산조정 전제에서 추가 조정하지 않는다. 2,000원은 한도에 여유가 있다는 뜻이지 자동으로 빼 주는 비용이 아니다. 장부 15,000원·한도 12,000원이라면 가상 비교에서 초과 3,000원을 불산입한다. 후속 연도의 추인과 IFRS 신고조정 특례 등은 별도 요건이다.</p>
+<p><strong>자산 처분 연결:</strong> 자산을 팔면 양도금액을 익금에 넣고 양도 당시 세무상 장부가액을 대응 손금으로 본다. 시가와 장부가액을 같은 숫자라고 가정하지 않는다. 취득원가를 감가상각으로 이미 비용 처리했다면 남은 장부가액을 확인해야 중복 비용 처리를 막는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 원가 배분 / 계상액·한도 / 토지 제외 / 판매용 재고. <strong>감가상각은 시세가 얼마나 떨어졌는지를 재는 평가손실이 아니다.</strong></p>
+<h2 id="tax-11-09" data-concept-id="tax-11-09">11-9. 기부금·기업업무추진비: 선의와 업무 관련성만으로 전액 인정되지 않는다 ★★★★☆</h2>
+<p><strong>교재 198~199쪽 · 문단의 의도:</strong> 원래 손금 요건과 정책상 허용·제한을 나눈다. 기부금은 사업과 직접 관계없이 무상 지출하는 법정 금액이다. 원칙적 사업비와 다르지만 사회적으로 긍정적인 기부를 장려하기 위해 특정 기부금 및 이월분을 법정 한도 안에서 인정한다. 모든 기부를 같은 한도로 빼는 것은 아니다.</p>
+<p><strong>기업업무추진비:</strong> 접대·교제·사례 등 이름에 관계없이 업무와 관련 있는 사람과 업무를 원활하게 하기 위해 지출한 금액이다. 옛 기출의 명칭은 <strong>접대비</strong>다. 업무 관련 지출이지만 과도한 소비나 사적 지출 혼입을 막기 위해 증빙·한도 등 제한이 있다. ‘기업업무’라는 좋은 이름이 전액 공제를 보장하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>가상 지출</th>
+<th>판정 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>특정 거래처 담당자와 관계 유지 식사</td>
+<td>기업업무추진비의 성격·증빙·한도인가</td>
+</tr>
+<tr>
+<td>불특정 다수에게 상품 견본 배포</td>
+<td>광고선전 목적의 비용인가</td>
+</tr>
+<tr>
+<td>사업과 직접 무관한 공익단체 무상 지원</td>
+<td>적격 기부금과 한도인가</td>
+</tr>
+<tr>
+<td>대리점에 판매 확대 약정에 따라 지원</td>
+<td>실질이 판매부대비용인가 관계 유지 비용인가</td>
+</tr>
+</tbody></table>
+<p><strong>시험·키워드·한 줄:</strong> 목적·상대방 / 광고와 접대 / 적격 증빙·한도. <strong>지출의 이름이 ‘홍보비’라고 쓰여 있어도 특정 거래처 친목 목적이면 실질을 다시 본다.</strong></p>
+<h2 id="tax-11-10" data-concept-id="tax-11-10">11-10. 과다·업무무관·자동차·이자: 비용을 한 번 더 걸러 내기 ★★★★☆</h2>
+<p><strong>교재 199~201쪽 · 문단의 의도:</strong> 일반 비용 범위에 들어온 뒤에도 특정 제한 규정이 작동한다. 제26조는 인건비·복리후생비·여비·교육훈련비·공동 운영비 및 기타 법정 비용 중 과다·부당한 금액을 제한한다. 해당 항목 전부를 불산입하는 것이 아니라 법정 초과·부당 부분을 본다.</p>
+<p>제27조는 업무와 직접 관련 없는 자산의 취득·관리 관련 법정 비용 및 업무무관 지출을 제한한다. 제27조의2는 업무용승용차 감가상각·임차료·유류비 등의 법정 비용 중 업무용 사용금액에 해당하지 않는 부분 등을 제한하고 명세서 제출을 요구한다. 회사 명의 자동차면 주말 개인 여행비도 무조건 비용이라는 뜻이 아니다.</p>
+<p><strong>제28조 지급이자 네 갈래:</strong> ① 채권자 불분명 사채 이자 ② 받는 자 불분명 채권·증권의 법정 이자·할인·차익 ③ 법정 건설자금 차입 이자 ④ 업무무관 자산·특수관계인 업무무관 가지급금 등에 대응하는 법정 차입이자다. 이자라고 모두 같은 불산입 이유가 아니다.</p>
+<p><strong>건설자금 이자는 특히 다르다:</strong> 사옥을 짓는 특정 차입금의 건설기간 이자는 당장 손금으로 빼지 않고 자산 취득원가에 넣는 자본적 지출이 될 수 있다. 부당한 이자라서 영구히 부인하는 것이 아니라 원가를 나중에 감가상각 등으로 반영하는 시기의 문제다. 교재의 ‘정당한 이자비용으로 볼 수 없는 경우’라는 총괄 문장을 건설이자까지 동일한 비난으로 읽지 않는다.</p>
+<p><strong>기출 사례를 그대로 계산 — 2019_024:</strong> 백제회사는 1월 1일 은행에서 10억 원을 연 10%로 빌려 그날 모두 사옥 건설에 쓰고 12월 31일 완공했다. 가정상 건설기간 이자는 1억 원, 취득가액은 11억 원이다. 이자 1억 원도 건물 원가에 들어가 향후 감가상각 등을 통해 반영된다. 그러나 자기 돈 10억 원으로 지어 실제 이자가 없다면 가상의 자기자본 이자 1억 원을 만들어 더하지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 실제 사업 사용 / 법정 과다액 / 불명 이자 / 건설원가. <strong>당기 손금불산입이 모두 영구 비용 부인이라는 뜻은 아니다.</strong></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>자본·부채·잔여지분</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 本(근본 본); 負(질 부), 債(빚 채); 殘(남을 잔), 餘(남을 여), 持(가질 지), 分(나눌 분). <strong>③ 합친 뜻:</strong> 밑천·빚·채무를 뺀 남는 몫. <strong>④ 이름의 이유:</strong> 회사의 조달과 소유자 관계를 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자산에서 부채를 뺀 회계상 자본과 소유자 지분. <strong>⑥ 쉬운 말:</strong> 갚을 몫을 빼고 남은 회사의 순자산. <strong>⑦ 사례:</strong> 출자100과 차입100은 서로 다름.</p>
+<p><strong>⑧ 시험:</strong> 입금이 모두 익금인가. <strong>⑨ 비교·기억법:</strong> 자본금은 회계상 자본 전체와 다름.</p>
+<h3>할증발행·액면·자본준비금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 割(벨 할), 增(더할 증), 發(필 발), 行(다닐 행); 額(이마 액), 面(낯 면); 資(재물 자), 本(근본 본), 準(법도 준), 備(갖출 비), 金(쇠 금). <strong>③ 합친 뜻:</strong> 액면보다 높여 발행·표시 금액·자본거래의 법정 적립. <strong>④ 이름의 이유:</strong> 주주가 낸 돈과 영업수익을 구분하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 액면 초과 주식 납입금의 자본 처리. <strong>⑥ 쉬운 말:</strong> 주식에 적힌 기준보다 더 받은 밑천. <strong>⑦ 사례:</strong> 액면5000×100주, 발행20000이면50만과150만.</p>
+<p><strong>⑧ 시험:</strong> 2021_054. <strong>⑨ 비교·기억법:</strong> 시가·발행가·액면을 구별.</p>
+<h3>감자·합병·분할차익</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 減(덜 감), 資(재물 자); 合(합할 합), 倂(아우를 병); 分(나눌 분), 割(벨 할), 差(어긋날 차), 益(더할 익). <strong>③ 합친 뜻:</strong> 자본을 줄임·회사를 합침·나눔에 따른 법정 차이. <strong>④ 이름의 이유:</strong> 조직·자본 구조 변화와 영업이익을 구분하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 자본거래 차익과 익금불산입 범위. <strong>⑥ 쉬운 말:</strong> 밑천과 회사 틀을 바꾸며 생긴 회계 차이. <strong>⑦ 사례:</strong> 감자액과 실제 반환액 등의 차이.</p>
+<p><strong>⑧ 시험:</strong> 법정 예외·재원. <strong>⑨ 비교·기억법:</strong> 자본차익 이름이면 모든 금액 비과세는 아님.</p>
+<h3>무상수증·채무면제·환입</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 無(없을 무), 償(갚을 상), 受(받을 수), 贈(줄 증); 債(빚 채), 務(힘쓸 무), 免(면할 면), 除(덜 제); 還(돌아올 환), 入(들 입). <strong>③ 합친 뜻:</strong> 대가 없이 받음·빚을 없애 줌·다시 들어옴. <strong>④ 이름의 이유:</strong> 순자산 증가를 포착하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 자산 수증·부채 감소·과거 비용 회수 등의 익금. <strong>⑥ 쉬운 말:</strong> 선물받거나 갚을 돈이 없어져도 이익. <strong>⑦ 사례:</strong> 설비100수증·빚100면제.</p>
+<p><strong>⑧ 시험:</strong> 현금이 없어도 익금. <strong>⑨ 비교·기억법:</strong> 법정 결손 보전액 등 제외.</p>
+<h3>평가손익·익금불산입·손금불산입</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 評(평할 평), 價(값 가), 損(덜 손), 益(더할 익); 金(쇠 금), 不(아닐 불), 算(셀 산), 入(들 입). <strong>③ 합친 뜻:</strong> 값을 다시 매긴 차이·계산에 넣지 않음. <strong>④ 이름의 이유:</strong> 미실현 평가와 과세원가 조작을 통제하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 일반 평가차이 및 법정 수익·비용 제외 조정. <strong>⑥ 쉬운 말:</strong> 장부에 적었다고 세법도 그대로 따라가지는 않기. <strong>⑦ 사례:</strong> 자산값을 임의로 올려 상각비 늘리기 제한.</p>
+<p><strong>⑧ 시험:</strong> 원칙과 법정 예외. <strong>⑨ 비교·기억법:</strong> 불산입이 모두 영구 제외인 것은 아님.</p>
+<h3>수입배당금·피출자법인·도관·연결납세</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 收(거둘 수), 入(들 입), 配(나눌 배), 當(마땅 당), 金(쇠 금); 被(입을 피), 出(날 출), 資(재물 자), 法(법 법), 人(사람 인); 導(이끌 도), 管(대롱 관); 連(이을 연), 結(맺을 결), 納(들일 납), 稅(세금 세). <strong>③ 합친 뜻:</strong> 받은 배당·출자받은 회사·통로·묶어 납세. <strong>④ 이름의 이유:</strong> 경제적으로 중복된 단계별 부담을 조정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법인 간 배당 조정과 법정 집단·동업 과세. <strong>⑥ 쉬운 말:</strong> 돈이 여러 회사를 지나갈 때 세금을 어떻게 맞출까. <strong>⑦ 사례:</strong> 30%출자 적격배당 기본불산입률80%.</p>
+<p><strong>⑧ 시험:</strong> 개인 가산공제와 법인 불산입 구분. <strong>⑨ 비교·기억법:</strong> 연결지배 현행90%,2019기출100%.</p>
+<h3>통상성·사회질서</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 通(통할 통), 常(항상 상), 性(성품 성); 社(모일 사), 會(모일 회), 秩(차례 질), 序(차례 서). <strong>③ 합친 뜻:</strong> 보통 인정할 성격·사회의 기본 질서. <strong>④ 이름의 이유:</strong> 사업 목적만으로 모든 지출을 공제하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 동종 사업자가 같은 상황에서 지출할 비용인지의 객관적 판단. <strong>⑥ 쉬운 말:</strong> 다른 정상적 회사도 이 상황에서 낼 돈인가. <strong>⑦ 사례:</strong> 정상 판매지원비와 입찰 담합금.</p>
+<p><strong>⑧ 시험:</strong> 경위·목적·형태·액수·효과. <strong>⑨ 비교·기억법:</strong> 자주 하는 위법 관행이 곧 통상성은 아님.</p>
+<h3>대손·구상채권·가지급금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 貸(빌릴 대), 損(덜 손); 求(구할 구), 償(갚을 상), 債(빚 채), 權(권세 권); 假(거짓 가), 支(지탱할 지), 給(줄 급), 金(쇠 금). <strong>③ 합친 뜻:</strong> 채권의 회수 손실·대신 갚고 돌려달랄 권리·임시 지급액. <strong>④ 이름의 이유:</strong> 손실 인정과 과다 차입·이익 이전을 함께 통제하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 회수불능 채권과 보증·업무무관 대여 제한. <strong>⑥ 쉬운 말:</strong> 못 받는 돈이어도 처음 생긴 이유와 법정 요건 보기. <strong>⑦ 사례:</strong> 보증으로 대신 갚은 뒤 채무자에게 받을 돈.</p>
+<p><strong>⑧ 시험:</strong> 대손 귀속·계상·보증 예외. <strong>⑨ 비교·기억법:</strong> 가지급금 계정 이름만으로 실질을 정하지 않음.</p>
+<h3>손해전보·징벌적 배상·공과금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 損(덜 손), 害(해할 해), 塡(메울 전), 補(기울 보); 懲(혼날 징), 罰(벌할 벌), 的(과녁 적), 賠(물어줄 배), 償(갚을 상); 公(공평할 공), 課(매길 과), 金(쇠 금). <strong>③ 합친 뜻:</strong> 손해를 메움·벌을 더하는 배상·공적 부담금. <strong>④ 이름의 이유:</strong> 피해 복구 비용과 제재의 세금 효과가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 실제 손해 회복과 법정 초과 제재의 구분. <strong>⑥ 쉬운 말:</strong> 깨진 만큼 갚는 돈과 벌로 더 내는 돈. <strong>⑦ 사례:</strong> 실손100·총배상300의 초과200 구분.</p>
+<p><strong>⑧ 시험:</strong> 2021두35308과 담합 판례 비교. <strong>⑨ 비교·기억법:</strong> 불법 원인이라고 모든 배상금 자동 불산입 아님.</p>
+<h3>감가상각·상각범위액·내용연수</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 減(덜 감), 價(값 가), 償(갚을 상), 却(물리칠 각); 範(법 범), 圍(둘레 위), 額(이마 액); 耐(견딜 내), 用(쓸 용), 年(해 년), 數(셈 수). <strong>③ 합친 뜻:</strong> 원가를 기간에 배분·법정 범위 금액·사용 기간. <strong>④ 이름의 이유:</strong> 한 해에 전부 쓰인 비용이 아니기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 장기사용 자산의 원가를 법정 방식으로 비용화. <strong>⑥ 쉬운 말:</strong> 기계값을 여러 해 사용에 나눠 놓기. <strong>⑦ 사례:</strong> 계상1만·한도1.2만이면 일반적으로추가조정없음.</p>
+<p><strong>⑧ 시험:</strong> 토지 제외·판매용 재고·무형자산. <strong>⑨ 비교·기억법:</strong> 시세 하락의 평가손실과 다름.</p>
+<h3>기부금·기업업무추진비·광고선전</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 寄(부칠 기), 附(붙을 부), 金(쇠 금); 企(꾀할 기), 業(업 업), 業(업 업), 務(힘쓸 무), 推(밀 추), 進(나아갈 진), 費(쓸 비); 廣(넓을 광), 告(알릴 고), 宣(베풀 선), 傳(전할 전). <strong>③ 합친 뜻:</strong> 무상 지원·업무관계 원활화 지출·널리 알림. <strong>④ 이름의 이유:</strong> 업무 관련성과 사회적 정책·소비 제한이 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 목적·상대방에 따라 다른 비용 분류. <strong>⑥ 쉬운 말:</strong> 누구에게 왜 돈을 썼나 묻기. <strong>⑦ 사례:</strong> 거래처 식사와 불특정 다수 견본.</p>
+<p><strong>⑧ 시험:</strong> 옛 접대비 명칭·증빙·한도. <strong>⑨ 비교·기억법:</strong> 홍보비라고 쓴 이름만으로 광고비 확정 아님.</p>
+<h3>자본적 지출·건설자금 이자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 資(재물 자), 本(근본 본), 的(과녁 적), 支(지탱할 지), 出(날 출); 建(세울 건), 設(베풀 설), 資(재물 자), 金(쇠 금), 利(이로울 이), 子(아들 자). <strong>③ 합친 뜻:</strong> 자산 원가에 넣는 지출·건설 차입의 대가. <strong>④ 이름의 이유:</strong> 완성 자산을 만드는 데 든 비용을 사용 기간에 대응시키기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 건설기간 이자를 취득원가에 반영하는 구조. <strong>⑥ 쉬운 말:</strong> 짓는 동안 빌린 값도 건물값의 일부로 보기. <strong>⑦ 사례:</strong> 건설10억+실제이자1억=원가11억.</p>
+<p><strong>⑧ 시험:</strong> 자기자본 가상 이자 금지. <strong>⑨ 비교·기억법:</strong> 불분명 사채 이자의 영구 부인과 구별.</p>
+<h1>기출 TOP5 · 반드시 계산하거나 이유를 말하기</h1>
+<table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>기출</th>
+<th>출제 의도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2021_057·058</td>
+<td>자본 납입·환급과 손익의 대칭</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2019_022</td>
+<td>감가상각 계상액과 한도</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2019_024</td>
+<td>건설자금 이자와 가상 자기자본 이자</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021_064</td>
+<td>불산입 항목·대손·평가손실</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2019_029</td>
+<td>이중과세 조정과 적용연도</td>
+</tr>
+</tbody></table>
+<p>TOP5는 다섯 학습 묶음이며 첫 묶음은 짝 문제다. 총 15문항 전체를 부록에 보존했다. 자본·주식배당·동업기업·연결납세처럼 교재 본문의 설명이 짧거나 없는 기출 쟁점은 11-2·11-4에서 보충했다. 실제 오답률 통계는 없다. 대표 함정은 ‘출자는 익금’, ‘주식배당이면 배당소득 없음’, ‘비용이면 전액 공제’, ‘한도 미달액 자동 추가 공제’, ‘건설이자와 가상 자기자본 이자 동일’이다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 세 가지 입금.</strong> 회사가 고객 매출 300, 은행 대출 300, 주주 출자 300을 받았다. 900 전부 익금인가? <strong>정답:</strong> 일반 구조에서 매출과 대출·출자를 구분한다. 대출은 부채도 늘고 출자는 자본 납입이다. <strong>출제 의도:</strong> 현금과 소득의 구별.</p>
+<p><strong>응용 2 · 납입금 쪼개기.</strong> 액면 1,000원 주식 200주를 4,000원에 발행했다. 자본금·초과액은? <strong>정답:</strong> 액면주식 전제에서 20만 원·60만 원이다. 60만 원을 영업수익으로 보지 않는다. <strong>출제 의도:</strong> 할증발행 원리.</p>
+<p><strong>응용 3 · 두 지급금.</strong> 경쟁자가 입찰을 포기하게 만들려고 500을 지급한 경우와, 확정판결에 따라 피해자의 실제 손해 500을 배상한 경우를 모두 같은 위법비용으로 부인할까? <strong>정답:</strong> 지출 자체의 목적·기능이 달라 별도 판단한다. 후자는 통상적 사업비용 요건 아래 손금이 될 수 있다. <strong>출제 의도:</strong> 판례 비교.</p>
+<p><strong>응용 4 · 회사 차로 가족 여행.</strong> 회사 명의 승용차의 모든 유지비를 손금 처리했다. 명의만 맞으면 되는가? <strong>정답:</strong> 법정 업무 사용·증빙·한도 등 요건을 확인해야 한다. <strong>출제 의도:</strong> 소유 명의와 업무 사용의 차이.</p>
+<p><strong>응용 5 · 회수된 대손.</strong> 법정 요건 아래 과거 손금 처리한 채권 80 중 30을 뒤늦게 받았다. 이미 세금 계산이 끝났으므로 무시하나? <strong>정답:</strong> 법정 회수액을 익금에 반영한다. <strong>출제 의도:</strong> 손금 인정과 환입의 대응.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제11강</h1>
+<p><strong>TOP3:</strong> 자본과 손익 / 손금 조건과 법정 제한 / 감가상각·건설이자의 원가 배분.</p>
+<table>
+<thead>
+<tr>
+<th>판정</th>
+<th>암기 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>출자·환급</td>
+<td>출자는 일반 익금 아님, 자본 환급·배당은 일반 손금 아님</td>
+</tr>
+<tr>
+<td>할증발행</td>
+<td>액면 합계=자본금, 초과 납입=주식발행초과금</td>
+</tr>
+<tr>
+<td>무상수증·채무면제</td>
+<td>자산 증가·부채 감소, 법정 결손 보전 제외 확인</td>
+</tr>
+<tr>
+<td>평가손익</td>
+<td>일반적으로 제외, 법정 평가 예외</td>
+</tr>
+<tr>
+<td>수입배당</td>
+<td>지분50%↑100% /20~50%80% /20%미만30%, 차감·제외 확인</td>
+</tr>
+<tr>
+<td>손금 요건</td>
+<td>사업 관련 + 통상적이거나 수익 직접 관련, 특별규정 우선</td>
+</tr>
+<tr>
+<td>담합금 vs 실제 배상</td>
+<td>위법행위 실행과 피해 회복의 지출은 다름</td>
+</tr>
+<tr>
+<td>대손</td>
+<td>법정 회수불능·귀속·계상, 보증 구상채권 제한</td>
+</tr>
+<tr>
+<td>벌금·법인세</td>
+<td>법정 불산입, 모든 공과금 동일 아님</td>
+</tr>
+<tr>
+<td>감가상각</td>
+<td>시세 하락 아닌 취득원가 배분, 계상액·한도 구별</td>
+</tr>
+<tr>
+<td>기업업무추진비</td>
+<td>옛 접대비, 업무 관련 있어도 증빙·한도</td>
+</tr>
+<tr>
+<td>건설이자</td>
+<td>법정 취득원가 반영, 가상의 자기자본 이자 금지</td>
+</tr>
+</tbody></table>
+<p><strong>기출 연도 주의:</strong> 2019 연결납세 100%와 현행 연결지배 90% 이상을 구분. 원본 정답은 그대로 보존한다.</p>
+<p><strong>반드시 외울 문장:</strong> 회사에 들어온 모든 돈이 수익은 아니고, 회사가 쓴 모든 돈이 당기 손금은 아니다.</p>
+<p><strong>사례를 풀 순서:</strong> 자본/손익 → 익금·손금 일반 범위 → 법정 제외·한도 → 귀속·계상 → 이중과세·기납부 등 중복 조정.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 출자·대출·매출과 담합금·실손배상을 구분하고 감가상각 한도 문제를 푼다. 🟡 <strong>복습 필요:</strong> 원칙은 알지만 불산입이 영구인지 시기 조정인지 섞인다. 🔴 <strong>이해 부족:</strong> 통장 입출금만으로 익금·손금을 정한다. 답변 전에는 실제 수준을 확정하지 않는다.</p>
+<p><strong>복습 TOP3:</strong> 11-1~11-4 자본·익금·배당 / 11-5~11-7 통상성·대손·배상 / 11-8~11-10 원가 배분·지출 제한. 교재 202쪽 요약마다 반대 사례를 하나 떠올려 본다.</p>
+<h1>문제 부록 · 15문항·60개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_053"><h4>기출문제 · 세법_기출2021_053</h4><p class="question-stem">[2021 기말고사 · 53번]<br>조세특례제한법에 따른 이른바 동업기업 과세의 적용을 받을 수 없는 종류의 회사로 묶인 것을 고르시오.</p><ol class="choices"><li>합명회사와 유한책임회사</li><li>합자회사와 유한회사</li><li>유한회사와 주식회사</li><li>합자회사와 유한회사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 합명회사는 법정 대상이 될 수 있으므로 둘 다 적용 불가능한 묶음이 아니다. 유한책임회사라는 명칭만으로 모든 유형의 적용 여부를 단정하지 말고 법정 단체 요건을 확인한다.</li><li><strong>비선택</strong> · 합자회사는 법정 대상이 될 수 있으므로 둘 다 적용 불가능한 묶음이 아니다. 원자료의 2번과 4번은 동일하게 제시되어 있으며 그대로 보존했다.</li><li><strong>선택</strong> · 원본 정답. 일반적인 회사 유형을 비교하는 출제 전제에서 유한회사·주식회사를 고른다. 특정 전문인적용역 법인 등 법정 특수 유형은 별도 요건을 확인한다.</li><li><strong>비선택</strong> · 원자료에서 2번과 같은 보기다. 합자회사가 법정 대상이 될 수 있으므로 둘 다 적용 불가능한 묶음은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_054"><h4>기출문제 · 세법_기출2021_054</h4><p class="question-stem">[2021 기말고사 · 54번]<br>다음은 신주 발행과 자본 증가에 관한 설명이다. 괄호 안에 들어갈 말로 적당하게 묶인 것을 고르시오.<br>출자가액이 [ ]보다 더 높은 것을 할증발행이라 한다. 할증발행을 한다면 [ ]을(를) 자본금으로 잡고 그보다 더 들어온 돈은 [ ]이 된다.</p><ol class="choices"><li>발행가액, 주식발행초과금, 자본잉여금</li><li>시가, 발행가액 합계, 주식발행초과금</li><li>평가액, 시가 총액, 이익준비금</li><li>액면가액, 액면금액 합계, 자본준비금</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 할증발행의 비교 기준은 발행가 자체가 아니라 액면이다. 자본금과 초과금의 자리도 바뀌었다.</li><li><strong>비선택</strong> · 시가와 액면은 다르다. 액면주식의 자본금은 일반적으로 액면 합계이고 발행가액 합계가 아니다.</li><li><strong>비선택</strong> · 평가액·시가 총액이 이 공식의 기준이 아니다. 자본준비금과 이익준비금도 다르다.</li><li><strong>선택</strong> · 정답. 액면을 초과한 발행이고 액면 합계가 자본금, 초과 납입액은 법정 자본준비금으로 연결된다. 무액면주식은 별도 규정이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_055"><h4>기출문제 · 세법_기출2021_055</h4><p class="question-stem">[2021 기말고사 · 55번]<br>다음 중 이익배당에 관한 설명으로 옳지 않은 것을 고르시오.</p><ol class="choices"><li>주식배당은 주주가 가지고 있는 주식 전체의 가치에 영향을 미치지 않으므로 배당소득이 될 수 없다.</li><li>이익배당으로 지급하는 돈은 법인의 손금이 아니다.</li><li>주식배당으로 자본금이 증가하더라도 이는 법인의 익금이 아니다.</li><li>법인세법은 유동화전문회사 등 특수목적회사에게 이익배당으로 지급하는 돈의 소득공제를 허용한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀린 설명이므로 선택. 주식으로 지급한다는 이유만으로 배당소득이 절대로 발생하지 않는 것은 아니다. 가치 희석 여부와 법정 소득 분류를 혼동했다.</li><li><strong>비선택</strong> · 일반적인 이익배당은 번 소득의 분배이므로 회사의 손금이 아니다.</li><li><strong>비선택</strong> · 주식배당으로 자본금 계정이 증가하는 것 자체를 회사가 새로 번 영업수익으로 보지 않는다.</li><li><strong>비선택</strong> · 법정 유동화전문회사 등은 요건에 따른 지급배당 소득공제 특례가 있다. 모든 회사의 배당 손금산입과는 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 1번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_056"><h4>기출문제 · 세법_기출2021_056</h4><p class="question-stem">[2021 기말고사 · 56번]<br>다음 주 의제배당을 낳지 않는 경우는?</p><ol class="choices"><li>주식의 소각으로 주주가 취득하는 금전이, 그 주식을 취득하기 위하여 하용한 금액을 초과하는 경우</li><li>주식배당</li><li>자본준비금의 자본 전입</li><li>피합병법인이 취득하는 합병신주의 시가가, 합병으로 소멸한 법인이 발행한 주식의 취득가액을 초과하는 경우</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 소각·감자 대가가 주식 취득금액을 초과하는 부분은 의제배당을 검토한다. 받은 금액 전부가 아니라 취득금액과 비교한다.</li><li><strong>비선택</strong> · 출제자는 이익을 재원으로 주식이 배분되는 경우의 배당 과세를 대비한다. 주식으로 받았다는 사실만으로 소득 과세가 없어지지 않는다. 주식배당과 잉여금 자본전입의 구체적 법적 형식은 구별한다.</li><li><strong>선택</strong> · 원본 정답. 일반적인 적격 자본준비금의 자본전입은 이익의 분배와 구별한다는 출제 취지다. 모든 자본준비금 재원·상황에서 의제배당이 없다는 뜻은 아니므로 법정 예외를 확인한다.</li><li><strong>비선택</strong> · 통상 합병으로 소멸하는 법인의 주주가 합병대가를 받고 주식 취득금액과 비교하는 상황을 뜻한다. 원문의 피합병법인이 합병신주를 취득한다는 표현은 보완해서 읽어야 한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_057"><h4>기출문제 · 세법_기출2021_057</h4><p class="question-stem">[2021 기말고사 · 57번]<br>다음 중 법인세법 시행령이 정하는 익금이 아닌 것을 고르시오.</p><ol class="choices"><li>자산의 양도금액</li><li>자본의 납입</li><li>무상으로 받은 자산의 가액</li><li>채무의 면제로 생기는 부채의 감소액</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 자산 양도금액은 원칙적인 익금 범위에 들고 대응 장부가액 등의 손금을 따로 본다.</li><li><strong>선택</strong> · 정답. 주주의 자본 납입은 순자산을 늘리지만 일반 사업수익이 아니어서 익금 범위에서 제외한다.</li><li><strong>비선택</strong> · 무상 자산 수증은 순자산을 늘려 원칙적 익금이다. 법정 이월결손금 보전 등 불산입 특례는 따로 본다.</li><li><strong>비선택</strong> · 채무 면제는 현금 유입 없이도 부채를 줄여 순자산을 늘린다. 법정 특례가 없는 일반 구조에서 익금이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_058"><h4>기출문제 · 세법_기출2021_058</h4><p class="question-stem">[2021 기말고사 · 58번]<br>다음 중 법인세법 시행령이 정하는 손금이 아닌 것을 고르시오.</p><ol class="choices"><li>인건비</li><li>자산의 임차료</li><li>차입금의 지급이자</li><li>자본감소의 대가로 주주에게 지급하는 돈</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 인건비는 원칙적인 손비 범위에 들어간다. 과다·부당 금액 등 법정 제한은 별도다.</li><li><strong>비선택</strong> · 사업용 자산 임차료는 일반 손비에 들어간다. 업무무관 등 예외는 별도다.</li><li><strong>비선택</strong> · 일반 차입금 이자는 손비지만 채권자 불명·건설자금·업무무관 대응 등 제한 규정을 확인한다.</li><li><strong>선택</strong> · 정답. 자본감소의 대가인 출자 환급은 자본거래로 일반 손금이 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_062"><h4>기출문제 · 세법_기출2021_062</h4><p class="question-stem">[2021 기말고사 · 62번]<br>다음 중 고정자산과 감가상각에 관한 설명 중 옳지 않은 것을 고르시오.</p><ol class="choices"><li>토지는 감가상각의 대상이 아니다.</li><li>물리적 형체를 갖는 것뿐 아니라 특허권, 산업재산권 등과 같이 물리적 형체가 없는 것도 고정자산에 해당한다.</li><li>토지와 건물은 판매용이라고 해도 항상 고정자산으로 취급된다.</li><li>내용연수가 1년 미만인 것은 보통 고정자산이라고 하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 토지는 법정 감가상각 대상에서 제외된다. 토지 처분 시 취득원가 반영과는 별개다.</li><li><strong>비선택</strong> · 특허권 등 법정 무형자산도 장기간 사용하는 자산·감가상각 대상이 될 수 있다.</li><li><strong>선택</strong> · 틀린 설명이므로 선택. 판매용 부동산은 재고자산 성격을 갖는다. 물건의 종류뿐 아니라 보유 목적을 본다.</li><li><strong>비선택</strong> · 고정자산은 통상 장기간 사업에 사용하는 자산이다. 짧은 소모품 등과 구분한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_063"><h4>기출문제 · 세법_기출2021_063</h4><p class="question-stem">[2021 기말고사 · 63번]<br>다음은 고정자산의 처분손익과 관련된 설명이다. 괄호 안에 들어갈 말로 적절하게 짝지어진 것을 고르시오.<br>고정자산을 양도한 경우에 그 [ ]은 익금이 되고 이에 [ ]하는 양도 당시의 [ ]은 손금이 된다.</p><ol class="choices"><li>시가 – 대응 – 시가</li><li>양도금액 – 대응 – 장부가액</li><li>양도금액 – 상충 – 평가액</li><li>양도차익 – 대응 – 양도차손</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 처분 수입은 일반적으로 실제 양도금액, 대응 비용은 양도 당시 장부가액이다. 시가 평가만으로 양쪽을 같은 숫자로 잡지 않는다.</li><li><strong>선택</strong> · 정답. 양도금액을 익금, 이에 대응하는 장부가액을 손금으로 계산한다.</li><li><strong>비선택</strong> · 손익은 상충이 아니라 대응 관계이며 일반 처분 비용을 임의 평가액으로 정하지 않는다.</li><li><strong>비선택</strong> · 양도차익·차손은 양도금액과 장부가액을 비교한 순결과다. 수익·비용의 각 항목을 묻는 빈칸에 맞지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_064"><h4>기출문제 · 세법_기출2021_064</h4><p class="question-stem">[2021 기말고사 · 64번]<br>다음 중 법인세법의 손금불산입 관련 규정에 관한 설명으로 옳은 것을 고르시오.</p><ol class="choices"><li>벌금, 과료, 과태료는 사업과 관련된 것이라면 담세력을 고려하여 모두 손금으로 인정한다.</li><li>채무보증으로 발생한 구상금 채권도 회수불능임이 분명하여지면 대손금으로서 손금이 된다.</li><li>자산의 평가손실은 시가평가 우선 원칙에 따라 발생한 사업연도에 즉시 손금으로 인정한다.</li><li>채권자가 불분명한 사채의 이자는 손금불산입한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 벌금·과료·과태료는 법정 불산입 항목이다. 사업 관련이라는 이유만으로 모두 손금 인정하지 않는다.</li><li><strong>비선택</strong> · 보증으로 생긴 구상채권 대손은 원칙적 불산입과 법정 열거 예외가 있다. 회수 불능만으로 무조건 손금이 되지 않는다.</li><li><strong>비선택</strong> · 일반 평가손실은 불산입하며 법정 평가 예외를 따로 본다. 시가 평가 우선이라는 일반 원칙을 전제한 것이 틀렸다.</li><li><strong>선택</strong> · 정답. 법정 채권자 불분명 사채 이자는 손금불산입한다. 실제 채권자·지급의 확인이 중요하다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_020"><h4>기출문제 · 세법_기출2019_020</h4><p class="question-stem">[2019 기말고사 · 20번 / 자체 풀이]<br>다음 중 법인세법상 익금에 해당하는 것은?</p><ol class="choices"><li>업무와 상관없는 부동산의 양도차익</li><li>자산수증이익 중 세법상 이월결손금의 보전에 충당한 금액</li><li>부가가치세의 매출세액</li><li>국세의 과오납금의 환급금에 대한 이자</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제공 자체 풀이의 정답. 업무무관 부동산 양도이익도 법인의 순자산 증가인 익금이 될 수 있다. 비용의 업무관련성 제한을 수익의 자동 제외로 바꾸지 않는다.</li><li><strong>비선택</strong> · 법정 이월결손금 보전에 충당한 범위는 익금불산입 특례다. 수증이익 전부가 무조건 제외되는 것은 아니다.</li><li><strong>비선택</strong> · 매출세액은 국가에 낼 부가가치세를 고객에게 받아 보유한 금액으로 법인 익금에 넣지 않는다.</li><li><strong>비선택</strong> · 국세 과오납 환급금에 대한 법정 이자는 익금불산입 항목이다. 일반 예금 이자와 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 1번.<br><br>법인이 업무와 무관한 부동산을 팔아 얻은 이익도 순자산을 증가시키는 수익으로 익금에 해당한다. 업무 관련성만으로 익금에서 제외되지 않는다. 보기의 이월결손금 보전에 충당한 자산수증이익, 부가가치세 매출세액, 국세 과오납금 환급이자는 법이 정한 익금불산입 항목이다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_022"><h4>기출문제 · 세법_기출2019_022</h4><p class="question-stem">[2019 기말고사 · 22번 / 자체 풀이]<br>(주)발해의 당해 사업연도 손익계산서에 비용으로 계상된 감가상각비는 10,000원이지만 세법상 감가상각비의 한도액은 12,000원이다. 어떻게 세무조정을 하여야 하는가? 단, 전기 이전의 감가상각비 부인액은 없다고 가정한다.</p><ol class="choices"><li>2,000원 손금산입</li><li>2,000원 익금산입</li><li>12,000원 손금산입</li><li>아무런 세무조정도 하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 일반 결산조정 전제에서는 한도 미달액을 자동 추가 손금으로 넣지 않는다.</li><li><strong>비선택</strong> · 익금에 2000원을 더할 이유도 없다. 한도보다 적게 계상한 것이 수익 발생은 아니다.</li><li><strong>비선택</strong> · 한도12000원 전액을 장부비용10000원에 추가하면 중복·과다 차감이 된다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 계상액10000원이 한도12000원 이내이고 이전 부인액이 없어 별도 조정이 없다. IFRS 등 특례는 문제의 일반 전제와 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 4번.<br><br>통상적인 결산조정 감가상각을 전제로 하면 장부에 비용으로 계상한 금액 중 세법상 한도 내 금액을 손금으로 인정한다. 계상액 10,000원이 한도 12,000원보다 적고 전기 상각부인액도 없으므로 추가 손금산입이나 손금불산입이 없다. 한도 미달 2,000원을 자동으로 더 공제하는 것이 아니다. IFRS 신고조정 등 특별한 예외는 이 문제의 전제가 아니다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_024"><h4>기출문제 · 세법_기출2019_024</h4><p class="question-stem">[2019 기말고사 · 24번 / 자체 풀이]<br>(주)백제는 올해 1월 1일부터 본사 사옥을 짓기 시작하여 1년 만인 올해 12월 31일 완공하였다. 건설에 들인 돈은 10억 원인데, 이는 올해 1월 1일 은행으로부터 연 10%의 이자율로 꾼 돈으로 같은 날 전부 건설자금으로 사용되었고 완공일 현재 아직 갚지 못한 상태이다. 이에 관련된 법인세법의 취급으로 잘못 설명된 것은?</p><ol class="choices"><li>차입금이 건설에 소요된 것이 분명한 이상, 그 지급이자 1억 원은 건설이 준공된 날까지 이를 자본적 지출로 하여 그 원본에 가산한다.</li><li>본사 사옥의 취득가액은 11억 원이다.</li><li>지급이자 1억 원은 그 전액이 올해 손금에 산입되는 것이 아니라 감가상각절차를 통해 서서히 손금에 산입된다.</li><li>설혹 건설자금 10억 원 전액을 자기 돈으로 조달하여 지급이자가 생기지 않았다고 하더라도 10억 원에 대한 이자상당액 1억 원을 가산한 11억 원이 본사 사옥의 취득가액이 된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문제의 특정 건설차입금10억×10%×1년=1억은 건설기간 취득원가에 가산한다.</li><li><strong>비선택</strong> · 건설비10억+자본화 이자1억=11억이다.</li><li><strong>비선택</strong> · 건물 원가에 들어간 이자도 그 원가의 일부로 향후 감가상각 등을 통해 반영한다. 당기 전액 비용 처리하지 않는다.</li><li><strong>선택</strong> · 잘못된 보기로 제공 자체 풀이의 정답. 자기자금이라 실제 이자가 없다면 가상의1억을 만들어 취득원가에 더하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 4번.<br><br>특정 건설자금 차입금의 건설기간 이자 1억 원은 취득원가에 가산하므로 문제의 사옥 취득가액은 11억 원이다. 건물 원가에 포함된 부분은 이후 감가상각을 통해 비용화된다. 그러나 자기자금으로 지어 실제 지급이자가 없다면 가상의 자기자본 이자 1억 원을 더하지 않으므로 ④가 틀리다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_025"><h4>기출문제 · 세법_기출2019_025</h4><p class="question-stem">[2019 기말고사 · 25번 / 자체 풀이]<br>다음 중 법인세법상 손금에 산입되는 항목은?</p><ol class="choices"><li>양도한 자산의 양도 당시 장부가액</li><li>벌금, 과료, 과태료</li><li>채권자가 불분명한 사채(私債)의 이자</li><li>각 사업연도에 납부하였거나 납부할 법인세</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제공 자체 풀이의 정답. 자산 양도금액에 대응하는 양도 당시 장부가액은 손금이다.</li><li><strong>비선택</strong> · 벌금·과료·과태료는 법정 불산입이다.</li><li><strong>비선택</strong> · 법정 채권자 불분명 사채 이자는 불산입이다.</li><li><strong>비선택</strong> · 법인세 자체는 법정 손금불산입이다. 모든 세금이 같은 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 1번.<br><br>양도한 자산의 장부가액은 자산 양도수익에 대응하는 손금이다. 반면 법인세 자체, 벌금·과료·과태료, 채권자가 불분명한 사채의 이자는 각각 법률상 손금불산입 대상이므로 구별한다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_026"><h4>기출문제 · 세법_기출2019_026</h4><p class="question-stem">[2019 기말고사 · 26번 / 자체 풀이]<br>다음 중 법인세법상 접대비에 관한 설명으로 가장 타당한 것은?</p><ol class="choices"><li>접대비란 접대비 및 교제비, 사례금, 그 밖에 어떠한 명목이든 상관없이 이와 유사한 성질의 비용으로서 업무와 관련 없이 지출한 금액을 말한다.</li><li>광고선전 목적으로 불특정다수인에게 나누어주는 견본품은 접대비로 보지 않는다.</li><li>지출내용을 증빙할 필요가 없는 기밀비는 일정 한도 내에서 접대비로 본다.</li><li>접대비라 할지라도 업무와 관련된 것임이 증명된다면 금액의 제한 없이 손금으로 인정된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 접대비, 현재 기업업무추진비는 업무 관련성이 필요하다. 업무와 관계없다고 정의한 것이 틀렸다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 불특정 다수에 광고 목적으로 배포한 견본품은 일반적으로 광고선전비 성격이며 특정 거래관계자의 친목 비용과 다르다.</li><li><strong>비선택</strong> · 증빙 없는 기밀비를 일정 한도만으로 일반적으로 인정하는 현행 구조가 아니다. 법정 증빙·인정 요건을 확인한다.</li><li><strong>비선택</strong> · 업무 관련이어도 법정 한도와 증빙 제한을 충족해야 한다. 무제한 손금이라는 말이 틀렸다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 2번.<br><br>불특정 다수에게 광고·홍보 목적으로 배포하는 견본품은 특정 거래관계자와의 친목 등을 위한 접대비와 구별되는 광고선전비 성격이다. 접대비는 업무 관련성이 필요하고 증빙 및 손금 한도 규제가 있으므로 ①·③·④는 옳지 않다. 출제 당시 접대비라는 명칭은 현재 기업업무추진비로 변경되었다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a> · <a href="https://law.go.kr/LSW/lsInfoP.do?lsId=001563" target="_blank" rel="noopener noreferrer">현행 법인세법</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_029"><h4>기출문제 · 세법_기출2019_029</h4><p class="question-stem">[2019 기말고사 · 29번 / 자체 풀이]<br>법인세 이중과세와 그 대책에 관한 설명으로 옳은 설명으로 묶인 것은?<br>ㄱ.개인출자자들이 회사에서 배당소득을 받는 경우 해당 회사가 낸 법인세 상당액의 전부를 배당소득에 가산하고 같은 금액을 배당세액공제로 세액 단계에서 빼 준다.<br>ㄴ.모회사가 100% 자회사에서 받는 배당소득은 전액 익금불산입한다.<br>ㄷ.연결납세는 100% 모자회사 사이에서만 가능하다.<br>ㄹ.상법상 인적회사는 회사 단계의 법인세를 부과하는 대신 그 사원들이 회사의 소득에 대하여 개인이라면 소득세 납세의무를, 법인이라면 법인세 납세의무를 지는 과세방식을 따라야 한다.</p><ol class="choices"><li>ㄱ, ㄴ</li><li>ㄱ, ㄷ</li><li>ㄴ, ㄷ</li><li>ㄴ, ㄹ</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · ㄱ은 실제 회사 납부세액 전부를 그대로 가산·공제한다는 부분이 틀리다. 법정 가산율·대상·한도가 있다. ㄴ은 당시 일반 전제의 불산입률100%를 말한다.</li><li><strong>비선택</strong> · ㄱ이 틀리다. ㄷ은 2019년 당시 연결납세 완전지배 기준으로만 읽어야 한다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답은 2019년 기준 ㄴ·ㄷ이다. 다만 불산입에는 차입이자 차감·제외 등 요건이 있고, 현행 연결지배 기준은90%이상이므로 현재에는 ㄷ이 틀리다. 원본 채점은 당시 기준으로 보존한다.</li><li><strong>비선택</strong> · ㄹ은 동업기업 과세특례를 강제로 적용해야 한다는 부분이 틀리다. 법정 대상의 신청에 따른 특례다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 3번.<br><br>2019년 출제 당시 일반적인 제도 설명을 기준으로 ㄴ·ㄷ을 고른다. 100% 보유 자회사 수입배당금의 익금불산입률은 100%이고 연결납세는 완전지배 관계를 전제로 했다. 다만 배당 익금불산입에도 적용 제외·차입금 이자 차감 등 세부 요건이 있다. ㄱ은 실제 회사 납부세액 전부를 그대로 가산·공제한다는 점이, ㄹ은 동업기업 과세특례를 선택사항이 아닌 강제사항으로 설명한 점이 틀리다.<br><br>개정 주의: 현재는 연결지배 기준이 90% 이상이므로 ㄷ의 “100% 사이에서만”을 현행법의 정답으로 암기하면 안 된다. 이 문제는 2019년 기준으로만 채점한다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a> · <a href="https://law.go.kr/LSW/lsInfoP.do?lsId=001563" target="_blank" rel="noopener noreferrer">현행 법인세법</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 11' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 11|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

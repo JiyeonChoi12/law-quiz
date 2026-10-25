@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제12강 법인세(3) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 12</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제12강 법인세(3) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>세법의 기초 · 제12강 법인세(3)</h1>
+<p>교재 인쇄면 203~219쪽 · 제12강 강의록 · 기출 6문항·24개 보기</p>
+<p><strong>이번 강의 질문:</strong> “이익이 생긴 것은 알겠는데 올해 소득일까, 내년 소득일까? 가까운 사람과 싸게 거래했다면 세법은 어디까지 다시 계산할까?” 금액의 성격을 배운 11강에서 시기와 정상가격 판단으로 넘어간다.</p>
+<p><mark class="yellow">귀속·요건·효과</mark> / <mark class="green">판단 이유</mark> / <mark class="pink">성립과 확정·과세와 계약</mark> / <mark class="blue">대손·소득처분 연결</mark>. 교재 판례를 모두 다루며, 마지막 사례는 교재 발췌의 과세 경위와 공식 판결의 최종 결론을 구분했다.</p>
+<h1>전체 지도</h1>
+<p>① 익금·손금을 어느 사업연도에 넣을지, 특수관계 거래의 계산을 언제 부인할지 배운다. ② 현금 시점만 따르면 소득을 미루기 쉽고, 가까운 관계에서 비정상 가격을 쓰면 소득을 다른 사람에게 옮길 수 있기 때문이다. ③ 법인세 계산의 시간축과 조세회피 방지 장치다. ④ 10강의 세무조정·소득처분, 11강의 대손·자본거래를 종합한다. 다음 13강은 이익에 매기는 세금에서 소비 거래에 매기는 부가가치세로 넘어간다. ⑤ 이 강을 모르면 현금을 안 받았다고 소득을 계속 미루거나, 가족·계열사와 거래하면 무조건 계약이 무효라고 오해한다.</p>
+<p><strong>민서와 선생님:</strong> “돈은 내년에 받는데 올해 세금이 생겨요?” “돈이 들어온 때와 받을 권리가 확정된 때는 다를 수 있어. 어떤 거래인지, 법이 정한 귀속시기가 무엇인지부터 보자.”</p>
+<h1>교재 순서대로 읽기</h1>
+<h2 id="tax-12-01" data-concept-id="tax-12-01">12-1. 현금·발생·권리의무 확정: 세 개의 시계를 나누기 ★★★★★</h2>
+<p><strong>교재 204~205쪽 · 문단의 의도:</strong> ‘얼마의 소득인가’와 ‘어느 해 소득인가’를 구별한다. 현금주의는 실제 받은 돈·지급한 돈을 기준으로 수익·비용을 잡는다. 발생주의는 현금 이동과 별개로 거래의 발생과 회계상 인식 기준을 본다. 법인세법 제40조는 익금·손금이 <strong>확정된 날이 속하는 사업연도</strong>를 원칙으로 한다.</p>
+<p>권리의무 확정주의는 받을 권리와 지급할 의무가 법정 기준에 따라 충분히 확정되었는지 보는 것이다. 계약서에 이름이 등장한 즉시 모든 소득이 확정되는 것도 아니고, 돈을 다 받을 때까지 늘 기다리는 것도 아니다. 세법상 구체적 귀속 규정을 우선 적용하고, 특별규정이 없는 영역에서는 공정·타당한 기업회계 존중 원칙이 보충 작용을 한다.</p>
+<table>
+<thead>
+<tr>
+<th>가상 장면</th>
+<th>확인할 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>올해 상품 인도, 내년 대금 수령</td>
+<td>상품 판매의 법정 인도 기준이면 올해 손익인가</td>
+</tr>
+<tr>
+<td>올해 계약금만 받고 물품 미인도</td>
+<td>아직 선수금 등으로 남는지, 거래별 귀속 규정은 무엇인가</td>
+</tr>
+<tr>
+<td>발생 여부 자체가 불확실한 조건부 권리</td>
+<td>실현 가능성이 충분히 성숙했는가</td>
+</tr>
+<tr>
+<td>확정 후 채무자가 무자력으로 됨</td>
+<td>원래 귀속을 지울 문제가 아니라 이후 대손 요건인가</td>
+</tr>
+</tbody></table>
+<p><strong>교재 판례 1 — 2004두3328:</strong> 원사건은 장기렌탈·장기할부판매 계약의 중도해지에 따른 손해배상채권 등의 귀속시기가 문제였다. 법원은 행사에 법률상 제한이 없는 확정 채권은 해당 사업연도 익금으로 보고, 나중에 채무자의 무자력으로 못 받게 되면 법정 대손 문제로 다루었다. 손해배상채권은 해지일이 속하는 해, 지연손해금은 해당 기간의 해라는 판단을 수긍했다. <a href="https://www.law.go.kr/LSW/precInfoP.do?evtNo=2004%EB%91%903328">공식 판결</a></p>
+<p><strong>교재 판례 2 — 2009두11157:</strong> 법원은 권리가 단순히 성립한 것만으로 익금이 확정되었다고 하지 않고, 실현 가능성이 상당히 높은 정도로 성숙했는지 권리의 성질·내용과 법률상·사실상 사정을 종합해야 한다고 설명했다. 교재 발췌는 일반 법리를 중심으로 하므로 상세 금액·인물은 실제 사건처럼 덧붙이지 않는다.</p>
+<p><strong>두 문장을 함께 번역:</strong> ① 단순 성립≠확정 → 종이에 권리가 적혀 있어도 실제로 상당히 성숙했는지 확인한다. ② 확정 후 회수 불능 → 먼저 확정된 과거 소득을 마음대로 없애는 대신 법정 대손 시점과 요건을 본다. ③ 종합 판단 → 모든 채권에 동일한 현금 수령일 또는 계약일을 붙이지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 확정 / 상당한 성숙 / 귀속과 대손. <strong>2021_059의 조문 빈칸은 ‘확정’이며, 현금주의가 아니다.</strong></p>
+<h2 id="tax-12-02" data-concept-id="tax-12-02">12-2. 유동화전문회사 배당: 지급을 미뤘다고 과세도 무조건 미룰까 ★★★★☆</h2>
+<p><strong>교재 205~206쪽 · 문단의 의도:</strong> 권리의 법률상 제한과 당사자끼리 정한 지급 유보를 구별한다. 유동화전문회사 등 법정 도관 회사는 일정 배당요건 아래 회사 단계에서 소득공제하고 주주 단계에서 과세한다. 두 단계의 과세 시점을 지나치게 어긋나게 하면 오랫동안 어느 단계에서도 실질 과세가 안 되는 문제가 생길 수 있다.</p>
+<p><strong>교재 판례 — 2012두16299, 2015.12.23.:</strong> 유동화전문회사는 자산유동화계획·정관에서 유동화증권 원리금을 모두 갚은 뒤에 배당금을 지급하도록 했다. 배당받을 법인은 “아직 현금으로 받지 못했으니 소득도 나중에 잡자”고 주장할 수 있는 상황이다. 법원은 이러한 유보는 거래 관계자들의 경제적 필요에 따른 약정이지 세법보다 우선하는 법률상 제한은 아니라고 보았다.</p>
+<p><strong>결론:</strong> 이 사건 법리상 특별한 사정이 없으면 <strong>잉여금처분결의일</strong>이 배당소득의 귀속시기다. 배당채권 회수불능 시 대손 처리할 수 없는 납세자 등 판결이 제시한 특별한 사정, 법령의 특정 유동화전문회사 수입시기 특례는 구별한다. 모든 개인·법인·모든 배당을 무조건 결의일로 통일하는 판례가 아니다.</p>
+<p><strong>법원의 고민:</strong> 회사에서 배당을 이유로 소득공제를 했는데 주주는 내부 약정으로 지급을 오래 미루며 계속 과세를 늦출 수 있다면 도관 특례가 과도한 이연 수단이 될 수 있다. <strong>문장 번역:</strong> 경제적 필요의 유보 → 당사자들이 돈을 나중에 주기로 정함. 법률상 제한 아님 → 그러한 약정만으로 세법상 확정시기를 반드시 늦추지는 않음. 특별한 사정 → 받는 사람의 과세 구조와 명문 특례도 함께 봄.</p>
+<p><strong>시험·키워드·한 줄:</strong> 도관 / 배당결의 / 약정 유보와 법률 제한. <strong>현금을 못 받은 사정 하나만으로 귀속시기를 정하지 않는다.</strong></p>
+<h2 id="tax-12-03" data-concept-id="tax-12-03">12-3. 수익·비용 대응과 거래별 귀속일 ★★★★★</h2>
+<p><strong>교재 206~208쪽 · 문단의 의도:</strong> 직접 비용은 그 비용이 만들어 낸 수익과 대응시켜야 기간별 이익을 제대로 계산할 수 있다. 상품을 올해 샀지만 내년에 팔았다면 매입대금 지급일만으로 올해 매출원가를 모두 넣지 않는다. 법인세법은 개별 귀속 규정들을 통해 이 대응을 구현한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 시행령 제68조의 거래</th>
+<th>기본 귀속일</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상품·제품 등 판매</td>
+<td>인도일</td>
+<td>부동산은 이 일반 상품 규정에서 제외</td>
+</tr>
+<tr>
+<td>시용판매</td>
+<td>구입 의사 표시일</td>
+<td>기간 내 거절 없으면 확정되는 약정은 그 기간 만료일</td>
+</tr>
+<tr>
+<td>그 밖의 자산 양도</td>
+<td>대금 청산일</td>
+<td>청산 전 등기·인도·사용수익이면 법정 빠른 날</td>
+</tr>
+<tr>
+<td>위탁매매</td>
+<td>수탁자가 위탁자산을 매매한 날</td>
+<td>위탁자에게 정산금을 보낸 날과 다름</td>
+</tr>
+<tr>
+<td>법정 증권시장 보통거래</td>
+<td>매매계약 체결일</td>
+<td>모든 장외 주식거래를 같은 규칙으로 보지 않음</td>
+</tr>
+</tbody></table>
+<p><strong>건설·제조·용역의 진행기준:</strong> 시행령 제69조는 원칙적으로 착수부터 인도·용역완료까지 작업진행률로 수익과 비용을 각 사업연도에 나누어 넣는다. 중소기업의 계약기간 1년 미만 건설 등, 기업회계기준상 인도연도 수익·비용으로 계상한 법정 경우 등에는 인도연도 산입 특례를 확인한다. 모든 건설계약은 무조건 완공 때 한꺼번에라는 말도 틀리다.</p>
+<p><strong>가상 계산:</strong> 전체 계약수익 1,000, 올해 법정 계산상 누적 진행률 30%, 이전 인식액 0이면 다른 조정이 없다는 단순 모형에서 누적 수익 300을 계산할 수 있다. 진행률은 임의 체감이 아니라 법정 기준으로 산정하며 비용도 대응한다. 현금으로 받은 계약금 100만을 곧바로 올해 전체 수익이라고 정하지 않는다.</p>
+<p><strong>교재 판례 — 2007두1439:</strong> 회사가 상품을 사려고 선급금을 지급했지만 아직 상품을 공급받지 못했다. 법원은 해당 상품 판매에 따른 수익이 발생했다고 볼 수 없으므로 그 수익에 대응하는 매입원가도 손금으로 발생하지 않았다고 보았다. <strong>번역:</strong> 돈을 먼저 준 사실과 상품을 팔아 원가가 된 사실은 다르다. 이후 선급금 자체가 회수 불능이 되는 문제는 법정 대손 등의 별도 요건으로 판단한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 상품 인도 / 시용 확정 / 자산 청산·선행 이전 / 작업진행률 / 선급금. <strong>2019_023에서 상품 생산일·계약일·대금수령일 대신 인도일을 고르는 이유가 여기 있다.</strong></p>
+<h2 id="tax-12-04" data-concept-id="tax-12-04">12-4. 비용이 덜 정해졌다는 이유로 확정 수익을 미룰 수는 없다 ★★★★☆</h2>
+<p><strong>교재 207~209쪽 · 문단의 의도:</strong> 수익·비용 대응 원칙의 방향을 설명한다. 수익이 확정되면 대응 원가·비용을 반영하려는 것이지, 비용이 아직 모두 확정되지 않았다는 이유만으로 이미 확정된 수익을 무조건 늦추는 장치는 아니다.</p>
+<p><strong>교재 사례 — 2001두4511, 2003.7.11.:</strong> 개발업자는 토지를 분양하고 대금을 모두 받았지만 도로·상하수도 같은 도시기반시설 공사는 아직 끝나지 않았다. 개발업자는 “시설을 모두 완성해야 의무를 다하고 매출원가도 확정되니 수익도 그때 잡아야 한다”고 주장했다.</p>
+<p>법원은 실제 분양한 대상이 토지 자체이고 기반시설 전체가 아니며, 기반시설이 해당 토지만을 위해 쓰이는 것도 아니라는 사정을 보았다. 그래서 토지 양도대금은 시설공사 진행과 별개로 이미 확정되었고, 기반시설 비용의 미확정을 이유로 수익 인식을 늦출 수 없다고 판단했다.</p>
+<p><strong>문장별 번역:</strong> 분양 대상 → 무엇을 팔았는지부터 정한다. 수입 시 확정 → 이 사건의 토지대금은 이미 확정된 상태다. 대응 → 확정 수익과 관련 원가를 맞추는 것이다. 역방향 금지 → 비용 일부가 덜 정해졌다고 수익을 무조건 뒤로 보내지 않는다. 이 판례의 ‘수입 시’ 표현을 모든 거래의 현금주의 선언으로 읽지 않는다.</p>
+<p><strong>다른 결론의 문제:</strong> 큰 사업에서 뒤쪽 공사가 남아 있다는 이유로 이미 넘긴 토지의 확정 수익까지 계속 이연할 수 있다. 다만 판결은 모든 복합계약을 토지와 용역으로 강제로 쪼개라는 뜻이 아니라 실제 계약 대상과 법정 귀속 기준을 판단한 것이다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 계약 대상 / 확정 수익 / 비용 미확정. <strong>대응 원칙은 수익과 비용을 맞추는 원칙이지 납세자가 원하는 해를 고르는 권리가 아니다.</strong></p>
+<h2 id="tax-12-05" data-concept-id="tax-12-05">12-5. 부당행위계산부인: 가까운 사이의 비정상 계산을 바로잡기 ★★★★★</h2>
+<p><strong>교재 210~212쪽 · 문단의 의도:</strong> 법인이 특수관계인과 비정상적인 거래를 하여 조세부담을 부당하게 줄이면 실제 계산에 매이지 않고 법정 정상 소득을 계산하도록 한다. 제52조는 거래를 세무상 바로잡는 조세회피 방지·공평 과세 규정이다.</p>
+<p><strong>판단 순서:</strong> ① 경제적 연관·경영지배 등 법정 특수관계인가 ② 거래·계산이 법정 유형에 해당하는가 ③ 경제적 합리성을 잃고 조세부담을 부당하게 줄였는가 ④ 적용할 정상 시가와 효과는 무엇인가. 본인도 상대방의 특수관계인으로 보는 쌍방관계를 확인한다. 단순한 친분이나 개인적으로 싫은 가격만으로 법정 관계가 되는 것은 아니다.</p>
+<p><strong>교재 판례 — 2002두9995:</strong> 정상적인 경제인의 합리적 방법 대신 우회·다단계 등 거래형식을 남용해 조세부담을 경감하는 경우, 관청이 객관적으로 타당한 소득을 의제해 과세한다는 법리를 제시한다. <strong>번역:</strong> 실제 계약이 존재해도 세금 계산은 비정상적으로 줄인 결과를 그대로 받아들이지 않을 수 있다. 반대로 거래단계가 많다는 이유만으로 언제나 부인하지 않는다.</p>
+<p><strong>경제적 합리성 사례 — 2021두30679, 2023.6.1.:</strong> 상표권자로 등록된 회사가 계열회사에게 상표 사용료를 별도로 받지 않자 관청이 정상 사용료 상당액을 익금에 넣었다. 법원은 무상이라는 사실만 보지 않았다. 한 상표는 사용자 회사가 실제 사용·관리 비용을 들여 가치를 대부분 형성했고, 다른 상표는 이미 받은 경영관리수수료에 사용료가 포함된 사정이 있었다. 부당행위계산부인 대상이 아니라고 본 원심 결론이 유지되었다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=238401">공식 판결</a></p>
+<p><strong>왜 그런가:</strong> 등록 명의만 가진 사람과 실제 브랜드 가치를 만들어 낸 사람이 다른 상황, 명목은 관리수수료지만 사용료가 이미 포함된 상황을 무시하면 존재하지 않는 무상 이익을 만들어 과세할 수 있다. <strong>문장 번역:</strong> 제반 사정 → 관계·역할·비용·기여를 함께 봄. 거래 당시 특별한 사정 → 사후 결과만으로 재단하지 않음. 경제적 합리성 → 그 상황의 정상적인 사업 판단으로 설명되는지 확인함.</p>
+<p><strong>시험·키워드·한 줄:</strong> 특수관계+부당 감소 / 경제적 합리성 / 구체적 사정. <strong>2021_065의 ‘시가와 다르면 정황 불문 자동 부인’이 틀린 이유다.</strong></p>
+<h2 id="tax-12-06" data-concept-id="tax-12-06">12-6. 시가: 관청이 원하는 가격이 아니라 법정 정상가격 ★★★★★</h2>
+<p><strong>교재 212~213쪽 · 문단의 의도:</strong> 정상적으로 계산할 기준을 객관화한다. 시가는 건전한 사회통념·상거래 관행 아래 특수관계 없는 사람들 사이에서 적용되거나 적용될 것으로 판단되는 가격이다. 물건값뿐 아니라 이율·요율·임대료·교환비율 등도 포함한다.</p>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>확인할 가격</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>유사한 상황에서 회사가 불특정 다수와 계속 거래한 가격 또는 비특수관계 제3자 간 일반 거래가격</td>
+<td>거래조건·시점 등이 비교 가능한지 확인</td>
+</tr>
+<tr>
+<td>2, 시가 불분명 시</td>
+<td>적격 감정가액, 둘 이상이면 법정 평균</td>
+<td>주식 등·가상자산의 제외 등 확인</td>
+</tr>
+<tr>
+<td>3</td>
+<td>상속세·증여세법의 법정 보충적 평가방법 준용</td>
+<td>원하는 계산을 임의로 선택하지 않음</td>
+</tr>
+</tbody></table>
+<p>상장주식은 법정 거래유형에서 거래소 최종시세가액 등을 적용하고, 사실상 경영권 이전 등에 관한 별도 조정도 있으므로 모든 상장주식 거래가 조건 없이 종가 하나로 끝나는 것은 아니다. 금전 대여의 이자율 등에는 추가 세부 규정이 있다. 강의록은 감정평가의 주식·가상자산 제외를 명시하므로 교재의 간략한 순서와 함께 읽는다. <a href="https://www.law.go.kr/LSW/lsLinkProc.do?joLnkStr=%EC%A0%9C40%EC%A1%B0&lsNm=%EB%B2%95%EC%9D%B8%EC%84%B8%EB%B2%95+%EC%8B%9C%ED%96%89%EB%A0%B9&mode=11">시행령 시가 규정</a></p>
+<p><strong>교재 판례 — 83누392, 1983.11.8.:</strong> 저가양도인지 판단할 때 정상적인 거래가액이 있으면 그것을 먼저 써야 한다. 이를 알 수 없을 때 감정가격·당시 법정 기준가격을 사용한다는 취지다. <strong>번역:</strong> 실제 비교 가능한 정상 거래가 있는데 관청에 편한 표준가격을 먼저 가져오지 않는다. 1983년 판결의 세부 평가규정은 현재 조문과 구분한다.</p>
+<p><strong>가상 사례:</strong> 회사가 같은 조건의 상품을 여러 독립 고객에게 100에 팔고 특수관계인에게만 60에 팔았다면 100이 중요한 정상가격 자료다. 그러나 독립 거래는 보증·운송 포함이고 특수관계 거래는 하자품·자체 운송이라면 숫자만 비교하지 말고 조건 차이를 검토한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 정상 거래 우선 / 비교 가능성 / 감정→보충 / 법정 예외. <strong>시가는 임의 평가액이 아니라 법정 순서와 조건으로 확인하는 기준이다.</strong></p>
+<h2 id="tax-12-07" data-concept-id="tax-12-07">12-7. 부당행위 유형과 자본거래: 누가 누구에게 이익을 줬나 ★★★★★</h2>
+<p><strong>교재 213~216쪽 · 문단의 의도:</strong> 이익을 옮기는 방법은 싸게 파는 것만이 아니다. 시행령 제88조의 유형을 방향에 따라 읽으면 긴 목록이 정리된다.</p>
+<table>
+<thead>
+<tr>
+<th>이익 이동 방식</th>
+<th>교재 조문에 나온 유형</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>회사가 많이 지출</td>
+<td>고가 매입·현물출자 수취, 과대상각, 고율 차입·고액 임차·용역 수취</td>
+</tr>
+<tr>
+<td>회사가 적게 받음</td>
+<td>무상·저가 양도·현물출자, 무상·저리 대여·저액 임대·용역 제공</td>
+</tr>
+<tr>
+<td>남의 부담 인수</td>
+<td>무수익 자산 취득·비용 부담, 불량자산 차환·불량채권 인수, 출연금 대신 부담</td>
+</tr>
+<tr>
+<td>권리행사 조절</td>
+<td>법정 파생상품 권리 불행사·행사기간 변경 등 이익 분여</td>
+</tr>
+<tr>
+<td>조직재편 손익 조절</td>
+<td>불공정 합병·분할 비율로 법인의 양도손익 감소</td>
+</tr>
+<tr>
+<td>주주 간 자본거래</td>
+<td>불공정 합병, 신주인수권 포기·고가 인수, 지분비율과 다른 일부 주식 소각</td>
+</tr>
+<tr>
+<td>기타 자본거래·유사행위</td>
+<td>증감자·합병분할·전환사채 등의 전환·인수·교환, 유사한 법정 이익 분여</td>
+</tr>
+</tbody></table>
+<p><strong>법정 제외도 함께:</strong> 일정 주식매수선택권 행사·지급, 비주주 임직원 등 법정 사택 제공, 세액 변동 없는 연결법인 간 일정 용역, 법정 증권법상 합병·분할, 포기 신주의 법정 모집배정 등에는 각 조항의 제외·요건이 있다. 유형명만 보고 모든 사택·모든 증자·모든 계열사 용역을 일괄 부인하지 않는다. 금액 차이 등의 추가 적용 요건도 거래유형별로 확인한다.</p>
+<p><strong>교재 판례 1 — 2012두23488, 2014.6.26.:</strong> 주주인 법인이 특수관계 회사의 신주를 시가보다 비싸게 인수했다. 관청이 일반 ‘자산 고가 매입’ 유형으로 바로 부인할 수 있는가? 법원은 신주 인수는 발행회사와의 자본거래이므로 그 일반 유형으로 부인할 수 없고, 고가 인수로 <strong>다른 특수관계 주주가 이익을 얻었는지</strong>를 해당 자본거래 조항으로 판단해야 한다고 보았다.</p>
+<p><strong>교재 판례 2 — 2018두56602, 2020.12.10.:</strong> 회사가 C회사의 유상증자에서 신주를 고가 인수했다. 관청은 기타 자본거래 이익 분여 규정으로 발행회사 C가 이익을 받았다고 주장했다. 법원은 신주발행의 자본거래 성격상 원칙적으로 신주인수인이 발행회사에 이익을 분여했다고 보기 어렵다는 판단을 수긍했다.</p>
+<p><strong>두 판례의 문장 번역:</strong> 일반 자산 매입과 다름 → 신주발행은 회사 밑천을 조달하는 거래다. 다른 주주에게 분여 → 증자 조건 때문에 기존 주주들의 지분가치가 이동했는지 본다. 기타 규정도 한계 있음 → 포괄 규정이라고 자본거래의 성격을 지우지 않는다. <strong>모든 주주·발행회사 사이의 거래가 부당행위계산부인에서 영구 면제된다는 뜻은 아니다.</strong> 해당 신주 고가 인수와 적용 조항에 관한 판단이다.</p>
+<p><strong>가상 이해 장면:</strong> 여러 주주가 있는 회사에 한 주주가 지나치게 많은 돈을 내면 회사 재산이 늘어 다른 주주의 주식가치가 상승할 수 있다. 그래서 회사 통장에 돈이 들어온 사실만 볼 것이 아니라 다른 주주에게 어떤 가치가 넘어갔는지도 본다. 실제 계산은 법정 평가방법에 따른다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 고가 매입·저가 양도 / 이익 분여 방향 / 자본거래 별도 유형. <strong>자본거래도 부인될 수 있지만 일반 자산거래 조항을 아무렇게나 가져다 쓰지는 않는다.</strong></p>
+<h2 id="tax-12-08" data-concept-id="tax-12-08">12-8. 판단 시점과 효과: 세무상 재계산이지 계약 취소가 아니다 ★★★★★</h2>
+<p><strong>교재 216~218쪽 · 문단의 의도:</strong> 언제의 사실로 판단하고 누구의 세금이 달라지는지 정한다. 부당행위계산부인은 원칙적으로 행위 당시의 특수관계와 거래 사정을 기준으로 한다. 비특수관계인을 중간에 세운 거래도 법정 요건 아래 포함한다. 합병 등의 특수관계 판정에는 별도 기간 규정이 있으므로 원칙과 예외를 함께 본다.</p>
+<p><strong>교재 판례 — 88누5273, 1989.6.13.:</strong> 교재가 인용한 이 판결은 소득세법상 부당행위계산에 관한 것이다. 객관적으로 법정 특수관계 거래가 조세부담을 부당하게 감소시켰다면 별도의 주관적 조세회피 목적이나 실제 경제적 손실이 반드시 있어야 하는 것은 아니고, 정상성은 거래 당시를 기준으로 판단한다고 했다. 법인세 규정과 공통된 판단 취지를 연결한 것이지 사건의 적용 세목 자체가 법인세였다는 말은 아니다.</p>
+<p><strong>효과:</strong> 관청은 정상 시가 등에 따라 법인의 소득금액을 다시 계산해 익금산입·손금불산입 등으로 과세소득을 조정한다. 하지만 해당 매매·대여 계약의 <strong>사법상 효력이 자동 무효·취소되는 것은 아니다.</strong> 이익을 얻은 상대방에게는 10강의 귀속자 유형에 따른 소득처분을 검토한다.</p>
+<p><strong>기출 사례 — 2019_027:</strong> 신라회사가 유일한 주주 홍길동에게 시가 10억 원의 토지를 6억 원에 넘겼다. 부당행위계산부인 요건이 충족되고 주주가 임직원이 아니라는 문제의 전제에서 회사 소득은 시가 기준으로 4억 원을 조정한다. 이미 주주에게 넘어간 4억 원은 회사 안의 유보가 아니라 배당처분 대상이다. 그렇다고 계약상 대금이 민사적으로 자동 10억 원으로 고쳐지거나 4억 원을 다시 받게 되는 것은 아니다.</p>
+<p><strong>교재 마지막 사례 — 2023두32839, 2023.5.18.: 과세 경위와 판결 결론 구별.</strong> 교재는 제2차 합병에서 회사 주식은 낮게, 상대 회사 주식은 높게 평가되어 주주 간 이익이 이전되었다는 이유로 관청이 회사에 법인세를 경정하고 일부 귀속자에게 상여처분·소득금액변동통지를 한 경위만 제시한다. 이것은 <strong>관청이 한 처분의 설명</strong>이다.</p>
+<p>공식 판결에서는 최근 합병 등으로 과거 3년 순손익을 통상 방식으로 적용하기 어려운 상황에서 주식가액 평가방법이 문제였다. 대법원은 해당 방식에 기초한 처분이 위법하다는 원심의 결론을 유지하고 상고를 기각했다. 따라서 이 사례를 “법원도 그 과세·상여처분을 전부 적법하다고 인정했다”로 암기하면 반대다. <strong>쉬운 번역:</strong> 정상가격으로 고칠 수 있는 제도라도 그 정상가격 계산부터 법에 맞아야 한다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=234799">최종 판결 확인</a></p>
+<p><strong>다른 결론의 문제:</strong> 평가방법을 검증하지 않고 관청의 숫자를 그대로 인정하면 부인 제도가 공평과세 장치가 아니라 임의 과세 수단이 된다. 반대로 계약은 유효하다는 이유로 세무조정까지 불가능하다고 하면 특수관계 거래로 소득을 쉽게 이전할 수 있다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 거래 당시 / 객관적 부당 감소 / 계약 효력 유지 / 법인 조정+귀속자 처분. <strong>세무상 부인은 사실을 없애는 마술이 아니라 법정 기준으로 세금을 다시 계산하는 것이다.</strong></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>현금주의·발생주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 現(나타날 현), 金(쇠 금), 主(주인 주), 義(옳을 의); 發(필 발), 生(날 생). <strong>③ 합친 뜻:</strong> 현금 이동 중심·거래 발생 중심. <strong>④ 이름의 이유:</strong> 어느 시점에 기간 손익으로 잡을지 정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현금 수수 또는 회계상 거래 발생에 따른 수익·비용 인식. <strong>⑥ 쉬운 말:</strong> 입금 때인가 거래가 생긴 때인가. <strong>⑦ 사례:</strong> 12월인도·2월대금의 구별.</p>
+<p><strong>⑧ 시험:</strong> 현금주의가 법인세 일반 원칙인가. <strong>⑨ 비교·기억법:</strong> 발생주의도 단순 계약서 날짜만 뜻하지 않음.</p>
+<h3>권리의무확정·귀속·대손</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 權(권세 권), 利(이로울 리), 義(옳을 의), 務(힘쓸 무), 確(굳을 확), 定(정할 정); 歸(돌아갈 귀), 屬(무리 속); 貸(빌릴 대), 損(덜 손). <strong>③ 합친 뜻:</strong> 받고 줄 권리·의무가 충분히 정해짐·어디에 속함·채권 손실. <strong>④ 이름의 이유:</strong> 연도 간 임의 이동을 막고 경제적 실현을 반영하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 확정 사업연도에 손익을 반영하고 후속 회수불능은 별도 요건으로 처리. <strong>⑥ 쉬운 말:</strong> 받을 권리가 익었는지, 나중 못 받게 된 것인지 나눔. <strong>⑦ 사례:</strong> 확정 다음 해 파산은 법정 대손 검토.</p>
+<p><strong>⑧ 시험:</strong> 성립과 확정·확정과 수령. <strong>⑨ 비교·기억법:</strong> 제40조 문언은 확정.</p>
+<h3>유동화·도관·잉여금처분결의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 流(흐를 유), 動(움직일 동), 化(될 화); 導(이끌 도), 管(대롱 관); 剩(남을 잉), 餘(남을 여), 金(쇠 금), 處(곳 처), 分(나눌 분), 決(결단할 결), 議(의논할 의). <strong>③ 합친 뜻:</strong> 자산을 유통 가능한 형태로 바꿈·통로·남은 이익 사용 결정. <strong>④ 이름의 이유:</strong> 회사와 구성원 단계의 과도한 과세이연을 막기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 유동화회사 법정 과세특례와 배당결의 시점. <strong>⑥ 쉬운 말:</strong> 중간 회사가 공제받았는데 받는 쪽은 계속 미루어도 될까. <strong>⑦ 사례:</strong> 원리금 상환 뒤 배당 지급 약정.</p>
+<p><strong>⑧ 시험:</strong> 법률상 제한과 내부 유보 약정. <strong>⑨ 비교·기억법:</strong> 모든 배당·납세자에 결의일을 무조건 적용하지 않음.</p>
+<h3>수익비용 대응·선급금·시용판매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 收(거둘 수), 益(더할 익), 費(쓸 비), 用(쓸 용), 對(대할 대), 應(응할 응); 先(먼저 선), 給(줄 급), 金(쇠 금); 試(시험할 시), 用(쓸 용), 販(팔 판), 賣(팔 매). <strong>③ 합친 뜻:</strong> 수익과 관련 비용 맞추기·먼저 준 돈·써 보고 구매 결정. <strong>④ 이름의 이유:</strong> 기간 이익을 제대로 나타내기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 직접 원가의 수익 대응과 거래별 귀속 규정. <strong>⑥ 쉬운 말:</strong> 팔아서 번 해에 그 물건 원가도 맞추기. <strong>⑦ 사례:</strong> 미공급 상품 선급금은 즉시 매출원가 아님.</p>
+<p><strong>⑧ 시험:</strong> 인도·구입 의사·기간 만료. <strong>⑨ 비교·기억법:</strong> 비용 미확정이 자동 수익 이연 권리는 아님.</p>
+<h3>작업진행률·위탁매매</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 作(지을 작), 業(업 업), 進(나아갈 진), 行(다닐 행), 率(비율 률); 委(맡길 위), 託(부탁할 탁), 賣(팔 매), 買(살 매). <strong>③ 합친 뜻:</strong> 작업을 완료한 비율·남에게 맡긴 매매. <strong>④ 이름의 이유:</strong> 장기 용역·대행 거래의 실질에 맞추기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 진행기준 및 수탁자 매매일에 따른 귀속. <strong>⑥ 쉬운 말:</strong> 얼마나 끝냈는지와 실제 언제 팔렸는지 보기. <strong>⑦ 사례:</strong> 장기공사 진행30%의 법정 수익계산.</p>
+<p><strong>⑧ 시험:</strong> 진행률 원칙·인도 특례. <strong>⑨ 비교·기억법:</strong> 위탁자에게 현금 정산한 날과 다름.</p>
+<h3>부당행위계산부인</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 부), 當(마땅 당), 行(다닐 행), 爲(할 위), 計(셀 계), 算(셀 산), 否(아닐 부), 認(알 인). <strong>③ 합친 뜻:</strong> 부당한 거래·계산을 세무상 그대로 인정하지 않음. <strong>④ 이름의 이유:</strong> 거래형식 남용을 통한 이익 이전을 막기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 특수관계 거래로 조세부담을 부당 감소시킨 경우 정상 기준 재계산. <strong>⑥ 쉬운 말:</strong> 가까운 사이에서 비정상적으로 줄인 회사 소득을 바로잡기. <strong>⑦ 사례:</strong> 시가10억 토지6억 양도.</p>
+<p><strong>⑧ 시험:</strong> 경제적 합리성·법정 유형. <strong>⑨ 비교·기억법:</strong> 민사계약 자동 무효 아님.</p>
+<h3>특수관계인·쌍방관계·경제적 합리성</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 特(특별할 특), 殊(다를 수), 關(빗장 관), 係(맬 계), 人(사람 인); 雙(쌍 쌍), 方(모 방); 經(지날 경), 濟(건널 제), 的(과녁 적), 合(합할 합), 理(다스릴 리), 性(성품 성). <strong>③ 합친 뜻:</strong> 법정 특별 관계·서로의 관계·경제적으로 납득할 성격. <strong>④ 이름의 이유:</strong> 관계만으로 모든 거래를 불리하게 취급하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경영지배·경제 연관 등 법정 관계와 거래 당시 정상성 판단. <strong>⑥ 쉬운 말:</strong> 왜 그런 가격·조건이었는지 그때 사정으로 보기. <strong>⑦ 사례:</strong> 상표 가치 형성·관리수수료 포함 사정.</p>
+<p><strong>⑧ 시험:</strong> 무상이라고 자동 부인인가. <strong>⑨ 비교·기억법:</strong> 단순 개인 친분과 법정 관계 구별.</p>
+<h3>시가·보충적 평가·상관행</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 時(때 시), 價(값 가); 補(기울 보), 充(찰 충), 的(과녁 적), 評(평할 평), 價(값 가); 商(장사 상), 慣(버릇 관), 行(다닐 행). <strong>③ 합친 뜻:</strong> 정상 거래가격·부족할 때 법정 평가·거래 관행. <strong>④ 이름의 이유:</strong> 임의 가격으로 과세하지 않기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 비특수관계 정상가격을 우선하고 불분명하면 법정 순서 적용. <strong>⑥ 쉬운 말:</strong> 비슷한 조건의 정상 거래가 얼마였나. <strong>⑦ 사례:</strong> 보증·운송 포함 여부가 다른 상품가격.</p>
+<p><strong>⑧ 시험:</strong> 주식·가상자산 감정 제외 등. <strong>⑨ 비교·기억법:</strong> 아무 감정액이나 세무서 마음대로 선택 아님.</p>
+<h3>이익분여·신주인수·차환</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 利(이로울 이), 益(더할 익), 分(나눌 분), 與(줄 여); 新(새 신), 株(그루 주), 引(끌 인), 受(받을 수); 借(빌릴 차), 換(바꿀 환). <strong>③ 합친 뜻:</strong> 이익을 나누어 줌·새 주식을 인수함·바꾸어 조달함. <strong>④ 이름의 이유:</strong> 우회 거래로 다른 관계자에게 가치를 넘기는 것을 파악하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 자본·자산 거래를 통한 가치 이전. <strong>⑥ 쉬운 말:</strong> 회사에 넣은 돈이 다른 주주에게 어떤 이익을 주나. <strong>⑦ 사례:</strong> 신주 고가 인수와 다른 특수관계 주주.</p>
+<p><strong>⑧ 시험:</strong> 일반 자산 고가 매입과 별도 자본거래 유형. <strong>⑨ 비교·기억법:</strong> 발행회사·인수자·다른 주주를 나눠 그리기.</p>
+<h3>익금산입·손금불산입·소득처분</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 益(더할 익), 金(쇠 금), 算(셀 산), 入(들 입); 損(덜 손), 不(아닐 불); 所(바 소), 得(얻을 득), 處(곳 처), 分(나눌 분). <strong>③ 합친 뜻:</strong> 수익에 더함·비용에서 제외·귀속 분류. <strong>④ 이름의 이유:</strong> 법인과 귀속자 양쪽의 세금을 맞추기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법인 소득 조정과 이익 귀속자 세목·소득 종류 연결. <strong>⑥ 쉬운 말:</strong> 회사 계산을 고친 뒤 누가 얻었는지도 보기. <strong>⑦ 사례:</strong> 임직원 아닌 주주 저가양도 차액 배당.</p>
+<p><strong>⑧ 시험:</strong> 유보와 이미 나간 이익. <strong>⑨ 비교·기억법:</strong> 관청의 처분 경위와 법원 최종 판단을 구별.</p>
+<h1>기출 TOP5 · 시간과 거래를 나누어 풀기</h1>
+<table>
+<thead>
+<tr>
+<th>우선순위</th>
+<th>기출</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2021_059</td>
+<td>제40조의 확정·권리의무확정주의</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2019_023</td>
+<td>상품 판매 인도일</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2021_065</td>
+<td>특수관계라도 경제적 합리성 판단 필요</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2019_027</td>
+<td>저가양도 차액의 배당처분, 유보 아님</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2021_060</td>
+<td>실현 구조와 현금주의 구별</td>
+</tr>
+</tbody></table>
+<p>2019_021까지 총 6문항을 모두 해설했다. TOP5는 학습 우선순위이며 실제 오답률이 아니다. 함정은 ‘받아야 익금’, ‘돈을 쓰면 즉시 손금’, ‘비용이 덜 정해지면 수익도 무조건 이연’, ‘시가 차이면 무조건 부인’, ‘부인되면 계약 무효’다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 12월 인도, 2월 입금.</strong> 일반 상품을 12월에 인도하고 다음 해 2월 돈을 받았다. 돈 받은 해가 무조건 귀속연도인가? <strong>정답:</strong> 상품 판매의 일반 인도 기준에 따라 12월이 속한 해의 손익을 본다. <strong>출제 의도:</strong> 현금과 권리 확정의 구별.</p>
+<p><strong>응용 2 · 확정 뒤 파산.</strong> 올해 적법하게 익금이 확정된 채권이 내년 채무자 파산으로 회수 불능이 되었다. 올해 익금을 처음부터 지울까? <strong>정답:</strong> 원래 귀속과 이후 법정 대손 처리를 구분한다. <strong>출제 의도:</strong> 기간별 사건의 분리.</p>
+<p><strong>응용 3 · 다른 조건의 가격.</strong> 독립 고객 가격100은 보증·운송 포함이고 계열사 가격70은 하자품·자체 운송이다. 숫자가 낮으므로 즉시 부인할까? <strong>정답:</strong> 조건 차이와 경제적 합리성·시가 및 법정 요건을 먼저 확인한다. <strong>출제 의도:</strong> 비교 가능성.</p>
+<p><strong>응용 4 · 계약 취소 요구.</strong> 주주에게 시가보다 싸게 판 부동산 거래가 세무상 부인되자 회사가 그 이유만으로 매매계약이 자동 무효라고 주장했다. <strong>정답:</strong> 세무상 재계산이 사법상 효력을 자동 제거하지 않는다. <strong>출제 의도:</strong> 과세효과와 민사효과 구별.</p>
+<p><strong>응용 5 · 판례의 중간만 읽기.</strong> 교재에 ‘관청이 5억 원을 익금에 더했다’고 적혀 있다. 이것만 보고 대법원이 과세를 인정했다고 결론 내렸다. <strong>정답:</strong> 처분 경위와 재판 결론은 다르므로 주문·판단 이유까지 확인해야 한다. <strong>출제 의도:</strong> 사례의 주장·처분·판결 구별.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제12강</h1>
+<p><strong>TOP3:</strong> 권리의무확정 / 수익·비용 대응 / 부당행위계산부인의 요건·효과.</p>
+<table>
+<thead>
+<tr>
+<th>핵심</th>
+<th>한 줄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>귀속 원칙</td>
+<td>익금·손금 확정된 사업연도, 현금 수령만 보지 않음</td>
+</tr>
+<tr>
+<td>확정 정도</td>
+<td>단순 성립 아닌 실현 가능성의 상당한 성숙</td>
+</tr>
+<tr>
+<td>나중 회수 불능</td>
+<td>원래 귀속과 법정 대손 시점 구별</td>
+</tr>
+<tr>
+<td>상품·시용</td>
+<td>인도일 / 구입 의사 또는 법정 확정일</td>
+</tr>
+<tr>
+<td>기타 자산</td>
+<td>청산일, 선행 등기·인도·사용수익 예외</td>
+</tr>
+<tr>
+<td>건설 등</td>
+<td>법정 진행률 원칙·인도기준 특례</td>
+</tr>
+<tr>
+<td>대응 원칙</td>
+<td>확정 수익에 비용을 대응, 비용 미확정이 자동 수익 이연 아님</td>
+</tr>
+<tr>
+<td>부인 요건</td>
+<td>법정 특수관계·유형·경제적 불합리·부당한 세부담 감소</td>
+</tr>
+<tr>
+<td>시가</td>
+<td>정상 거래 우선, 불분명하면 법정 평가 순서·예외</td>
+</tr>
+<tr>
+<td>시점</td>
+<td>거래 당시 원칙, 주관적 회피 의도만 찾지 않음</td>
+</tr>
+<tr>
+<td>효과</td>
+<td>법인 소득 재계산+귀속자 소득처분, 계약 효력 자동 소멸 아님</td>
+</tr>
+</tbody></table>
+<p><strong>판례 연결:</strong> 선급금≠즉시 원가 / 미완성 기반시설≠토지 수익 자동 이연 / 상표 무상사용≠자동 부인 / 신주 고가 인수는 다른 주주 이익 분여 구별.</p>
+<p><strong>반드시 외울 문장:</strong> 관청이 과세했다는 사실은 법원이 그 과세를 적법하다고 인정했다는 뜻이 아니다. 2023두32839의 최종 결론을 확인한다.</p>
+<p><strong>사례를 풀 순서:</strong> 소득 종류 → 확정·개별 귀속 규정 → 대응 비용 → 특수관계·합리성 → 정상 시가 → 법인 조정·귀속자 처분.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 연말·연초 거래의 귀속과 저가 거래의 세무상 효과를 설명한다. 🟡 <strong>복습 필요:</strong> 기본은 알지만 대손·선급금·신주 인수의 예외에서 흔들린다. 🔴 <strong>이해 부족:</strong> 현금 수령일만 보거나 특수관계 거래를 모두 무효라고 생각한다. 실제 답변 전에는 수준을 단정하지 않는다.</p>
+<p><strong>복습 TOP3:</strong> 12-1~12-2 권리 확정 / 12-3~12-4 대응과 귀속 / 12-5~12-8 부인·시가·효과. 교재 219쪽 요약을 원인→사례→결론 순서로 말해 본다.</p>
+<h1>문제 부록 · 6문항·24개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_059"><h4>기출문제 · 세법_기출2021_059</h4><p class="question-stem">[2021 기말고사 · 59번]<br>다음은 법인세법 제40조 제1항이다. 빈칸 안에 들어갈 말과, 이 규정을 흔히 부르는 말로 적합한 것이 바르게 묶인 것을 고르시오.<br>내국법인의 각 사업연도의 익금과 손금의 귀속사업연도는 그 익금과 손금이 [ ]된 날이 속하는 사업연도로 한다.</p><ol class="choices"><li>확정 – 권리(의무)확정주의</li><li>실현 – 채무확정주의</li><li>발생 – 발생주의</li><li>성립 – 실현주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 정답. 조문은 확정이라고 하며 권리·의무확정주의를 원칙으로 한다. 단순 계약 성립이나 실제 현금 수수와 구별한다.</li><li><strong>비선택</strong> · 실현은 관련 설명에 쓰이는 말이지만 이 조문의 빈칸 문언은 확정이다. 익금과 손금을 모두 다루므로 채무만의 설명으로 끝내지 않는다.</li><li><strong>비선택</strong> · 회계 발생주의와 법인세의 법정 확정기준을 혼동했다.</li><li><strong>비선택</strong> · 성립만으로 언제나 충분하지 않다. 실현 가능성의 상당한 성숙을 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 1번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_060"><h4>기출문제 · 세법_기출2021_060</h4><p class="question-stem">[2021 기말고사 · 60번]<br>우리나라 법인세법이 원칙적으로 손익의 확정시기에 관하여 실현주의를 규정하거나 채택하고 있다고 할 때, 그 세부내용을 이루는 원칙들로서 가장 거리가 먼 것을 고르시오.</p><ol class="choices"><li>권리확정주의</li><li>역사적 원가 주의</li><li>현금주의</li><li>수익 – 비용 대응 원칙</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 권리가 법정 기준으로 확정되었을 때 익금 귀속을 판단하는 구조로 관련된다.</li><li><strong>비선택</strong> · 취득원가를 기초로 법정 비용을 배분하고 일반 미실현 평가손익을 제한하는 구조와 연결된다.</li><li><strong>선택</strong> · 가장 거리가 먼 것으로 정답. 실제 현금 수수만으로 귀속시키는 것이 법인세 일반 원칙은 아니다.</li><li><strong>비선택</strong> · 수익에 대응하는 원가·비용을 같은 기간·대상에 맞추는 구조다. 비용 미확정이 언제나 수익을 뒤로 미루는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_065"><h4>기출문제 · 세법_기출2021_065</h4><p class="question-stem">[2021 기말고사 · 65번]<br>다음 중 법인세법의 부당행위계산부인 제도에 관한 설명으로 옳지 않은 것을 고르시오.</p><ol class="choices"><li>특수관계인 간의 거래에 적용된다.</li><li>일단 법인세 관련 법령 등에서 정하는 시가에 따라 거래하지 않으면, 그 거래의 구체적인 정황을 불문하고 익금산입이나 손금불산입의 결과가 생긴다.</li><li>법인세법 시행령에서 그 적용대상이 되는 구체적인 거래 유형들을 규정하면서 또 일종의 포괄 조항으로 ‘기타 이익분여’에 관한 규정도 두고 있다.</li><li>자본거래를 통한 주주 간 이익분여 행위에도 적용될 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 법정 특수관계인과의 거래가 적용 요건의 중심이다. 법정 간접 거래와 관계 판정 규정도 확인한다.</li><li><strong>선택</strong> · 틀린 설명이므로 선택. 거래 당시 사정과 경제적 합리성, 시가·법정 유형 등을 종합해야 한다. 단순한 숫자 차이만으로 모든 경우 자동 부인하지 않는다.</li><li><strong>비선택</strong> · 시행령은 개별 유형과 유사·기타 이익 분여 유형을 규정한다. 포괄 규정도 법 취지·요건의 한계를 받는다.</li><li><strong>비선택</strong> · 자본거래를 통한 주주 간 이익 분여도 법정 유형이다. 다만 신주 고가 인수를 일반 자산 고가 매입과 기계적으로 동일시하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_021"><h4>기출문제 · 세법_기출2019_021</h4><p class="question-stem">[2019 기말고사 · 21번 / 자체 풀이]<br>법인세법 제40조 제1항은 “각 사업연도의 익금과 손금의 귀속사업연도는 그 익금과 손금이 확정된 날이 속하는 사업연도로 한다”고 규정하고 있다. 현행 판례와 학설에 의할 때, 이 조항과 가장 관계가 희박한 것은?</p><ol class="choices"><li>권리확정주의</li><li>현금주의</li><li>채무확정주의</li><li>실현주의</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 권리 확정에 따른 익금 귀속과 직접 관련된다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 현금의 실제 수입·지출만으로 귀속을 결정하는 기준은 제40조의 일반 원칙과 가장 멀다.</li><li><strong>비선택</strong> · 채무 확정에 따른 손금 귀속과 관련된다.</li><li><strong>비선택</strong> · 소득의 법정 실현·확정을 파악하는 구조와 관련된다. 단순 성립과 현금 수령을 동일시하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 2번.<br><br>법인세법 제40조는 익금·손금이 확정된 날이 속하는 사업연도에 귀속시키는 권리·채무확정주의를 규정한다. 실제로 현금을 받거나 지급한 때만을 기준으로 삼는 현금주의와는 다르므로 가장 관계가 희박한 것은 ②이다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_023"><h4>기출문제 · 세법_기출2019_023</h4><p class="question-stem">[2019 기말고사 · 23번 / 자체 풀이]<br>제조업을 영위하는 법인이 생산한 제품을 판매한 경우에 법인세법상 그 손익이 귀속되는 사업연도로 가장 타당한 것은?</p><ol class="choices"><li>생산한 날이 속하는 사업연도</li><li>판매계약을 체결한 날이 속하는 사업연도</li><li>인도한 날이 속하는 사업연도</li><li>대금을 수령한 날이 속하는 사업연도</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 생산만 마쳤다고 판매수익이 발생한 것은 아니다. 재고로 남아 있을 수 있다.</li><li><strong>비선택</strong> · 일반 상품 판매는 계약 체결만이 아니라 인도라는 개별 귀속 기준을 본다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 통상적인 제품 판매의 손익은 인도일이 속하는 사업연도에 귀속한다.</li><li><strong>비선택</strong> · 현금 수령일을 일반 기준으로 삼는 현금주의가 아니다. 선지급·후지급이면 인도일과 다를 수 있다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 3번.<br><br>통상적인 제품·상품 판매의 손익 귀속은 인도일이 속하는 사업연도가 원칙이다. 단순한 생산 완료·계약 체결이나 현금 수령만으로 정하지 않는다. 이는 법인세법 제40조의 위임에 따른 시행령상 자산판매 손익 귀속기준을 적용한 것이다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_027"><h4>기출문제 · 세법_기출2019_027</h4><p class="question-stem">[2019 기말고사 · 27번 / 자체 풀이]<br>(주)신라는 이 회사의 유일한 주주인 홍길동에게 토지를 6억 원에 양도하였으나 관할세무서장은 양도 당시에 그 토지의 시가가 10억 원이라는 사실을 발견하였다. 이 경우 (주)신라와 홍길동에게 생기는 세법상 효과로서 가장 잘못 설명된 것은?</p><ol class="choices"><li>(주)신라는 홍길동에게 토지를 10억 원에 양도한 것으로 취급된다.</li><li>차액 4억 원은 유보로 처분한다.</li><li>관할세무서장은 (주)신라에게 소득금액변동통지서를 송달하고 그 사실을 홍길동에게 알려야 한다.</li><li>홍길동은 (주)신라로부터 4억 원의 배당을 받은 것으로 취급된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문제의 부인 요건이 충족되면 세무상 소득은 시가10억을 기준으로 계산한다. 민사 계약대금이 자동10억으로 바뀐다는 뜻은 아니다.</li><li><strong>선택</strong> · 잘못된 보기로 제공 자체 풀이의 정답. 차액4억은 주주에게 이미 귀속되어 사외유출되었으므로 회사에 남는 유보가 아니다.</li><li><strong>비선택</strong> · 부인에 따른 귀속자 소득처분과 소득금액변동통지의 연결을 묻는다. 구체적 통지·원천징수 절차는 법정 규정에 따른다.</li><li><strong>비선택</strong> · 임직원이 아닌 주주에게 이익이 귀속되었다는 전제에서는 배당처분이다. 임직원인 주주라면 지위에 따른 상여 등 분류를 따로 확인한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 2번.<br><br>특수관계인인 주주에게 토지를 시가보다 4억 원 싸게 넘겼으므로 부당행위계산 부인에 따라 법인 소득을 시가 기준으로 계산한다. 차액은 이미 사외로 유출되어 주주에게 귀속되었으므로 회사 안에 남는 유보가 아니라 배당처분 대상이라는 것이 문제의 전제이다. 홍길동이 임직원이 아닌 주주로서 이익을 받았다는 전제이며, 임직원 등 귀속자의 지위에 따라 다른 소득처분이 적용될 수 있다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsiSeq=206289" target="_blank" rel="noopener noreferrer">법인세법(2019년 시행본)</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 12' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 12|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

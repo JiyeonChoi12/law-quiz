@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제15강 부가가치세(3) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 15</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제15강 부가가치세(3) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>제15강 부가가치세(3) · 세금이 0이어도 결과는 같지 않다</h1>
+<p>교재257~274쪽과15강 강의록의 마지막 내용을 모두 연결한다. 영세율·면세→누적효과→부수 공급→국제거래→전자적 용역 순서다. 교재 표15-1의 숫자와 장례식장·해외 채권 중개 사례를 포함했다. 대화는 이해용 재구성이다.</p>
+<h2>마지막 강의 다섯 질문</h2>
+<p>① <strong>결국 무엇인가?</strong> 부가세를 받지 않는 두 제도의 차이, 면세의 범위, 국경을 넘는 소비의 과세다. ② <strong>왜 생겼나?</strong> 생필품 부담을 줄이면서도 수출품에 국내 세금이 남지 않도록 하고, 국내 소비가 해외 공급이라는 이유만으로 빠져나가지 않게 하기 위해서다. ③ <strong>전체 위치는?</strong> 부가세 기본 구조에 예외와 국제거래를 결합하는 마지막 강이다. ④ <strong>연결은?</strong> <mark class="blue">13강의 매입세액 공제와14강의 사업자·증빙을 적용한다. 다음 강은 없으며, 이제 세법 총론·소득세·법인세·부가세를 함께 복습한다.</mark> ⑤ <strong>모르면?</strong> 면세면 과거 세금까지 모두 없어지는 줄 알거나, 달러로 받으면 무조건 영세율이라고 생각한다.</p>
+<p><mark class="yellow">영세율은 매출세율0%이면서 적법한 매입세액 공제를 유지하고, 면세는 관련 매입세액을 원칙적으로 공제하지 않는다.</mark></p>
+<p><strong>중요도:</strong> ★★★★★ 영세율/면세·누적효과·소비지국 원칙 / ★★★★☆ 면세 범위·부수 공급·공급장소 / ★★★☆☆ 외화획득 세부 범위·전자적 용역 / ★★☆☆☆ 심화 상호주의 세부 요건. 제공 문제의 분포와 학습 중요도를 구별하며 실제 오답률은 추정하지 않는다.</p>
+<h2 id="tax-15-01" data-concept-id="tax-15-01">15-1. 영세율과 면세: 매입세액이 갈림길 ★★★★★</h2>
+<p><strong>교재258·262~265쪽 · 이 문단을 넣은 이유:</strong> 겉으로 매출세금이 없다는 결과만 보고 두 제도를 혼동하지 않게 한다.</p>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>영세율</th>
+<th>면세</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>과세 체계 안인가</td>
+<td>과세거래로서 세율0%</td>
+<td>해당 공급의 세금을 면제</td>
+</tr>
+<tr>
+<td>매출세액</td>
+<td>0</td>
+<td>해당 공급에 부과하지 않음</td>
+</tr>
+<tr>
+<td>관련 매입세액</td>
+<td>법정 요건을 갖추면 공제·환급</td>
+<td>원칙적으로 불공제</td>
+</tr>
+<tr>
+<td>앞 단계 세금</td>
+<td>적법한 공제를 통해 제거 가능</td>
+<td>비용·가격 속에 남을 수 있음</td>
+</tr>
+<tr>
+<td>대표 목적</td>
+<td>수출 등 소비지국 과세·법정 정책</td>
+<td>생활 부담·공익·과세 기술상 고려</td>
+</tr>
+</tbody></table>
+<p><strong>쉬운 사례:</strong> 물건을100+세금10에 사서 영세율로 수출하면 매출세액0에서 공제 가능한10을 빼서 환급받을 수 있다. 같은10을 부담했어도 면세사업 관련 매입이면 원칙적으로 돌려받지 못한다. 그래서 영세율을 완전면세, 일반 면세를 불완전면세라고 설명한다.</p>
+<p><mark class="pink">교재의 ‘전액 환급’은 공제 가능한 적법한 매입세액을 전제로 한다.</mark> 영세율 사업자도 사업 무관·기업업무추진비 등 법정 불공제 세액까지 모두 환급받는 것은 아니다. 면세도 사업자 자체에 모든 세금이 없다는 뜻이 아니라 특정 공급의 부가세 면제를 말한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 영(0)세율 / 매입 공제 유지 / 면세 불공제 / <strong>0을 매기는 것과 세금 연결에서 빠지는 것은 다르다.</strong></p>
+<h2 id="tax-15-02" data-concept-id="tax-15-02">15-2. 수출·국외용역·외국항행의 영세율 ★★★★☆</h2>
+<p><strong>교재258~259쪽 · 제21~23조의 취지:</strong> 국내에서 만든 물건에 국내 소비세가 붙은 채 외국으로 나가고, 수입국에서 또 소비세가 붙는 부담을 조정한다.</p>
+<p>재화의 수출은 단순히 수출신고한 물건만 떠올려서는 부족하다. 교재는 ① 내국물품을 외국으로 반출하는 경우(우리나라 선박이 잡거나 채집한 수산물 포함) ② 중계무역 등 대통령령이 정한 거래로 국내 사업장에서 계약·대가 수령 등이 이루어지는 경우 ③ 법정 내국신용장·구매확인서에 따른 국내 공급 등을 든다. <strong>국내에서 납품했다고 영세율이 무조건 배제되는 것은 아니다.</strong> 각 법정 수출 범위와 증빙을 확인한다.</p>
+<p><strong>이해 사례:</strong> 제조업체가 수출업체에 물품을 납품한다. 물건을 받는 곳이 국내라는 사실만으로 끝내지 않고 내국신용장·구매확인서와 법정 요건을 본다.14강의 수정세금계산서 사유와 연결된다.</p>
+<p>국외에서 공급하는 용역에도 영세율을 적용한다. 외국 회사와 계약한 것만으로 국외 공급이 되는 것은 아니며 실제 법정 공급장소를 본다. <strong>외국항행용역</strong>은 선박·항공기로 여객·화물을 국내→국외, 국외→국내, 국외→국외로 수송하는 것과 법정 부수 공급을 포함한다. 국내선 운송까지 이름이 항공이라서 모두 영세율인 것은 아니다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 반출 / 중계무역 / 내국신용장·구매확인서 / 국외 공급 / 외국항행 / <strong>상대가 외국인인가가 아니라 법이 정한 거래인가를 묻는다.</strong></p>
+<h2 id="tax-15-03" data-concept-id="tax-15-03">15-3. 외화를 벌었다고 모두 영세율일까 ★★★☆☆</h2>
+<p><strong>교재259~262쪽 · 제24·25조와 시행령33조의 역할:</strong> 국내 공급이지만 수출에 준하여 장려할 거래의 조건을 정한다. 이 부분은 목록을 외우기 전에 ‘공급받는 사람·업종·대금 받는 방법·상호주의’를 순서대로 확인한다.</p>
+<p><strong>외교공관 관련:</strong> 우리나라에 상주하는 외교공관·영사기관·국제연합과 준하는 국제기구 등에 대한 법정 공급이 대상이다. 명예영사관원을 장으로 하는 영사기관은 교재의 예외다. 소속 직원 등도 외국 공무원 신분·이에 준하는 확인과 <strong>내국인이 아닐 것</strong>, 법정 공급 방법을 확인한다.</p>
+<p><strong>교재 시행령33조 제1항의 확인 절차:</strong> 지정된 외교관면세점에서 외교관 면세카드를 확인하고 성명·국적·카드번호·품명·수량·가액 등을 판매기록표에 남긴다. 열거 대상은 음식·숙박, 법정 개별소비세 물품, 법정 석유류, 주류, 전력, 외교부장관 승인 자동차다. 외국 여권을 보여 준 모든 관광객에게 적용되는 규정이 아니다.</p>
+<p><strong>교재 제2항의 국내 공급 목록:</strong> 국내사업장이 없는 비거주자·외국법인에게 공급하고 외국환은행에서 원화로 받는 등 법정 수령 방법을 갖춘 거래를 전제로 한다.</p>
+<table>
+<thead>
+<tr>
+<th>교재의 범위</th>
+<th>놓치기 쉬운 조건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지정 국내사업자에게 인도하는 재화</td>
+<td>그 국내사업자의 과세사업에 사용</td>
+</tr>
+<tr>
+<td>전문·과학·기술 서비스</td>
+<td>수의업·제조업 회사본부·기타 산업 회사본부 제외</td>
+</tr>
+<tr>
+<td>무형재산권 임대·통신</td>
+<td>해당 법정 업종인지 확인</td>
+</tr>
+<tr>
+<td>컨테이너수리·보세구역 보관창고·해운대리점/중개/선박관리</td>
+<td>통상 물류업 전부가 아님</td>
+</tr>
+<tr>
+<td>뉴스·영상음반 제작배급·소프트웨어·컴퓨터·자료처리·호스팅·포털 등</td>
+<td>영화관·비디오 감상실 제외, 열거 업종 범위</td>
+</tr>
+<tr>
+<td>상품중개·전자상거래 소매중개</td>
+<td>법정 거래형태 확인</td>
+</tr>
+<tr>
+<td>사업시설관리·사업지원</td>
+<td>조경관리·여행사·기타 여행보조 제외</td>
+</tr>
+<tr>
+<td>투자자문</td>
+<td>법정 투자자문업</td>
+</tr>
+<tr>
+<td>교육지원</td>
+<td>일반 교육 전체가 아님</td>
+</tr>
+<tr>
+<td>보건업</td>
+<td>임상시험용역에 한정</td>
+</tr>
+<tr>
+<td>유사 거래</td>
+<td>부령으로 정한 범위</td>
+</tr>
+</tbody></table>
+<p>교재는 전문서비스업·해당 사업지원·투자자문 등에 상대국의 동일 면세 조건도 붙인다. 세부 업종 분류는 심화 확인 사항이지만 <strong>달러 입금 한 가지로 영세율을 판정하면 안 된다</strong>는 것이 필수다.</p>
+<p><strong>판례 — 2005두12718, 2007.6.14.</strong> 납세자는 외화획득 거래라는 이유로 영세율 적용을 주장했다. 교재가 인용한 법원 판단은 국내 공급에 대한 예외 영세율은 수출에 준하고 외환 관리·징수질서를 해치지 않는 법정 범위에서 제한적으로 인정된다는 것이다. 당시 시행령의 ‘외국환은행에서 원화로 받는 것’도 단순 권고가 아니라 요건으로 엄격히 읽었다. 세부 미제시 사실은 만들지 않는다. <strong>번역:</strong> 외화 벌면 보상해 준다는 막연한 정책이 아니라 정해진 통로와 조건을 지켜야 한다.</p>
+<p><strong>상호주의:</strong> 영세율을 적용받는 사업자가 비거주자·외국법인이면 그 나라가 우리 거주자·내국법인에게 동일 면세를 하는지 본다. 유사 소비세 자체가 없는 경우도 조문상 동일 면세 범위에 포함한다. <strong>서비스를 사는 외국인</strong>과 <strong>영세율을 적용받는 외국 사업자</strong>를 혼동하지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 외화획득≠자동 영세율 / 요건 엄격 / 상호주의 / <strong>좋은 정책 목적만으로 법정 조건을 건너뛸 수 없다.</strong></p>
+<h2 id="tax-15-04" data-concept-id="tax-15-04">15-4. 면세 대상: 같은 면세라도 이유가 다르다 ★★★★★</h2>
+<p><strong>교재263~265쪽 · 제26조의 취지:</strong> 생필품·복지·문화 등의 부담을 줄이거나 과세 구조상 어려움을 고려한다. 모든 면세의 이유가 저소득층 지원 하나인 것은 아니다. 2021_074는 금융업의 이유를 다른 문화·교육 계열과 구별한다.</p>
+<p><strong>교재의20개 항목을 빠짐없이, 조건과 함께 정리.</strong> 아래 표현은 요지이며 각 ‘법정’ 대상은 시행령·특례까지 확인한다.</p>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>면세 대상 요지</th>
+<th>기억할 경계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>미가공 식료품, 법정 국내산 비식용 농축수임산물</td>
+<td>가공·식용·국내산 조건 구별</td>
+</tr>
+<tr>
+<td>2</td>
+<td>수돗물</td>
+<td>모든 음료라는 뜻 아님</td>
+</tr>
+<tr>
+<td>3</td>
+<td>연탄·무연탄</td>
+<td>모든 에너지 아님</td>
+</tr>
+<tr>
+<td>4</td>
+<td>여성용 생리 처리 위생용품</td>
+<td>품목 범위</td>
+</tr>
+<tr>
+<td>5</td>
+<td>법정 의료보건·수의 용역과 혈액</td>
+<td>모든 진료·미용 시술 일률 면세 아님</td>
+</tr>
+<tr>
+<td>6</td>
+<td>법정 교육용역</td>
+<td>교육이라는 이름만으로 부족</td>
+</tr>
+<tr>
+<td>7</td>
+<td>여객운송</td>
+<td>법정 항공·고속전세버스·택시·특수차·특종선박·고속철도·관광유흥 운송 등 제외</td>
+</tr>
+<tr>
+<td>8</td>
+<td>도서·대여·실내 열람, 신문·잡지·관보·법정 뉴스·방송</td>
+<td>광고 제외</td>
+</tr>
+<tr>
+<td>9</td>
+<td>우표·인지·증지·복권·공중전화</td>
+<td>수집용 우표 제외</td>
+</tr>
+<tr>
+<td>10</td>
+<td>법정 저가 담배·특수용 담배</td>
+<td>일반 담배 전부가 아님</td>
+</tr>
+<tr>
+<td>11</td>
+<td>법정 금융·보험</td>
+<td>기술적 과세 곤란 등의 이유</td>
+</tr>
+<tr>
+<td>12</td>
+<td>법정 주택과 부수 토지 임대</td>
+<td>상가 임대와 구별</td>
+</tr>
+<tr>
+<td>13</td>
+<td>법정 공동주택 어린이집 임대</td>
+<td>관리규약·관리주체/입주자대표회의·복리시설 조건</td>
+</tr>
+<tr>
+<td>14</td>
+<td>토지</td>
+<td>건물과 묶어 팔 때 구분</td>
+</tr>
+<tr>
+<td>15</td>
+<td>저술·작곡 등 법정 직업상 인적 용역</td>
+<td>개인이 하는 모든 일 아님</td>
+</tr>
+<tr>
+<td>16</td>
+<td>법정 예술창작품·예술문화행사·아마추어 운동경기</td>
+<td>행사 이름만으로 결정하지 않음</td>
+</tr>
+<tr>
+<td>17</td>
+<td>도서관·과학관·박물관·미술관·동식물원 등 법정 입장</td>
+<td>문화 접근 지원</td>
+</tr>
+<tr>
+<td>18</td>
+<td>종교·자선·학술·구호 등 공익단체의 법정 공급</td>
+<td>비영리면 모든 공급 면세라는 뜻 아님</td>
+</tr>
+<tr>
+<td>19</td>
+<td>국가·지자체·지자체조합의 법정 공급</td>
+<td>14강의 대가 있는 시설 임대 사례 주의</td>
+</tr>
+<tr>
+<td>20</td>
+<td>국가·지자체·지자체조합·법정 공익단체에 무상 공급</td>
+<td>유상 납품까지 일률 면세 아님</td>
+</tr>
+</tbody></table>
+<p><strong>기출 사례:</strong> 국가에 유상으로 납품한다고20호 면세가 되는 것이 아니다. 토지와 건물을 한 번에 팔면 토지 면세와 건물의 과세 여부를 구별하고 공급가액을 나눈다. 실지거래가액을 우선하되 불분명하거나 법정 안분 요건에 해당하면 보충 기준을 본다. 건물도 개별 특례가 있을 수 있으므로 ‘건물은 어떤 경우든100% 과세’라고 일반화하지 않는다.</p>
+<p><strong>판례 — 2015두60662, 2019.1.17.</strong> 교재는 금융·보험 면세의 이유와 비과세와의 차이를 소개한다. 은행·대부업자는 법정 인가·등록 등을 거쳐 자금 융통·중개 용역을 업으로 제공하고 이자 등을 받는다. 법원의 고민은 그 이자에 서비스 대가 외 요소도 섞여 있어 용역 대가만 정확히 분리하기 어렵다는 것이다. 그래서 공급 대상이지만 면세한다. 반면 은행업 등의 개입 없이 이루어진 개별 자금 융통은 해당 사안의 구조에서 공급 과세대상 자체가 아닌 비과세와 구별했다.</p>
+<p><strong>문장 번역:</strong> 공급에 해당→경제적 서비스 거래다 / 대가 외 요소 혼합→받은 이자 전부가 서비스 수수료는 아니다 / 면제→과세대상이지만 법이 빼 준다 / 비과세→처음부터 해당 공급 과세대상인지가 다르다. <strong>주의:</strong> 돈을 빌려 준 사람의 모든 활동이 자동 비과세라는 일반명제가 아니며 사업형태·법정 용역 범위를 확인한다. <strong>시험·한 줄:</strong> <strong>면세는 법에 열거된 범위, 비과세는 과세대상 여부의 문제다.</strong></p>
+<h2 id="tax-15-05" data-concept-id="tax-15-05">15-5. 면세를 끼웠는데 왜330원이341원이 될까 ★★★★★</h2>
+<p><strong>교재265~266쪽 · 표15-1을 그대로 계산.</strong> 각 사업자는 자기 단계에서100원의 이윤을 남긴다. 도매상의 앞 단계 매입은 이 단순 예시에서 생략한다. 표의VAT는 판매 때의 매출세액이지 각 사업자의 최종 납부세액을 그대로 적은 것이 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th align="right">모두 과세: 공급가액+VAT</th>
+<th align="right">중간만 면세: 공급가액+VAT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>도매상</td>
+<td align="right">100+10</td>
+<td align="right">100+10</td>
+</tr>
+<tr>
+<td>중간도매상</td>
+<td align="right">200+20</td>
+<td align="right">210+0</td>
+</tr>
+<tr>
+<td>소매상</td>
+<td align="right">300+30</td>
+<td align="right">310+31</td>
+</tr>
+<tr>
+<td>소비자 최종 지출</td>
+<td align="right">330</td>
+<td align="right">341</td>
+</tr>
+</tbody></table>
+<p><strong>모두 과세일 때:</strong> 중간도매상은110을 지급했지만 매입세액10을 공제하므로 상품 원가100을 기준으로 이윤100을 붙여200+20에 판다. 소매상도 세금20을 공제하므로 원가200에 이윤100을 붙여300+30에 판다. 납부세액은 단순 모형에서 도매10, 중간20−10=10, 소매30−20=10, 합계30이다.</p>
+<p><strong>중간이 면세일 때:</strong> 중간도매상은 지급한110 중 세금10을 공제받지 못한다. 원가가110이 되어 같은 이윤100을 남기려면210에 판다. 면세 판매라 소매상에게 공제받을 매입세액은 없다. 소매상은210에 이윤100을 더한310에 세금31을 붙인다. 소비자는341을 낸다. 국가는 앞 단계10과 마지막31, 합계41을 걷는다.</p>
+<p><mark class="green">공제가 끊겨 세금10이 원가에 남고, 그 원가에 다시 과세되는 것이 누적의 이유다.</mark> 최종 가격 차이11은 ‘앞 단계 세금10의 잔존+그10에 붙은1’로 이해한다. 중간의 면세만 보고 전체 소비세가 줄어들 것이라고 단정하면 안 된다.</p>
+<p>최종단계 면세는 같은 원가·이윤·가격 전가 가정에서 부담을 줄이는 효과가 있지만 앞 단계 세금은 남는다. 실제 시장가격이 반드시 교재 계산대로 움직인다는 경제 예측은 아니다. <strong>기출 확장:</strong> 면세 농축수임산물 등을 재료로 과세사업을 하는 법정 경우에는 의제매입세액공제가 공제 단절을 완화한다. 실제 세금을 받지 않은 면세 매입이므로 법정 공제율·대상·한도·증빙 안에서 의제하는 것이다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 면세 매입 공제 단절 / 세금의 원가화 / 재과세 / <strong>중간 면세가 언제나 소비자의 혜택은 아니다.</strong></p>
+<h2 id="tax-15-06" data-concept-id="tax-15-06">15-6. 면세를 포기하고 싶은 이유 ★★★★☆</h2>
+<p><strong>교재266~267쪽 · 제28조의 역할:</strong> 면세 때문에 앞 단계 세금이 남는 경우 등 법정 범위에서 과세 체계로 들어오도록 선택권을 준다.</p>
+<p>예를 들어 원래 면세 재화를 법정 수출 거래로 공급한다면, 면세만 유지할 때는 관련 매입세액이 남을 수 있다. 법이 허용한 면세 포기를 통해 영세율과 매입세액 공제를 적용할 이유가 생긴다. <strong>무조건 세금을 더 내려고 혜택을 포기하는 행동이 아니다.</strong></p>
+<p>포기 가능한 범위는 ① 제21~24조상 영세율 대상 ② 제26조 제1항12·15·18호의 법정 공급, 즉 주택·부수토지 임대, 저술가 등 인적용역, 공익단체 공급 범주다. 법정 절차와 적용 대상 범위를 지켜 신고해야 한다. <strong>모든 면세대상을 자유롭게 포기할 수는 없다.</strong></p>
+<p>신고일부터3년간 면세를 적용받지 못하며,3년이 지나 면세를 다시 받으려면 면세적용신고서를 제출한다. 제출하지 않으면 계속 포기한 것으로 본다. <a href="https://law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=001571">현행 제28조 확인</a></p>
+<p><strong>시험·키워드·한 줄:</strong> 대상 한정 / 신고 / 3년 / 재적용 신고 / <strong>포기는 선택이지만 대상과 시간은 법이 정한다.</strong></p>
+<h2 id="tax-15-07" data-concept-id="tax-15-07">15-7. 주된 공급에 따라가는 부수 공급과 장례식장 사례 ★★★★☆</h2>
+<p><strong>교재267~269쪽 · 제14조의 역할:</strong> 하나의 경제적 거래를 인위적으로 잘게 쪼개 다른 세금을 붙이는 문제를 줄인다. 두 항의 구조를 구별한다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>조건</th>
+<th>법적 처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주된 공급에 부수</td>
+<td>대가에 통상 포함, 또는 거래관행상 통상 부수</td>
+<td>주된 재화·용역 공급에 포함</td>
+</tr>
+<tr>
+<td>주된 사업에 부수</td>
+<td>우연·일시적 공급, 또는 생산·용역 과정에서 필연적으로 생기는 재화 등 법정 범위</td>
+<td>별도 공급으로 보되 과세·면세는 주된 사업을 따름</td>
+</tr>
+</tbody></table>
+<p>‘부수니까 전부 별도 공급이 아니다’도 틀리고, ‘별도 공급이면 면세·과세도 반드시 독립’도 틀리다.</p>
+<p><strong>교재 사례 — 2013두932, 2013.6.28.</strong> 장례식장에서 상주·조문객에게 밥·반찬·다과 등을 제공했다. 관청은 음식 제공을 과세 용역으로 보았고 납세자는 면세 장의용역에 통상 따라붙는 공급이라고 다퉜다. 법원은 음식 자체가 시신 보관·염습·빈소 설치 같은 장의행위는 아니어도, 그것만으로 부수성을 부정하면 안 된다고 보았다.</p>
+<p><strong>법원이 본 장면:</strong> 여러 장례식장에서 장의용역과 함께 조문에 필요한 음식을 제공하는 관행이 있었다. 일반 손님 전체가 아니라 특정 조문객을 대상으로, 빈소 바로 옆의 제한된 공간에서 이루어졌다. 장례비용 부담을 줄이려는 면세 취지도 고려했다. 교재 인용문은 장의 공급자가 직접 제공해야만 한다고 제한할 이유가 없다고 설명한다. 법원은 이런 사정 아래 <strong>통상 부수성을 인정한 원심 판단을 정당</strong>하다고 보았다.</p>
+<p><strong>문장별 쉬운 번역:</strong> 본래 장의 의미에 안 들어감→음식은 음식이다 / 그래도 부수성 별도 판단→장례에 보통 따라붙는가를 본다 / 거래관행→다른 장례식장에서는 실제 어떻게 하는가 / 특정 조문객·공간→독립된 일반 식당과 같은가 / 종합 판단→이름 하나로 결론 내리지 않는다.</p>
+<p><strong>다른 결론이면:</strong> 장례에 통상 결합된 공급을 무조건 쪼개 면세 취지를 약화할 수 있다. 반대로 모든 인근 식당까지 면세하면 법정 부수성을 벗어난다. <strong>시험·키워드·한 줄:</strong> 통상 포함 / 관행 / 특정 조문객 / <strong>장례식장 근처라는 주소가 아니라 실제 거래의 결합 관계를 본다.</strong></p>
+<h2 id="tax-15-08" data-concept-id="tax-15-08">15-8. 소비지국 과세원칙과 대리납부 ★★★★★</h2>
+<p><strong>교재269~270쪽 · 제4·21·22·50·52조 연결:</strong> 부가세는 소비세이므로 소비되는 나라에서 부담시키려는 것이 소비지국 과세원칙이다. 수출에 영세율을 적용하고 수입에는 과세하면 국내산과 수입품이 국내 소비에서 같은 세금 조건을 갖게 된다.</p>
+<p><strong>교재 판례 — 서울고법2003누9369·2003누9376, 2004.6.10.</strong> 교재는 개별 사건의 모든 사실보다 국제 과세 원리를 인용한다. 법원은 국내 소비에는 국내 과세, 국외 제공에는 영세율이라는 구조가 최종소비자 부담과 무역 왜곡 방지에 맞는다고 설명한다. 어느 나라에 납세의무가 생기는지 정하는 연결점이 <strong>공급장소</strong>라는 것이다. 교재가 제시하지 않은 당사자·금액·최종 소송 결과를 만들지 않는다.</p>
+<p><strong>한 줄씩 번역:</strong> 동일 조세부담→수입품이라고 국내 소비세를 빠뜨리지 않음 / 무역 왜곡 방지→세금 차이만으로 국내산·수입품 선택이 기울지 않게 함 / 공급장소→법적으로 어디서 공급되었다고 보는지 판단. 경제적 소비원칙과 법정 장소 기준을 함께 적용해야 한다.</p>
+<p>국외사업자로부터 국내에서 용역·권리를 공급받는 법정 경우, 공급받는 자가 대가 지급 시 부가세를 징수해 <strong>대리납부</strong>한다. 국내사업장 유무·관련성, 과세사업 사용과 매입 불공제 등 조건을 본다. 수입 재화에 세관 단계에서 부가세를 내는 구조와 구별한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1028444887">현행 제52조</a></p>
+<p><strong>기출075 표현 주의:</strong> 원문3번은 ‘수입 물품에 대한 부가가치세 대리납부’라고 적었다. 출제 의도는 국제거래의 국내 소비 과세 장치로 대리납부를 연결한 것으로 보이지만, <strong>통상 재화 수입의 세관 납부와 국외사업자 용역·권리의 대리납부는 정확히 구분</strong>해야 한다. 원문·공식 정답4번은 보존하고 이 한계를 별도 해설했다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 수출0 / 수입 과세 / 법정 대리납부 / <strong>생산자 국적보다 어디서 소비되고 어디서 공급된 것으로 보는지가 중요하다.</strong></p>
+<h2 id="tax-15-09" data-concept-id="tax-15-09">15-9. 공급장소와 해외 전환사채 중개 사례 ★★★★☆</h2>
+<p><strong>교재270~272쪽 · 제19·20조의 역할:</strong> 국제거래에서 과세권의 장소를 정한다.13강의 ‘언제 공급’과 여기의 ‘어디서 공급’을 섞지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>법정 기본 장소</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이동 필요한 재화</td>
+<td>이동이 시작되는 곳</td>
+</tr>
+<tr>
+<td>이동 필요 없는 재화</td>
+<td>공급될 때 그 재화가 있는 곳</td>
+</tr>
+<tr>
+<td>일반 용역</td>
+<td>역무 제공 장소, 시설물·권리 등이 사용되는 장소</td>
+</tr>
+<tr>
+<td>국내외 국제운송, 비거주자·외국법인 사업자</td>
+<td>여객 탑승 또는 화물 적재 장소</td>
+</tr>
+<tr>
+<td>법정 전자적 용역</td>
+<td>공급받는 자의 사업장 소재지·주소지·거소지</td>
+</tr>
+</tbody></table>
+<p>물건은 장소가 보이지만 용역은 국경을 걸칠 수 있다. 단일 용역의 여러 작업 중 <strong>중요하고 본질적인 부분</strong>이 어디에서 이루어졌는지가 판례의 기준이다. 일부 국내 작업이 있다고 무조건 전부 국내로 보지 않는다. 인용된2004두7528·7535도 이 기준의 연결 판례다.</p>
+<p><strong>교재 사례 — 2014두8766, 2016.1.14.</strong> 싱가포르의MLPL은 크레디트스위스 은행 홍콩지점에서 우리나라 상장회사의 해외 전환사채를 싸게 사서 회수하려 했다. 한국 회사가 인수 중개·알선과 회수 업무를 제공했고,2010.3.19. 전체 대가85만 달러를 받았다. 관청은 국내 용역이라고 과세했다.</p>
+<p>법원은 어떤 일이 거래의 핵심인지 따졌다. 한국 회사 대표가 홍콩지점을 여러 번 방문해 협상했고, 저가 인수 기회를 마련하는 일이 대가 결정의 핵심이었다. 국내 거주자에게 매도할 수 없는 채권이 다수였으며, 인수대금도 해외결제기관을 통해 결제됐다. 반면 국내 발행회사에 만기를 알리고 상환 방법을 협의하는 회수 작업은 정해진 만기·이자율에 따른 기계적·반복 업무로 보았다.</p>
+<p>그래서 <strong>중요하고 본질적인 부분이 국외에서 수행된 단일 용역</strong>으로 보아 영세율을 적용해야 한다는 원심 판단을 유지했다. 관청의2010년1기 부가세 처분이 위법하다는 결론이다. <strong>번역:</strong> 돈을 국내에서 받아 냈다는 장면 하나보다, 고객이 큰 대가를 준 핵심 일이 어디서 이루어졌는지를 본다.</p>
+<p><strong>다른 결론의 문제:</strong> 서류 정리·회수 같은 부수 업무가 국내에 있다는 이유로 해외 핵심 용역을 모두 국내 공급으로 바꿀 수 있다. 반대로 핵심은 국내인데 잠깐 외국에 갔다고 영세율이 되는 것도 아니다. <strong>시험·키워드·한 줄:</strong> 단일 용역 / 중요·본질 / 협상과 회수의 비중 / <strong>어디서 가장 중요한 가치를 제공했는지 거래 전체로 판단한다.</strong></p>
+<h2 id="tax-15-10" data-concept-id="tax-15-10">15-10. 해외 동영상·소프트웨어에도 국내 소비세가 붙는 이유 ★★★☆☆</h2>
+<p><strong>교재272~273쪽 · 제53조의2의 취지:</strong> 해외 사업자의 전자적 서비스가 국내에서 소비되는데 국내 사업장이 없다는 이유로 과세가 빠지지 않게 한다. 일반 등록의 부담을 줄인 <strong>간편사업자등록</strong>으로 신고·납부하도록 한다. 간이과세자의 작은 규모 사업자 제도와 다른 말이다.</p>
+<p>교재 대상은 ① 게임·음성·동영상·소프트웨어 등 ② 광고 게재 ③ 클라우드컴퓨팅서비스 ④ 법정 재화·용역 중개 ⑤ 이에 유사한 법정 전자용역이다. 해당 국외사업자는 국내 제공 사업 개시일부터20일 이내 간편등록한다.</p>
+<p>다만 <strong>등록사업자의 과세사업·면세사업에 대한 공급은 이 특례 적용에서 제외</strong>된다. 이를 모든 해외 전자서비스 거래가 비과세라는 뜻으로 읽으면 안 된다. 사업자 간 거래에는 일반 규정·대리납부 등 해당 체계를 따로 판단한다. <a href="https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1032157481">현행 제53조의2 제1항의 제외 문구</a></p>
+<p>국외 공급자가 법정 제3자를 통해 국내에 제공하면 그 제3자를 공급자로 보는 경우도 있다. 교재는 전자용역 거래를 가능하게 하는 오픈마켓 등 운영자, 구매대금을 받아 판매자에게 지급하는 중개자, 이에 유사한 법정 관여자를 든다. 해당 제3자에게20일 내 간편등록 의무를 연결한다. 단순히 인터넷에 링크를 올렸다는 사실만으로 모든 사람이 공급자로 바뀌지는 않는다.</p>
+<p>간편등록자는 법정 방식으로 신고·납부하고, 해당 전자용역에 대해서는 제38조의 통상 매입세액 공제 외 다른 세액공제를 적용하지 않는 제한을 확인한다. <strong>간편하다는 것은 세금을 안 낸다는 말이 아니다.</strong></p>
+<p><strong>이해 대화:</strong> “판매 회사가 해외에 있는데 우리나라 세금도 내요?” → “우리나라 소비자에게 전자서비스를 제공하면 소비지국 과세원칙과 법정 특례가 연결돼.” <strong>시험·키워드·한 줄:</strong> 국내 소비 / 국외 공급자 /20일 / 제3자 공급의제 / 등록사업자 제외 / <strong>국경 밖 판매자도 국내 소비에 대한 법정 납세의무를 질 수 있다.</strong></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>영세율·면세·비과세</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 零(떨어질 영), 稅(세금 세), 率(비율 율); 免(면할 면); 非(아닐 비), 課(매길 과). <strong>③ 합친 뜻:</strong> 0세율·세금 면제·과세대상 밖. <strong>④ 이름의 이유:</strong> 소비지 과세와 정책적 면제의 구조가 다르기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영세율은 과세체계와 공제 유지, 면세는 해당 공급 면제·관련 매입 불공제. <strong>⑥ 쉬운 말:</strong> 세율0과 과세에서 빼 줌을 나누기. <strong>⑦ 사례:</strong> 매입세액10의 수출 환급과 면세 잔존.</p>
+<p><strong>⑧ 시험:</strong> 완전면세와 불완전면세. <strong>⑨ 비교·기억법:</strong> 영은 영세사업의 작다는 뜻이 아닌 숫자0.</p>
+<h3>내국신용장·구매확인서·중계무역</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 內(안 내), 國(나라 국), 信(믿을 신), 用(쓸 용), 狀(문서 장); 購(살 구), 買(살 매), 確(굳을 확), 認(알 인), 書(글 서); 中(가운데 중), 繼(이을 계), 貿(바꿀 무), 易(바꿀 역). <strong>③ 합친 뜻:</strong> 국내 수출용 조달 지급 문서·수출용 구매 확인·중간 무역. <strong>④ 이름의 이유:</strong> 수출용 국내 조달·특수 무역도 연결하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 수출 범위와 영세율 증빙. <strong>⑥ 쉬운 말:</strong> 국내 납품도 수출로 이어짐을 법정 서류로 확인. <strong>⑦ 사례:</strong> 제조업체가 수출업체에 납품.</p>
+<p><strong>⑧ 시험:</strong> 국내 거래면 무조건10%라는 함정. <strong>⑨ 비교·기억법:</strong> 문서 명칭만 아니라 법정 기한·거래 요건.</p>
+<h3>외국항행·외화획득·상호주의</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 外(바깥 외), 國(나라 국), 航(배 항), 行(다닐 행); 貨(재화 화), 獲(얻을 획), 得(얻을 득); 相(서로 상), 互(서로 호), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 국경 넘는 운송·외화 얻음·서로 같은 대우. <strong>④ 이름의 이유:</strong> 국제거래 부담과 대우를 조정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 국제운송·정책 영세율과 상대국 면세 조건. <strong>⑥ 쉬운 말:</strong> 달러 받았나뿐 아니라 어떤 거래·조건인가. <strong>⑦ 사례:</strong> 국내→국외 여객 운송.</p>
+<p><strong>⑧ 시험:</strong> 국외 공급과 국내 외화획득 구별. <strong>⑨ 비교·기억법:</strong> 영세율 적용 사업자가 외국인인 경우와 외국 고객 구별.</p>
+<h3>면세 공익 항목의 한자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 官(벼슬 관), 報(알릴 보); 印(도장 인), 紙(종이 지); 證(증거 증); 慈(사랑할 자), 善(착할 선); 救(구원할 구), 護(보호할 호). <strong>③ 합친 뜻:</strong> 관보·인지·증지·자선·구호. <strong>④ 이름의 이유:</strong> 공적 기능과 생활·문화 지원을 반영하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 문서·증표·공익 공급의 면세 범주. <strong>⑥ 쉬운 말:</strong> 나라의 알림문, 수수료 증표, 어려운 사람 돕기. <strong>⑦ 사례:</strong> 관보·인지·공익단체 법정 공급.</p>
+<p><strong>⑧ 시험:</strong> 법26조 열거와 대통령령 조건. <strong>⑨ 비교·기억법:</strong> 공익 이름만으로 모든 매출 면세 아님.</p>
+<h3>누적효과·역진성·의제매입세액</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 累(쌓일 누), 積(쌓을 적), 效(본받을 효), 果(열매 과); 逆(거스를 역), 進(나아갈 진), 性(성품 성); 擬(헤아릴 의), 制(지을 제), 買(살 매), 入(들 입). <strong>③ 합친 뜻:</strong> 쌓이는 결과·소득 대비 부담 역방향·법이 보는 매입세액. <strong>④ 이름의 이유:</strong> 면세가 중간에 끼면 소비세가 비용화되기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공제 단절의 잔존 부담과 법정 농산물 등 공제. <strong>⑥ 쉬운 말:</strong> 공제 못한 세금이 원가에 숨어 다시 과세됨. <strong>⑦ 사례:</strong> 교재330과341.</p>
+<p><strong>⑧ 시험:</strong> 모든 면세는 무조건 유리하다는 함정. <strong>⑨ 비교·기억법:</strong> 실제 거래세액 없는 의제공제는 요건·율·한도 제한.</p>
+<h3>면세포기·부수 공급·거래관행</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 免(면할 면), 稅(세금 세), 抛(던질 포), 棄(버릴 기); 附(붙을 부), 隨(따를 수); 去(갈 거), 來(올 래), 慣(익숙할 관), 行(다닐 행). <strong>③ 합친 뜻:</strong> 면제 선택을 버림·따라붙는 공급·통상 거래 모습. <strong>④ 이름의 이유:</strong> 공제 연결 선택과 경제적 거래의 결합을 반영하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 포기 및 주된 공급·사업과 부수 공급 관계. <strong>⑥ 쉬운 말:</strong> 혼자 따로 거래한 것인가 보통 함께 제공하나. <strong>⑦ 사례:</strong> 장례식장 특정 조문객 음식.</p>
+<p><strong>⑧ 시험:</strong> 포기 대상 한정·3년·부수 두 항 비교. <strong>⑨ 비교·기억법:</strong> 옆 건물에 있다는 사실만으로 부수 아님.</p>
+<h3>소비지국·공급장소·대리납부</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 消(사라질 소), 費(쓸 비), 地(땅 지), 國(나라 국); 供(이바지할 공), 給(줄 급), 場(마당 장), 所(바 소); 代(대신할 대), 理(다스릴 리), 納(들일 납), 付(줄 부). <strong>③ 합친 뜻:</strong> 소비하는 나라·법정 공급 위치·대신 세금 납부. <strong>④ 이름의 이유:</strong> 국내 소비가 국외 공급자 때문에 빠지지 않도록 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 수출입 과세권과 국외사업자 용역등 징수 체계. <strong>⑥ 쉬운 말:</strong> 어디서 쓰고 어디서 공급한 거래인가. <strong>⑦ 사례:</strong> 수출0·수입 과세·법정 용역 대리납부.</p>
+<p><strong>⑧ 시험:</strong> 공급시기와 공급장소 구별. <strong>⑨ 비교·기억법:</strong> 재화 수입의 세관 납부와 용역 대리납부 구별.</p>
+<h3>전환사채·중개알선·추심</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 轉(구를 전), 換(바꿀 환), 社(모일 사), 債(빚 채); 中(가운데 중), 介(낄 개), 斡(관리할 알), 旋(돌 선); 推(밀 추), 尋(찾을 심). <strong>③ 합친 뜻:</strong> 주식 전환 가능 회사채·거래 연결·채권 회수. <strong>④ 이름의 이유:</strong> 단일 용역이 국경에 걸칠 때 핵심을 찾기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해외 채권 거래 중개·회수 용역의 본질적 수행 장소. <strong>⑥ 쉬운 말:</strong> 싸게 살 기회를 만든 일과 나중 돈 받은 일 나누기. <strong>⑦ 사례:</strong> MLPL·홍콩 은행·한국 회사의85만 달러 용역.</p>
+<p><strong>⑧ 시험:</strong> 중요하고 본질적인 부분. <strong>⑨ 비교·기억법:</strong> 잠깐 해외 방문만으로 국외 용역 아님.</p>
+<h3>전자적 용역·간편사업자등록·간이과세</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 電(번개 전), 子(아들 자), 的(과녁 적), 用(쓸 용), 役(부릴 역); 簡(대쪽 간), 便(편할 편), 登(오를 등), 錄(기록할 록); 易(쉬울 이), 課(매길 과), 稅(세금 세). <strong>③ 합친 뜻:</strong> 정보망 서비스·간편 등록·간단 과세. <strong>④ 이름의 이유:</strong> 해외 사업자에게 일반 국내 등록 대신 적절한 의무를 부여하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 국외 전자용역 공급자의 등록 특례와 소규모 과세 체계의 구별. <strong>⑥ 쉬운 말:</strong> 외국 동영상 서비스의 국내 소비도 과세 확인. <strong>⑦ 사례:</strong> 국외업체·법정 플랫폼20일 등록.</p>
+<p><strong>⑧ 시험:</strong> 등록사업자 사업 공급 제외 문구. <strong>⑨ 비교·기억법:</strong> 간편등록과 간이과세는 다른 제도.</p>
+<h1>기출 TOP5 · 직접4문항과 교차1문항</h1>
+<table>
+<thead>
+<tr>
+<th>우선</th>
+<th>기출</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2019_034</td>
+<td>최종 면세≠완전면세, 중간 면세 누적</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2019_035</td>
+<td>국가에 무상 공급, 토지 안분, 면세 포기 범위</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2021_075</td>
+<td>소비지국 과세와 증빙 불공제 구별</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021_074</td>
+<td>금융 면세의 성격</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2019_030 · 13강 교차</td>
+<td>전단계세액공제와 누적 방지</td>
+</tr>
+</tbody></table>
+<p>이 강 부록은 직접4문항16보기다. TOP5의 다섯째는 이미13강에서 푼 연결 문제다.2019년 문항은 원자료에 표시된 자체 풀이이며 공식 정답이라고 바꾸지 않았다. 가장 주의할 표현은 완전면세·언제나 가격 하락·모든 면세 포기·외화면 무조건0%다.</p>
+<h1>새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 같은 세금0.</strong> 두 사업자가 모두 매출 부가세를 받지 않는다. 한 명은 수출 영세율, 한 명은 면세다. 적법한 사업상 매입세액10의 처리도 같을까? <strong>정답:</strong> 영세율은 공제·환급을 검토하고 면세 관련 매입은 원칙적 불공제다. <strong>출제 의도:</strong> 외형0과 구조 구별.</p>
+<p><strong>응용 2 · 달러로 받은 국내 상담.</strong> 국내에서 수행한 상담료를 외국 고객이 달러로 보냈다. 자동 영세율인가? <strong>정답:</strong> 국내 공급이면 외화획득 영세율의 업종·상대방·대금 수령 방법 등 법정 요건을 따로 본다. <strong>출제 의도:</strong> 외화와 국외 공급 구별.</p>
+<p><strong>응용 3 · 시장가격 질문.</strong> 중간 단계가 면세로 바뀌니 소비자가 반드시11원 더 내야 한다고 주장했다. <strong>정답:</strong> 교재100원씩 이윤 유지·전가 가정에서는330→341이다. 실제 가격은 계약·시장 사정에 달라지며 법적 공제 단절이 핵심이다. <strong>출제 의도:</strong> 법정 세액과 경제적 가정 구별.</p>
+<p><strong>응용 4 · 장례식장 앞 일반 식당.</strong> 누구나 오는 독립 식당이 장례식장 옆이라는 이유로 음식 판매를 면세라고 했다. <strong>정답:</strong> 위치만으로 부족하다. 특정 조문객·제한 공간·장의 공급과의 통상 부수성을 확인한다. <strong>출제 의도:</strong> 판례 사실관계의 범위.</p>
+<p><strong>응용 5 · 해외 영상 서비스.</strong> 국외 업체가 국내 개인 소비자에게 영상 이용 서비스를 제공한다. 국내 사무실이 없으니 납세의무도 없을까? <strong>정답:</strong> 법정 전자용역 특례에 따라 공급자·플랫폼의 간편등록·신고납부를 본다. 등록사업자 사업에 대한 공급과는 구별한다. <strong>출제 의도:</strong> 소비지 과세와 전자거래 특례.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제15강</h1>
+<p><strong>TOP3:</strong> 영세율 vs 면세 / 공제 단절의 누적 / 소비지국과 공급장소.</p>
+<table>
+<thead>
+<tr>
+<th>핵심</th>
+<th>한 줄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>영세율</td>
+<td>매출0%, 적법한 매입 공제·환급 유지</td>
+</tr>
+<tr>
+<td>면세</td>
+<td>관련 매입 불공제, 앞 단계 세금 남음</td>
+</tr>
+<tr>
+<td>영세율 유형</td>
+<td>수출·국외 용역·외국항행·법정 외화획득</td>
+</tr>
+<tr>
+<td>외화획득</td>
+<td>외화 받았다는 사실만으로 불충분</td>
+</tr>
+<tr>
+<td>면세 이유</td>
+<td>생활·복지·문화·공익·금융 과세기술 등 다양</td>
+</tr>
+<tr>
+<td>교재 누적표</td>
+<td>전부 과세330 vs 중간 면세341, 각 이윤100 가정</td>
+</tr>
+<tr>
+<td>면세 포기</td>
+<td>법정 대상·신고·3년, 재면세 신청 필요</td>
+</tr>
+<tr>
+<td>부수 공급</td>
+<td>주된 공급에 포함 vs 별도 공급이되 주된 사업 과면세 따름</td>
+</tr>
+<tr>
+<td>소비지국</td>
+<td>수출0·수입 과세, 법정 용역등 대리납부</td>
+</tr>
+<tr>
+<td>공급장소</td>
+<td>재화 이동 시작/소재, 용역 제공·사용, 전자 수취자 소재</td>
+</tr>
+<tr>
+<td>단일 국제용역</td>
+<td>중요하고 본질적인 부분의 수행 장소</td>
+</tr>
+<tr>
+<td>전자 특례</td>
+<td>국외사업자·법정 제3자20일 간편등록, 등록사업자 사업 공급 제외</td>
+</tr>
+</tbody></table>
+<p><strong>판례:</strong> 2005두12718 요건 엄격 /2015두60662 금융 면세와 비과세 /2013두932 장례 음식 부수 /2014두8766 해외 협상 핵심.</p>
+<p><strong>반드시 외울 문장:</strong> 면세는 완전면세가 아니다. 부수성은 이름보다 거래관행과 실제 결합 관계를 본다.</p>
+<p><strong>사례를 풀 순서:</strong> 공급·장소 →면세 여부 →영세율·포기 요건 →매입 공제 →누적·증빙 →국제거래 납세주체.</p>
+</div>
+
+<h1>학습 상태 진단 · 전 범위 마무리</h1>
+<p>🟢 <strong>이해 완료:</strong> 영세율·면세를 숫자로 비교하고330→341을 설명하며, 해외 채권 중개의 핵심 수행 장소를 판단한다. 🟡 <strong>복습 필요:</strong> 개념은 알지만 부수 공급·포기·전자 특례 조건을 혼동한다. 🔴 <strong>이해 부족:</strong> 면세와 영세율을 같게 보거나 해외 업체 거래를 모두 비과세로 생각한다. 실제 답변 전에는 학습 수준을 단정하지 않는다.</p>
+<p><strong>복습 TOP3:</strong> 15-1·15-5 영세율과 누적 /15-4·15-7 면세와 부수 /15-8~15-10 국제 과세. 교재274쪽 마지막 요약을 설명한 뒤, 전 과목을 ‘누가 납세자인가→무엇이 과세대상인가→언제·어디서→얼마→신고·증빙→불복’의 여섯 질문으로 다시 묶어 본다.</p>
+<h1>문제 부록 · 4문항·16개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_074"><h4>기출문제 · 세법_기출2021_074</h4><p class="question-stem">[2021 기말고사 · 74번]<br>다음은 부가가치세법에서 면세로 정하여져 있는 용역들이다. 그 중 다른 세 가지와, 면세를 인정하는 이유에서 그 성질을 달리하는 것을 하나 고르시오.</p><ol class="choices"><li>도서 출판</li><li>도서관 운영</li><li>금융업</li><li>예술 행사</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 문화·지식에 대한 접근과 부담 경감이라는 정책적 면세 취지와 연결한다. 도서의 법정 공급 범위를 확인한다.</li><li><strong>비선택</strong> · 문화·교육적 접근을 지원하는 면세 범주다.</li><li><strong>선택</strong> · 정답. 금융 용역은 이자에 여러 요소가 섞여 용역 대가를 분리하기 어려운 과세기술상 사정 등의 설명이 핵심이다.</li><li><strong>비선택</strong> · 법정 예술행사의 면세는 문화적·정책적 취지다. 모든 상업행사가 이름만으로 면세인 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_075"><h4>기출문제 · 세법_기출2021_075</h4><p class="question-stem">[2021 기말고사 · 75번]<br>다음 중 국제거래의 부가가치세 과세에서 중요한 소비지국 과세 원칙과 무관한 항목을 고르시오.</p><ol class="choices"><li>수출 재화에 대한 영세율 적용</li><li>재화 수입에 대한 과세</li><li>수입 물품에 대한 부가가치세 대리납부</li><li>사실과 다른 세금계산서에 기재된 매입세액의 불공제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 수출품에 국내 소비세를 남기지 않고 소비지에서 과세하도록 하는 대표 장치다.</li><li><strong>비선택</strong> · 국내에서 소비되는 수입 재화도 국내산과 마찬가지로 소비세를 부담하게 하는 구조다.</li><li><strong>비선택</strong> · 출제 의도상 대리납부를 소비지국 과세와 연결한 보기다. 다만 원문 ‘수입 물품’은 통상 재화의 세관 수입납부와 국외사업자의 국내 용역·권리 공급 대리납부를 섞은 표현이므로 엄밀히 구별한다. 원문·정답은 보존했다.</li><li><strong>선택</strong> · 정답. 사실과 다른 증빙의 매입세액 제한은 전단계세액공제의 진실성·검증 문제이지 소비지국 배분 원칙 자체의 장치가 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_034"><h4>기출문제 · 세법_기출2019_034</h4><p class="question-stem">[2019 기말고사 · 34번 / 자체 풀이]<br>부가가치세의 면세 작용에 관한 설명으로 옳지 않은 것은?</p><ol class="choices"><li>최종소비자 단계에서 재화의 공급을 면세하는 경우 그 재화의 소비자 판매가격(세포함가격)은 해당 재화의 공급을 과세하는 경우의 소비자 판매가격(세포함가격)보다 낮아지게 된다.</li><li>최종소비자 단계에서 재화의 공급을 면세한다는 것은 해당 재화에 포함된 부가가치세를 완전면세하는 것이다.</li><li>중간단계에 있는 사업자의 재화 공급을 면세한다면 해당 재화의 소비자 판매가격(세포함가격)이 올라간다.</li><li>부가가치세를 면제받은 농산물, 축산물, 수산물 또는 임산물에 대해서는 의제매입세액을 허용한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 같은 원가·이윤·전가 가정에서 최종단계 면세는 부담을 낮추는 방향이다. 실제 시장가격이 반드시 하락한다는 절대명제로 읽지 않는다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 면세는 관련 매입세액을 공제하지 않아 앞 단계 세금이 남는다. 영세율과 같은 완전면세가 아니다.</li><li><strong>비선택</strong> · 중간 면세로 공제가 끊기고 잔존 세금이 원가에 들어가면 누적효과가 생긴다. 교재의 동일 이윤 가정에서330→341이다.</li><li><strong>비선택</strong> · 면세 농축수임산물 등을 재료로 과세사업을 하는 등 법정 요건에서 의제매입세액공제를 허용한다. 모든 구매자에게 한도 없이 자동 공제하는 것은 아니다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 2번.<br><br>면세는 그 단계의 매출세액을 면제하지만 관련 매입세액은 원칙적으로 공제하지 않아 전단계 세금이 가격에 남는다. 따라서 최종단계 면세가 영세율과 같은 완전면세라는 ②는 틀리다. 중간단계 면세는 공제 단절로 세부담 누적을 일으킬 수 있다. 면세농산물 등의 의제매입세액 공제 역시 법정 요건·공제율·한도 안에서 적용된다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsId=001571" target="_blank" rel="noopener noreferrer">부가가치세법</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_035"><h4>기출문제 · 세법_기출2019_035</h4><p class="question-stem">[2019 기말고사 · 35번 / 자체 풀이]<br>부가가치세의 면세대상에 관한 설명으로 옳지 않은 것으로 묶인 것은?<br>ㄱ.수돗물이나 연탄과 무연탄의 공급을 면세하는 것은 부가가치세의 역진성을 완화하기 위한 것이다.<br>ㄴ.국가에 무상 또는 유상으로 공급하는 재화 또는 용역은 부가가치세를 면세한다.<br>ㄷ.사업자가 토지와 건물을 함께 양도하는 경우 토지와 건물의 각 공급가액을 안분하여야 하고, 이 경우 안분기준은 실지거래가액에 의하는 것이 원칙이다.<br>ㄹ. 모든 면세대상에 대해서 면세의 포기가 가능하다.</p><ol class="choices"><li>ㄱ, ㄴ</li><li>ㄱ, ㄷ</li><li>ㄴ, ㄹ</li><li>ㄷ, ㄹ</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · ㄱ은 생필품 부담·역진성 완화와 연결하여 옳다. ㄴ은 국가에 유상 공급도 언제나 면세라는 점에서 틀리다. 따라서 ㄱ·ㄴ 조합은 아니다.</li><li><strong>비선택</strong> · ㄱ은 맞고 ㄷ도 일반적인 토지 면세·건물 과세 및 실지거래가액 우선 구분이라는 전제에서 맞다. 안분이 불분명한 법정 경우 등은 보충 규정을 본다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. ㄴ은 유상 공급까지 일괄 면세하여 틀리고, ㄹ은 모든 면세를 포기할 수 있다고 하여 틀리다. 포기 대상·절차는 법정 범위에 한정된다.</li><li><strong>비선택</strong> · ㄷ은 일반 원칙에서 맞고 ㄹ은 틀리므로 틀린 것끼리의 조합이 아니다. 건물의 개별 면세 특례 등은 별도 판단이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 3번.<br><br>틀린 것은 ㄴ·ㄹ이다. 국가 등에 무상 공급하는 재화·용역은 면세 규정이 있지만 국가에 유상 공급한다는 이유만으로 일률적으로 면세되는 것은 아니다. 면세 포기도 법이 정한 대상에 한정된다. 토지는 면세, 건물은 과세되는 것이 일반적이므로 일괄 양도 시 각 공급가액을 구분하고 원칙적으로 실지거래가액에 따른다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsInfoP.do?lsId=001571" target="_blank" rel="noopener noreferrer">부가가치세법</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 15' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 15|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제8강 소득세(2) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-section-start{break-before:page;page-break-before:always}
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 08</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제8강 소득세(2) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>세법의 기초 · 제8강 소득세(2)</h1>
+<p>교재 인쇄면 121~141쪽 · 제8강 강의록 · 기출 8문항·32개 보기</p>
+<p><strong>이번 강의 질문:</strong> “같은 돈이라도 이자·배당·사업·근로 중 어디에 넣느냐에 따라 왜 계산이 달라질까?” 소득 이름은 장식이 아니라 적용할 경비·공제·과세방법을 고르는 기준이다.</p>
+<p><mark class="yellow">핵심 정의·공식</mark> / <mark class="green">이유</mark> / <mark class="pink">이름과 실질의 차이</mark> / <mark class="blue">연결</mark>. 모든 교재 판례를 남겼고, 실제 사건 사실이 없는 부분은 법리를 이해시키는 가상 장면으로 구별했다.</p>
+<h1>전체 지도</h1>
+<p>① 종합소득 여섯 종류를 분류하고 소득금액 계산을 배운다. ② 받는 이유가 다른 돈에 같은 경비 공식을 적용하면 담세력을 왜곡하기 때문에 구분이 생겼다. ③ 개인 소득세의 ‘소득금액’ 단계다. ④ 7강의 소득 지도에서 각 칸을 열어 보고, 9강에서 합산·공제·세율·신고로 이어진다. ⑤ 이 강을 모르면 ‘이자’라는 이름만 보고 사업소득을 이자소득으로 착각하거나 모든 수입에 경비를 빼게 된다.</p>
+<p><strong>핵심 대화:</strong> 민서 “돈을 받은 건 똑같은데요?” 선생님 “빌려준 돈의 대가인지, 투자 이익을 나눈 건지, 독립 사업의 매출인지, 일하는 대가인지부터 물어보자.”</p>
+<h1>교재 순서대로 읽기</h1>
+<h2 id="tax-08-01" data-concept-id="tax-08-01">8-1. 이자소득: 남이 내 돈을 사용한 대가 ★★★★★</h2>
+<p><strong>교재 122~124쪽 · 문단의 의도:</strong> 이자라는 이름보다 ‘금전 사용의 대가’라는 공통 성격을 찾게 한다. 소득세법 제16조는 국가·지방자치단체·내국법인 채권의 이자와 할인액, 국내외 예금 이자, 외국법인 채권 관련 이자·할인액 등을 열거한다. 신용계·신용부금 이익, 법정 환매조건부 매매차익, 저축성보험 보험차익, 직장공제회 초과반환금, 비영업대금 이익과 법정 유사·결합상품 이익도 포함한다. 장기 저축성보험·종신형 연금보험 등에는 법정 제외 요건이 있으므로 모든 보험금이 이자라는 말은 아니다.</p>
+<p><strong>할인액 가상 사례:</strong> 만기에 100을 돌려받는 채권을 처음에 95에 발행했다면 5가 금전 사용대가의 성격을 가질 수 있다. 중간 거래에서 생기는 모든 채권 가격 차익을 자동으로 발행 할인액과 같게 보지는 않는다. 교재의 ‘선이자’라는 설명은 먼저 할인해 준 금액의 경제적 기능을 이해시키려는 것이다.</p>
+<p><strong>비영업대금의 이익:</strong> 금전 대여를 사업으로 하지 않는 사람이 일시·우발적으로 돈을 빌려주고 받는 이자·수수료 등이다. 반대로 개인이 자기 책임으로 계속·반복적인 대금업을 하면 그 수입은 사업소득이다. ‘이자’라는 이름보다 활동 전체를 본다. 법인 금융회사 자체의 소득은 법인세 문제이므로 개인 사업소득 설명과 구별한다.</p>
+<p><mark class="yellow">이자소득금액은 원칙적으로 총수입금액이며 일반적인 필요경비 공제를 하지 않는다.</mark> 민서가 돈을 빌려 주기 위해 다른 곳에서 빌린 이자를 냈더라도 이를 당연히 이자소득에서 빼는 공식으로 쓰지 않는다. 사업소득이면 사업 관련 경비 요건을 따로 검토한다.</p>
+<p><strong>교재 엔화스왑예금 판례 — 2010두3961, 2011.4.28.:</strong> 고객은 은행에서 엔화 정기예금과 선물환거래를 함께 가입했다. 나중에 예금 이자와 선물환 차익을 받자 관청은 차익도 이자소득이라고 과세하려 했다. 법원은 당시 계약과 법률 아래 선물환계약을 예금과 별개인 유효한 계약으로 보고, 그 차익이 당시 열거된 이자·유사소득에 해당하지 않는다고 판단했다. 법원의 고민은 “비슷한 경제적 결과라고 법에 없는 유형을 곧바로 과세할 수 있는가?”였다.</p>
+<p><strong>문장 번역:</strong> ① 별개 계약 → 두 계약을 이름만 묶어 하나로 지우지 않는다. ② 가장행위 아님 → 실제 효력 있는 계약을 허구 취급하지 않는다. ③ 당시 유형에 해당하지 않음 → 조세법률주의의 한계를 지킨다. <strong>현재는 결합 파생상품 이익에 관한 법정 규정이 있으므로, 이 판례를 ‘모든 환차익 상품은 영구 비과세’라고 외우지 않는다.</strong></p>
+<p><strong>시험·키워드·한 줄:</strong> 금전 사용대가 / 비영업대금 / 경비 없음. <strong>집합투자기구 이익은 보통 배당소득 쪽이며, 돈을 빌려주어 받았다고 모두 같은 소득도 아니다.</strong></p>
+<h2 id="tax-08-02" data-concept-id="tax-08-02">8-2. 배당소득: 법인 등의 수익을 나누어 받기 ★★★★★</h2>
+<p><strong>교재 125~127쪽 · 문단의 의도:</strong> 배당의 중심은 ‘수익 분배’이고 형식적인 주주총회 배당만 있는 것이 아님을 설명한다. 소득세법 제17조는 내국·외국법인의 배당·분배금, 법인으로 보는 단체 및 법인과세 신탁재산의 분배, 의제배당, 법인세법상 배당처분, 법정 집합투자기구·파생결합상품 이익, 국제조세상 배당간주, 출자공동사업자의 배분액 등을 규정한다. 유사한 수익분배와 법정 결합상품도 본다.</p>
+<p><strong>출자공동사업자:</strong> 경영에 참여하지 않고 출자만 하는 등 법정 요건에 해당하는 사람의 손익분배비율 상당액은 배당소득이다. 공동사업에서 받은 돈이므로 언제나 사업소득이라고 하면 틀린다. ‘누가 어떤 지위로 받았는가’를 본다.</p>
+<p><strong>의제배당 가상 계산:</strong> 주식을 70에 취득한 주주가 주식 소각 등 법정 사유로 100을 받았다면 취득에 쓴 70을 초과한 30이 의제배당 문제다. 100 전부를 무조건 배당으로 보거나, ‘배당’이라는 이름이 없다고 전부 비과세하지 않는다. 구체적 법정 사유와 취득가액을 확인한다. 단순한 주식 매매와 소각·감자를 위한 거래도 구분한다.</p>
+<p><strong>교재 판례 — 2003두1059·1066, 2004.7.9.:</strong> 회사가 주주들의 토지를 정상가격보다 높게 사서 초과 금액이 주주들에게 확정적으로 돌아갔다. 주주총회에서 배당 결의를 하지 않았다는 이유로 배당소득이 아닌가? 법원은 특별한 사정이 없으면 회사 밖으로 나간 이익이 출자자에게 현실 귀속된 것을 배당소득으로 추인할 수 있다고 보았다. 배당가능이익·출자비율·결의 형식만으로 실질을 지울 수 없다는 취지다.</p>
+<p><strong>문장 번역:</strong> 사외유출 → 회사 밖으로 이익이 나감. 확정적 귀속 → 주주가 실제 자기 이익으로 얻음. 추인 → 구체적 사실에서 배당 성격을 인정함. 모든 주주와의 거래를 배당으로 본다는 말은 아니다. 정상가격으로 거래했다면 초과 이익의 현실 귀속이라는 전제가 다르다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 수익분배 / 의제배당 / 출자만 하는 공동사업자. <strong>배당소득에도 일반적인 필요경비 공제는 없지만, 소득금액이 항상 받은 돈과 똑같은 것은 아니다. 다음의 가산 제도가 있기 때문이다.</strong></p>
+<h2 id="tax-08-03" data-concept-id="tax-08-03">8-3. 배당가산과 배당세액공제: 더했다가 빼는 이유 ★★★★★</h2>
+<p><strong>교재 127~128쪽 · 문단의 의도:</strong> 회사 단계의 법인세와 주주 단계의 소득세가 같은 이익에 경제적으로 겹치는 문제를 조정한다. 일정한 적격 배당에 대하여 법인세 부담 상당액을 소득에 더해 세전 수준으로 되돌리는 것이 <strong>배당가산(Gross-up)</strong>, 소득세 계산 후 그 상당액을 법정 한도 등 아래 빼는 것이 <strong>배당세액공제</strong>다. 먼저 소득에 더하고 나중에 세액에서 빼는 위치가 다르다.</p>
+<p><strong>교재 예시를 빠짐없이 읽기:</strong> 교재는 배당 100원, 가산 10원, 개인 세율 20%를 가정해 110×20%=22원, 여기서 10원을 공제해 개인세금 12원이라고 설명한다. 회사 부담 10원과 개인 부담 12원을 합쳐 22원이라는 흐름이다.</p>
+<p><strong>숫자 보완:</strong> 교재의 같은 문장에 있는 ‘법인세율 10%’를 엄밀하게 세전소득에 적용하면 세후 100원을 만들기 위한 세전소득은 100÷0.9=111.11…원이다. <strong>세후 배당 100원에 가산 10원</strong>인 단순 모형과 <strong>세전 소득의 10%를 법인세로 내는 정확한 역산</strong>은 같지 않다. 그래서 교재 예시는 ‘법인세 상당액을 10원으로 가정한 조정 원리’로 이해해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>정확한 단순화 예시: 회사 세전이익 100, 법인세율 10%, 개인세율 20%</th>
+<th>금액</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>회사 법인세</td>
+<td>10</td>
+</tr>
+<tr>
+<td>주주가 받는 세후 배당</td>
+<td>90</td>
+</tr>
+<tr>
+<td>세전 회복 가산</td>
+<td>10을 더해 100</td>
+</tr>
+<tr>
+<td>주주 소득세 산출</td>
+<td>100×20%=20</td>
+</tr>
+<tr>
+<td>회사 부담 상당액 공제 후 주주 부담</td>
+<td>20−10=10</td>
+</tr>
+<tr>
+<td>회사·주주의 총부담</td>
+<td>10+10=20</td>
+</tr>
+</tbody></table>
+<p>이 표 역시 현행 신고 계산을 그대로 대체하는 것이 아니라 원리 모형이다. 실제는 법정 가산율, 대상 배당, 누진세율, 공제 한도와 특례 등을 적용하므로 이중과세가 언제나 완전히 없어지는 것은 아니다. 외국 배당·일부 의제배당 등을 모두 같은 적격 배당으로 취급하지 않는다.</p>
+<p><mark class="pink">연도 주의: 강의록은 10%, 교재는 11% 상향을 적었다. 현행 부칙상 제17조 제3항의 10%→11% 개정 시행일은 2027년 1월 1일이다.</mark> 따라서 2026년 학습·계산에서는 교재의 개정 표기를 무조건 현행 적용률이라고 쓰지 않는다. 2019·2021 문제에는 그 출제연도 법이 적용된다. <a href="https://law.go.kr/LSW/lsRvsDocListP.do?lsId=001565">소득세법 개정문과 부칙</a>.</p>
+<p><strong>시험·키워드·한 줄:</strong> 가산=소득 단계 / 공제=세액 단계 / 대상·연도 확인. <strong>세금을 두 번 받으려고 더하는 것이 아니라, 이미 회사가 낸 부담을 조정하려고 더했다가 세액에서 빼는 구조다.</strong></p>
+<h2 id="tax-08-04" data-concept-id="tax-08-04">8-4. 사업소득: 독립적으로 계속·반복해서 버는 돈 ★★★★★</h2>
+<p><strong>교재 128~131쪽 · 문단의 의도:</strong> 사업자등록증 유무나 개별 수입 이름 대신 활동의 실질을 보게 한다. 소득세법 제19조의 공통 기준은 <mark class="yellow">영리 목적 + 자기 계산과 책임 + 계속성·반복성</mark>이다. 2021년 기출에는 당시 제20호라고 적혀 있지만 교재의 현행형 목록에서는 유사소득 포괄조항이 제21호다. 번호보다 문장의 요건을 기억한다.</p>
+<p>교재의 열거 범위는 농림어업, 광업, 제조업, 전기·가스 등 공급업, 수도·폐기물·원료재생, 건설, 도소매, 운수·창고, 숙박·음식, 정보통신, 금융·보험, 부동산, 전문·과학·기술서비스, 사업시설관리·지원·임대, 교육, 보건·사회복지, 예술·스포츠·여가, 협회·수리·개인서비스, 가구 내 고용활동과 법정 사업용 유형자산 양도, 유사 활동까지다. 곡물 등 식량작물 재배, 법정 교육기관·사회복지 등에는 해당 제외 규정을 함께 읽는다. 사업용 토지·건물 양도가 모두 사업소득이 되는 것도 아니다.</p>
+<p><strong>88누8753 판결의 읽는 법:</strong> 수익 목적뿐 아니라 규모·횟수·활동 모습 등을 사회통념상 종합한다. 한 번 계약금을 받았다고 그 앞뒤의 계속적인 직업 활동까지 사라지는 것은 아니다.</p>
+<p><strong>교재 사례 1 — 탤런트 전속계약금, 2000두5203:</strong> 연기자 겸 광고모델은 여러 연예 활동으로 계속 수익을 얻었다. 다툼은 한 번 받는 전속계약금을 일시적 기타소득으로 볼지였다. 법원은 직업 내용·기간·거래 상대·주수입원·횟수·규모를 함께 보고 연예 활동 전체의 계속·반복성을 인정하여 사업소득으로 판단했다. <strong>번역:</strong> 광고 계약 하나만 떼지 말고 생업 전체를 보라는 말이다. 다르게 보면 계약금 지급 횟수만 바꾸어 같은 사업소득의 종류를 바꿀 수 있게 된다.</p>
+<p><strong>교재 사례 2 — 무인가 대금업, 85누904:</strong> 사업자등록 없이 1년 반 동안 차량 5대, 상시 직원 7명, 900여억 원의 자금, 70여 명 고객과 수십 차례 대여라는 활동이 있었다. 인가가 없으니 사업이 아닌가? 법원은 자기 계산과 책임 아래 계속한 대금업의 실질을 보고 사업소득이라고 했다. <strong>번역:</strong> 불법·미등록이라는 표지는 사업 규모와 반복성을 없애지 않는다. 7강의 위법소득과 연결된다.</p>
+<p><strong>교재 사례 3 — 물품 연불판매, 91누117:</strong> 판매자가 대금을 나중에 나누어 받는 대신 이자 상당액을 더한 가격을 약정했다. 이 금액을 일시적 금전대여의 이자인 비영업대금 이익으로 볼까? 법원은 판매계약에서 정한 연불 조건의 대가라면 판매대금 성격을 보아 비영업대금 이익과 구별했다. <strong>번역:</strong> 명칭이 ‘이자 상당’이어도 출발은 물품 판매다. 별개의 금전대여와 구별한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 독립성 / 계속·반복 / 전체 활동. <strong>돈의 이름표보다 어떤 경제활동에서 나왔는지를 본다.</strong></p>
+<h2 id="tax-08-05" data-concept-id="tax-08-05">8-5. 필요경비와 결손금: 매출 전부가 내 이익은 아니다 ★★★★☆</h2>
+<p><strong>교재 131~132쪽 · 문단의 의도:</strong> 순소득에 과세하므로 사업을 위해 든 법정 비용을 공제한다. <strong>사업소득금액 = 총수입금액 − 필요경비.</strong> 필요경비가 더 크면 그 초과액이 결손금이다. 가족 생활비까지 사업비로 자유롭게 빼는 뜻은 아니다. 사업 관련성·증빙·법정 불산입 등을 본다.</p>
+<p><strong>가상 계산:</strong> 가게 수입 1,000, 인정 경비 700이면 사업소득 300이다. 수입 1,000, 인정 경비 1,100이면 결손금 100이다. 세금을 −100 내거나 현금 100을 자동 지급받는다는 말이 아니다. 다른 소득과의 통산·이월 규칙은 별도로 적용한다.</p>
+<p><strong>교재 판례 — 2014도16164, 2015.2.26.:</strong> 위법소득에 대한 세금을 계산하면서 그 소득을 얻는 데 지출한 비용을 공제할 수 있는지가 문제되었다. 법원은 순소득 과세의 원칙 때문에 위법소득 관련 비용도 필요경비 인정이 원칙일 수 있지만, 지출 자체가 사회질서에 심히 반하는 등 특별한 사정이 있으면 인정하지 않는다고 보았다. 교재의 인용은 이 법리 부분이므로 사건에 없는 구체적 비용·인물·금액을 덧붙이지 않는다.</p>
+<p><strong>문장 번역:</strong> ① 위법 여부와 별개 담세력 → 불법 매출도 경제적 소득은 본다. ② 순소득 → 돈을 벌기 위해 실제 들인 비용도 원칙적으로 따진다. ③ 사회질서에 심히 반함 → 모든 범죄 비용까지 국가가 세금 계산에서 승인해 주는 것은 아니다. 법정 비용 불산입 규정도 별도로 우선 확인한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 순소득 / 결손 / 위법 비용의 한계. <strong>‘위법이니 전부 경비 불가’와 ‘위법소득 과세하니 모든 경비 가능’ 둘 다 지나친 단정이다.</strong></p>
+<h2 id="tax-08-06" data-concept-id="tax-08-06">8-6. 근로소득: 종속적 지위에서 일한 대가 ★★★★★</h2>
+<p><strong>교재 132~133쪽 · 문단의 의도:</strong> 급여 이름과 지급 형식을 바꾸어도 근로의 대가이면 해당할 수 있다. 봉급·급료·보수·세비·임금·상여·수당, 법인 의결기관 결의 상여, 법인세법상 상여처분, 퇴직 때 받지만 법정 퇴직소득이 아닌 금액, 재직 중 직무발명보상금, 법정 임직원 할인·지원 이익 등을 살핀다. 비과세 요건은 소득 구분 다음에 따로 판단한다.</p>
+<p><strong>교재 2007두1941 판결의 이야기:</strong> 일하는 사람이 급여 외 경제적 이익을 받았을 때 ‘기본 월급이라는 이름이 아니면 근로소득 밖인가’가 문제된다. 법원은 명칭·형태와 무관하게 근로 제공의 직접 대가 및 근로를 전제로 밀접히 연결되어 근로조건을 이루는 급여를 포함한다고 보았다. <strong>번역:</strong> 봉투에 복지·보조금이라고 써도 실제로 일을 제공하는 대가인지 확인한다. 모든 회사 지급액이 무조건 근로소득이라는 뜻은 아니다.</p>
+<p><strong>소득금액 계산:</strong> 과세 대상 총급여액(비과세 제외)에서 <strong>근로소득공제</strong>를 뺀다. 사업자처럼 개인이 쓴 출퇴근비·식비 영수증을 전부 필요경비로 직접 빼는 제도가 아니다. 법정 표준화 공제다. 공제액이 모든 사람에게 똑같은 정액이라는 뜻도 아니며 총급여 수준에 따른 계산을 한다.</p>
+<p><strong>연말정산:</strong> 원천징수한 세금과 연간 정확한 세금을 맞춘다. 원칙적으로 다음 해 2월분 급여 지급 때, 퇴직자는 퇴직하는 달 급여 지급 때 정산한다. 근로소득만 있고 적정하게 연말정산된 경우 등 법정 요건이면 종합소득세 확정신고를 생략할 수 있다. 여러 근무지 소득이 합산 정산되지 않았거나 다른 종합과세 소득이 있으면 신고 여부를 다시 확인한다. 분리과세되는 다른 소득이 있다는 이유만으로 모든 연말정산 특례를 잃는 것도 아니다.</p>
+<p><strong>기출 경계 사례:</strong> 사외이사 보수·법인세법상 상여처분·국회의원 세비는 근로소득 범위로 본다. 재직 중 부여받은 주식매수선택권을 <strong>퇴직 후 행사</strong>한 이익은 법정 기타소득이다. 일용근로소득은 종합합산 없이 원천징수로 종결되는 분리과세 구조다. <strong>시험·키워드·한 줄:</strong> 종속성 / 총급여−근로소득공제 / 연말정산. <strong>이름보다 대가관계, 신고 면제는 요건을 본다.</strong></p>
+<h2 id="tax-08-07" data-concept-id="tax-08-07">8-7. 연금소득: 납입·운용·수령을 나누기 ★★★☆☆</h2>
+<p><strong>교재 134~135쪽 · 문단의 의도:</strong> 장래 생활을 위해 쌓는 돈은 납입 단계와 받는 단계를 연결해 과세한다. 공적연금 관련법에 따른 연금과 법정 연금계좌에서 연금 형태로 인출하는 금액 등이 대상이다. 계좌 안에는 과세이연된 퇴직소득, 세액공제 받은 납입액, 운용수익, 법정 이연소득 등이 섞일 수 있다.</p>
+<p><strong>교재 문장 보완:</strong> ‘넣을 때 과세하지 않고 받을 때 과세’는 과세이연의 큰 취지다. 모든 납입액이 무제한 면세·공제되고 모든 수령액이 똑같이 종합과세되는 것은 아니다. 공제받지 않은 원금, 비과세, 사적연금 분리과세·선택 규정, 이연퇴직소득 등 각 항목의 요건을 나눈다. 같은 계좌라도 돈의 출처와 인출 방식이 중요하다.</p>
+<p><strong>가상 대화:</strong> 하린 “계좌에서 돈을 꺼냈으니 다 연금인가요?” 선생님 “법에서 정한 연금수령인지, 연금외수령인지부터 보자.” 세액공제 받은 납입액·운용수익을 법정 연금외 방식으로 꺼내면 기타소득 문제가 생길 수 있고, 과세이연 퇴직소득은 그 성격에 맞는 별도 처리를 본다.</p>
+<p>종합과세 연금소득금액의 기본 계산은 <strong>총연금액 − 연금소득공제</strong>다. 사업 경비를 개별 영수증대로 빼는 방식이 아니다. <strong>시험·키워드·한 줄:</strong> 공적·사적 / 과세이연 / 연금수령·연금외수령. <strong>‘계좌 이름’ 하나가 아니라 어떤 돈을 어떤 방식으로 받았는지 본다.</strong></p>
+<h2 id="tax-08-08" data-concept-id="tax-08-08">8-8. 기타소득: 남는 돈 전부가 아니라 열거된 소득 ★★★★★</h2>
+<p><strong>교재 135~138쪽 · 문단의 의도:</strong> 제21조는 다른 소득에 속하지 않는 것 중 법령이 정한 소득을 과세한다. 기타라는 이름 때문에 무제한 포괄 규정으로 읽기 쉽지만 그렇지 않다. 교재의 긴 목록을 의미별로 다시 정리했다.</p>
+<table>
+<thead>
+<tr>
+<th>교재 열거 묶음</th>
+<th>내용과 경계</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>상·당첨·사행</td>
+<td>상금·현상금·포상금·보로금, 복권·경품, 법정 사행 이익, 경마·경륜·경정·소싸움·체육투표 환급, 슬롯머신 당첨 등</td>
+</tr>
+<tr>
+<td>권리·작품</td>
+<td>비저작자 등의 저작권 양도·사용대가, 영상·방송필름 등, 광업·어업·양식업·산업재산·상표·영업권·토사석 채취·지하수 등 법정 권리</td>
+</tr>
+<tr>
+<td>대여·공익사업</td>
+<td>일시 물품·장소 대여, 법정 소규모 중개 대여, 공익사업 관련 지역권·지상권 설정·대여</td>
+</tr>
+<tr>
+<td>계약·발견</td>
+<td>법정 위약금·배상금·부당이득 반환이자, 유실물·매장물 보상·취득, 무주물 취득</td>
+</tr>
+<tr>
+<td>관계·사례</td>
+<td>특수관계로 얻은 법정 경제적 이익, 재산권 알선수수료, 사례금</td>
+</tr>
+<tr>
+<td>창작·일시 용역</td>
+<td>원작자 원고료·인세·창작 대가, 일시 강연·방송·전문지식 등 인적용역</td>
+</tr>
+<tr>
+<td>계좌·퇴직 후</td>
+<td>소기업·소상공인 공제부금 법정 해지일시금, 법정 연금외수령, 퇴직 후 주식매수선택권 행사·직무발명보상금</td>
+</tr>
+<tr>
+<td>그 밖의 법정 유형</td>
+<td>법인세법상 기타소득처분, 뇌물·알선수재·배임수재, 종교인소득 등</td>
+</tr>
+</tbody></table>
+<p>위 표는 교재 항목을 놓치지 않기 위한 지도다. 해당 소득이 사업의 계속·반복 활동이나 근로의 대가에 먼저 해당하는지, 각 항목의 제외·비과세·특례는 없는지 살핀다. 창작료를 한 번 받았다는 사실만으로 생업인 작가의 사업소득을 모두 기타소득으로 바꾸지 않는다.</p>
+<p><strong>기타소득금액 = 총수입금액 − 필요경비.</strong> 그러나 항목별 경비 계산이 다르다. 법정 정률 경비가 인정되는 인적용역과 일반 경비 원칙을 적용하는 사례금을 혼동하면 세액이 달라진다. 교재의 2017년 판례 인용에 나오는 인적용역 경비 <strong>80%는 당시 법률의 설명</strong>이다. 이를 현재 모든 기타소득에 통일 적용하지 않는다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 열거주의 / 다른 소득 우선 판정 / 경비 종류별 차이. <strong>기타소득은 남은 돈을 다 넣는 서랍이 아니라 법이 정한 여러 작은 서랍이다.</strong></p>
+<h2 id="tax-08-09" data-concept-id="tax-08-09">8-9. 배상금과 사례금: 같은 이름인데 왜 결론이 다를까 ★★★★☆</h2>
+<p><strong>교재 138~140쪽의 판례 세 개를 비교한다.</strong> 이름이 아니라 돈을 준 이유·실제 손해·용역의 가치를 본다는 공통점이 있다.</p>
+<p><strong>사례 1 — 약정 지연손해금, 94다3070:</strong> 채무자가 돈을 제때 주지 않아 채권자가 약정 지연손해금을 받았다. 당사자는 ‘돈이 늦게 들어온 손해를 메웠을 뿐’이라고 볼 수 있다. 법원은 본래 계약의 지급 자체에 대한 손해를 넘어선 지연 배상으로 보아 법정 기타소득의 위약금·배상금에 포함된다고 판단했다. 금전채무라고 달라지지 않는다. <strong>한 줄 번역:</strong> 원래 받을 원금과, 늦게 준 데 따른 추가 배상은 다르다.</p>
+<p><strong>사례 2 — 계약 해제 후 실제 손해 전보, 2002두3942:</strong> 매수인의 불이행으로 매매계약을 합의해제하고 매도인이 손해배상 명목의 돈을 받았다. 이 사건에서는 현실적인 손해를 메워 주는 성격이라고 보아 기타소득인 추가 배상과 구별했다. <strong>한 줄 번역:</strong> 없어진 재산을 원래대로 채운 것과 원래 지급 자체의 손해를 넘어 얻은 것은 다르다. ‘합의해제면 모든 배상금 비과세’가 아니다. 실제 손해와 금액의 성격을 확인한다.</p>
+<p><strong>사례 3 — 일시 용역 대가인가 사례금인가, 2017두30214:</strong> 어떤 일을 도와준 뒤 받은 금품에 일의 대가와 고마움의 표시가 함께 섞였다. 법원은 수행한 업무, 지급 동기·실질 목적, 액수, 상대방과의 관계 등을 종합해 <strong>전체적으로 용역 대가의 범주를 벗어나면 사례금</strong>으로 분류한다고 보았다. 일이 조금 관련되어 있다는 이유만으로 전액을 인적용역 대가로 분류해 정률 필요경비를 적용할 수는 없다. 교재가 제시하지 않은 세부 인물·금액은 여기서 실제 사실처럼 만들어 넣지 않는다.</p>
+<p><strong>판례 문장별 번역:</strong> 인적용역 대가 → 일한 것과 금액 사이에 보수 관계가 있어야 한다. 성격을 벗어남 → 일한 대가만으로 설명되지 않는 큰 사례 성격이 있다. 종합 고려 → 금액 하나만으로 판단하지 않는다. 필요경비 차이 → 소득 이름의 판정이 계산 결과를 바꾸므로 실질에 맞게 구분한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 원금·현실 손해·초과 배상 / 보수·사례 / 실질. <strong>손해배상·감사비라는 명칭이 세금 결론을 대신하지 않는다.</strong></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>이자·할인액</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 利(이로울 이), 子(아들 자); 割(벨 할), 引(끌 인), 額(이마 액). <strong>③ 합친 뜻:</strong> 원금에서 생기는 대가·미리 깎은 금액. <strong>④ 이름의 이유:</strong> 지급 이름이나 시점이 달라도 사용대가를 포착하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 금전 사용대가와 발행 할인 등 이자 성격의 금액. <strong>⑥ 쉬운 말:</strong> 내 돈을 쓰게 한 값. <strong>⑦ 사례:</strong> 만기 100 채권을 95에 발행한 단순 예.</p>
+<p><strong>⑧ 시험:</strong> 할인액도 법정 이자. <strong>⑨ 비교·기억법:</strong> 모든 중도 매매차익을 발행 할인액과 같게 보지 않음.</p>
+<h3>비영업대금(非營業貸金)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 非(아닐 비), 營(경영할 영), 業(업 업), 貸(빌릴 대), 金(쇠 금). <strong>③ 합친 뜻:</strong> 대여업이 아닌 돈 빌려주기. <strong>④ 이름의 이유:</strong> 일반 금융소득과 대여 사업의 수입을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 대금업 아닌 자의 일시·우발적 대여에서 받는 이자·수수료. <strong>⑥ 쉬운 말:</strong> 사업으로 돈놀이를 하는 것이 아닌 일시 대여. <strong>⑦ 사례:</strong> 친구에게 한 번 대여하고 받은 이자.</p>
+<p><strong>⑧ 시험:</strong> 개인 대금업의 사업소득과 비교. <strong>⑨ 비교·기억법:</strong> 무등록이라도 실질이 대금업이면 사업성 검토.</p>
+<h3>배당·잉여금·의제배당</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 配(나눌 배), 當(마땅 당); 剩(남을 잉), 餘(남을 여), 金(쇠 금); 擬(헤아릴 의), 制(억제할 제). <strong>③ 합친 뜻:</strong> 수익을 나누어 줌·남은 금액·배당으로 취급. <strong>④ 이름의 이유:</strong> 형식적 배당 밖의 수익 이전도 보기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 수익분배와 소각·감자 등 법정 사유의 배당 간주. <strong>⑥ 쉬운 말:</strong> 회사 이익을 나눠 받는 돈. <strong>⑦ 사례:</strong> 취득 70 주식 소각으로 100 수령 시 초과 30 검토.</p>
+<p><strong>⑧ 시험:</strong> 배당결의 유무만으로 결정하지 않음. <strong>⑨ 비교·기억법:</strong> 원금 회수 부분과 수익 분배 부분 구별.</p>
+<h3>배당가산·배당세액공제</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 配(나눌 배), 當(마땅 당), 加(더할 가), 算(셀 산); 稅(세금 세), 額(이마 액), 控(당길 공), 除(덜 제). <strong>③ 합친 뜻:</strong> 배당소득에 더함·계산된 세금에서 뺌. <strong>④ 이름의 이유:</strong> 법인세와 개인소득세의 경제적 이중과세를 조정하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 적격 배당에 회사 부담 상당액을 가산하고 세액에서 공제하는 제도. <strong>⑥ 쉬운 말:</strong> 먼저 세전으로 되돌리고 이미 낸 몫을 빼기. <strong>⑦ 사례:</strong> 회사 세전 100·세금 10·배당 90 원리 모형.</p>
+<p><strong>⑧ 시험:</strong> 모든 배당에 항상 적용하는가. <strong>⑨ 비교·기억법:</strong> 소득공제와 세액공제의 위치 차이.</p>
+<h3>출자공동사업자</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 出(날 출), 資(재물 자), 共(함께 공), 同(같을 동), 事(일 사), 業(업 업), 者(사람 자). <strong>③ 합친 뜻:</strong> 공동사업에 자본을 내는 법정 유형의 사람. <strong>④ 이름의 이유:</strong> 노동·경영 활동과 투자 수익을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 경영 참여 없이 출자하는 등 법정 요건의 공동사업자. <strong>⑥ 쉬운 말:</strong> 운영에 참여하지 않고 돈을 대고 몫을 받는 경우. <strong>⑦ 사례:</strong> 손익분배비율 상당액의 배당소득.</p>
+<p><strong>⑧ 시험:</strong> 사업장 계산과 구성원 소득 구분. <strong>⑨ 비교·기억법:</strong> 모든 공동사업자를 뜻하지 않음.</p>
+<h3>사업소득·자기 계산과 책임</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 事(일 사), 業(업 업), 所(바 소), 得(얻을 득); 計(셀 계), 算(셀 산), 責(꾸짖을 책), 任(맡길 임). <strong>③ 합친 뜻:</strong> 사업에서 번 돈·스스로 손익과 책임 부담. <strong>④ 이름의 이유:</strong> 종속 근로와 일시 용역을 구별하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 영리 목적의 독립적 계속·반복 활동으로 얻는 소득. <strong>⑥ 쉬운 말:</strong> 내 사업의 잘됨과 손해를 스스로 부담. <strong>⑦ 사례:</strong> 연예 활동 전체의 전속계약금.</p>
+<p><strong>⑧ 시험:</strong> 전체 기간·횟수·규모. <strong>⑨ 비교·기억법:</strong> 지급 한 번이라고 활동 전체도 일회성이 되는 것은 아님.</p>
+<h3>필요경비·결손금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 必(반드시 필), 要(요긴할 요), 經(지날 경), 費(쓸 비); 缺(이지러질 결), 損(덜 손), 金(쇠 금). <strong>③ 합친 뜻:</strong> 수입을 위해 필요한 비용·부족한 손실액. <strong>④ 이름의 이유:</strong> 매출 아닌 순소득을 과세하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 공제 가능한 사업 비용과 수입을 초과하는 인정 경비. <strong>⑥ 쉬운 말:</strong> 번 돈에서 인정되는 사업비를 빼기. <strong>⑦ 사례:</strong> 수입 1000·경비 1100이면 결손 100.</p>
+<p><strong>⑧ 시험:</strong> 개인 생활비·사회질서 위반 지출의 한계. <strong>⑨ 비교·기억법:</strong> 결손금이 곧 현금 환급액은 아님.</p>
+<h3>근로소득·연말정산</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 勤(부지런할 근), 勞(일할 로), 所(바 소), 得(얻을 득); 年(해 년), 末(끝 말), 精(정밀할 정), 算(셀 산). <strong>③ 합친 뜻:</strong> 일한 대가·연간 세금을 정확히 계산. <strong>④ 이름의 이유:</strong> 미리 뗀 세금과 정확한 세금을 맞추기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 종속적 근로의 법정 대가와 원천징수세액의 연간 정산. <strong>⑥ 쉬운 말:</strong> 월급에서 뗀 돈을 연간 기준으로 다시 맞추기. <strong>⑦ 사례:</strong> 적정 연말정산된 단일 근로소득의 신고 특례.</p>
+<p><strong>⑧ 시험:</strong> 퇴직 후 선택권·일용근로와 비교. <strong>⑨ 비교·기억법:</strong> 연말정산은 무조건 환급을 뜻하지 않음.</p>
+<h3>연금·과세이연</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 年(해 년), 金(쇠 금); 課(매길 과), 稅(세금 세), 移(옮길 이), 延(늘일 연). <strong>③ 합친 뜻:</strong> 장기적으로 받는 돈·과세시점을 뒤로 옮김. <strong>④ 이름의 이유:</strong> 노후 준비와 장기 저축의 특성을 고려하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 공적·사적 법정 연금소득과 납입·수령 단계의 과세 조정. <strong>⑥ 쉬운 말:</strong> 지금과 나중 중 어느 때 세금을 계산할지 정하기. <strong>⑦ 사례:</strong> 이연퇴직소득·공제 받은 납입액·운용수익.</p>
+<p><strong>⑧ 시험:</strong> 연금수령과 연금외수령. <strong>⑨ 비교·기억법:</strong> 모든 납입액 무제한 공제·모든 수령액 동일 과세 아님.</p>
+<h3>기타소득·인적용역·사례금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 其(그 기), 他(다를 타), 所(바 소), 得(얻을 득); 人(사람 인), 的(과녁 적), 用(쓸 용), 役(부릴 역); 謝(사례할 사), 禮(예도 례), 金(쇠 금). <strong>③ 합친 뜻:</strong> 다른 법정 유형·사람이 제공한 일·감사 뜻의 금품. <strong>④ 이름의 이유:</strong> 동기와 실질에 따라 경비 계산까지 달라지기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 법정 기타소득 중 용역 대가와 사례 성격의 금액. <strong>⑥ 쉬운 말:</strong> 일한 값인지 고마워서 준 성격인지 살피기. <strong>⑦ 사례:</strong> 업무 내용·액수·관계·동기를 종합.</p>
+<p><strong>⑧ 시험:</strong> 모든 기타소득 같은 경비율인가. <strong>⑨ 비교·기억법:</strong> 감사비라는 이름만으로 사례금 확정은 아님.</p>
+<h3>전보·지연손해금</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 塡(메울 전), 補(기울 보); 遲(늦을 지), 延(늘일 연), 損(덜 손), 害(해할 해), 金(쇠 금). <strong>③ 합친 뜻:</strong> 손해를 메움·이행이 늦어 생긴 손해 배상. <strong>④ 이름의 이유:</strong> 원래 재산의 회복과 과세되는 소득의 증가를 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 현실 손해 회복과 지연으로 받는 법정 추가 배상의 구별. <strong>⑥ 쉬운 말:</strong> 깨진 것을 메운 돈인지 늦어서 더 받은 돈인지 보기. <strong>⑦ 사례:</strong> 매매 해제 현실 손해와 금전채무 지연손해금.</p>
+<p><strong>⑧ 시험:</strong> 판례의 서로 다른 사실관계. <strong>⑨ 비교·기억법:</strong> 손해배상이라는 이름만으로 일괄 비과세하지 않음.</p>
+<h1>기출 TOP5 · 경계와 계산부터</h1>
+<table>
+<thead>
+<tr>
+<th>순위</th>
+<th>기출</th>
+<th>학습 목표</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2021_042</td>
+<td>소득별로 다른 소득금액 계산</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2021_041</td>
+<td>영리·계산과 책임·계속 반복</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2021_047</td>
+<td>배당가산·공제와 공익신탁 비과세</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021_044</td>
+<td>퇴직 후 주식매수선택권과 근로소득 경계</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2019_018</td>
+<td>이자·배당·출자공동사업자의 구별</td>
+</tr>
+</tbody></table>
+<p>나머지 2021_045·046 및 2019_017도 부록에서 전부 해설했다. 학습 우선순위이며 실제 오답률 순위는 아니다. 보기의 반복 함정은 ‘이자도 경비 공제’, ‘배당은 언제나 받은 금액 그대로’, ‘사업자등록이 없으면 사업 아님’, ‘근로소득이면 무조건 5월 신고’다.</p>
+<h1 class="practice-section-start">새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 이름이 이자인 두 수입.</strong> 은채가 친구에게 일시 대여하고 받은 돈과 개인 대금업자가 여러 고객에게 계속 대여하고 받은 돈이 있다. 둘 다 이자소득인가? <strong>정답:</strong> 전자는 비영업대금 이익, 후자는 활동의 실질에 따라 사업소득을 검토한다. <strong>출제 의도:</strong> 이름 대신 계속·반복 활동을 보는가.</p>
+<p><strong>응용 2 · 주식 소각의 100.</strong> 취득금액 70의 주식이 소각되어 법정 사유로 100을 받았다. 원금 70을 무시하고 100 전부를 의제배당으로 보는가? <strong>정답:</strong> 해당 의제배당 요건 아래 취득금액 초과분 30을 검토한다. <strong>출제 의도:</strong> 투자 회수와 수익 분배의 구별.</p>
+<p><strong>응용 3 · 좋은 이름의 수당.</strong> 회사가 근무조건에 따라 매달 고정적으로 주는 돈을 ‘격려 선물’이라 불렀다. 명칭만으로 근로소득에서 빠지나? <strong>정답:</strong> 근로 제공과의 대가관계 및 법정 비과세 요건을 살핀다. <strong>출제 의도:</strong> 명칭과 실질을 분리하는가.</p>
+<p><strong>응용 4 · 받은 금액에서 무조건 절반 빼기.</strong> 지우는 모든 기타소득에 같은 비율의 필요경비를 적용했다. 맞나? <strong>정답:</strong> 항목마다 경비 규정이 달라 틀리다. 실제 일의 대가인지 사례금인지 먼저 분류해야 한다. <strong>출제 의도:</strong> 소득 분류가 경비 계산을 바꾸는 이유.</p>
+<p><strong>응용 5 · 회사세금이 있으니 더 많이?</strong> 회사 세전이익 200, 회사세금 20, 지급배당 180을 가정하고 개인 세율은 20%다. 회사세금 20을 정확히 가산·공제하는 원리 모형의 개인 부담과 총부담은? <strong>정답:</strong> 가산 후 200×20%=40, 개인 부담 40−20=20, 총부담 20+20=40이다. 실제 법정 가산율 계산과는 구별한다. <strong>출제 의도:</strong> 가산은 소득, 공제는 세액 단계임을 이해하는가.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제8강</h1>
+<p><strong>TOP3:</strong> 소득별 계산 / 사업·근로·기타 경계 / 배당가산과 공제.</p>
+<table>
+<thead>
+<tr>
+<th>소득</th>
+<th>중심 성격</th>
+<th>소득금액 기본 계산</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이자</td>
+<td>금전 사용대가</td>
+<td>총수입, 일반 필요경비 공제 없음</td>
+</tr>
+<tr>
+<td>배당</td>
+<td>수익 분배</td>
+<td>총수입+법정 대상 가산, 경비 공제와 다름</td>
+</tr>
+<tr>
+<td>사업</td>
+<td>영리·독립·계속 반복</td>
+<td>총수입−필요경비</td>
+</tr>
+<tr>
+<td>근로</td>
+<td>종속적 근로 대가</td>
+<td>총급여(비과세 제외)−근로소득공제</td>
+</tr>
+<tr>
+<td>연금</td>
+<td>공적·사적 연금 법정 수령</td>
+<td>해당 총연금−연금소득공제, 특례 구분</td>
+</tr>
+<tr>
+<td>기타</td>
+<td>다른 소득 외 법정 열거</td>
+<td>총수입−종류별 필요경비</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>판례·함정</th>
+<th>한 줄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>엔화스왑</td>
+<td>당시 법의 한계, 현재 결합상품 규정과 구별</td>
+</tr>
+<tr>
+<td>고가매입 배당</td>
+<td>결의 이름보다 주주에게 현실 귀속된 이익</td>
+</tr>
+<tr>
+<td>탤런트 계약금</td>
+<td>지급 한 번보다 직업 활동 전체의 반복성</td>
+</tr>
+<tr>
+<td>무인가 대금업</td>
+<td>인가·등록 없음이 사업 실질을 지우지 않음</td>
+</tr>
+<tr>
+<td>연불판매</td>
+<td>판매대금 성격과 별도 대여 이자 구별</td>
+</tr>
+<tr>
+<td>위법 경비</td>
+<td>원칙과 사회질서상 한계, 법정 불산입 확인</td>
+</tr>
+<tr>
+<td>배상·사례</td>
+<td>실제 손해·초과 배상·용역 대가를 나눔</td>
+</tr>
+<tr>
+<td>가산율</td>
+<td>2026년 10%, 11% 개정은 2027년 시행 구별</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 소득의 종류를 먼저 정해야 경비·공제·과세방법을 정할 수 있다.</p>
+<p><strong>사례를 풀 순서:</strong> 받은 이유 → 활동 전체 → 법정 유형 → 제외·비과세 → 소득금액 계산 → 합산 여부.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 여섯 소득을 사례로 구분하고 공식을 설명한다. 🟡 <strong>복습 필요:</strong> 분류는 하지만 경비·가산·공제 위치가 섞인다. 🔴 <strong>이해 부족:</strong> 받은 돈의 명칭만으로 소득 종류를 정한다. 실제 답변 전에는 이해 수준을 확정하지 않는다.</p>
+<p><strong>복습 TOP3:</strong> 8-1~8-3 이자·배당 / 8-4~8-6 독립 사업과 근로 / 8-8~8-9 기타소득의 범위. 교재 141쪽을 읽으며 각 정의마다 본문의 판례를 하나 연결한다.</p>
+<h1>문제 부록 · 8문항·32개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_041"><h4>기출문제 · 세법_기출2021_041</h4><p class="question-stem">[2021 기말고사 · 41번]<br>소득세법 제19조 제1항 제20호는 일종의 포괄 규정으로서 사업소득에서 말하는 ‘사업’의 개념에 관한 일반적 정의를 포함하고 있다. 다음의 괄호 안에 들어갈 말로 옳게 짝지어진 것은?<br>제1호부터 제19호까지의 규정에 따른 소득과 유사한 소득으로서 [ ]를(을) 목적으로 자기의 [ ] 하에 [ ]으로 행하는 활동을 통하여 얻는 소득</p><ol class="choices"><li>공익 – 명의 – 계속적·반복적</li><li>영리 – 명의 – 일시적·우발적</li><li>영리 – 명의와 책임 – 일시적·반복적</li><li>영리 – 계산과 책임 – 계속적·반복적</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 영리 목적을 공익으로 바꿨고 자기 계산과 책임이라는 요건도 빠졌다.</li><li><strong>비선택</strong> · 영리만 맞는다. 자기 명의만으로 사업성을 정하지 않으며 일시·우발이 아니라 계속·반복을 본다.</li><li><strong>비선택</strong> · 자기 계산과 책임, 계속·반복이라는 핵심을 명의와 일시성으로 바꿨다.</li><li><strong>선택</strong> · 정답. 영리·자기 계산과 책임·계속 반복이다. 원문의 당시 제20호와 교재의 제21호라는 조문 번호 차이는 법 개정에 따른 것이므로 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_042"><h4>기출문제 · 세법_기출2021_042</h4><p class="question-stem">[2021 기말고사 · 42번]<br>다음 중 소득의 종류 별로 소득금액을 계산하는 방법으로 잘못된 것을 고르시오.</p><ol class="choices"><li>사업소득: 총수입금액 – 필요경비 공제</li><li>근로소득: 총 급여액 – 근로소득 공제</li><li>기타소득: 총수입금액 – 필요경비 공제</li><li>이자소득: 총수입금액 – 필요경비 공제</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사업은 총수입금액에서 법정 필요경비를 뺀 순소득을 계산한다.</li><li><strong>비선택</strong> · 근로는 과세 총급여액에서 법정 근로소득공제를 뺀다. 개인별 실제 지출을 전부 경비로 빼는 방식과 다르다.</li><li><strong>비선택</strong> · 기타는 총수입에서 필요경비를 빼되 항목별 경비 규정을 확인한다. 모든 기타소득에 같은 정률이 적용되지는 않는다.</li><li><strong>선택</strong> · 틀린 계산이므로 선택. 이자소득금액은 원칙적으로 총수입금액이고 일반 필요경비 공제를 하지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_044"><h4>기출문제 · 세법_기출2021_044</h4><p class="question-stem">[2021 기말고사 · 44번]<br>다음 중 근로소득에 해당하지 않는 항목을 고르시오.</p><ol class="choices"><li>사외이사가 받는 보수</li><li>법인세법에 따라 상여로 처분된 금액</li><li>임직원의 지위에서 부여 받은 주식매수선택권을 퇴직 후 행사하여 얻은 차익</li><li>국회의원의 세비(歲費)</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 사외이사 보수도 법정 근로소득 범위에 포함될 수 있다. 일반 근로계약 명칭이 없다는 이유만으로 제외하지 않는다.</li><li><strong>비선택</strong> · 법인세법상 상여로 소득처분한 금액은 소득세법상 근로소득에 포함된다. 실제 급여명세서 명칭만으로 판단하지 않는다.</li><li><strong>선택</strong> · 정답. 재직 중 부여받은 주식매수선택권을 퇴직 후 행사한 이익은 법정 기타소득이다. 부여 시점과 행사 시점을 나눈다.</li><li><strong>비선택</strong> · 세비는 소득세법의 근로소득 열거에 포함된다. 공적 직위라는 이유로 소득 구분에서 빠지지 않는다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_045"><h4>기출문제 · 세법_기출2021_045</h4><p class="question-stem">[2021 기말고사 · 45번]<br>다음 중 근로소득의 과세방법으로 옳은 항목을 고르시오.</p><ol class="choices"><li>근로소득의 지급에는 원천징수의무가 성립하지 않는다.</li><li>근로소득을 얻은 사람은 항상 다음 해 5월 1일부터 31일까지 사이에 종합소득세의 과세표준과 세액을 신고하여야 한다.</li><li>근로소득 외의 다른 소득이 조금이라도 있으면 연말정산의 특례를 적용 받을 수 없다.</li><li>일용 근로자의 근로소득은 종합소득 과세표준에 합산하지 않고 원천징수로 과세를 종결한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 근로소득 지급에는 원칙적으로 법정 원천징수 의무가 있다.</li><li><strong>비선택</strong> · 근로소득만 있고 적정하게 연말정산된 경우 등 법정 요건에서는 확정신고를 생략할 수 있다. 항상 신고라는 말이 틀리다.</li><li><strong>비선택</strong> · 분리과세 소득 등까지 조금이라도 있으면 특례를 잃는다고 할 수 없다. 다른 소득의 성격과 신고 면제 요건을 본다.</li><li><strong>선택</strong> · 정답. 일용근로소득은 종합소득 과세표준에 합산하지 않는 분리과세 구조로 원천징수로 종결한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_046"><h4>기출문제 · 세법_기출2021_046</h4><p class="question-stem">[2021 기말고사 · 46번]<br>다음 중 이자소득에 해당하지 않는 항목을 고르시오.</p><ol class="choices"><li>국내 또는 국외에서 받는, 일정한 집합투자기구로부터의 이익</li><li>국가나 지방자치단체가 발행한 채권 또는 증권의 할인액</li><li>비영업대금의 이익</li><li>내국법인이 발행한 채권 또는 증권의 할인액</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 이자소득이 아닌 것을 묻는다. 법정 집합투자기구 이익은 배당소득 분류다. 은행을 통해 지급받았다는 이유만으로 이자가 되지 않는다.</li><li><strong>비선택</strong> · 국가·지방자치단체 발행 채권·증권의 이자와 할인액은 이자소득에 포함된다.</li><li><strong>비선택</strong> · 금전대여업 아닌 사람이 일시적으로 빌려주고 받은 이익은 비영업대금의 이익인 이자소득이다.</li><li><strong>비선택</strong> · 내국법인 발행 채권·증권의 할인액도 법정 이자소득에 들어간다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 1번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_047"><h4>기출문제 · 세법_기출2021_047</h4><p class="question-stem">[2021 기말고사 · 47번]<br>다음 중 배당소득에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>배당소득금액은 총수입금액과 항상 일치한다.</li><li>법인으로 보는 단체로부터 받는 배당금도 배당소득으로 분류된다.</li><li>배당소득금액의 계산과 배당세액 공제(imputation)는 전혀 별개의 제도로서, 배당소득금액의 계산 과정에 무관하게 배당세액 공제는 항상 적용된다.</li><li>공익신탁의 이익 역시 다른 종류의 배당소득과 마찬가지로 과세된다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 항상 같지 않다. 법정 적격 배당에는 배당가산이 있어 소득금액이 총수입을 초과할 수 있다.</li><li><strong>선택</strong> · 정답. 법인으로 보는 단체에서 받는 배당·분배금도 배당소득에 포함된다.</li><li><strong>비선택</strong> · 배당가산과 배당세액공제는 이중과세를 조정하는 연결된 제도다. 모든 배당에 무관하게 항상 공제하는 것이 아니다.</li><li><strong>비선택</strong> · 공익신탁 이익은 법정 비과세 규정을 확인해야 한다. 다른 배당과 언제나 똑같이 과세한다는 문장이 틀렸다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_017"><h4>기출문제 · 세법_기출2019_017</h4><p class="question-stem">[2019 기말고사 · 17번 / 자체 풀이]<br>소득세법상 사업소득에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>소득세법은 사업소득의 성격을 영리를 목적으로 자기의 계산과 책임하에 계속적․반복적으로 행하는 활동을 통하여 얻은 소득이라고 한다.</li><li>둘 이상의 사업자가 공동사업을 하는 경우 해당 공동사업장을 과세단위로 하여 납세의무를 부과한다.</li><li>사업소득은 일명 유형별 포괄주의를 규정하고 있지 않다.</li><li>판례에 따르면 위법소득은 소득에 포함하지 않는다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 제공 자체 풀이의 정답. 영리 목적, 자기 계산과 책임, 계속·반복이라는 사업의 일반적 요건이다.</li><li><strong>비선택</strong> · 공동사업장은 소득금액 계산 단위지만 원칙적인 납세의무는 각 공동사업자에게 귀속된다. 계산 단위와 납세자를 혼동했다.</li><li><strong>비선택</strong> · 열거된 사업과 유사한 활동의 소득을 포섭하는 규정이 있다. 유형별 포괄 규정이 없다는 말이 틀리다.</li><li><strong>비선택</strong> · 현실적으로 지배·관리한 위법이익도 법정 요건 아래 과세할 수 있다는 것이 판례의 기본 입장이다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 1번.<br><br>소득세법 제19조는 열거된 사업과 유사한 소득으로서 영리 목적, 자기의 계산과 책임, 계속성·반복성을 갖춘 활동에서 생긴 소득을 사업소득에 포함한다. 공동사업장은 소득금액 계산의 단위이지만 원칙적으로 납세의무는 각 공동사업자에게 귀속되므로 ②와 구별된다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsLinkProc.do?lsNm=%EC%86%8C%EB%93%9D%EC%84%B8%EB%B2%95&amp;mode=11" target="_blank" rel="noopener noreferrer">소득세법 조문정보</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2019_018"><h4>기출문제 · 세법_기출2019_018</h4><p class="question-stem">[2019 기말고사 · 18번 / 자체 풀이]<br>소득세법상 금융소득(이자소득과 배당소득)에 관한 설명으로 옳은 것은?</p><ol class="choices"><li>이자소득은 유형별 포괄주의를 취하고 있으나 배당소득은 그러하지 아니하다.</li><li>비영업대금의 이익은 배당소득에 포함된다.</li><li>공동사업장의 소득금액 중 출자공동사업자의 손익분배비율에 해당하는 금액은 배당소득으로 과세된다.</li><li>이자소득금액은 총수입금액에 그 이자소득의 11%에 해당하는 금액을 더한 금액으로 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 이자뿐 아니라 배당에도 수익분배 성격의 유사소득을 포함하는 규정이 있다.</li><li><strong>비선택</strong> · 비영업대금의 이익은 배당이 아니라 이자소득이다.</li><li><strong>선택</strong> · 제공 자체 풀이의 정답. 법정 출자공동사업자 배분액은 배당소득이다. 모든 공동사업자가 출자공동사업자인 것은 아니다.</li><li><strong>비선택</strong> · 이자소득에 배당가산을 적용하지 않는다. 당시의 11%라는 수치와 별개로 소득 종류 자체를 바꿔 쓴 것이 틀렸다. 배당가산율은 적용연도를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 자체 풀이 · 공식 정답/공식 해설 아님<br>자체 판단 정답: 3번.<br><br>공동사업의 소득금액 중 경영에는 참여하지 않고 출자만 하는 출자공동사업자의 손익분배비율 상당액은 배당소득이다. 비영업대금의 이익은 이자소득이며 이자·배당 모두 유사소득을 포함하는 규정이 있다. 이자소득금액에 11%를 가산하는 규정도 없다.<br><br>참고 근거: <a href="https://law.go.kr/LSW/lsLinkProc.do?lsNm=%EC%86%8C%EB%93%9D%EC%84%B8%EB%B2%95&amp;mode=11" target="_blank" rel="noopener noreferrer">소득세법 조문정보</a><br><br>2019년 기출의 출제 취지를 기준으로 작성한 학습용 풀이입니다. 법령 개정·특례에 따라 현행 강의의 판단과 다를 수 있으므로 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 08' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 08|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>

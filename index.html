@@ -467,6 +467,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 <script src="./concepts/foundations-concepts.js"></script>
 <script src="./concepts/consumer-concepts.js"></script>
 <script src="./concepts/argument-concepts.js"></script>
+<script src="./concepts/tax-concepts.js"></script>
 <script>
 const DATA_BASE='./data/';
 const SUBJECTS=[
@@ -492,6 +493,7 @@ const GOVERNANCE_CONCEPTS=window.GOVERNANCE_CONCEPTS||{pages:{},routes:[],titles
 const FOUNDATIONS_CONCEPTS=window.FOUNDATIONS_CONCEPTS||{pages:{},routes:[],titles:{},questionConceptIds:{}};
 const CONSUMER_CONCEPTS=window.CONSUMER_CONCEPTS||{pages:{},routes:[],titles:{},questionConceptIds:{}};
 const ARGUMENT_CONCEPTS=window.ARGUMENT_CONCEPTS||{pages:{},routes:[],titles:{},questionConceptIds:{}};
+const TAX_CONCEPTS=window.TAX_CONCEPTS||{pages:{},routes:[],titles:{},questionConceptIds:{}};
 const CONCEPT_PAGES={
   ...PROPERTY_CONCEPTS.pages,
   ...OBLIGATIONS_CONCEPTS.pages,
@@ -502,6 +504,7 @@ const CONCEPT_PAGES={
   ...FOUNDATIONS_CONCEPTS.pages,
   ...CONSUMER_CONCEPTS.pages,
   ...ARGUMENT_CONCEPTS.pages,
+  ...TAX_CONCEPTS.pages,
   '민법':'./concepts/민법_개념.html'
 };
 const CONCEPT_ROUTES=[
@@ -514,6 +517,7 @@ const CONCEPT_ROUTES=[
   ...FOUNDATIONS_CONCEPTS.routes,
   ...CONSUMER_CONCEPTS.routes,
   ...ARGUMENT_CONCEPTS.routes,
+  ...TAX_CONCEPTS.routes,
   {prefix:'civil-01-',page:'./concepts/민법총칙_제1장_통합과외본.html'},
   {prefix:'civil-02-',page:'./concepts/민법총칙_제2장_법률행위에서_당사자요건_통합과외본.html'},
   {prefix:'civil-03-',page:'./concepts/민법총칙_제3장_법률행위의_목적과_효력요건_통합과외본.html'},
@@ -531,6 +535,7 @@ const CONCEPT_TITLES={
   ...FOUNDATIONS_CONCEPTS.titles,
   ...CONSUMER_CONCEPTS.titles,
   ...ARGUMENT_CONCEPTS.titles,
+  ...TAX_CONCEPTS.titles,
   'civil-01-01':'민법의 대상과 성격',
   'civil-01-02':'민법의 법원',
   'civil-01-03':'관습법과 사실인 관습',
@@ -742,7 +747,7 @@ function getConceptIds(q){
   if(fresh&&Array.isArray(fresh.conceptIds))return fresh.conceptIds;
   if(Array.isArray(q.conceptIds))return q.conceptIds;
   if(q.conceptId)return[q.conceptId];
-  return PROPERTY_CONCEPTS.questionConceptIds[q.id]||OBLIGATIONS_CONCEPTS.questionConceptIds[q.id]||COMMERCIAL_CONCEPTS.questionConceptIds[q.id]||COMPANY_CONCEPTS.questionConceptIds[q.id]||CRIMINAL_CONCEPTS.questionConceptIds[q.id]||GOVERNANCE_CONCEPTS.questionConceptIds[q.id]||FOUNDATIONS_CONCEPTS.questionConceptIds[q.id]||CONSUMER_CONCEPTS.questionConceptIds[q.id]||ARGUMENT_CONCEPTS.questionConceptIds[q.id]||[];
+  return PROPERTY_CONCEPTS.questionConceptIds[q.id]||OBLIGATIONS_CONCEPTS.questionConceptIds[q.id]||COMMERCIAL_CONCEPTS.questionConceptIds[q.id]||COMPANY_CONCEPTS.questionConceptIds[q.id]||CRIMINAL_CONCEPTS.questionConceptIds[q.id]||GOVERNANCE_CONCEPTS.questionConceptIds[q.id]||FOUNDATIONS_CONCEPTS.questionConceptIds[q.id]||CONSUMER_CONCEPTS.questionConceptIds[q.id]||ARGUMENT_CONCEPTS.questionConceptIds[q.id]||TAX_CONCEPTS.questionConceptIds[q.id]||[];
 }
 function conceptLinksHtml(q){
   const ids=getConceptIds(q).filter(id=>CONCEPT_TITLES[id]);

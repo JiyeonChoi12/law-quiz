@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세법의기초 제6강 납세자 권리의 보호(2) · 통합 과외본</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans KR Local";
+    src: local("Noto Sans KR"), local("NotoSansKR-Regular");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "Noto Serif KR Local";
+    src: local("Noto Serif KR"), local("NotoSerifKR");
+    font-weight: 100 900;
+  }
+
+  @page { size: A4; margin: 17mm 15mm 18mm 18mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --scale: 1;
+    --rail: 276px;
+    --ink: #1c1d1b;
+    --ink-soft: #424440;
+    --muted: #74766f;
+    --paper: #fffefa;
+    --canvas: #f1f0eb;
+    --line: #deddd6;
+    --line-dark: #b9bbb3;
+    --accent: #3f6258;
+    --accent-soft: #e7eeea;
+    --yellow: #ffe889;
+    --green: #d8efdc;
+    --pink: #f7d7df;
+    --blue: #d8ebf6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Noto Sans KR Local", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: calc(10.5pt * var(--scale));
+    font-weight: 400;
+    line-height: 1.78;
+    letter-spacing: -.012em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    left: var(--rail);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-bottom: 1px solid #d8d8d180;
+    background: #f1f0ebee;
+    backdrop-filter: blur(16px);
+  }
+  .progress {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: var(--rail);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .crumb {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .tool {
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    background: transparent;
+    font: 700 12px/1 "Noto Sans KR Local", sans-serif;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--line); background: #ffffffa6; }
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #ffffffa6;
+  }
+  .search-wrap::before { content: "⌕"; margin-right: 7px; color: var(--muted); font-size: 18px; }
+  #search {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--ink);
+    background: transparent;
+    font: 500 12px "Noto Sans KR Local", sans-serif;
+  }
+  #search::placeholder { color: #96978f; }
+  #menu { display: none; }
+
+  #toc {
+    position: fixed;
+    z-index: 35;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--rail);
+    overflow: auto;
+    padding: 29px 22px 44px;
+    border-right: 1px solid var(--line);
+    background: #faf9f5;
+  }
+  .brand {
+    margin: 0 0 30px;
+    color: var(--ink);
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .19em;
+  }
+  .brand-title {
+    display: block;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+  }
+  .brand-sub {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .toc-label {
+    margin: 0 8px 10px;
+    color: #999a93;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #toc a {
+    position: relative;
+    display: block;
+    margin: 1px 0;
+    padding: 7px 9px;
+    color: #61635e;
+    text-decoration: none;
+    font-size: 11.5px;
+    line-height: 1.45;
+    transition: color .15s ease, background .15s ease;
+  }
+  #toc a.toc-h1 {
+    margin-top: 11px;
+    color: #2d2f2c;
+    font-weight: 750;
+  }
+  #toc a.toc-h2 { padding-left: 19px; }
+  #toc a:hover { color: var(--ink); background: #eeeee8; }
+  #toc a.active { color: var(--accent); font-weight: 750; }
+  #toc a.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .legend {
+    margin-top: 28px;
+    padding: 15px 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.y { background: #d6bb39; }
+  .dot.g { background: #739779; }
+  .dot.p { background: #c3818e; }
+  .dot.b { background: #6d98ae; }
+
+  #content {
+    width: min(900px, calc(100vw - var(--rail) - 70px));
+    margin: 86px auto 80px calc(var(--rail) + 35px);
+    padding: 68px 78px 90px;
+    border: 1px solid #e2e0d8;
+    background: var(--paper);
+    box-shadow: 0 14px 44px #2c312b0c;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1 {
+    position: relative;
+    margin: 30mm 0 12mm;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 25pt;
+    font-weight: 750;
+    line-height: 1.32;
+    letter-spacing: -.06em;
+    page-break-before: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  .part-label {
+    display: block;
+    margin-bottom: 5mm;
+    color: var(--accent);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: .18em;
+  }
+  #content > h1:first-child {
+    margin-top: 0;
+    padding: 11mm 0 7mm;
+    border-top: 5px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    font-size: 31pt;
+    page-break-before: avoid;
+  }
+  #content > h1:first-child .part-label {
+    margin-bottom: 8mm;
+  }
+  #content > h1:first-child + h2 {
+    margin: -3mm 0 9mm;
+    padding: 0;
+    border: 0;
+    color: var(--muted);
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  h2 {
+    margin: 13mm 0 5mm;
+    padding: 0 0 3mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 17.5pt;
+    font-weight: 720;
+    line-height: 1.4;
+    letter-spacing: -.045em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h2.case-heading {
+    margin-top: 9mm;
+    padding: 3mm 4mm;
+    border: 0;
+    border-left: 4px solid #3f8050;
+    border-radius: 0 3px 3px 0;
+    color: #2f643b;
+    background: #edf7ef;
+    font-family: "Noto Sans KR Local", "Noto Sans KR", sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  h2.case-heading::before {
+    content: "CASE";
+    display: inline-block;
+    margin-right: 2.5mm;
+    padding: .8mm 1.8mm;
+    border-radius: 2px;
+    color: white;
+    background: #3f8050;
+    font-size: 7.2pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    vertical-align: 1px;
+  }
+  p.case-result,
+  p.case-trap {
+    margin: 3mm 0;
+    padding: 2.4mm 3mm;
+    border-radius: 0 2px 2px 0;
+  }
+  p.case-result {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  p.case-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  h3 {
+    margin: 0 0 3mm;
+    color: var(--ink-soft);
+    font-size: 9.5pt;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: .025em;
+    break-after: avoid;
+    scroll-margin-top: 76px;
+  }
+  h4 {
+    margin: 5mm 0 2mm;
+    color: var(--ink);
+    font-size: 10.5pt;
+    font-weight: 750;
+    break-after: avoid;
+  }
+  p { margin: 0 0 3.5mm; }
+  ul, ol { margin: 2mm 0 5mm 2mm; padding-left: 5.5mm; }
+  li { margin: 0 0 1.8mm; padding-left: 1mm; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  strong { color: var(--ink); font-weight: 800; }
+  em { color: var(--ink-soft); }
+  hr { margin: 10mm 0; border: 0; border-top: 1px solid var(--line); }
+  code {
+    padding: .2mm 1mm;
+    border-radius: 2px;
+    color: #37423e;
+    background: #edf0ed;
+    font-family: "Noto Sans KR Local", sans-serif;
+    font-size: .94em;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 7mm 0 8mm;
+    padding: 1mm 0 1mm 7mm;
+    border-left: 2px solid var(--accent);
+    color: #2f3935;
+    font-family: "Noto Serif KR Local", "Noto Serif KR", serif;
+    font-size: 11pt;
+    font-weight: 600;
+    line-height: 1.68;
+    break-inside: avoid;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  .study-block {
+    position: relative;
+    margin: 5mm 0 6mm;
+    padding: 0 0 0 7mm;
+    border-left: 1px solid var(--line);
+  }
+  .study-block > h3::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 8px 1px -7.5mm;
+    border-radius: 50%;
+    background: var(--line-dark);
+    content: "";
+  }
+  .study-block.tone-doctrine,
+  .study-block.tone-easy {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-term,
+  .study-block.tone-case {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-trap {
+    padding-top: 4mm;
+    padding-right: 5mm;
+    padding-bottom: 1.5mm;
+    padding-left: 5mm;
+    border-radius: 0 3px 3px 0;
+  }
+  .study-block.tone-doctrine > h3,
+  .study-block.tone-easy > h3,
+  .study-block.tone-term > h3,
+  .study-block.tone-case > h3,
+  .study-block.tone-trap > h3 {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.1mm 2.6mm 1.2mm;
+    border-radius: 2px;
+    color: white;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: .025em;
+  }
+  .study-block.tone-doctrine > h3::before,
+  .study-block.tone-easy > h3::before,
+  .study-block.tone-term > h3::before,
+  .study-block.tone-case > h3::before,
+  .study-block.tone-trap > h3::before { display: none; }
+  .study-block.tone-doctrine {
+    border-left: 3px solid #c39400;
+    background: #fff7cf;
+  }
+  .study-block.tone-doctrine > h3 {
+    color: #3e3100;
+    background: #f0ca45;
+  }
+  .study-block.tone-easy {
+    border-left: 3px solid #4a88b2;
+    background: #edf6fc;
+  }
+  .study-block.tone-easy > h3 { background: #4a88b2; }
+  .study-block.tone-term {
+    border-left: 3px solid #367d88;
+    background: #eaf5f6;
+  }
+  .study-block.tone-term > h3 { background: #367d88; }
+  .study-block.tone-case {
+    border-left: 3px solid #3f8050;
+    background: #edf7ef;
+  }
+  .study-block.tone-case > h3 { background: #3f8050; }
+  .study-block.tone-trap {
+    border-left: 3px solid #bc4562;
+    background: #fff0f3;
+  }
+  .study-block.tone-trap > h3 { background: #bc4562; }
+  .study-block.tone-takeaway {
+    margin-top: 7mm;
+    padding: 4mm 6mm 1.5mm;
+    border: 0;
+    border-left: 4px solid #d0a000;
+    background: #fff5c7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .study-block.tone-takeaway > h3 {
+    display: inline-block;
+    margin-bottom: 2.5mm;
+    padding: 1mm 2.5mm;
+    border-radius: 2px;
+    color: #3e3100;
+    background: #f0ca45;
+    font-size: 8.7pt;
+    letter-spacing: .08em;
+  }
+  .study-block.tone-takeaway > h3::before { display: none; }
+  .study-block.tone-takeaway p { font-family: "Noto Serif KR Local", serif; font-size: 10.7pt; }
+
+  table {
+    width: 100%;
+    margin: 6mm 0 8mm;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 8.8pt;
+    line-height: 1.58;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  th {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink);
+    background: #eeeee8;
+    font-weight: 800;
+    text-align: left;
+  }
+  td {
+    padding: 2.8mm 2.6mm;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f8f7f2; }
+
+  .key-yellow, mark { background: var(--yellow); }
+  .key-green { background: var(--green); }
+  .key-pink { background: var(--pink); }
+  .key-blue { background: var(--blue); }
+
+  .print-footer { display: none; }
+  .focus #toc { transform: translateX(-100%); }
+  .focus .topbar { left: 0; }
+  .focus .progress { left: 0; }
+  .focus #content { margin-left: auto; margin-right: auto; }
+  #toc, .topbar, .progress, #content { transition: .22s ease; }
+
+  @media (max-width: 900px) {
+    :root { --rail: 0px; }
+    #toc {
+      width: min(86vw, 310px);
+      transform: translateX(-101%);
+      box-shadow: 12px 0 34px #171a1720;
+    }
+    body.menu-open #toc { transform: translateX(0); }
+    #menu { display: inline-block; }
+    .topbar { left: 0; padding: 0 12px; }
+    .progress { left: 0; }
+    .crumb { display: none; }
+    .search-wrap { width: min(46vw, 210px); margin-left: auto; }
+    #content {
+      width: calc(100vw - 20px);
+      margin: 72px 10px 30px;
+      padding: 40px 24px 60px;
+      border: 0;
+      box-shadow: none;
+    }
+    #content > h1:first-child { font-size: 25pt; }
+    h1 { font-size: 21pt; }
+    h2 { font-size: 16pt; }
+  }
+
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      color: #171817;
+      background: white;
+      font-size: 9.7pt;
+      line-height: 1.68;
+    }
+    .topbar, #toc, .progress { display: none !important; }
+    #content {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      box-shadow: none;
+    }
+    h1 { margin-top: 18mm; }
+    #content > h1:first-child { padding-top: 3mm; }
+    h2 { margin-top: 10mm; }
+    .study-block { margin-top: 4mm; margin-bottom: 5mm; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+/* Chapter 5: accessible annotations, compact question appendix, true A4 recall sheet. */
+.legend-note{padding:18px 20px;border:1px solid #dadbd5;border-radius:8px;margin:24px 0;background:#fff;}
+.legend-note p{font-size:.88em;margin:12px 0 0;}
+.key-yellow,.key-green,.key-pink,.key-blue{padding:1px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#101a18;}
+.key-yellow{background:#ffe16b;border-bottom:2px solid #b88400;}
+.key-green{background:#bfe9c9;border-bottom:2px solid #35764b;}
+.key-pink{background:#ffc3d6;border-bottom:2px solid #b73d69;}
+.key-blue{background:#c4e4ff;border-bottom:2px solid #377da8;}
+.study-block{background:#fff!important;}
+.red-note{color:#a02b35;font-size:.92em;border-left:3px solid #b4444e;padding-left:12px;}
+.decision-flow{padding:20px;border:1px solid #bdcfc7;line-height:2;background:#f5faf7;border-radius:8px;}
+.answer-box{margin:15px 0 25px;border:1px solid #d1ddd7;border-radius:8px;background:#fff;}
+.answer-box summary{cursor:pointer;padding:12px 16px;font-weight:750;color:#315b49;background:#f0f6f2;}
+.answer-box[open]>*:not(summary){margin-left:16px;margin-right:16px;}
+.answer-box[open]>:nth-child(2){margin-top:15px;}
+.answer-box p{font-size:.95em;}
+.question-card{margin:26px 0;padding:0;border:0;}
+.question-card h4{font-size:12pt;margin:0 0 14px;padding-top:18px;border-top:2px solid #415e51;}
+.question-card h4 small{font-size:8pt;font-weight:400;color:#737c75;display:inline-block;margin-left:8px;}
+.review-tag{font-size:8pt;color:#a12c54;background:#ffe3ec;padding:3px 7px;border-radius:4px;}
+.question-stem{font-weight:650;line-height:1.8;}
+.question-card li{margin-bottom:8px;}
+.question-card .choices{font-size:.95em;}
+.answer-label{font-weight:800;color:#335c49;}
+.parts-note{padding:12px;background:#fff4f6;border-left:3px solid #b9476a;}
+.choice-notes{font-size:.94em;}
+.memory-sheet{border:1px solid #b7c6bd;padding:22px;margin:24px 0;background:#fff;}
+.memory-kicker{font-size:8pt;letter-spacing:.12em;color:#51715e;}
+.memory-sheet h2{margin:12px 0;font-size:20pt;}
+.memory-sheet table{font-size:9pt;line-height:1.5;margin:15px 0;}
+.memory-sheet td:first-child{width:23%;font-weight:700;}
+.memory-last{padding:12px;background:#ffe78d;}
+@media screen and (max-width:900px){
+ table{display:block;overflow-x:auto;max-width:100%;}
+ td,th{min-width:95px;}
+ .question-card,.answer-box{overflow-wrap:anywhere;}
+ #print{white-space:nowrap;}
+ .topbar{gap:5px;}
+ .search-wrap{min-width:90px;}
+}
+@media print{
+ p,li{orphans:3;widows:3;}
+ h1{font-size:22pt;margin-top:12mm;}
+ h2{font-size:15pt;margin-top:7mm;}
+ .study-block{padding-top:2.5mm!important;padding-bottom:.5mm!important;margin:3mm 0 4mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+ .study-block>h3{display:block!important;width:fit-content;break-after:avoid!important;page-break-after:avoid!important;}
+ .study-block>h3+p{break-before:avoid;}
+ .study-block>p:last-child{margin-bottom:2mm;}
+ table{margin:4mm 0 5mm;font-size:8.2pt;line-height:1.5;}
+ td,th{padding:2.1mm 2.3mm;}
+ tr,li{break-inside:avoid;}
+ .question-card{margin:5mm 0;padding:4mm 0 0;break-inside:auto;}
+ .question-card h4{font-size:10.5pt;margin:0 0 3mm;padding-top:3mm;break-inside:avoid;break-after:avoid;}
+ .question-stem{font-size:9pt;line-height:1.6;break-inside:avoid;}
+ .question-card li{margin-bottom:1.4mm;}
+ .question-card .choices{font-size:8.6pt;margin-bottom:3mm;}
+ .answer-box{border:0;border-left:2px solid #9ab7a6;border-radius:0;margin:3mm 0 5mm;padding:0 0 0 3mm;}
+ .answer-box summary{padding:1.5mm 2mm;font-size:8pt;break-after:avoid;list-style:none;}
+ .answer-box[open]>*:not(summary){margin-left:0;margin-right:0;}
+ .answer-box[open]>:nth-child(2){margin-top:2mm;}
+ .choice-notes{font-size:8.2pt;line-height:1.55;}
+ .parts-note{font-size:8.2pt!important;padding:2mm;}
+ .answer-label{font-size:8.5pt!important;}
+ .memory-section-title{display:none!important;}
+ .memory-sheet{break-before:page;break-after:page;break-inside:avoid;border:0;margin:0;padding:0;font-size:8.3pt;line-height:1.45;}
+ .memory-sheet h2{font-size:18pt;margin:3mm 0 4mm;}
+ .memory-sheet table{font-size:8pt;line-height:1.42;margin:4mm 0;}
+ .memory-sheet td,.memory-sheet th{padding:1.8mm 2mm;}
+ .memory-sheet p{margin:0 0 3mm;}
+ .memory-last{padding:2.5mm;}
+ #content>table:last-of-type{break-inside:avoid;}
+}
+
+mark{padding:1px 3px;color:#121b17;box-decoration-break:clone;-webkit-box-decoration-break:clone}mark.yellow{background:#ffe16b;border-bottom:2px solid #b88400}mark.green{background:#9fe0b0;border-bottom:2px solid #31884b}mark.pink{background:#ffabc8;border-bottom:2px solid #bb3768}mark.blue{background:#a8d7ff;border-bottom:2px solid #3478af}.course-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;font-size:12px;font-weight:700}.course-tabs a{padding:8px 14px;border:1px solid #bfcfc5;border-radius:7px;color:#315b49;text-decoration:none}h2[id]{scroll-margin-top:90px}.source-explanation{font-size:.85em;color:#53635e;border-top:1px solid #ccd6d0;padding-top:10px}.question-card{overflow-wrap:anywhere}@media print{.course-tabs{display:none!important}.question-card{break-inside:auto}.choices li,.choice-notes li{break-inside:avoid}.question-card h4{break-after:avoid}.source-explanation{font-size:7.8pt}.memory-sheet{font-size:8pt}.memory-sheet td,.memory-sheet th{padding:1.4mm 1.8mm}}
+.question-stem{white-space:pre-wrap}
+.question-figure{max-width:100%;height:auto;display:block;margin:12px auto;max-height:320px;object-fit:contain}
+.question-figure img{max-width:100%;height:auto;max-height:280px;display:block;margin:auto;object-fit:contain}
+.question-figure figcaption{text-align:center;font-size:.75em;color:#53635e;margin:4px 0 8px}
+@media print {
+ .practice-section-start{break-before:page;page-break-before:always}
+ .practice-title{break-after:avoid;page-break-after:avoid}
+ h2 + p{break-after:avoid;page-break-after:avoid}
+ .question-card{break-inside:avoid;page-break-inside:avoid}
+ .question-card .source-explanation{break-before:avoid}
+ .study-block{break-inside:avoid;page-break-inside:avoid}
+ table{break-inside:avoid;page-break-inside:avoid}
+ .memory-sheet{font-size:10pt;line-height:1.6}
+ .memory-sheet table{font-size:9.5pt;line-height:1.55}
+ .memory-sheet td,.memory-sheet th{padding:2mm}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <button class="tool" id="menu" title="목차 열기">☰</button>
+  <span class="crumb">FOUNDATIONS OF TAX LAW · CHAPTER 06</span>
+  <div class="search-wrap"><input id="search" placeholder="본문 검색 · Enter" aria-label="본문 검색"></div>
+  <button class="tool" id="smaller" title="글자 작게">A−</button>
+  <button class="tool" id="larger" title="글자 크게">A+</button>
+  <button class="tool" id="focus" title="집중 모드">◫</button>
+  <button class="tool" id="print" title="인쇄 또는 PDF 저장">인쇄</button>
+</header>
+<aside id="toc">
+  <div class="brand">
+    <span class="brand-kicker">ANNOTATED STUDY EDITION</span>
+    <span class="brand-title">세법의기초</span>
+    <span class="brand-sub">제6강 납세자 권리의 보호(2) · 통합 과외본</span>
+  </div>
+  <div class="toc-label">CONTENTS</div>
+  <nav id="toc-links"></nav>
+  <div class="legend">
+    <div class="legend-row"><span class="dot y"></span>시험 필수·암기</div>
+    <div class="legend-row"><span class="dot g"></span>이유·법원의 논리</div>
+    <div class="legend-row"><span class="dot p"></span>함정·반대 개념</div>
+    <div class="legend-row"><span class="dot b"></span>연결·비교</div>
+  </div>
+</aside>
+<main id="content"><nav class="course-tabs" aria-label="학습 메뉴"><a href="./세법의기초_개념.html">세법의기초 개념 목록</a><a href="../index.html?subject=세법">문제 풀기</a></nav><h1>세법의 기초 · 제6강 납세자 권리의 보호(2)</h1>
+<p>교재 인쇄면 81~101쪽 · 제6강 강의록 · 기출 6문항·24개 보기</p>
+<p><strong>이번 강의 질문:</strong> “이미 세금 고지서를 받았는데 틀렸다면, 누구에게 언제 무엇을 요구할까?” 권리가 있어도 엉뚱한 처분을 다투거나 기간을 놓치면 내용 판단까지 가지 못한다.</p>
+<p><mark class="yellow">결론·기간</mark> / <mark class="green">제도의 이유</mark> / <mark class="pink">함정·예외</mark> / <mark class="blue">앞뒤 연결</mark>. 과거 문제의 원문·정답은 유지하고, 개정된 기간은 별도 표시했다.</p>
+<h1>전체 지도</h1>
+<p>① 이 강은 <strong>처분 후 불복과 과다 신고의 정정</strong>을 설명한다. ② 국가의 세금 계산도 틀릴 수 있고 본인의 신고도 틀릴 수 있기 때문에 구제 통로가 필요하다. ③ 세법 총론의 마지막으로, 과세권과 납세자 보호를 연결한다. ④ 5강의 과세 전 보호 뒤에 이어지고, 다음 7강부터는 소득세·법인세·부가가치세의 구체적 세액을 배운다. ⑤ 이 강을 모르면 “세금이 잘못됐다”는 말은 할 수 있어도 실제로 고칠 절차를 찾지 못한다.</p>
+<p><strong>지우의 두 상황:</strong> 세무서가 “500만 원 더 내라”고 고지했다면 관청의 부과처분을 다툰다. 반면 지우가 스스로 500만 원을 너무 많이 신고했다면 자기 신고를 ‘처분 취소’하라고 소송하는 것이 아니라, 먼저 적법한 경정청구를 한다. 출발점이 다르므로 길도 다르다.</p>
+<h1>교재 순서대로 읽기</h1>
+<h2 id="tax-06-01" data-concept-id="tax-06-01">6-1. 조세불복은 세금 분쟁의 전용 구제 절차 ★★★★★</h2>
+<p><strong>교재 82~84쪽 · 문단의 의도:</strong> 일반 행정심판과 국세 불복의 관계를 먼저 잡는다. 국세기본법 제55조는 위법·부당한 처분을 받거나 필요한 처분을 받지 못해 권리·이익을 침해당한 사람에게 취소·변경 등 필요한 조치를 구할 길을 연다. 제56조는 행정심판법을 전부 그대로 적용하지 않고 일부 규정만 준용한다. ‘특별 절차’라는 말은 법원과 무관하다는 뜻이 아니다.</p>
+<p><mark class="yellow">국세 부과처분 취소소송은 원칙적으로 심사청구 또는 심판청구를 거쳐야 한다.</mark> 이를 필요적 전치주의라고 한다. ‘또는’에 동그라미를 친다. 심사 다음 심판을 모두 거치라는 말이 아니다. 감사원법에 따른 심사청구도 법정 요건 아래 전치절차를 대신한다.</p>
+<p><strong>왜 법원 전에 한 번 더 보나?</strong> 세금은 전문적 계산과 많은 사실자료가 필요하다. 행정기관이 자기 오류를 먼저 고치면 소송 없이 해결할 수 있다. 하지만 국민에게 우회로를 강제하면서 그 절차를 허술하게 만들면 재판받을 권리를 해친다. 헌법 제107조 제3항이 행정심판에 사법절차의 준용을 요구하는 이유다.</p>
+<p><strong>교재 헌법재판 사례 — 2000헌바30, 2001.6.28.:</strong> 납세자는 당시 지방세를 다투기 위해 의무적인 심사 단계를 거쳐야 했다. 갈등은 “법원에 가기 전 절차가 공정한 재판의 대체 단계로 충분한가?”였다. 헌법재판소는 당시 지방세 절차의 심판기관 독립성·공정성과 당사자 절차권 보장 등의 부족을 문제 삼아 위헌으로 판단했다. ‘필요적 전치 자체는 언제나 위헌’이라는 결론이 아니다. 교재는 제도 보완 후 2021년부터 지방세에도 조세심판원 심판청구를 통한 필요적 전치가 다시 시행된 흐름을 설명한다.</p>
+<p><strong>판례 문장 번역:</strong> ① 사법절차 준용 → 법원과 이름까지 같아야 한다는 것이 아니라 독립·공정과 방어권 같은 중요한 원리가 살아 있어야 한다. ② 재판청구권 제한 → 법원으로 가는 문 앞에 불합리한 장애물을 두면 안 된다. <strong>시험·키워드·한 줄:</strong> 민사소송 아님 / 필요적 전치 / 심사 ‘또는’ 심판. <strong>돈 문제여도 공권력의 부과처분을 다투는 기본 통로는 행정소송이다.</strong> 환급 관련 민사소송·당사자소송까지 모두 금지된다는 뜻은 아니다(4강 연결).</p>
+<h2 id="tax-06-02" data-concept-id="tax-06-02">6-2. 무엇을 다툴까: 처분·부작위와 세무조사 결정 ★★★★★</h2>
+<p><strong>교재 84~86쪽 · 문단의 의도:</strong> 불만이 있다는 것과 법적으로 다툴 대상이 있다는 것을 나눈다. 처분은 구체적인 사건에 대한 공권력 행사·거부 등으로 국민의 권리의무에 영향을 주는 행정작용이다. 부작위는 신청에 대해 법적으로 일정한 처분을 해야 하고 상당한 시간도 지났는데 아무것도 하지 않는 경우다. 단순히 답장이 느리다는 이유만으로 모두 부작위가 되지는 않는다.</p>
+<p><strong>교재 판례 — 2009두23617·23624, 2011.3.10.:</strong> 등장인물은 조사를 받게 된 납세자와 과세관청이다. 관청이 세무조사를 결정하자 납세자는 조사 자체를 다투었다. “세금이 실제 부과된 뒤에만 다투면 되나?”가 갈등이었다. 법원은 조사받는 동안 질문에 답하고 검사에 응해야 하며 영업의 자유 등에도 직접 부담이 생긴다고 보았다. 따라서 세무조사 결정은 항고소송 대상인 처분이다. 조사 후 과세까지 기다리게 하면 중복·위법 조사로 인한 부담을 제때 막기 어렵다.</p>
+<p><strong>문장별 번역:</strong> ① 검사 수인의무 → 적법한 검사를 받아들여야 하는 부담이 이미 생긴다. ② 권리의무에 직접 영향 → 먼 미래의 가능성만 있는 것이 아니다. ③ 분쟁의 조기 해결 → 조사부터 잘못됐다면 조사 단계에서 다툴 수 있어야 한다. <mark class="pink">5강의 ‘세무조사 결과통지’와 지금의 ‘세무조사 결정’을 같은 말로 읽지 않는다.</mark></p>
+<p><strong>국세기본법의 일반 불복 통로에서 제외되는 네 묶음:</strong> 심사·심판 결정 자체를 다시 같은 불복으로 돌리는 것, 조세범 처벌절차법상 통고처분, 감사원 심사청구를 한 처분 및 그 심사결정, 세법상 과태료 부과처분이다. 이유도 다르다. 심판의 무한 반복·중복을 막거나, 범칙사건·행정질서벌의 별도 절차를 적용하기 때문이다. <strong>이 통로 제외 = 어떤 구제도 불가능</strong>은 아니다. 통고처분에 따르지 않는 경우 형사절차 문제, 과태료는 질서위반행위규제법상 불복 구조를 따로 본다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 처분성 / 법적 의무 있는 부작위 / 제외의 이유. <strong>문서 제목이 아니라 실제 법적 효과를 보고 다툴 대상을 고른다.</strong></p>
+<h2 id="tax-06-03" data-concept-id="tax-06-03">6-3. 누가 누구를 통해 다툴까: 청구인과 대리인 ★★★★☆</h2>
+<p><strong>교재 86~88쪽 · 문단의 의도:</strong> 세금 이야기에 관심 있는 누구나 불복할 수 있는 것은 아니다. 처분 상대방뿐 아니라 법률상 보호되는 이익을 침해받은 제3자도 청구할 수 있다. 제2차 납세의무자, 물적납세의무자, 보증인 등이 그 지위와 요건에 따라 문제된다. 2008두402 판결의 핵심은 <strong>개별적·직접적·구체적으로 보호되는 이익</strong>과 단순한 사실상 이익의 구별이다.</p>
+<p><strong>쉬운 가상 장면:</strong> 친구의 가게 세금이 늘어 친구가 힘들어졌다는 사정만으로 내가 청구인이 되는 것은 아니다. 반면 그 세금 때문에 법률에 따라 내 재산으로 책임져야 하는 사람이라면 나 자신의 보호 이익을 검토한다. ‘가까운 사이’가 아니라 ‘법이 내 이익을 보호하는가’가 질문이다.</p>
+<p>변호사·세무사와 법정 등록 요건을 갖춘 공인회계사 등을 대리인으로 선임할 수 있다. 교재의 소액 기준은 <strong>불복 금액 5천만 원 미만</strong>이다. 이 경우 배우자, 4촌 이내 혈족, 배우자의 4촌 이내 혈족도 가능하다. 5천만 원 ‘이하’가 아니다. 모든 인척을 무조건 허용하는 것도 아니다.</p>
+<p><strong>그림 6-1 위임장 읽기:</strong> 서식의 핵심은 청구인·대리인, 대상 사건, 위임 범위, 서명 등으로 누구의 어떤 권한인지 드러내는 것이다. 대리권은 서면으로 증명하고 해임도 서면 신고한다. 일반적인 불복행위 위임만으로 <strong>취하</strong>까지 당연히 할 수는 없다. 취하는 구제 절차를 끝낼 수 있어 특별한 위임이 필요하다. 서식 이미지의 빈칸을 외우기보다 이 법적 기능을 기억한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 법률상 이익 / 서면 증명 / 취하 특별수권. <strong>대리할 수 있는 사람과 대리해도 특별히 맡아야 하는 행위를 따로 확인한다.</strong></p>
+<h2 id="tax-06-04" data-concept-id="tax-06-04">6-4. 불복의 길과 시계: 선택 관계를 먼저 잡기 ★★★★★</h2>
+<p><strong>교재 88~89·95쪽 · 문단의 의도:</strong> 기관 이름과 기간을 섞지 않도록 한다.</p>
+<table>
+<thead>
+<tr>
+<th>절차</th>
+<th>어디에서 판단하나</th>
+<th>소송 전의 위치</th>
+<th>기본 청구기간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이의신청</td>
+<td>세무서장·지방국세청장, 허용되는 사건</td>
+<td>선택적 사전 단계</td>
+<td>처분을 안 날, 통지받았다면 받은 날부터 90일</td>
+</tr>
+<tr>
+<td>심사청구</td>
+<td>국세청장</td>
+<td>심판청구와 선택 관계</td>
+<td>원칙 90일</td>
+</tr>
+<tr>
+<td>심판청구</td>
+<td>국무총리 소속 조세심판원</td>
+<td>심사청구와 선택 관계</td>
+<td>원칙 90일</td>
+</tr>
+<tr>
+<td>감사원 심사청구</td>
+<td>감사원, 감사원법에 근거</td>
+<td>법정 요건 아래 별도 전치 통로</td>
+<td>안 날 90일 및 행위 있은 날 180일 제한 확인</td>
+</tr>
+</tbody></table>
+<p><mark class="yellow">처분 → [이의신청은 선택] → 심사 또는 심판 → 행정소송.</mark> 심사청구서는 원칙적으로 처분한 세무서장을 거쳐 국세청장에게 낸다. 이의신청만 마치고 곧장 법원으로 가는 것은 원칙적인 전치 요건을 충족하지 못한다. 심사와 심판을 같은 처분에 중복 제기하지 않는다. 이의신청을 거친 뒤에는 그 결정 통지를 받은 날부터 다시 90일 내 심사·심판을 청구한다.</p>
+<p><strong>기산점 가상 사례:</strong> 지우가 결정서를 받은 날과 작성일이 다르다면 무조건 작성일을 출발점으로 삼지 않는다. 통지 수령일을 확인한다. 법정 재해 등의 사유로 청구할 수 없었던 경우에는 사유 소멸 후 14일 등 특별규정과 증빙을 확인한다. 단순히 바빴다는 사정은 이 예외가 아니다.</p>
+<p><strong>감사원 보완:</strong> 교재·강의록은 ‘안 날 90일’을 중심으로 적었다. 감사원법 제44조에는 <strong>행위가 있은 날 180일</strong> 제한도 있어 둘을 함께 봐야 한다. 감사원 심사결정 후 소송은 원칙적으로 결정 통지 수령 후 90일 내, 원처분청을 상대로 한다. <a href="https://www.law.go.kr/expcInfoP.do?expcSeq=337801">법제처의 감사원법 제44조 설명</a>.</p>
+<p><strong>시험·키워드·한 줄:</strong> 이의는 임의 / 심사·심판은 선택 / 90일의 출발점. <strong>기관 세 개를 줄 세워 모두 거치는 문제가 아니다.</strong></p>
+<h2 id="tax-06-05" data-concept-id="tax-06-05">6-5. 무슨 결정을 내리고, 어디까지 바꿀까 ★★★★★</h2>
+<p><strong>교재 90~93쪽 · 문단의 의도:</strong> 심리 대상, 결정 종류, 범위, 시간, 효력을 차례로 구분한다. 총액주의는 해당 과세단위의 <strong>정당한 세액을 초과했는가</strong>를 판단한다. 쟁점주의는 처분 당시 제시한 사유의 당부에 초점을 둔다. 교재의 대법원 88누6504·2004두3823은 총액주의를 설명한다.</p>
+<p><strong>판례 장면을 이해하기 위한 가상 금액:</strong> 관청 계산과정에 오류가 있어도 같은 과세단위·허용되는 처분사유 범위에서 정당한 세액이 100이고 고지액이 90이라면, 계산 경로의 오류만으로 언제나 취소되는 것은 아니다. 법원은 세액의 정당한 범위도 살핀다. <strong>다른 연도의 세금을 섞어 합계만 맞추는 것, 중대한 절차 위법을 지워 버리는 것까지 허용한다는 뜻은 아니다.</strong> 5강의 적법절차와 2021년 32번 고지서 하자를 함께 읽는다.</p>
+<table>
+<thead>
+<tr>
+<th>결정</th>
+<th>쉬운 뜻</th>
+<th>대표 상황</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>각하</td>
+<td>내용 판단에 들어갈 요건이 없다</td>
+<td>정당한 예외 없이 청구기간 경과</td>
+</tr>
+<tr>
+<td>기각</td>
+<td>내용을 판단했지만 청구에 이유 없다</td>
+<td>적법한 세액이고 취소 사유 없음</td>
+</tr>
+<tr>
+<td>인용: 취소·경정</td>
+<td>청구에 이유 있어 없애거나 고친다</td>
+<td>위법·부당한 처분</td>
+</tr>
+<tr>
+<td>인용: 필요한 처분</td>
+<td>아무것도 하지 않은 위법을 바로잡는다</td>
+<td>적법한 신청에 대한 부작위</td>
+</tr>
+<tr>
+<td>재조사</td>
+<td>추가 사실확인 뒤 결론을 구체화한다</td>
+<td>취소·경정 등을 위해 추가 조사 필요</td>
+</tr>
+</tbody></table>
+<p><strong>불고불리:</strong> 청구하지 않은 다른 처분까지 새로 판단하지 않는다. <strong>불이익변경 금지:</strong> 다툰 처분보다 청구인에게 불리한 결정을 내리지 않는다. 총액주의가 이 제한을 없애지 않는다. 예컨대 한 처분을 다투었다고 재결기관이 별개 처분까지 새로 만들어 불이익을 줄 수는 없다.</p>
+<p><strong>기간은 주체를 나누기:</strong> 납세자의 청구기간과 기관의 결정기간은 별개다. 심사·심판 결정은 원칙 90일, 이의신청 결정은 30일이며 처분청 의견서에 항변하는 경우 60일이다. 교재의 2018구합52785 사건은 재조사결정 후 조사·처분 기간을 강행규정으로 볼지 다투었다. 법원은 법 자체가 연기·연장·중지를 예정하고 있고 불충분한 조사로 서둘러 처분하면 권리구제도 나빠질 수 있다는 이유 등으로 훈시규정으로 보았다. <strong>기관의 기한 경과가 자동 승소나 처분 무효를 뜻하지 않는다.</strong> 그렇다고 무기한 기다려야 하는 것도 아니다. 법정 결정기간 내 통지가 없을 때 소송으로 갈 수 있는 규정을 함께 본다.</p>
+<table>
+<thead>
+<tr>
+<th>효력</th>
+<th>누구·무엇을 제한하나</th>
+<th>기억하는 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>불가쟁력</td>
+<td>불복기간을 놓친 당사자의 통상적 다툼</td>
+<td>기간을 넘기면 쉽게 다시 다툴 수 없다</td>
+</tr>
+<tr>
+<td>불가변력</td>
+<td>재결기관의 자기 결정 변경</td>
+<td>재결기관도 제멋대로 뒤집지 못한다</td>
+</tr>
+<tr>
+<td>기속력</td>
+<td>관계 행정청의 후속 행동</td>
+<td>인용 취지에 따라 필요한 처분을 해야 한다</td>
+</tr>
+<tr>
+<td>형성력</td>
+<td>원처분의 법적 상태</td>
+<td>취소·변경 결정 자체로 상태가 달라진다</td>
+</tr>
+</tbody></table>
+<p><strong>교재 82누91 판결:</strong> 취소·변경 결정이 났는데 관청이 별도로 취소하기 전까지 납세자가 계속 효력을 감수해야 하는가? 특별한 사정이 없으면 결정 자체로 원처분이 취소·변경되는 형성력을 인정한다. 재결이 나온 순간 곧바로 어떤 소송도 못 낸다는 뜻으로 불가쟁력을 설명하지 않는다. <strong>시험·키워드·한 줄:</strong> 요건 심사와 본안 심사 구별, 기간 주체 구별. <strong>늦게 낸 청구는 원칙 ‘각하’, 내용을 보고 지면 ‘기각’이다.</strong></p>
+<h2 id="tax-06-06" data-concept-id="tax-06-06">6-6. 심판기관과 법원: 마지막 문도 정확히 찾기 ★★★★☆</h2>
+<p><strong>교재 93~97쪽 · 문단의 의도:</strong> 심사·심판의 공정성 장치를 알고 법원 단계로 연결한다. 조세심판원은 국무총리 소속으로 심판 업무를 독립적으로 수행한다. 원장과 상임·비상임 조세심판관을 두며 법률·조세·회계 전문성과 법정 자격을 요구한다. 교재는 원장·상임관의 대통령 임명, 비상임관의 국무총리 위촉 구조, 상임관 3년 임기와 한 차례 중임, 비상임관 3년과 한 차례 연임을 설명한다. 인사 세부는 <strong>심화 ★★☆☆☆</strong>, 독립된 판단기관이라는 이유를 먼저 잡는다.</p>
+<p>조세심판관회의는 주심 1명과 배석 2명 이상으로 구성하고, 담당 심판관 3분의 2 이상 출석 및 출석자 과반수 찬성으로 의결한다. 비공개가 원칙이되 의장이 필요하다고 인정하면 공개할 수 있다. 강의록에 회의 설명과 제67조가 함께 표시되지만 구체적인 회의 규정은 <strong>국세기본법 제72조</strong>와 연결해 읽는다.</p>
+<p>국세심사위원회는 세무서·지방국세청·국세청에 두고 이의·심사·과세전적부심사 사항을 심의·의결한다. 위원장은 각각 세무서장·지방국세청장·국세청차장이고 내부위원과 민간위원을 함께 둔다. ‘이의신청은 임의이므로 위원회 심의도 필요 없다’는 결론은 틀린다. 이용할지 선택하는 것과 이용했을 때 적법하게 심리할 의무는 다른 문제다.</p>
+<p><strong>95누6328 판결의 이유:</strong> 전치주의는 전문적인 행정기관이 스스로 재고·시정할 기회를 갖게 하려는 제도다. 이름만 형식적으로 확인하는 데 목적이 있는 것이 아니다. 다만 이런 취지를 이유로 전치 요건을 마음대로 생략해도 된다고 읽지는 않는다.</p>
+<p>조세불복은 위법과 부당을 다룬다. 법원의 취소소송은 <strong>위법</strong>을 심사한다. 단순히 더 좋은 정책 선택이 있다는 정도의 부당성은 별개지만, 재량권 일탈·남용이면 위법이 될 수 있다. 소송은 원칙적으로 심사·심판 결정 통지를 받은 날부터 90일 내 제기한다. 결정기간이 지나도 통지가 없다면 법정 요건에 따라 결정 전에도 제기할 수 있다. 재조사결정은 후속 처분 통지 및 별도 기간 규정까지 확인해야 하므로 일반 기각결정과 기계적으로 같게 세지 않는다.</p>
+<p><strong>93누16901 판결 — 원처분주의:</strong> 납세자가 원래 부과처분의 잘못을 주장하면서 심판의 기각결정만 취소해 달라고 했다면 대상 선택이 어긋난다. 원칙적으로 <strong>원래 부과처분</strong>을 다툰다. 심판결정 자체의 고유한 위법이 있으면 예외적으로 그 결정을 다툴 수 있다. 교재 판결은 고유 위법이 없는데 원처분의 하자만 이유로 재결 취소를 구한 경우를 받아들이지 않았다.</p>
+<p><strong>기출 보충:</strong> 과세처분의 적법성을 뒷받침하는 주요 과세요건 사실은 일반적으로 과세관청이 증명한다. 공제·감면 등 개별 요건과 자료의 지배 영역에 따라 납세자 측 증명이 문제되는 부분도 있으므로 ‘모든 사실의 증명은 항상 관청’이라고 확대하지 않는다. <strong>시험·키워드·한 줄:</strong> 90일 / 원처분 / 위법 심사. <strong>세금액이 맞아 보인다는 이유로 필수 고지사항 같은 절차 하자를 없는 일로 만들 수는 없다.</strong></p>
+<h2 id="tax-06-07" data-concept-id="tax-06-07">6-7. 통상적 경정청구: 내가 너무 많이 신고했다면 ★★★★★</h2>
+<p><strong>교재 97~98쪽 · 문단의 의도:</strong> 자기 신고로 확정된 세액을 낮추는 공식 통로를 설명한다. 과세표준·세액을 지나치게 신고했거나, 결손금·세액공제·환급액을 너무 적게 신고했다면 경정청구를 검토한다. 법정신고기한 내 신고자뿐 아니라 현행법상 기한후신고자와 법정 특례 대상도 확인한다.</p>
+<p><strong>가상 사례:</strong> 하린이 비용 영수증을 빠뜨려 세금을 120만 원 신고했지만 정확히는 90만 원이었다. “내가 쓴 신고서를 법원이 취소해 주세요”가 아니라 관청에 30만 원 줄여 달라고 적법한 경정청구를 한다. 관청이 거부하면 그 <strong>경정거부처분</strong>에 대해 불복 절차를 진행한다. 반대로 90만 원 내야 하는데 60만 원 신고했다면 통상 수정신고 문제다.</p>
+<p>통상 경정청구는 원칙 <strong>법정신고기한이 지난 후 5년 이내</strong>다. 실제로 일찍 신고한 날짜가 기준이 아니다. 다만 결정·경정으로 늘어난 부분은 별도 단기 제한이 있다. <mark class="pink">강의록의 ‘90일’과 현행 제45조의2 제1항의 ‘3개월’을 구별한다.</mark> 현행 규정은 처분을 안 날, 통지를 받았다면 받은 날부터 <strong>3개월 이내이면서 법정신고기한 후 5년 이내</strong>라는 제한이다. 한 달은 언제나 30일이 아니므로 두 표현을 같은 계산으로 쓰지 않는다. <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1018105441">국세기본법 제45조의2 제1항</a>.</p>
+<p><strong>조문의 취지:</strong> 모든 신고 실수를 영원히 고치게 하면 법적 안정성이 없어지고, 한 번 썼다고 못 고치게 하면 과다 세금이 그대로 남는다. 그래서 구제 기회와 기간 제한을 함께 둔다. <strong>시험·키워드·한 줄:</strong> 감액 청구 / 법정신고기한 / 거부처분. <strong>많이 신고했으면 경정청구, 적게 신고했으면 수정신고라는 방향부터 잡는다.</strong></p>
+<h2 id="tax-06-08" data-concept-id="tax-06-08">6-8. 후발적 경정청구: 신고 뒤 세금의 바탕이 달라졌다면 ★★★★★</h2>
+<p><strong>교재 98~101쪽 · 문단의 의도:</strong> 처음부터 잘못 계산한 것과 나중에 기초가 달라진 것을 나눈다. 일정한 후발 사유를 안 날부터 <strong>3개월 내</strong> 경정을 청구하는 특별 구제다. 통상 5년이 지났다는 이유만으로 막히지 않으며, 아직 5년이 안 지났다고 후발적 청구가 불가능한 것도 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>후발 사유의 묶음</th>
+<th>쉬운 해석</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>거래·행위가 심사·심판 결정이나 판결 등으로 달리 확정</td>
+<td>세금을 계산한 거래의 존재·내용이 달라짐</td>
+</tr>
+<tr>
+<td>소득·과세물건의 귀속자가 제3자로 변경</td>
+<td>내 소득으로 세었는데 다른 사람에게 귀속됨</td>
+</tr>
+<tr>
+<td>조세조약상 상호합의가 기존 신고 등과 다름</td>
+<td>국가 간 과세 조정으로 전제가 달라짐</td>
+</tr>
+<tr>
+<td>한 결정·경정이 연결된 다른 세목·기간의 과다 세액을 발생시킴</td>
+<td>같은 기간 다른 세목 또는 같은 세목 다른 기간의 연동 조정</td>
+</tr>
+<tr>
+<td>대통령령이 정한 유사 사유</td>
+<td>구체적 요건 확인, 아무 새 사정이나 되는 것은 아님</td>
+</tr>
+</tbody></table>
+<p><strong>교재 판례를 원문 사실로 보완 — 2017두41740, 2017.9.7.:</strong> 양도인들은 부동산 매매가를 35억 원으로 신고했다. 과세관청은 임대차보증금을 포함해 38억 3천만 원이라고 보고 세금을 늘렸다. 이후 매수 회사와의 민사소송에서 매매가가 35억 원이라는 판결이 확정되었다. 납세자는 그 판결을 근거로 경정청구했지만 거절당했다. 법원은 과세의 기초인 거래 가액이 판결로 다르게 확정된 이상 후발적 청구 사유가 될 수 있다고 보았다. 예전에 통상적 청구로 다툴 수 있었다는 사정만으로 후발적 구제를 배제할 수 없다. <a href="https://www.law.go.kr/LSW/precInfoP.do?precSeq=185617">대법원 판결</a>.</p>
+<p><strong>법원의 고민과 이유:</strong> 세금의 바탕이 바뀌었는데 예전에 주장할 수 있었다는 이유만으로 옛 세금을 유지하면 후발적 구제의 의미가 줄어든다. 그렇다고 무관한 판결이나 같은 사실을 재확인한 자료까지 자동으로 구제 사유가 되는 것은 아니다.</p>
+<p><strong>문장별 쉬운 번역:</strong> ① 산정기초에 변동 → 세금 계산의 바탕이 달라졌다. ② 거래의 존부·법률효과가 다르게 확정 → 계약이 있었는지, 얼마의 권리가 생겼는지 법적으로 달리 정해졌다. ③ 통상 청구가 가능했다는 사정만으로 배제 불가 → 옛 구제 통로가 있었다고 새로 발생한 법정 사유까지 무시하지 않는다. 판결문에 나오는 <strong>당시 법의 ‘2개월’은 현행·교재의 3개월과 구별</strong>한다.</p>
+<p><strong>시험·키워드·한 줄:</strong> 후발 ‘사유’ / 안 날 / 3개월. <strong>지난해 계산 오류를 올해 처음 알아챈 것만으로 후발적 사유가 새로 생긴 것은 아니다.</strong></p>
+<h2 id="tax-06-09" data-concept-id="tax-06-09">6-9. 원천징수 불복: 돈을 낸 행위와 처분은 다르다 ★★★★☆</h2>
+<p><strong>기출 33번 보충·3강과 7강 연결:</strong> 원천징수 세액은 법에서 정한 때 성립과 동시에 확정되는 구조다. 이미 확정된 세액을 내지 않아 관청이 고지하면 보통 <strong>징수처분</strong>이지 처음 세액을 만드는 부과처분이 아니다. 국가가 납부금을 받았다는 사실을 ‘수령처분’이라고 이름 붙여 취소소송 대상으로 만들지도 않는다. 원천징수의무자도 법정 요건에 따라 경정청구가 가능한 경우가 있다.</p>
+<p>법인세 소득처분에 이은 <strong>법인에 대한 소득금액변동통지</strong>는 별도로 본다. 통지가 원천징수 납세의무에 직접 영향을 주므로 법인은 이를 처분으로 다툴 수 있다. 뒤에 징수고지가 올 때까지 기다리면 선행 통지의 하자를 다투는 데 제한이 생길 수 있다. 2002두1878 전원합의체 법리 및 이를 적용한 판결의 취지다. <a href="https://www.law.go.kr/precInfoP.do?precSeq=160172">대법원 원천징수처분취소 판결</a>.</p>
+<p><strong>가상 대화:</strong> 회사 “대표자 상여로 본 금액이 틀렸어요.” → 우선 어느 통지가 법인의 의무에 직접 영향을 주었는지 본다. 대표자 개인의 소득세 의무와 회사의 원천징수 의무는 관련 있지만 당사자·처분·성립 시점까지 모두 같지는 않다. <strong>시험·키워드·한 줄:</strong> 자동확정 / 징수 / 소득금액변동통지. <strong>같은 ‘통지’라는 이름에도 법적 효과는 다를 수 있다.</strong></p>
+<h1>용어를 이름부터 이해하기</h1>
+<h3>조세불복(租稅不服)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 租(구실 조), 稅(세금 세), 不(아닐 불), 服(따를 복). <strong>③ 합친 뜻:</strong> 세금 관련 판단을 따를 수 없다고 다툼. <strong>④ 이름의 이유:</strong> 잘못된 과세를 정해진 통로로 고치기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 위법·부당한 처분 등의 취소·변경 등 구제를 구하는 절차. <strong>⑥ 쉬운 말:</strong> 세금 결정이 틀렸다고 공식적으로 다시 판단해 달라고 하기. <strong>⑦ 사례:</strong> 추가 고지의 계산 근거를 다툼.</p>
+<p><strong>⑧ 시험:</strong> 불복 대상·기간·기관. <strong>⑨ 비교·기억법:</strong> 막연한 민원과 법정 불복은 다름.</p>
+<h3>필요적 전치주의(必要的前置主義)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 必(반드시 필), 要(요긴할 요), 的(과녁 적), 前(앞 전), 置(둘 치), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 반드시 앞에 거쳐야 할 단계를 둠. <strong>④ 이름의 이유:</strong> 전문기관의 자기 시정 기회를 주기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 원칙적으로 법정 행정 불복을 거쳐야 취소소송을 허용하는 구조. <strong>⑥ 쉬운 말:</strong> 법원에 가기 전 정해진 심사를 먼저 받기. <strong>⑦ 사례:</strong> 심판을 거친 뒤 부과처분 취소소송.</p>
+<p><strong>⑧ 시험:</strong> 심사 또는 심판. <strong>⑨ 비교·기억법:</strong> 이의신청은 임의적 단계.</p>
+<h3>처분·부작위</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 處(곳 처), 分(나눌 분); 不(아닐 부), 作(지을 작), 爲(할 위). <strong>③ 합친 뜻:</strong> 구체적으로 조치함·해야 할 일을 하지 않음. <strong>④ 이름의 이유:</strong> 한 일과 하지 않은 일 모두 권리를 침해할 수 있기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 구체적 공권력 행사 등과 법적 처분의무가 있는 신청에 대한 미처분. <strong>⑥ 쉬운 말:</strong> 잘못 결정했거나 꼭 결정해야 하는데 가만히 있음. <strong>⑦ 사례:</strong> 세무조사 결정과 법적 신청에 대한 방치.</p>
+<p><strong>⑧ 시험:</strong> 처분성·신청·처분의무. <strong>⑨ 비교·기억법:</strong> 모든 안내문과 답변 지연이 해당하지는 않음.</p>
+<h3>각하·기각·인용</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 却(물리칠 각), 下(아래 하); 棄(버릴 기), 却(물리칠 각); 認(알 인), 容(용납할 용). <strong>③ 합친 뜻:</strong> 입구에서 물림·내용상 배척·요구를 받아들임. <strong>④ 이름의 이유:</strong> 심리의 단계와 판단 결과를 나누기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 요건 미비, 본안 이유 없음, 청구 이유 있음에 따른 결정. <strong>⑥ 쉬운 말:</strong> 문 앞에서 못 들어감·들어가 따져도 짐·주장이 받아들여짐. <strong>⑦ 사례:</strong> 청구기간 경과는 원칙 각하.</p>
+<p><strong>⑧ 시험:</strong> 100일 청구와 정당 세액 다툼 비교. <strong>⑨ 비교·기억법:</strong> 각하는 옳고 그름을 본안 판단한 것이 아님.</p>
+<h3>불고불리·불이익변경 금지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 告(알릴 고), 不(아닐 불), 理(다스릴 리); 不(아닐 불), 利(이로울 이), 益(더할 익), 變(변할 변), 更(고칠 경), 禁(금할 금), 止(그칠 지). <strong>③ 합친 뜻:</strong> 청구하지 않은 것을 심리하지 않음·더 불리하게 바꾸지 않음. <strong>④ 이름의 이유:</strong> 권리구제 요청이 새로운 불이익 통로가 되지 않도록 하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 불복 대상 처분과 재결 내용의 법정 한계. <strong>⑥ 쉬운 말:</strong> 다툰 범위 밖의 일을 새로 처분하거나 더 나쁘게 결정하지 않기. <strong>⑦ 사례:</strong> 한 처분 취소 청구를 계기로 별개 처분까지 변경하지 않음.</p>
+<p><strong>⑧ 시험:</strong> 총액주의와의 관계. <strong>⑨ 비교·기억법:</strong> 과세관청의 별도 적법한 권한 행사까지 영구 소멸하는 것은 아님.</p>
+<h3>총액주의(總額主義)</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 總(거느릴 총), 額(이마 액), 主(주인 주), 義(옳을 의). <strong>③ 합친 뜻:</strong> 전체 액수를 기준으로 판단하는 입장. <strong>④ 이름의 이유:</strong> 개별 계산 이유만이 아니라 적법한 조세채무 범위를 보기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 해당 과세단위의 정당한 세액 초과 여부를 심판·소송에서 판단하는 견해. <strong>⑥ 쉬운 말:</strong> 같은 세금 단위에서 실제 얼마가 맞는지 확인. <strong>⑦ 사례:</strong> 계산 오류가 있어도 정당 세액 범위 안인지 검토.</p>
+<p><strong>⑧ 시험:</strong> 쟁점주의와 대비. <strong>⑨ 비교·기억법:</strong> 다른 연도 합산이나 절차 하자 무시를 뜻하지 않음.</p>
+<h3>불가쟁력·불가변력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 不(아닐 불), 可(옳을 가), 爭(다툴 쟁), 力(힘 력); 變(변할 변). <strong>③ 합친 뜻:</strong> 다툴 수 없는 힘·바꿀 수 없는 힘. <strong>④ 이름의 이유:</strong> 법률관계와 준사법적 판단의 안정을 위한 구별.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 불복기간 경과에 따른 다툼 제한과 재결기관의 자기 변경 제한. <strong>⑥ 쉬운 말:</strong> 당사자도 늦으면 못 다투고 기관도 마음대로 못 뒤집음. <strong>⑦ 사례:</strong> 재결 이후 소송기간과 기관의 변경 가능성 구별.</p>
+<p><strong>⑧ 시험:</strong> 누구를 제한하는가. <strong>⑨ 비교·기억법:</strong> 모든 결정이 즉시 확정되어 소송 불가라는 뜻 아님.</p>
+<h3>기속력·형성력</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 羈(굴레 기), 束(묶을 속), 力(힘 력); 形(모양 형), 成(이룰 성). <strong>③ 합친 뜻:</strong> 따르도록 묶는 힘·법적 상태를 바꾸는 힘. <strong>④ 이름의 이유:</strong> 승소 결정을 실제 권리구제로 이어 주기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 관계 행정청의 이행 의무와 취소·변경 결정의 직접 효과. <strong>⑥ 쉬운 말:</strong> 판단을 따라 행동하고 결정 자체로 처분 상태가 달라짐. <strong>⑦ 사례:</strong> 취소 결정 뒤 관청의 별도 취소 전에도 효력 검토.</p>
+<p><strong>⑧ 시험:</strong> 불가쟁력과 비교. <strong>⑨ 비교·기억법:</strong> 기속은 후속 행동, 형성은 법적 상태 변화.</p>
+<h3>경정청구·후발적 사유</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 更(고칠 경), 正(바를 정), 請(청할 청), 求(구할 구); 後(뒤 후), 發(필 발), 的(과녁 적), 事(일 사), 由(말미암을 유). <strong>③ 합친 뜻:</strong> 바르게 고쳐 달라고 구함·뒤에 생긴 이유. <strong>④ 이름의 이유:</strong> 잘못된 신고와 나중에 변한 세금의 바탕을 각각 구제하기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 과다 세액 등의 시정을 요청하는 절차와 과세 기초를 뒤에 바꾸는 법정 사유. <strong>⑥ 쉬운 말:</strong> 많이 잡은 세금을 줄여 달라, 뒤늦게 바탕이 달라졌다면 특별 통로 확인. <strong>⑦ 사례:</strong> 매매대금이 후속 판결로 다르게 확정.</p>
+<p><strong>⑧ 시험:</strong> 통상 5년·후발 안 날 3개월. <strong>⑨ 비교·기억법:</strong> 예전 영수증을 늦게 발견했다고 모두 후발 사유 아님.</p>
+<h3>원처분주의·재결</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 原(근원 원), 處(곳 처), 分(나눌 분), 主(주인 주), 義(옳을 의); 裁(마를 재), 決(결단할 결). <strong>③ 합친 뜻:</strong> 처음 처분을 중심으로 다툼·불복에 대한 판단. <strong>④ 이름의 이유:</strong> 실제로 권리를 침해한 처분을 바로잡기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 원칙적으로 최초 처분을 소송 대상으로 삼고 재결 고유 하자만 별도 다투는 구조. <strong>⑥ 쉬운 말:</strong> 심판에서 졌다고 그 패소 결정만 잘못 겨누지 않기. <strong>⑦ 사례:</strong> 추가 세금의 위법은 원래 부과처분 취소로 주장.</p>
+<p><strong>⑧ 시험:</strong> 재결 고유 위법 예외. <strong>⑨ 비교·기억법:</strong> 단순 원처분 하자와 재결 고유 하자를 구별.</p>
+<h3>원천징수·소득금액변동통지</h3>
+<p><strong>① 음훈·② 글자의 뜻:</strong> 源(근원 원), 泉(샘 천), 徵(부를 징), 收(거둘 수); 所(바 소), 得(얻을 득), 金(쇠 금), 額(이마 액), 變(변할 변), 動(움직일 동), 通(통할 통), 知(알 지). <strong>③ 합친 뜻:</strong> 소득이 나오는 곳에서 세금을 거둠·소득금액 변동을 알림. <strong>④ 이름의 이유:</strong> 소득 지급 단계에서 세금을 확보하고 의무 변동을 알리기 때문.</p>
+<p><strong>⑤ 법률상 뜻:</strong> 지급자의 징수납부 의무 및 법인 소득처분 후 법정 통지. <strong>⑥ 쉬운 말:</strong> 회사가 떼어 낼 세금과 그 세금에 직접 영향을 주는 통지. <strong>⑦ 사례:</strong> 법인에 대한 소득금액변동통지 불복.</p>
+<p><strong>⑧ 시험:</strong> 자동확정·징수처분·처분성. <strong>⑨ 비교·기억법:</strong> 회사 의무와 소득자 개인 의무는 구별.</p>
+<h1>기출 TOP5 · 먼저 풀 문제</h1>
+<p>제공된 직접 관련 문제는 6문항이다. 아래 순서는 학습 우선순위이며 실제 오답률 순위가 아니다. 남은 27번도 부록에서 모든 보기를 설명했다.</p>
+<table>
+<thead>
+<tr>
+<th>순위</th>
+<th>기출</th>
+<th>먼저 확인할 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2021_031</td>
+<td>심사·심판의 선택 관계와 각하·기각을 아는가</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2021_028</td>
+<td>내 신고와 관청 처분의 구제 통로가 다른가</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2021_032</td>
+<td>고지서 하자·제소기간·증명책임을 구별하는가</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021_030</td>
+<td>이의신청의 임의성과 90일을 연결하는가</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2021_033</td>
+<td>원천징수의 자동확정과 소득금액변동통지를 구별하는가</td>
+</tr>
+</tbody></table>
+<p><strong>반복되는 함정:</strong> ‘돈이므로 민사’, ‘심사 다음 심판’, ‘100일 뒤 기각’, ‘계산이 맞으면 절차 하자 무관’, ‘국가가 돈 받으면 모두 수령처분’. 실제로 많이 틀렸다는 통계가 아니라, 보기에서 확인되는 혼동 지점이다.</p>
+<h1 class="practice-section-start">새로운 사례로 응용하기</h1>
+<p><strong>응용 1 · 서로 다른 문 두 개.</strong> 다온은 본인이 과다 신고한 세액과 별도로 관청이 증액 고지한 세액을 모두 다투려 한다. 출발 절차가 같은가? <strong>정답:</strong> 자기 과다 신고는 적법한 경정청구 및 거부처분 불복, 증액처분은 그 처분에 대한 불복을 구분한다. <strong>출제 의도:</strong> 세액이 많다는 결과만 보고 대상 처분을 놓치지 않는가.</p>
+<p><strong>응용 2 · 친구가 대신 취하.</strong> 적법하게 선임된 가족 대리인이 특별 위임 없이 “번거로우니 끝내자”며 청구를 취하했다. 일반 위임만으로 충분한가? <strong>정답:</strong> 아니다. 취하는 특별한 위임이 필요한 행위다. <strong>출제 의도:</strong> 대리인 자격과 대리권 범위를 분리하는가.</p>
+<p><strong>응용 3 · 계산 오류와 고지 오류.</strong> 같은 과세단위 안에서 계산 경로 일부가 잘못된 사건과 필수 고지사항이 누락되어 방어권을 침해한 사건이 있다. 총액만 맞으면 두 사건 모두 문제없는가? <strong>정답:</strong> 아니다. 총액주의의 적용 범위와 독립적인 절차 하자를 나누어 심사한다. <strong>출제 의도:</strong> 총액주의를 절차 면책으로 오해하는가.</p>
+<p><strong>응용 4 · 뒤늦게 찾은 서랍.</strong> 법정신고기한 후 6년이 지나 예전 영수증을 발견했다. 후발적 경정청구가 자동으로 가능한가? <strong>정답:</strong> 단순 발견만으로 법정 후발 사유가 생긴 것은 아니다. 과세 기초를 바꾸는 판결 등 법정 요건을 따져야 한다. <strong>출제 의도:</strong> ‘늦게 안 기존 사실’과 ‘뒤에 생긴 구제 사유’를 구별하는가.</p>
+<p><strong>응용 5 · 결과가 안 오는 심판.</strong> 적법한 심판청구 후 법정 결정기간이 지났지만 아직 통지가 없다. 자동 승소인가, 무기한 대기인가? <strong>정답:</strong> 둘 다 아니다. 기간 경과가 자동 인용은 아니며 법정 요건에 따라 결정 전 소송을 제기할 수 있다. 재조사결정 등 특별한 기간 구조는 따로 확인한다. <strong>출제 의도:</strong> 청구기간과 기관 처리기간을 구별하는가.</p>
+<div class="memory-sheet">
+
+<h1>한 장으로 마지막 확인 · 제6강</h1>
+<p><strong>TOP3:</strong> ① 불복 경로 ② 각하·기각 ③ 통상·후발 경정청구.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>시험 직전 기억</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>처분</td>
+<td>구체적 권리의무에 직접 영향</td>
+</tr>
+<tr>
+<td>부작위</td>
+<td>신청·법적 처분의무·상당한 시간·미처분</td>
+</tr>
+<tr>
+<td>조사 결정</td>
+<td>처분성 인정, 단순 결과통지와 구별</td>
+</tr>
+<tr>
+<td>경로</td>
+<td>처분 → 이의는 선택 → 심사 또는 심판 → 소송</td>
+</tr>
+<tr>
+<td>기간</td>
+<td>이의·심사·심판 원칙 90일, 수령 등 기산점 확인</td>
+</tr>
+<tr>
+<td>감사원</td>
+<td>별도 법률, 안 날 90일·행위일 180일 제한</td>
+</tr>
+<tr>
+<td>각하·기각</td>
+<td>형식 요건 부족 / 본안 판단 후 이유 없음</td>
+</tr>
+<tr>
+<td>인용</td>
+<td>취소·경정·필요한 처분, 재조사결정 가능</td>
+</tr>
+<tr>
+<td>범위</td>
+<td>불고불리·불이익변경 금지</td>
+</tr>
+<tr>
+<td>결정기간</td>
+<td>심사·심판 90일, 이의 30일·항변 시 60일</td>
+</tr>
+<tr>
+<td>효력</td>
+<td>불가쟁·불가변·기속·형성, 대상과 시점 구별</td>
+</tr>
+<tr>
+<td>소송</td>
+<td>원처분주의, 원칙 결정 통지 후 90일</td>
+</tr>
+<tr>
+<td>통상 경정</td>
+<td>원칙 법정신고기한 후 5년, 증가분 현행 3개월 제한 병존</td>
+</tr>
+<tr>
+<td>후발 경정</td>
+<td>법정 후발 사유 안 날부터 3개월, 단순 늦은 발견과 다름</td>
+</tr>
+<tr>
+<td>원천징수</td>
+<td>자동확정·징수, 법인 소득금액변동통지는 처분</td>
+</tr>
+</tbody></table>
+<p><strong>반드시 외울 문장:</strong> 심사와 심판은 선택이고, 이의신청만으로 원칙적인 전치절차를 마치는 것은 아니다.</p>
+<p><strong>사례를 풀 순서:</strong> 누가 → 어떤 처분 또는 신고 → 어떤 구제 → 언제부터 얼마 동안 → 요건 판단인지 내용 판단인지.</p>
+</div>
+
+<h1>학습 상태 진단</h1>
+<p>🟢 <strong>이해 완료:</strong> 위 사례 5개를 절차와 이유까지 설명한다. 🟡 <strong>복습 필요:</strong> 이름은 알지만 경로·기간이 섞인다. 🔴 <strong>이해 부족:</strong> 각하·기각 또는 자기 신고·관청 처분의 구제 방법을 구별하지 못한다. 아직 답변을 받지 않았으므로 실제 이해도를 단정하지 않는다.</p>
+<p><strong>반드시 복습 TOP3:</strong> 6-4의 불복 경로 / 6-5의 각하·기각 / 6-7~6-8의 경정청구. 교재 101쪽 정리를 읽으며 빈 종이에 절차를 다시 그리면 이 강의 연결이 드러난다.</p>
+<h1>문제 부록 · 6문항·24개 보기</h1>
+<p>제공 JSON의 문제·보기·정답·기존 해설은 보존했다. 별도로 작성한 보기별 과외 해설에서 표현·조건을 보완한다. ‘선택’은 질문에 맞춰 고르는 보기라는 뜻이며, 그 보기의 문장이 참이라는 뜻은 아니다. 실제 오답률 자료는 제공되지 않았다.</p>
+<section class="question-card" id="question-세법_기출2021_027"><h4>기출문제 · 세법_기출2021_027</h4><p class="question-stem">[2021 기말고사 · 27번]<br>다음 중 조세소송에 관한 설명으로 옳지 않은 것을 고르시오.</p><ol class="choices"><li>조세소송은 금전채권채무 관계에 관한 소송이므로 원칙적으로 국가와 납세자 간의 민사소송 절차를 통하게 된다.</li><li>납세자는 조세소송에 앞서 원칙적으로 행정심판 절차를 거쳐야 한다.</li><li>조세소송에 앞선 행정심판 절차에서는 사법 절차가 원칙적으로 준용되어야 한다.</li><li>국가와 납세자 간 분쟁의 궁극적인 해결 절차는 조세소송이다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 1번</p><ol class="choice-notes"><li><strong>선택</strong> · 틀리다. 부과처분 취소를 구하는 기본 통로는 행정소송이다. 돈에 관한 분쟁이라는 사정만으로 민사소송이 되지 않는다. 다만 부당이득 반환 등 별도 소송 유형은 구별한다.</li><li><strong>비선택</strong> · 국세 부과처분 취소소송은 원칙적으로 심사·심판 등 법정 전치절차를 거쳐야 한다. 이의신청만으로 충분하지 않다.</li><li><strong>비선택</strong> · 헌법 제107조 제3항의 취지다. 독립성·공정성·방어권 같은 사법절차의 중요한 원리를 갖춰야 한다는 뜻이다.</li><li><strong>비선택</strong> · 행정기관 단계의 판단에 불복하면 법정 요건 아래 법원에서 최종적인 권리구제를 구한다. 이것이 행정 불복을 거친 뒤 소송을 허용하는 구조다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 1번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_028"><h4>기출문제 · 세법_기출2021_028</h4><p class="question-stem">[2021 기말고사 · 28번]<br>다음 중 납세자의 불복 절차에 관한 설명으로 옳은 것을 고르시오.</p><ol class="choices"><li>국가가 납세의무를 결정 또는 경정한 다음 이를 납세자에게 고지하는 행정작용은 징수처분이다.</li><li>부과처분을 받은 후 세액을 납부한 납세의무자는 일반적으로 그 납부한 세액을 부당이득으로 보아 국가에 반환 청구할 수 있다.</li><li>세액을 신고한 후, 신고한 세액이 과다하다고 생각하는 납세의무자는 우선 과세관청에 감액경정을 하여 줄 것을 청구하여야 한다.</li><li>세액을 신고한 후, 신고한 세액이 과소하다고 생각하는 납세의무자는 우선 고세관청에 증액경정을 하여 줄 것을 청구하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 결정·경정으로 세액을 확정하여 고지하는 기능을 단순 징수처분이라고만 하면 틀린다. 부과와 납부 명령이 함께 담긴 고지인지 구별한다.</li><li><strong>비선택</strong> · 유효한 부과처분이 존재하는 동안 납부액이 일반적으로 곧바로 법률상 원인 없는 이득이 되는 것은 아니다. 취소 또는 당연무효 여부 등 선결 문제를 본다.</li><li><strong>선택</strong> · 정답. 자기 과다 신고는 적법한 경정청구를 하고 거부되면 거부처분 불복을 검토한다. 본인 신고 자체는 관청의 부과처분이 아니다.</li><li><strong>비선택</strong> · 과소 신고를 바로잡는 통상 절차는 수정신고다. 경정청구를 증액 요청 제도라고 뒤집은 보기다. 원문의 오탈자도 원본 보존 원칙에 따라 그대로 두었다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_030"><h4>기출문제 · 세법_기출2021_030</h4><p class="question-stem">[2021 기말고사 · 30번]<br>다음 중 이의신청에 관한 설명으로 옳은 것을 고르시오.</p><ol class="choices"><li>국세청장에게 제기하는 필요적 전심절차의 하나이다.</li><li>임의적인 절차이기 때문에 이를 꼭 거쳐야 할 필요는 없다.</li><li>국세심사위원회의 심의 의결을 거치지 않아도 된다.</li><li>과세처분을 받은 날부터 60일 이내에 제기하여야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 국세청장에게 하는 심사청구와 섞었다. 이의신청은 세무서장·지방국세청장에게 하는 선택적 절차다.</li><li><strong>선택</strong> · 정답. 이의신청은 거치지 않을 수 있다. 하지만 이것이 심사·심판 등 소송 전치절차까지 모두 선택이라는 뜻은 아니다.</li><li><strong>비선택</strong> · 이용이 선택이라는 점과 적법한 심의·의결을 거칠 의무는 별개다. 국세심사위원회 제도를 함께 본다.</li><li><strong>비선택</strong> · 원칙적으로 처분을 안 날, 통지를 받았다면 받은 날부터 90일이다. 60일은 이의신청에서 항변하는 경우의 결정기간과 혼동하기 쉽다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_031"><h4>기출문제 · 세법_기출2021_031</h4><p class="question-stem">[2021 기말고사 · 31번]<br>다음 중 조세소송의 필요적 전심 절차에 관한 설명으로 옳은 것을 고르시오.</p><ol class="choices"><li>심사청구와 심판청구를 차례로 거쳐야 한다.</li><li>과세관청에게 관련된 사건의 사실관계에 관한 재조사를 명하는 결정을 하는 일이 있다.</li><li>이의신청을 거친 다음에는 바로 법원에 소송을 낼 수 있다.</li><li>과세처분을 받은 날로부터 100일 째 되는 날에 행정심판을 청구하였다면 청구기각의 결정이 내려져야 한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 2번</p><ol class="choice-notes"><li><strong>비선택</strong> · 심사와 심판은 선택 관계다. 같은 처분에 대해 둘을 중복하여 제기할 수 없다.</li><li><strong>선택</strong> · 정답. 필요한 사실확인을 위한 재조사결정을 할 수 있다. 즉시 전부 취소 또는 전부 기각만 가능한 것이 아니다.</li><li><strong>비선택</strong> · 이의신청만으로는 원칙적인 소송 전치 요건을 충족하지 못한다. 이어 심사 또는 심판 등 법정 절차가 필요하다.</li><li><strong>비선택</strong> · 기간 예외가 없는 통상 상황이라면 90일을 넘겨 요건이 없으므로 각하다. 본안에서 이유 없다고 판단한 기각과 다르다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 2번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_032"><h4>기출문제 · 세법_기출2021_032</h4><p class="question-stem">[2021 기말고사 · 32번]<br>다음 중 조세소송의 절차에 관한 설명으로 옳지 않은 것을 고르시오.</p><ol class="choices"><li>납세자가 과세관청의 결정 경정의 효력을 다투고자 할 때에는 부과처분, 신고의 효력을 다투고자 할 때에는 궁극적으로 경정거부처분의 취소를 구하여야 한다.</li><li>납세자는 행정심판 기관의 각하 또는 기각 결정을 받은 날로부터 90일 이내에 취소청구의 소를 법원에 제기하여야 한다.</li><li>납부고지서(또는 납세고지서)에 적혀야 할 이른바 필요적 기재사항의 일부가 적혀 있지 않은 경우에도 그 부과처분의 내용이 적정한 이상 법원은 납부고지서의 보정을 명할 수 있을 뿐 부과처분 자체를 취소할 수는 없다.</li><li>과세처분의 적법성을 뒷받침할 수 있는 주요사실들에 관한 입증책임은 일반적으로 과세관청이 부담한다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 3번</p><ol class="choice-notes"><li><strong>비선택</strong> · 관청의 결정·경정은 부과처분을, 자기 신고는 적법한 경정청구 후 거부처분을 다투는 기본 구조다. 구체적 사건의 무효·특례 등은 별도 검토한다.</li><li><strong>비선택</strong> · 적법한 전치절차를 거친 일반적인 각하·기각 결정 통지 후 90일의 제소기간을 묻는다. 처음 불복 자체를 늦게 낸 경우까지 적법한 전치가 회복되는 것은 아니다.</li><li><strong>선택</strong> · 틀리다. 필수 고지사항 누락 등 절차 하자는 처분의 위법 사유가 될 수 있다. 세액이 맞다는 이유로 언제나 보정만 가능하고 취소는 불가하다고 단정할 수 없다.</li><li><strong>비선택</strong> · 일반적인 과세요건 주요사실의 증명책임은 과세관청에 있다. 공제·감면 요건 등 개별 쟁점은 별도로 본다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 3번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+<section class="question-card" id="question-세법_기출2021_033"><h4>기출문제 · 세법_기출2021_033</h4><p class="question-stem">[2021 기말고사 · 33번]<br>다음 중 원천징수의무의 존부나 크기를 다투는 절차와 관련된 내용으로 옳은 것을 고르시오.</p><ol class="choices"><li>원천징수의무자가 원천징수의무를 이행하지 않은 경우 국가는 원천징수의무자를 상대로 원천징수세액을 확정시키는 부과처분을 하고 원천징수의무자는 그 취소를 구하는 소송을 낼 수 있다.</li><li>원천징수의무를 일단 이행한 원천징수의무자가 납부한 세액을 돌려 받고 싶다면, 국가를 상대로 원천징수세액의 수령처분에 대한 취소를 구하는 소송을 낼 수 있다.</li><li>국세기본법이 정하는 경정청구는 원천납세의무자를 위한 제도일 뿐이므로 원천징수의무자는 이러한 경정청구를 할 수 없다.</li><li>법인세법에 따른 사외유출의 소득처분에 이은 소득금액변동통지를 받은 법인은 이를 행정처분으로 보아 그 취소를 법원에 청구할 수 있다.</li></ol><details class="answer-box"><summary>정답·보기별 해설</summary><p class="answer-label">원본 정답: 4번</p><ol class="choice-notes"><li><strong>비선택</strong> · 원천징수 세액은 법정 시점에 성립과 동시에 확정되는 구조이므로 미납 세액 고지는 통상 징수처분이다. 처음 세액을 확정하는 부과처분이라는 부분이 틀렸다.</li><li><strong>비선택</strong> · 납부금의 수령을 곧바로 취소소송 대상인 수령처분이라고 만들 수 없다. 적법한 경정청구 등 해당 법률관계에 맞는 구제 방법을 선택한다.</li><li><strong>비선택</strong> · 원천징수의무자도 법정 요건 아래 경정청구가 가능하다. 원천납세의무자만을 위한 제도라는 단정이 틀렸다.</li><li><strong>선택</strong> · 정답. 법인에 대한 소득금액변동통지는 원천징수의무에 직접 영향을 미치는 처분이다. 회사의 지위와 소득 귀속자 개인의 지위를 구별한다.</li></ol><p class="source-explanation"><strong>제공 자료 해설 대조:</strong> 공식 첨부자료에 표시된 정답: 4번. 별도 해설은 제공되지 않았습니다.<br><br>2021년 기출자료입니다. 자료실 공지에 따르면 법령 개정 등으로 현재 기준의 정오답이 달라질 수 있으므로 출제경향 참고용으로 활용하고, 현행 강의·교안을 우선 확인하세요.</p></details></section>
+
+</main>
+<script>
+  const content = document.getElementById('content');
+  const tocLinks = document.getElementById('toc-links');
+
+  [...content.querySelectorAll('h1')].forEach((heading, index) => {
+    const label = document.createElement('span');
+    label.className = 'part-label';
+    label.textContent = index === 0 ? '세법의기초 · CHAPTER 06' : 'PART · FOUNDATIONS OF TAX LAW';
+    heading.insertBefore(label, heading.firstChild);
+  });
+  [...content.querySelectorAll('h2')].forEach(heading => {
+    if (!/^사례\s*\d+/.test(heading.textContent.trim())) return;
+    heading.classList.add('case-heading');
+    let node = heading.nextElementSibling;
+    while (node && !/^(H1|H2)$/.test(node.tagName)) {
+      if (node.tagName === 'P') {
+        const firstStrong = node.querySelector(':scope > strong:first-child');
+        const label = firstStrong ? firstStrong.textContent : '';
+        if (/시험 함정/.test(label)) node.classList.add('case-trap');
+        else if (/결론|최종 결론|판결/.test(label)) node.classList.add('case-result');
+      }
+      node = node.nextElementSibling;
+    }
+  });
+
+  function toneFor(text) {
+    if (/한 줄 결론|한 줄 요약/.test(text)) return 'takeaway';
+    if (/시험|함정|주의/.test(text)) return 'trap';
+    if (/중학생|쉽게|쉬운/.test(text)) return 'easy';
+    if (/사례|판례|드라마|사실관계/.test(text)) return 'case';
+    if (/한자|용어|이름 속/.test(text)) return 'term';
+    if (/정확한 정리|법학적으로/.test(text)) return 'doctrine';
+    return 'plain';
+  }
+
+  const blockHeads = [...content.querySelectorAll('h3')];
+  blockHeads.forEach(h => {
+    const wrapper = document.createElement('section');
+    wrapper.className = 'study-block tone-' + toneFor(h.textContent);
+    h.parentNode.insertBefore(wrapper, h);
+    wrapper.appendChild(h);
+    let node = wrapper.nextSibling;
+    while (node && !(node.nodeType === 1 && /^(H1|H2|H3|HR)$/.test(node.tagName))) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+  });
+
+  const firstTitle = content.querySelector('h1');
+  const headings = [...content.querySelectorAll('h1,h2')].filter(h => {
+    if (h === firstTitle) return false;
+    return !/정확하게 정리하고, 쉽게 이해하는/.test(h.textContent);
+  });
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + (i + 1);
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent
+      .replace(/^(세법의기초 · CHAPTER 06|PART · FOUNDATIONS OF TAX LAW)/, '')
+      .replace(/[★☆]+/g, '')
+      .trim();
+    a.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+    tocLinks.appendChild(a);
+  });
+
+  const links = [...tocLinks.querySelectorAll('a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
+  }), { rootMargin: '-70px 0px -78% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  let scale = Number(localStorage.getItem('civil-law-scale') || 1);
+  document.documentElement.style.setProperty('--scale', scale);
+  document.getElementById('larger').onclick = () => {
+    scale = Math.min(1.28, scale + .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('smaller').onclick = () => {
+    scale = Math.max(.84, scale - .06);
+    document.documentElement.style.setProperty('--scale', scale);
+    localStorage.setItem('civil-law-scale', scale);
+  };
+  document.getElementById('focus').onclick = () => document.body.classList.toggle('focus');
+  document.getElementById('menu').onclick = () => document.body.classList.toggle('menu-open');
+  tocLinks.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  document.getElementById('print').onclick = () => window.print();
+  document.getElementById('search').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && event.target.value.trim()) window.find(event.target.value.trim());
+  });
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const ratio = max > 0 ? scrollY / max : 0;
+    document.getElementById('progress').style.width = (ratio * 100) + '%';
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+<script>document.querySelectorAll('#content>h1').forEach(h=>{if(h.textContent.includes('시험 직전'))h.classList.add('memory-section-title')});window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open?'1':'0';d.open=true}));window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach(d=>d.open=d.dataset.wasOpen==='1'));function showConceptAnchor(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(!id.startsWith('tax-'))return;const t=document.getElementById(id);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:'start',behavior:'instant'}))}window.addEventListener('load',showConceptAnchor);window.addEventListener('hashchange',showConceptAnchor);document.fonts.ready.then(showConceptAnchor);</script></body>
+</html>
