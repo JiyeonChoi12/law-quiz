@@ -11,9 +11,9 @@ const data=JSON.parse(fs.readFileSync(file,'utf8'));
 const baseline=JSON.parse(execFileSync('git',['show',`22aaefa:${file}`],{encoding:'utf8'}));
 assert.equal(baseline.length,454);
 assert.deepEqual(data.slice(0,454),baseline);
-assert.equal(data.length,464);
-assert.equal(new Set(data.map(q=>q.id)).size,464);
-assert.equal(data.filter(q=>q.source==='형성평가').length,118);
+assert.equal(data.length,474);
+assert.equal(new Set(data.map(q=>q.id)).size,474);
+assert.equal(data.filter(q=>q.source==='형성평가').length,128);
 assert.equal(data.filter(q=>q.source==='워크북').length,346);
 const hashes=[
   '9f6f427c58f2e362841f05e3a6fa59b42567218961afbbac6ba5c16ca6d8110a',
@@ -27,7 +27,7 @@ const hashes=[
   'e8179ad255669c71dd7921e4d26d998113c7d0d8884b839920614feccd6cb1e8',
   'cde9e03ed0494e376f9eaa0319a45bbfc91993c5db4c8059fc2e20eb1bce51bc'
 ];
-for(const [i,q] of data.slice(454).entries()){
+for(const [i,q] of data.slice(454,464).entries()){
   assert.equal(q.id,`통치의기본구조_${109+i}`);
   assert.equal(q.type,'mc');
   assert.equal(q.source,'형성평가');
@@ -39,5 +39,5 @@ for(const [i,q] of data.slice(454).entries()){
   const content={question:q.question,choices:q.choices,answer:q.answer,explanation:q.explanation};
   assert.equal(createHash('sha256').update(JSON.stringify(content)).digest('hex'),hashes[i],q.id);
 }
-assert.match(data.at(-1).question,/이 사건 법률조항 중 “임원”/);
+assert.match(data[463].question,/이 사건 법률조항 중 “임원”/);
 console.log('PASS: lecture 13, 10 questions / 40 choices / 10 revealed answers and explanations, Q10 passage included; 454 previous questions unchanged.');
