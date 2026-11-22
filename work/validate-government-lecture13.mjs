@@ -11,9 +11,9 @@ const data=JSON.parse(fs.readFileSync(file,'utf8'));
 const baseline=JSON.parse(execFileSync('git',['show',`22aaefa:${file}`],{encoding:'utf8'}));
 assert.equal(baseline.length,454);
 assert.deepEqual(data.slice(0,454),baseline);
-assert.equal(data.length,474);
-assert.equal(new Set(data.map(q=>q.id)).size,474);
-assert.equal(data.filter(q=>q.source==='형성평가').length,128);
+assert.equal(data.length,484);
+assert.equal(new Set(data.map(q=>q.id)).size,484);
+assert.equal(data.filter(q=>q.source==='형성평가').length,138);
 assert.equal(data.filter(q=>q.source==='워크북').length,346);
 const hashes=[
   '9f6f427c58f2e362841f05e3a6fa59b42567218961afbbac6ba5c16ca6d8110a',

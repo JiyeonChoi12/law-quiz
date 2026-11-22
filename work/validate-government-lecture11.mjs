@@ -16,9 +16,9 @@ const baseline=JSON.parse(execFileSync('git',['show',`fd3d98c2eb09d7381adc25ede6
 const baselineIds=new Set(baseline.map(q=>q.id));
 assert.equal(baseline.length,436);
 assert.deepEqual(data.filter(q=>baselineIds.has(q.id)),baseline);
-assert.equal(data.length,474);
-assert.equal(new Set(data.map(q=>q.id)).size,474);
-assert.equal(data.filter(q=>q.source==='형성평가').length,128);
+assert.equal(data.length,484);
+assert.equal(new Set(data.map(q=>q.id)).size,484);
+assert.equal(data.filter(q=>q.source==='형성평가').length,138);
 assert.equal(data.filter(q=>q.source==='워크북').length,346);
 const lecture11Ids=new Set(Array.from({length:10},(_,i)=>`통치의기본구조_${String(91+i).padStart(3,'0')}`));
 const added=data.filter(q=>lecture11Ids.has(q.id));

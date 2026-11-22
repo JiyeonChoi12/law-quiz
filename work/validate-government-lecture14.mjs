@@ -12,9 +12,9 @@ const data=JSON.parse(fs.readFileSync(file,'utf8'));
 const baseline=JSON.parse(execFileSync('git',['show',`6f29da1:${file}`],{encoding:'utf8'}));
 assert.equal(baseline.length,464);
 assert.deepEqual(data.slice(0,464),baseline);
-assert.equal(data.length,474);
-assert.equal(new Set(data.map(q=>q.id)).size,474);
-assert.equal(data.filter(q=>q.source==='형성평가').length,128);
+assert.equal(data.length,484);
+assert.equal(new Set(data.map(q=>q.id)).size,484);
+assert.equal(data.filter(q=>q.source==='형성평가').length,138);
 assert.equal(data.filter(q=>q.source==='워크북').length,346);
 const hashes=[
   '44cd3cea18127f6dfe386b3fb3e4b620024e3400632e4391c9f0036858f8c8f9',
@@ -28,7 +28,7 @@ const hashes=[
   '3aca1f990576a8de4aee94722ea68faba2ff410c31e2d1a1a29207bdc6cdd211',
   'a3a487527388a03e7e2d2c6e82dd33eaf2faa6856011d468d1c01e571b122207'
 ];
-const added=data.slice(464);
+const added=data.slice(464,474);
 for(const [i,q] of added.entries()){
   assert.equal(q.id,`통치의기본구조_${119+i}`);
   assert.equal(q.type,'mc');
